@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>昇腾 vs 英伟达 · 开发者基础体验竞品分析</title>
+<style>
+:root{
+  --blue:#2f6fed; --blue-d:#1b4fc2; --blue-s:#eaf1fe;
+  --purple:#7c5cf0; --purple-s:#efeafe;
+  --cyan:#1f9fb8; --cyan-s:#e3f6f9;
+  --green:#76B900; --green-s:#eef6df;
+  --gold:#e0a32e; --gold-s:#fbf1da;
+  --coral:#C7000B; --coral-s:#fbe9e7;
+  --g1:#f6f8fc; --g2:#eef1f7; --g3:#e3e8f0; --g4:#d3dae6;
+  --g5:#aab4c6; --g6:#7e8aa0; --g7:#5a6678; --g8:#3c4658; --g9:#262e3d; --g10:#161b26;
+  --bg:#eef2f8; --card:#ffffff; --ink:#1d2533; --ink2:#5a6678;
+  --shadow:0 6px 24px rgba(31,45,77,.07),0 1px 3px rgba(31,45,77,.06);
+  --shadow-h:0 12px 36px rgba(31,45,77,.13);
+  --radius:18px;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* network deco */
+.netbg{position:fixed;top:0;right:0;width:46vw;height:60vh;z-index:0;opacity:.5;pointer-events:none}
+
+/* topnav */
+.topnav{position:fixed;top:0;left:0;right:0;height:54px;z-index:50;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:1px solid var(--g3);display:flex;align-items:center;gap:8px;padding:0 22px}
+.topnav .brand{font-weight:800;font-size:15px;letter-spacing:.3px;margin-right:14px}
+.topnav .brand b{color:var(--blue)}
+.topnav .navlinks{display:flex;gap:4px;flex-wrap:wrap;overflow:auto}
+.topnav a{font-size:12.5px;color:var(--ink2);padding:5px 10px;border-radius:8px;white-space:nowrap;transition:.15s}
+.topnav a:hover{background:var(--g2);color:var(--ink)}
+.topnav a.active{background:var(--blue-s);color:var(--blue-d);font-weight:600}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.floor{padding:62px 0 30px;scroll-margin-top:60px}
+.floor-hd{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.floor-hd .fno{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--blue);
+  background:var(--blue-s);padding:3px 9px;border-radius:7px}
+.floor-hd h2{font-size:23px;margin:0;font-weight:800;letter-spacing:.2px}
+.floor-sub{color:var(--ink2);font-size:14px;margin:2px 0 26px}
+
+/* hero */
+.hero{padding:96px 0 30px}
+.hero h1{font-size:42px;line-height:1.15;margin:0 0 14px;font-weight:850;letter-spacing:-.5px}
+.hero h1 .vs{color:var(--g5);font-weight:600;margin:0 10px}
+.hero h1 .a{color:var(--coral)}
+.hero h1 .n{color:var(--green)}
+.hero .lede{font-size:16.5px;color:var(--ink2);max-width:760px;margin:0 0 26px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--g3);
+  padding:7px 14px;border-radius:30px;font-size:13px;box-shadow:var(--shadow)}
+.chip .dot{width:8px;height:8px;border-radius:50%}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+.metric{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.metric::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.6),transparent 60%);pointer-events:none}
+.metric .k{font-size:12px;color:var(--ink2);font-weight:600;letter-spacing:.3px}
+.metric .v{font-family:var(--mono);font-size:30px;font-weight:800;margin:6px 0 2px;letter-spacing:-1px}
+.metric .vsub{font-size:12px;color:var(--ink2)}
+.metric.bad .v{color:var(--coral)} .metric.good .v{color:var(--green)} .metric.blue .v{color:var(--blue)}
+.method{margin-top:26px;background:var(--g1);border:1px dashed var(--g4);border-radius:14px;
+  padding:14px 18px;font-size:12.5px;color:var(--ink2)}
+.method b{color:var(--ink)}
+
+/* journey overview */
+.journey{position:relative;background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);
+  padding:30px 26px 22px;box-shadow:var(--shadow);overflow:hidden}
+.jstages{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;position:relative;z-index:2}
+.jstage{text-align:center}
+.jstage .sn{font-family:var(--mono);font-size:11px;color:var(--g6);font-weight:700}
+.jstage .snm{font-size:13.5px;font-weight:700;margin:3px 0 10px;min-height:38px;display:flex;align-items:center;justify-content:center;text-align:center}
+.jbars{display:flex;gap:6px;justify-content:center;align-items:flex-end;height:96px;margin-bottom:8px}
+.jbar{width:26px;border-radius:6px 6px 0 0;position:relative;display:flex;justify-content:center;transition:.4s}
+.jbar span{position:absolute;top:-17px;font-family:var(--mono);font-size:11px;font-weight:700}
+.jbar.a{background:linear-gradient(180deg,#e0473c,#C7000B)} .jbar.a span{color:var(--coral)}
+.jbar.n{background:linear-gradient(180deg,#a5d65a,#76B900)} .jbar.n span{color:var(--green)}
+.jtps{display:flex;flex-direction:column;gap:3px;margin-top:4px}
+.jtp{font-size:10.5px;color:var(--ink2);background:var(--g1);border:1px solid var(--g2);border-radius:5px;padding:2px 4px;line-height:1.3}
+.jcurve{position:absolute;left:0;right:0;top:30px;height:130px;z-index:1;pointer-events:none}
+.jlegend{display:flex;gap:18px;justify-content:center;margin-top:14px;font-size:12px;color:var(--ink2)}
+.jlegend i{display:inline-block;width:14px;height:8px;border-radius:3px;margin-right:5px;vertical-align:middle}
+
+/* heatmap */
+.heat{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);padding:8px 8px 14px;box-shadow:var(--shadow);overflow:hidden}
+.heatrow{display:grid;grid-template-columns:46px 1fr 64px 64px 70px;align-items:center;gap:8px;padding:5px 12px}
+.heatrow.head{position:sticky;top:54px;background:var(--card);font-size:11.5px;color:var(--ink2);font-weight:700;border-bottom:1px solid var(--g2);z-index:3}
+.heatrow.head .c{text-align:center}
+.heat .stagebar{grid-column:1/-1;font-size:12px;font-weight:700;color:var(--blue-d);background:var(--blue-s);
+  padding:5px 12px;border-radius:7px;margin:8px 4px 2px}
+.tpid{font-family:var(--mono);font-size:11px;color:var(--g6);font-weight:700}
+.tpnm{font-size:13px;font-weight:600}
+.cell{height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:13.5px;font-weight:700;color:#fff}
+.diff{text-align:center;font-family:var(--mono);font-size:12.5px;font-weight:700;border-radius:7px;padding:4px 0}
+.diff.pos{color:var(--green);background:var(--green-s)} .diff.neg{color:var(--coral);background:var(--coral-s)}
+.diff.big{outline:2px solid var(--coral);font-weight:800}
+.diff.zero{color:var(--g6);background:var(--g1)}
+
+/* touchpoint cards */
+.tpgrid{display:grid;gap:18px}
+.tpcard{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;transition:.2s}
+.tpcard:hover{box-shadow:var(--shadow-h);transform:translateY(-2px)}
+.tpcard-hd{display:flex;align-items:center;gap:12px;padding:16px 20px 12px;flex-wrap:wrap}
+.tpcard-hd .id{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--g7);padding:3px 9px;border-radius:7px}
+.tpcard-hd h3{font-size:17px;margin:0;font-weight:750;flex:1;min-width:140px}
+.scorepair{display:flex;gap:8px}
+.spill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid}
+.spill .num{font-family:var(--mono);font-weight:800}
+.spill.a{background:var(--coral-s);border-color:#f2c4bc;color:var(--coral)}
+.spill.n{background:var(--green-s);border-color:#d6e8ad;color:var(--green)}
+.tpcard-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tpside{padding:6px 20px 20px}
+.tpside.left{border-right:1px solid var(--g2)}
+.tpside .who{font-size:12px;font-weight:700;letter-spacing:.3px;margin:8px 0 10px;display:flex;align-items:center;gap:7px}
+.tpside .who .tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;line-height:1.6;align-self:center;flex:none;display:inline-block}
+.tag.real{background:var(--blue-s);color:var(--blue-d)}
+.tag.mk{background:var(--gold-s);color:#9a6a10}
+.tag.text{background:var(--g2);color:var(--g7)}
+.shot{width:100%;border-radius:10px;border:1px solid var(--g3);display:block;cursor:zoom-in;
+  aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--g1)}
+/* nvidia mockup */
+.mock{border-radius:10px;border:1px solid #2a2a2a;background:#161616;overflow:hidden;aspect-ratio:16/10;display:flex;flex-direction:column}
+.mock .bar{display:flex;align-items:center;gap:5px;padding:7px 10px;background:#0d0d0d;border-bottom:1px solid #262626}
+.mock .bar i{width:8px;height:8px;border-radius:50%;background:#3a3a3a}
+.mock .bar .url{margin-left:8px;font-family:var(--mono);font-size:9px;color:#6a6a6a;background:#222;padding:2px 8px;border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mock .body{flex:1;padding:12px 14px;color:#cfcfcf;display:flex;flex-direction:column;gap:7px;overflow:hidden}
+.mock .mh{font-size:13px;font-weight:800;color:#fff;line-height:1.25}
+.mock .mh .g{color:#76b900}
+.mock .ml{font-size:9.5px;color:#9a9a9a;line-height:1.4}
+.mock .mbtn{align-self:flex-start;background:#76b900;color:#0a0a0a;font-size:9.5px;font-weight:800;padding:4px 10px;border-radius:5px;margin-top:2px}
+.mock .mrow{display:flex;gap:5px;flex-wrap:wrap;margin-top:auto}
+.mock .mtag{font-size:8.5px;color:#8a8a8a;border:1px solid #333;border-radius:4px;padding:2px 6px}
+.concl{list-style:none;margin:12px 0 0;padding:0}
+.concl li{position:relative;padding:7px 0 7px 26px;font-size:13px;color:var(--ink);border-top:1px solid var(--g1)}
+.concl li:first-child{border-top:none}
+.concl li .lab{font-weight:700;color:var(--blue-d)}
+.concl li::before{content:'';position:absolute;left:7px;top:13px;width:7px;height:7px;border-radius:2px;background:var(--blue);transform:rotate(45deg)}
+.concl.win li::before{background:var(--green)}
+/* per-image caption (图文并茂) */
+.shotcap{font-size:12.5px;color:var(--ink2);line-height:1.62;margin:11px 0 2px;padding-left:11px;border-left:2.5px solid var(--coral)}
+.shotcap.nv{border-left-color:var(--green)}
+/* verdict block */
+.verdict{border-top:1px solid var(--g2);background:var(--g1);padding:13px 20px 17px}
+.verdict.win{background:var(--green-s);border-top-color:#e0edc4}
+.vtitle{font-size:11.5px;font-weight:800;color:var(--ink);letter-spacing:.4px;display:flex;align-items:center;gap:7px}
+.vtitle::before{content:'';width:4px;height:14px;border-radius:3px;background:var(--blue);display:inline-block}
+.verdict.win .vtitle{color:#5e8a09} .verdict.win .vtitle::before{background:var(--green)}
+.verdict .concl{margin-top:7px}
+.verdict .concl li{font-size:13px;line-height:1.62;border-top-color:var(--g2)}
+/* 昇腾该怎么做 recommendation callout */
+.rec{display:flex;gap:11px;align-items:flex-start;margin-top:13px;padding:12px 14px;background:var(--blue-s);border:1px solid #cfe0fb;border-radius:10px}
+.rec.win{background:#eef6df;border-color:#d6e8ad}
+.rec-tag{flex:none;font-size:11px;font-weight:800;color:#fff;background:var(--blue);padding:4px 10px;border-radius:7px;white-space:nowrap;margin-top:1px}
+.rec.win .rec-tag{background:#5e8a09}
+.rec-txt{flex:1;font-size:13px;color:var(--ink);line-height:1.62;font-weight:550}
+.rec-txt b{font-weight:800;color:var(--blue-d)}
+.rec.win .rec-txt b{color:#4d7307}
+.rec-dept{flex:none;align-self:flex-start;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:7px;white-space:nowrap;margin-top:1px}
+/* 责任归属 floor */
+.deptgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.deptcard{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.deptcard .dh{display:flex;align-items:center;gap:11px;padding:14px 18px;border-bottom:1px solid var(--g2)}
+.deptcard .dh .ddot{flex:none;width:13px;height:13px;border-radius:4px}
+.deptcard .dh .dtit{flex:1}
+.deptcard .dh h4{margin:0;font-size:15.5px;font-weight:800}
+.deptcard .dh .dblurb{font-size:11px;color:var(--ink2);margin-top:1px}
+.deptcard .dh .dcount{flex:none;font-family:var(--mono);font-size:12px;font-weight:800;color:#fff;padding:3px 10px;border-radius:20px}
+.deptlist{list-style:none;margin:0;padding:6px 18px 15px}
+.deptlist li{padding:9px 0;border-top:1px solid var(--g1);font-size:12.5px;color:var(--ink2);line-height:1.6}
+.deptlist li:first-child{border-top:none}
+.deptlist li b{color:var(--ink);font-weight:700}
+.deptlist .tpref{font-family:var(--mono);font-size:10.5px;font-weight:800;color:#fff;padding:1px 6px;border-radius:5px;margin-right:7px;white-space:nowrap}
+.deptlist .p0flag{font-size:10px;font-weight:800;color:#fff;background:var(--coral);padding:1px 6px;border-radius:5px;margin-left:6px}
+
+/* synthesis */
+.judges{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.judge{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.judge .jn{font-family:var(--mono);font-size:34px;font-weight:800;color:var(--g3);position:absolute;top:8px;right:16px}
+.judge h4{margin:0 0 8px;font-size:16px;font-weight:750;max-width:84%}
+.judge p{margin:0;font-size:13.5px;color:var(--ink2)}
+.judge .pin{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:9px}
+.pin.a{background:var(--coral-s);color:var(--coral)} .pin.win{background:var(--green-s);color:var(--green)}
+.pin.both{background:var(--purple-s);color:var(--purple)}
+.actions{margin-top:24px;background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.actions table{width:100%;border-collapse:collapse;font-size:13.5px}
+.actions th{background:var(--g1);text-align:left;padding:12px 18px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--g3)}
+.actions td{padding:13px 18px;border-bottom:1px solid var(--g1);vertical-align:top}
+.actions tr:last-child td{border-bottom:none}
+.prio{font-family:var(--mono);font-weight:800;font-size:12px;padding:3px 9px;border-radius:7px;white-space:nowrap}
+.prio.p0{background:var(--coral);color:#fff} .prio.p1{background:var(--gold);color:#fff}
+.prio.p2{background:var(--blue-s);color:var(--blue-d)} .prio.p3{background:var(--g2);color:var(--g7)}
+
+.footer{padding:40px 0 70px;color:var(--ink2);font-size:12.5px;text-align:center}
+.footer code{font-family:var(--mono);background:var(--g2);padding:1px 6px;border-radius:5px}
+
+/* synthesis floors */
+.synth-toc{display:flex;flex-wrap:wrap;gap:10px}
+.synth-toc a{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--g3);
+  border-radius:12px;padding:10px 15px;font-size:13px;font-weight:650;box-shadow:var(--shadow);transition:.15s}
+.synth-toc a:hover{box-shadow:var(--shadow-h);transform:translateY(-2px)}
+.synth-toc a .n{font-family:var(--mono);font-weight:800;color:#fff;width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px}
+.synth-floor .synth-body{display:grid;grid-template-columns:0.82fr 1fr;gap:30px;align-items:start;margin-top:4px}
+.synth-text .lead{font-size:14.5px;color:var(--ink);font-weight:650;margin:0 0 14px;line-height:1.72}
+.synth-text p{font-size:13.5px;color:var(--ink2);margin:0 0 12px;line-height:1.74}
+.synth-text p b{color:var(--ink);font-weight:700}
+.synth-demo{background:var(--g1);border:1px solid var(--g3);border-radius:16px;padding:20px;position:relative}
+.demo-cap{font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--g6);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.demo-cap::before{content:'DEMO';font-family:var(--mono);background:var(--ink);color:#fff;padding:2px 7px;border-radius:5px;font-size:9px;letter-spacing:.5px}
+/* hero demo */
+.herodemo{display:flex;flex-direction:column;gap:12px}
+.herocard{border-radius:12px;padding:16px 18px 30px;position:relative;overflow:hidden}
+.herocard.light{background:linear-gradient(135deg,#eef3fc,#fbfcff);border:1px solid var(--g3)}
+.herocard.dark{background:linear-gradient(135deg,#141414,#1f1f1f);border:1px solid #2a2a2a}
+.herocard .lbl{font-size:10.5px;font-weight:700;margin-bottom:8px}
+.herocard.light .lbl{color:var(--coral)} .herocard.dark .lbl{color:#76b900}
+.herocard .big{font-size:19px;font-weight:850;line-height:1.22}
+.herocard.light .big{color:var(--ink)} .herocard.dark .big{color:#fff}
+.herocard.dark .big .g{color:#76b900}
+.herocard .small{font-size:11px;margin-top:6px;line-height:1.5}
+.herocard.light .small{color:var(--ink2)} .herocard.dark .small{color:#9a9a9a}
+.herocard .pinq{position:absolute;right:14px;bottom:11px;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px}
+.pinq.no{background:var(--coral-s);color:var(--coral)} .pinq.yes{background:var(--green-s);color:#5e8a09}
+/* flow demo */
+.flowlane{margin-bottom:18px}
+.flowlane:last-child{margin-bottom:0}
+.flowlane .lh{margin-bottom:10px}
+.flowlane .badge{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.step{font-size:11px;font-weight:600;padding:6px 10px;border-radius:8px;border:1px solid;white-space:nowrap}
+.step.ok{background:var(--green-s);border-color:#d6e8ad;color:#5e8a09}
+.step.warn{background:#fff;border-color:var(--g4);color:var(--ink2)}
+.step.gate{background:var(--coral-s);border-color:#f2c4bc;color:var(--coral);font-weight:800}
+.arrow{color:var(--g5);font-size:12px}
+.lenbar{height:7px;border-radius:4px;margin-top:11px}
+/* matrix demo */
+.mtx{display:grid;grid-template-columns:84px 1fr 1fr;gap:8px}
+.mtx .hd{font-size:11.5px;font-weight:700;color:var(--ink2);display:flex;align-items:center;justify-content:center;padding-bottom:2px}
+.mtx .rl{font-size:12px;font-weight:700;display:flex;align-items:center}
+.mcell{border-radius:10px;padding:11px 12px;font-size:11px;line-height:1.42}
+.mcell.smooth{background:var(--green-s);border:1px solid #d6e8ad}
+.mcell.mid{background:var(--gold-s);border:1px solid #ecd49a}
+.mcell.block{background:var(--coral-s);border:1px solid #f2c4bc}
+.mcell .mk{font-weight:800;font-size:12px;display:block;margin-bottom:3px}
+.mcell.smooth .mk{color:#5e8a09} .mcell.mid .mk{color:#8a5d10} .mcell.block .mk{color:var(--coral)}
+/* path demo */
+.pathlane{border-radius:12px;padding:13px 15px;margin-bottom:11px;border:1px solid}
+.pathlane.win{background:var(--green-s);border-color:#d6e8ad}
+.pathlane.base{background:var(--card);border-color:var(--g3)}
+.pathlane .ph{font-size:12.5px;font-weight:800;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pathlane.win .ph{color:#5e8a09}
+.pathlane .psteps{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.pathlane .ps{font-size:11px;font-weight:600;background:rgba(255,255,255,.75);border:1px solid var(--g3);border-radius:7px;padding:5px 9px}
+.tofirst{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--card);border:1px solid var(--g3);white-space:nowrap}
+/* discover demo */
+.disc-evid{display:flex;gap:10px;margin-bottom:14px}
+.disc-evid figure{flex:1;margin:0}
+.disc-evid img{width:100%;border-radius:9px;border:1px solid var(--g3);aspect-ratio:16/11;object-fit:cover;object-position:center;cursor:zoom-in}
+.disc-evid figcaption{font-size:10px;color:var(--coral);font-weight:700;margin-top:5px;text-align:center}
+.health{display:flex;flex-direction:column;gap:8px}
+.hrow{display:grid;grid-template-columns:88px 1fr 1fr;gap:7px;align-items:center}
+.hrow .hl{font-size:11.5px;font-weight:700;color:var(--ink2)}
+.hbar{height:30px;border-radius:7px;display:flex;align-items:center;padding:0 10px;font-size:10.5px;font-weight:700;color:#fff;line-height:1.25}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(15,20,32,.86);z-index:100;display:none;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lb.on{display:flex} .lb img{max-width:96%;max-height:96%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+
+@media(max-width:820px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .tpcard-body{grid-template-columns:1fr}
+  .tpside.left{border-right:none;border-bottom:1px solid var(--g2)}
+  .judges{grid-template-columns:1fr}
+  .jstages{grid-template-columns:repeat(3,1fr);row-gap:24px}
+  .synth-floor .synth-body{grid-template-columns:1fr;gap:18px}
+  .synth-toc a{flex:1 1 100%}
+  .hero h1{font-size:30px}
+}
+</style>
+</head>
+<body>
+<svg class="netbg" id="netbg"></svg>
+
+<nav class="topnav">
+  <div class="brand"><b>昇腾</b> vs 英伟达 · 体验竞品</div>
+  <div class="navlinks" id="navlinks">
+    <a href="#hero" class="active">概览</a>
+    <a href="#journey">旅程图</a>
+    <a href="#heat">热力图</a>
+    <a href="#s1">①认知导航</a>
+    <a href="#s2">②产品选型</a>
+    <a href="#s3">③学习文档</a>
+    <a href="#s4">④资源获取</a>
+    <a href="#s5">⑤开发实践</a>
+    <a href="#s6">⑥支持社区</a>
+    <a href="#synth">综述</a>
+    <a href="#actions">建议</a>
+    <a href="#dept">责任归属</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero floor" id="hero">
+    <h1><span class="a">昇腾</span><span class="vs">vs</span><span class="n">英伟达</span><br>开发者基础体验 · 逐触点拆解</h1>
+    <p class="lede">以「开发者从第一次到官网，到真正跑起来」的用户旅程为主线，把两边开发者门户拆成 <b>6 阶段 · 24 个触点</b>，逐触点实跑取证、给结论与评分。视角：UX 体验旅程型。</p>
+    <div class="chips">
+      <span class="chip"><span class="dot" style="background:var(--coral)"></span>昇腾 · hiascend.com</span>
+      <span class="chip"><span class="dot" style="background:var(--green)"></span>NVIDIA · developer.nvidia.com</span>
+      <span class="chip"><span class="dot" style="background:var(--blue)"></span>2026-06-13 · v1</span>
+    </div>
+    <div class="metrics">
+      <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v">73.3<span style="font-size:18px;color:var(--g5)"> / </span>78.5</div><div class="vsub">24 触点 0–100 体验分</div></div>
+      <div class="metric bad"><div class="k">最大缺口 · SDK 下载流程</div><div class="v">−20</div><div class="vsub">账号闸门 + 多级选择 + 协议</div></div>
+      <div class="metric good"><div class="k">反转长板 · 快速入门</div><div class="v">+10</div><div class="vsub">学习路径 + 在线实验</div></div>
+      <div class="metric"><div class="k">真实截图取证</div><div class="v">19<span style="font-size:18px;color:var(--g5)">张</span></div><div class="vsub">昇腾9 · NVIDIA10（关键页全覆盖）</div></div>
+    </div>
+    <div class="method"><b>取证方法与可靠性：</b>昇腾全旅程 9 张真实截图；NVIDIA 站点对无头浏览器强反爬，关键页已由人工补截，现共 10 张真实截图（首页 / CUDA下载 / CUDA Toolkit / 行业方案 / 文档中心 / 快速入门 / NGC / build playground / 论坛 / 开发者博客），覆盖全部有独立页面的对比触点。其余少量比较性论点（导航、搜索、Nsight 等无单一页面对应者）以标注 mockup 呈现。每个触点证据均标注「真实截图 / mockup」。</div>
+  </header>
+
+  <!-- JOURNEY -->
+  <section class="floor" id="journey">
+    <div class="floor-hd"><span class="fno">MAP</span><h2>用户旅程总览</h2></div>
+    <p class="floor-sub">6 阶段的体验分对比（柱）与情绪曲线（线）。昇腾在「资源获取」明显塌陷，在「学习与文档」小幅反超。</p>
+    <div class="journey">
+      <svg class="jcurve" id="jcurve" preserveAspectRatio="none"></svg>
+      <div class="jstages" id="jstages"></div>
+      <div class="jlegend"><span><i style="background:var(--coral)"></i>昇腾</span><span><i style="background:var(--green)"></i>NVIDIA</span><span style="color:var(--g6)">柱高=阶段均分 · 数字=0–100</span></div>
+    </div>
+  </section>
+
+  <!-- HEATMAP -->
+  <section class="floor" id="heat">
+    <div class="floor-hd"><span class="fno">HEAT</span><h2>24 触点体验热力图</h2></div>
+    <p class="floor-sub">越红越该改（问题优先）。最右「差」列＝昇腾−NVIDIA，红框标注最大三处缺口。</p>
+    <div class="heat" id="heatmap">
+      <div class="heatrow head"><div></div><div>触点</div><div class="c">昇腾</div><div class="c">NVIDIA</div><div class="c">差值</div></div>
+    </div>
+  </section>
+
+  <!-- STAGE FLOORS render here -->
+  <div id="floors"></div>
+
+  <!-- SYNTHESIS intro -->
+  <section class="floor" id="synth">
+    <div class="floor-hd"><span class="fno">∑</span><h2>末尾综述</h2></div>
+    <p class="floor-sub">把 24 个触点的结论收敛成 5 个跨触点的大判断 —— 每个判断单独占一层，左侧详述、右侧配一张说明性 Demo。</p>
+    <div class="synth-toc" id="synthtoc"></div>
+  </section>
+  <div id="synthfloors"></div>
+  <!-- ACTIONS -->
+  <section class="floor" id="actions">
+    <div class="floor-hd"><span class="fno">DO</span><h2>行动建议</h2></div>
+    <p class="floor-sub">按优先级排序，P0 为最高杠杆、应优先动手。</p>
+    <div class="actions">
+      <table>
+        <thead><tr><th style="width:64px">优先级</th><th>建议</th><th style="width:130px">对应触点</th><th style="width:180px">预期收益</th></tr></thead>
+        <tbody id="actbody"></tbody>
+      </table>
+    </div>
+  </section>
+  <!-- DEPARTMENTS -->
+  <section class="floor" id="dept">
+    <div class="floor-hd"><span class="fno">OWN</span><h2>责任归属</h2></div>
+    <p class="floor-sub">把 24 条「昇腾该怎么做」按<b>主责部门</b>归堆——每个部门看到自己要接的活。一条改进常需跨部门协同，这里只标“主责”。</p>
+    <div class="deptgrid" id="deptgrid"></div>
+  </section>
+
+  <div class="footer">
+    证据素材：<code>materials/ascend-vs-nvidia/</code>（screenshots · visual-analysis.md · failed-links.md）　|　完整文字版：<code>reports/ascend-vs-nvidia-2026-06-13-v1.md</code><br>
+    NVIDIA 触点截图受站点反爬限制，以标注 mockup 复刻；所有 NVIDIA 事实均来自官网可核实内容。本报告为体验研究判断，评分非实测数值。
+  </div>
+</div>
+
+<div class="lb" id="lb"><img id="lbimg" src="" alt=""></div>
+
+<script>
+const IMG='../materials/ascend-vs-nvidia/screenshots/';
+
+/* ---------- data ---------- */
+const STAGES=[
+ {n:1,id:'s1',name:'认知与导航',a:73,nv:78,sub:'我到了官网，这是什么、东西在哪',
+  tps:['首页第一屏','顶部导航/IA','全站搜索','语言切换']},
+ {n:2,id:'s2',name:'产品探索与选型',a:74,nv:78,sub:'我该用哪个产品 / 软件栈',
+  tps:['产品总览','产品详情','规格参数','解决方案']},
+ {n:3,id:'s3',name:'学习与文档',a:78,nv:79,sub:'我怎么上手、文档好不好读',
+  tps:['文档中心','快速入门','教程','API 参考']},
+ {n:4,id:'s4',name:'资源获取',a:64,nv:81,sub:'去哪下 SDK、要不要建账号',
+  tps:['下载中心','注册/登录','SDK 流程','版本选择']},
+ {n:5,id:'s5',name:'开发实践',a:77,nv:81,sub:'有没有示例、模型、能不能先试',
+  tps:['代码示例','模型库','开发工具','在线体验']},
+ {n:6,id:'s6',name:'支持与社区',a:73,nv:78,sub:'卡住了去哪问',
+  tps:['社区/论坛','技术支持','FAQ','博客/案例']},
+];
+
+// nm: nvidia mockup {url,h,hl,lines[],btn,tags[]}; if nimg given use real shot
+const TP=[
+// stage1
+{id:'1.1',s:1,name:'首页第一屏',a:70,nv:78,
+ aimg:'01-ascend-home.png',atag:'real',nimg:'01-nvidia-home.png',ntag:'real',
+ adesc:'浅色背景，顶部是 CANN 训练营 banner，首屏主视觉给到品牌大标语「昇腾万里，让智能无所不及」。真正的开发者动作入口——注册、产品矩阵、“从入门到成果”的成长路径——都排在更下方，要往下滚才看得到。',
+ ndesc:'深色背景，首屏大标题直接是一句开发者动作「Skip the setup. Start building.」（跳过环境配置、直接开干，building 用品牌绿高亮），紧跟着就是教程卡片流。代价是首次访问会叠一层 cookie 同意弹窗，挡住部分主视觉。',
+ c:[['开发者的第一问没被先回答','开发者刚打开官网，最想知道的是“我现在能做什么”。NVIDIA 用一句 Skip the setup. Start building. 直接把人引向动作；昇腾首屏先讲品牌愿景，把“你能做什么”排在了“我们是谁”后面，开发者要多滚一屏才找到起步入口。'],
+    ['主行动入口的位置偏低','昇腾的主按钮「立即注册登录社区」落在页面最底部，视觉层级低、容易被忽略；NVIDIA 把教程、Read More 这些“下一步”入口紧贴首屏，顺着视线就能点下去。'],
+    ['两边各有一处首屏摩擦，但性质不同','NVIDIA 的 cookie 弹窗会在落地瞬间遮挡主视觉、要先关掉；昇腾首屏没有遮挡，但“无遮挡”换来的是“也没给出明确的下一步”——一个是挡路、一个是没指路。']],
+ rec:'在首屏 banner 区加一条明确的<b>“开发者起步”主入口</b>（如“5 分钟跑通第一个示例”直达在线实验），把“从入门到成果”的成长路径提到首屏，让品牌口号与开发者动作并存，而不是二选一。'},
+{id:'1.2',s:1,name:'顶部导航 / 信息架构',a:74,nv:80,
+ aimg:'01-ascend-home.png',atag:'real',
+ adesc:'昇腾顶部导航是 CANN / 产品 / 解决方案 / 开发者与合作伙伴 / 支持与服务 五个一级入口，偏“企业 + 产品线”的组织方式；好处是把 文档 / 在线开发 / 资源 直接外露在导航右上角，老用户一眼直达。',
+ nm:{url:'developer.nvidia.com',h:'Tutorials · Training',hl:'Topic × Industry 双轴',
+   lines:['一级：Tutorials / Training / Topic / Industry / Platforms & Tools','按“我要做什么任务”组织'],
+   tags:['AI','Robotics','HPC','Cloud']},ntag:'text',
+ ndesc:'NVIDIA 导航按“开发者要做的事”组织：Tutorials / Training / Browse by Topic / Browse by Industry / Platforms & Tools，既能按主题（AI、HPC、机器人）也能按行业进入，不需要先知道产品叫什么。',
+ c:[['两套导航的分类心智不同','昇腾按“产品线”分——你得先认识 CANN、MindIE 这些名字才知道点哪；NVIDIA 按“主题 / 行业 / 任务”分，一个还没选定产品的新手也能顺着“我要做什么”找到入口。'],
+    ['昇腾的直达性是优点','把 文档、在线开发、资源 提到导航右上单独露出，对回访的老开发者很高效，这点比 NVIDIA 收进多级菜单更直接。']],
+ rec:'在产品线导航之外，<b>补一层“按场景 / 按角色”的横切入口</b>（如“我要做推理部署 / 算子开发”），让不认识产品名的新手也能进来——保留直达性的同时降低认知门槛。'},
+{id:'1.3',s:1,name:'全站搜索',a:76,nv:74,
+ aimg:'07-ascend-document.png',atag:'real',
+ adesc:'昇腾文档中心把搜索做成页面正中的一个大搜索框，是这一页的主入口，检索意图很明确；不足是输入框带 0/100 字符上限，较长的自然语言查询会被截断。',
+ nm:{url:'developer.nvidia.com',h:'Submit Search',hl:'常规顶栏搜索',lines:['搜索为顶栏常规入口','无页面级大搜索框'],tags:['search']},ntag:'text',
+ ndesc:'NVIDIA 的搜索是顶栏里一个常规的 Submit Search 入口，没有页面级的大搜索框，更多依赖左侧筛选与浏览来找内容。',
+ win:true,
+ c:[['搜索的“可见性”昇腾更强','把搜索做成页面级大框，等于直接告诉用户“想找什么就搜”，对文档场景很对路；NVIDIA 的顶栏搜索更隐蔽，靠筛选补位。'],
+    ['昇腾有个小体验瑕疵','0/100 的字符上限会截断长查询，开发者贴一段报错信息去搜时会被打断。']],
+ rec:'保留大搜索框的强可见性，<b>放宽字符上限、支持粘贴报错/日志检索</b>，再加上搜索联想与热门搜索，把这个已经领先的入口做得更稳。'},
+{id:'1.4',s:1,name:'语言 / 地区切换',a:72,nv:78,
+ aimg:'01-ascend-home.png',atag:'real',
+ adesc:'昇腾默认中文、右上角可切 /zh，内容以中文为主、英文为辅；对国内开发者非常顺，但英文文档的完整度和更新及时性是隐性短板。',
+ nm:{url:'nvidia.com',h:'Global · EN first',hl:'英文优先 + 地区切换',lines:['英文优先，全球地区切换','开发者内容以英文为主'],tags:['EN','Global']},ntag:'text',
+ ndesc:'NVIDIA 默认英文、提供全球地区切换，开发者内容以英文为主，面向全球开发者的可达性强，但中文本地化内容相对薄。',
+ c:[['这是一对镜像的语言门槛','昇腾对中文用户友好、英文薄；NVIDIA 对英文用户友好、中文薄。谁更顺，取决于你站在哪个语言区。'],
+    ['对昇腾出海是隐性阻力','海外或学术开发者首选英文资料，昇腾英文内容的深度与时效不足，会直接影响第一印象。']],
+ rec:'若有出海或学术生态目标，<b>把核心文档、快速入门、ModelZoo 的英文版做到与中文同步</b>（而非滞后翻译），并在显眼处提供语言切换。'},
+// stage2
+{id:'2.1',s:2,name:'产品总览',a:70,nv:76,
+ aimg:'01-ascend-products.png',atag:'real',
+ adesc:'这是昇腾首页的“产品矩阵”楼层：把 ModelArts、Hub Service、MindCluster / MindSpore / PyTorch、CANN 软件包、MindStudio、CCAE 等按硬件 + 软件栈铺成一张大网格，体系完整但信息密度高。',
+ nm:{url:'developer.nvidia.com',h:'Platforms & Tools',hl:'按能力域分类',lines:['Simulation / Accelerated Computing','AI Training & Inference / Cloud'],tags:['能力域']},ntag:'text',
+ ndesc:'NVIDIA 的产品入口（Platforms & Tools）按“能力域”组织——Simulation、Accelerated Computing、AI Training & Inference、Cloud，更贴近“我要做哪类任务”，而不是“有哪些产品”。',
+ c:[['两种产品组织逻辑','昇腾按“有什么产品”铺（硬件线 + 软件栈一张大网格），适合已经知道自己要找什么的人；NVIDIA 按“能做什么”分（能力域），更贴近任务心智。'],
+    ['昇腾的决策成本偏高','矩阵信息密度大、平铺罗列，新手面对一屏产品名容易不知从哪下手，缺一个“我是谁 → 该用什么”的引导。']],
+ rec:'在产品矩阵之上加一个<b>“选型分诊”入口</b>：用“你是算子/框架/应用开发者、要做训练/推理/迁移”几步问答，直接推荐对应产品与起步路径，把平铺的矩阵变成有导引的选择。'},
+{id:'2.2',s:2,name:'产品详情页',a:78,nv:82,
+ aimg:'06-ascend-cann.png',atag:'real',
+ adesc:'昇腾 CANN 产品页内容很完整：顶部 hero + “快速体验”按钮，三个入口（代码仓 / 资源获取 / CANN 训练营），中部一张架构图，下面还有“CANN 开发者日历（SIG 会议）”和开源开放专区，社区共建感强。',
+ nm:{url:'developer.nvidia.com/cuda-toolkit',h:'CUDA Toolkit',hl:'Download Now',
+   lines:['“a development environment for GPU-accelerated apps”','组件 + 链接 docs/samples/forums/DLI'],btn:'Download Now',tags:['Samples','Docs','Forums']},ntag:'text',
+ ndesc:'NVIDIA CUDA Toolkit 产品页以“a development environment for GPU-accelerated apps”定位，主按钮是醒目的 Download Now，下面列组件、链接到 docs / samples / forums / DLI，结构直奔“下载并开始”。',
+ c:[['两边产品页都很扎实，但气质不同','昇腾页强“社区与共建”（开发者日历、SIG、开源专区），NVIDIA 页强“直达下载”（Download Now 居首）。前者像生态主页，后者像上手入口。'],
+    ['昇腾的“快速体验”是亮点','产品页上直接给“快速体验”按钮，降低了试用门槛，方向正确——只是它的视觉权重还不够，容易被周围信息淹没。']],
+ rec:'把 CANN 页的<b>“快速体验”提为页面主 CTA</b>（视觉权重对齐 NVIDIA 的 Download Now），并让它直通在线实验/在线开发，让“看完介绍立刻能试”成为详情页的默认动作。'},
+{id:'2.3',s:2,name:'规格参数',a:74,nv:76,
+ aimg:'07-ascend-specs.png',atag:'real',
+ adesc:'这是昇腾文档中心的“硬件产品”区：Atlas 系列按 开发者套件 / 加速模块 / 加速卡 / 智能小站 / 服务器 / 集群 分门别类列全（200I、300I、800、900 等型号一目了然），信息齐全。',
+ nm:{url:'docs.nvidia.com',h:'Specs in product pages',hl:'产品页集中',lines:['规格集中在各产品页','缺并排选型对比工具'],tags:['Specs']},ntag:'text',
+ ndesc:'NVIDIA 的规格更多集中在各产品页内，型号与参数随产品呈现；同样完整，但两边都没有“把多个型号拉到一起并排比”的选型对比工具。',
+ c:[['规格信息两边都齐，差在“分布”','昇腾把硬件规格集中在文档中心一张大表里（适合系统查阅），NVIDIA 分散在各产品页（适合定向查单品）。'],
+    ['共同缺口：没有并排选型','开发者选硬件时最想要“A 卡 vs B 卡”的对比表，两边都得自己翻、自己拼，这里谁先做谁占优。']],
+ rec:'在硬件规格表上加一个<b>“勾选型号 → 并排对比”的选型工具</b>（性能、显存、功耗、适用场景逐行对齐），把昇腾“集中列全”的优势直接升级成“能对比、好决策”。'},
+{id:'2.4',s:2,name:'解决方案 / 场景入口',a:72,nv:78,
+ aimg:'06-ascend-solution.png',atag:'real',
+ adesc:'这张其实是昇腾的 404 页面——我用常识性直链 /solution 访问时它并不存在。要肯定的是 404 页做得干净（飞碟插画 + “返回首页” + 完整底部站点地图），错误恢复合格。解决方案本身藏在顶部导航“解决方案”里，偏行业案例展示。',
+ nm:{url:'nvidia.com/industries',h:'Browse by Industry',hl:'行业可浏览',lines:['Healthcare / Robotics / Gaming…','行业分类细、可浏览'],tags:['Industry']},ntag:'text',
+ ndesc:'NVIDIA 的 Browse by Industry 把行业（Healthcare / Robotics / Gaming…）做成可浏览的分类入口，开发者能按自己所在行业一路点进去找方案。',
+ c:[['行业入口两边都有，颗粒度不同','NVIDIA 的行业分类细、可浏览、可自助下钻；昇腾解决方案偏“行业案例展示”，按场景自助找入口的颗粒度更粗。'],
+    ['一个连带的可发现性问题','常识直链 /solution 直接 404（尽管 404 页本身做得不错），说明昇腾的 URL 规范性有提升空间——这和博客 /blog 404 是同一类问题。']],
+ rec:'把解决方案做成<b>“按行业 / 按场景可浏览、可下钻”的结构</b>，并规范常识性 URL（让 /solution 这类直链能命中而不是 404），把“有方案”升级成“找得到方案”。'},
+// stage3
+{id:'3.1',s:3,name:'文档中心首页',a:80,nv:82,
+ aimg:'07-ascend-document.png',atag:'real',
+ adesc:'昇腾文档中心：页面正中一个大搜索框 + 下面“热门文档”卡片（CANN 软件栈、Ascend C 算子开发、应用开发等）+ 按软件/硬件产品线分类 + 其他资源（昇腾学堂、下载、ModelZoo），是“搜索优先”的组织。',
+ nm:{url:'docs.nvidia.com',h:'100+ products',hl:'主题/行业/角色筛选',lines:['按 Topic / Industry / Job Role 筛选','字母 / 最新 排序'],tags:['Filter','Sort']},ntag:'text',
+ ndesc:'NVIDIA docs 聚合 100+ 产品，靠“按主题 / 行业 / 角色（Job Role）筛选 + 字母/最新排序”来收敛，是“筛选优先”的组织，对不知道产品名的人更友好。',
+ c:[['两边文档中心都很强，心智不同','昇腾“搜索优先”（大搜索框居中），NVIDIA“筛选优先”（多维 filter）。一个适合“我知道要搜什么”，一个适合“我不确定，靠筛”。'],
+    ['宽容度上 NVIDIA 略胜','按产品线组织要求你先认识产品名；按主题/角色筛选则允许新手从“我是谁、我要做什么”进来，试错成本更低。']],
+ rec:'在“搜索 + 产品线”之外，<b>给文档中心加一层“按角色 / 按主题”的筛选与导航</b>（对齐 NVIDIA 的 Job Role / Topic），让老手能搜、新手能筛，两类人各走各的路。'},
+{id:'3.2',s:3,name:'快速入门',a:82,nv:72,win:true,
+ aimg:'07-ascend-learn-path.png',atag:'real',
+ adesc:'昇腾“学习”页不是一篇安装文档，而是一整套「学习路径」：按角色分成 应用开发 / 推理开发 / 训练开发 / 框架开发 四条路径，每条卡片下面直接列出该走的子课程（生成式 AI 入门、ACL 推理、模型迁移等）；页面再往下的「学习资源」里就是 在线课程 / 微认证 / “在线实验”——不用在本地装任何环境，直接在浏览器里跑。',
+ nm:{url:'docs.nvidia.com/cuda/cuda-quick-start-guide',h:'CUDA Quick Start',hl:'文档式安装指南',
+   lines:['按 OS 分（Win/Linux），内联命令','假设有基础，sample 拉 GitHub','首个 build 约 15–60 分钟'],tags:['v13.3','CLI']},ntag:'text',
+ ndesc:'NVIDIA 的 CUDA Quick Start Guide 是一份标准技术文档：按操作系统（Windows / Linux）分章、给出可复制的命令行，右上有版本选择器、左侧是层级目录。但它默认你已有基础，示例代码要去 GitHub 另外拉，首个能跑起来的 build 大约要 15–60 分钟。',
+ c:[['昇腾把“快速入门”做成了体系，而不是一篇文档','面对“我该怎么上手”，NVIDIA 给的是一份按操作系统分的安装指南，偏硬核、且假设你有基础；昇腾给的是按角色铺好的学习路径 + 课程 + 认证，新手一眼知道自己该走哪条线。这一层昇腾明显更友好。'],
+    ['“在线实验”直接抹掉了装环境这道坎','上手最容易卡住的地方就是搭本地环境（NVIDIA 这条路约 15–60 分钟）。昇腾的在线实验让人免安装、在浏览器里直接跑通第一个例子，把“第一次成功”的门槛降到最低。']],
+ rec:'把“在线实验 + 引导式 ModelZoo”从学习页<b>前置到首屏和产品页</b>，让“开箱即跑、免装上手”成为昇腾对外的体验标签——这是少数几个体验反超 NVIDIA 的点，要主动讲出来、放大它。'},
+{id:'3.3',s:3,name:'教程',a:76,nv:80,
+ aimg:'07-ascend-learn.png',atag:'real',
+ adesc:'昇腾的教程资源很丰富：学习页有“探索学习”卡片、按热度的“热门排行”，背后是昇腾学堂的体系化课程，并配套微认证。',
+ nm:{url:'developer.nvidia.com',h:'Tutorials + DLI',hl:'DLI 权威认证',lines:['首页 Tutorials 流 + On-Demand 视频','Deep Learning Institute 含认证'],tags:['DLI','Videos']},ntag:'text',
+ ndesc:'NVIDIA 走 Tutorials 资讯流 + On-Demand 视频 + DLI（Deep Learning Institute）路线，DLI 是业界知名、含权威证书的培训品牌。',
+ c:[['内容量两边都够，差在“品牌势能”','昇腾有探索学习 + 热门排行 + 昇腾学堂，体系不缺；但 NVIDIA 的 DLI 是开发者圈公认的培训/认证品牌，号召力更强。'],
+    ['昇腾微认证的“含金量心智”待建立','对标 DLI 的微认证已经有了，缺的是行业认可与雇主背书，知道的人还不多。']],
+ rec:'给昇腾微认证<b>建立含金量背书</b>（与高校/企业联合认证、纳入招聘技能标签、公开通过率与权益），把“有认证”做成“值得考的认证”，让教程的体系优势变成可感知的成长回报。'},
+{id:'3.4',s:3,name:'API / 接口参考',a:72,nv:80,
+ aimg:'07-ascend-document.png',atag:'real',
+ adesc:'昇腾的 API / 接口参考存在于 CANN 文档体系内（Ascend C、AscendCL 等），能查到；但跨版本切换与不同模块间的结构一致性还有打磨空间。图为文档中心入口。',
+ nm:{url:'docs.nvidia.com/cuda',h:'CUDA Runtime API',hl:'版本选择器 v13.3',lines:['成熟版本选择器 + 左侧层级 TOC','跨版本查阅顺'],tags:['Versioned','TOC']},ntag:'text',
+ ndesc:'NVIDIA 的 CUDA Runtime API 文档有成熟的版本选择器（v13.3 等）+ 左侧层级目录，跨版本、跨模块查阅都很顺，是多年沉淀的文档工程。',
+ c:[['NVIDIA 的 API 文档工程更成熟','显眼的版本选择器 + 稳定的层级 TOC，让“查某版本某接口”这件事很顺；昇腾的 API 文档查得到，但版本切换与结构一致性还不够统一。'],
+    ['一个共同的缺口','两边都偏“静态文档式”，缺可交互的 API explorer（在线试调、参数提示），开发者仍要在文档和代码间来回切。']],
+ rec:'给昇腾 API 文档<b>统一版本选择器与层级结构</b>，并逐步引入“可在线试调”的交互式 API 参考，让查接口从“翻文档”变成“边查边试”。'},
+// stage4
+{id:'4.1',s:4,name:'下载中心',a:68,nv:72,
+ aimg:'02-ascend-download.png',atag:'real',nimg:'02-nvidia-cuda-download.png',ntag:'real',
+ adesc:'昇腾下载中心：产品卡网格（CANN / PyTorch / TensorFlow / MindSpore / MindCluster / MindStudio），分“社区版 / 商用版”双轨；落地瞬间先弹一个“资源下载中心公告”把页面挡住。',
+ ndesc:'NVIDIA CUDA 下载页：中央是经典的绿色按钮选择器；落地时也会弹一个“订阅 CUDA 更新”的邮件捕获弹窗（可关闭）。两边落地都用 modal 打断。',
+ c:[['一个有意思的共性：都用 modal 打断','昇腾落地弹“下载公告”，NVIDIA 弹“邮件订阅”。区别在于：NVIDIA 用这次打断换取增长线索（留资），昇腾的公告更多是单向通知、价值更低。'],
+    ['昇腾的“社区版/商用版”双轨','结构上清晰，但对只想试用的开发者来说，多了一次“我该选哪版”的判断分叉。']],
+ rec:'把落地公告从<b>“打断式 modal 降级为顶部 banner / 角标”</b>，不挡主任务流；并在下载入口默认高亮“社区版”，减少“选哪版”的决策负担。'},
+{id:'4.2',s:4,name:'注册 / 登录',a:62,nv:80,
+ aimg:'05-ascend-login.png',atag:'real',
+ adesc:'昇腾登录页是“华为账号登录”：支持 手机号/邮箱/账号名 + 密码、短信验证码，以及微信 / QQ 第三方登录，一个账号打通昇腾与华为云生态；对国内开发者非常顺。',
+ nm:{url:'developer.nvidia.com/developer-program',h:'Join · login optional',hl:'下载不强制登录',
+   lines:['全球账号，下载零登录、账号后置','第三方生态镜像（缺微信/QQ）'],btn:'Join Program',tags:['No-login DL']},ntag:'text',
+ ndesc:'NVIDIA 用全球账号 + 开发者计划，关键是——下载 CUDA 不强制登录，账号是“想要更多权益时再注册”的后置项；第三方登录偏全球生态（无微信/QQ）。',
+ c:[['账号体系是一对镜像门槛','昇腾绑华为账号、给微信/QQ，对国内一键直达，但海外开发者没有微信/QQ、还要新注册华为账号，门槛陡升；NVIDIA 正好相反，对全球顺、对国内缺本地化登录。'],
+    ['更关键的是“登录的时机”','昇腾把登录卡在下载之前；NVIDIA 把登录完全后置。前者恰恰在最该“先试试”的环节设了闸。']],
+ rec:'把登录从下载的前置条件改为<b>后置项——游客可先下社区版、跑通后再提示登录解锁更多</b>；若要出海，再补邮箱直注册与 Google/GitHub 等国际第三方登录。'},
+{id:'4.3',s:4,name:'SDK / Toolkit 下载流程',a:64,nv:84,
+ aimg:'02-ascend-download.png',atag:'real',nimg:'02-nvidia-cuda-download.png',ntag:'real',
+ adesc:'昇腾社区版下载页：要先在“社区版 / 商用版”里选对分支，再依次选 CPU 架构（AArch64 / X86_64）、CANN 版本、具体软件包，并勾选同意《CANN 软件用户许可协议》，关键下载动作还要求登录华为账号。落地时先弹一个“资源下载中心公告”把页面挡住。',
+ ndesc:'CUDA 下载页：一行行绿色按钮，依次点 操作系统 → 架构 → 发行版 → 版本 → 安装类型（Network / Full），每点一步只展示下一步的合法选项；选完页面就内联给出一条可直接复制的安装命令，全程不要求登录。（首屏也有一个可关闭的邮件订阅弹窗。）',
+ c:[['“先跑起来”的步数差出一倍多','NVIDIA 从打开下载页到拿到能跑的安装命令大约 2 步、且不用登录；昇腾要经过“关公告 → 选架构 → 选版本 → 选包 → 同意协议 → 登录华为账号 → 下载”约 7 步。每多一道选择或闸门，就会在这一步多流失一批还没上手的开发者。'],
+    ['登录被放在了“下载之前”而不是“之后”','昇腾把华为账号登录设成下载的前置条件；NVIDIA 把账号完全后置——你可以先把东西下下来跑通，等需要更多权益时再注册。对“只想先试一下”的开发者，前置登录就是劝退点。']],
+ rec:'把社区版改成<b>“游客可直接下载、登录与协议同意后置”</b>，再给 架构/版本/软件包 配好默认值做智能推荐，把这条 7 步的最长链路砍短——这是全报告 ROI 最高的改进（对应 P0）。'},
+{id:'4.4',s:4,name:'版本 / 环境选择',a:72,nv:80,
+ aimg:'02-ascend-download.png',atag:'real',
+ adesc:'昇腾下载支持 社区版 / 商用版 双分支，再按 CPU 架构、版本、软件包逐项选择；历史版本可回溯，版本管理完整。',
+ nm:{url:'developer.nvidia.com/cuda-toolkit-archive',h:'Version archive',hl:'Network / Full installer',lines:['历史版本完整可回溯','两种安装包适配不同网络'],tags:['Archive','Network','Full']},ntag:'text',
+ ndesc:'NVIDIA 的版本管理也很完整（CUDA Archive 全量历史版本），且额外提供 Network / Full 两种安装包，分别适配“在线增量装”和“离线整包装”两种网络环境。',
+ c:[['版本管理两边都完整','历史版本都能回溯，这点没有明显差距。'],
+    ['NVIDIA 在“安装包形态”上更细','Network / Full 两种包分别照顾联网/离线场景，是替用户想到位的小体验；昇腾的“社区/商用”分版更多是授权层面的选择。']],
+ rec:'在版本选择里<b>区分“在线增量包 / 离线整包”并按用户网络环境默认选好</b>，把版本与软件包的多级选择尽量自动化，少让开发者做判断题。'},
+// stage5
+{id:'5.1',s:5,name:'代码示例 / Samples',a:78,nv:80,
+ aimg:'03-ascend-code.png',atag:'real',
+ adesc:'这是昇腾 ModelZoo 的“一站式模型开发”区：直接在页面里内联一段可复制的 Stable Diffusion 代码（torch_npu / StableDiffusionPipeline），看完即可复制去跑，“可复制即用”体验好。',
+ nm:{url:'github.com/NVIDIA/cuda-samples',h:'CUDA Samples',hl:'集中 GitHub',lines:['Samples 集中 GitHub','生态成熟、社区贡献多'],tags:['GitHub']},ntag:'text',
+ ndesc:'NVIDIA 的 CUDA Samples 集中在 GitHub 仓库，按类别组织、社区贡献成熟；优势是生态厚、可直接 clone，代价是要离开官网去 GitHub。',
+ c:[['两边都重“复制即用”，载体不同','昇腾把可跑代码内联在站内页面（看完即抄），NVIDIA 把 samples 集中在 GitHub（生态成熟、可 clone）。一个减少跳转，一个依托社区。'],
+    ['各有所长','昇腾站内内联对“快速看一眼怎么写”更友好；NVIDIA 的 GitHub 仓对“完整工程、版本管理、贡献回流”更成熟。']],
+ rec:'保持站内内联代码的“即看即抄”优势，同时<b>给每段示例配“在线实验里一键运行”和“GitHub 完整工程”双入口</b>，既能立刻试、又能拿走完整代码。'},
+{id:'5.2',s:5,name:'模型库',a:80,nv:80,
+ aimg:'03-ascend-modelzoo.png',atag:'real',
+ adesc:'昇腾 ModelZoo：DeepSeek 等热点专区前置，大模型按 LLM / 多模态 / MindSpeed 分类，再用“模型 → 工具 → 展示（ModelShow）”引导式三步把人带上手，新手友好、追热点快。',
+ nm:{url:'catalog.ngc.nvidia.com',h:'NGC Catalog',hl:'企业级容器/模型/NIM',lines:['容器 / 模型 / Helm chart 聚合','与 NIM/NeMo 打通，偏生产部署'],tags:['NIM','Containers']},ntag:'text',
+ ndesc:'NVIDIA NGC 是企业级目录：聚合容器 / 模型 / Helm chart，并与 NIM、NeMo 打通，强项在“拿去生产部署”，面向工程化落地。',
+ c:[['两者定位不同，不是同一种东西','昇腾 ModelZoo 偏“上手体验”（引导式三步 + 追热点专区，适合先跑起来），NGC 偏“生产部署”（容器/微服务，适合工程化）。'],
+    ['这块是昇腾的相对长板','在“让新手快速找到热门模型并跑通”这件事上，昇腾的引导式设计体验更顺，值得继续强化。']],
+ rec:'把 ModelZoo 的<b>“引导式三步 + 热点专区”心智复用到 CANN / 算子等更硬核入口</b>，并为每个模型补“一键在线跑 + 一键部署”的两端出口，把“好上手”的长板拉满。'},
+{id:'5.3',s:5,name:'开发工具',a:74,nv:80,
+ aimg:'08-ascend-tools.png',atag:'real',
+ adesc:'这是昇腾开发者中心的“开发工具”区：CANN 异构计算架构、PyTorch 框架适配、MindSpeed 训练加速、MindIE 推理引擎、MindStudio 全流程工具链一字排开，工具链覆盖完整。',
+ nm:{url:'developer.nvidia.com/nsight',h:'Nsight Tools',hl:'调试/性能成熟',lines:['Nsight 调试与性能分析','生态深、品牌成熟'],tags:['Nsight','DLI']},ntag:'text',
+ ndesc:'NVIDIA 的 Nsight 系列（调试 + 性能分析）是多年沉淀的成熟工具，配合 CUDA 工具链与 DLI 培训，开发者认知度高、生态深。',
+ c:[['工具链两边都全，差在“成熟度与心智”','昇腾 MindStudio + CANN 工具链 + HiDevLab 覆盖完整；但 NVIDIA Nsight 在调试/性能分析上的品牌与生态沉淀更深，开发者更熟。'],
+    ['昇腾在补 IDE/插件体验','MindStudio 对标 Nsight 的方向对，IDE 集成、插件生态仍在持续推进中。']],
+ rec:'聚焦把 <b>MindStudio 的 IDE/插件与可视化 profiling 做到“开箱顺手”</b>（VS Code 等主流 IDE 插件），并用真实案例讲清“某工具解决了什么痛点”，把“工具全”变成“工具好用且被知道”。'},
+{id:'5.4',s:5,name:'在线体验 / Playground',a:74,nv:82,
+ aimg:'08-ascend-onlinedev.png',atag:'real',
+ adesc:'昇腾在开发者中心提供“HiDevLab-在线开发”入口（简单、高效、易用的在线开发平台），配合学习页的“在线实验”，偏“在浏览器里搭环境、写代码、跑通”。',
+ nm:{url:'build.nvidia.com',h:'Try models in browser',hl:'浏览器即试模型',lines:['NIM：浏览器里直接调模型 API','无需安装，评估期友好'],btn:'Try API',tags:['NIM','Playground']},ntag:'text',
+ ndesc:'NVIDIA 的 build.nvidia.com 偏“浏览器里直接试模型”：用 NIM 在线调模型 API、不用安装，对处于“先评估一下”阶段的开发者很友好。',
+ c:[['两边都有在线体验，但切入点不同','昇腾 HiDevLab/在线实验偏“开发环境”（搭好环境写代码跑），NVIDIA build 偏“试模型”（无装直接调 API）。一个面向上手开发，一个面向快速评估。'],
+    ['NVIDIA 的“无装试模型”更前卫','对还没决定要不要投入的开发者，浏览器里点几下就能看到模型效果，转化路径更短。']],
+ rec:'在 HiDevLab“在线写代码”之外，<b>补一个“无需安装、浏览器里直接试模型/算子效果”的轻量 playground</b>（对标 build.nvidia.com），让评估期开发者零成本先看到效果再决定上手。'},
+// stage6
+{id:'6.1',s:6,name:'开发者社区 / 论坛',a:72,nv:80,
+ aimg:'04-ascend-forum.png',atag:'real',
+ adesc:'昇腾论坛按产品线细分版块（综合专区 / Ascend C / CANN / MindSpore / MindStudio / MindIE / Atlas 等），帖子流 + 标签，分版精细、利于精准提问；中文社区，发帖需登录华为账号。',
+ nm:{url:'forums.developer.nvidia.com',h:'Discourse · Global',hl:'官方工程师参与',lines:['全球英文 Discourse','官方工程师参与，搜索可索引性强'],tags:['CUDA','Jetson','EN']},ntag:'text',
+ ndesc:'NVIDIA 用 Discourse 搭的全球英文论坛，按产品/平台分版（CUDA / Jetson / TensorRT…），官方工程师参与、内容对搜索引擎友好，很多长尾问题在 Google 上就能搜到。',
+ c:[['分版精细 vs 全球可达','昇腾按产品线细分版，提问定位准；NVIDIA 的全球英文 Discourse + 官方工程师参与，搜索可索引性强，很多问题搜一下就有现成答案。'],
+    ['门槛又是一对镜像','昇腾发帖需华为账号、以中文圈为主；NVIDIA 全球可达但中文氛围弱。']],
+ rec:'让论坛内容<b>“游客可读、对搜索引擎可索引”，并增设英文版块</b>，把高质量问答暴露到搜索结果里，扩大“一搜就能解决”的长尾覆盖。'},
+{id:'6.2',s:6,name:'技术支持入口',a:74,nv:76,
+ aimg:'08-ascend-developer.png',atag:'real',
+ adesc:'昇腾的技术支持走“支持与服务”：有正式的技术工单、举报中心等通道，企业级支持感强；图为开发者中心的互动/支持入口区。',
+ nm:{url:'developer.nvidia.com',h:'Program + Enterprise',hl:'社区+计划分层',lines:['开发者计划分层 + 企业支持','偏社区驱动'],tags:['Program','Enterprise']},ntag:'text',
+ ndesc:'NVIDIA 的支持偏“社区 + 开发者计划分层 + 企业支持”：个人靠论坛与文档自助，企业走付费支持，分层清晰。',
+ c:[['两边都有正式支持，风格不同','昇腾偏“工单制”（提交问题、有人跟进，企业感强）；NVIDIA 偏“社区自助 + 分层会员”，个人开发者更多靠论坛解决。'],
+    ['对个人开发者的即时性','工单制对正式问题靠谱，但日常小问题的即时解答，仍取决于社区/FAQ 的活跃度。']],
+ rec:'把工单、FAQ、论坛<b>串成一个统一的“求助入口”</b>（一个搜索框先自助、搜不到再转工单/发帖），让开发者不用自己判断“这问题该去哪问”。'},
+{id:'6.3',s:6,name:'FAQ',a:76,nv:72,win:true,
+ aimg:'07-ascend-document.png',atag:'real',
+ adesc:'昇腾有集中的 FAQ 文档体系（AscendFAQ，覆盖社区功能、伙伴计划等），常见问题能在一个地方自助查到，集中度好。图为文档中心入口。',
+ nm:{url:'docs / forums',h:'FAQ scattered',hl:'分散在文档/论坛',lines:['FAQ 较分散在 docs 与 forums','无集中 FAQ 体系'],tags:['scattered']},ntag:'text',
+ ndesc:'NVIDIA 的 FAQ 较分散，散落在各产品文档与论坛里，没有一个统一集中的 FAQ 体系，靠搜索拼凑。',
+ c:[['集中 vs 分散，这次昇腾占优','昇腾把常见问题收敛成一个 FAQ 体系，自助查找路径短；NVIDIA 的 FAQ 散在文档/论坛各处，得自己搜。'],
+    ['但要让人找得到','集中的 FAQ 只有被暴露在显眼入口、并接入搜索，价值才发挥得出来。']],
+ rec:'把集中的 FAQ <b>接入全站搜索与各产品页的“常见问题”入口</b>，并支持按报错信息/关键词检索，把“整理得好”进一步变成“随手就查到”。'},
+{id:'6.4',s:6,name:'博客 / 案例',a:68,nv:82,
+ aimg:'08-ascend-blog.png',atag:'real',
+ adesc:'这张是昇腾的 404——常识直链 /blog 不存在。博客/技术干货内容其实有，但入口分散、得从开发者中心绕进去；这暴露了昇腾内容“可发现性”的系统性短板。',
+ nm:{url:'developer.nvidia.com/blog',h:'Technical Blog',hl:'高产 + SEO 强',lines:['技术博客高产、SEO 强','重要的开发者获取与教育渠道'],tags:['Blog','SEO']},ntag:'text',
+ ndesc:'NVIDIA 的 developer.nvidia.com/blog 是一个高产、SEO 强的稳定技术博客入口，是它获取与教育开发者的重要渠道，很多技术话题搜索就能命中。',
+ c:[['内容有，但“被发现”差很多','NVIDIA 博客高产、URL 稳定、SEO 强，是开发者获取主渠道；昇腾的技术干货/博客质量不差，却因入口分散、直链 /blog 直接 404 而难被找到。'],
+    ['这是低成本高回报的洼地','可发现性问题不需要重做内容，规范入口和 SEO 就能见效。']],
+ rec:'<b>建一个统一、URL 规范、对搜索引擎友好的博客入口</b>（让 /blog 直达而非 404），坚持高频技术输出并做好 SEO，把已有的好内容真正推到开发者搜索结果里。'},
+];
+
+const JUDGES=[
+ {id:'j1',pin:'both',plab:'阶段 1–2',color:'#7c5cf0',h:'动作导向 vs 品牌叙事',cap:'首屏第一眼对比',
+  one:'落地后第 0 秒，开发者看到的是“动作”还是“口号”？',
+  lead:'开发者落地官网的第一问从来不是“你是谁”，而是“我现在能干什么”。两边对这一问的应答顺序，决定了首屏的体感。',
+  body:[
+   'NVIDIA 把答案直接写进首屏文案——<b>“Skip the setup. Start building.”</b>，一句话给出动作与承诺；导航也按 Tutorials / Training / Topic / Industry 这种“任务视角”组织，处处在回答“你要做什么”。',
+   '昇腾首屏是品牌愿景<b>“昇腾万里，让智能无所不及”</b>，主 CTA「立即注册登录社区」沉在页面底部，开发者要向下滚动才遇到“从入门到成果”的成长路径。信息没缺，但把“我们是谁”排在了“你能做什么”前面。',
+   '代价是首屏的“动作密度”低：同样 5 秒，NVIDIA 让人知道下一步点哪，昇腾让人先知道这是个什么平台。<b>补法不难——首屏加一条明确的“开发者起步”主动作即可。</b>'],
+  demo:'hero'},
+ {id:'j2',pin:'a',plab:'阶段 4 · 最高杠杆',color:'#C7000B',h:'零登录直取 vs 账号闸门',cap:'下载链路步数对比',
+  one:'从“想下载”到“真正跑起来”，中间隔了几道闸门？',
+  lead:'这是整份报告里 ROI 最高的单点。把下载路径摊开看，两边的步数与闸门差距巨大——而路径长度几乎等于上手流失率。',
+  body:[
+   'NVIDIA：关掉（可选的）邮件 modal → 逐级点绿按钮选平台 → 页面<b>内联给出安装命令，复制即跑</b>。全程不强制登录，账号是“想要更多时再说”的后置项。',
+   '昇腾：落地先被下载公告 modal 打断 → 选 CPU 架构 → 选版本 → 选软件包 → 勾选同意《CANN 软件用户许可协议》→ 关键动作<b>需登录华为账号</b> → 才能下载。每多一道闸门，就多一截流失。',
+   '改造方向明确：<b>游客可直接下载社区版</b>，把登录与协议同意后置到“下载之后 / 需要更多权益时”，并把多级选择折叠为带默认值的智能推荐。'],
+  demo:'flow'},
+ {id:'j3',pin:'both',plab:'账号 / 语言 / 社区',color:'#1f9fb8',h:'全球化 vs 本地化的镜像门槛',cap:'人群 × 平台 顺畅度矩阵',
+  one:'门槛不是“谁高谁低”，而是一组对角线镜像。',
+  lead:'昇腾和 NVIDIA 的门槛是镜像的：各自对本土人群极顺、对对方腹地很卡。把“人群 × 平台”摆成矩阵，对角线一目了然。',
+  body:[
+   '昇腾对<b>国内开发者</b>几乎零摩擦——微信/QQ 一键登录、全中文内容、论坛按产品线细分版；但<b>海外开发者</b>撞上华为账号（无微信/QQ 可用）、偏薄的英文内容、中文社区。',
+   'NVIDIA 镜像地相反：全球账号、英文优先、Discourse 全球社区对海外极友好；但缺 Google / GitHub 之外的本地化登录，中文内容与社区氛围弱。',
+   '结论：<b>若昇腾战略只服务国内生态，现状已足够顺</b>；一旦要拓海外 / 学术，账号、语言、社区三处短板会同时显形，需成套补齐，而非单点修。'],
+  demo:'matrix'},
+ {id:'j4',pin:'win',plab:'阶段 3、5 · 长板',color:'#76B900',h:'昇腾的反转长板：体系化引导',cap:'“上手到首次可跑”路径对比',
+  one:'别让短板掩盖长板——教人上手这件事，昇腾其实更强。',
+  lead:'在“教开发者上手”这件事上，昇腾做得比 NVIDIA 更体系化、更新手友好。这是一个应该被“放大”而非“追平”的差异点。',
+  body:[
+   '昇腾把“快速入门”做成<b>按角色（应用 / 算子 / 训练 / 推理开发）的学习路径</b>，配在线课程、微认证，尤其是<b>“在线实验”——免装本地环境、浏览器里直接跑</b>；ModelZoo 也是“模型→工具→展示”的引导式三步 + DeepSeek 热点专区。',
+   'NVIDIA 的 quickstart 反而偏硬核：按 OS 给内联命令，但假设你有基础、sample 要去 GitHub 拉，首个可跑 build 约 15–60 分钟。',
+   '<b>建议把在线实验、引导式 ModelZoo 前置到首屏与产品页</b>，让“开箱即跑”成为昇腾的体验标签，把这块相对优势讲出来。'],
+  demo:'path'},
+ {id:'j5',pin:'a',plab:'阶段 6 + 全局',color:'#e0a32e',h:'可发现性 / 可索引性',cap:'入口健康度 + 404 实证',
+  one:'内容质量不差，但“搜得到、进得去”才算数。',
+  lead:'昇腾的内容质量并不差，问题在“被发现”这一层有三处系统性漏损——而这恰恰是低成本、高回报的改进区。',
+  body:[
+   '<b>入口分散与 URL 不规范</b>：常识性直链 /blog、/solution 直接 404（实拍为证），开发者得绕回开发者中心才找到博客；NVIDIA 的 developer.nvidia.com/blog 是高产、SEO 强的稳定入口。',
+   '<b>登录墙 + 中文圈</b>：论坛发帖需华为账号、内容以中文为主，搜索引擎可索引性与全球长尾覆盖弱于 NVIDIA 的全球英文 Discourse。',
+   '<b>低成本高回报</b>：规范 URL、统一博客入口、提升游客可读与 SEO、补英文版块，就能显著改善“被搜到、被点进”的概率。'],
+  demo:'discover'},
+];
+
+const ACTIONS=[
+ ['p0','下载「游客可下、登录后置」，缩短首次成功路径','4.2 / 4.3','直接降上手流失 · 最高杠杆'],
+ ['p0','首屏新增「开发者起步」主动作（如“5分钟跑通第一个示例”）','1.1 / 1.2','补齐落地第一问'],
+ ['p1','把「在线实验 + 引导式 ModelZoo」长板前置到首屏/产品页','3.2 / 5.2','放大差异化优势'],
+ ['p1','规范 URL（消灭 /blog /solution 404）+ 博客统一入口 + SEO','6.4 / 2.4','提升可发现性'],
+ ['p2','文档/产品增加「按场景/角色」横切入口 + 选型分诊','2.1 / 3.1','降低“得先懂产品名”门槛'],
+ ['p2','拓海外：邮箱直注册 + 国际第三方登录 + 英文内容/版块','1.4 / 4.2 / 6.1','打开海外/学术生态'],
+ ['p3','API 文档补版本选择器 + 结构一致性','3.4','对齐查阅体验'],
+];
+
+// 改进措施 → 主责部门（6 部门口径；协同部门此处不展开）
+const DEPT_META=[
+ ['体验设计','#7c5cf0','交互 · 信息架构 · 官网视觉'],
+ ['资料','#1f9fb8','文档 · API · FAQ · 内容本地化'],
+ ['官网平台','#2f6fed','前端 · 账号 · 下载 · URL · 搜索'],
+ ['产品','#c8881a','选型 · CTA · 在线体验规划'],
+ ['研发·工具链','#5b6bb5','MindStudio · 在线实验 · ModelZoo'],
+ ['社区运营','#cf5a86','论坛 · 博客 SEO · 认证 · 求助'],
+];
+const DEPT_OF={
+ '1.1':'体验设计','1.2':'体验设计','1.3':'官网平台','1.4':'资料',
+ '2.1':'产品','2.2':'产品','2.3':'产品','2.4':'官网平台',
+ '3.1':'资料','3.2':'产品','3.3':'社区运营','3.4':'资料',
+ '4.1':'体验设计','4.2':'官网平台','4.3':'官网平台','4.4':'官网平台',
+ '5.1':'资料','5.2':'研发·工具链','5.3':'研发·工具链','5.4':'研发·工具链',
+ '6.1':'社区运营','6.2':'社区运营','6.3':'资料','6.4':'社区运营',
+};
+const DEPT_COLOR=Object.fromEntries(DEPT_META.map(d=>[d[0],d[1]]));
+const P0SET={'4.3':1,'1.1':1};
+
+// 用户后补的 NVIDIA 真实整页截图 → 触点（有则用真图替换 mockup；再补图只需在此加一行）
+const NV_REAL={
+ '2.2':'06-nvidia-cuda-toolkit.png',
+ '2.4':'06-nvidia-industries.png',
+ '3.1':'07-nvidia-docs.png',
+ '3.2':'07-nvidia-quickstart.png',
+ '5.2':'03-nvidia-ngc.png',
+ '5.4':'08-nvidia-build.png',
+ '6.1':'08-nvidia-forum.png',
+ '6.4':'08-nvidia-blog.png',
+};
+
+/* ---------- helpers ---------- */
+function heatColor(s){
+  if(s<66) return '#C7000B';        // bad
+  if(s<72) return '#e0a32e';        // warn
+  if(s<78) return '#3f7fe6';        // mid
+  return '#76B900';                 // good
+}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+
+/* ---------- journey overview ---------- */
+(function(){
+  const host=document.getElementById('jstages');
+  STAGES.forEach(st=>{
+    const aH=Math.round((st.a-50)/50*96), nH=Math.round((st.nv-50)/50*96);
+    const d=document.createElement('div');d.className='jstage';
+    d.innerHTML=`<div class="sn">阶段 ${st.n}</div><div class="snm">${st.name}</div>
+      <div class="jbars">
+        <div class="jbar a" style="height:${aH}px"><span>${st.a}</span></div>
+        <div class="jbar n" style="height:${nH}px"><span>${st.nv}</span></div>
+      </div>
+      <div class="jtps">${st.tps.map(t=>`<div class="jtp">${t}</div>`).join('')}</div>`;
+    host.appendChild(d);
+  });
+  // emotion curve (ascend) overlay
+  const svg=document.getElementById('jcurve');
+  function pts(key,off){return STAGES.map((s,i)=>{
+    const x=(i+0.5)/6*100; const y=130-((s[key]-50)/50*96)-off; return [x,y];});}
+  setTimeout(()=>{
+    const w=svg.clientWidth||1000,h=130;
+    const toXY=(p)=>p.map(([x,y])=>`${x/100*w},${y}`).join(' ');
+    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    svg.innerHTML=`
+      <polyline points="${toXY(pts('a',6))}" fill="none" stroke="#C7000B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55" stroke-dasharray="2 6"/>
+      <polyline points="${toXY(pts('nv',6))}" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55" stroke-dasharray="2 6"/>`;
+  },60);
+})();
+
+/* ---------- heatmap ---------- */
+(function(){
+  const host=document.getElementById('heatmap');
+  STAGES.forEach(st=>{
+    const bar=document.createElement('div');bar.className='stagebar';
+    bar.textContent=`阶段 ${st.n} · ${st.name}`;host.appendChild(bar);
+    TP.filter(t=>t.s===st.n).forEach(t=>{
+      const diff=t.a-t.nv;
+      const dcl=diff>0?'pos':(diff<0?'neg':'zero');
+      const big=Math.abs(diff)>=14?' big':'';
+      const r=document.createElement('div');r.className='heatrow';
+      r.innerHTML=`<div class="tpid">${t.id}</div><div class="tpnm">${t.name}</div>
+        <div class="cell" style="background:${heatColor(t.a)}">${t.a}</div>
+        <div class="cell" style="background:${heatColor(t.nv)}">${t.nv}</div>
+        <div class="diff ${dcl}${big}">${diff>0?'+':''}${diff}</div>`;
+      r.style.cursor='pointer';
+      r.onclick=()=>document.getElementById('tp-'+t.id).scrollIntoView({behavior:'smooth',block:'center'});
+      host.appendChild(r);
+    });
+  });
+})();
+
+/* ---------- stage floors + touchpoint cards ---------- */
+(function(){
+  const host=document.getElementById('floors');
+  const cn=['①','②','③','④','⑤','⑥'];
+  STAGES.forEach(st=>{
+    const sec=document.createElement('section');sec.className='floor';sec.id=st.id;
+    let cards='';
+    TP.filter(t=>t.s===st.n).forEach(t=>{
+      const left=`<img class="shot" src="${IMG}${t.aimg}" loading="lazy" alt="${t.name} 昇腾" onclick="zoom(this.src)">`;
+      const nvimg=t.nimg||NV_REAL[t.id];
+      const nvreal=t.ntag==='real'||!!NV_REAL[t.id];
+      let right;
+      if(nvimg){
+        right=`<img class="shot" src="${IMG}${nvimg}" loading="lazy" alt="${t.name} NVIDIA" onclick="zoom(this.src)">`;
+      }else{
+        const m=t.nm||{};
+        right=`<div class="mock">
+          <div class="bar"><i></i><i></i><i></i><div class="url">${m.url||'developer.nvidia.com'}</div></div>
+          <div class="body">
+            <div class="mh">${(m.h||'').replace(/Start building/,'<span class="g">Start building</span>')}</div>
+            ${m.hl?`<div class="ml" style="color:#76b900;font-weight:700">${m.hl}</div>`:''}
+            ${(m.lines||[]).map(l=>`<div class="ml">· ${l}</div>`).join('')}
+            ${m.btn?`<div class="mbtn">${m.btn}</div>`:''}
+            <div class="mrow">${(m.tags||[]).map(x=>`<span class="mtag">${x}</span>`).join('')}</div>
+          </div></div>`;
+      }
+      const tagTxt={real:'真实截图',mock:'mockup',text:'文本+mockup'};
+      cards+=`<div class="tpcard" id="tp-${t.id}">
+        <div class="tpcard-hd">
+          <span class="id">${t.id}</span><h3>${t.name}</h3>
+          <div class="scorepair">
+            <span class="spill a">昇腾 <span class="num">${t.a}</span></span>
+            <span class="spill n">NVIDIA <span class="num">${t.nv}</span></span>
+          </div>
+        </div>
+        <div class="tpcard-body">
+          <div class="tpside left">
+            <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span>昇腾 <span class="tag ${t.atag==='real'?'real':'text'}">${tagTxt[t.atag]||'真实截图'}</span></div>
+            ${left}
+            ${t.adesc?`<p class="shotcap">${t.adesc}</p>`:''}
+          </div>
+          <div class="tpside">
+            <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>NVIDIA <span class="tag ${nvreal?'real':'mk'}">${nvreal?'真实截图':'mockup · 依据官网文本'}</span></div>
+            ${right}
+            ${t.ndesc?`<p class="shotcap nv">${t.ndesc}</p>`:''}
+          </div>
+        </div>
+        <div class="verdict ${t.win?'win':''}">
+          <div class="vtitle">${t.win?'差异分析　·　此处昇腾占优':'差异分析'}</div>
+          <ul class="concl ${t.win?'win':''}">
+            ${t.c.map(([lab,txt])=>`<li><span class="lab">${lab}：</span>${txt}</li>`).join('')}
+          </ul>
+          ${t.rec?`<div class="rec ${t.win?'win':''}"><span class="rec-tag">昇腾该怎么做</span><span class="rec-txt">${t.rec}</span><span class="rec-dept" style="background:${DEPT_COLOR[DEPT_OF[t.id]]}1a;color:${DEPT_COLOR[DEPT_OF[t.id]]}">主责 · ${DEPT_OF[t.id]}</span></div>`:''}
+        </div>
+      </div>`;
+    });
+    sec.innerHTML=`<div class="floor-hd"><span class="fno">${cn[st.n-1]}</span><h2>${st.name}</h2>
+        <span style="font-family:var(--mono);font-size:13px;color:var(--g6)">均分 <b style="color:var(--coral)">${st.a}</b> / <b style="color:var(--green)">${st.nv}</b></span></div>
+      <p class="floor-sub">${st.sub}　·　触点：${st.tps.join(' / ')}</p>
+      <div class="tpgrid">${cards}</div>`;
+    host.appendChild(sec);
+  });
+})();
+
+/* ---------- synthesis demos ---------- */
+function demoHero(){return `
+ <div class="herodemo">
+   <div class="herocard dark">
+     <div class="lbl">NVIDIA · 首屏文案</div>
+     <div class="big">Skip the setup. <span class="g">Start building.</span></div>
+     <div class="small">紧跟教程 / Read More 入口；导航按 Tutorials · Topic · Industry 任务视角组织</div>
+     <span class="pinq yes">“我能干什么” ✓ 即答</span>
+   </div>
+   <div class="herocard light">
+     <div class="lbl">昇腾 · 首屏文案</div>
+     <div class="big">昇腾万里，让智能无所不及</div>
+     <div class="small">主 CTA「立即注册登录社区」在页面底部 ↓；成长路径需向下滚动才见</div>
+     <span class="pinq no">“我能干什么” ✗ 晚一屏</span>
+   </div>
+ </div>`;}
+function demoFlow(){return `
+ <div class="flowlane">
+   <div class="lh"><span class="badge" style="background:var(--green-s);color:#5e8a09">NVIDIA · 2 步 · 0 登录</span></div>
+   <div class="flow">
+     <span class="step ok">选平台（绿按钮）</span><span class="arrow">→</span>
+     <span class="step ok">复制内联安装命令 ✓ 跑起来</span>
+   </div>
+   <div class="lenbar" style="width:30%;background:linear-gradient(90deg,#a5d65a,#76B900)"></div>
+ </div>
+ <div class="flowlane">
+   <div class="lh"><span class="badge" style="background:var(--coral-s);color:var(--coral)">昇腾 · 7 步 · 含登录墙</span></div>
+   <div class="flow">
+     <span class="step warn">关公告 modal</span><span class="arrow">→</span>
+     <span class="step warn">选 CPU 架构</span><span class="arrow">→</span>
+     <span class="step warn">选版本</span><span class="arrow">→</span>
+     <span class="step warn">选软件包</span><span class="arrow">→</span>
+     <span class="step warn">同意 CANN 协议</span><span class="arrow">→</span>
+     <span class="step gate">登录墙 · 华为账号</span><span class="arrow">→</span>
+     <span class="step warn">下载</span>
+   </div>
+   <div class="lenbar" style="width:100%;background:linear-gradient(90deg,#f0b76a,#C7000B)"></div>
+ </div>`;}
+function demoMatrix(){return `
+ <div class="mtx">
+   <div class="hd"></div><div class="hd">昇腾</div><div class="hd">NVIDIA</div>
+   <div class="rl">国内<br>开发者</div>
+   <div class="mcell smooth"><span class="mk">顺</span>微信/QQ 一键、全中文、论坛细分版</div>
+   <div class="mcell mid"><span class="mk">中</span>全球账号、英文为主，需适应</div>
+   <div class="rl">海外<br>开发者</div>
+   <div class="mcell block"><span class="mk">卡</span>华为账号(无微信/QQ)、英文薄、中文社区</div>
+   <div class="mcell smooth"><span class="mk">顺</span>全球账号、英文优先、Discourse 友好</div>
+ </div>
+ <div style="font-size:11px;color:var(--ink2);margin-top:13px;text-align:center;line-height:1.5">对角线镜像：各自对本土极顺、对对方腹地很卡</div>`;}
+function demoPath(){return `
+ <div class="pathlane win">
+   <div class="ph"><span>昇腾 · 体系化引导</span><span class="tofirst" style="color:#5e8a09;border-color:#d6e8ad">到首次可跑：快</span></div>
+   <div class="psteps">
+     <span class="ps">按角色学习路径</span><span class="arrow">→</span>
+     <span class="ps">在线实验（免装·浏览器直接跑）</span><span class="arrow">→</span>
+     <span class="ps">引导式 ModelZoo</span>
+   </div>
+ </div>
+ <div class="pathlane base">
+   <div class="ph"><span>NVIDIA · 文档式 quickstart</span><span class="tofirst">到首次可跑：15–60 min</span></div>
+   <div class="psteps">
+     <span class="ps">按 OS 内联命令</span><span class="arrow">→</span>
+     <span class="ps">自己装环境</span><span class="arrow">→</span>
+     <span class="ps">GitHub 拉 sample</span>
+   </div>
+ </div>
+ <img class="shot" style="margin-top:6px;aspect-ratio:16/9" src="${IMG}07-ascend-learn-path.png" loading="lazy" onclick="zoom(this.src)" alt="昇腾学习路径实拍">
+ <div style="font-size:10.5px;color:var(--ink2);text-align:center;margin-top:5px">实拍：昇腾「学习路径」四条角色路径 + 在线实验</div>`;}
+function demoDiscover(){return `
+ <div class="disc-evid">
+   <figure><img src="${IMG}08-ascend-blog.png" loading="lazy" onclick="zoom(this.src)" alt="/blog 404"><figcaption>直链 /blog → 404</figcaption></figure>
+   <figure><img src="${IMG}06-ascend-solution.png" loading="lazy" onclick="zoom(this.src)" alt="/solution 404"><figcaption>直链 /solution → 404</figcaption></figure>
+ </div>
+ <div class="health">
+   <div class="hrow"><span class="hl">博客入口</span><div class="hbar" style="background:#C7000B">昇腾 · 分散，直链 404</div><div class="hbar" style="background:#76B900">NVIDIA · SEO 强，稳定</div></div>
+   <div class="hrow"><span class="hl">社区可索引</span><div class="hbar" style="background:#e0a32e">登录墙 · 中文圈</div><div class="hbar" style="background:#76B900">全球英文 · 可搜</div></div>
+   <div class="hrow"><span class="hl">URL 规范</span><div class="hbar" style="background:#C7000B">常识直链易 404</div><div class="hbar" style="background:#76B900">路径稳定</div></div>
+ </div>`;}
+
+/* ---------- synthesis floors + actions ---------- */
+(function(){
+  const plab={a:'昇腾短板',win:'昇腾长板',both:'双向'};
+  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,discover:demoDiscover};
+  const toc=document.getElementById('synthtoc');
+  JUDGES.forEach((j,i)=>{
+    const a=document.createElement('a');a.href='#'+j.id;
+    a.innerHTML=`<span class="n" style="background:${j.color}">${i+1}</span>${j.h}`;
+    toc.appendChild(a);
+  });
+  const host=document.getElementById('synthfloors');
+  JUDGES.forEach((j,i)=>{
+    const sec=document.createElement('section');sec.className='floor synth-floor';sec.id=j.id;
+    sec.innerHTML=`
+      <div class="floor-hd"><span class="fno" style="background:${j.color}1f;color:${j.color}">综述 ${i+1}</span>
+        <h2>${j.h}</h2><span class="pin ${j.pin}">${plab[j.pin]} · ${j.plab}</span></div>
+      <p class="floor-sub">${j.one}</p>
+      <div class="synth-body">
+        <div class="synth-text"><p class="lead">${j.lead}</p>${j.body.map(p=>`<p>${p}</p>`).join('')}</div>
+        <div class="synth-demo"><div class="demo-cap">${j.cap}</div>${demos[j.demo]()}</div>
+      </div>`;
+    host.appendChild(sec);
+  });
+  const ab=document.getElementById('actbody');
+  ACTIONS.forEach(([p,a,tp,roi])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span class="prio ${p}">${p.toUpperCase()}</span></td><td>${a}</td>
+      <td style="font-family:var(--mono);font-size:12px;color:var(--ink2)">${tp}</td><td style="color:var(--ink2)">${roi}</td>`;
+    ab.appendChild(tr);
+  });
+})();
+
+/* ---------- 责任归属 floor ---------- */
+(function(){
+  const grid=document.getElementById('deptgrid');
+  DEPT_META.forEach(([name,color,blurb])=>{
+    const items=TP.filter(t=>t.rec && DEPT_OF[t.id]===name);
+    const li=items.map(t=>`<li><span class="tpref" style="background:${color}">${t.id}</span><b>${t.name}</b>${P0SET[t.id]?'<span class="p0flag">P0</span>':''}<br>${t.rec}</li>`).join('');
+    const card=document.createElement('div');card.className='deptcard';
+    card.innerHTML=`<div class="dh"><span class="ddot" style="background:${color}"></span>
+        <div class="dtit"><h4>${name}</h4><div class="dblurb">${blurb}</div></div>
+        <span class="dcount" style="background:${color}">${items.length} 项</span></div>
+      <ul class="deptlist">${li}</ul>`;
+    grid.appendChild(card);
+  });
+})();
+
+/* ---------- lightbox ---------- */
+function zoom(src){const lb=document.getElementById('lb');document.getElementById('lbimg').src=src;lb.classList.add('on');}
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+
+/* ---------- scrollspy ---------- */
+(function(){
+  const links=[...document.querySelectorAll('#navlinks a')];
+  const map=links.map(a=>({a,el:document.querySelector(a.getAttribute('href'))})).filter(x=>x.el);
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      links.forEach(l=>l.classList.remove('active'));
+      const hit=map.find(m=>m.el===e.target);if(hit)hit.a.classList.add('active');
+    }});
+  },{rootMargin:'-55px 0px -75% 0px',threshold:0});
+  map.forEach(m=>io.observe(m.el));
+})();
+
+/* ---------- network deco ---------- */
+(function(){
+  const svg=document.getElementById('netbg');const W=700,H=560;
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const N=26,nodes=[];
+  for(let i=0;i<N;i++)nodes.push({x:Math.random()*W,y:Math.random()*H});
+  let s='';
+  nodes.forEach((a,i)=>nodes.forEach((b,j)=>{if(j>i){
+    const d=Math.hypot(a.x-b.x,a.y-b.y);
+    if(d<130)s+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#9db8ee" stroke-width="1" opacity="${(1-d/130)*.5}"/>`;
+  }}));
+  nodes.forEach(n=>s+=`<circle cx="${n.x}" cy="${n.y}" r="${1.5+Math.random()*2}" fill="#6f97e8" opacity=".6"/>`);
+  svg.innerHTML=s;
+})();
+</script>
+</body>
+</html>
