@@ -87,6 +87,49 @@ a{color:inherit;text-decoration:none}
 .jcurve{position:absolute;left:0;right:0;top:30px;height:130px;z-index:1;pointer-events:none}
 .jlegend{display:flex;gap:18px;justify-content:center;margin-top:14px;font-size:12px;color:var(--ink2)}
 .jlegend i{display:inline-block;width:14px;height:8px;border-radius:3px;margin-right:5px;vertical-align:middle}
+/* §4 用户旅程网格(适配自 report-ppt-skill,固定高度楼层版) */
+.jrn-wrap{display:flex;flex-direction:column;gap:0;margin-top:4px}
+.jrn-grid{display:grid;grid-template-columns:56px repeat(6,1fr);gap:0}
+.jrn-rl{display:flex;flex-direction:column;justify-content:center;padding-right:9px;text-align:right}
+.jrn-rn{font-size:10.5px;font-weight:700;color:var(--ink2);line-height:1.4}
+.jrn-re{font-size:8px;color:var(--g6);text-transform:uppercase;letter-spacing:.5px;margin-top:1px}
+.jrn-pw,.jrn-tw,.jrn-fw,.jrn-ew,.jrn-pw2,.jrn-ow{padding-right:5px;display:flex;flex-direction:column}
+.jrn-ph{flex:1;border-radius:10px 10px 0 0;padding:10px 12px 12px;background:#141a26;position:relative;overflow:hidden;min-height:60px}
+.jrn-ph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--acc)}
+.jrn-ph .pn{font-size:8.5px;font-weight:800;letter-spacing:1.4px;color:rgba(255,255,255,.32);margin-bottom:3px;font-family:var(--mono)}
+.jrn-ph .pt{font-size:13px;font-weight:800;color:#fff;line-height:1.25}
+.jrn-ph .ptm{font-size:9px;margin-top:7px;display:inline-flex;align-self:flex-start;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.62);font-family:var(--mono);font-weight:700}
+.jrn-tc,.jrn-fc,.jrn-pc,.jrn-oc,.jrn-ec{border-left:1px solid var(--g3);border-right:1px solid var(--g3);border-bottom:1px solid var(--g3)}
+.jrn-tc,.jrn-fc{background:rgba(255,255,255,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.jrn-tc{flex:1;padding:9px 12px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:64px}
+.jrn-touch{font-size:11px;color:var(--ink);line-height:1.32;display:flex;align-items:center;gap:6px}
+.jrn-touch::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--g5);flex-shrink:0}
+.jrn-fc{flex:1;padding:9px 12px;display:flex;flex-direction:column;gap:7px}
+.jrn-scr{border-radius:5px;overflow:hidden;border:1px solid var(--g3);background:#f8f9fb;height:72px;display:flex;flex-direction:column;flex:0 0 auto}
+.jrn-sb{display:flex;align-items:center;gap:3px;padding:3px 5px;background:#eceef2;border-bottom:1px solid var(--g3);flex-shrink:0}
+.jrn-sd{width:4px;height:4px;border-radius:50%}
+.jrn-sc{padding:6px 7px;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:3.5px;justify-content:center}
+.jmb{height:4px;border-radius:2px;background:#e5e7eb}
+.jrn-fl{font-size:10.5px;font-weight:500;color:var(--ink);line-height:1.4}
+.jrn-grid.je{height:116px}
+.jrn-ec{flex:1;position:relative;height:100%;background:rgba(250,251,255,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);overflow:hidden}
+.jrn-ec svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.jrn-ec .d{position:absolute;width:9px;height:9px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.22);transform:translate(-50%,-50%);left:50%;z-index:3}
+.jrn-ec .dn{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--green);border:1.5px solid #fff;transform:translate(-50%,-50%);left:50%;z-index:2}
+.jrn-ec .e{position:absolute;font-size:14px;transform:translate(-50%,0);left:50%;z-index:3;line-height:1}
+.jrn-ec .l{position:absolute;font-family:var(--mono);font-size:8px;font-weight:700;transform:translateX(-50%);left:50%;bottom:4px;z-index:3;white-space:nowrap}
+.jrn-pc{flex:1;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:60px;background:linear-gradient(160deg,rgba(254,236,236,.72),rgba(255,247,240,.52))}
+.jrn-pi{display:flex;gap:5px;align-items:flex-start}
+.jrn-pi-icon{width:15px;height:15px;border-radius:4px;background:#FEF3C7;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+.jrn-pi-icon svg{width:9px;height:9px;stroke:#92400E;fill:none;stroke-width:2}
+.jrn-pt{font-size:10.5px;color:#7F1D1D;line-height:1.4}
+.jrn-oc{flex:1;border-radius:0 0 9px 9px;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:60px;background:linear-gradient(160deg,rgba(220,252,231,.72),rgba(240,253,244,.52))}
+.jrn-oi{display:flex;gap:5px;align-items:flex-start}
+.jrn-oi-dot{width:7px;height:7px;border-radius:50%;background:#10B981;flex-shrink:0;margin-top:4px}
+.jrn-ot{font-size:10.5px;color:#064E3B;line-height:1.4}
+.jrn-ot b,.jrn-pt b{font-weight:800}
+.jrn-od{font-size:8px;font-weight:800;color:#fff;background:#10B981;padding:1px 6px;border-radius:5px;margin-left:5px;white-space:nowrap;vertical-align:1px}
+@media(max-width:820px){ .jrn-grid{overflow-x:auto} }
 
 /* heatmap */
 .heat{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);padding:8px 8px 14px;box-shadow:var(--shadow);overflow:hidden}
@@ -329,13 +372,10 @@ a{color:inherit;text-decoration:none}
 
   <!-- JOURNEY -->
   <section class="floor" id="journey">
-    <div class="floor-hd"><span class="fno">MAP</span><h2>用户旅程总览</h2></div>
-    <p class="floor-sub">6 阶段的体验分对比（柱）与情绪曲线（线）。昇腾在「资源获取」明显塌陷，在「学习与文档」小幅反超。</p>
-    <div class="journey">
-      <svg class="jcurve" id="jcurve" preserveAspectRatio="none"></svg>
-      <div class="jstages" id="jstages"></div>
-      <div class="jlegend"><span><i style="background:var(--coral)"></i>昇腾</span><span><i style="background:var(--green)"></i>NVIDIA</span><span style="color:var(--g6)">柱高=阶段均分 · 数字=0–100</span></div>
-    </div>
+    <div class="floor-hd"><span class="fno">MAP</span><h2>六阶段旅程：资源获取是昇腾体验谷底，学习上手是唯一反超</h2></div>
+    <p class="floor-sub">Developer journey · 触点 / 行为 / 情绪（昇腾红 vs NVIDIA绿双曲线）/ 痛点 / 机会点。情绪在阶段 4「资源获取」探底，在阶段 3「学习与文档」反超 NVIDIA。</p>
+    <div class="jrn-wrap" id="jrnGrid"></div>
+    <div class="jlegend"><span><i style="background:var(--coral)"></i>昇腾情绪</span><span><i style="background:var(--green)"></i>NVIDIA情绪</span><span style="color:var(--g6)">痛点 = 昇腾对比短板 · 机会点 = 昇腾该怎么做（标主责部门）</span></div>
   </section>
 
   <!-- HEATMAP -->
@@ -703,31 +743,65 @@ function heatColor(s){
 function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 
 /* ---------- journey overview ---------- */
+const JOURNEY=[
+ {n:'01',name:'认知与导航',acc:'#EF4444',meta:'昇 73 / NV 78',
+  touch:['官网首页第一屏','顶部导航 / 信息架构','全站搜索','语言 / 地区切换'],
+  ui:[['100%','#cdd9f0','15px'],['70%'],['86%']],
+  action:'落地首页 → 扫导航找入口 → 搜索 / 切语言',
+  aY:42,nY:28,emoji:'😐',eL:'找下一步',eC:'#D97706',
+  pains:['首屏是品牌口号、起步入口沉在底部，“我现在能干什么”比 NVIDIA <b>晚一屏</b>应答'],
+  opps:[['首屏加“开发者起步”主入口（5 分钟跑通示例）+ 成长路径前置','体验设计']]},
+ {n:'02',name:'产品探索选型',acc:'#F59E0B',meta:'昇 74 / NV 78',
+  touch:['产品总览（矩阵）','产品详情（CANN）','规格参数','解决方案'],
+  ui:[['92%','#e8def5','14px'],['54%'],['74%']],
+  action:'浏览产品矩阵 → 进 CANN 详情看架构 → 查 Atlas 规格',
+  aY:46,nY:30,emoji:'😐',eL:'罗列多',eC:'#D97706',
+  pains:['矩阵密度高、缺“我是谁→选什么”分诊；规格无并排对比；<b>/solution 直链 404</b>'],
+  opps:[['加“选型分诊”问答 + 规格并排对比工具 + 规范 URL','产品·官网平台']]},
+ {n:'03',name:'学习与文档',acc:'#3B82F6',meta:'昇 78 / NV 79 · 反超',
+  touch:['文档中心','快速入门（学习路径）','教程','API 参考'],
+  ui:[['100%','#cfe0f5','13px'],['64%'],['80%','#cfe0f5','6px']],
+  action:'搜文档 → 走角色学习路径 → 在线实验跑通 → 查 API',
+  aY:30,nY:26,emoji:'🙂',eL:'上手顺',eC:'#059669',
+  pains:['API 版本切换 / 结构待统一；微认证含金量心智弱'],
+  opps:[['在线实验 + 引导式 ModelZoo 前置首屏（昇腾长板，要放大）','产品']]},
+ {n:'04',name:'资源获取',acc:'#10B981',meta:'昇 64 / NV 81 · 谷底',
+  touch:['下载中心','注册 / 登录','SDK 下载流程','版本选择'],
+  ui:[['100%','#dfe6f5','12px'],['80%'],['42%','#f0a99f','13px']],
+  action:'关公告 → 选架构/版本/包 → 同意协议 → 登录华为账号 → 下载（约 7 步）',
+  aY:82,nY:20,emoji:'😣',eL:'卡在下载',eC:'#DC2626',
+  pains:['“先跑起来”<b>7 步</b> + 登录前置 + 协议同意，链路最长；海外无微信/QQ 门槛陡'],
+  opps:[['游客可下、登录后置、选项默认值智能推荐','官网平台 · P0']]},
+ {n:'05',name:'开发实践',acc:'#8B5CF6',meta:'昇 77 / NV 81',
+  touch:['代码示例 / Samples','模型库（ModelZoo）','开发工具','在线体验'],
+  ui:[['84%','#bfe3cf','5px'],['72%','#bfe3cf','5px'],['58%','#bfe3cf','5px'],['66%','#bfe3cf','5px']],
+  action:'ModelZoo 内联代码复制即跑 → MindStudio 调试 → HiDevLab 在线开发',
+  aY:44,nY:24,emoji:'😐',eL:'工具够用',eC:'#D97706',
+  pains:['工具成熟度 / IDE 插件待补；缺“无装直接试模型”的 playground'],
+  opps:[['ModelZoo 心智复用到硬核入口 + 补浏览器试模型 playground','研发·工具链']]},
+ {n:'06',name:'支持与社区',acc:'#0EA5B7',meta:'昇 73 / NV 78',
+  touch:['开发者社区 / 论坛','技术支持','FAQ','博客 / 案例'],
+  ui:[['100%','#fde6cf','12px'],['70%'],['46%','#f0a99f','10px']],
+  action:'论坛按产品线提问 → 查 FAQ → 找博客（踩 /blog 404）',
+  aY:50,nY:30,emoji:'😕',eL:'搜不到',eC:'#D97706',
+  pains:['登录墙 + 中文圈 + 入口分散（<b>/blog 404</b>），内容“搜不到、进不去”'],
+  opps:[['论坛游客可读 + 英文版块 + SEO；博客统一入口','社区运营']]},
+];
 (function(){
-  const host=document.getElementById('jstages');
-  STAGES.forEach(st=>{
-    const aH=Math.round((st.a-50)/50*96), nH=Math.round((st.nv-50)/50*96);
-    const d=document.createElement('div');d.className='jstage';
-    d.innerHTML=`<div class="sn">阶段 ${st.n}</div><div class="snm">${st.name}</div>
-      <div class="jbars">
-        <div class="jbar a" style="height:${aH}px"><span>${st.a}</span></div>
-        <div class="jbar n" style="height:${nH}px"><span>${st.nv}</span></div>
-      </div>
-      <div class="jtps">${st.tps.map(t=>`<div class="jtp">${t}</div>`).join('')}</div>`;
-    host.appendChild(d);
-  });
-  // emotion curve (ascend) overlay
-  const svg=document.getElementById('jcurve');
-  function pts(key,off){return STAGES.map((s,i)=>{
-    const x=(i+0.5)/6*100; const y=130-((s[key]-50)/50*96)-off; return [x,y];});}
-  setTimeout(()=>{
-    const w=svg.clientWidth||1000,h=130;
-    const toXY=(p)=>p.map(([x,y])=>`${x/100*w},${y}`).join(' ');
-    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
-    svg.innerHTML=`
-      <polyline points="${toXY(pts('a',6))}" fill="none" stroke="#C7000B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55" stroke-dasharray="2 6"/>
-      <polyline points="${toXY(pts('nv',6))}" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55" stroke-dasharray="2 6"/>`;
-  },60);
+  const wrap=document.getElementById('jrnGrid');
+  const N=JOURNEY.length, aY=JOURNEY.map(s=>s.aY), nY=JOURNEY.map(s=>s.nY);
+  const seg=(a,i)=>{const p=i===0?a[i]:(a[i-1]+a[i])/2, q=i===N-1?a[i]:(a[i]+a[i+1])/2; return `0,${p} 50,${a[i]} 100,${q}`;};
+  const rl=(rn,re)=>`<div class="jrn-rl"><div class="jrn-rn">${rn}</div><div class="jrn-re">${re}</div></div>`;
+  const r1=`<div class="jrn-grid"><div></div>`+JOURNEY.map(s=>`<div class="jrn-pw"><div class="jrn-ph" style="--acc:${s.acc}"><div class="pn">${s.n}</div><div class="pt">${s.name}</div><div class="ptm">${s.meta}</div></div></div>`).join('')+`</div>`;
+  const r2=`<div class="jrn-grid">`+rl('触点','Touch')+JOURNEY.map(s=>`<div class="jrn-tw"><div class="jrn-tc">${s.touch.map(t=>`<div class="jrn-touch">${t}</div>`).join('')}</div></div>`).join('')+`</div>`;
+  const r3=`<div class="jrn-grid">`+rl('行为','Action')+JOURNEY.map(s=>{
+    const bars=s.ui.map(b=>`<div class="jmb" style="width:${b[0]}${b[1]?`;height:${b[2]||'4px'};background:${b[1]}`:''}"></div>`).join('');
+    return `<div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#FF5F57"></div><div class="jrn-sd" style="background:#FFBD2E"></div><div class="jrn-sd" style="background:#28CA41"></div></div><div class="jrn-sc">${bars}</div></div><div class="jrn-fl">${s.action}</div></div></div>`;
+  }).join('')+`</div>`;
+  const r4=`<div class="jrn-grid je">`+rl('情绪','Emotion')+JOURNEY.map((s,i)=>`<div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="50" x2="100" y2="50" stroke="#E5E7EB" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polyline points="${seg(nY,i)}" fill="none" stroke="#76B900" stroke-width="1.2" opacity=".75" vector-effect="non-scaling-stroke"/><polyline points="${seg(aY,i)}" fill="none" stroke="#C7000B" stroke-width="1.8" vector-effect="non-scaling-stroke"/></svg><div class="dn" style="top:${nY[i]}%"></div><div class="d" style="top:${aY[i]}%;background:${s.eC}"></div><div class="e" style="top:calc(${aY[i]}% - 20px)">${s.emoji}</div><div class="l" style="color:${s.eC}">${s.eL}</div></div></div>`).join('')+`</div>`;
+  const r5=`<div class="jrn-grid">`+rl('痛点','Pain')+JOURNEY.map(s=>`<div class="jrn-pw2"><div class="jrn-pc">${s.pains.map(p=>`<div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">${p}</div></div>`).join('')}</div></div>`).join('')+`</div>`;
+  const r6=`<div class="jrn-grid">`+rl('机会点','Opps')+JOURNEY.map(s=>`<div class="jrn-ow"><div class="jrn-oc">${s.opps.map(o=>`<div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">${o[0]}<span class="jrn-od">${o[1]}</span></div></div>`).join('')}</div></div>`).join('')+`</div>`;
+  wrap.innerHTML=r1+r2+r3+r4+r5+r6;
 })();
 
 /* ---------- heatmap ---------- */
