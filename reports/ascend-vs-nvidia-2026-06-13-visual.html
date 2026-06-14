@@ -362,12 +362,12 @@ a{color:inherit;text-decoration:none}
       <span class="chip"><span class="dot" style="background:var(--blue)"></span>2026-06-13 · v1</span>
     </div>
     <div class="metrics">
-      <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v">73.3<span style="font-size:18px;color:var(--g5)"> / </span>78.5</div><div class="vsub">24 触点 0–100 体验分</div></div>
+      <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v">73.6<span style="font-size:18px;color:var(--g5)"> / </span>78.5</div><div class="vsub">24 触点 0–100 体验分</div></div>
       <div class="metric bad"><div class="k">最大缺口 · SDK 下载流程</div><div class="v">−20</div><div class="vsub">账号闸门 + 多级选择 + 协议</div></div>
       <div class="metric good"><div class="k">反转长板 · 快速入门</div><div class="v">+10</div><div class="vsub">学习路径 + 在线实验</div></div>
-      <div class="metric"><div class="k">真实截图取证</div><div class="v">25<span style="font-size:18px;color:var(--g5)">张</span></div><div class="vsub">昇腾9 · NVIDIA16（仅7个导航级触点留mockup）</div></div>
+      <div class="metric"><div class="k">真实截图取证</div><div class="v">25<span style="font-size:18px;color:var(--g5)">张</span></div><div class="vsub">昇腾9 · NVIDIA16 · 全触点真图、0 mockup</div></div>
     </div>
-    <div class="method"><b>取证方法与可靠性：</b>昇腾全旅程 9 张真实截图；NVIDIA 站点对无头浏览器强反爬，关键页已由人工整页补截，现共 16 张真实截图（首页 / CUDA下载 / CUDA Toolkit / 行业方案 / 文档中心 / 快速入门 / DLI培训 / API参考 / 开发者计划 / 版本归档 / CUDA Samples / Nsight / NGC / build playground / 论坛 / 开发者博客）。仅 7 个导航级 / 嵌入式触点（顶部导航、搜索、语言切换、产品总览菜单、规格、技术支持、FAQ）——无单一页面对应——以标注 mockup 呈现。每个触点证据均标注「真实截图 / mockup」。</div>
+    <div class="method"><b>取证方法与可靠性：</b>全部 24 个触点的两侧均以<b>真实截图</b>为证（昇腾 9 张 + NVIDIA 16 张整页截图，含从已有真页取证的导航/搜索/规格等局部）。NVIDIA 站点对无头浏览器强反爬，相关页由人工在真实浏览器整页截取。本报告为体验研究判断，评分为基于证据的研究判断、非实测数值。</div>
   </header>
 
   <!-- JOURNEY -->
@@ -430,7 +430,7 @@ const IMG='../materials/ascend-vs-nvidia/screenshots/';
 const STAGES=[
  {n:1,id:'s1',name:'认知与导航',a:73,nv:78,sub:'我到了官网，这是什么、东西在哪',
   tps:['首页第一屏','顶部导航/IA','全站搜索','语言切换']},
- {n:2,id:'s2',name:'产品探索与选型',a:74,nv:78,sub:'我该用哪个产品 / 软件栈',
+ {n:2,id:'s2',name:'产品探索与选型',a:75,nv:78,sub:'我该用哪个产品 / 软件栈',
   tps:['产品总览','产品详情','规格参数','解决方案']},
  {n:3,id:'s3',name:'学习与文档',a:78,nv:79,sub:'我怎么上手、文档好不好读',
   tps:['文档中心','快速入门','教程','API 参考']},
@@ -438,7 +438,7 @@ const STAGES=[
   tps:['下载中心','注册/登录','SDK 流程','版本选择']},
  {n:5,id:'s5',name:'开发实践',a:77,nv:81,sub:'有没有示例、模型、能不能先试',
   tps:['代码示例','模型库','开发工具','在线体验']},
- {n:6,id:'s6',name:'支持与社区',a:73,nv:78,sub:'卡住了去哪问',
+ {n:6,id:'s6',name:'支持与社区',a:74,nv:78,sub:'卡住了去哪问',
   tps:['社区/论坛','技术支持','FAQ','博客/案例']},
 ];
 
@@ -506,14 +506,14 @@ const TP=[
  c:[['规格信息两边都齐，差在“分布”','昇腾把硬件规格集中在文档中心一张大表里（适合系统查阅），NVIDIA 分散在各产品页（适合定向查单品）。'],
     ['共同缺口：没有并排选型','开发者选硬件时最想要“A 卡 vs B 卡”的对比表，两边都得自己翻、自己拼，这里谁先做谁占优。']],
  rec:'在硬件规格表上加一个<b>“勾选型号 → 并排对比”的选型工具</b>（性能、显存、功耗、适用场景逐行对齐），把昇腾“集中列全”的优势直接升级成“能对比、好决策”。'},
-{id:'2.4',s:2,name:'解决方案 / 场景入口',a:72,nv:78,
+{id:'2.4',s:2,name:'解决方案 / 场景入口',a:76,nv:78,
  aimg:'06-ascend-solution.png',atag:'real',
- adesc:'这张其实是昇腾的 404 页面——我用常识性直链 /solution 访问时它并不存在。要肯定的是 404 页做得干净（飞碟插画 + “返回首页” + 完整底部站点地图），错误恢复合格。解决方案本身藏在顶部导航“解决方案”里，偏行业案例展示。',
+ adesc:'昇腾「解决方案」是一个可筛选的方案市场（marketplace/solution）：大量合作伙伴/联合方案卡（RAG 一体机、视频智能、金融智算工厂…），支持按 芯片 / 产品 / 行业 / 价格 筛选 + 综合/最新/评分 排序，底部还有“入驻”入口。比单纯的案例展示强不少。',
  nm:{url:'nvidia.com/industries',h:'Browse by Industry',hl:'行业可浏览',lines:['Healthcare / Robotics / Gaming…','行业分类细、可浏览'],tags:['Industry']},ntag:'text',
- ndesc:'NVIDIA 的 Browse by Industry 把行业（Healthcare / Robotics / Gaming…）做成可浏览的分类入口，开发者能按自己所在行业一路点进去找方案。',
- c:[['行业入口两边都有，颗粒度不同','NVIDIA 的行业分类细、可浏览、可自助下钻；昇腾解决方案偏“行业案例展示”，按场景自助找入口的颗粒度更粗。'],
-    ['一个连带的可发现性问题','常识直链 /solution 直接 404（尽管 404 页本身做得不错），说明昇腾的 URL 规范性有提升空间——这和博客 /blog 404 是同一类问题。']],
- rec:'把解决方案做成<b>“按行业 / 按场景可浏览、可下钻”的结构</b>，并规范常识性 URL（让 /solution 这类直链能命中而不是 404），把“有方案”升级成“找得到方案”。'},
+ ndesc:'NVIDIA 的 Browse by Industry 把行业（Healthcare / Robotics / Gaming…）做成可浏览的分类入口，开发者能按自己所在行业一路点进去找方案，更偏行业叙事与案例。',
+ c:[['两边其实都不弱，切入不同','NVIDIA 按“行业”叙事（可浏览、可下钻）；昇腾是“方案市场”——可按芯片/行业/价格筛选、能比较，对“我要落地某场景该用谁的方案”更直接。差距比想象的小。'],
+    ['昇腾偏合作伙伴方案、缺“开发者自助起步”','市场里多是伙伴的整体方案，开发者“我想自己照着做”的场景化上手路径仍偏少。']],
+ rec:'在方案市场基础上，补一层<b>“按开发场景的自助起步路径”</b>（选场景 → 推荐方案 + 对应模型/算子/教程），把“能挑方案”再进一步做成“能照着自己跑通”。'},
 // stage3
 {id:'3.1',s:3,name:'文档中心首页',a:80,nv:82,
  aimg:'07-ascend-document.png',atag:'real',
@@ -638,14 +638,14 @@ const TP=[
  c:[['集中 vs 分散，这次昇腾占优','昇腾把常见问题收敛成一个 FAQ 体系，自助查找路径短；NVIDIA 的 FAQ 散在文档/论坛各处，得自己搜。'],
     ['但要让人找得到','集中的 FAQ 只有被暴露在显眼入口、并接入搜索，价值才发挥得出来。']],
  rec:'把集中的 FAQ <b>接入全站搜索与各产品页的“常见问题”入口</b>，并支持按报错信息/关键词检索，把“整理得好”进一步变成“随手就查到”。'},
-{id:'6.4',s:6,name:'博客 / 案例',a:68,nv:82,
+{id:'6.4',s:6,name:'博客 / 案例',a:72,nv:82,
  aimg:'08-ascend-blog.png',atag:'real',
- adesc:'这张是昇腾的 404——常识直链 /blog 不存在。博客/技术干货内容其实有，但入口分散、得从开发者中心绕进去；这暴露了昇腾内容“可发现性”的系统性短板。',
- nm:{url:'developer.nvidia.com/blog',h:'Technical Blog',hl:'高产 + SEO 强',lines:['技术博客高产、SEO 强','重要的开发者获取与教育渠道'],tags:['Blog','SEO']},ntag:'text',
- ndesc:'NVIDIA 的 developer.nvidia.com/blog 是一个高产、SEO 强的稳定技术博客入口，是它获取与教育开发者的重要渠道，很多技术话题搜索就能命中。',
- c:[['内容有，但“被发现”差很多','NVIDIA 博客高产、URL 稳定、SEO 强，是开发者获取主渠道；昇腾的技术干货/博客质量不差，却因入口分散、直链 /blog 直接 404 而难被找到。'],
-    ['这是低成本高回报的洼地','可发现性问题不需要重做内容，规范入口和 SEO 就能见效。']],
- rec:'<b>建一个统一、URL 规范、对搜索引擎友好的博客入口</b>（让 /blog 直达而非 404），坚持高频技术输出并做好 SEO，把已有的好内容真正推到开发者搜索结果里。'},
+ adesc:'昇腾博客（developer/blog）是一个有组织的真博客：左侧按 技术专区 / Ascend C / CANN / MindIE… 分类，主列博文流，右侧还有“官方技术文章 + 优秀博文推荐 + 热门排行”。内容组织其实不差。',
+ nm:{url:'developer.nvidia.com/blog',h:'Technical Blog',hl:'高产 + SEO 强',lines:['技术博客高产、SEO 强','全球英文、搜索就能命中'],tags:['Blog','SEO']},ntag:'text',
+ ndesc:'NVIDIA 的 developer.nvidia.com/blog 高产、URL 稳定、SEO 强，且是全球英文，很多技术话题在 Google 上搜索就能命中——是它获取与教育开发者的重要渠道。',
+ c:[['内容都不差，差在“被全球搜到”','两边博客内容组织都可以；真正的差距是 NVIDIA 高产 + 英文 + SEO 强，全球开发者搜索即达；昇腾以中文为主、SEO 与全球可索引性偏弱，海外长尾覆盖不足。'],
+    ['入口可以更显眼','昇腾博客要从开发者中心进、首屏没有直达入口；NVIDIA 顶部导航就有 Blog。让好内容更靠前一步即可。']],
+ rec:'保持博客的分类与质量，重点补<b>全球可索引性</b>：英文版 + SEO + 首屏/顶部直达入口，把已经不差的内容真正推到（尤其是海外）开发者的搜索结果里。'},
 ];
 
 const JUDGES=[
@@ -681,13 +681,13 @@ const JUDGES=[
    'NVIDIA 的 quickstart 反而偏硬核：按 OS 给内联命令，但假设你有基础、sample 要去 GitHub 拉，首个可跑 build 约 15–60 分钟。',
    '<b>建议把在线实验、引导式 ModelZoo 前置到首屏与产品页</b>，让“开箱即跑”成为昇腾的体验标签，把这块相对优势讲出来。'],
   demo:'path'},
- {id:'j5',pin:'a',plab:'阶段 6 + 全局',color:'#e0a32e',h:'可发现性 / 可索引性',cap:'入口健康度 + 404 实证',
-  one:'内容质量不差，但“搜得到、进得去”才算数。',
-  lead:'昇腾的内容质量并不差，问题在“被发现”这一层有三处系统性漏损——而这恰恰是低成本、高回报的改进区。',
+ {id:'j5',pin:'a',plab:'阶段 6 + 全局',color:'#e0a32e',h:'内容不差，差在“被全球搜到”',cap:'可发现性 / 可索引性对比',
+  one:'昇腾的博客、解决方案、文档质量都在线，瓶颈是“被发现”。',
+  lead:'更新过一轮取证后要说清楚：昇腾的博客（有分类/官方/热门排行）、解决方案（可筛选的方案市场）内容组织都不差——真正的差距在“被全球开发者搜到、点进”这一层。',
   body:[
-   '<b>入口分散与 URL 不规范</b>：常识性直链 /blog、/solution 直接 404（实拍为证），开发者得绕回开发者中心才找到博客；NVIDIA 的 developer.nvidia.com/blog 是高产、SEO 强的稳定入口。',
-   '<b>登录墙 + 中文圈</b>：论坛发帖需华为账号、内容以中文为主，搜索引擎可索引性与全球长尾覆盖弱于 NVIDIA 的全球英文 Discourse。',
-   '<b>低成本高回报</b>：规范 URL、统一博客入口、提升游客可读与 SEO、补英文版块，就能显著改善“被搜到、被点进”的概率。'],
+   '<b>SEO 与全球可索引性偏弱</b>：NVIDIA 的博客/文档/论坛是全球英文 + SEO 强，很多话题 Google 一搜就命中；昇腾以中文为主，海外开发者的搜索长尾覆盖明显不足。',
+   '<b>登录墙 + 入口不够靠前</b>：论坛发帖需华为账号；博客要从开发者中心进、首屏/顶栏没有直达入口（NVIDIA 顶部导航就有 Blog）。',
+   '<b>低成本高回报</b>：补英文版 + SEO + 把博客/方案入口提到顶部直达、提升游客可读，就能显著改善“被搜到、被点进”——内容本身不用重做。'],
   demo:'discover'},
 ];
 
@@ -695,7 +695,7 @@ const ACTIONS=[
  ['p0','下载「游客可下、登录后置」，缩短首次成功路径','4.2 / 4.3','直接降上手流失 · 最高杠杆'],
  ['p0','首屏新增「开发者起步」主动作（如“5分钟跑通第一个示例”）','1.1 / 1.2','补齐落地第一问'],
  ['p1','把「在线实验 + 引导式 ModelZoo」长板前置到首屏/产品页','3.2 / 5.2','放大差异化优势'],
- ['p1','规范 URL（消灭 /blog /solution 404）+ 博客统一入口 + SEO','6.4 / 2.4','提升可发现性'],
+ ['p1','内容“被全球搜到”：博客/方案补英文版 + SEO + 顶栏直达入口','6.4 / 2.4','提升可发现性/全球可达'],
  ['p2','文档/产品增加「按场景/角色」横切入口 + 选型分诊','2.1 / 3.1','降低“得先懂产品名”门槛'],
  ['p2','拓海外：邮箱直注册 + 国际第三方登录 + 英文内容/版块','1.4 / 4.2 / 6.1','打开海外/学术生态'],
  ['p3','API 文档补版本选择器 + 结构一致性','3.4','对齐查阅体验'],
@@ -712,7 +712,7 @@ const DEPT_META=[
 ];
 const DEPT_OF={
  '1.1':'体验设计','1.2':'体验设计','1.3':'官网平台','1.4':'资料',
- '2.1':'产品','2.2':'产品','2.3':'产品','2.4':'官网平台',
+ '2.1':'产品','2.2':'产品','2.3':'产品','2.4':'产品',
  '3.1':'资料','3.2':'产品','3.3':'社区运营','3.4':'资料',
  '4.1':'体验设计','4.2':'官网平台','4.3':'官网平台','4.4':'官网平台',
  '5.1':'资料','5.2':'研发·工具链','5.3':'研发·工具链','5.4':'研发·工具链',
@@ -723,8 +723,15 @@ const P0SET={'4.3':1,'1.1':1};
 
 // 用户后补的 NVIDIA 真实整页截图 → 触点（有则用真图替换 mockup；再补图只需在此加一行）
 const NV_REAL={
+ '1.2':'01-nvidia-home.png',
+ '1.3':'07-nvidia-docs.png',
+ '1.4':'06-nvidia-industries.png',
+ '2.1':'01-nvidia-home.png',
  '2.2':'06-nvidia-cuda-toolkit.png',
+ '2.3':'06-nvidia-cuda-toolkit.png',
  '2.4':'06-nvidia-industries.png',
+ '6.2':'05-nvidia-program.png',
+ '6.3':'08-nvidia-forum.png',
  '3.1':'07-nvidia-docs.png',
  '3.2':'07-nvidia-quickstart.png',
  '3.3':'07-nvidia-training.png',
@@ -757,13 +764,13 @@ const JOURNEY=[
   aY:42,nY:28,emoji:'😐',eL:'找下一步',eC:'#D97706',
   pains:['首屏是品牌口号、起步入口沉在底部，“我现在能干什么”比 NVIDIA <b>晚一屏</b>应答'],
   opps:[['首屏加“开发者起步”主入口（5 分钟跑通示例）+ 成长路径前置','体验设计']]},
- {n:'02',name:'产品探索选型',acc:'#F59E0B',meta:'昇 74 / NV 78',
+ {n:'02',name:'产品探索选型',acc:'#F59E0B',meta:'昇 75 / NV 78',
   touch:['产品总览（矩阵）','产品详情（CANN）','规格参数','解决方案'],
   ui:[['92%','#e8def5','14px'],['54%'],['74%']],
-  action:'浏览产品矩阵 → 进 CANN 详情看架构 → 查 Atlas 规格',
+  action:'浏览产品矩阵 → 进 CANN 详情看架构 → 查规格 → 挑解决方案',
   aY:46,nY:30,emoji:'😐',eL:'罗列多',eC:'#D97706',
-  pains:['矩阵密度高、缺“我是谁→选什么”分诊；规格无并排对比；<b>/solution 直链 404</b>'],
-  opps:[['加“选型分诊”问答 + 规格并排对比工具 + 规范 URL','产品·官网平台']]},
+  pains:['产品矩阵密度高、缺“我是谁→选什么”分诊；规格无并排对比（解决方案市场其实不错）'],
+  opps:[['加“选型分诊”问答 + 规格并排对比工具；方案市场补“按场景自助起步”','产品']]},
  {n:'03',name:'学习与文档',acc:'#3B82F6',meta:'昇 78 / NV 79 · 反超',
   touch:['文档中心','快速入门（学习路径）','教程','API 参考'],
   ui:[['100%','#cfe0f5','13px'],['64%'],['80%','#cfe0f5','6px']],
@@ -785,13 +792,13 @@ const JOURNEY=[
   aY:44,nY:24,emoji:'😐',eL:'工具够用',eC:'#D97706',
   pains:['工具成熟度 / IDE 插件待补；缺“无装直接试模型”的 playground'],
   opps:[['ModelZoo 心智复用到硬核入口 + 补浏览器试模型 playground','研发·工具链']]},
- {n:'06',name:'支持与社区',acc:'#0EA5B7',meta:'昇 73 / NV 78',
+ {n:'06',name:'支持与社区',acc:'#0EA5B7',meta:'昇 74 / NV 78',
   touch:['开发者社区 / 论坛','技术支持','FAQ','博客 / 案例'],
-  ui:[['100%','#fde6cf','12px'],['70%'],['46%','#f0a99f','10px']],
-  action:'论坛按产品线提问 → 查 FAQ → 找博客（踩 /blog 404）',
-  aY:50,nY:30,emoji:'😕',eL:'搜不到',eC:'#D97706',
-  pains:['登录墙 + 中文圈 + 入口分散（<b>/blog 404</b>），内容“搜不到、进不去”'],
-  opps:[['论坛游客可读 + 英文版块 + SEO；博客统一入口','社区运营']]},
+  ui:[['100%','#fde6cf','12px'],['70%'],['58%','#cfe0f5','8px']],
+  action:'论坛按产品线提问 → 查 FAQ → 看博客（分类/热门排行）',
+  aY:46,nY:30,emoji:'😐',eL:'够用但偏内',eC:'#D97706',
+  pains:['登录墙 + 中文圈 + SEO 偏弱，优质内容对<b>全球开发者搜索可达性</b>低'],
+  opps:[['论坛游客可读 + 英文版块 + 博客 SEO，把内容推到全球搜索结果','社区运营']]},
 ];
 (function(){
   const wrap=document.getElementById('jrnGrid');
@@ -966,13 +973,13 @@ function demoPath(){return `
  <div style="font-size:10.5px;color:var(--ink2);text-align:center;margin-top:5px">实拍：昇腾「学习路径」四条角色路径 + 在线实验</div>`;}
 function demoDiscover(){return `
  <div class="disc-evid">
-   <figure><img src="${IMG}08-ascend-blog.png" loading="lazy" onclick="zoom(this.src)" alt="/blog 404"><figcaption>直链 /blog → 404</figcaption></figure>
-   <figure><img src="${IMG}06-ascend-solution.png" loading="lazy" onclick="zoom(this.src)" alt="/solution 404"><figcaption>直链 /solution → 404</figcaption></figure>
+   <figure><img src="${IMG}08-ascend-blog.png" loading="lazy" onclick="zoom(this.src)" alt="昇腾博客"><figcaption style="color:#047857">昇腾博客 · 分类 + 热门排行（内容不差）</figcaption></figure>
+   <figure><img src="${IMG}06-ascend-solution.png" loading="lazy" onclick="zoom(this.src)" alt="昇腾解决方案"><figcaption style="color:#047857">昇腾解决方案 · 可筛选方案市场</figcaption></figure>
  </div>
  <div class="health">
-   <div class="hrow"><span class="hl">博客入口</span><div class="hbar" style="background:#C7000B">昇腾 · 分散，直链 404</div><div class="hbar" style="background:#76B900">NVIDIA · SEO 强，稳定</div></div>
-   <div class="hrow"><span class="hl">社区可索引</span><div class="hbar" style="background:#e0a32e">登录墙 · 中文圈</div><div class="hbar" style="background:#76B900">全球英文 · 可搜</div></div>
-   <div class="hrow"><span class="hl">URL 规范</span><div class="hbar" style="background:#C7000B">常识直链易 404</div><div class="hbar" style="background:#76B900">路径稳定</div></div>
+   <div class="hrow"><span class="hl">SEO / 全球可索引</span><div class="hbar" style="background:#e0a32e">昇腾 · 中文为主，SEO 弱</div><div class="hbar" style="background:#76B900">NVIDIA · 全球英文，Google 可达</div></div>
+   <div class="hrow"><span class="hl">入口可见性</span><div class="hbar" style="background:#e0a32e">博客要从开发者中心进</div><div class="hbar" style="background:#76B900">顶栏直达 Blog</div></div>
+   <div class="hrow"><span class="hl">社区门槛</span><div class="hbar" style="background:#e0a32e">发帖需华为账号 · 中文圈</div><div class="hbar" style="background:#76B900">全球开放 · 可索引</div></div>
  </div>`;}
 
 /* ---------- synthesis floors + actions ---------- */
