@@ -456,12 +456,12 @@ ndesc:'深色背景，首屏大标题是一句开发者动作「Skip the setup. 
 {id:'1.2',s:1,name:'顶部导航 / 信息架构',a:74,nv:80,
  aimg:'01-ascend-home.png',atag:'real',
  adesc:'昇腾顶部导航是 CANN / 产品 / 解决方案 / 开发者与合作伙伴 / 支持与服务 五个一级入口，偏“企业 + 产品线”的组织方式；好处是把 文档 / 在线开发 / 资源 直接外露在导航右上角，老用户一眼直达。',
- nm:{url:'developer.nvidia.com',h:'Tutorials · Training',hl:'Topic × Industry 双轴',
-   lines:['一级：Tutorials / Training / Topic / Industry / Platforms & Tools','按“我要做什么任务”组织'],
-   tags:['AI','Robotics','HPC','Cloud']},ntag:'text',
- ndesc:'NVIDIA 导航按“开发者要做的事”组织：Tutorials / Training / Browse by Topic / Browse by Industry / Platforms & Tools，既能按主题（AI、HPC、机器人）也能按行业进入，不需要先知道产品叫什么。',
- c:[['两套导航的分类心智不同','昇腾按“产品线”分——你得先认识 CANN、MindIE 这些名字才知道点哪；NVIDIA 按“主题 / 行业 / 任务”分，一个还没选定产品的新手也能顺着“我要做什么”找到入口。'],
-    ['昇腾的直达性是优点','把 文档、在线开发、资源 提到导航右上单独露出，对回访的老开发者很高效，这点比 NVIDIA 收进多级菜单更直接。']],
+ nm:{url:'developer.nvidia.com',h:'Home·Blog·Forums·Docs·Downloads·Training',hl:'+ Topics / Platforms and Tools / Industries / Resources',
+   lines:['主栏 = 内容目的地','二级下拉 = 按主题/行业/资源浏览'],
+   tags:['Topics','Industries','Resources']},ntag:'text',
+ ndesc:'NVIDIA 顶栏是两层：主栏 Home / Blog / Forums / Docs / Downloads / Training（直达各内容目的地）+ 右侧 搜索 / Join / 账号；下面一行是 Topics / Platforms and Tools / Industries / Resources 下拉，可按主题、行业、资源浏览。',
+ c:[['两套导航的分类心智不同','昇腾按“产品线”分（CANN / 产品 / 解决方案…，得先认识产品名）；NVIDIA 主栏是 Blog/Forums/Docs/Downloads/Training 这些“内容目的地”，再用 Topics/Industries 二级下拉按主题/行业浏览——新手不必先知道产品叫什么。'],
+    ['两边都把关键入口外露','昇腾把 文档/在线开发/资源 放导航右上；NVIDIA 把 Docs/Downloads/Forums 直接做成主栏一级，都很直达。']],
  rec:'在产品线导航之外，<b>补一层“按场景 / 按角色”的横切入口</b>（如“我要做推理部署 / 算子开发”），让不认识产品名的新手也能进来——保留直达性的同时降低认知门槛。'},
 {id:'1.3',s:1,name:'全站搜索',a:76,nv:74,
  aimg:'07-ascend-document.png',atag:'real',
@@ -550,9 +550,9 @@ ndesc:'深色背景，首屏大标题是一句开发者动作「Skip the setup. 
  rec:'给昇腾 API 文档<b>统一版本选择器与层级结构</b>，并逐步引入“可在线试调”的交互式 API 参考，让查接口从“翻文档”变成“边查边试”。'},
 // stage4
 {id:'4.1',s:4,name:'下载中心',a:68,nv:72,
- aimg:'02-ascend-download.png',atag:'real',nimg:'02-nvidia-cuda-download.png',ntag:'real',
+ aimg:'02-ascend-download.png',atag:'real',nimg:'02-nvidia-cuda-modal.png',ntag:'real',
  adesc:'昇腾下载中心：产品卡网格（CANN / PyTorch / TensorFlow / MindSpore / MindCluster / MindStudio），分“社区版 / 商用版”双轨；落地瞬间先弹一个“资源下载中心公告”把页面挡住。',
- ndesc:'NVIDIA CUDA 下载页：中央是经典的绿色按钮选择器；落地时也会弹一个“订阅 CUDA 更新”的邮件捕获弹窗（可关闭）。两边落地都用 modal 打断。',
+ ndesc:'NVIDIA CUDA 下载页：落地时弹一个“订阅 CUDA 更新”的邮件捕获弹窗（图为此态，可一键关闭）；关掉后才是绿色按钮选择器。两边落地都用 modal 打断。',
  c:[['一个有意思的共性：都用 modal 打断','昇腾落地弹“下载公告”，NVIDIA 弹“邮件订阅”。区别在于：NVIDIA 用这次打断换取增长线索（留资），昇腾的公告更多是单向通知、价值更低。'],
     ['昇腾的“社区版/商用版”双轨','结构上清晰，但对只想试用的开发者来说，多了一次“我该选哪版”的判断分叉。']],
  rec:'把落地公告从<b>“打断式 modal 降级为顶部 banner / 角标”</b>，不挡主任务流；并在下载入口默认高亮“社区版”，减少“选哪版”的决策负担。'},
@@ -568,7 +568,7 @@ ndesc:'深色背景，首屏大标题是一句开发者动作「Skip the setup. 
 {id:'4.3',s:4,name:'SDK / Toolkit 下载流程',a:64,nv:84,
  aimg:'02-ascend-download.png',atag:'real',nimg:'02-nvidia-cuda-download.png',ntag:'real',
  adesc:'昇腾社区版下载页：要先在“社区版 / 商用版”里选对分支，再依次选 CPU 架构（AArch64 / X86_64）、CANN 版本、具体软件包，并勾选同意《CANN 软件用户许可协议》，关键下载动作还要求登录华为账号。落地时先弹一个“资源下载中心公告”把页面挡住。',
- ndesc:'CUDA 下载页：一行行绿色按钮，依次点 操作系统 → 架构 → 发行版 → 版本 → 安装类型（Network / Full），每点一步只展示下一步的合法选项；选完页面就内联给出一条可直接复制的安装命令，全程不要求登录。（首屏也有一个可关闭的邮件订阅弹窗。）',
+ndesc:'CUDA 下载页（关掉订阅弹窗后）：一行行绿色按钮，依次点 操作系统（图为第一步 Linux/Windows）→ 架构 → 发行版 → 版本 → 安装类型（Network / Full），每点一步只展示下一步的合法选项；选完页面就内联给出一条可直接复制的安装命令，全程不要求登录。',
  c:[['“先跑起来”的步数差出一倍多','NVIDIA 从打开下载页到拿到能跑的安装命令大约 2 步、且不用登录；昇腾要经过“关公告 → 选架构 → 选版本 → 选包 → 同意协议 → 登录华为账号 → 下载”约 7 步。每多一道选择或闸门，就会在这一步多流失一批还没上手的开发者。'],
     ['登录被放在了“下载之前”而不是“之后”','昇腾把华为账号登录设成下载的前置条件；NVIDIA 把账号完全后置——你可以先把东西下下来跑通，等需要更多权益时再注册。对“只想先试一下”的开发者，前置登录就是劝退点。']],
  rec:'把社区版改成<b>“游客可直接下载、登录与协议同意后置”</b>，再给 架构/版本/软件包 配好默认值做智能推荐，把这条 7 步的最长链路砍短——这是全报告 ROI 最高的改进（对应 P0）。'},
@@ -653,7 +653,7 @@ const JUDGES=[
   one:'落地后第 0 秒，开发者看到的是“动作”还是“口号”？',
   lead:'开发者落地官网的第一问从来不是“你是谁”，而是“我现在能干什么”。两边对这一问的应答顺序，决定了首屏的体感。',
   body:[
-   'NVIDIA 把答案直接写进首屏文案——<b>“Skip the setup. Start building.”</b>，一句话给出动作与承诺；导航也按 Tutorials / Training / Topic / Industry 这种“任务视角”组织，处处在回答“你要做什么”。',
+   'NVIDIA 把答案直接写进首屏文案——<b>“Skip the setup. Start building.”</b>，一句话给出动作与承诺；导航也直接给“内容目的地”（Docs / Downloads / Forums / Training）+ 按 Topics / Industries 浏览，处处在回答“你要做什么、去哪拿”。',
    '昇腾首屏是品牌愿景<b>“昇腾万里，让智能无所不及”</b>，主 CTA「立即注册登录社区」沉在页面底部，开发者要向下滚动才遇到“从入门到成果”的成长路径。信息没缺，但把“我们是谁”排在了“你能做什么”前面。',
    '代价是首屏的“动作密度”低：同样 5 秒，NVIDIA 让人知道下一步点哪，昇腾让人先知道这是个什么平台。<b>补法不难——首屏加一条明确的“开发者起步”主动作即可。</b>'],
   demo:'hero'},
@@ -909,7 +909,7 @@ function demoHero(){return `
    <div class="herocard dark">
      <div class="lbl">NVIDIA · 首屏文案</div>
      <div class="big">Skip the setup. <span class="g">Start building.</span></div>
-     <div class="small">紧跟教程 / Read More 入口；导航按 Tutorials · Topic · Industry 任务视角组织</div>
+     <div class="small">紧跟教程 / Read More 入口；导航 = Docs·Downloads·Forums·Training + Topics·Industries 浏览</div>
      <span class="pinq yes">“我能干什么” ✓ 即答</span>
    </div>
    <div class="herocard light">

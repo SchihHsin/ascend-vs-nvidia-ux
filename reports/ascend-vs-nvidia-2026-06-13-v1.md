@@ -46,7 +46,7 @@
 
 ### 触点 1.2 — 顶部导航 / 信息架构
 - **证据**：`01-ascend-home.png`（真实）/ NVIDIA 导航（mockup，依据官网文本）
-- 结论①（分类心智）：昇腾导航＝CANN / 产品 / 解决方案 / 开发者与合作伙伴 / 支持与服务（企业+产品线结构）；NVIDIA＝Tutorials / Training / Browse by Topic / Browse by Industry / Platforms & Tools（开发者资源+主题结构）。
+- 结论①（分类心智）：昇腾导航＝CANN / 产品 / 解决方案 / 开发者与合作伙伴 / 支持与服务（企业+产品线结构）；NVIDIA 顶栏两层＝主栏 Home / Blog / Forums / Docs / Downloads / Training（内容目的地）+ 二级 Topics / Platforms and Tools / Industries / Resources 下拉（按主题/行业/资源浏览）。
 - 结论②（直达性）：昇腾把「文档 / 在线开发 / 资源」单独外露在导航右上，直达性好；NVIDIA 把它们收进资源目录。
 - 结论③（找得到吗）：NVIDIA 的 Topic × Industry 双轴让"不知道产品名"的用户也能切入；昇腾要求先认识产品线名称。
 - **评分**：昇腾 74 / NVIDIA 80
