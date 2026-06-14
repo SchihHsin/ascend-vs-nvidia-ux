@@ -27,7 +27,7 @@ tracking/ascend-vs-nvidia.md   竞品跟踪表(旅程定义、进度)
 
 ## 可视化报告结构(`...-visual.html`,单文件)
 
-`<style>`(token + 组件) → `<body>`(topbar + 楼层容器 + lightbox) → `<script>`(数据 + 渲染)。楼层顺序:封面 → **用户旅程总览图**(6 阶段配对柱 + 情绪分曲线) → **24 触点热力图**(点行可跳触点) → **6 阶段楼层**(逐触点卡) → **末尾综述**(5 个判断各占一层 + 定制 Demo) → **行动建议**表(P0–P3) → **责任归属**楼层(6 部门归堆)。
+`<style>`(token + 组件) → `<body>`(topbar + 楼层容器 + lightbox) → `<script>`(数据 + 渲染)。楼层顺序:封面 → **用户旅程图**(`JOURNEY` 数据 + `#jrnGrid`,样式取自 report-ppt-skill §4:六行网格 = 阶段头/触点/行为 mini线框/情绪【昇腾红 vs NVIDIA绿双曲线】/痛点/机会点,固定高度楼层版) → **24 触点热力图**(点行可跳触点) → **6 阶段楼层**(逐触点卡) → **末尾综述**(5 个判断各占一层 + 定制 Demo) → **行动建议**表(P0–P3) → **责任归属**楼层(6 部门归堆)。
 
 ### 触点卡结构(图文并茂,关键约定)
 
@@ -48,11 +48,13 @@ tracking/ascend-vs-nvidia.md   竞品跟踪表(旅程定义、进度)
 
 ## 取证现状
 
-真实截图 **19 张**(昇腾 9 · NVIDIA 10:home/cuda-download/cuda-toolkit/industries/docs/quickstart/ngc/build/forum/blog)——所有有独立页面的对比触点全覆盖。其余比较性论点(导航/搜索/Nsight/DLI 等无单一页面对应者)用标注 mockup。昇腾另有 5 张「按重点裁」的区段图(产品矩阵/Atlas规格/内联代码/开发工具/HiDevLab在线开发)+ 学习路径裁图。
+**全部 24 个触点两侧均为真实截图,0 mockup**。NVIDIA 16 张(home/cuda-download/cuda-toolkit/industries/docs/quickstart/training/api/program/archive/samples/nsight/ngc/build/forum/blog),导航/搜索/语言/产品总览/规格/技术支持/FAQ 这 7 个导航级触点复用对应真页(`NV_REAL` 里映射)。昇腾 9 张主图 + 5 张「按重点裁」区段图(产品矩阵/Atlas规格/内联代码/开发工具/HiDevLab)+ 学习路径裁图。**注:解决方案/博客早期曾误用猜错 URL 的 404 截图,已更正为真实页 `/marketplace/solution`(可筛选方案市场)、`/developer/blog`(分类+热门排行),并据此把 2.4 72→76、6.4 68→72 上调,总均分 73.3→73.6。** 评分散见 `TP`(触点)、`STAGES`(阶段均分)、封面 metric;改分要同步这几处(热力图由 JS 自动重算)。
 
 ## 踩过的坑(重要)
 
-- **NVIDIA 站点对无头浏览器强反爬**:`developer.nvidia.com`/`docs`/`forums`/`catalog.ngc`/`build` 等子页,headless Chrome(含 `--headless=new` + 真实 UA + 关 AutomationControlled)多半返回空白。NVIDIA 真图基本靠**人工在真浏览器整页截**后丢进 screenshots/。
+- **NVIDIA 站点对无头浏览器强反爬**:`developer.nvidia.com`/`docs`/`forums`/`catalog.ngc`/`build` 等子页,headless Chrome 多半返回空白。NVIDIA 真图靠**人工在真浏览器整页截**(用户拖进 `~/Downloads` 后,因 macOS TCC 我读不了 Downloads,需用户在 Finder 拖进 `screenshots/`,我再按文件名标题对号改名)。
+- **昇腾子页也会限流无头**:多次请求后 `hiascend.com` 子页(developer/blog、marketplace/solution 等)headless 返回空白;**绕过**:`--headless=new` + `--virtual-time-budget=14000~16000` + 等待 30~40s(`vh=2x` 更稳),换 IP/等一会儿也行。
+- **别拿"猜错 URL 的 404"当证据**:踩过——把 `/blog`、`/zh/solution` 的 404 当短板证据,其实真页在 `/developer/blog`、`/marketplace/solution`。找不到先去 WebFetch 首页/搜索扒真实 href,别用 404 充数。
 - **卡片缩略图只显示页面顶部**(`.shot{object-position:top}`):若文字讲的是页面中段模块(如学习路径、产品矩阵、内联代码),要用 `sips -c <h> <w> --cropOffset <Y> <X>` **裁出对应区段单独存图**,否则图文对不上。
 - **class 命名别撞**:NVIDIA mockup 容器类是 `.mock`;标签曾误用 `class="tag mock"` → 被 `.mock{aspect-ratio:16/10}` 撑成大黄框。标签改用 `.tag.mk`。
 - **页面很长(~2.8 万 px)**:无头截图验证要把 `--window-size` 高度开到 30000,再用 `sips` 裁带状区看局部。Chrome 偶发 exit 144 但文件已写出;多实例并发要各自 `--user-data-dir`。
@@ -75,8 +77,8 @@ ud=$(mktemp -d); "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollba
 - **用中文**交流。
 - **视觉/设计类改动先提 2–4 个选项**让用户选(可用 AskUserQuestion),不要直接实现。
 - **模拟数据先行**:缺真实结构时用模拟数据/标注 mockup 做成完整楼层,后续替换。
-- 改完把新约定/坑同步进本文件;commit / push **等用户明确要求**再做(本项目未必已 git init,见下)。
+- **每次改完自动收尾(用户偏好,不用再问)**:把新架构/约定/现状/坑同步进本文件 → `git commit`(中文 prefix `feat:`/`fix:`/`style:`/`docs:`)→ `git push origin main`,一气呵成。仓库已建:远程 `github.com/SchihHsin/ascend-vs-nvidia-ux`(main)。纯文案/数值微调可不更本文件,但**仍要 push**。
 ```
-# 若要独立成 git 仓:
+# 远程已配置好,直接 push;若换机重建 git 仓:
 git init && git add -A && git commit -m "init: 昇腾 vs 英伟达 官网体验竞品分析"
 ```

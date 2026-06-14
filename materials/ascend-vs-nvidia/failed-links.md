@@ -1,24 +1,12 @@
-# 截图失败记录
+# 截图取证记录
 
-## NVIDIA — 无头浏览器强反爬（仅 2 页可截）
-可截：`developer.nvidia.com/`（首页）、`developer.nvidia.com/cuda-downloads`（CUDA 下载）。
-其余子页无头 Chrome 返回空白（已试 headless / headless=new + 真实 UA + 关闭 AutomationControlled，均空白）：
+> 现状(2026-06-14):**全部 24 个触点两侧均已用真实截图取证,无 mockup、无遗留失败项。** 本文件保留取证过程中的方法与坑,供复用。
 
-| 目标 | URL | 替代证据 |
-|------|-----|---------|
-| NGC 模型目录 | catalog.ngc.nvidia.com | WebFetch 文本 + mockup |
-| 开发者论坛 | forums.developer.nvidia.com | WebFetch 文本 + mockup |
-| CUDA Toolkit 产品页 | developer.nvidia.com/cuda-toolkit | WebFetch 文本（hero/Download Now/组件/链接）+ mockup |
-| 文档中心 | docs.nvidia.com | WebFetch 文本（100+产品/主题·行业·角色筛选）+ mockup |
-| CUDA 快速入门 | docs.nvidia.com/cuda/cuda-quick-start-guide | WebFetch 文本（分 OS/内联命令/版本选择器）+ mockup |
-| 开发者博客 | developer.nvidia.com/blog | WebFetch 文本 + mockup |
-| build playground | build.nvidia.com | WebFetch 超时；用已知功能描述 + mockup |
+## NVIDIA — 无头浏览器强反爬,改人工整页截
+`developer.nvidia.com` / `docs.nvidia.com` / `forums.developer.nvidia.com` / `catalog.ngc.nvidia.com` / `build.nvidia.com` 等子页,headless Chrome(含 `--headless=new` + 真实 UA + 关 AutomationControlled)多半返回空白。**解法**:用户在真实浏览器整页截图后,在 Finder 拖进 `screenshots/`(macOS TCC 会挡住程序读 `~/Downloads`),再按文件名标题对号改名。已覆盖 16 张:home / cuda-download / cuda-toolkit / industries / docs / quickstart / training / api / program / archive / samples / nsight / ngc / build / forum / blog。
 
-## 昇腾 — URL 猜测导致 404（已改用真实入口）
-| 猜测 URL | 结果 | 真实入口 |
-|---------|------|---------|
-| hiascend.com/zh/solution | 404 | 顶部导航「解决方案」（行业解决方案楼层） |
-| hiascend.com/blog | 404 | 「技术干货」/ 开发者中心博客区 |
+## 昇腾 — 多次请求后子页也会限流无头
+`hiascend.com` 子页(developer/blog、marketplace/solution 等)在多次 headless 请求后返回空白。**绕过**:`--headless=new` + `--virtual-time-budget=14000~16000` + 等待 30~40s(`--force-device-scale-factor=2` 更稳)。等一会儿 / 换网络也能恢复。
 
-> 注：昇腾 404 页本身干净（404 插画 + 返回首页 + 完整底部站点地图），见 06/08-ascend-solution/blog.png，作为「错误恢复」触点的正向证据保留。
-> 补图方式：在有 GUI 的浏览器手动访问上述 NVIDIA URL 截图，替换 screenshots/ 下对应文件。
+## 教训 — 别拿"猜错 URL 的 404"当证据
+解决方案 / 博客早期误用了 `/zh/solution`、`/blog` 的 404 截图当短板证据——错误。真页在 `/marketplace/solution`(可筛选方案市场)、`/developer/blog`(分类 + 官方文章 + 热门排行)。找不到先 WebFetch 首页/搜索扒真实 href,不要用 404 充数。
