@@ -104,13 +104,11 @@ a{color:inherit;text-decoration:none}
 .jrn-tc{flex:1;padding:9px 12px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:64px}
 .jrn-touch{font-size:11px;color:var(--ink);line-height:1.32;display:flex;align-items:center;gap:6px}
 .jrn-touch::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--g5);flex-shrink:0}
-.jrn-fc{flex:1;padding:9px 12px;display:flex;flex-direction:column;gap:7px}
-.jrn-scr{border-radius:5px;overflow:hidden;border:1px solid var(--g3);background:#f8f9fb;height:72px;display:flex;flex-direction:column;flex:0 0 auto}
-.jrn-sb{display:flex;align-items:center;gap:3px;padding:3px 5px;background:#eceef2;border-bottom:1px solid var(--g3);flex-shrink:0}
-.jrn-sd{width:4px;height:4px;border-radius:50%}
-.jrn-sc{padding:6px 7px;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:3.5px;justify-content:center}
-.jmb{height:4px;border-radius:2px;background:#e5e7eb}
-.jrn-fl{font-size:10.5px;font-weight:500;color:var(--ink);line-height:1.4}
+.jrn-fc{flex:1;padding:9px 11px;display:flex;flex-direction:column;justify-content:center}
+/* 行为 = 竖向流程图(HTML 方框 + SVG 箭头) */
+.jrn-flow{display:flex;flex-direction:column;align-items:stretch}
+.jrn-node{font-size:9.5px;color:var(--ink);background:#fff;border:1.4px solid var(--g4);border-radius:6px;padding:3px 7px;line-height:1.22;text-align:center}
+.jrn-arr{display:block;margin:1px auto;flex:none}
 .jrn-grid.je{height:116px}
 .jrn-ec{flex:1;position:relative;height:100%;background:rgba(250,251,255,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);overflow:hidden}
 .jrn-ec svg{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -808,8 +806,11 @@ const JOURNEY=[
   const r1=`<div class="jrn-grid"><div></div>`+JOURNEY.map(s=>`<div class="jrn-pw"><div class="jrn-ph" style="--acc:${s.acc}"><div class="pn">${s.n}</div><div class="pt">${s.name}</div><div class="ptm">${s.meta}</div></div></div>`).join('')+`</div>`;
   const r2=`<div class="jrn-grid">`+rl('触点','Touch')+JOURNEY.map(s=>`<div class="jrn-tw"><div class="jrn-tc">${s.touch.map(t=>`<div class="jrn-touch">${t}</div>`).join('')}</div></div>`).join('')+`</div>`;
   const r3=`<div class="jrn-grid">`+rl('行为','Action')+JOURNEY.map(s=>{
-    const bars=s.ui.map(b=>`<div class="jmb" style="width:${b[0]}${b[1]?`;height:${b[2]||'4px'};background:${b[1]}`:''}"></div>`).join('');
-    return `<div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#FF5F57"></div><div class="jrn-sd" style="background:#FFBD2E"></div><div class="jrn-sd" style="background:#28CA41"></div></div><div class="jrn-sc">${bars}</div></div><div class="jrn-fl">${s.action}</div></div></div>`;
+    // 把 action 按 → 拆成步骤,手画成竖向流程图(HTML 方框 + SVG 连接箭头)
+    const steps=s.action.split(/\s*→\s*/);
+    const arr=`<svg class="jrn-arr" width="13" height="9" viewBox="0 0 13 9"><line x1="6.5" y1="0" x2="6.5" y2="4.5" stroke="${s.acc}" stroke-width="1.5" opacity=".5"/><path d="M3.5,4 L6.5,8 L9.5,4" fill="none" stroke="${s.acc}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/></svg>`;
+    const chart=steps.map((st,i)=>`<div class="jrn-node" style="border-color:${s.acc}">${st}</div>`+(i<steps.length-1?arr:'')).join('');
+    return `<div class="jrn-fw"><div class="jrn-fc"><div class="jrn-flow">${chart}</div></div></div>`;
   }).join('')+`</div>`;
   const r4=`<div class="jrn-grid je">`+rl('情绪','Emotion')+JOURNEY.map((s,i)=>`<div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="50" x2="100" y2="50" stroke="#E5E7EB" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polyline points="${seg(nY,i)}" fill="none" stroke="#76B900" stroke-width="1.2" opacity=".75" vector-effect="non-scaling-stroke"/><polyline points="${seg(aY,i)}" fill="none" stroke="#C7000B" stroke-width="1.8" vector-effect="non-scaling-stroke"/></svg><div class="dn" style="top:${nY[i]}%"></div><div class="d" style="top:${aY[i]}%;background:${s.eC}"></div><div class="e" style="top:calc(${aY[i]}% - 20px)">${s.emoji}</div><div class="l" style="color:${s.eC}">${s.eL}</div></div></div>`).join('')+`</div>`;
   const r5=`<div class="jrn-grid">`+rl('痛点','Pain')+JOURNEY.map(s=>`<div class="jrn-pw2"><div class="jrn-pc">${s.pains.map(p=>`<div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">${p}</div></div>`).join('')}</div></div>`).join('')+`</div>`;
