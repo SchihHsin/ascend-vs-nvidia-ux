@@ -36,7 +36,9 @@ tracking/ascend-vs-nvidia.md   竞品跟踪表(旅程定义、进度)
   - **已校订(续)**:`2.1 产品总览` 把"昇腾品牌站矩阵 vs NVIDIA 开发者站 Platforms&Tools"明确成 **IA 差异本身**(单站 vs 双站)、并把"选型分诊"改成**共同可优化点**(不再单扣昇腾);`1.4 语言` SRC 改 `/developer`;综述 j2/j4/j5 的 plab "阶段X"→"步骤X"。
   - **审计结论**:其余卡(3.3/3.4/5.3/5.4/4.4 等)散文**已是"取舍"框架、昇腾长板有 surface**,不属偏向;`4.2 登录`/`4.3 SDK下载`的低分是**真实谷底**(登录前置+7步),非偏向,保留。`win` 维持 1.3/3.2/6.3(真实昇腾占优),1.1 现 78/77 但文案"落地都不弱"故不标 win。
   - **内容 pass 基本完成**;若用户仍觉某卡偏向,逐卡点名再调。
-  - **NVIDIA 真图补齐(用户手动截)**:`06-nvidia-specs`(2.3 H100 规格页,替原 cuda-toolkit 顶替)、`07-nvidia-search`(1.3 全站搜索页;**据此把 1.3 从昇腾 win 改为平手 76/76**——真图显示 NVIDIA 搜索是 AI+按 developer 资源筛选,比原 docs 代理强)、`08-nvidia-support`(6.2 Support 分层页)。导航专图:`08-ascend-dev-nav`(1.2 昇腾导航条)+`01-nvidia-nav`(1.2 NVIDIA 导航条),不再一图四用。
+  - **NVIDIA 真图补齐(用户手动截)**:`06-nvidia-specs`(2.3 H100 规格页)、`07-nvidia-search`(1.3 全站搜索页;**据此把 1.3 从昇腾 win 改为平手 76/76**)、`08-nvidia-support`(6.2 Support 分层页)、`01-nvidia-brand-home`(nvidia.com 官网首页)、训练:`06-nvidia-nemo`/`07-nvidia-frameworks`/`08-nvidia-nccl`(T2/T4/T5 换真图,不再 mockup)。
+  - **1.1 拆成两个先后触点**(用户:"先首页再开发者"):**`1.1` 官网首页**(hiascend.com ↔ nvidia.com,官网↔官网,76/74,讲单站vs双站)+ **`1.1b` 开发者门户首屏**(/developer ↔ developer.nvidia.com,开发者↔开发者,78/77)。两者都在 step1,STEP_MAP 两场景都加 `1.1b`。
+  - **导航类触点用横条显示**:`.shot.bar`(aspect-auto + height-auto,满宽不裁),触点加 `bar:true`(现 1.2);否则 16:10 cover 会把导航长条裁得只剩中间。导航专图 `08-ascend-dev-nav`/`01-nvidia-nav`。
 - **旧 6 阶段口径**(认知导航/产品选型/学习文档/资源获取/开发实践/支持社区)已废弃为"用法分类",仅在 git 历史可查。
 
 ## 可视化报告结构(`...-visual.html`,单文件)
