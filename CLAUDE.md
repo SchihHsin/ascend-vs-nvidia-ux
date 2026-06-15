@@ -39,6 +39,7 @@ tracking/ascend-vs-nvidia.md   竞品跟踪表(旅程定义、进度)
 - **`NV_REAL` 映射**:用户后补的 NVIDIA 真实整页截图 → 触点 id。渲染时 `nvimg=t.nimg||NV_REAL[t.id]`、`nvreal=...||!!NV_REAL[t.id]`;**再补 NVIDIA 真图只需在 `NV_REAL` 加一行**(文件丢进 screenshots/ + 加映射),无真图者自动落回 `nm` 描述的深色 mockup。
 - **责任部门**:`DEPT_META`(6 部门:体验设计/资料/官网平台/产品/研发·工具链/社区运营,各带色)+ `DEPT_OF`(触点 id → 主责部门)。rec callout 与「责任归属」楼层都读它。**部门口径与 cann-dashboard 的「内部使用者」近似但不同**:这里多了「官网平台」(承接 登录/下载/URL/搜索),改归属只改 `DEPT_OF` 一行。
 - 图表全自绘(纯 CSS + 内联 SVG,**无 ECharts**,离线可开):旅程柱/曲线、热力图、综述 Demo(hero/flow/matrix/path/discover)。
+- **`SRC` 来源链接表**(`{id:[昇腾URL, NVIDIA URL]}`):每个触点 who 行的"真实截图"标签已换成**可点击来源链接**(`.srclink`,显示精简 URL),改触点锚点要同步改 `SRC` + 图。
 - `heatColor(s)`:<66 红 / <72 金 / <78 蓝 / ≥78 绿(问题优先)。
 
 ## 配色约定(品牌色)
