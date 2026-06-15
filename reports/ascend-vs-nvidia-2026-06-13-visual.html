@@ -70,6 +70,25 @@ a{color:inherit;text-decoration:none}
   padding:14px 18px;font-size:12.5px;color:var(--ink2)}
 .method b{color:var(--ink)}
 
+/* 全站信息架构对照 */
+.ia-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ia-col{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 20px}
+.ia-col h3{margin:0 0 12px;font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.ia-col h3::before{content:'';width:11px;height:11px;border-radius:3px;background:var(--c)}
+.ia-tree{font-size:12.5px;color:var(--ink);line-height:1.5}
+.ia-root{font-weight:800;color:var(--ink);margin-bottom:4px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ia-lv1{position:relative;padding:3px 0 3px 16px;margin-left:5px;border-left:2px solid var(--g3)}
+.ia-lv2{position:relative;padding:3px 0 3px 16px;margin-left:22px;border-left:2px dashed var(--g4);color:var(--ink2)}
+.ia-lv1::before,.ia-lv2::before{content:'';position:absolute;left:-1px;top:13px;width:9px;height:2px;background:var(--g3)}
+.ia-path{font-family:var(--mono);font-size:10.5px;color:var(--g6);background:var(--g1);padding:1px 6px;border-radius:5px}
+.ia-star{font-size:10px;font-weight:800;color:#fff;background:var(--coral);padding:1px 7px;border-radius:20px;margin-left:4px}
+.ia-note{font-size:10.5px;color:var(--gold);font-weight:600}
+.ia-finds{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.ia-find{background:var(--card);border:1px solid var(--g3);border-radius:14px;padding:14px 16px;font-size:12.5px;color:var(--ink2);line-height:1.6;box-shadow:var(--shadow)}
+.ia-find-h{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:6px}
+.ia-find b{color:var(--ink)}
+@media(max-width:820px){.ia-grid,.ia-finds{grid-template-columns:1fr}}
+
 /* journey overview */
 .journey{position:relative;background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);
   padding:30px 26px 22px;box-shadow:var(--shadow);overflow:hidden}
@@ -337,6 +356,7 @@ a{color:inherit;text-decoration:none}
   <div class="brand"><b>昇腾</b> vs 英伟达 · 体验竞品</div>
   <div class="navlinks" id="navlinks">
     <a href="#hero" class="active">概览</a>
+    <a href="#ia">全站架构</a>
     <a href="#journey">旅程图</a>
     <a href="#heat">热力图</a>
     <a href="#s1">①认知导航</a>
@@ -368,8 +388,49 @@ a{color:inherit;text-decoration:none}
       <div class="metric good"><div class="k">反转长板 · 快速入门</div><div class="v">+10</div><div class="vsub">学习路径 + 在线实验</div></div>
       <div class="metric"><div class="k">真实截图取证</div><div class="v">25<span style="font-size:18px;color:var(--g5)">张</span></div><div class="vsub">昇腾9 · NVIDIA16 · 全触点真图、0 mockup</div></div>
     </div>
-    <div class="method"><b>取证方法与可靠性：</b>全部 24 个触点的两侧均以<b>真实截图</b>为证（昇腾 9 张 + NVIDIA 16 张整页截图，含从已有真页取证的导航/搜索/规格等局部）。NVIDIA 站点对无头浏览器强反爬，相关页由人工在真实浏览器整页截取。本报告为体验研究判断，评分为基于证据的研究判断、非实测数值。</div>
+    <div class="method"><b>取证方法与可靠性：</b>全部触点两侧均以<b>真实截图</b>为证（每张卡可点 who 行的来源链接核对）。NVIDIA 站点对无头浏览器强反爬，相关页由人工整页截取。评分为基于证据的研究判断、非实测数值；<b>按"同维度、同功能"对位</b>（开发者门户比开发者门户、CANN 比 CUDA、品牌站比品牌站），尽量客观、不预设谁更好。</div>
   </header>
+
+  <!-- 全站信息架构对照 -->
+  <section class="floor" id="ia">
+    <div class="floor-hd"><span class="fno">IA</span><h2>全站信息架构：昇腾「单站·CANN 打头」 vs NVIDIA「双站·CUDA 内含」</h2></div>
+    <p class="floor-sub">先看“地图”再走旅程。两边因业务形态不同选了不同的站点结构——下面并排摊开，<b>是两种取舍，不分高下</b>。</p>
+    <div class="ia-grid">
+      <div class="ia-col">
+        <h3 style="--c:var(--coral)">昇腾 · 单站全包</h3>
+        <div class="ia-tree">
+          <div class="ia-root"><a class="srclink" href="https://www.hiascend.com/" target="_blank" rel="noopener">hiascend.com ↗</a> 昇腾社区（品牌+产品+开发者+生态，一个站全包）</div>
+          <div class="ia-lv1"><b>CANN</b> <span class="ia-path">/cann</span> <span class="ia-star">★ 一级导航 + 独立子站</span></div>
+          <div class="ia-lv1">产品（硬件 Atlas 系列）</div>
+          <div class="ia-lv1">解决方案 <span class="ia-path">/marketplace/solution</span></div>
+          <div class="ia-lv1">开发者与合作伙伴</div>
+          <div class="ia-lv2">开发者中心 <span class="ia-path">/developer</span> <span class="ia-note">← 埋在二级</span></div>
+          <div class="ia-lv2">合作伙伴 · 教育科研 · 昇腾AI市场</div>
+          <div class="ia-lv1">文档中心 <span class="ia-path">/document</span></div>
+          <div class="ia-lv1">论坛 <span class="ia-path">/forum</span> · ModelZoo · 在线开发 HiDevLab</div>
+        </div>
+      </div>
+      <div class="ia-col">
+        <h3 style="--c:var(--green)">NVIDIA · 按受众分两站</h3>
+        <div class="ia-tree">
+          <div class="ia-root"><a class="srclink nv" href="https://www.nvidia.com/" target="_blank" rel="noopener">nvidia.com ↗</a> 品牌 / 消费 / 企业</div>
+          <div class="ia-lv1">Products · Solutions · Industries · Shop · Drivers · Support</div>
+          <div class="ia-lv1">Developers <span class="ia-note">← 在页脚</span> → developer.nvidia.com</div>
+          <div class="ia-root" style="margin-top:12px"><a class="srclink nv" href="https://developer.nvidia.com/" target="_blank" rel="noopener">developer.nvidia.com ↗</a> 开发者总站</div>
+          <div class="ia-lv1">Tutorials · Training · Docs · Downloads · Forums</div>
+          <div class="ia-lv1">Browse by Topic · Industry</div>
+          <div class="ia-lv1">Platforms &amp; Tools</div>
+          <div class="ia-lv2">Accelerated Computing → <b>CUDA Toolkit</b> <span class="ia-note">← CUDA 在此，一个产品</span></div>
+          <div class="ia-lv2">Omniverse · AI · Cloud（NGC · build）</div>
+        </div>
+      </div>
+    </div>
+    <div class="ia-finds">
+      <div class="ia-find"><div class="ia-find-h">业务形态决定结构</div>昇腾是纯 AI 算力平台 → 一个站、CANN 为王（信号集中、聚焦）；NVIDIA 有庞大消费业务 → 必须分 nvidia.com（消费）与 developer.nvidia.com（开发者），各司其职。<b>是业务不同，不是谁更好。</b></div>
+      <div class="ia-find"><div class="ia-find-h">开发者入口两边都偏埋</div>昇腾「开发者」在“开发者与合作伙伴”二级；NVIDIA「Developers」在 nvidia.com 页脚。从品牌站找到开发者门户，<b>两边都不算顺——对称，不构成单边短板。</b></div>
+      <div class="ia-find"><div class="ia-find-h">CANN vs CUDA 的摆位</div>昇腾把核心计算栈 CANN 顶成一级导航 + 独立子站（专属聚焦阵地，代价是多一个“去 /developer 还是 /cann”的入口分叉）；NVIDIA 把 CUDA 折进开发者站当一个产品（单一入口，但 CUDA 是众多平台之一）。<b>两种取舍。</b></div>
+    </div>
+  </section>
 
   <!-- JOURNEY -->
   <section class="floor" id="journey">
