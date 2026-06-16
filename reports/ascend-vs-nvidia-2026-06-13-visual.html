@@ -369,6 +369,9 @@ a{color:inherit;text-decoration:none}
 .l1tab[data-t="op"].on{background:#7c5cf0}
 .l1tab[data-t="train"].on{background:#1f9fb8}
 .tabpanel[hidden]{display:none}
+.synth-gh{flex:1 1 100%;font-weight:800;font-size:12.5px;color:var(--g7);margin:10px 0 0;padding-left:2px;letter-spacing:.3px}
+.synth-grouphd{text-align:center;padding:6px 0 0;box-shadow:none;background:none;border:none}
+.synth-grouphd h2{font-size:21px;color:var(--g8);display:inline-block;border-bottom:3px solid var(--coral);padding-bottom:7px;margin:0}
 </style>
 </head>
 <body>
@@ -475,7 +478,7 @@ a{color:inherit;text-decoration:none}
   <!-- SYNTHESIS intro -->
   <section class="floor" id="synth">
     <div class="floor-hd"><span class="fno">∑</span><h2>末尾综述</h2></div>
-    <p class="floor-sub">把 24 个触点的结论收敛成 5 个跨触点的大判断 —— 每个判断单独占一层，左侧详述、右侧配一张说明性 Demo。</p>
+    <p class="floor-sub">把触点结论收敛成跨触点大判断，分 <b>三部分：共性（两条场景都成立）/ 算子开发专属 / 训练专属</b>。每条单独占一层，左侧详述、右侧配一张说明性 Demo。</p>
     <div class="synth-toc" id="synthtoc"></div>
   </section>
   <div id="synthfloors"></div>
@@ -832,15 +835,15 @@ const JUDGES=[
    'NVIDIA 镜像地相反：全球账号、英文优先、Discourse 全球社区对海外极友好；但缺 Google / GitHub 之外的本地化登录，中文内容与社区氛围弱。',
    '结论：<b>若昇腾战略只服务国内生态，现状已足够顺</b>；一旦要拓海外 / 学术，账号、语言、社区三处短板会同时显形，需成套补齐，而非单点修。'],
   demo:'matrix'},
- {id:'j4',pin:'win',plab:'步骤 2 · 长板',color:'#76B900',h:'昇腾的反转长板：体系化引导',cap:'“上手到首次可跑”路径对比',
-  one:'别让短板掩盖长板——教人上手这件事，昇腾其实更强。',
+ {id:'j4',g:'op',pin:'win',plab:'步骤 2 · 算子长板',color:'#76B900',h:'算子开发的反转长板：算子 hub 5 环节 vs CUDA 资源堆',cap:'“上手到首次可跑”路径对比',
+  one:'写算子这件事上，昇腾的上手引导其实比 NVIDIA 更有结构。',
   lead:'在“教开发者上手”这件事上，昇腾做得比 NVIDIA 更体系化、更新手友好。这是一个应该被“放大”而非“追平”的差异点。',
   body:[
    '昇腾把“快速入门”做成<b>按角色（应用 / 算子 / 训练 / 推理开发）的学习路径</b>，配在线课程、微认证，尤其是<b>“在线实验”——免装本地环境、浏览器里直接跑</b>；ModelZoo 也是“模型→工具→展示”的引导式三步 + DeepSeek 热点专区。',
    'NVIDIA 的 quickstart 反而偏硬核：按 OS 给内联命令，但假设你有基础、sample 要去 GitHub 拉，首个可跑 build 约 15–60 分钟。',
    '<b>建议把在线实验、引导式 ModelZoo 前置到首屏与产品页</b>，让“开箱即跑”成为昇腾的体验标签，把这块相对优势讲出来。'],
   demo:'path'},
- {id:'j5',pin:'a',plab:'步骤 6–7 + 全局',color:'#e0a32e',h:'内容不差，差在“被全球搜到”',cap:'可发现性 / 可索引性对比',
+ {id:'j5',g:'common',pin:'a',plab:'步骤 6–7 + 全局',color:'#e0a32e',h:'内容不差，差在“被全球搜到”',cap:'可发现性 / 可索引性对比',
   one:'昇腾的博客、解决方案、文档质量都在线，瓶颈是“被发现”。',
   lead:'更新过一轮取证后要说清楚：昇腾的博客（有分类/官方/热门排行）、解决方案（可筛选的方案市场）内容组织都不差——真正的差距在“被全球开发者搜到、点进”这一层。',
   body:[
@@ -848,6 +851,22 @@ const JUDGES=[
    '<b>登录墙 + 入口不够靠前</b>：论坛发帖需华为账号；博客要从开发者中心进、首屏/顶栏没有直达入口（NVIDIA 顶部导航就有 Blog）。',
    '<b>低成本高回报</b>：补英文版 + SEO + 把博客/方案入口提到顶部直达、提升游客可读，就能显著改善“被搜到、被点进”——内容本身不用重做。'],
   demo:'discover'},
+ {id:'jt1',g:'train',pin:'a',plab:'步骤 4 · 训练主摩擦',color:'#C7000B',h:'框架迁移：原生零迁移 vs torch_npu + MindSpeed',cap:'训练上手摩擦点',
+  one:'训练这条线，昇腾最大的坎不是配环境，是“把 PyTorch 代码迁过来”。',
+  lead:'NVIDIA 上训练基本是框架原生体验——PyTorch / TF 直接跑；昇腾要多一层“迁移 + 适配”。这是训练场景独有、算子场景没有的摩擦点。',
+  body:[
+   'NVIDIA：原生 PyTorch / TensorFlow，NeMo 管大模型并行，cuDNN / NCCL 成熟，开发者几乎不需要“迁移”这一步。',
+   '昇腾：需 torch_npu 适配 + MindSpeed 训练加速库。MindSpeed 把并行 / 显存优化封装得不错、能力在线，但“迁移”这一步本身就是 NVIDIA 没有的额外成本。',
+   '<b>补法：把“PyTorch → 昇腾”做成一键迁移 / 自动适配工具 + 迁移对照样例库</b>，把迁移成本压到接近“原生”，训练上手的最大摩擦点就消失了。'],
+  demo:'migrate'},
+ {id:'jt2',g:'train',pin:'a',plab:'步骤 5 · 训练',color:'#e0a32e',h:'分布式训练：首跑门槛与现成 recipe',cap:'分布式跑通成熟度',
+  one:'把多卡分布式训练第一次“调通跑顺”，NVIDIA 的坑更少。',
+  lead:'昇腾分布式训练链路完整（MindCluster 调度 + MindSpeed 并行 + MindStudio profiling），但首次跑通的工程门槛偏高——差距更多在“现成可抄的经验”，不是底层能力。',
+  body:[
+   'NVIDIA：NCCL 多卡通信、Nsight profiling、海量现成 recipe 与最佳实践，首次跑通踩坑成本低。',
+   '昇腾：工具链齐全，但端到端“可一键跑通”的训练样例、按规模 / 卡数分档的排错资料相对少，新手容易卡在“为什么跑不起来”。',
+   '<b>补法：补一套端到端“可一键跑通”的分布式训练样例 + 常见报错排查手册</b>（按模型规模 / 卡数分档），把首次跑通门槛降下来。'],
+  demo:'dist'},
 ];
 
 const ACTIONS=[
@@ -1275,28 +1294,50 @@ function demoDiscover(){return `
    <div class="hrow"><span class="hl">社区门槛</span><div class="hbar" style="background:#e0a32e">发帖需华为账号 · 中文圈</div><div class="hbar" style="background:#76B900">全球开放 · 可索引</div></div>
  </div>`;}
 
-/* ---------- synthesis floors + actions ---------- */
+function demoMigrate(){return `
+ <div class="pathlane base">
+   <div class="ph"><span>NVIDIA · 原生体验</span><span class="tofirst" style="color:#5e8a09;border-color:#d6e8ad">迁移成本：0</span></div>
+   <div class="psteps"><span class="ps">写 PyTorch</span><span class="arrow">→</span><span class="ps">直接跑（NeMo 管并行）</span></div>
+ </div>
+ <div class="pathlane">
+   <div class="ph"><span>昇腾 · 多一层迁移</span><span class="tofirst" style="color:var(--coral);border-color:#f0c0bd">迁移成本：1 层</span></div>
+   <div class="psteps"><span class="ps">写 PyTorch</span><span class="arrow">→</span><span class="ps">torch_npu 适配</span><span class="arrow">→</span><span class="ps">MindSpeed 并行</span><span class="arrow">→</span><span class="ps">跑</span></div>
+ </div>
+ <div style="font-size:11px;color:var(--ink2);text-align:center;margin-top:8px">MindSpeed 能力在线，差距在“迁移”这步本身——NVIDIA 没有。</div>`;}
+function demoDist(){return `
+ <div class="health">
+   <div class="hrow"><span class="hl">现成 recipe / 经验</span><div class="hbar" style="background:#e0a32e">昇腾 · 链路全、现成样例少</div><div class="hbar" style="background:#76B900">NVIDIA · 海量 recipe</div></div>
+   <div class="hrow"><span class="hl">多卡通信</span><div class="hbar" style="background:#e0a32e">HCCL（在追平）</div><div class="hbar" style="background:#76B900">NCCL 成熟</div></div>
+   <div class="hrow"><span class="hl">首次跑通门槛</span><div class="hbar" style="background:#e0a32e">工程门槛偏高</div><div class="hbar" style="background:#76B900">坑少</div></div>
+ </div>`;}
+
+/* ---------- synthesis floors + actions（按 共性/算子/训练 三组渲染） ---------- */
 (function(){
   const plab={a:'昇腾短板',win:'昇腾长板',both:'双向'};
-  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,discover:demoDiscover};
+  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,discover:demoDiscover,migrate:demoMigrate,dist:demoDist};
+  const GROUPS=[['common','共性 · 两条场景都成立'],['op','算子开发 · 专属结论'],['train','训练 · 专属结论']];
   const toc=document.getElementById('synthtoc');
-  JUDGES.forEach((j,i)=>{
-    const a=document.createElement('a');a.href='#'+j.id;
-    a.innerHTML=`<span class="n" style="background:${j.color}">${i+1}</span>${j.h}`;
-    toc.appendChild(a);
-  });
   const host=document.getElementById('synthfloors');
-  JUDGES.forEach((j,i)=>{
-    const sec=document.createElement('section');sec.className='floor synth-floor';sec.id=j.id;
-    sec.innerHTML=`
-      <div class="floor-hd"><span class="fno" style="background:${j.color}1f;color:${j.color}">综述 ${i+1}</span>
-        <h2>${j.h}</h2><span class="pin ${j.pin}">${plab[j.pin]} · ${j.plab}</span></div>
-      <p class="floor-sub">${j.one}</p>
-      <div class="synth-body">
-        <div class="synth-text"><p class="lead">${j.lead}</p>${j.body.map(p=>`<p>${p}</p>`).join('')}</div>
-        <div class="synth-demo"><div class="demo-cap">${j.cap}</div>${demos[j.demo]()}</div>
-      </div>`;
-    host.appendChild(sec);
+  let n=0;
+  GROUPS.forEach(([g,glabel])=>{
+    const js=JUDGES.filter(j=>j.g===g);if(!js.length)return;
+    const gl=document.createElement('div');gl.className='synth-gh';gl.textContent=glabel;toc.appendChild(gl);
+    const gh=document.createElement('section');gh.className='floor synth-grouphd';gh.innerHTML=`<h2>${glabel}</h2>`;host.appendChild(gh);
+    js.forEach(j=>{
+      n++;
+      const a=document.createElement('a');a.href='#'+j.id;
+      a.innerHTML=`<span class="n" style="background:${j.color}">${n}</span>${j.h}`;toc.appendChild(a);
+      const sec=document.createElement('section');sec.className='floor synth-floor';sec.id=j.id;
+      sec.innerHTML=`
+        <div class="floor-hd"><span class="fno" style="background:${j.color}1f;color:${j.color}">综述 ${n}</span>
+          <h2>${j.h}</h2><span class="pin ${j.pin}">${plab[j.pin]} · ${j.plab}</span></div>
+        <p class="floor-sub">${j.one}</p>
+        <div class="synth-body">
+          <div class="synth-text"><p class="lead">${j.lead}</p>${j.body.map(p=>`<p>${p}</p>`).join('')}</div>
+          <div class="synth-demo"><div class="demo-cap">${j.cap}</div>${demos[j.demo]()}</div>
+        </div>`;
+      host.appendChild(sec);
+    });
   });
   const ab=document.getElementById('actbody');
   ACTIONS.forEach(([p,a,tp,roi])=>{
