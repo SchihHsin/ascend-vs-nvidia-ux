@@ -372,6 +372,17 @@ a{color:inherit;text-decoration:none}
 .synth-gh{flex:1 1 100%;font-weight:800;font-size:12.5px;color:var(--g7);margin:10px 0 0;padding-left:2px;letter-spacing:.3px}
 .synth-grouphd{text-align:center;padding:6px 0 0;box-shadow:none;background:none;border:none}
 .synth-grouphd h2{font-size:21px;color:var(--g8);display:inline-block;border-bottom:3px solid var(--coral);padding-bottom:7px;margin:0}
+/* 用户视角动线条 */
+.pov{margin:2px 0 14px;padding:11px 14px;border-radius:11px;background:#f6f4fe;border:1px solid #e6e1fb}
+.pov.train{background:#eef8fb;border-color:#d3ecf2}
+.pov-say{font-size:13.5px;color:var(--g8);line-height:1.55}
+.pov-who{display:inline-block;font-weight:800;font-size:11px;color:#fff;background:#7c5cf0;padding:2px 9px;border-radius:6px;margin-right:8px;vertical-align:1px}
+.pov.train .pov-who{background:#1f9fb8}
+.pov-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:9px}
+.pf-step{font-size:12px;background:#fff;border:1px solid var(--g3);border-radius:7px;padding:3px 10px;color:var(--g7);font-family:var(--mono)}
+.pf-step.goal{border-color:#7c5cf0;color:#7c5cf0;font-weight:700}
+.pov.train .pf-step.goal{border-color:#1f9fb8;color:#1f9fb8}
+.pf-arr{color:var(--g5);font-size:13px}
 </style>
 </head>
 <body>
@@ -961,6 +972,47 @@ const NV_REAL={
  'T5':'08-nvidia-nccl.png',
 };
 
+/* 用户视角：第一人称 say + 动线条 flow（按场景）。单对象=两场景共用；{op,train}=分场景 */
+const POV={
+ '1.1':{say:'我要在昇腾上动手，先搜到官网、落地第一眼。',flow:['搜“昇腾”','落地 hiascend.com','找开发者入口']},
+ '1.1b':{op:{say:'进了开发者中心，我找“算子开发”那条路。',flow:['开发者中心首屏','获取开发资源','点「算子开发」卡']},
+         train:{say:'进了开发者中心，我找“训练开发”那条路。',flow:['开发者中心首屏','获取开发资源','点「训练开发」卡']}},
+ '1.2':{op:{say:'想查算子怎么写，我从顶栏找文档。',flow:['顶栏导航','点「文档」','Ascend C 文档']},
+        train:{say:'想学训练怎么搭，我从顶栏找学习。',flow:['顶栏导航','点「学习」','训练路径']}},
+ '1.3':{say:'我直接搜我要的东西（如某报错/某接口）。',flow:['文档大搜索框','输关键词','看结果']},
+ '1.4':{say:'切到我习惯的语言再继续。',flow:['右上角','中 / 英切换','继续浏览']},
+ '2.1':{op:{say:'确认我写算子要用哪个软件栈。',flow:['产品矩阵','定位 CANN','Ascend C']},
+        train:{say:'确认我训练要用哪个框架。',flow:['产品矩阵','定位 MindSpore/PyTorch','MindSpeed']}},
+ '2.3':{say:'选哪块卡？先查硬件规格。',flow:['硬件规格','看 Atlas 型号','选卡']},
+ '2.4':{say:'看有没有现成方案能参考。',flow:['方案市场','按行业 / 芯片筛','参考方案']},
+ '2.2':{say:'看这个核心栈到底能干啥、怎么开始。',flow:['CANN 产品页','看架构 / 快速体验','进开发']},
+ '3.1':{op:{say:'查 Ascend C 的接口说明。',flow:['文档中心','搜 Ascend C','看 API']},
+        train:{say:'查 MindSpeed / 框架接口。',flow:['文档中心','搜 MindSpeed','看 API']}},
+ '3.2':{op:{say:'想快速跑通第一个算子例子。',flow:['学习页','角色路径','在线实验直接跑']},
+        train:{say:'想快速跑通第一个训练例子。',flow:['学习页','训练路径','在线实验 / 可训模型']}},
+ '3.3':{say:'系统学一下、顺便考个认证。',flow:['探索学习','昇腾学堂','微认证']},
+ '3.4':{say:'查具体接口的参数怎么用。',flow:['文档中心','找接口','跨版本查阅']},
+ '4.1':{say:'去把 CANN 下下来。',flow:['下载中心','选社区版','选软件包']},
+ '4.2':{say:'下载要我先登录。',flow:['触发下载','华为账号登录','回到下载']},
+ '4.3':{say:'走完整条下载流程拿到包。',flow:['关公告','选架构/版本/包','同意协议→登录→下载']},
+ '4.4':{say:'选对版本、和框架匹配。',flow:['版本列表','选 CANN 版本','匹配框架']},
+ '5.1':{op:{say:'找个算子样例直接抄。',flow:['示例 / ModelZoo','算子样例','复制即跑']},
+        train:{say:'找个训练脚本直接抄。',flow:['ModelZoo','可训模型','复制训练脚本']}},
+ '5.2':{op:{say:'进阶找更多算子 / 模型。',flow:['ModelZoo','热点专区','引导三步']},
+        train:{say:'找可训的进阶模型。',flow:['ModelZoo','大模型分类','可训模型']}},
+ '5.3':{say:'用工具链把算子编译、部署、调起来。',flow:['MindStudio','编译算子','部署到卡']},
+ '5.4':{say:'先免装在浏览器里试一下。',flow:['开发者中心','HiDevLab 在线开发','浏览器里跑']},
+ '6.1':{op:{say:'算子报错，去论坛对应版块问。',flow:['论坛','Ascend C 版块','发帖']},
+        train:{say:'训练报错，去论坛对应版块问。',flow:['论坛','MindSpeed 版块','发帖']}},
+ '6.2':{say:'正式点的问题，走工单。',flow:['支持与服务','提技术工单','跟进']},
+ '6.3':{say:'先查 FAQ 看能不能自助解决。',flow:['FAQ','搜报错关键词','自助解决']},
+ '6.4':{say:'看技术博客 / 案例进阶。',flow:['博客','技术专区','热门排行']},
+ 'T2':{say:'进训练开发，看该按哪个框架上手。',flow:['训练 hub','选 MindSpore/PyTorch','学习路径']},
+ 'T4':{say:'把我的 PyTorch 代码迁到昇腾。',flow:['原 PyTorch','torch_npu 适配','MindSpeed 并行']},
+ 'T5':{say:'起多卡分布式训练、调通跑出 loss。',flow:['配多卡','MindSpeed 并行','跑出 loss']},
+};
+const povOf=id=>{const p=POV[id];return p?(p[curScen]||p):null;};
+
 /* ---------- helpers ---------- */
 function heatColor(s){
   if(s<66) return '#C7000B';        // bad
@@ -1146,6 +1198,9 @@ function tpCardHtml(t){
             <span class="spill n">NVIDIA <span class="num">${t.nv}</span></span>
           </div>
         </div>
+        ${(()=>{const p=povOf(t.id);if(!p)return'';const who=curScen==='train'?'训练开发者':'算子开发者';
+          const fl=(p.flow||[]).map((s,i)=>`<span class="pf-step${i===p.flow.length-1?' goal':''}">${s}</span>`+(i<p.flow.length-1?'<span class="pf-arr">→</span>':'')).join('');
+          return `<div class="pov ${curScen}"><div class="pov-say"><span class="pov-who">${who}视角</span>${p.say}</div>${fl?`<div class="pov-flow">${fl}</div>`:''}</div>`;})()}
         <div class="tpcard-body">
           <div class="tpside left">
             <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span>昇腾 <a class="srclink" href="${(SRC[t.id]||[])[0]||'#'}" target="_blank" rel="noopener" title="${(SRC[t.id]||[])[0]||''}">${shortUrl((SRC[t.id]||[])[0])} ↗</a></div>
