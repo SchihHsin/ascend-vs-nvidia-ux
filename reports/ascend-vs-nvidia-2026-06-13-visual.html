@@ -361,6 +361,14 @@ a{color:inherit;text-decoration:none}
 .scen-todo,.scen-todo *{font-family:inherit}
 .scen-todo{padding:40px 22px;text-align:center;color:var(--g6);background:var(--g1);border:1px dashed var(--g3);border-radius:14px;font-size:14px}
 .stagebar.cross{background:var(--g2);color:var(--g7)}
+/* 一级 tab + 面板 */
+.l1tabs{display:flex;gap:4px;flex-wrap:wrap}
+.l1tab{font-family:inherit;font-size:14px;font-weight:700;color:var(--g6);background:none;border:none;padding:8px 17px;border-radius:9px;cursor:pointer;transition:.15s}
+.l1tab:hover{background:var(--g1);color:var(--g8)}
+.l1tab.on{background:var(--g8);color:#fff}
+.l1tab[data-t="op"].on{background:#7c5cf0}
+.l1tab[data-t="train"].on{background:#1f9fb8}
+.tabpanel[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -368,26 +376,17 @@ a{color:inherit;text-decoration:none}
 
 <nav class="topnav">
   <div class="brand"><b>昇腾</b> vs 英伟达 · 体验竞品</div>
-  <div class="navlinks" id="navlinks">
-    <a href="#hero" class="active">概览</a>
-    <a href="#ia">全站架构</a>
-    <a href="#journey">旅程图</a>
-    <a href="#heat">热力图</a>
-    <a href="#L1">①落地选型</a>
-    <a href="#L2">②上手引导</a>
-    <a href="#L3">③配环境</a>
-    <a href="#L4">④动手写</a>
-    <a href="#L5">⑤编译跑通</a>
-    <a href="#L6">⑥调试求助</a>
-    <a href="#L7">⑦进阶生态</a>
-    <a href="#synth">综述</a>
-    <a href="#actions">建议</a>
-    <a href="#dept">责任归属</a>
+  <div class="l1tabs" id="l1tabs">
+    <button class="l1tab on" data-t="overview" onclick="showTab('overview')">概览</button>
+    <button class="l1tab" data-t="op" onclick="showTab('op')">算子开发</button>
+    <button class="l1tab" data-t="train" onclick="showTab('train')">训练</button>
+    <button class="l1tab" data-t="synth" onclick="showTab('synth')">综述结论</button>
   </div>
 </nav>
 
 <div class="wrap">
 
+  <div class="tabpanel" id="tab-overview">
   <!-- HERO -->
   <header class="hero floor" id="hero">
     <h1><span class="a">昇腾</span><span class="vs">vs</span><span class="n">英伟达</span><br>开发者基础体验 · 逐触点拆解</h1>
@@ -447,15 +446,13 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
+  </div><!-- /tab-overview -->
+
+  <div class="tabpanel" id="tab-scenario" hidden>
   <!-- JOURNEY -->
   <section class="floor" id="journey">
-    <div class="floor-hd"><span class="fno">MAP</span><h2>开发者生命周期旅程：配环境是谷底，上手引导是昇腾反超点</h2></div>
-    <p class="floor-sub">不再是“假阶段”，而是<b>开发者为一个真实目标走的 7 步</b>（落地→上手→配环境→写→编译跑通→调试求助→进阶生态）。下方<b>场景 tab 同时切换 旅程 / 热力图 / 楼层</b>三处。情绪在「配环境」探底，在「上手引导」微反超 NVIDIA。</p>
-    <div id="scenTabs">
-      <span class="sct-lbl">场景：</span>
-      <button class="scen-tab on" data-s="op" onclick="setScen('op')"><span class="sct-n">算子开发</span><span class="sct-s">写出并跑通第一个自定义算子</span></button>
-      <button class="scen-tab" data-s="train" onclick="setScen('train')"><span class="sct-n">训练</span><span class="sct-s">把一个模型在昇腾/N卡上训起来</span></button>
-    </div>
+    <div class="floor-hd"><span class="fno">MAP</span><h2 id="scenTitle">开发者生命周期旅程</h2></div>
+    <p class="floor-sub" id="scenSub">开发者为一个真实目标走的 7 步（落地→上手→配环境→写→编译跑通→调试求助→进阶生态）。触点 / 行为 / 情绪 / 痛点 / 机会点。</p>
     <div class="jrn-wrap" id="jrnGrid"></div>
     <div class="jlegend"><span><i style="background:var(--coral)"></i>昇腾情绪</span><span><i style="background:var(--green)"></i>NVIDIA情绪</span><span style="color:var(--g6)">痛点 = 昇腾对比短板 · 机会点 = 昇腾该怎么做（标主责部门）</span></div>
   </section>
@@ -472,6 +469,9 @@ a{color:inherit;text-decoration:none}
   <!-- STAGE FLOORS render here -->
   <div id="floors"></div>
 
+  </div><!-- /tab-scenario -->
+
+  <div class="tabpanel" id="tab-synth" hidden>
   <!-- SYNTHESIS intro -->
   <section class="floor" id="synth">
     <div class="floor-hd"><span class="fno">∑</span><h2>末尾综述</h2></div>
@@ -496,6 +496,8 @@ a{color:inherit;text-decoration:none}
     <p class="floor-sub">把 24 条「昇腾该怎么做」按<b>主责部门</b>归堆——每个部门看到自己要接的活。一条改进常需跨部门协同，这里只标“主责”。</p>
     <div class="deptgrid" id="deptgrid"></div>
   </section>
+
+  </div><!-- /tab-synth -->
 
   <div class="footer">
     证据素材：<code>materials/ascend-vs-nvidia/</code>（screenshots · visual-analysis.md · failed-links.md）　|　完整文字版：<code>reports/ascend-vs-nvidia-2026-06-13-v1.md</code><br>
@@ -1172,12 +1174,27 @@ function renderFloors(){
 
 /* ---------- 场景切换 + 总渲染 ---------- */
 function renderAll(){renderJourney();renderHeat();renderFloors();}
-function setScen(id){
-  if(curScen===id)return;curScen=id;
-  document.querySelectorAll('#scenTabs .scen-tab').forEach(b=>b.classList.toggle('on',b.dataset.s===id));
-  renderAll();
+const SCEN_HEAD={
+ op:['算子开发 · 生命周期旅程','站在「写算子的人」视角走 7 步：落地官网 → 进开发者门户 → 配 CANN 环境 → 写 Ascend C 算子 → 编译跑通 → 调试求助 → 进阶。情绪在「配环境」探底、「上手引导」微反超 NVIDIA。'],
+ train:['训练 · 生命周期旅程','站在「训练模型的人」视角走 7 步：落地官网 → 进开发者门户 → 配 CANN+框架+数据 → 框架迁移(torch_npu/MindSpeed) → 分布式跑通 → 调试求助 → 进阶。情绪有<b>两个谷底</b>——「配环境」和「框架迁移」。'],
+};
+function updateScenHead(){
+  const h=SCEN_HEAD[curScen];if(!h)return;
+  const t=document.getElementById('scenTitle'),s=document.getElementById('scenSub');
+  if(t)t.textContent=h[0];if(s)s.innerHTML=h[1];
 }
-renderAll();
+function setScen(id){
+  if(curScen===id){updateScenHead();return;}curScen=id;
+  renderAll();updateScenHead();
+}
+function showTab(t){
+  document.querySelectorAll('.tabpanel').forEach(p=>p.hidden=true);
+  document.querySelectorAll('.l1tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  if(t==='op'||t==='train'){document.getElementById('tab-scenario').hidden=false;setScen(t);}
+  else document.getElementById('tab-'+t).hidden=false;
+  window.scrollTo(0,0);
+}
+renderAll();updateScenHead();
 
 /* ---------- synthesis demos ---------- */
 function demoHero(){return `
