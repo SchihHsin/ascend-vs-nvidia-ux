@@ -550,6 +550,8 @@ const tpsOfStep=k=>TP.filter(t=>stepOf(t.id)===k);
 const _avg=a=>a.length?Math.round(a.reduce((s,x)=>s+x,0)/a.length):0;
 const stepAvg=k=>{const ts=tpsOfStep(k);return [_avg(ts.map(t=>t.a)),_avg(ts.map(t=>t.nv))];};
 const crossTps=()=>TP.filter(t=>CROSS.includes(t.id));
+// 场景相关图：aimg/nimg 可为 {op,train} 对象,按当前场景取对应标注图
+const pick=v=>(v&&typeof v==='object'&&!Array.isArray(v))?(v[curScen]||v.op||Object.values(v)[0]):v;
 
 // nm: nvidia mockup {url,h,hl,lines[],btn,tags[]}; if nimg given use real shot
 const TP=[
@@ -570,7 +572,8 @@ ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句
     ['昇腾的隐性成本：门户埋在二级','开发者中心不在官网首页一眼可达，要从“开发者与合作伙伴”二级进；NVIDIA 虽分两站，但开发者门户是独立强入口。']],
  rec:'把开发者中心<b>提到官网首页一眼可达（顶栏直达 + 首屏入口）</b>，并在三张场景卡上给一个最强单一 CTA（如“算子开发 · 5 分钟跑通”），把已经不弱的内容补上“先点这里”的指令性。'},
 {id:'1.2',s:1,name:'顶部导航 / 信息架构',a:74,nv:80,bar:true,
- aimg:'08-ascend-dev-nav.png',atag:'real',
+ aimg:{op:'08-ascend-dev-nav-op.png',train:'08-ascend-dev-nav-train.png'},atag:'real',
+ nimg:{op:'01-nvidia-nav-op.png',train:'01-nvidia-nav-train.png'},
  adesc:'同维度对位：取昇腾<b>开发者中心顶栏</b>（hiascend.com/developer，而非品牌站的产品线导航）。这里是“内容目的地”式：主页 / 文档 / 论坛 / 学习 / 在线开发 / 资源 等入口 + 右侧搜索 / 登录 + 「加入开发者计划」——给开发者的内容入口，而非企业产品线。',
  nm:{url:'developer.nvidia.com',h:'Home·Blog·Forums·Docs·Downloads·Training',hl:'+ Topics / Platforms and Tools / Industries / Resources',
    lines:['主栏 = 内容目的地','二级下拉 = 按主题/行业/资源浏览'],
@@ -1096,8 +1099,8 @@ function renderHeat(){
 /* ---------- 触点卡 + 楼层（按 7 步分组） ---------- */
 function tpCardHtml(t){
       const sc=t.bar?'shot bar':'shot';
-      const left=`<img class="${sc}" src="${IMG}${t.aimg}" loading="lazy" alt="${t.name} 昇腾" onclick="zoom(this.src)">`;
-      const nvimg=t.nimg||NV_REAL[t.id];
+      const left=`<img class="${sc}" src="${IMG}${pick(t.aimg)}" loading="lazy" alt="${t.name} 昇腾" onclick="zoom(this.src)">`;
+      const nvimg=pick(t.nimg||NV_REAL[t.id]);
       const nvreal=t.ntag==='real'||!!NV_REAL[t.id];
       let right;
       if(nvimg){
