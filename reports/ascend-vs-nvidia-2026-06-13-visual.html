@@ -572,15 +572,16 @@ const pick=v=>(v&&typeof v==='object'&&!Array.isArray(v))?(v[curScen]||v.op||Obj
 // nm: nvidia mockup {url,h,hl,lines[],btn,tags[]}; if nimg given use real shot
 const TP=[
 // stage1
-{id:'1.1',s:1,name:'官网首页（落地第一眼）',a:76,nv:74,
- aimg:'01-ascend-home.png',atag:'real',nimg:'01-nvidia-brand-home.png',ntag:'real',
+{id:'1.1',s:1,name:'官网首页（落地第一眼）',a:76,nv:74,bar:true,
+ aimg:'01-ascend-home-1.1.png',atag:'real',nimg:'01-nvidia-brand-home-1.1.png',ntag:'real',
  adesc:'昇腾<b>官网首页 hiascend.com</b>（单站：品牌 + 产品 + 开发者 + 生态一站全包）。首屏 CANN 训练营 banner + 品牌口号「昇腾万里，让智能无所不及」，下面就是 场景卡 / 产品矩阵 / “从入门到成果”成长路径——作为开发者落地，官网首页本身就直接露出开发入口。',
 ndesc:'NVIDIA <b>官网首页 nvidia.com</b>（双站之一，面向全受众）：首屏是品牌 / 数据中心叙事（Blackwell / GB300 等），导航 Products / Solutions / Industries / Shop / Drivers / Support。开发者要的「Developers」入口在页脚，需再跳到 developer.nvidia.com。',
  c:[['单站 vs 双站，落地体感不同','昇腾是单站——官网首页直接面向开发者（首屏就有场景卡 / CANN），落地即见入口；NVIDIA 官网是品牌 / 消费叙事，开发者得先找到页脚「Developers」再跳到开发者站。对纯开发者，昇腾官网这一步更省。'],
     ['但昇腾官网信息更杂、NVIDIA 受众更聚焦','品牌 + 产品 + 开发者 + 生态都压在一个站，昇腾首屏密度高、品牌口号占主视觉；NVIDIA 把受众分流到两站，各自更聚焦。各有取舍。']],
  rec:'保留单站“官网即面向开发者”的直达优势，<b>首屏给一条明确的“开发者起步 / 场景直达”主入口</b>，别让品牌口号盖过开发动作；并把到开发者中心的跳转做得一眼可达。'},
-{id:'1.1b',s:1,name:'开发者门户首屏',a:78,nv:77,
- aimg:'08-ascend-developer.png',atag:'real',nimg:'01-nvidia-home.png',ntag:'real',
+{id:'1.1b',s:1,name:'开发者门户首屏',a:78,nv:77,bar:true,
+ aimg:{op:'08-ascend-developer-op.png',train:'08-ascend-developer-train.png'},atag:'real',
+ nimg:{op:'01-nvidia-home-op.png',train:'01-nvidia-home-train.png'},ntag:'real',
  adesc:'落地官网后进到<b>开发者门户首屏</b>：昇腾开发者中心 hiascend.com/developer。首屏直接铺「获取开发资源」——训练开发 / 推理开发 / 算子开发三张场景卡 + 开发工具（CANN / PyTorch / MindSpeed / MindIE / MindStudio / HiDevLab），再往下是 学习成长（在线实验 / 认证）、互动交流、加入开发者计划。相当“开发者动作导向”。',
 ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句开发者动作「Skip the setup. Start building.」（building 用品牌绿高亮）+ 紧跟教程卡片流。这才是 NVIDIA 给开发者的“首页”。',
  c:[['两边开发者门户落地都很“动作导向”','昇腾开发者中心首屏铺 场景卡 + 开发工具 + 学习成长；NVIDIA 用一句“Skip the setup. Start building.”+ 教程流。都在回答“我现在能干什么”，落地都不弱。'],
