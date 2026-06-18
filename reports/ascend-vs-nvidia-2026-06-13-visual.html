@@ -460,6 +460,73 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
+  <!-- 评估方法论 · DJFI -->
+  <section class="floor" id="method">
+    <div class="floor-hd"><span class="fno">DJFI</span><h2>评估方法论 · 开发者旅程摩擦指数</h2></div>
+    <p class="floor-sub">本报告的所有分数,均由<b>可观测、可计数的指标</b>经公开公式<b>计算</b>得出,不含逐项主观打分。框架名为 <b>DJFI(Developer Journey Friction Index)</b>——测量开发者完成真实任务时遇到的、可被复现测量的摩擦。给定测量值与公式,任何人重算得同一结果。</p>
+    <h3 style="margin:6px 0 12px;font-size:16px;color:var(--ink)">一、理论依据(每一层均挂靠权威来源)</h3>
+    <div class="ia-finds">
+      <div class="ia-find"><div class="ia-find-h">ISO 9241-11:2018</div>可用性的国际标准定义——<b>有效性 / 效率 / 满意度</b>三要素,构成评估维度的总框架。</div>
+      <div class="ia-find"><div class="ia-find-h">Nielsen / NN/g</div>启发式评估、<b>交互成本(Interaction Cost)</b>与<b>竞品可用性基准测试法</b>——竞品同维度对比的标准做法。</div>
+      <div class="ia-find"><div class="ia-find-h">DevEx Framework(CACM 2023)</div>Noda、Forsgren 等提出的开发者体验框架——<b>反馈循环 / 认知负荷 / 心流</b>,为指标提供"开发者专属"颗粒度。</div>
+      <div class="ia-find"><div class="ia-find-h">认知负荷与交互定律</div>Sweller 认知负荷理论、Hick 定律(选项越多决策越慢)、Fitts 定律、<b>Tesler 复杂度守恒定律</b>。</div>
+      <div class="ia-find"><div class="ia-find-h">Time-to-First-Run</div>开发者关系(DevRel)通用黄金指标——从落地到第一次成功运行的成本,衡量上手速度。</div>
+      <div class="ia-find"><div class="ia-find-h">Quiñones &amp; Rusu(2017)</div>《如何构建可用性启发式》系统综述——本框架领域指标的<b>构建方法论依据</b>。</div>
+    </div>
+    <div class="method" style="margin-top:18px">
+      <b>二、评估对象与边界(精确界定,不越界)</b><br>
+      <b>测量:</b>开发者门户中<b>可观测、可计数的旅程摩擦</b>——点击成本、准入门槛、决策负荷、内容可执行性、可发现性。<br>
+      <b>不纳入计算:</b>视觉美感、文案质量、主观"清晰度"感受、品牌好感——这些无法在不引入判断的前提下量化,故<b>不计入分数</b>,仅作不计分的"定性观察"另列。<br>
+      <b>适用范围:</b>PC 端 Web 开发者门户;移动 SDK / IDE 插件 / 端侧部署需各自扩展指标层。
+    </div>
+    <h3 style="margin:22px 0 12px;font-size:16px;color:var(--ink)">三、指标体系(5 维度 · 全部可观测)</h3>
+    <div class="ia-finds">
+      <div class="ia-find"><div class="ia-find-h">A · 效率与反馈循环</div>到达目标点击/跳转数 · 完成总步骤数 · 上下文切换数 · <b>Time-to-First-Run</b>。<span style="color:var(--g6)">依据:ISO 效率 / NN/g 交互成本 / DevEx</span></div>
+      <div class="ia-find"><div class="ia-find-h">B · 认知负荷</div>版本/平台选择项数 · 必做决策点数 · 目标导航深度(IA 层级)。<span style="color:var(--g6)">依据:Sweller / Hick 定律 / DevEx</span></div>
+      <div class="ia-find"><div class="ia-find-h">C · 准入摩擦</div>是否需登录/注册(0/1) · 是否需同意协议/审批(0/1) · 必填表单字段数。<span style="color:var(--g6)">依据:Nielsen 用户控制 / Tesler 定律</span></div>
+      <div class="ia-find"><div class="ia-find-h">D · 内容可执行性</div>代码示例可否复制即运行(0/1) · 快速入门有无完整可运行代码(0/1) · 文档时效。<span style="color:var(--g6)">依据:Nielsen 帮助与文档 / DevEx</span></div>
+      <div class="ia-find"><div class="ia-find-h">E · 可发现性</div>核心关键词搜索命中率 · 路径死链/404 数 · 关键入口可达性。<span style="color:var(--g6)">依据:Nielsen 识别而非回忆</span></div>
+    </div>
+    <div class="method" style="margin-top:18px">
+      <b>四、执行 · 测量协议(保证可复现)</b><br>
+      ① <b>设备/视口</b>:桌面 1440×900,Chrome 最新稳定版;② <b>账号状态</b>:未登录态进入(模拟首次开发者);③ <b>计数规则</b>:点击 = 一次有效交互,步骤 = 用户必须完成的离散动作,同一动作不重复计;④ <b>取证</b>:每个指标值附对应截图为证;⑤ <b>时点</b>:记录评估日期与页面版本;⑥ <b>缺测处理</b>:无法实测的指标标注"缺测"并<b>排除出计算</b>,不以估值填充。
+    </div>
+    <div class="method" style="margin-top:12px">
+      <b>五、执行 · 归一化与计算(全公式,无逐项判断)</b><br>
+      <b>归一化</b>(测量值 → 0–100,分越高 = 摩擦越小):<br>
+      ・数值型:<code>分 = ( worst − 实测值 ) ÷ ( worst − best ) × 100</code>,截断到 0–100;<br>
+      ・布尔型(0/1):无门槛 = 100,有门槛 = 0;　・比例型:直接 ×100。<br>
+      <b>锚点</b> best/worst 取理论最优与合理劣化上限,<b>全部公开、对两边一视同仁</b>。<br>
+      <b>合成</b>:维度分 = 维度内指标分算术平均;触点分 = 5 维度分算术平均(<b>等权,去除权重主观</b>);步骤分 / 总分 = 触点分算术平均。<br>
+      <b>敏感性分析</b>:另给"按 DevEx 维度加权"的备选结果,验证主结论在不同权重下是否稳定。
+    </div>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">六、算例(触点 4.3 · SDK 下载)</h3>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)">
+      <thead><tr style="text-align:left;background:var(--g2);color:var(--g7)">
+        <th style="padding:9px 12px">维度 · 指标</th><th style="padding:9px 12px">锚点 best→worst</th>
+        <th style="padding:9px 12px">昇腾实测 → 分</th><th style="padding:9px 12px">NVIDIA → 分</th></tr></thead>
+      <tbody style="color:var(--ink)">
+        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">A 完成步骤数</td><td style="padding:8px 12px">2→10</td><td style="padding:8px 12px">7 → <b>37</b></td><td style="padding:8px 12px">2 → <b>100</b></td></tr>
+        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">A 到首次可运行步骤</td><td style="padding:8px 12px">3→15</td><td style="padding:8px 12px">11 → <b>33</b></td><td style="padding:8px 12px">4 → <b>92</b></td></tr>
+        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">B 选择项数</td><td style="padding:8px 12px">1→6</td><td style="padding:8px 12px">4 → <b>40</b></td><td style="padding:8px 12px">3 → <b>60</b></td></tr>
+        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">C 是否需登录</td><td style="padding:8px 12px">否→是</td><td style="padding:8px 12px">是 → <b>0</b></td><td style="padding:8px 12px">否 → <b>100</b></td></tr>
+        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">C 是否需同意协议</td><td style="padding:8px 12px">否→是</td><td style="padding:8px 12px">是 → <b>0</b></td><td style="padding:8px 12px">否 → <b>100</b></td></tr>
+        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">D 命令可复制即用</td><td style="padding:8px 12px">是→否</td><td style="padding:8px 12px">部分 → <b>50</b></td><td style="padding:8px 12px">是 → <b>100</b></td></tr>
+        <tr style="border-top:2px solid var(--g3);font-weight:700"><td style="padding:10px 12px">触点分(维度等权)</td><td style="padding:10px 12px"></td><td style="padding:10px 12px;color:var(--coral)">昇腾 31</td><td style="padding:10px 12px;color:var(--green)">NVIDIA 89</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="floor-sub" style="margin-top:8px">每一位分数都可回溯到一个数出来的指标值 + 一张截图;给定该测量表,任何人重算均得 31 与 89。</p>
+    <div class="method" style="margin-top:14px">
+      <b>七、可复现性、效度与局限(诚实陈述)</b><br>
+      <b>可复现性(强):</b>测量协议 + 公开锚点 + 公开公式 ⇒ 给定输入,输出唯一。<br>
+      <b>构念效度(中):</b>指标均挂靠权威构念,但"可观测摩擦"是体验的<b>代理</b>,非体验全部(见边界)。<br>
+      <b>信度(待补):</b>当前为单评估者;提升路径为多评估者独立测量并报告一致性。<br>
+      <b>局限:</b>① 仅覆盖可观测摩擦,主观维度不计入分;② 锚点与权重为框架设定(公开且对称),已用敏感性分析控制影响;③ 个别指标受站点限制缺测时如实标注、排除计算;④ 结论对应评估时点的站点版本;⑤ 非经用户实测验证之标准量表。
+    </div>
+  </section>
+
   </div><!-- /tab-overview -->
 
   <div class="tabpanel" id="tab-scenario" hidden>
