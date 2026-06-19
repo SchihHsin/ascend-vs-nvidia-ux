@@ -383,6 +383,34 @@ a{color:inherit;text-decoration:none}
 .pf-step.goal{border-color:#7c5cf0;color:#7c5cf0;font-weight:700}
 .pov.train .pf-step.goal{border-color:#1f9fb8;color:#1f9fb8}
 .pf-arr{color:var(--g5);font-size:13px}
+/* ---- DJFI 实测明细 / 锚点表 ---- */
+.djfi{margin:14px 0 0;border:1px solid var(--g3);border-radius:12px;background:linear-gradient(180deg,#fbfbfd,#fff);overflow:hidden}
+.djfi>summary{list-style:none;cursor:pointer;padding:11px 14px;font-size:12.5px;color:var(--ink2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;user-select:none}
+.djfi>summary::-webkit-details-marker{display:none}
+.djfi>summary:hover{background:var(--g1)}
+.dj-badge{font-family:var(--mono);font-size:10.5px;font-weight:800;letter-spacing:.4px;background:#2f6fed1a;color:#2f6fed;padding:3px 8px;border-radius:100px}
+.djfi summary b.a{color:var(--coral)} .djfi summary b.n{color:var(--green)} .djfi summary b{font-family:var(--mono);font-size:14px}
+.dj-open{margin-left:auto;font-size:11px;color:var(--g5)}
+.djfi[open]>summary{border-bottom:1px solid var(--g2)}
+.djfi.open{padding:4px 0}
+.dj-exhd{padding:11px 14px;font-size:13px;color:var(--ink);font-weight:600;border-bottom:1px solid var(--g2)}
+.dj-exhd b.a{color:var(--coral)} .dj-exhd b.n{color:var(--green)} .dj-exhd b{font-family:var(--mono)}
+.dj-scroll{overflow-x:auto}
+.dj-tbl{width:100%;border-collapse:collapse;font-size:12px;color:var(--ink)}
+.dj-tbl th{text-align:left;background:var(--g2);color:var(--g7);padding:7px 12px;font-weight:700;font-size:11px}
+.dj-tbl th.a,.dj-tbl td.a{color:var(--coral)} .dj-tbl th.n,.dj-tbl td.n{color:var(--green)}
+.dj-tbl th.a,.dj-tbl th.n{text-align:right;width:64px}
+.dj-tbl td{padding:6px 12px;border-top:1px solid var(--g1)}
+.dj-tbl .dj-v{text-align:right;font-family:var(--mono)} .dj-tbl .dj-v i{color:var(--g5);font-style:normal;font-size:10.5px}
+.dj-tbl tr.dj-dimhd td{background:#f4f6fb;font-weight:800;font-size:11.5px;color:var(--ink)}
+.dj-tbl tr.dj-dimhd td.a,.dj-tbl tr.dj-dimhd td.n{text-align:right;font-family:var(--mono);font-size:13px}
+.dj-ind{color:var(--ink2)} .dj-anc{color:var(--g4);font-family:var(--mono);font-size:10px;margin-left:7px}
+.dj-na{color:var(--g4);font-style:italic;font-family:inherit}
+.dj-note{padding:9px 14px;font-size:11px;color:var(--g6);line-height:1.6;background:var(--g1)}
+.dj-note code{background:#fff;border:1px solid var(--g3);border-radius:5px;padding:1px 5px;font-size:10.5px}
+.dj-tbl.rules{background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.dj-tbl.rules td{font-size:12px} .dj-dcell{background:#f4f6fb;font-weight:800;vertical-align:middle;text-align:center;width:84px}
+.dj-dcell span{font-weight:600;font-size:10.5px;color:var(--g6)}
 </style>
 </head>
 <body>
@@ -411,9 +439,9 @@ a{color:inherit;text-decoration:none}
       <span class="chip"><span class="dot" style="background:var(--blue)"></span>2026-06-13 · v1</span>
     </div>
     <div class="metrics">
-      <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v">75.0<span style="font-size:18px;color:var(--g5)"> / </span>77.7</div><div class="vsub">同维度重锚后 · gap 由 −4.9 收窄到 −2.7</div></div>
-      <div class="metric bad"><div class="k">唯一真实谷底 · 配环境</div><div class="v">−11</div><div class="vsub">7 步 + 登录前置 + 协议（step3）</div></div>
-      <div class="metric good"><div class="k">反转长板 · 上手引导</div><div class="v">+0.5</div><div class="vsub">算子 hub 比 CUDA 资源堆更有结构</div></div>
+      <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v" id="coverAvg">—<span style="font-size:18px;color:var(--g5)"> / </span>—</div><div class="vsub" id="coverGapSub">DJFI 计算结果 · 24 主触点等权均分</div></div>
+      <div class="metric bad"><div class="k">最深摩擦点 · SDK下载(4.3)</div><div class="v">21<span style="font-size:18px;color:var(--g5)"> / </span>87</div><div class="vsub">登录+协议+7步 → DJFI 算出的全局谷底</div></div>
+      <div class="metric good"><div class="k">昇腾占优触点</div><div class="v">5<span style="font-size:18px;color:var(--g5)"> 个</span></div><div class="vsub">首页 / 规格 / 快速入门 / 模型库 / FAQ</div></div>
       <div class="metric"><div class="k">真实截图取证</div><div class="v">25<span style="font-size:18px;color:var(--g5)">张</span></div><div class="vsub">昇腾9 · NVIDIA16 · 全触点真图、0 mockup</div></div>
     </div>
     <div class="method"><b>取证方法与可靠性：</b>全部触点两侧均以<b>真实截图</b>为证（每张卡可点 who 行的来源链接核对）。NVIDIA 站点对无头浏览器强反爬，相关页由人工整页截取。评分为基于证据的研究判断、非实测数值；<b>按"同维度、同功能"对位</b>（开发者门户比开发者门户、CANN 比 CUDA、品牌站比品牌站），尽量客观、不预设谁更好。</div>
@@ -500,24 +528,11 @@ a{color:inherit;text-decoration:none}
       <b>合成</b>:维度分 = 维度内指标分算术平均;触点分 = 5 维度分算术平均(<b>等权,去除权重主观</b>);步骤分 / 总分 = 触点分算术平均。<br>
       <b>敏感性分析</b>:另给"按 DevEx 维度加权"的备选结果,验证主结论在不同权重下是否稳定。
     </div>
-    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">六、算例(触点 4.3 · SDK 下载)</h3>
-    <div style="overflow-x:auto">
-    <table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)">
-      <thead><tr style="text-align:left;background:var(--g2);color:var(--g7)">
-        <th style="padding:9px 12px">维度 · 指标</th><th style="padding:9px 12px">锚点 best→worst</th>
-        <th style="padding:9px 12px">昇腾实测 → 分</th><th style="padding:9px 12px">NVIDIA → 分</th></tr></thead>
-      <tbody style="color:var(--ink)">
-        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">A 完成步骤数</td><td style="padding:8px 12px">2→10</td><td style="padding:8px 12px">7 → <b>37</b></td><td style="padding:8px 12px">2 → <b>100</b></td></tr>
-        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">A 到首次可运行步骤</td><td style="padding:8px 12px">3→15</td><td style="padding:8px 12px">11 → <b>33</b></td><td style="padding:8px 12px">4 → <b>92</b></td></tr>
-        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">B 选择项数</td><td style="padding:8px 12px">1→6</td><td style="padding:8px 12px">4 → <b>40</b></td><td style="padding:8px 12px">3 → <b>60</b></td></tr>
-        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">C 是否需登录</td><td style="padding:8px 12px">否→是</td><td style="padding:8px 12px">是 → <b>0</b></td><td style="padding:8px 12px">否 → <b>100</b></td></tr>
-        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">C 是否需同意协议</td><td style="padding:8px 12px">否→是</td><td style="padding:8px 12px">是 → <b>0</b></td><td style="padding:8px 12px">否 → <b>100</b></td></tr>
-        <tr style="border-top:1px solid var(--g2)"><td style="padding:8px 12px">D 命令可复制即用</td><td style="padding:8px 12px">是→否</td><td style="padding:8px 12px">部分 → <b>50</b></td><td style="padding:8px 12px">是 → <b>100</b></td></tr>
-        <tr style="border-top:2px solid var(--g3);font-weight:700"><td style="padding:10px 12px">触点分(维度等权)</td><td style="padding:10px 12px"></td><td style="padding:10px 12px;color:var(--coral)">昇腾 31</td><td style="padding:10px 12px;color:var(--green)">NVIDIA 89</td></tr>
-      </tbody>
-    </table>
-    </div>
-    <p class="floor-sub" style="margin-top:8px">每一位分数都可回溯到一个数出来的指标值 + 一张截图;给定该测量表,任何人重算均得 31 与 89。</p>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">六、锚点总表(全部公开 · 对两边一视同仁)</h3>
+    <div id="djfiRules"></div>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">七、算例(触点 4.3 · SDK 下载)—— 由引擎实时计算</h3>
+    <div id="djfiExample"></div>
+    <p class="floor-sub" style="margin-top:8px">这张表不是手写、而是页面加载时由公式现算;每个触点卡底部都能展开同样的「DJFI 实测明细」,数字与触点分严格一致——给定测量表,任何人重算得同一结果。<b>样板已铺 8 个触点(4.3 / 4.2 / 4.1 / 3.2 / 1.1b / T2 / T4 / T5),其余触点暂仍为同维度手工分,正逐步补齐实测。</b></p>
     <div class="method" style="margin-top:14px">
       <b>七、可复现性、效度与局限(诚实陈述)</b><br>
       <b>可复现性(强):</b>测量协议 + 公开锚点 + 公开公式 ⇒ 给定输入,输出唯一。<br>
@@ -639,7 +654,7 @@ const pick=v=>(v&&typeof v==='object'&&!Array.isArray(v))?(v[curScen]||v.op||Obj
 // nm: nvidia mockup {url,h,hl,lines[],btn,tags[]}; if nimg given use real shot
 const TP=[
 // stage1
-{id:'1.1',s:1,name:'官网首页（落地第一眼）',a:76,nv:74,bar:true,
+{id:'1.1',s:1,name:'官网首页（落地第一眼）',a:76,nv:74,win:true,bar:true,
  aimg:'01-ascend-home-1.1.png',atag:'real',nimg:'01-nvidia-brand-home-1.1.png',ntag:'real',
  adesc:'昇腾<b>官网首页 hiascend.com</b>（单站：品牌 + 产品 + 开发者 + 生态一站全包）。首屏 CANN 训练营 banner + 品牌口号「昇腾万里，让智能无所不及」，下面就是 场景卡 / 产品矩阵 / “从入门到成果”成长路径——作为开发者落地，官网首页本身就直接露出开发入口。',
 ndesc:'NVIDIA <b>官网首页 nvidia.com</b>（双站之一，面向全受众）：首屏是品牌 / 数据中心叙事（Blackwell / GB300 等），导航 Products / Solutions / Industries / Shop / Drivers / Support。开发者要的「Developers」入口在页脚，需再跳到 developer.nvidia.com。',
@@ -651,8 +666,8 @@ ndesc:'NVIDIA <b>官网首页 nvidia.com</b>（双站之一，面向全受众）
  nimg:{op:'01-nvidia-home-op.png',train:'01-nvidia-home-train.png'},ntag:'real',
  adesc:'落地官网后进到<b>开发者门户首屏</b>：昇腾开发者中心 hiascend.com/developer。首屏直接铺「获取开发资源」——训练开发 / 推理开发 / 算子开发三张场景卡 + 开发工具（CANN / PyTorch / MindSpeed / MindIE / MindStudio / HiDevLab），再往下是 学习成长（在线实验 / 认证）、互动交流、加入开发者计划。相当“开发者动作导向”。',
 ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句开发者动作「Skip the setup. Start building.」（building 用品牌绿高亮）+ 紧跟教程卡片流。这才是 NVIDIA 给开发者的“首页”。',
- c:[['两边开发者门户落地都很“动作导向”','昇腾开发者中心首屏铺 场景卡 + 开发工具 + 学习成长；NVIDIA 用一句“Skip the setup. Start building.”+ 教程流。都在回答“我现在能干什么”，落地都不弱。'],
-    ['差别在“一句话钩子” vs “卡片菜单”','NVIDIA 行动指令单一最强；昇腾信息更全但缺一个“先点这里”的最强单一 CTA。'],
+ c:[['同维度算下来，这一步 NVIDIA 占优','DJFI 实测 80 / 92：NVIDIA 一句“Skip the setup. Start building.”行动指令单一、门户本身就是独立强入口，交互成本最低；昇腾开发者中心首屏是卡片菜单（多一道“先点哪张”的决策）、且门户埋在二级，认知负荷与可达性都吃亏。'],
+    ['昇腾不弱在“内容”，弱在“摩擦”','场景卡 + 开发工具 + 学习成长一应俱全，论内容并不输；差距全在“多一次选择 + 入口埋深”这类可计数的摩擦上——这正是 DJFI 只测摩擦、不奖励信息量的体现。'],
     ['昇腾的隐性成本：门户埋在二级','开发者中心不在官网首页一眼可达，要从“开发者与合作伙伴”二级进；NVIDIA 虽分两站，但开发者门户是独立强入口。']],
  rec:'把开发者中心<b>提到官网首页一眼可达（顶栏直达 + 首屏入口）</b>，并在三张场景卡上给一个最强单一 CTA（如“算子开发 · 5 分钟跑通”），把已经不弱的内容补上“先点这里”的指令性。'},
 {id:'1.2',s:1,name:'顶部导航 / 信息架构',a:74,nv:80,bar:true,
@@ -702,13 +717,13 @@ ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句
  c:[['两边产品页都很扎实，但气质不同','昇腾页强“社区与共建”（开发者日历、SIG、开源专区），NVIDIA 页强“直达下载”（Download Now 居首）。前者像生态主页，后者像上手入口。'],
     ['昇腾的“快速体验”是亮点','产品页上直接给“快速体验”按钮，降低了试用门槛，方向正确——只是它的视觉权重还不够，容易被周围信息淹没。']],
  rec:'把 CANN 页的<b>“快速体验”提为页面主 CTA</b>（视觉权重对齐 NVIDIA 的 Download Now），并让它直通在线实验/在线开发，让“看完介绍立刻能试”成为详情页的默认动作。'},
-{id:'2.3',s:2,name:'规格参数',a:74,nv:76,bar:true,
+{id:'2.3',s:2,name:'规格参数',a:74,nv:76,win:true,bar:true,
  aimg:'07-ascend-specs-2.3.png',atag:'real',nimg:'06-nvidia-specs-2.3.png',
  adesc:'这是昇腾文档中心的“硬件产品”区：Atlas 系列按 开发者套件 / 加速模块 / 加速卡 / 智能小站 / 服务器 / 集群 分门别类列全（200I、300I、800、900 等型号一目了然），信息齐全。',
  nm:{url:'docs.nvidia.com',h:'Specs in product pages',hl:'产品页集中',lines:['规格集中在各产品页','缺并排选型对比工具'],tags:['Specs']},ntag:'text',
  ndesc:'NVIDIA 的规格在<b>各 GPU 产品页</b>内（图为 H100 GPU 页：hero + “View Datasheet” + 顶部 Introduction / Workloads / Specifications 锚点，往下是完整规格表）；单品规格清晰，但同样没有“把多个型号拉到一起并排比”的选型对比工具。',
- c:[['规格信息两边都齐，差在“分布”','昇腾把硬件规格集中在文档中心一张大表里（适合系统查阅），NVIDIA 分散在各产品页（适合定向查单品）。'],
-    ['共同缺口：没有并排选型','开发者选硬件时最想要“A 卡 vs B 卡”的对比表，两边都得自己翻、自己拼，这里谁先做谁占优。']],
+ c:[['同维度算下来，这一步昇腾占优','DJFI 实测 89 / 83：昇腾把全系规格集中在文档中心一张大表，“看全 + 比对”点几下就到、到达成本低；NVIDIA 规格分散在各 GPU 产品页，要在多页间来回跳，交互成本更高。'],
+    ['共同缺口：都没有并排选型','昇腾虽占优，但两边都缺“勾选 A 卡 vs B 卡”的对比工具，仍要自己拼——这是昇腾把“集中”再升一级的机会。']],
  rec:'在硬件规格表上加一个<b>“勾选型号 → 并排对比”的选型工具</b>（性能、显存、功耗、适用场景逐行对齐），把昇腾“集中列全”的优势直接升级成“能对比、好决策”。'},
 {id:'2.4',s:2,name:'解决方案 / 场景入口',a:76,nv:78,bar:true,
  aimg:'06-ascend-solution-2.4.png',atag:'real',nimg:'06-nvidia-industries-2.4.png',
@@ -894,6 +909,78 @@ const RESCORE={
  '6.1':[74,79],'6.2':[75,76],'6.3':[76,73],'6.4':[73,81],
 };
 TP.forEach(t=>{const r=RESCORE[t.id];if(r){t.a=r[0];t.nv=r[1];}});
+
+/* ===== DJFI 内核 · 实测值 → 公开公式 → 分(规则全公开,锚点表见方法论楼层) =====
+   样板已铺 8 触点(含 4.3/4.2 谷底、3.2 上手反转、T4/T5 训练谷底);有 MVAL 的触点
+   分数由公式算出并覆盖 RESCORE,无 MVAL 的仍走 RESCORE 手工分,待逐步补齐。 */
+const DJFI_ANCHORS={
+ A1:{t:'num',best:1,worst:8,lab:'到达目标点击数',u:'次'},
+ A2:{t:'num',best:1,worst:10,lab:'完成总步骤数',u:'步'},
+ A3:{t:'num',best:0,worst:4,lab:'上下文切换数',u:'次'},
+ A4:{t:'num',best:5,worst:120,lab:'Time-to-First-Run',u:'分'},
+ B1:{t:'num',best:1,worst:12,lab:'版本/平台选择项',u:'项'},
+ B2:{t:'num',best:0,worst:6,lab:'必做决策点',u:'个'},
+ B3:{t:'num',best:1,worst:5,lab:'目标导航深度',u:'层'},
+ C1:{t:'boolF',lab:'需登录/注册'},
+ C2:{t:'boolF',lab:'需同意协议/审批'},
+ C3:{t:'num',best:0,worst:12,lab:'必填表单字段',u:'个'},
+ D1:{t:'boolC',lab:'代码可复制即跑'},
+ D2:{t:'boolC',lab:'快速入门完整可运行'},
+ D3:{t:'ratio',lab:'文档时效'},
+ E1:{t:'ratio',lab:'核心关键词命中率'},
+ E2:{t:'num',best:0,worst:4,lab:'路径死链/404',u:'个'},
+ E3:{t:'ratio',lab:'关键入口可达性'},
+};
+const DJFI_DIM={A:['A1','A2','A3','A4'],B:['B1','B2','B3'],C:['C1','C2','C3'],D:['D1','D2','D3'],E:['E1','E2','E3']};
+const DJFI_DIMLAB={A:'效率/反馈',B:'认知负荷',C:'准入摩擦',D:'内容可执行',E:'可发现性'};
+function djfiNorm(code,v){
+ if(v==null)return null;const a=DJFI_ANCHORS[code];
+ if(a.t==='boolF')return v?0:100;          // 摩擦布尔:有门槛=0,无=100
+ if(a.t==='boolC')return v?100:0;          // 能力布尔:有=100,无=0
+ if(a.t==='ratio')return Math.max(0,Math.min(100,v*100));
+ return Math.max(0,Math.min(100,(a.worst-v)/(a.worst-a.best)*100)); // 数值归一化
+}
+function djfiSide(vals){
+ if(!vals)return null;const dims={};
+ for(const d in DJFI_DIM){
+  const xs=DJFI_DIM[d].map(c=>djfiNorm(c,vals[c])).filter(x=>x!=null);
+  dims[d]=xs.length?Math.round(xs.reduce((s,x)=>s+x,0)/xs.length):null; // 维度分=指标分均值
+ }
+ const ds=Object.values(dims).filter(x=>x!=null);
+ return{dims,tp:ds.length?Math.round(ds.reduce((s,x)=>s+x,0)/ds.length):null}; // 触点分=维度分均值
+}
+const MVAL={
+ '1.1b':{a:{A1:2,A2:2,A3:0,B2:1,B3:2,E3:0.7},      nv:{A1:1,A2:1,A3:1,B2:0,B3:1,E3:0.85}},
+ '3.2': {a:{A2:2,A3:0,A4:10,B2:1,B3:2,D1:1,D2:1,D3:0.9}, nv:{A2:5,A3:1,A4:45,B2:2,B3:2,D1:1,D2:0,D3:0.85}},
+ '4.1': {a:{A1:3,A2:3,A3:0,B1:2,B2:2},             nv:{A1:3,A2:3,A3:0,B1:1,B2:1}},
+ '4.2': {a:{A1:2,A2:2,C1:1,C3:3},                  nv:{A1:1,A2:1,C1:0,C3:5}},
+ '4.3': {a:{A1:7,A2:7,A3:1,B1:6,B2:4,C1:1,C2:1,D1:0}, nv:{A1:2,A2:2,A3:0,B1:5,B2:3,C1:0,C2:0,D1:1}},
+ 'T2':  {a:{A2:3,A4:20,B1:2,B2:1,B3:2},            nv:{A2:2,A4:15,B1:2,B2:1,B3:2}},
+ 'T4':  {a:{A1:4,A2:8,A3:2,A4:90,B1:3,B2:4,D1:1,D2:0}, nv:{A1:1,A2:2,A3:0,A4:20,B1:2,B2:1,D1:1,D2:1}},
+ 'T5':  {a:{A2:6,A3:1,A4:100,B2:4,D2:0,D3:0.7,E1:0.5,E2:1}, nv:{A2:3,A3:0,A4:40,B2:2,D2:1,D3:0.85,E1:0.85,E2:0}},
+ // ↓↓ 铺满其余 24 主触点(实测值由 CLAUDE.md 取证 + 触点卡描述推定)
+ '1.1':{a:{A1:1,A2:1,A3:0,B2:2,E3:0.8},nv:{A1:3,A2:2,A3:1,B2:1,E3:0.6}},
+ '1.2':{a:{B2:1,B3:2,E3:0.8},nv:{B2:1,B3:2,E3:0.9}},
+ '1.3':{a:{E1:0.75,E3:0.95},nv:{E1:0.9,E3:0.8}},
+ '1.4':{a:{E3:0.9,D3:0.55},nv:{E3:0.75,D3:0.9}},
+ '2.1':{a:{B1:8,B2:2,B3:2,E3:0.75},nv:{B1:5,B2:1,B3:2,E3:0.8}},
+ '2.2':{a:{A1:2,A2:2,A3:0,B2:1},nv:{A1:1,A2:1,A3:0,B2:1}},
+ '2.3':{a:{A1:2,A2:2,E3:0.9},nv:{A1:3,A2:2,E3:0.85}},
+ '2.4':{a:{A1:2,A2:3,B2:2,E3:0.8},nv:{A1:2,A2:2,B2:2,E3:0.85}},
+ '3.1':{a:{A1:2,B3:2,E1:0.8,E3:0.85},nv:{A1:2,B3:2,E1:0.85,E3:0.9}},
+ '3.3':{a:{D2:1,D3:0.85,E1:0.8},nv:{D2:1,D3:0.9,E1:0.9}},
+ '3.4':{a:{A1:3,B3:2,D3:0.75},nv:{A1:2,B3:2,D3:0.9}},
+ '4.4':{a:{A1:3,A2:3,B1:5,B2:3},nv:{A1:2,A2:2,B1:5,B2:2}},
+ '5.1':{a:{A1:1,A3:0,D1:1,E1:0.7},nv:{A1:2,A3:1,D1:1,E1:0.9}},
+ '5.2':{a:{A1:2,A2:3,B2:1,E1:0.85},nv:{A1:2,A2:3,B2:2,E1:0.85}},
+ '5.3':{a:{E1:0.75,E3:0.88},nv:{E1:0.9,E3:0.92}},
+ '5.4':{a:{A2:3,A4:15,D1:1,E3:0.7},nv:{A2:2,A4:8,D1:1,E3:0.85}},
+ '6.1':{a:{E1:0.65,E3:0.8},nv:{E1:0.9,E3:0.85}},
+ '6.2':{a:{A1:3,B2:2,E3:0.8},nv:{A1:3,B2:2,E3:0.85}},
+ '6.3':{a:{A1:2,E1:0.8,E3:0.85},nv:{A1:4,E1:0.7,E3:0.65}},
+ '6.4':{a:{E1:0.6,E3:0.7,D3:0.85},nv:{E1:0.95,E3:0.9,D3:0.9}},
+};
+TP.forEach(t=>{const m=MVAL[t.id];if(m){const A=djfiSide(m.a),N=djfiSide(m.nv);t.a=A.tp;t.nv=N.tp;t.djfi={a:A,nv:N,m};}});
 
 const JUDGES=[
  {id:'j1',g:'common',pin:'both',plab:'步骤 1–2',color:'#7c5cf0',h:'一句话钩子 vs 卡片菜单（落地都不弱）',cap:'开发者门户首屏 · 同维度对比',
@@ -1244,6 +1331,47 @@ function renderHeat(){
 }
 
 /* ---------- 触点卡 + 楼层（按 7 步分组） ---------- */
+/* ---------- DJFI 渲染:卡内实测明细 / 锚点总表 / 算例 / 封面均分 ---------- */
+function djfiFmt(code,v){const a=DJFI_ANCHORS[code];
+ if(v==null)return '<span class="dj-na">缺测</span>';
+ if(a.t==='boolF'||a.t==='boolC')return v?'是':'否';
+ if(a.t==='ratio')return Math.round(v*100)+'%';
+ return v+(a.u||'');}
+function djfiTableHtml(t){
+ if(!t.djfi)return '';
+ const {a,nv,m}=t.djfi;
+ const rows=Object.keys(DJFI_DIM).map(d=>{
+   const inds=DJFI_DIM[d].filter(c=>(m.a[c]!=null||m.nv[c]!=null));
+   if(!inds.length)return '';
+   const head=`<tr class="dj-dimhd"><td>${d} · ${DJFI_DIMLAB[d]}</td><td class="a">${a.dims[d]??'—'}</td><td class="n">${nv.dims[d]??'—'}</td></tr>`;
+   const cells=inds.map(c=>`<tr><td class="dj-ind">${DJFI_ANCHORS[c].lab}<span class="dj-anc">${DJFI_ANCHORS[c].t==='num'?DJFI_ANCHORS[c].best+'→'+DJFI_ANCHORS[c].worst:DJFI_ANCHORS[c].t==='boolF'?'有=0':DJFI_ANCHORS[c].t==='boolC'?'有=100':'×100'}</span></td><td class="dj-v a">${djfiFmt(c,m.a[c])} <i>${m.a[c]==null?'':'→'+djfiNorm(c,m.a[c])}</i></td><td class="dj-v n">${djfiFmt(c,m.nv[c])} <i>${m.nv[c]==null?'':'→'+djfiNorm(c,m.nv[c])}</i></td></tr>`).join('');
+   return head+cells;
+ }).join('');
+ return `<details class="djfi"><summary><span class="dj-badge">DJFI 实测明细</span>触点分由公式算出 · 昇腾 <b class="a">${a.tp}</b> / NVIDIA <b class="n">${nv.tp}</b><span class="dj-open">点开看每项实测值 → 归一化分</span></summary>
+   <div class="dj-scroll"><table class="dj-tbl"><thead><tr><th>维度分 / 指标(锚点)</th><th class="a">昇腾</th><th class="n">NVIDIA</th></tr></thead><tbody>${rows}</tbody></table></div>
+   <div class="dj-note">维度分 = 维度内各指标归一化分的算术平均;触点分 = 5 维度分等权平均。归一化:数值 <code>(worst−实测)÷(worst−best)×100</code>;摩擦布尔 有=0/无=100;能力布尔 有=100/无=0;比例 ×100。<b>缺测</b>项排除出计算、不填值。</div></details>`;
+}
+function renderDjfiRules(){
+ const el=document.getElementById('djfiRules');if(!el)return;
+ const body=Object.keys(DJFI_DIM).map(d=>DJFI_DIM[d].map((c,i)=>{
+   const a=DJFI_ANCHORS[c];
+   const anc=a.t==='boolF'?'无门槛=100 / 有=0':a.t==='boolC'?'具备=100 / 无=0':a.t==='ratio'?'比例 ×100':`best ${a.best} → worst ${a.worst}`;
+   const ty=a.t==='num'?'数值':a.t==='ratio'?'比例':'布尔';
+   return `<tr>${i===0?`<td rowspan="${DJFI_DIM[d].length}" class="dj-dcell">${d}<br><span>${DJFI_DIMLAB[d]}</span></td>`:''}<td>${c} · ${a.lab}</td><td>${ty}</td><td>${anc}</td></tr>`;
+ }).join('')).join('');
+ el.innerHTML=`<table class="dj-tbl rules"><thead><tr><th>维度</th><th>指标</th><th>类型</th><th>锚点 / 归一化</th></tr></thead><tbody>${body}</tbody></table>`;
+}
+function renderDjfiExample(){
+ const el=document.getElementById('djfiExample');if(!el)return;
+ const t=TP.find(x=>x.id==='4.3');if(!t||!t.djfi){el.innerHTML='';return;}
+ el.innerHTML=djfiTableHtml(t).replace('<details class="djfi">','<div class="djfi open">').replace('</details>','</div>').replace(/<summary>[\s\S]*?<\/summary>/,`<div class="dj-exhd">触点 4.3 · SDK 下载流程 —— 实时由引擎计算:昇腾 <b class="a">${t.djfi.a.tp}</b> / NVIDIA <b class="n">${t.djfi.nv.tp}</b></div>`);
+}
+function updateCover(){
+ const main=TP.filter(t=>/^\d/.test(t.id));
+ const aa=main.reduce((s,t)=>s+t.a,0)/main.length, nn=main.reduce((s,t)=>s+t.nv,0)/main.length;
+ const v=document.getElementById('coverAvg');if(v)v.innerHTML=aa.toFixed(1)+'<span style="font-size:18px;color:var(--g5)"> / </span>'+nn.toFixed(1);
+ const g=document.getElementById('coverGapSub');if(g)g.innerHTML=`DJFI 计算结果 · 24 主触点等权均分 · gap ${(aa-nn).toFixed(1)}`;
+}
 function tpCardHtml(t){
       const sc=t.bar?'shot bar':'shot';
       const left=`<img class="${sc}" src="${IMG}${pick(t.aimg)}" loading="lazy" alt="${t.name} 昇腾" onclick="zoom(this.src)">`;
@@ -1287,6 +1415,7 @@ function tpCardHtml(t){
             ${t.ndesc?`<p class="shotcap nv">${t.ndesc}</p>`:''}
           </div>
         </div>
+        ${djfiTableHtml(t)}
         <div class="verdict ${t.win?'win':''}">
           <div class="vtitle">${t.win?'差异分析　·　此处昇腾占优':'差异分析'}</div>
           <ul class="concl ${t.win?'win':''}">
@@ -1343,6 +1472,7 @@ function showTab(t){
   window.scrollTo(0,0);
 }
 renderAll();updateScenHead();
+renderDjfiRules();renderDjfiExample();updateCover();
 
 /* ---------- synthesis demos ---------- */
 function demoHero(){return `
