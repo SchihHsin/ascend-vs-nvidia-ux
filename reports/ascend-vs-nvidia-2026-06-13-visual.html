@@ -368,6 +368,18 @@ a{color:inherit;text-decoration:none}
 .l1tab.on{background:var(--g8);color:#fff}
 .l1tab[data-t="op"].on{background:#7c5cf0}
 .l1tab[data-t="train"].on{background:#1f9fb8}
+.l1tab[data-t="comm"].on{background:#e8833a}
+.pov.comm{background:linear-gradient(135deg,#fff4ea,#fff)}
+.commscore{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+.commscore .cs{background:var(--card);border:1px solid var(--g3);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);min-width:150px}
+.commscore .cs .k{font-size:11px;color:var(--ink2);font-weight:600}
+.commscore .cs .v{font-family:var(--mono);font-size:22px;font-weight:800;margin-top:3px}
+.sec6{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.sec6 th{background:var(--g2);color:var(--g7);text-align:left;padding:7px 10px;font-size:11px}
+.sec6 td{padding:6px 10px;border-top:1px solid var(--g1)}
+.sec6 .blk{color:#C7000B;font-weight:700}
+.commtodo{border:1.5px dashed var(--g4);border-radius:12px;background:repeating-linear-gradient(45deg,#fafafa,#fafafa 10px,#f3f3f5 10px,#f3f3f5 20px);padding:18px;color:var(--g6);font-size:12.5px;line-height:1.7;min-height:160px;display:flex;flex-direction:column;justify-content:center}
+.commtodo b{color:var(--ink)}
 .tabpanel[hidden]{display:none}
 .synth-gh{flex:1 1 100%;font-weight:800;font-size:12.5px;color:var(--g7);margin:10px 0 0;padding-left:2px;letter-spacing:.3px}
 .synth-grouphd{text-align:center;padding:6px 0 0;box-shadow:none;background:none;border:none}
@@ -422,6 +434,7 @@ a{color:inherit;text-decoration:none}
     <button class="l1tab on" data-t="overview" onclick="showTab('overview')">概览</button>
     <button class="l1tab" data-t="op" onclick="showTab('op')">算子开发</button>
     <button class="l1tab" data-t="train" onclick="showTab('train')">训练</button>
+    <button class="l1tab" data-t="comm" onclick="showTab('comm')">社区承接</button>
     <button class="l1tab" data-t="synth" onclick="showTab('synth')">综述结论</button>
   </div>
 </nav>
@@ -594,6 +607,147 @@ a{color:inherit;text-decoration:none}
   </section>
 
   </div><!-- /tab-synth -->
+
+  <div class="tabpanel" id="tab-comm" hidden>
+  <!-- 社区承接 · intro -->
+  <section class="floor" id="comm-intro">
+    <div class="floor-hd"><span class="fno">⤳</span><h2>社区承接 · 带着问题转向社区，能否得到可用答案</h2></div>
+    <p class="floor-sub">问题源自算子开发的人机协同时序图：一次算子开发沿时间串起 5 次搜索 <b>D→M→X→O→L</b>，在三类节点工作流会转向社区。对每条问题<b>模拟真实用户：优先去官方逐步查找（找到就停、找不到再转二手）</b>，两侧（昇腾 ↔ CUDA）各走一遍，逐步截图取证、按口径打分。</p>
+    <div class="ia-finds">
+      <div class="ia-find"><div class="ia-find-h">触发 1 · AI 检索官方失败</div>官方 how-to 页 SPA 受阻 → 转向二手社区 / 人工核查官方</div>
+      <div class="ia-find"><div class="ia-find-h">触发 2 · 人工独立复核</div>不确定、拉安全网 → 官方 + 二手</div>
+      <div class="ia-find"><div class="ia-find-h">触发 3 · 需要决策</div>版本 / soc / 精度 → 官方文档 + Gitee 样例 + 论坛</div>
+    </div>
+    <div class="method" style="margin-top:16px">
+      <b>承接分（与 DJFI 同构：实测→归一化→合成）：</b>每个目的地实测 5 指标（②可抓取 ③详尽 ④版本清晰 ⑤数量 ⑥可信度，1–5），归一化 nm=v/5；<b>综合 = 1−(1−OFF)(1−SEC)</b>（OFF=官方 ②×③、SEC=二手 ⑤×⑥；任一渠道扛得住即可答），再乘版本因子 <b>0.7+0.3·nm④</b>。官方文档/仓/论坛属官方，不计入二手 ⑤⑥。<br>
+      <span style="color:var(--g6)">本 tab 为<b>样板态</b>：问题 D 昇腾侧已实测建成（真图+注解）；NVIDIA 侧无头被反爬挡、留位待手动补图；其余 5 条问题待铺。</span>
+    </div>
+  </section>
+
+  <!-- 问题 D -->
+  <section class="floor" id="comm-D">
+    <div class="floor-hd"><span class="fno">D</span><h2>写 kernel · 用 Ascend C 写自定义算子的完整流程</h2>
+      <span style="font-family:var(--mono);font-size:13px;color:var(--g6)">承接分 <b style="color:var(--coral)">昇腾 77</b> / <b style="color:var(--green)">NVIDIA 待实测</b></span></div>
+    <p class="floor-sub">触发：官方 how-to 页 SPA 受阻。<b>昇腾问</b>：msOpGen 生成工程、add_custom.json 配置、aclnn 注册调用怎么做？　·　<b>CUDA 对照问</b>：nvcc 编译自定义 kernel、kernel 启动配置、注册进 PyTorch 怎么做？</p>
+    <div class="commscore">
+      <div class="cs"><div class="k">昇腾 · 综合承接分</div><div class="v" style="color:var(--coral)">77<span style="font-size:13px;color:var(--g5)">/100</span></div></div>
+      <div class="cs"><div class="k">官方 OFF（②可抓×③详尽）</div><div class="v">0.80</div></div>
+      <div class="cs"><div class="k">二手 SEC（⑤数量×⑥可信）</div><div class="v">0.72</div></div>
+      <div class="cs"><div class="k">版本因子（④散乱=2）</div><div class="v">0.82</div></div>
+      <div class="cs"><div class="k">NVIDIA · 综合</div><div class="v" style="color:var(--g5)">待实测</div></div>
+    </div>
+
+    <!-- D·1 触发 -->
+    <div class="tpcard">
+      <div class="tpcard-hd"><span class="id">D·1</span><h3>触发 · 搜索官方 how-to</h3>
+        <div class="scorepair"><span class="spill a">昇腾 SPA 受阻</span><span class="spill n">NVIDIA 待测</span></div></div>
+      <div class="pov comm"><div class="pov-say"><span class="pov-who">算子开发者视角</span>“我搜 ‘Ascend C 自定义算子’，想直接看官方完整流程怎么走。”</div>
+        <div class="pov-flow"><span class="pf-step">搜索引擎/AI</span><span class="pf-arr">→</span><span class="pf-step">昇腾文档中心</span><span class="pf-arr">→</span><span class="pf-step goal">想要 how-to 正文</span></div></div>
+      <div class="tpcard-body">
+        <div class="tpside left">
+          <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span>昇腾 · hiascend.com/document</div>
+          <img class="shot bar" src="../materials/ascend-vs-nvidia/screenshots/comm-D-asc-01-doccenter.ann.png" onclick="zoom(this.src)">
+          <p class="shotcap">文档中心首屏：真人浏览器能看到「Ascend C 算子开发」热门入口；但 <b>WebFetch / AI 抓取只得到导航骨架 + “0/100” 空结果</b>，正文要 JS 才渲染——AI 检索这一步就受阻（实测）。这正是工作流转向社区的触发点。</p>
+        </div>
+        <div class="tpside">
+          <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>NVIDIA · docs.nvidia.com/cuda</div>
+          <div class="commtodo"><b>待手动补图</b>（docs.nvidia.com 无头被反爬挡）。<br>截图清单 → 步骤①：在真浏览器打开 <b>docs.nvidia.com/cuda/</b>，搜 “custom kernel / CUDA C++ Programming Guide”，整页截图拖进 <code>screenshots/</code> 命名 <code>comm-D-nv-01-cudadocs.png</code>。</div>
+          <p class="shotcap nv">推断（待实测）：CUDA 文档为静态站、AI 可抓取，触发点理论上比昇腾弱。以你截的真图为准。</p>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="vtitle">这一步能不能接住</div>
+        <ul class="concl"><li><span class="lab">昇腾：</span>对真人=能进；对 AI/检索=受阻（SPA），所以“用 AI 查官方”的人会被迫转人工或二手。② 可抓取（经入口）记 <b>2</b>。</li></ul>
+      </div>
+    </div>
+
+    <!-- D·2 官方文档站 -->
+    <div class="tpcard">
+      <div class="tpcard-hd"><span class="id">D·2</span><h3>官方文档站 · 进算子 hub → 自定义算子文档</h3>
+        <div class="scorepair"><span class="spill a">昇腾 ②5深页/③4/④2</span><span class="spill n">NVIDIA 待测</span></div></div>
+      <div class="pov comm"><div class="pov-say"><span class="pov-who">算子开发者视角</span>“进开发者中心→算子开发 hub，照着用户旅程点到‘写算子第一课’，找 msOpGen 和 add_custom.json。”</div>
+        <div class="pov-flow"><span class="pf-step">算子开发 hub</span><span class="pf-arr">→</span><span class="pf-step">用户旅程表</span><span class="pf-arr">→</span><span class="pf-step goal">自定义算子文档</span></div></div>
+      <div class="tpcard-body">
+        <div class="tpside left">
+          <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span>昇腾 · /developer/operator → 文档详情页</div>
+          <img class="shot bar" src="../materials/ascend-vs-nvidia/screenshots/comm-D-asc-02-operatorhub.ann.png" onclick="zoom(this.src)">
+          <p class="shotcap">算子开发 hub：一张「用户旅程」表把 写算子第一课 / 自定义算子 / aclnn 调用 / Tiling 都铺好，覆盖完整。</p>
+          <img class="shot bar" src="../materials/ascend-vs-nvidia/screenshots/comm-D-asc-05-customop-doc.ann.png" onclick="zoom(this.src)">
+          <p class="shotcap">点进「基于自定义算子工程的算子开发」详情页：<b>静态可抓</b>、含 add_custom.json 配置 + msOpGen 命令 + 工程目录树 + 93 行可执行代码（③ 详尽，可执行）。<b>但 aclnn 调用在另一页、且同一套文档散在 8.0/8.1/8.2.alpha/8.3/9.1beta 等多版本（④ 版本散乱 = 2）。</b></p>
+        </div>
+        <div class="tpside">
+          <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>NVIDIA · docs.nvidia.com/cuda + Programming Guide</div>
+          <div class="commtodo"><b>待手动补图</b>。<br>截图清单 → 步骤②：真浏览器打开 <b>CUDA C++ Programming Guide</b>（docs.nvidia.com/cuda/cuda-c-programming-guide/）定位 “Kernels / Programming Model / 自定义 kernel” 段，及 <b>PyTorch Custom C++/CUDA Extensions</b>（pytorch.org/tutorials）。整页截图命名 <code>comm-D-nv-02-cudaprogguide.png</code>。</div>
+          <p class="shotcap nv">推断（待实测）：CUDA 编程指南为单一版本主线、静态可抓，版本散乱度预计低于昇腾；以真图为准。</p>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="vtitle">这一步能不能接住</div>
+        <ul class="concl"><li><span class="lab">昇腾：</span>拿到深链后<b>能接住、且详尽可执行</b>——② 深页可抓 5 / ③ 详尽 4（aclnn 跨页）/ ④ 版本散乱 2。官方 OFF = nm②·nm③ = 1.0×0.8 = <b>0.80</b>。</li></ul>
+      </div>
+    </div>
+
+    <!-- D·3 代码样例 -->
+    <div class="tpcard">
+      <div class="tpcard-hd"><span class="id">D·3</span><h3>代码样例 · Gitee → GitCode</h3>
+        <div class="scorepair"><span class="spill a">昇腾 已迁移</span><span class="spill n">NVIDIA 待测</span></div></div>
+      <div class="pov comm"><div class="pov-say"><span class="pov-who">算子开发者视角</span>“照 hub 底部‘代码样例’点到 Gitee 找 AddCustom 样例直接抄。”</div>
+        <div class="pov-flow"><span class="pf-step">代码样例</span><span class="pf-arr">→</span><span class="pf-step">Gitee ascend/samples</span><span class="pf-arr">→</span><span class="pf-step goal">AddCustom 样例</span></div></div>
+      <div class="tpcard-body">
+        <div class="tpside left">
+          <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span>昇腾 · gitee.com/ascend/samples</div>
+          <img class="shot bar" src="../materials/ascend-vs-nvidia/screenshots/comm-D-asc-03-gitee-deprecated.ann.png" onclick="zoom(this.src)">
+          <p class="shotcap">点到 Gitee 撞上「<b>CANN Samples（已停止维护）· 本仓已迁移 GitCode</b>」——旧文档/链接仍指向这里，用户要再跳一次到 GitCode（cann 组织）才拿到现行样例。时效/可达性扣分（实测）。</p>
+        </div>
+        <div class="tpside">
+          <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>NVIDIA · github.com/NVIDIA/cuda-samples</div>
+          <div class="commtodo"><b>待手动补图</b>（GitHub 一般可无头，若被挡则手动）。<br>截图清单 → 步骤③：打开 <b>github.com/NVIDIA/cuda-samples</b>，截仓库首页（star 数 / 目录 / 最近更新）命名 <code>comm-D-nv-03-cudasamples.png</code>。</div>
+          <p class="shotcap nv">推断（待实测）：CUDA Samples 仓活跃、单一权威入口，无“迁移断链”问题；以真图为准。</p>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="vtitle">这一步能不能接住</div>
+        <ul class="concl"><li><span class="lab">昇腾：</span>样例存在但<b>入口断裂（Gitee 弃用→GitCode）</b>，多一跳、旧链易踩空。能接住但有摩擦。</li></ul>
+      </div>
+    </div>
+
+    <!-- D·4 二手社区 -->
+    <div class="tpcard">
+      <div class="tpcard-hd"><span class="id">D·4</span><h3>二手社区 · 六平台（站外）</h3>
+        <div class="scorepair"><span class="spill a">昇腾 ⑤5/⑥3.6→SEC 0.72</span><span class="spill n">NVIDIA 待测</span></div></div>
+      <div class="pov comm"><div class="pov-say"><span class="pov-who">算子开发者视角</span>“官方 AI 检索受阻时，直接搜 CSDN / 知乎 看别人怎么跑通。”</div>
+        <div class="pov-flow"><span class="pf-step">搜索 Ascend C 自定义算子</span><span class="pf-arr">→</span><span class="pf-step">CSDN/阿里云</span><span class="pf-arr">→</span><span class="pf-step goal">实战教程</span></div></div>
+      <div class="tpcard-body">
+        <div class="tpside left">
+          <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:#e8833a;display:inline-block"></span>昇腾侧 · 六平台实测（站外，进 SEC）</div>
+          <table class="sec6">
+            <thead><tr><th>平台</th><th>可抓取</th><th>可用条数</th><th>日期中位</th><th>可信度基准</th></tr></thead>
+            <tbody>
+              <tr><td>CSDN</td><td>整页可</td><td>≥4</td><td>2023–24</td><td>3.0</td></tr>
+              <tr><td>阿里云开发者社区</td><td>整页可</td><td>1–2</td><td>2024</td><td>4.0</td></tr>
+              <tr><td>ai6s 等聚合/科普</td><td>整页可</td><td>1</td><td>2024</td><td>2.5</td></tr>
+              <tr><td>知乎</td><td class="blk">反爬 403</td><td class="blk">受阻</td><td>—</td><td>—</td></tr>
+              <tr><td>博客园</td><td>整页可</td><td>0（首屏未命中）</td><td>—</td><td>3.0</td></tr>
+              <tr><td>segmentfault</td><td>整页可</td><td>0（首屏未命中）</td><td>—</td><td>3.0</td></tr>
+            </tbody>
+          </table>
+          <p class="shotcap">⑤ 数量：CSDN ≥4 + 阿里云 + 聚合 ≈ 6+ 可用 → <b>5</b>。⑥ 可信度：基准均值 ~3.1，一致性高 +1、时效不罚、独立性 &lt;0.6 −0.5 → ~<b>3.6</b>。SEC = nm⑤·nm⑥ = 1.0×0.72 = <b>0.72</b>。（CSDN 代表截图待补，知乎 403 截图待补。）</p>
+        </div>
+        <div class="tpside">
+          <div class="who"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>NVIDIA 侧 · 站外六平台（英文生态）</div>
+          <div class="commtodo"><b>待手动补图 + 检索</b>。<br>对照平台：<b>Stack Overflow / Reddit(r/CUDA) / Medium / dev.to / GitHub Discussions / NVIDIA 开发者博客</b>。截 Stack Overflow 搜 “CUDA custom kernel / PyTorch CUDA extension” 的结果页，命名 <code>comm-D-nv-04-stackoverflow.png</code>。</div>
+          <p class="shotcap nv">推断（待实测）：Stack Overflow 对 CUDA 覆盖极厚，SEC 预计高于昇腾；以真检索为准。</p>
+        </div>
+      </div>
+      <div class="verdict win">
+        <div class="vtitle">问题 D 综合 · 昇腾 77 / 100</div>
+        <ul class="concl win"><li><span class="lab">能答上：</span>官方深文档（详尽可执行）+ 二手（CSDN/阿里云）双渠道都扛得住 → 综合 = 1−(1−0.80)(1−0.72) = 0.944。</li>
+          <li><span class="lab">主要摩擦：</span>① AI 检索官方入口 SPA 受阻；② 版本号严重散乱（×0.82 版本因子）；③ 样例 Gitee→GitCode 断链。最终 <b>0.944×0.82 ≈ 0.77 → 77/100</b>。</li></ul>
+        <div class="rec"><span class="rec-tag">昇腾该怎么做</span><span class="rec-txt">把算子文档入口做成 <b>AI/爬虫可抓的 SSR 直链</b>（消除 SPA 受阻这个转社区的第一触发）、<b>收敛版本矩阵</b>、把 Gitee 旧链 301 到 GitCode，让“官方一步到位”，减少被迫转二手。</span><span class="rec-dept" style="background:#2f6fed1a;color:#2f6fed">主责 · 资料 / 官网平台</span></div>
+      </div>
+    </div>
+  </section>
+  </div><!-- /tab-comm -->
 
   <div class="footer">
     证据素材：<code>materials/ascend-vs-nvidia/</code>（screenshots · visual-analysis.md · failed-links.md）　|　完整文字版：<code>reports/ascend-vs-nvidia-2026-06-13-v1.md</code><br>
