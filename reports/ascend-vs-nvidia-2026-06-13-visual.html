@@ -380,6 +380,10 @@ a{color:inherit;text-decoration:none}
 .sec6 .blk{color:#C7000B;font-weight:700}
 .commtodo{border:1.5px dashed var(--g4);border-radius:12px;background:repeating-linear-gradient(45deg,#fafafa,#fafafa 10px,#f3f3f5 10px,#f3f3f5 20px);padding:18px;color:var(--g6);font-size:12.5px;line-height:1.7;min-height:160px;display:flex;flex-direction:column;justify-content:center}
 .commtodo b{color:var(--ink)}
+.l2tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px;padding:8px 10px;background:rgba(255,255,255,.93);backdrop-filter:blur(6px);border:1px solid var(--g3);border-radius:12px;box-shadow:var(--shadow);position:sticky;top:62px;z-index:30}
+.l2tab{font-family:inherit;font-size:13px;font-weight:700;color:var(--g6);background:#fff;border:1px solid var(--g3);padding:7px 13px;border-radius:8px;cursor:pointer;transition:.15s}
+.l2tab:hover{color:var(--ink);border-color:var(--g4)}
+.l2tab.on{background:#e8833a;color:#fff;border-color:#e8833a}
 .tabpanel[hidden]{display:none}
 .synth-gh{flex:1 1 100%;font-weight:800;font-size:12.5px;color:var(--g7);margin:10px 0 0;padding-left:2px;letter-spacing:.3px}
 .synth-grouphd{text-align:center;padding:6px 0 0;box-shadow:none;background:none;border:none}
@@ -609,6 +613,15 @@ a{color:inherit;text-decoration:none}
   </div><!-- /tab-synth -->
 
   <div class="tabpanel" id="tab-comm" hidden>
+  <div class="l2tabs" id="commTabs">
+    <button class="l2tab on" data-q="intro" onclick="showCommQ('intro')">概览</button>
+    <button class="l2tab" data-q="D" onclick="showCommQ('D')">D 写 kernel</button>
+    <button class="l2tab" data-q="M" onclick="showCommQ('M')">M Tiling</button>
+    <button class="l2tab" data-q="X" onclick="showCommQ('X')">X 内存越界</button>
+    <button class="l2tab" data-q="O" onclick="showCommQ('O')">O 注册集成</button>
+    <button class="l2tab" data-q="L" onclick="showCommQ('L')">L 精度排查</button>
+    <button class="l2tab" data-q="DEC" onclick="showCommQ('DEC')">决策 版本配套</button>
+  </div>
   <!-- 社区承接 · intro -->
   <section class="floor" id="comm-intro">
     <div class="floor-hd"><span class="fno">⤳</span><h2>社区承接 · 带着问题转向社区，能否得到可用答案</h2></div>
@@ -1798,11 +1811,20 @@ function setScen(id){
   if(curScen===id){updateScenHead();return;}curScen=id;
   renderAll();updateScenHead();
 }
+function showCommQ(q){
+  window._commQ=q;
+  ['intro','D','M','X','O','L','DEC'].forEach(function(id){
+    var el=document.getElementById('comm-'+id);
+    if(el) el.style.display=(id===q)?'':'none';
+  });
+  document.querySelectorAll('#commTabs .l2tab').forEach(function(b){b.classList.toggle('on',b.dataset.q===q);});
+  window.scrollTo(0,0);
+}
 function showTab(t){
   document.querySelectorAll('.tabpanel').forEach(p=>p.hidden=true);
   document.querySelectorAll('.l1tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
   if(t==='op'||t==='train'){document.getElementById('tab-scenario').hidden=false;setScen(t);}
-  else document.getElementById('tab-'+t).hidden=false;
+  else {document.getElementById('tab-'+t).hidden=false; if(t==='comm')showCommQ(window._commQ||'intro');}
   window.scrollTo(0,0);
 }
 renderAll();updateScenHead();
