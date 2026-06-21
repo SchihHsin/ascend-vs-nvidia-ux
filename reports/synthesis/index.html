@@ -300,6 +300,30 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .jx-p{font-size:var(--fs-xs);color:#7F1D1D;line-height:1.4}
 .jx-leg{display:flex;gap:1.4vw;font-size:var(--fs-sm);color:var(--ink-2);align-items:center;flex-wrap:wrap}
 .jx-leg i{width:22px;height:3px;border-radius:2px;display:inline-block;margin-right:.4em;vertical-align:middle}
+/* 设计高亮三卡（切角玻璃方卡，移植自 cann-design-concept #12）*/
+.dh-wrap{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:3.2vh}
+.dh-lead{font-size:clamp(15px,1.15vw,20px);color:var(--ink-2);line-height:1.65;text-align:center;max-width:1000px;width:100%;margin:0 auto}
+.dh-lead b{color:var(--ink);font-weight:600}
+.dh{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;max-width:1000px;width:100%;margin:0 auto}
+.dh-card{position:relative;aspect-ratio:1;overflow:hidden;clip-path:polygon(0 0,calc(100% - 44px) 0,100% 44px,100% 100%,44px 100%,0 calc(100% - 44px));padding:2.6vh 1.7vw;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;text-align:left;background:rgba(255,255,255,.4);backdrop-filter:blur(15px) saturate(1.5);-webkit-backdrop-filter:blur(15px) saturate(1.5)}
+.dh-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,0) 14%);pointer-events:none;z-index:1}
+.dh-main{display:flex;flex-direction:column;gap:.1vh;position:relative;z-index:2}
+.dh-ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(91,91,214,.12);color:var(--accent);position:relative;z-index:2}
+.dh-ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.dh-num{font-family:'HarmonyOS Sans SC','Inter';font-weight:500;font-size:min(5.4vw,9vh);line-height:1;letter-spacing:-.02em;background:linear-gradient(120deg,#5B5BD6,#8B3DEE);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.dh-num .u{font-size:.34em;font-weight:600;-webkit-text-fill-color:initial;color:var(--ink-2);margin-left:.04em}
+.dh-t{font-weight:700;font-size:var(--fs-h3);color:var(--ink);letter-spacing:-.01em;margin-top:.3vh}
+.dh-d{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.4;align-self:flex-end;text-align:right;position:relative;z-index:2}
+.dh-d .dh-src{display:block;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--accent);margin-top:.3vh}
+.dh-card.dark{background:radial-gradient(ellipse 130% 130% at 50% 48%,#0E1116 0%,#3A424F 100%)}
+.dh-card.accent{background:radial-gradient(ellipse 130% 130% at 50% 48%,#3F2DBE 0%,#9D86EC 100%)}
+.dh-card.dark::before,.dh-card.accent::before{display:none}
+.dh-card.dark .dh-ic,.dh-card.accent .dh-ic{background:rgba(255,255,255,.2);color:#fff}
+.dh-card.dark .dh-num,.dh-card.accent .dh-num{background:none;-webkit-text-fill-color:#fff;color:#fff}
+.dh-card.dark .dh-num .u,.dh-card.accent .dh-num .u{color:rgba(255,255,255,.7)}
+.dh-card.dark .dh-t,.dh-card.accent .dh-t{color:#fff}
+.dh-card.dark .dh-d,.dh-card.accent .dh-d{color:rgba(255,255,255,.78)}
+.dh-card.dark .dh-d .dh-src{color:rgba(255,255,255,.6)}.dh-card.accent .dh-d .dh-src{color:rgba(255,255,255,.82)}
 </style>
 </head>
 <body>
@@ -331,18 +355,32 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">开发者都在用 AI——昇腾的「用户」已经是 人 &#8853; AI</span></div>
-        <div class="subttl">AI Adoption 2025 · 四大权威调研</div>
+        <div class="subttl">AI Adoption · 2026 权威调研</div>
       </div>
       <div class="head-r">01 / 为什么双视角<br/>2026</div>
     </div>
     <div class="body-area">
-      <div class="bignums">
-        <div class="bignum"><div class="bn">90<span class="u">%</span></div><div class="bl">开发者已把 AI 用进<b>日常工作流</b>，较上年 +14pp；中位每天 2 小时和 AI 协作</div><div class="bsrc">Google DORA 2025</div></div>
-        <div class="bignum"><div class="bn">84<span class="u">%</span></div><div class="bl">正在用或计划用 AI（上年 76%）；51% 专业开发者<b>每天</b>用</div><div class="bsrc">Stack Overflow 2025</div></div>
-        <div class="bignum"><div class="bn">85<span class="u">%</span></div><div class="bl">经常用 AI 编码；62% 至少依赖一个 AI 助手 / Agent</div><div class="bsrc">JetBrains 2025（24,534 人）</div></div>
-        <div class="bignum"><div class="bn">80<span class="u">%</span></div><div class="bl">的<b>新</b>开发者第一周就用 Copilot；用 LLM SDK 的公共仓 +178% YoY</div><div class="bsrc">GitHub Octoverse 2025</div></div>
+      <div class="dh-wrap">
+        <div class="dh-lead">2026 年，AI 已是开发者的<b>日常基础设施</b>，并正从「助手」迈向「自主 Agent」。</div>
+        <div class="dh">
+          <div class="dh-card">
+            <div class="dh-ic"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+            <div class="dh-main"><div class="dh-num">90<span class="u">%</span></div><div class="dh-t">开发者经常用 AI</div></div>
+            <div class="dh-d">74% 已用上专门 AI 工具<span class="dh-src">JetBrains 2026.01</span></div>
+          </div>
+          <div class="dh-card accent">
+            <div class="dh-ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V4h6v3"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
+            <div class="dh-main"><div class="dh-num">80<span class="u">%</span></div><div class="dh-t">企业已嵌入 AI Agent</div></div>
+            <div class="dh-d">生产应用中、从助手到自主 Agent<span class="dh-src">Gartner 2026 Q1</span></div>
+          </div>
+          <div class="dh-card dark">
+            <div class="dh-ic"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div>
+            <div class="dh-main"><div class="dh-num">97<span class="u">%</span></div><div class="dh-t">软件组织已用 AI</div></div>
+            <div class="dh-d">76.6% 在用 + 20.4% 评估中<span class="dh-src">软件生命周期调研 2026</span></div>
+          </div>
+        </div>
+        <div class="bridge" style="margin-top:0">但开发者<b>并不完全信任</b> AI 的输出——而 AI 答得准不准，取决于它能不能<b>搜到 / 抓到 / 引用对昇腾知识</b>，这就是「AI 可用性」。于是昇腾要两套看：人侧 <b>体验</b> &#8853; AI 侧 <b>知识可用性</b>。</div>
       </div>
-      <div class="bridge">用得越多，<b>信任反而在降</b>：46% 不信任 AI 输出的准确性（SO，上年 31%）、30% 不太信 AI 生成的代码（DORA）。<b>而 AI 答得准不准，取决于它能不能搜到 / 抓到 / 引用对昇腾知识——这就是「AI 可用性」。</b>于是昇腾要两套看：人侧 <b>体验</b> + AI 侧 <b>知识可用性</b>。</div>
     </div>
   </section>
 
@@ -356,35 +394,51 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-r">02 / 人机协同旅程<br/>opknow 20</div>
     </div>
     <div class="body-area">
-      <div class="seq">
-        <div class="seq-col" style="--c:#E60012">
-          <div class="seq-h" style="background:#E60012">用户（人）<span class="sub">下指令 · 核对 · 验证</span></div>
-          <div class="seq-steps">
-            <div class="seq-step"><span class="n">U1</span>提需求：<b>「帮我在昇腾写个自定义算子并跑通」</b></div>
-            <div class="seq-step"><span class="n">U2</span>看 AI 给的方案，<b>追问 / 补环境信息</b>（卡型、CANN 版本）</div>
-            <div class="seq-step"><span class="n">U3</span>把代码贴到环境里跑，<b>把报错回喂</b>给 AI</div>
-            <div class="seq-step"><span class="n">U4</span>验证跑通、<b>人审采纳</b></div>
-          </div>
-        </div>
-        <div class="seq-col" style="--c:#7c5cf0">
-          <div class="seq-h" style="background:#7c5cf0">AI 助手 / Agent<span class="sub">拆解 · 有限次检索 · 综合</span></div>
-          <div class="seq-steps">
-            <div class="seq-step"><span class="n">A1</span>拆解任务，判断<b>该查什么、查哪个栈</b></div>
-            <div class="seq-step"><span class="n">A2</span><b>有限次检索</b>（web_search / fetch）昇腾文档 + 社区</div>
-            <div class="seq-step"><span class="n">A3</span>官方抓取受阻 → <b>换渠道 / 二手兜底 / 调自带知识</b></div>
-            <div class="seq-step"><span class="n">A4</span>综合成<b>可复现答案、锁版本</b>；不确定处诚实标注</div>
-          </div>
-          <div class="seq-loop">&#8635; A1&ndash;A3 视情况多轮循环</div>
-        </div>
-        <div class="seq-col" style="--c:#2f6fed">
-          <div class="seq-h" style="background:#2f6fed">昇腾知识源（工具）<span class="sub">三渠道，任一扛住即可答</span></div>
-          <div class="seq-steps">
-            <div class="seq-step"><b>官方一手</b>：文档 / API —— 多数可抓，<b>自定义算子页 SPA 抓不到</b>（单点 D）</div>
-            <div class="seq-step"><b>二手社区</b>：GitCode / 论坛 / 博客 —— <b>少而同质</b>、平台抓取参差</div>
-            <div class="seq-step"><b>模型自带知识</b>：训练得来，<b>系统性偏薄</b>，不检索常答不了</div>
-            <div class="seq-step" style="border-left-color:#10B981;background:rgba(220,252,231,.5)">任一渠道扛住 → AI 能答；<b>三条同时弱 → 致命</b>（noisy-OR）</div>
-          </div>
-        </div>
+      <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:1vh">
+        <svg viewBox="0 0 1000 470" preserveAspectRatio="xMidYMid meet" style="flex:1;min-height:0;width:100%;font-family:'HarmonyOS Sans SC','Inter',sans-serif">
+          <defs>
+            <marker id="aR" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L8 4.5L0 9z" fill="context-stroke"/></marker>
+          </defs>
+          <!-- 泳道生命线 -->
+          <line x1="165" y1="54" x2="165" y2="452" stroke="#c9ced6" stroke-width="1.4" stroke-dasharray="3,4"/>
+          <line x1="500" y1="54" x2="500" y2="452" stroke="#c9ced6" stroke-width="1.4" stroke-dasharray="3,4"/>
+          <line x1="835" y1="54" x2="835" y2="452" stroke="#c9ced6" stroke-width="1.4" stroke-dasharray="3,4"/>
+          <!-- 头部参与者 -->
+          <g>
+            <rect x="55" y="8" width="220" height="38" rx="9" fill="#E60012"/><text x="165" y="27" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">用户（人）</text><text x="165" y="40" text-anchor="middle" fill="rgba(255,255,255,.8)" font-size="9.5">下指令 · 核对 · 验证</text>
+            <rect x="390" y="8" width="220" height="38" rx="9" fill="#7c5cf0"/><text x="500" y="27" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">AI 助手 / Agent</text><text x="500" y="40" text-anchor="middle" fill="rgba(255,255,255,.8)" font-size="9.5">拆解 · 有限次检索 · 综合</text>
+            <rect x="725" y="8" width="220" height="38" rx="9" fill="#2f6fed"/><text x="835" y="27" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">昇腾知识源</text><text x="835" y="40" text-anchor="middle" fill="rgba(255,255,255,.8)" font-size="9.5">官方 / 二手 / 自带 三渠道</text>
+          </g>
+          <!-- 循环框（AI↔源 有限次多轮）-->
+          <rect x="452" y="150" width="420" height="120" rx="8" fill="none" stroke="#cdb8f5" stroke-width="1.3" stroke-dasharray="5,4"/>
+          <text x="462" y="146" fill="#7c5cf0" font-size="11" font-weight="700">&#8635; loop · 有限次多轮</text>
+          <!-- ① 用户→AI 提需求 -->
+          <text x="332" y="80" text-anchor="middle" fill="#16191e" font-size="13" font-weight="600">①「帮我写个自定义算子、跑通」</text>
+          <line x1="165" y1="92" x2="498" y2="92" stroke="#E60012" stroke-width="2.2" marker-end="url(#aR)"/>
+          <!-- AI 激活：拆解 -->
+          <rect x="488" y="104" width="24" height="34" rx="3" fill="#ece7fb" stroke="#7c5cf0" stroke-width="1"/>
+          <text x="520" y="124" fill="#5b4bb0" font-size="11.5">拆解 · 判断该查什么</text>
+          <!-- ② AI→源 检索 -->
+          <text x="668" y="174" text-anchor="middle" fill="#16191e" font-size="13" font-weight="600">② 有限次检索 web_search / fetch</text>
+          <line x1="500" y1="186" x2="833" y2="186" stroke="#2f6fed" stroke-width="2.2" marker-end="url(#aR)"/>
+          <!-- ✕ 源→AI 抓不到（红色空返回，虚线）-->
+          <text x="668" y="214" text-anchor="middle" fill="#d63b2f" font-size="12.5" font-weight="700">&#10005; 官方 SPA 抓不到 · 二手少而同质</text>
+          <line x1="835" y1="226" x2="502" y2="226" stroke="#d63b2f" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#aR)"/>
+          <!-- ③ AI→源 换二手兜底 -->
+          <text x="668" y="252" text-anchor="middle" fill="#16191e" font-size="13" font-weight="600">③ 换二手社区兜底 / 调自带知识</text>
+          <line x1="500" y1="262" x2="833" y2="262" stroke="#2f6fed" stroke-width="2.2" marker-end="url(#aR)"/>
+          <!-- ④ AI→用户 给答案 -->
+          <text x="332" y="306" text-anchor="middle" fill="#16191e" font-size="13" font-weight="600">④ 给方案 · 锁版本 · 诚实标注不确定处</text>
+          <line x1="500" y1="318" x2="167" y2="318" stroke="#7c5cf0" stroke-width="2.2" marker-end="url(#aR)"/>
+          <!-- ⑤ 用户→AI 回喂报错 -->
+          <text x="332" y="350" text-anchor="middle" fill="#16191e" font-size="13" font-weight="600">⑤ 跑出报错 → 回喂；AI 修正</text>
+          <line x1="165" y1="362" x2="498" y2="362" stroke="#E60012" stroke-width="2.2" marker-end="url(#aR)"/>
+          <line x1="500" y1="386" x2="167" y2="386" stroke="#7c5cf0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#aR)"/>
+          <!-- 用户 验证采纳 -->
+          <rect x="153" y="404" width="24" height="34" rx="3" fill="#dcfce7" stroke="#10B981" stroke-width="1"/>
+          <text x="185" y="424" fill="#047857" font-size="11.5" font-weight="600">&#10003; 验证跑通 · 人审采纳</text>
+        </svg>
+        <div class="bridge" style="margin-top:0">关键：知识只要<b>一条渠道扛住就能答</b>（noisy-OR）；只有<b>三条同时弱</b>——如自定义算子（官方抓不到 + 二手少 + 自带薄）——才致命。这正是 AI 侧度量要测的。</div>
       </div>
     </div>
   </section>
@@ -403,7 +457,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="card" style="--c:#E60012">
           <div class="duo-h"><span class="duo-tag" style="background:#E60012">人侧 · UX</span>开发者从第一次到跑通的体验旅程</div>
           <ul>
-            <li><b>7 步生命周期 &times; 2 场景</b>（算子开发 / 训练）&times; ~28 触点，逐触点实跑取证</li>
+            <li><b>7 步生命周期</b>（以<b>算子开发</b>为例）&times; ~28 触点，逐触点实跑取证</li>
             <li>每触点：<b>真实截图 + 点击动线 + 差异分析 + 改进建议</b>（标主责部门）</li>
             <li>客观打分（同维度重锚、去偏向），均分 <b>昇腾 74.9 / NVIDIA 77.6</b></li>
             <li>产出：昇腾 vs NVIDIA <b>开发者门户</b>逐触点对照报告</li>
@@ -434,7 +488,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div class="stat-grid">
         <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:75%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:75;background:linear-gradient(90deg,#56F5A0,#38D4CF)"></div><div class="stat-pill" style="flex:25;background:linear-gradient(90deg,#38D4CF,#4FACFE)"></div></div></div><div class="stat-num">74.9</div><div class="stat-desc">人侧 UX 均分（昇腾），vs NVIDIA 77.6——<b>体验接近、非碾压</b>，落地/上手都不弱。</div></div>
-        <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:68%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:68;background:linear-gradient(90deg,#FBBF60,#F59E0B)"></div><div class="stat-pill" style="flex:32;background:linear-gradient(90deg,#F59E0B,#FF6F55)"></div></div></div><div class="stat-num">68</div><div class="stat-desc"><b>配环境</b>是人侧最大谷底（−11 vs NVIDIA）：7 步 + 登录前置 + 协议；训练还多一个「框架迁移」谷底。</div></div>
+        <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:68%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:68;background:linear-gradient(90deg,#FBBF60,#F59E0B)"></div><div class="stat-pill" style="flex:32;background:linear-gradient(90deg,#F59E0B,#FF6F55)"></div></div></div><div class="stat-num">68</div><div class="stat-desc"><b>配环境</b>是人侧最大谷底（−11 vs NVIDIA）：选架构/版本/包 + 登录前置 + 协议，约 7 步最长链路。</div></div>
         <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:41%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:41;background:linear-gradient(90deg,#FF5A6E,#FF6F55)"></div><div class="stat-pill" style="flex:59;background:#E5E7EB"></div></div></div><div class="stat-num">.41</div><div class="stat-desc">AI 侧最塌一格：<b>自定义算子（D）</b>——官方 SPA 抓不到、二手少、自带知识薄，三渠道同时弱。</div></div>
       </div>
     </div>
@@ -444,8 +498,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">人类旅程：配环境探底，训练多一个迁移谷底</span></div>
-        <div class="subttl">Developer Journey · 7 步生命周期 · 算子 / 训练双场景</div>
+        <div class="brand"><span class="ttl">人类旅程：配环境是谷底，上手引导是昇腾反超点</span></div>
+        <div class="subttl">Developer Journey · 7 步生命周期 · 以算子开发为例</div>
       </div>
       <div class="head-r">05 / 人类旅程<br/>ascend-vs-nvidia-ux</div>
     </div>
@@ -454,12 +508,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="jx-c" style="--c:#EF4444"><div class="jx-n">L1</div><div class="jx-t">落地·选型</div><div class="jx-emo">&#128528;</div><div class="jx-sc">昇76 / NV76</div><div class="jx-p">官网到开发者中心要绕</div></div>
         <div class="jx-c" style="--c:#16A34A"><div class="jx-n">L2</div><div class="jx-t">上手引导</div><div class="jx-emo">&#128578;</div><div class="jx-sc">昇78 / NV78 &middot; 反超</div><div class="jx-p">算子 hub 比 CUDA 页有结构</div></div>
         <div class="jx-c" style="--c:#DC2626"><div class="jx-n">L3</div><div class="jx-t">配环境</div><div class="jx-emo">&#128547;</div><div class="jx-sc">昇68 / NV79 &middot; 谷底</div><div class="jx-p">7 步 + 登录前置 + 协议</div></div>
-        <div class="jx-c" style="--c:#3B82F6"><div class="jx-n">L4</div><div class="jx-t">动手写</div><div class="jx-emo">&#128528;</div><div class="jx-sc">昇77 / NV80</div><div class="jx-p">训练侧=框架迁移摩擦</div></div>
+        <div class="jx-c" style="--c:#3B82F6"><div class="jx-n">L4</div><div class="jx-t">动手写</div><div class="jx-emo">&#128528;</div><div class="jx-sc">昇77 / NV80</div><div class="jx-p">写 Ascend C · 边写边查 API</div></div>
         <div class="jx-c" style="--c:#8B5CF6"><div class="jx-n">L5</div><div class="jx-t">编译跑通</div><div class="jx-emo">&#128528;</div><div class="jx-sc">昇75 / NV79</div><div class="jx-p">算子编译链路较长</div></div>
         <div class="jx-c" style="--c:#0EA5B7"><div class="jx-n">L6</div><div class="jx-t">调试求助</div><div class="jx-emo">&#128528;</div><div class="jx-sc">昇75 / NV76</div><div class="jx-p">中文圈、全球可搜性低</div></div>
         <div class="jx-c" style="--c:#e0a32e"><div class="jx-n">L7</div><div class="jx-t">进阶生态</div><div class="jx-emo">&#128528;</div><div class="jx-sc">昇77 / NV81</div><div class="jx-p">内容不差，差在被搜到</div></div>
       </div>
-      <div class="jx-leg"><span><i style="background:#C7000B"></i>昇腾情绪</span><span><i style="background:#76B900"></i>NVIDIA 情绪</span><span style="color:var(--ink-3)">算子单谷底（L3）；训练双谷底（L3 配环境 + L4 框架迁移）</span></div>
+      <div class="jx-leg"><span><i style="background:#C7000B"></i>昇腾情绪</span><span><i style="background:#76B900"></i>NVIDIA 情绪</span><span style="color:var(--ink-3)">谷底在 L3 配环境；L2 上手引导昇腾微反超 NVIDIA</span></div>
     </div></div>
   </section>
 
@@ -547,7 +601,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="points" style="margin-top:1vh">
           <div class="point"><div class="dot"></div><div><div class="pt-title">配环境降到「游客可下」</div><div class="pt-desc">登录与协议后置、选项默认值、一键脚本/镜像；砍掉 7 步最长链路（P0）。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">上手引导前置 + 最强 CTA</div><div class="pt-desc">把算子 hub 的「5 环节结构 + 在线实验」提到首屏。</div></div></div>
-          <div class="point"><div class="dot"></div><div><div class="pt-title">训练：一键框架迁移</div><div class="pt-desc">PyTorch&rarr;昇腾自动适配 + 迁移对照样例，抹平训练主摩擦。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">自定义算子：样例 + 一键编译跑通</div><div class="pt-desc">补 Ascend C Hello-World 样例 + 脚手架，把算子上手最长链路压短。</div></div></div>
         </div>
       </div>
     </div>
@@ -567,7 +621,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="point"><div class="dot"></div><div><div class="pt-title">C · 把「版本声明」放进对话最前面</div><div class="pt-desc">先锁版本，再答——跨渠道一致。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">D · 长检索的过程可见性</div><div class="pt-desc">让「绕路」看起来像工作，而不是卡死。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">E · 为「人审」而设计</div><div class="pt-desc">可核对、可下钻、可纠错。</div></div></div>
-          <div class="point"><div class="dot"></div><div><div class="pt-title">F · 角色感知的 Agent 体验</div><div class="pt-desc">同一问题，算子 / 训练 / 应用 / 入门四种用户要不同答案。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">F · 角色感知的 Agent 体验</div><div class="pt-desc">同一问题，算子 / 应用 / 入门 等不同角色要不同答案。</div></div></div>
         </div>
       </div>
     </div>
@@ -593,7 +647,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="rm-bar dark" style="left:6%;width:26%;top:37%"><span class="lbl">人侧 P0 · 配环境游客可下</span><span class="rm-badge">人</span></div>
         <div class="rm-bar white" style="left:34%;width:30%;top:50%"><span class="lbl">全球可发现性：英文 + SEO + 直达</span><span class="rm-badge">人&amp;AI</span></div>
         <div class="rm-bar white" style="left:34%;width:26%;top:63%"><span class="lbl">上手引导前置 + 在线实验</span><span class="rm-badge">人</span></div>
-        <div class="rm-bar dark" style="left:60%;width:30%;top:50%"><span class="lbl">训练一键迁移 + 角色感知答案</span><span class="rm-badge">人&amp;AI</span></div>
+        <div class="rm-bar dark" style="left:60%;width:30%;top:50%"><span class="lbl">自定义算子样例 + 角色感知答案</span><span class="rm-badge">人&amp;AI</span></div>
         <div class="rm-bar white" style="left:62%;width:30%;top:76%"><span class="lbl">二手生态扶持 · 多平台互证</span><span class="rm-badge">AI</span></div>
         <div class="rm-diamond" style="left:39%;top:88%"></div>
         <div class="rm-ms" style="left:41.5%;top:87.5%">撞点修完 · 两侧均见效</div>
