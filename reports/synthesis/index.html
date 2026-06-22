@@ -395,8 +395,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:1.2vh">
-        <img src="seq-journey.png" alt="自定义算子开发 · 人机协同全链路时序图" style="flex:1;min-height:0;width:100%;object-fit:contain;object-position:center"/>
-        <div class="bridge" style="margin-top:0">5 参与者（二手社区 / 昇腾官方 / AI / 人类用户 / 本机工具），一次算子开发沿时间撞上 <b>5 次搜索</b>；<b>只有写 kernel 的「自定义算子」官方真受阻</b>（红箭头 ✕ SPA 抓不到 → 转二手兜底）。知识只要<b>一条渠道扛住就能答</b>（noisy-OR），三条同时弱才致命。</div>
+        <style>
+          .seq-srclegend{display:flex;flex-wrap:wrap;gap:.5vh 2.2vw;align-items:center;font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5}
+          .seq-srclegend .ssl{display:inline-flex;align-items:center;gap:.5em}
+          .seq-srclegend .ssl i{width:11px;height:11px;border-radius:3px;flex:none}
+          .seq-srclegend .ssl b{color:var(--ink);font-weight:600}
+        </style>
+        <iframe src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-height:0;width:100%;border:1px solid var(--line);border-radius:12px;background:#fff"></iframe>
+        <div class="seq-srclegend">
+          <span class="ssl"><i style="background:#6B5BA8"></i><b>AI ↔ 昇腾 / 二手</b>　每次抓取的命中·质量　=　AI 可用性矩阵打分（opknow 热力图）</span>
+          <span class="ssl"><i style="background:#2f3d63"></i><b>人 ↔ 昇腾社区</b>　这条线的直接体验　=　触点体验分析（ascend-vs-nvidia-ux）</span>
+          <span class="ssl" style="color:var(--ink-3)">悬浮节点看每步细节</span>
+        </div>
+        <div class="bridge" style="margin-top:0">一次算子开发沿时间撞上 <b>5 次搜索</b>（D→M→X→O→L）；<b>只有写 kernel 的「自定义算子」官方真受阻</b>（红虚箭头 ✕ SPA 抓不到 → 转二手兜底）。知识只要<b>一条渠道扛住就能答</b>（noisy-OR），三条同时弱才致命。</div>
       </div>
     </div>
   </section>
