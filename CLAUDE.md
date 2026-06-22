@@ -143,6 +143,17 @@ ud=$(mktemp -d); "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollba
 # 裁局部:sips -c <高> <宽> --cropOffset <Y> <X> /tmp/r.png --out /tmp/tile.png
 ```
 
+## 综合汇报 PPT(`reports/synthesis/index.html`)
+
+由 **report-ppt-skill** 产出的单文件纵向翻页 deck(13 页),把**两个项目合成一份**:本项目(人侧 UX 体验旅程)⊕ `../opknow`(AI 侧「大模型对昇腾内容可获取性」)。主线:**Agent 时代,用户既是人也是 AI**。封面标题=**「业界大模型对昇腾社区内容可获取性分析」**。**只用算子开发场景**(已去训练)。
+
+- **页序**:1 封面 / 2 AI趋势立论(cann#12 切角三卡,2026 数据)/ 3 人机时序图 / 4 两套度量 / 5 关键数字(胶囊)/ 6 人类旅程 / 7 AI可用性热力 / 8 竞品对照 / 9 撞点合一 / 10-11 黑底改进+A–F / 12 甘特 / 13 收尾。
+- **铁律:能用源材料的精调原图就别手搓**(踩过坑——自画的件很毛坯)。已嵌入的真图(都在 `reports/synthesis/`):`seq-journey.png`(opknow 20 时序图)/`journey-op.png`(本项目 7 步旅程图)/`ai-usability-heat.png`(opknow 17 可用性矩阵)/`touchpoint-heat.png`(本项目触点热力)。复用 skill 精调件:封面 s-cover / 胶囊 stat-grid / cann#12 三卡 .dh / 甘特 .rm / 黑底设计点 s-glow。**仍是手搓**:页4 .duo、页9 .collide(纯文字综述,源材料无对应图)。
+- **2026 AI 采用数据**(页2,Web 检索):JetBrains 2026.01 90% / Gartner 2026 Q1 80%企业嵌 AI Agent / 软件生命周期 2026 调研 97%组织。
+- **网址带页码**:翻页回写 `#N`,打开 `index.html#N` 直接跳第 N 页(deck JS 已加 `replaceState`+加载读 hash;**同步进了 skill 模板** `deck-template.html`)。
+- **截单页验证**:headless 不真滚动内层容器,截全 deck 只得首屏;**可靠法**=python 把 `#deck` 内容替换成只留目标 `<section>` 再 headless 截(`re.findall('<section class="slide.*?</section>'...)`)。
+- **另产出 skill**:`~/.claude/skills/click-annotation/`(把「截图上加点击注解」做成通用 skill,`annotate.py` 颜色/裁剪/场景全参数化,50% 透明圆点+箭头+底部标签条,原图绝不改)。
+
 ## 协作规则
 
 - **用中文**交流。
