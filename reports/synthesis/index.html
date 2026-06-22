@@ -706,6 +706,7 @@ const dots=slides.map((s,i)=>{const b=document.createElement('button');b.classNa
 
 function updateCurrent(i){
   idx=i; const s=slides[idx];
+  try{history.replaceState(null,'','#'+(idx+1));}catch(e){}   /* 网址带当前页码 */
   dots.forEach((d,k)=>d.classList.toggle('active',k===idx));
   counter.textContent=pad(idx+1)+' / '+pad(slides.length);
   prevBtn.disabled=idx<=0; nextBtn.disabled=idx>=slides.length-1;
@@ -760,9 +761,12 @@ document.addEventListener('mousemove',e=>{
 });
 document.addEventListener('mouseleave',()=>{ controls.classList.remove('show'); navDots.classList.remove('show'); });
 
-window.scrollTo(0,0);
 slides.forEach(paintSlide);
-updateCurrent(0);
+/* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
+(function(){const m=(location.hash||'').match(/(\d+)/);const start=m?Math.min(slides.length,Math.max(1,+m[1]))-1:0;
+  window.scrollTo(0,0);
+  if(start>0){updateCurrent(start);requestAnimationFrame(()=>slides[start].scrollIntoView({block:'start',behavior:'auto'}));}
+  else updateCurrent(0);})();
 </script>
 </body>
 </html>
