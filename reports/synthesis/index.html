@@ -379,7 +379,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="dh-d">76.6% 已在用 + 20.4% 评估中<span class="dh-src">软件生命周期调研 2026</span></div>
           </div>
         </div>
-        <div class="bridge" style="margin:0 auto;max-width:1000px;width:100%;background:rgba(91,91,214,.1);color:var(--ink)">但开发者<b>并不完全信任</b> AI 的输出——而 AI 答得准不准，取决于它能不能<b>搜到 / 抓到 / 引用对昇腾知识</b>，这就是「AI 可用性」。于是昇腾要两套看：人侧 <b>体验</b> &#8853; AI 侧 <b>知识可用性</b>。</div>
+        <div class="bridge" style="margin:0 auto;max-width:1000px;width:100%;background:rgba(91,91,214,.1);color:var(--ink)">但开发者<b>并不完全信任</b> AI 的输出——而 AI 回答是否准确，取决于其能否<b>搜到 / 抓到 / 引用对昇腾知识</b>，这就是「AI 可用性」。于是昇腾要两套看：人侧 <b>体验</b> &#8853; AI 侧 <b>知识可用性</b>。</div>
       </div>
     </div>
   </section>
@@ -465,7 +465,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 可用性怎么测：同一套任务，CUDA 与昇腾各跑一遍</span></div>
+        <div class="brand"><span class="ttl">AI 可用性如何度量：同一套任务，CUDA 与昇腾各实测一遍</span></div>
         <div class="subttl">Methodology · 站在「会检索的 AI 助手」视角，按「触达 × 质量」给知识打分（opknow 18）</div>
       </div>
       <div class="head-r">04 / AI 可用性 · 方法</div>
@@ -475,8 +475,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">How it runs</span>怎么跑的</div>
-        <p class="cmp-desc">AI 助手用 <b>web_search / web_fetch</b> 抓 <b>官方站 + 二手社区 + 自带知识</b> 三路，按「<b>触达 × 质量</b>」打 1–5 分、<b>noisy-OR 合成</b>；同一套任务在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 各<b>真跑一遍</b>，差异归因到「<b>栈 / 生态</b>」。</p>
+        <div class="cmp-h"><span class="hk">How it runs</span>如何运行</div>
+        <p class="cmp-desc">AI 助手用 <b>web_search / web_fetch</b> 抓 <b>官方站 + 二手社区 + 自带知识</b> 三路，按「<b>触达 × 质量</b>」打 1–5 分、<b>noisy-OR 合成</b>；同一套任务在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 各<b>真实执行一遍</b>，差异归因到「<b>栈 / 生态</b>」。</p>
         <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">Scenarios</span>7 阶段 → 26 任务，算子开发涉及 5 次检索</div>
         <div class="lc-stages">装环境 · 开发算子 · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
         <div class="op5">
@@ -486,7 +486,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="op5-i"><span class="c">O</span><b>注册集成</b><small>接 PyTorch</small></div>
           <div class="op5-i"><span class="c">L</span><b>精度排查</b><small>逐层比对</small></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">可用性是<b>「任务相关」</b>的：成熟通识两栈差距小，<b>前沿开发差距被拉满</b>——要定位「卡在哪一关」，而非只给总分。</div>
+        <div class="bridge" style="margin-top:.2vh">可用性是<b>「任务相关」</b>的：成熟通识两栈差距小，<b>前沿开发差距极大</b>——要定位「受阻于哪一关」，而非只给总分。</div>
       </div>
     </div>
   </section>
@@ -495,13 +495,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 怎么跑这几次检索：会「遇阻就转、不够再搜」的 Agent 循环</span></div>
+        <div class="brand"><span class="ttl">AI 如何执行这几次检索：「遇阻转向、不足再检索」的 Agent 循环</span></div>
         <div class="subttl">Agent loop · web_search / web_fetch → 回灌 → 研判 → 收敛 / 遇阻回路（opknow 20 · 公开 Messages API 示范实现）</div>
       </div>
       <div class="head-r">AI · 执行架构<br/>opknow 20</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 36%;height:100%;padding:1vh .4vw;display:flex">
+      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
         <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div class="card" style="flex:1;min-width:0;display:flex;align-items:center;justify-content:center;padding:1.6vh 1.4vw;overflow:hidden">
@@ -638,29 +638,29 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .mxline{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}.mxline b{color:var(--ink-2)}
   </style>
 
-  <!-- 3c2 灰底：指标怎么算的（hi=1） -->
+  <!-- 3c2 灰底：指标如何计算（hi=1） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">指标怎么算的：三源 × 两关 → 11 项，每项 score_N() 由实测代入</span></div>
+        <div class="brand"><span class="ttl">指标如何计算：三源 × 两关 → 11 项，每项 score_N() 由实测代入</span></div>
         <div class="subttl">Metric system · 可复现公式（score_metrics.py）；综合用噪声-OR 合成（opknow 18）</div>
       </div>
       <div class="head-r">AI · 指标口径<br/>opknow 18</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 36%;height:100%;padding:1vh .4vw;display:flex">
+      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
         <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Metric system</span>知识有 3 个来源 × 2 道关，交叉长出指标</div>
+        <div class="cmp-h"><span class="hk">Metric system</span>知识有 3 个来源 × 2 道关，交叉构成指标</div>
         <div class="mxg">
           <div class="mh cnr">来源 ＼ 关卡</div><div class="mh t">第 1 关 · 能否触达</div><div class="mh q">第 2 关 · 内容质量</div>
           <div class="ml">官方一手</div><div class="mc"><span class="ix">①</span> 可发现　<span class="ix">②</span> 可抓取</div><div class="mc"><span class="ix">③</span> 正文详尽　<span class="ix">④</span> 版本清晰</div>
           <div class="ml">二手社区</div><div class="mc"><span class="ix">⑤</span> 丰富度<br/><small style="color:#A1A4AA">n≥6→5 / ≥3→3 / 0→1</small></div><div class="mc"><span class="ix">⑥</span> 可信度 / 一致性</div>
-          <div class="ml">模型自带</div><div class="mc" style="grid-column:span 2"><span class="ix">⑦</span> 自带知识 · 不检索就能答的覆盖密度（质量并入本项）</div>
+          <div class="ml">模型自带</div><div class="mc" style="grid-column:span 2"><span class="ix">⑦</span> 自带知识 · 无需检索即可作答的覆盖密度（质量并入本项）</div>
         </div>
         <div class="mxline">跨渠道 <b>⑧ 检索成本</b>（摩擦·反向）｜产出 <b>⑨ 版本可锁 ⑩ 步骤可复现</b>（因变量·不进综合）｜收口 <b>⑪ 综合置信度</b>　＝ 三源×两关 + 4 项 = <b>11 项</b></div>
-        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 ＝ 噪声-OR(官方 · 二手 · 自带)</b>：<b>一条渠道扛得住就能答</b>；④版本 · ⑧成本作全局乘子，<b>受阻记 0</b>（≠给质量打 1 分）。→ 所以 <b>D 三渠道同时塌</b>（官方受阻 + 二手稀 + 自带弱）才掉到 <b style="color:#E60012">.41</b>。</div>
+        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 ＝ 噪声-OR(官方 · 二手 · 自带)</b>：<b>一条渠道达标即可作答</b>；④版本 · ⑧成本作全局乘子，<b>受阻记 0</b>（≠给质量打 1 分）。→ 所以 <b>D 三渠道同时失守</b>（官方受阻 + 二手稀 + 自带弱）才掉到 <b style="color:#E60012">.41</b>。</div>
       </div>
     </div>
   </section>
@@ -669,7 +669,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">矩阵评分：D 官方可抓单点塌方，其余卡在版本散 / 二手薄 / 自带弱</span></div>
+        <div class="brand"><span class="ttl">矩阵评分：D 官方可抓单点失守，其余受限于版本散 / 二手薄 / 自带弱</span></div>
         <div class="subttl">AI usability matrix · 算子开发 5 任务 × 6 维 · 每格 昇腾 / NVIDIA 对比（1–5 分，综合为合成值）（opknow 17）</div>
       </div>
       <div class="head-r">06 / 矩阵评分 · 结果</div>
@@ -679,7 +679,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Result</span>不是「都差」，是 <b>D 一格塌</b>（其余卡在版本散 / 二手薄 / 自带弱）</div>
+        <div class="cmp-h"><span class="hk">Result</span>不是「都差」，是 <b>D 一格失守</b>（其余受限于版本散 / 二手薄 / 自带弱）</div>
         <div class="card" style="padding:1.8vh 1.4vw">
           <div class="hm-grid" id="mOp" style="grid-template-columns:104px repeat(6,1fr)"></div>
           <div class="hm-legend"><span>每格：<b style="color:#3D4452">昇腾</b>（大·配色）/ <b style="color:#9aa0aa">N</b>=NVIDIA（小）· 1–5 分</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
@@ -747,8 +747,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe src="seq-d3.html?hi=2" title="时序图 · 人↔昇腾社区 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.3vh">
-        <div class="cmp-h"><span class="hk">How it runs</span>怎么测的</div>
-        <p class="cmp-desc">把一个人从<b>找入口到进阶</b>的全程拆成 <b>7 阶段 / 24 触点</b>，每个触点都<b>真实跑一遍 + 截图取证</b>，与 NVIDIA <b>同维对照</b>打分（差值＝昇腾−NVIDIA）。</p>
+        <div class="cmp-h"><span class="hk">How it runs</span>如何度量</div>
+        <p class="cmp-desc">把一个人从<b>找入口到进阶</b>的全程拆成 <b>7 阶段 / 24 触点</b>，每个触点都<b>真实运行一遍 + 截图取证</b>，与 NVIDIA <b>同维对照</b>打分（差值＝昇腾−NVIDIA）。</p>
         <div class="op7">
           <div class="op7-i"><span class="n">1</span><b>找入口<br/>选型</b></div>
           <div class="op7-i"><span class="n">2</span><b>上手<br/>引导</b></div>
@@ -817,11 +817,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
           </ul>
         </div>
         <div class="card" style="--c:#7c5cf0">
-          <div class="duo-h"><span class="duo-tag" style="background:#7c5cf0">AI 侧 · 可用性</span>AI 替人检索昇腾知识能否答准</div>
+          <div class="duo-h"><span class="duo-tag" style="background:#7c5cf0">AI 侧 · 可用性</span>AI 替人检索昇腾知识能否准确作答</div>
           <ul>
             <li>选若干任务，CUDA / 昇腾各<b>真实检索一遍</b>，记录每一步</li>
             <li><b>11 指标 &times; 三源两关</b>（官方 / 二手 / 自带 &times; 触达 / 质量）</li>
-            <li>综合用 <b>noisy-OR 公式</b>（任一渠道扛住即可答）+ <code>score_metrics.py</code> 实算</li>
+            <li>综合用 <b>noisy-OR 公式</b>（任一渠道达标即可作答）+ <code>score_metrics.py</code> 实算</li>
             <li>产出：全任务 &times; 指标<b>可用性热力图</b>（逐格悬浮带真实来源）</li>
           </ul>
         </div>
@@ -840,9 +840,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <div class="stat-grid">
-        <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:75%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:75;background:linear-gradient(90deg,#56F5A0,#38D4CF)"></div><div class="stat-pill" style="flex:25;background:linear-gradient(90deg,#38D4CF,#4FACFE)"></div></div></div><div class="stat-num">74.9</div><div class="stat-desc">人侧 UX 均分（昇腾），vs NVIDIA 77.6——<b>体验接近、非碾压</b>，落地/上手都不弱。</div></div>
+        <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:75%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:75;background:linear-gradient(90deg,#56F5A0,#38D4CF)"></div><div class="stat-pill" style="flex:25;background:linear-gradient(90deg,#38D4CF,#4FACFE)"></div></div></div><div class="stat-num">74.9</div><div class="stat-desc">人侧 UX 均分（昇腾），vs NVIDIA 77.6——<b>体验接近、差距有限</b>，落地/上手都不弱。</div></div>
         <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:68%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:68;background:linear-gradient(90deg,#FBBF60,#F59E0B)"></div><div class="stat-pill" style="flex:32;background:linear-gradient(90deg,#F59E0B,#FF6F55)"></div></div></div><div class="stat-num">68</div><div class="stat-desc"><b>配环境</b>是人侧最大谷底（−11 vs NVIDIA）：选架构/版本/包 + 登录前置 + 协议，约 7 步最长链路。</div></div>
-        <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:41%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:41;background:linear-gradient(90deg,#FF5A6E,#FF6F55)"></div><div class="stat-pill" style="flex:59;background:#E5E7EB"></div></div></div><div class="stat-num">.41</div><div class="stat-desc">AI 侧最塌一格：<b>自定义算子（D）</b>——官方 SPA 抓不到、二手少、自带知识薄，三渠道同时弱。</div></div>
+        <div class="stat-col"><div class="stat-bar-area"><div class="stat-marks"><span>0</span><span class="stat-tri" style="left:41%">&#9660;</span><span>100</span></div><div class="stat-pills"><div class="stat-pill" style="flex:41;background:linear-gradient(90deg,#FF5A6E,#FF6F55)"></div><div class="stat-pill" style="flex:59;background:#E5E7EB"></div></div></div><div class="stat-num">.41</div><div class="stat-desc">AI 侧失分最重的一格：<b>自定义算子（D）</b>——官方 SPA 抓不到、二手少、自带知识薄，三渠道同时弱。</div></div>
       </div>
     </div>
   </section>
@@ -866,7 +866,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 可用性：越往深处自研越塌，自定义算子最致命</span></div>
+        <div class="brand"><span class="ttl">AI 可用性：越往深处自研越弱，自定义算子缺口最大</span></div>
         <div class="subttl">AI Usability Heatmap · 三渠道 &times; 综合档位（noisy-OR）· opknow 17</div>
       </div>
       <div class="head-r">06 / AI 可用性<br/>opknow</div>
@@ -876,8 +876,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:1.4vh;min-width:0">
         <div style="font-size:var(--fs-body);color:var(--ink-2);line-height:1.7">实测矩阵：每个任务在 CUDA / 昇腾各真实检索一遍，按 <b>11 指标 × 三源两关</b>打分（颜色 v5 绿→v1 红，受阻态独立中性色）。</div>
         <div style="font-size:var(--fs-h3);font-weight:700;color:var(--ink);line-height:1.5">三大短板</div>
-        <div style="font-size:var(--fs-body);color:var(--ink-2);line-height:1.7">&#9312; <b>版本清晰度</b>是唯一「全局性」短板（多版本号并存、无权威当前版）；<br/>&#9313; 模型<b>自带知识系统性偏薄</b>，不检索常答不了；<br/>&#9314; 官方 SPA「抓不到」实测<b>收窄成单点</b>——26 格里只有写 kernel 的自定义算子真受阻。</div>
-        <div style="font-size:var(--fs-sm);color:var(--ink-3)">「采纳漏斗」：越靠用户上手侧可用性越高，越往深处自研越塌。</div>
+        <div style="font-size:var(--fs-body);color:var(--ink-2);line-height:1.7">&#9312; <b>版本清晰度</b>是唯一「全局性」短板（多版本号并存、无权威当前版）；<br/>&#9313; 模型<b>自带知识系统性偏薄</b>，不检索常无法作答；<br/>&#9314; 官方 SPA「抓不到」实测<b>收窄成单点</b>——26 格里只有写 kernel 的自定义算子真受阻。</div>
+        <div style="font-size:var(--fs-sm);color:var(--ink-3)">「采纳漏斗」：越靠用户上手侧可用性越高，越往深处自研越弱。</div>
       </div>
     </div></div>
   </section>
@@ -895,9 +895,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <img src="touchpoint-heat.png" alt="触点体验热力图 昇腾 vs NVIDIA(按7步聚合)" style="height:100%;min-width:0;width:auto;object-fit:contain;object-position:left center"/>
       <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:1.5vh;min-width:0">
         <div style="font-size:var(--fs-body);color:var(--ink-2);line-height:1.7">人侧触点逐项打分（昇腾 / NVIDIA / 差值，按 7 步聚合，问题优先越红越该改）。</div>
-        <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#dcfce7;color:#047857">接近</span><div>均分 <b>昇腾 74.9 / NVIDIA 77.6</b>——人侧体验<b>非碾压</b>，落地 / 上手都不弱。</div></div>
+        <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#dcfce7;color:#047857">接近</span><div>均分 <b>昇腾 74.9 / NVIDIA 77.6</b>——人侧体验<b>差距有限</b>，落地 / 上手都不弱。</div></div>
         <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#fde2e2;color:#b91c1c">谷底</span><div><b>配环境 −11</b> 是最大缺口；<b>上手引导昇腾反超</b>。</div></div>
-        <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#fef3c7;color:#92400e">全局</span><div><b>版本清晰度 / 可发现性</b>两项——正好和 AI 侧撞在一起（见下页）。</div></div>
+        <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#fef3c7;color:#92400e">全局</span><div><b>版本清晰度 / 可发现性</b>两项——正好与 AI 侧重叠（见下页）。</div></div>
       </div>
     </div></div>
   </section>
@@ -906,24 +906,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">撞点合一：人和 AI 卡在同几道坎，改一处两头受益</span></div>
+        <div class="brand"><span class="ttl">撞点合一：人和 AI 受阻于相同堵点，改一处两侧受益</span></div>
         <div class="subttl">Synthesis · 共性短板 vs 各自独有</div>
       </div>
       <div class="head-r">08 / 撞点合一<br/>2026</div>
     </div>
     <div class="body-area"><div class="collide">
       <div class="col-card same">
-        <div class="col-h">&#9889; 人 &amp; AI 撞在一起的坎（改了两头都受益）</div>
-        <div class="col-item"><span class="who" style="background:#fde2e2;color:#b91c1c">版本</span><div><b>版本号到处并存、没有权威「当前版」</b>——人选不对、AI 也锁不准版本。</div></div>
+        <div class="col-h">&#9889; 人 &amp; AI 重叠的堵点（改一处两侧受益）</div>
+        <div class="col-item"><span class="who" style="background:#fde2e2;color:#b91c1c">版本</span><div><b>版本号到处并存、没有权威「当前版」</b>——人易选错、AI 也难以锁定版本。</div></div>
         <div class="col-item"><span class="who" style="background:#fde2e2;color:#b91c1c">可发现</span><div><b>内容差在「被全球搜到」</b>——人在 Google 搜不到，AI 二手检索也抓不到。</div></div>
-        <div class="col-item"><span class="who" style="background:#fde2e2;color:#b91c1c">深处</span><div><b>越往深处（自定义算子）越塌</b>——人文档模糊靠试错，AI 官方抓不到+自带知识薄。</div></div>
+        <div class="col-item"><span class="who" style="background:#fde2e2;color:#b91c1c">深处</span><div><b>越往深处（自定义算子）越弱</b>——人文档模糊靠试错，AI 官方抓不到+自带知识薄。</div></div>
       </div>
       <div class="col-card diff">
         <div class="col-h">各自独有的坎</div>
-        <div class="col-item"><span class="who" style="background:#ede9fe;color:#6d28d9">人</span><div><b>配环境</b>：7 步 + 登录前置 + 协议（AI 不下载、无此坎）。</div></div>
-        <div class="col-item"><span class="who" style="background:#ede9fe;color:#6d28d9">人</span><div><b>账号 / 语言 / 社区镜像门槛</b>（对国内顺、对海外卡）。</div></div>
-        <div class="col-item"><span class="who" style="background:#dbeafe;color:#1d4ed8">AI</span><div><b>官方页 SPA 抓不到</b>（人有眼睛能看，AI 没有）。</div></div>
-        <div class="col-item"><span class="who" style="background:#dbeafe;color:#1d4ed8">AI</span><div><b>模型自带知识薄</b>，不检索就答不了（人可凭经验）。</div></div>
+        <div class="col-item"><span class="who" style="background:#ede9fe;color:#6d28d9">人</span><div><b>配环境</b>：7 步 + 登录前置 + 协议（AI 不下载、无此障碍）。</div></div>
+        <div class="col-item"><span class="who" style="background:#ede9fe;color:#6d28d9">人</span><div><b>账号 / 语言 / 社区镜像门槛</b>（对国内顺畅、对海外受阻）。</div></div>
+        <div class="col-item"><span class="who" style="background:#dbeafe;color:#1d4ed8">AI</span><div><b>官方页 SPA 抓不到</b>（人可肉眼查看，AI 不能）。</div></div>
+        <div class="col-item"><span class="who" style="background:#dbeafe;color:#1d4ed8">AI</span><div><b>模型自带知识薄</b>，不检索则无法作答（人可凭经验）。</div></div>
       </div>
     </div></div>
   </section>
@@ -934,11 +934,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="chrome"><div>方案 · 给昇腾的改进</div><div>人侧 &#8853; AI 侧</div></div>
     <div class="inner">
       <div>
-        <div class="kicker">SOLUTION · 一处投入、两头受益</div>
-        <h1 class="h-title">先修「撞点」<br/><span class="light">人和 AI 一起卡的那几道坎</span></h1>
+        <div class="kicker">SOLUTION · 一处投入、两侧受益</div>
+        <h1 class="h-title">先解决「撞点」<br/><span class="light">人和 AI 共同受阻的那几处堵点</span></h1>
         <p class="body">优先级跟着「撞点」走——既抬人侧体验，又抬 AI 侧可用性，ROI 最高。</p>
         <div class="points">
-          <div class="point"><div class="dot"></div><div><div class="pt-title">版本「一站收口」</div><div class="pt-desc">canonical 当前版 + 配套矩阵工具；人选得对、AI 锁得准。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">版本「一站收口」</div><div class="pt-desc">canonical 当前版 + 配套矩阵工具；便于人准确选择、AI 准确锁定。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">机器可读出口 + 可抓取</div><div class="pt-desc">llms.txt / markdown 导出 / 结构化索引；把 SPA「抓不到」的单点 D 打通。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">全球可发现性</div><div class="pt-desc">英文 + SEO + 顶栏直达；人能搜到、AI 二手也抓得到。</div></div></div>
         </div>
@@ -946,9 +946,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div>
         <div class="kicker">人侧专属</div>
         <div class="points" style="margin-top:1vh">
-          <div class="point"><div class="dot"></div><div><div class="pt-title">配环境降到「游客可下」</div><div class="pt-desc">登录与协议后置、选项默认值、一键脚本/镜像；砍掉 7 步最长链路（P0）。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">配环境降到「游客可下」</div><div class="pt-desc">登录与协议后置、选项默认值、一键脚本/镜像；精简 7 步最长链路（P0）。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">上手引导前置 + 最强 CTA</div><div class="pt-desc">把算子 hub 的「5 环节结构 + 在线实验」提到首屏。</div></div></div>
-          <div class="point"><div class="dot"></div><div><div class="pt-title">自定义算子：样例 + 一键编译跑通</div><div class="pt-desc">补 Ascend C Hello-World 样例 + 脚手架，把算子上手最长链路压短。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">自定义算子：样例 + 一键编译跑通</div><div class="pt-desc">补 Ascend C Hello-World 样例 + 脚手架，缩短算子上手的最长链路。</div></div></div>
         </div>
       </div>
     </div>
@@ -963,10 +963,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="kicker">DESIGN FOR THE AGENT ERA · 用户是人，也是 AI</div>
         <h1 class="h-title" style="font-size:min(3.6vw,6vh)">六个面向「人 + AI」的体验设计点</h1>
         <div class="points" style="display:grid;grid-template-columns:1fr 1fr;gap:1.6vh 4vw;margin-top:1vh">
-          <div class="point"><div class="dot"></div><div><div class="pt-title">A · 把「答案成色」做成一等公民</div><div class="pt-desc">来源 / 版本 / 可复现度可见，人审才信得过。</div></div></div>
-          <div class="point"><div class="dot"></div><div><div class="pt-title">B · 为「我抓不到」设计诚实失败态</div><div class="pt-desc">抓不到就说抓不到，别用兜底页糊弄。</div></div></div>
-          <div class="point"><div class="dot"></div><div><div class="pt-title">C · 把「版本声明」放进对话最前面</div><div class="pt-desc">先锁版本，再答——跨渠道一致。</div></div></div>
-          <div class="point"><div class="dot"></div><div><div class="pt-title">D · 长检索的过程可见性</div><div class="pt-desc">让「绕路」看起来像工作，而不是卡死。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">A · 把「答案成色」做成一等公民</div><div class="pt-desc">来源 / 版本 / 可复现度可见，人审才可信赖。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">B · 为「我抓不到」设计诚实失败态</div><div class="pt-desc">抓不到就明确告知，不以兜底页搪塞。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">C · 把「版本声明」放进对话最前面</div><div class="pt-desc">先锁定版本，再作答——跨渠道一致。</div></div></div>
+          <div class="point"><div class="dot"></div><div><div class="pt-title">D · 长检索的过程可见性</div><div class="pt-desc">让「绕路」看起来像有效工作，而非停滞。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">E · 为「人审」而设计</div><div class="pt-desc">可核对、可下钻、可纠错。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">F · 角色感知的 Agent 体验</div><div class="pt-desc">同一问题，算子 / 应用 / 入门 等不同角色要不同答案。</div></div></div>
         </div>
@@ -978,7 +978,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">先打「撞点」P0，再分头补人侧 / AI 侧</span></div>
+        <div class="brand"><span class="ttl">先攻克「撞点」P0，再分别补齐人侧 / AI 侧</span></div>
         <div class="subttl">Roadmap · 落地优先级（按 ROI）</div>
       </div>
       <div class="head-r">09 / 落地节奏<br/>2026</div>
@@ -997,7 +997,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="rm-bar dark" style="left:60%;width:30%;top:50%"><span class="lbl">自定义算子样例 + 角色感知答案</span><span class="rm-badge">人&amp;AI</span></div>
         <div class="rm-bar white" style="left:62%;width:30%;top:76%"><span class="lbl">二手生态扶持 · 多平台互证</span><span class="rm-badge">AI</span></div>
         <div class="rm-diamond" style="left:39%;top:88%"></div>
-        <div class="rm-ms" style="left:41.5%;top:87.5%">撞点修完 · 两侧均见效</div>
+        <div class="rm-ms" style="left:41.5%;top:87.5%">撞点修复后 · 两侧均见效</div>
       </div></div>
     </div>
   </section>
@@ -1013,7 +1013,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="cv-center">
         <div class="cv-kicker">一句话结论</div>
         <div class="cv-sub" style="font-weight:300;font-size:min(3.4vw,6vh);line-height:1.25">Agent 时代，昇腾的「用户」<br/>既是人，也是 AI。</div>
-        <div class="cv-lead" style="max-width:42ch">人侧体验已接近 NVIDIA，差距在配环境与可发现性；AI 侧差距更结构化，卡在版本、可抓取、自定义算子。<b style="color:#fff">把人和 AI 一起卡的那几道坎修掉，一处投入、两头受益。</b></div>
+        <div class="cv-lead" style="max-width:42ch">人侧体验已接近 NVIDIA，差距在配环境与可发现性；AI 侧差距更结构化，症结在版本、可抓取、自定义算子。<b style="color:#fff">将人和 AI 共同受阻的那几处堵点解决，一处投入、两侧受益。</b></div>
       </div>
       <div class="cv-bot">
         <div class="cv-ucd"><span class="sq"></span>ascend-vs-nvidia-ux &middot; opknow</div>
