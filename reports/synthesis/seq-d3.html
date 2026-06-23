@@ -1114,7 +1114,7 @@ function renderV(){
   /* 4 条参与者生命线 + 列头 */
   ["hu","ai","off","tool","sec"].forEach(k=>{
     const x=LX[k];
-    svg.append("line").attr("data-lane",k).attr("x1",x).attr("x2",x).attr("y1",vTop-34).attr("y2",Hv-26)
+    svg.append("line").attr("data-lane",k).attr("data-col",PCOL[k]).attr("x1",x).attr("x2",x).attr("y1",vTop-34).attr("y2",Hv-26)
       .attr("stroke","#e3e3e3").attr("stroke-width",1.5);
     const t=svg.append("text").attr("data-lane",k).attr("x",x).attr("y",vTop-46).attr("text-anchor","middle")
       .attr("font-size",11.5).attr("font-weight",800).attr("fill",PCOL[k]).text(PNAME[k]);
@@ -2014,12 +2014,17 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     lbl.textContent=step<1?'▶ 按关系讲解':('第 '+step+' / '+GROUPS.length+' · '+GROUPS[step-1].name);}
   function applyHi(){
     var svgEl=document.getElementById('journey'); if(!svgEl){updLbl();notify();return;}
-    if(step<1){ Array.prototype.forEach.call(svgEl.children,function(el){el.style.opacity='';}); updLbl(); notify(); return; }
+    function clr(el){el.style.opacity='';if(el.tagName==='line'&&el.getAttribute('data-lane')){el.style.stroke='';el.style.strokeWidth='';el.style.strokeOpacity='';}}
+    if(step<1){ Array.prototype.forEach.call(svgEl.children,clr); updLbl(); notify(); return; }
     var g=GROUPS[step-1], lanes=lanesOf(g);
     Array.prototype.forEach.call(svgEl.children,function(el){
       var pr=el.getAttribute&&el.getAttribute('data-pair'), ln=el.getAttribute&&el.getAttribute('data-lane');
       if(pr) el.style.opacity=(g.pairs.indexOf(pr)>=0)?'1':'0.1';
-      else if(ln) el.style.opacity=lanes[ln]?'1':'0.12';
+      else if(ln){
+        if(lanes[ln]){ el.style.opacity='1';
+          if(el.tagName==='line'){ el.style.stroke=el.getAttribute('data-col')||''; el.style.strokeWidth='2.5'; el.style.strokeOpacity='1'; } }
+        else { el.style.opacity='0.12'; if(el.tagName==='line'){el.style.stroke='';el.style.strokeWidth='';el.style.strokeOpacity='';} }
+      }
       else el.style.opacity='0.12';
     });
     updLbl(); notify();
