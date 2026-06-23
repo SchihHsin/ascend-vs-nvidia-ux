@@ -1075,10 +1075,10 @@ const D_FLOW={
 };
 function renderV(){
   const phX=4, phW=70, owX=78, owW=44;
-  const LX={hu:235, ai:455, off:675, tool:895, sec:1110};
+  const LX={hu:175, ai:475, off:775, tool:1075, sec:1375};
   const PCOL={off:"#C8102E", sec:"#BA7517", ai:"#6B5BA8", hu:"#2f3d63", tool:"#3f7d72"};
   const PNAME={off:"昇腾官方", sec:"二手社区", ai:"AI（Agent）", hu:"人类用户", tool:"本机工具"};
-  const vTop=86, dyV=38, Wv=1180;
+  const vTop=86, dyV=38, Wv=1440;
   const Y = xi => vTop + xi*dyV;
   const Hv = Y(NODES.length-1) + 70;
   const exec = ()=> curLvl>=1 ? "ai" : "hu";        // 执行方：Vibe 档起转 AI
@@ -2003,16 +2003,16 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   /* ===== 按关系讲解：高亮某对生命线之间的所有箭头、其余压暗 ===== */
   var GROUPS=[
     {name:'AI ↔ 昇腾 / 二手 · 矩阵评分', pairs:['ai-off','ai-sec']},
-    {name:'人 ↔ 昇腾社区 · 技术体验', pairs:['hu-off','hu-sec']},
-    {name:'人 ↔ AI · 协作交接', pairs:['ai-hu']}
+    {name:'人 ↔ 昇腾社区 · 技术体验', pairs:['hu-off','hu-sec']}
   ];
   var step=0;  // 0=全亮；1..GROUPS.length
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
+  function notify(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqStep:step},'*');}catch(e){}}
   function updLbl(){var lbl=document.getElementById('sqLbl');if(!lbl)return;
     lbl.textContent=step<1?'▶ 按关系讲解':('第 '+step+' / '+GROUPS.length+' · '+GROUPS[step-1].name);}
   function applyHi(){
-    var svgEl=document.getElementById('journey'); if(!svgEl){updLbl();return;}
-    if(step<1){ Array.prototype.forEach.call(svgEl.children,function(el){el.style.opacity='';}); updLbl(); return; }
+    var svgEl=document.getElementById('journey'); if(!svgEl){updLbl();notify();return;}
+    if(step<1){ Array.prototype.forEach.call(svgEl.children,function(el){el.style.opacity='';}); updLbl(); notify(); return; }
     var g=GROUPS[step-1], lanes=lanesOf(g);
     Array.prototype.forEach.call(svgEl.children,function(el){
       var pr=el.getAttribute&&el.getAttribute('data-pair'), ln=el.getAttribute&&el.getAttribute('data-lane');
@@ -2020,7 +2020,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
       else if(ln) el.style.opacity=lanes[ln]?'1':'0.12';
       else el.style.opacity='0.12';
     });
-    updLbl();
+    updLbl(); notify();
   }
   window.__seqApplyHi=applyHi;
   function go(n){var N=GROUPS.length;step=((n%(N+1))+(N+1))%(N+1);applyHi();}
