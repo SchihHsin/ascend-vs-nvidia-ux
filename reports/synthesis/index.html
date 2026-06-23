@@ -436,8 +436,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .qpx .qx-h{font-family:'JetBrains Mono';font-weight:700;font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;padding-left:.4vw}
     .qpx .qx-h.cu{color:#5a8a00}.qpx .qx-h.ca{color:#C7000B}
     .qpx .qx-t{display:flex;align-items:center;gap:.5em;font-weight:700;font-size:var(--fs-sm);color:var(--ink)}
-    .qpx .qx-t .ql{width:22px;height:22px;border-radius:6px;background:var(--g-purple);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:12px;font-weight:800;flex:none}
+    .qpx .ql{width:22px;height:22px;border-radius:6px;background:var(--g-purple);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:12px;font-weight:800;flex:none}
     .qpx .qx-t small{display:block;font-weight:400;font-size:10px;color:var(--ink-3)}
+    .qpx .qx-intent{grid-column:1/-1;display:flex;align-items:center;gap:.55em;font-weight:700;font-size:var(--fs-sm);color:var(--ink);margin-top:.5vh}
+    .qpx .qx-intent small{font-weight:400;font-size:10px;color:var(--ink-3)}
+    .qpx .qx-intent .qx-goal{font-weight:500;font-size:var(--fs-xs);color:var(--accent);background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.2);border-radius:7px;padding:2px 9px;line-height:1.4}
+    .qpx .qx-intent .qx-goal b{color:var(--ink-3);font-weight:700;margin-right:.3em}
     .qpx .qx-c{font-size:var(--fs-sm);line-height:1.5;color:var(--ink-2);border-radius:10px;padding:.9vh .9vw}
     .qpx .qx-c.cu{background:rgba(118,185,0,.08);border:1px solid rgba(118,185,0,.25)}
     .qpx .qx-c.ca{background:rgba(199,0,11,.055);border:1px solid rgba(199,0,11,.2)}
@@ -501,21 +505,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center">
       <div class="bridge" style="margin-top:0;flex:0 0 auto">铁律：<b>真实开发者口吻</b>、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>（CUDA 不放水、昇腾不刁难）。</div>
-      <div class="qpx" style="align-content:center;grid-template-columns:78px 1fr 1fr">
-        <div class="qx-h"></div><div class="qx-h cu">CUDA 怎么问</div><div class="qx-h ca">CANN / 昇腾 怎么问</div>
-        <div class="qx-t"><span class="ql">D</span><span>写 kernel<small>自定义算子</small></span></div>
+      <div class="qpx" style="align-content:center;grid-template-columns:1fr 1fr">
+        <div class="qx-h cu">CUDA 怎么问</div><div class="qx-h ca">CANN / 昇腾 怎么问</div>
+        <div class="qx-intent"><span class="ql">D</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一意图</b>写个自定义算子并集成进 PyTorch</span></div>
         <div class="qx-c cu">怎么写自定义 CUDA kernel 并集成进 PyTorch（C++ extension）？给出完整步骤、<code>setup.py</code> 和注册代码。</div>
         <div class="qx-c ca">怎么用 Ascend C 开发自定义算子并集成进 PyTorch（<code>msOpGen</code> / <code>aclnn</code>）？给出完整步骤。</div>
-        <div class="qx-t"><span class="ql">M</span><span>Tiling<small>动态 shape</small></span></div>
+        <div class="qx-intent"><span class="ql">M</span>Tiling<small>动态 shape</small><span class="qx-goal"><b>同一意图</b>算子 / 推理怎么支持动态 shape 输入</span></div>
         <div class="qx-c cu">TensorRT / CUDA kernel 处理动态 shape 输入怎么做（optimization profile / 运行时 shape）？</div>
         <div class="qx-c ca">Ascend C 自定义算子做动态 shape，<code>Tiling</code> 怎么写、<code>TilingData</code> 怎么定义和传递？</div>
-        <div class="qx-t"><span class="ql">X</span><span>内存越界<small>定位</small></span></div>
+        <div class="qx-intent"><span class="ql">X</span>内存越界<small>定位</small><span class="qx-goal"><b>同一意图</b>kernel / 算子内存越界，怎么用工具定位是哪一行</span></div>
         <div class="qx-c cu">CUDA kernel 报 illegal memory access，怎么用 <code>compute-sanitizer</code> 定位是哪一行越界？</div>
         <div class="qx-c ca">昇腾算子内存越界，怎么用 <code>msSanitizer</code> / 算子内存检测定位是哪一行？</div>
-        <div class="qx-t"><span class="ql">O</span><span>注册集成<small>接框架</small></span></div>
+        <div class="qx-intent"><span class="ql">O</span>注册集成<small>接框架</small><span class="qx-goal"><b>同一意图</b>自定义算子怎么注册进框架让它能被调用</span></div>
         <div class="qx-c cu">自定义算子怎么注册进 PyTorch 让 <code>torch.ops</code> 能调（<code>TORCH_LIBRARY</code> / dispatcher）？</div>
         <div class="qx-c ca">Ascend C 算子怎么注册成 <code>aclnn</code> 接口并集成进 <code>torch_npu</code> / PyTorch 让框架能调？</div>
-        <div class="qx-t"><span class="ql">L</span><span>精度排查<small>逐层比对</small></span></div>
+        <div class="qx-intent"><span class="ql">L</span>精度排查<small>逐层比对</small><span class="qx-goal"><b>同一意图</b>自定义算子结果和参考不一致，怎么逐层 / 逐元素比对定位</span></div>
         <div class="qx-c cu">自定义 CUDA 算子结果和 PyTorch 参考不一致，怎么定位数值精度（逐层 / 逐元素比对）？</div>
         <div class="qx-c ca">昇腾算子输出和标杆不一致，怎么用 <code>msaccucmp</code> / 精度比对 / dump 定位？</div>
       </div>
