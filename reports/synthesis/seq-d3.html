@@ -1188,6 +1188,10 @@ function renderV(){
       .style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"二手社区":"昇腾官方"),b:br.b})).on("mouseleave",hideTip);
   });
+
+  /* ===== 逐步讲解：导出几何（聚光灯用）+ 重绘后回填 ===== */
+  window.__seqGeo={vTop:vTop,dyV:dyV,Hv:Hv,Wv:Wv,phases:PHASE.map(d=>({n:d.n,top:Y(d.a)-dyV/2+2,bot:Y(d.b)+dyV/2-2}))};
+  if(window.__seqApplySpot) window.__seqApplySpot();
 }
 
 /* ===== 视图调度 + 自主度拖动条 + 横竖 Tab ===== */
@@ -1975,6 +1979,11 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 .wrap{max-width:none!important;margin:0!important;padding:0!important;height:100%}
 .chartwrap{border:none!important;padding:6px!important;margin:0!important;width:100%!important;height:100%!important;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box;background:transparent!important}
 #journey{width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important}
+#spotmask rect{transition:opacity .25s,y .3s,height .3s}
+#seqctrl{position:fixed;top:8px;right:12px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Noto Sans SC',sans-serif}
+#seqctrl .sqbtn{width:24px;height:24px;border-radius:7px;border:1px solid #d4d8df;background:rgba(255,255,255,.85);color:#444;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+#seqctrl .sqbtn:hover{background:#fff;border-color:#5B5BD6;color:#5B5BD6}
+#seqctrl .sqlbl{font-size:11.5px;font-weight:600;color:#5B5BD6;background:rgba(255,255,255,.88);border:1px solid #d4d8df;border-radius:8px;padding:5px 10px;cursor:pointer;white-space:nowrap;user-select:none}
 </style>
 <script>
 (function(){
@@ -1989,6 +1998,40 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   }
   if(document.readyState!=='loading')fix();else document.addEventListener('DOMContentLoaded',fix);
   window.addEventListener('load',fix);
+
+  /* ===== 逐步讲解：聚光灯（压暗其余阶段、只留当前阶段那条横带）===== */
+  var SVGNS='http://www.w3.org/2000/svg', step=0;
+  function geo(){return window.__seqGeo;}
+  function clearSpot(){var g=document.getElementById('spotmask');if(g&&g.parentNode)g.parentNode.removeChild(g);}
+  function updLbl(){var G=geo(),lbl=document.getElementById('sqLbl');if(!lbl)return;
+    lbl.textContent=(step<1||!G)?'▶ 逐步讲解':('第 '+step+' / '+G.phases.length+' 步 · '+G.phases[step-1].n);}
+  function applySpot(){
+    var svgEl=document.getElementById('journey'),G=geo(); clearSpot();
+    if(!svgEl||!G||step<1||step>G.phases.length){updLbl();return;}
+    var ph=G.phases[step-1],g=document.createElementNS(SVGNS,'g');
+    g.setAttribute('id','spotmask'); g.setAttribute('pointer-events','none');
+    function dim(y,h){if(h<=0.5)return;var r=document.createElementNS(SVGNS,'rect');
+      r.setAttribute('x',0);r.setAttribute('y',y);r.setAttribute('width',G.Wv);r.setAttribute('height',h);
+      r.setAttribute('fill','#fbfbfd');r.setAttribute('opacity','0.8');g.appendChild(r);}
+    dim(0,ph.top); dim(ph.bot,G.Hv-ph.bot);
+    var hl=document.createElementNS(SVGNS,'rect');
+    hl.setAttribute('x',1);hl.setAttribute('y',ph.top);hl.setAttribute('width',3.5);hl.setAttribute('height',ph.bot-ph.top);
+    hl.setAttribute('rx',2);hl.setAttribute('fill','#5B5BD6');g.appendChild(hl);
+    svgEl.appendChild(g); updLbl();
+  }
+  window.__seqApplySpot=applySpot;
+  function go(n){var G=geo();if(!G)return;var N=G.phases.length;step=((n%(N+1))+(N+1))%(N+1);applySpot();}
+  function buildCtrl(){
+    if(document.getElementById('seqctrl'))return;
+    var d=document.createElement('div');d.id='seqctrl';
+    d.innerHTML='<button id="sqPrev" class="sqbtn" title="上一步">‹</button><span id="sqLbl" class="sqlbl">▶ 逐步讲解</span><button id="sqNext" class="sqbtn" title="下一步">›</button>';
+    document.body.appendChild(d);
+    document.getElementById('sqNext').onclick=function(){go(step+1);};
+    document.getElementById('sqLbl').onclick=function(){go(step+1);};
+    document.getElementById('sqPrev').onclick=function(){go(step-1);};
+    updLbl();
+  }
+  if(document.readyState!=='loading')buildCtrl();else document.addEventListener('DOMContentLoaded',buildCtrl);
 })();
 </script>
 </body>
