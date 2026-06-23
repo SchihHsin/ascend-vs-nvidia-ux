@@ -354,7 +354,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-corner .hc-row{position:absolute;bottom:24%;left:14%;font-size:11px;font-weight:700;color:#3D4452}
     .hm-row-label{display:flex;align-items:center;gap:9px;padding:0 9px;font-size:12px;font-weight:700;color:#1B2432;border:1px solid rgba(223,223,223,.6);border-radius:10px;min-height:42px}
     .hm-row-label small{font-size:9.5px;font-weight:500;color:#A1A4AA;display:block}
-    .hm-cell{border-radius:10px;min-height:42px;display:flex;align-items:center;justify-content:center;border:1px solid #EFF0F1;font-family:'JetBrains Mono';font-size:13px;font-weight:800}
+    .hm-cell{border-radius:10px;min-height:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;border:1px solid #EFF0F1;font-family:'JetBrains Mono';font-size:13px;font-weight:800}
+    .hm-cell .cn{font-size:9px;color:#9aa0aa;font-weight:600;margin-top:2px}
     .hm-legend{display:flex;align-items:center;gap:8px;margin-top:1vh;font-size:10px;color:#A1A4AA;justify-content:flex-end}
     .hm-grad{height:7px;width:110px;border-radius:4px;background:linear-gradient(90deg,#FFB9B9,#FFD7B7 35%,#FFF2A5 55%,#C4F3E1 75%,#94E1C8)}
   </style><section class="slide s-gray">
@@ -365,9 +366,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div class="head-r">05 / 问题对 · 怎么问</div>
     </div>
-    <div class="body-area" style="display:flex;flex-direction:column;gap:1.2vh">
-      <div class="bridge" style="margin-top:0;flex:0 0 auto">铁律：<b>真实开发者口吻</b>（不是「X 是什么」）、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>（CUDA 不放水、昇腾不刁难）。</div>
-      <div class="qpx" style="flex:1;min-height:0;align-content:center">
+    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
+      <div class="card" style="flex:0 0 34%;height:100%;padding:1vh .4vw;display:flex">
+        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center">
+      <div class="bridge" style="margin-top:0;flex:0 0 auto">铁律：<b>真实开发者口吻</b>、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>（CUDA 不放水、昇腾不刁难）。</div>
+      <div class="qpx" style="align-content:center;grid-template-columns:78px 1fr 1fr">
         <div class="qx-h"></div><div class="qx-h cu">CUDA 怎么问</div><div class="qx-h ca">CANN / 昇腾 怎么问</div>
         <div class="qx-t"><span class="ql">D</span><span>写 kernel<small>自定义算子</small></span></div>
         <div class="qx-c cu">怎么写自定义 CUDA kernel 并集成进 PyTorch（C++ extension）？给出完整步骤、<code>setup.py</code> 和注册代码。</div>
@@ -384,6 +389,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="qx-t"><span class="ql">L</span><span>精度排查<small>逐层比对</small></span></div>
         <div class="qx-c cu">自定义 CUDA 算子结果和 PyTorch 参考不一致，怎么定位数值精度（逐层 / 逐元素比对）？</div>
         <div class="qx-c ca">昇腾算子输出和标杆不一致，怎么用 <code>msaccucmp</code> / 精度比对 / dump 定位？</div>
+      </div>
       </div>
     </div>
   </section>

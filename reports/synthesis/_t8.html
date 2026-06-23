@@ -358,31 +358,46 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-cell .cn{font-size:9px;color:#9aa0aa;font-weight:600;margin-top:2px}
     .hm-legend{display:flex;align-items:center;gap:8px;margin-top:1vh;font-size:10px;color:#A1A4AA;justify-content:flex-end}
     .hm-grad{height:7px;width:110px;border-radius:4px;background:linear-gradient(90deg,#FFB9B9,#FFD7B7 35%,#FFF2A5 55%,#C4F3E1 75%,#94E1C8)}
+  </style><style>
+    .op7{display:grid;grid-template-columns:repeat(7,1fr);gap:.5vw}
+    .op7-i{display:flex;flex-direction:column;align-items:center;gap:.35em;text-align:center;background:rgba(47,61,99,.05);border:1px solid rgba(47,61,99,.16);border-radius:9px;padding:1.1vh .2vw}
+    .op7-i .n{width:22px;height:22px;border-radius:6px;background:#2f3d63;color:#fff;font-family:'JetBrains Mono';font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+    .op7-i b{font-size:10.5px;color:var(--ink);line-height:1.25;font-weight:600}
+    .cmp2{display:grid;grid-template-columns:1fr 1fr;gap:.8vw}
+    .cmp2 figure{margin:0;display:flex;flex-direction:column;gap:.3em}
+    .cmp2 img{width:100%;border:1px solid var(--line);border-radius:8px;display:block;aspect-ratio:16/10;object-fit:cover;object-position:top}
+    .cmp2 figcaption{font-size:11px;font-weight:600;text-align:center}
+    .scard .sr{display:grid;grid-template-columns:1.5fr auto auto auto;gap:.7vw;align-items:center;font-size:var(--fs-sm);padding:.35vh 0}
+    .scard .sr+.sr{border-top:1px solid rgba(0,0,0,.05)}
+    .scard .nm{color:var(--ink);font-weight:600}
+    .scard .sh{font-size:10px;color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+    .scard .pill{font-family:'JetBrains Mono';font-weight:800;font-size:12px;padding:3px 0;border-radius:7px;color:#fff;text-align:center;min-width:42px}
+    .scard .dlt{font-family:'JetBrains Mono';font-weight:800;font-size:12px;padding:3px 0;border-radius:7px;text-align:center;min-width:50px}
+    .scard .dlt.up{background:rgba(35,160,106,.14);color:#1f7a4d}.scard .dlt.dn{background:rgba(230,0,18,.1);color:#C7000B}
   </style><section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 可用性怎么测：同一套任务，CUDA 与昇腾各跑一遍</span></div>
-        <div class="subttl">Methodology · 站在「会检索的 AI 助手」视角，按「触达 × 质量」给知识打分（opknow 18）</div>
+        <div class="brand"><span class="ttl">触点评分：总均分 73.6 — SDK 下载 / 工具差距最大，FAQ 自助反超</span></div>
+        <div class="subttl">Touchpoint scores · 昇腾 vs NVIDIA（24 触点节选；差值＝昇腾−NVIDIA）（ascend-vs-nvidia-ux）</div>
       </div>
-      <div class="head-r">04 / AI 可用性 · 方法</div>
+      <div class="head-r">08 / 技术体验 · 评分</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 38%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+      <div class="card" style="flex:0 0 36%;height:100%;padding:1vh .4vw;display:flex">
+        <iframe src="seq-d3.html?hi=2" title="时序图 · 人↔昇腾社区 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">How it runs</span>怎么跑的</div>
-        <p class="cmp-desc">AI 助手用 <b>web_search / web_fetch</b> 抓 <b>官方站 + 二手社区 + 自带知识</b> 三路，按「<b>触达 × 质量</b>」打 1–5 分、<b>noisy-OR 合成</b>；同一套任务在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 各<b>真跑一遍</b>，差异归因到「<b>栈 / 生态</b>」。</p>
-        <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">Scenarios</span>7 阶段 → 26 任务，算子开发涉及 5 次检索</div>
-        <div class="lc-stages">装环境 · 开发算子 · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
-        <div class="op5">
-          <div class="op5-i"><span class="c">D</span><b>写 kernel</b><small>自定义算子</small></div>
-          <div class="op5-i"><span class="c">M</span><b>Tiling</b><small>动态 shape</small></div>
-          <div class="op5-i"><span class="c">X</span><b>内存越界</b><small>定位</small></div>
-          <div class="op5-i"><span class="c">O</span><b>注册集成</b><small>接 PyTorch</small></div>
-          <div class="op5-i"><span class="c">L</span><b>精度排查</b><small>逐层比对</small></div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.3vh">
+        <div class="cmp-h"><span class="hk">Scores</span>不是全面落后，是<b>有长有短</b></div>
+        <div class="scard card" style="padding:1.4vh 1.4vw">
+          <div class="sr"><span class="sh">触点（节选 6 / 24）</span><span class="sh" style="text-align:center">昇腾</span><span class="sh" style="text-align:center">NVIDIA</span><span class="sh" style="text-align:center">差值</span></div>
+          <div class="sr"><span class="nm">官网首页</span><span class="pill" style="background:#23A06A">82</span><span class="pill" style="background:#23A06A">74</span><span class="dlt up">+8</span></div>
+          <div class="sr"><span class="nm">教程 / Tutorial</span><span class="pill" style="background:#23A06A">87</span><span class="pill" style="background:#23A06A">93</span><span class="dlt dn">−6</span></div>
+          <div class="sr"><span class="nm">SDK · Toolkit 下载流程</span><span class="pill" style="background:#E60012">21</span><span class="pill" style="background:#23A06A">87</span><span class="dlt dn">−66</span></div>
+          <div class="sr"><span class="nm">开发者社区 / 论坛</span><span class="pill" style="background:#23A06A">73</span><span class="pill" style="background:#23A06A">88</span><span class="dlt dn">−15</span></div>
+          <div class="sr"><span class="nm">博客 / 案例</span><span class="pill" style="background:#23A06A">75</span><span class="pill" style="background:#23A06A">92</span><span class="dlt dn">−17</span></div>
+          <div class="sr"><span class="nm">FAQ 自助</span><span class="pill" style="background:#23A06A">85</span><span class="pill" style="background:#E8A317">63</span><span class="dlt up">+22</span></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">可用性是<b>「任务相关」</b>的：成熟通识两栈差距小，<b>前沿开发差距被拉满</b>——要定位「卡在哪一关」，而非只给总分。</div>
+        <div class="bridge" style="margin-top:.2vh">总均分 <b>73.6</b>；<b>SDK / Toolkit 下载（−66）、工具 / 可观测性</b>对 CUDA 差距最大；<b>FAQ 自助（+22）、规格参数</b>反超。最该补「<b>官方直链能被 AI / 人抓到</b>」。</div>
       </div>
     </div>
   </section>

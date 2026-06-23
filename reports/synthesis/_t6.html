@@ -361,30 +361,50 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </style><section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 可用性怎么测：同一套任务，CUDA 与昇腾各跑一遍</span></div>
-        <div class="subttl">Methodology · 站在「会检索的 AI 助手」视角，按「触达 × 质量」给知识打分（opknow 18）</div>
+        <div class="brand"><span class="ttl">矩阵评分：D 官方可抓单点塌方，其余卡在版本散 / 二手薄 / 自带弱</span></div>
+        <div class="subttl">AI usability matrix · 算子开发 5 任务 × 6 维 · 每格 昇腾 / NVIDIA 对比（1–5 分，综合为合成值）（opknow 17）</div>
       </div>
-      <div class="head-r">04 / AI 可用性 · 方法</div>
+      <div class="head-r">06 / 矩阵评分 · 结果</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 38%;height:100%;padding:1vh .4vw;display:flex">
+      <div class="card" style="flex:0 0 34%;height:100%;padding:1vh .4vw;display:flex">
         <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">How it runs</span>怎么跑的</div>
-        <p class="cmp-desc">AI 助手用 <b>web_search / web_fetch</b> 抓 <b>官方站 + 二手社区 + 自带知识</b> 三路，按「<b>触达 × 质量</b>」打 1–5 分、<b>noisy-OR 合成</b>；同一套任务在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 各<b>真跑一遍</b>，差异归因到「<b>栈 / 生态</b>」。</p>
-        <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">Scenarios</span>7 阶段 → 26 任务，算子开发涉及 5 次检索</div>
-        <div class="lc-stages">装环境 · 开发算子 · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
-        <div class="op5">
-          <div class="op5-i"><span class="c">D</span><b>写 kernel</b><small>自定义算子</small></div>
-          <div class="op5-i"><span class="c">M</span><b>Tiling</b><small>动态 shape</small></div>
-          <div class="op5-i"><span class="c">X</span><b>内存越界</b><small>定位</small></div>
-          <div class="op5-i"><span class="c">O</span><b>注册集成</b><small>接 PyTorch</small></div>
-          <div class="op5-i"><span class="c">L</span><b>精度排查</b><small>逐层比对</small></div>
+        <div class="cmp-h"><span class="hk">Result</span>不是「都差」，是 <b>D 一格塌</b>（其余卡在版本散 / 二手薄 / 自带弱）</div>
+        <div class="card" style="padding:1.8vh 1.4vw">
+          <div class="hm-grid" id="mOp" style="grid-template-columns:104px repeat(6,1fr)"></div>
+          <div class="hm-legend"><span>每格：<b style="color:#3D4452">昇腾</b>（大·配色）/ <b style="color:#9aa0aa">N</b>=NVIDIA（小）· 1–5 分</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">可用性是<b>「任务相关」</b>的：成熟通识两栈差距小，<b>前沿开发差距被拉满</b>——要定位「卡在哪一关」，而非只给总分。</div>
+        <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel 的 D <b>官方真受阻（.41，SPA 抓空 → 转二手）</b>；M/X/O/L 官方都抓得到。<b>场景可用性 ≈ 最弱且最靠前那一搜。</b></div>
       </div>
     </div>
+    <script>
+    (function(){var grid=document.getElementById('mOp');if(!grid)return;
+      function heat(s){return s<20?'rgba(224,33,40,.06)':s<40?'rgba(244,132,12,.06)':s<60?'rgba(5,131,88,.06)':s<80?'rgba(18,113,128,.06)':'rgba(57,121,249,.06)';}
+      function bord(s){return s<20?'rgba(224,33,40,.22)':s<40?'rgba(244,132,12,.22)':s<60?'rgba(5,131,88,.22)':s<80?'rgba(18,113,128,.22)':'rgba(57,121,249,.22)';}
+      function txt(s){return s<20?'#E02128':s<40?'#F4840C':s<60?'#058358':s<80?'#127180':'#3979F9';}
+      var cols=['官方可抓','正文质量','版本清晰','二手厚度','自带知识','综合'];
+      // 每格 [昇腾显示, 昇腾色分0-100, NVIDIA显示]
+      var rows=[
+        {name:'写 kernel',sub:'D · 自定义算子',comb:41, c:[['受阻',0,'5'],['2',40,'5'],['2',40,'3'],['3',60,'4'],['2',40,'5']]},
+        {name:'Tiling',sub:'M · 动态 shape',comb:63, c:[['4',80,'5'],['4',80,'5'],['4',80,'4'],['2',40,'2'],['2',40,'5']]},
+        {name:'内存越界',sub:'X · 定位',comb:74, c:[['4',80,'5'],['5',100,'5'],['2',40,'5'],['2',40,'3'],['2',40,'4']]},
+        {name:'注册集成',sub:'O · 接框架',comb:72, c:[['4',80,'5'],['5',100,'5'],['3',60,'5'],['3',60,'2'],['3',60,'5']]},
+        {name:'精度排查',sub:'L · 比对',comb:69, c:[['4',80,'2'],['5',100,'5'],['2',40,'5'],['3',60,'2'],['3',60,'4']]}
+      ];
+      function cell(can,score,cuda){return '<div class="hm-cell" style="background:'+heat(score)+';color:'+txt(score)+';border-color:'+bord(score)+'"><span>'+can+'</span><span class="cn">N '+cuda+'</span></div>';}
+      var h='<div class="hm-corner"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">任务</span></div>';
+      cols.forEach(function(c){h+='<div class="hm-header">'+c+'</div>';});
+      rows.forEach(function(r){
+        var st=r.comb; var dot='<div style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:'+(st<60?'#E63838':st<70?'#FD9A00':'#37C597')+';box-shadow:0 0 0 2px '+(st<60?'rgba(230,56,56,.2)':st<70?'rgba(253,154,0,.2)':'rgba(55,197,151,.2)')+'"></div>';
+        h+='<div class="hm-row-label">'+dot+'<div><div>'+r.name+'</div><small>'+r.sub+'</small></div></div>';
+        r.c.forEach(function(d){ h+=cell(d[0],d[1],d[2]); });
+        h+=cell('.'+r.comb, r.comb<50?15:r.comb, '高');   // 综合：昇腾 .xx（D 强制红）/ NVIDIA 高
+      });
+      grid.innerHTML=h;
+    })();
+    </script>
   </section>
 
 </div>

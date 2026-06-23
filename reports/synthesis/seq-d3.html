@@ -2036,7 +2036,13 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     document.getElementById('sqPrev').onclick=function(){go(step-1);};
     updLbl();
   }
-  if(document.readyState!=='loading')buildCtrl();else document.addEventListener('DOMContentLoaded',buildCtrl);
+  function init(){
+    buildCtrl();
+    var m=(location.search.match(/[?&]hi=(\d+)/));   // ?hi=1/2 → 嵌入时锁定某关系聚光灯、隐藏控制条
+    if(m){ go(+m[1]); var c=document.getElementById('seqctrl'); if(c)c.style.display='none'; }
+  }
+  if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
+  window.addEventListener('load',function(){var m=(location.search.match(/[?&]hi=(\d+)/));if(m)go(+m[1]);});
 })();
 </script>
 </body>
