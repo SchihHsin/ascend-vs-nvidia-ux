@@ -458,7 +458,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-row-label{display:flex;align-items:center;gap:9px;padding:0 9px;font-size:12px;font-weight:700;color:#1B2432;border:1px solid rgba(223,223,223,.6);border-radius:10px;min-height:42px}
     .hm-row-label small{font-size:9.5px;font-weight:500;color:#A1A4AA;display:block}
     .hm-cell{border-radius:10px;min-height:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;border:1px solid #EFF0F1;font-family:'JetBrains Mono';font-size:13px;font-weight:800}
-    .hm-cell .cn{font-size:9px;color:#9aa0aa;font-weight:600;margin-top:2px}
+    .hm-cell .cn{font-size:11px;font-weight:800;margin-top:2px}
     .hm-legend{display:flex;align-items:center;gap:8px;margin-top:1vh;font-size:10px;color:#A1A4AA;justify-content:flex-end}
     .hm-grad{height:7px;width:110px;border-radius:4px;background:linear-gradient(90deg,#FFB9B9,#FFD7B7 35%,#FFF2A5 55%,#C4F3E1 75%,#94E1C8)}
   </style>
@@ -603,8 +603,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="ml">二手社区</div><div class="mc"><span class="ix">⑤</span> 丰富度<br/><small style="color:#A1A4AA">n≥6→5 / ≥3→3 / 0→1</small></div><div class="mc"><span class="ix">⑥</span> 可信度 / 一致性</div>
           <div class="ml">模型自带</div><div class="mc" style="grid-column:span 2"><span class="ix">⑦</span> 自带知识 · 无需检索即可作答的覆盖密度（质量并入本项）</div>
         </div>
-        <div class="mxline">跨渠道 <b>⑧ 检索成本</b>（摩擦·反向）｜产出 <b>⑨ 版本可锁 ⑩ 步骤可复现</b>（因变量·不进综合）｜收口 <b>⑪ 综合置信度</b>　＝ 三源×两关 + 4 项 = <b>11 项</b></div>
-        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 ＝ 噪声-OR(官方 · 二手 · 自带)</b>：<b>一条渠道达标即可作答</b>；④版本 · ⑧成本作全局乘子，<b>受阻记 0</b>（≠给质量打 1 分）。→ 所以 <b>D 三渠道同时失守</b>（官方受阻 + 二手稀 + 自带弱）才掉到 <b style="color:#E60012">.41</b>。</div>
+        <div class="mxline"><b style="color:var(--ink-2)">怎么算分（每项 score_N 把实测映射 1–5）</b>：② 可抓 <b>SSR抓到→4–5 · SPA抓空→受阻0</b>　⑤ 二手 <b>n≥6→5·≥3→3·0→1</b>　④ 版本 <b>单主线→5·多版本散→2</b>　⑧ 成本反向计</div>
+        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = 噪声-OR：1−(1−官方)(1−二手)(1−自带)</b>，受阻源记 0、再乘 ④版本·⑧成本系数。一条渠道达标即可作答——D 三渠道同时失守（OFF 0 · SEC .24 · OWN .40 → .54，再被版本/成本拉到 <b style="color:#FF6B6B">.41</b>）。</div>
       </div>
     </div>
   </section>
@@ -645,7 +645,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
         {name:'注册集成',sub:'O · 接框架',comb:72, c:[['4',80,'5'],['5',100,'5'],['3',60,'5'],['3',60,'2'],['3',60,'5']]},
         {name:'精度排查',sub:'L · 比对',comb:69, c:[['4',80,'2'],['5',100,'5'],['2',40,'5'],['3',60,'2'],['3',60,'4']]}
       ];
-      function cell(can,score,cuda){return '<div class="hm-cell" style="background:'+heat(score)+';color:'+txt(score)+';border-color:'+bord(score)+'"><span>'+can+'</span><span class="cn">N '+cuda+'</span></div>';}
+      function cscore(d){if(d==='高')return 95;var n=parseInt(d);return isNaN(n)?60:n*20;}
+      function cell(can,score,cuda){return '<div class="hm-cell" style="background:'+heat(score)+';border-color:'+bord(score)+'"><span style="color:'+txt(score)+'">'+can+'</span><span class="cn" style="color:'+txt(cscore(cuda))+'">N '+cuda+'</span></div>';}
       var h='<div class="hm-corner"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">任务</span></div>';
       cols.forEach(function(c){h+='<div class="hm-header">'+c+'</div>';});
       rows.forEach(function(r){
