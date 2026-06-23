@@ -1075,10 +1075,10 @@ const D_FLOW={
 };
 function renderV(){
   const phX=4, phW=70, owX=78, owW=44;
-  const LX={hu:150, ai:415, off:680, tool:945, sec:1210};
+  const LX={hu:255, ai:490, off:725, tool:960, sec:1195};
   const PCOL={off:"#C8102E", sec:"#BA7517", ai:"#6B5BA8", hu:"#2f3d63", tool:"#3f7d72"};
   const PNAME={off:"昇腾官方", sec:"二手社区", ai:"AI（Agent）", hu:"人类用户", tool:"本机工具"};
-  const vTop=86, dyV=38, Wv=1250;
+  const vTop=86, dyV=38, Wv=1255;
   const Y = xi => vTop + xi*dyV;
   const Hv = Y(NODES.length-1) + 70;
   const exec = ()=> curLvl>=1 ? "ai" : "hu";        // 执行方：Vibe 档起转 AI
@@ -1135,11 +1135,12 @@ function renderV(){
 
   /* 每步＝一条消息（标题在箭头上方）；决策＝执行者线上的菱形。红色小字＝该步对应的矩阵指标分（打穿到 page 17） */
   const NS=SCENARIOS[curScen].nodeScore||{};
+  const brSrc={}; (BRANCH||[]).forEach(br=>{ brSrc[br.from]=['hu',(br.to||'off')].sort().join('-'); });
   NODES.forEach(d=>{
     const y=Y(d.xi);
     if(d.kind==="decision"){
       const x=LX[d.lane];
-      const gx=svg.append("g").attr("transform",`translate(${x},${y})`).style("cursor","pointer")
+      const gx=svg.append("g").attr("data-pair",brSrc[d.id]||null).attr("transform",`translate(${x},${y})`).style("cursor","pointer")
         .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
       drawBarV(gx,d);                       // 菱形按 dtier 深浅
       sideLabel(gx,d, d.lane==="ai");       // AI 在左→标题朝右(中央)；人在右→朝左(中央)
@@ -1183,9 +1184,10 @@ function renderV(){
   if(curLvl<=1) BRANCH.forEach(br=>{
     const src=byId[br.from], y=Y(src.xi)+(br.above?-22:(src.kind==="decision"?0:26)), tgt=br.to||"off", x2=LX[tgt];
     const pair=['hu',tgt].sort().join('-');
-    svg.append("line").attr("data-pair",pair).attr("x1",LX.hu-14).attr("y1",y).attr("x2",x2+3).attr("y2",y)
+    const x1b=(src.kind==="decision")?(LX[src.lane]+BARW/2):LX.hu;  // 决策→右缘中点起；否则从人生命线起
+    svg.append("line").attr("data-pair",pair).attr("x1",x1b).attr("y1",y).attr("x2",x2+3).attr("y2",y)
       .attr("stroke","#2f3d63").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ab)").attr("opacity",.85);
-    svg.append("text").attr("data-pair",pair).attr("x",(LX.hu+x2)/2).attr("y",y-5).attr("text-anchor","middle")
+    svg.append("text").attr("data-pair",pair).attr("x",(x1b+x2)/2).attr("y",y-5).attr("text-anchor","middle")
       .attr("font-size",9.5).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
       .style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"二手社区":"昇腾官方"),b:br.b})).on("mouseleave",hideTip);
