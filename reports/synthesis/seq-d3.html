@@ -1114,9 +1114,9 @@ function renderV(){
   /* 4 条参与者生命线 + 列头 */
   ["hu","ai","off","tool","sec"].forEach(k=>{
     const x=LX[k];
-    svg.append("line").attr("x1",x).attr("x2",x).attr("y1",vTop-34).attr("y2",Hv-26)
+    svg.append("line").attr("data-lane",k).attr("x1",x).attr("x2",x).attr("y1",vTop-34).attr("y2",Hv-26)
       .attr("stroke","#e3e3e3").attr("stroke-width",1.5);
-    const t=svg.append("text").attr("x",x).attr("y",vTop-46).attr("text-anchor","middle")
+    const t=svg.append("text").attr("data-lane",k).attr("x",x).attr("y",vTop-46).attr("text-anchor","middle")
       .attr("font-size",11.5).attr("font-weight",800).attr("fill",PCOL[k]).text(PNAME[k]);
     if(k==="ai"||k==="hu") t.style("cursor","help")
       .on("mousemove",ev=>showLaneTip(ev,k)).on("mouseleave",hideTip).on("click",ev=>pinLaneTip(ev,k));
@@ -1157,23 +1157,24 @@ function renderV(){
       return;
     }
     const x2=LX[to], dir=x2>x1?1:-1;
+    const pair=[frm,to].sort().join('-');
     const isAi=frm==="ai"||to==="ai";
     const col=f.blocked?"#C8102E":(isAi?"#8156c9":"#7a8aa0");
     const mk=f.blocked?"url(#ahr)":(isAi?"url(#ah)":"url(#ahg)");
-    svg.append("line").attr("x1",x1+dir*14).attr("y1",y).attr("x2",x2-dir*3).attr("y2",y)
+    svg.append("line").attr("data-pair",pair).attr("x1",x1+dir*14).attr("y1",y).attr("x2",x2-dir*3).attr("y2",y)
       .attr("stroke",col).attr("stroke-width",2).attr("marker-end",mk).attr("opacity",.92);
-    const tt=svg.append("text").attr("x",(x1+x2)/2).attr("y",y-7).attr("text-anchor","middle")
+    const tt=svg.append("text").attr("data-pair",pair).attr("x",(x1+x2)/2).attr("y",y-7).attr("text-anchor","middle")
       .attr("font-size",10).attr("font-weight",600).attr("fill", f.blocked?"#C8102E":"#333");
     tt.append("tspan").text(d.t);
     if(NS[d.id] && !f.blocked) tt.append("tspan").attr("fill","#bb2236").attr("font-weight",700).text("　"+NS[d.id]);
-    const gx=svg.append("g").attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
+    const gx=svg.append("g").attr("data-pair",pair).attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
     drawMarker(gx,d,PCOL[frm],f.blocked);
     if(f.blocked){                          // 红色空返回 + ✕（核心发现可视化）+ 对应矩阵分
       const ry=y+17;
-      svg.append("line").attr("x1",x2-dir*3).attr("y1",ry).attr("x2",x1+dir*14).attr("y2",ry)
+      svg.append("line").attr("data-pair",pair).attr("x1",x2-dir*3).attr("y1",ry).attr("x2",x1+dir*14).attr("y2",ry)
         .attr("stroke","#C8102E").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ahr)").attr("opacity",.92);
-      svg.append("text").attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
+      svg.append("text").attr("data-pair",pair).attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
         .attr("font-size",9.5).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）"+(NS[d.id]?" → 矩阵 "+NS[d.id]:""));
     }
   });
@@ -1181,17 +1182,17 @@ function renderV(){
   /* 用户独立分支 ＝ 人 → 昇腾社区（官方 or 二手）的独立消息（仅档①）；br.to 指定目标线，缺省 off */
   if(curLvl<=1) BRANCH.forEach(br=>{
     const src=byId[br.from], y=Y(src.xi)+(br.above?-22:(src.kind==="decision"?0:26)), tgt=br.to||"off", x2=LX[tgt];
-    svg.append("line").attr("x1",LX.hu-14).attr("y1",y).attr("x2",x2+3).attr("y2",y)
+    const pair=['hu',tgt].sort().join('-');
+    svg.append("line").attr("data-pair",pair).attr("x1",LX.hu-14).attr("y1",y).attr("x2",x2+3).attr("y2",y)
       .attr("stroke","#2f3d63").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ab)").attr("opacity",.85);
-    svg.append("text").attr("x",(LX.hu+x2)/2).attr("y",y-5).attr("text-anchor","middle")
+    svg.append("text").attr("data-pair",pair).attr("x",(LX.hu+x2)/2).attr("y",y-5).attr("text-anchor","middle")
       .attr("font-size",9.5).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
       .style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"二手社区":"昇腾官方"),b:br.b})).on("mouseleave",hideTip);
   });
 
-  /* ===== 逐步讲解：导出几何（聚光灯用）+ 重绘后回填 ===== */
-  window.__seqGeo={vTop:vTop,dyV:dyV,Hv:Hv,Wv:Wv,phases:PHASE.map(d=>({n:d.n,top:Y(d.a)-dyV/2+2,bot:Y(d.b)+dyV/2-2}))};
-  if(window.__seqApplySpot) window.__seqApplySpot();
+  /* ===== 按关系高亮：重绘后回填当前选中 ===== */
+  if(window.__seqApplyHi) window.__seqApplyHi();
 }
 
 /* ===== 视图调度 + 自主度拖动条 + 横竖 Tab ===== */
@@ -1979,7 +1980,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 .wrap{max-width:none!important;margin:0!important;padding:0!important;height:100%}
 .chartwrap{border:none!important;padding:6px!important;margin:0!important;width:100%!important;height:100%!important;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box;background:transparent!important}
 #journey{width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important}
-#spotmask rect{transition:opacity .25s,y .3s,height .3s}
+#journey [data-pair],#journey [data-lane]{transition:opacity .28s}
 #seqctrl{position:fixed;top:8px;right:12px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Noto Sans SC',sans-serif}
 #seqctrl .sqbtn{width:24px;height:24px;border-radius:7px;border:1px solid #d4d8df;background:rgba(255,255,255,.85);color:#444;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 #seqctrl .sqbtn:hover{background:#fff;border-color:#5B5BD6;color:#5B5BD6}
@@ -1999,32 +2000,34 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   if(document.readyState!=='loading')fix();else document.addEventListener('DOMContentLoaded',fix);
   window.addEventListener('load',fix);
 
-  /* ===== 逐步讲解：聚光灯（压暗其余阶段、只留当前阶段那条横带）===== */
-  var SVGNS='http://www.w3.org/2000/svg', step=0;
-  function geo(){return window.__seqGeo;}
-  function clearSpot(){var g=document.getElementById('spotmask');if(g&&g.parentNode)g.parentNode.removeChild(g);}
-  function updLbl(){var G=geo(),lbl=document.getElementById('sqLbl');if(!lbl)return;
-    lbl.textContent=(step<1||!G)?'▶ 逐步讲解':('第 '+step+' / '+G.phases.length+' 步 · '+G.phases[step-1].n);}
-  function applySpot(){
-    var svgEl=document.getElementById('journey'),G=geo(); clearSpot();
-    if(!svgEl||!G||step<1||step>G.phases.length){updLbl();return;}
-    var ph=G.phases[step-1],g=document.createElementNS(SVGNS,'g');
-    g.setAttribute('id','spotmask'); g.setAttribute('pointer-events','none');
-    function dim(y,h){if(h<=0.5)return;var r=document.createElementNS(SVGNS,'rect');
-      r.setAttribute('x',0);r.setAttribute('y',y);r.setAttribute('width',G.Wv);r.setAttribute('height',h);
-      r.setAttribute('fill','#fbfbfd');r.setAttribute('opacity','0.8');g.appendChild(r);}
-    dim(0,ph.top); dim(ph.bot,G.Hv-ph.bot);
-    var hl=document.createElementNS(SVGNS,'rect');
-    hl.setAttribute('x',1);hl.setAttribute('y',ph.top);hl.setAttribute('width',3.5);hl.setAttribute('height',ph.bot-ph.top);
-    hl.setAttribute('rx',2);hl.setAttribute('fill','#5B5BD6');g.appendChild(hl);
-    svgEl.appendChild(g); updLbl();
+  /* ===== 按关系讲解：高亮某对生命线之间的所有箭头、其余压暗 ===== */
+  var GROUPS=[
+    {name:'AI ↔ 昇腾 / 二手 · 矩阵评分', pairs:['ai-off','ai-sec']},
+    {name:'人 ↔ 昇腾社区 · 技术体验', pairs:['hu-off','hu-sec']},
+    {name:'人 ↔ AI · 协作交接', pairs:['ai-hu']}
+  ];
+  var step=0;  // 0=全亮；1..GROUPS.length
+  function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
+  function updLbl(){var lbl=document.getElementById('sqLbl');if(!lbl)return;
+    lbl.textContent=step<1?'▶ 按关系讲解':('第 '+step+' / '+GROUPS.length+' · '+GROUPS[step-1].name);}
+  function applyHi(){
+    var svgEl=document.getElementById('journey'); if(!svgEl){updLbl();return;}
+    if(step<1){ Array.prototype.forEach.call(svgEl.children,function(el){el.style.opacity='';}); updLbl(); return; }
+    var g=GROUPS[step-1], lanes=lanesOf(g);
+    Array.prototype.forEach.call(svgEl.children,function(el){
+      var pr=el.getAttribute&&el.getAttribute('data-pair'), ln=el.getAttribute&&el.getAttribute('data-lane');
+      if(pr) el.style.opacity=(g.pairs.indexOf(pr)>=0)?'1':'0.1';
+      else if(ln) el.style.opacity=lanes[ln]?'1':'0.12';
+      else el.style.opacity='0.12';
+    });
+    updLbl();
   }
-  window.__seqApplySpot=applySpot;
-  function go(n){var G=geo();if(!G)return;var N=G.phases.length;step=((n%(N+1))+(N+1))%(N+1);applySpot();}
+  window.__seqApplyHi=applyHi;
+  function go(n){var N=GROUPS.length;step=((n%(N+1))+(N+1))%(N+1);applyHi();}
   function buildCtrl(){
     if(document.getElementById('seqctrl'))return;
     var d=document.createElement('div');d.id='seqctrl';
-    d.innerHTML='<button id="sqPrev" class="sqbtn" title="上一步">‹</button><span id="sqLbl" class="sqlbl">▶ 逐步讲解</span><button id="sqNext" class="sqbtn" title="下一步">›</button>';
+    d.innerHTML='<button id="sqPrev" class="sqbtn" title="上一个关系">‹</button><span id="sqLbl" class="sqlbl">▶ 按关系讲解</span><button id="sqNext" class="sqbtn" title="下一个关系">›</button>';
     document.body.appendChild(d);
     document.getElementById('sqNext').onclick=function(){go(step+1);};
     document.getElementById('sqLbl').onclick=function(){go(step+1);};
