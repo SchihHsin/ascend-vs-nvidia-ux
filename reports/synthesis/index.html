@@ -402,8 +402,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
           .seq-side .ssl b{color:var(--ink);font-weight:600}
           .seq-side .seq-note{font-size:var(--fs-xs);color:var(--ink-3)}
         </style>
-        <iframe src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:1px solid var(--line);border-radius:12px;background:#fff"></iframe>
-        <div class="seq-side card">
+        <div class="card" style="flex:1;min-width:0;height:100%;padding:1.2vh 1vw;display:flex">
+          <iframe src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+        </div>
+        <div class="seq-side">
           <div class="ssl"><i style="background:#6B5BA8"></i><span><b>AI ↔ 昇腾 / 二手</b><br/>每次抓取的命中·质量　=　AI 可用性矩阵打分（opknow 热力图）</span></div>
           <div class="ssl"><i style="background:#2f3d63"></i><span><b>人 ↔ 昇腾社区</b><br/>这条线的直接体验　=　触点体验分析（ascend-vs-nvidia-ux）</span></div>
           <div class="bridge" style="margin-top:0">一次算子开发沿时间撞上 <b>5 次搜索</b>（D→M→X→O→L）；<b>只有写 kernel 的「自定义算子」官方真受阻</b>（红 ✕ SPA 抓不到 → 转二手兜底）。知识只要<b>一条渠道扛住就能答</b>（noisy-OR），三条同时弱才致命。</div>
