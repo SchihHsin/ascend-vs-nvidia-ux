@@ -396,8 +396,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div style="flex:1;min-height:0;display:flex;gap:1.6vw">
         <style>
-          .seq-side{flex:0 0 30%;min-width:0;display:flex;flex-direction:column;justify-content:center}
-          .seq-side .ss-pane{display:flex;flex-direction:column;gap:1.4vh}
+          .seq-side{flex:0 0 35%;min-width:0;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+          .seq-side .ss-pane{display:flex;flex-direction:column;gap:1.1vh}
           .seq-side .ss-pane[hidden]{display:none}
           .seq-side .ssl{display:flex;align-items:flex-start;gap:.6em;font-size:var(--fs-body);color:var(--ink-2);line-height:1.55}
           .seq-side .ssl i{width:12px;height:12px;border-radius:3px;flex:none;margin-top:.4em}
@@ -406,8 +406,15 @@ body.overview #panel,body.overview #toggle{display:none!important}
           .seq-side .ss-h{display:flex;align-items:center;gap:.5em;font-size:var(--fs-h3);font-weight:700;color:var(--ink);line-height:1.3}
           .seq-side .ss-h i{width:13px;height:13px;border-radius:4px;flex:none}
           .seq-side .ss-tag{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
-          .seq-side .ss-p{font-size:var(--fs-body);line-height:1.7;color:var(--ink-2);margin:0}
+          .seq-side .ss-p{font-size:var(--fs-sm);line-height:1.6;color:var(--ink-2);margin:0}
           .seq-side .ss-p b{color:var(--ink);font-weight:600}
+          .seq-side .ss-fig{display:block;width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;box-shadow:0 6px 18px -12px rgba(30,40,70,.3)}
+          .seq-side .ss-cap{font-size:var(--fs-xs);color:var(--ink-3);line-height:1.5}
+          .seq-side .ss-cmp{display:grid;grid-template-columns:1fr 1fr;gap:.6vw}
+          .seq-side .ss-cmp figure{margin:0;display:flex;flex-direction:column;gap:.3em}
+          .seq-side .ss-cmp img{width:100%;border:1px solid var(--line);border-radius:8px;display:block;aspect-ratio:16/11;object-fit:cover;object-position:top}
+          .seq-side .ss-cmp figcaption{font-size:10px;color:var(--ink-2);text-align:center;font-weight:600}
+          .seq-side .ss-cmp .vnv{color:#76B900}.seq-side .ss-cmp .vas{color:#C7000B}
         </style>
         <div class="card" style="flex:1;min-width:0;height:100%;padding:1.2vh .6vw;display:flex">
           <iframe src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
@@ -417,21 +424,23 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="ssl"><i style="background:#6B5BA8"></i><span><b>AI ↔ 昇腾 / 二手</b><br/>每次抓取的命中·质量　=　AI 可用性矩阵打分（opknow 热力图）</span></div>
             <div class="ssl"><i style="background:#2f3d63"></i><span><b>人 ↔ 昇腾社区</b><br/>这条线的直接体验　=　触点体验分析（ascend-vs-nvidia-ux）</span></div>
             <div class="bridge" style="margin-top:0">一次算子开发沿时间撞上 <b>5 次搜索</b>（D→M→X→O→L）；<b>只有写 kernel 的「自定义算子」官方真受阻</b>。知识只要<b>一条渠道扛住就能答</b>（noisy-OR）。</div>
-            <div class="seq-note">点图右上「按关系讲解」，这里随高亮展开对应分析</div>
+            <div class="seq-note">点图右上「按关系讲解」，这里随高亮展开<b>对应的图表与截图证据</b></div>
           </div>
           <div class="ss-pane" data-step="1" hidden>
             <div class="ss-h"><i style="background:#6B5BA8"></i>AI ↔ 昇腾 / 二手 · 矩阵评分</div>
-            <div class="ss-tag">分析过程</div>
-            <p class="ss-p">AI 用 <b>web_fetch / web_search</b> 抓官方 + 二手，按「<b>触达 × 质量</b>」给每格打分，noisy-OR 合成综合可用性（11 指标 × 三源两关）。</p>
-            <div class="ss-tag">分析结论</div>
-            <div class="bridge" style="margin-top:0">5 次检索里只有写 kernel 的 D <b>官方真受阻（.41，SPA 抓空 → 转二手）</b>；M/X/O/L 官方都抓得到（.63/.74/.72/.69）。<b>场景可用性 ≈ 最弱且最靠前那一搜。</b></div>
+            <a href="ai-usability-heat.png" target="_blank"><img class="ss-fig" src="ai-usability-heat.png" style="max-height:40vh;object-fit:contain" alt="AI 检索可用性矩阵"/></a>
+            <div class="ss-cap"><b>分析过程</b>：AI 用 web_fetch / web_search 抓官方 + 二手，按「触达 × 质量」给 11 指标 × 三源两关打分，noisy-OR 合成综合可用性（opknow 17）。</div>
+            <div class="bridge" style="margin-top:0">写 kernel 的 D <b>官方真受阻 .41</b>（SPA 抓空 → 转二手）；M/X/O/L 官方都抓得到（.63/.74/.72/.69）。<b>场景可用性 ≈ 最弱且最靠前那一搜。</b></div>
           </div>
           <div class="ss-pane" data-step="2" hidden>
             <div class="ss-h"><i style="background:#2f3d63"></i>人 ↔ 昇腾社区 · 技术体验</div>
-            <div class="ss-tag">分析过程</div>
-            <p class="ss-p">把人直接逛昇腾官网的全旅程拆成 <b>24 触点</b>，逐触点与 NVIDIA 同维对照、真实截图取证评分。</p>
-            <div class="ss-tag">分析结论</div>
-            <div class="bridge" style="margin-top:0">总均分 <b>73.6</b>；<b>X（工具 / 可观测性）</b>对 CUDA 差距最大、L（精度）差距最小。最该补「<b>官方直链能被 AI / 人抓到</b>」。</div>
+            <a href="touchpoint-heat.png" target="_blank"><img class="ss-fig" src="touchpoint-heat.png" style="max-height:30vh;object-fit:contain" alt="触点体验热力图"/></a>
+            <div class="ss-cmp">
+              <figure><a href="nv-docs.png" target="_blank"><img src="nv-docs.png" alt="NVIDIA 文档"/></a><figcaption class="vnv">NVIDIA Documentation Hub</figcaption></figure>
+              <figure><a href="asc-docs.png" target="_blank"><img src="asc-docs.png" alt="昇腾 文档"/></a><figcaption class="vas">昇腾 界面文档</figcaption></figure>
+            </div>
+            <div class="ss-cap"><b>分析过程</b>：人逛官网全旅程拆 <b>24 触点</b>，逐触点与 NVIDIA 同维对照、<b>真实截图取证</b>评分（上：热力图；下：文档触点截图对比）。</div>
+            <div class="bridge" style="margin-top:0">总均分 <b>73.6</b>；SDK/Toolkit 下载、<b>工具 / 可观测性</b>对 CUDA 差距最大。最该补「官方直链能被 AI / 人抓到」。</div>
           </div>
         </div>
       </div>
