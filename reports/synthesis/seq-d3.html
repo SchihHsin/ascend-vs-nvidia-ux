@@ -347,7 +347,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 
 <a id="s1"></a>
 <h2><span class="no">①</span>全链路时序图 · 4 参与者（拖动「AI 自主度」看场景切换 · 悬浮看每步细节）</h2>
-<div class="sechint">竖向时序图、<b>5 条生命线（昇腾官方 ｜ 二手社区 ｜ AI ｜ 人类用户 ｜ 本机工具）</b>。这是<b>「算子开发场景」全流程</b>：开发一个算子沿时间撞上 <b>5 次搜索（D→M→X→O→L）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行。拖滑块看 3 档自主度、<b>悬浮节点看细节</b>。<details class="moreinfo"><summary>展开：交互与核心发现</summary><div>每步是参与者间一条消息（横向箭头、标题在上）。<b>核心发现</b>：5 次搜索里<b>只有写 kernel 的 D（sD）官方真受阻</b>——AI 向昇腾官方 <code>web_fetch</code>，返回红色空箭头「✕ 抓取为空（SPA）」、再转二手社区兜底；后面 M/X/O/L 官方都抓得到、但各有版本/二手/自带的坑。拖动时执行/决策发起方 morph——越自动「人类用户」线越靠边。（3 档为协作示意、仅 AI 检索步实测，口径见底部局限①）</div></details></div>
+<div class="sechint">竖向时序图、<b>5 条生命线（人类用户 ｜ AI ｜ 昇腾官方 ｜ 本机工具 ｜ 二手社区）</b>。这是<b>「算子开发场景」全流程</b>：开发一个算子沿时间撞上 <b>5 次搜索（D→M→X→O→L）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行。拖滑块看 3 档自主度、<b>悬浮节点看细节</b>。<details class="moreinfo"><summary>展开：交互与核心发现</summary><div>每步是参与者间一条消息（横向箭头、标题在上）。<b>核心发现</b>：5 次搜索里<b>只有写 kernel 的 D（sD）官方真受阻</b>——AI 向昇腾官方 <code>web_fetch</code>，返回红色空箭头「✕ 抓取为空（SPA）」、再转二手社区兜底；后面 M/X/O/L 官方都抓得到、但各有版本/二手/自带的坑。拖动时执行/决策发起方 morph——越自动「人类用户」线越靠边。（3 档为协作示意、仅 AI 检索步实测，口径见底部局限①）</div></details></div>
 
 <div class="sctabs" id="sctabs"></div>
 
@@ -366,11 +366,11 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 
 <div class="legendbar">
   <span class="lg" style="font-weight:700;color:#555">生命线：</span>
-  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#C8102E"></i> 昇腾官方</span>
-  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#BA7517"></i> 二手社区</span>
-  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#6B5BA8"></i> AI</span>
   <span class="lg"><i class="lgdot" style="background:#fff;border-color:#2f3d63"></i> 人类用户</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#6B5BA8"></i> AI</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#C8102E"></i> 昇腾官方</span>
   <span class="lg"><i class="lgdot" style="background:#fff;border-color:#3f7d72"></i> 本机工具</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#BA7517"></i> 二手社区</span>
   <span class="lg" id="lgHandoff"><i class="lgline"></i> 消息·涉及 AI</span>
   <span class="lg"><i class="lgline" style="border-top-color:#7a8aa0"></i> 消息·人↔工具</span>
   <span class="lg"><i class="lgline" style="border-top:2px dashed #C8102E"></i> 受阻·空返回 ✕</span>
@@ -824,7 +824,7 @@ let NODES, BRANCH, PHASE, PHASE_DETAIL, FLOW, NDETAIL, ARCHFLOW, byId, curScen="
 
 /* ===== 场景 D · 自定义算子开发（Ascend C + msOpGen + aclnn → PyTorch）===== */
 /* 场景级旅程：开发一个算子，沿途撞上 5 次搜索（D→M→X→O→L），各打穿矩阵不同行。
-   生命线 5 条：昇腾官方(off) / 二手社区(sec) / AI / 人 / 工具。唯一官方受阻＝写 kernel 的 D。 */
+   生命线 5 条：人类用户(hu) / AI / 昇腾官方(off) / 本机工具(tool) / 二手社区(sec)。唯一官方受阻＝写 kernel 的 D。 */
 const D_NODES = [
   {id:"n1",   lane:"hu", kind:"start",   t:"立项·选型·开发算子接 PyTorch",
     meta:"用户主导 · P1 · 含 step1 落地·选型", b:`<b>用户给 AI 的原始输入：</b>「我要在昇腾 NPU 上写一个自定义算子（例如逐元素 AddCustom），用 Ascend C 实现，并注册进 PyTorch、能在 torch_npu 里调用——完整流程怎么走？」<br><br>目标：开发一个 Ascend C 自定义算子并接入 PyTorch。立项即含<b>选型（step1 落地·找入口·选型）</b>——先去社区找入口、判断走 aclnn 简易工程还是完整自定义算子工程。之后这次开发会沿时间撞上多次搜索，每次对应 26 任务里不同的一个。`},
@@ -1062,7 +1062,7 @@ function drawBarV(sel,d){
 
 /* ===================== 竖向视图 · 4 参与者真·时序图（时间自上而下） =====================
    每步＝参与者间一条消息（横向箭头，标题在箭头上方）；受阻＝红色空返回。
-   生命线左→右：昇腾官方(off) ｜ 二手社区(sec) ｜ AI ｜ 人类用户 ｜ 本机工具。决策＝落在执行者生命线上的菱形。
+   生命线左→右：人类用户(hu) ｜ AI ｜ 昇腾官方(off) ｜ 本机工具(tool) ｜ 二手社区(sec)。决策＝落在执行者生命线上的菱形。
    FLOW：frm/to 为参与者；"exec"＝执行方(Vibe 档起转 AI)，随滑块 morph（人靠边）。检索 = AI→官方(受阻则→二手)。 */
 const D_FLOW={
   n1:{frm:"hu",to:"ai"},
@@ -1075,7 +1075,7 @@ const D_FLOW={
 };
 function renderV(){
   const phX=4, phW=70, owX=78, owW=44;
-  const LX={sec:235, off:455, ai:675, hu:895, tool:1110};
+  const LX={hu:235, ai:455, off:675, tool:895, sec:1110};
   const PCOL={off:"#C8102E", sec:"#BA7517", ai:"#6B5BA8", hu:"#2f3d63", tool:"#3f7d72"};
   const PNAME={off:"昇腾官方", sec:"二手社区", ai:"AI（Agent）", hu:"人类用户", tool:"本机工具"};
   const vTop=86, dyV=38, Wv=1180;
@@ -1112,7 +1112,7 @@ function renderV(){
   });
 
   /* 4 条参与者生命线 + 列头 */
-  ["sec","off","ai","hu","tool"].forEach(k=>{
+  ["hu","ai","off","tool","sec"].forEach(k=>{
     const x=LX[k];
     svg.append("line").attr("x1",x).attr("x2",x).attr("y1",vTop-34).attr("y2",Hv-26)
       .attr("stroke","#e3e3e3").attr("stroke-width",1.5);
