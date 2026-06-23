@@ -455,10 +455,16 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-corner svg{position:absolute;inset:0;width:100%;height:100%}
     .hm-corner .hc-col{position:absolute;top:24%;right:14%;font-size:11px;font-weight:700;color:#3D4452}
     .hm-corner .hc-row{position:absolute;bottom:24%;left:14%;font-size:11px;font-weight:700;color:#3D4452}
-    .hm-row-label{display:flex;align-items:center;gap:9px;padding:0 9px;font-size:12px;font-weight:700;color:#1B2432;border:1px solid rgba(223,223,223,.6);border-radius:10px;min-height:42px}
+    .hm-row-label{display:flex;align-items:center;gap:8px;padding:0 8px;font-size:11.5px;font-weight:700;color:#1B2432;border:1px solid rgba(223,223,223,.6);border-radius:8px;min-height:28px}
+    .hm-stk{font-family:'Noto Sans SC',sans-serif;font-size:9px;font-weight:800;padding:1.5px 6px;border-radius:5px;color:#fff;flex:none}
+    .hm-stk.asc{background:#C7000B}.hm-stk.nv{background:#76B900}
+    .hm-row-label.nv-row{justify-content:flex-start;padding-left:18px;background:rgba(0,0,0,.022);border-top-color:transparent}
     .hm-row-label small{font-size:9.5px;font-weight:500;color:#A1A4AA;display:block}
-    .hm-cell{border-radius:10px;min-height:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;border:1px solid #EFF0F1;font-family:'JetBrains Mono';font-size:13px;font-weight:800}
+    .hm-cell{border-radius:8px;min-height:28px;display:flex;align-items:center;justify-content:center;line-height:1.05;border:1px solid #EFF0F1;font-family:'JetBrains Mono';font-size:12px;font-weight:800}
     .hm-cell .cn{font-size:11px;font-weight:800;margin-top:2px}
+    .hm-cell.pair{padding:0!important;border:0!important;background:none!important;display:flex;flex-direction:column;gap:3px;min-height:42px}
+    .hm-half{flex:1;min-height:18px;border:1px solid #EFF0F1;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:.4em;font-family:'JetBrains Mono';font-weight:800;font-size:11px;line-height:1}
+    .hm-half small{font-size:8px;font-weight:700;opacity:.55}
     .hm-legend{display:flex;align-items:center;gap:8px;margin-top:1vh;font-size:10px;color:#A1A4AA;justify-content:flex-end}
     .hm-grad{height:7px;width:110px;border-radius:4px;background:linear-gradient(90deg,#FFB9B9,#FFD7B7 35%,#FFF2A5 55%,#C4F3E1 75%,#94E1C8)}
   </style>
@@ -626,7 +632,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cmp-h"><span class="hk">Result</span>不是「都差」，是 <b>D 一格失守</b>（其余受限于版本散 / 二手薄 / 自带弱）</div>
         <div class="card" style="padding:1.8vh 1.4vw">
           <div class="hm-grid" id="mOp" style="grid-template-columns:104px repeat(6,1fr)"></div>
-          <div class="hm-legend"><span>每格：<b style="color:#3D4452">昇腾</b>（大·配色）/ <b style="color:#9aa0aa">N</b>=NVIDIA（小）· 1–5 分</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
+          <div class="hm-legend"><span>每个维度并排两格：<b style="color:#3D4452">左 昇</b>＝昇腾 / <b style="color:#3D4452">右 N</b>＝NVIDIA，<b>各自配色</b>（1–5 分，综合为合成值）</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
         </div>
         <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel 的 D <b>官方真受阻（.41，SPA 抓空 → 转二手）</b>；M/X/O/L 官方都抓得到。<b>场景可用性 ≈ 最弱且最靠前那一搜。</b></div>
       </div>
@@ -646,14 +652,20 @@ body.overview #panel,body.overview #toggle{display:none!important}
         {name:'精度排查',sub:'L · 比对',comb:69, c:[['4',80,'2'],['5',100,'5'],['2',40,'5'],['3',60,'2'],['3',60,'4']]}
       ];
       function cscore(d){if(d==='高')return 95;var n=parseInt(d);return isNaN(n)?60:n*20;}
-      function cell(can,score,cuda){return '<div class="hm-cell" style="background:'+heat(score)+';border-color:'+bord(score)+'"><span style="color:'+txt(score)+'">'+can+'</span><span class="cn" style="color:'+txt(cscore(cuda))+'">N '+cuda+'</span></div>';}
+      function scell(disp,sc){return '<div class="hm-cell" style="background:'+heat(sc)+';color:'+txt(sc)+';border-color:'+bord(sc)+'">'+disp+'</div>';}
       var h='<div class="hm-corner"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">任务</span></div>';
       cols.forEach(function(c){h+='<div class="hm-header">'+c+'</div>';});
       rows.forEach(function(r){
-        var st=r.comb; var dot='<div style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:'+(st<60?'#E63838':st<70?'#FD9A00':'#37C597')+';box-shadow:0 0 0 2px '+(st<60?'rgba(230,56,56,.2)':st<70?'rgba(253,154,0,.2)':'rgba(55,197,151,.2)')+'"></div>';
-        h+='<div class="hm-row-label">'+dot+'<div><div>'+r.name+'</div><small>'+r.sub+'</small></div></div>';
-        r.c.forEach(function(d){ h+=cell(d[0],d[1],d[2]); });
-        h+=cell('.'+r.comb, r.comb<50?15:r.comb, '高');   // 综合：昇腾 .xx（D 强制红）/ NVIDIA 高
+        var st=r.comb,dc=(st<60?'#E63838':st<70?'#FD9A00':'#37C597'),ds=(st<60?'rgba(230,56,56,.2)':st<70?'rgba(253,154,0,.2)':'rgba(55,197,151,.2)');
+        var dot='<div style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:'+dc+';box-shadow:0 0 0 2px '+ds+'"></div>';
+        // 昇腾 行
+        h+='<div class="hm-row-label">'+dot+'<div style="flex:1;min-width:0"><div>'+r.name+'</div><small>'+r.sub+'</small></div><span class="hm-stk asc">昇腾</span></div>';
+        r.c.forEach(function(d){ h+=scell(d[0],d[1]); });
+        h+=scell('.'+r.comb, r.comb<50?15:r.comb);
+        // CUDA 行
+        h+='<div class="hm-row-label nv-row"><span class="hm-stk nv">NVIDIA</span></div>';
+        r.c.forEach(function(d){ h+=scell(d[2],cscore(d[2])); });
+        h+=scell('高',95);
       });
       grid.innerHTML=h;
     })();
@@ -685,14 +697,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .scard .dlt.up{background:rgba(35,160,106,.14);color:#1f7a4d}.scard .dlt.dn{background:rgba(230,0,18,.1);color:#C7000B}
   </style>
 
-  <!-- 7 灰底：技术体验方法论（人↔昇腾，hi=2） -->
+  <!-- 7 灰底：基础体验方法论（人↔昇腾，hi=2） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">人侧：开发者逛昇腾官网的全旅程，拆 24 触点逐一对照 NVIDIA</span></div>
         <div class="subttl">Human UX · 真实截图取证、与 NVIDIA 同维评分（ascend-vs-nvidia-ux）</div>
       </div>
-      <div class="head-r">07 / 技术体验 · 方法</div>
+      <div class="head-r">07 / 基础体验 · 方法</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -736,14 +748,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .mxline2{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}.mxline2 b{color:var(--ink-2)}
   </style>
 
-  <!-- 7b 灰底：技术体验指标怎么定义（hi=2） -->
+  <!-- 7b 灰底：基础体验指标怎么定义（hi=2） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">技术体验指标怎么定义：5 维 × 16 项，按 best/worst 归一化</span></div>
+        <div class="brand"><span class="ttl">基础体验指标怎么定义：5 维 × 16 项，按 best/worst 归一化</span></div>
         <div class="subttl">DJFI 评分内核 · 测「人去点、去读」的摩擦（可量化、可复现）（ascend-vs-nvidia-ux）</div>
       </div>
-      <div class="head-r">技术体验 · 指标口径<br/>ascend-vs-nvidia-ux</div>
+      <div class="head-r">基础体验 · 指标口径<br/>ascend-vs-nvidia-ux</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -771,7 +783,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">触点评分：总均分 73.6 — SDK 下载 / 工具差距最大，FAQ 自助反超</span></div>
         <div class="subttl">Touchpoint scores · 昇腾 vs NVIDIA（24 触点节选；差值＝昇腾−NVIDIA）（ascend-vs-nvidia-ux）</div>
       </div>
-      <div class="head-r">08 / 技术体验 · 评分</div>
+      <div class="head-r">08 / 基础体验 · 评分</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -797,7 +809,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">两套实测度量：人侧体验旅程 &#8853; AI 侧知识可用性</span></div>
+        <div class="brand"><span class="ttl">两套实测度量：人侧基础体验旅程 &#8853; AI 侧内容可用性</span></div>
         <div class="subttl">Methodology · 各自实跑取证、量化打分</div>
       </div>
       <div class="head-r">03 / 度量方法<br/>2026</div>
@@ -892,7 +904,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <img src="touchpoint-heat.png" alt="触点体验热力图 昇腾 vs NVIDIA(按7步聚合)" style="height:100%;min-width:0;width:auto;object-fit:contain;object-position:left center"/>
       <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:1.5vh;min-width:0">
         <div style="font-size:var(--fs-body);color:var(--ink-2);line-height:1.7">人侧触点逐项打分（昇腾 / NVIDIA / 差值，按 7 步聚合，问题优先越红越该改）。</div>
-        <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#dcfce7;color:#047857">接近</span><div>均分 <b>昇腾 74.9 / NVIDIA 77.6</b>——人侧体验<b>差距有限</b>，落地 / 上手都不弱。</div></div>
+        <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#dcfce7;color:#047857">接近</span><div>均分 <b>昇腾 74.9 / NVIDIA 77.6</b>——人侧基础体验<b>差距有限</b>，落地 / 上手都不弱。</div></div>
         <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#fde2e2;color:#b91c1c">谷底</span><div><b>配环境 −11</b> 是最大缺口；<b>上手引导昇腾反超</b>。</div></div>
         <div class="col-item" style="font-size:var(--fs-body)"><span class="who" style="background:#fef3c7;color:#92400e">全局</span><div><b>版本清晰度 / 可发现性</b>两项——正好与 AI 侧重叠（见下页）。</div></div>
       </div>
@@ -933,7 +945,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div>
         <div class="kicker">SOLUTION · 一处投入、两侧受益</div>
         <h1 class="h-title">先解决「撞点」<br/><span class="light">人和 AI 共同受阻的那几处堵点</span></h1>
-        <p class="body">优先级跟着「撞点」走——既抬人侧体验，又抬 AI 侧可用性，ROI 最高。</p>
+        <p class="body">优先级跟着「撞点」走——既抬人侧基础体验，又抬 AI 侧可用性，ROI 最高。</p>
         <div class="points">
           <div class="point"><div class="dot"></div><div><div class="pt-title">版本「一站收口」</div><div class="pt-desc">canonical 当前版 + 配套矩阵工具；便于人准确选择、AI 准确锁定。</div></div></div>
           <div class="point"><div class="dot"></div><div><div class="pt-title">机器可读出口 + 可抓取</div><div class="pt-desc">llms.txt / markdown 导出 / 结构化索引；把 SPA「抓不到」的单点 D 打通。</div></div></div>
@@ -1010,7 +1022,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="cv-center">
         <div class="cv-kicker">一句话结论</div>
         <div class="cv-sub" style="font-weight:300;font-size:min(3.4vw,6vh);line-height:1.25">Agent 时代，昇腾的「用户」<br/>既是人，也是 AI。</div>
-        <div class="cv-lead" style="max-width:42ch">人侧体验已接近 NVIDIA，差距在配环境与可发现性；AI 侧差距更结构化，症结在版本、可抓取、自定义算子。<b style="color:#fff">将人和 AI 共同受阻的那几处堵点解决，一处投入、两侧受益。</b></div>
+        <div class="cv-lead" style="max-width:42ch">人侧基础体验已接近 NVIDIA，差距在配环境与可发现性；AI 侧差距更结构化，症结在版本、可抓取、自定义算子。<b style="color:#fff">将人和 AI 共同受阻的那几处堵点解决，一处投入、两侧受益。</b></div>
       </div>
       <div class="cv-bot">
         <div class="cv-ucd"><span class="sq"></span>ascend-vs-nvidia-ux &middot; opknow</div>

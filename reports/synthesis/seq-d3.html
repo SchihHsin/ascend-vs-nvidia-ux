@@ -804,7 +804,7 @@ TOOLS = [
 
 <div class="limit">
   <b>诚实声明与局限：</b>
-  ① 旅程节点的<b>受阻 / 卡点 / 版本号 / 二手来源均为 D 任务实测检索所得</b>（见 <code>task_run_log.md</code>，也正是本项目真正测的「知识可用性」），但「一次完整开发」的<b>线性步骤顺序是基于实测骨架的合理重构</b>（开发步骤 msopgen / 编包 / aclnn 按官方文档复述、未实际运行验证），真实开发中 P4–P7 可能多次回退迭代（d3 驳回即触发），图为主路径示意。<b>滑块 3 档的分工差异为建模</b>（仅「① 人主笔」对应实测的这次检索，另两档非实测）；而<b>受阻事实在三档下不变</b>（同一 CANN 生态），变的只是「谁执行、人是否核查」。
+  ① 旅程节点的<b>受阻 / 卡点 / 版本号 / 二手来源均为 D 任务实测检索所得</b>（见 <code>task_run_log.md</code>，也正是本项目真正测的「内容可用性」），但「一次完整开发」的<b>线性步骤顺序是基于实测骨架的合理重构</b>（开发步骤 msopgen / 编包 / aclnn 按官方文档复述、未实际运行验证），真实开发中 P4–P7 可能多次回退迭代（d3 驳回即触发），图为主路径示意。<b>滑块 3 档的分工差异为建模</b>（仅「① 人主笔」对应实测的这次检索，另两档非实测）；而<b>受阻事实在三档下不变</b>（同一 CANN 生态），变的只是「谁执行、人是否核查」。
   ② §4.3 代码是<b>公开 Messages API 的示范实现</b>，解释 agent 循环契约，<b>非 Claude 内部源码</b>；服务端 web_search 的检索 / 排序内部实现不可观测。
   ③ 工作量占比按<b>节点计数</b>而非真实工时；不同开发者熟练度会显著改变人侧耗时。
   ④ 本页只刻画 D 这一个「最难」任务的旅程；成熟任务（如 G 迁移、Z 概念对照）的人机协同形态会大不相同（AI 主导区段更长、卡点更少），详见 <a href="17_official_site_focus.html" style="color:#2f3d63">热力矩阵</a>与<a href="19_findings_ux_synthesis.html" style="color:#2f3d63">启发与方向</a>。
@@ -2005,7 +2005,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   /* ===== 按关系讲解：高亮某对生命线之间的所有箭头、其余压暗 ===== */
   var GROUPS=[
     {name:'AI ↔ 昇腾 / 二手 · 矩阵评分', pairs:['ai-off','ai-sec']},
-    {name:'人 ↔ 昇腾社区 · 技术体验', pairs:['hu-off']}
+    {name:'人 ↔ 昇腾社区 · 基础体验', pairs:['hu-off']}
   ];
   var step=0;  // 0=全亮；1..GROUPS.length
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
