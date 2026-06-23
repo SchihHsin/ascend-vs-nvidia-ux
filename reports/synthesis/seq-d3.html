@@ -2010,6 +2010,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   var step=0, hoverMsg=null;  // 0=全亮；1..GROUPS.length；hoverMsg=悬浮聚焦的某条消息
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
   function notify(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqStep:step},'*');}catch(e){}}
+  function notifyHover(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqHover:hoverMsg},'*');}catch(e){}}
   function updLbl(){var lbl=document.getElementById('sqLbl');if(!lbl)return;
     lbl.textContent=step<1?'▶ 按关系讲解':('第 '+step+' / '+GROUPS.length+' · '+GROUPS[step-1].name);}
   function applyHi(){
@@ -2032,8 +2033,8 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   }
   window.__seqApplyHi=applyHi;
   (function(){var svgEl=document.getElementById('journey'); if(!svgEl)return;
-    svgEl.addEventListener('mouseover',function(e){ if(step<1)return; var el=e.target.closest&&e.target.closest('[data-msg]'); var m=el?el.getAttribute('data-msg'):null; if(m!==hoverMsg){hoverMsg=m;applyHi();} });
-    svgEl.addEventListener('mouseout',function(e){ if(step<1||hoverMsg==null)return; var to=e.relatedTarget,el=(to&&to.closest)?to.closest('[data-msg]'):null; if(!el){hoverMsg=null;applyHi();} });
+    svgEl.addEventListener('mouseover',function(e){ if(step<1)return; var el=e.target.closest&&e.target.closest('[data-msg]'); var m=el?el.getAttribute('data-msg'):null; if(m!==hoverMsg){hoverMsg=m;applyHi();notifyHover();} });
+    svgEl.addEventListener('mouseout',function(e){ if(step<1||hoverMsg==null)return; var to=e.relatedTarget,el=(to&&to.closest)?to.closest('[data-msg]'):null; if(!el){hoverMsg=null;applyHi();notifyHover();} });
   })();
   function go(n){var N=GROUPS.length;step=((n%(N+1))+(N+1))%(N+1);applyHi();}
   function buildCtrl(){

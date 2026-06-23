@@ -652,20 +652,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
         {name:'精度排查',sub:'L · 比对',comb:69, c:[['4',80,'2'],['5',100,'5'],['2',40,'5'],['3',60,'2'],['3',60,'4']]}
       ];
       function cscore(d){if(d==='高')return 95;var n=parseInt(d);return isNaN(n)?60:n*20;}
-      function scell(disp,sc){return '<div class="hm-cell" style="background:'+heat(sc)+';color:'+txt(sc)+';border-color:'+bord(sc)+'">'+disp+'</div>';}
+      function scell(disp,sc,lt){return '<div class="hm-cell" data-letter="'+(lt||'')+'" style="background:'+heat(sc)+';color:'+txt(sc)+';border-color:'+bord(sc)+'">'+disp+'</div>';}
       var h='<div class="hm-corner"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">任务</span></div>';
       cols.forEach(function(c){h+='<div class="hm-header">'+c+'</div>';});
       rows.forEach(function(r){
+        var lt=r.sub.charAt(0);
         var st=r.comb,dc=(st<60?'#E63838':st<70?'#FD9A00':'#37C597'),ds=(st<60?'rgba(230,56,56,.2)':st<70?'rgba(253,154,0,.2)':'rgba(55,197,151,.2)');
         var dot='<div style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:'+dc+';box-shadow:0 0 0 2px '+ds+'"></div>';
         // 昇腾 行
-        h+='<div class="hm-row-label">'+dot+'<div style="flex:1;min-width:0"><div>'+r.name+'</div><small>'+r.sub+'</small></div><span class="hm-stk asc">昇腾</span></div>';
-        r.c.forEach(function(d){ h+=scell(d[0],d[1]); });
-        h+=scell('.'+r.comb, r.comb<50?15:r.comb);
+        h+='<div class="hm-row-label" data-letter="'+lt+'">'+dot+'<div style="flex:1;min-width:0"><div>'+r.name+'</div><small>'+r.sub+'</small></div><span class="hm-stk asc">昇腾</span></div>';
+        r.c.forEach(function(d){ h+=scell(d[0],d[1],lt); });
+        h+=scell('.'+r.comb, r.comb<50?15:r.comb, lt);
         // CUDA 行
-        h+='<div class="hm-row-label nv-row"><span class="hm-stk nv">NVIDIA</span></div>';
-        r.c.forEach(function(d){ h+=scell(d[2],cscore(d[2])); });
-        h+=scell('高',95);
+        h+='<div class="hm-row-label nv-row" data-letter="'+lt+'"><span class="hm-stk nv">NVIDIA</span></div>';
+        r.c.forEach(function(d){ h+=scell(d[2],cscore(d[2]),lt); });
+        h+=scell('高',95,lt);
       });
       grid.innerHTML=h;
     })();
@@ -1174,6 +1175,23 @@ slides.forEach(paintSlide);
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
 (function(){const m=(location.hash||'').match(/(\d+)/);const start=m?Math.min(slides.length,Math.max(1,+m[1]))-1:0;
   updateCurrent(start>0?start:0);})();
+  /* 左侧时序图悬浮某条消息 → 右侧对应字母(D/M/X/O/L)内容聚光、其余压暗 */
+  window.addEventListener('message',function(e){
+    var d=e&&e.data; if(!d||!('__seqHover' in d))return;
+    var fs=document.querySelectorAll('iframe'),ifr=null;
+    for(var i=0;i<fs.length;i++){ if(fs[i].contentWindow===e.source){ifr=fs[i];break;} }
+    if(!ifr)return; var sec=ifr.closest('.slide'); if(!sec)return;
+    var msg=d.__seqHover,lt=null;
+    if(msg){ var L=['D','M','X','O','L']; for(var j=0;j<L.length;j++){ if(msg.indexOf(L[j])>=0){lt=L[j];break;} } }
+    var els=sec.querySelectorAll('[data-letter]');
+    for(var k=0;k<els.length;k++){ els[k].style.transition='opacity .15s'; els[k].style.opacity=(!lt||els[k].getAttribute('data-letter')===lt)?'':'0.3'; }
+  });
+  /* 问题对页：按 .ql 字母给每行打 data-letter */
+  document.querySelectorAll('.qpx').forEach(function(grid){var cur=null;
+    Array.prototype.forEach.call(grid.children,function(el){
+      if(el.classList.contains('qx-t')){var q=el.querySelector('.ql');cur=q?q.textContent.trim():null;if(cur)el.setAttribute('data-letter',cur);}
+      else if(el.classList.contains('qx-c')&&cur){el.setAttribute('data-letter',cur);}
+    });});
 </script>
 </body>
 </html>
