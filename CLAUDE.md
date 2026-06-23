@@ -155,7 +155,7 @@ ud=$(mktemp -d); "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollba
   - **AI↔昇腾/二手(hi=1)** 3 页:① 方法论+场景(怎么跑/7阶段26任务/算子涉及 D·M·X·O·L)② **CUDA vs CANN 问题对**(5 个问句对,左 CUDA 绿/右 CANN 红,原文取自 opknow 18 §2)③ **§9 重画矩阵**(算子 5 任务×6 维,**每格昇腾大字配色 / NVIDIA「N x」小字**,D 官方可抓=受阻红;数据从 opknow 17 `ROWS` 提取 cann/cuda 1–5 分)。
   - **人↔昇腾社区(hi=2)** 2 页:① 方法论(7阶段/24触点 + 7步旅程 op7 + NVIDIA/昇腾文档截图对比 `nv-docs/asc-docs`)② 触点评分卡(节选 6 触点 昇腾/NVIDIA/差值,真实分)。
   - **矩阵/分数一律重画、不截图**(用户明确:用 report-ppt-skill §9 模板重画,只取算子子集);截图仅用于「真实截图对比」证据(文档触点)。
-- **第3页仍保留交互总览**(时序图 + 控制条按关系切换 + postMessage 联动右 `.ss-pane`):iframe `applyHi()` 用 **postMessage** `window.parent.postMessage({__seqStep:step},'*')` 通知父页(**别直接 `window.parent.__seqOnStep`——file:// 跨框同源策略静默挡**);`__seqOnStep(n)` 切 `.ss-pane[data-step=n]`,⚠ `.ss-pane` 自定义 `display:flex` 盖住 `hidden`,要补 `.ss-pane[hidden]{display:none}`。(与专页内容有重叠,后续可能精简成纯总览。)
+- **第3页=纯总览**(已精简):36% 时序图(全亮、带控制条供现场按关系高亮演示)+ 右侧两张关系映射卡(`.ovm`:AI↔昇腾→矩阵 / 人↔昇腾→技术体验,各指向「后续 N 页」)。**所有时序图左栏统一 36%**(slide 3 原来是 65% 与专页不一致,已对齐)。早先的 postMessage 右栏联动(`__seqOnStep`/`.ss-pane`)已随精简移除,深挖内容全交给 hi=1/hi=2 专页。
 - **图填满白卡**:letterbox 留白是图比卡窄;`seq-d3.html` 调 `LX`/`Wv` 让图 aspect≈卡 aspect(当前 `LX hu/ai/off/tool/sec=150/415/680/945/1210`、`Wv 1255`、`dyV 38`,配 36% 左栏)。
 - ⚠️ **单页截图脚本的坑**:`s[:first]+one+s[last:]` 会把**夹在 section 之间的内联 `<style>`**(`.op5/.qpx/.hm-*/.op7/.scard` 等都在那)一起删掉 → 截出来「没样式」是假象,不是 bug;验证时要把那些 `<style>` 块一并拼回(`re.findall(r'<style>\s*\.(lc-stages|op7).*?</style>')`)。
 - **2026 AI 采用数据**(页2,Web 检索):JetBrains 2026.01 90% / Gartner 2026 Q1 80%企业嵌 AI Agent / 软件生命周期 2026 调研 97%组织。
