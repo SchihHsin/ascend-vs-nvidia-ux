@@ -173,3 +173,8 @@ ud=$(mktemp -d); "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollba
 # 远程已配置好,直接 push;若换机重建 git 仓:
 git init && git add -A && git commit -m "init: 昇腾 vs 英伟达 官网体验竞品分析"
 ```
+
+## 标签页图标(favicon)
+
+- **入口 `index.html` + 主报告 `reports/ascend-vs-nvidia-2026-06-13-visual.html`** 头部各内联了一个 SVG data-URI favicon(`<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,…">`,无外部文件、GitHub Pages 直接生效)。
+- 图样 = **红绿双柱**(华为红 `#C8102E` 短柱 + 英伟达绿 `#76B900` 高柱 + 深色基线,白底圆角),呼应「昇腾 vs 英伟达」对比主题。下划线开头的临时稿(`_v.html`/`synthesis/*`)未加。
