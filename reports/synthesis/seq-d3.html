@@ -2005,7 +2005,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   /* ===== 按关系讲解：高亮某对生命线之间的所有箭头、其余压暗 ===== */
   var GROUPS=[
     {name:'AI ↔ 昇腾 / 二手 · 矩阵评分', pairs:['ai-off','ai-sec']},
-    {name:'人 ↔ 昇腾社区 · 技术体验', pairs:['hu-off','hu-sec']}
+    {name:'人 ↔ 昇腾社区 · 技术体验', pairs:['hu-off']}
   ];
   var step=0;  // 0=全亮；1..GROUPS.length
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
@@ -2021,8 +2021,9 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
       var pr=el.getAttribute&&el.getAttribute('data-pair'), ln=el.getAttribute&&el.getAttribute('data-lane');
       if(pr) el.style.opacity=(g.pairs.indexOf(pr)>=0)?'1':'0.1';
       else if(ln){
-        if(lanes[ln]){ el.style.opacity='1';
-          if(el.tagName==='line'){ el.style.stroke=el.getAttribute('data-col')||''; el.style.strokeWidth='2.5'; el.style.strokeOpacity='1'; } }
+        if(lanes[ln]){ var minor=(ln==='sec');   // 二手社区是次要部分，亮也更淡
+          el.style.opacity=minor?'0.5':'1';
+          if(el.tagName==='line'){ el.style.stroke=el.getAttribute('data-col')||''; el.style.strokeWidth=minor?'1.6':'2.5'; el.style.strokeOpacity=minor?'0.55':'1'; } }
         else { el.style.opacity='0.12'; if(el.tagName==='line'){el.style.stroke='';el.style.strokeWidth='';el.style.strokeOpacity='';} }
       }
       else el.style.opacity='0.12';
