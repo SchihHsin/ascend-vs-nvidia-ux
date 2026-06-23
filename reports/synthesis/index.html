@@ -493,11 +493,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">Scenarios</span>7 阶段 → 26 任务，算子开发涉及 5 次检索</div>
         <div class="lc-stages">装环境 · 开发算子 · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
         <div class="op5">
-          <div class="op5-i"><span class="c">D</span><b>写 kernel</b><small>自定义算子</small></div>
-          <div class="op5-i"><span class="c">M</span><b>Tiling</b><small>动态 shape</small></div>
-          <div class="op5-i"><span class="c">X</span><b>内存越界</b><small>定位</small></div>
-          <div class="op5-i"><span class="c">O</span><b>注册集成</b><small>接 PyTorch</small></div>
-          <div class="op5-i"><span class="c">L</span><b>精度排查</b><small>逐层比对</small></div>
+          <div class="op5-i"><span class="c">一</span><b>写 kernel</b><small>自定义算子</small></div>
+          <div class="op5-i"><span class="c">二</span><b>Tiling</b><small>动态 shape</small></div>
+          <div class="op5-i"><span class="c">三</span><b>内存越界</b><small>定位</small></div>
+          <div class="op5-i"><span class="c">四</span><b>注册集成</b><small>接 PyTorch</small></div>
+          <div class="op5-i"><span class="c">五</span><b>精度排查</b><small>逐层比对</small></div>
         </div>
         <div class="bridge" style="margin-top:.2vh">可用性是<b>「任务相关」</b>的：成熟通识两栈差距小，<b>前沿开发差距极大</b>——要定位「受阻于哪一关」，而非只给总分。</div>
       </div>
@@ -541,36 +541,36 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="bridge" style="margin-top:0;flex:0 0 auto">铁律：<b>真实开发者口吻</b>、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>。</div>
       <div class="qpx">
         <div class="qhead"><div class="qx-h cu">CUDA 怎么问</div><div class="qx-h ca">CANN / 昇腾 怎么问</div></div>
-        <div class="qtask">
-          <div class="qx-intent"><span class="ql">D</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一意图</b>写个自定义算子并集成进 PyTorch</span></div>
+        <div class="qtask" data-letter="D">
+          <div class="qx-intent"><span class="ql">一</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一意图</b>写个自定义算子并集成进 PyTorch</span></div>
           <div class="qpair">
             <div class="qx-c cu">怎么写自定义 CUDA kernel 并集成进 PyTorch（C++ extension）？给出完整步骤、<code>setup.py</code> 和注册代码。</div>
             <div class="qx-c ca">怎么用 Ascend C 开发自定义算子并集成进 PyTorch（<code>msOpGen</code> / <code>aclnn</code>）？给出完整步骤。</div>
           </div>
         </div>
-        <div class="qtask">
-          <div class="qx-intent"><span class="ql">M</span>Tiling<small>动态 shape</small><span class="qx-goal"><b>同一意图</b>算子 / 推理怎么支持动态 shape 输入</span></div>
+        <div class="qtask" data-letter="M">
+          <div class="qx-intent"><span class="ql">二</span>Tiling<small>动态 shape</small><span class="qx-goal"><b>同一意图</b>算子 / 推理怎么支持动态 shape 输入</span></div>
           <div class="qpair">
             <div class="qx-c cu">TensorRT / CUDA kernel 处理动态 shape 输入怎么做（optimization profile / 运行时 shape）？</div>
             <div class="qx-c ca">Ascend C 自定义算子做动态 shape，<code>Tiling</code> 怎么写、<code>TilingData</code> 怎么定义和传递？</div>
           </div>
         </div>
-        <div class="qtask">
-          <div class="qx-intent"><span class="ql">X</span>内存越界<small>定位</small><span class="qx-goal"><b>同一意图</b>kernel / 算子内存越界，怎么用工具定位是哪一行</span></div>
+        <div class="qtask" data-letter="X">
+          <div class="qx-intent"><span class="ql">三</span>内存越界<small>定位</small><span class="qx-goal"><b>同一意图</b>kernel / 算子内存越界，怎么用工具定位是哪一行</span></div>
           <div class="qpair">
             <div class="qx-c cu">CUDA kernel 报 illegal memory access，怎么用 <code>compute-sanitizer</code> 定位是哪一行越界？</div>
             <div class="qx-c ca">昇腾算子内存越界，怎么用 <code>msSanitizer</code> / 算子内存检测定位是哪一行？</div>
           </div>
         </div>
-        <div class="qtask">
-          <div class="qx-intent"><span class="ql">O</span>注册集成<small>接框架</small><span class="qx-goal"><b>同一意图</b>自定义算子怎么注册进框架让它能被调用</span></div>
+        <div class="qtask" data-letter="O">
+          <div class="qx-intent"><span class="ql">四</span>注册集成<small>接框架</small><span class="qx-goal"><b>同一意图</b>自定义算子怎么注册进框架让它能被调用</span></div>
           <div class="qpair">
             <div class="qx-c cu">自定义算子怎么注册进 PyTorch 让 <code>torch.ops</code> 能调（<code>TORCH_LIBRARY</code> / dispatcher）？</div>
             <div class="qx-c ca">Ascend C 算子怎么注册成 <code>aclnn</code> 接口并集成进 <code>torch_npu</code> / PyTorch 让框架能调？</div>
           </div>
         </div>
-        <div class="qtask">
-          <div class="qx-intent"><span class="ql">L</span>精度排查<small>逐层比对</small><span class="qx-goal"><b>同一意图</b>自定义算子结果和参考不一致，怎么逐层 / 逐元素比对定位</span></div>
+        <div class="qtask" data-letter="L">
+          <div class="qx-intent"><span class="ql">五</span>精度排查<small>逐层比对</small><span class="qx-goal"><b>同一意图</b>自定义算子结果和参考不一致，怎么逐层 / 逐元素比对定位</span></div>
           <div class="qpair">
             <div class="qx-c cu">自定义 CUDA 算子结果和 PyTorch 参考不一致，怎么定位数值精度（逐层 / 逐元素比对）？</div>
             <div class="qx-c ca">昇腾算子输出和标杆不一致，怎么用 <code>msaccucmp</code> / 精度比对 / dump 定位？</div>
@@ -615,7 +615,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="ml">模型自带</div><div class="mc" style="grid-column:span 2"><span class="ix">⑦</span> 自带知识 · 无需检索即可作答的覆盖密度（质量并入本项）</div>
         </div>
         <div class="mxline"><b style="color:var(--ink-2)">怎么算分（每项 score_N 把实测映射 1–5）</b>：② 可抓 <b>SSR抓到→4–5 · SPA抓空→受阻0</b>　⑤ 二手 <b>n≥6→5·≥3→3·0→1</b>　④ 版本 <b>单主线→5·多版本散→2</b>　⑧ 成本反向计</div>
-        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = 噪声-OR：1−(1−官方)(1−二手)(1−自带)</b>，受阻源记 0、再乘 ④版本·⑧成本系数。一条渠道达标即可作答——D 三渠道同时失守（OFF 0 · SEC .24 · OWN .40 → .54，再被版本/成本拉到 <b style="color:#FF6B6B">.41</b>）。</div>
+        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = 噪声-OR：1−(1−官方)(1−二手)(1−自带)</b>，受阻源记 0、再乘 ④版本·⑧成本系数。一条渠道达标即可作答——写 kernel 三渠道同时失守（OFF 0 · SEC .24 · OWN .40 → .54，再被版本/成本拉到 <b style="color:#FF6B6B">.41</b>）。</div>
       </div>
     </div>
   </section>
@@ -639,7 +639,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="hm-grid" id="mOp" style="grid-template-columns:90px 54px repeat(6,1fr)"></div>
           <div class="hm-legend"><span>第1列 检索问题 · 第2列 <b style="color:#C7000B">CANN</b>（昇腾）/ <b style="color:#5a8a00">CUDA</b>（NVIDIA），格内各自配色（1–5 分；<b>综合</b>：CANN 为合成小数，CUDA 原数据为档位<b>高 .88–1.0</b>）</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel 的 D <b>官方真受阻（.41，SPA 抓空 → 转二手）</b>；M/X/O/L 官方都抓得到。<b>场景可用性 ≈ 最弱且最靠前那一搜。</b></div>
+        <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel <b>官方真受阻（.41，SPA 抓空 → 转二手）</b>；M/X/O/L 官方都抓得到。<b>场景可用性 ≈ 最弱且最靠前那一搜。</b></div>
       </div>
     </div>
     <script>
@@ -959,12 +959,6 @@ slides.forEach(paintSlide);
     var els=sec.querySelectorAll('[data-letter]');
     for(var k=0;k<els.length;k++){ els[k].style.transition='opacity .15s'; els[k].style.opacity=(!lt||els[k].getAttribute('data-letter')===lt)?'':'0.3'; }
   });
-  /* 问题对页：按 .ql 字母给每行打 data-letter */
-  document.querySelectorAll('.qpx').forEach(function(grid){var cur=null;
-    Array.prototype.forEach.call(grid.children,function(el){
-      if(el.classList.contains('qx-t')){var q=el.querySelector('.ql');cur=q?q.textContent.trim():null;if(cur)el.setAttribute('data-letter',cur);}
-      else if(el.classList.contains('qx-c')&&cur){el.setAttribute('data-letter',cur);}
-    });});
 </script>
 </body>
 </html>
