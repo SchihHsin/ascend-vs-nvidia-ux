@@ -1,3 +1,6 @@
 .DS_Store
 *.tmp
 /tmp/
+
+# 单页验证临时文件
+reports/synthesis/_*.html
