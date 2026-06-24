@@ -164,6 +164,14 @@ ud=$(mktemp -d); "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollba
 - **网址带页码**:翻页回写 `#N`,打开 `index.html#N` 直接跳第 N 页(deck JS 已加 `replaceState`+加载读 hash;**同步进了 skill 模板** `deck-template.html`)。
 - **截单页验证**:headless 不真滚动内层容器,截全 deck 只得首屏;**可靠法**=python 把 `#deck` 内容替换成只留目标 `<section>` 再 headless 截(`re.findall('<section class="slide.*?</section>'...)`)。
 - **另产出 skill**:`~/.claude/skills/click-annotation/`(把「截图上加点击注解」做成通用 skill,`annotate.py` 颜色/裁剪/场景全参数化,50% 透明圆点+箭头+底部标签条,原图绝不改)。
+- **⚠ 当前状态(2026-06-24,覆盖上面若干旧描述)**:
+  - **deck = 11 页**(删掉了原 #12+ 的「两套度量/谷底/人类旅程/撞点/改进/A–F/甘特/收尾」——未调整、不合理):封面 / AI趋势(页2,挂了 **Stack Overflow 2025** 不信任 AI 论据:33%信任·46%不信任·66%被「看着对其实不对」坑;浅紫 bridge 用 `.bridge.lite` 让加粗字变黑可读) / 时序图总览 / **AI 侧 5 页**(方法论·架构·问法·指标·矩阵) / **人侧 3 页**。
+  - **人侧页序 = 指标定义 → 方法论 → 评分**(指标即评分标准,排在「右侧已带得分」的方法论/评分前面)。
+  - **翻页 = cut 瞬切**(slide `position:fixed` 堆叠 + `.active` 切换,去 scroll-snap;键盘/滚轮/触摸/`#N`/概览/全屏都在;**不是** fade,用户最后选了 cut)。
+  - **矩阵(页8)= 重建 + 逐格核对**:布局 = 第1列「检索问题」(`1-5` 阿拉伯编号 + 任务名,`grid-row:span 2` 跨两行,**编号徽章按综合分状态配色** 红<.60/金<.70/绿)+ 第2列 `CANN`/`CUDA` 栈标签 + 6 维等大格;**数据按 opknow 17 `ROWS` 逐格核对**(曾把 D 的「受阻」错放「官方可抓」列——其实在「正文详尽」、D 官方可抓=2);**CUDA 综合诚实标「高」**(原数据是档位 .88–1.0、无每任务小数,**别瞎编**);`d(v)` 把 1-5→[display,score×20],受阻→[受阻,0]。
+  - **任务编号 = 阿拉伯数字 1-5**(矩阵/op5/问题对 `.ql`/时序图「检索X·矩阵X」全统一);⚠ **内部 `data-letter`/节点 id 仍是 D/M/X/O/L 不动**(左右联动靠它),改显示别碰内部。问题对页结构现为 `.qtask`(并发对话改过),联动 `data-letter` 直接写死在 `.qtask` 上(别用读 `.ql` 文字的旧 tagger,已删)。
+  - **时序图交互全套(`seq-d3.html`)**:① **两级聚光**——聚光态下悬浮**组内**某条线 → 它全亮、同组其他线 0.32 次要黯淡、非组 0.1;**只响应当前组内的线**。② **模态点击钉住**——点组内线钉住聚焦(再点取消/点别条切换),点空白或线外任意处取消(click 挂 `document`);`curFocus()=hoverMsg||pinnedMsg`,`go()` 切关系时重置。③ 每条线叠 **18px 透明热区线 + `cursor:pointer`**(细 SVG 线热区只有线宽、点不到,只有线上文字能点 → 加宽)。④ **左↔右联动**:`notifyHover()` postMessage `{__seqHover:curFocus()}`,父页按 `e.source` 定位 iframe→section;矩阵/问题页按 msg 里字母 D/M/X/O/L 压暗非匹配 `[data-letter]`;**人方法论页**(`#hstep0` 判定)按 **分支/决策 id→7阶段** 映射 `{b0:0,b1:3,bSoc:2,dSoc:2,b2:2,dVer:2,bTil:3,dTil:3,bAcc:5,dAcc:5}` 调 `setHStep`(⚠ Gitee 那条分支 id 是 `b2` 不是 `bVer`;决策块 dSoc/dVer/dTil/dAcc 也要入表)。⑤ 生命线高亮加粗变色(`data-col` 存色);二手社区即使在组也半透(次要部分)。⑥ 两图左上角灰色图名(embedfix 注入 `.embed-title`)。
+  - **⚠ 协作坑**:`index.html` 被**多个对话并发改过**(问题页 `.qpx`→`.qtask`、左栏宽 36%↔52% 都是别处改的)→ 两边同时改会打架,**同一时间只在一个对话改**;每次动手前先读最新文件,**用 python 按内容匹配替换、别按行号**(行号会因并发改动错位)。
 
 ## 协作规则
 
