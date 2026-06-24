@@ -702,6 +702,44 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
+        <div class="brand"><span class="ttl">基础体验指标怎么定义：5 维 × 16 项，按 best/worst 归一化</span></div>
+        <div class="subttl">DJFI 评分内核 · 测「人去点、去读」的摩擦（可量化、可复现）（ascend-vs-nvidia-ux）</div>
+      </div>
+      <div class="head-r">基础体验 · 指标口径<br/>ascend-vs-nvidia-ux</div>
+    </div>
+    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
+      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
+        <iframe src="seq-d3.html?hi=2" title="时序图 · 人↔昇腾社区 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.1vh">
+        <div class="cmp-h"><span class="hk">DJFI kernel</span>5 个维度，每维若干可量化指标</div>
+        <div class="djg">
+          <div class="dj-row"><div class="dj-d">A 效率 / 反馈</div><div class="dj-ind"><span class="ic">A1</span> 到达目标点击数 <small>1→8</small>　<span class="ic">A2</span> 总步骤 <small>1→10</small>　<span class="ic">A3</span> 上下文切换 <small>0→4</small>　<span class="ic">A4</span> 首次跑通耗时 <small>5→120 分</small></div></div>
+          <div class="dj-row"><div class="dj-d">B 认知负荷</div><div class="dj-ind"><span class="ic">B1</span> 版本/平台选择项 <small>1→12</small>　<span class="ic">B2</span> 必做决策点 <small>0→6</small>　<span class="ic">B3</span> 目标导航深度 <small>1→5 层</small></div></div>
+          <div class="dj-row"><div class="dj-d">C 准入摩擦</div><div class="dj-ind"><span class="ic">C1</span> 需登录/注册　<span class="ic">C2</span> 需同意协议/审批　<span class="ic">C3</span> 必填表单字段 <small>0→12</small></div></div>
+          <div class="dj-row"><div class="dj-d">D 内容可执行</div><div class="dj-ind"><span class="ic">D1</span> 代码可复制即跑　<span class="ic">D2</span> 快速入门完整可运行　<span class="ic">D3</span> 文档时效</div></div>
+          <div class="dj-row"><div class="dj-d">E 可发现性</div><div class="dj-ind"><span class="ic">E1</span> 核心关键词命中率　<span class="ic">E2</span> 路径死链/404 <small>0→4</small>　<span class="ic">E3</span> 关键入口可达性</div></div>
+        </div>
+        <div class="mxline2">归一化:每项 <b>best→100 / worst→0</b>(布尔=是否触发摩擦、比率直接折算);<b>维度分 = 指标等权均值</b>,<b>触点分 = 5 维等权均值</b>。</div>
+        <div class="bridge" style="margin-top:.2vh">与 AI 侧矩阵不同:这里测的是<b>「人去点、去读」的摩擦</b>(点击/步骤/登录/死链…),不是「AI 能不能抓到」——所以同一个昇腾社区,<b>人侧与 AI 侧短板未必在同一处</b>。</div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .djg{display:flex;flex-direction:column;gap:.6vh}
+    .dj-row{display:grid;grid-template-columns:104px 1fr;gap:.6vw;align-items:stretch}
+    .dj-d{font-size:11.5px;font-weight:700;color:#2f3d63;background:rgba(47,61,99,.08);border:1px solid rgba(47,61,99,.18);border-radius:8px;padding:.6vh .4vw;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2}
+    .dj-ind{font-size:10.5px;color:var(--ink-2);line-height:1.55;background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:8px;padding:.55vh .7vw}
+    .dj-ind .ic{font-family:'JetBrains Mono';color:var(--accent);font-weight:800;font-size:10px}
+    .dj-ind small{color:#A1A4AA}
+    .mxline2{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}.mxline2 b{color:var(--ink-2)}
+  </style>
+
+  <!-- 7b 灰底：基础体验指标怎么定义（hi=2） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
         <div class="brand"><span class="ttl">人侧：开发者逛昇腾官网的全旅程，拆 24 触点逐一对照 NVIDIA</span></div>
         <div class="subttl">Human UX · 真实截图取证、与 NVIDIA 同维评分（ascend-vs-nvidia-ux）</div>
       </div>
@@ -737,44 +775,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
       setHStep(0);
     })();
     </script>
-  </section>
-
-  <style>
-    .djg{display:flex;flex-direction:column;gap:.6vh}
-    .dj-row{display:grid;grid-template-columns:104px 1fr;gap:.6vw;align-items:stretch}
-    .dj-d{font-size:11.5px;font-weight:700;color:#2f3d63;background:rgba(47,61,99,.08);border:1px solid rgba(47,61,99,.18);border-radius:8px;padding:.6vh .4vw;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2}
-    .dj-ind{font-size:10.5px;color:var(--ink-2);line-height:1.55;background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:8px;padding:.55vh .7vw}
-    .dj-ind .ic{font-family:'JetBrains Mono';color:var(--accent);font-weight:800;font-size:10px}
-    .dj-ind small{color:#A1A4AA}
-    .mxline2{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}.mxline2 b{color:var(--ink-2)}
-  </style>
-
-  <!-- 7b 灰底：基础体验指标怎么定义（hi=2） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验指标怎么定义：5 维 × 16 项，按 best/worst 归一化</span></div>
-        <div class="subttl">DJFI 评分内核 · 测「人去点、去读」的摩擦（可量化、可复现）（ascend-vs-nvidia-ux）</div>
-      </div>
-      <div class="head-r">基础体验 · 指标口径<br/>ascend-vs-nvidia-ux</div>
-    </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=2" title="时序图 · 人↔昇腾社区 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.1vh">
-        <div class="cmp-h"><span class="hk">DJFI kernel</span>5 个维度，每维若干可量化指标</div>
-        <div class="djg">
-          <div class="dj-row"><div class="dj-d">A 效率 / 反馈</div><div class="dj-ind"><span class="ic">A1</span> 到达目标点击数 <small>1→8</small>　<span class="ic">A2</span> 总步骤 <small>1→10</small>　<span class="ic">A3</span> 上下文切换 <small>0→4</small>　<span class="ic">A4</span> 首次跑通耗时 <small>5→120 分</small></div></div>
-          <div class="dj-row"><div class="dj-d">B 认知负荷</div><div class="dj-ind"><span class="ic">B1</span> 版本/平台选择项 <small>1→12</small>　<span class="ic">B2</span> 必做决策点 <small>0→6</small>　<span class="ic">B3</span> 目标导航深度 <small>1→5 层</small></div></div>
-          <div class="dj-row"><div class="dj-d">C 准入摩擦</div><div class="dj-ind"><span class="ic">C1</span> 需登录/注册　<span class="ic">C2</span> 需同意协议/审批　<span class="ic">C3</span> 必填表单字段 <small>0→12</small></div></div>
-          <div class="dj-row"><div class="dj-d">D 内容可执行</div><div class="dj-ind"><span class="ic">D1</span> 代码可复制即跑　<span class="ic">D2</span> 快速入门完整可运行　<span class="ic">D3</span> 文档时效</div></div>
-          <div class="dj-row"><div class="dj-d">E 可发现性</div><div class="dj-ind"><span class="ic">E1</span> 核心关键词命中率　<span class="ic">E2</span> 路径死链/404 <small>0→4</small>　<span class="ic">E3</span> 关键入口可达性</div></div>
-        </div>
-        <div class="mxline2">归一化:每项 <b>best→100 / worst→0</b>(布尔=是否触发摩擦、比率直接折算);<b>维度分 = 指标等权均值</b>,<b>触点分 = 5 维等权均值</b>。</div>
-        <div class="bridge" style="margin-top:.2vh">与 AI 侧矩阵不同:这里测的是<b>「人去点、去读」的摩擦</b>(点击/步骤/登录/死链…),不是「AI 能不能抓到」——所以同一个昇腾社区,<b>人侧与 AI 侧短板未必在同一处</b>。</div>
-      </div>
-    </div>
   </section>
 
   <!-- 8 灰底：触点评分（人↔昇腾，hi=2） -->
