@@ -958,7 +958,7 @@ slides.forEach(paintSlide);
     var msg=d.__seqHover;
     /* 人方法论页：悬浮「人→社区」分支线 → 右侧对应 7 阶段(setHStep) */
     if(sec.querySelector('#hstep0') && typeof window.setHStep==='function'){
-      var B={b0:0,bSoc:2,bVer:2,b1:3,bTil:3,bAcc:5};
+      var B={b0:0,b1:3,bSoc:2,dSoc:2,b2:2,dVer:2,bTil:3,dTil:3,bAcc:5,dAcc:5};
       if(msg && (msg in B)) window.setHStep(B[msg]);
       return;
     }
