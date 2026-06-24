@@ -765,7 +765,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <text x="300" y="614" font-size="7.8" fill="#A03038">模型无法可靠识别「自身不知道」，遂凭记忆</text>
   <text x="300" y="625" font-size="7.8" fill="#A03038">填补空缺 = 杜撰（看似正确、实则有误）</text>
 </svg>
-<div class="sechint" style="margin:8px 0 0;font-size:12px">悬浮任意节点查看该环节职责（锚 D 任务）。<b>① 官方与二手由一次检索一并返回</b>，并非先检索官方、失败后才转二手；<b>② 自带知识无需检索亦在其中</b> —— 三者即矩阵中的三来源。</div>
+<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px">悬浮任意节点查看该环节职责（锚 D 任务）。<b>① 官方与二手由一次检索一并返回</b>，并非先检索官方、失败后才转二手；<b>② 自带知识无需检索亦在其中</b> —— 三者即矩阵中的三来源。</div>
   </div>
   <div id="codeView" style="display:none">
   <div class="sechint" style="margin:0 0 6px">最小实现代码（A–D 段对应架构图各环节）：</div>
@@ -2020,5 +2020,53 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 </script>
 <style>.embed-title{position:fixed;top:10px;left:13px;font-size:11px;font-weight:600;color:#b3b6bd;letter-spacing:.03em;z-index:40;pointer-events:none;font-family:'Noto Sans SC',sans-serif}</style>
 <script>(function(){function t(){if(document.querySelector(".embed-title"))return;var d=document.createElement("div");d.className="embed-title";d.textContent="AI Agent 循环架构图";document.body.appendChild(d);}if(document.readyState!=="loading")t();else addEventListener("DOMContentLoaded",t);})();</script>
+<style>
+#archctrl{position:fixed;top:8px;right:12px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Noto Sans SC',sans-serif}
+#archctrl .acb{width:24px;height:24px;border-radius:7px;border:1px solid #d4d8df;background:rgba(255,255,255,.88);color:#444;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+#archctrl .acb:hover{background:#fff;border-color:#8a6d1a;color:#8a6d1a}
+#archctrl .aclbl{font-size:11.5px;font-weight:600;color:#8a6d1a;background:rgba(255,255,255,.9);border:1px solid #d4d8df;border-radius:8px;padding:5px 10px;cursor:pointer;white-space:nowrap;user-select:none}
+#archcap.walking{background:#fff7ea;border:1px solid #ecd9a8;border-radius:8px;padding:7px 10px}
+</style>
+<script>
+(function(){
+  function init(){
+    var av=document.getElementById('archView'); if(!av) return;
+    var svg=av.querySelector('svg'); if(!svg) return;
+    if(document.getElementById('archctrl')) return;
+    var cap=document.getElementById('archcap'); var orig=cap?cap.innerHTML:'';
+    var WALK=[
+      {n:['ask','msg'], c:'用户问句原样进入 messages（system 约束 + 历史 + 当前问句），不做预处理。'},
+      {n:['intent','subgoal','route'], c:'模型先想清楚要查什么：① 解析意图 → ② 拆成可分别检索的子问题 → ③ 决定路由（检索 / 抓取 / 直接作答）。'},
+      {n:['gate','search','fetch','own'], c:'是否需要检索。检索时 web_search 把官方与二手一并返回、web_fetch 抓官方正文；模型自带知识无需检索亦在其中 —— 即矩阵中的三来源。'},
+      {n:['relay','judge'], c:'④ 汇总当前证据后研判：是否足以答好这一题？'},
+      {n:['converge','final'], c:'证据充分 → ⑥ 收敛 → 终答：可照抄命令 + 锁版本 + 标注核验，结果可靠。'},
+      {n:['redo'], c:'证据不足时先评估能否继续检索：未达 max_uses 上限且预期有效，则换检索词回 ③ 再检索一轮。'},
+      {n:['hasEv','final'], c:'检索穷尽后若仍无可靠证据，模型无法可靠识别「自身不知道」，遂凭记忆填补空缺 = 杜撰（看似正确、实则有误）—— 这正是终答可能不可靠的根因。'}
+    ];
+    var idx=0;
+    function updLbl(){var l=document.getElementById('archlbl'); if(l) l.textContent= idx<1?'▶ 按环节讲解':('讲解 '+idx+' / '+WALK.length);}
+    function apply(){
+      var kids=svg.children, i, el, k;
+      if(idx<1){ for(i=0;i<kids.length;i++) kids[i].style.opacity=''; if(cap){cap.innerHTML=orig;cap.classList.remove('walking');} updLbl(); return; }
+      var act=WALK[idx-1].n;
+      for(i=0;i<kids.length;i++){ el=kids[i]; if(el.tagName==='defs') continue;
+        k=el.getAttribute&&el.getAttribute('data-k');
+        el.style.opacity=(k&&act.indexOf(k)>=0)?'1':'0.12';
+      }
+      if(cap){cap.innerHTML='<b>讲解 '+idx+' / '+WALK.length+'：</b>'+WALK[idx-1].c;cap.classList.add('walking');}
+      updLbl();
+    }
+    function go(d){ idx+=d; if(idx<0)idx=WALK.length; if(idx>WALK.length)idx=0; apply(); }
+    var c=document.createElement('div'); c.id='archctrl';
+    c.innerHTML='<button class="acb" id="acp">‹</button><span class="aclbl" id="archlbl">▶ 按环节讲解</span><button class="acb" id="acn">›</button>';
+    document.body.appendChild(c);
+    document.getElementById('acp').onclick=function(){go(-1);};
+    document.getElementById('acn').onclick=function(){go(1);};
+    document.getElementById('archlbl').onclick=function(){go(1);};
+  }
+  if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
+  window.addEventListener('load',init);
+})();
+</script>
 </body>
 </html>
