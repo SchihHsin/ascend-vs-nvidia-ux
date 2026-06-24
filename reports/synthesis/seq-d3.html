@@ -2041,7 +2041,12 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
       if(m&&el){ var g=GROUPS[step-1],pr=el.getAttribute('data-pair'); if(!pr||g.pairs.indexOf(pr)<0) m=null; }   /* 只有当前组内的线才触发二级聚光 */
       if(m!==hoverMsg){hoverMsg=m;applyHi();notifyHover();} });
     svgEl.addEventListener('mouseout',function(e){ if(step<1||hoverMsg==null)return; var to=e.relatedTarget,el=(to&&to.closest)?to.closest('[data-msg]'):null; if(!el){hoverMsg=null;applyHi();notifyHover();} });
-    svgEl.addEventListener('click',function(e){ if(step<1)return; var el=e.target.closest&&e.target.closest('[data-msg]'); if(!el)return; var g=GROUPS[step-1],pr=el.getAttribute('data-pair'); if(!pr||g.pairs.indexOf(pr)<0)return; var m=el.getAttribute('data-msg'); pinnedMsg=(pinnedMsg===m)?null:m; applyHi(); notifyHover(); });   /* 点击：钉住/取消聚焦（持久化）*/
+    document.addEventListener('click',function(e){ if(step<1)return;
+      var el=e.target.closest&&e.target.closest('[data-msg]');
+      if(el){ var g=GROUPS[step-1],pr=el.getAttribute('data-pair');
+        if(pr&&g.pairs.indexOf(pr)>=0){ var m=el.getAttribute('data-msg'); pinnedMsg=(pinnedMsg===m)?null:m; applyHi(); notifyHover(); return; } }
+      if(pinnedMsg!=null){ pinnedMsg=null; applyHi(); notifyHover(); }   /* 点空白/非组内 → 取消钉住（模态）*/
+    });
   })();
   function go(n){var N=GROUPS.length;step=((n%(N+1))+(N+1))%(N+1);hoverMsg=null;pinnedMsg=null;applyHi();}
   function buildCtrl(){
