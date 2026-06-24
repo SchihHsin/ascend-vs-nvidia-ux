@@ -589,7 +589,18 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .mxg .mc{font-size:11px;color:var(--ink-2);background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:8px;padding:.6vh .6vw;line-height:1.45}
     .mxg .mc b{color:var(--ink);font-weight:600}
     .mxg .mc .ix{font-family:'JetBrains Mono';color:var(--accent);font-weight:800}
+    .mxg .mc.tipped{cursor:help}
+    .mxg .mc.tipped::after{content:"i";position:absolute;top:3px;right:4px;width:11px;height:11px;border-radius:50%;background:rgba(0,0,0,.14);color:#fff;font-size:8px;font-style:italic;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+    .mxg .mc.tipped{position:relative}
+    .mxg .mc.tipped:hover{border-color:var(--accent);background:rgba(91,91,214,.07)}
+    .mxg .mc.tipped:hover .mtip{opacity:1;visibility:visible;transform:translateY(0)}
+    .mtip{position:absolute;left:0;bottom:calc(100% + 8px);z-index:60;width:230px;background:#1f2430;color:#fff;font-size:10.5px;font-weight:400;line-height:1.55;padding:8px 10px;border-radius:9px;box-shadow:0 12px 30px -8px rgba(0,0,0,.55);text-align:left;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .14s,transform .14s;pointer-events:none}
+    .mtip.r{left:auto;right:0}
+    .mtip b{color:#fff;font-weight:700}.mtip .f{font-family:'JetBrains Mono';color:#9bd1ff;font-weight:700}
+    .tipped:hover .mtip{opacity:1;visibility:visible;transform:translateY(0)}
     .mxline{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}.mxline b{color:var(--ink-2)}
+    .mxline .mi{position:relative;cursor:help;font-weight:600;color:var(--ink-2);border-bottom:1px dotted rgba(0,0,0,.3);white-space:nowrap}
+    .mxline .mi .ix{font-family:'JetBrains Mono';color:var(--accent);font-weight:800}
   </style>
 
   <!-- 3c2 灰底：指标如何计算（hi=1） -->
@@ -607,14 +618,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
         <div class="cmp-h"><span class="hk">Metric system</span>知识有 3 个来源 × 2 道关，交叉构成指标</div>
-        <div class="mxg">
-          <div class="mh cnr">来源 ＼ 关卡</div><div class="mh t">第 1 关 · 能否触达</div><div class="mh q">第 2 关 · 内容质量</div>
-          <div class="ml">官方一手</div><div class="mc"><span class="ix">①</span> 可发现　<span class="ix">②</span> 可抓取</div><div class="mc"><span class="ix">③</span> 正文详尽　<span class="ix">④</span> 版本清晰</div>
-          <div class="ml">二手社区</div><div class="mc"><span class="ix">⑤</span> 丰富度<br/><small style="color:#A1A4AA">n≥6→5 / ≥3→3 / 0→1</small></div><div class="mc"><span class="ix">⑥</span> 可信度 / 一致性</div>
-          <div class="ml">模型自带</div><div class="mc" style="grid-column:span 2"><span class="ix">⑦</span> 自带知识 · 无需检索即可作答的覆盖密度（质量并入本项）</div>
+        <div class="mxg" style="grid-template-columns:70px 1fr 1fr 1fr 1fr">
+          <div class="mh cnr">来源 ＼ 关卡</div><div class="mh t" style="grid-column:span 2">第 1 关 · 能否触达</div><div class="mh q" style="grid-column:span 2">第 2 关 · 内容质量</div>
+          <div class="ml">官方一手</div>
+          <div class="mc tipped"><span class="ix">①</span> 可发现<span class="mtip"><span class="f">score1</span> 命中排名 · 检索轮数 · 是否换词二搜<br/>一轮 rank=1→<b>5</b> / ≤6→4 / ≤10→3；多轮→3；换词二搜才浮出官方→<b>2</b></span></div>
+          <div class="mc tipped"><span class="ix">②</span> 可抓取<span class="mtip"><span class="f">score2</span> 核心 how-to 页抓取形态<br/>静态→<b>5</b> / 服务端渲染 ssr→4 / SPA 只回导航→<b>2</b> / robots 拦→1</span></div>
+          <div class="mc tipped"><span class="ix">③</span> 正文详尽<span class="mtip r"><span class="f">score3</span> 含可跑命令/代码 · 参考完整度<br/>穷尽→<b>5</b> / 主路径→4 / 概述→3 / 片段→2；②抓不到则记「受阻」不打分</span></div>
+          <div class="mc tipped"><span class="ix">④</span> 版本清晰<span class="mtip r"><span class="f">score4</span> 并存版本号个数 · 有无支持矩阵<br/>版本无关或 ≤1→<b>5</b> / 有矩阵→4 / 双轴可锁→3 / ≥3 散乱→<b>2</b></span></div>
+          <div class="ml">二手社区</div>
+          <div class="mc tipped" style="grid-column:span 2"><span class="ix">⑤</span> 丰富度<span class="mtip"><span class="f">score5</span> 去重二手来源条数 n<br/>≥6→<b>5</b> / ≥5→4 / ≥3→3 / ≥1→2 / 0→<b>1</b>（官方文档/仓/论坛不计二手）</span></div>
+          <div class="mc tipped" style="grid-column:span 2"><span class="ix">⑥</span> 可信度 / 一致性<span class="mtip r"><span class="f">score6</span> 各源权威基准分取均值 ＋ 一致性（互证 +1 / 矛盾 −1）＋ 时效罚 ＋ 独立性罚，截到 1–5</span></div>
+          <div class="ml">模型自带</div>
+          <div class="mc tipped" style="grid-column:span 4"><span class="ix">⑦</span> 自带知识 · 无需检索即可作答的覆盖密度<span class="mtip"><span class="f">score7</span> 训练覆盖密度自评 1–5 ＋ 知识截止 gap 罚分（相关 API 迭代越快、罚分越重）</span></div>
         </div>
-        <div class="mxline"><b style="color:var(--ink-2)">如何计分（每项 score_N 将实测映射 1–5）</b>：② 可抓 <b>SSR 可抓→4–5 · SPA 抓取为空→受阻 0</b>　⑤ 二手 <b>n≥6→5·≥3→3·0→1</b>　④ 版本 <b>单主线→5·多版本散→2</b>　⑧ 成本反向计</div>
-        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = 噪声-OR：1−(1−官方)(1−二手)(1−自带)</b>，受阻源记 0、再乘 ④版本·⑧成本系数。一条渠道达标即可作答——写 kernel 三渠道同时失守（OFF 0 · SEC .24 · OWN .40 → .54，再被版本/成本拉到 <b style="color:#FF6B6B">.41</b>）。</div>
+        <div class="mxline">过程 / 产出（因变量，不进 ⑪）：<span class="mi tipped"><span class="ix">⑧</span> 检索成本<span class="mtip"><span class="f">score8</span> 反向，分高=省力。cost = 轮数 + 0.5·fetch + 4·抓取失败<br/>≤1.5→<b>5</b> / ≤2.5→4 / ≤4→3 / ≤6→2</span></span> · <span class="mi tipped"><span class="ix">⑨</span> 版本可锁<span class="mtip"><span class="f">score9</span> 确切版本+opset→<b>5</b> / 工具版本可定→4 / 给范围→3 / 抽不出→2</span></span> · <span class="mi tipped"><span class="ix">⑩</span> 步骤可复现<span class="mtip r"><span class="f">score10</span> 照抄即跑→<b>5</b> / 替好参数即跑→4 / 需小修→3 / 仅骨架→2</span></span>　<span style="color:#A1A4AA">— 悬浮任一指标看打分档</span></div>
+        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = K × 版本因子 × 成本因子</b>；<b>K = 1−(1−OFF)(1−SEC)(1−OWN)</b>（噪声-OR：官方 / 二手 / 自带 <b>任一渠道扛住即可答</b>，取「至少一条送达」而非平均）。OFF=①×②×③ · SEC=⑤×⑥ · OWN=⑦，各档先归一 v/5、受阻渠道记 0。例：写 kernel 三渠道齐弱（OFF 0 · SEC .24 · OWN .40 → K .54），再乘版本 / 成本系数 → <b style="color:#FF6B6B">.41</b>。</div>
       </div>
     </div>
   </section>
