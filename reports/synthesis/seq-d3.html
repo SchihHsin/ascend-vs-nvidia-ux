@@ -2007,10 +2007,11 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     {name:'AI ↔ 昇腾 / 二手 · 矩阵评分', pairs:['ai-off','ai-sec']},
     {name:'人 ↔ 昇腾社区 · 基础体验', pairs:['hu-off']}
   ];
-  var step=0, hoverMsg=null;  // 0=全亮；1..GROUPS.length；hoverMsg=悬浮聚焦的某条消息
+  var step=0, hoverMsg=null, pinnedMsg=null;  // 0=全亮；hoverMsg=悬浮临时聚焦；pinnedMsg=点击钉住
+  function curFocus(){return hoverMsg!=null?hoverMsg:pinnedMsg;}  // 有效聚焦：悬浮优先，否则用钉住的
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
   function notify(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqStep:step},'*');}catch(e){}}
-  function notifyHover(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqHover:hoverMsg},'*');}catch(e){}}
+  function notifyHover(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqHover:curFocus()},'*');}catch(e){}}
   function updLbl(){var lbl=document.getElementById('sqLbl');if(!lbl)return;
     lbl.textContent=step<1?'▶ 按关系讲解':('第 '+step+' / '+GROUPS.length+' · '+GROUPS[step-1].name);}
   function applyHi(){
@@ -2020,7 +2021,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     var g=GROUPS[step-1], lanes=lanesOf(g);
     Array.prototype.forEach.call(svgEl.children,function(el){
       var pr=el.getAttribute&&el.getAttribute('data-pair'), ln=el.getAttribute&&el.getAttribute('data-lane');
-      if(pr){ if(g.pairs.indexOf(pr)>=0){ var ms=el.getAttribute('data-msg'); el.style.opacity=(hoverMsg&&ms)?(ms===hoverMsg?'1':'0.32'):'1'; } else el.style.opacity='0.1'; }
+      if(pr){ if(g.pairs.indexOf(pr)>=0){ var ms=el.getAttribute('data-msg'),fo=curFocus(); el.style.opacity=(fo&&ms)?(ms===fo?'1':'0.32'):'1'; } else el.style.opacity='0.1'; }
       else if(ln){
         if(lanes[ln]){ var minor=(ln==='sec');   // 二手社区是次要部分，亮也更淡
           el.style.opacity=minor?'0.5':'1';
@@ -2037,8 +2038,9 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
       if(m&&el){ var g=GROUPS[step-1],pr=el.getAttribute('data-pair'); if(!pr||g.pairs.indexOf(pr)<0) m=null; }   /* 只有当前组内的线才触发二级聚光 */
       if(m!==hoverMsg){hoverMsg=m;applyHi();notifyHover();} });
     svgEl.addEventListener('mouseout',function(e){ if(step<1||hoverMsg==null)return; var to=e.relatedTarget,el=(to&&to.closest)?to.closest('[data-msg]'):null; if(!el){hoverMsg=null;applyHi();notifyHover();} });
+    svgEl.addEventListener('click',function(e){ if(step<1)return; var el=e.target.closest&&e.target.closest('[data-msg]'); if(!el)return; var g=GROUPS[step-1],pr=el.getAttribute('data-pair'); if(!pr||g.pairs.indexOf(pr)<0)return; var m=el.getAttribute('data-msg'); pinnedMsg=(pinnedMsg===m)?null:m; applyHi(); notifyHover(); });   /* 点击：钉住/取消聚焦（持久化）*/
   })();
-  function go(n){var N=GROUPS.length;step=((n%(N+1))+(N+1))%(N+1);applyHi();}
+  function go(n){var N=GROUPS.length;step=((n%(N+1))+(N+1))%(N+1);hoverMsg=null;pinnedMsg=null;applyHi();}
   function buildCtrl(){
     if(document.getElementById('seqctrl'))return;
     var d=document.createElement('div');d.id='seqctrl';
