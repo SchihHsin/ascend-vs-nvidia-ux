@@ -381,7 +381,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="dh-d">76.6% 已在用 + 20.4% 评估中<span class="dh-src">软件生命周期调研 2026</span></div>
           </div>
         </div>
-        <div class="bridge lite" style="margin:0 auto;max-width:1040px;width:100%;background:rgba(91,91,214,.1);color:var(--ink)">但开发者<b>并不完全信任</b> AI 的输出——<b>仅 33% 信任其准确性、46% 不信任</b>，<b>66% 被「看着对、其实不对」的答案坑过</b>（Stack Overflow 2025）。而 AI 答得准不准，取决于它能否<b>搜到 / 抓到 / 引用对昇腾知识</b>，这就是「AI 可用性」。于是昇腾要两套看：人侧<b>「基础体验」</b> + AI 侧<b>「内容可用性」</b>。</div>
+        <div class="bridge lite" style="margin:0 auto;max-width:1040px;width:100%;background:rgba(91,91,214,.1);color:var(--ink)">但开发者<b>并不完全信任</b> AI 的输出——<b>仅 33% 信任其准确性、46% 不信任</b>，<b>66% 曾被「看似正确、实则有误」的答案误导</b>（Stack Overflow 2025）。而 AI 回答是否准确，取决于它能否<b>搜到 / 抓到 / 引用对昇腾知识</b>，这就是「AI 可用性」。于是昇腾要两套看：人侧<b>「基础体验」</b> + AI 侧<b>「内容可用性」</b>。</div>
       </div>
     </div>
   </section>
@@ -614,7 +614,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="ml">二手社区</div><div class="mc"><span class="ix">⑤</span> 丰富度<br/><small style="color:#A1A4AA">n≥6→5 / ≥3→3 / 0→1</small></div><div class="mc"><span class="ix">⑥</span> 可信度 / 一致性</div>
           <div class="ml">模型自带</div><div class="mc" style="grid-column:span 2"><span class="ix">⑦</span> 自带知识 · 无需检索即可作答的覆盖密度（质量并入本项）</div>
         </div>
-        <div class="mxline"><b style="color:var(--ink-2)">怎么算分（每项 score_N 把实测映射 1–5）</b>：② 可抓 <b>SSR抓到→4–5 · SPA抓空→受阻0</b>　⑤ 二手 <b>n≥6→5·≥3→3·0→1</b>　④ 版本 <b>单主线→5·多版本散→2</b>　⑧ 成本反向计</div>
+        <div class="mxline"><b style="color:var(--ink-2)">如何计分（每项 score_N 将实测映射 1–5）</b>：② 可抓 <b>SSR 可抓→4–5 · SPA 抓取为空→受阻 0</b>　⑤ 二手 <b>n≥6→5·≥3→3·0→1</b>　④ 版本 <b>单主线→5·多版本散→2</b>　⑧ 成本反向计</div>
         <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = 噪声-OR：1−(1−官方)(1−二手)(1−自带)</b>，受阻源记 0、再乘 ④版本·⑧成本系数。一条渠道达标即可作答——写 kernel 三渠道同时失守（OFF 0 · SEC .24 · OWN .40 → .54，再被版本/成本拉到 <b style="color:#FF6B6B">.41</b>）。</div>
       </div>
     </div>
@@ -624,7 +624,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">矩阵评分：写 kernel 官方正文 SPA 抓空，其余卡在版本散 / 二手薄 / 自带弱</span></div>
+        <div class="brand"><span class="ttl">矩阵评分：写 kernel 官方正文 SPA 抓取为空，其余受限于版本散 / 二手薄 / 自带弱</span></div>
         <div class="subttl">AI usability matrix · 算子开发 5 任务 × 6 维 · 每格 昇腾 / NVIDIA 对比（1–5 分，综合为合成值）（opknow 17）</div>
       </div>
       <div class="head-r">06 / 矩阵评分 · 结果</div>
@@ -634,12 +634,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Result</span>不是「都差」，是<b>写 kernel 一格塌</b>（其余受限于版本散 / 二手薄 / 自带弱）</div>
+        <div class="cmp-h"><span class="hk">Result</span>并非「全面落后」，而是<b>写 kernel 单项失守</b>（其余受限于版本散 / 二手薄 / 自带弱）</div>
         <div class="card" style="padding:1.8vh 1.4vw">
           <div class="hm-grid" id="mOp" style="grid-template-columns:90px 54px repeat(6,1fr)"></div>
           <div class="hm-legend"><span>第1列 检索问题 · 第2列 <b style="color:#C7000B">CANN</b>（昇腾）/ <b style="color:#5a8a00">CUDA</b>（NVIDIA），格内各自配色（1–5 分；<b>综合</b>：CANN 为合成小数，CUDA 原数据为档位<b>高 .88–1.0</b>）</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel <b>官方真受阻（.41，SPA 抓空 → 转二手）</b>；M/X/O/L 官方都抓得到。<b>场景可用性 ≈ 最弱且最靠前那一搜。</b></div>
+        <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel <b>官方真受阻（.41，SPA 抓取为空 → 转二手）</b>；M/X/O/L 官方均可抓取。<b>场景可用性 ≈ 最弱且最靠前的那一次检索。</b></div>
       </div>
     </div>
     <script>
@@ -752,7 +752,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.3vh">
         <div class="cmp-h"><span class="hk">How it runs</span>如何度量</div>
         <p class="cmp-desc">把一个人从<b>找入口到进阶</b>的全程拆成 <b>7 阶段 / 24 触点</b>，每个触点都<b>真实运行一遍 + 截图取证</b>，与 NVIDIA <b>同维对照</b>打分（差值＝昇腾−NVIDIA）。</p>
-        <div class="op7"><div class="op7-i clk act" id="hstep0" onclick="setHStep(0)"><span class="n">1</span><b>找入口<br/>选型</b></div><div class="op7-i clk" id="hstep1" onclick="setHStep(1)"><span class="n">2</span><b>上手<br/>引导</b></div><div class="op7-i clk" id="hstep2" onclick="setHStep(2)"><span class="n">3</span><b>配环境<br/>拿 SDK</b></div><div class="op7-i clk" id="hstep3" onclick="setHStep(3)"><span class="n">4</span><b>写·查<br/>文档</b></div><div class="op7-i clk" id="hstep4" onclick="setHStep(4)"><span class="n">5</span><b>编译<br/>调试</b></div><div class="op7-i clk" id="hstep5" onclick="setHStep(5)"><span class="n">6</span><b>调试<br/>求助</b></div><div class="op7-i clk" id="hstep6" onclick="setHStep(6)"><span class="n">7</span><b>进阶<br/>跟生态</b></div></div>
+        <div class="op7"><div class="op7-i clk act" id="hstep0" onclick="setHStep(0)"><span class="n">1</span><b>找入口<br/>选型</b></div><div class="op7-i clk" id="hstep1" onclick="setHStep(1)"><span class="n">2</span><b>上手<br/>引导</b></div><div class="op7-i clk" id="hstep2" onclick="setHStep(2)"><span class="n">3</span><b>配环境<br/>获取 SDK</b></div><div class="op7-i clk" id="hstep3" onclick="setHStep(3)"><span class="n">4</span><b>写·查<br/>文档</b></div><div class="op7-i clk" id="hstep4" onclick="setHStep(4)"><span class="n">5</span><b>编译<br/>调试</b></div><div class="op7-i clk" id="hstep5" onclick="setHStep(5)"><span class="n">6</span><b>调试<br/>求助</b></div><div class="op7-i clk" id="hstep6" onclick="setHStep(6)"><span class="n">7</span><b>进阶<br/>跟生态</b></div></div>
         <div class="cmp2">
           <figure><a id="hsNvA" target="_blank"><img id="hsNv" alt="NVIDIA 截图"/></a><figcaption id="hsNcap" style="color:#5a8a00"></figcaption></figure>
           <figure><a id="hsAscA" target="_blank"><img id="hsAsc" alt="昇腾 截图"/></a><figcaption id="hsAcap" style="color:#C7000B"></figcaption></figure>
@@ -762,7 +762,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <script>
     (function(){
-      var HS=[{a:'step1-asc.png',n:'step1-nv.png',ac:'昇腾 官网首页',nc:'NVIDIA 官网首页',sa:82,sn:74,t:'单站全包、首页即露开发入口（不弱）；NVIDIA 品牌 + 开发者双站、入口分流。'},{a:'step2-asc.png',n:'step2-nv.png',ac:'昇腾 学习 / 教程',nc:'NVIDIA 教程',sa:87,sn:93,t:'两边都厚；NVIDIA 教程体系更系统、学习路径更清。'},{a:'step3-asc.png',n:'step3-nv.png',ac:'昇腾 资源下载',nc:'NVIDIA CUDA 下载',sa:21,sn:87,t:'最大谷底：昇腾下载前要登录华为账号 + 多版本号散乱，最劝退。'},{a:'step4-asc.png',n:'step4-nv.png',ac:'昇腾 文档中心',nc:'NVIDIA Docs',sa:81,sn:83,t:'文档搜索框约 100 字上限、长报错被截断；按产品线分版定位还算准。'},{a:'step5-asc.png',n:'step5-nv.png',ac:'昇腾 在线代码 / 样例',nc:'NVIDIA Samples',sa:82,sn:90,t:'NVIDIA samples 一键可跑；昇腾在线开发(在线 IDE)是长板，但 SEO 弱、入口埋深。'},{a:'step6-asc.png',n:'step6-nv.png',ac:'昇腾 开发者论坛',nc:'NVIDIA Forum',sa:73,sn:88,t:'论坛按产品线分版 + AscendFAQ 自助不错；但发帖需登录华为账号、门槛偏高。'},{a:'step7-asc.png',n:'step7-nv.png',ac:'昇腾 博客 / 案例',nc:'NVIDIA Blog',sa:75,sn:92,t:'NVIDIA 博客 SEO 强、海外可达；昇腾内容 SEO 偏弱、入口埋二级。'}];
+      var HS=[{a:'step1-asc.png',n:'step1-nv.png',ac:'昇腾 官网首页',nc:'NVIDIA 官网首页',sa:82,sn:74,t:'单站全包、首页即露开发入口（不逊色）；NVIDIA 品牌 + 开发者双站、入口分流。'},{a:'step2-asc.png',n:'step2-nv.png',ac:'昇腾 学习 / 教程',nc:'NVIDIA 教程',sa:87,sn:93,t:'两边都厚；NVIDIA 教程体系更系统、学习路径更清。'},{a:'step3-asc.png',n:'step3-nv.png',ac:'昇腾 资源下载',nc:'NVIDIA CUDA 下载',sa:21,sn:87,t:'最大谷底：昇腾下载前要登录华为账号 + 多版本号散乱，最劝退。'},{a:'step4-asc.png',n:'step4-nv.png',ac:'昇腾 文档中心',nc:'NVIDIA Docs',sa:81,sn:83,t:'文档搜索框约 100 字上限、长报错被截断；按产品线分版定位还算准。'},{a:'step5-asc.png',n:'step5-nv.png',ac:'昇腾 在线代码 / 样例',nc:'NVIDIA Samples',sa:82,sn:90,t:'NVIDIA samples 一键可跑；昇腾在线开发(在线 IDE)是长板，但 SEO 弱、入口埋深。'},{a:'step6-asc.png',n:'step6-nv.png',ac:'昇腾 开发者论坛',nc:'NVIDIA Forum',sa:73,sn:88,t:'论坛按产品线分版 + AscendFAQ 自助不错；但发帖需登录华为账号、门槛偏高。'},{a:'step7-asc.png',n:'step7-nv.png',ac:'昇腾 博客 / 案例',nc:'NVIDIA Blog',sa:75,sn:92,t:'NVIDIA 博客 SEO 强、海外可达；昇腾内容 SEO 偏弱、入口埋二级。'}];
       function sc(s){return s<40?'#E60012':s<70?'#E8A317':'#23A06A';}
       window.setHStep=function(k){var d=HS[k];if(!d)return;
         document.getElementById('hsAsc').src=d.a;document.getElementById('hsNv').src=d.n;
@@ -791,7 +791,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe src="seq-d3.html?hi=2" title="时序图 · 人↔昇腾社区 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.3vh">
-        <div class="cmp-h"><span class="hk">Scores</span>不是全面落后，是<b>有长有短</b></div>
+        <div class="cmp-h"><span class="hk">Scores</span>并非全面落后，而是<b>各有长短</b></div>
         <div class="scard card" style="padding:1.4vh 1.4vw">
           <div class="sr"><span class="sh">触点（节选 6 / 24）</span><span class="sh" style="text-align:center">昇腾</span><span class="sh" style="text-align:center">NVIDIA</span><span class="sh" style="text-align:center">差值</span></div>
           <div class="sr"><span class="nm">官网首页</span><span class="pill" style="background:#23A06A">82</span><span class="pill" style="background:#23A06A">74</span><span class="dlt up">+8</span></div>
