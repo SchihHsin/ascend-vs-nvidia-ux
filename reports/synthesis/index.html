@@ -651,17 +651,18 @@ body.overview #panel,body.overview #toggle{display:none!important}
       var cols=['官方可抓','正文质量','版本清晰','二手厚度','自带知识','综合'];
       /* 数据=opknow 17 ROWS 实测；CUDA 综合原数据为档位「高」(.88-1.0) */
       var rows=[
-        {no:'一',name:'写 kernel',sub:'自定义算子',lt:'D', cann:[d(2),['受阻',0],d(2),d(3),d(2),['.41',15]], cuda:[d(5),d(5),d(3),d(4),d(5),['高',95]]},
-        {no:'二',name:'Tiling',sub:'动态 shape',lt:'M', cann:[d(4),d(4),d(4),d(2),d(2),['.63',63]], cuda:[d(5),d(5),d(4),d(2),d(5),['高',95]]},
-        {no:'三',name:'内存越界',sub:'定位',lt:'X', cann:[d(4),d(5),d(2),d(2),d(2),['.74',74]], cuda:[d(5),d(5),d(3),d(3),d(4),['高',95]]},
-        {no:'四',name:'注册集成',sub:'接框架',lt:'O', cann:[d(4),d(5),d(3),d(3),d(3),['.72',72]], cuda:[d(5),d(5),d(3),d(2),d(5),['高',95]]},
-        {no:'五',name:'精度排查',sub:'比对',lt:'L', cann:[d(4),d(5),d(2),d(3),d(3),['.69',69]], cuda:[d(5),d(5),d(5),d(2),d(4),['高',95]]}
+        {no:'1',name:'写 kernel',sub:'自定义算子',lt:'D', cann:[d(2),['受阻',0],d(2),d(3),d(2),['.41',15]], cuda:[d(5),d(5),d(3),d(4),d(5),['高',95]]},
+        {no:'2',name:'Tiling',sub:'动态 shape',lt:'M', cann:[d(4),d(4),d(4),d(2),d(2),['.63',63]], cuda:[d(5),d(5),d(4),d(2),d(5),['高',95]]},
+        {no:'3',name:'内存越界',sub:'定位',lt:'X', cann:[d(4),d(5),d(2),d(2),d(2),['.74',74]], cuda:[d(5),d(5),d(3),d(3),d(4),['高',95]]},
+        {no:'4',name:'注册集成',sub:'接框架',lt:'O', cann:[d(4),d(5),d(3),d(3),d(3),['.72',72]], cuda:[d(5),d(5),d(3),d(2),d(5),['高',95]]},
+        {no:'5',name:'精度排查',sub:'比对',lt:'L', cann:[d(4),d(5),d(2),d(3),d(3),['.69',69]], cuda:[d(5),d(5),d(5),d(2),d(4),['高',95]]}
       ];
       function scell(c,lt){return '<div class="hm-cell" data-letter="'+lt+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</div>';}
       var h='<div class="hm-corner" style="grid-column:span 2"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">检索问题</span></div>';
       cols.forEach(function(c){h+='<div class="hm-header">'+c+'</div>';});
       rows.forEach(function(r){
-        h+='<div class="hm-task" data-letter="'+r.lt+'" style="grid-row:span 2"><span class="hm-no">'+r.no+'</span><div><div>'+r.name+'</div><small>'+r.sub+'</small></div></div>';
+        var cb=parseFloat(r.cann[5][0])*100, nc=(cb<60?'#E63838':cb<70?'#FD9A00':'#37C597');
+        h+='<div class="hm-task" data-letter="'+r.lt+'" style="grid-row:span 2"><span class="hm-no" style="background:'+nc+'" title="综合 '+r.cann[5][0]+'">'+r.no+'</span><div><div>'+r.name+'</div><small>'+r.sub+'</small></div></div>';
         h+='<div class="hm-stk-cell asc" data-letter="'+r.lt+'">CANN</div>';
         r.cann.forEach(function(c){ h+=scell(c,r.lt); });
         h+='<div class="hm-stk-cell nv" data-letter="'+r.lt+'">CUDA</div>';
