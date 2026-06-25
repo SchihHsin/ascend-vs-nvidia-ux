@@ -823,6 +823,108 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
+  <!-- 结论页：样式 -->
+  <style>
+    .ccg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw}
+    .cc{border-radius:14px;padding:1.8vh 1.2vw;background:rgba(255,255,255,.5);border:1px solid var(--line);display:flex;flex-direction:column;gap:1vh}
+    .cc .cc-tag{align-self:flex-start;font-size:var(--fs-xs);font-weight:700;padding:3px 10px;border-radius:8px}
+    .cc.ai .cc-tag{background:rgba(124,92,240,.12);color:#5a3fa0}
+    .cc.hu .cc-tag{background:rgba(47,61,99,.1);color:#2f3d63}
+    .cc.both .cc-tag{background:rgba(0,0,0,.06);color:var(--ink-2)}
+    .cc-h{font-weight:700;font-size:var(--fs-h3);color:var(--ink);line-height:1.4}
+    .cc-d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.65}
+    .cc-ev{display:flex;flex-wrap:wrap;gap:.4em;margin-top:auto;padding-top:.4vh}
+    .cc-ev span{font-family:'JetBrains Mono';font-size:10px;color:var(--ink-3);background:rgba(0,0,0,.045);border-radius:6px;padding:2px 7px;white-space:nowrap}
+    .chain{display:grid;grid-template-columns:62px 1.35fr 1fr 1.15fr;gap:.7vh .7vw;align-items:stretch}
+    .chain .ch-h{font-size:var(--fs-xs);font-weight:700;color:var(--ink-3);letter-spacing:.04em;display:flex;align-items:flex-end;padding:0 .2vw .2vh}
+    .chain .ch-b{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px}
+    .chain .ch-b .bn{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800;font-family:'JetBrains Mono'}
+    .chain .ch-b small{font-size:9px;font-weight:700;letter-spacing:.04em}
+    .chain .ch-b.ai .bn{background:#7c5cf0}.chain .ch-b.ai small{color:#5a3fa0}
+    .chain .ch-b.hu .bn{background:#2f3d63}.chain .ch-b.hu small{color:#2f3d63}
+    .chain .cell{font-size:var(--fs-xs);line-height:1.5;border-radius:10px;padding:.8vh .8vw}
+    .chain .c-an{background:rgba(255,255,255,.5);border:1px solid var(--line);color:var(--ink-2)}
+    .chain .c-co{background:rgba(0,0,0,.03);color:var(--ink-2)}
+    .chain .c-dp{background:rgba(124,92,240,.08);border:1px solid rgba(124,92,240,.22);color:var(--ink);font-weight:600}
+    .chain .c-dp.hu{background:rgba(47,61,99,.07);border-color:rgba(47,61,99,.2)}
+    .chain b{color:var(--ink)}
+  </style>
+
+  <!-- 11 灰底：核心结论 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">双视角分析，收敛出三条核心结论</span></div>
+        <div class="subttl">Findings · 人侧「基础体验」⊕ AI 侧「内容可用性」</div>
+      </div>
+      <div class="head-r">11 / 核心结论</div>
+    </div>
+    <div class="body-area"><div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.6vh">
+      <div class="ccg">
+        <div class="cc ai">
+          <span class="cc-tag">AI 侧</span>
+          <div class="cc-h">外部大模型对昇腾知识：抓不到、对不准、易杜撰</div>
+          <div class="cc-d">官方核心页为 SPA、<b>抓取为空</b>；版本号散乱、无权威当前版；深处<b>自带知识薄</b>。三关全弱时模型无法识别自身不知道，<b>凭记忆杜撰</b>（看似正确、实则有误）。</div>
+          <div class="cc-ev"><span>矩阵 写kernel .41</span><span>架构图末拍·杜撰</span><span>SO 2025 66% 被坑</span><span>一次开发 5 次检索</span></div>
+        </div>
+        <div class="cc hu">
+          <span class="cc-tag">人侧</span>
+          <div class="cc-h">基础体验接近 NVIDIA，卡在配环境与可发现性</div>
+          <div class="cc-d"><b>配环境是谷底（−11）</b>：登录前置 + 协议 + 选架构/版本/包；<b>SDK 下载 −66</b>、英文 / SEO 可发现性弱。长板在<b>上手引导</b>（算子 hub 5 环节 + 在线实验，L2 微反超 CUDA）。</div>
+          <div class="cc-ev"><span>总均分 73.6</span><span>配环境 −11</span><span>SDK 下载 −66</span><span>上手 L2 反超</span></div>
+        </div>
+        <div class="cc both">
+          <span class="cc-tag">合</span>
+          <div class="cc-h">人与 AI 撞在同几道坎，且都需把碎片按场景结构化</div>
+          <div class="cc-d"><b>版本、可发现性、越往深处</b>三道坎两侧共担；碎片化让<b>人靠试错、让 AI 杜撰</b>。改一处两侧受益 —— 由此引出 5 个设计点。</div>
+          <div class="cc-ev"><span>版本散乱</span><span>全球可发现性</span><span>深处自研最塌</span><span>→ 见下页</span></div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 12 灰底：设计点链路 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">5 个设计点：从分析，到结论，再到落点</span></div>
+        <div class="subttl">Analysis → Conclusion → Design · 每条都由前面页的实测证据推出</div>
+      </div>
+      <div class="head-r">12 / 设计点 · 链路</div>
+    </div>
+    <div class="body-area"><div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1vh">
+      <div class="chain">
+        <div class="ch-h"></div><div class="ch-h">分析依据（前页证据） →</div><div class="ch-h">结论 →</div><div class="ch-h">设计点</div>
+
+        <div class="ch-b ai"><span class="bn">1</span><small>AI</small></div>
+        <div class="cell c-an">一次算子开发撞上 <b>5 次检索</b>，知识散在 官方 / 二手 / 自带；AI 自行拼合、拼不全时凭记忆杜撰。</div>
+        <div class="cell c-co">碎片化是病根，人与 AI 都需要把碎片<b>按场景拼成结构化答案</b>。</div>
+        <div class="cell c-dp">通过智能助手将碎片化信息<b>总结为场景化、结构化的答案</b>。</div>
+
+        <div class="ch-b ai"><span class="bn">2</span><small>AI</small></div>
+        <div class="cell c-an">官方核心页为 <b>SPA、抓取为空</b>（矩阵 写 kernel「官方可抓」塌），且无内联可运行命令。</div>
+        <div class="cell c-co">文档不能止于静态页，需<b>机器可读、可问答、可运行</b>。</div>
+        <div class="cell c-dp">文档作为<b>即取即用、可对话、可运行</b>的智能触点。</div>
+
+        <div class="ch-b hu"><span class="bn">3</span><small>人</small></div>
+        <div class="cell c-an">上手引导是<b>长板</b>（算子 hub 5 环节 + 在线实验，L2 微反超），但学习整体仍靠试错、未成体系。</div>
+        <div class="cell c-co">放大长板，做<b>边学边运行</b>的沉浸式学习，而非读静态文档。</div>
+        <div class="cell c-dp hu"><b>沉浸、交互式</b>学习体验。</div>
+
+        <div class="ch-b hu"><span class="bn">4</span><small>人</small></div>
+        <div class="cell c-an"><b>配环境是谷底（−11）</b>，卡在选架构/版本/包的分诊；架构图中 AI 已做「意图解析→子目标拆解」，人侧缺对应。</div>
+        <div class="cell c-co">按用户<b>意图（要做什么）</b>铺一条学习 / 上手路径。</div>
+        <div class="cell c-dp hu"><b>基于意图</b>的学习路径推荐。</div>
+
+        <div class="ch-b ai"><span class="bn">5</span><small>AI·收口</small></div>
+        <div class="cell c-an">外部大模型抓不到官方、版本散乱、自带薄 → 杜撰；综合按<b>噪声-OR</b>，一条渠道达标即可作答。</div>
+        <div class="cell c-co">把知识做成 <b>skill = 给大模型补一条达标渠道</b>，输出结构化、可核验答案。</div>
+        <div class="cell c-dp">社区知识 <b>skill 化</b>，复用给外部大模型。</div>
+      </div>
+      <div class="cmp-cap" style="text-align:left;color:var(--ink-3)">归属：①②⑤ 由 <b style="color:#5a3fa0">AI 侧</b>分析（矩阵 / 架构图）推出；③④ 由 <b style="color:#2f3d63">人侧</b>旅程（配环境谷底 / 上手长板 / 学习路径）推出 —— 正好扣住双视角。⑤ 是①②④对 AI 侧的收口。</div>
+    </div></div>
+  </section>
+
 </div>
 
 <!-- 调色面板（JS 会把它挂到当前黑底章节封面页内）-->
