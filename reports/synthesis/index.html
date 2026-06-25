@@ -984,6 +984,18 @@ slides.forEach(paintSlide);
     var els=sec.querySelectorAll('[data-letter]');
     for(var k=0;k<els.length;k++){ els[k].style.transition='opacity .15s'; els[k].style.opacity=(!lt||els[k].getAttribute('data-letter')===lt)?'':'0.3'; }
   });
+  /* 架构图「按环节讲解」→ 更新该卡片下方 caption */
+  (function(){ var host=null, orig='';
+    window.addEventListener('message',function(e){
+      var d=e&&e.data; if(!d||!('__archCap' in d))return;
+      var fs=document.querySelectorAll('iframe'),ifr=null;
+      for(var i=0;i<fs.length;i++){ if(fs[i].contentWindow===e.source){ifr=fs[i];break;} }
+      if(!ifr)return; var card=ifr.closest('.card')||ifr.parentElement;
+      var cap=card?card.querySelector('.cmp-cap'):null; if(!cap)return;
+      if(host!==cap){ host=cap; orig=cap.innerHTML; }
+      cap.innerHTML=(d.__archCap==null)?orig:d.__archCap;
+    });
+  })();
 </script>
 </body>
 </html>

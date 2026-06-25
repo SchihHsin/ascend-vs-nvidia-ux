@@ -2045,16 +2045,18 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     ];
     var idx=0;
     function updLbl(){var l=document.getElementById('archlbl'); if(l) l.textContent= idx<1?'▶ 按环节讲解':('讲解 '+idx+' / '+WALK.length);}
+    function post(html){ try{ if(window.parent&&window.parent!==window) window.parent.postMessage({__archCap:html},'*'); }catch(e){} }
     function apply(){
       var kids=svg.children, i, el, k;
-      if(idx<1){ for(i=0;i<kids.length;i++) kids[i].style.opacity=''; if(cap){cap.innerHTML=orig;cap.classList.remove('walking');} updLbl(); return; }
+      if(idx<1){ for(i=0;i<kids.length;i++) kids[i].style.opacity=''; if(cap){cap.innerHTML=orig;cap.classList.remove('walking');} post(null); updLbl(); return; }
       var act=WALK[idx-1].n;
       for(i=0;i<kids.length;i++){ el=kids[i]; if(el.tagName==='defs') continue;
         k=el.getAttribute&&el.getAttribute('data-k');
         el.style.opacity=(k&&act.indexOf(k)>=0)?'1':'0.12';
       }
-      if(cap){cap.innerHTML='<b>讲解 '+idx+' / '+WALK.length+'：</b>'+WALK[idx-1].c;cap.classList.add('walking');}
-      updLbl();
+      var h='<b>讲解 '+idx+' / '+WALK.length+'：</b>'+WALK[idx-1].c;
+      if(cap){cap.innerHTML=h;cap.classList.add('walking');}
+      post(h); updLbl();
     }
     function go(d){ idx+=d; if(idx<0)idx=WALK.length; if(idx>WALK.length)idx=0; apply(); }
     var c=document.createElement('div'); c.id='archctrl';
