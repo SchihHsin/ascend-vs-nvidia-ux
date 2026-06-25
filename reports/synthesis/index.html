@@ -825,24 +825,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
   <!-- 结论页：样式 -->
   <style>
-    .ccg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw}
-    .cc{border-radius:14px;padding:1.8vh 1.2vw;background:rgba(255,255,255,.5);border:1px solid var(--line);display:flex;flex-direction:column;gap:1vh}
-    .cc .cc-tag{align-self:flex-start;font-size:var(--fs-xs);font-weight:700;padding:3px 10px;border-radius:8px}
+    .ccg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;flex:1;min-height:0;align-content:stretch}
+    .cc{border-radius:14px;padding:3vh 1.6vw;background:rgba(255,255,255,.5);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;gap:1.8vh}
+    .cc .cc-tag{align-self:flex-start;font-size:var(--fs-sm);font-weight:700;padding:4px 12px;border-radius:8px}
     .cc.ai .cc-tag{background:rgba(124,92,240,.12);color:#5a3fa0}
     .cc.hu .cc-tag{background:rgba(47,61,99,.1);color:#2f3d63}
     .cc.both .cc-tag{background:rgba(0,0,0,.06);color:var(--ink-2)}
-    .cc-h{font-weight:700;font-size:var(--fs-h3);color:var(--ink);line-height:1.4}
-    .cc-d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.65}
-    .cc-ev{display:flex;flex-wrap:wrap;gap:.4em;margin-top:auto;padding-top:.4vh}
-    .cc-ev span{font-family:'JetBrains Mono';font-size:10px;color:var(--ink-3);background:rgba(0,0,0,.045);border-radius:6px;padding:2px 7px;white-space:nowrap}
-    .chain{display:grid;grid-template-columns:62px 1.35fr 1fr 1.15fr;gap:.7vh .7vw;align-items:stretch}
-    .chain .ch-h{font-size:var(--fs-xs);font-weight:700;color:var(--ink-3);letter-spacing:.04em;display:flex;align-items:flex-end;padding:0 .2vw .2vh}
+    .cc-h{font-weight:700;font-size:var(--fs-h2);color:var(--ink);line-height:1.35}
+    .cc-d{font-size:var(--fs-body);color:var(--ink-2);line-height:1.7}
+    .cc-ev{display:flex;flex-wrap:wrap;gap:.4em;margin-top:.8vh;padding-top:.4vh}
+    .cc-ev span{font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);background:rgba(0,0,0,.045);border-radius:6px;padding:3px 9px;white-space:nowrap}
+    .chain{display:grid;grid-template-columns:62px 1.35fr 1fr 1.15fr;gap:1.5vh .8vw;align-items:stretch}
+    .chain .ch-h{font-size:var(--fs-sm);font-weight:700;color:var(--ink-3);letter-spacing:.04em;display:flex;align-items:flex-end;padding:0 .2vw .2vh}
     .chain .ch-b{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px}
-    .chain .ch-b .bn{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800;font-family:'JetBrains Mono'}
-    .chain .ch-b small{font-size:9px;font-weight:700;letter-spacing:.04em}
+    .chain .ch-b .bn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:800;font-family:'JetBrains Mono'}
+    .chain .ch-b small{font-size:var(--fs-xs);font-weight:700;letter-spacing:.04em}
     .chain .ch-b.ai .bn{background:#7c5cf0}.chain .ch-b.ai small{color:#5a3fa0}
     .chain .ch-b.hu .bn{background:#2f3d63}.chain .ch-b.hu small{color:#2f3d63}
-    .chain .cell{font-size:var(--fs-xs);line-height:1.5;border-radius:10px;padding:.8vh .8vw}
+    .chain .cell{font-size:var(--fs-body);line-height:1.62;border-radius:10px;padding:1.2vh 1vw}
     .chain .c-an{background:rgba(255,255,255,.5);border:1px solid var(--line);color:var(--ink-2)}
     .chain .c-co{background:rgba(0,0,0,.03);color:var(--ink-2)}
     .chain .c-dp{background:rgba(124,92,240,.08);border:1px solid rgba(124,92,240,.22);color:var(--ink);font-weight:600}
@@ -921,7 +921,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cell c-co">把知识做成 <b>skill = 给大模型补一条达标渠道</b>，输出结构化、可核验答案。</div>
         <div class="cell c-dp">社区知识 <b>skill 化</b>，复用给外部大模型。</div>
       </div>
-      <div class="cmp-cap" style="text-align:left;color:var(--ink-3)">归属：①②⑤ 由 <b style="color:#5a3fa0">AI 侧</b>分析（矩阵 / 架构图）推出；③④ 由 <b style="color:#2f3d63">人侧</b>旅程（配环境谷底 / 上手长板 / 学习路径）推出 —— 正好扣住双视角。⑤ 是①②④对 AI 侧的收口。</div>
+      <div class="cmp-cap" style="text-align:left;color:var(--ink-3);font-size:var(--fs-sm)">归属：①②⑤ 由 <b style="color:#5a3fa0">AI 侧</b>分析（矩阵 / 架构图）推出；③④ 由 <b style="color:#2f3d63">人侧</b>旅程（配环境谷底 / 上手长板 / 学习路径）推出 —— 正好扣住双视角。⑤ 是①②④对 AI 侧的收口。</div>
     </div></div>
   </section>
 
