@@ -325,6 +325,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .dh-card.dark .dh-t,.dh-card.accent .dh-t{color:#fff}
 .dh-card.dark .dh-d,.dh-card.accent .dh-d{color:rgba(255,255,255,.78)}
 .dh-card.dark .dh-d .dh-src{color:rgba(255,255,255,.6)}.dh-card.accent .dh-d .dh-src{color:rgba(255,255,255,.82)}
+/* 信任落差页＝问题页：整页改状态红 --g-red(#FF5A6E→#FF6F55，非品牌红 #C7000B)，scope 在 .warn 不影响立论页共用的 dh-card */
+.warn .dh-num{background:linear-gradient(120deg,#FF5A6E,#FF6F55);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.warn .dh-ic{background:rgba(255,90,110,.13);color:#F0414F}
+.warn .dh-d .dh-src{color:#E84656}
+.warn .dh-card.accent{background:radial-gradient(ellipse 130% 130% at 50% 48%,#D62236 0%,#FF7A6B 100%)}
+.warn .dh-card.dark{background:radial-gradient(ellipse 130% 130% at 50% 48%,#2A1012 0%,#5A2A2E 100%)}
+.warn .bridge.lite{background:rgba(255,90,110,.1)!important}
 </style>
 </head>
 <body>
@@ -383,8 +390,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 1b 灰底：信任落差 -->
-  <section class="slide s-gray">
+  <!-- 1b 灰底：信任落差（红色警示主题：突出问题，用状态红 --g-red，非品牌红） -->
+  <section class="slide s-gray warn">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">用得多≠信得过——开发者对 AI 输出仍存在明显信任落差</span></div>
