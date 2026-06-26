@@ -1142,7 +1142,10 @@ function renderV(){
       const gx=svg.append("g").attr("data-pair",brSrc[d.id]||null).attr("data-msg",d.id).attr("transform",`translate(${x},${y})`).style("cursor","pointer")
         .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
       drawBarV(gx,d);                       // 菱形按 dtier 深浅
-      sideLabel(gx,d, d.lane==="ai");       // AI 在左→标题朝右(中央)；人在右→朝左(中央)
+      // 决策标题：放菱形右上方(单行,去「决策：」前缀)——朝左会压到「主导方」列,故一律朝右
+      gx.append("text").attr("text-anchor","start").attr("x",20).attr("y",-11)
+        .attr("font-size",11).attr("font-weight",600).attr("fill","#555")
+        .text(d.t.replace(/^决策[:：]\s*/,""));
       return;
     }
     const f=FLOW[d.id]; if(!f) return;
