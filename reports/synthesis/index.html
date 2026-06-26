@@ -865,22 +865,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 人侧扩展：样式 -->
+  <!-- 结论页：样式 -->
   <style>
-    .jr-card{flex:1;min-height:0;display:flex;flex-direction:column;gap:1.4vh;padding:2.4vh 1.8vw}
-    .jr-curve{flex:0 0 auto;position:relative}
-    .jr-curve svg{width:100%;height:30vh;display:block;overflow:visible}
-    .jr-leg{position:absolute;top:0;right:.4vw;display:flex;gap:1.1vw;font-size:var(--fs-sm);color:var(--ink-2)}
-    .jr-leg i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:.4em;vertical-align:middle}
-    .jr-steps{display:grid;grid-template-columns:repeat(7,1fr);gap:.7vw;flex:1;min-height:0}
-    .jr-st{display:flex;flex-direction:column;justify-content:center;gap:.9vh;background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:11px;padding:1.4vh .8vw}
-    .jr-st .jr-k{display:flex;align-items:center;gap:.4em;font-weight:800;font-size:var(--fs-body);color:var(--ink)}
-    .jr-st .jr-k .kn{width:22px;height:22px;border-radius:6px;background:#2f3d63;color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-sm);display:flex;align-items:center;justify-content:center;flex:none}
-    .jr-st .jr-nm{font-weight:700;font-size:var(--fs-sm);color:var(--ink);line-height:1.25}
-    .jr-st .jr-d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5}
-    .jr-st .jr-dl{align-self:flex-start;font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-xs);padding:2px 7px;border-radius:6px;color:#fff}
-    .jr-st.bad{border-color:rgba(199,0,11,.35);background:rgba(199,0,11,.04)}
-    .jr-st.win{border-color:rgba(118,185,0,.4);background:rgba(118,185,0,.05)}
     .ccg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;flex:1;min-height:0;align-content:stretch}
     .cc{border-radius:14px;padding:3vh 1.6vw;background:rgba(255,255,255,.5);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;gap:1.8vh}
     .cc .cc-tag{align-self:flex-start;font-size:var(--fs-sm);font-weight:700;padding:4px 12px;border-radius:8px}
@@ -906,132 +892,93 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .chain b{color:var(--ink)}
   </style>
 
-  <!-- 12 灰底：人侧旅程（单独一页，无时序图） -->
+  <!-- 12 灰底：iframe 引主报告 #journey -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">走完 7 步生命周期：谷底在「配环境·拿 SDK」，长板在「上手引导」</span></div>
-        <div class="subttl">Human journey · 昇腾 vs NVIDIA 全旅程情绪曲线（分值＝同维度体验分，差值＝昇腾−NVIDIA）</div>
+        <div class="brand"><span class="ttl">走完 7 步生命周期：每步「触点 × 情绪 × 痛点 / 机会」，谷底在配环境</span></div>
+        <div class="subttl">Human journey · 开发者从找入口到进阶的全旅程（引自基础体验报告）</div>
       </div>
       <div class="head-r">12 / 基础体验 · 旅程</div>
     </div>
-    <div class="body-area">
-      <div class="card jr-card">
-        <div class="jr-curve">
-          <div class="jr-leg"><span><i style="background:#C7000B"></i>昇腾</span><span><i style="background:#76B900"></i>NVIDIA</span></div>
-          <svg viewBox="0 0 980 224" preserveAspectRatio="xMidYMid meet">
-            <line x1="40" y1="70" x2="945" y2="70" stroke="#d4d8df" stroke-width="1" stroke-dasharray="3,5"/>
-            <line x1="40" y1="150" x2="945" y2="150" stroke="#d4d8df" stroke-width="1" stroke-dasharray="3,5"/>
-            <polyline points="65,127 207,101 348,108 490,101 632,76 773,95 915,82" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <polyline points="65,117 207,95 348,197 490,108 632,114 773,127 915,124" fill="none" stroke="#C7000B" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <g fill="#76B900"><circle cx="65" cy="127" r="4"/><circle cx="207" cy="101" r="4"/><circle cx="348" cy="108" r="4"/><circle cx="490" cy="101" r="4"/><circle cx="632" cy="76" r="4"/><circle cx="773" cy="95" r="4"/><circle cx="915" cy="82" r="4"/></g>
-            <g fill="#C7000B"><circle cx="65" cy="117" r="4"/><circle cx="207" cy="95" r="4"/><circle cx="490" cy="108" r="4"/><circle cx="632" cy="114" r="4"/><circle cx="773" cy="127" r="4"/><circle cx="915" cy="124" r="4"/></g>
-            <circle cx="348" cy="197" r="7.5" fill="#fff" stroke="#C7000B" stroke-width="2.5"/>
-            <text x="348" y="219" text-anchor="middle" font-size="13" fill="#C7000B" font-weight="700" font-family="'HarmonyOS Sans SC'">配环境谷底 · SDK 下载 −66</text>
-            <text x="207" y="84" text-anchor="middle" font-size="13" fill="#5a8a00" font-weight="700" font-family="'HarmonyOS Sans SC'">上手微反超 +2</text>
-          </svg>
-        </div>
-        <div class="jr-steps">
-          <div class="jr-st win"><div class="jr-k"><span class="kn">1</span></div><div class="jr-nm">落地·找入口·选型</div><span class="jr-dl" style="background:#76B900">+8</span><div class="jr-d">单站即露开发入口，落地不弱；但好落地页 /developer 埋在二级。</div></div>
-          <div class="jr-st win"><div class="jr-k"><span class="kn">2</span></div><div class="jr-nm">上手引导</div><span class="jr-dl" style="background:#76B900">+2</span><div class="jr-d">算子 hub 5 环节 + 在线实验（免装即跑），比 CUDA 更体系——长板。</div></div>
-          <div class="jr-st bad"><div class="jr-k"><span class="kn">3</span></div><div class="jr-nm">配环境·拿 SDK</div><span class="jr-dl" style="background:#E60012">−66</span><div class="jr-d">登录华为账号前置 + 多版本号散乱，最劝退（全旅程谷底）。</div></div>
-          <div class="jr-st"><div class="jr-k"><span class="kn">4</span></div><div class="jr-nm">动手写·查文档</div><span class="jr-dl" style="background:#E8A317">−2</span><div class="jr-d">文档搜索框约 100 字截断、命令散在正文不完整。</div></div>
-          <div class="jr-st"><div class="jr-k"><span class="kn">5</span></div><div class="jr-nm">编译跑通</div><span class="jr-dl" style="background:#E8A317">−8</span><div class="jr-d">samples 一键可跑略弱；在线 IDE 是长板但入口埋深。</div></div>
-          <div class="jr-st"><div class="jr-k"><span class="kn">6</span></div><div class="jr-nm">调试·求助</div><span class="jr-dl" style="background:#E8A317">−15</span><div class="jr-d">论坛分版 + FAQ 自助（+22）不错，但发帖需登录华为账号。</div></div>
-          <div class="jr-st bad"><div class="jr-k"><span class="kn">7</span></div><div class="jr-nm">进阶·跟生态</div><span class="jr-dl" style="background:#E60012">−17</span><div class="jr-d">博客 / 方案内容不差，差在「被全球搜到」（SEO / 英文弱）。</div></div>
-        </div>
-      </div>
-    </div>
+    <div class="body-area"><iframe src="ar-embed.html?sec=journey" title="journey" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-
-  <style>
-    .syn{display:flex;flex-direction:column;gap:1.2vh;flex:1;min-height:0;justify-content:center}
-    .sy{display:grid;grid-template-columns:165px 1.25fr 1fr;gap:1.3vw;align-items:center;background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:12px;padding:1.6vh 1.3vw}
-    .sy .sy-l{display:flex;flex-direction:column;gap:.5vh}
-    .sy .sy-tag{align-self:flex-start;font-size:var(--fs-xs);font-weight:700;padding:3px 9px;border-radius:7px;color:#fff}
-    .sy .sy-step{font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);font-weight:600}
-    .sy .sy-h{font-weight:700;font-size:var(--fs-body);color:var(--ink);line-height:1.4}
-    .sy .sy-one{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5}
-    .sy .sy-rec{font-size:var(--fs-sm);color:var(--ink);line-height:1.55;background:rgba(0,0,0,.035);border-radius:9px;padding:1.1vh 1vw}
-    .sy .sy-rec b{font-weight:700}
-    .acts{display:flex;flex-direction:column;gap:.8vh;flex:1;min-height:0;justify-content:center}
-    .act-row{display:grid;grid-template-columns:74px 1.7fr 130px 1.1fr;gap:1.2vw;align-items:center;padding:0 1vw}
-    .act-row.hd{font-family:'JetBrains Mono';font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:700}
-    .act-row.r{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:11px;padding:1.4vh 1vw;min-height:0}
-    .act-p{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);color:#fff;border-radius:7px;text-align:center;padding:3px 0}
-    .act-s{font-size:var(--fs-body);color:var(--ink);font-weight:500;line-height:1.4}
-    .act-tp{font-family:'JetBrains Mono';font-size:var(--fs-sm);color:var(--ink-2)}
-    .act-g{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.4}
-    .depts{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2vw;flex:1;min-height:0;align-content:center}
-    .dp{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:13px;padding:2vh 1.3vw;display:flex;flex-direction:column;gap:1vh}
-    .dp .dp-h{display:flex;align-items:center;gap:.55em;font-weight:800;font-size:var(--fs-h3);color:var(--ink)}
-    .dp .dp-dot{width:11px;height:11px;border-radius:50%;flex:none}
-    .dp .dp-own{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.55}
-    .dp .dp-tp{margin-top:auto;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);background:rgba(0,0,0,.035);border-radius:6px;padding:3px 8px;align-self:flex-start}
-  </style>
-
-  <!-- 13 灰底：人侧综述 · 5 个跨触点结论 -->
+  <!-- 13 灰底：iframe 引主报告 #j1 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">5 个跨触点结论：差距集中在「下载闸门」与「全球可发现性」，上手是长板</span></div>
-        <div class="subttl">Synthesis · 把逐触点结论收敛成跨触点大判断（算子开发场景）</div>
+        <div class="brand"><span class="ttl">结论①：一句话钩子 vs 卡片菜单——落地都不弱，差在好落地页埋二级</span></div>
+        <div class="subttl">Synthesis · 步骤 1–2（引自基础体验报告 综述）</div>
       </div>
-      <div class="head-r">13 / 基础体验 · 结论</div>
+      <div class="head-r">13 / 结论 · 落地</div>
     </div>
-    <div class="body-area">
-      <div class="syn">
-        <div class="sy"><div class="sy-l"><span class="sy-tag" style="background:#7c5cf0">落地</span><span class="sy-step">步骤 1–2</span></div><div><div class="sy-h">一句话钩子 vs 卡片菜单——落地都不弱</div><div class="sy-one">两边首屏都在答「我能干什么」，差在指令性；昇腾真正的隐性成本是好落地页 /developer 埋在二级。</div></div><div class="sy-rec"><b>把 /developer 提到一眼可达</b> + 给场景卡一个最强单一 CTA。</div></div>
-        <div class="sy"><div class="sy-l"><span class="sy-tag" style="background:#C7000B">最高杠杆</span><span class="sy-step">步骤 3</span></div><div><div class="sy-h">零登录直取 vs 账号闸门（SDK −66）</div><div class="sy-one">NVIDIA 下载内联命令复制即跑、不强制登录；昇腾要过公告→选架构/版本/包→同意协议→登录华为账号。</div></div><div class="sy-rec"><b>游客可直接下载社区版</b>，登录/协议后置，多级选择折叠为带默认值的智能推荐。</div></div>
-        <div class="sy"><div class="sy-l"><span class="sy-tag" style="background:#1f9fb8">门槛镜像</span><span class="sy-step">账号·语言·社区</span></div><div><div class="sy-h">全球化 vs 本地化的镜像门槛</div><div class="sy-one">昇腾对国内开发者近零摩擦、对海外卡（华为账号/英文薄）；NVIDIA 正相反。是一组对角线镜像。</div></div><div class="sy-rec">若只服务国内已足够顺；<b>要拓海外/学术，账号·语言·社区三处需成套补齐</b>。</div></div>
-        <div class="sy"><div class="sy-l"><span class="sy-tag" style="background:#76B900">长板</span><span class="sy-step">步骤 2 · 算子</span></div><div><div class="sy-h">算子上手的反转长板：hub 5 环节 vs CUDA 资源堆</div><div class="sy-one">昇腾按角色做学习路径 + 在线实验（免装浏览器直跑）+ 引导式 ModelZoo，比 CUDA 的硬核 quickstart 更新手友好。</div></div><div class="sy-rec"><b>把在线实验、引导式 ModelZoo 前置到首屏</b>，让「开箱即跑」成为体验标签。</div></div>
-        <div class="sy"><div class="sy-l"><span class="sy-tag" style="background:#e0a32e">可发现性</span><span class="sy-step">步骤 6–7 + 全局</span></div><div><div class="sy-h">内容不差，差在「被全球搜到」</div><div class="sy-one">博客/方案内容组织都不差，瓶颈在 SEO 与全球可索引性弱、入口埋二级、登录墙挡发帖。</div></div><div class="sy-rec"><b>补英文版 + SEO + 博客/方案入口提到顶部直达</b>——内容不用重做，低成本高回报。</div></div>
-      </div>
-    </div>
+    <div class="body-area"><iframe src="ar-embed.html?sec=j1" title="j1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-
-  <!-- 14 灰底：行动建议 -->
+  <!-- 14 灰底：iframe 引主报告 #j2 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">行动建议：P0 先砍「下载闸门」、补「落地起步」——最高杠杆两件事</span></div>
-        <div class="subttl">Action items · 按优先级排序，P0＝最高杠杆应优先动手</div>
+        <div class="brand"><span class="ttl">结论②：零登录直取 vs 账号闸门（SDK −66）——全篇 ROI 最高的单点</span></div>
+        <div class="subttl">Synthesis · 步骤 3 · 最高杠杆（引自基础体验报告 综述）</div>
       </div>
-      <div class="head-r">14 / 行动建议</div>
+      <div class="head-r">14 / 结论 · 下载闸门</div>
     </div>
-    <div class="body-area">
-      <div class="acts">
-        <div class="act-row hd"><span>优先级</span><span>建议</span><span>对应触点</span><span>预期收益</span></div>
-        <div class="act-row r"><span class="act-p" style="background:#E60012">P0</span><span class="act-s">下载「游客可下、登录后置」，缩短首次成功路径</span><span class="act-tp">4.2 / 4.3</span><span class="act-g">直接降上手流失 · 最高杠杆</span></div>
-        <div class="act-row r"><span class="act-p" style="background:#E60012">P0</span><span class="act-s">首屏新增「开发者起步」主动作（如「5 分钟跑通第一个示例」）</span><span class="act-tp">1.1 / 1.2</span><span class="act-g">补齐落地第一问</span></div>
-        <div class="act-row r"><span class="act-p" style="background:#E8A317">P1</span><span class="act-s">把「在线实验 + 引导式 ModelZoo」长板前置到首屏 / 产品页</span><span class="act-tp">3.2 / 5.2</span><span class="act-g">放大差异化优势</span></div>
-        <div class="act-row r"><span class="act-p" style="background:#E8A317">P1</span><span class="act-s">内容「被全球搜到」：博客 / 方案补英文版 + SEO + 顶栏直达入口</span><span class="act-tp">6.4 / 2.4</span><span class="act-g">提升可发现性 / 全球可达</span></div>
-        <div class="act-row r"><span class="act-p" style="background:#2f6fed">P2</span><span class="act-s">文档 / 产品增加「按场景 / 角色」横切入口 + 选型分诊</span><span class="act-tp">2.1 / 3.1</span><span class="act-g">降低「得先懂产品名」门槛</span></div>
-        <div class="act-row r"><span class="act-p" style="background:#2f6fed">P2</span><span class="act-s">拓海外：邮箱直注册 + 国际第三方登录 + 英文内容 / 版块</span><span class="act-tp">1.4 / 4.2 / 6.1</span><span class="act-g">打开海外 / 学术生态</span></div>
-        <div class="act-row r"><span class="act-p" style="background:#929aa6">P3</span><span class="act-s">API 文档补版本选择器 + 结构一致性</span><span class="act-tp">3.4</span><span class="act-g">对齐查阅体验</span></div>
-      </div>
-    </div>
+    <div class="body-area"><iframe src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-
-  <!-- 15 灰底：责任归属 -->
+  <!-- 15 灰底：iframe 引主报告 #j3 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">责任归属：6 个部门各管一段——下载 / 账号归「官网平台」，长板靠「研发·工具链」</span></div>
-        <div class="subttl">Ownership · 改进措施 → 主责部门（协同部门此处不展开）</div>
+        <div class="brand"><span class="ttl">结论③：全球化 vs 本地化的镜像门槛——账号 / 语言 / 社区一组对角线</span></div>
+        <div class="subttl">Synthesis · 账号·语言·社区（引自基础体验报告 综述）</div>
       </div>
-      <div class="head-r">15 / 责任归属</div>
+      <div class="head-r">15 / 结论 · 门槛镜像</div>
     </div>
-    <div class="body-area">
-      <div class="depts">
-        <div class="dp"><div class="dp-h"><span class="dp-dot" style="background:#7c5cf0"></span>体验设计</div><div class="dp-own">交互 · 信息架构 · 官网视觉；管落地页 CTA、首屏起步动作。</div><span class="dp-tp">首页 / 导航 / 文档落地 · 4 触点</span></div>
-        <div class="dp"><div class="dp-h"><span class="dp-dot" style="background:#2f6fed"></span>官网平台</div><div class="dp-own">前端 · 账号 · 下载 · URL · 搜索；<b>承接 P0 的下载闸门与登录后置</b>。</div><span class="dp-tp">下载 / 登录 / 搜索 · 4 触点</span></div>
-        <div class="dp"><div class="dp-h"><span class="dp-dot" style="background:#c8881a"></span>产品</div><div class="dp-own">选型 · CTA · 在线体验规划；管按场景/角色入口与分诊。</div><span class="dp-tp">产品总览 / 选型 · 5 触点</span></div>
-        <div class="dp"><div class="dp-h"><span class="dp-dot" style="background:#5b6bb5"></span>研发·工具链</div><div class="dp-own">MindStudio · 在线实验 · ModelZoo；<b>把上手长板前置、做成体验标签</b>。</div><span class="dp-tp">在线实验 / 工具链 · 3 触点</span></div>
-        <div class="dp"><div class="dp-h"><span class="dp-dot" style="background:#1f9fb8"></span>资料</div><div class="dp-own">文档 · API · FAQ · 内容本地化；管命令完整性、英文版与版本选择器。</div><span class="dp-tp">文档 / API / FAQ · 5 触点</span></div>
-        <div class="dp"><div class="dp-h"><span class="dp-dot" style="background:#cf5a86"></span>社区运营</div><div class="dp-own">论坛 · 博客 SEO · 认证 · 求助；<b>承接「被全球搜到」的 SEO 与入口直达</b>。</div><span class="dp-tp">论坛 / 博客 / 认证 · 4 触点</span></div>
+    <div class="body-area"><iframe src="ar-embed.html?sec=j3" title="j3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+  </section>
+  <!-- 16 灰底：iframe 引主报告 #j4 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">结论④：算子上手的反转长板——hub 5 环节 + 在线实验比 CUDA 更体系</span></div>
+        <div class="subttl">Synthesis · 步骤 2 · 算子长板（引自基础体验报告 综述）</div>
       </div>
+      <div class="head-r">16 / 结论 · 上手长板</div>
     </div>
+    <div class="body-area"><iframe src="ar-embed.html?sec=j4" title="j4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+  </section>
+  <!-- 17 灰底：iframe 引主报告 #j5 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">结论⑤：内容不差，差在「被全球搜到」——SEO / 英文 / 入口埋深</span></div>
+        <div class="subttl">Synthesis · 步骤 6–7 + 全局（引自基础体验报告 综述）</div>
+      </div>
+      <div class="head-r">17 / 结论 · 可发现性</div>
+    </div>
+    <div class="body-area"><iframe src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+  </section>
+  <!-- 18 灰底：iframe 引主报告 #actions -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">行动建议：P0 先砍下载闸门、补落地起步——按优先级排序</span></div>
+        <div class="subttl">Action items · P0＝最高杠杆应优先动手（引自基础体验报告）</div>
+      </div>
+      <div class="head-r">18 / 行动建议</div>
+    </div>
+    <div class="body-area"><iframe src="ar-embed.html?sec=actions" title="actions" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+  </section>
+  <!-- 19 灰底：iframe 引主报告 #dept -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">责任归属：6 个部门各管一段——下载 / 账号归官网平台</span></div>
+        <div class="subttl">Ownership · 改进措施 → 主责部门（引自基础体验报告）</div>
+      </div>
+      <div class="head-r">19 / 责任归属</div>
+    </div>
+    <div class="body-area"><iframe src="ar-embed.html?sec=dept" title="dept" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
 
   <!-- 11 灰底：核心结论 -->
@@ -1041,7 +988,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">两个视角分析下来，归结为三条核心结论</span></div>
         <div class="subttl">结论</div>
       </div>
-      <div class="head-r">16 / 核心结论</div>
+      <div class="head-r">20 / 核心结论</div>
     </div>
     <div class="body-area"><div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.6vh">
       <div class="ccg">
@@ -1074,7 +1021,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">5 个设计点：每一个都顺着「分析 → 结论 → 落点」推导而来</span></div>
         <div class="subttl">结论</div>
       </div>
-      <div class="head-r">17 / 设计点 · 链路</div>
+      <div class="head-r">21 / 设计点 · 链路</div>
     </div>
     <div class="body-area"><div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1vh">
       <div class="chain">
