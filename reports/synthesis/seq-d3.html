@@ -943,12 +943,12 @@ function drawAxisDots(parent, cx, y, st){
   st.axLane.forEach((l,i)=>{
     const g=parent.append("g").attr("transform",`translate(${cx-total/2+i*gap},${y})`);
     g.append("circle").attr("r",r).attr("fill",dotColor(l));
-    g.append("text").attr("text-anchor","middle").attr("dy",3.2).attr("font-size",9).attr("font-weight",700).attr("fill",dotTextColor(l)).text(AXNAME[i]);
+    g.append("text").attr("text-anchor","middle").attr("dy",3.2).attr("font-size",12).attr("font-weight",700).attr("fill",dotTextColor(l)).text(AXNAME[i]);
   });
 }
 /* 计数文字 AI n / 人 m（双色 tspan）；横竖共用 */
 function drawCount(parent, cx, y, st){
-  const t=parent.append("text").attr("x",cx).attr("y",y).attr("text-anchor","middle").attr("font-size",10);
+  const t=parent.append("text").attr("x",cx).attr("y",y).attr("text-anchor","middle").attr("font-size",13.5);
   t.append("tspan").attr("fill","#3C3489").text("AI "+st.ai);
   t.append("tspan").attr("fill","#999").text("  /  ");
   t.append("tspan").attr("fill","#0C447C").text("人 "+st.hu);
@@ -1016,11 +1016,11 @@ function drawNodeShape(sel,d){
   }
   if(d.blocked){
     sel.append("circle").attr("r",24).attr("fill","none").attr("stroke","#C8102E").attr("stroke-width",2.5);
-    sel.append("text").attr("x",18).attr("y",-16).attr("font-size",14).attr("font-weight",900)
+    sel.append("text").attr("x",18).attr("y",-16).attr("font-size",19).attr("font-weight",900)
       .attr("fill","#C8102E").text("✕");
   }
   sel.append("text").attr("text-anchor","middle").attr("dy",4)
-    .attr("font-size",11).attr("font-weight",800)
+    .attr("font-size",15).attr("font-weight",800)
     .attr("fill", d.kind==="decision"?(d.dtier==="A"?"#4d3a06":"#8a6d1a"):stroke(d)).text(d.id);
 }
 
@@ -1036,7 +1036,7 @@ function wrapText(el,txt,max,lh,anchorX,centerVert){
 
 /* 竖向激活条（经典 sequence）：三类 kind 用三种填充样式区分
    实色=AI 检索/起草 · 描边浅底=用户本地执行 · 斜条纹底=决策点；lane 仍用紫/蓝；受阻套红框✕ */
-const BARW=24, BARH=42;
+const BARW=28, BARH=46;
 function drawBarV(sel,d){
   let fillv, strokev, idcol, sw;
   if(d.kind==="decision"){            // A=非人不可→实心深金；B=技术路线→斜条纹浅底
@@ -1053,11 +1053,11 @@ function drawBarV(sel,d){
     sel.append("rect").attr("x",-BARW/2-4).attr("y",-BARH/2-4)
       .attr("width",BARW+8).attr("height",BARH+8).attr("rx",7)
       .attr("fill","none").attr("stroke","#C8102E").attr("stroke-width",2.5);
-    sel.append("text").attr("x",BARW/2+8).attr("y",-BARH/2+3).attr("font-size",14)
+    sel.append("text").attr("x",BARW/2+8).attr("y",-BARH/2+3).attr("font-size",19)
       .attr("font-weight",900).attr("fill","#C8102E").text("✕");
   }
   sel.append("text").attr("text-anchor","middle").attr("dy",4)
-    .attr("font-size",10.5).attr("font-weight",800).attr("fill",idcol).text(d.id);
+    .attr("font-size",14).attr("font-weight",800).attr("fill",idcol).text(d.id);
 }
 
 /* ===================== 竖向视图 · 4 参与者真·时序图（时间自上而下） =====================
@@ -1075,10 +1075,10 @@ const D_FLOW={
 };
 function renderV(){
   const phX=4, phW=70, owX=78, owW=44;
-  const LX={hu:255, ai:490, off:725, tool:960, sec:1195};
+  const LX={hu:205, ai:425, off:645, tool:865, sec:1085};
   const PCOL={off:"#C8102E", sec:"#BA7517", ai:"#6B5BA8", hu:"#2f3d63", tool:"#3f7d72"};
   const PNAME={off:"昇腾官方", sec:"二手社区", ai:"AI（Agent）", hu:"人类用户", tool:"本机工具"};
-  const vTop=86, dyV=38, Wv=1255;
+  const vTop=92, dyV=42, Wv=1130;
   const Y = xi => vTop + xi*dyV;
   const Hv = Y(NODES.length-1) + 70;
   const exec = ()=> curLvl>=1 ? "ai" : "hu";        // 执行方：Vibe 档起转 AI
@@ -1087,14 +1087,14 @@ function renderV(){
 
   /* 阶段卡 + 主导方色带（最左，同前） */
   svg.append("text").attr("x",phX+phW/2).attr("y",vTop-62).attr("text-anchor","middle")
-    .attr("font-size",10).attr("font-weight",800).attr("fill","#555").text("阶段·人/AI");
+    .attr("font-size",13.5).attr("font-weight",800).attr("fill","#555").text("阶段·人/AI");
   PHASE.forEach((d,i)=>{
     const y0=Y(d.a)-dyV/2+5, h=(d.b-d.a)*dyV + dyV-10, cy=(Y(d.a)+Y(d.b))/2, cxp=phX+phW/2, st=phaseStats(d);
     svg.append("rect").attr("x",phX).attr("y",y0).attr("width",phW).attr("height",h)
       .attr("rx",8).attr("fill",phaseColors[i]).attr("opacity",.6).style("cursor","help")
       .on("mousemove",e=>showPhaseTip(e,i)).on("mouseleave",hideTip).on("click",e=>pinPhaseTip(e,i));
-    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",9.5).attr("font-weight",700).attr("fill","#555");
-    wrapText(lab, d.n, 6, 11, cxp, false); lab.attr("y",cy-24);
+    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",13).attr("font-weight",700).attr("fill","#555");
+    wrapText(lab, d.n, 6, 14, cxp, false); lab.attr("y",cy-24);
     drawRatioBar(svg, cxp, cy-6, Math.min(phW-14,84), st);
     drawCount(svg, cxp, cy+10, st);
     drawAxisDots(svg, cxp, cy+24, st);
@@ -1103,12 +1103,12 @@ function renderV(){
       .on("mousemove",e=>showPhaseTip(e,i)).on("mouseleave",hideTip).on("click",e=>pinPhaseTip(e,i));
   });
   svg.append("text").attr("x",owX+owW/2).attr("y",vTop-62).attr("text-anchor","middle")
-    .attr("font-size",10).attr("font-weight",800).attr("fill","#555").text("主导方");
+    .attr("font-size",13.5).attr("font-weight",800).attr("fill","#555").text("主导方");
   PHASE.forEach(d=>{
     const k=phaseOwner(d), y0=Y(d.a)-dyV/2+5, h=(d.b-d.a)*dyV + dyV-10;
     svg.append("rect").attr("x",owX).attr("y",y0).attr("width",owW).attr("height",h).attr("rx",6).attr("fill",ownColors[k]);
-    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",9.5).attr("font-weight",700).attr("fill","#2b2b2b");
-    wrapText(lab, ownName[k], 4, 12, owX+owW/2, true); lab.attr("y",(Y(d.a)+Y(d.b))/2+3);
+    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",13).attr("font-weight",700).attr("fill","#2b2b2b");
+    wrapText(lab, ownName[k], 4, 15, owX+owW/2, true); lab.attr("y",(Y(d.a)+Y(d.b))/2+3);
   });
 
   /* 4 条参与者生命线 + 列头 */
@@ -1117,20 +1117,20 @@ function renderV(){
     svg.append("line").attr("data-lane",k).attr("data-col",PCOL[k]).attr("x1",x).attr("x2",x).attr("y1",vTop-34).attr("y2",Hv-26)
       .attr("stroke","#e3e3e3").attr("stroke-width",1.5);
     const t=svg.append("text").attr("data-lane",k).attr("x",x).attr("y",vTop-46).attr("text-anchor","middle")
-      .attr("font-size",11.5).attr("font-weight",800).attr("fill",PCOL[k]).text(PNAME[k]);
+      .attr("font-size",15.5).attr("font-weight",800).attr("fill",PCOL[k]).text(PNAME[k]);
     if(k==="ai"||k==="hu") t.style("cursor","help")
       .on("mousemove",ev=>showLaneTip(ev,k)).on("mouseleave",hideTip).on("click",ev=>pinLaneTip(ev,k));
   });
 
   const drawMarker=(g,d,color,blocked)=>{
-    if(blocked){ g.append("circle").attr("r",16).attr("fill","none").attr("stroke","#C8102E").attr("stroke-width",2.2); }
-    g.append("circle").attr("r",13).attr("fill","#fff").attr("stroke",color).attr("stroke-width",2);
-    g.append("text").attr("text-anchor","middle").attr("dy",4).attr("font-size",10).attr("font-weight",800).attr("fill",color).text(d.id);
+    if(blocked){ g.append("circle").attr("r",18).attr("fill","none").attr("stroke","#C8102E").attr("stroke-width",2.2); }
+    g.append("circle").attr("r",15).attr("fill","#fff").attr("stroke",color).attr("stroke-width",2);
+    g.append("text").attr("text-anchor","middle").attr("dy",4).attr("font-size",13.5).attr("font-weight",800).attr("fill",color).text(d.id);
   };
   const sideLabel=(g,d,toRight)=>{
     g.append("text").attr("text-anchor", toRight?"start":"end")
-      .attr("font-size",10).attr("font-weight",600).attr("fill","#333")
-      .each(function(){ wrapText(d3.select(this), d.t, 9, 12, (toRight?1:-1)*22, true); }).attr("y",0);
+      .attr("font-size",13.5).attr("font-weight",600).attr("fill","#333")
+      .each(function(){ wrapText(d3.select(this), d.t, 9, 16, (toRight?1:-1)*28, true); }).attr("y",0);
   };
 
   /* 每步＝一条消息（标题在箭头上方）；决策＝执行者线上的菱形。红色小字＝该步对应的矩阵指标分（打穿到 page 17） */
@@ -1145,7 +1145,7 @@ function renderV(){
       drawBarV(gx,d);                       // 菱形按 dtier 深浅
       sideLabel(gx,d, d.lane==="ai");       // AI 在左→标题朝右(中央)；人在右→朝左(中央)
       if(NS[d.id]) gx.append("text").attr("x",0).attr("y",20).attr("text-anchor","middle")
-        .attr("font-size",9).attr("font-weight",700).attr("fill","#bb2236").text(NS[d.id]);
+        .attr("font-size",12).attr("font-weight",700).attr("fill","#bb2236").text(NS[d.id]);
       return;
     }
     const f=FLOW[d.id]; if(!f) return;
@@ -1166,7 +1166,7 @@ function renderV(){
       .attr("stroke",col).attr("stroke-width",2).attr("marker-end",mk).attr("opacity",.92);
     svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
     const tt=svg.append("text").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",y-7).attr("text-anchor","middle")
-      .attr("font-size",10).attr("font-weight",600).attr("fill", f.blocked?"#C8102E":"#333");
+      .attr("font-size",13.5).attr("font-weight",600).attr("fill", f.blocked?"#C8102E":"#333");
     tt.append("tspan").text(d.t);
     if(NS[d.id] && !f.blocked) tt.append("tspan").attr("fill","#bb2236").attr("font-weight",700).text("　"+NS[d.id]);
     const gx=svg.append("g").attr("data-pair",pair).attr("data-msg",d.id).attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
@@ -1178,7 +1178,7 @@ function renderV(){
         .attr("stroke","#C8102E").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ahr)").attr("opacity",.92);
       svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",ry).attr("x2",x2).attr("y2",ry).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
       svg.append("text").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
-        .attr("font-size",9.5).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）"+(NS[d.id]?" → 矩阵 "+NS[d.id]:""));
+        .attr("font-size",13).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）"+(NS[d.id]?" → 矩阵 "+NS[d.id]:""));
     }
   });
 
@@ -1191,7 +1191,7 @@ function renderV(){
       .attr("stroke","#2f3d63").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ab)").attr("opacity",.85);
     svg.append("line").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
     svg.append("text").attr("data-pair",pair).attr("data-msg",br.id).attr("x",(x1b+x2)/2).attr("y",y-5).attr("text-anchor","middle")
-      .attr("font-size",9.5).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
+      .attr("font-size",13).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
       .style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"二手社区":"昇腾官方"),b:br.b})).on("mouseleave",hideTip);
   });
