@@ -332,6 +332,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .warn .dh-card.accent{background:radial-gradient(ellipse 130% 130% at 50% 48%,#D62236 0%,#FF7A6B 100%)}
 .warn .dh-card.dark{background:radial-gradient(ellipse 130% 130% at 50% 48%,#2A1012 0%,#5A2A2E 100%)}
 .warn .bridge.lite{background:rgba(255,90,110,.1)!important}
+.warn .bridge.lite b{background:linear-gradient(transparent 60%,rgba(255,90,110,.3) 0)}  /* 问题页加粗高亮底也用红，不再蓝 */
 </style>
 </head>
 <body>
@@ -451,7 +452,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <p class="cmp-desc">Agent 时代「用户」既是人也是 AI。同一次算子开发沿时间撞上 <b>5 次检索</b>，<b>两条线</b>分别对应两套实测分析：</p>
         <div class="ov-map">
           <div class="ovm">
-            <div class="ovm-h"><i style="background:#6B5BA8"></i>AI ↔ 昇腾 / 二手</div>
+            <div class="ovm-h"><i style="background:#6B5BA8"></i>AI ↔ 昇腾 / 第三方平台</div>
             <div class="ovm-d">每次抓取的命中 · 质量 = <b>AI 可用性矩阵打分</b>（opknow）</div>
             <div class="ovm-f">→ 后续 3 页：方法论 · CUDA vs CANN 问法 · 矩阵评分</div>
           </div>
@@ -523,11 +524,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
         <div class="cmp-h"><span class="hk">How it runs</span>如何运行</div>
-        <p class="cmp-desc">AI 助手用 <b>web_search / web_fetch</b> 抓 <b>官方站 + 二手社区 + 自带知识</b> 三路，按「<b>触达 × 质量</b>」打 1–5 分、<b>noisy-OR 合成</b>；同一套任务在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 各<b>真实执行一遍</b>，差异归因到「<b>栈 / 生态</b>」。</p>
+        <p class="cmp-desc">AI 助手用 <b>web_search / web_fetch</b> 抓 <b>官方站 + 第三方平台 + 自带知识</b> 三路，按「<b>触达 × 质量</b>」打 1–5 分、<b>noisy-OR 合成</b>；同一套任务在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 各<b>真实执行一遍</b>，差异归因到「<b>栈 / 生态</b>」。</p>
         <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">Scenarios</span>7 阶段 → 26 任务，算子开发涉及 5 次检索</div>
         <div class="lc-stages">装环境 · 开发算子 · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
         <div class="op5">
@@ -553,7 +554,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div class="card" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1vh;padding:1.3vh 1.1vw;overflow:hidden">
         <iframe src="arch-d3.html" title="Agent 循环架构（悬浮看每个环节）" style="flex:1;min-width:0;min-height:0;width:100%;border:0;background:transparent"></iframe>
@@ -573,7 +574,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center">
       <div class="bridge" style="margin-top:0;flex:0 0 auto">铁律：<b>真实开发者口吻</b>、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>。</div>
@@ -653,7 +654,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
         <div class="cmp-h"><span class="hk">Metric system</span>知识有 3 个来源 × 2 道关，交叉构成指标</div>
@@ -664,14 +665,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="mc tipped"><span class="ix">②</span> 可抓取<span class="mtip"><span class="f">score2</span> 核心 how-to 页抓取形态<br/>静态→<b>5</b> / 服务端渲染 ssr→4 / SPA 只回导航→<b>2</b> / robots 拦→1</span></div>
           <div class="mc tipped"><span class="ix">③</span> 正文详尽<span class="mtip r"><span class="f">score3</span> 含可跑命令/代码 · 参考完整度<br/>穷尽→<b>5</b> / 主路径→4 / 概述→3 / 片段→2；②抓不到则记「受阻」不打分</span></div>
           <div class="mc tipped"><span class="ix">④</span> 版本清晰<span class="mtip r"><span class="f">score4</span> 并存版本号个数 · 有无支持矩阵<br/>版本无关或 ≤1→<b>5</b> / 有矩阵→4 / 双轴可锁→3 / ≥3 散乱→<b>2</b></span></div>
-          <div class="ml">二手社区</div>
-          <div class="mc tipped" style="grid-column:span 2"><span class="ix">⑤</span> 丰富度<span class="mtip"><span class="f">score5</span> 去重二手来源条数 n<br/>≥6→<b>5</b> / ≥5→4 / ≥3→3 / ≥1→2 / 0→<b>1</b>（官方文档/仓/论坛不计二手）</span></div>
+          <div class="ml">第三方平台</div>
+          <div class="mc tipped" style="grid-column:span 2"><span class="ix">⑤</span> 丰富度<span class="mtip"><span class="f">score5</span> 去重第三方平台来源条数 n<br/>≥6→<b>5</b> / ≥5→4 / ≥3→3 / ≥1→2 / 0→<b>1</b>（官方文档/仓/论坛不计第三方平台）</span></div>
           <div class="mc tipped" style="grid-column:span 2"><span class="ix">⑥</span> 可信度 / 一致性<span class="mtip r"><span class="f">score6</span> 各源权威基准分取均值 ＋ 一致性（互证 +1 / 矛盾 −1）＋ 时效罚 ＋ 独立性罚，截到 1–5</span></div>
           <div class="ml">模型自带</div>
           <div class="mc tipped" style="grid-column:span 4"><span class="ix">⑦</span> 自带知识 · 无需检索即可作答的覆盖密度<span class="mtip"><span class="f">score7</span> 训练覆盖密度自评 1–5 ＋ 知识截止 gap 罚分（相关 API 迭代越快、罚分越重）</span></div>
         </div>
         <div class="mxline">过程 / 产出（因变量，不进 ⑪）：<span class="mi tipped"><span class="ix">⑧</span> 检索成本<span class="mtip"><span class="f">score8</span> 反向，分高=省力。cost = 轮数 + 0.5·fetch + 4·抓取失败<br/>≤1.5→<b>5</b> / ≤2.5→4 / ≤4→3 / ≤6→2</span></span> · <span class="mi tipped"><span class="ix">⑨</span> 版本可锁<span class="mtip"><span class="f">score9</span> 确切版本+opset→<b>5</b> / 工具版本可定→4 / 给范围→3 / 抽不出→2</span></span> · <span class="mi tipped"><span class="ix">⑩</span> 步骤可复现<span class="mtip r"><span class="f">score10</span> 照抄即跑→<b>5</b> / 替好参数即跑→4 / 需小修→3 / 仅骨架→2</span></span>　<span style="color:#A1A4AA">— 悬浮任一指标看打分档</span></div>
-        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = K × 版本因子 × 成本因子</b>；<b>K = 1−(1−OFF)(1−SEC)(1−OWN)</b>（噪声-OR：官方 / 二手 / 自带 <b>任一渠道扛住即可答</b>，取「至少一条送达」而非平均）。OFF=①×②×③ · SEC=⑤×⑥ · OWN=⑦，各档先归一 v/5、受阻渠道记 0。例：写 kernel 三渠道齐弱（OFF 0 · SEC .24 · OWN .40 → K .54），再乘版本 / 成本系数 → <b style="color:#FF6B6B">.41</b>。</div>
+        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = K × 版本因子 × 成本因子</b>；<b>K = 1−(1−OFF)(1−SEC)(1−OWN)</b>（噪声-OR：官方 / 第三方平台 / 自带 <b>任一渠道扛住即可答</b>，取「至少一条送达」而非平均）。OFF=①×②×③ · SEC=⑤×⑥ · OWN=⑦，各档先归一 v/5、受阻渠道记 0。例：写 kernel 三渠道齐弱（OFF 0 · SEC .24 · OWN .40 → K .54），再乘版本 / 成本系数 → <b style="color:#FF6B6B">.41</b>。</div>
       </div>
     </div>
   </section>
@@ -680,22 +681,22 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">矩阵评分：写 kernel 官方正文 SPA 抓取为空，其余受限于版本散 / 二手薄 / 自带弱</span></div>
+        <div class="brand"><span class="ttl">矩阵评分：写 kernel 官方正文 SPA 抓取为空，其余受限于版本散 / 第三方平台薄 / 自带弱</span></div>
         <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">08 / 矩阵评分 · 结果</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/二手 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Result</span>并非「全面落后」，而是<b>写 kernel 单项失守</b>（其余受限于版本散 / 二手薄 / 自带弱）</div>
+        <div class="cmp-h"><span class="hk">Result</span>并非「全面落后」，而是<b>写 kernel 单项失守</b>（其余受限于版本散 / 第三方平台薄 / 自带弱）</div>
         <div class="card" style="padding:1.8vh 1.4vw">
           <div class="hm-grid" id="mOp" style="grid-template-columns:90px 54px repeat(6,1fr)"></div>
           <div class="hm-legend"><span>第1列 检索问题 · 第2列 <b style="color:#C7000B">CANN</b>（昇腾）/ <b style="color:#5a8a00">CUDA</b>（NVIDIA），格内各自配色（1–5 分；<b>综合</b>：CANN 为合成小数，CUDA 原数据为档位<b>高 .88–1.0</b>）</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel <b>官方真受阻（.41，SPA 抓取为空 → 转二手）</b>；M/X/O/L 官方均可抓取。<b>场景可用性 ≈ 最弱且最靠前的那一次检索。</b></div>
+        <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel <b>官方真受阻（.41，SPA 抓取为空 → 转第三方平台）</b>；M/X/O/L 官方均可抓取。<b>场景可用性 ≈ 最弱且最靠前的那一次检索。</b></div>
       </div>
     </div>
     <script>
@@ -704,7 +705,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       function bord(s){return s<20?'rgba(224,33,40,.22)':s<40?'rgba(244,132,12,.22)':s<60?'rgba(5,131,88,.22)':s<80?'rgba(18,113,128,.22)':'rgba(57,121,249,.22)';}
       function txt(s){return s<20?'#E02128':s<40?'#F4840C':s<60?'#058358':s<80?'#127180':'#3979F9';}
       function d(v){return v==='受阻'?['受阻',0]:[String(v),v*20];}
-      var cols=['官方可抓','正文质量','版本清晰','二手厚度','自带知识','综合'];
+      var cols=['官方可抓','正文质量','版本清晰','第三方平台厚度','自带知识','综合'];
       /* 数据=opknow 17 ROWS 实测；CUDA 综合原数据为档位「高」(.88-1.0) */
       var rows=[
         {no:'1',name:'写 kernel',sub:'自定义算子',lt:'D', cann:[d(2),['受阻',0],d(2),d(3),d(2),['.41',15]], cuda:[d(5),d(5),d(3),d(4),d(5),['高',95]]},
@@ -936,7 +937,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="ch-h"></div><div class="ch-h">分析依据（前页证据） →</div><div class="ch-h">结论 →</div><div class="ch-h">设计点</div>
 
         <div class="ch-b ai"><span class="bn">1</span><small>AI</small></div>
-        <div class="cell c-an">一次算子开发撞上 <b>5 次检索</b>，知识散在 官方 / 二手 / 自带；AI 自行拼合、拼不全时凭记忆杜撰。</div>
+        <div class="cell c-an">一次算子开发撞上 <b>5 次检索</b>，知识散在 官方 / 第三方平台 / 自带；AI 自行拼合、拼不全时凭记忆杜撰。</div>
         <div class="cell c-co">碎片化是病根，人与 AI 都需要把碎片<b>按场景拼成结构化答案</b>。</div>
         <div class="cell c-dp">通过智能助手将碎片化信息<b>总结为场景化、结构化的答案</b>。</div>
 

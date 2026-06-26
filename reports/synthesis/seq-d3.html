@@ -347,7 +347,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 
 <a id="s1"></a>
 <h2><span class="no">①</span>全链路时序图 · 4 参与者（拖动「AI 自主度」看场景切换 · 悬浮看每步细节）</h2>
-<div class="sechint">竖向时序图、<b>5 条生命线（人类用户 ｜ AI ｜ 昇腾官方 ｜ 本机工具 ｜ 二手社区）</b>。这是<b>「算子开发场景」全流程</b>：开发一个算子沿时间撞上 <b>5 次搜索（D→M→X→O→L）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行。拖滑块看 3 档自主度、<b>悬浮节点看细节</b>。<details class="moreinfo"><summary>展开：交互与核心发现</summary><div>每步是参与者间一条消息（横向箭头、标题在上）。<b>核心发现</b>：5 次搜索里<b>只有写 kernel 的 D（sD）官方真受阻</b>——AI 向昇腾官方 <code>web_fetch</code>，返回红色空箭头「✕ 抓取为空（SPA）」、再转二手社区兜底；后面 M/X/O/L 官方都抓得到、但各有版本/二手/自带的坑。拖动时执行/决策发起方 morph——越自动「人类用户」线越靠边。（3 档为协作示意、仅 AI 检索步实测，口径见底部局限①）</div></details></div>
+<div class="sechint">竖向时序图、<b>5 条生命线（人类用户 ｜ AI ｜ 昇腾社区 ｜ 本机工具 ｜ 第三方平台）</b>。这是<b>「算子开发场景」全流程</b>：开发一个算子沿时间撞上 <b>5 次搜索（D→M→X→O→L）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行。拖滑块看 3 档自主度、<b>悬浮节点看细节</b>。<details class="moreinfo"><summary>展开：交互与核心发现</summary><div>每步是参与者间一条消息（横向箭头、标题在上）。<b>核心发现</b>：5 次搜索里<b>只有写 kernel 的 D（sD）官方真受阻</b>——AI 向昇腾社区 <code>web_fetch</code>，返回红色空箭头「✕ 抓取为空（SPA）」、再转第三方平台兜底；后面 M/X/O/L 官方都抓得到、但各有版本/第三方平台/自带的坑。拖动时执行/决策发起方 morph——越自动「人类用户」线越靠边。（3 档为协作示意、仅 AI 检索步实测，口径见底部局限①）</div></details></div>
 
 <div class="sctabs" id="sctabs"></div>
 
@@ -368,9 +368,9 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <span class="lg" style="font-weight:700;color:#555">生命线：</span>
   <span class="lg"><i class="lgdot" style="background:#fff;border-color:#2f3d63"></i> 人类用户</span>
   <span class="lg"><i class="lgdot" style="background:#fff;border-color:#6B5BA8"></i> AI</span>
-  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#C8102E"></i> 昇腾官方</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#C8102E"></i> 昇腾社区</span>
   <span class="lg"><i class="lgdot" style="background:#fff;border-color:#3f7d72"></i> 本机工具</span>
-  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#BA7517"></i> 二手社区</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#BA7517"></i> 第三方平台</span>
   <span class="lg" id="lgHandoff"><i class="lgline"></i> 消息·涉及 AI</span>
   <span class="lg"><i class="lgline" style="border-top-color:#7a8aa0"></i> 消息·人↔工具</span>
   <span class="lg"><i class="lgline" style="border-top:2px dashed #C8102E"></i> 受阻·空返回 ✕</span>
@@ -397,8 +397,8 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
     <div class="jbody">
       <div class="jtext">
         <p>开发一个算子<b>不是搜一次</b>，是沿时间撞上 <b>5 次搜索</b>：写 kernel(D) → Tiling(M) → 内存越界(X) → 注册集成(O) → 精度排查(L)。可用性<b>一路在变</b>，不是一个数。</p>
-        <p>5 次里 <b>4 次官方都抓得到</b>（M.63 / X.74 / O.72 / L.69，各有版本/二手的小坑），<b>只有写 kernel 的 D 官方真受阻（.41）</b>。但整条路的体感被 D 拖着——因为它<b>又最弱、又最靠前</b>：kernel 写不出，后面 Tiling/编译/精度全建在二手地基上，到编译才报错。<b>场景可用性 ≈ 最弱且最靠前的那一搜。</b></p>
-        <p class="j-fix"><b>怎么改：</b>优先修<b>最靠前的瓶颈</b>——把写 kernel 那页（opdevg）静态化（治本，见 <a href="19_findings_ux_synthesis.html">19</a>）；在此之前，AI 抓取为空时<b>显式报「官方未取得、以下二手」</b>，别让错误地基静默往下传。</p>
+        <p>5 次里 <b>4 次官方都抓得到</b>（M.63 / X.74 / O.72 / L.69，各有版本/第三方平台的小坑），<b>只有写 kernel 的 D 官方真受阻（.41）</b>。但整条路的体感被 D 拖着——因为它<b>又最弱、又最靠前</b>：kernel 写不出，后面 Tiling/编译/精度全建在第三方平台地基上，到编译才报错。<b>场景可用性 ≈ 最弱且最靠前的那一搜。</b></p>
+        <p class="j-fix"><b>怎么改：</b>优先修<b>最靠前的瓶颈</b>——把写 kernel 那页（opdevg）静态化（治本，见 <a href="19_findings_ux_synthesis.html">19</a>）；在此之前，AI 抓取为空时<b>显式报「官方未取得、以下第三方平台」</b>，别让错误地基静默往下传。</p>
       </div>
       <div class="jdemo">
         <div class="demo-cap">5 次搜索的可用性 · 整体被最弱的 D 拖着</div>
@@ -412,12 +412,12 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
         <div class="s5cap">4 次官方都抓得到，唯独写 kernel 的 D 受阻、且最靠前——整条路被它拖着（横截面 19 给不出这条「逐段」曲线）</div>
         <div class="demo-side ds-comm">昇腾社区侧 · 供给侧治本（治根：让 AI 抓得到）</div>
         <div class="lofi">
-          <div class="lofi-bar s-comm">昇腾官方文档站 · opdevg 写 kernel 页</div>
+          <div class="lofi-bar s-comm">昇腾社区文档站 · opdevg 写 kernel 页</div>
           <div class="lofi-body">
             <div class="ba2">
               <div class="ba-col ba-b"><span class="ba-t">现状（SPA）</span>web_fetch 只回导航 + meta、<b>正文 0 字</b>——AI 抓取为空，错误地基由此而起</div>
               <span class="ba-arr">→</span>
-              <div class="ba-col ba-a"><span class="ba-t">改后（静态化）</span>正文 HTML 内含 msopgen 命令 + 参数表，<b>AI 一次抓全</b>、不必转二手</div>
+              <div class="ba-col ba-a"><span class="ba-t">改后（静态化）</span>正文 HTML 内含 msopgen 命令 + 参数表，<b>AI 一次抓全</b>、不必转第三方平台</div>
             </div>
           </div>
         </div>
@@ -425,8 +425,8 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
         <div class="lofi">
           <div class="lofi-bar s-ai">AI 助手 · 回答</div>
           <div class="lofi-body">
-            <div class="lofi-warn">⚠ 官方 how-to 页未取得（SPA 抓取为空）；以下据二手 + 自带知识，请核对官方</div>
-            <p>步骤 1：msopgen gen …<span class="src s-2">二手</span></p>
+            <div class="lofi-warn">⚠ 官方 how-to 页未取得（SPA 抓取为空）；以下据第三方平台 + 自带知识，请核对官方</div>
+            <p>步骤 1：msopgen gen …<span class="src s-2">第三方平台</span></p>
             <p>步骤 2：build.sh 编包 …<span class="src s-own">自带知识</span></p>
           </div>
         </div>
@@ -451,7 +451,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
         </div>
         <div class="demo-side ds-comm">昇腾社区侧 · 供给侧：官方命令写成「可照抄完整块」</div>
         <div class="lofi">
-          <div class="lofi-bar s-comm">昇腾官方文档站 · 命令示例</div>
+          <div class="lofi-bar s-comm">昇腾社区文档站 · 命令示例</div>
           <div class="lofi-body">
             <div class="ba2">
               <div class="ba-col ba-b"><span class="ba-t">现状</span>命令散在正文、soc_version 不说怎么取 → AI 只能现编占位、人填错</div>
@@ -494,7 +494,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
         <div class="arc-cap">检索段的「顺」是虚假信心：真正的难全压在后段、且是人独自承担——只有按时间走一遍才看得出这条落差。</div>
         <div class="demo-side ds-comm">昇腾社区侧 · 供给侧：只能治「版本」这一处 A 类</div>
         <div class="lofi">
-          <div class="lofi-bar s-comm">昇腾官方文档站 · 版本</div>
+          <div class="lofi-bar s-comm">昇腾社区文档站 · 版本</div>
           <div class="lofi-body">
             <div class="ba2">
               <div class="ba-col ba-b"><span class="ba-t">现状</span>多版本号并存、URL 还会漂——AI 锁不准版本</div>
@@ -529,7 +529,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
       <tr><td><span class="pri p0">P0</span></td><td>先修<b>最靠前的瓶颈</b>：写 kernel 页 opdevg 静态化 + 抓不到「响亮」标注</td><td>判断1 · sD</td><td>把最弱且最靠前的环节抬起来</td></tr>
       <tr><td><span class="pri p0">P0</span></td><td>人机<b>交接做成一等公民</b>：AI 标需填项 + 报错一键完整回灌</td><td>判断2 · 编译段</td><td>降交接处信息丢失</td></tr>
       <tr><td><span class="pri p1">P1</span></td><td><b>「前松后紧」前置告知</b>：旅程开头标后段需人核验的点</td><td>判断3 · A类</td><td>管理预期、不在深水区才报错</td></tr>
-      <tr><td><span class="pri p1">P1</span></td><td>供给侧治本（opdevg 静态化 / 版本收口 / 补二手）</td><td>→ 见 19</td><td>把原料做好，所有 AI 工具受益</td></tr>
+      <tr><td><span class="pri p1">P1</span></td><td>供给侧治本（opdevg 静态化 / 版本收口 / 补第三方平台）</td><td>→ 见 19</td><td>把原料做好，所有 AI 工具受益</td></tr>
     </tbody>
   </table>
   <div class="cb-overall"><b>总论：AI 能搬来知识，搬不动你的机器</b>——而且这条路是<b>「前松后紧」</b>的：真正的问题不是某个分数低，是<b>早期一次静默失败沿时间放大 + 后段人独自承担</b>。这是只有走一遍旅程才看得出的体感结论。（切上方 <b>训练场景</b> Tab 看同一视角下另一条路；供给侧文档站怎么治本、全 26 任务 ROI 排序见 <a href="19_findings_ux_synthesis.html">19</a>；推理场景制作中。）</div>
@@ -545,7 +545,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
     <div class="jbody">
       <div class="jtext">
         <p>训练也是 <b>5 次搜索的串联</b>，但和算子开发是<b>两种地形</b>：5 搜里<b>官方全部抓得到（②全 4）</b>，最弱的 F 分布式也有 .72（中高）、只是版本散；没有 D 写 kernel 那种 .41 受阻、又最靠前、把全程拖下水的深谷。</p>
-        <p>连<b>二手社区</b>这条线在两个场景里的角色都不同：D 是「官方塌了被迫转二手、二手还薄」（受阻兜底）；训练是「<b>官方够用、二手再添 ranktable 实例 / 收敛经验</b>」（健康补充）。而且训练里<b>人也直接和昇腾社区交互</b>——去官方配套表 / Gitee 样例对齐版本拓扑、撞 OOM 时自己翻 CSDN 实战贴。同一条线，地形不同、角色就不同。</p>
+        <p>连<b>第三方平台</b>这条线在两个场景里的角色都不同：D 是「官方塌了被迫转第三方平台、第三方平台还薄」（受阻兜底）；训练是「<b>官方够用、第三方平台再添 ranktable 实例 / 收敛经验</b>」（健康补充）。而且训练里<b>人也直接和昇腾社区交互</b>——去官方配套表 / Gitee 样例对齐版本拓扑、撞 OOM 时自己翻 CSDN 实战贴。同一条线，地形不同、角色就不同。</p>
         <p>这正印证<b>「可用性是任务相关的」</b>：越靠<b>采纳漏斗的上手 / 训练侧</b>（迁移、分布式、显存），华为投入越足、官方做得越厚；越往深处自研（写 kernel）越塌。<b>同一个 AI、同样按时间走，体感差一个量级</b>——这是横截面 19 的均值掩盖、只有逐段旅程才显出来的。</p>
         <p class="j-fix"><b>怎么改：</b>训练这条路官方都抓得到，<b>治本重点不在「抓不到」而在「版本散」</b>——收口 F/I 的版本（一个 canonical + 配套查询器）最能把 .72 抬起来。</p>
       </div>
@@ -575,7 +575,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
       <div class="jdemo">
         <div class="demo-side ds-comm">昇腾社区侧 · 供给侧：版本收口（训练第一坑）</div>
         <div class="lofi">
-          <div class="lofi-bar s-comm">昇腾官方文档站 · 版本配套表</div>
+          <div class="lofi-bar s-comm">昇腾社区文档站 · 版本配套表</div>
           <div class="lofi-body">
             <div class="ba2">
               <div class="ba-col ba-b"><span class="ba-t">现状</span>CANN / torch_npu / PyTorch 版本号并存、配套关系散 → AI 锁不准、人对不齐</div>
@@ -635,7 +635,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
       <tr><td><span class="pri p0">P0</span></td><td>供给侧<b>收口版本</b>：CANN / torch_npu canonical 配套表 + 查询器（治训练第一坑）</td><td>判断2 · sF/sI</td><td>把最弱的 F .72 抬起来</td></tr>
       <tr><td><span class="pri p0">P0</span></td><td>使用侧<b>本机事实清单前置</b>：开训前核对版本 / 拓扑 / 显存 / 精度阈值</td><td>判断3 · A 类</td><td>减少每段协同来回</td></tr>
       <tr><td><span class="pri p1">P1</span></td><td><b>版本声明前置</b>：环境卡先对配套表，别等 import 失败</td><td>判断2 · dVerT</td><td>避免「看着对、装不上」</td></tr>
-      <tr><td><span class="pri p1">P1</span></td><td>补<b>带版本号的分布式 / HCCL 二手</b>（救 F 的 ⑤⑥ 同质）</td><td>→ 见 19</td><td>降二手回声、抬可信度</td></tr>
+      <tr><td><span class="pri p1">P1</span></td><td>补<b>带版本号的分布式 / HCCL 第三方平台</b>（救 F 的 ⑤⑥ 同质）</td><td>→ 见 19</td><td>降第三方平台回声、抬可信度</td></tr>
     </tbody>
   </table>
   <div class="cb-overall"><b>总论：训练这条路 AI 是「称职的副驾」</b>——5 搜全在中高/高带、官方都抓得到，没有算子那种受阻深谷。它的难<b>均匀、可预期</b>：每段都要人备好本机事实（版本 / 拓扑 / 显存 / 精度）。<b>对照算子开发，最能说明「可用性是任务相关的」</b>——同一个 AI，地形决定体感。（切上方 <b>算子开发</b> Tab 看深谷那条路；全 26 任务 ROI 排序见 <a href="19_findings_ux_synthesis.html">19</a>；推理场景制作中。）</div>
@@ -652,7 +652,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <ul class="tight" style="margin-top:8px">
     <li><b>硬上限 = <code>max_uses</code></b>：<code>web_search</code> 是 Anthropic Messages API 的<b>服务端工具</b>，注册时带 <code>max_uses</code> 封顶（如 5）；超过会返回 <code>max_uses_exceeded</code>，模型不能无限刷。</li>
     <li><b>软停止 = 模型自主判断「信息已足够」</b>：服务端工具在<b>同一轮</b>内自带 loop——模型决定检索内容 → 平台执行并回灌结果 → 模型判断信息是否足够 → 不足则续检索、足够则停止并生成终答（<code>stop_reason: end_turn</code>；耗时较长会先 <code>pause_turn</code> 再继续）。所以「调用 N 次」不是写死的常量，而是 <b>min(max_uses, 模型判断收敛点)</b>。</li>
-    <li><b>为什么 D 任务收敛得早</b>：实测前 1–2 条结果（知乎 / ai6s.net / MindSpore 官方 / CSDN）已能拼出步骤骨架，边际信息递减；继续搜更多只会拿到同质 CSDN 互抄（D 的二手本就薄），模型据此判断「再搜性价比低」→ 提前停。<b>检索次数少 ≠ 偷懒，而是边际收益判断</b>。</li>
+    <li><b>为什么 D 任务收敛得早</b>：实测前 1–2 条结果（知乎 / ai6s.net / MindSpore 官方 / CSDN）已能拼出步骤骨架，边际信息递减；继续搜更多只会拿到同质 CSDN 互抄（D 的第三方平台本就薄），模型据此判断「再搜性价比低」→ 提前停。<b>检索次数少 ≠ 偷懒，而是边际收益判断</b>。</li>
   </ul>
   <h3 style="margin-top:18px">输入优化：用户怎么写指令能显著抬升输出精准度</h3>
   <table>
@@ -660,7 +660,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
     <tbody>
       <tr><td><b>补约束</b>：写明「要<b>可照抄的完整命令 + 锁定版本号</b>」</td><td>逼 AI 在 s5 给出带真实 soc_version 占位说明的 msopgen 命令，而非泛泛描述，减少 d1 的来回。</td></tr>
       <tr><td><b>限范围</b>：写明芯片型号 / CANN 版本（如 910B1 + 8.0.RC3）</td><td>直接消解 d2 版本对齐这个卡点——AI 不必在多版本间猜，输出一次到位。</td></tr>
-      <tr><td><b>限渠道</b>：写明「优先官方文档，无法取得则说明受阻、不得编造」</td><td>触发 AI 在 s3 受阻时<b>诚实标注 SPA 无法抓取</b>并转二手，而不是用记忆补全一个看似正确、实则无法运行的步骤。</td></tr>
+      <tr><td><b>限渠道</b>：写明「优先官方文档，无法取得则说明受阻、不得编造」</td><td>触发 AI 在 s3 受阻时<b>诚实标注 SPA 无法抓取</b>并转第三方平台，而不是用记忆补全一个看似正确、实则无法运行的步骤。</td></tr>
       <tr><td><b>给反馈</b>：把 s9 的编译报错<b>原文</b>贴回</td><td>AI 解读的准确度直接取决于报错原文，而非「我编译失败了」这类模糊描述。</td></tr>
     </tbody>
   </table>
@@ -673,14 +673,14 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <tbody>
     <tr><td>第 1 轮</td><td><b>规划</b>：解析「Ascend C 自定义算子 + 接 PyTorch」→ 拆成「找官方 how-to → 找工程脚手架 → 找 PyTorch 绑定方式」三个子目标；<b>决定先发 web_search</b>。</td><td>s2</td></tr>
     <tr><td>（服务端）</td><td><b>读结果 + 研判</b>：扫一遍搜索摘要，识别出官方页 + 知乎 + MindSpore + CSDN；判断官方页最权威 → <b>决定 web_fetch 官方 URL</b>。</td><td>s2→s3</td></tr>
-    <tr><td>第 2 轮</td><td><b>遇阻分支判断</b>：fetch 回来只有 meta、正文缺失 → 识别为 SPA 受阻 → <b>不编造</b>，改判「靠二手 + 自带知识拼」→ 决定再读 MindSpore / CSDN。</td><td>s3（受阻）→s4</td></tr>
-    <tr><td>第 3 轮</td><td><b>结果生成</b>：把二手碎片 + 自带知识合成步骤骨架，按「环境→msopgen→核函数→编包→部署→绑定」排序，<b>给占位 + 标注哪些需用户核验</b>（soc_version / 版本）→ 输出，<code>end_turn</code>。</td><td>s5</td></tr>
+    <tr><td>第 2 轮</td><td><b>遇阻分支判断</b>：fetch 回来只有 meta、正文缺失 → 识别为 SPA 受阻 → <b>不编造</b>，改判「靠第三方平台 + 自带知识拼」→ 决定再读 MindSpore / CSDN。</td><td>s3（受阻）→s4</td></tr>
+    <tr><td>第 3 轮</td><td><b>结果生成</b>：把第三方平台碎片 + 自带知识合成步骤骨架，按「环境→msopgen→核函数→编包→部署→绑定」排序，<b>给占位 + 标注哪些需用户核验</b>（soc_version / 版本）→ 输出，<code>end_turn</code>。</td><td>s5</td></tr>
   </tbody>
 </table>
-<div class="note">关键内部动作 = <b>「研判信息是否足够」与「遇阻是否编造」两个判断点</b>。D 任务的特殊性在于：官方受阻 + 二手薄 + 自带知识在 Ascend C 深处也不厚 → 模型在第 2 轮就进入「没有强证据」状态，只能给骨架而非可照抄全程，这是综合分低的技术根因。</div>
+<div class="note">关键内部动作 = <b>「研判信息是否足够」与「遇阻是否编造」两个判断点</b>。D 任务的特殊性在于：官方受阻 + 第三方平台薄 + 自带知识在 Ascend C 深处也不厚 → 模型在第 2 轮就进入「没有强证据」状态，只能给骨架而非可照抄全程，这是综合分低的技术根因。</div>
 
 <h3>4.3 Agent 循环架构（图）+ 最小实现代码 <span class="disc">示范实现 · 基于公开 Anthropic Messages API，非 Claude 内部源码</span></h3>
-<div class="sechint">「我平常如何运行」的 agent 循环流程：<b>输入</b>（原始问句 + system 约束 → messages，不预处理）→ 模型推理 <b>①意图解析 → ②子目标拆解 → ③工具路由</b> → <b>需要工具?</b>（stop_reason）→ 是：调 <b>web_search</b>(服务端) / <b>web_fetch</b>(客户端) → <b>tool_result 回灌</b> → <b>④研判</b>（够? 受阻?）→ 够：<b>⑥收敛 → 终答</b>；不够 / 受阻：<b>⑤遇阻处理</b>(不编造·转二手) <b>回到 ③ 路由</b>（多轮回路）。否（end_turn）则<b>直接出终答</b>。<b>右上角可切「代码」</b>看最小实现（逐段 A–D 对应）。</div>
+<div class="sechint">「我平常如何运行」的 agent 循环流程：<b>输入</b>（原始问句 + system 约束 → messages，不预处理）→ 模型推理 <b>①意图解析 → ②子目标拆解 → ③工具路由</b> → <b>需要工具?</b>（stop_reason）→ 是：调 <b>web_search</b>(服务端) / <b>web_fetch</b>(客户端) → <b>tool_result 回灌</b> → <b>④研判</b>（够? 受阻?）→ 够：<b>⑥收敛 → 终答</b>；不够 / 受阻：<b>⑤遇阻处理</b>(不编造·转第三方平台) <b>回到 ③ 路由</b>（多轮回路）。否（end_turn）则<b>直接出终答</b>。<b>右上角可切「代码」</b>看最小实现（逐段 A–D 对应）。</div>
 <div class="avbox">
   <div class="avhead"><div class="avtabs"><button class="avtab active" data-v="arch">架构图</button><button class="avtab" data-v="code">代码</button></div></div>
   <div id="archView">
@@ -717,7 +717,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <text x="280" y="476" text-anchor="middle" font-size="8.5" fill="#a98a4a">够?/受阻?</text></g>
   <g class="anode" data-k="blocked"><rect x="5" y="418" width="140" height="40" rx="8" fill="#ECE7F6" stroke="#b9abe0"/>
   <text x="75" y="435" text-anchor="middle" font-size="10.5" fill="#4a3f9e">⑤ 遇阻处理</text>
-  <text x="75" y="450" text-anchor="middle" font-size="9" fill="#5b4fc0">不编造·转二手</text></g>
+  <text x="75" y="450" text-anchor="middle" font-size="9" fill="#5b4fc0">不编造·转第三方平台</text></g>
   <g class="anode" data-k="converge"><rect x="205" y="512" width="150" height="30" rx="8" fill="#ECE7F6" stroke="#b9abe0"/>
   <text x="280" y="531" text-anchor="middle" font-size="11" fill="#4a3f9e">⑥ 收敛</text></g>
   <g class="anode" data-k="final"><rect x="178" y="560" width="232" height="48" rx="9" fill="#DDF3E7" stroke="#2a7a68"/>
@@ -797,14 +797,14 @@ TOOLS = [
 <a id="s6"></a>
 <h2><span class="no">③</span>交付物汇总</h2>
 <div class="card">
-  <div class="deliv"><div class="dn">1</div><div><b>全链路时序图</b>（本页 §1）：4 参与者（昇腾社区 ｜ AI ｜ 人类用户 ｜ 本机工具）、14 主节点 + 9 决策点（A 类 3 非人不可 + B 类 6 技术路线）+ 6 用户独立分支（人→昇腾官方，多数从决策块指出 + sD 安全网，对应 ascend step1/3/4/6）、人机交接连线（① 档 10 处、随档位变少）、7 阶段色带、主导方色带、逐节点悬浮详情——均锚定 D 任务实测事实。</div></div>
+  <div class="deliv"><div class="dn">1</div><div><b>全链路时序图</b>（本页 §1）：4 参与者（昇腾社区 ｜ AI ｜ 人类用户 ｜ 本机工具）、14 主节点 + 9 决策点（A 类 3 非人不可 + B 类 6 技术路线）+ 6 用户独立分支（人→昇腾社区，多数从决策块指出 + sD 安全网，对应 ascend step1/3/4/6）、人机交接连线（① 档 10 处、随档位变少）、7 阶段色带、主导方色带、逐节点悬浮详情——均锚定 D 任务实测事实。</div></div>
   <div class="deliv"><div class="dn">2</div><div><b>业务分析全部折进上图交互</b>：任务分工·四轴<b>折进生命线名悬浮</b>、协同交接量化<b>折进图例「消息·涉及 AI」悬浮</b>；用户决策依据 / 前置条件 / 决策链（含每步信息来源、随滑块在「人做」「AI 接管」两版切换）<b>折进 ◆ 节点悬浮</b>；人机主导权边界逐阶段<b>折进左侧阶段条悬浮</b>。结论见 §1 下方蓝色框。</div></div>
   <div class="deliv"><div class="dn">3</div><div><b>技术拆解</b>（§2 Agent 系统工程）：工具调用策略（max_uses 硬上限 + 模型自主软停止）、输入优化、大模型逐轮内部动作、agent 循环架构图 + 代码；每个时序节点悬浮还标出「对应架构环节」。</div></div>
 </div>
 
 <div class="limit">
   <b>诚实声明与局限：</b>
-  ① 旅程节点的<b>受阻 / 卡点 / 版本号 / 二手来源均为 D 任务实测检索所得</b>（见 <code>task_run_log.md</code>，也正是本项目真正测的「内容可用性」），但「一次完整开发」的<b>线性步骤顺序是基于实测骨架的合理重构</b>（开发步骤 msopgen / 编包 / aclnn 按官方文档复述、未实际运行验证），真实开发中 P4–P7 可能多次回退迭代（d3 驳回即触发），图为主路径示意。<b>滑块 3 档的分工差异为建模</b>（仅「① 人主笔」对应实测的这次检索，另两档非实测）；而<b>受阻事实在三档下不变</b>（同一 CANN 生态），变的只是「谁执行、人是否核查」。
+  ① 旅程节点的<b>受阻 / 卡点 / 版本号 / 第三方平台来源均为 D 任务实测检索所得</b>（见 <code>task_run_log.md</code>，也正是本项目真正测的「内容可用性」），但「一次完整开发」的<b>线性步骤顺序是基于实测骨架的合理重构</b>（开发步骤 msopgen / 编包 / aclnn 按官方文档复述、未实际运行验证），真实开发中 P4–P7 可能多次回退迭代（d3 驳回即触发），图为主路径示意。<b>滑块 3 档的分工差异为建模</b>（仅「① 人主笔」对应实测的这次检索，另两档非实测）；而<b>受阻事实在三档下不变</b>（同一 CANN 生态），变的只是「谁执行、人是否核查」。
   ② §4.3 代码是<b>公开 Messages API 的示范实现</b>，解释 agent 循环契约，<b>非 Claude 内部源码</b>；服务端 web_search 的检索 / 排序内部实现不可观测。
   ③ 工作量占比按<b>节点计数</b>而非真实工时；不同开发者熟练度会显著改变人侧耗时。
   ④ 本页只刻画 D 这一个「最难」任务的旅程；成熟任务（如 G 迁移、Z 概念对照）的人机协同形态会大不相同（AI 主导区段更长、卡点更少），详见 <a href="17_official_site_focus.html" style="color:#2f3d63">热力矩阵</a>与<a href="19_findings_ux_synthesis.html" style="color:#2f3d63">启发与方向</a>。
@@ -824,14 +824,14 @@ let NODES, BRANCH, PHASE, PHASE_DETAIL, FLOW, NDETAIL, ARCHFLOW, byId, curScen="
 
 /* ===== 场景 D · 自定义算子开发（Ascend C + msOpGen + aclnn → PyTorch）===== */
 /* 场景级旅程：开发一个算子，沿途撞上 5 次搜索（D→M→X→O→L），各打穿矩阵不同行。
-   生命线 5 条：人类用户(hu) / AI / 昇腾官方(off) / 本机工具(tool) / 二手社区(sec)。唯一官方受阻＝写 kernel 的 D。 */
+   生命线 5 条：人类用户(hu) / AI / 昇腾社区(off) / 本机工具(tool) / 第三方平台(sec)。唯一官方受阻＝写 kernel 的 D。 */
 const D_NODES = [
   {id:"n1",   lane:"hu", kind:"start",   t:"立项·选型·开发算子接 PyTorch",
     meta:"用户主导 · P1 · 含 step1 落地·选型", b:`<b>用户给 AI 的原始输入：</b>「我要在昇腾 NPU 上写一个自定义算子（例如逐元素 AddCustom），用 Ascend C 实现，并注册进 PyTorch、能在 torch_npu 里调用——完整流程怎么走？」<br><br>目标：开发一个 Ascend C 自定义算子并接入 PyTorch。立项即含<b>选型（step1 落地·找入口·选型）</b>——先去社区找入口、判断走 aclnn 简易工程还是完整自定义算子工程。之后这次开发会沿时间撞上多次搜索，每次对应 26 任务里不同的一个。`},
   {id:"sD",   lane:"ai", kind:"fetch",   blocked:true, t:"🔍 1·自定义算子 how-to",
     meta:"Agent 自主 · P2 · 官方受阻", b:"写核函数前搜「怎么写自定义算子」。web_fetch 官方 how-to（devguide/opdevg SPA）正文抓取为空——<b>这是整条旅程唯一官方真受阻的一搜</b>。", blk:"实测受阻：SPA 页只回导航 + meta；26 任务里唯一「SPA 短板真正咬到结果」的格。"},
-  {id:"sD2",  lane:"ai", kind:"search",  t:"官方受阻 → 转二手拼答案",
-    meta:"Agent 自主 · P2", b:"官方抓不到，转 MindSpore 2.3.1 教程 + CSDN「AscendC 入门」+ 自带知识合成骨架。二手薄、扎堆 CSDN。"},
+  {id:"sD2",  lane:"ai", kind:"search",  t:"官方受阻 → 转第三方平台拼答案",
+    meta:"Agent 自主 · P2", b:"官方抓不到，转 MindSpore 2.3.1 教程 + CSDN「AscendC 入门」+ 自带知识合成骨架。第三方平台薄、扎堆 CSDN。"},
   {id:"gD",   lane:"ai", kind:"draft",   t:"给 msopgen / 编包骨架",
     meta:"Agent 自主 · P2→交付", b:"输出 msopgen gen ... 生成工程的步骤骨架，标注 soc_version 需核验。"},
   {id:"eD",   lane:"hu", kind:"run",     t:"本地 msopgen + 写核函数",
@@ -847,7 +847,7 @@ const D_NODES = [
   {id:"eC",   lane:"hu", kind:"run",     t:"编包·部署 → 遇内存越界报错",
     meta:"人机协同 · P4 · 报错", b:"bash build.sh 编包、部署 OPP，运行时遇内存越界报错。"},
   {id:"sX",   lane:"ai", kind:"fetch",   t:"🔍 3·内存越界 / msSanitizer",
-    meta:"Agent 自主 · P4 · 官方可抓", b:"搜「内存越界怎么定位」。官方 msSanitizer 文档 ③5 满分可抓——但二手仅 1 条、自带弱。"},
+    meta:"Agent 自主 · P4 · 官方可抓", b:"搜「内存越界怎么定位」。官方 msSanitizer 文档 ③5 满分可抓——但第三方平台仅 1 条、自带弱。"},
   {id:"gX",   lane:"ai", kind:"draft",   t:"给 msSanitizer 用法",
     meta:"Agent 自主 · P4", b:"给 msSanitizer 命令与读法。"},
   {id:"eX",   lane:"hu", kind:"run",     t:"定位 + 修内存越界",
@@ -871,12 +871,12 @@ const D_NODES = [
   {id:"nEnd", lane:"hu", kind:"deliver", t:"交付",
     meta:"用户主导 · P7", b:"算子开发完成、接入 PyTorch、精度达标，交付。"},
 ];
-/* 分支（用户脱离 AI 的独立动作）——目标都是昇腾官方 */
+/* 分支（用户脱离 AI 的独立动作）——目标都是昇腾社区 */
 const D_BRANCH = [
   {id:"b0", from:"n1", to:"off", step:"step1", above:true, t:"找入口·选型",
     b:`立项时人去昇腾社区找开发入口、判断走 aclnn 简易工程还是完整自定义算子工程。<div class="tt-sec"><span class="lbl">对应 ascend step1 落地·找入口·选型（据姊妹 UX 研究）</span>· 单站全包、官网首页即露开发入口（不弱）；<br>· 但<b>开发者中心埋在二级</b>，缺一个「先点这里」的最强单一 CTA。</div>`},
   {id:"b1", from:"sD", to:"off", step:"step4·安全网", t:"AI 受阻 → 人自查官方 SPA",
-    b:`AI fetch 受阻时，用户开浏览器人眼看渲染后正文——人能看到 AI 抓不到的内容（这条是安全网，非决策）。<b>档①②都在</b>：受阻时人仍会去看；<b>但前提是 AI 把受阻暴露给人</b>——若 AI 静默退二手不告知，人就看不到、安全网形同失效（越自主越不透明的风险）。<div class="tt-sec"><span class="lbl">对应 ascend step4 写·查文档（据姊妹 UX 研究 · 真实截图 2026-06-13）</span>· 文档中心搜索框带字符上限（约 100 字），贴一整段报错会被<b>截断</b>；<br>· 想去论坛提问，<b>发帖需登录华为账号</b>（门槛）；<br>· 好在论坛按产品线分版（综合 / Ascend C / CANN…）、另有集中的 <b>AscendFAQ</b>，自助定位还算准。</div>`},
+    b:`AI fetch 受阻时，用户开浏览器人眼看渲染后正文——人能看到 AI 抓不到的内容（这条是安全网，非决策）。<b>档①②都在</b>：受阻时人仍会去看；<b>但前提是 AI 把受阻暴露给人</b>——若 AI 静默退第三方平台不告知，人就看不到、安全网形同失效（越自主越不透明的风险）。<div class="tt-sec"><span class="lbl">对应 ascend step4 写·查文档（据姊妹 UX 研究 · 真实截图 2026-06-13）</span>· 文档中心搜索框带字符上限（约 100 字），贴一整段报错会被<b>截断</b>；<br>· 想去论坛提问，<b>发帖需登录华为账号</b>（门槛）；<br>· 好在论坛按产品线分版（综合 / Ascend C / CANN…）、另有集中的 <b>AscendFAQ</b>，自助定位还算准。</div>`},
   {id:"bSoc", from:"dSoc", to:"off", step:"step3", t:"查官方版本配套表",
     b:`选 soc_version 时，人去查官方版本配套表、npu-smi 对应关系。<div class="tt-sec"><span class="lbl">对应 ascend step3 配环境·拿 SDK（据姊妹 UX 研究）</span>· 多版本号并存，<b>选对版本本身就费劲</b>；<br>· 想搜博客佐证，昇腾内容<b>SEO 偏弱、海外搜不到</b>。</div>`},
   {id:"bTil", from:"dTil", to:"off", step:"step4", t:"查 Ascend C Tiling 文档",
@@ -961,7 +961,7 @@ const LVL=[
   desc:"代码由人编写、本地由人运行、决策由人裁定；AI 从旁提供片段 / 补全 / 解释。检索需人主动发起。"},
  {name:"AI 主写，人审校", exec:"AI", decide:"人",
   covers:"<b>Vibe Coding</b>——Cursor / Claude Code 的 <b>agent 模式</b>：AI 自己改文件 / 跑命令 / 读报错自迭代",
-  desc:"AI 成段生成代码、自行调用工具运行、读取报错自迭代，人审查结果并修正。<b>执行转交 AI</b>；但<b>决策仍归人</b>、受阻时人仍会去社区核查（<b>安全网保留</b>，前提是 AI 暴露受阻、不静默退二手）。"},
+  desc:"AI 成段生成代码、自行调用工具运行、读取报错自迭代，人审查结果并修正。<b>执行转交 AI</b>；但<b>决策仍归人</b>、受阻时人仍会去社区核查（<b>安全网保留</b>，前提是 AI 暴露受阻、不静默退第三方平台）。"},
  {name:"人委派，AI 自主完成", exec:"AI", decide:"AI",
   covers:"Devin(异步)、spec 驱动、多智能体——内部实现不同，对人均为「委派→获取结果」",
   desc:"人委派整体任务(或预先编写规格)，AI 自主执行并提交 PR，人仅作最终验收。<b>决策亦归 AI</b>；深水区(D)知识有缺口时风险最高、而人介入最少。"}
@@ -1062,8 +1062,8 @@ function drawBarV(sel,d){
 
 /* ===================== 竖向视图 · 4 参与者真·时序图（时间自上而下） =====================
    每步＝参与者间一条消息（横向箭头，标题在箭头上方）；受阻＝红色空返回。
-   生命线左→右：人类用户(hu) ｜ AI ｜ 昇腾官方(off) ｜ 本机工具(tool) ｜ 二手社区(sec)。决策＝落在执行者生命线上的菱形。
-   FLOW：frm/to 为参与者；"exec"＝执行方(Vibe 档起转 AI)，随滑块 morph（人靠边）。检索 = AI→官方(受阻则→二手)。 */
+   生命线左→右：人类用户(hu) ｜ AI ｜ 昇腾社区(off) ｜ 本机工具(tool) ｜ 第三方平台(sec)。决策＝落在执行者生命线上的菱形。
+   FLOW：frm/to 为参与者；"exec"＝执行方(Vibe 档起转 AI)，随滑块 morph（人靠边）。检索 = AI→官方(受阻则→第三方平台)。 */
 const D_FLOW={
   n1:{frm:"hu",to:"ai"},
   sD:{frm:"ai",to:"off", blocked:true}, sD2:{frm:"ai",to:"sec"}, gD:{frm:"ai",to:"exec"}, eD:{frm:"exec",to:"tool"},
@@ -1077,7 +1077,7 @@ function renderV(){
   const phX=4, phW=70, owX=78, owW=44;
   const LX={hu:205, ai:425, off:645, tool:865, sec:1085};
   const PCOL={off:"#C8102E", sec:"#BA7517", ai:"#6B5BA8", hu:"#2f3d63", tool:"#3f7d72"};
-  const PNAME={off:"昇腾官方", sec:"二手社区", ai:"AI（Agent）", hu:"人类用户", tool:"本机工具"};
+  const PNAME={off:"昇腾社区", sec:"第三方平台", ai:"AI（Agent）", hu:"人类用户", tool:"本机工具"};
   const vTop=92, dyV=42, Wv=1130;
   const Y = xi => vTop + xi*dyV;
   const Hv = Y(NODES.length-1) + 70;
@@ -1182,7 +1182,7 @@ function renderV(){
     }
   });
 
-  /* 用户独立分支 ＝ 人 → 昇腾社区（官方 or 二手）的独立消息（仅档①）；br.to 指定目标线，缺省 off */
+  /* 用户独立分支 ＝ 人 → 昇腾社区（官方 or 第三方平台）的独立消息（仅档①）；br.to 指定目标线，缺省 off */
   if(curLvl<=1) BRANCH.forEach(br=>{
     const src=byId[br.from], y=Y(src.xi)+(br.above?-29:(src.kind==="decision"?0:34)), tgt=br.to||"off", x2=LX[tgt];
     const pair=['hu',tgt].sort().join('-');
@@ -1193,7 +1193,7 @@ function renderV(){
     svg.append("text").attr("data-pair",pair).attr("data-msg",br.id).attr("x",(x1b+x2)/2).attr("y",y-5).attr("text-anchor","middle")
       .attr("font-size",10.5).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
       .style("cursor","pointer")
-      .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"二手社区":"昇腾官方"),b:br.b})).on("mouseleave",hideTip);
+      .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"第三方平台":"昇腾社区"),b:br.b})).on("mouseleave",hideTip);
   });
 
   /* ===== 按关系高亮：重绘后回填当前选中 ===== */
@@ -1253,8 +1253,8 @@ const D_NDETAIL={
   s2:{arch:"① 意图解析 → ② 子目标拆解 → ③ 工具路由 → web_search"},
   s3:{arch:"③ 工具路由 → web_fetch → ④ 研判（抓取为空）→ ⑤ 遇阻处理",
     full:`<div class="tt-sec"><span class="lbl">卡点（实测受阻）</span>官方 how-to 整段压在 <b>devguide/opdevg/</b> SPA 子树，web_fetch 只回导航 + meta、<b>正文抓不到</b>。</div>`
-        +`<div class="tt-sec"><span class="lbl">解决</span>转走二手（s4）+ 让用户开浏览器人眼自查（分支 b1，人能看到 AI 抓不到的渲染后正文）。</div>`},
-  s4:{arch:"⑤ 遇阻处理（转二手 + 自带知识）→ 续检索 / 收敛"},
+        +`<div class="tt-sec"><span class="lbl">解决</span>转走第三方平台（s4）+ 让用户开浏览器人眼自查（分支 b1，人能看到 AI 抓不到的渲染后正文）。</div>`},
+  s4:{arch:"⑤ 遇阻处理（转第三方平台 + 自带知识）→ 续检索 / 收敛"},
   s5:{arch:"⑥ 收敛 → 终答（end_turn）"},
   s7:{arch:"模型产出（内容合成，属终答前的起草）"},
   s9:{arch:"报错回灌 messages → 模型重新研判 / 给改法",
@@ -1400,9 +1400,9 @@ const D_NDETAIL={
 /* 阶段折叠详情（§3 主导权边界表）：主导方随滑块 phaseOwner 实时算、bound=边界说明（人主笔档为例） */
 const D_PHASE_DETAIL=[
   {nodes:"n1", bound:"定目标「开发算子接 PyTorch」——一次开发沿时间撞上多次搜索。"},
-  {nodes:"sD–dSoc", bound:"写核函数：<b>1·自定义算子 how-to——整条旅程唯一官方真受阻的一搜（.41）</b>，转二手兜底；soc_version 非人不可。"},
+  {nodes:"sD–dSoc", bound:"写核函数：<b>1·自定义算子 how-to——整条旅程唯一官方真受阻的一搜（.41）</b>，转第三方平台兜底；soc_version 非人不可。"},
   {nodes:"sM / dTil", bound:"写 Tiling：<b>2</b>（官方可抓 .63，和写 kernel 同子树却抓得到）；Tiling 策略＝算子调优。"},
-  {nodes:"eC–eX", bound:"编译遇内存越界：<b>3</b>（msSanitizer 官方满分可抓 .74，但二手薄）。"},
+  {nodes:"eC–eX", bound:"编译遇内存越界：<b>3</b>（msSanitizer 官方满分可抓 .74，但第三方平台薄）。"},
   {nodes:"sO–dVer", bound:"接框架：<b>4</b>（注册集成 .72）；版本对齐非人不可。"},
   {nodes:"eT–dAcc", bound:"精度排查：<b>5</b>（.69）；精度达标由人按业务阈值判定。"},
   {nodes:"nEnd", bound:"交付。"}
@@ -1431,7 +1431,7 @@ function laneTipHtml(side, withFull){
   let html=(withFull?'<span class="tt-close" id="tipClose">✕</span>':'');
   if(side==="ai"){
     html+=`<div class="tt-h"><span class="minibadge mb-ai">AI</span>AI（Agent）· 检索 + 产出</div>`;
-    html+=`<div class="tt-meta">把「知识搬进答案」——多轮 <code>web_search</code> 找方案、<code>web_fetch</code> 取官方正文、拼二手、起草 msopgen 命令 / 核函数 / Tiling / aclnn 绑定、解读编译报错。价值链<b>前两轴恒由 AI 担</b>：</div>`;
+    html+=`<div class="tt-meta">把「知识搬进答案」——多轮 <code>web_search</code> 找方案、<code>web_fetch</code> 取官方正文、拼第三方平台、起草 msopgen 命令 / 核函数 / Tiling / aclnn 绑定、解读编译报错。价值链<b>前两轴恒由 AI 担</b>：</div>`;
     html+=axisRow("检索·获取知识","AI 100%",100,aiCol);
     html+=axisRow("产出·编写代码","AI 为主",82,aiCol);
     if(withFull) html+=`<div class="tt-sec"><span class="lbl">为何前两轴恒 AI</span>不论自主度档位，「搜什么 · 抓哪页 · 几轮够 · 怎么拼步骤骨架」始终由 AI 主导；用户在此区段仅等结果。</div>`;
@@ -1459,7 +1459,7 @@ function coopTipHtml(withFull){
   else if(curLvl===1) html+=`<div class="tt-b">执行转交 AI、交接变少；但<b>决策仍归人</b>、受阻时人仍会去昇腾社区核查——<b>独立分支保留（${BRANCH.length} 条）</b>，不是归零。</div>`;
   else html+=`<div class="tt-b">自主度拉满 → <b>用户独立分支归零</b>：决策也交给 AI、人不再独立核查，安全网消失。</div>`;
   if(withFull){
-    if(curLvl<=1) html+=`<div class="tt-sec"><span class="lbl">${BRANCH.length} 条用户独立分支</span>${BRANCH.map(b=>b.id+" "+b.t+"（→"+((b.to||"off")==="sec"?"二手社区":"昇腾官方")+"）").join("、")}——都是人直接和昇腾社区交互的后备动作（档①②都在，决策与受阻自查仍归人）。</div>`;
+    if(curLvl<=1) html+=`<div class="tt-sec"><span class="lbl">${BRANCH.length} 条用户独立分支</span>${BRANCH.map(b=>b.id+" "+b.t+"（→"+((b.to||"off")==="sec"?"第三方平台":"昇腾社区")+"）").join("、")}——都是人直接和昇腾社区交互的后备动作（档①②都在，决策与受阻自查仍归人）。</div>`;
     else html+=`<div class="tt-sec"><span class="lbl">安全网消失</span>自动化档 AI 遭遇同样的 SPA / 版本问题，但无人核查。</div>`;
     html+=`<div class="tt-foot">点击空白处或 ✕ 关闭</div>`;
   } else html+=`<div class="tt-hint">点击查看完整说明 ↗</div>`;
@@ -1475,7 +1475,7 @@ const D_ARCHFLOW={
       {s:"ok",  t:"③ 工具路由",       note:"决定抓官方 how-to 页（devguide/opdevg）"},
       {s:"err", t:"web_fetch 官方页",  note:"SPA 子树只回导航 + meta，<b>正文抓取为空</b>——出问题就在这一步（5 搜索里唯一）"},
       {s:"fix", t:"④ 研判",            note:"判定证据不足 / 官方受阻，<b>不凭记忆杜撰</b>"},
-      {s:"fix", t:"⑤ 遇阻处理",        note:"转二手社区（sD2）+ 自带知识 + 让用户开浏览器人眼自查（分支 b1）"}
+      {s:"fix", t:"⑤ 遇阻处理",        note:"转第三方平台（sD2）+ 自带知识 + 让用户开浏览器人眼自查（分支 b1）"}
     ]}
 };
 /* ===== 注册场景 D + 切换机制 ===== */
@@ -1485,12 +1485,12 @@ SCENARIOS.D={
   FLOW:D_FLOW, NDETAIL:D_NDETAIL, ARCHFLOW:D_ARCHFLOW, A:["dSoc","dVer","dAcc"],
   dscore:{
     META:[
-      ["①","官方可发现","s2：web_search 命中二手，官方 hiascend 未置顶"],
+      ["①","官方可发现","s2：web_search 命中第三方平台，官方 hiascend 未置顶"],
       ["②","官方可抓取","s3：web_fetch 官方 how-to 受阻（SPA 抓取为空）"],
       ["③","官方正文详尽","s3：抓不到正文 → 受阻态（不打推断分）"],
       ["④","版本清晰","d2：版本散乱，连 URL 都从 devguide/opdevg 漂到 opdevg/Ascendcopdevg"],
-      ["⑤","二手丰富","s4：转 MindSpore / CSDN 二手，量薄"],
-      ["⑥","二手可信","s4：二手多扎堆 CSDN、独立性低"],
+      ["⑤","第三方平台丰富","s4：转 MindSpore / CSDN 第三方平台，量薄"],
+      ["⑥","第三方平台可信","s4：第三方平台多扎堆 CSDN、独立性低"],
       ["⑦","自带知识","s4：官方受阻后靠模型自带知识兜底"],
       ["⑧","检索成本","s2–s4：多轮检索 + fetch 失败，成本最尖刺（反向，越低越差）"],
       ["⑨","可锁版","d1/d2：需本机 npu-smi / 版本核验才能锁定"],
@@ -1498,11 +1498,11 @@ SCENARIOS.D={
     ],
     CANN:[2,2,"受阻",2,3,2,2,1,2,3], CUDA:[5,5,5,3,4,4,5,5,5,5],
     comp:["⑪ .41 低","⑪ .88 高"],
-    note:`这就是上图那段旅程的<b>「分数面」</b>——同一份 D 实测，时序图讲成旅程、这里量化成分：<b>s3 红空返回＝②③</b>、<b>d2 版本散乱＝④⑨</b>、二手薄＝⑤⑥、自带兜底＝⑦、检索尖刺＝⑧。`
+    note:`这就是上图那段旅程的<b>「分数面」</b>——同一份 D 实测，时序图讲成旅程、这里量化成分：<b>s3 红空返回＝②③</b>、<b>d2 版本散乱＝④⑨</b>、第三方平台薄＝⑤⑥、自带兜底＝⑦、检索尖刺＝⑧。`
   },
   concl:{
-    insight:`26 任务里<b>最塌的一条（综合 .41）</b>。坑在哪：官方 how-to 整段压在 SPA 页、AI <b>抓取为空（s3 红）</b>，二手又薄、版本又散——三重坑叠加。AI 能给步骤骨架，但本机芯片 / 版本 / 精度这些 <b>A 类决策永远回到人</b>；连<b>算子调优（dT Tiling 策略）</b>也得人按本机 shape 定夺。`,
-    next:`① 把官方 opdevg 页<b>静态化</b>（让 AI 抓得到正文，直接救 s3）② 补<b>带版本号的完整二手</b>（救 ⑤⑥）③ <b>收口版本</b>（一个 canonical + 配套查询器，救 ④⑨）。这三条最能把 .41 往上抬。`
+    insight:`26 任务里<b>最塌的一条（综合 .41）</b>。坑在哪：官方 how-to 整段压在 SPA 页、AI <b>抓取为空（s3 红）</b>，第三方平台又薄、版本又散——三重坑叠加。AI 能给步骤骨架，但本机芯片 / 版本 / 精度这些 <b>A 类决策永远回到人</b>；连<b>算子调优（dT Tiling 策略）</b>也得人按本机 shape 定夺。`,
+    next:`① 把官方 opdevg 页<b>静态化</b>（让 AI 抓得到正文，直接救 s3）② 补<b>带版本号的完整第三方平台</b>（救 ⑤⑥）③ <b>收口版本</b>（一个 canonical + 配套查询器，救 ④⑨）。这三条最能把 .41 往上抬。`
   },
   nodeScore:{ sD:"→矩阵 一 .41", sD2:"⑤3⑥2", sM:"→矩阵 二 .63", sX:"→矩阵 三 .74", sO:"→矩阵 四 .72", sL:"→矩阵 五 .69", dSoc:"④⑨ 本机", dVer:"④2⑨2" }
 };
@@ -1618,8 +1618,8 @@ const ARCHIVED_G={
       ["②","官方可抓取","g3：web_fetch ssr 可抓（对比 D 的 s3 受阻）"],
       ["③","官方正文详尽","g3：transfer_to_npu 一行 + 步骤 + 版本矩阵全"],
       ["④","版本清晰","g3：明列支持 PyTorch 1.11 / 2.1 / 2.2"],
-      ["⑤","二手丰富","g2：华为云 / 知乎 / CSDN / 博客园，量中"],
-      ["⑥","二手可信","g2：华为云 + 多平台、独立性好"],
+      ["⑤","第三方平台丰富","g2：华为云 / 知乎 / CSDN / 博客园，量中"],
+      ["⑥","第三方平台可信","g2：华为云 + 多平台、独立性好"],
       ["⑦","自带知识","g4：迁移属通识，模型有一定覆盖"],
       ["⑧","检索成本","g2–g3：一轮命中 + fetch 成功，成本最低（满分）"],
       ["⑨","可锁版","g3/dN：官方版本矩阵明确"],
@@ -1637,7 +1637,7 @@ const TR_NODES=[
   {id:"t1", lane:"hu", kind:"start", t:"立项·多卡训练一个模型",
     meta:"用户主导 · P1", b:"已有单卡能运行的 PyTorch 训练脚本，目标扩到多卡昇腾 NPU 训练。一次训练落地会沿时间撞上多次搜索，每次对应 26 任务里不同的一个。"},
   {id:"sI", lane:"ai", kind:"fetch", t:"🔍 I·版本兼容",
-    meta:"Agent 自主 · P2 · 官方可抓", b:"开训前搜「torch_npu 与 CANN / PyTorch 版本怎么对」。官方版本配套表 + 二手命中——官方抓得到（②4），但版本号并存、需对本机已装版本。"},
+    meta:"Agent 自主 · P2 · 官方可抓", b:"开训前搜「torch_npu 与 CANN / PyTorch 版本怎么对」。官方版本配套表 + 第三方平台命中——官方抓得到（②4），但版本号并存、需对本机已装版本。"},
   {id:"gI", lane:"ai", kind:"draft", t:"给版本对齐方案",
     meta:"Agent 自主 · P2", b:"给 CANN ↔ torch_npu ↔ PyTorch 的版本对应，标注需核对本机已装 CANN 版本。"},
   {id:"dVerT", lane:"hu", kind:"decision", t:"决策：选版本组合",
@@ -1645,9 +1645,9 @@ const TR_NODES=[
   {id:"eI", lane:"hu", kind:"run", t:"装 torch_npu·验证 import",
     meta:"人机协同 · P2", b:"按锁定版本装 torch_npu，import 验证环境通。"},
   {id:"sF", lane:"ai", kind:"fetch", t:"🔍 F·分布式 HCCL 配置",
-    meta:"Agent 自主 · P3 · 官方可抓 · 本场景最弱", b:"搜「多卡怎么起、HCCL 怎么配」。官方 HCCL 页 ssr 可抓，但<b>版本散乱（④2）、二手同质</b>——本场景最弱的一搜（.72）。"},
-  {id:"sF2", lane:"ai", kind:"search", t:"查二手补 ranktable 实例",
-    meta:"Agent 自主 · P3 · 二手补充", b:"官方给机制、但完整 ranktable / 启动脚本实例多在 CSDN / 华为云开发者社区。<b>这里二手是「健康补充」——官方够用、二手添实例，区别于 D 的「官方塌了被迫转薄二手」。</b>"},
+    meta:"Agent 自主 · P3 · 官方可抓 · 本场景最弱", b:"搜「多卡怎么起、HCCL 怎么配」。官方 HCCL 页 ssr 可抓，但<b>版本散乱（④2）、第三方平台同质</b>——本场景最弱的一搜（.72）。"},
+  {id:"sF2", lane:"ai", kind:"search", t:"查第三方平台补 ranktable 实例",
+    meta:"Agent 自主 · P3 · 第三方平台补充", b:"官方给机制、但完整 ranktable / 启动脚本实例多在 CSDN / 华为云开发者社区。<b>这里第三方平台是「健康补充」——官方够用、第三方平台添实例，区别于 D 的「官方塌了被迫转薄第三方平台」。</b>"},
   {id:"gF", lane:"ai", kind:"draft", t:"给分布式启动方案",
     meta:"Agent 自主 · P3", b:"给 init_process_group(backend='hccl') + ranktable / 环境变量 + 启动脚本骨架，留组网占位。"},
   {id:"dTopo", lane:"hu", kind:"decision", t:"决策：多卡拓扑 / 通信后端",
@@ -1661,7 +1661,7 @@ const TR_NODES=[
   {id:"eP", lane:"hu", kind:"run", t:"开混合精度 → 撞显存 OOM",
     meta:"人机协同 · P4 · 报错", b:"开 AMP 提 batch 加速，运行时撞显存 OOM 报错。"},
   {id:"sQ", lane:"ai", kind:"fetch", t:"🔍 Q·显存 OOM 优化",
-    meta:"Agent 自主 · P5 · 官方可抓", b:"搜「OOM 怎么降显存」。官方显存优化 + 二手都全（①5、③5）——本场景最顺的一搜（.86）。"},
+    meta:"Agent 自主 · P5 · 官方可抓", b:"搜「OOM 怎么降显存」。官方显存优化 + 第三方平台都全（①5、③5）——本场景最顺的一搜（.86）。"},
   {id:"gQ", lane:"ai", kind:"draft", t:"给显存优化方案",
     meta:"Agent 自主 · P5", b:"给梯度累积 / 重计算 / batch 调整 / 释放策略。"},
   {id:"dBatch", lane:"hu", kind:"decision", t:"决策：batch / 显存策略（训练调优）",
@@ -1669,9 +1669,9 @@ const TR_NODES=[
   {id:"eQ", lane:"hu", kind:"run", t:"调 batch 重训 → 精度不收敛",
     meta:"人机协同 · P5 · 报错", b:"调整后训练起来，但 loss 不收敛 / 精度对不上参考。"},
   {id:"sR", lane:"ai", kind:"fetch", t:"🔍 R·收敛 / 精度排查",
-    meta:"Agent 自主 · P6 · 官方可抓", b:"搜「精度 / 收敛怎么排查」。官方精度比对 + 二手可抓（③5），版本仍是短板。"},
-  {id:"sR2", lane:"ai", kind:"search", t:"查二手收敛经验贴",
-    meta:"Agent 自主 · P6 · 二手补充", b:"loss 不收敛 / 精度对不齐的实战经验多在 CSDN / 知乎 / 华为云 bbs。二手在收敛排查上是有用补充，非被迫兜底。"},
+    meta:"Agent 自主 · P6 · 官方可抓", b:"搜「精度 / 收敛怎么排查」。官方精度比对 + 第三方平台可抓（③5），版本仍是短板。"},
+  {id:"sR2", lane:"ai", kind:"search", t:"查第三方平台收敛经验贴",
+    meta:"Agent 自主 · P6 · 第三方平台补充", b:"loss 不收敛 / 精度对不齐的实战经验多在 CSDN / 知乎 / 华为云 bbs。第三方平台在收敛排查上是有用补充，非被迫兜底。"},
   {id:"gR", lane:"ai", kind:"draft", t:"给排查清单",
     meta:"Agent 自主 · P6", b:"给 loss scaling / 数据管线 / lr / 算子精度逐项排查清单。"},
   {id:"dAccT", lane:"hu", kind:"decision", t:"决策：精度 / 收敛是否达标",
@@ -1685,9 +1685,9 @@ const TR_BRANCH=[
   {id:"b1", from:"dVerT", to:"off", t:"查官方版本配套表对齐",
     b:`版本不确定时，用户去 hiascend 官方版本配套表 / Gitee 仓对齐 torch_npu 与 CANN 版本。<div class="tt-sec"><span class="lbl">人自己用社区会撞到什么（据姊妹 UX 研究 · 真实截图 2026-06-13）</span>· 文档中心搜索框带<b>字符上限（约 100 字）</b>，长查询 / 报错会被截断；<br>· 好在配套问题多能在<b>集中的 AscendFAQ</b> 自助查到。</div>`},
   {id:"b2", from:"dTopo", to:"off", t:"Gitee 找多卡训练样例",
-    b:`多卡拓扑 / ranktable 不确定时，用户去 Gitee 昇腾官方 samples 仓找多卡训练样例对齐。<div class="tt-sec"><span class="lbl">人自己用社区会撞到什么（据姊妹 UX 研究）</span>· 想去论坛问拓扑，<b>发帖需登录华为账号</b>；<br>· 论坛按产品线分版（MindSpeed / CANN…）定位准、Gitee 样例可直接照抄。</div>`},
+    b:`多卡拓扑 / ranktable 不确定时，用户去 Gitee 昇腾社区 samples 仓找多卡训练样例对齐。<div class="tt-sec"><span class="lbl">人自己用社区会撞到什么（据姊妹 UX 研究）</span>· 想去论坛问拓扑，<b>发帖需登录华为账号</b>；<br>· 论坛按产品线分版（MindSpeed / CANN…）定位准、Gitee 样例可直接照抄。</div>`},
   {id:"b3", from:"eP", to:"sec", t:"CSDN / 华为云找 OOM 实战贴",
-    b:`撞显存 OOM 时，用户也会自己去 CSDN / 华为云开发者社区翻实战经验贴——训练里人和二手社区也有直接交互。<div class="tt-sec"><span class="lbl">人自己用社区会撞到什么（据姊妹 UX 研究）</span>· 官方搜不到就转二手，但昇腾二手<b>SEO 一般、内容偏同质</b>（扎堆 CSDN）；<br>· 华为云开发者社区 bbs 的实战贴能整页读到，是有用补充。</div>`},
+    b:`撞显存 OOM 时，用户也会自己去 CSDN / 华为云开发者社区翻实战经验贴——训练里人和第三方平台也有直接交互。<div class="tt-sec"><span class="lbl">人自己用社区会撞到什么（据姊妹 UX 研究）</span>· 官方搜不到就转第三方平台，但昇腾第三方平台<b>SEO 一般、内容偏同质</b>（扎堆 CSDN）；<br>· 华为云开发者社区 bbs 的实战贴能整页读到，是有用补充。</div>`},
 ];
 const TR_PHASE=[
   {a:0, b:0,  n:"P1 立项"},
@@ -1701,10 +1701,10 @@ const TR_PHASE=[
 const TR_PHASE_DETAIL=[
   {nodes:"t1", bound:"定目标「单卡脚本扩多卡昇腾训练」——AI 不介入。"},
   {nodes:"sI–eI / dVerT", bound:"AI 检索版本配套 + 给对齐方案；用户按本机已装版本锁 torch_npu，并去官方配套表对齐（b1）。<b>官方抓得到，但版本号并存是训练第一坑。</b>"},
-  {nodes:"sF–eF / dTopo", bound:"AI 抓官方 HCCL 机制 + <b>补二手 ranktable 实例（sF2）</b>；用户按本机卡数定拓扑、去 Gitee 找训练样例（b2）、起多卡。<b>本场景最弱的一搜（F .72，④版本散）。</b>"},
+  {nodes:"sF–eF / dTopo", bound:"AI 抓官方 HCCL 机制 + <b>补第三方平台 ranktable 实例（sF2）</b>；用户按本机卡数定拓扑、去 Gitee 找训练样例（b2）、起多卡。<b>本场景最弱的一搜（F .72，④版本散）。</b>"},
   {nodes:"sP–eP", bound:"AI 给 AMP 接入；用户开混合精度提速，撞显存 OOM，自己也翻 CSDN 实战贴（b3）。"},
   {nodes:"sQ–eQ / dBatch", bound:"AI 给显存优化（梯度累积 / 重计算）；用户按本机显存定 batch、重训。<b>最顺的一搜（Q .86）。</b>"},
-  {nodes:"sR–eR / dAccT", bound:"AI 给收敛 / 精度排查清单 + <b>补二手经验贴（sR2）</b>；用户按业务阈值判定达标。"},
+  {nodes:"sR–eR / dAccT", bound:"AI 给收敛 / 精度排查清单 + <b>补第三方平台经验贴（sR2）</b>；用户按业务阈值判定达标。"},
   {nodes:"tEnd", bound:"多卡训练运行通过、精度收敛达标，交付。全程无受阻点。"},
 ];
 const TR_FLOW={
@@ -1720,11 +1720,11 @@ const TR_ARCHFLOW={};
 const TR_NDETAIL={
   sI:{arch:"① 意图解析 → ③ 工具路由 → web_fetch 官方版本配套表 → ④ 研判（可抓）"},
   sF:{arch:"③ 工具路由 → web_fetch 官方 HCCL 页 → ④ 研判（ssr 可抓、但版本散）",
-    full:`<div class="tt-sec"><span class="lbl">本场景最弱的一搜</span>官方 HCCL 页可抓（②4、非受阻），但<b>版本号并存（④2）、二手扎堆同质</b>——F .72，是训练这条路的低点，但仍中高、远好过 D 的 .41 受阻。</div>`},
-  sF2:{arch:"③ 工具路由 → web_search 二手（CSDN / 华为云）→ ⑥ 收敛（官方机制 + 二手实例合成）"},
-  sR2:{arch:"③ 工具路由 → web_search 二手收敛经验 → ⑥ 收敛"},
+    full:`<div class="tt-sec"><span class="lbl">本场景最弱的一搜</span>官方 HCCL 页可抓（②4、非受阻），但<b>版本号并存（④2）、第三方平台扎堆同质</b>——F .72，是训练这条路的低点，但仍中高、远好过 D 的 .41 受阻。</div>`},
+  sF2:{arch:"③ 工具路由 → web_search 第三方平台（CSDN / 华为云）→ ⑥ 收敛（官方机制 + 第三方平台实例合成）"},
+  sR2:{arch:"③ 工具路由 → web_search 第三方平台收敛经验 → ⑥ 收敛"},
   sP:{arch:"③ 工具路由 → web_search + web_fetch AMP 文档 → ⑥ 收敛（自带知识也够）"},
-  sQ:{arch:"③ 工具路由 → web_search 显存优化 → ④ 研判（官方 + 二手都全）"},
+  sQ:{arch:"③ 工具路由 → web_search 显存优化 → ④ 研判（官方 + 第三方平台都全）"},
   sR:{arch:"③ 工具路由 → web_fetch 精度比对文档 → ④ 研判（可抓）"},
   dVerT:{tier:"A",
     intro:`<b>决策依据</b>：torch_npu 必须与本机已装的 CANN / PyTorch 版本严格配套，错配则 import 失败 / 算子缺失。AI 给得了配套表，<b>但给不了本机实际装的是哪个版本</b>。`,
@@ -1793,12 +1793,12 @@ SCENARIOS.TR={
   FLOW:TR_FLOW, NDETAIL:TR_NDETAIL, ARCHFLOW:TR_ARCHFLOW, A:["dVerT","dTopo","dAccT"],
   dscore:{
     META:[
-      ["①","官方可发现","sF：web_search 命中官方 HCCL 页 + 二手"],
+      ["①","官方可发现","sF：web_search 命中官方 HCCL 页 + 第三方平台"],
       ["②","官方可抓取","sF：web_fetch HCCL 页 ssr 可抓（非受阻）"],
       ["③","官方正文详尽","sF：HCCL 配置正文可抓、够细"],
       ["④","版本清晰","sF：CANN / torch_npu 版本号并存，散乱（训练第一坑）"],
-      ["⑤","二手丰富","sF：CSDN / 华为云有，量中、同质"],
-      ["⑥","二手可信","sF：多平台但部分扎堆"],
+      ["⑤","第三方平台丰富","sF：CSDN / 华为云有，量中、同质"],
+      ["⑥","第三方平台可信","sF：多平台但部分扎堆"],
       ["⑦","自带知识","gF：分布式属较通识，模型有一定覆盖"],
       ["⑧","检索成本","sF：一两轮命中、fetch 成功，成本低（满分）"],
       ["⑨","可锁版","dVerT：需本机已装版本核对"],
@@ -1806,9 +1806,9 @@ SCENARIOS.TR={
     ],
     CANN:[4,4,4,2,3,3,3,5,3,3], CUDA:[5,5,5,3,3,4,4,5,4,5],
     comp:["⑪ .72 中高","⑪ .88 高"],
-    note:`这里锚<b>本场景最弱的一搜 F 分布式（.72）</b>——对照 D：F 的 <b>②官方可抓（4、非受阻）</b>，坑只在 <b>④版本散乱（2）</b>。<b>二手在训练里是「健康补充」</b>（⑤⑥各 3，官方够用、二手再添 ranktable 实例 / 收敛经验），不是 D 那种「官方塌了被迫转薄二手」。训练这条路 5 搜全在中高/高带、<b>无受阻深谷</b>。`
+    note:`这里锚<b>本场景最弱的一搜 F 分布式（.72）</b>——对照 D：F 的 <b>②官方可抓（4、非受阻）</b>，坑只在 <b>④版本散乱（2）</b>。<b>第三方平台在训练里是「健康补充」</b>（⑤⑥各 3，官方够用、第三方平台再添 ranktable 实例 / 收敛经验），不是 D 那种「官方塌了被迫转薄第三方平台」。训练这条路 5 搜全在中高/高带、<b>无受阻深谷</b>。`
   },
-  nodeScore:{ sI:"→矩阵 I .73", sF:"→矩阵 F .72", sF2:"⑤3⑥3 二手健康补充", sP:"→矩阵 P .83", sQ:"→矩阵 Q .86", sR:"→矩阵 R .75", sR2:"⑤3 经验贴", dVerT:"④2⑨3 本机", dTopo:"本机拓扑" }
+  nodeScore:{ sI:"→矩阵 I .73", sF:"→矩阵 F .72", sF2:"⑤3⑥3 第三方平台健康补充", sP:"→矩阵 P .83", sQ:"→矩阵 Q .86", sR:"→矩阵 R .75", sR2:"⑤3 经验贴", dVerT:"④2⑨3 本机", dTopo:"本机拓扑" }
 };
 function setScenario(k){
   const S=SCENARIOS[k]; if(!S) return;
@@ -1826,7 +1826,7 @@ function renderDscore(){
   const cell=(m,v,from)=>{ const cls=v==="受阻"?"vna":"v"+v; return `<i class="cell ${cls}" title="${m[0]}${m[1]} = ${v}　← ${from}">${m[0]}${v}</i>`; };
   let h=`<div class="dsc-h">${SCENARIOS[curScen].label} 量化得分 · 与热力矩阵同源（<code>score_metrics.py</code> 实测算出 · 悬浮看每格来自时序图哪一步）</div>`;
   h+=`<div class="dsc-row"><span class="dsc-lab cann">CANN</span>`+D.META.map((m,i)=>cell(m,D.CANN[i],m[2])).join("")+`<b class="comp lo">${D.comp[0]}</b></div>`;
-  h+=`<div class="dsc-row"><span class="dsc-lab cuda">CUDA</span>`+D.META.map((m,i)=>cell(m,D.CUDA[i],"对照基线（静态站可抓、二手厚、版本清）")).join("")+`<b class="comp hi">${D.comp[1]}</b></div>`;
+  h+=`<div class="dsc-row"><span class="dsc-lab cuda">CUDA</span>`+D.META.map((m,i)=>cell(m,D.CUDA[i],"对照基线（静态站可抓、第三方平台厚、版本清）")).join("")+`<b class="comp hi">${D.comp[1]}</b></div>`;
   h+=`<div class="dsc-note">${D.note}⚠ 本条仅锚 ${SCENARIOS[curScen].label} 一个任务（矩阵的 1 行）。<a href="17_official_site_focus.html">去热力矩阵看全 26 行 →</a></div>`;
   el.innerHTML=h;
 }
@@ -1837,7 +1837,7 @@ function renderConcl(){
   let h=`<div class="cb-h">结论 · ${S.label}（CANN ${S.grade}${cuda?" ｜ CUDA "+cuda:""}）</div>`;
   if(C.insight) h+=`<div class="cb-row"><span class="cb-tag t-i">这条说明什么</span><div>${C.insight}</div></div>`;
   if(C.next)    h+=`<div class="cb-row"><span class="cb-tag t-n">下一步怎么做</span><div>${C.next}</div></div>`;
-  h+=`<div class="cb-overall"><b>总论：可用性是任务相关的</b>——越靠采纳漏斗上手侧做得越厚、越深入自研越塌；改进杠杆＝<b>官方页可抓性 + 版本治理 + 二手厚度</b>。（训练 / 推理场景制作中，补齐后再做跨场景对照。）<a href="19_findings_ux_synthesis.html">全 26 任务的规律 + ROI 优先级 →</a></div>`;
+  h+=`<div class="cb-overall"><b>总论：可用性是任务相关的</b>——越靠采纳漏斗上手侧做得越厚、越深入自研越塌；改进杠杆＝<b>官方页可抓性 + 版本治理 + 第三方平台厚度</b>。（训练 / 推理场景制作中，补齐后再做跨场景对照。）<a href="19_findings_ux_synthesis.html">全 26 任务的规律 + ROI 优先级 →</a></div>`;
   el.innerHTML=h;
 }
 function archFlowHtml(id){
@@ -1929,8 +1929,8 @@ const ANODE={
   search:{t:"web_search · 服务端工具",b:"平台在<b>同一次 create 调用内自闭环</b>（生成 query→检索→回灌→模型判断→续检索 / 停止），<b>max_uses 封顶＝硬上限</b>。"},
   fetch:{t:"web_fetch · 客户端工具",b:"模型返回 tool_use，由<b>我们的 fetch_url 执行</b>抓取，结果 append 回 messages；抓取为空则如实返回「正文抽不到」。"},
   relay:{t:"tool_result 回灌",b:"将工具结果写回 messages，进入下一轮 create——即<b>多轮循环的连接点</b>。"},
-  judge:{t:"④ 研判",b:"读取回灌结果，判定「<b>信息是否足以支撑可照抄答案</b>」+「<b>是否受阻</b>」。对 D＝第 2 轮即发现官方 SPA 抓取为空、二手稀薄 → 判定「证据不足」，触发遇阻或续检索。"},
-  blocked:{t:"⑤ 遇阻处理",b:"官方抓取为空 / robots 拦截时<b>不凭记忆杜撰</b>，转用二手 + 自带知识，并在答案中<b>如实标注「官方受阻」</b>——「绝不编造」铁律的落点。"},
+  judge:{t:"④ 研判",b:"读取回灌结果，判定「<b>信息是否足以支撑可照抄答案</b>」+「<b>是否受阻</b>」。对 D＝第 2 轮即发现官方 SPA 抓取为空、第三方平台稀薄 → 判定「证据不足」，触发遇阻或续检索。"},
+  blocked:{t:"⑤ 遇阻处理",b:"官方抓取为空 / robots 拦截时<b>不凭记忆杜撰</b>，转用第三方平台 + 自带知识，并在答案中<b>如实标注「官方受阻」</b>——「绝不编造」铁律的落点。"},
   converge:{t:"⑥ 收敛",b:"信息足够即<b>停止检索</b>，将片段按「环境→msopgen→核函数→编包→部署→绑定」组织为有序步骤，给出占位 + <b>标注需用户核验项</b>（soc_version / 版本）。"},
   final:{t:"终答 · end_turn",b:"把碎片合成<b>可照抄命令 + 锁版本 + 标需用户核验项</b>；受阻处如实标注。"}
 };
@@ -2007,7 +2007,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 
   /* ===== 按关系讲解：高亮某对生命线之间的所有箭头、其余压暗 ===== */
   var GROUPS=[
-    {name:'AI ↔ 昇腾 / 二手 · 矩阵评分', pairs:['ai-off','ai-sec']},
+    {name:'AI ↔ 昇腾 / 第三方平台 · 矩阵评分', pairs:['ai-off','ai-sec']},
     {name:'人 ↔ 昇腾社区 · 基础体验', pairs:['hu-off']}
   ];
   var step=0, hoverMsg=null, pinnedMsg=null;  // 0=全亮；hoverMsg=悬浮临时聚焦；pinnedMsg=点击钉住
@@ -2026,7 +2026,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
       var pr=el.getAttribute&&el.getAttribute('data-pair'), ln=el.getAttribute&&el.getAttribute('data-lane');
       if(pr){ if(g.pairs.indexOf(pr)>=0){ var ms=el.getAttribute('data-msg'),fo=curFocus(); el.style.opacity=(fo&&ms)?(ms===fo?'1':'0.32'):'1'; } else el.style.opacity='0.1'; }
       else if(ln){
-        if(lanes[ln]){ var minor=(ln==='sec');   // 二手社区是次要部分，亮也更淡
+        if(lanes[ln]){ var minor=(ln==='sec');   // 第三方平台是次要部分，亮也更淡
           el.style.opacity=minor?'0.5':'1';
           if(el.tagName==='line'){ el.style.stroke=el.getAttribute('data-col')||''; el.style.strokeWidth=minor?'1.6':'2.5'; el.style.strokeOpacity=minor?'0.55':'1'; } }
         else { el.style.opacity='0.12'; if(el.tagName==='line'){el.style.stroke='';el.style.strokeWidth='';el.style.strokeOpacity='';} }
