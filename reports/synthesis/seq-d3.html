@@ -377,7 +377,6 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <span class="lg"><i class="lgdiaA"></i> 决策·A 非人不可</span>
   <span class="lg"><i class="lgdiaB"></i> 决策·B 技术路线</span>
   <span class="lg"><i class="lgline dash"></i> 用户独立分支（人→社区，悬浮看人用社区撞到的真实摩擦）</span>
-  <span class="lg"><b style="color:#bb2236">①②③…</b> 节点旁红色小字＝该步对应的<b>矩阵指标分</b>（打穿到热力矩阵）</span>
 </div>
 <div class="ownleg">
   <b style="font-size:12px;color:#444">主导方色带：</b>
@@ -1133,7 +1132,7 @@ function renderV(){
       .each(function(){ wrapText(d3.select(this), d.t, 9, 16, (toRight?1:-1)*28, true); }).attr("y",0);
   };
 
-  /* 每步＝一条消息（标题在箭头上方）；决策＝执行者线上的菱形。红色小字＝该步对应的矩阵指标分（打穿到 page 17） */
+  /* 每步＝一条消息（标题在箭头上方）；决策＝执行者线上的菱形。nodeScore(矩阵指标分小字)已按用户要求不再渲染——数据保留备用，悬浮 tip 仍可显示 */
   const NS=SCENARIOS[curScen].nodeScore||{};
   const brSrc={}; (BRANCH||[]).forEach(br=>{ brSrc[br.from]=['hu',(br.to||'off')].sort().join('-'); });
   NODES.forEach(d=>{
@@ -1144,8 +1143,6 @@ function renderV(){
         .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
       drawBarV(gx,d);                       // 菱形按 dtier 深浅
       sideLabel(gx,d, d.lane==="ai");       // AI 在左→标题朝右(中央)；人在右→朝左(中央)
-      if(NS[d.id]) gx.append("text").attr("x",0).attr("y",20).attr("text-anchor","middle")
-        .attr("font-size",12).attr("font-weight",700).attr("fill","#bb2236").text(NS[d.id]);
       return;
     }
     const f=FLOW[d.id]; if(!f) return;
@@ -1168,7 +1165,6 @@ function renderV(){
     const tt=svg.append("text").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",y-7).attr("text-anchor","middle")
       .attr("font-size",13.5).attr("font-weight",600).attr("fill", f.blocked?"#C8102E":"#333");
     tt.append("tspan").text(d.t);
-    if(NS[d.id] && !f.blocked) tt.append("tspan").attr("fill","#bb2236").attr("font-weight",700).text("　"+NS[d.id]);
     const gx=svg.append("g").attr("data-pair",pair).attr("data-msg",d.id).attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
     drawMarker(gx,d,PCOL[frm],f.blocked);
@@ -1178,7 +1174,7 @@ function renderV(){
         .attr("stroke","#C8102E").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ahr)").attr("opacity",.92);
       svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",ry).attr("x2",x2).attr("y2",ry).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
       svg.append("text").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
-        .attr("font-size",10.5).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）"+(NS[d.id]?" → 矩阵 "+NS[d.id]:""));
+        .attr("font-size",10.5).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）");
     }
   });
 
