@@ -55,7 +55,7 @@ body.overview .s-cover .slide-inner{padding:0}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 480' preserveAspectRatio='none'%3E%3Cpath d='M0 320 C 380 250 760 330 1080 195 C 1280 140 1380 185 1440 130 L1440 480 L0 480 Z' fill='%237e8696' fill-opacity='0.07'/%3E%3Cpath d='M0 372 C 430 305 820 405 1180 245 C 1340 198 1402 240 1440 190 L1440 480 L0 480 Z' fill='%23949bab' fill-opacity='0.08'/%3E%3C/svg%3E"),linear-gradient(125deg,rgba(120,128,145,.05),transparent 50%);
   background-position:bottom center,0 0;background-size:100% 50%,100% 100%;background-repeat:no-repeat,no-repeat}
 .head{display:flex;align-items:flex-start;justify-content:space-between;flex:0 0 auto;margin-bottom:3.4vh}
-.head-l{display:flex;flex-direction:column;gap:.8vh}
+.head-l{display:flex;flex-direction:column-reverse;gap:.8vh}  /* 小标题(.subttl=章节名)在上、大标题在下 */
 .brand{display:flex;align-items:center;gap:.5em}
 .brand .logo{height:clamp(19px,1.7vw,25px);width:auto;display:block;flex-shrink:0}  /* ⛔ 标题前只放 CANN logo（无合适 logo 就删掉 img 留空），绝不换成 Lucide/通用 icon */
 .brand .ttl{font-weight:800;font-size:var(--fs-h1);letter-spacing:-.01em}      /* 标题=结论 */
@@ -356,7 +356,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">开发者都在用 AI——昇腾的「用户」已经是 人 &#8853; AI</span></div>
-        <div class="subttl">AI Adoption · 2026 权威调研</div>
+        <div class="subttl">立论</div>
       </div>
       <div class="head-r">01 / 为什么双视角<br/>2026</div>
     </div>
@@ -390,7 +390,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">一次「自定义算子开发」，人和 AI 这样协同</span></div>
-        <div class="subttl">Human&ndash;AI Journey · 三方时序（用户 &harr; AI 助手 &harr; 昇腾知识源）</div>
+        <div class="subttl">立论</div>
       </div>
       <div class="head-r">02 / 人机协同旅程<br/>opknow 20</div>
     </div>
@@ -478,7 +478,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">AI 可用性如何度量：同一套任务，CUDA 与昇腾各实测一遍</span></div>
-        <div class="subttl">Methodology · 站在「会检索的 AI 助手」视角，按「触达 × 质量」给知识打分（opknow 18）</div>
+        <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">03 / AI 可用性 · 方法</div>
     </div>
@@ -508,7 +508,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">AI 如何执行这几次检索：「遇阻转向、不足再检索」的 Agent 循环</span></div>
-        <div class="subttl">Agent loop · web_search / web_fetch → 回灌 → 研判 → 收敛 / 遇阻回路（opknow 20 · 公开 Messages API 示范实现）</div>
+        <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">04 / AI · 执行架构<br/>opknow 20</div>
     </div>
@@ -528,7 +528,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">同一意图，只换技术栈：5 个问题在 CUDA / CANN 上分别怎么问</span></div>
-        <div class="subttl">Question pairs · 开发意图相同、其余全对齐，差异才能归因到生态而非问法（opknow 18）</div>
+        <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">05 / 问题对 · 怎么问</div>
     </div>
@@ -608,7 +608,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">指标如何计算：三源 × 两关 → 11 项，每项 score_N() 由实测代入</span></div>
-        <div class="subttl">Metric system · 可复现公式（score_metrics.py）；综合用噪声-OR 合成（opknow 18）</div>
+        <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">06 / AI · 指标定义<br/>opknow 18</div>
     </div>
@@ -642,7 +642,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">矩阵评分：写 kernel 官方正文 SPA 抓取为空，其余受限于版本散 / 二手薄 / 自带弱</span></div>
-        <div class="subttl">AI usability matrix · 算子开发 5 任务 × 6 维 · 每格 昇腾 / NVIDIA 对比（1–5 分，综合为合成值）（opknow 17）</div>
+        <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">07 / 矩阵评分 · 结果</div>
     </div>
@@ -720,7 +720,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">基础体验指标怎么定义：5 维 × 16 项，按 best/worst 归一化</span></div>
-        <div class="subttl">DJFI 评分内核 · 测「人去点、去读」的摩擦（可量化、可复现）（ascend-vs-nvidia-ux）</div>
+        <div class="subttl">人侧 · 基础体验</div>
       </div>
       <div class="head-r">08 / 基础体验 · 指标定义<br/>ascend-vs-nvidia-ux</div>
     </div>
@@ -758,7 +758,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">人侧：开发者逛昇腾官网的全旅程，拆 24 触点逐一对照 NVIDIA</span></div>
-        <div class="subttl">Human UX · 真实截图取证、与 NVIDIA 同维评分（ascend-vs-nvidia-ux）</div>
+        <div class="subttl">人侧 · 基础体验</div>
       </div>
       <div class="head-r">09 / 基础体验 · 方法</div>
     </div>
@@ -799,7 +799,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">触点评分：总均分 73.6 — SDK 下载 / 工具差距最大，FAQ 自助反超</span></div>
-        <div class="subttl">Touchpoint scores · 昇腾 vs NVIDIA（24 触点节选；差值＝昇腾−NVIDIA）（ascend-vs-nvidia-ux）</div>
+        <div class="subttl">人侧 · 基础体验</div>
       </div>
       <div class="head-r">10 / 基础体验 · 评分</div>
     </div>
@@ -855,7 +855,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">双视角分析，收敛出三条核心结论</span></div>
-        <div class="subttl">Findings · 人侧「基础体验」⊕ AI 侧「内容可用性」</div>
+        <div class="subttl">结论</div>
       </div>
       <div class="head-r">11 / 核心结论</div>
     </div>
@@ -888,7 +888,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">5 个设计点：从分析，到结论，再到落点</span></div>
-        <div class="subttl">Analysis → Conclusion → Design · 每条都由前面页的实测证据推出</div>
+        <div class="subttl">结论</div>
       </div>
       <div class="head-r">12 / 设计点 · 链路</div>
     </div>
