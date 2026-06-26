@@ -525,15 +525,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-r">04 / AI · 执行架构<br/>opknow 20</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 64%;height:100%;display:flex;flex-direction:column;gap:1vh;padding:1.3vh 1.1vw;overflow:hidden">
+      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
+        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+      </div>
+      <div class="card" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1vh;padding:1.3vh 1.1vw;overflow:hidden">
         <iframe src="arch-d3.html" title="Agent 循环架构（悬浮看每个环节）" style="flex:1;min-width:0;min-height:0;width:100%;border:0;background:transparent"></iframe>
         <div class="cmp-cap" style="text-align:center;color:var(--ink-3)">抓不到就转向、不够就再检索 — <b style="color:var(--ink-2)">悬浮任意环节看它在做什么</b>（opknow 20 · 公开 Messages API 示范实现）</div>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.4vh">
-        <div class="cmp-h"><span class="hk">How it runs</span>如何运行</div>
-        <p class="cmp-desc">把一个开发问题拆成<b>子目标</b>，逐个判断「要不要检索」；用 <b>web_search / web_fetch</b> 抓<b>官方站 + 第三方平台 + 自带知识</b>三路，回灌后<b>研判证据是否充分</b>，再决定收敛还是继续。</p>
-        <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">三种收场</span>够了 / 不够 / 不知道</div>
-        <p class="cmp-desc"><b>① 收敛</b>：证据充分 → 给出带出处的答案。<br/><b>② 遇阻回路</b>：抓取为空或证据不足 → 换 URL / 换平台 / 换关键词，↺ 再检索一轮。<br/><b style="color:#C7000B">③ 凭记忆杜撰</b>：三路都弱、又无法可靠识别自身不确定时，模型会编出看似正确、实则有误的答案。</p>
       </div>
     </div>
   </section>
