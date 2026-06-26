@@ -650,38 +650,77 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .mxline .mi .ix{font-family:'JetBrains Mono';color:var(--accent);font-weight:800}
   </style>
 
-  <!-- 3c2 灰底：指标如何计算（hi=1） -->
+  <!-- 灰底：AI 指标 · 理论权威依据（自写，防质疑） -->
+  <style>
+    .auth{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:1.1vw;flex:1;min-height:0}
+    .au{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:13px;padding:2vh 1.2vw;display:flex;flex-direction:column;gap:.9vh}
+    .au .au-tag{align-self:flex-start;font-size:var(--fs-xs);font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:3px 9px}
+    .au .au-h{font-weight:700;font-size:var(--fs-h3);color:var(--ink);line-height:1.3}
+    .au .au-h .en{display:block;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:500;color:var(--ink-3);margin-top:.25vh;letter-spacing:.02em}
+    .au .au-d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.55}
+  </style>
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 有没有用上昇腾知识，从哪些方面打分：从「能不能找到」到「找到的够不够用」，共 11 项</span></div>
-        <div class="subttl">AI 侧 · 内容可用性</div>
+        <div class="brand"><span class="ttl">这套指标不是拍脑袋：每一维都对应成熟的检索 / 信息架构概念，且可复现</span></div>
+        <div class="subttl">Why it holds · 理论依据与可复现性——回应「凭什么这么测」的质疑</div>
       </div>
-      <div class="head-r">07/ AI · 指标定义<br/>opknow 18</div>
+      <div class="head-r">07/ AI 指标 · 理论依据</div>
     </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Metric system</span>知识有 3 个来源 × 2 道关，交叉构成指标</div>
-        <div class="mxg" style="grid-template-columns:70px 1fr 1fr 1fr 1fr">
-          <div class="mh cnr">来源 ＼ 关卡</div><div class="mh t" style="grid-column:span 2">第 1 关 · 能否触达</div><div class="mh q" style="grid-column:span 2">第 2 关 · 内容质量</div>
-          <div class="ml">官方一手</div>
-          <div class="mc tipped"><span class="ix">①</span> 可发现<span class="mtip"><span class="f">score1</span> 命中排名 · 检索轮数 · 是否换词二搜<br/>一轮 rank=1→<b>5</b> / ≤6→4 / ≤10→3；多轮→3；换词二搜才浮出官方→<b>2</b></span></div>
-          <div class="mc tipped"><span class="ix">②</span> 可抓取<span class="mtip"><span class="f">score2</span> 核心 how-to 页抓取形态<br/>静态→<b>5</b> / 服务端渲染 ssr→4 / SPA 只回导航→<b>2</b> / robots 拦→1</span></div>
-          <div class="mc tipped"><span class="ix">③</span> 正文详尽<span class="mtip r"><span class="f">score3</span> 含可跑命令/代码 · 参考完整度<br/>穷尽→<b>5</b> / 主路径→4 / 概述→3 / 片段→2；②抓不到则记「受阻」不打分</span></div>
-          <div class="mc tipped"><span class="ix">④</span> 版本清晰<span class="mtip r"><span class="f">score4</span> 并存版本号个数 · 有无支持矩阵<br/>版本无关或 ≤1→<b>5</b> / 有矩阵→4 / 双轴可锁→3 / ≥3 散乱→<b>2</b></span></div>
-          <div class="ml">第三方平台</div>
-          <div class="mc tipped" style="grid-column:span 2"><span class="ix">⑤</span> 丰富度<span class="mtip"><span class="f">score5</span> 去重第三方平台来源条数 n<br/>≥6→<b>5</b> / ≥5→4 / ≥3→3 / ≥1→2 / 0→<b>1</b>（官方文档/仓/论坛不计第三方平台）</span></div>
-          <div class="mc tipped" style="grid-column:span 2"><span class="ix">⑥</span> 可信度 / 一致性<span class="mtip r"><span class="f">score6</span> 各源权威基准分取均值 ＋ 一致性（互证 +1 / 矛盾 −1）＋ 时效罚 ＋ 独立性罚，截到 1–5</span></div>
-          <div class="ml">模型自带</div>
-          <div class="mc tipped" style="grid-column:span 4"><span class="ix">⑦</span> 自带知识 · 无需检索即可作答的覆盖密度<span class="mtip"><span class="f">score7</span> 训练覆盖密度自评 1–5 ＋ 知识截止 gap 罚分（相关 API 迭代越快、罚分越重）</span></div>
-        </div>
-        <div class="mxline">过程 / 产出（因变量，不进 ⑪）：<span class="mi tipped"><span class="ix">⑧</span> 检索成本<span class="mtip"><span class="f">score8</span> 反向，分高=省力。cost = 轮数 + 0.5·fetch + 4·抓取失败<br/>≤1.5→<b>5</b> / ≤2.5→4 / ≤4→3 / ≤6→2</span></span> · <span class="mi tipped"><span class="ix">⑨</span> 版本可锁<span class="mtip"><span class="f">score9</span> 确切版本+opset→<b>5</b> / 工具版本可定→4 / 给范围→3 / 抽不出→2</span></span> · <span class="mi tipped"><span class="ix">⑩</span> 步骤可复现<span class="mtip r"><span class="f">score10</span> 照抄即跑→<b>5</b> / 替好参数即跑→4 / 需小修→3 / 仅骨架→2</span></span>　<span style="color:#A1A4AA">— 悬浮任一指标看打分档</span></div>
-        <div class="bridge" style="margin-top:.2vh"><b>⑪ 综合 = K × 版本因子 × 成本因子</b>；<b>K = 1−(1−OFF)(1−SEC)(1−OWN)</b>（噪声-OR：官方 / 第三方平台 / 自带 <b>任一渠道扛住即可答</b>，取「至少一条送达」而非平均）。OFF=①×②×③ · SEC=⑤×⑥ · OWN=⑦，各档先归一 v/5、受阻渠道记 0。例：写 kernel 三渠道齐弱（OFF 0 · SEC .24 · OWN .40 → K .54），再乘版本 / 成本系数 → <b style="color:#FF6B6B">.41</b>。</div>
+    <div class="body-area">
+      <div class="auth">
+        <div class="au"><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div><div class="au-d">同一套任务在 <b>CUDA / 昇腾</b> 各真实跑一遍，差异归因到「生态」而非「题目难易」——对照实验的基本范式。</div></div>
+        <div class="au"><span class="au-tag">拆解框架</span><div class="au-h">知识价值链<span class="en">information foraging</span></div><div class="au-d">知识要「<b>被找到 → 被取到 → 被用上</b>」，任一关断答案就打折（触达→质量→成本→产出），对应信息觅食的思路。</div></div>
+        <div class="au"><span class="au-tag">触达维度</span><div class="au-h">可发现 / 可取回<span class="en">findability / retrievability</span></div><div class="au-d">「能不能被找到、能不能取回正文」是<b>信息架构</b>与<b>检索系统评估</b>里既有的度量维度，不是自创。</div></div>
+        <div class="au"><span class="au-tag">自带知识</span><div class="au-h">参数化知识<span class="en">parametric knowledge</span></div><div class="au-d">模型不检索也能答的参数化知识，是 <b>RAG 评估</b>里公认的一条独立来源，故单列一项、并按知识截止 gap 客观罚分。</div></div>
+        <div class="au"><span class="au-tag">渠道合成</span><div class="au-h">噪声-OR 合成<span class="en">noisy-OR · 概率图模型</span></div><div class="au-d">官方 / 二手 / 自带 多条<b>独立渠道</b>，任一达标即可作答、全断才崩；用 noisy-OR 合成，而非随手加权求和。</div></div>
+        <div class="au"><span class="au-tag">可复现</span><div class="au-h">公式可重跑<span class="en">score_metrics.py</span></div><div class="au-d">每格分由<b>实测观测代入公式</b>算出、一键 <code>--diff</code> 可重跑核对，非主观研判——结论可被第三方复现。</div></div>
       </div>
     </div>
+  </section>
+  <!-- 灰底：opknow18 sec=s3（iframe 嵌原节） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">指标怎么形成：从「到底在测什么」一步步推出 触达→质量→成本→产出 价值链</span></div>
+        <div class="subttl">Metric system · 指标怎么形成（opknow 18 §3）</div>
+      </div>
+      <div class="head-r">08/ AI 指标 · 怎么形成</div>
+    </div>
+    <div class="body-area"><iframe src="m18-embed.html?sec=s3" title="opknow18 sec=s3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+  </section>
+  <!-- 灰底：opknow18 sec=s4&grp=touch（iframe 嵌原节） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">逐项定义 · 触达类：能不能找到、能不能抓到（① ② ⑤ ⑦）</span></div>
+        <div class="subttl">Per-item definitions · 逐项：定义 · 为什么单独 · 量化公式（opknow 18 §4）</div>
+      </div>
+      <div class="head-r">09/ AI 指标 · 触达类</div>
+    </div>
+    <div class="body-area"><iframe src="m18-embed.html?sec=s4&grp=touch" title="opknow18 sec=s4&grp=touch" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+  </section>
+  <!-- 灰底：opknow18 sec=s4&grp=qual（iframe 嵌原节） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">逐项定义 · 质量类：抓到的够不够好（③ ④ ⑥）</span></div>
+        <div class="subttl">Per-item definitions · 逐项：定义 · 为什么单独 · 量化公式（opknow 18 §4）</div>
+      </div>
+      <div class="head-r">10/ AI 指标 · 质量类</div>
+    </div>
+    <div class="body-area"><iframe src="m18-embed.html?sec=s4&grp=qual" title="opknow18 sec=s4&grp=qual" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+  </section>
+  <!-- 灰底：opknow18 sec=s4&grp=costout（iframe 嵌原节） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">逐项定义 · 成本 / 产出 / 综合（⑧ ⑨ ⑩ ⑪）</span></div>
+        <div class="subttl">Per-item definitions · 逐项：定义 · 为什么单独 · 量化公式（opknow 18 §4）</div>
+      </div>
+      <div class="head-r">11/ AI 指标 · 产出</div>
+    </div>
+    <div class="body-area"><iframe src="m18-embed.html?sec=s4&grp=costout" title="opknow18 sec=s4&grp=costout" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
 
   <!-- 3d 灰底：矩阵评分结果（§9 重画，算子子集） -->
@@ -691,7 +730,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">打分结果：「写算子」这一关最低——官方文档 AI 根本抓不到；其余几关也卡在版本散乱、第三方资料少、模型自带知识弱</span></div>
         <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
-      <div class="head-r">08/ 矩阵评分 · 结果</div>
+      <div class="head-r">12/ 矩阵评分 · 结果</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -785,7 +824,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">实测暴露的七个问题：版本混乱 +「自带 / 二手双薄」是结构性缺口</span></div>
         <div class="subttl">Seven problems · 按证据强度排序，①② 为结构性短板，其余被 26 任务实测收窄成精准版（opknow 19）</div>
       </div>
-      <div class="head-r">09/ AI · 七个问题</div>
+      <div class="head-r">13/ AI · 七个问题</div>
     </div>
     <div class="body-area">
       <div class="pg7">
@@ -808,7 +847,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 1／8 · 版本体系「一站收口」：canonical 版本 + 配套矩阵工具</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">10/ 供给侧 · 改文档站</div>
+      <div class="head-r">14/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=1" title="opknow19 卡1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -819,7 +858,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 2／8 · 错误码「一码一页」：把兜底页拆成可着陆的逐条解释</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">11/ 供给侧 · 改文档站</div>
+      <div class="head-r">15/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=2" title="opknow19 卡2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -830,7 +869,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 3／8 · 核心 how-to 链路静态化（devguide / opdevg/）</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">12/ 供给侧 · 改文档站</div>
+      <div class="head-r">16/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=3" title="opknow19 卡3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -841,7 +880,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 4／8 · 机器可读出口：llms.txt / markdown 导出 / 结构化 API 索引</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">13/ 供给侧 · 改文档站</div>
+      <div class="head-r">17/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=4" title="opknow19 卡4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -852,7 +891,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 5／8 · 给「没有眼睛的用户」的界面设计：页面怎么组织才容易被抓取</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">14/ 供给侧 · 改文档站</div>
+      <div class="head-r">18/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -863,7 +902,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 6／8 · 二手生态扶持：把「少而同质」变「多平台互证」</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">15/ 供给侧 · 改文档站</div>
+      <div class="head-r">19/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=6" title="opknow19 卡6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -874,7 +913,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 7／8 · 给「人」的站内体验：跟着同一套指标走就不会错</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">16/ 供给侧 · 改文档站</div>
+      <div class="head-r">20/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=7" title="opknow19 卡7" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -885,7 +924,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 8／8 · 面向下一代模型的语料供给：官方一条腿撑不起可用性</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">17/ 供给侧 · 改文档站</div>
+      <div class="head-r">21/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=8" title="opknow19 卡8" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -896,7 +935,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">使用侧 A · 把「答案的成色」做成一等公民的 UI</span></div>
         <div class="subttl">Usage side · 改的是「做检索的 Agent 产品」——呈现与交互（opknow 19 §4）</div>
       </div>
-      <div class="head-r">18/ 使用侧 · 改 Agent 产品</div>
+      <div class="head-r">22/ 使用侧 · 改 Agent 产品</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=9" title="opknow19 卡9" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -907,7 +946,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">使用侧 B · 为「我抓不到」设计诚实的失败态</span></div>
         <div class="subttl">Usage side · 改的是「做检索的 Agent 产品」——呈现与交互（opknow 19 §4）</div>
       </div>
-      <div class="head-r">19/ 使用侧 · 改 Agent 产品</div>
+      <div class="head-r">23/ 使用侧 · 改 Agent 产品</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=10" title="opknow19 卡10" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -918,7 +957,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">使用侧 C · 把「版本声明」设计进对话的最前面</span></div>
         <div class="subttl">Usage side · 改的是「做检索的 Agent 产品」——呈现与交互（opknow 19 §4）</div>
       </div>
-      <div class="head-r">20/ 使用侧 · 改 Agent 产品</div>
+      <div class="head-r">24/ 使用侧 · 改 Agent 产品</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=11" title="opknow19 卡11" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -929,7 +968,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">使用侧 D · 长检索的过程可见性：让「绕路」像工作而非卡死</span></div>
         <div class="subttl">Usage side · 改的是「做检索的 Agent 产品」——呈现与交互（opknow 19 §4）</div>
       </div>
-      <div class="head-r">21/ 使用侧 · 改 Agent 产品</div>
+      <div class="head-r">25/ 使用侧 · 改 Agent 产品</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=12" title="opknow19 卡12" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -940,7 +979,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">使用侧 E · 为「人审」设计：可核对、可下钻、可纠错</span></div>
         <div class="subttl">Usage side · 改的是「做检索的 Agent 产品」——呈现与交互（opknow 19 §4）</div>
       </div>
-      <div class="head-r">22/ 使用侧 · 改 Agent 产品</div>
+      <div class="head-r">26/ 使用侧 · 改 Agent 产品</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=13" title="opknow19 卡13" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -951,7 +990,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">使用侧 F · 角色感知的 Agent 体验：同一问题，四种用户要不同答案</span></div>
         <div class="subttl">Usage side · 改的是「做检索的 Agent 产品」——呈现与交互（opknow 19 §4）</div>
       </div>
-      <div class="head-r">23/ 使用侧 · 改 Agent 产品</div>
+      <div class="head-r">27/ 使用侧 · 改 Agent 产品</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=14" title="opknow19 卡14" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -962,7 +1001,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">使用侧 G · 按「专有知识依赖度」路由：不是每个问题都值得检索</span></div>
         <div class="subttl">Usage side · 改的是「做检索的 Agent 产品」——呈现与交互（opknow 19 §4）</div>
       </div>
-      <div class="head-r">24/ 使用侧 · 改 Agent 产品</div>
+      <div class="head-r">28/ 使用侧 · 改 Agent 产品</div>
     </div>
     <div class="body-area"><iframe src="ux19-embed.html?card=15" title="opknow19 卡15" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -974,7 +1013,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验怎么打分：从 5 个维度、16 个细项，对照最好与最差的标杆换算成分数</span></div>
         <div class="subttl">人侧 · 基础体验</div>
       </div>
-      <div class="head-r">25/ 基础体验 · 指标定义<br/>ascend-vs-nvidia-ux</div>
+      <div class="head-r">29/ 基础体验 · 指标定义<br/>ascend-vs-nvidia-ux</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1012,7 +1051,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">人侧：开发者从头到尾逛一遍昇腾官网，拆成 24 个触点，逐一和 NVIDIA 对照</span></div>
         <div class="subttl">人侧 · 基础体验</div>
       </div>
-      <div class="head-r">26/ 基础体验 · 方法</div>
+      <div class="head-r">30/ 基础体验 · 方法</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1053,7 +1092,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">触点评分：平均 73.6 分——SDK 下载和工具链差距最大，FAQ 自助反超 NVIDIA</span></div>
         <div class="subttl">人侧 · 基础体验</div>
       </div>
-      <div class="head-r">27/ 基础体验 · 评分</div>
+      <div class="head-r">31/ 基础体验 · 评分</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1109,7 +1148,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">走完 7 步生命周期：每步「触点 × 情绪 × 痛点 / 机会」，谷底在配环境</span></div>
         <div class="subttl">Human journey · 开发者从找入口到进阶的全旅程（引自基础体验报告）</div>
       </div>
-      <div class="head-r">28/ 基础体验 · 旅程</div>
+      <div class="head-r">32/ 基础体验 · 旅程</div>
     </div>
     <div class="body-area"><iframe src="ar-embed.html?sec=journey" title="journey" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1120,7 +1159,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论①：一句话钩子 vs 卡片菜单——落地都不弱，差在好落地页埋二级</span></div>
         <div class="subttl">Synthesis · 步骤 1–2（引自基础体验报告 综述）</div>
       </div>
-      <div class="head-r">29/ 结论 · 落地</div>
+      <div class="head-r">33/ 结论 · 落地</div>
     </div>
     <div class="body-area"><iframe src="ar-embed.html?sec=j1" title="j1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1131,7 +1170,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论②：零登录直取 vs 账号闸门（SDK −66）——全篇 ROI 最高的单点</span></div>
         <div class="subttl">Synthesis · 步骤 3 · 最高杠杆（引自基础体验报告 综述）</div>
       </div>
-      <div class="head-r">30/ 结论 · 下载闸门</div>
+      <div class="head-r">34/ 结论 · 下载闸门</div>
     </div>
     <div class="body-area"><iframe src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1142,7 +1181,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论③：全球化 vs 本地化的镜像门槛——账号 / 语言 / 社区一组对角线</span></div>
         <div class="subttl">Synthesis · 账号·语言·社区（引自基础体验报告 综述）</div>
       </div>
-      <div class="head-r">31/ 结论 · 门槛镜像</div>
+      <div class="head-r">35/ 结论 · 门槛镜像</div>
     </div>
     <div class="body-area"><iframe src="ar-embed.html?sec=j3" title="j3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1153,7 +1192,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论④：算子上手的反转长板——hub 5 环节 + 在线实验比 CUDA 更体系</span></div>
         <div class="subttl">Synthesis · 步骤 2 · 算子长板（引自基础体验报告 综述）</div>
       </div>
-      <div class="head-r">32/ 结论 · 上手长板</div>
+      <div class="head-r">36/ 结论 · 上手长板</div>
     </div>
     <div class="body-area"><iframe src="ar-embed.html?sec=j4" title="j4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1164,7 +1203,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论⑤：内容不差，差在「被全球搜到」——SEO / 英文 / 入口埋深</span></div>
         <div class="subttl">Synthesis · 步骤 6–7 + 全局（引自基础体验报告 综述）</div>
       </div>
-      <div class="head-r">33/ 结论 · 可发现性</div>
+      <div class="head-r">37/ 结论 · 可发现性</div>
     </div>
     <div class="body-area"><iframe src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1175,7 +1214,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">行动建议：P0 先砍下载闸门、补落地起步——按优先级排序</span></div>
         <div class="subttl">Action items · P0＝最高杠杆应优先动手（引自基础体验报告）</div>
       </div>
-      <div class="head-r">34/ 行动建议</div>
+      <div class="head-r">38/ 行动建议</div>
     </div>
     <div class="body-area"><iframe src="ar-embed.html?sec=actions" title="actions" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1186,7 +1225,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">责任归属：6 个部门各管一段——下载 / 账号归官网平台</span></div>
         <div class="subttl">Ownership · 改进措施 → 主责部门（引自基础体验报告）</div>
       </div>
-      <div class="head-r">35/ 责任归属</div>
+      <div class="head-r">39/ 责任归属</div>
     </div>
     <div class="body-area"><iframe src="ar-embed.html?sec=dept" title="dept" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1198,7 +1237,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">两个视角分析下来，归结为三条核心结论</span></div>
         <div class="subttl">结论</div>
       </div>
-      <div class="head-r">36/ 核心结论</div>
+      <div class="head-r">40/ 核心结论</div>
     </div>
     <div class="body-area"><div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.6vh">
       <div class="ccg">
@@ -1231,7 +1270,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">5 个设计点：每一个都顺着「分析 → 结论 → 落点」推导而来</span></div>
         <div class="subttl">结论</div>
       </div>
-      <div class="head-r">37/ 设计点 · 链路</div>
+      <div class="head-r">41/ 设计点 · 链路</div>
     </div>
     <div class="body-area"><div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1vh">
       <div class="chain">
