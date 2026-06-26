@@ -515,6 +515,26 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-grad{height:7px;width:110px;border-radius:4px;background:linear-gradient(90deg,#FFB9B9,#FFD7B7 35%,#FFF2A5 55%,#C4F3E1 75%,#94E1C8)}
   </style>
 
+  <!-- 3b2 灰底：AI 执行架构（hi=1） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">AI 是如何完成这几次检索的：找不到就换个方向，证据不足就再检索一轮</span></div>
+        <div class="subttl">AI 侧 · 内容可用性</div>
+      </div>
+      <div class="head-r">04 / AI · 执行架构<br/>opknow 20</div>
+    </div>
+    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
+      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
+        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+      </div>
+      <div class="card" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1vh;padding:1.3vh 1.1vw;overflow:hidden">
+        <iframe src="arch-d3.html" title="Agent 循环架构（悬浮看每个环节）" style="flex:1;min-width:0;min-height:0;width:100%;border:0;background:transparent"></iframe>
+        <div class="cmp-cap" style="text-align:center;color:var(--ink-3)">抓不到就转向、不够就再检索 — <b style="color:var(--ink-2)">悬浮任意环节看它在做什么</b>（opknow 20 · 公开 Messages API 示范实现）</div>
+      </div>
+    </div>
+  </section>
+
   <!-- 3b 灰底：AI 可用性方法论 + 算子 5 场景 -->
   <section class="slide s-gray">
     <div class="head">
@@ -522,7 +542,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">AI 可用性怎么测：同一套开发任务，在昇腾和 CUDA 上各做一遍</span></div>
         <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
-      <div class="head-r">04 / AI 可用性 · 方法</div>
+      <div class="head-r">05 / AI 可用性 · 方法</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -541,26 +561,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
         </div>
         <div class="bridge" style="margin-top:.2vh">可用性是<b>「任务相关」</b>的：成熟通识两栈差距小，<b>前沿开发差距极大</b>——要定位「受阻于哪一关」，而非只给总分。</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3b2 灰底：AI 执行架构（hi=1） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">AI 是如何完成这几次检索的：找不到就换个方向，证据不足就再检索一轮</span></div>
-        <div class="subttl">AI 侧 · 内容可用性</div>
-      </div>
-      <div class="head-r">05 / AI · 执行架构<br/>opknow 20</div>
-    </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div class="card" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1vh;padding:1.3vh 1.1vw;overflow:hidden">
-        <iframe src="arch-d3.html" title="Agent 循环架构（悬浮看每个环节）" style="flex:1;min-width:0;min-height:0;width:100%;border:0;background:transparent"></iframe>
-        <div class="cmp-cap" style="text-align:center;color:var(--ink-3)">抓不到就转向、不够就再检索 — <b style="color:var(--ink-2)">悬浮任意环节看它在做什么</b>（opknow 20 · 公开 Messages API 示范实现）</div>
       </div>
     </div>
   </section>
