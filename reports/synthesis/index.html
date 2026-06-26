@@ -442,7 +442,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
         .ovm-h i{width:13px;height:13px;border-radius:4px;flex:none}
         .ovm-d{font-size:var(--fs-sm);color:var(--ink-2);margin-top:.5vh;line-height:1.55}.ovm-d b{color:var(--ink)}
         .ovm-f{font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--accent);margin-top:.7vh}
-        .seq-note{font-size:var(--fs-xs);color:var(--ink-3)}
+        .seq-note{font-size:var(--fs-xs);color:var(--ink-3);line-height:1.5}
+        .seq-guide{margin:.2vh 0 .4vh;padding-left:1.05em;display:flex;flex-direction:column;gap:.5vh}
+        .seq-guide li{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5}.seq-guide li b{color:var(--ink)}
       </style>
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
         <iframe src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
@@ -468,23 +470,23 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <style>
-    .lc-stages{font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-2);background:rgba(0,0,0,.035);border-radius:8px;padding:.9vh 1vw;text-align:center;letter-spacing:.01em}
+    .lc-stages{font-family:'JetBrains Mono';font-size:var(--fs-body);color:var(--ink-2);background:rgba(0,0,0,.035);border-radius:8px;padding:.9vh 1vw;text-align:center;letter-spacing:.01em}
     .op5{display:grid;grid-template-columns:repeat(5,1fr);gap:.7vw}
     .op5-i{display:flex;flex-direction:column;align-items:center;gap:.25em;text-align:center;background:rgba(91,91,214,.05);border:1px solid rgba(91,91,214,.18);border-radius:10px;padding:1.4vh .3vw}
     .op5-i .c{width:28px;height:28px;border-radius:7px;background:var(--g-purple);color:#fff;font-family:'JetBrains Mono';font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
-    .op5-i b{font-size:var(--fs-sm);color:var(--ink)}.op5-i small{font-size:var(--fs-xs);color:var(--ink-3)}
+    .op5-i b{font-size:var(--fs-body);color:var(--ink)}.op5-i small{font-size:var(--fs-sm);color:var(--ink-3)}
     .qpx{display:flex;flex-direction:column;gap:.7vh}
     .qpx .qhead{display:grid;grid-template-columns:1fr 1fr;gap:.8vw;padding:0 1.1vw}
     .qpx .qx-h{font-family:'JetBrains Mono';font-weight:700;font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center}
     .qpx .qx-h.cu{color:#5a8a00}.qpx .qx-h.ca{color:#C7000B}
     .qpx .qtask{background:rgba(255,255,255,.5);border-radius:12px;padding:1vh 1.1vw;display:flex;flex-direction:column;gap:.7vh}
     .qpx .ql{width:16px;height:16px;border-radius:5px;background:rgba(0,0,0,.055);color:var(--ink-2);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:700;flex:none}
-    .qpx .qx-intent{display:flex;align-items:center;gap:.55em;font-weight:700;font-size:var(--fs-sm);color:var(--ink)}
+    .qpx .qx-intent{display:flex;align-items:center;gap:.55em;font-weight:700;font-size:var(--fs-body);color:var(--ink)}
     .qpx .qx-intent small{font-weight:400;font-size:var(--fs-xs);color:var(--ink-3)}
     .qpx .qx-intent .qx-goal{font-weight:500;font-size:var(--fs-xs);color:var(--accent);background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.2);border-radius:7px;padding:2px 9px;line-height:1.4}
     .qpx .qx-intent .qx-goal b{color:var(--ink-3);font-weight:700;margin-right:.3em}
     .qpx .qpair{display:grid;grid-template-columns:1fr 1fr;gap:.8vw}
-    .qpx .qx-c{font-size:var(--fs-sm);line-height:1.5;color:var(--ink-2);border-radius:10px;padding:.9vh .9vw}
+    .qpx .qx-c{font-size:var(--fs-body);line-height:1.55;color:var(--ink-2);border-radius:10px;padding:.9vh .9vw}
     .qpx .qx-c.cu{background:rgba(118,185,0,.08);border:1px solid rgba(118,185,0,.25)}
     .qpx .qx-c.ca{background:rgba(199,0,11,.055);border:1px solid rgba(199,0,11,.2)}
     .qpx .qx-c code{font-family:'JetBrains Mono';font-size:.9em;background:rgba(0,0,0,.05);padding:0 .3em;border-radius:3px}
@@ -734,11 +736,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .op7{display:grid;grid-template-columns:repeat(7,1fr);gap:.5vw}
     .op7-i{display:flex;flex-direction:column;align-items:center;gap:.35em;text-align:center;background:rgba(47,61,99,.05);border:1px solid rgba(47,61,99,.16);border-radius:9px;padding:1.1vh .2vw}
     .op7-i .n{width:22px;height:22px;border-radius:6px;background:#2f3d63;color:#fff;font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);display:flex;align-items:center;justify-content:center}
-    .op7-i b{font-size:var(--fs-xs);color:var(--ink);line-height:1.25;font-weight:600}
+    .op7-i b{font-size:var(--fs-sm);color:var(--ink);line-height:1.25;font-weight:600}
     .op7-i.clk{cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
     .op7-i.clk:hover{border-color:#2f3d63}
     .op7-i.act{background:rgba(47,61,99,.13);border-color:#2f3d63;box-shadow:0 0 0 2px rgba(47,61,99,.22)}
-    .hs-ana{font-size:var(--fs-sm);line-height:1.5;color:var(--ink-2);display:flex;flex-wrap:wrap;align-items:center;gap:.5em}
+    .hs-ana{font-size:var(--fs-body);line-height:1.55;color:var(--ink-2);display:flex;flex-wrap:wrap;align-items:center;gap:.5em}
     .hs-ana .hp{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-xs);padding:2px 7px;border-radius:6px;color:#fff}
     .hs-ana .hd{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-xs);padding:2px 7px;border-radius:6px}
     .hs-ana .hd.up{background:rgba(35,160,106,.14);color:#1f7a4d}.hs-ana .hd.dn{background:rgba(230,0,18,.1);color:#C7000B}
