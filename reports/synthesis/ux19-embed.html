@@ -897,8 +897,14 @@ if (typeof document.getElementById === "function" && document.getElementById("pk
 
 <style id="embedfix">
 html.embed,html.embed body{background:transparent!important;overflow:hidden!important}
-body.embed .wrap{padding:14px 20px!important;max-width:none!important;margin:0!important}
-body.embed .uxcard{margin:0!important;max-width:none!important}
+body.embed .pagenav,body.embed .toc,body.embed .subtitle,body.embed h1,body.embed .statgrid,body.embed .sechint,body.embed .pagefoot,body.embed footer{display:none!important}
+body.embed .wrap{padding:8px 22px!important;max-width:none!important;margin:0!important}
+body.embed .uxcard{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0!important;max-width:none!important}
+body.embed .uxcard.ux-show{display:flex!important;flex-direction:column;justify-content:center;height:calc(100vh - 24px)}
+body.embed .uxcard.ux-show.ux-flex{flex-direction:row;gap:26px;align-items:stretch}
+body.embed .ux-left{flex:0 0 37%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px}
+body.embed .ux-right{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:0}
+body.embed .ux-right .demo{margin:0!important}
 </style>
 <script id="embedfixjs">
 (function(){
@@ -912,7 +918,25 @@ body.embed .uxcard{margin:0!important;max-width:none!important}
       Array.prototype.forEach.call(par.children,function(c){if(c!==el)c.style.display='none';});
       el.style.display='';el=par;
     }
-    t.style.display='';var h=t.querySelector('h3');if(h)h.style.display='none';window.scrollTo(0,0);return true;
+    t.style.display='';t.classList.add('ux-show');
+    var h=t.querySelector('h3');if(h)h.style.display='none';
+    if(!t.dataset.laid){
+      t.dataset.laid='1';
+      var dt=t.querySelector('.demotitle')||t.querySelector('.demo');
+      if(dt){
+        var left=document.createElement('div');left.className='ux-left';
+        var right=document.createElement('div');right.className='ux-right';
+        var kids=Array.prototype.slice.call(t.children),hit=false;
+        kids.forEach(function(c){
+          if(c===dt)hit=true;
+          if(c.tagName==='H3')return;
+          (hit?right:left).appendChild(c);
+        });
+        t.appendChild(left);t.appendChild(right);
+        t.classList.add('ux-flex');
+      }
+    }
+    window.scrollTo(0,0);return true;
   }
   var i=0,iv=setInterval(function(){i++;if(apply()||i>30)clearInterval(iv);},80);
 })();
