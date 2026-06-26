@@ -943,12 +943,12 @@ function drawAxisDots(parent, cx, y, st){
   st.axLane.forEach((l,i)=>{
     const g=parent.append("g").attr("transform",`translate(${cx-total/2+i*gap},${y})`);
     g.append("circle").attr("r",r).attr("fill",dotColor(l));
-    g.append("text").attr("text-anchor","middle").attr("dy",3.2).attr("font-size",12).attr("font-weight",700).attr("fill",dotTextColor(l)).text(AXNAME[i]);
+    g.append("text").attr("text-anchor","middle").attr("dy",3.2).attr("font-size",9).attr("font-weight",700).attr("fill",dotTextColor(l)).text(AXNAME[i]);
   });
 }
 /* 计数文字 AI n / 人 m（双色 tspan）；横竖共用 */
 function drawCount(parent, cx, y, st){
-  const t=parent.append("text").attr("x",cx).attr("y",y).attr("text-anchor","middle").attr("font-size",13.5);
+  const t=parent.append("text").attr("x",cx).attr("y",y).attr("text-anchor","middle").attr("font-size",10);
   t.append("tspan").attr("fill","#3C3489").text("AI "+st.ai);
   t.append("tspan").attr("fill","#999").text("  /  ");
   t.append("tspan").attr("fill","#0C447C").text("人 "+st.hu);
@@ -1087,14 +1087,14 @@ function renderV(){
 
   /* 阶段卡 + 主导方色带（最左，同前） */
   svg.append("text").attr("x",phX+phW/2).attr("y",vTop-62).attr("text-anchor","middle")
-    .attr("font-size",13.5).attr("font-weight",800).attr("fill","#555").text("阶段·人/AI");
+    .attr("font-size",10).attr("font-weight",800).attr("fill","#555").text("阶段·人/AI");
   PHASE.forEach((d,i)=>{
     const y0=Y(d.a)-dyV/2+5, h=(d.b-d.a)*dyV + dyV-10, cy=(Y(d.a)+Y(d.b))/2, cxp=phX+phW/2, st=phaseStats(d);
     svg.append("rect").attr("x",phX).attr("y",y0).attr("width",phW).attr("height",h)
       .attr("rx",8).attr("fill",phaseColors[i]).attr("opacity",.6).style("cursor","help")
       .on("mousemove",e=>showPhaseTip(e,i)).on("mouseleave",hideTip).on("click",e=>pinPhaseTip(e,i));
-    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",13).attr("font-weight",700).attr("fill","#555");
-    wrapText(lab, d.n, 6, 14, cxp, false); lab.attr("y",cy-24);
+    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",9.5).attr("font-weight",700).attr("fill","#555");
+    wrapText(lab, d.n, 6, 11, cxp, false); lab.attr("y",cy-24);
     drawRatioBar(svg, cxp, cy-6, Math.min(phW-14,84), st);
     drawCount(svg, cxp, cy+10, st);
     drawAxisDots(svg, cxp, cy+24, st);
@@ -1103,12 +1103,12 @@ function renderV(){
       .on("mousemove",e=>showPhaseTip(e,i)).on("mouseleave",hideTip).on("click",e=>pinPhaseTip(e,i));
   });
   svg.append("text").attr("x",owX+owW/2).attr("y",vTop-62).attr("text-anchor","middle")
-    .attr("font-size",13.5).attr("font-weight",800).attr("fill","#555").text("主导方");
+    .attr("font-size",10).attr("font-weight",800).attr("fill","#555").text("主导方");
   PHASE.forEach(d=>{
     const k=phaseOwner(d), y0=Y(d.a)-dyV/2+5, h=(d.b-d.a)*dyV + dyV-10;
     svg.append("rect").attr("x",owX).attr("y",y0).attr("width",owW).attr("height",h).attr("rx",6).attr("fill",ownColors[k]);
-    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",13).attr("font-weight",700).attr("fill","#2b2b2b");
-    wrapText(lab, ownName[k], 4, 15, owX+owW/2, true); lab.attr("y",(Y(d.a)+Y(d.b))/2+3);
+    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",9.5).attr("font-weight",700).attr("fill","#2b2b2b");
+    wrapText(lab, ownName[k], 4, 12, owX+owW/2, true); lab.attr("y",(Y(d.a)+Y(d.b))/2+3);
   });
 
   /* 4 条参与者生命线 + 列头 */
@@ -1173,25 +1173,25 @@ function renderV(){
       .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
     drawMarker(gx,d,PCOL[frm],f.blocked);
     if(f.blocked){                          // 红色空返回 + ✕（核心发现可视化）+ 对应矩阵分
-      const ry=y+17;
+      const ry=y+15;
       svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x2-dir*3).attr("y1",ry).attr("x2",x1+dir*14).attr("y2",ry)
         .attr("stroke","#C8102E").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ahr)").attr("opacity",.92);
       svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",ry).attr("x2",x2).attr("y2",ry).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
       svg.append("text").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
-        .attr("font-size",13).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）"+(NS[d.id]?" → 矩阵 "+NS[d.id]:""));
+        .attr("font-size",10.5).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）"+(NS[d.id]?" → 矩阵 "+NS[d.id]:""));
     }
   });
 
   /* 用户独立分支 ＝ 人 → 昇腾社区（官方 or 二手）的独立消息（仅档①）；br.to 指定目标线，缺省 off */
   if(curLvl<=1) BRANCH.forEach(br=>{
-    const src=byId[br.from], y=Y(src.xi)+(br.above?-22:(src.kind==="decision"?0:26)), tgt=br.to||"off", x2=LX[tgt];
+    const src=byId[br.from], y=Y(src.xi)+(br.above?-29:(src.kind==="decision"?0:34)), tgt=br.to||"off", x2=LX[tgt];
     const pair=['hu',tgt].sort().join('-');
     const x1b=(src.kind==="decision")?(LX[src.lane]+BARW/2):LX.hu;  // 决策→右缘中点起；否则从人生命线起
     svg.append("line").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2+3).attr("y2",y)
       .attr("stroke","#2f3d63").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ab)").attr("opacity",.85);
     svg.append("line").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
     svg.append("text").attr("data-pair",pair).attr("data-msg",br.id).attr("x",(x1b+x2)/2).attr("y",y-5).attr("text-anchor","middle")
-      .attr("font-size",13).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
+      .attr("font-size",10.5).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
       .style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"二手社区":"昇腾官方"),b:br.b})).on("mouseleave",hideTip);
   });
@@ -1986,7 +1986,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 .chartwrap{border:none!important;padding:6px!important;margin:0!important;width:100%!important;height:100%!important;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box;background:transparent!important}
 #journey{width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important}
 #journey [data-pair],#journey [data-lane]{transition:opacity .28s}
-#seqctrl{position:fixed;top:8px;right:12px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Noto Sans SC',sans-serif}
+#seqctrl{position:fixed;bottom:8px;right:12px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Noto Sans SC',sans-serif}
 #seqctrl .sqbtn{width:24px;height:24px;border-radius:7px;border:1px solid #d4d8df;background:rgba(255,255,255,.85);color:#444;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 #seqctrl .sqbtn:hover{background:#fff;border-color:#5B5BD6;color:#5B5BD6}
 #seqctrl .sqlbl{font-size:11.5px;font-weight:600;color:#5B5BD6;background:rgba(255,255,255,.88);border:1px solid #d4d8df;border-radius:8px;padding:5px 10px;cursor:pointer;white-space:nowrap;user-select:none}
@@ -2068,7 +2068,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   window.addEventListener('load',function(){var m=(location.search.match(/[?&]hi=(\d+)/));if(m)go(+m[1]);});
 })();
 </script>
-<style>.embed-title{position:fixed;top:10px;left:13px;font-size:11px;font-weight:600;color:#b3b6bd;letter-spacing:.03em;z-index:40;pointer-events:none;font-family:'Noto Sans SC',sans-serif}</style>
+<style>.embed-title{position:fixed;bottom:8px;left:13px;font-size:11px;font-weight:600;color:#b3b6bd;letter-spacing:.03em;z-index:40;pointer-events:none;font-family:'Noto Sans SC',sans-serif}</style>
 <script>(function(){function t(){if(document.querySelector(".embed-title"))return;var d=document.createElement("div");d.className="embed-title";d.textContent="人机协同 · 全链路时序图";document.body.appendChild(d);}if(document.readyState!=="loading")t();else addEventListener("DOMContentLoaded",t);})();</script>
 </body>
 </html>
