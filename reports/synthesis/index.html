@@ -450,21 +450,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
-        <div class="cmp-h"><span class="hk">Two readings</span>一张时序图，两条线各讲一件事</div>
-        <p class="cmp-desc">Agent 时代「用户」既是人也是 AI。同一次算子开发沿时间撞上 <b>5 次检索</b>，<b>两条线</b>分别对应两套实测分析：</p>
+        <div class="cmp-h"><span class="hk">How to read</span>怎么看这张图</div>
+        <p class="cmp-desc">这是开发者干完<b>一次「写自定义算子」</b>的全过程，从上到下按<b>时间</b>推进——Agent 时代，「用户」既是人、也是替他干活的 AI 助手。</p>
+        <ul class="seq-guide">
+          <li><b>竖线＝参与方</b>：用户 · AI 助手 · 昇腾官方文档 · 第三方平台（CSDN / 博客）· AI 自带知识。</li>
+          <li><b>横箭头＝一次来回</b>：谁向谁要信息、抓到还是没抓到。</li>
+          <li><b>怎么读</b>：用户把需求交给 AI → AI 分头去 官方 / 第三方 / 自带知识 里找 → 拿回来拼答案，不够就再找一轮。一次开发这样<b>来回 5 次检索</b>。</li>
+        </ul>
         <div class="ov-map">
           <div class="ovm">
             <div class="ovm-h"><i style="background:#6B5BA8"></i>AI ↔ 昇腾 / 第三方平台</div>
-            <div class="ovm-d">每次抓取的命中 · 质量 = <b>AI 可用性矩阵打分</b>（opknow）</div>
-            <div class="ovm-f">→ 后续 3 页：方法论 · CUDA vs CANN 问法 · 矩阵评分</div>
+            <div class="ovm-d">AI 每次<b>抓没抓到、够不够用</b> → 后面用「可用性矩阵」打分。</div>
           </div>
           <div class="ovm">
             <div class="ovm-h"><i style="background:#2f3d63"></i>人 ↔ 昇腾社区</div>
-            <div class="ovm-d">这条线的直接体验 = <b>触点体验分析</b>（ascend-vs-nvidia-ux）</div>
-            <div class="ovm-f">→ 后续 2 页：方法论 + 截图对比 · 触点评分</div>
+            <div class="ovm-d">开发者本人逛官网的<b>直接体验</b> → 后面做触点评分。</div>
           </div>
         </div>
-        <div class="seq-note">点图右上「按关系讲解」可现场高亮某条线 · 悬浮节点看每步细节</div>
+        <div class="seq-note">点图右上「按关系讲解」高亮某条线 · 悬浮节点看每步细节</div>
       </div>
     </div>
   </section>
@@ -552,10 +555,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">How it runs</span>如何运行</div>
-        <p class="cmp-desc">AI 助手用 <b>web_search / web_fetch</b> 抓 <b>官方站 + 第三方平台 + 自带知识</b> 三路，按「<b>触达 × 质量</b>」打 1–5 分、<b>noisy-OR 合成</b>；同一套任务在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 各<b>真实执行一遍</b>，差异归因到「<b>栈 / 生态</b>」。</p>
-        <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">Scenarios</span>7 阶段 → 26 任务，算子开发涉及 5 次检索</div>
-        <div class="lc-stages">装环境 · 开发算子 · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
+        <div class="cmp-h"><span class="hk">Tasks</span>这几个检索任务是怎么定义的</div>
+        <p class="cmp-desc">把开发者的真实工作流拆成 <b>7 个阶段</b>，挑出最难、最依赖查文档的 <b>「算子开发」</b>，再拆成开发者真会一个个去查的 <b>5 个子任务</b>——每个子任务就是一次「带着问题去检索」，正好对应时序图里的 <b>5 次检索</b>。</p>
+        <div class="lc-stages">装环境 · <b style="color:var(--accent)">开发算子</b> · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
         <div class="op5">
           <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
           <div class="op5-i"><span class="c">2</span><b>Tiling</b><small>动态 shape</small></div>
@@ -563,7 +565,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="op5-i"><span class="c">4</span><b>注册集成</b><small>接 PyTorch</small></div>
           <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">可用性是<b>「任务相关」</b>的：成熟通识两栈差距小，<b>前沿开发差距极大</b>——要定位「受阻于哪一关」，而非只给总分。</div>
+        <div class="bridge" style="margin-top:.2vh">同一套 5 个任务，在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 上各<b>真实做一遍</b>，差异才能归到「生态」、而非「题目难易」。</div>
       </div>
     </div>
   </section>
