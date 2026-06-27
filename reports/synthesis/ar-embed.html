@@ -2026,10 +2026,24 @@ body.embed.steps .tpcard{padding:8px 12px!important}
 <script id="embedfixjs">
 (function(){
   var p=new URLSearchParams(location.search);
-  var id=p.get('sec');if(!id)return;
+  var id=p.get('sec');var tpid=p.get('tp');if(!id&&!tpid)return;
   var pg=p.get('pg');
+  function fit(node){node.style.transform='';node.style.transformOrigin='top center';var vh=window.innerHeight,fh=node.getBoundingClientRect().height;if(fh>vh-2)node.style.transform='scale('+((vh-2)/fh).toFixed(3)+')';}
   function apply(){
     document.documentElement.classList.add('embed');document.body.classList.add('embed');
+    /* 单触点卡模式 ?tp=ID:只露 #tp-ID 整张卡,沿祖先链隐旁支兄弟 */
+    if(tpid){
+      var tc=document.getElementById('tp-'+tpid);if(!tc)return false;
+      var e=tc;
+      while(e&&e.parentElement&&e!==document.body){
+        var par=e.parentElement;
+        if(e.hasAttribute&&e.hasAttribute('hidden'))e.removeAttribute('hidden');
+        Array.prototype.forEach.call(par.children,function(c){if(c!==e)c.style.display='none';});
+        e.style.display='';e=par;
+      }
+      document.body.style.padding='0';document.body.style.margin='0';
+      tc.style.display='';window.scrollTo(0,0);fit(tc);return true;
+    }
     if(/^L\d/.test(id)||id==='Lx')document.body.classList.add('steps');
     var t=document.getElementById(id);if(!t)return false;
     document.querySelectorAll('.floor').forEach(function(f){f.style.display='none';f.style.transform='';});
