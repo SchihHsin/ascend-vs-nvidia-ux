@@ -2019,11 +2019,9 @@ body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed f
 body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
 /* 步骤楼层触点卡改 2 列,压低高度→缩放后更可读 */
 body.embed .tpgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:start}
-/* 步骤页:保留截图对比图,只隐视角条/摩擦指数明细;截图限高让卡矮、2列装下不滚动 */
-body.embed.steps .tpcard .pov,body.embed.steps .tpcard .djfi,body.embed.steps .tpcard .djfi-tbl,body.embed.steps .tpcard .shotcap{display:none!important}
-body.embed.steps .tpcard{padding:9px 12px!important}
-body.embed.steps .tpcard .tpcard-body{gap:8px!important}
-body.embed.steps .tpcard .shot,body.embed.steps .tpcard .mock{max-height:15vh!important;width:auto!important;object-fit:contain}
+/* 步骤分析 iframe:大图已在 deck 页原生放,这里只要分析——隐触点小图/视角条/摩擦明细/触点列表,留 分数+差异分析+建议 */
+body.embed.steps .tpcard .tpcard-body,body.embed.steps .tpcard .pov,body.embed.steps .tpcard .djfi,body.embed.steps .tpcard .djfi-tbl,body.embed.steps .floor-sub{display:none!important}
+body.embed.steps .tpcard{padding:8px 12px!important}
 </style>
 <script id="embedfixjs">
 (function(){
