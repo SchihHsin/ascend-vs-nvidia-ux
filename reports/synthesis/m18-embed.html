@@ -808,9 +808,11 @@
 </div>
 
 <style id="embedfix">
-html.embed,html.embed body{background:transparent!important;overflow:hidden!important}
+html.embed,html.embed body{background:transparent!important;overflow:hidden!important;margin:0!important}
+body.embed{padding:0!important;margin:0!important;height:100vh;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
 body.embed .pagenav,body.embed .toc,body.embed .subtitle,body.embed h1,body.embed .topnav{display:none!important}
-body.embed .wrap{padding:14px 20px!important;max-width:none!important;margin:0!important}
+body.embed .wrap{padding:0 30px!important;max-width:none!important;margin:0!important;width:100%;box-sizing:border-box}
+body.embed .mcard{margin:0 0 10px!important}
 </style>
 <script id="embedfixjs">
 (function(){

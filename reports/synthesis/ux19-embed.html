@@ -896,14 +896,15 @@ if (typeof document.getElementById === "function" && document.getElementById("pk
 </script>
 
 <style id="embedfix">
-html.embed,html.embed body{background:transparent!important;overflow:hidden!important}
+html.embed,html.embed body{background:transparent!important;overflow:hidden!important;margin:0!important}
+body.embed{padding:0!important;margin:0!important;height:100vh;box-sizing:border-box}
 body.embed .pagenav,body.embed .toc,body.embed .subtitle,body.embed h1,body.embed .statgrid,body.embed .sechint,body.embed .pagefoot,body.embed footer{display:none!important}
-body.embed .wrap{padding:8px 22px!important;max-width:none!important;margin:0!important}
+body.embed .wrap{padding:0 30px!important;max-width:none!important;margin:0!important;width:100%;height:100vh;box-sizing:border-box}
 body.embed .uxcard{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0!important;max-width:none!important}
-body.embed .uxcard.ux-show{display:flex!important;flex-direction:column;justify-content:center;height:calc(100vh - 24px)}
-body.embed .uxcard.ux-show.ux-flex{flex-direction:row;gap:26px;align-items:stretch}
-body.embed .ux-left{flex:0 0 37%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px}
-body.embed .ux-right{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:0}
+body.embed .uxcard.ux-show{display:flex!important;flex-direction:column;justify-content:center;height:100vh}
+body.embed .uxcard.ux-show.ux-flex{flex-direction:row;gap:28px;align-items:center}
+body.embed .ux-left{flex:0 0 37%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px}
+body.embed .ux-right{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:0}
 body.embed .ux-right .demo{margin:0!important}
 </style>
 <script id="embedfixjs">
