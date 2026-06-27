@@ -2017,6 +2017,12 @@ html.embed{background:transparent!important;overflow:hidden!important;scroll-sna
 html.embed body{background:transparent!important;overflow:hidden!important;height:100vh!important;scroll-snap-type:none!important}
 body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed footer,body.embed .footer{display:none!important}
 body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
+/* 单触点卡 ?tp 模式:卡铺满宽度(去 max-width)、隐卡自带头(deck 页头已给标题+分数) */
+body.embed.tponly .wrap{max-width:none!important;padding:0 6px!important;margin:0!important}
+body.embed.tponly .tpcard{max-width:none!important;width:100%!important;box-shadow:none!important;border:0!important;background:none!important}
+body.embed.tponly .tpcard .tpcard-hd{display:none!important}
+body.embed.tponly .tpcard .shot,body.embed.tponly .tpcard .mock{max-height:34vh!important;width:auto!important;object-fit:contain}
+body.embed.tponly .tpcard .shotcap{display:none!important}
 /* 步骤楼层触点卡改 2 列,压低高度→缩放后更可读 */
 body.embed .tpgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:start}
 /* 步骤分析 iframe:大图已在 deck 页原生放,这里只要分析——隐触点小图/视角条/摩擦明细/触点列表,留 分数+差异分析+建议 */
@@ -2033,6 +2039,7 @@ body.embed.steps .tpcard{padding:8px 12px!important}
     document.documentElement.classList.add('embed');document.body.classList.add('embed');
     /* 单触点卡模式 ?tp=ID:只露 #tp-ID 整张卡,沿祖先链隐旁支兄弟 */
     if(tpid){
+      document.body.classList.add('tponly');
       var tc=document.getElementById('tp-'+tpid);if(!tc)return false;
       var e=tc;
       while(e&&e.parentElement&&e!==document.body){
@@ -2042,7 +2049,12 @@ body.embed.steps .tpcard{padding:8px 12px!important}
         e.style.display='';e=par;
       }
       document.body.style.padding='0';document.body.style.margin='0';
-      tc.style.display='';window.scrollTo(0,0);fit(tc);return true;
+      tc.style.display='';window.scrollTo(0,0);fit(tc);
+      if(!tc.dataset.ro){tc.dataset.ro='1';
+        if(window.ResizeObserver){new ResizeObserver(function(){fit(tc);}).observe(tc);}
+        tc.querySelectorAll('img').forEach(function(im){if(im.complete)fit(tc);else im.addEventListener('load',function(){fit(tc);});});
+      }
+      return true;
     }
     if(/^L\d/.test(id)||id==='Lx')document.body.classList.add('steps');
     var t=document.getElementById(id);if(!t)return false;
