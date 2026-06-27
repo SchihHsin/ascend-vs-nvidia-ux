@@ -321,6 +321,9 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 .deliv:last-child{border-bottom:none}
 .deliv .dn{flex:none;width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;background:#2f3d63;color:#fff;font-weight:900;font-size:14px}
 </style>
+<!-- 嵌入态先把整页藏住,等 embedfix 裁好再淡入——避免先闪一下原始页 -->
+<style id="embedhidecss">html.embed-wait body{opacity:0!important}body{transition:opacity .14s ease}</style>
+<script id="embedhidejs">document.documentElement.classList.add('embed-wait');setTimeout(function(){document.documentElement.classList.remove('embed-wait');},3000);</script>
 </head>
 <body>
 <div class="wrap">
@@ -2000,6 +2003,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
       if(id==='tip'||id==='tipmask')return;
       el.style.display='none';
     });
+    document.documentElement.classList.remove('embed-wait');
   }
   if(document.readyState!=='loading')fix();else document.addEventListener('DOMContentLoaded',fix);
   window.addEventListener('load',fix);

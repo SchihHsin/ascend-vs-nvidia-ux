@@ -151,6 +151,9 @@ mark.m-gap{background:#efefef;color:#666;font-style:italic;padding:0 2px}
 a.hit{color:#777;text-decoration:none;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;word-break:break-all}
 a.hit:hover{text-decoration:underline;color:#444}
 </style>
+<!-- 嵌入态先把整页藏住,等 embedfix 裁好再淡入——避免先闪一下原始页 -->
+<style id="embedhidecss">html.embed-wait body{opacity:0!important}body{transition:opacity .14s ease}</style>
+<script id="embedhidejs">if(/[?&](sec|tp|pg|card|hi)=/.test(location.search)){document.documentElement.classList.add('embed-wait');setTimeout(function(){document.documentElement.classList.remove('embed-wait');},3000);}</script>
 </head>
 <body>
 <div class="wrap">
@@ -939,7 +942,9 @@ body.embed .ux-right .demo{margin:0!important}
     }
     window.scrollTo(0,0);return true;
   }
-  var i=0,iv=setInterval(function(){i++;if(apply()||i>30)clearInterval(iv);},80);
+  function reveal(){document.documentElement.classList.remove('embed-wait');}
+  var i=0,iv=setInterval(function(){i++;if(apply()){clearInterval(iv);reveal();}else if(i>60){clearInterval(iv);reveal();}},40);
+  document.addEventListener('DOMContentLoaded',function(){if(apply())reveal();});
 })();
 </script>
 <script id="deckwheelfwd">window.addEventListener("wheel",function(e){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__deckWheel:e.deltaY},"*");}catch(_){}},{passive:true});</script>

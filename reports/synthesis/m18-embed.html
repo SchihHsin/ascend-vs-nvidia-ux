@@ -196,6 +196,9 @@
 
   .foot{margin-top:34px;font-size:10.5px;color:var(--g4);border-top:1px solid var(--g6);padding-top:12px;line-height:1.7;}
 </style>
+<!-- 嵌入态先把整页藏住,等 embedfix 裁好再淡入——避免先闪一下原始页 -->
+<style id="embedhidecss">html.embed-wait body{opacity:0!important}body{transition:opacity .14s ease}</style>
+<script id="embedhidejs">if(/[?&](sec|tp|pg|card|hi)=/.test(location.search)){document.documentElement.classList.add('embed-wait');setTimeout(function(){document.documentElement.classList.remove('embed-wait');},3000);}</script>
 </head>
 <body>
 <div class="wrap">
@@ -827,7 +830,9 @@ body.embed .mcard{margin:0 0 10px!important}
     }
     window.scrollTo(0,0);return shown;
   }
-  var n=0,iv=setInterval(function(){n++;if(apply()||n>30)clearInterval(iv);},80);
+  function reveal(){document.documentElement.classList.remove('embed-wait');}
+  var n=0,iv=setInterval(function(){n++;if(apply()){clearInterval(iv);reveal();}else if(n>60){clearInterval(iv);reveal();}},40);
+  document.addEventListener('DOMContentLoaded',function(){if(apply())reveal();});
 })();
 </script>
 <script id="deckwheelfwd">window.addEventListener("wheel",function(e){
