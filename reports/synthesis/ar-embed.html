@@ -2017,6 +2017,8 @@ html.embed{background:transparent!important;overflow:hidden!important;scroll-sna
 html.embed body{background:transparent!important;overflow:hidden!important;height:100vh!important;scroll-snap-type:none!important}
 body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed footer,body.embed .footer{display:none!important}
 body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
+/* 步骤楼层触点卡改 2 列,压低高度→缩放后更可读;卡内图文改竖排免挤 */
+body.embed .tpgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:start}
 </style>
 <script id="embedfixjs">
 (function(){
