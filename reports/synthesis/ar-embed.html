@@ -2028,10 +2028,12 @@ body.embed.tponly .tpcard .tpcard-body{grid-column:1!important;grid-row:2!import
 body.embed.tponly .tpcard .djfi{grid-column:1!important;grid-row:3!important;margin:8px 0 0!important}
 body.embed.tponly .tpcard .verdict{grid-column:2!important;grid-row:2/4!important;align-self:start!important;margin:0!important;border-top:0!important;border-radius:12px!important}
 /* rec(昇腾该怎么做):标签+主责同一行、说明文字另起一行铺满(窄右栏里三者并排会把 txt 挤成一条) */
-body.embed.tponly .tpcard .rec{display:grid!important;grid-template-columns:auto 1fr auto!important;grid-template-areas:"tag . dept" "txt txt txt"!important;column-gap:8px!important;row-gap:7px!important;align-items:center!important}
+body.embed.tponly .tpcard .rec{display:grid!important;grid-template-columns:auto 1fr auto!important;grid-template-areas:"tag . dept" "txt txt txt"!important;column-gap:8px!important;row-gap:7px!important;align-items:center!important;padding:13px 18px!important}
 body.embed.tponly .tpcard .rec .rec-tag{grid-area:tag!important;margin-top:0!important}
 body.embed.tponly .tpcard .rec .rec-dept{grid-area:dept!important;justify-self:end!important;margin-top:0!important}
 body.embed.tponly .tpcard .rec .rec-txt{grid-area:txt!important}
+/* 差异分析列表项右内边距=0,窄右栏里文字贴右边(左有 ◆ 缩进 26px、右却 0,失衡)——补右内边距 */
+body.embed.tponly .tpcard .concl li{padding-right:22px!important}
 /* 图填满各自半栏,消除 width:auto 留下的大空隙 */
 body.embed.tponly .tpcard .tpside{padding:2px 9px 6px!important}
 body.embed.tponly .tpcard .tpside.left{padding-left:0!important}
