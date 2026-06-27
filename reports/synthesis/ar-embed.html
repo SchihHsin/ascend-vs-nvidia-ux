@@ -400,7 +400,7 @@ a{color:inherit;text-decoration:none}
 .pf-step.goal{border-color:#7c5cf0;color:#7c5cf0;font-weight:700}
 .pov.train .pf-step.goal{border-color:#1f9fb8;color:#1f9fb8}
 .pf-arr{color:var(--g5);font-size:13px}
-/* ---- DJFI 实测明细 / 锚点表 ---- */
+/* ---- 摩擦指数 实测明细 / 锚点表 ---- */
 .djfi{margin:14px 0 0;border:1px solid var(--g3);border-radius:12px;background:linear-gradient(180deg,#fbfbfd,#fff);overflow:hidden}
 .djfi>summary{list-style:none;cursor:pointer;padding:11px 14px;font-size:12.5px;color:var(--ink2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;user-select:none}
 .djfi>summary::-webkit-details-marker{display:none}
@@ -457,8 +457,8 @@ a{color:inherit;text-decoration:none}
       <span class="chip"><span class="dot" style="background:var(--blue)"></span>2026-06-13 · v1</span>
     </div>
     <div class="metrics">
-      <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v" id="coverAvg">—<span style="font-size:18px;color:var(--g5)"> / </span>—</div><div class="vsub" id="coverGapSub">DJFI 计算结果 · 24 主触点等权均分</div></div>
-      <div class="metric bad"><div class="k">最深摩擦点 · SDK下载(4.3)</div><div class="v">21<span style="font-size:18px;color:var(--g5)"> / </span>87</div><div class="vsub">登录+协议+7步 → DJFI 算出的全局谷底</div></div>
+      <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v" id="coverAvg">—<span style="font-size:18px;color:var(--g5)"> / </span>—</div><div class="vsub" id="coverGapSub">摩擦指数 计算结果 · 24 主触点等权均分</div></div>
+      <div class="metric bad"><div class="k">最深摩擦点 · SDK下载(4.3)</div><div class="v">21<span style="font-size:18px;color:var(--g5)"> / </span>87</div><div class="vsub">登录+协议+7步 → 摩擦指数 算出的全局谷底</div></div>
       <div class="metric good"><div class="k">昇腾占优触点</div><div class="v">5<span style="font-size:18px;color:var(--g5)"> 个</span></div><div class="vsub">首页 / 规格 / 快速入门 / 模型库 / FAQ</div></div>
       <div class="metric"><div class="k">真实截图取证</div><div class="v">25<span style="font-size:18px;color:var(--g5)">张</span></div><div class="vsub">昇腾9 · NVIDIA16 · 全触点真图、0 mockup</div></div>
     </div>
@@ -506,10 +506,10 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
-  <!-- 评估方法论 · DJFI -->
+  <!-- 评估方法论 · 摩擦指数 -->
   <section class="floor" id="method">
-    <div class="floor-hd"><span class="fno">DJFI</span><h2>评估方法论 · 开发者旅程摩擦指数</h2></div>
-    <p class="floor-sub">本报告的所有分数,均由<b>可观测、可计数的指标</b>经公开公式<b>计算</b>得出,不含逐项主观打分。框架名为 <b>DJFI(Developer Journey Friction Index)</b>——测量开发者完成真实任务时遇到的、可被复现测量的摩擦。给定测量值与公式,任何人重算得同一结果。</p>
+    <div class="floor-hd"><span class="fno">摩擦指数</span><h2>评估方法论 · 开发者旅程摩擦指数</h2></div>
+    <p class="floor-sub">本报告的所有分数,均由<b>可观测、可计数的指标</b>经公开公式<b>计算</b>得出,不含逐项主观打分。框架名为 <b>摩擦指数(Developer Journey Friction Index)</b>——测量开发者完成真实任务时遇到的、可被复现测量的摩擦。给定测量值与公式,任何人重算得同一结果。</p>
     <h3 style="margin:6px 0 12px;font-size:16px;color:var(--ink)">一、理论依据(每一层均挂靠权威来源)</h3>
     <div class="ia-finds">
       <div class="ia-find"><div class="ia-find-h">ISO 9241-11:2018</div>可用性的国际标准定义——<b>有效性 / 效率 / 满意度</b>三要素,构成评估维度的总框架。</div>
@@ -550,7 +550,7 @@ a{color:inherit;text-decoration:none}
     <div id="djfiRules"></div>
     <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">七、算例(触点 4.3 · SDK 下载)—— 由引擎实时计算</h3>
     <div id="djfiExample"></div>
-    <p class="floor-sub" style="margin-top:8px">这张表不是手写、而是页面加载时由公式现算;每个触点卡底部都能展开同样的「DJFI 实测明细」,数字与触点分严格一致——给定测量表,任何人重算得同一结果。<b>样板已铺 8 个触点(4.3 / 4.2 / 4.1 / 3.2 / 1.1b / T2 / T4 / T5),其余触点暂仍为同维度手工分,正逐步补齐实测。</b></p>
+    <p class="floor-sub" style="margin-top:8px">这张表不是手写、而是页面加载时由公式现算;每个触点卡底部都能展开同样的「摩擦指数 实测明细」,数字与触点分严格一致——给定测量表,任何人重算得同一结果。<b>样板已铺 8 个触点(4.3 / 4.2 / 4.1 / 3.2 / 1.1b / T2 / T4 / T5),其余触点暂仍为同维度手工分,正逐步补齐实测。</b></p>
     <div class="method" style="margin-top:14px">
       <b>七、可复现性、效度与局限(诚实陈述)</b><br>
       <b>可复现性(强):</b>测量协议 + 公开锚点 + 公开公式 ⇒ 给定输入,输出唯一。<br>
@@ -633,7 +633,7 @@ a{color:inherit;text-decoration:none}
       <div class="ia-find"><div class="ia-find-h">触发 3 · 需要决策</div>版本 / soc / 精度 → 官方文档 + Gitee 样例 + 论坛</div>
     </div>
     <div class="method" style="margin-top:16px">
-      <b>承接分（与 DJFI 同构：实测→归一化→合成）：</b>每个目的地实测 5 指标（②可抓取 ③详尽 ④版本清晰 ⑤数量 ⑥可信度，1–5），归一化 nm=v/5；<b>综合 = 1−(1−OFF)(1−SEC)</b>（OFF=官方 ②×③、SEC=第三方 ⑤×⑥；任一渠道扛得住即可答），再乘版本因子 <b>0.7+0.3·nm④</b>。官方文档/仓/论坛属官方，不计入第三方 ⑤⑥。<br>
+      <b>承接分（与 摩擦指数 同构：实测→归一化→合成）：</b>每个目的地实测 5 指标（②可抓取 ③详尽 ④版本清晰 ⑤数量 ⑥可信度，1–5），归一化 nm=v/5；<b>综合 = 1−(1−OFF)(1−SEC)</b>（OFF=官方 ②×③、SEC=第三方 ⑤×⑥；任一渠道扛得住即可答），再乘版本因子 <b>0.7+0.3·nm④</b>。官方文档/仓/论坛属官方，不计入第三方 ⑤⑥。<br>
       <span style="color:var(--g6)">本 tab 为<b>样板态</b>：问题 D 昇腾侧已实测建成（真图+注解）；NVIDIA 侧无头被反爬挡、留位待手动补图；其余 5 条问题待铺。</span>
     </div>
   </section>
@@ -1014,8 +1014,8 @@ ndesc:'NVIDIA <b>官网首页 nvidia.com</b>（双站之一，面向全受众）
  nimg:{op:'01-nvidia-home-op.png',train:'01-nvidia-home-train.png'},ntag:'real',
  adesc:'落地官网后进到<b>开发者门户首屏</b>：昇腾开发者中心 hiascend.com/developer。首屏直接铺「获取开发资源」——训练开发 / 推理开发 / 算子开发三张场景卡 + 开发工具（CANN / PyTorch / MindSpeed / MindIE / MindStudio / HiDevLab），再往下是 学习成长（在线实验 / 认证）、互动交流、加入开发者计划。相当“开发者动作导向”。',
 ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句开发者动作「Skip the setup. Start building.」（building 用品牌绿高亮）+ 紧跟教程卡片流。这才是 NVIDIA 给开发者的“首页”。',
- c:[['同维度算下来，这一步 NVIDIA 占优','DJFI 实测 80 / 92：NVIDIA 一句“Skip the setup. Start building.”行动指令单一、门户本身就是独立强入口，交互成本最低；昇腾开发者中心首屏是卡片菜单（多一道“先点哪张”的决策）、且门户埋在二级，认知负荷与可达性都吃亏。'],
-    ['昇腾不弱在“内容”，弱在“摩擦”','场景卡 + 开发工具 + 学习成长一应俱全，论内容并不输；差距全在“多一次选择 + 入口埋深”这类可计数的摩擦上——这正是 DJFI 只测摩擦、不奖励信息量的体现。'],
+ c:[['同维度算下来，这一步 NVIDIA 占优','摩擦指数 实测 80 / 92：NVIDIA 一句“Skip the setup. Start building.”行动指令单一、门户本身就是独立强入口，交互成本最低；昇腾开发者中心首屏是卡片菜单（多一道“先点哪张”的决策）、且门户埋在二级，认知负荷与可达性都吃亏。'],
+    ['昇腾不弱在“内容”，弱在“摩擦”','场景卡 + 开发工具 + 学习成长一应俱全，论内容并不输；差距全在“多一次选择 + 入口埋深”这类可计数的摩擦上——这正是 摩擦指数 只测摩擦、不奖励信息量的体现。'],
     ['昇腾的隐性成本：门户埋在二级','开发者中心不在官网首页一眼可达，要从“开发者与合作伙伴”二级进；NVIDIA 虽分两站，但开发者门户是独立强入口。']],
  rec:'把开发者中心<b>提到官网首页一眼可达（顶栏直达 + 首屏入口）</b>，并在三张场景卡上给一个最强单一 引导按钮（如“算子开发 · 5 分钟跑通”），把已经不弱的内容补上“先点这里”的指令性。'},
 {id:'1.2',s:1,name:'顶部导航 / 信息架构',a:74,nv:80,bar:true,
@@ -1070,7 +1070,7 @@ ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句
  adesc:'这是昇腾文档中心的“硬件产品”区：Atlas 系列按 开发者套件 / 加速模块 / 加速卡 / 智能小站 / 服务器 / 集群 分门别类列全（200I、300I、800、900 等型号一目了然），信息齐全。',
  nm:{url:'docs.nvidia.com',h:'Specs in product pages',hl:'产品页集中',lines:['规格集中在各产品页','缺并排选型对比工具'],tags:['Specs']},ntag:'text',
  ndesc:'NVIDIA 的规格在<b>各 GPU 产品页</b>内（图为 H100 GPU 页：hero + “View Datasheet” + 顶部 Introduction / Workloads / Specifications 锚点，往下是完整规格表）；单品规格清晰，但同样没有“把多个型号拉到一起并排比”的选型对比工具。',
- c:[['同维度算下来，这一步昇腾占优','DJFI 实测 89 / 83：昇腾把全系规格集中在文档中心一张大表，“看全 + 比对”点几下就到、到达成本低；NVIDIA 规格分散在各 GPU 产品页，要在多页间来回跳，交互成本更高。'],
+ c:[['同维度算下来，这一步昇腾占优','摩擦指数 实测 89 / 83：昇腾把全系规格集中在文档中心一张大表，“看全 + 比对”点几下就到、到达成本低；NVIDIA 规格分散在各 GPU 产品页，要在多页间来回跳，交互成本更高。'],
     ['共同缺口：都没有并排选型','昇腾虽占优，但两边都缺“勾选 A 卡 vs B 卡”的对比工具，仍要自己拼——这是昇腾把“集中”再升一级的机会。']],
  rec:'在硬件规格表上加一个<b>“勾选型号 → 并排对比”的选型工具</b>（性能、显存、功耗、适用场景逐行对齐），把昇腾“集中列全”的优势直接升级成“能对比、好决策”。'},
 {id:'2.4',s:2,name:'解决方案 / 场景入口',a:76,nv:78,bar:true,
@@ -1258,10 +1258,10 @@ const RESCORE={
 };
 TP.forEach(t=>{const r=RESCORE[t.id];if(r){t.a=r[0];t.nv=r[1];}});
 
-/* ===== DJFI 内核 · 实测值 → 公开公式 → 分(规则全公开,锚点表见方法论楼层) =====
+/* ===== 摩擦指数 内核 · 实测值 → 公开公式 → 分(规则全公开,锚点表见方法论楼层) =====
    样板已铺 8 触点(含 4.3/4.2 谷底、3.2 上手反转、T4/T5 训练谷底);有 MVAL 的触点
    分数由公式算出并覆盖 RESCORE,无 MVAL 的仍走 RESCORE 手工分,待逐步补齐。 */
-const DJFI_ANCHORS={
+const 摩擦指数_ANCHORS={
  A1:{t:'num',best:1,worst:8,lab:'到达目标点击数',u:'次'},
  A2:{t:'num',best:1,worst:10,lab:'完成总步骤数',u:'步'},
  A3:{t:'num',best:0,worst:4,lab:'上下文切换数',u:'次'},
@@ -1279,10 +1279,10 @@ const DJFI_ANCHORS={
  E2:{t:'num',best:0,worst:4,lab:'路径死链/404',u:'个'},
  E3:{t:'ratio',lab:'关键入口可达性'},
 };
-const DJFI_DIM={A:['A1','A2','A3','A4'],B:['B1','B2','B3'],C:['C1','C2','C3'],D:['D1','D2','D3'],E:['E1','E2','E3']};
-const DJFI_DIMLAB={A:'效率/反馈',B:'认知负荷',C:'准入摩擦',D:'内容可执行',E:'可发现性'};
+const 摩擦指数_DIM={A:['A1','A2','A3','A4'],B:['B1','B2','B3'],C:['C1','C2','C3'],D:['D1','D2','D3'],E:['E1','E2','E3']};
+const 摩擦指数_DIMLAB={A:'效率/反馈',B:'认知负荷',C:'准入摩擦',D:'内容可执行',E:'可发现性'};
 function djfiNorm(code,v){
- if(v==null)return null;const a=DJFI_ANCHORS[code];
+ if(v==null)return null;const a=摩擦指数_ANCHORS[code];
  if(a.t==='boolF')return v?0:100;          // 摩擦布尔:有门槛=0,无=100
  if(a.t==='boolC')return v?100:0;          // 能力布尔:有=100,无=0
  if(a.t==='ratio')return Math.max(0,Math.min(100,v*100));
@@ -1290,8 +1290,8 @@ function djfiNorm(code,v){
 }
 function djfiSide(vals){
  if(!vals)return null;const dims={};
- for(const d in DJFI_DIM){
-  const xs=DJFI_DIM[d].map(c=>djfiNorm(c,vals[c])).filter(x=>x!=null);
+ for(const d in 摩擦指数_DIM){
+  const xs=摩擦指数_DIM[d].map(c=>djfiNorm(c,vals[c])).filter(x=>x!=null);
   dims[d]=xs.length?Math.round(xs.reduce((s,x)=>s+x,0)/xs.length):null; // 维度分=指标分均值
  }
  const ds=Object.values(dims).filter(x=>x!=null);
@@ -1679,8 +1679,8 @@ function renderHeat(){
 }
 
 /* ---------- 触点卡 + 楼层（按 7 步分组） ---------- */
-/* ---------- DJFI 渲染:卡内实测明细 / 锚点总表 / 算例 / 封面均分 ---------- */
-function djfiFmt(code,v){const a=DJFI_ANCHORS[code];
+/* ---------- 摩擦指数 渲染:卡内实测明细 / 锚点总表 / 算例 / 封面均分 ---------- */
+function djfiFmt(code,v){const a=摩擦指数_ANCHORS[code];
  if(v==null)return '<span class="dj-na">缺测</span>';
  if(a.t==='boolF'||a.t==='boolC')return v?'是':'否';
  if(a.t==='ratio')return Math.round(v*100)+'%';
@@ -1688,24 +1688,24 @@ function djfiFmt(code,v){const a=DJFI_ANCHORS[code];
 function djfiTableHtml(t){
  if(!t.djfi)return '';
  const {a,nv,m}=t.djfi;
- const rows=Object.keys(DJFI_DIM).map(d=>{
-   const inds=DJFI_DIM[d].filter(c=>(m.a[c]!=null||m.nv[c]!=null));
+ const rows=Object.keys(摩擦指数_DIM).map(d=>{
+   const inds=摩擦指数_DIM[d].filter(c=>(m.a[c]!=null||m.nv[c]!=null));
    if(!inds.length)return '';
-   const head=`<tr class="dj-dimhd"><td>${d} · ${DJFI_DIMLAB[d]}</td><td class="a">${a.dims[d]??'—'}</td><td class="n">${nv.dims[d]??'—'}</td></tr>`;
-   const cells=inds.map(c=>`<tr><td class="dj-ind">${DJFI_ANCHORS[c].lab}<span class="dj-anc">${DJFI_ANCHORS[c].t==='num'?DJFI_ANCHORS[c].best+'→'+DJFI_ANCHORS[c].worst:DJFI_ANCHORS[c].t==='boolF'?'有=0':DJFI_ANCHORS[c].t==='boolC'?'有=100':'×100'}</span></td><td class="dj-v a">${djfiFmt(c,m.a[c])} <i>${m.a[c]==null?'':'→'+djfiNorm(c,m.a[c])}</i></td><td class="dj-v n">${djfiFmt(c,m.nv[c])} <i>${m.nv[c]==null?'':'→'+djfiNorm(c,m.nv[c])}</i></td></tr>`).join('');
+   const head=`<tr class="dj-dimhd"><td>${d} · ${摩擦指数_DIMLAB[d]}</td><td class="a">${a.dims[d]??'—'}</td><td class="n">${nv.dims[d]??'—'}</td></tr>`;
+   const cells=inds.map(c=>`<tr><td class="dj-ind">${摩擦指数_ANCHORS[c].lab}<span class="dj-anc">${摩擦指数_ANCHORS[c].t==='num'?摩擦指数_ANCHORS[c].best+'→'+摩擦指数_ANCHORS[c].worst:摩擦指数_ANCHORS[c].t==='boolF'?'有=0':摩擦指数_ANCHORS[c].t==='boolC'?'有=100':'×100'}</span></td><td class="dj-v a">${djfiFmt(c,m.a[c])} <i>${m.a[c]==null?'':'→'+djfiNorm(c,m.a[c])}</i></td><td class="dj-v n">${djfiFmt(c,m.nv[c])} <i>${m.nv[c]==null?'':'→'+djfiNorm(c,m.nv[c])}</i></td></tr>`).join('');
    return head+cells;
  }).join('');
- return `<details class="djfi"><summary><span class="dj-badge">DJFI 实测明细</span>触点分由公式算出 · 昇腾 <b class="a">${a.tp}</b> / NVIDIA <b class="n">${nv.tp}</b><span class="dj-open">点开看每项实测值 → 归一化分</span></summary>
+ return `<details class="djfi"><summary><span class="dj-badge">摩擦指数 实测明细</span>触点分由公式算出 · 昇腾 <b class="a">${a.tp}</b> / NVIDIA <b class="n">${nv.tp}</b><span class="dj-open">点开看每项实测值 → 归一化分</span></summary>
    <div class="dj-scroll"><table class="dj-tbl"><thead><tr><th>维度分 / 指标(锚点)</th><th class="a">昇腾</th><th class="n">NVIDIA</th></tr></thead><tbody>${rows}</tbody></table></div>
    <div class="dj-note">维度分 = 维度内各指标归一化分的算术平均;触点分 = 5 维度分等权平均。归一化:数值 <code>(worst−实测)÷(worst−best)×100</code>;摩擦布尔 有=0/无=100;能力布尔 有=100/无=0;比例 ×100。<b>缺测</b>项排除出计算、不填值。</div></details>`;
 }
 function renderDjfiRules(){
  const el=document.getElementById('djfiRules');if(!el)return;
- const body=Object.keys(DJFI_DIM).map(d=>DJFI_DIM[d].map((c,i)=>{
-   const a=DJFI_ANCHORS[c];
+ const body=Object.keys(摩擦指数_DIM).map(d=>摩擦指数_DIM[d].map((c,i)=>{
+   const a=摩擦指数_ANCHORS[c];
    const anc=a.t==='boolF'?'无门槛=100 / 有=0':a.t==='boolC'?'具备=100 / 无=0':a.t==='ratio'?'比例 ×100':`best ${a.best} → worst ${a.worst}`;
    const ty=a.t==='num'?'数值':a.t==='ratio'?'比例':'布尔';
-   return `<tr>${i===0?`<td rowspan="${DJFI_DIM[d].length}" class="dj-dcell">${d}<br><span>${DJFI_DIMLAB[d]}</span></td>`:''}<td>${c} · ${a.lab}</td><td>${ty}</td><td>${anc}</td></tr>`;
+   return `<tr>${i===0?`<td rowspan="${摩擦指数_DIM[d].length}" class="dj-dcell">${d}<br><span>${摩擦指数_DIMLAB[d]}</span></td>`:''}<td>${c} · ${a.lab}</td><td>${ty}</td><td>${anc}</td></tr>`;
  }).join('')).join('');
  el.innerHTML=`<table class="dj-tbl rules"><thead><tr><th>维度</th><th>指标</th><th>类型</th><th>锚点 / 归一化</th></tr></thead><tbody>${body}</tbody></table>`;
 }
@@ -1718,7 +1718,7 @@ function updateCover(){
  const main=TP.filter(t=>/^\d/.test(t.id));
  const aa=main.reduce((s,t)=>s+t.a,0)/main.length, nn=main.reduce((s,t)=>s+t.nv,0)/main.length;
  const v=document.getElementById('coverAvg');if(v)v.innerHTML=aa.toFixed(1)+'<span style="font-size:18px;color:var(--g5)"> / </span>'+nn.toFixed(1);
- const g=document.getElementById('coverGapSub');if(g)g.innerHTML=`DJFI 计算结果 · 24 主触点等权均分 · gap ${(aa-nn).toFixed(1)}`;
+ const g=document.getElementById('coverGapSub');if(g)g.innerHTML=`摩擦指数 计算结果 · 24 主触点等权均分 · gap ${(aa-nn).toFixed(1)}`;
 }
 function tpCardHtml(t){
       const sc=t.bar?'shot bar':'shot';
@@ -2019,9 +2019,11 @@ body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed f
 body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
 /* 步骤楼层触点卡改 2 列,压低高度→缩放后更可读 */
 body.embed .tpgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:start}
-/* 步骤页紧凑:隐截图/mockup + 视角条,只留 分数 + 差异分析 + 建议 */
-body.embed.steps .tpcard .tpcard-body,body.embed.steps .tpcard .pov{display:none!important}
-body.embed.steps .tpcard{padding:10px 13px!important}
+/* 步骤页:保留截图对比图,只隐视角条/摩擦指数明细;截图限高让卡矮、2列装下不滚动 */
+body.embed.steps .tpcard .pov,body.embed.steps .tpcard .djfi,body.embed.steps .tpcard .djfi-tbl,body.embed.steps .tpcard .shotcap{display:none!important}
+body.embed.steps .tpcard{padding:9px 12px!important}
+body.embed.steps .tpcard .tpcard-body{gap:8px!important}
+body.embed.steps .tpcard .shot,body.embed.steps .tpcard .mock{max-height:15vh!important;width:auto!important;object-fit:contain}
 </style>
 <script id="embedfixjs">
 (function(){
@@ -2055,6 +2057,11 @@ body.embed.steps .tpcard{padding:10px 13px!important}
       grid.style.gridTemplateColumns='repeat(3,minmax(0,1fr))';
       var half=3,start=(parseInt(pg)-1)*half,end=start+half;
       cards.forEach(function(c,i){c.style.display=(i>=start&&i<end)?'':'none';});
+    }
+    /* 步骤页:按触点数定列数——≥5用3列(6触点→2行铺满)、2-4用2列、1用1列 */
+    if(document.body.classList.contains('steps')){
+      var tg=t.querySelector('.tpgrid');
+      if(tg){var nc=tg.querySelectorAll('.tpcard').length;tg.style.setProperty('grid-template-columns','repeat('+(nc>=5?3:(nc>=2?2:1))+',minmax(0,1fr))','important');}
     }
     window.scrollTo(0,0);
     /* 缩放适配:无滚动条,把楼层缩到刚好装下 viewport(防截断) */
