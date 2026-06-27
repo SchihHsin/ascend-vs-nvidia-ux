@@ -2019,9 +2019,18 @@ body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed f
 body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
 /* 单触点卡 ?tp 模式:卡铺满宽度(去 max-width)、隐卡自带头(deck 页头已给标题+分数) */
 body.embed.tponly .wrap{max-width:none!important;padding:0 6px!important;margin:0!important}
-body.embed.tponly .tpcard{max-width:none!important;width:100%!important;box-shadow:none!important;border:0!important;background:none!important}
+/* 单触点·左右版:视角横幅占顶部整宽;下方左列(55%)两张对比图、右列(45%)摩擦指数+差异分析+建议 */
+body.embed.tponly .tpcard.tpsolo{max-width:none!important;width:100%!important;box-shadow:none!important;border:0!important;background:none!important;
+  display:grid!important;grid-template-columns:64% 36%!important;column-gap:18px!important;row-gap:8px!important;align-content:start!important}
 body.embed.tponly .tpcard .tpcard-hd{display:none!important}
-body.embed.tponly .tpcard .shot,body.embed.tponly .tpcard .mock{max-height:34vh!important;width:auto!important;object-fit:contain}
+body.embed.tponly .tpcard .pov{grid-column:1/3!important;margin:0!important}
+body.embed.tponly .tpcard .tpcard-body{grid-column:1!important;grid-row:2/4!important;align-self:start!important}
+body.embed.tponly .tpcard .djfi{grid-column:2!important;grid-row:2!important;margin:0!important}
+body.embed.tponly .tpcard .verdict{grid-column:2!important;grid-row:3!important;margin-top:10px!important;border-top:0!important;border-radius:12px!important}
+/* 图填满各自半栏,消除 width:auto 留下的大空隙 */
+body.embed.tponly .tpcard .tpside{padding:2px 9px 6px!important}
+body.embed.tponly .tpcard .tpside.left{padding-left:0!important}
+body.embed.tponly .tpcard .shot,body.embed.tponly .tpcard .mock{width:100%!important;height:auto!important;max-height:60vh!important;object-fit:contain}
 body.embed.tponly .tpcard .shotcap{display:none!important}
 /* 单触点模式:tpgrid 不再分两列,让唯一卡铺满整宽 */
 body.embed.tponly .tpgrid{display:block!important;grid-template-columns:1fr!important}
@@ -2051,7 +2060,7 @@ body.embed.steps .tpcard{padding:8px 12px!important}
         e.style.display='';e=par;
       }
       document.body.style.padding='0';document.body.style.margin='0';
-      tc.style.display='';window.scrollTo(0,0);fit(tc);
+      tc.style.display='';tc.classList.add('tpsolo');window.scrollTo(0,0);fit(tc);
       if(!tc.dataset.ro){tc.dataset.ro='1';
         if(window.ResizeObserver){new ResizeObserver(function(){fit(tc);}).observe(tc);}
         tc.querySelectorAll('img').forEach(function(im){if(im.complete)fit(tc);else im.addEventListener('load',function(){fit(tc);});});
