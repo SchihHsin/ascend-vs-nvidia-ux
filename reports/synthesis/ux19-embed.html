@@ -942,5 +942,6 @@ body.embed .ux-right .demo{margin:0!important}
   var i=0,iv=setInterval(function(){i++;if(apply()||i>30)clearInterval(iv);},80);
 })();
 </script>
+<script id="deckwheelfwd">window.addEventListener("wheel",function(e){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__deckWheel:e.deltaY},"*");}catch(_){}},{passive:true});</script>
 </body>
 </html>

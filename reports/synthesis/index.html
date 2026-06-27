@@ -1335,7 +1335,10 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='Escape'){ if(document.body.classList.contains('overview')) exitOverview(); }
 });
 let wheelLock=false;
-addEventListener('wheel',e=>{ if(document.body.classList.contains('overview'))return; if(wheelLock||Math.abs(e.deltaY)<18)return; wheelLock=true; setTimeout(()=>wheelLock=false,640); e.deltaY>0?next():prev(); },{passive:true});
+function deckWheelNav(dy){ if(document.body.classList.contains('overview'))return; if(wheelLock||Math.abs(dy)<18)return; wheelLock=true; setTimeout(()=>wheelLock=false,640); dy>0?next():prev(); }
+addEventListener('wheel',e=>deckWheelNav(e.deltaY),{passive:true});
+/* iframe 内的 wheel 被 iframe 吃掉、不冒泡到父页 → 各 embed 把 wheel 转发来,父页照样翻页 */
+addEventListener('message',e=>{ var d=e&&e.data; if(d&&typeof d.__deckWheel==='number') deckWheelNav(d.__deckWheel); });
 let _ty=null;
 addEventListener('touchstart',e=>{_ty=e.touches[0].clientY;},{passive:true});
 addEventListener('touchend',e=>{ if(_ty==null||document.body.classList.contains('overview'))return; var dy=e.changedTouches[0].clientY-_ty; if(Math.abs(dy)>50){dy<0?next():prev();} _ty=null; },{passive:true});

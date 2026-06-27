@@ -2070,5 +2070,6 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
   window.addEventListener('load',init);
 })();
 </script>
+<script id="deckwheelfwd">window.addEventListener("wheel",function(e){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__deckWheel:e.deltaY},"*");}catch(_){}},{passive:true});</script>
 </body>
 </html>

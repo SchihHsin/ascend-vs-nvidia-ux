@@ -841,5 +841,6 @@ body.embed .mcard{margin:0 0 10px!important}
   var n=0,iv=setInterval(function(){n++;if(apply()||n>30)clearInterval(iv);},80);
 })();
 </script>
+<script id="deckwheelfwd">window.addEventListener("wheel",function(e){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__deckWheel:e.deltaY},"*");}catch(_){}},{passive:true});</script>
 </body>
 </html>
