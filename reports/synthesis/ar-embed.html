@@ -1332,8 +1332,8 @@ TP.forEach(t=>{const m=MVAL[t.id];if(m){const A=djfiSide(m.a),N=djfiSide(m.nv);t
 
 const JUDGES=[
  {id:'j1',g:'common',pin:'both',plab:'步骤 1–2',color:'#7c5cf0',h:'一句话钩子 vs 卡片菜单（落地都不弱）',cap:'开发者门户首屏 · 同维度对比',
-  one:'同维度对位后，两边落地都很“开发者动作导向”——差别在指令性，不在“动作 vs 口号”。',
-  lead:'此处必须同维度：拿昇腾<b>开发者中心 /developer</b> 对位 developer.nvidia.com（而非用品牌页 hiascend.com）。换对页面后，之前“品牌叙事 vs 动作导向”的判断不成立——两边首屏都在回答“我能干什么”。',
+  one:'',
+  lead:'',
   body:[
    'NVIDIA 是<b>一句话钩子</b>：“Skip the setup. Start building.” + 紧跟教程流，视线落点单一、行动指令最强。',
    '昇腾开发者中心是<b>卡片菜单</b>：首屏就铺 训练/推理/算子开发三张场景卡 + 开发工具 + 学习成长（在线实验/认证），信息更全、同样即答“我能干什么”，只是缺一个“先点这里”的最强单一 CTA。',
@@ -2014,11 +2014,9 @@ document.getElementById('lb').onclick=()=>document.getElementById('lb').classLis
 
 <style id="embedfix">
 html.embed{background:transparent!important;overflow:hidden!important;scroll-snap-type:none!important}
-html.embed body{background:transparent!important;overflow-y:auto!important;overflow-x:hidden!important;height:100vh!important;scroll-snap-type:none!important;scrollbar-width:thin;scrollbar-color:rgba(140,140,160,.35) transparent}
-html.embed body::-webkit-scrollbar{width:6px}
-html.embed body::-webkit-scrollbar-thumb{background:rgba(140,140,160,.35);border-radius:6px}
+html.embed body{background:transparent!important;overflow:hidden!important;height:100vh!important;scroll-snap-type:none!important}
 body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed footer,body.embed .footer{display:none!important}
-body.embed .floor{padding:14px 0 8px!important;scroll-margin-top:0!important}
+body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
 </style>
 <script id="embedfixjs">
 (function(){
@@ -2028,7 +2026,7 @@ body.embed .floor{padding:14px 0 8px!important;scroll-margin-top:0!important}
   function apply(){
     document.documentElement.classList.add('embed');document.body.classList.add('embed');
     var t=document.getElementById(id);if(!t)return false;
-    document.querySelectorAll('.floor').forEach(function(f){f.style.display='none';});
+    document.querySelectorAll('.floor').forEach(function(f){f.style.display='none';f.style.transform='';});
     var el=t;
     while(el&&el.nodeType===1){
       if(el.hasAttribute('hidden'))el.removeAttribute('hidden');
@@ -2043,7 +2041,6 @@ body.embed .floor{padding:14px 0 8px!important;scroll-margin-top:0!important}
       document.querySelectorAll('.synth-grouphd').forEach(function(g){g.style.display='none';});
     }
     var hd=t.querySelector(':scope > .floor-hd');if(hd)hd.style.display='none';
-    /* dept paging: pg=1 shows first 3 cards, pg=2 shows last 3——3 卡并排一行(防 2 列换行变高被裁) */
     if(id==='dept'&&pg){
       var grid=document.getElementById('deptgrid');
       var cards=grid?Array.from(grid.querySelectorAll('.deptcard')):[];
@@ -2052,10 +2049,14 @@ body.embed .floor{padding:14px 0 8px!important;scroll-margin-top:0!important}
       var half=3,start=(parseInt(pg)-1)*half,end=start+half;
       cards.forEach(function(c,i){c.style.display=(i>=start&&i<end)?'':'none';});
     }
-    window.scrollTo(0,Math.max(0,t.offsetTop-8));
+    window.scrollTo(0,0);
+    /* 缩放适配:无滚动条,把楼层缩到刚好装下 viewport(防截断) */
+    t.style.transform='';t.style.transformOrigin='top center';
+    var vh=window.innerHeight, fh=t.getBoundingClientRect().height;
+    if(fh>vh-2){ t.style.transform='scale('+((vh-2)/fh).toFixed(3)+')'; }
     return true;
   }
-  var n=0,iv=setInterval(function(){n++;var ok=apply();if(ok){window.scrollTo(0,Math.max(0,(document.getElementById(id).offsetTop)-8));}if(n>60)clearInterval(iv);},90);
+  var n=0,iv=setInterval(function(){n++;if(apply()){clearInterval(iv);setTimeout(apply,250);setTimeout(apply,700);}else if(n>60)clearInterval(iv);},90);
 })();
 </script>
 <script id="deckwheelfwd">window.addEventListener("wheel",function(e){
