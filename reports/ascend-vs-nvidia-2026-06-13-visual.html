@@ -533,7 +533,7 @@ a{color:inherit;text-decoration:none}
       <div class="ia-find"><div class="ia-find-h">D · 内容可执行性</div>代码示例可否复制即运行(0/1) · 快速入门有无完整可运行代码(0/1) · 文档时效。<span style="color:var(--g6)">依据:Nielsen 帮助与文档 / DevEx</span></div>
       <div class="ia-find"><div class="ia-find-h">E · 可发现性</div>核心关键词搜索命中率 · 路径死链/404 数 · 关键入口可达性。<span style="color:var(--g6)">依据:Nielsen 识别而非回忆</span></div>
     </div>
-    <div class="method" style="margin-top:18px">
+    <div class="method" style="margin-top:18px" data-pgbreak="2">
       <b>四、执行 · 测量协议(保证可复现)</b><br>
       ① <b>设备/视口</b>:桌面 1440×900,Chrome 最新稳定版;② <b>账号状态</b>:未登录态进入(模拟首次开发者);③ <b>计数规则</b>:点击 = 一次有效交互,步骤 = 用户必须完成的离散动作,同一动作不重复计;④ <b>取证</b>:每个指标值附对应截图为证;⑤ <b>时点</b>:记录评估日期与页面版本;⑥ <b>缺测处理</b>:无法实测的指标标注"缺测"并<b>排除出计算</b>,不以估值填充。
     </div>
@@ -1827,9 +1827,62 @@ function showTab(t){
   if(t==='op'||t==='train'){document.getElementById('tab-scenario').hidden=false;setScen(t);}
   else {document.getElementById('tab-'+t).hidden=false; if(t==='comm')showCommQ(window._commQ||'intro');}
   window.scrollTo(0,0);
+  history.replaceState(null,'','#'+t);
 }
 renderAll();updateScenHead();
 renderDjfiRules();renderDjfiExample();updateCover();
+(function(){
+  var TABS=['overview','op','train','comm','synth'];
+  var h=location.hash.slice(1);
+  if(h&&TABS.indexOf(h)>=0)showTab(h);
+  window.addEventListener('hashchange',function(){
+    var h2=location.hash.slice(1);
+    if(h2&&TABS.indexOf(h2)>=0)showTab(h2);
+  });
+})();
+
+/* ---------- embed mode: ?emb=1&sec=SECTION_ID ---------- */
+(function(){
+  var p=new URLSearchParams(location.search);
+  if(!p.has('emb'))return;
+  document.documentElement.classList.add('emb');
+  var sec=p.get('sec');
+  var pg=p.get('pg');
+  if(sec){
+    /* overview sections (method / ia / hero …) */
+    document.querySelectorAll('.tabpanel').forEach(function(el){el.hidden=true;});
+    var ov=document.getElementById('tab-overview');
+    if(ov){
+      ov.hidden=false;
+      Array.from(ov.querySelectorAll('section.floor')).forEach(function(s){
+        s.style.display=(s.id===sec)?'':'none';
+      });
+    }
+    /* paginate a long section by a data-pgbreak marker among its direct children */
+    if(pg){
+      var host=document.getElementById(sec);
+      if(host){
+        var kids=Array.prototype.slice.call(host.children);
+        var brk=kids.findIndex(function(k){return k.hasAttribute('data-pgbreak');});
+        kids.forEach(function(k,i){
+          if(k.classList.contains('floor-hd')){k.style.display='none';return;} /* 标题由幻灯片自带，隐藏避免重复 */
+          if(brk<0){k.style.display='';return;}
+          var inPg1=i<brk;
+          k.style.display=((pg==='1'&&inPg1)||(pg!=='1'&&!inPg1))?'':'none';
+        });
+      }
+    }
+  }
+  /* edge-aware wheel forwarding: scroll inside iframe, but hand off at top/bottom */
+  window.addEventListener('wheel',function(e){
+    try{
+      if(!window.parent||window.parent===window)return;
+      var atTop=window.scrollY<=1&&e.deltaY<0;
+      var atBot=(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-2)&&e.deltaY>0;
+      if(atTop||atBot)window.parent.postMessage({__deckWheel:e.deltaY},'*');
+    }catch(_){}
+  },{passive:true});
+})();
 
 /* ---------- synthesis demos ---------- */
 function demoHero(){return `
@@ -2011,5 +2064,16 @@ document.getElementById('lb').onclick=()=>document.getElementById('lb').classLis
   svg.innerHTML=s;
 })();
 </script>
+<style>
+html.emb .topnav,html.emb .l1tabs,html.emb #netbg{display:none!important}
+html.emb body{padding-top:0!important}
+html.emb .wrap{padding:0 20px!important;max-width:none!important}
+html.emb .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
+html.emb .floor-hd h2{font-size:17px!important}
+html.emb .floor-sub{margin:2px 0 10px!important;font-size:12.5px!important}
+html.emb h3{margin-top:12px!important;margin-bottom:8px!important;font-size:13px!important}
+html.emb .ia-finds{grid-template-columns:repeat(3,1fr)!important}
+html.emb .method{font-size:12px!important;padding:10px 14px!important}
+</style>
 </body>
 </html>

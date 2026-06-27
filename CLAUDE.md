@@ -192,6 +192,14 @@ ud=$(mktemp -d); "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollba
   - **⚠ 放大字号必分两类(用户反复强调)**:① **「写在材料上的字」**(直接铺在页面底上的内容/标签:阶段条 `.lc-stages`、任务卡 `.op5-i b/small`、人侧 7 步 `.op7-i b`、触点分析 `.hs-ana`、问题对内容 `.qx-intent/.qx-c`、结论卡正文…)→ **该放大**(普遍 xs/sm→sm/body)。② **「组件/图表里的字」**(受组件尺寸约束:**矩阵 `.hm-*`**、DJFI 网格 `.djg`、指标网格 `.mxg`、时序图/架构图 iframe 内部 SVG、各种徽章/页码/轴标签)→ **不动**,放大就挤破/溢出。**「整体调大」≠ 全局 ramp×N**——要逐类区分,只放大第①类。(把硬编码 px 收敛到 xs 不会变大,因为 xs=9–11≈原值;真要大必须升一档到 sm/body。)**已按 skill「角色→档位」映射系统性过一遍**(正文/说明/场景→body):副标题 `.subttl`、信任落差三卡正文 `.dh-d`、总览映射卡 `.ovm-d`、指标页总结句 `.mxline` 等全升到 `--fs-body`;`.seq-note` xs→sm。**别再点哪改哪——新增页直接照角色映射给档**。
   - **第5页「问题对」**:每任务补「**同一意图**」横幅(取自 opknow 18 §2)+ 名称/意图/两问装进**半透明白卡 `.qtask`**(无描边);并去掉「CUDA 不放水、昇腾不刁难」。
   - **⚠ 收尾铁律(本人反复忘)**:每轮改完**必须**同步本文件 + commit + push,不要攒到最后;用户多次因没更新 CLAUDE.md 而不满。arch-d3 的改动**两份**(本仓 `reports/synthesis/arch-d3.html` + 源 `../opknow/20_human_ai_journey.html`)都要改并各自 commit/push。
+  - **🟢 2026-06-27 改版(防裁剪 + 分页 + 滚动 + 小标题规整)**:
+    - **m18 §s4 逐项定义从 3 组拆成 6 组(防裁剪)**:原 `?sec=s4&grp=touch|qual|costout` 三页里 ⑪ 综合那页(costout)最长被裁。`m18-embed.html` 给 11 个 `.mcard` 各加 `data-pg="a..f"`(a=①②官方触达 / b=⑤⑦二手&自带 / c=③④官方质量 / d=⑥二手质量 / e=⑧⑨⑩成本产出 / f=⑪综合),embedfix JS 支持 `grp=a..f` 按 `data-pg` 过滤(旧 touch/qual/costout 仍兼容)。deck 对应 6 页 `?sec=s4&grp=a..f`。**并删了 §s3 的「第三步/第四步」**(过三道关筛 + v1–v5.1 演化时间线)——s3 页太长。
+    - **时序图页拆两页**:原「时序图 + DJFI 文案」一页 → ① **时序图页**(仿第6页**图左 52% 卡 + 文右**布局,`seq-d3.html?hi=2` + 右栏三类转向触发 `.trig`)② **DJFI 方法论页**。
+    - **🔴 DJFI 方法论 = 嵌 `ascend-vs-nvidia-2026-06-13-visual.html` 的 `#method` 楼层、别手搓**:中途手搓过 native 版(`.thg/.thc/.bound/.calc`)被用户打回「丑、信息少」(又一次踩头号铁律),改回 iframe 嵌原页并**分两页**(`?emb=1&sec=method&pg=1|2`)。visual.html 新增 **embed 模式**:`?emb=1&sec=ID` 隐 topnav/l1tabs/netbg、只露该 `section.floor`;`&pg=N` 按 `#method` 里打了 `data-pgbreak="2"` 的「四、测量协议」节点分屏(pg1=理论依据+边界+5维指标体系 / pg2=测量协议+归一化+锚点表+算例+局限),并隐 `.floor-hd`(deck 头已有标题)。⚠ visual.html 不是副本、是源文件本身,直接改即可(无需 cp)。
+    - **责任归属拆 P1/P2(防裁剪)**:`ar-embed.html?sec=dept` 加 `&pg=1|2`,embedfix 按 `#deptgrid .deptcard` 前 3 / 后 3 切(P1=体验设计/资料/官网平台,P2=产品/研发工具链/社区运营)。
+    - **🔴 嵌入页滚动条兜底(防裁剪通用解,m18-embed + ar-embed 都已加)**:楼层仍超高时,embed `body` 改 `height:100vh + overflow-y:auto + display:block`(去掉旧的 `justify-content:center` 竖直居中——内容**默认顶部对齐、向下滚**;细滚动条默认淡、hover 才明显)。**`deckwheelfwd` 改成 edge-aware**:iframe 内未到顶/底时滚轮只滚自身,**仅滚到顶再上滚 / 到底再下滚才 `postMessage __deckWheel` 翻页**(否则一滚就翻页、看不全)。新增 embed 都照此。
+    - **小标题(`.subttl`)规整成「章节 · 「本页内容」」**:原各页 eyebrow 杂(有的写英文 `Per-item definitions`、有的写来源 `opknow 18 §4`)。统一为 `章节名 · 「本页一词概括」`(如 `AI 侧 · 指标体系 · 「综合置信度 ⑪」`、`人侧 · 基础体验 · 「责任归属 P1」`)。批量替换用 python 按内容匹配(终端中文显示乱码但读写正常,UTF-8 无 BOM)。
+    - **visual.html 顶部 tab 加 hash 定位**:`#overview/#op/#train/#comm/#synth` 直达对应 tab(`showTab` 写 `replaceState`、加载与 `hashchange` 读 hash)。
   - **待办**:① arch-d3 讲解按钮从 iframe 内移到父页外层(用户已要求,未做)② 左右联动——已明确「左侧每条检索线 = 跑一遍整张右侧流程图」(非一线对应一段),方式待定(候选:点左侧检索线→右图高亮该次走的路径/结局,D 受阻杜撰 vs M/X/O/L 收敛终答)。
 
 ## 协作规则
