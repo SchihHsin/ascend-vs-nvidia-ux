@@ -1135,82 +1135,132 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .chain b{color:var(--ink)}
   </style>
 
-  <!-- 灰底：步骤 1 分析（iframe 引主报告 #L1） -->
+  <!-- 步骤页两图对比 · 样式 -->
+  <style>
+    .stepfig{margin:0;display:flex;flex-direction:column;gap:.8vh;min-height:0;background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:14px;padding:1.3vh 1vw;overflow:hidden}
+    .stepfig figcaption{font-size:var(--fs-body);color:var(--ink);font-weight:700;display:flex;align-items:center;gap:.6em;flex:0 0 auto}
+    .stepfig .sd{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);color:#fff;border-radius:7px;padding:2px 9px}
+    .stepfig .sd.a{background:#C7000B}.stepfig .sd.n{background:#5a8a00}
+    .stepfig img{flex:1;min-height:0;width:100%;object-fit:contain;border-radius:9px;border:1px solid var(--line);background:#fff}
+  </style>
+  <!-- 灰底：步骤 1 两图对比（昇腾/NVIDIA） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">步骤 1 · 落地·找入口·选型：第一次来，找到「从哪开始开发」</span></div>
-        <div class="subttl">Step analysis · 该步触点逐一对照 NVIDIA（分数 · 差异分析 · 改进建议），引自基础体验报告</div>
+        <div class="subttl">昇腾 官网首页 vs NVIDIA 官网首页　·　昇腾 82 / NVIDIA 74（差值 +8）</div>
       </div>
       <div class="head-r">32/ 基础体验 · 步骤 1</div>
     </div>
-    <div class="body-area"><iframe src="ar-embed.html?sec=L1" title="step1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area" style="display:flex;flex-direction:column;gap:1.3vh">
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1.8vw">
+        <figure class="stepfig"><figcaption><span class="sd a">昇腾 82</span>昇腾 官网首页</figcaption><img src="step1-asc.png" alt="昇腾 昇腾 官网首页"></figure>
+        <figure class="stepfig"><figcaption><span class="sd n">NVIDIA 74</span>NVIDIA 官网首页</figcaption><img src="step1-nv.png" alt="NVIDIA NVIDIA 官网首页"></figure>
+      </div>
+      <div class="bridge" style="flex:0 0 auto">单站全包、首页即露开发入口；NVIDIA 品牌 + 开发者双站、入口分流。</div>
+    </div>
   </section>
-  <!-- 灰底：步骤 2 分析（iframe 引主报告 #L2） -->
+  <!-- 灰底：步骤 2 两图对比（昇腾/NVIDIA） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">步骤 2 · 上手引导：看清「要怎么做」（算子 hub / CUDA 页）</span></div>
-        <div class="subttl">Step analysis · 该步触点逐一对照 NVIDIA（分数 · 差异分析 · 改进建议），引自基础体验报告</div>
+        <div class="brand"><span class="ttl">步骤 2 · 上手引导：看清「要怎么做」</span></div>
+        <div class="subttl">昇腾 学习 / 教程 vs NVIDIA 教程　·　昇腾 87 / NVIDIA 93（差值 −6）</div>
       </div>
       <div class="head-r">33/ 基础体验 · 步骤 2</div>
     </div>
-    <div class="body-area"><iframe src="ar-embed.html?sec=L2" title="step2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area" style="display:flex;flex-direction:column;gap:1.3vh">
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1.8vw">
+        <figure class="stepfig"><figcaption><span class="sd a">昇腾 87</span>昇腾 学习 / 教程</figcaption><img src="step2-asc.png" alt="昇腾 昇腾 学习 / 教程"></figure>
+        <figure class="stepfig"><figcaption><span class="sd n">NVIDIA 93</span>NVIDIA 教程</figcaption><img src="step2-nv.png" alt="NVIDIA NVIDIA 教程"></figure>
+      </div>
+      <div class="bridge" style="flex:0 0 auto">两侧均较完善；NVIDIA 教程体系更系统、学习路径更清。</div>
+    </div>
   </section>
-  <!-- 灰底：步骤 3 分析（iframe 引主报告 #L3） -->
+  <!-- 灰底：步骤 3 两图对比（昇腾/NVIDIA） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">步骤 3 · 配环境·拿 SDK：装 CANN / CUDA Toolkit</span></div>
-        <div class="subttl">Step analysis · 该步触点逐一对照 NVIDIA（分数 · 差异分析 · 改进建议），引自基础体验报告</div>
+        <div class="subttl">昇腾 资源下载 vs NVIDIA CUDA 下载　·　昇腾 21 / NVIDIA 87（差值 −66）</div>
       </div>
       <div class="head-r">34/ 基础体验 · 步骤 3</div>
     </div>
-    <div class="body-area"><iframe src="ar-embed.html?sec=L3" title="step3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area" style="display:flex;flex-direction:column;gap:1.3vh">
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1.8vw">
+        <figure class="stepfig"><figcaption><span class="sd a">昇腾 21</span>昇腾 资源下载</figcaption><img src="step3-asc.png" alt="昇腾 昇腾 资源下载"></figure>
+        <figure class="stepfig"><figcaption><span class="sd n">NVIDIA 87</span>NVIDIA CUDA 下载</figcaption><img src="step3-nv.png" alt="NVIDIA NVIDIA CUDA 下载"></figure>
+      </div>
+      <div class="bridge" style="flex:0 0 auto">最大谷底：昇腾下载前要登录华为账号 + 多版本号散乱，最易致用户流失。</div>
+    </div>
   </section>
-  <!-- 灰底：步骤 4 分析（iframe 引主报告 #L4） -->
+  <!-- 灰底：步骤 4 两图对比（昇腾/NVIDIA） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">步骤 4 · 动手写·查文档：写第一个算子，边写边查参考</span></div>
-        <div class="subttl">Step analysis · 该步触点逐一对照 NVIDIA（分数 · 差异分析 · 改进建议），引自基础体验报告</div>
+        <div class="subttl">昇腾 文档中心 vs NVIDIA Docs　·　昇腾 81 / NVIDIA 83（差值 −2）</div>
       </div>
       <div class="head-r">35/ 基础体验 · 步骤 4</div>
     </div>
-    <div class="body-area"><iframe src="ar-embed.html?sec=L4" title="step4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area" style="display:flex;flex-direction:column;gap:1.3vh">
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1.8vw">
+        <figure class="stepfig"><figcaption><span class="sd a">昇腾 81</span>昇腾 文档中心</figcaption><img src="step4-asc.png" alt="昇腾 昇腾 文档中心"></figure>
+        <figure class="stepfig"><figcaption><span class="sd n">NVIDIA 83</span>NVIDIA Docs</figcaption><img src="step4-nv.png" alt="NVIDIA NVIDIA Docs"></figure>
+      </div>
+      <div class="bridge" style="flex:0 0 auto">文档搜索框约 100 字上限、长报错被截断；按产品线分版定位尚算准确。</div>
+    </div>
   </section>
-  <!-- 灰底：步骤 5 分析（iframe 引主报告 #L5） -->
+  <!-- 灰底：步骤 5 两图对比（昇腾/NVIDIA） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">步骤 5 · 编译跑通：用工具链编译 → 第一次跑成功</span></div>
-        <div class="subttl">Step analysis · 该步触点逐一对照 NVIDIA（分数 · 差异分析 · 改进建议），引自基础体验报告</div>
+        <div class="subttl">昇腾 在线代码 / 样例 vs NVIDIA Samples　·　昇腾 82 / NVIDIA 90（差值 −8）</div>
       </div>
       <div class="head-r">36/ 基础体验 · 步骤 5</div>
     </div>
-    <div class="body-area"><iframe src="ar-embed.html?sec=L5" title="step5" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area" style="display:flex;flex-direction:column;gap:1.3vh">
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1.8vw">
+        <figure class="stepfig"><figcaption><span class="sd a">昇腾 82</span>昇腾 在线代码 / 样例</figcaption><img src="step5-asc.png" alt="昇腾 昇腾 在线代码 / 样例"></figure>
+        <figure class="stepfig"><figcaption><span class="sd n">NVIDIA 90</span>NVIDIA Samples</figcaption><img src="step5-nv.png" alt="NVIDIA NVIDIA Samples"></figure>
+      </div>
+      <div class="bridge" style="flex:0 0 auto">NVIDIA samples 一键可跑；昇腾在线开发（在线 IDE）是长板，但搜索引擎优化弱、入口埋深。</div>
+    </div>
   </section>
-  <!-- 灰底：步骤 6 分析（iframe 引主报告 #L6） -->
+  <!-- 灰底：步骤 6 两图对比（昇腾/NVIDIA） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">步骤 6 · 调试·求助：出错怎么查、卡住去哪问</span></div>
-        <div class="subttl">Step analysis · 该步触点逐一对照 NVIDIA（分数 · 差异分析 · 改进建议），引自基础体验报告</div>
+        <div class="subttl">昇腾 开发者论坛 vs NVIDIA Forum　·　昇腾 73 / NVIDIA 88（差值 −15）</div>
       </div>
       <div class="head-r">37/ 基础体验 · 步骤 6</div>
     </div>
-    <div class="body-area"><iframe src="ar-embed.html?sec=L6" title="step6" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area" style="display:flex;flex-direction:column;gap:1.3vh">
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1.8vw">
+        <figure class="stepfig"><figcaption><span class="sd a">昇腾 73</span>昇腾 开发者论坛</figcaption><img src="step6-asc.png" alt="昇腾 昇腾 开发者论坛"></figure>
+        <figure class="stepfig"><figcaption><span class="sd n">NVIDIA 88</span>NVIDIA Forum</figcaption><img src="step6-nv.png" alt="NVIDIA NVIDIA Forum"></figure>
+      </div>
+      <div class="bridge" style="flex:0 0 auto">论坛按产品线分版 + AscendFAQ 自助尚可；但发帖需登录华为账号、门槛偏高。</div>
+    </div>
   </section>
-  <!-- 灰底：步骤 7 分析（iframe 引主报告 #L7） -->
+  <!-- 灰底：步骤 7 两图对比（昇腾/NVIDIA） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">步骤 7 · 进阶·跟生态：有经验后：博客 / 认证 / 模型库 / 社区</span></div>
-        <div class="subttl">Step analysis · 该步触点逐一对照 NVIDIA（分数 · 差异分析 · 改进建议），引自基础体验报告</div>
+        <div class="subttl">昇腾 博客 / 案例 vs NVIDIA Blog　·　昇腾 75 / NVIDIA 92（差值 −17）</div>
       </div>
       <div class="head-r">38/ 基础体验 · 步骤 7</div>
     </div>
-    <div class="body-area"><iframe src="ar-embed.html?sec=L7" title="step7" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area" style="display:flex;flex-direction:column;gap:1.3vh">
+      <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1.8vw">
+        <figure class="stepfig"><figcaption><span class="sd a">昇腾 75</span>昇腾 博客 / 案例</figcaption><img src="step7-asc.png" alt="昇腾 昇腾 博客 / 案例"></figure>
+        <figure class="stepfig"><figcaption><span class="sd n">NVIDIA 92</span>NVIDIA Blog</figcaption><img src="step7-nv.png" alt="NVIDIA NVIDIA Blog"></figure>
+      </div>
+      <div class="bridge" style="flex:0 0 auto">NVIDIA 博客搜索引擎优化强、海外可达；昇腾内容搜索引擎优化偏弱、入口埋二级。</div>
+    </div>
   </section>
 
   <!-- 13 灰底：iframe 引主报告 #j1 -->
