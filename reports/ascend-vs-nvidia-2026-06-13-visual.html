@@ -519,13 +519,13 @@ a{color:inherit;text-decoration:none}
       <div class="ia-find"><div class="ia-find-h">Time-to-First-Run</div>开发者关系(DevRel)通用黄金指标——从落地到第一次成功运行的成本,衡量上手速度。</div>
       <div class="ia-find"><div class="ia-find-h">Quiñones &amp; Rusu(2017)</div>《如何构建可用性启发式》系统综述——本框架领域指标的<b>构建方法论依据</b>。</div>
     </div>
-    <div class="method" style="margin-top:18px">
+    <div class="method" style="margin-top:18px" data-pgstart="2">
       <b>二、评估对象与边界(精确界定,不越界)</b><br>
       <b>测量:</b>开发者门户中<b>可观测、可计数的旅程摩擦</b>——点击成本、准入门槛、决策负荷、内容可执行性、可发现性。<br>
       <b>不纳入计算:</b>视觉美感、文案质量、主观"清晰度"感受、品牌好感——这些无法在不引入判断的前提下量化,故<b>不计入分数</b>,仅作不计分的"定性观察"另列。<br>
       <b>适用范围:</b>PC 端 Web 开发者门户;移动 SDK / IDE 插件 / 端侧部署需各自扩展指标层。
     </div>
-    <h3 style="margin:22px 0 12px;font-size:16px;color:var(--ink)" data-pgstart="2">三、指标体系(5 维度 · 全部可观测)</h3>
+    <h3 style="margin:22px 0 12px;font-size:16px;color:var(--ink)" data-pgstart="3">三、指标体系(5 维度 · 全部可观测)</h3>
     <div class="ia-finds">
       <div class="ia-find"><div class="ia-find-h">A · 效率与反馈循环</div>到达目标点击/跳转数 · 完成总步骤数 · 上下文切换数 · <b>Time-to-First-Run</b>。<span style="color:var(--g6)">依据:ISO 效率 / NN/g 交互成本 / DevEx</span></div>
       <div class="ia-find"><div class="ia-find-h">B · 认知负荷</div>版本/平台选择项数 · 必做决策点数 · 目标导航深度(IA 层级)。<span style="color:var(--g6)">依据:Sweller / Hick 定律 / DevEx</span></div>
@@ -533,11 +533,11 @@ a{color:inherit;text-decoration:none}
       <div class="ia-find"><div class="ia-find-h">D · 内容可执行性</div>代码示例可否复制即运行(0/1) · 快速入门有无完整可运行代码(0/1) · 文档时效。<span style="color:var(--g6)">依据:Nielsen 帮助与文档 / DevEx</span></div>
       <div class="ia-find"><div class="ia-find-h">E · 可发现性</div>核心关键词搜索命中率 · 路径死链/404 数 · 关键入口可达性。<span style="color:var(--g6)">依据:Nielsen 识别而非回忆</span></div>
     </div>
-    <div class="method" style="margin-top:18px">
+    <div class="method" style="margin-top:18px" data-pgstart="4">
       <b>四、执行 · 测量协议(保证可复现)</b><br>
       ① <b>设备/视口</b>:桌面 1440×900,Chrome 最新稳定版;② <b>账号状态</b>:未登录态进入(模拟首次开发者);③ <b>计数规则</b>:点击 = 一次有效交互,步骤 = 用户必须完成的离散动作,同一动作不重复计;④ <b>取证</b>:每个指标值附对应截图为证;⑤ <b>时点</b>:记录评估日期与页面版本;⑥ <b>缺测处理</b>:无法实测的指标标注"缺测"并<b>排除出计算</b>,不以估值填充。
     </div>
-    <div class="method" style="margin-top:12px">
+    <div class="method" style="margin-top:12px" data-pgstart="5">
       <b>五、执行 · 归一化与计算(全公式,无逐项判断)</b><br>
       <b>归一化</b>(测量值 → 0–100,分越高 = 摩擦越小):<br>
       ・数值型:<code>分 = ( worst − 实测值 ) ÷ ( worst − best ) × 100</code>,截断到 0–100;<br>
@@ -546,9 +546,9 @@ a{color:inherit;text-decoration:none}
       <b>合成</b>:维度分 = 维度内指标分算术平均;触点分 = 5 维度分算术平均(<b>等权,去除权重主观</b>);步骤分 / 总分 = 触点分算术平均。<br>
       <b>敏感性分析</b>:另给"按 DevEx 维度加权"的备选结果,验证主结论在不同权重下是否稳定。
     </div>
-    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)" data-pgstart="3">六、锚点总表(全部公开 · 对两边一视同仁)</h3>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)" data-pgstart="6">六、锚点总表(全部公开 · 对两边一视同仁)</h3>
     <div id="djfiRules"></div>
-    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">七、算例(触点 4.3 · SDK 下载)—— 由引擎实时计算</h3>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)" data-pgstart="7">七、算例(触点 4.3 · SDK 下载)—— 由引擎实时计算</h3>
     <div id="djfiExample"></div>
     <p class="floor-sub" style="margin-top:8px">这张表不是手写、而是页面加载时由公式现算;每个触点卡底部都能展开同样的「DJFI 实测明细」,数字与触点分严格一致——给定测量表,任何人重算得同一结果。<b>样板已铺 8 个触点(4.3 / 4.2 / 4.1 / 3.2 / 1.1b / T2 / T4 / T5),其余触点暂仍为同维度手工分,正逐步补齐实测。</b></p>
     <div class="method" style="margin-top:14px">
@@ -1854,7 +1854,9 @@ renderDjfiRules();renderDjfiExample();updateCover();
     var ov=document.getElementById('tab-overview');
     if(ov){
       ov.hidden=false;
-      Array.from(ov.querySelectorAll('section.floor')).forEach(function(s){
+      /* ⚠ 用 .floor 不能用 section.floor——#hero 是 <header class="hero floor">、IA 才是 section，
+         漏掉 header 会让「昇腾vs英伟达 均分/取证」那块 hero 跟着露出来 */
+      Array.from(ov.querySelectorAll('.floor')).forEach(function(s){
         s.style.display=(s.id===sec)?'':'none';
       });
     }
