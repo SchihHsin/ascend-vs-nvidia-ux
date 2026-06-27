@@ -348,7 +348,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="cv-center">
         <div class="cv-kicker">Developer Experience &#8853; LLM Usability · 昇腾社区 · 2026</div>
         <div class="cv-sub">昇腾社区可用性 · 双视角分析<br/>AI 侧「内容可用性」&times; 人侧「基础体验」</div>
-        <div class="cv-lead">两套实测合一：人侧「基础体验」—— 开发者从逛官网到跑通的旅程；AI 侧「内容可用性」—— 业界大模型能否搜到 / 抓到 / 用对昇腾社区知识。</div>
+        <div class="cv-lead">两套实测合一：人侧「基础体验」—— 开发者从浏览官网到跑通的旅程；AI 侧「内容可用性」—— 业界大模型能否搜到 / 抓到 / 用对昇腾社区知识。</div>
       </div>
       <div class="cv-bot">
         <div class="cv-ucd">UX 竞品分析 &middot; opknow 可用性实测</div>
@@ -450,21 +450,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
-        <div class="cmp-h"><span class="hk">How to read</span>怎么看这张图</div>
-        <p class="cmp-desc">这是开发者干完<b>一次「写自定义算子」</b>的全过程，从上到下按<b>时间</b>推进。图里有两个「找知识」的主体——<b>开发者本人</b>，和被他派去查资料、写代码的 <b>AI 助手</b>。</p>
+        <div class="cmp-h"><span class="hk">How to read</span>如何阅读本图</div>
+        <p class="cmp-desc">这是开发者完成<b>一次「自定义算子开发」</b>的全过程，自上而下按<b>时间</b>推进。图中有两个「获取知识」的主体——<b>开发者本人</b>，以及受其委托查阅资料、编写代码的 <b>AI 助手</b>。</p>
         <ul class="seq-guide">
           <li><b>竖线＝参与方</b>：用户 · AI 助手 · 昇腾官方文档 · 第三方平台（CSDN / 博客）· AI 自带知识。</li>
-          <li><b>横箭头＝一次来回</b>：谁向谁要信息、抓到还是没抓到。</li>
-          <li><b>怎么读</b>：用户把需求交给 AI → AI 分头去 官方 / 第三方 / 自带知识 里找 → 拿回来拼答案，不够就再找一轮。一次开发这样<b>来回 5 次检索</b>。</li>
+          <li><b>横箭头＝一次往返</b>：由谁向谁请求信息、是否取回。</li>
+          <li><b>读法</b>：用户将需求交给 AI → AI 分别从 官方 / 第三方 / 自带知识 检索 → 回灌后组织答案，证据不足则再检索一轮。一次开发共发起<b> 5 次检索</b>。</li>
         </ul>
         <div class="ov-map">
           <div class="ovm">
             <div class="ovm-h"><i style="background:#6B5BA8"></i>AI ↔ 昇腾 / 第三方平台</div>
-            <div class="ovm-d">AI 每次<b>抓没抓到、够不够用</b> → 后面用「可用性矩阵」打分。</div>
+            <div class="ovm-d">AI 每次<b>能否取回、是否够用</b> → 后续以「可用性矩阵」评分。</div>
           </div>
           <div class="ovm">
             <div class="ovm-h"><i style="background:#2f3d63"></i>人 ↔ 昇腾社区</div>
-            <div class="ovm-d">开发者本人逛官网的<b>直接体验</b> → 后面做触点评分。</div>
+            <div class="ovm-d">开发者本人浏览官网的<b>直接体验</b> → 后续做触点评分。</div>
           </div>
         </div>
         <div class="seq-note">点图右上「按关系讲解」高亮某条线 · 悬浮节点看每步细节</div>
@@ -522,7 +522,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 是如何完成这几次检索的：找不到就换个方向，证据不足就再检索一轮</span></div>
+        <div class="brand"><span class="ttl">AI 如何完成这几次检索：检索受阻则转换方向，证据不足则再检索一轮</span></div>
         <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">04/ AI · 执行架构<br/>opknow 20</div>
@@ -530,13 +530,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 64%;height:100%;display:flex;flex-direction:column;gap:1vh;padding:1.3vh 1.1vw;overflow:hidden">
         <iframe src="arch-d3.html" title="Agent 循环架构（悬浮看每个环节）" style="flex:1;min-width:0;min-height:0;width:100%;border:0;background:transparent"></iframe>
-        <div class="cmp-cap" style="text-align:center;color:var(--ink-3)">抓不到就转向、不够就再检索 — <b style="color:var(--ink-2)">悬浮任意环节看它在做什么</b>（opknow 20 · 公开 Messages API 示范实现）</div>
+        <div class="cmp-cap" style="text-align:center;color:var(--ink-3)">受阻则转向、不足则再检索 — <b style="color:var(--ink-2)">悬浮任意环节查看其职责</b>（opknow 20 · 公开 Messages API 示范实现）</div>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.4vh">
         <div class="cmp-h"><span class="hk">How it runs</span>如何运行</div>
-        <p class="cmp-desc">把一个开发问题拆成<b>子目标</b>，逐个判断「要不要检索」；用 <b>web_search / web_fetch</b> 抓<b>官方站 + 第三方平台 + 自带知识</b>三路，回灌后<b>研判证据是否充分</b>，再决定收敛还是继续。</p>
-        <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">三种收场</span>够了 / 不够 / 不知道</div>
-        <p class="cmp-desc"><b>① 收敛</b>：证据充分 → 给出带出处的答案。<br/><b>② 遇阻回路</b>：抓取为空或证据不足 → 换 URL / 换平台 / 换关键词，↺ 再检索一轮。<br/><b style="color:#C7000B">③ 凭记忆杜撰</b>：三路都弱、又无法可靠识别自身不确定时，模型会编出看似正确、实则有误的答案。</p>
+        <p class="cmp-desc">将一个开发问题拆成<b>子目标</b>，逐个判断<b>是否需要检索</b>；用 <b>web_search / web_fetch</b> 检索<b>官方站 + 第三方平台 + 自带知识</b>三路，回灌后<b>研判证据是否充分</b>，据此决定收敛或继续。</p>
+        <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">三种结局</span>证据充分 / 不足 / 缺失</div>
+        <p class="cmp-desc"><b>① 收敛</b>：证据充分 → 给出带出处的答案。<br/><b>② 遇阻回路</b>：抓取为空或证据不足 → 换 URL / 换平台 / 换关键词，↺ 再检索一轮。<br/><b style="color:#C7000B">③ 凭记忆杜撰</b>：三路均弱、又无法可靠识别自身不确定时，模型会生成看似正确、实则有误的答案。</p>
       </div>
     </div>
   </section>
@@ -545,7 +545,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 可用性怎么测：同一套开发任务，在 CANN / 昇腾 与 CUDA / 英伟达 上各做一遍</span></div>
+        <div class="brand"><span class="ttl">AI 可用性怎么测：同一套开发任务，在 CANN / 昇腾 与 CUDA / 英伟达 上各实测一遍</span></div>
         <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">05/ AI 可用性 · 方法</div>
@@ -556,7 +556,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
         <div class="cmp-h"><span class="hk">Tasks</span>这几个检索任务是怎么定义的</div>
-        <p class="cmp-desc">把开发者的真实工作流拆成 <b>7 个典型场景</b>，挑出最难、最依赖查文档的 <b>「算子开发」</b>，再拆成开发者真会一个个去查的 <b>5 个子任务</b>——每个子任务就是一次「带着问题去检索」，正好对应时序图里的 <b>5 次检索</b>。</p>
+        <p class="cmp-desc">将开发者的真实工作流拆成 <b>7 个典型场景</b>，选取最难、最依赖查阅文档的 <b>「算子开发」</b>，再细分为开发者逐项检索的 <b>5 个子任务</b>——每个子任务即一次「携问题检索」，对应时序图中的 <b>5 次检索</b>。</p>
         <div class="lc-stages">装环境 · <b style="color:var(--accent)">开发算子</b> · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
         <div class="op5">
           <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
@@ -565,7 +565,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="op5-i"><span class="c">4</span><b>注册集成</b><small>接 PyTorch</small></div>
           <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">同一套 5 个任务，在 <b style="color:#5a8a00">CUDA / 英伟达</b> 与 <b style="color:#C7000B">CANN / 昇腾</b> 上各<b>真实做一遍</b>，差异才能归到「生态」、而非「题目难易」。</div>
+        <div class="bridge" style="margin-top:.2vh">同一套 5 个任务，在 <b style="color:#5a8a00">CUDA / 英伟达</b> 与 <b style="color:#C7000B">CANN / 昇腾</b> 上各<b>实测一遍</b>，差异方可归于「生态」、而非「题目难度」。</div>
       </div>
     </div>
   </section>
@@ -574,7 +574,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">同样的需求，该怎么问：5 个开发问题，在 CANN / 昇腾 与 CUDA / 英伟达 上各问一遍</span></div>
+        <div class="brand"><span class="ttl">同样的需求，如何提问：5 个开发问题，在 CANN / 昇腾 与 CUDA / 英伟达 上各提问一遍</span></div>
         <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">06/ 问题对 · 怎么问</div>
@@ -664,18 +664,18 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">这套指标不是拍脑袋：每一维都对应成熟的检索 / 信息架构概念，且可复现</span></div>
+        <div class="brand"><span class="ttl">本指标体系并非主观臆定：每一维都对应成熟的检索 / 信息架构概念，且可复现</span></div>
         <div class="subttl">Why it holds · 每一维都有经典文献 / 理论支撑 + 公式可复现——回应「凭什么这么测」</div>
       </div>
       <div class="head-r">07/ AI 指标 · 理论依据</div>
     </div>
     <div class="body-area">
       <div class="auth">
-        <div class="au"><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div><div class="au-d">同一套任务在 <b>CUDA / 英伟达</b> 与 <b>CANN / 昇腾</b> 各真实跑一遍，差异归因到「生态」而非「题目难易」。</div><div class="au-src">依据 · <b>R. A. Fisher</b>《实验设计 The Design of Experiments》1935</div></div>
+        <div class="au"><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div><div class="au-d">同一套任务在 <b>CUDA / 英伟达</b> 与 <b>CANN / 昇腾</b> 各实测一遍，差异归因于「生态」而非「题目难度」。</div><div class="au-src">依据 · <b>R. A. Fisher</b>《实验设计 The Design of Experiments》1935</div></div>
         <div class="au"><span class="au-tag">拆解框架</span><div class="au-h">知识价值链<span class="en">information foraging</span></div><div class="au-d">知识要「<b>被找到 → 被取到 → 被用上</b>」，任一关断答案就打折（触达→质量→成本→产出）。</div><div class="au-src">依据 · <b>Pirolli &amp; Card</b> “Information Foraging” · Psychological Review 1999</div></div>
         <div class="au"><span class="au-tag">触达维度</span><div class="au-h">可发现 / 可取回<span class="en">findability / retrievability</span></div><div class="au-d">「能不能被找到、能不能取回正文」是<b>信息架构</b>与<b>检索系统评估</b>里既有的度量维度，不是自创。</div><div class="au-src">依据 · <b>Morville</b>《Ambient Findability》2005 ／ <b>Azzopardi &amp; Vinay</b> “Retrievability” · CIKM 2008</div></div>
         <div class="au"><span class="au-tag">自带知识</span><div class="au-h">参数化知识<span class="en">parametric knowledge</span></div><div class="au-d">模型不检索也能答的参数化知识，是 <b>RAG</b> 评估里公认的一条独立来源，故单列一项、按知识截止 gap 客观罚分。</div><div class="au-src">依据 · <b>Lewis et al.</b> RAG · NeurIPS 2020 ／ <b>Petroni et al.</b> “LMs as Knowledge Bases?” · EMNLP 2019</div></div>
-        <div class="au"><span class="au-tag">渠道合成</span><div class="au-h">噪声-OR 合成<span class="en">noisy-OR · 概率图模型</span></div><div class="au-d">官方 / 二手 / 自带 多条<b>独立渠道</b>，任一达标即可作答、全断才崩；用 noisy-OR 合成、而非随手加权。</div><div class="au-src">依据 · <b>Judea Pearl</b>《Probabilistic Reasoning in Intelligent Systems》1988</div></div>
+        <div class="au"><span class="au-tag">渠道合成</span><div class="au-h">噪声-OR 合成<span class="en">noisy-OR · 概率图模型</span></div><div class="au-d">官方 / 二手 / 自带 多条<b>独立渠道</b>，任一达标即可作答、全部受阻则失败；用 noisy-OR 合成、而非简单加权。</div><div class="au-src">依据 · <b>Judea Pearl</b>《Probabilistic Reasoning in Intelligent Systems》1988</div></div>
         <div class="au"><span class="au-tag">可复现</span><div class="au-h">公式可重跑<span class="en">reproducibility</span></div><div class="au-d">每格分由<b>实测观测代入公式</b>算出、一键 <code>--diff</code> 可重跑核对，非主观研判，结论可被第三方复现。</div><div class="au-src">依据 · <b>Pineau et al.</b> ML 可复现性清单 · NeurIPS 2019</div></div>
       </div>
     </div>
@@ -836,7 +836,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="p7"><div class="p7top"><span class="p7n">4</span></div><div class="p7h">官方 SPA 抓不到 → 收窄成单点</div><div class="p7d">「全站抓不到」被实测推翻：仅 D（自定义算子）核心 how-to 真抓不到，其余 SSR 可抓——是补一个子树、不是重做网站。</div><div class="p7e">②可抓取性 26 格仅 D＝2</div></div>
         <div class="p7"><div class="p7top"><span class="p7n">5</span></div><div class="p7h">抓得到 ≠ 够用</div><div class="p7d">错误码命中专属页、也抓得到，但内容是泛化兜底（原因栏 N/A、只有 2 条通用建议），与「抓不到」是两种正交失败。</div><div class="p7e">E：②4 但 ③2，综合 .55 倒数第二</div></div>
         <div class="p7"><div class="p7top"><span class="p7n">6</span></div><div class="p7h">采纳漏斗：越深越塌</div><div class="p7d">上手侧（迁移 / 安装 / 部署）接近 CUDA，越往算子自研越单调下滑；自定义算子 D 综合 .41 是全栈深谷。</div><div class="p7e">三组均值 .77 → .74 → .67</div></div>
-        <div class="p7"><div class="p7top"><span class="p7n">7</span></div><div class="p7h">检索成本尖刺</div><div class="p7d">多数任务成本正常，但个别任务一次抓取失败就把成本打穿，Agent 过程中「看起来在瞎逛」、响应慢。</div><div class="p7e">⑧检索成本 D / K / O ＝ 1</div></div>
+        <div class="p7"><div class="p7top"><span class="p7n">7</span></div><div class="p7h">检索成本尖刺</div><div class="p7d">多数任务成本正常，但个别任务一次抓取失败就把成本打穿，Agent 过程中「看似无目的检索」、响应慢。</div><div class="p7e">⑧检索成本 D / K / O ＝ 1</div></div>
         <div class="p7 sum"><div class="sh">一句话收口</div><div class="st">结构性缺口＝<b>① 版本混乱</b> ＋ <b>② 自带 / 二手双薄</b>（检索没兜底）＋ <b>③ 深水区单点塌方</b>（自定义算子）。上手侧已接近 CUDA，优先级按此排，而非泛泛「改进文档」。</div></div>
       </div>
     </div>
@@ -995,7 +995,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <script>
     (function(){
-      var HS=[{a:'step1-asc.png',n:'step1-nv.png',ac:'昇腾 官网首页',nc:'NVIDIA 官网首页',sa:82,sn:74,t:'单站全包、首页即露开发入口（不逊色）；NVIDIA 品牌 + 开发者双站、入口分流。'},{a:'step2-asc.png',n:'step2-nv.png',ac:'昇腾 学习 / 教程',nc:'NVIDIA 教程',sa:87,sn:93,t:'两边都厚；NVIDIA 教程体系更系统、学习路径更清。'},{a:'step3-asc.png',n:'step3-nv.png',ac:'昇腾 资源下载',nc:'NVIDIA CUDA 下载',sa:21,sn:87,t:'最大谷底：昇腾下载前要登录华为账号 + 多版本号散乱，最劝退。'},{a:'step4-asc.png',n:'step4-nv.png',ac:'昇腾 文档中心',nc:'NVIDIA Docs',sa:81,sn:83,t:'文档搜索框约 100 字上限、长报错被截断；按产品线分版定位还算准。'},{a:'step5-asc.png',n:'step5-nv.png',ac:'昇腾 在线代码 / 样例',nc:'NVIDIA Samples',sa:82,sn:90,t:'NVIDIA samples 一键可跑；昇腾在线开发(在线 IDE)是长板，但 SEO 弱、入口埋深。'},{a:'step6-asc.png',n:'step6-nv.png',ac:'昇腾 开发者论坛',nc:'NVIDIA Forum',sa:73,sn:88,t:'论坛按产品线分版 + AscendFAQ 自助不错；但发帖需登录华为账号、门槛偏高。'},{a:'step7-asc.png',n:'step7-nv.png',ac:'昇腾 博客 / 案例',nc:'NVIDIA Blog',sa:75,sn:92,t:'NVIDIA 博客 SEO 强、海外可达；昇腾内容 SEO 偏弱、入口埋二级。'}];
+      var HS=[{a:'step1-asc.png',n:'step1-nv.png',ac:'昇腾 官网首页',nc:'NVIDIA 官网首页',sa:82,sn:74,t:'单站全包、首页即露开发入口（不逊色）；NVIDIA 品牌 + 开发者双站、入口分流。'},{a:'step2-asc.png',n:'step2-nv.png',ac:'昇腾 学习 / 教程',nc:'NVIDIA 教程',sa:87,sn:93,t:'两侧均较完善；NVIDIA 教程体系更系统、学习路径更清。'},{a:'step3-asc.png',n:'step3-nv.png',ac:'昇腾 资源下载',nc:'NVIDIA CUDA 下载',sa:21,sn:87,t:'最大谷底：昇腾下载前要登录华为账号 + 多版本号散乱，最易致用户流失。'},{a:'step4-asc.png',n:'step4-nv.png',ac:'昇腾 文档中心',nc:'NVIDIA Docs',sa:81,sn:83,t:'文档搜索框约 100 字上限、长报错被截断；按产品线分版定位尚算准确。'},{a:'step5-asc.png',n:'step5-nv.png',ac:'昇腾 在线代码 / 样例',nc:'NVIDIA Samples',sa:82,sn:90,t:'NVIDIA samples 一键可跑；昇腾在线开发(在线 IDE)是长板，但 SEO 弱、入口埋深。'},{a:'step6-asc.png',n:'step6-nv.png',ac:'昇腾 开发者论坛',nc:'NVIDIA Forum',sa:73,sn:88,t:'论坛按产品线分版 + AscendFAQ 自助尚可；但发帖需登录华为账号、门槛偏高。'},{a:'step7-asc.png',n:'step7-nv.png',ac:'昇腾 博客 / 案例',nc:'NVIDIA Blog',sa:75,sn:92,t:'NVIDIA 博客 SEO 强、海外可达；昇腾内容 SEO 偏弱、入口埋二级。'}];
       function sc(s){return s<40?'#E60012':s<70?'#E8A317':'#23A06A';}
       window.setHStep=function(k){var d=HS[k];if(!d)return;
         document.getElementById('hsAsc').src=d.a;document.getElementById('hsNv').src=d.n;
@@ -1169,7 +1169,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cc ai">
           <span class="cc-tag">AI 侧</span>
           <div class="cc-h">外部大模型对昇腾知识：抓不到、对不准、易杜撰</div>
-          <div class="cc-d">官方核心页为 SPA、<b>抓取为空</b>；版本号散乱、无权威当前版；深处<b>自带知识薄</b>。三关全弱时模型无法识别自身不知道，<b>凭记忆杜撰</b>（看似正确、实则有误）。</div>
+          <div class="cc-d">官方核心页为 SPA、<b>抓取为空</b>；版本号散乱、无权威当前版；深处<b>自带知识薄</b>。三关全弱时模型无法可靠识别自身不确定，<b>凭记忆杜撰</b>（看似正确、实则有误）。</div>
           <div class="cc-ev"><span>矩阵 写kernel .41</span><span>架构图末拍·杜撰</span><span>SO 2025 66% 被坑</span><span>一次开发 5 次检索</span></div>
         </div>
         <div class="cc hu">
