@@ -476,7 +476,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .lc-stages{font-family:'JetBrains Mono';font-size:var(--fs-body);color:var(--ink-2);background:rgba(0,0,0,.035);border-radius:8px;padding:.9vh 1vw;text-align:center;letter-spacing:.01em}
     .op5{display:grid;grid-template-columns:repeat(5,1fr);gap:.7vw}
     .op5-i{display:flex;flex-direction:column;align-items:center;gap:.25em;text-align:center;background:rgba(91,91,214,.05);border:1px solid rgba(91,91,214,.18);border-radius:10px;padding:1.4vh .3vw}
-    .op5-i .c{width:28px;height:28px;border-radius:7px;background:var(--g-purple);color:#fff;font-family:'JetBrains Mono';font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+    .op5-i .c{width:21px;height:21px;border-radius:6px;background:var(--accent-soft);color:var(--accent);font-family:'JetBrains Mono';font-weight:800;display:flex;align-items:center;justify-content:center;font-size:12px}
     .op5-i b{font-size:var(--fs-body);color:var(--ink)}.op5-i small{font-size:var(--fs-sm);color:var(--ink-3)}
     .qpx{display:flex;flex-direction:column;gap:.7vh}
     .qpx .qhead{display:grid;grid-template-columns:1fr 1fr;gap:.8vw;padding:0 1.1vw}
@@ -545,7 +545,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 可用性怎么测：同一套开发任务，在昇腾和 CUDA 上各做一遍</span></div>
+        <div class="brand"><span class="ttl">AI 可用性怎么测：同一套开发任务，在 CANN / 昇腾 与 CUDA / 英伟达 上各做一遍</span></div>
         <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">05/ AI 可用性 · 方法</div>
@@ -556,7 +556,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
         <div class="cmp-h"><span class="hk">Tasks</span>这几个检索任务是怎么定义的</div>
-        <p class="cmp-desc">把开发者的真实工作流拆成 <b>7 个阶段</b>，挑出最难、最依赖查文档的 <b>「算子开发」</b>，再拆成开发者真会一个个去查的 <b>5 个子任务</b>——每个子任务就是一次「带着问题去检索」，正好对应时序图里的 <b>5 次检索</b>。</p>
+        <p class="cmp-desc">把开发者的真实工作流拆成 <b>7 个典型场景</b>，挑出最难、最依赖查文档的 <b>「算子开发」</b>，再拆成开发者真会一个个去查的 <b>5 个子任务</b>——每个子任务就是一次「带着问题去检索」，正好对应时序图里的 <b>5 次检索</b>。</p>
         <div class="lc-stages">装环境 · <b style="color:var(--accent)">开发算子</b> · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
         <div class="op5">
           <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
@@ -565,7 +565,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="op5-i"><span class="c">4</span><b>注册集成</b><small>接 PyTorch</small></div>
           <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">同一套 5 个任务，在 <b style="color:#5a8a00">CUDA</b> 与 <b style="color:#C7000B">昇腾</b> 上各<b>真实做一遍</b>，差异才能归到「生态」、而非「题目难易」。</div>
+        <div class="bridge" style="margin-top:.2vh">同一套 5 个任务，在 <b style="color:#5a8a00">CUDA / 英伟达</b> 与 <b style="color:#C7000B">CANN / 昇腾</b> 上各<b>真实做一遍</b>，差异才能归到「生态」、而非「题目难易」。</div>
       </div>
     </div>
   </section>
@@ -574,7 +574,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">同样的需求换到昇腾，该怎么问：5 个开发问题，在昇腾与 CUDA 上各问一遍</span></div>
+        <div class="brand"><span class="ttl">同样的需求，该怎么问：5 个开发问题，在 CANN / 昇腾 与 CUDA / 英伟达 上各问一遍</span></div>
         <div class="subttl">AI 侧 · 内容可用性</div>
       </div>
       <div class="head-r">06/ 问题对 · 怎么问</div>
@@ -586,7 +586,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center">
       <div class="bridge" style="margin-top:0;flex:0 0 auto"><b>真实开发者口吻</b>、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>。</div>
       <div class="qpx">
-        <div class="qhead"><div class="qx-h cu">CUDA 怎么问</div><div class="qx-h ca">CANN / 昇腾 怎么问</div></div>
+        <div class="qhead"><div class="qx-h cu">CUDA / 英伟达 怎么问</div><div class="qx-h ca">CANN / 昇腾 怎么问</div></div>
         <div class="qtask" data-letter="D">
           <div class="qx-intent"><span class="ql">1</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一意图</b>写个自定义算子并集成进 PyTorch</span></div>
           <div class="qpair">
@@ -669,7 +669,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <div class="auth">
-        <div class="au"><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div><div class="au-d">同一套任务在 <b>CUDA / 昇腾</b> 各真实跑一遍，差异归因到「生态」而非「题目难易」——对照实验的基本范式。</div></div>
+        <div class="au"><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div><div class="au-d">同一套任务在 <b>CUDA / 英伟达</b> 与 <b>CANN / 昇腾</b> 各真实跑一遍，差异归因到「生态」而非「题目难易」——对照实验的基本范式。</div></div>
         <div class="au"><span class="au-tag">拆解框架</span><div class="au-h">知识价值链<span class="en">information foraging</span></div><div class="au-d">知识要「<b>被找到 → 被取到 → 被用上</b>」，任一关断答案就打折（触达→质量→成本→产出），对应信息觅食的思路。</div></div>
         <div class="au"><span class="au-tag">触达维度</span><div class="au-h">可发现 / 可取回<span class="en">findability / retrievability</span></div><div class="au-d">「能不能被找到、能不能取回正文」是<b>信息架构</b>与<b>检索系统评估</b>里既有的度量维度，不是自创。</div></div>
         <div class="au"><span class="au-tag">自带知识</span><div class="au-h">参数化知识<span class="en">parametric knowledge</span></div><div class="au-d">模型不检索也能答的参数化知识，是 <b>RAG 评估</b>里公认的一条独立来源，故单列一项、并按知识截止 gap 客观罚分。</div></div>
