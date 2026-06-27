@@ -1142,8 +1142,8 @@ function renderV(){
       const gx=svg.append("g").attr("data-pair",brSrc[d.id]||null).attr("data-msg",d.id).attr("transform",`translate(${x},${y})`).style("cursor","pointer")
         .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
       drawBarV(gx,d);                       // 菱形按 dtier 深浅
-      // 决策标题：放菱形右上方(单行,去「决策：」前缀)——朝左会压到「主导方」列,故一律朝右
-      gx.append("text").attr("text-anchor","start").attr("x",20).attr("y",-11)
+      // 决策标题：放菱形左上方(单行,去「决策：」前缀)——用户要求朝左,右边被箭头挤、不易看
+      gx.append("text").attr("text-anchor","end").attr("x",-20).attr("y",-11)
         .attr("font-size",11).attr("font-weight",600).attr("fill","#555")
         .text(d.t.replace(/^决策[:：]\s*/,""));
       return;
