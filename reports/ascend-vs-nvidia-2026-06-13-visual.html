@@ -525,7 +525,7 @@ a{color:inherit;text-decoration:none}
       <b>不纳入计算:</b>视觉美感、文案质量、主观"清晰度"感受、品牌好感——这些无法在不引入判断的前提下量化,故<b>不计入分数</b>,仅作不计分的"定性观察"另列。<br>
       <b>适用范围:</b>PC 端 Web 开发者门户;移动 SDK / IDE 插件 / 端侧部署需各自扩展指标层。
     </div>
-    <h3 style="margin:22px 0 12px;font-size:16px;color:var(--ink)">三、指标体系(5 维度 · 全部可观测)</h3>
+    <h3 style="margin:22px 0 12px;font-size:16px;color:var(--ink)" data-pgstart="2">三、指标体系(5 维度 · 全部可观测)</h3>
     <div class="ia-finds">
       <div class="ia-find"><div class="ia-find-h">A · 效率与反馈循环</div>到达目标点击/跳转数 · 完成总步骤数 · 上下文切换数 · <b>Time-to-First-Run</b>。<span style="color:var(--g6)">依据:ISO 效率 / NN/g 交互成本 / DevEx</span></div>
       <div class="ia-find"><div class="ia-find-h">B · 认知负荷</div>版本/平台选择项数 · 必做决策点数 · 目标导航深度(IA 层级)。<span style="color:var(--g6)">依据:Sweller / Hick 定律 / DevEx</span></div>
@@ -533,7 +533,7 @@ a{color:inherit;text-decoration:none}
       <div class="ia-find"><div class="ia-find-h">D · 内容可执行性</div>代码示例可否复制即运行(0/1) · 快速入门有无完整可运行代码(0/1) · 文档时效。<span style="color:var(--g6)">依据:Nielsen 帮助与文档 / DevEx</span></div>
       <div class="ia-find"><div class="ia-find-h">E · 可发现性</div>核心关键词搜索命中率 · 路径死链/404 数 · 关键入口可达性。<span style="color:var(--g6)">依据:Nielsen 识别而非回忆</span></div>
     </div>
-    <div class="method" style="margin-top:18px" data-pgbreak="2">
+    <div class="method" style="margin-top:18px">
       <b>四、执行 · 测量协议(保证可复现)</b><br>
       ① <b>设备/视口</b>:桌面 1440×900,Chrome 最新稳定版;② <b>账号状态</b>:未登录态进入(模拟首次开发者);③ <b>计数规则</b>:点击 = 一次有效交互,步骤 = 用户必须完成的离散动作,同一动作不重复计;④ <b>取证</b>:每个指标值附对应截图为证;⑤ <b>时点</b>:记录评估日期与页面版本;⑥ <b>缺测处理</b>:无法实测的指标标注"缺测"并<b>排除出计算</b>,不以估值填充。
     </div>
@@ -546,7 +546,7 @@ a{color:inherit;text-decoration:none}
       <b>合成</b>:维度分 = 维度内指标分算术平均;触点分 = 5 维度分算术平均(<b>等权,去除权重主观</b>);步骤分 / 总分 = 触点分算术平均。<br>
       <b>敏感性分析</b>:另给"按 DevEx 维度加权"的备选结果,验证主结论在不同权重下是否稳定。
     </div>
-    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">六、锚点总表(全部公开 · 对两边一视同仁)</h3>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)" data-pgstart="3">六、锚点总表(全部公开 · 对两边一视同仁)</h3>
     <div id="djfiRules"></div>
     <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">七、算例(触点 4.3 · SDK 下载)—— 由引擎实时计算</h3>
     <div id="djfiExample"></div>
@@ -1858,27 +1858,30 @@ renderDjfiRules();renderDjfiExample();updateCover();
         s.style.display=(s.id===sec)?'':'none';
       });
     }
-    /* paginate a long section by a data-pgbreak marker among its direct children */
+    /* paginate a long section by data-pgstart="N" markers among its direct children */
     if(pg){
       var host=document.getElementById(sec);
       if(host){
-        var kids=Array.prototype.slice.call(host.children);
-        var brk=kids.findIndex(function(k){return k.hasAttribute('data-pgbreak');});
-        kids.forEach(function(k,i){
+        var cur=1;
+        Array.prototype.slice.call(host.children).forEach(function(k){
           if(k.classList.contains('floor-hd')){k.style.display='none';return;} /* 标题由幻灯片自带，隐藏避免重复 */
-          if(brk<0){k.style.display='';return;}
-          var inPg1=i<brk;
-          k.style.display=((pg==='1'&&inPg1)||(pg!=='1'&&!inPg1))?'':'none';
+          var st=k.getAttribute('data-pgstart');
+          if(st)cur=parseInt(st,10)||cur;
+          k.style.display=(String(cur)===pg)?'':'none';
         });
       }
     }
   }
-  /* edge-aware wheel forwarding: scroll inside iframe, but hand off at top/bottom */
+  /* edge-aware wheel forwarding: scroll inside iframe, but hand off at top/bottom（emb 下 body 才是滚动容器，用 body.scrollTop）*/
   window.addEventListener('wheel',function(e){
     try{
       if(!window.parent||window.parent===window)return;
-      var atTop=window.scrollY<=1&&e.deltaY<0;
-      var atBot=(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-2)&&e.deltaY>0;
+      var b=document.body;
+      var st=b.scrollTop||document.documentElement.scrollTop||0;
+      var ch=b.clientHeight||window.innerHeight;
+      var sh=b.scrollHeight;
+      var atTop=st<=1&&e.deltaY<0;
+      var atBot=(st+ch>=sh-2)&&e.deltaY>0;
       if(atTop||atBot)window.parent.postMessage({__deckWheel:e.deltaY},'*');
     }catch(_){}
   },{passive:true});
@@ -2065,15 +2068,23 @@ document.getElementById('lb').onclick=()=>document.getElementById('lb').classLis
 })();
 </script>
 <style>
-html.emb .topnav,html.emb .l1tabs,html.emb #netbg{display:none!important}
-html.emb body{padding-top:0!important}
-html.emb .wrap{padding:0 20px!important;max-width:none!important}
-html.emb .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
-html.emb .floor-hd h2{font-size:17px!important}
-html.emb .floor-sub{margin:2px 0 10px!important;font-size:12.5px!important}
-html.emb h3{margin-top:12px!important;margin-bottom:8px!important;font-size:13px!important}
-html.emb .ia-finds{grid-template-columns:repeat(3,1fr)!important}
-html.emb .method{font-size:12px!important;padding:10px 14px!important}
+/* ===== embed 模式：融入 synthesis deck 灰底（透明背景 + 玻璃卡 + 居中分页，内容多才滚动）===== */
+html.emb{background:transparent!important;overflow:hidden!important}
+html.emb body{background:transparent!important;padding:0!important;margin:0!important;height:100vh!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin;scrollbar-color:rgba(140,140,160,.3) transparent}
+html.emb body::-webkit-scrollbar{width:6px}
+html.emb body::-webkit-scrollbar-thumb{background:rgba(140,140,160,.3);border-radius:6px}
+html.emb .topnav,html.emb .l1tabs,html.emb #netbg,html.emb .floor-hd{display:none!important}
+html.emb .wrap{padding:0!important;max-width:none!important;margin:0!important}
+/* 楼层撑满一屏：内容少则居中、内容多则随 body 滚动不裁切 */
+html.emb .floor{min-height:100vh;box-sizing:border-box;padding:3.2vh 10px!important;display:flex;flex-direction:column;justify-content:center;gap:6px;scroll-margin-top:0!important}
+html.emb .floor>*{flex:0 0 auto}
+html.emb h3{margin:0 0 2px!important;font-size:15px!important;font-weight:800;color:#16191e!important;letter-spacing:.01em}
+html.emb .floor-sub{margin:0 0 6px!important;font-size:13px!important;color:#5e646e!important}
+/* 理论/指标卡：deck 玻璃卡（去白底硬阴影的网页感）*/
+html.emb .ia-finds{grid-template-columns:repeat(3,1fr)!important;gap:13px!important;margin-top:2px!important}
+html.emb .ia-find{background:rgba(255,255,255,.55)!important;border:1px solid rgba(255,255,255,.72)!important;border-radius:14px!important;box-shadow:0 10px 30px -18px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.85)!important;-webkit-backdrop-filter:blur(12px) saturate(1.3);backdrop-filter:blur(12px) saturate(1.3)}
+/* method 段：deck 浅玻璃条（去网页虚线框）*/
+html.emb .method{background:rgba(255,255,255,.5)!important;border:1px solid rgba(255,255,255,.7)!important;border-radius:13px!important;box-shadow:0 8px 24px -18px rgba(30,40,70,.2),inset 0 1px 0 rgba(255,255,255,.8)!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:12.5px!important;padding:12px 16px!important;margin-top:12px!important}
 </style>
 </body>
 </html>
