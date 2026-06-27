@@ -2023,6 +2023,8 @@ body.embed.tponly .tpcard{max-width:none!important;width:100%!important;box-shad
 body.embed.tponly .tpcard .tpcard-hd{display:none!important}
 body.embed.tponly .tpcard .shot,body.embed.tponly .tpcard .mock{max-height:34vh!important;width:auto!important;object-fit:contain}
 body.embed.tponly .tpcard .shotcap{display:none!important}
+/* 单触点模式:tpgrid 不再分两列,让唯一卡铺满整宽 */
+body.embed.tponly .tpgrid{display:block!important;grid-template-columns:1fr!important}
 /* 步骤楼层触点卡改 2 列,压低高度→缩放后更可读 */
 body.embed .tpgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:start}
 /* 步骤分析 iframe:大图已在 deck 页原生放,这里只要分析——隐触点小图/视角条/摩擦明细/触点列表,留 分数+差异分析+建议 */
