@@ -2043,10 +2043,12 @@ body.embed .floor{padding:14px 0 8px!important;scroll-margin-top:0!important}
       document.querySelectorAll('.synth-grouphd').forEach(function(g){g.style.display='none';});
     }
     var hd=t.querySelector(':scope > .floor-hd');if(hd)hd.style.display='none';
-    /* dept paging: pg=1 shows first 3 cards, pg=2 shows last 3 */
+    /* dept paging: pg=1 shows first 3 cards, pg=2 shows last 3——3 卡并排一行(防 2 列换行变高被裁) */
     if(id==='dept'&&pg){
-      var cards=Array.from(document.querySelectorAll('#deptgrid .deptcard'));
+      var grid=document.getElementById('deptgrid');
+      var cards=grid?Array.from(grid.querySelectorAll('.deptcard')):[];
       if(!cards.length)return false;
+      grid.style.gridTemplateColumns='repeat(3,minmax(0,1fr))';
       var half=3,start=(parseInt(pg)-1)*half,end=start+half;
       cards.forEach(function(c,i){c.style.display=(i>=start&&i<end)?'':'none';});
     }
