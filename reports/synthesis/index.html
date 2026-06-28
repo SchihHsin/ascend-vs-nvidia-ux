@@ -655,7 +655,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .auth{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:1.1vw;flex:1;min-height:0}
     .au{position:relative;background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:13px;padding:2vh 1.2vw;display:flex;flex-direction:column;gap:.9vh}
     /* tag / icon 收成中性灰(装饰性、不抢色);颜色只留给 依据/做法/指标 功能标签 */
-    .au .au-tag{align-self:flex-start;font-size:var(--fs-xs);font-weight:700;color:var(--ink-3);background:var(--g1);border:1px solid var(--line);border-radius:6px;padding:3px 9px}
+    /* au-tag = 类别眉标:无底色纯文字 + 字距(和「依据」这类药丸标签形态上区分开) */
+    .au .au-tag{align-self:flex-start;font-size:var(--fs-xs);font-weight:700;color:var(--ink-3);letter-spacing:.08em;padding:0 0 .3vh;border-bottom:2px solid var(--line)}
     /* 右上角线性 icon(Lucide),中性灰描边、低存在感 */
     .au .au-ic{position:absolute;top:1.7vh;right:1.1vw;width:2.5vw;max-width:42px;min-width:34px;aspect-ratio:1;border-radius:11px;background:var(--g1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-3)}
     .au .au-ic svg{width:55%;height:55%;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
