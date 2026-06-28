@@ -305,14 +305,14 @@ a.hit:hover{text-decoration:underline;color:#444}
   </div>
 
   <div class="card uxcard">
-    <div class="who">抬 ③ 正文详尽度 · 直接救 E（全栈最弱场景之一）</div>
-    <h3>2. 错误码「一码一页」：把兜底页拆成可着陆的逐条解释</h3>
+    <div class="who">提升 ③ 正文详尽度 · 直接改善 E（全栈最弱场景之一）</div>
+    <h3>2. 错误码一码一页：为每个错误码建独立的排查页</h3>
     <ul class="tight">
-      <li>每个错误码（EZ9999、EE 系列…）独立静态页：含义 / 常见触发 / 排查步骤 / 修复样例，URL 含错误码本身。</li>
-      <li>报错信息里直接印 URL（CUDA 的 error code → SO 讨论这条路，昇腾要靠官方自建，因为第三方生态薄、没人替你建）。</li>
-      <li>这是开发者搜索意图最明确、情绪最焦灼的场景——搜「EZ9999」的人要的是答案，不是「错误码体系介绍」。</li>
+      <li>每个错误码（EZ9999、EE 系列等）建独立静态页：含义、常见触发、排查步骤、修复样例，网址中包含错误码本身。</li>
+      <li>在报错信息中直接给出该页网址（CUDA 靠 StackOverflow 生态接住，昇腾第三方生态薄，需由官方自建）。</li>
+      <li>这是开发者搜索意图最明确、最急于解决的场景——搜索「EZ9999」的人需要的是解决方案，而非错误码体系综述。</li>
     </ul>
-    <div class="nvref"><b>NVIDIA 是怎么做的（以及为什么不直接沿用它的模式）：</b>官方只给一张 enum 表，案例靠 StackOverflow 生态接住——那是「码有语义 + 生态厚」两个前提的结果，不是可移植的方案：<code>cudaErrorIllegalAddress</code> 看名字就知道方向，而 EZ9999 是 catch-all（原因栏写 N/A，码本身信息量≈0）；CANN 第三方又薄（实测 2–3 条、扎堆 CSDN）。生态是慢变量，官方页是当季就能落地的可控杠杆——短期走一码一页，生态扶持（第 6 条）作长期接力。</div>
+    <div class="nvref"><b>NVIDIA 的做法（及为何不宜直接照搬）：</b>官方仅提供一张 enum 表，案例由 StackOverflow 生态承接——这依赖「错误码自带语义 + 第三方生态深厚」两个前提，不可直接移植：<code>cudaErrorIllegalAddress</code> 顾名可知方向，而 EZ9999 为 catch-all（原因栏为 N/A、信息量近乎为零）；CANN 第三方又薄（实测仅 2–3 条、集中于 CSDN）。生态是慢变量，官方页是短期即可落地的可控杠杆——近期先做一码一页，第三方扶持（第 6 条）作为长期补充。</div>
     <div class="demotitle">Demo · 左：实测现状的兜底页；右：建议的一码一页 <span class="mockdisc">右侧内容为示意</span></div>
 <div class="demo">
   <div class="dnote">E 任务实测：搜 EZ9999 命中官方页、抓得到（②4），EZ9999 甚至有专属页——但内容是泛化兜底：原因栏写 N/A、只有通用处理建议，没有按触发场景的逐条解释（③2）。右侧示意「一码一页」该有什么。</div>
@@ -340,18 +340,18 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
     </div>
   </div>
 </div>
-    <div class="why">E.cann 综合 .55，败因正是「抓得到但是通用兜底页」（③=2）。一码一页同时喂人和喂 AI。</div>
+    <div class="why">E.cann 综合 .55，主因是「抓得到但仅为通用兜底页」（③=2）。一码一页可同时服务开发者与 AI。</div>
   </div>
 
   <div class="card uxcard">
-    <div class="who">抬 ② 可抓取性 · 救 D（全栈唯一「低」）· 范围已被实测收窄到一个子树</div>
-    <h3>3. 把 <code>devguide/opdevg/</code> 的核心 how-to 链路静态化</h3>
+    <div class="who">提升 ② 可抓取性 · 解决 D（全栈唯一「低」分）· 范围已由实测收窄到一个子树</div>
+    <h3>3. 让核心 how-to 页可被抓取：改为服务端渲染</h3>
     <ul class="tight">
-      <li>实测已证明这<b>不需要全站重做</b>：25/26 格官方页可抓，连 opdevg 的 Tiling 正文页都是 SSR——只剩 D 的自定义算子 how-to 引导链路是 SPA。</li>
-      <li>最小动作：为该链路提供 SSR 镜像（O 任务的 doc_center 镜像就是现成模式），或提供 markdown/纯文本导出。</li>
-      <li>叠加效应最大：D 同时踩「SPA + 第三方稀 + 版本散」三重坑，解开第一重，另两重的权重也会下降（AI 能抓到权威正文后对第三方依赖骤减）。</li>
+      <li>实测证明<b>无需全站重做</b>：26 格中 25 格官方页可抓取，连 opdevg 的 Tiling 正文页也是服务端渲染——仅剩 D 的自定义算子 how-to 引导链路为 SPA。</li>
+      <li>最小改动：为该链路提供服务端渲染镜像（O 任务的 doc_center 镜像即现成模式），或提供 Markdown / 纯文本导出。</li>
+      <li>叠加效应最大：D 同时受「SPA + 第三方稀缺 + 版本分散」三重影响，解决其一，另两项的权重也随之下降（AI 能抓到官方正文后，对第三方的依赖显著减少）。</li>
     </ul>
-    <div class="nvref"><b>NVIDIA 是怎么做的（实测）：</b>docs.nvidia.com 全站静态可抓——26 个任务实测 CUDA 官方页 ② 全部 5 分：TensorRT Quick Start、Nsight UserGuide、cuBLAS 参考、compute-sanitizer……Agent 抓回的都是完整正文。「无 JS 也能抓全」在英伟达侧不是特性，是默认。</div>
+    <div class="nvref"><b>NVIDIA 的做法（实测）：</b>docs.nvidia.com 全站静态可抓——26 个任务实测中 CUDA 官方页 ② 均为 5 分：TensorRT Quick Start、Nsight UserGuide、cuBLAS 参考、compute-sanitizer 等，Agent 抓回的均为完整正文。「无需 JS 即可抓全」在 NVIDIA 侧并非特性，而是默认。</div>
     <div class="demotitle">Demo · 同一个站，人眼 vs Agent 两双眼睛（同时支撑第 5 条「页面组织规范」）</div>
 <div class="demo">
   <div class="dnote">人眼里这两个页面渲染后几乎一样、都「有内容」。下面展示的是 <b>Agent 实际抓到的东西</b>——②可抓取性 26 格的全部分差就来自这个差别。左侧即 D 任务实测形态。</div>
@@ -380,26 +380,26 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
   </div>
   <div class="note">把这两栏给任何一个文档负责人看，「静态化抬②」就从抽象口号变成肉眼可见的差距。验收方法同卡 5：禁 JS 抓一遍，看右栏内容还剩多少。</div>
 </div>
-    <div class="why">D.cann .41 是整张热力图的唯一深谷，且受害者（算子开发者）是最无替代信息源的角色。</div>
+    <div class="why">D.cann .41 是整张热力图的唯一低谷，且受影响最大的算子开发者，恰是最缺替代信息源的角色。</div>
   </div>
 
   <div class="card uxcard">
-    <div class="who">抬 ②③⑦ · Agent 体验（AX）基建 · 面向所有 AI 工具</div>
-    <h3>4. 机器可读出口：llms.txt / markdown 导出 / 结构化 API 索引</h3>
+    <div class="who">提升 ②③⑦ · Agent 体验（AX）基建 · 面向所有 AI 工具</div>
+    <h3>4. 提供机器可读出口：llms.txt、Markdown 导出、结构化 API 索引</h3>
     <ul class="tight">
-      <li>提供 <code>llms.txt</code>（站点级 AI 阅读指引）与每页「View as markdown」出口——这正在成为开发者文档站对 AI 的标准礼仪。</li>
-      <li>API 参考提供结构化索引（JSON/CSV 的算子-版本-签名表），让 AI 一次抓取拿到全量而非逐页翻。</li>
-      <li>长期看还间接抬 ⑦：可抓的权威语料更容易进入下一代模型的训练集，慢慢补「自带知识薄」这个最深的洞。</li>
+      <li>提供 <code>llms.txt</code>（站点级 AI 阅读指引）与每页「View as Markdown」出口——这正成为开发者文档站面向 AI 的通行做法。</li>
+      <li>API 参考提供结构化索引（JSON/CSV 的算子-版本-签名表），使 AI 一次抓取即获全量，无需逐页翻阅。</li>
+      <li>长期还可间接提升 ⑦：可抓取的官方语料更易进入下一代模型的训练集，逐步弥补「自带知识薄」这一最深的短板。</li>
     </ul>
-    <div class="ba"><b class="bx">✕ Before（2026-06-11 实测）</b>：<code>hiascend.com/llms.txt</code> → <b>404</b>（robots.txt 有、llms.txt 无）；无「View as markdown」出口、无结构化算子索引——Agent 只能按给人设计的页面逐页 fetch。</div>
-    <div class="nvref"><b>NVIDIA 是怎么做的（2026-06-11 核实）：</b><a href="https://docs.nvidia.com/llms.txt" target="_blank" rel="noopener">docs.nvidia.com/llms.txt</a> 已上线——一份汇总索引列出约 20 个产品（CUDA Toolkit、NeMo、NIM、Jetson…）各自的 llms.txt，部分产品还给 llms-full.txt 全文版（2026-04-09 更新）。另外其 Sphinx 文档管线默认产出机器可读索引 <code>objects.inv</code>（PyTorch 文档站实测存在，全量 API 清单 188KB）——「结构化 API 索引」也有现成对照。即本卡的两条建议英伟达都已落地。</div>
-    <div class="ba"><b class="ax">✓ After（建议落地后）</b>：Agent 一次 fetch <code>llms-full.txt</code> 即拿到全量权威正文，逐页抓取降级为兜底——② 整体抬到 5、D 的受阻同步解除（§5-3 反事实实算：平均 ⑪ +.027、4 格翻档）。</div>
-    <div class="why">⑦ 短期内无法直接改（训练是模型厂的事），但「让语料可被收录」是站方唯一能做的杠杆。</div>
+    <div class="ba"><b class="bx">✕ Before（2026-06-11 实测）</b>：<code>hiascend.com/llms.txt</code> → <b>404</b>（有 robots.txt、无 llms.txt）；无「View as Markdown」出口、无结构化算子索引——Agent 只能逐页抓取面向人设计的页面。</div>
+    <div class="nvref"><b>NVIDIA 的做法（2026-06-11 核实）：</b><a href="https://docs.nvidia.com/llms.txt" target="_blank" rel="noopener">docs.nvidia.com/llms.txt</a> 已上线——一份汇总索引列出约 20 个产品（CUDA Toolkit、NeMo、NIM、Jetson 等）各自的 llms.txt，部分产品还提供 llms-full.txt 全文版（2026-04-09 更新）。其 Sphinx 文档管线还默认产出机器可读索引 <code>objects.inv</code>（PyTorch 文档站实测存在，全量 API 清单 188KB）——「结构化 API 索引」亦有现成对照。即本卡的两条建议，NVIDIA 均已落地。</div>
+    <div class="ba"><b class="ax">✓ After（建议落地后）</b>：Agent 一次抓取 <code>llms-full.txt</code> 即获全量官方正文，逐页抓取降为兜底——② 整体提升至 5、D 的受阻同步解除（§5-3 反事实测算：综合分平均 +0.027、4 格跨档）。</div>
+    <div class="why">⑦ 短期无法直接改善（训练由模型厂商决定），但「让语料可被收录」是站方唯一可控的杠杆。</div>
   </div>
 
   <div class="card uxcard">
-    <div class="who">抬 ②③⑧① · 页面级界面组织规范 · 每条都来自实测中「抓到 / 抓不到」的正反对照</div>
-    <h3>5. 页面怎么组织才容易被抓取：给「没有眼睛的用户」的界面设计</h3>
+    <div class="who">提升 ②③⑧① · 页面级组织规范 · 每条均来自实测中「抓到 / 抓不到」的正反对照</div>
+    <h3>5. 面向 AI 抓取的页面组织方式</h3>
     <ul class="tight">
       <li><b>正文进首屏 HTML</b>：命令/参数表/代码必须在服务端渲染的 HTML 里，不靠 JS 注入——26 格里 ② 的全部分差都由这一条决定（SSR 页 4–5 分、D 的 SPA 链路 2 分）。验收法：禁 JS 抓一遍页面，看参数表还在不在。</li>
       <li><b>Tab / 折叠面板的内容要预先在 DOM 里</b>：C-ATB 页实测「概述可抓、算子列表抓不到」——同一页内点击才加载的部分，对 Agent 等于不存在。视觉上可以折叠，数据上不能懒加载。</li>
@@ -416,8 +416,8 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
   </div>
 
   <div class="card uxcard">
-    <div class="who">抬 ⑤⑥ 第三方生态 · 慢变量、需运营</div>
-    <h3>6. 第三方生态扶持：把「少而同质」变「多平台互证」</h3>
+    <div class="who">提升 ⑤⑥ 第三方生态 · 慢变量、需持续运营</div>
+    <h3>6. 扶持第三方生态：从「少而同质」到「多平台互证」</h3>
     <ul class="tight">
       <li>官方认证教程计划：鼓励在 CSDN <b>之外</b>的平台（个人博客、英文 Medium/dev.to 等）产出带版本号的完整教程——独立性因子实测在罚「CSDN×2 回声」。</li>
       <li><b>选平台先看 Agent 可抓性</b>：实测知乎反爬 403（N/O/Q 三任务均未取得正文）——优质教程发在知乎，对 AI 助手近乎不存在；CSDN/博客园/华为云 bbs/segmentfault/云厂商社区实测可整页抓取。扶持内容应优先落在可抓平台，或硬性要求同步一份到可抓渠道（如官方博客/gitee 仓 markdown）。</li>
@@ -425,16 +425,16 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
       <li>优先覆盖漏斗深水区（算子开发、Tiling、报错案例集、<b>排错工具实战案例</b>——X 实测 msSanitizer 官方文档 ③ 满分、社区案例却近乎零，是「官方好但生态空」的典型），上手侧已经不缺。</li>
     </ul>
     <div class="ba"><b class="bx">✕ Before（实测）</b>：⑤ 第三方量 CANN 26 格均 ≤4、K/M/N/S/X 仅 2 条；可抓的扎堆 CSDN（独立性因子实罚「CSDN×2 回声」），优质的躺在知乎（403，对 Agent 不存在）。</div>
-    <div class="nvref"><b>NVIDIA 是怎么做的（实测）：</b>官方亲自下场补第三方——developer.nvidia.com/blog 的技术博客在 L（算子精度）、N（算子融合）两任务实测中直接成为可用来源，覆盖「正式文档不会写、社区暂时没人写」的中间地带；开发者论坛（forums.developer.nvidia.com）在 B/E 实测中兜住长尾问答。即「第三方厚」不全是自然生长，官方供给占了一角。</div>
+    <div class="nvref"><b>NVIDIA 的做法（实测）：</b>官方亲自参与补充第三方——developer.nvidia.com/blog 的技术博客在 L（算子精度）、N（算子融合）两任务实测中成为可用来源，覆盖「正式文档不写、社区暂无人写」的中间地带；开发者论坛（forums.developer.nvidia.com）在 B/E 实测中承接长尾问答。可见「第三方厚」并非全靠自然生长，官方供给亦占一席。</div>
     <div class="ba"><b class="ax">✓ After（建议落地后）</b>：每个深水任务有 3+ 条<b>独立平台、可抓、带版本号与日期</b>的教程互证——⑤⑥ 各 +1（§5-3 反事实实算：平均 ⑪ +.056、7 格翻档，ROI 第二）。</div>
-    <div class="why">第三方是官方文档的「冗余备份通道」。CUDA 的韧性正来自这条通道极厚——官方页再差也有 SO 兜底。</div>
+    <div class="why">第三方是官方文档的冗余通道。CUDA 的韧性正源于这条通道足够厚——官方页即便不足，也有 StackOverflow 承接。</div>
   </div>
 
   <div class="card uxcard">
     <div class="who">UIUX 经典议题在 AI 时代的重写</div>
-    <h3>7. 给「人」的站内体验：跟着同一套指标走就不会错</h3>
+    <h3>7. 改善面向开发者的站内体验：沿用同一套评估指标</h3>
     <ul class="tight">
-      <li>本项目最反直觉的发现：<b>给 AI 修路和给人修路是同一条路</b>——参数表齐全、命令可复制、版本明确、URL 可直达，对人和对 Agent 是同一组需求。</li>
+      <li>本项目最反直觉的发现：<b>为 AI 优化与为开发者优化是同一件事</b>——参数表齐全、命令可复制、版本明确、网址可直达，对人与对 Agent 是同一组需求。</li>
       <li>不需要为 AI 单独立项「AI 友好改造」，把 ①–⑩ 指标当成文档站的体验验收清单即可（如：新页面发布前跑一次「无 JS 抓取」冒烟测试 = ②；查正文是否含可执行命令 = ③⑩）。</li>
       <li>站内搜索按错误码/API 名直达（①），减少「搜得到列表页、找不到正文」的两段式挫败。</li>
     </ul>
@@ -445,17 +445,17 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
   </div>
 
   <div class="card uxcard">
-    <div class="who">抬 ⑦ 自带知识 · 最深的洞、最慢的变量 · 26 全量后新增（§5-3 反事实实算：⑦+1 → 平均 ⑪ +.048、4 格翻档，长期 ROI 排第三、高于 llms.txt）</div>
-    <h3>8. 面向下一代模型的语料供给：官方一条腿撑不起可用性</h3>
+    <div class="who">提升 ⑦ 自带知识 · 最深的短板、最慢的变量 · 26 全量后新增（§5-3 反事实测算：⑦+1 → 综合分平均 +0.048、4 格跨档，长期 ROI 第三、高于 llms.txt）</div>
+    <h3>8. 面向下一代模型的语料供给：官方与生态需共同支撑</h3>
     <ul class="tight">
       <li><b>为什么独立成条（26 全量后的新证据）</b>：X 内存越界是极端例——官方 msSanitizer 文档 ③ 满分 5，但第三方仅 1 条＋自带 ⑦ 只有 2，综合仍只到中高。噪声-OR 的数学含义就在这：<b>K = 1−(1−OFF)(1−SEC)(1−OWN)，官方（OFF）一条渠道做得再好，另两条全空时 K 仍被压住</b>。文档写好 ≠ 任务被兜住。</li>
       <li>站方可控的杠杆：把权威内容以<b>最易被训练集收录的形态</b>同步一份——公开 git 仓的 markdown（GitHub/gitee 是训练语料的高概率来源）、关键文档出英文版（训练语料英文占比高）、教程带完整可跑代码而非截图。</li>
-      <li>与卡 4 的分工：llms.txt 解决「<b>这一代</b>模型检索时抓得到」，本条解决「<b>下一代</b>模型不检索也知道」——前者是急救，后者是治本。</li>
+      <li>与卡 4 的分工：llms.txt 解决「<b>当代</b>模型检索时抓得到」，本条解决「<b>下一代</b>模型不检索也知道」——前者应急，后者根治。</li>
     </ul>
     <div class="ba"><b class="bx">✕ Before（实测）</b>：⑦ 自带知识 CANN 26 格多为 2–3（D 深处还因 churn=fast 罚 −0.5），CUDA 多为 4–5——同一个模型，对 CUDA「不检索就能答」、对 CANN「不检索就答不了」，检索一旦受阻（D）或低质（E）就没有兜底。</div>
-    <div class="nvref"><b>英伟达侧对照（结果而非动作）：</b>CUDA ⑦ 的 26 格高分<b>不是</b>英伟达刻意喂语料的产物——是 20 年自然生态（SO/博客/教材/开源仓）沉淀进各代模型训练集的副产品，外部观测不到任何「刻意动作」。这条对照的真正含义是：语料厚度可以等生态慢慢长（CUDA 路线），也可以主动供给——<b>昇腾没有 20 年可等，「自然生长」在这里不是方案</b>。</div>
+    <div class="nvref"><b>英伟达侧对照（结果而非动作）：</b>CUDA ⑦ 的 26 格高分<b>不是</b>英伟达刻意喂语料的产物——是 20 年自然生态（SO/博客/教材/开源仓）沉淀进各代模型训练集的副产品，外部观测不到任何「刻意动作」。这条对照的真正含义是：语料厚度可以等生态慢慢长（CUDA 路线），也可以主动供给——<b>昇腾没有 20 年可等，「自然生长」在此并非可行方案</b>。</div>
     <div class="ba"><b class="ax">✓ After（跨模型代际见效）</b>：下一代模型对 CANN 专有任务的 ⑦ 从 2–3 抬向 4，检索从「必需且无兜底」降级为「核验手段」——这是唯一能在 D 类深水任务上同时改善「检索成本尖刺」与「受阻无兜底」的路径。</div>
-    <div class="why">⑦ 是三渠道里唯一跨「这一代 Agent 产品」起效的——它直接长在模型里，用户换任何 AI 工具都带着。慢，但复利。</div>
+    <div class="why">⑦ 是三条渠道中唯一可跨「当代 Agent 产品」起效的——它内化于模型，用户更换任何 AI 工具都随之带走。见效慢，但具复利效应。</div>
   </div>
 </div>
 
