@@ -42,9 +42,12 @@ body.on-dark.scrolling::-webkit-scrollbar-thumb{background:rgba(255,255,255,.32)
 
 /* ===== 总览（Overview）：缩略图网格（按当前视窗比例，不强制 16:9）===== */
 body.overview{scroll-snap-type:none;background:#15151a;padding:30px 30px 64px;overflow-y:auto;overflow-x:hidden}
-body.overview #deck{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;width:auto;max-width:1480px;margin:0 auto;align-items:start}
-body.overview .slide{opacity:1!important;pointer-events:auto!important;position:relative!important;width:auto!important;min-height:0!important;padding:0!important;margin:0!important;display:block!important;overflow:hidden!important;border-radius:12px;cursor:pointer;scroll-snap-align:none;box-shadow:0 12px 34px -14px rgba(0,0,0,.6);outline:2px solid transparent;transition:outline-color .18s,transform .18s}
+body.overview #deck{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;width:auto;max-width:1480px;margin:0 auto;align-items:start;counter-reset:slideno}
+body.overview .slide{counter-increment:slideno;opacity:1!important;pointer-events:auto!important;position:relative!important;width:auto!important;min-height:0!important;padding:0!important;margin:0!important;display:block!important;overflow:hidden!important;border-radius:12px;cursor:pointer;scroll-snap-align:none;box-shadow:0 12px 34px -14px rgba(0,0,0,.6);outline:2px solid transparent;transition:outline-color .18s,transform .18s}
 body.overview .slide:hover{transform:translateY(-4px);outline-color:var(--accent)}
+/* 总览页:悬浮卡片时右下角浮出页码 */
+body.overview .slide::after{content:counter(slideno);position:absolute;bottom:7px;right:8px;z-index:6;font-family:'JetBrains Mono';font-size:13px;font-weight:600;color:#fff;background:rgba(20,23,28,.82);padding:2px 9px;border-radius:7px;opacity:0;transform:translateY(3px);transition:opacity .15s,transform .15s;pointer-events:none}
+body.overview .slide:hover::after{opacity:1;transform:none}
 body.overview .slide-inner{position:absolute;top:0;left:0;width:100vw;height:100vh;transform-origin:top left;overflow:hidden;pointer-events:none;box-sizing:border-box}
 body.overview .s-gray .slide-inner{display:flex;flex-direction:column;padding:5vh 4vw}
 body.overview .s-glow .slide-inner{padding:7vh 6vw}
