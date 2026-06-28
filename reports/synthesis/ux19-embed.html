@@ -906,9 +906,17 @@ body.embed .wrap{padding:0 30px!important;max-width:none!important;margin:0!impo
 body.embed .uxcard{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0!important;max-width:none!important}
 body.embed .uxcard.ux-show{display:flex!important;flex-direction:column;justify-content:center;height:100vh}
 body.embed .uxcard.ux-show.ux-flex{flex-direction:row;gap:28px;align-items:center}
-body.embed .ux-left{flex:0 0 37%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px}
+body.embed .ux-left{flex:0 0 39%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0}
 body.embed .ux-right{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:0}
 body.embed .ux-right .demo{margin:0!important}
+/* 左栏文字层次:眉标(灰·次)→ 建议(放大·菱形标记·重点)→ NVIDIA 范本(callout)→ 为何优先(脚注),拉开间距不堆叠 */
+body.embed .ux-left>*{margin:0!important}
+body.embed .ux-left .who{font-size:12px!important;font-weight:700!important;color:var(--sub)!important;letter-spacing:.02em!important;line-height:1.5!important;margin-bottom:15px!important;padding-bottom:9px!important;border-bottom:1px solid var(--line)!important}
+body.embed .ux-left ul.tight{list-style:none!important;padding:0!important;margin:0 0 16px!important;display:flex!important;flex-direction:column!important;gap:12px!important;font-size:14.5px!important}
+body.embed .ux-left ul.tight li{margin:0!important;padding-left:21px!important;position:relative!important;line-height:1.55!important;color:var(--ink)!important}
+body.embed .ux-left ul.tight li::before{content:''!important;position:absolute!important;left:1px!important;top:.5em!important;width:8px!important;height:8px!important;border-radius:2px!important;background:var(--nv)!important;transform:rotate(45deg)!important}
+body.embed .ux-left .nvref{font-size:12px!important;line-height:1.55!important;margin:0 0 14px!important}
+body.embed .ux-left .why{font-size:12.5px!important;line-height:1.55!important;margin:0!important;padding-top:11px!important}
 </style>
 <script id="embedfixjs">
 (function(){

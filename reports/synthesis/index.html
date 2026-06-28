@@ -909,7 +909,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <div class="pg7">
-        <div class="p7 struct"><div class="p7-ic"><svg viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div><div class="p7top"><span class="p7n">1</span><span class="p7tag">结构性</span></div><div class="p7h">版本体系混乱（影响全流程）</div><div class="p7d">同一文档散在 8.0RC2 / 80RC3 / 82RC1 / 商用·社区 多个版本树，无权威「当前版」；CANN↔driver↔torch_npu 多轴配套，配错一轴就跑不起来。</div><div class="p7e">④版本清晰度 26 格 12 格＝2 分</div></div>
+        <div class="p7 struct"><div class="p7-ic"><svg viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div><div class="p7top"><span class="p7n">1</span><span class="p7tag">结构性</span></div><div class="p7h">版本体系混乱（影响全流程）</div><div class="p7d">同一文档散在 8.0RC2 / 80RC3 / 82RC1 / 商用·社区 多个版本树，缺少明确的当前推荐版本；CANN↔driver↔torch_npu 多轴配套，配错一轴即无法运行。</div><div class="p7e">④版本清晰度 26 格 12 格＝2 分</div></div>
         <div class="p7 struct"><div class="p7-ic"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div><div class="p7top"><span class="p7n">2</span><span class="p7tag">结构性</span></div><div class="p7h">模型自带知识偏薄</div><div class="p7d">AI「不检索就答不了」，而 CUDA 多数能直接答；检索成了唯一来源，链路一断答案就坍塌、没有兜底。</div><div class="p7e">⑦自带均 2.85 vs CUDA ≥ 4</div></div>
         <div class="p7"><div class="p7-ic"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="p7top"><span class="p7n">3</span></div><div class="p7h">第三方生态少而同质</div><div class="p7d">多集中在 CSDN / 华为云，知乎反爬 403 抓不到；对 Agent 而言有效第三方比人眼看到的更窄。</div><div class="p7e">⑤丰富度 K/M/N/S/X 仅 2</div></div>
         <div class="p7"><div class="p7-ic"><svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9.5 12.5 5 5"/><path d="m14.5 12.5-5 5"/></svg></div><div class="p7top"><span class="p7n">4</span></div><div class="p7h">官方单页应用（SPA）抓不到 → 收窄成单点</div><div class="p7d">「全站抓不到」被实测推翻：仅 D（自定义算子）核心 how-to 真抓不到，其余 SSR 可抓——是补一个子树、不是重做网站。</div><div class="p7e">②可抓取性 26 格仅 D＝2</div></div>
@@ -925,7 +925,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">供给侧 1／8 · 版本体系统一收口：设权威版本 + 配套查询工具</span></div>
+        <div class="brand"><span class="ttl">供给侧 1／8 · 版本体系统一收口：规范链接 + 配套查询工具</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「1/8 版本收口」</div>
       </div>
       <div class="head-r">17/ 供给侧 · 改文档站</div>
@@ -1561,7 +1561,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cc ai">
           <span class="cc-tag">AI 侧</span>
           <div class="cc-h">外部大模型对昇腾知识：抓不到、对不准、易杜撰</div>
-          <div class="cc-d">官方核心页为单页应用（SPA）、<b>抓取为空</b>；版本号散乱、无权威当前版；深处<b>自带知识薄</b>。三关全弱时模型无法可靠识别自身不确定，<b>凭记忆杜撰</b>（看似正确、实则有误）。</div>
+          <div class="cc-d">官方核心页为单页应用（SPA）、<b>抓取为空</b>；版本号散乱、缺少明确的当前推荐版本；深处<b>自带知识薄</b>。三关全弱时模型无法可靠识别自身不确定，<b>凭记忆杜撰</b>（看似正确、实则有误）。</div>
           <div class="cc-ev"><span>矩阵 写kernel .41</span><span>架构图末拍·杜撰</span><span>SO 2025 66% 被坑</span><span>一次开发 5 次检索</span></div>
         </div>
         <div class="cc hu">
