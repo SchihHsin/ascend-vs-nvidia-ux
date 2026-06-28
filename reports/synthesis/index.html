@@ -653,8 +653,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <!-- 灰底：AI 指标 · 理论权威依据（自写，防质疑） -->
   <style>
     .auth{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:1.1vw;flex:1;min-height:0}
-    .au{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:13px;padding:2vh 1.2vw;display:flex;flex-direction:column;gap:.9vh}
-    .au .au-tag{align-self:flex-start;font-size:var(--fs-xs);font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:3px 9px}
+    .au{position:relative;background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:13px;padding:2vh 1.2vw;display:flex;flex-direction:column;gap:.9vh}
+    /* tag / icon 收成中性灰(装饰性、不抢色);颜色只留给 依据/做法/指标 功能标签 */
+    .au .au-tag{align-self:flex-start;font-size:var(--fs-xs);font-weight:700;color:var(--ink-3);background:var(--g1);border:1px solid var(--line);border-radius:6px;padding:3px 9px}
+    /* 右上角线性 icon(Lucide),中性灰描边、低存在感 */
+    .au .au-ic{position:absolute;top:1.7vh;right:1.1vw;width:2.5vw;max-width:42px;min-width:34px;aspect-ratio:1;border-radius:11px;background:var(--g1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-3)}
+    .au .au-ic svg{width:55%;height:55%;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
     .au .au-h{font-weight:700;font-size:var(--fs-h3);color:var(--ink);line-height:1.3}
     .au .au-h .en{display:block;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:500;color:var(--ink-3);margin-top:.25vh;letter-spacing:.02em}
     .au .au-d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.55}
@@ -667,7 +671,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .au .au-step b{color:var(--ink);font-weight:700}
     .au .au-step.out b{color:#1f7a4d}
     .au .au-src{margin-top:auto;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);line-height:1.5;padding-top:.7vh;border-top:1px dashed var(--line)}
-    .au .au-src b{color:var(--accent);font-weight:700}
+    .au .au-src b{color:var(--ink-2);font-weight:700}
   </style>
   <section class="slide s-gray">
     <div class="head">
@@ -679,32 +683,32 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <div class="auth">
-        <div class="au"><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div>
+        <div class="au"><div class="au-ic"><svg viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></svg></div><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div>
           <div class="au-step"><span class="au-k">依据</span>要把差异归因到「生态」，就得让生态成为<b>唯一变量</b>，任务 / 模型 / 评分口径全部固定。</div>
           <div class="au-step do"><span class="au-k">做法</span>同一套任务在 CUDA / 英伟达 与 CANN / 昇腾 <b>各实测一遍</b>，同题、同 Agent、同评分。</div>
           <div class="au-step out"><span class="au-k">指标</span>每项都是「昇腾实测 <b>vs</b> 英伟达实测」的<b>成对值</b>，差值即生态差距——非单边主观分。</div>
           <div class="au-src">依据 · <b>R. A. Fisher</b>《实验设计 The Design of Experiments》1935</div></div>
-        <div class="au"><span class="au-tag">拆解框架</span><div class="au-h">知识价值链<span class="en">information foraging</span></div>
+        <div class="au"><div class="au-ic"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><span class="au-tag">拆解框架</span><div class="au-h">知识价值链<span class="en">information foraging</span></div>
           <div class="au-step"><span class="au-k">依据</span>知识要起作用，得走完「<b>被找到 → 被取到 → 被用上</b>」整条链，任一关断掉价值就打折。</div>
           <div class="au-step do"><span class="au-k">做法</span>把「能不能用上知识」拆成四段分别测：<b>触达 → 质量 → 成本 → 产出</b>。</div>
           <div class="au-step out"><span class="au-k">指标</span>这条链决定了指标的<b>分层结构</b>：①②触达 / 质量 / ⑧成本 / ⑨⑩产出，逐关评。</div>
           <div class="au-src">依据 · <b>Pirolli &amp; Card</b> “Information Foraging” · Psychological Review 1999</div></div>
-        <div class="au"><span class="au-tag">触达维度</span><div class="au-h">可发现 / 可取回<span class="en">findability / retrievability</span></div>
+        <div class="au"><div class="au-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><span class="au-tag">触达维度</span><div class="au-h">可发现 / 可取回<span class="en">findability / retrievability</span></div>
           <div class="au-step"><span class="au-k">依据</span>信息架构与检索评估里，「能被找到」和「能取回正文」是<b>两个独立度量</b>，不能混。</div>
           <div class="au-step do"><span class="au-k">做法</span>触达这关拆成两项实测：搜不搜得到官方源、点进去 web_fetch 抓不抓得到正文。</div>
           <div class="au-step out"><span class="au-k">指标</span><b>① 可发现性</b>（命中排名 / 轮数）+ <b>② 可抓取性</b>（static / SSR / SPA / robots 形态）。</div>
           <div class="au-src">依据 · <b>Morville</b>《Ambient Findability》2005 ／ <b>Azzopardi &amp; Vinay</b> “Retrievability” · CIKM 2008</div></div>
-        <div class="au"><span class="au-tag">自带知识</span><div class="au-h">参数化知识<span class="en">parametric knowledge</span></div>
+        <div class="au"><div class="au-ic"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div><span class="au-tag">自带知识</span><div class="au-h">参数化知识<span class="en">parametric knowledge</span></div>
           <div class="au-step"><span class="au-k">依据</span>模型不检索也能凭训练时记住的<b>参数化知识</b>作答，RAG 评估里这是公认的一条独立来源。</div>
           <div class="au-step do"><span class="au-k">做法</span>把「模型自带知识」<b>单列一项</b>，按知识截止日到当前的 gap <b>客观罚分</b>（越旧越扣）。</div>
           <div class="au-step out"><span class="au-k">指标</span><b>⑦ 自带知识</b>——不靠检索的兜底能力，单独计、不和检索项混淆。</div>
           <div class="au-src">依据 · <b>Lewis et al.</b> RAG · NeurIPS 2020 ／ <b>Petroni et al.</b> “LMs as Knowledge Bases?” · EMNLP 2019</div></div>
-        <div class="au"><span class="au-tag">渠道合成</span><div class="au-h">噪声-OR 合成<span class="en">noisy-OR · 概率图模型</span></div>
+        <div class="au"><div class="au-ic"><svg viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></div><span class="au-tag">渠道合成</span><div class="au-h">噪声-OR 合成<span class="en">noisy-OR · 概率图模型</span></div>
           <div class="au-step"><span class="au-k">依据</span>官方 / 第三方 / 自带是三条<b>相对独立的渠道</b>，概率图里多条独立通路用 noisy-OR 合成。</div>
           <div class="au-step do"><span class="au-k">做法</span>综合分不做简单加权平均，而是 <b>noisy-OR</b>：任一渠道达标即可作答，全断才记 0。</div>
           <div class="au-step out"><span class="au-k">指标</span><b>⑪ 综合置信度</b>由三渠道 noisy-OR 合成——避免「一条够用却被均值拉低」。</div>
           <div class="au-src">依据 · <b>Judea Pearl</b>《Probabilistic Reasoning in Intelligent Systems》1988</div></div>
-        <div class="au"><span class="au-tag">可复现</span><div class="au-h">公式可重跑<span class="en">reproducibility</span></div>
+        <div class="au"><div class="au-ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div><span class="au-tag">可复现</span><div class="au-h">公式可重跑<span class="en">reproducibility</span></div>
           <div class="au-step"><span class="au-k">依据</span>ML 可复现性清单要求结论由<b>可重跑的流程</b>得出，而非主观研判。</div>
           <div class="au-step do"><span class="au-k">做法</span>每格分都由实测观测<b>代入公开公式</b>算出，<code>--diff</code> 一键重跑核对。</div>
           <div class="au-step out"><span class="au-k">指标</span><b>①–⑧</b> 全由 <code>score_metrics.py</code> 公式算出，第三方<b>可复现</b>。</div>
