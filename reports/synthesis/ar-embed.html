@@ -2022,6 +2022,8 @@ body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed f
 body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
 /* 单触点卡 ?tp 模式:卡铺满宽度(去 max-width)、隐卡自带头(deck 页头已给标题+分数) */
 body.embed.tponly .wrap{max-width:none!important;padding:0 6px!important;margin:0!important}
+/* 旅程页:grid 内容,解开 1180 限宽让它铺满 iframe 右半区(文字类 sec 仍保持限宽利于阅读) */
+body.embed.sec-journey .wrap{max-width:none!important;padding:0 4px!important;margin:0!important}
 /* 单触点·左右版:视角横幅占顶部整宽;下方左列(55%)两张对比图、右列(45%)摩擦指数+差异分析+建议 */
 body.embed.tponly .tpcard.tpsolo{max-width:none!important;width:100%!important;box-shadow:none!important;border:0!important;background:none!important;
   display:grid!important;grid-template-columns:64fr 36fr!important;column-gap:12px!important;row-gap:12px!important;align-content:start!important;overflow:visible!important}
@@ -2104,6 +2106,7 @@ body.embed.steps .tpcard{padding:8px 12px!important}
       return true;
     }
     if(/^L\d/.test(id)||id==='Lx')document.body.classList.add('steps');
+    document.body.classList.add('sec-'+id.replace(/[^a-z0-9]/gi,''));
     var t=document.getElementById(id);if(!t)return false;
     document.querySelectorAll('.floor').forEach(function(f){f.style.display='none';f.style.transform='';});
     var el=t;
