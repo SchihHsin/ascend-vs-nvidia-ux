@@ -45,7 +45,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:#f3f3f
 .prob p{font-size:13.5px}
 .evline{font-size:12.5px;color:#4a7a00;background:#F4FAEA;border-left:3px solid var(--nv);padding:6px 10px;border-radius:0 6px 6px 0;margin-top:8px}
 .evline b{color:#3d6500}
-.nvref{font-size:12.5px;background:#F0F7E6;border-left:3px solid var(--nv);padding:6px 10px;border-radius:0 6px 6px 0;margin-top:10px}
+/* 白底 + 左上角绿色径向光晕(光晕作背景层、文字自然在上),替代左描边 */
+.nvref{font-size:12.5px;background:radial-gradient(125% 95% at 0% 0%, rgba(118,185,0,.20), rgba(118,185,0,0) 52%), #fff;border:1px solid var(--line);padding:9px 13px;border-radius:11px;margin-top:10px}
 /* 无 demo 卡的轻量 Before/After 行（有 demo 的卡由 demo 的 duolab 承担） */
 .ba{font-size:12.5px;line-height:1.7;background:#f7f7f7;border-radius:8px;padding:8px 12px;margin-top:10px}
 .ba b.bx{color:#a33}.ba b.ax{color:#2e7d32}
@@ -906,7 +907,7 @@ body.embed .wrap{padding:0 30px!important;max-width:none!important;margin:0!impo
 body.embed .uxcard{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0!important;max-width:none!important}
 body.embed .uxcard.ux-show{display:flex!important;flex-direction:column;justify-content:center;height:100vh}
 body.embed .uxcard.ux-show.ux-flex{flex-direction:row;gap:28px;align-items:center}
-body.embed .ux-left{flex:0 0 39%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0}
+body.embed .ux-left{flex:0 0 32%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0}
 body.embed .ux-right{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:0}
 body.embed .ux-right .demo{margin:0!important}
 /* 左栏文字层次:眉标(灰·次)→ 建议(放大·菱形标记·重点)→ NVIDIA 范本(callout)→ 为何优先(脚注),拉开间距不堆叠 */
