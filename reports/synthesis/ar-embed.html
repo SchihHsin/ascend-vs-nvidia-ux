@@ -2020,8 +2020,9 @@ html.embed{background:transparent!important;overflow:hidden!important;scroll-sna
 html.embed body{background:transparent!important;overflow:hidden!important;height:100vh!important;scroll-snap-type:none!important}
 body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed footer,body.embed .footer{display:none!important}
 body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
-/* 单触点卡 ?tp 模式:卡铺满宽度(去 max-width)、隐卡自带头(deck 页头已给标题+分数) */
-body.embed.tponly .wrap{max-width:none!important;padding:0 6px!important;margin:0!important}
+/* 单触点卡 ?tp 模式:卡铺满宽度(去 max-width、padding 归 0 与 deck 题目左右对齐)、上下居中 */
+body.embed.tponly{height:100vh!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+body.embed.tponly .wrap{max-width:none!important;padding:0!important;margin:0!important;width:100%!important}
 /* 旅程页:grid 内容,解开 1180 限宽让它铺满 iframe 右半区(文字类 sec 仍保持限宽利于阅读) */
 body.embed.sec-journey .wrap{max-width:none!important;padding:0 4px!important;margin:0!important}
 /* 单触点·左右版:视角横幅占顶部整宽;下方左列(55%)两张对比图、右列(45%)摩擦指数+差异分析+建议 */
