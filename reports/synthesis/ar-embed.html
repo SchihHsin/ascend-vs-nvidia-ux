@@ -2040,7 +2040,7 @@ body.embed.tponly .tpcard.imgstack .tpcard-body{grid-template-columns:1fr!import
 body.embed.tponly .tpcard.imgstack .tpside.left{border-right:0!important;border-bottom:1px solid var(--g2)!important}
 /* 摩擦明细:hover 浮层弹出(绝对定位、不挤压布局、不触发整页缩放);覆盖 details 关闭时的 display:none */
 /* 摩擦明细:点击展开(details 原生开合),明细做成绝对定位浮层——浮在内容上、不挤压布局、不触发整页缩放 */
-body.embed.tponly .tpcard .djfi{position:relative!important}
+body.embed.tponly .tpcard .djfi{position:relative!important;overflow:visible!important}
 body.embed.tponly .tpcard .djfi>summary{cursor:pointer!important}
 body.embed.tponly .tpcard .djfi[open] .dj-pop{position:absolute!important;left:0!important;right:0!important;top:calc(100% + 6px)!important;z-index:60!important;
   background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;box-shadow:0 16px 40px -12px rgba(0,0,0,.32)!important;
