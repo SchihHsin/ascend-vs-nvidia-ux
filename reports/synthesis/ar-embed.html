@@ -513,7 +513,7 @@ a{color:inherit;text-decoration:none}
   <section class="floor" id="method">
     <div class="floor-hd"><span class="fno">摩擦指数</span><h2>评估方法论 · 开发者旅程摩擦指数</h2></div>
     <p class="floor-sub">本报告的所有分数,均由<b>可观测、可计数的指标</b>经公开公式<b>计算</b>得出,不含逐项主观打分。框架名为 <b>摩擦指数(Developer Journey Friction Index)</b>——测量开发者完成真实任务时遇到的、可被复现测量的摩擦。给定测量值与公式,任何人重算得同一结果。</p>
-    <h3 style="margin:6px 0 12px;font-size:16px;color:var(--ink)">一、理论依据(每一层均挂靠权威来源)</h3>
+    <h3 style="margin:6px 0 12px;font-size:16px;color:var(--ink)">一、理论依据</h3>
     <div class="ia-finds">
       <div class="ia-find"><div class="ia-find-h">ISO 9241-11:2018</div>可用性的国际标准定义——<b>有效性 / 效率 / 满意度</b>三要素,构成评估维度的总框架。</div>
       <div class="ia-find"><div class="ia-find-h">Nielsen / NN/g</div>启发式评估、<b>交互成本(Interaction Cost)</b>与<b>竞品可用性基准测试法</b>——竞品同维度对比的标准做法。</div>
@@ -2039,14 +2039,12 @@ body.embed.tponly .tpcard .verdict{grid-column:2!important;align-self:start!impo
 body.embed.tponly .tpcard.imgstack .tpcard-body{grid-template-columns:1fr!important}
 body.embed.tponly .tpcard.imgstack .tpside.left{border-right:0!important;border-bottom:1px solid var(--g2)!important}
 /* 摩擦明细:hover 浮层弹出(绝对定位、不挤压布局、不触发整页缩放);覆盖 details 关闭时的 display:none */
+/* 摩擦明细:点击展开(details 原生开合),明细做成绝对定位浮层——浮在内容上、不挤压布局、不触发整页缩放 */
 body.embed.tponly .tpcard .djfi{position:relative!important}
-body.embed.tponly .tpcard .djfi>summary{cursor:default!important;list-style:none!important}
-body.embed.tponly .tpcard .djfi>summary::-webkit-details-marker{display:none!important}
-body.embed.tponly .tpcard .djfi .dj-pop{display:block!important;position:absolute!important;left:0!important;right:0!important;top:calc(100% + 6px)!important;z-index:60!important;
+body.embed.tponly .tpcard .djfi>summary{cursor:pointer!important}
+body.embed.tponly .tpcard .djfi[open] .dj-pop{position:absolute!important;left:0!important;right:0!important;top:calc(100% + 6px)!important;z-index:60!important;
   background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;box-shadow:0 16px 40px -12px rgba(0,0,0,.32)!important;
-  max-height:62vh!important;overflow:auto!important;padding:4px 10px 10px!important;
-  opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .14s ease,transform .14s ease,visibility .14s}
-body.embed.tponly .tpcard .djfi:hover .dj-pop{opacity:1!important;visibility:visible!important;transform:none!important}
+  max-height:62vh!important;overflow:auto!important;padding:4px 10px 10px!important}
 /* rec(昇腾该怎么做):标签+主责同一行、说明文字另起一行铺满(窄右栏里三者并排会把 txt 挤成一条) */
 body.embed.tponly .tpcard .rec{display:grid!important;grid-template-columns:auto 1fr auto!important;grid-template-areas:"tag . dept" "txt txt txt"!important;column-gap:8px!important;row-gap:7px!important;align-items:center!important;padding:13px 18px!important}
 body.embed.tponly .tpcard .rec .rec-tag{grid-area:tag!important;margin-top:0!important}
@@ -2141,7 +2139,8 @@ body.embed.steps .tpcard{padding:8px 12px!important}
     /* 缩放适配:无滚动条,把楼层缩到刚好装下 viewport(防截断) */
     t.style.transform='';t.style.transformOrigin='top center';
     var vh=window.innerHeight, fh=t.getBoundingClientRect().height;
-    if(fh>vh-2){ t.style.transform='scale('+((vh-2)/fh).toFixed(3)+')'; }
+    /* journey 是宽幅 grid:宁可铺满宽度(矮了底部留白),也别为塞高度而整体缩小→变窄 */
+    if(id!=='journey' && fh>vh-2){ t.style.transform='scale('+((vh-2)/fh).toFixed(3)+')'; }
     return true;
   }
   function reveal(){document.documentElement.classList.remove('embed-wait');}
