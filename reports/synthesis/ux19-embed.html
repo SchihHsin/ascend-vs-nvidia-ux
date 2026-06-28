@@ -267,13 +267,13 @@ a.hit:hover{text-decoration:underline;color:#444}
 <div>
   <div class="card uxcard">
     <div class="who">提升 ④ 版本清晰度 · 覆盖全部 26 格 · 投入产出比最高（§5-3 反事实测算：综合分平均提升 0.10、16/26 格跨档）</div>
-    <h3>1. 版本体系统一收口：规范链接 + 配套查询工具</h3>
+    <h3>1. 版本体系统一收口：首选网址 + 配套查询工具</h3>
     <ul class="tight">
-      <li>为每篇文档设置<b>规范链接（canonical URL）</b>，统一指向当前推荐版本；历史版本保留，但搜索引擎与 AI 默认落至该版本。</li>
+      <li>为每篇文档指定<b>首选网址（canonical）</b>，统一指向当前推荐版本；历史版本保留，但搜索引擎与 AI 默认落至该版本。</li>
       <li>提供<b>配套查询器</b>：输入芯片型号与 PyTorch 版本，输出 CANN、driver、torch_npu 的<b>唯一</b>配套组合（实测中该配套需手工比对 6 个版本号）。</li>
       <li>页面顶部明确标注<b>适用版本与最后验证日期</b>，为 AI 判断内容时效提供直接依据。</li>
     </ul>
-    <div class="nvref"><b>NVIDIA 的做法（2026-06-11 核实）：</b>① 规范链接机制——<code>docs.nvidia.com/cuda/</code> 始终指向当前版本，历史版本统一归入 <a href="https://docs.nvidia.com/cuda/archive/" target="_blank" rel="noopener">/cuda/archive/</a>，同一文档不会多版本并存混排；② 配套查询的现成范本是 <a href="https://pytorch.org/get-started/locally/" target="_blank" rel="noopener">PyTorch 官方安装选择器</a>——按五个维度选择即可输出唯一安装命令。这正是 CUDA 侧 ④ 版本清晰度 26 格无一低于 3 分的原因。</div>
+    <div class="nvref"><b>NVIDIA 的做法（2026-06-11 核实）：</b>① 首选网址机制——<code>docs.nvidia.com/cuda/</code> 始终指向当前版本，历史版本统一归入 <a href="https://docs.nvidia.com/cuda/archive/" target="_blank" rel="noopener">/cuda/archive/</a>，同一文档不会多版本并存混排；② 配套查询的现成范本是 <a href="https://pytorch.org/get-started/locally/" target="_blank" rel="noopener">PyTorch 官方安装选择器</a>——按五个维度选择即可输出唯一安装命令。这正是 CUDA 侧 ④ 版本清晰度 26 格无一低于 3 分的原因。</div>
     <div class="demotitle">Demo · 左：现状的多版本散乱（实测）；右：建议的配套查询器（下拉框可实际选择） <span class="mockdisc">右侧为示意，占位数据非真实配套</span></div>
 <div class="demo">
   <div class="duo">
@@ -284,7 +284,7 @@ a.hit:hover{text-decoration:underline;color:#444}
         <div style="border-bottom:1px dashed #eee;padding:5px 0"><b style="color:#1a0dab">将ONNX模型转换为OM模型 - CANN <b style="color:var(--hw)">商用版 8.0.RC2</b></b><br><a class="hit" href="https://www.hiascend.com/document/detail/zh/canncommercial/80RC2/quickstart/quickstart/quickstart_18_0012.html" target="_blank" rel="noopener">hiascend.com/document/detail/zh/canncommercial/<b>80RC2</b>/quickstart/quickstart/quickstart_18_0012.html ↗</a></div>
         <div style="border-bottom:1px dashed #eee;padding:5px 0"><b style="color:#1a0dab">将ONNX模型转换为OM模型 - CANN <b style="color:var(--hw)">商用版 8.0.RC3</b></b><br><a class="hit" href="https://www.hiascend.com/document/detail/zh/canncommercial/80RC3/quickstart/quickstart/quickstart_18_0010.html" target="_blank" rel="noopener">hiascend.com/document/detail/zh/canncommercial/<b>80RC3</b>/quickstart/quickstart/quickstart_18_0010.html ↗</a></div>
         <div style="border-bottom:1px dashed #eee;padding:5px 0"><b style="color:#1a0dab">将ONNX模型转换为OM模型 - CANN <b style="color:var(--hw)">社区版 800alpha001</b></b><br><a class="hit" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/800alpha001/quickstart/quickstart/quickstart_18_0010.html" target="_blank" rel="noopener">hiascend.com/document/detail/zh/CANNCommunityEdition/<b>800alpha001</b>/quickstart/quickstart/quickstart_18_0010.html ↗</a></div>
-        <p style="color:#999;font-size:11.5px;margin-top:8px">三条均为<b>现网真实地址、可点击验证</b>（2026-06-11 复核可访问，其中两条经验证正文同含 atc 命令）：同一内容在三棵版本树各存一份、互不指向规范链接——人与 AI 均可能随机落入其中某一版。<br>配套关系另散落于三处（I 任务实测）：gitee 仓 README、PyPI 页、hiascend 配套表，driver↔CANN↔torch↔torch_npu 双轴交叉、<b>需手工比对 6 个版本号</b>。</p>
+        <p style="color:#999;font-size:11.5px;margin-top:8px">三条均为<b>现网真实地址、可点击验证</b>（2026-06-11 复核可访问，其中两条经验证正文同含 atc 命令）：同一内容在三棵版本树各存一份、互不指向首选网址——人与 AI 均可能随机落入其中某一版。<br>配套关系另散落于三处（I 任务实测）：gitee 仓 README、PyPI 页、hiascend 配套表，driver↔CANN↔torch↔torch_npu 双轴交叉、<b>需手工比对 6 个版本号</b>。</p>
       </div></div>
     </div>
     <div class="good">
