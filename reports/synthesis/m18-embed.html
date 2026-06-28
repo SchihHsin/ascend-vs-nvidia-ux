@@ -114,12 +114,8 @@
   .evo .step .txt .corr{display:inline-block;font-size:9px;font-weight:800;color:#fff;background:var(--hw);border-radius:4px;padding:1px 6px;margin-right:5px;letter-spacing:.3px;}
 
   /* 指标定义卡 */
-  .mcard{background:#fff;border:1px solid var(--g6);border-radius:11px;padding:15px 18px;margin:11px 0;border-left:5px solid var(--g4);}
-  .mcard.touch{border-left-color:var(--touch);}
-  .mcard.qual{border-left-color:var(--qual);}
-  .mcard.cost{border-left-color:var(--cost);}
-  .mcard.out{border-left-color:var(--out);}
-  .mcard.sum{border-left-color:#5b6070;}
+  /* 透白玻璃卡(去左描边,对齐 deck .card/.au 风格) */
+  .mcard{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);border:1px solid rgba(255,255,255,.7);border-radius:12px;box-shadow:0 9px 26px -15px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.85);padding:15px 18px;margin:11px 0;}
   .mhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
   .mhead .nm{font-size:14.5px;font-weight:900;color:var(--g1);}
   .mhead .en{font-size:10px;color:var(--g4);letter-spacing:.3px;}
