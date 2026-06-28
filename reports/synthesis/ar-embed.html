@@ -2024,11 +2024,12 @@ body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
 body.embed.tponly .wrap{max-width:none!important;padding:0 6px!important;margin:0!important}
 /* 单触点·左右版:视角横幅占顶部整宽;下方左列(55%)两张对比图、右列(45%)摩擦指数+差异分析+建议 */
 body.embed.tponly .tpcard.tpsolo{max-width:none!important;width:100%!important;box-shadow:none!important;border:0!important;background:none!important;
-  display:grid!important;grid-template-columns:64fr 36fr!important;column-gap:18px!important;row-gap:8px!important;align-content:start!important;overflow:visible!important}
+  display:grid!important;grid-template-columns:64fr 36fr!important;column-gap:12px!important;row-gap:12px!important;align-content:start!important;overflow:visible!important}
 body.embed.tponly .tpcard .tpcard-hd{display:none!important}
 body.embed.tponly .tpcard .pov{grid-column:1/3!important;grid-row:1!important;margin:0!important}
-body.embed.tponly .tpcard .tpcard-body{grid-column:1!important;grid-row:2!important;align-self:start!important}
-body.embed.tponly .tpcard .djfi{grid-column:1!important;grid-row:3!important;margin:8px 0 0!important}
+/* 两张对比图也包成卡片(与视角/摩擦/差异分析一致);间距全交给 grid 的 12px gap 统一 */
+body.embed.tponly .tpcard .tpcard-body{grid-column:1!important;grid-row:2!important;align-self:start!important;background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;padding:10px 6px!important;overflow:hidden!important}
+body.embed.tponly .tpcard .djfi{grid-column:1!important;grid-row:3!important;margin:0!important}
 body.embed.tponly .tpcard .verdict{grid-column:2!important;grid-row:2/4!important;align-self:start!important;margin:0!important;border-top:0!important;border-radius:12px!important}
 /* rec(昇腾该怎么做):标签+主责同一行、说明文字另起一行铺满(窄右栏里三者并排会把 txt 挤成一条) */
 body.embed.tponly .tpcard .rec{display:grid!important;grid-template-columns:auto 1fr auto!important;grid-template-areas:"tag . dept" "txt txt txt"!important;column-gap:8px!important;row-gap:7px!important;align-items:center!important;padding:13px 18px!important}
@@ -2037,9 +2038,8 @@ body.embed.tponly .tpcard .rec .rec-dept{grid-area:dept!important;justify-self:e
 body.embed.tponly .tpcard .rec .rec-txt{grid-area:txt!important}
 /* 差异分析列表项右内边距=0,窄右栏里文字贴右边(左有 ◆ 缩进 26px、右却 0,失衡)——补右内边距 */
 body.embed.tponly .tpcard .concl li{padding-right:22px!important}
-/* 图填满各自半栏,消除 width:auto 留下的大空隙 */
-body.embed.tponly .tpcard .tpside{padding:2px 9px 6px!important}
-body.embed.tponly .tpcard .tpside.left{padding-left:0!important}
+/* 图填满各自半栏,消除 width:auto 留下的大空隙;两侧对称内边距,中间靠 .tpside.left 的分隔线 */
+body.embed.tponly .tpcard .tpside{padding:2px 11px 4px!important}
 body.embed.tponly .tpcard .shot,body.embed.tponly .tpcard .mock{width:100%!important;height:auto!important;max-height:60vh!important;object-fit:contain}
 body.embed.tponly .tpcard .shotcap{display:none!important}
 /* 单触点模式:tpgrid 不再分两列,让唯一卡铺满整宽 */
