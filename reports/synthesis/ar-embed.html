@@ -1699,8 +1699,8 @@ function djfiTableHtml(t){
    return head+cells;
  }).join('');
  return `<details class="djfi"><summary><span class="dj-badge">摩擦指数 实测明细</span>触点分由公式算出 · 昇腾 <b class="a">${a.tp}</b> / NVIDIA <b class="n">${nv.tp}</b><span class="dj-open">点开看每项实测值 → 归一化分</span></summary>
-   <div class="dj-scroll"><table class="dj-tbl"><thead><tr><th>维度分 / 指标(锚点)</th><th class="a">昇腾</th><th class="n">NVIDIA</th></tr></thead><tbody>${rows}</tbody></table></div>
-   <div class="dj-note">维度分 = 维度内各指标归一化分的算术平均;触点分 = 5 维度分等权平均。归一化:数值 <code>(worst−实测)÷(worst−best)×100</code>;摩擦布尔 有=0/无=100;能力布尔 有=100/无=0;比例 ×100。<b>缺测</b>项排除出计算、不填值。</div></details>`;
+   <div class="dj-pop"><div class="dj-scroll"><table class="dj-tbl"><thead><tr><th>维度分 / 指标(锚点)</th><th class="a">昇腾</th><th class="n">NVIDIA</th></tr></thead><tbody>${rows}</tbody></table></div>
+   <div class="dj-note">维度分 = 维度内各指标归一化分的算术平均;触点分 = 5 维度分等权平均。归一化:数值 <code>(worst−实测)÷(worst−best)×100</code>;摩擦布尔 有=0/无=100;能力布尔 有=100/无=0;比例 ×100。<b>缺测</b>项排除出计算、不填值。</div></div></details>`;
 }
 function renderDjfiRules(){
  const el=document.getElementById('djfiRules');if(!el)return;
@@ -2026,11 +2026,25 @@ body.embed.tponly .wrap{max-width:none!important;padding:0 6px!important;margin:
 body.embed.tponly .tpcard.tpsolo{max-width:none!important;width:100%!important;box-shadow:none!important;border:0!important;background:none!important;
   display:grid!important;grid-template-columns:64fr 36fr!important;column-gap:12px!important;row-gap:12px!important;align-content:start!important;overflow:visible!important}
 body.embed.tponly .tpcard .tpcard-hd{display:none!important}
-body.embed.tponly .tpcard .pov{grid-column:1/3!important;grid-row:1!important;margin:0!important}
-/* 两张对比图也包成卡片(与视角/摩擦/差异分析一致);间距全交给 grid 的 12px gap 统一 */
-body.embed.tponly .tpcard .tpcard-body{grid-column:1!important;grid-row:2!important;align-self:start!important;background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;padding:10px 6px!important;overflow:hidden!important}
-body.embed.tponly .tpcard .djfi{grid-column:1!important;grid-row:3!important;margin:0!important}
-body.embed.tponly .tpcard .verdict{grid-column:2!important;grid-row:2/4!important;align-self:start!important;margin:0!important;border-top:0!important;border-radius:12px!important}
+body.embed.tponly .tpcard .pov{grid-column:1/3!important;margin:0!important}
+/* 左栏容器:摩擦分(上)+ 两图卡紧挨成一列,右侧再高也不被撑开(空隙留底部、不插在两卡之间) */
+body.embed.tponly .tpcard .tpleft{grid-column:1!important;display:flex!important;flex-direction:column!important;gap:12px!important;align-self:start!important;min-width:0!important}
+/* 两张对比图也包成卡片(与视角/摩擦/差异分析一致) */
+body.embed.tponly .tpcard .tpcard-body{align-self:start!important;background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;padding:10px 6px!important;overflow:hidden!important;margin:0!important}
+body.embed.tponly .tpcard .djfi{margin:0!important}
+body.embed.tponly .tpcard .verdict{grid-column:2!important;align-self:start!important;margin:0!important;border-top:0!important;border-radius:12px!important}
+/* 长条图(很宽很矮)自动改上下排,放大更清楚;普通比例保持左右 */
+body.embed.tponly .tpcard.imgstack .tpcard-body{grid-template-columns:1fr!important}
+body.embed.tponly .tpcard.imgstack .tpside.left{border-right:0!important;border-bottom:1px solid var(--g2)!important}
+/* 摩擦明细:hover 浮层弹出(绝对定位、不挤压布局、不触发整页缩放);覆盖 details 关闭时的 display:none */
+body.embed.tponly .tpcard .djfi{position:relative!important}
+body.embed.tponly .tpcard .djfi>summary{cursor:default!important;list-style:none!important}
+body.embed.tponly .tpcard .djfi>summary::-webkit-details-marker{display:none!important}
+body.embed.tponly .tpcard .djfi .dj-pop{display:block!important;position:absolute!important;left:0!important;right:0!important;top:calc(100% + 6px)!important;z-index:60!important;
+  background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;box-shadow:0 16px 40px -12px rgba(0,0,0,.32)!important;
+  max-height:62vh!important;overflow:auto!important;padding:4px 10px 10px!important;
+  opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .14s ease,transform .14s ease,visibility .14s}
+body.embed.tponly .tpcard .djfi:hover .dj-pop{opacity:1!important;visibility:visible!important;transform:none!important}
 /* rec(昇腾该怎么做):标签+主责同一行、说明文字另起一行铺满(窄右栏里三者并排会把 txt 挤成一条) */
 body.embed.tponly .tpcard .rec{display:grid!important;grid-template-columns:auto 1fr auto!important;grid-template-areas:"tag . dept" "txt txt txt"!important;column-gap:8px!important;row-gap:7px!important;align-items:center!important;padding:13px 18px!important}
 body.embed.tponly .tpcard .rec .rec-tag{grid-area:tag!important;margin-top:0!important}
@@ -2070,10 +2084,22 @@ body.embed.steps .tpcard{padding:8px 12px!important}
         e.style.display='';e=par;
       }
       document.body.style.padding='0';document.body.style.margin='0';
-      tc.style.display='';tc.classList.add('tpsolo');window.scrollTo(0,0);fit(tc);
+      tc.style.display='';tc.classList.add('tpsolo');
+      /* 左栏:把 摩擦分(djfi,置顶)+ 两图卡 包进 .tpleft,使其紧挨、不被右侧高卡撑开 */
+      var _b=tc.querySelector('.tpcard-body'),_d=tc.querySelector('.djfi');
+      if(_b&&!tc.querySelector(':scope > .tpleft')){
+        var _L=document.createElement('div');_L.className='tpleft';
+        _b.parentNode.insertBefore(_L,_b);
+        if(_d)_L.appendChild(_d);_L.appendChild(_b);   /* 分数在上、图在下 */
+      }
+      /* 长条形(很宽很矮)的两图改上下排,放大更清楚;普通比例保持左右 */
+      var _imgs=tc.querySelectorAll('.tpcard-body img');
+      function _decide(){var strip=_imgs.length>0;Array.prototype.forEach.call(_imgs,function(im){if(!im.naturalWidth||im.naturalHeight/im.naturalWidth>0.4)strip=false;});tc.classList.toggle('imgstack',strip);}
+      _decide();
+      window.scrollTo(0,0);fit(tc);
       if(!tc.dataset.ro){tc.dataset.ro='1';
         if(window.ResizeObserver){new ResizeObserver(function(){fit(tc);}).observe(tc);}
-        tc.querySelectorAll('img').forEach(function(im){if(im.complete)fit(tc);else im.addEventListener('load',function(){fit(tc);});});
+        tc.querySelectorAll('img').forEach(function(im){if(im.complete){_decide();fit(tc);}else im.addEventListener('load',function(){_decide();fit(tc);});});
       }
       return true;
     }
