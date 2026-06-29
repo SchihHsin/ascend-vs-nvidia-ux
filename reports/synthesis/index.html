@@ -917,20 +917,20 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">实测暴露的七个问题：版本混乱 +「自带 / 第三方双薄」是结构性缺口</span></div>
+        <div class="brand"><span class="ttl">实测暴露的七个问题：版本混乱 +「自带 / 第三方双薄」是系统性短板</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「七大问题」</div>
       </div>
       <div class="head-r">16/ AI · 七个问题</div>
     </div>
     <div class="body-area">
       <div class="pg7">
-        <div class="p7 struct"><div class="p7top"><span class="p7n">1</span><span class="p7tag">结构性</span></div><div class="p7h">版本体系混乱（影响全流程）</div><div class="p7d">同一文档散落在多棵版本树，缺少明确的当前推荐版本。</div>
+        <div class="p7 struct"><div class="p7top"><span class="p7n">1</span><span class="p7tag">系统性</span></div><div class="p7h">版本体系混乱（影响全流程）</div><div class="p7d">同一文档散落在多棵版本树，缺少明确的当前推荐版本。</div>
           <div class="mm"><div class="mbar"><i></i><i></i><i></i><span>搜「atc 模型转换」命中</span></div><div class="mbd">
             <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">商用 8.0RC2</span></div>
             <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">商用 8.0RC3</span></div>
             <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">社区 800alpha</span></div></div></div>
           <div class="p7e">④版本清晰度 26 格 12 格＝2 分</div></div>
-        <div class="p7 struct"><div class="p7top"><span class="p7n">2</span><span class="p7tag">结构性</span></div><div class="p7h">模型自带知识偏薄</div><div class="p7d">AI 不检索就答不了，CUDA 多数能直接答；检索一断答案即坍塌、无兜底。</div>
+        <div class="p7 struct"><div class="p7top"><span class="p7n">2</span><span class="p7tag">系统性</span></div><div class="p7h">模型自带知识偏薄</div><div class="p7d">AI 不检索就答不了，CUDA 多数能直接答；检索一断答案即坍塌、无兜底。</div>
           <div class="mm"><div class="mbd"><div class="mcmp"><span style="color:#8a909a;font-family:'JetBrains Mono';font-size:10px">CUDA</span><span class="mok">不检索也能答 ✓</span></div><div class="mcmp"><span style="color:#8a909a;font-family:'JetBrains Mono';font-size:10px">CANN</span><span class="mno">不检索就答不了 ✕</span></div></div></div>
           <div class="p7e">⑦自带均 2.85 vs CUDA ≥ 4</div></div>
         <div class="p7"><div class="p7top"><span class="p7n">3</span></div><div class="p7h">第三方生态少而同质</div><div class="p7d">多集中在 CSDN／华为云，知乎反爬抓不到；对 Agent 有效的第三方更窄。</div>
@@ -948,7 +948,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="p7"><div class="p7top"><span class="p7n">7</span></div><div class="p7h">检索成本尖刺</div><div class="p7d">多数任务成本正常，个别任务一次抓取失败即把成本打穿、响应变慢。</div>
           <div class="mm"><div class="mbd"><svg class="mspk" viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div></div>
           <div class="p7e">⑧检索成本 D / K / O ＝ 1</div></div>
-        <div class="p7 sum"><div class="sh">结论</div><div class="st">三个结构性缺口：<b>① 版本体系混乱</b>；<b>② 模型自带知识与第三方生态同时偏薄</b>——检索一旦失败便无兜底；<b>③ 越到算子自研等深层场景可用性越低</b>，自定义算子是全栈最低谷。上手侧已接近 CUDA，应据此排定优先级，而非泛泛「改进文档」。</div></div>
+        <div class="p7 sum"><div class="sh">结论</div><div class="st">三个系统性短板：<b>① 版本体系混乱</b>；<b>② 模型自带知识与第三方生态同时偏薄</b>——检索一旦失败便无兜底；<b>③ 越到算子自研等深层场景可用性越低</b>，自定义算子是全栈最低谷。上手侧已接近 CUDA，应据此排定优先级，而非泛泛「改进文档」。</div></div>
       </div>
     </div>
   </section>
