@@ -881,20 +881,35 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <!-- 灰底：AI 侧 · 七个问题（opknow 19 §1，重排） -->
   <style>
     .pg7{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:1vw;flex:1;min-height:0}
-    .p7{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:13px;padding:1.6vh 1.1vw;display:flex;flex-direction:column;justify-content:center;gap:.9vh;position:relative;overflow:hidden}
+    .p7{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);border:1px solid rgba(255,255,255,.7);box-shadow:0 9px 26px -15px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.85);border-radius:13px;padding:1.6vh 1.1vw;display:flex;flex-direction:column;justify-content:center;gap:.9vh;position:relative;overflow:hidden}
     .p7 .p7n{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-h3);color:#fff;background:#3D4452;width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center}
     .p7 .p7top{display:flex;align-items:center;gap:.5em}
     .p7 .p7tag{font-size:var(--fs-xs);font-weight:700;padding:2px 8px;border-radius:6px;background:var(--g-red);color:#fff;letter-spacing:.02em}
     .p7 .p7h{font-weight:700;font-size:var(--fs-body);color:var(--ink);line-height:1.32}
     .p7 .p7d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5}
     .p7 .p7e{margin-top:.4vh;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);background:rgba(0,0,0,.04);border-radius:6px;padding:3px 8px;align-self:flex-start}
-    .p7.struct{border-color:rgba(255,90,110,.4);background:rgba(255,90,110,.05)}
+    .p7.struct{border-color:rgba(255,90,110,.5)}
     .p7.struct .p7n{background:var(--g-red)}
     .p7.sum{background:var(--g-ink);border:0;color:#fff;justify-content:center;gap:1vh}
-    /* 每张问题卡右上角淡水印线性图标(配图,中性灰、压文字下层) */
-    .p7>*{position:relative;z-index:1}
-    .p7-ic{position:absolute;z-index:0;top:1vh;right:.7vw;width:clamp(60px,4.6vw,86px);aspect-ratio:1;color:var(--ink);opacity:.06;pointer-events:none}
-    .p7-ic svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    /* 每张问题卡配一个内容相关小示意 mini-mock */
+    .p7 .mm{margin-top:.4vh;border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden;font-size:11px;line-height:1.45}
+    .p7 .mm .mbar{background:#f6f7f9;border-bottom:1px solid var(--line);padding:4px 8px;display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono';font-size:10px;color:#8a909a}
+    .p7 .mm .mbar i{width:6px;height:6px;border-radius:50%;background:#d9dde3;display:inline-block}
+    .p7 .mm .mbd{padding:6px 9px}
+    .p7 .vrow{display:flex;justify-content:space-between;gap:6px;padding:2.5px 0;border-bottom:1px dashed #eee;font-family:'JetBrains Mono'}
+    .p7 .vrow:last-child{border-bottom:0}
+    .p7 .vbadge{font-weight:700;color:#fff;background:var(--hw,#C7000B);border-radius:4px;padding:0 5px;font-size:10px;white-space:nowrap}
+    .p7 .mzero{text-align:center;color:#b9bdc4;padding:7px 0;font-size:11.5px;font-family:'Noto Sans SC'}
+    .p7 .mkv b{color:var(--g-red,#E5484D)}
+    .p7 .mcmp{display:flex;gap:6px;align-items:baseline;padding:1.5px 0}
+    .p7 .mok{color:#2E7D46;font-weight:700}.p7 .mno{color:var(--g-red,#E5484D);font-weight:700}
+    .p7 .mchips{display:flex;gap:5px;flex-wrap:wrap}
+    .p7 .mchip{font-size:10.5px;border:1px solid var(--line);border-radius:20px;padding:2px 9px;background:#fafbfc}
+    .p7 .mchip.bad{border-color:#f0c0c2;background:#FDECEC;color:var(--g-red,#E5484D)}
+    .p7 .mbars{display:flex;align-items:flex-end;gap:13px;height:42px;padding:4px 4px 0}
+    .p7 .mbars .mb{width:28px;background:linear-gradient(#9aa3b2,#c2c8d2);border-radius:3px 3px 0 0;position:relative}
+    .p7 .mbars .mb span{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:9.5px;color:var(--ink-2);white-space:nowrap}
+    .p7 svg.mspk{display:block;width:100%;height:42px}
     .p7.sum .sh{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
     .p7.sum .st{font-weight:700;font-size:var(--fs-body);line-height:1.5}
     .p7.sum .st b{color:#FFB4B4}
@@ -909,13 +924,30 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <div class="pg7">
-        <div class="p7 struct"><div class="p7-ic"><svg viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div><div class="p7top"><span class="p7n">1</span><span class="p7tag">结构性</span></div><div class="p7h">版本体系混乱（影响全流程）</div><div class="p7d">同一文档散在 8.0RC2 / 80RC3 / 82RC1 / 商用·社区 多个版本树，缺少明确的当前推荐版本；CANN↔driver↔torch_npu 多轴配套，配错一轴即无法运行。</div><div class="p7e">④版本清晰度 26 格 12 格＝2 分</div></div>
-        <div class="p7 struct"><div class="p7-ic"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div><div class="p7top"><span class="p7n">2</span><span class="p7tag">结构性</span></div><div class="p7h">模型自带知识偏薄</div><div class="p7d">AI「不检索就答不了」，而 CUDA 多数能直接答；检索成了唯一来源，链路一断答案就坍塌、没有兜底。</div><div class="p7e">⑦自带均 2.85 vs CUDA ≥ 4</div></div>
-        <div class="p7"><div class="p7-ic"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="p7top"><span class="p7n">3</span></div><div class="p7h">第三方生态少而同质</div><div class="p7d">多集中在 CSDN / 华为云，知乎反爬 403 抓不到；对 Agent 而言有效第三方比人眼看到的更窄。</div><div class="p7e">⑤丰富度 K/M/N/S/X 仅 2</div></div>
-        <div class="p7"><div class="p7-ic"><svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9.5 12.5 5 5"/><path d="m14.5 12.5-5 5"/></svg></div><div class="p7top"><span class="p7n">4</span></div><div class="p7h">官方单页应用（SPA）抓不到 → 收窄成单点</div><div class="p7d">「全站抓不到」被实测推翻：仅 D（自定义算子）核心 how-to 真抓不到，其余 SSR 可抓——是补一个子树、不是重做网站。</div><div class="p7e">②可抓取性 26 格仅 D＝2</div></div>
-        <div class="p7"><div class="p7-ic"><svg viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></div><div class="p7top"><span class="p7n">5</span></div><div class="p7h">抓得到 ≠ 够用</div><div class="p7d">错误码命中专属页、也抓得到，但内容是泛化兜底（原因栏 N/A、只有 2 条通用建议），与「抓不到」是两种正交失败。</div><div class="p7e">E：②4 但 ③2，综合 .55 倒数第二</div></div>
-        <div class="p7"><div class="p7-ic"><svg viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></div><div class="p7top"><span class="p7n">6</span></div><div class="p7h">采纳漏斗：越深越塌</div><div class="p7d">上手侧（迁移 / 安装 / 部署）接近 CUDA，越往算子自研越单调下滑；自定义算子 D 综合 .41 是全栈深谷。</div><div class="p7e">三组均值 .77 → .74 → .67</div></div>
-        <div class="p7"><div class="p7-ic"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="p7top"><span class="p7n">7</span></div><div class="p7h">检索成本尖刺</div><div class="p7d">多数任务成本正常，但个别任务一次抓取失败就把成本打穿，Agent 过程中「看似无目的检索」、响应慢。</div><div class="p7e">⑧检索成本 D / K / O ＝ 1</div></div>
+        <div class="p7 struct"><div class="p7top"><span class="p7n">1</span><span class="p7tag">结构性</span></div><div class="p7h">版本体系混乱（影响全流程）</div><div class="p7d">同一文档散落在多棵版本树，缺少明确的当前推荐版本。</div>
+          <div class="mm"><div class="mbar"><i></i><i></i><i></i><span>搜「atc 模型转换」命中</span></div><div class="mbd">
+            <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">商用 8.0RC2</span></div>
+            <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">商用 8.0RC3</span></div>
+            <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">社区 800alpha</span></div></div></div>
+          <div class="p7e">④版本清晰度 26 格 12 格＝2 分</div></div>
+        <div class="p7 struct"><div class="p7top"><span class="p7n">2</span><span class="p7tag">结构性</span></div><div class="p7h">模型自带知识偏薄</div><div class="p7d">AI 不检索就答不了，CUDA 多数能直接答；检索一断答案即坍塌、无兜底。</div>
+          <div class="mm"><div class="mbd"><div class="mcmp"><span style="color:#8a909a;font-family:'JetBrains Mono';font-size:10px">CUDA</span><span class="mok">不检索也能答 ✓</span></div><div class="mcmp"><span style="color:#8a909a;font-family:'JetBrains Mono';font-size:10px">CANN</span><span class="mno">不检索就答不了 ✕</span></div></div></div>
+          <div class="p7e">⑦自带均 2.85 vs CUDA ≥ 4</div></div>
+        <div class="p7"><div class="p7top"><span class="p7n">3</span></div><div class="p7h">第三方生态少而同质</div><div class="p7d">多集中在 CSDN／华为云，知乎反爬抓不到；对 Agent 有效的第三方更窄。</div>
+          <div class="mm"><div class="mbd"><div class="mchips"><span class="mchip">CSDN ×2</span><span class="mchip">华为云 bbs</span><span class="mchip bad">知乎 403 ✕</span></div></div></div>
+          <div class="p7e">⑤丰富度 K/M/N/S/X 仅 2</div></div>
+        <div class="p7"><div class="p7top"><span class="p7n">4</span></div><div class="p7h">官方 SPA 抓不到 → 收窄成单点</div><div class="p7d">仅 D（自定义算子）核心 how-to 真抓不到，其余 SSR 可抓——补一个子树即可。</div>
+          <div class="mm"><div class="mbar"><i></i><i></i><i></i><span>Agent 抓 opdevg 页</span></div><div class="mbd" style="font-family:'JetBrains Mono';color:#999;font-size:10.5px"><div>&lt;title&gt;算子开发-CANN文档</div><div>导航：首页／文档／社区…</div><div class="mzero">—— 正文 0 字 ——</div></div></div>
+          <div class="p7e">②可抓取性 26 格仅 D＝2</div></div>
+        <div class="p7"><div class="p7top"><span class="p7n">5</span></div><div class="p7h">抓得到 ≠ 够用</div><div class="p7d">错误码命中专属页、也抓得到，但内容是泛化兜底，与「抓不到」是两种失败。</div>
+          <div class="mm"><div class="mbd" style="font-family:'JetBrains Mono'"><div style="font-weight:700;color:#222">EZ9999 AclNN Inner Error</div><div class="mkv" style="margin-top:4px">可能原因：<b>N/A</b></div><div style="color:#999">仅 2 条通用建议 · 无排查步骤</div></div></div>
+          <div class="p7e">E：②4 但 ③2，综合 .55 倒二</div></div>
+        <div class="p7"><div class="p7top"><span class="p7n">6</span></div><div class="p7h">采纳漏斗：越深越塌</div><div class="p7d">上手侧接近 CUDA，越往算子自研越单调下滑；自定义算子 D 是全栈低谷。</div>
+          <div class="mm"><div class="mbd"><div class="mbars"><div class="mb" style="height:34px"><span>.77</span></div><div class="mb" style="height:30px"><span>.74</span></div><div class="mb" style="height:21px;background:linear-gradient(#e07a7d,#f0b3b5)"><span>.67</span></div></div></div></div>
+          <div class="p7e">三组均值 .77 → .74 → .67</div></div>
+        <div class="p7"><div class="p7top"><span class="p7n">7</span></div><div class="p7h">检索成本尖刺</div><div class="p7d">多数任务成本正常，个别任务一次抓取失败即把成本打穿、响应变慢。</div>
+          <div class="mm"><div class="mbd"><svg class="mspk" viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div></div>
+          <div class="p7e">⑧检索成本 D / K / O ＝ 1</div></div>
         <div class="p7 sum"><div class="sh">一句话收口</div><div class="st">结构性缺口＝<b>① 版本混乱</b> ＋ <b>② 自带 / 第三方双薄</b>（检索没兜底）＋ <b>③ 深水区单点塌方</b>（自定义算子）。上手侧已接近 CUDA，优先级按此排，而非泛泛「改进文档」。</div></div>
       </div>
     </div>
