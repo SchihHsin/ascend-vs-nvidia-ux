@@ -391,10 +391,32 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
       <li>API 参考提供结构化索引（JSON/CSV 的算子-版本-签名表），使 AI 一次抓取即获全量，无需逐页翻阅。</li>
       <li>长期还可间接提升 ⑦：可抓取的官方语料更易进入下一代模型的训练集，逐步弥补「自带知识薄」这一最深的短板。</li>
     </ul>
-    <div class="ba"><b class="bx">✕ Before（2026-06-11 实测）</b>：<code>hiascend.com/llms.txt</code> → <b>404</b>（有 robots.txt、无 llms.txt）；无「View as Markdown」出口、无结构化算子索引——Agent 只能逐页抓取面向人设计的页面。</div>
-    <div class="nvref"><b>NVIDIA 的做法（2026-06-11 核实）：</b><a href="https://docs.nvidia.com/llms.txt" target="_blank" rel="noopener">docs.nvidia.com/llms.txt</a> 已上线——一份汇总索引列出约 20 个产品（CUDA Toolkit、NeMo、NIM、Jetson 等）各自的 llms.txt，部分产品还提供 llms-full.txt 全文版（2026-04-09 更新）。其 Sphinx 文档管线还默认产出机器可读索引 <code>objects.inv</code>（PyTorch 文档站实测存在，全量 API 清单 188KB）——「结构化 API 索引」亦有现成对照。即本卡的两条建议，NVIDIA 均已落地。</div>
-    <div class="ba"><b class="ax">✓ After（建议落地后）</b>：Agent 一次抓取 <code>llms-full.txt</code> 即获全量官方正文，逐页抓取降为兜底——② 整体提升至 5、D 的受阻同步解除（§5-3 反事实测算：综合分平均 +0.027、4 格跨档）。</div>
-    <div class="why">⑦ 短期无法直接改善（训练由模型厂商决定），但「让语料可被收录」是站方唯一可控的杠杆。</div>
+    <div class="why">⑦ 短期无法直接改善（训练由模型厂商决定），但「让语料可被收录」是站方唯一可控的杠杆。落地后 ② 可整体提升至 5、D 的受阻同步解除（§5-3 反事实测算：综合分平均 +0.027、4 格跨档）。</div>
+    <div class="demotitle">Demo · 左：现状 <code>llms.txt</code> 缺失；右：NVIDIA 已上线的 llms.txt 索引 <span class="mockdisc">右侧为 2026-06-11 实测</span></div>
+<div class="demo">
+  <div class="dnote">「机器可读出口」= 给 AI 一个汇总入口，一次抓全、无需逐页翻；现状是这个入口还不存在。</div>
+  <div class="duo">
+    <div class="bad">
+      <div class="duolab">✕ 现状 · hiascend.com/llms.txt（实测 404）</div>
+      <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">hiascend.com/llms.txt</span></div>
+      <div class="bbody">
+        <div style="text-align:center;color:#c0392b;font-weight:800;font-size:16px;padding:10px 0;font-family:ui-monospace,Menlo,monospace">404 Not Found</div>
+        <p style="color:#888;font-size:12px">有 robots.txt、无 llms.txt；无「View as Markdown」出口、无结构化算子索引。<br>→ Agent 只能逐页抓取面向人设计的页面。</p>
+      </div></div>
+    </div>
+    <div class="good">
+      <div class="duolab">✓ NVIDIA · docs.nvidia.com/llms.txt（已上线）</div>
+      <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">docs.nvidia.com/llms.txt</span></div>
+      <div class="bbody">
+        <pre class="cmd" style="margin:0"># NVIDIA Docs · 约 20 个产品索引
+CUDA Toolkit → llms.txt · <b>llms-full.txt</b>
+NeMo / NIM / Jetson → llms.txt
+…</pre>
+        <p style="color:#666;font-size:11.5px;margin-top:6px">另：Sphinx 管线默认产出 <code>objects.inv</code> 全量 API 索引（PyTorch 实测 188KB）。本卡两条建议 NVIDIA 均已落地。</p>
+      </div></div>
+    </div>
+  </div>
+</div>
   </div>
 
   <div class="card uxcard">
