@@ -338,9 +338,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .warn .bridge.lite{background:rgba(255,90,110,.1)!important}
 .warn .bridge.lite b{background:linear-gradient(transparent 60%,rgba(255,90,110,.3) 0)}  /* 问题页加粗高亮底也用红，不再蓝 */
 /* ===== 一页一板块行动方案：左 demo 主视觉 + 右措施清单（大字措施/小字分析/小标签） ===== */
-.rolewrap{flex:1;min-height:0;display:flex;gap:2.2vw;align-items:center}
-.roledemo{flex:0 0 46%;min-width:0;display:flex;flex-direction:column;justify-content:center}
-.rolemeasures{flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center}
+.rolewrap{flex:1;min-height:0;display:flex;flex-direction:column;gap:1.4vh;justify-content:center}
+.ameasures{display:grid;grid-template-columns:1fr 1fr;gap:1.2vh 1.6vw;align-content:center}
+.ahead{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:var(--fs-body);font-weight:800;letter-spacing:.02em;margin-top:.4vh}
+.ahead::before{content:'';width:11px;height:11px;border-radius:3px;flex:none}
+.ahead.hu{color:#9a5a00}.ahead.hu::before{background:#c8881a}
+.ahead.co{color:#5b3fb0}.ahead.co::before{background:#5b3fb0}
+.ahead.ai{color:#1f6f86}.ahead.ai::before{background:#1f6f86}
 /* 角色大色块 + 板块 strip（让「哪个角色 + 哪个板块」突出） */
 .role-chip{display:inline-block;font-size:var(--fs-h2);font-weight:800;color:#fff;border-radius:9px;padding:2px 15px;margin-right:14px;letter-spacing:.02em;vertical-align:baseline;position:relative;top:-2px}
 .role-chip.exp{background:linear-gradient(135deg,#8b6df2,#5b5bd6)}
@@ -1605,36 +1609,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-r">体验部 · 板块 2 / 4</div>
     </div>
     <div class="body-area"><div class="rolewrap">
-      <div class="roledemo"><div style="width:100%">
-        <div class="fdt">建议态 · 下载页应该长这样（约 2 步、登录后置）</div>
-        <div style="background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:0 9px 26px -15px rgba(30,40,70,.2)">
-          <div style="background:#f6f7f9;border-bottom:1px solid var(--line);padding:8px 12px;display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono';font-size:11px;color:#8a909a"><span style="width:8px;height:8px;border-radius:50%;background:#d9dde3"></span><span style="width:8px;height:8px;border-radius:50%;background:#d9dde3"></span><span style="width:8px;height:8px;border-radius:50%;background:#d9dde3"></span>　hiascend.com/download</div>
-          <div style="padding:2.2vh 1.6vw">
-            <div style="font-size:var(--fs-sm);color:var(--ink-2);margin-bottom:1vh">为你推荐的配置　<span style="color:#2E7D46;font-weight:700">✓ 已自动选好</span></div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2vh">
-              <span style="font-size:var(--fs-sm);background:var(--g1);border:1px solid var(--line);border-radius:8px;padding:5px 12px">Atlas 800T A2</span>
-              <span style="font-size:var(--fs-sm);background:var(--g1);border:1px solid var(--line);border-radius:8px;padding:5px 12px">AArch64</span>
-              <span style="font-size:var(--fs-sm);background:var(--g1);border:1px solid var(--line);border-radius:8px;padding:5px 12px">CANN 8.x · 当前推荐</span>
-              <span style="font-size:var(--fs-sm);background:var(--g1);border:1px solid var(--line);border-radius:8px;padding:5px 12px">离线整包</span>
-            </div>
-            <div style="background:#2E7D46;color:#fff;font-size:var(--fs-h3);font-weight:700;text-align:center;border-radius:10px;padding:1.5vh 0">游客直接下载　↓</div>
-            <div style="font-size:var(--fs-sm);color:var(--ink-3);margin-top:1.2vh;text-align:center">无需登录 · 需要更多权益时再登录（后置）</div>
-          </div>
-        </div>
-        <div style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:1.2vh;line-height:1.5">现状 7 步、登录前置的实测对照见 <b>触点 4.3</b>；此处只画「该建成什么样」。</div>
-      </div></div>
-      <div class="rolemeasures">
-        <div class="rgoal"><span class="gl">目标</span>让「只想先试一下」的开发者<b>零阻力</b>拿到能跑的包——把这条 7 步最长链路砍到 ~2 步，补上 <b>SDK 下载 −66</b> 的全报告最大缺口。</div>
-        <div class="mgrp hu">给「人」的改进</div>
+      <div class="rgoal"><span class="gl">目标</span>让「只想先试一下」的开发者<b>零阻力</b>拿到能跑的包——把这条 7 步最长链路砍到 ~2 步，补上 <b>SDK 下载 −66</b> 的全报告最大缺口；同时让安装信息对 AI 也可读、可照着装。</div>
+      <div class="ameasures">
+        <div class="ahead hu">给「人」的改进</div>
         <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">社区版「<b>游客可直接下载、登录与协议后置</b>」</div><div class="rmi-why">现状把华为账号登录设成下载前置条件，对「只想先试」的人就是劝退点；NVIDIA 账号完全后置。<span class="src2">触点 4.3 / 4.2</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要做「架构→版本→包」三四道判断题；给默认值、少让开发者选。<span class="src2">触点 4.3</span></div></div></div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要做「架构 → 版本 → 包」三四道判断题；给默认值、少让开发者选。<span class="src2">触点 4.3</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">区分「<b>在线增量包 / 离线整包</b>」并按网络环境默认选好</div><div class="rmi-why">NVIDIA 用 Network / Full 照顾联网 / 离线；昇腾现状只分社区 / 商用。<span class="src2">触点 4.4</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">落地公告改<b>顶部 banner</b> 不挡流，下载默认高亮「社区版」</div><div class="rmi-why">现状落地先弹「下载中心公告」挡住页面，又要先选社区 / 商用。<span class="src2">触点 4.1</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">下完跑通后<b>引导下一步</b>（在线实验 / 文档 / 示例）</div><div class="rmi-why">把「下到包」延伸成「跑通第一个」，缩短首次成功路径、减少装完不知所措的流失。<span class="src2">行动建议</span></div></div></div>
         <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">出海补<b>邮箱直注册 + Google / GitHub</b> 登录</div><div class="rmi-why">现状仅华为账号，海外 / 学术开发者注册门槛高。<span class="src2">触点 4.2 / 1.4</span></div></div></div>
-        <div class="mgrp co">人 + AI 共通</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">下载 / 安装页把「<b>当前推荐版本 + 配套</b>（CANN / driver / torch_npu）」写进正文文字</div><div class="rmi-why">人不会配错、AI 也能读到对的版本；与「文档·版本」板块的首选网址呼应。<span class="src2">供给侧 #1 · 触点 4.4</span></div></div></div>
-        <div class="mgrp ai">给「AI」的改进</div>
+        <div class="ahead co">人 + AI 共通</div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">下载 / 安装页把「<b>当前推荐版本 + 配套</b>（CANN / driver / torch_npu）」写进正文文字</div><div class="rmi-why">人不会配错、AI 也读到对的版本；与「文档 · 版本」板块的首选网址呼应。<span class="src2">供给侧 #1 · 触点 4.4</span></div></div></div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">下载页本身<b>对搜索引擎 / AI 可索引</b>（正文非纯 JS 渲染）</div><div class="rmi-why">让「昇腾怎么装 CANN」这类查询能被搜到、被 Agent 抓到正确入口。<span class="src2">供给侧 #5 · 指标①②</span></div></div></div>
+        <div class="ahead ai">给「AI」的改进</div>
         <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">安装 / 上手命令做成<b>可复制文本、可被抓取</b></div><div class="rmi-why">命令不贴图、不靠 JS 注入，Agent 才能照着一步步装、不凭记忆杜撰。<span class="src2">供给侧 #5</span></div></div></div>
       </div>
     </div></div>
