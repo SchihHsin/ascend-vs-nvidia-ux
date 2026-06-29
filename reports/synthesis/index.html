@@ -340,10 +340,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
 /* ===== 一页一板块行动方案：左 demo 主视觉 + 右措施清单（大字措施/小字分析/小标签） ===== */
 .rolewrap{flex:1;min-height:0;display:flex;gap:2.2vw;align-items:center}
 .roledemo{flex:0 0 46%;min-width:0;display:flex;flex-direction:column;justify-content:center}
-.rolemeasures{flex:1;min-width:0;display:flex;flex-direction:column;gap:2.1vh;justify-content:center}
+.rolemeasures{flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center}
+/* 角色大色块 + 板块 strip（让「哪个角色 + 哪个板块」突出） */
+.role-chip{display:inline-block;font-size:var(--fs-h2);font-weight:800;color:#fff;border-radius:9px;padding:2px 15px;margin-right:14px;letter-spacing:.02em;vertical-align:baseline;position:relative;top:-2px}
+.role-chip.exp{background:linear-gradient(135deg,#8b6df2,#5b5bd6)}
+.role-chip.doc{background:linear-gradient(135deg,#23a6bf,#1577a0)}
+.role-chip.dev{background:linear-gradient(135deg,#3a78f0,#2453c0)}
+.bk-strip{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:1vh}
+.bk-strip .bkl{font-size:var(--fs-sm);color:var(--ink-3);margin-right:2px}
+.bk-strip .bk{font-size:var(--fs-sm);color:var(--ink-2);background:var(--g1);border:1px solid var(--line);border-radius:20px;padding:3px 13px}
+.bk-strip .bk.on{color:#fff;background:var(--accent);border-color:transparent;font-weight:800}
 .rgoal{font-size:var(--fs-body);color:var(--ink);line-height:1.55;background:var(--accent-soft);border-radius:10px;padding:1.3vh 1.1vw;margin-bottom:.6vh}
 .rgoal .gl{font-weight:800;color:var(--accent);margin-right:.4em}
 .rgoal b{color:var(--ink);font-weight:700}
+.mgrp{display:flex;align-items:center;gap:7px;font-size:var(--fs-sm);font-weight:800;letter-spacing:.03em;margin:.4vh 0 .1vh}
+.mgrp::before{content:'';width:10px;height:10px;border-radius:3px;flex:none}
+.mgrp.hu{color:#9a5a00}.mgrp.hu::before{background:#c8881a}
+.mgrp.co{color:#5b3fb0}.mgrp.co::before{background:#5b3fb0}
+.mgrp.ai{color:#1f6f86}.mgrp.ai::before{background:#1f6f86}
 .rmi{display:flex;gap:13px;align-items:flex-start}
 .rmi .rp{flex:none;font-size:var(--fs-xs);font-weight:800;color:#fff;border-radius:6px;padding:3px 9px;margin-top:3px;letter-spacing:.02em}
 .rp.p0{background:#E5484D}.rp.p1{background:#E0922B}.rp.p2{background:#9aa3b2}
@@ -1581,14 +1595,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 行动 · 板块：下载与账号 -->
+  <!-- 行动 · 板块：下载与账号（体验部） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">行动 · 下载与账号——把上手前的下载 / 登录摩擦砍到最小</span></div>
-        <div class="subttl">负责：体验部 · 开发　｜　对应：SDK 下载触点 −66（全报告最大缺口）</div>
+        <div class="brand"><span class="role-chip exp">体验部</span><span class="ttl">下载与账号——把上手前的下载 / 登录摩擦砍到最小</span></div>
+        <div class="bk-strip"><span class="bkl">体验部负责的板块：</span><span class="bk">官网与落地</span><span class="bk on">下载与账号</span><span class="bk">学习与上手</span><span class="bk">智能化触点</span></div>
       </div>
-      <div class="head-r">行动 · 下载与账号</div>
+      <div class="head-r">体验部 · 板块 2 / 4</div>
     </div>
     <div class="body-area"><div class="rolewrap">
       <div class="roledemo"><div style="width:100%">
@@ -1610,11 +1624,18 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:1.2vh;line-height:1.5">现状 7 步、登录前置的实测对照见 <b>触点 4.3</b>；此处只画「该建成什么样」。</div>
       </div></div>
       <div class="rolemeasures">
-        <div class="rgoal"><span class="gl">目标</span>让「只想先试一下」的开发者<b>零阻力</b>拿到能跑的包——把这条 7 步最长链路砍短，直接降低上手流失。</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">社区版「<b>游客可直接下载、登录与协议后置</b>」</div><div class="rmi-why">现状把华为账号登录设成下载的前置条件；对「只想先试一下」的人，前置登录就是劝退点。NVIDIA 把账号完全后置。</div><div class="rmi-meta"><span class="who2 hu">给人</span><span class="src2">触点 4.3 / 4.2</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要依次做「架构 → 版本 → 包」三四道判断题；给默认值 + 按网络环境分「在线增量 / 离线整包」，少让开发者做选择。</div><div class="rmi-meta"><span class="who2 hu">给人</span><span class="src2">触点 4.3 / 4.4</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">落地公告改<b>顶部 banner</b> 不挡流，下载入口默认高亮「社区版」</div><div class="rmi-why">现状落地先弹「资源下载中心公告」把页面挡住，又要先在社区 / 商用里选对分支。</div><div class="rmi-meta"><span class="who2 hu">给人</span><span class="src2">触点 4.1</span></div></div></div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">出海补<b>邮箱直注册 + Google / GitHub</b> 登录</div><div class="rmi-why">现状仅华为账号登录，海外 / 学术开发者注册门槛高。（与「全球可达」一并推进）</div><div class="rmi-meta"><span class="who2 hu">给人</span><span class="src2">触点 4.2 / 1.4</span></div></div></div>
+        <div class="rgoal"><span class="gl">目标</span>让「只想先试一下」的开发者<b>零阻力</b>拿到能跑的包——把这条 7 步最长链路砍到 ~2 步，补上 <b>SDK 下载 −66</b> 的全报告最大缺口。</div>
+        <div class="mgrp hu">给「人」的改进</div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">社区版「<b>游客可直接下载、登录与协议后置</b>」</div><div class="rmi-why">现状把华为账号登录设成下载前置条件，对「只想先试」的人就是劝退点；NVIDIA 账号完全后置。<span class="src2">触点 4.3 / 4.2</span></div></div></div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要做「架构→版本→包」三四道判断题；给默认值、少让开发者选。<span class="src2">触点 4.3</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">区分「<b>在线增量包 / 离线整包</b>」并按网络环境默认选好</div><div class="rmi-why">NVIDIA 用 Network / Full 照顾联网 / 离线；昇腾现状只分社区 / 商用。<span class="src2">触点 4.4</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">落地公告改<b>顶部 banner</b> 不挡流，下载默认高亮「社区版」</div><div class="rmi-why">现状落地先弹「下载中心公告」挡住页面，又要先选社区 / 商用。<span class="src2">触点 4.1</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">下完跑通后<b>引导下一步</b>（在线实验 / 文档 / 示例）</div><div class="rmi-why">把「下到包」延伸成「跑通第一个」，缩短首次成功路径、减少装完不知所措的流失。<span class="src2">行动建议</span></div></div></div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">出海补<b>邮箱直注册 + Google / GitHub</b> 登录</div><div class="rmi-why">现状仅华为账号，海外 / 学术开发者注册门槛高。<span class="src2">触点 4.2 / 1.4</span></div></div></div>
+        <div class="mgrp co">人 + AI 共通</div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">下载 / 安装页把「<b>当前推荐版本 + 配套</b>（CANN / driver / torch_npu）」写进正文文字</div><div class="rmi-why">人不会配错、AI 也能读到对的版本；与「文档·版本」板块的首选网址呼应。<span class="src2">供给侧 #1 · 触点 4.4</span></div></div></div>
+        <div class="mgrp ai">给「AI」的改进</div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">安装 / 上手命令做成<b>可复制文本、可被抓取</b></div><div class="rmi-why">命令不贴图、不靠 JS 注入，Agent 才能照着一步步装、不凭记忆杜撰。<span class="src2">供给侧 #5</span></div></div></div>
       </div>
     </div></div>
   </section>
