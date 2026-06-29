@@ -49,6 +49,23 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:#f3f3f
 .nvref{font-size:12.5px;background:radial-gradient(125% 95% at 0% 0%, rgba(118,185,0,.20), rgba(118,185,0,0) 52%), #fff;border:1px solid var(--line);padding:9px 13px;border-radius:11px;margin-top:10px}
 /* 无 demo 卡的轻量 Before/After 行（有 demo 的卡由 demo 的 duolab 承担） */
 .ba{font-size:12.5px;line-height:1.7;background:#f7f7f7;border-radius:8px;padding:8px 12px;margin-top:10px}
+/* demo 内的清单 / 渠道图等小组件 */
+.ckl{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ckl li{position:relative;padding-left:25px;font-size:13px;line-height:1.42}
+.ckl li::before{content:'✓';position:absolute;left:3px;top:0;color:#2E7D46;font-weight:800}
+.ckhint{display:block;font-size:11px;color:var(--sub);margin-top:1px}
+.cov{display:flex;flex-direction:column;gap:6px}
+.covrow{display:flex;align-items:center;gap:8px;font-size:12.5px}
+.covrow .pf{flex:0 0 128px;font-weight:600}
+.covrow .st{font-size:11.5px;padding:1px 8px;border-radius:20px}
+.st.no{background:#FDECEC;color:#E5484D}.st.ok{background:#E8F3EC;color:#2E7D46}.st.mid{background:#FFF4E5;color:#B26A00}
+.norchan{display:flex;flex-direction:column;gap:9px}
+.nch{display:flex;align-items:center;gap:9px}
+.nch .lab{flex:0 0 86px;font-size:12px;color:var(--sub)}
+.nch .track{flex:1;height:13px;background:#eef0f3;border-radius:7px;overflow:hidden}
+.nch .fill{height:100%;border-radius:7px}
+.nch .val{flex:0 0 64px;font-size:11.5px;text-align:right;color:var(--ink)}
+.norformula{margin-top:9px;font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#16191e;color:#e8eaed;border-radius:8px;padding:9px 11px;line-height:1.6}
 .ba b.bx{color:#a33}.ba b.ax{color:#2e7d32}
 .nvref>b:first-child{color:#3d6500}
 /* 漏斗条 */
@@ -423,33 +440,54 @@ NeMo / NIM / Jetson → llms.txt
     <div class="who">提升 ②③⑧① · 页面级组织规范 · 每条均来自实测中「抓到 / 抓不到」的正反对照</div>
     <h3>5. 面向 AI 抓取的页面组织方式</h3>
     <ul class="tight">
-      <li><b>正文进首屏 HTML</b>：命令/参数表/代码必须在服务端渲染的 HTML 里，不靠 JS 注入——26 格里 ② 的全部分差都由这一条决定（SSR 页 4–5 分、D 的 SPA 链路 2 分）。验收法：禁 JS 抓一遍页面，看参数表还在不在。</li>
-      <li><b>Tab / 折叠面板的内容要预先在 DOM 里</b>：C-ATB 页实测「概述可抓、算子列表抓不到」——同一页内点击才加载的部分，对 Agent 等于不存在。视觉上可以折叠，数据上不能懒加载。</li>
-      <li><b>命令用代码块、表格用真 <code>&lt;table&gt;</code>，绝不用截图贴命令</b>：③ 拿 5 分的页面（CUDA 四任务实测）共性是命令与参数表全是可复制文本；贴在图片里的命令 Agent 读不了、人也复制不了。</li>
-      <li><b>meta description 写「本页最关键的一条命令/结论」</b>：A 任务实测正文受阻时，meta 里那条 <code>atc --model=...</code> 命令是唯一幸存信息——把 meta 当「最坏情况下的界面」来设计。</li>
-      <li><b>一页收完一条主路径，URL 含关键词</b>：前置条件→命令→参数→验证收在一页，别切成五页（每多一页多一次 fetch，⑧ 直接掉分）；URL 带错误码/API 名才可能被搜索精确命中（①）。</li>
-      <li><b>版本号写进正文头部的文字里</b>，别只放在 JS 版本切换器组件里——切换器对 Agent 不存在，正文里的版本声明才是它能读到、能引用的。</li>
-      <li><b>robots.txt 别拦正文目录</b>：<code>doc_center/source/</code> 实测 ROBOTS_DISALLOWED，整棵子树对 Agent 直接消失。</li>
+      <li>把右侧 7 条页面规范当作<b>发布前的机检清单</b>——每条都来自实测中「抓到 / 抓不到」的正反对照。</li>
+      <li>核心观念：<b>视觉层之下的 HTML 结构层，就是 Agent 的界面</b>；这是「界面设计」在 Agent 时代的直译。</li>
     </ul>
-    <div class="ba"><b class="bx">✕ Before（实测）</b>：C-ATB 页「概述抓到了、算子列表点击才加载抓不到」；A 任务深层参考页正文受阻时，meta 里那条 atc 命令是唯一幸存信息——同一页面对人完整、对 Agent 缺一半。</div>
-    <div class="nvref"><b>NVIDIA 是怎么做的（实测原文佐证）：</b>正面样本就是我们抓回的页面本身——TensorRT Quick Start：trtexec 命令与完整 C++/Python 运行时代码全为可复制文本、旗标全表做成跳转链接；Nsight UserGuide：<code>nsys profile</code> 语法 + <code>--trace</code>/<code>--backtrace</code> 选项全表（均为 2026-06-10 web_fetch 实测记录，③ 全 5）。上面 7 条规范，这些页面几乎条条都中。</div>
-    <div class="ba"><b class="ax">✓ After（验收线）</b>：新页面发布前「禁 JS 抓一遍」，参数表、命令、版本声明仍齐全才算过——7 条规范全部可机检（§5-3 反事实实算：已可抓格 ③ 各 +1 → 平均 ⑪ +.013）。</div>
-    <div class="why">可视对照见第 3 条卡内 Demo「人眼 vs Agent 两双眼睛」。这是「界面设计」在 Agent 时代的直译：视觉层之下的 HTML 结构层就是 Agent 的界面。以上每条都有 26 任务实测的正反例支撑，不是泛泛的 SEO 建议。注意：本研究测不到「人看的视觉界面」好不好（方法盲区，未测≠没问题），人因层的界面问题需另做用户研究。</div>
+    <div class="why">验收法统一为「禁 JS 抓一遍」：参数表、命令、版本声明仍齐全才算过。注：人看的视觉界面好不好属方法盲区，需另做用户研究。</div>
+    <div class="demotitle">Demo · 发布前「禁 JS 抓一遍」机检清单 <span class="mockdisc">每条均有 26 任务实测正反例支撑</span></div>
+    <div class="demo">
+      <ul class="ckl">
+        <li><b>正文进首屏 HTML</b>：命令／参数表／代码不靠 JS 注入<span class="ckhint">② 可抓取性的全部分差由这一条决定</span></li>
+        <li><b>Tab／折叠内容预渲染进 DOM</b>：不点击才懒加载<span class="ckhint">实测 C-ATB「算子列表点击才加载、抓不到」</span></li>
+        <li><b>命令用代码块、表格用真 <code>&lt;table&gt;</code></b>：不贴截图<span class="ckhint">截图里的命令 Agent 与人都复制不了</span></li>
+        <li><b>meta description 写最关键的一条命令／结论</b><span class="ckhint">正文受阻时，它常是唯一幸存信息</span></li>
+        <li><b>一页收完一条主路径、URL 含关键词</b>：别切成五页<span class="ckhint">每多一页多一次抓取，⑧ 检索成本掉分</span></li>
+        <li><b>版本号写进正文文字</b>：不只放在 JS 版本切换器里<span class="ckhint">切换器对 Agent 不存在</span></li>
+        <li><b>robots.txt 不拦正文目录</b><span class="ckhint">实测 doc_center/source/ 被拦、整棵子树消失</span></li>
+      </ul>
+    </div>
   </div>
 
   <div class="card uxcard">
     <div class="who">提升 ⑤⑥ 第三方生态 · 慢变量、需持续运营</div>
     <h3>6. 扶持第三方生态：从「少而同质」到「多平台互证」</h3>
     <ul class="tight">
-      <li>官方认证教程计划：鼓励在 CSDN <b>之外</b>的平台（个人博客、英文 Medium/dev.to 等）产出带版本号的完整教程——独立性因子实测在罚「CSDN×2 回声」。</li>
-      <li><b>选平台先看 Agent 可抓性</b>：实测知乎反爬 403（N/O/Q 三任务均未取得正文）——优质教程发在知乎，对 AI 助手近乎不存在；CSDN/博客园/华为云 bbs/segmentfault/云厂商社区实测可整页抓取。扶持内容应优先落在可抓平台，或硬性要求同步一份到可抓渠道（如官方博客/gitee 仓 markdown）。</li>
-      <li>每篇扶持内容硬性要求：注明 CANN 版本 + 完整可复制命令 + 发表日期（这三项正是 ⑤⑥⑨⑩ 的得分点）。</li>
-      <li>优先覆盖漏斗深水区（算子开发、Tiling、报错案例集、<b>排错工具实战案例</b>——X 实测 msSanitizer 官方文档 ③ 满分、社区案例却近乎零，是「官方好但生态空」的典型），上手侧已经不缺。</li>
+      <li>鼓励在 CSDN <b>之外</b>的平台（个人博客、英文 Medium／dev.to 等）产出带版本号的完整教程——独立性因子实测在惩罚「CSDN×2 回声」。</li>
+      <li><b>选平台先看 Agent 可抓性</b>：优质教程若只发在知乎（实测 403），对 AI 助手近乎不存在；应优先落在可抓平台，或同步一份到官方博客／gitee 仓 markdown。</li>
+      <li>优先覆盖深水区（算子开发、Tiling、报错案例、排错工具实战）——上手侧已不缺。每篇硬性要求：注明版本 + 可复制命令 + 日期。</li>
     </ul>
-    <div class="ba"><b class="bx">✕ Before（实测）</b>：⑤ 第三方量 CANN 26 格均 ≤4、K/M/N/S/X 仅 2 条；可抓的扎堆 CSDN（独立性因子实罚「CSDN×2 回声」），优质的躺在知乎（403，对 Agent 不存在）。</div>
-    <div class="nvref"><b>NVIDIA 的做法（实测）：</b>官方亲自参与补充第三方——developer.nvidia.com/blog 的技术博客在 L（算子精度）、N（算子融合）两任务实测中成为可用来源，覆盖「正式文档不写、社区暂无人写」的中间地带；开发者论坛（forums.developer.nvidia.com）在 B/E 实测中承接长尾问答。可见「第三方厚」并非全靠自然生长，官方供给亦占一席。</div>
-    <div class="ba"><b class="ax">✓ After（建议落地后）</b>：每个深水任务有 3+ 条<b>独立平台、可抓、带版本号与日期</b>的教程互证——⑤⑥ 各 +1（§5-3 反事实实算：平均 ⑪ +.056、7 格翻档，ROI 第二）。</div>
-    <div class="why">第三方是官方文档的冗余通道。CUDA 的韧性正源于这条通道足够厚——官方页即便不足，也有 StackOverflow 承接。</div>
+    <div class="why">第三方是官方文档的冗余通道。CUDA 的韧性正源于这条通道足够厚——官方页即便不足也有 StackOverflow 承接；NVIDIA 官方还亲自参与补充（技术博客、开发者论坛）。落地后 ⑤⑥ 各 +1（§5-3 测算 ⑪ +0.056、ROI 第二）。</div>
+    <div class="demotitle">Demo · 第三方教程的平台覆盖：昇腾现状 vs NVIDIA <span class="mockdisc">均为实测</span></div>
+    <div class="demo">
+      <div class="duo">
+        <div class="bad">
+          <div class="duolab">✕ 昇腾现状 · 少而同质，优质内容抓不到</div>
+          <div class="cov" style="padding:4px 2px">
+            <div class="covrow"><span class="pf">CSDN</span><span class="st mid">×2 · 扎堆，独立性被罚</span></div>
+            <div class="covrow"><span class="pf">知乎（优质）</span><span class="st no">403 · 反爬抓不到 ✕</span></div>
+            <div class="covrow"><span class="pf">整体有效量</span><span class="st no">K/M/N/S/X 仅 2 / 26</span></div>
+          </div>
+        </div>
+        <div class="good">
+          <div class="duolab">✓ NVIDIA · 多平台互证、官方亦参与</div>
+          <div class="cov" style="padding:4px 2px">
+            <div class="covrow"><span class="pf">官方技术博客</span><span class="st ok">✓ L／N 任务可用来源</span></div>
+            <div class="covrow"><span class="pf">开发者论坛</span><span class="st ok">✓ 承接 B／E 长尾问答</span></div>
+            <div class="covrow"><span class="pf">StackOverflow 等</span><span class="st ok">✓ 多独立平台互证</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="card uxcard">
@@ -457,27 +495,41 @@ NeMo / NIM / Jetson → llms.txt
     <h3>7. 改善面向开发者的站内体验：沿用同一套评估指标</h3>
     <ul class="tight">
       <li>本项目最反直觉的发现：<b>为 AI 优化与为开发者优化是同一件事</b>——参数表齐全、命令可复制、版本明确、网址可直达，对人与对 Agent 是同一组需求。</li>
-      <li>不需要为 AI 单独立项「AI 友好改造」，把 ①–⑩ 指标当成文档站的体验验收清单即可（如：新页面发布前跑一次「无 JS 抓取」冒烟测试 = ②；查正文是否含可执行命令 = ③⑩）。</li>
-      <li>站内搜索按错误码/API 名直达（①），减少「搜得到列表页、找不到正文」的两段式挫败。</li>
+      <li>因此无需为 AI 单独立项「AI 友好改造」，把 ①–⑩ 指标直接当成文档站的<b>发布前验收清单</b>即可。</li>
+      <li>站内搜索按错误码／API 名直达（①），减少「搜到列表页、找不到正文」的两段式挫败。</li>
     </ul>
-    <div class="ba"><b class="bx">✕ Before（实测推断）</b>：现状的发布流程没有 Agent 视角的把关——D 的 SPA 链路、E 的兜底页、12 个 ④=2 的版本散页都顺利上线了。</div>
-    <div class="ba" style="background:#f1f1f1;color:#777"><b>本条无 NVIDIA 参照段</b>：文档验收属内部流程，外部观测不到（只能看到结果=26 格 CUDA 全高），硬写就是编造——按本项目「有对照才讲」的规则留空。</div>
-    <div class="ba"><b class="ax">✓ After（建议落地后）</b>：新页发布前过三道机检——无 JS 抓取看正文在不在（②）、查可执行命令与参数表（③⑩）、查正文版本声明（④）；①–⑩ 即验收清单本身。</div>
-    <div class="why">把度量体系反向用作供给侧验收标准，是这套研究对站方最可直接落地的输出。</div>
+    <div class="why">把度量体系反向用作供给侧验收标准，是这套研究对站方最可直接落地的输出。（文档验收属内部流程、外部观测不到，故本卡无 NVIDIA 参照——按「有对照才讲」的规则留空。）</div>
+    <div class="demotitle">Demo · 把 ①–⑩ 指标当作发布前机检清单 <span class="mockdisc">每项可机器自动检查</span></div>
+    <div class="demo">
+      <ul class="ckl">
+        <li><b>无 JS 抓取，看正文还在不在</b><span class="ckhint">对应指标 ② 可抓取性</span></li>
+        <li><b>查正文是否含可执行命令与参数表</b><span class="ckhint">对应 ③ 详尽度 · ⑩ 可复现</span></li>
+        <li><b>查正文头部是否有版本声明</b><span class="ckhint">对应 ④ 版本清晰度</span></li>
+        <li><b>站内搜索按错误码／API 名能否直达正文</b><span class="ckhint">对应 ① 可发现性</span></li>
+      </ul>
+      <div class="dnote" style="margin-top:9px">现状缺的正是这道把关：D 的 SPA 链路、E 的兜底页、12 个 ④=2 的版本散页，都在没有 Agent 视角审查的情况下上线了。</div>
+    </div>
   </div>
 
   <div class="card uxcard">
     <div class="who">提升 ⑦ 自带知识 · 最深的短板、最慢的变量 · 26 全量后新增（§5-3 反事实测算：⑦+1 → 综合分平均 +0.048、4 格跨档，长期 ROI 第三、高于 llms.txt）</div>
     <h3>8. 面向下一代模型的语料供给：官方与生态需共同支撑</h3>
     <ul class="tight">
-      <li><b>为什么独立成条（26 全量后的新证据）</b>：X 内存越界是极端例——官方 msSanitizer 文档 ③ 满分 5，但第三方仅 1 条＋自带 ⑦ 只有 2，综合仍只到中高。噪声-OR 的数学含义就在这：<b>K = 1−(1−OFF)(1−SEC)(1−OWN)，官方（OFF）一条渠道做得再好，另两条全空时 K 仍被压住</b>。文档写好 ≠ 任务被兜住。</li>
-      <li>站方可控的杠杆：把权威内容以<b>最易被训练集收录的形态</b>同步一份——公开 git 仓的 markdown（GitHub/gitee 是训练语料的高概率来源）、关键文档出英文版（训练语料英文占比高）、教程带完整可跑代码而非截图。</li>
+      <li><b>为什么独立成条</b>：以 X 内存越界为例——官方 msSanitizer 文档满分 5，但第三方仅 1、自带 ⑦ 仅 2，综合仍只到中高。<b>文档写好 ≠ 任务被兜住</b>（见右侧噪声-OR）。</li>
+      <li>站方可控的杠杆：把官方内容以<b>最易被训练集收录的形态</b>同步一份——公开 git 仓 markdown、关键文档出英文版、教程带可跑代码而非截图。</li>
       <li>与卡 4 的分工：llms.txt 解决「<b>当代</b>模型检索时抓得到」，本条解决「<b>下一代</b>模型不检索也知道」——前者应急，后者根治。</li>
     </ul>
-    <div class="ba"><b class="bx">✕ Before（实测）</b>：⑦ 自带知识 CANN 26 格多为 2–3（D 深处还因 churn=fast 罚 −0.5），CUDA 多为 4–5——同一个模型，对 CUDA「不检索就能答」、对 CANN「不检索就答不了」，检索一旦受阻（D）或低质（E）就没有兜底。</div>
-    <div class="nvref"><b>英伟达侧对照（结果而非动作）：</b>CUDA ⑦ 的 26 格高分<b>不是</b>英伟达刻意喂语料的产物——是 20 年自然生态（SO/博客/教材/开源仓）沉淀进各代模型训练集的副产品，外部观测不到任何「刻意动作」。这条对照的真正含义是：语料厚度可以等生态慢慢长（CUDA 路线），也可以主动供给——<b>昇腾没有 20 年可等，「自然生长」在此并非可行方案</b>。</div>
-    <div class="ba"><b class="ax">✓ After（跨模型代际见效）</b>：下一代模型对 CANN 专有任务的 ⑦ 从 2–3 抬向 4，检索从「必需且无兜底」降级为「核验手段」——这是唯一能在 D 类深水任务上同时改善「检索成本尖刺」与「受阻无兜底」的路径。</div>
-    <div class="why">⑦ 是三条渠道中唯一可跨「当代 Agent 产品」起效的——它内化于模型，用户更换任何 AI 工具都随之带走。见效慢，但具复利效应。</div>
+    <div class="why">⑦ 是三条渠道中唯一可跨「当代 Agent 产品」起效的——它内化于模型，用户更换任何 AI 工具都随之带走。见效慢，但具复利效应。CUDA 的高分是 20 年自然生态的副产品；昇腾没有 20 年可等，「自然生长」在此并非可行方案，只能主动供给。</div>
+    <div class="demotitle">Demo · 噪声-OR：三渠道任一达标即可作答、全弱才失败（以 X 内存越界为例）<span class="mockdisc">实测分值</span></div>
+    <div class="demo">
+      <div class="dnote">官方文档做到满分，但另两条渠道空，综合仍被压住——这就是「文档写好 ≠ 任务被兜住」的数学原因。</div>
+      <div class="norchan">
+        <div class="nch"><span class="lab">官方 OFF</span><div class="track"><div class="fill" style="width:100%;background:#2E7D46"></div></div><span class="val">5 / 5 满分</span></div>
+        <div class="nch"><span class="lab">第三方 SEC</span><div class="track"><div class="fill" style="width:20%;background:#E5484D"></div></div><span class="val">1 / 5</span></div>
+        <div class="nch"><span class="lab">自带 OWN</span><div class="track"><div class="fill" style="width:40%;background:#E08A2B"></div></div><span class="val">2 / 5</span></div>
+      </div>
+      <div class="norformula">K = 1 − (1−OFF)(1−SEC)(1−OWN)　→　综合仅「中高」<br><span style="color:#9aa0a8">官方一条做满分，另两条全空，K 仍被压住。</span></div>
+    </div>
   </div>
 </div>
 
