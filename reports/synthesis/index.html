@@ -881,12 +881,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <!-- 灰底：AI 侧 · 七个问题（opknow 19 §1，重排） -->
   <style>
     .pg7{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:1vw;flex:1;min-height:0}
-    .p7{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);border:1px solid rgba(255,255,255,.7);box-shadow:0 9px 26px -15px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.85);border-radius:13px;padding:1.6vh 1.1vw;display:flex;flex-direction:column;justify-content:center;gap:.9vh;position:relative;overflow:hidden}
+    .p7{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);border:1px solid rgba(255,255,255,.7);box-shadow:0 9px 26px -15px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.85);border-radius:13px;padding:1.6vh 1.1vw;display:flex;flex-direction:column;justify-content:flex-start;gap:.9vh;position:relative;overflow:hidden}
     .p7 .p7n{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-h3);color:#fff;background:#3D4452;width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center}
     .p7 .p7top{display:flex;align-items:center;gap:.5em}
     .p7 .p7tag{font-size:var(--fs-xs);font-weight:700;padding:2px 8px;border-radius:6px;background:var(--g-red);color:#fff;letter-spacing:.02em}
-    .p7 .p7h{font-weight:700;font-size:var(--fs-body);color:var(--ink);line-height:1.32}
-    .p7 .p7d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5}
+    .p7 .p7h{font-weight:700;font-size:var(--fs-body);color:var(--ink);line-height:1.32;min-height:2.64em}
+    .p7 .p7d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5;min-height:3em}
     .p7 .p7e{margin-top:.4vh;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);background:rgba(0,0,0,.04);border-radius:6px;padding:3px 8px;align-self:flex-start}
     .p7.struct{border-color:rgba(255,90,110,.5)}
     .p7.struct .p7n{background:var(--g-red)}
@@ -948,7 +948,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="p7"><div class="p7top"><span class="p7n">7</span></div><div class="p7h">检索成本尖刺</div><div class="p7d">多数任务成本正常，个别任务一次抓取失败即把成本打穿、响应变慢。</div>
           <div class="mm"><div class="mbd"><svg class="mspk" viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div></div>
           <div class="p7e">⑧检索成本 D / K / O ＝ 1</div></div>
-        <div class="p7 sum"><div class="sh">一句话收口</div><div class="st">结构性缺口＝<b>① 版本混乱</b> ＋ <b>② 自带 / 第三方双薄</b>（检索没兜底）＋ <b>③ 深水区单点塌方</b>（自定义算子）。上手侧已接近 CUDA，优先级按此排，而非泛泛「改进文档」。</div></div>
+        <div class="p7 sum"><div class="sh">结论</div><div class="st">三个结构性缺口：<b>① 版本体系混乱</b>；<b>② 模型自带知识与第三方生态同时偏薄</b>——检索一旦失败便无兜底；<b>③ 越到算子自研等深层场景可用性越低</b>，自定义算子是全栈最低谷。上手侧已接近 CUDA，应据此排定优先级，而非泛泛「改进文档」。</div></div>
       </div>
     </div>
   </section>
