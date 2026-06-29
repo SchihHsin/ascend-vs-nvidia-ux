@@ -337,6 +337,35 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .warn .dh-card.dark{background:radial-gradient(ellipse 130% 130% at 50% 48%,#2A1012 0%,#5A2A2E 100%)}
 .warn .bridge.lite{background:rgba(255,90,110,.1)!important}
 .warn .bridge.lite b{background:linear-gradient(transparent 60%,rgba(255,90,110,.3) 0)}  /* 问题页加粗高亮底也用红，不再蓝 */
+/* ===== 一页一板块行动方案：左 demo 主视觉 + 右措施清单（大字措施/小字分析/小标签） ===== */
+.rolewrap{flex:1;min-height:0;display:flex;gap:2.2vw;align-items:center}
+.roledemo{flex:0 0 46%;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.rolemeasures{flex:1;min-width:0;display:flex;flex-direction:column;gap:2.1vh;justify-content:center}
+.rgoal{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5;padding-left:13px;border-left:3px solid var(--accent);margin-bottom:.4vh}
+.rmi{display:flex;gap:13px;align-items:flex-start}
+.rmi .rp{flex:none;font-size:10.5px;font-weight:800;color:#fff;border-radius:6px;padding:3px 8px;margin-top:2px;letter-spacing:.02em}
+.rp.p0{background:#E5484D}.rp.p1{background:#E0922B}.rp.p2{background:#9aa3b2}
+.rmi-b{flex:1;min-width:0}
+.rmi-act{font-size:var(--fs-body);font-weight:700;color:var(--ink);line-height:1.4}
+.rmi-act b{color:#3f33a0}
+.rmi-why{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5;margin-top:.5vh}
+.rmi-meta{display:flex;gap:6px;align-items:center;margin-top:.7vh}
+.rmi-meta .who2{font-size:10px;font-weight:700;border-radius:20px;padding:1.5px 9px}
+.who2.co{color:#5b3fb0;background:#efeafc}.who2.ai{color:#1f6f86;background:#e3f3f7}.who2.hu{color:#9a5a00;background:#fef0d8}
+.rmi-meta .src2{font-family:'JetBrains Mono';font-size:10px;color:var(--ink-3)}
+/* 行动页右侧 demo：现状/建议 步骤流对比 */
+.fdemo{display:flex;gap:1vw;height:100%;align-items:stretch}
+.fdemo .fdt{font-size:var(--fs-sm);font-weight:700;color:var(--ink);margin-bottom:1vh}
+.fcol{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.4vh 1vw;display:flex;flex-direction:column}
+.fcol.bad{border-color:#f2c4c6;background:linear-gradient(180deg,#fff8f8,#fff)}.fcol.good{border-color:#bfe3cb;background:linear-gradient(180deg,#f6fcf8,#fff)}
+.fcol-h{font-size:12px;font-weight:800;margin-bottom:1vh}
+.fcol.bad .fcol-h{color:#E5484D}.fcol.good .fcol-h{color:#2E7D46}
+.fstep{display:flex;align-items:center;gap:8px;font-size:11.5px;padding:4px 0;color:var(--ink)}
+.fstep .sn{flex:none;width:17px;height:17px;border-radius:50%;background:var(--g2);color:var(--ink-2);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.fstep.gate{color:#E5484D;font-weight:700}.fstep.gate .sn{background:#E5484D;color:#fff}
+.fstep.ok .sn{background:#2E7D46;color:#fff}
+.fbig{margin-top:auto;font-size:11px;line-height:1.5;color:var(--ink-2);padding-top:1vh;border-top:1px dashed var(--line)}
+.fbig b{color:#E5484D}.fcol.good .fbig b{color:#2E7D46}
 </style>
 </head>
 <body>
@@ -355,7 +384,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cv-lead">两套实测合一：人侧「基础体验」—— 开发者从浏览官网到跑通的旅程；AI 侧「内容可用性」—— 业界大模型能否搜到 / 抓到 / 用对昇腾社区知识。</div>
       </div>
       <div class="cv-bot">
-        <div class="cv-ucd">UX 竞品分析 &middot; opknow 可用性实测</div>
+        <div class="cv-ucd">DEV LAB &middot; 时昕昱 ｜ 闫浩 ｜ 张敬文 ｜ 俪旻硕</div>
         <div class="cv-meta">2026</div>
       </div>
     </div>
@@ -1550,6 +1579,48 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
+  <!-- 行动 · 板块：下载与账号 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">行动 · 下载与账号——把上手前的下载 / 登录摩擦砍到最小</span></div>
+        <div class="subttl">负责：体验部 · 开发　｜　对应：SDK 下载触点 −66（全报告最大缺口）</div>
+      </div>
+      <div class="head-r">行动 · 下载与账号</div>
+    </div>
+    <div class="body-area"><div class="rolewrap">
+      <div class="roledemo"><div style="display:flex;flex-direction:column;width:100%">
+        <div class="fdt">「先跑起来」要几步：现状 ~7 步 vs 建议 ~2 步（实测）</div>
+        <div class="fdemo">
+          <div class="fcol bad">
+            <div class="fcol-h">✕ 现状 · 约 7 步、登录前置</div>
+            <div class="fstep"><span class="sn">1</span>关「资源下载中心」公告</div>
+            <div class="fstep"><span class="sn">2</span>选 社区版 / 商用版</div>
+            <div class="fstep"><span class="sn">3</span>选 CPU 架构（AArch64/X86）</div>
+            <div class="fstep"><span class="sn">4</span>选 CANN 版本</div>
+            <div class="fstep"><span class="sn">5</span>选 软件包</div>
+            <div class="fstep"><span class="sn">6</span>勾选同意《许可协议》</div>
+            <div class="fstep gate"><span class="sn">7</span>登录华为账号（前置闸门）</div>
+            <div class="fbig">每多一道选择 / 闸门，就在这一步多流失一批还没上手的开发者；<b>登录被放在「下载之前」</b>是劝退点。</div>
+          </div>
+          <div class="fcol good">
+            <div class="fcol-h">✓ 建议 · 约 2 步、登录后置</div>
+            <div class="fstep ok"><span class="sn">1</span>用默认推荐（架构 / 版本 / 包已配好）</div>
+            <div class="fstep ok"><span class="sn">2</span>游客直接下载、跑通</div>
+            <div class="fstep" style="color:var(--ink-3)"><span class="sn" style="background:var(--g2);color:var(--ink-3)">·</span>需更多权益时再登录（后置）</div>
+            <div class="fbig">对标 NVIDIA：先把东西下下来跑通、账号完全后置。<b>这是全报告 ROI 最高的单点改进</b>。</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="rolemeasures">
+        <div class="rgoal">目标：让「只想先试一下」的开发者<b>零阻力</b>拿到能跑的包——把这条 7 步最长链路砍短，直接降低上手流失。</div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">社区版「<b>游客可直接下载、登录与协议后置</b>」</div><div class="rmi-why">现状把华为账号登录设成下载的前置条件；对「只想先试一下」的人，前置登录就是劝退点。NVIDIA 把账号完全后置。</div><div class="rmi-meta"><span class="who2 hu">给人</span><span class="src2">触点 4.3 / 4.2</span></div></div></div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要依次做「架构 → 版本 → 包」三四道判断题；给默认值 + 按网络环境分「在线增量 / 离线整包」，少让开发者做选择。</div><div class="rmi-meta"><span class="who2 hu">给人</span><span class="src2">触点 4.3 / 4.4</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">落地公告改<b>顶部 banner</b> 不挡流，下载入口默认高亮「社区版」</div><div class="rmi-why">现状落地先弹「资源下载中心公告」把页面挡住，又要先在社区 / 商用里选对分支。</div><div class="rmi-meta"><span class="who2 hu">给人</span><span class="src2">触点 4.1</span></div></div></div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">出海补<b>邮箱直注册 + Google / GitHub</b> 登录</div><div class="rmi-why">现状仅华为账号登录，海外 / 学术开发者注册门槛高。（与「全球可达」一并推进）</div><div class="rmi-meta"><span class="who2 hu">给人</span><span class="src2">触点 4.2 / 1.4</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
   <!-- 18 灰底：iframe 引主报告 #actions -->
   <section class="slide s-gray">
     <div class="head">
@@ -1592,13 +1663,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cv-meta" style="margin-left:auto">Human &#8853; AI Usability</div>
       </div>
       <div class="cv-center">
-        <div class="cv-kicker">结论收口 · Closing</div>
+        <!-- <div class="cv-kicker">结论收口 · Closing</div> -->
         <div class="cv-sub" style="font-weight:600">Thanks</div>
         <div class="cv-thesis">Agent 时代，用户既是人，也是 AI</div>
         <div class="cv-lead">人与 AI 撞在同几道坎——版本散乱、可发现性弱、越往深处越塌。把碎片化的昇腾知识按场景结构化、可抓取、可运行：人少试错，AI 不杜撰。</div>
       </div>
       <div class="cv-bot">
-        <div class="cv-ucd">UX 竞品分析 &middot; opknow 可用性实测</div>
+        <div class="cv-ucd">DEV LAB &middot; 时昕昱 ｜ 闫浩 ｜ 张敬文 ｜ 俪旻硕</div>
         <div class="cv-meta">谢谢观看 &middot; 2026</div>
       </div>
     </div>
