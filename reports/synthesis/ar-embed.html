@@ -2021,7 +2021,10 @@ html.embed body{background:transparent!important;overflow:hidden!important;heigh
 body.embed .topnav,body.embed .netbg,body.embed #toc,body.embed .lb,body.embed footer,body.embed .footer{display:none!important}
 body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
 /* 单触点卡 ?tp 模式:卡铺满宽度(去 max-width、padding 归 0 与 deck 题目左右对齐)、上下居中 */
-body.embed.tponly{height:100vh!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+/* 所有嵌入页(触点 + sec 综述/行动/责任等)都垂直居中,别顶对齐留下半空 */
+body.embed{display:flex!important;flex-direction:column!important;justify-content:center!important}
+html.embed body.embed{min-height:100vh}
+body.embed.tponly{height:100vh!important}
 body.embed.tponly .wrap{max-width:none!important;padding:0!important;margin:0!important;width:100%!important}
 /* 旅程页:grid 内容,解开 1180 限宽让它铺满 iframe 右半区(文字类 sec 仍保持限宽利于阅读) */
 body.embed.sec-journey .wrap{max-width:none!important;padding:0 4px!important;margin:0!important}
