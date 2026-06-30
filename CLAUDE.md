@@ -221,7 +221,16 @@ ud=$(mktemp -d); "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollba
 - **用中文**交流。
 - **视觉/设计类改动先提 2–4 个选项**让用户选(可用 AskUserQuestion),不要直接实现。
 - **模拟数据先行**:缺真实结构时用模拟数据/标注 mockup 做成完整楼层,后续替换。
-- **每次改完自动收尾(用户偏好,不用再问)**:把新架构/约定/现状/坑同步进本文件 → `git commit`(中文 prefix `feat:`/`fix:`/`style:`/`docs:`)→ `git push origin main`,一气呵成。仓库已建:远程 `github.com/SchihHsin/ascend-vs-nvidia-ux`(main)。纯文案/数值微调可不更本文件,但**仍要 push**。
+- **每次改完自动收尾(用户偏好,不用再问)**:把新架构/约定/现状/坑同步进本文件 → `git commit`(中文 prefix `feat:`/`fix:`/`style:`/`docs:`)→ push,一气呵成。仓库已建:远程 `github.com/SchihHsin/ascend-vs-nvidia-ux`(main)。纯文案/数值微调可不更本文件,但**仍要 push**。
+- **push 固定方法(2026-06-30 已验证成功,别再裸连 SSH 耗时)**:本机 GitHub SSH key 没问题,但当前终端直连 `github.com:22` / `ssh.github.com:443` 会超时或被关;HTTPS 读仓库可通但无写入凭据。终端有代理 `127.0.0.1:7890`,成功 push 的方式是 **SSH over 443 + SOCKS5 代理**:
+```
+GIT_SSH_COMMAND="ssh -p 443 -o HostName=ssh.github.com -o 'ProxyCommand=nc -x 127.0.0.1:7890 -X 5 %h %p'" git push origin main
+```
+若要先快速自检,用:
+```
+ssh -T -p 443 -o HostName=ssh.github.com -o BatchMode=yes -o ConnectTimeout=12 -o 'ProxyCommand=nc -x 127.0.0.1:7890 -X 5 %h %p' git@github.com
+```
+看到 `Hi SchihHsin! You've successfully authenticated` 即可直接 push。**不要再连续重试普通 `git push origin main`**。
 ```
 # 远程已配置好,直接 push;若换机重建 git 仓:
 git init && git add -A && git commit -m "init: 昇腾 vs 英伟达 官网体验竞品分析"
