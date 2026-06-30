@@ -373,7 +373,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .head-l:has(.role-chip.dev){--tab-role:#2f6fed;--tab-soft:rgba(47,111,237,.1)}
 .bk-strip{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:1vh}
 .bk-strip .bkl{font-size:var(--fs-sm);color:var(--ink-3);margin-right:2px}
-.bk-strip .bk{font-size:var(--fs-sm);color:var(--tab-role,var(--ink-2));background:var(--tab-soft,var(--g1));border:1px solid color-mix(in srgb,var(--tab-role,var(--line)) 24%,transparent);border-radius:20px;padding:3px 13px}
+.bk-strip .bk{font-size:var(--fs-sm);color:var(--tab-role,var(--ink-2));background:var(--tab-soft,var(--g1));border:1px solid color-mix(in srgb,var(--tab-role,var(--line)) 24%,transparent);border-radius:20px;padding:3px 13px;cursor:pointer;transition:background .15s,border-color .15s,color .15s,transform .15s}
+.bk-strip .bk:hover,.bk-strip .bk:focus-visible{border-color:color-mix(in srgb,var(--tab-role,var(--accent)) 44%,transparent);transform:translateY(-1px);outline:none}
 .bk-strip .bk.on{color:#fff;background:var(--tab-role,var(--accent));border-color:transparent;font-weight:800}
 .rgoal{position:relative;min-height:0;font-size:var(--fs-body);color:var(--ink);line-height:1.68;background:linear-gradient(160deg,rgba(255,255,255,.78),var(--role-soft));border:1px solid rgba(255,255,255,.86);border-radius:16px;padding:3vh 1.45vw 2.4vh;box-shadow:0 16px 42px -28px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.9);display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .rgoal::before{content:attr(data-board);align-self:flex-start;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--role);background:rgba(255,255,255,.72);border:1px solid color-mix(in srgb,var(--role) 22%,transparent);border-radius:999px;padding:.42vh .75vw;margin-bottom:1.4vh}
@@ -2113,6 +2114,36 @@ function installSeqZoomButtons(){
   });
 }
 
+function installBoardTabs(){
+  const groups=new Map();
+  slides.forEach((sl,i)=>{
+    const strip=sl.querySelector('.bk-strip');
+    if(!strip)return;
+    const label=strip.querySelector('.bkl')?.textContent.trim()||'';
+    const active=strip.querySelector('.bk.on')?.textContent.trim();
+    if(!active)return;
+    if(!groups.has(label))groups.set(label,new Map());
+    groups.get(label).set(active,i);
+  });
+  document.querySelectorAll('.bk-strip').forEach(strip=>{
+    const label=strip.querySelector('.bkl')?.textContent.trim()||'';
+    const targets=groups.get(label);
+    if(!targets)return;
+    strip.querySelectorAll('.bk').forEach(tab=>{
+      const name=tab.textContent.trim();
+      const target=targets.get(name);
+      if(target==null)return;
+      tab.setAttribute('role','button');
+      tab.setAttribute('tabindex','0');
+      tab.setAttribute('aria-label','跳转到 '+name);
+      tab.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();go(target);});
+      tab.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();go(target);}
+      });
+    });
+  });
+}
+
 /* 总览 Overview：每页包进 .slide-inner 缩放成缩略图，排网格（按当前视窗比例）*/
 function applyOverviewScale(){if(!document.body.classList.contains('overview'))return;const cellW=slides[0].getBoundingClientRect().width,scale=cellW/window.innerWidth;slides.forEach(s=>{s.style.height=(window.innerHeight*scale)+'px';const inner=s.querySelector(':scope>.slide-inner');if(inner)inner.style.transform='scale('+scale+')';});}
 function enterOverview(){slides.forEach(s=>{if(!s.querySelector(':scope>.slide-inner')){const w=document.createElement('div');w.className='slide-inner';while(s.firstChild)w.appendChild(s.firstChild);s.appendChild(w);}});document.body.classList.add('overview');requestAnimationFrame(applyOverviewScale);}
@@ -2132,6 +2163,7 @@ document.addEventListener('mouseleave',()=>{ controls.classList.remove('show'); 
 
 slides.forEach(paintSlide);
 installSeqZoomButtons();
+installBoardTabs();
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
 (function(){const m=(location.hash||'').match(/(\d+)/);const start=m?Math.min(slides.length,Math.max(1,+m[1]))-1:0;
   updateCurrent(start>0?start:0);})();
