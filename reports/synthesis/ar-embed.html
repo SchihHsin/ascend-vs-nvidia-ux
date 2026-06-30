@@ -461,7 +461,7 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="metrics">
       <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v" id="coverAvg">—<span style="font-size:18px;color:var(--g5)"> / </span>—</div><div class="vsub" id="coverGapSub">摩擦指数 计算结果 · 24 主触点等权均分</div></div>
-      <div class="metric bad"><div class="k">最深摩擦点 · SDK下载(4.3)</div><div class="v">21<span style="font-size:18px;color:var(--g5)"> / </span>87</div><div class="vsub">登录+协议+7步 → 摩擦指数 算出的全局谷底</div></div>
+      <div class="metric bad"><div class="k">最深摩擦点 · Toolkit 下载(4.3)</div><div class="v">21<span style="font-size:18px;color:var(--g5)"> / </span>87</div><div class="vsub">登录+协议+7步 → 摩擦指数 算出的全局谷底</div></div>
       <div class="metric good"><div class="k">昇腾占优触点</div><div class="v">5<span style="font-size:18px;color:var(--g5)"> 个</span></div><div class="vsub">首页 / 规格 / 快速入门 / 模型库 / FAQ</div></div>
       <div class="metric"><div class="k">真实截图取证</div><div class="v">25<span style="font-size:18px;color:var(--g5)">张</span></div><div class="vsub">昇腾9 · NVIDIA16 · 全触点真图、0 mockup</div></div>
     </div>
@@ -526,7 +526,7 @@ a{color:inherit;text-decoration:none}
       <b>二、评估对象与边界(精确界定,不越界)</b><br>
       <b>测量:</b>开发者门户中<b>可观测、可计数的旅程摩擦</b>——点击成本、准入门槛、决策负荷、内容可执行性、可发现性。<br>
       <b>不纳入计算:</b>视觉美感、文案质量、主观"清晰度"感受、品牌好感——这些无法在不引入判断的前提下量化,故<b>不计入分数</b>,仅作不计分的"定性观察"另列。<br>
-      <b>适用范围:</b>PC 端 Web 开发者门户;移动 SDK / IDE 插件 / 端侧部署需各自扩展指标层。
+      <b>适用范围:</b>PC 端 Web 开发者门户;移动端开发包 / IDE 插件 / 端侧部署需各自扩展指标层。
     </div>
     <h3 style="margin:22px 0 12px;font-size:16px;color:var(--ink)">三、指标体系(5 维度 · 全部可观测)</h3>
     <div class="ia-finds">
@@ -551,7 +551,7 @@ a{color:inherit;text-decoration:none}
     </div>
     <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">六、锚点总表(全部公开 · 对两边一视同仁)</h3>
     <div id="djfiRules"></div>
-    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">七、算例(触点 4.3 · SDK 下载)—— 由引擎实时计算</h3>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">七、算例(触点 4.3 · Toolkit 下载)—— 由引擎实时计算</h3>
     <div id="djfiExample"></div>
     <p class="floor-sub" style="margin-top:8px">这张表不是手写、而是页面加载时由公式现算;每个触点卡底部都能展开同样的「摩擦指数 实测明细」,数字与触点分严格一致——给定测量表,任何人重算得同一结果。<b>样板已铺 8 个触点(4.3 / 4.2 / 4.1 / 3.2 / 1.1b / T2 / T4 / T5),其余触点暂仍为同维度手工分,正逐步补齐实测。</b></p>
     <div class="method" style="margin-top:14px">
@@ -969,7 +969,7 @@ let curScen='op';
 const STEPS=[
  {k:1,id:'L1',name:'落地·找入口·选型',sub:'第一次来，找到“从哪开始开发”'},
  {k:2,id:'L2',name:'上手引导',        sub:'看清“要怎么做”（算子 hub / CUDA 页）'},
- {k:3,id:'L3',name:'配环境·拿 SDK',   sub:'装 CANN / CUDA Toolkit'},
+ {k:3,id:'L3',name:'配环境·拿 Toolkit',   sub:'装 CANN / CUDA Toolkit'},
  {k:4,id:'L4',name:'动手写·查文档',   sub:'写第一个算子，边写边查参考'},
  {k:5,id:'L5',name:'编译跑通',        sub:'用工具链编译 → 第一次成功'},
  {k:6,id:'L6',name:'调试·求助',       sub:'出错怎么查、卡住去哪问'},
@@ -1137,7 +1137,7 @@ ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句
  c:[['账号体系是一对镜像门槛','昇腾绑华为账号、给微信/QQ，对国内一键直达，但海外开发者没有微信/QQ、还要新注册华为账号，门槛陡升；NVIDIA 正好相反，对全球顺、对国内缺本地化登录。'],
     ['更关键的是“登录的时机”','昇腾把登录卡在下载之前；NVIDIA 把登录完全后置。前者恰恰在最该“先试试”的环节设了闸。']],
  rec:'把登录从下载的前置条件改为<b>后置项——游客可先下社区版、跑通后再提示登录解锁更多</b>；若要出海，再补邮箱直注册与 Google/GitHub 等国际第三方登录。'},
-{id:'4.3',s:4,name:'SDK / Toolkit 下载流程',a:64,nv:84,bar:true,
+{id:'4.3',s:4,name:'Toolkit 下载流程',a:64,nv:84,bar:true,
  aimg:'02-ascend-download-4.3.png',atag:'real',nimg:'02-nvidia-cuda-download-4.3.png',ntag:'real',
  adesc:'昇腾社区版下载页：要先在“社区版 / 商用版”里选对分支，再依次选 CPU 架构（AArch64 / X86_64）、CANN 版本、具体软件包，并勾选同意《CANN 软件用户许可协议》，关键下载动作还要求登录华为账号。落地时先弹一个“资源下载中心公告”把页面挡住。',
 ndesc:'CUDA 下载页（关掉订阅弹窗后）：一行行绿色按钮，依次点 操作系统（图为第一步 Linux/Windows）→ 架构 → 发行版 → 版本 → 安装类型（Network / Full），每点一步只展示下一步的合法选项；选完页面就内联给出一条可直接复制的安装命令，全程不要求登录。',
@@ -1548,8 +1548,8 @@ const JOURNEY_OP=[
   aY:30,nY:34,emoji:'🙂',eL:'结构更清',eC:'#059669',
   pains:['算子 hub 有 5 环节框架，但缺“先装 CANN”的明确第一步；不过结构已胜过 NVIDIA 的 CUDA 资源堆'],
   opps:[['算子 hub 顶部加“按 4 步开始”主线 + 在线实验前置，把结构优势讲足','产品']]},
- {n:'03',name:'配环境·拿 SDK',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
-  touch:['下载中心','注册 / 登录','SDK 下载流程','版本选择'],
+ {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
+  touch:['下载中心','注册 / 登录','Toolkit 下载流程','版本选择'],
   action:'关下载公告 → 选架构/版本/包 → 同意 CANN 协议 → 登录华为账号 → 下载（约 7 步）',
   aY:82,nY:22,emoji:'😣',eL:'卡在下载',eC:'#DC2626',
   pains:['“先跑起来”<b>7 步</b> + 登录前置 + 协议同意，链路最长；NVIDIA 绿按钮零登录、内联命令约 2 步'],
@@ -1592,8 +1592,8 @@ const JOURNEY_TRAIN=[
   aY:32,nY:34,emoji:'🙂',eL:'引导清晰',eC:'#059669',
   pains:['MindSpeed / MindSpore 等专用栈需额外认知；NVIDIA 多数原生框架即可起步'],
   opps:[['训练 hub 给“按框架选路径 + 一键拉可训模型在线跑”最短线','产品']]},
- {n:'03',name:'配环境·拿 SDK',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
-  touch:['下载中心','注册 / 登录','SDK 流程','版本选择'],
+ {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
+  touch:['下载中心','注册 / 登录','Toolkit 流程','版本选择'],
   action:'装 CANN + 框架(torch_npu/MindSpeed) + 数据集 → 同意协议 → 登录 → 备好',
   aY:80,nY:24,emoji:'😣',eL:'环境最重',eC:'#DC2626',
   pains:['训练环境更重：CANN + 框架 + 数据，叠加登录前置 / 协议，比算子还多步'],
@@ -1715,7 +1715,7 @@ function renderDjfiRules(){
 function renderDjfiExample(){
  const el=document.getElementById('djfiExample');if(!el)return;
  const t=TP.find(x=>x.id==='4.3');if(!t||!t.djfi){el.innerHTML='';return;}
- el.innerHTML=djfiTableHtml(t).replace('<details class="djfi">','<div class="djfi open">').replace('</details>','</div>').replace(/<summary>[\s\S]*?<\/summary>/,`<div class="dj-exhd">触点 4.3 · SDK 下载流程 —— 实时由引擎计算:昇腾 <b class="a">${t.djfi.a.tp}</b> / NVIDIA <b class="n">${t.djfi.nv.tp}</b></div>`);
+ el.innerHTML=djfiTableHtml(t).replace('<details class="djfi">','<div class="djfi open">').replace('</details>','</div>').replace(/<summary>[\s\S]*?<\/summary>/,`<div class="dj-exhd">触点 4.3 · Toolkit 下载流程 —— 实时由引擎计算:昇腾 <b class="a">${t.djfi.a.tp}</b> / NVIDIA <b class="n">${t.djfi.nv.tp}</b></div>`);
 }
 function updateCover(){
  const main=TP.filter(t=>/^\d/.test(t.id));
