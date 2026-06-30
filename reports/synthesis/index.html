@@ -67,6 +67,23 @@ body.overview .s-cover .slide-inner{padding:0}
 .body-area{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
 .card{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);
   border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 10px 30px -16px rgba(30,40,70,.2),inset 0 1px 0 rgba(255,255,255,.85);padding:2.2vh 1.6vw}
+.seq-zoom-host{position:relative}
+.seq-zoom-btn{position:absolute;right:12px;top:12px;z-index:12;width:34px;height:34px;border:1px solid rgba(212,216,223,.85);border-radius:9px;background:rgba(255,255,255,.86);color:#3d4452;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 22px -14px rgba(30,40,70,.35);opacity:.22;transition:opacity .16s,background .16s,color .16s,transform .16s}
+.seq-zoom-host:hover .seq-zoom-btn,.seq-zoom-btn:focus-visible{opacity:1}
+.seq-zoom-btn:hover{background:#fff;color:var(--accent);transform:translateY(-1px)}
+.seq-zoom-btn svg{width:18px;height:18px;display:block}
+.seq-modal{position:fixed;inset:0;z-index:90;background:rgba(16,18,24,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:3vh 3vw}
+.seq-modal.open{display:flex}
+.seq-modal-panel{position:relative;width:100%;height:100%;background:rgba(244,246,250,.94);border:1px solid rgba(255,255,255,.58);border-radius:18px;box-shadow:0 28px 90px -26px rgba(0,0,0,.5);overflow:hidden;display:flex}
+.seq-modal iframe{width:100%;height:100%;border:0;background:transparent}
+.seq-modal-close{position:absolute;right:18px;top:16px;z-index:2;width:38px;height:38px;border:1px solid rgba(212,216,223,.9);border-radius:10px;background:rgba(255,255,255,.9);color:#3d4452;font-size:24px;line-height:1;cursor:pointer}
+.seq-full-slide{padding:3vh 3vw;background:#e7e9ee}
+.seq-full-slide .head{margin-bottom:1.8vh}
+.seq-full-slide .brand .ttl{font-size:clamp(20px,1.45vw,27px)}
+.seq-full-stage{flex:1;min-height:0;padding:1vh .8vw;display:flex;overflow:hidden;border-radius:18px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.75);box-shadow:0 16px 48px -22px rgba(30,40,70,.28),inset 0 1px 0 rgba(255,255,255,.86)}
+.seq-full-stage iframe{flex:1;min-width:0;height:100%;border:0;background:transparent}
+.magic-seq-ghost{position:fixed;z-index:80;overflow:hidden;background:rgba(244,246,250,.96);border:1px solid rgba(255,255,255,.75);box-shadow:0 24px 80px -24px rgba(30,40,70,.5);pointer-events:none;transition:left .72s cubic-bezier(.2,.8,.2,1),top .72s cubic-bezier(.2,.8,.2,1),width .72s cubic-bezier(.2,.8,.2,1),height .72s cubic-bezier(.2,.8,.2,1),border-radius .72s cubic-bezier(.2,.8,.2,1),opacity .72s ease}
+.magic-seq-ghost iframe{width:100%;height:100%;border:0;background:transparent}
 
 /* 甘特 roadmap（精调件②）：玻璃大卡 + 浮动条 + 虚线网格底纹 */
 .rm{position:relative;flex:1;min-height:0;margin-top:1vh;background:rgba(255,255,255,.55);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.7);border-radius:18px;box-shadow:0 12px 34px -16px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.85)}
@@ -337,42 +354,60 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .warn .dh-card.dark{background:radial-gradient(ellipse 130% 130% at 50% 48%,#2A1012 0%,#5A2A2E 100%)}
 .warn .bridge.lite{background:rgba(255,90,110,.1)!important}
 .warn .bridge.lite b{background:linear-gradient(transparent 60%,rgba(255,90,110,.3) 0)}  /* 问题页加粗高亮底也用红，不再蓝 */
-/* ===== 一页一板块行动方案：左 demo 主视觉 + 右措施清单（大字措施/小字分析/小标签） ===== */
-.rolewrap{flex:1;min-height:0;display:flex;flex-direction:column;gap:1.4vh;justify-content:center}
-.ameasures{display:grid;grid-template-columns:1fr 1fr;gap:1.2vh 1.6vw;align-content:center}
-.ahead{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:var(--fs-body);font-weight:800;letter-spacing:.02em;margin-top:.4vh}
-.ahead::before{content:'';width:11px;height:11px;border-radius:3px;flex:none}
-.ahead.hu{color:#9a5a00}.ahead.hu::before{background:#c8881a}
-.ahead.co{color:#5b3fb0}.ahead.co::before{background:#5b3fb0}
-.ahead.ai{color:#1f6f86}.ahead.ai::before{background:#1f6f86}
+/* ===== 一页一板块行动方案：左侧决策摘要 + 右侧优先级行动板 ===== */
+.rolewrap{--role:#5b5bd6;--role-soft:rgba(91,91,214,.1);flex:1;min-height:0;display:grid;grid-template-columns:minmax(250px,30%) 1fr;gap:1.7vw;align-items:stretch}
+.rolewrap:has(.role-chip.doc){--role:#1788a8;--role-soft:rgba(31,159,184,.11)}
+.rolewrap:has(.role-chip.dev){--role:#2f6fed;--role-soft:rgba(47,111,237,.1)}
+.rolewrap .role-chip{display:none}
+.ameasures{min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vh 1vw;align-content:center}
+.ahead{grid-column:1/-1;display:flex;align-items:center;font-size:var(--fs-sm);font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin:.25vh 0 -.25vh;color:var(--ink-3)}
+.ahead::before{display:none}
+.ahead.p0{color:#E5484D}.ahead.p1{color:#C7771D}.ahead.p2{color:#7B8495}
 /* 角色大色块 + 板块 strip（让「哪个角色 + 哪个板块」突出） */
 .role-chip{display:inline-block;font-size:var(--fs-h2);font-weight:800;color:#fff;border-radius:9px;padding:2px 15px;margin-right:14px;letter-spacing:.02em;vertical-align:baseline;position:relative;top:-2px}
 .role-chip.exp{background:linear-gradient(135deg,#8b6df2,#5b5bd6)}
 .role-chip.doc{background:linear-gradient(135deg,#23a6bf,#1577a0)}
 .role-chip.dev{background:linear-gradient(135deg,#3a78f0,#2453c0)}
+.head-l:has(.role-chip.exp){--tab-role:#5b5bd6;--tab-soft:rgba(91,91,214,.1)}
+.head-l:has(.role-chip.doc){--tab-role:#1788a8;--tab-soft:rgba(31,159,184,.11)}
+.head-l:has(.role-chip.dev){--tab-role:#2f6fed;--tab-soft:rgba(47,111,237,.1)}
 .bk-strip{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:1vh}
 .bk-strip .bkl{font-size:var(--fs-sm);color:var(--ink-3);margin-right:2px}
-.bk-strip .bk{font-size:var(--fs-sm);color:var(--ink-2);background:var(--g1);border:1px solid var(--line);border-radius:20px;padding:3px 13px}
-.bk-strip .bk.on{color:#fff;background:var(--accent);border-color:transparent;font-weight:800}
-.rgoal{font-size:var(--fs-body);color:var(--ink);line-height:1.55;background:var(--accent-soft);border-radius:10px;padding:1.3vh 1.1vw;margin-bottom:.6vh}
-.rgoal .gl{font-weight:800;color:var(--accent);margin-right:.4em}
-.rgoal b{color:var(--ink);font-weight:700}
+.bk-strip .bk{font-size:var(--fs-sm);color:var(--tab-role,var(--ink-2));background:var(--tab-soft,var(--g1));border:1px solid color-mix(in srgb,var(--tab-role,var(--line)) 24%,transparent);border-radius:20px;padding:3px 13px}
+.bk-strip .bk.on{color:#fff;background:var(--tab-role,var(--accent));border-color:transparent;font-weight:800}
+.rgoal{position:relative;min-height:0;font-size:var(--fs-body);color:var(--ink);line-height:1.68;background:linear-gradient(160deg,rgba(255,255,255,.78),var(--role-soft));border:1px solid rgba(255,255,255,.86);border-radius:16px;padding:3vh 1.45vw 2.4vh;box-shadow:0 16px 42px -28px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.9);display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.rgoal::before{content:attr(data-board);align-self:flex-start;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--role);background:rgba(255,255,255,.72);border:1px solid color-mix(in srgb,var(--role) 22%,transparent);border-radius:999px;padding:.42vh .75vw;margin-bottom:1.4vh}
+.rgoal::after{content:'';position:absolute;right:1vw;bottom:1.2vh;width:118px;height:118px;background:var(--role);opacity:.085;pointer-events:none;-webkit-mask:var(--rg-icon) center/contain no-repeat;mask:var(--rg-icon) center/contain no-repeat}
+.rgoal[data-board^="01"]{--rg-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 30 32 12l24 18v24a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V30Z'/%3E%3Cpath d='M24 58V38h16v20'/%3E%3Cpath d='M42 24 31 35l-7-7'/%3E%3C/svg%3E")}
+.rgoal[data-board^="02"]{--rg-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M32 8v30'/%3E%3Cpath d='m20 28 12 12 12-12'/%3E%3Cpath d='M14 42v10a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4V42'/%3E%3Cpath d='M20 16h24'/%3E%3C/svg%3E")}
+.rgoal[data-board^="03"]{--rg-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 14h18a8 8 0 0 1 8 8v30a8 8 0 0 0-8-8H12V14Z'/%3E%3Cpath d='M52 14H38a8 8 0 0 0-8 8v30a8 8 0 0 1 8-8h14V14Z'/%3E%3Cpath d='m26 27 10 6-10 6V27Z'/%3E%3C/svg%3E")}
+.rgoal[data-board^="04"]{--rg-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='25' cy='25' r='13'/%3E%3Cpath d='m35 35 13 13'/%3E%3Cpath d='M17 52h25'/%3E%3Cpath d='M42 52l8-8 6 8'/%3E%3Cpath d='M16 18h18'/%3E%3Cpath d='M16 26h12'/%3E%3C/svg%3E")}
+.rgoal[data-board^="05"]{--rg-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8h22l10 10v38H18V8Z'/%3E%3Cpath d='M40 8v12h10'/%3E%3Cpath d='M25 30h18'/%3E%3Cpath d='M25 39h18'/%3E%3Cpath d='M25 48h11'/%3E%3Cpath d='m14 18-6 6 6 6'/%3E%3Cpath d='M8 24h9'/%3E%3C/svg%3E")}
+.rgoal[data-board^="06"]{--rg-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='22' r='7'/%3E%3Ccircle cx='46' cy='18' r='7'/%3E%3Ccircle cx='38' cy='46' r='8'/%3E%3Cpath d='M24 20 39 18'/%3E%3Cpath d='M23 27 33 40'/%3E%3Cpath d='M45 25 40 38'/%3E%3Cpath d='M16 48h10'/%3E%3Cpath d='M21 43v10'/%3E%3C/svg%3E")}
+.rgoal[data-board^="07"]{--rg-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 18 8 32l12 14'/%3E%3Cpath d='m44 18 12 14-12 14'/%3E%3Cpath d='M36 12 28 52'/%3E%3Cpath d='M22 54h20'/%3E%3C/svg%3E")}
+.rgoal[data-board^="08"]{--rg-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M42 8a14 14 0 0 0-18 17L9 40a7 7 0 0 0 10 10l15-15A14 14 0 0 0 51 17l-9 9-8-8 8-10Z'/%3E%3Cpath d='M16 44h.1'/%3E%3Cpath d='M38 44h14'/%3E%3Cpath d='M45 37v14'/%3E%3C/svg%3E")}
+.rgoal .gl{display:none}
+.rgoal b{color:var(--ink);font-weight:800;background:linear-gradient(transparent 58%,rgba(91,91,214,.16) 0)}
 .mgrp{display:flex;align-items:center;gap:7px;font-size:var(--fs-sm);font-weight:800;letter-spacing:.03em;margin:.4vh 0 .1vh}
 .mgrp::before{content:'';width:10px;height:10px;border-radius:3px;flex:none}
 .mgrp.hu{color:#9a5a00}.mgrp.hu::before{background:#c8881a}
 .mgrp.co{color:#5b3fb0}.mgrp.co::before{background:#5b3fb0}
 .mgrp.ai{color:#1f6f86}.mgrp.ai::before{background:#1f6f86}
-.rmi{display:flex;gap:13px;align-items:flex-start}
-.rmi .rp{flex:none;font-size:var(--fs-xs);font-weight:800;color:#fff;border-radius:6px;padding:3px 9px;margin-top:3px;letter-spacing:.02em}
+.rmi{position:relative;display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.82);border-radius:13px;padding:1.05vh 1vw;box-shadow:0 10px 26px -22px rgba(30,40,70,.34);min-width:0}
+.rmi:has(.p0){grid-column:1/-1;background:linear-gradient(135deg,rgba(229,72,77,.1),rgba(255,255,255,.72));border-color:rgba(229,72,77,.22);padding:1.25vh 1.15vw}
+.rmi:has(.p1){background:linear-gradient(135deg,rgba(224,146,43,.08),rgba(255,255,255,.6))}
+.rmi:has(.p2){background:rgba(255,255,255,.48)}
+.rmi .rp{flex:none;font-size:var(--fs-xs);font-weight:900;color:#fff;border-radius:7px;padding:.35vh .62vw;margin-top:.1vh;letter-spacing:.04em;box-shadow:0 8px 18px -12px rgba(0,0,0,.35)}
 .rp.p0{background:#E5484D}.rp.p1{background:#E0922B}.rp.p2{background:#9aa3b2}
 .rmi-b{flex:1;min-width:0}
-.rmi-act{font-size:var(--fs-h3);font-weight:700;color:var(--ink);line-height:1.38}
+.rmi-act{font-size:var(--fs-body);font-weight:800;color:var(--ink);line-height:1.35}
+.rmi:has(.p0) .rmi-act{font-size:var(--fs-h3);letter-spacing:-.01em}
 .rmi-act b{color:#3f33a0}
-.rmi-why{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.55;margin-top:.6vh}
-.rmi-meta{display:flex;gap:7px;align-items:center;margin-top:.8vh}
-.rmi-meta .who2{font-size:var(--fs-xs);font-weight:700;border-radius:20px;padding:2px 10px}
+.rmi-why{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.48;margin-top:.46vh}
+.rmi-meta{display:flex;gap:7px;align-items:center;margin:0 0 .5vh}
+.rmi-meta .who2{font-size:var(--fs-xs);font-weight:800;border-radius:20px;padding:2px 10px;letter-spacing:.02em}
 .who2.co{color:#5b3fb0;background:#efeafc}.who2.ai{color:#1f6f86;background:#e3f3f7}.who2.hu{color:#9a5a00;background:#fef0d8}
-.rmi-meta .src2{font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3)}
+.rmi-meta .src2,.src2{display:inline-flex;align-items:center;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:700;color:var(--role);background:var(--role-soft);border-radius:999px;padding:.15vh .46vw;margin-left:.35em;white-space:nowrap}
 /* 行动页右侧 demo：现状/建议 步骤流对比 */
 .fdemo{display:flex;gap:1vw;height:100%;align-items:stretch}
 .fdemo .fdt{font-size:var(--fs-sm);font-weight:700;color:var(--ink);margin-bottom:1vh}
@@ -400,8 +435,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div class="cv-center">
         <div class="cv-kicker">Developer Experience &#8853; LLM Usability · 昇腾社区 · 2026</div>
-        <div class="cv-sub">昇腾社区可用性 · 双视角分析<br/>AI 侧「内容可用性」&times; 人侧「基础体验」</div>
-        <div class="cv-lead">两套实测合一：人侧「基础体验」—— 开发者从浏览官网到跑通的旅程；AI 侧「内容可用性」—— 业界大模型能否搜到 / 抓到 / 用对昇腾社区知识。</div>
+        <div class="cv-sub">昇腾社区可用性 · 双视角分析<br/>AI 侧「内容可用性」&times; 开发者侧「基础体验」</div>
+        <div class="cv-lead">两套实测合一：开发者侧「基础体验」—— 开发者从浏览官网到跑通的旅程；AI 侧「内容可用性」—— 业界大模型能否搜到 / 抓到 / 用对昇腾社区知识。</div>
       </div>
       <div class="cv-bot">
         <div class="cv-ucd">DEV LAB &middot; 时昕昱 ｜ 闫浩 ｜ 张敬文 ｜ 俪旻硕</div>
@@ -473,7 +508,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="dh-d">三分之二开发者有过被误导的经历<span class="dh-src">Stack Overflow 2025</span></div>
           </div>
         </div>
-        <div class="bridge lite" style="margin:0 auto;max-width:1040px;width:100%;background:rgba(91,91,214,.1);color:var(--ink);text-align:center">而 AI 回答是否准确，取决于它会不会<b>找不到 / 找不准 / 读不了知识</b>，这就是「AI 可用性」。于是昇腾要两套看：人侧<b>「基础体验」</b> + AI 侧<b>「内容可用性」</b>。</div>
+        <div class="bridge lite" style="margin:0 auto;max-width:1040px;width:100%;background:rgba(91,91,214,.1);color:var(--ink);text-align:center">而 AI 回答是否准确，取决于它会不会<b>找不到 / 找不准 / 读不了知识</b>，这就是「AI 可用性」。于是昇腾要两套看：开发者侧<b>「基础体验」</b> + AI 侧<b>「内容可用性」</b>。</div>
       </div>
     </div>
   </section>
@@ -516,12 +551,26 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="ovm-d">AI 每次<b>能否取回、是否够用</b> → 后续以「可用性矩阵」评分。</div>
           </div>
           <div class="ovm">
-            <div class="ovm-h"><i style="background:#2f3d63"></i>人 ↔ 昇腾社区</div>
+            <div class="ovm-h"><i style="background:#2f3d63"></i>开发者 ↔ 昇腾社区</div>
             <div class="ovm-d">开发者本人浏览官网的<b>直接体验</b> → 后续做触点评分。</div>
           </div>
         </div>
         <div class="seq-note">点图右上「按关系讲解」高亮某条线 · 悬浮节点看每步细节</div>
       </div>
+    </div>
+  </section>
+
+  <!-- 3a 灰底：全屏时序图 -->
+  <section class="slide s-gray seq-full-slide" data-seq-full>
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">先把全链路摊开：AI 与开发者分别在哪里依赖昇腾社区内容</span></div>
+        <div class="subttl">立论 · 全屏时序图</div>
+      </div>
+      <div class="head-r">04/ 时序图 · 全屏<br/>Projection View</div>
+    </div>
+    <div class="seq-full-stage" data-magic-seq>
+      <iframe data-src="seq-d3.html?full=1" title="自定义算子开发 · 全屏时序图"></iframe>
     </div>
   </section>
 
@@ -578,10 +627,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">AI 如何完成这几次检索：检索受阻则转换方向，证据不足则再检索一轮</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「检索路径」</div>
       </div>
-      <div class="head-r">04/ AI · 执行架构<br/>opknow 20</div>
+      <div class="head-r">05/ AI · 执行架构<br/>opknow 20</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 64%;height:100%;display:flex;flex-direction:column;gap:1vh;padding:1.3vh 1.1vw;overflow:hidden">
+      <div class="card" data-magic-target style="flex:0 0 64%;height:100%;display:flex;flex-direction:column;gap:1vh;padding:1.3vh 1.1vw;overflow:hidden">
         <iframe data-src="arch-d3.html" title="Agent 循环架构（悬浮看每个环节）" style="flex:1;min-width:0;min-height:0;width:100%;border:0;background:transparent"></iframe>
         <div class="cmp-cap" style="text-align:center;color:var(--ink-3)">受阻则转向、不足则再检索 — <b style="color:var(--ink-2)">悬浮任意环节查看其职责</b>（opknow 20 · 公开 Messages API 示范实现）</div>
       </div>
@@ -601,7 +650,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">AI 可用性怎么测：同一套开发任务，在 CANN / 昇腾 与 CUDA / 英伟达 上各实测一遍</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「测试设计」</div>
       </div>
-      <div class="head-r">05/ AI 可用性 · 方法</div>
+      <div class="head-r">06/ AI 可用性 · 方法</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -630,7 +679,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">同样的需求，如何提问：5 个开发问题，在 CANN / 昇腾 与 CUDA / 英伟达 上各提问一遍</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「问题编写」</div>
       </div>
-      <div class="head-r">06/ 问题对 · 怎么问</div>
+      <div class="head-r">07/ 问题对 · 怎么问</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -739,7 +788,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">每一维指标都对应成熟的检索 / 信息架构理论，且公式可复现</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「理论依据」</div>
       </div>
-      <div class="head-r">07/ AI 指标 · 理论依据</div>
+      <div class="head-r">08/ AI 指标 · 理论依据</div>
     </div>
     <div class="body-area">
       <div class="auth">
@@ -783,7 +832,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">指标怎么形成：从「到底在测什么」一步步推出 触达→质量→成本→产出 价值链</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「指标形成」</div>
       </div>
-      <div class="head-r">08/ AI 指标 · 怎么形成</div>
+      <div class="head-r">09/ AI 指标 · 怎么形成</div>
     </div>
     <div class="body-area"><iframe data-src="m18-embed.html?sec=s3" title="opknow18 sec=s3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -794,7 +843,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">逐项定义 · 官方触达：能否找到、能否抓到（① ②）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「官方触达 ①②」</div>
       </div>
-      <div class="head-r">09/ AI 指标 · 官方触达</div>
+      <div class="head-r">10/ AI 指标 · 官方触达</div>
     </div>
     <div class="body-area"><iframe data-src="m18-embed.html?sec=s4&grp=a" title="opknow18 sec=s4 grp=a" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -805,7 +854,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">逐项定义 · 第三方 & 自带：社区丰富度与模型先验（⑤ ⑦）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「第三方&自带 ⑤⑦」</div>
       </div>
-      <div class="head-r">10/ AI 指标 · 第三方&自带</div>
+      <div class="head-r">11/ AI 指标 · 第三方&自带</div>
     </div>
     <div class="body-area"><iframe data-src="m18-embed.html?sec=s4&grp=b" title="opknow18 sec=s4 grp=b" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -816,7 +865,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">逐项定义 · 官方质量：正文够不够细、版本说不说得清（③ ④）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「官方质量 ③④」</div>
       </div>
-      <div class="head-r">11/ AI 指标 · 官方质量</div>
+      <div class="head-r">12/ AI 指标 · 官方质量</div>
     </div>
     <div class="body-area"><iframe data-src="m18-embed.html?sec=s4&grp=c" title="opknow18 sec=s4 grp=c" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -827,7 +876,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">逐项定义 · 第三方质量：可信度、时效与一致性（⑥）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「第三方质量 ⑥」</div>
       </div>
-      <div class="head-r">12/ AI 指标 · 第三方质量</div>
+      <div class="head-r">13/ AI 指标 · 第三方质量</div>
     </div>
     <div class="body-area"><iframe data-src="m18-embed.html?sec=s4&grp=d" title="opknow18 sec=s4 grp=d" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -838,7 +887,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">逐项定义 · 成本与产出：检索摩擦 + 版本锁定与可复现（⑧ ⑨ ⑩）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「成本产出 ⑧⑨⑩」</div>
       </div>
-      <div class="head-r">13/ AI 指标 · 成本产出</div>
+      <div class="head-r">14/ AI 指标 · 成本产出</div>
     </div>
     <div class="body-area"><iframe data-src="m18-embed.html?sec=s4&grp=e" title="opknow18 sec=s4 grp=e" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -849,7 +898,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">逐项定义 · 综合置信度：三源噪声-OR 汇总公式（⑪）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「综合置信度 ⑪」</div>
       </div>
-      <div class="head-r">14/ AI 指标 · 综合</div>
+      <div class="head-r">15/ AI 指标 · 综合</div>
     </div>
     <div class="body-area"><iframe data-src="m18-embed.html?sec=s4&grp=f" title="opknow18 sec=s4 grp=f" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -861,7 +910,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">打分结果：「写算子」这一关最低——官方文档 AI 根本抓不到；其余几关也卡在版本散乱、第三方资料少、模型自带知识弱</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「打分结果」</div>
       </div>
-      <div class="head-r">15/ 矩阵评分 · 结果</div>
+      <div class="head-r">16/ 矩阵评分 · 结果</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -974,7 +1023,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">实测暴露的七个问题：版本混乱 +「自带 / 第三方双薄」是系统性短板</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「七大问题」</div>
       </div>
-      <div class="head-r">16/ AI · 七个问题</div>
+      <div class="head-r">17/ AI · 七个问题</div>
     </div>
     <div class="body-area">
       <div class="pg7">
@@ -1014,7 +1063,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 1／8 · 版本体系统一收口：首选网址 + 配套查询工具</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「1/8 版本收口」</div>
       </div>
-      <div class="head-r">17/ 供给侧 · 改文档站</div>
+      <div class="head-r">18/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=1" title="opknow19 卡1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1025,7 +1074,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 2／8 · 错误码一码一页：为每个错误码建独立的排查页</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「2/8 错误码」</div>
       </div>
-      <div class="head-r">18/ 供给侧 · 改文档站</div>
+      <div class="head-r">19/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1036,7 +1085,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 3／8 · 让核心 how-to 页可被抓取：改为服务端渲染</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「3/8 how-to 静态化」</div>
       </div>
-      <div class="head-r">19/ 供给侧 · 改文档站</div>
+      <div class="head-r">20/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=3" title="opknow19 卡3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1047,7 +1096,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 4／8 · 提供机器可读出口：llms.txt、Markdown 导出、结构化 API 索引</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「4/8 机器可读出口」</div>
       </div>
-      <div class="head-r">20/ 供给侧 · 改文档站</div>
+      <div class="head-r">21/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=4" title="opknow19 卡4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1058,7 +1107,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 5／8 · 面向 AI 抓取的页面组织方式</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「5/8 页面结构」</div>
       </div>
-      <div class="head-r">21/ 供给侧 · 改文档站</div>
+      <div class="head-r">22/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1069,7 +1118,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 6／8 · 扶持第三方生态：从「少而同质」到「多平台互证」</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">22/ 供给侧 · 改文档站</div>
+      <div class="head-r">23/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=6" title="opknow19 卡6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1080,7 +1129,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 7／8 · 改善面向开发者的站内体验：沿用同一套评估指标</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「7/8 站内体验」</div>
       </div>
-      <div class="head-r">23/ 供给侧 · 改文档站</div>
+      <div class="head-r">24/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=7" title="opknow19 卡7" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1091,7 +1140,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 8／8 · 面向下一代模型的语料供给：官方与生态需共同支撑</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「8/8 语料供给」</div>
       </div>
-      <div class="head-r">24/ 供给侧 · 改文档站</div>
+      <div class="head-r">25/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=8" title="opknow19 卡8" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1112,9 +1161,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">人机协同时序：一个开发问题，在「官方 → 第三方 → 人工核查」之间逐级转向</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「时序图」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「时序图」</div>
       </div>
-      <div class="head-r">25/ 基础体验 · 时序图</div>
+      <div class="head-r">26/ 基础体验 · 时序图</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1122,13 +1171,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
         <div class="cmp-h"><span class="hk">Interaction</span>开发者带着一个问题，如何在社区里逐级转向</div>
-        <p class="cmp-desc">左图是<b>人 ↔ 社区</b>的协同时序：开发者带着一个具体问题，<b>先查官方</b>；官方受阻或不足时<b>转向第三方社区</b>；仍不确定、或需要做版本 / 精度决策时，<b>再回到官方 + 论坛人工核查</b>。三个转向点对应三类触发。</p>
+        <p class="cmp-desc">左图是<b>开发者 ↔ 社区</b>的协同时序：开发者带着一个具体问题，<b>先查官方</b>；官方受阻或不足时<b>转向第三方社区</b>；仍不确定、或需要做版本 / 精度决策时，<b>再回到官方 + 论坛人工核查</b>。三个转向点对应三类触发。</p>
         <div class="trig">
           <div class="trig-i"><span class="tn">触发 1</span><div class="tx"><b>AI 检索官方失败</b><small>官方 how-to 页单页应用（SPA）受阻 → 转第三方社区 / 人工核查官方</small></div></div>
           <div class="trig-i"><span class="tn">触发 2</span><div class="tx"><b>人工独立复核</b><small>不确定、拉安全网 → 官方 + 第三方交叉验证</small></div></div>
           <div class="trig-i"><span class="tn">触发 3</span><div class="tx"><b>需要决策</b><small>版本 / soc / 精度 → 官方文档 + Gitee 样例 + 论坛</small></div></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">同一张时序图，<b>AI 侧</b>看「能不能抓到」，<b>人侧</b>看「点几下、问几轮才拿到可用答案」——下两页用 <b>摩擦指数</b> 把这条人侧摩擦量化。</div>
+        <div class="bridge" style="margin-top:.2vh">同一张时序图，<b>AI 侧</b>看「能不能抓到」，<b>开发者侧</b>看「点几下、问几轮才拿到可用答案」——下两页用 <b>摩擦指数</b> 把这条开发者侧摩擦量化。</div>
       </div>
     </div>
   </section>
@@ -1137,9 +1186,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">走完 7 步生命周期：每步「触点 × 情绪 × 痛点 / 机会」，谷底在配环境</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「开发者旅程」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程」</div>
       </div>
-      <div class="head-r">26/ 基础体验 · 旅程</div>
+      <div class="head-r">27/ 基础体验 · 旅程</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:1.4vw;align-items:stretch">
       <div style="flex:0 0 17%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
@@ -1155,9 +1204,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">基础体验评估方法论 · 理论依据 + 评估边界：每维挂靠权威，先划清测什么 / 不测什么</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「开发者旅程摩擦指数 1/4 · 理论与边界」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 1/4 · 理论与边界」</div>
       </div>
-      <div class="head-r">27/ 摩擦指数 · 理论与边界</div>
+      <div class="head-r">28/ 摩擦指数 · 理论与边界</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=1" title="摩擦指数 理论依据+评估边界" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -1167,9 +1216,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">基础体验评估方法论 · 指标体系 + 测量协议 + 归一化：5 维 16 项，全公式可复现</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「开发者旅程摩擦指数 2/4 · 指标与计算」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 2/4 · 指标与计算」</div>
       </div>
-      <div class="head-r">28/ 摩擦指数 · 指标与计算</div>
+      <div class="head-r">29/ 摩擦指数 · 指标与计算</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=2" title="摩擦指数 指标体系+测量协议+归一化" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -1179,9 +1228,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">基础体验评估方法论 · 锚点总表：16 指标 best/worst 全公开、对两边一视同仁</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「开发者旅程摩擦指数 3/4 · 锚点总表」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 3/4 · 锚点总表」</div>
       </div>
-      <div class="head-r">29/ 摩擦指数 · 锚点总表</div>
+      <div class="head-r">30/ 摩擦指数 · 锚点总表</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=3" title="摩擦指数 六、锚点总表" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -1191,9 +1240,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">基础体验评估方法论 · 算例与效度局限：引擎实时计算 + 诚实陈述边界</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「开发者旅程摩擦指数 4/4 · 算例与局限」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 4/4 · 算例与局限」</div>
       </div>
-      <div class="head-r">30/ 摩擦指数 · 算例与局限</div>
+      <div class="head-r">31/ 摩擦指数 · 算例与局限</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=4" title="摩擦指数 七、算例与局限" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -1216,9 +1265,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">触点评分：平均 73.6 分——SDK 下载和工具链差距最大，FAQ 自助反超 NVIDIA</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「触点评分」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「触点评分」</div>
       </div>
-      <div class="head-r">31/ 基础体验 · 评分</div>
+      <div class="head-r">32/ 基础体验 · 评分</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1273,9 +1322,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">1.1 · 官网首页（落地第一眼）</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 74（差值 +2）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 74（差值 +2）</div>
       </div>
-      <div class="head-r">32/ 触点 1.1</div>
+      <div class="head-r">33/ 触点 1.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1" title="触点 1.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1284,9 +1333,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">1.1b · 开发者门户首屏</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 77（差值 +1）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 77（差值 +1）</div>
       </div>
-      <div class="head-r">33/ 触点 1.1b</div>
+      <div class="head-r">34/ 触点 1.1b</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1b" title="触点 1.1b" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1295,9 +1344,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">1.2 · 顶部导航 / 信息架构</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 76（差值 0）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 76（差值 0）</div>
       </div>
-      <div class="head-r">34/ 触点 1.2</div>
+      <div class="head-r">35/ 触点 1.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.2" title="触点 1.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1306,9 +1355,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">2.1 · 产品总览</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
       </div>
-      <div class="head-r">35/ 触点 2.1</div>
+      <div class="head-r">36/ 触点 2.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.1" title="触点 2.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1317,9 +1366,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">2.3 · 规格参数</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
       </div>
-      <div class="head-r">36/ 触点 2.3</div>
+      <div class="head-r">37/ 触点 2.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.3" title="触点 2.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1328,9 +1377,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">2.4 · 解决方案 / 场景入口</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 77（差值 -1）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 77（差值 -1）</div>
       </div>
-      <div class="head-r">37/ 触点 2.4</div>
+      <div class="head-r">38/ 触点 2.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.4" title="触点 2.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1339,9 +1388,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">2.2 · 产品详情页</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 80（差值 -2）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 80（差值 -2）</div>
       </div>
-      <div class="head-r">38/ 触点 2.2</div>
+      <div class="head-r">39/ 触点 2.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.2" title="触点 2.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1350,9 +1399,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">3.2 · 快速入门</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 82 / NVIDIA 72（差值 +10）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 82 / NVIDIA 72（差值 +10）</div>
       </div>
-      <div class="head-r">39/ 触点 3.2</div>
+      <div class="head-r">40/ 触点 3.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.2" title="触点 3.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1361,9 +1410,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">3.3 · 教程</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 77 / NVIDIA 79（差值 -2）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 77 / NVIDIA 79（差值 -2）</div>
       </div>
-      <div class="head-r">40/ 触点 3.3</div>
+      <div class="head-r">41/ 触点 3.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.3" title="触点 3.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1372,9 +1421,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">5.4 · 在线体验 / Playground</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 80（差值 -4）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 80（差值 -4）</div>
       </div>
-      <div class="head-r">41/ 触点 5.4</div>
+      <div class="head-r">42/ 触点 5.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.4" title="触点 5.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1383,9 +1432,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">4.1 · 下载中心</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 70 / NVIDIA 74（差值 -4）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 70 / NVIDIA 74（差值 -4）</div>
       </div>
-      <div class="head-r">42/ 触点 4.1</div>
+      <div class="head-r">43/ 触点 4.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.1" title="触点 4.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1394,9 +1443,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">4.2 · 注册 / 登录</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 64 / NVIDIA 80（差值 -16）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 64 / NVIDIA 80（差值 -16）</div>
       </div>
-      <div class="head-r">43/ 触点 4.2</div>
+      <div class="head-r">44/ 触点 4.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.2" title="触点 4.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1405,9 +1454,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">4.3 · SDK / Toolkit 下载流程</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 66 / NVIDIA 82（差值 -16）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 66 / NVIDIA 82（差值 -16）</div>
       </div>
-      <div class="head-r">44/ 触点 4.3</div>
+      <div class="head-r">45/ 触点 4.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.3" title="触点 4.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1416,9 +1465,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">4.4 · 版本 / 环境选择</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 73 / NVIDIA 79（差值 -6）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 73 / NVIDIA 79（差值 -6）</div>
       </div>
-      <div class="head-r">45/ 触点 4.4</div>
+      <div class="head-r">46/ 触点 4.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.4" title="触点 4.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1427,9 +1476,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">3.1 · 文档中心首页</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 80 / NVIDIA 81（差值 -1）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 80 / NVIDIA 81（差值 -1）</div>
       </div>
-      <div class="head-r">46/ 触点 3.1</div>
+      <div class="head-r">47/ 触点 3.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.1" title="触点 3.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1438,9 +1487,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">3.4 · API / 接口参考</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
       </div>
-      <div class="head-r">47/ 触点 3.4</div>
+      <div class="head-r">48/ 触点 3.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.4" title="触点 3.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1449,9 +1498,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">5.1 · 代码示例 / Samples</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 79（差值 -1）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 79（差值 -1）</div>
       </div>
-      <div class="head-r">48/ 触点 5.1</div>
+      <div class="head-r">49/ 触点 5.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.1" title="触点 5.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1460,9 +1509,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">5.3 · 开发工具</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 79（差值 -4）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 79（差值 -4）</div>
       </div>
-      <div class="head-r">49/ 触点 5.3</div>
+      <div class="head-r">50/ 触点 5.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.3" title="触点 5.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1471,9 +1520,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">6.1 · 开发者社区 / 论坛</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
       </div>
-      <div class="head-r">50/ 触点 6.1</div>
+      <div class="head-r">51/ 触点 6.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.1" title="触点 6.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1482,9 +1531,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">6.2 · 技术支持入口</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 76（差值 -1）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 76（差值 -1）</div>
       </div>
-      <div class="head-r">51/ 触点 6.2</div>
+      <div class="head-r">52/ 触点 6.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.2" title="触点 6.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1493,9 +1542,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">6.3 · FAQ</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 73（差值 +3）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 73（差值 +3）</div>
       </div>
-      <div class="head-r">52/ 触点 6.3</div>
+      <div class="head-r">53/ 触点 6.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.3" title="触点 6.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1504,9 +1553,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">5.2 · 模型库</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 81 / NVIDIA 79（差值 +2）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 81 / NVIDIA 79（差值 +2）</div>
       </div>
-      <div class="head-r">53/ 触点 5.2</div>
+      <div class="head-r">54/ 触点 5.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.2" title="触点 5.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1515,9 +1564,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">6.4 · 博客 / 案例</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 73 / NVIDIA 81（差值 -8）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 73 / NVIDIA 81（差值 -8）</div>
       </div>
-      <div class="head-r">54/ 触点 6.4</div>
+      <div class="head-r">55/ 触点 6.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.4" title="触点 6.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1526,9 +1575,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">1.3 · 全站搜索</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 76（差值 0）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 76（差值 0）</div>
       </div>
-      <div class="head-r">55/ 触点 1.3</div>
+      <div class="head-r">56/ 触点 1.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.3" title="触点 1.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1537,9 +1586,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">1.4 · 语言 / 地区切换</span></div>
-        <div class="subttl">人侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 75（差值 0）</div>
+        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 75（差值 0）</div>
       </div>
-      <div class="head-r">56/ 触点 1.4</div>
+      <div class="head-r">57/ 触点 1.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.4" title="触点 1.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1549,9 +1598,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">结论①：一句话钩子 vs 卡片菜单——落地都不弱，差在好落地页埋二级</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「结论① 落地」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「结论① 落地」</div>
       </div>
-      <div class="head-r">57/ 结论 · 落地</div>
+      <div class="head-r">58/ 结论 · 落地</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j1" title="j1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1560,9 +1609,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">结论②：零登录直取 vs 账号闸门（SDK −66）——全篇投入产出比最高的单点</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「结论② 下载闸门」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「结论② 下载闸门」</div>
       </div>
-      <div class="head-r">58/ 结论 · 下载闸门</div>
+      <div class="head-r">59/ 结论 · 下载闸门</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1571,9 +1620,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">结论③：全球化 vs 本地化的镜像门槛——账号 / 语言 / 社区一组对角线</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「结论③ 门槛」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「结论③ 门槛」</div>
       </div>
-      <div class="head-r">59/ 结论 · 门槛镜像</div>
+      <div class="head-r">60/ 结论 · 门槛镜像</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j3" title="j3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1582,9 +1631,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">结论④：算子上手的反转长板——hub 5 环节 + 在线实验比 CUDA 更体系</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「结论④ 上手长板」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「结论④ 上手长板」</div>
       </div>
-      <div class="head-r">60/ 结论 · 上手长板</div>
+      <div class="head-r">61/ 结论 · 上手长板</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j4" title="j4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1593,12 +1642,72 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">结论⑤：内容不差，差在「被全球搜到」——搜索引擎优化（SEO）/ 英文 / 入口埋深</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「结论⑤ 可发现性」</div>
+        <div class="subttl">开发者侧 · 基础体验 · 「结论⑤ 可发现性」</div>
       </div>
-      <div class="head-r">61/ 结论 · 可发现性</div>
+      <div class="head-r">62/ 结论 · 可发现性</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
+  <!-- 结论行动 · 三角色总览 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">结论落地：三类角色共担一条链路，从「能看」改到「能跑、能搜、能被 AI 用」</span></div>
+        <div class="subttl">结论 · 分角色行动方案 · 「总览」</div>
+      </div>
+      <div class="head-r">63/ 结论 · 三角色</div>
+    </div>
+    <div class="body-area">
+      <div class="ccg">
+        <div class="cc hu">
+          <span class="cc-tag">体验部</span>
+          <div class="cc-h">把开发者入口、下载、学习、求助做成一条短路径</div>
+          <div class="cc-d">负责官网与落地、下载与账号、学习与上手、智能化触点。核心指标是首次跑通路径：少选、少登录、少跳转，先让开发者看到结果。</div>
+          <div class="cc-ev"><span>SDK 下载 −66</span><span>L2 上手反超</span><span>搜索 / FAQ 可聚合</span></div>
+        </div>
+        <div class="cc ai">
+          <span class="cc-tag">资料内容</span>
+          <div class="cc-h">把文档、版本、报错、社区内容收敛成可信知识体系</div>
+          <div class="cc-d">负责文档与版本、社区与内容。核心指标是能否被开发者和 AI 同时读懂：当前版明确、错误码有解、案例能被搜索到。</div>
+          <div class="cc-ev"><span>版本清晰 12/26 偏低</span><span>EZ9999 泛化兜底</span><span>第三方少而同质</span></div>
+        </div>
+        <div class="cc both">
+          <span class="cc-tag">开发</span>
+          <div class="cc-h">把站点与工具链改成可运行、可抓取、可集成的基础设施</div>
+          <div class="cc-d">负责机器可读出口、工具与工程。核心指标是 Agent 能抓、代码能跑、工具能接住深水区问题，避免模型凭记忆补答案。</div>
+          <div class="cc-ev"><span>SPA 正文 0 字</span><span>llms.txt 缺失</span><span>D/K/O 成本尖刺</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 行动 · 板块：官网与落地（体验部） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="role-chip exp">体验部</span><span class="ttl">官网与落地——让开发者不懂产品名也能走到正确起点</span></div>
+        <div class="bk-strip"><span class="bkl">体验部负责的板块：</span><span class="bk on">官网与落地</span><span class="bk">下载与账号</span><span class="bk">学习与上手</span><span class="bk">智能化触点</span></div>
+      </div>
+      <div class="head-r">体验部 · 板块 1 / 4</div>
+    </div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">体验部</span>
+      <div class="rgoal" data-board="01 · 官网与落地"><span class="gl">目标</span>把首屏、导航、产品矩阵从「展示有什么」改成「我该从哪里开始」；让算子开发者无需先认识 CANN / Ascend C / Atlas 之间的关系，也能被分流到正确路径。</div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">官网首屏给一个<b>开发者起步 / 场景直达</b>主入口</div><div class="rmi-why">昇腾官网单站整合是优势，但品牌信息会盖住开发动作；入口要在首屏一眼可见。<span class="src2">触点 1.1</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">开发者中心三张场景卡只保留一个<b>最强 CTA</b></div><div class="rmi-why">“算子开发 · 5 分钟跑通”比多入口平铺更能降低首次点击成本。<span class="src2">触点 1.1b</span></div></div></div>
+        <div class="ahead p1">P1</div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">顶栏补<b>按场景 / 按角色</b>横切入口</div><div class="rmi-why">新手通常知道“我要做算子 / 推理 / 训练”，不一定知道应点哪个产品名。<span class="src2">触点 1.2</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">产品矩阵前置<b>选型分诊</b>，几步问答推荐路径</div><div class="rmi-why">把平铺产品罗列改成“你是谁、要做什么、该从哪里开始”的引导。<span class="src2">触点 2.1</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">方案市场补<b>按开发场景的自助起步路径</b></div><div class="rmi-why">场景页不仅展示方案，还要指向对应模型、算子、教程和可跑样例。<span class="src2">触点 2.4</span></div></div></div>
+        <div class="ahead p2">P2</div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">规格页增加<b>勾选型号并排对比</b></div><div class="rmi-why">昇腾规格集中列全已经不弱，下一步是把信息变成可决策工具。<span class="src2">触点 2.3</span></div></div></div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">关键落地页标题、摘要、路径写清<b>角色与任务</b></div><div class="rmi-why">同一信息既帮助开发者扫读，也帮助搜索引擎和 Agent 判断页面是否匹配意图。<span class="src2">供给侧 #5</span></div></div></div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">为场景入口输出<b>稳定 URL + 可索引页面摘要</b></div><div class="rmi-why">Agent 需要可引用的入口页，而不是只能从 JS 菜单里推断路径。<span class="src2">AI 问题 #4</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
+
   <!-- 行动 · 板块：下载与账号（体验部） -->
   <section class="slide s-gray">
     <div class="head">
@@ -1608,56 +1717,179 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div class="head-r">体验部 · 板块 2 / 4</div>
     </div>
-    <div class="body-area"><div class="rolewrap">
-      <div class="rgoal"><span class="gl">目标</span>让「只想先试一下」的开发者<b>零阻力</b>拿到能跑的包——把这条 7 步最长链路砍到 ~2 步，补上 <b>SDK 下载 −66</b> 的全报告最大缺口；同时让安装信息对 AI 也可读、可照着装。</div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">体验部</span>
+      <div class="rgoal" data-board="02 · 下载与账号"><span class="gl">目标</span>让「只想先试一下」的开发者<b>零阻力</b>拿到能跑的包——把这条 7 步最长链路砍到 ~2 步，补上 <b>SDK 下载 −66</b> 的全报告最大缺口；同时让安装信息对 AI 也可读、可照着装。</div>
       <div class="ameasures">
-        <div class="ahead hu">给「人」的改进</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">社区版「<b>游客可直接下载、登录与协议后置</b>」</div><div class="rmi-why">现状把华为账号登录设成下载前置条件，对「只想先试」的人就是劝退点；NVIDIA 账号完全后置。<span class="src2">触点 4.3 / 4.2</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要做「架构 → 版本 → 包」三四道判断题；给默认值、少让开发者选。<span class="src2">触点 4.3</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">区分「<b>在线增量包 / 离线整包</b>」并按网络环境默认选好</div><div class="rmi-why">NVIDIA 用 Network / Full 照顾联网 / 离线；昇腾现状只分社区 / 商用。<span class="src2">触点 4.4</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">落地公告改<b>顶部 banner</b> 不挡流，下载默认高亮「社区版」</div><div class="rmi-why">现状落地先弹「下载中心公告」挡住页面，又要先选社区 / 商用。<span class="src2">触点 4.1</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">下完跑通后<b>引导下一步</b>（在线实验 / 文档 / 示例）</div><div class="rmi-why">把「下到包」延伸成「跑通第一个」，缩短首次成功路径、减少装完不知所措的流失。<span class="src2">行动建议</span></div></div></div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">出海补<b>邮箱直注册 + Google / GitHub</b> 登录</div><div class="rmi-why">现状仅华为账号，海外 / 学术开发者注册门槛高。<span class="src2">触点 4.2 / 1.4</span></div></div></div>
-        <div class="ahead co">人 + AI 共通</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-act">下载 / 安装页把「<b>当前推荐版本 + 配套</b>（CANN / driver / torch_npu）」写进正文文字</div><div class="rmi-why">人不会配错、AI 也读到对的版本；与「文档 · 版本」板块的首选网址呼应。<span class="src2">供给侧 #1 · 触点 4.4</span></div></div></div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">下载页本身<b>对搜索引擎 / AI 可索引</b>（正文非纯 JS 渲染）</div><div class="rmi-why">让「昇腾怎么装 CANN」这类查询能被搜到、被 Agent 抓到正确入口。<span class="src2">供给侧 #5 · 指标①②</span></div></div></div>
-        <div class="ahead ai">给「AI」的改进</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-act">安装 / 上手命令做成<b>可复制文本、可被抓取</b></div><div class="rmi-why">命令不贴图、不靠 JS 注入，Agent 才能照着一步步装、不凭记忆杜撰。<span class="src2">供给侧 #5</span></div></div></div>
+        <div class="ahead p0">P0</div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">社区版「<b>游客可直接下载、登录与协议后置</b>」</div><div class="rmi-why">现状把华为账号登录设成下载前置条件，对「只想先试」的人就是劝退点；NVIDIA 账号完全后置。<span class="src2">触点 4.3 / 4.2</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要做「架构 → 版本 → 包」三四道判断题；给默认值、少让开发者选。<span class="src2">触点 4.3</span></div></div></div>
+        <div class="ahead p1">P1</div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">区分「<b>在线增量包 / 离线整包</b>」并按网络环境默认选好</div><div class="rmi-why">NVIDIA 用 Network / Full 照顾联网 / 离线；昇腾现状只分社区 / 商用。<span class="src2">触点 4.4</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">落地公告改<b>顶部 banner</b> 不挡流，下载默认高亮「社区版」</div><div class="rmi-why">现状落地先弹「下载中心公告」挡住页面，又要先选社区 / 商用。<span class="src2">触点 4.1</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">下完跑通后<b>引导下一步</b>（在线实验 / 文档 / 示例）</div><div class="rmi-why">把「下到包」延伸成「跑通第一个」，缩短首次成功路径、减少装完不知所措的流失。<span class="src2">行动建议</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">下载 / 安装页把「<b>当前推荐版本 + 配套</b>（CANN / driver / torch_npu）」写进正文文字</div><div class="rmi-why">开发者不会配错、AI 也读到对的版本；与「文档 · 版本」板块的首选网址呼应。<span class="src2">供给侧 #1 · 触点 4.4</span></div></div></div>
+        <div class="ahead p2">P2</div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">出海补<b>邮箱直注册 + Google / GitHub</b> 登录</div><div class="rmi-why">现状仅华为账号，海外 / 学术开发者注册门槛高。<span class="src2">触点 4.2 / 1.4</span></div></div></div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">下载页本身<b>对搜索引擎 / AI 可索引</b>（正文非纯 JS 渲染）</div><div class="rmi-why">让「昇腾怎么装 CANN」这类查询能被搜到、被 Agent 抓到正确入口。<span class="src2">供给侧 #5 · 指标①②</span></div></div></div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">安装 / 上手命令做成<b>可复制文本、可被抓取</b></div><div class="rmi-why">命令不贴图、不靠 JS 注入，Agent 才能照着一步步装、不凭记忆杜撰。<span class="src2">供给侧 #5</span></div></div></div>
       </div>
     </div></div>
   </section>
-  <!-- 18 灰底：iframe 引主报告 #actions -->
+
+  <!-- 行动 · 板块：学习与上手（体验部） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">行动建议：P0 先砍下载闸门、补落地起步——按优先级排序</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「行动建议」</div>
+        <div class="brand"><span class="role-chip exp">体验部</span><span class="ttl">学习与上手——把“内容完整”变成“第一次就跑通”</span></div>
+        <div class="bk-strip"><span class="bkl">体验部负责的板块：</span><span class="bk">官网与落地</span><span class="bk">下载与账号</span><span class="bk on">学习与上手</span><span class="bk">智能化触点</span></div>
       </div>
-      <div class="head-r">62/ 行动建议</div>
+      <div class="head-r">体验部 · 板块 3 / 4</div>
     </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=actions" title="actions" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">体验部</span>
+      <div class="rgoal" data-board="03 · 学习与上手"><span class="gl">目标</span>把昇腾已经有优势的在线实验、ModelZoo、算子 hub 放大成统一心智：从产品页、学习页、示例页任一入口进入，都能在 5 分钟内跑出第一个结果。</div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">把<b>在线实验 + 引导式 ModelZoo</b>前置到首屏和产品页</div><div class="rmi-why">这是昇腾少数明确反超 NVIDIA 的体验长板，应主动放大。<span class="src2">触点 3.2</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">CANN 页把<b>快速体验</b>升级为主按钮</div><div class="rmi-why">产品页内容扎实，但默认动作不够强；应直接通向在线实验 / 在线开发。<span class="src2">触点 2.2</span></div></div></div>
+        <div class="ahead p1">P1</div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">每段示例提供<b>一键在线运行 + GitHub 完整工程</b></div><div class="rmi-why">站内内联代码方便复制，GitHub 工程方便带走，二者要同时给。<span class="src2">触点 5.1</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">把 ModelZoo 的<b>三步引导</b>复用到 CANN / 算子入口</div><div class="rmi-why">让硬核入口也有“选模型 / 看命令 / 跑起来”的渐进路径。<span class="src2">触点 5.2</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">每条学习路径输出<b>目标、前置条件、预计耗时、成功标准</b></div><div class="rmi-why">开发者知道自己走到哪一步，AI 也能把路径拆成可执行计划。<span class="src2">设计点 ③④</span></div></div></div>
+        <div class="ahead p2">P2</div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">微认证补<b>高校 / 企业背书与技能标签</b></div><div class="rmi-why">教程体系不只要有，还要让开发者觉得值得投入时间。<span class="src2">触点 3.3</span></div></div></div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">教程代码块保持<b>可复制、可抓取、可验证输出</b></div><div class="rmi-why">避免 Agent 只读到叙述，却拿不到命令、依赖和预期结果。<span class="src2">供给侧 #5 / #8</span></div></div></div>
+      </div>
+    </div></div>
   </section>
-  <!-- 19a 灰底：责任归属 P1（体验设计 · 资料 · 官网平台） -->
+
+  <!-- 行动 · 板块：智能化触点（体验部） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">责任归属 · 上半：体验设计 / 资料 / 官网平台——改信息架构、文档、下载闸门</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「责任归属 P1」</div>
+        <div class="brand"><span class="role-chip exp">体验部</span><span class="ttl">智能化触点——把搜索、FAQ、工单做成一个会分诊的入口</span></div>
+        <div class="bk-strip"><span class="bkl">体验部负责的板块：</span><span class="bk">官网与落地</span><span class="bk">下载与账号</span><span class="bk">学习与上手</span><span class="bk on">智能化触点</span></div>
       </div>
-      <div class="head-r">63/ 责任归属 · P1</div>
+      <div class="head-r">体验部 · 板块 4 / 4</div>
     </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=dept&pg=1" title="dept-p1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">体验部</span>
+      <div class="rgoal" data-board="04 · 智能化触点"><span class="gl">目标</span>让开发者带着报错、日志、任务意图进入后，不再自己判断“搜文档、看 FAQ、发论坛还是提工单”，而是由统一入口完成分诊和转接。</div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">全站搜索支持<b>粘贴报错 / 日志</b>并按资源类型筛选</div><div class="rmi-why">现有搜索可见性不弱，但字符与结构化能力不足；报错检索是最高频求助入口。<span class="src2">触点 1.3</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">工单、FAQ、论坛串成<b>统一求助入口</b></div><div class="rmi-why">先自助搜索，搜不到再转论坛 / 工单，减少开发者自己选渠道。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
+        <div class="ahead p1">P1</div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">搜索联想沉淀<b>热门报错、API、版本组合</b></div><div class="rmi-why">把反复出现的问题前置，降低重复提问和人工支持压力。<span class="src2">触点 1.3 / 6.3</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">学习入口按意图推荐<b>下一步路径</b></div><div class="rmi-why">把“沉浸交互式学习”和“基于意图的路径推荐”落到真实入口。<span class="src2">设计点 ③④</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">智能助手回答必须带<b>来源、版本、可执行下一步</b></div><div class="rmi-why">避免只总结碎片信息；要把碎片化内容组织成场景化结构答案。<span class="src2">设计点 ①②</span></div></div></div>
+        <div class="ahead p2">P2</div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">FAQ 接入产品页、下载页、工具页的<b>局部常见问题</b></div><div class="rmi-why">集中 FAQ 整理得好，但要出现在开发者卡住的地方。<span class="src2">触点 6.3</span></div></div></div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">把社区知识沉淀成<b>可复用的问答 Skill / 检索包</b></div><div class="rmi-why">让外部大模型复用经过版本校验的知识，而不是在网页碎片里猜。<span class="src2">设计点 ⑤</span></div></div></div>
+      </div>
+    </div></div>
   </section>
-  <!-- 19b 灰底：责任归属 P2（产品 · 研发工具链 · 社区运营） -->
+
+  <!-- 行动 · 板块：文档与版本（资料内容） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">责任归属 · 下半：产品 / 研发工具链 / 社区运营——改上手引导、工具、生态</span></div>
-        <div class="subttl">人侧 · 基础体验 · 「责任归属 P2」</div>
+        <div class="brand"><span class="role-chip doc">资料内容</span><span class="ttl">文档与版本——先把“当前该看哪一版”讲清楚</span></div>
+        <div class="bk-strip"><span class="bkl">资料内容负责的板块：</span><span class="bk on">文档与版本</span><span class="bk">社区与内容</span></div>
       </div>
-      <div class="head-r">64/ 责任归属 · P2</div>
+      <div class="head-r">资料内容 · 板块 1 / 2</div>
     </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=dept&pg=2" title="dept-p2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip doc">资料内容</span>
+      <div class="rgoal" data-board="05 · 文档与版本"><span class="gl">目标</span>消除贯穿全链路的版本税：文档、下载、API、报错、工具都指向同一个“当前推荐版本”和配套矩阵；深水区文档要能直接指导自定义算子、Tiling、调试和注册集成。</div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">建立<b>首选网址 + 当前推荐版</b>规则</div><div class="rmi-why">版本混乱是 AI 侧覆盖面最大的问题，也会让开发者在下载和文档之间反复确认。<span class="src2">AI 问题 #1 / 供给侧 #1</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">做 CANN / driver / torch_npu <b>配套查询工具</b></div><div class="rmi-why">任何一轴配错都跑不起来，配套关系应从文档段落升级成工具。<span class="src2">触点 4.4 / 供给侧 #1</span></div></div></div>
+        <div class="ahead p1">P1</div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档中心补<b>按角色 / 按主题</b>筛选</div><div class="rmi-why">让老手能搜，新手能筛，避免先被产品树吓住。<span class="src2">触点 3.1</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">API 文档统一<b>版本选择器 + 层级结构</b></div><div class="rmi-why">查接口不能靠翻长文档，应支持按版本、模块、函数逐层进入。<span class="src2">触点 3.4</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">每个错误码建<b>一码一页</b>，含场景、原因、修复样例</div><div class="rmi-why">EZ9999 这类泛化兜底页抓得到也不够用，是排错时最危险的弃坑点。<span class="src2">AI 问题 #5 / 供给侧 #2</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">核心 how-to 改成<b>正文可直接读取</b>的页面</div><div class="rmi-why">开发者看到的是文档，Agent 抓到却可能是导航骨架；两套体验必须统一。<span class="src2">AI 问题 #4 / 供给侧 #3</span></div></div></div>
+        <div class="ahead p2">P2</div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">文档页显式写入<b>版本、适用芯片、依赖、最后更新时间</b></div><div class="rmi-why">让模型回答时能带上约束，降低把旧版本内容套到当前任务的风险。<span class="src2">供给侧 #5 / #8</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 行动 · 板块：社区与内容（资料内容） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="role-chip doc">资料内容</span><span class="ttl">社区与内容——给官方文档之外的长尾问题建立兜底层</span></div>
+        <div class="bk-strip"><span class="bkl">资料内容负责的板块：</span><span class="bk">文档与版本</span><span class="bk on">社区与内容</span></div>
+      </div>
+      <div class="head-r">资料内容 · 板块 2 / 2</div>
+    </div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip doc">资料内容</span>
+      <div class="rgoal" data-board="06 · 社区与内容"><span class="gl">目标</span>把论坛、博客、案例、第三方内容从“站内资料”升级为可被搜索引擎、开发者和大模型共同使用的外部知识网络，尤其补齐自定义算子、调试、报错这类深水区。</div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">论坛内容<b>游客可读、可被搜索引擎索引</b></div><div class="rmi-why">昇腾论坛分版精细，但登录和索引限制会削弱“一搜就解决”的长尾覆盖。<span class="src2">触点 6.1</span></div></div></div>
+        <div class="ahead p1">P1</div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">博客案例补<b>英文版、SEO、顶部直达入口</b></div><div class="rmi-why">内容质量不差，但入口埋深和全球可发现性拉低海外 / 学术场景。<span class="src2">触点 6.4 / 1.4</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">围绕 D/M/X/O/L 建<b>深水区专题内容池</b></div><div class="rmi-why">自定义算子、Tiling、msSanitizer、注册集成、精度排查是最低谷和最高风险区。<span class="src2">AI 问题 #6 / 社区承接</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">扶持多平台互证的<b>第三方生态</b></div><div class="rmi-why">当前第三方少而同质，集中在少数平台；官方缺口很难被社区绕行补偿。<span class="src2">AI 问题 #3 / 供给侧 #6</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">高质量问答沉淀为<b>官方 FAQ / 案例反哺</b></div><div class="rmi-why">论坛与工单里的高频问题应回流到文档和搜索，而不是留在一次性回复里。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
+        <div class="ahead p2">P2</div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">认证、SIG、案例内容形成<b>成长路径</b></div><div class="rmi-why">把社区活动与学习体系串起来，形成“学完能证明、遇事有人接”的闭环。<span class="src2">触点 3.3 / 2.2</span></div></div></div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">公开可训练的<b>英文、Markdown、代码样例语料</b></div><div class="rmi-why">模型自带知识偏薄，下一代模型要靠更开放、更结构化的官方与生态语料补齐。<span class="src2">AI 问题 #2 / 供给侧 #8</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 行动 · 板块：机器可读出口（开发） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="role-chip dev">开发</span><span class="ttl">机器可读出口——给 Agent 一条稳定、低成本、可引用的读取通道</span></div>
+        <div class="bk-strip"><span class="bkl">开发负责的板块：</span><span class="bk on">机器可读出口</span><span class="bk">工具与工程</span></div>
+      </div>
+      <div class="head-r">开发 · 板块 1 / 2</div>
+    </div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip dev">开发</span>
+      <div class="rgoal" data-board="07 · 机器可读出口"><span class="gl">目标</span>把面向浏览器的站点同时改造成面向 Agent 的知识接口：能找到入口、能抓到正文、能拿到结构化索引、能回链引用，减少“抓不到就凭记忆”的失败。</div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">上线<b>llms.txt / llms-full.txt</b>站点级索引</div><div class="rmi-why">NVIDIA 已有类似入口；昇腾目前缺少一次抓全的机器阅读入口。<span class="src2">供给侧 #4</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">每页提供<b>View as Markdown</b>出口</div><div class="rmi-why">Markdown 能保留标题、代码块、表格和链接，是 Agent 低成本读取文档的通道。<span class="src2">供给侧 #4</span></div></div></div>
+        <div class="ahead p1">P1</div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">搜索结果和文档页提供<b>可复制引用链接</b></div><div class="rmi-why">开发者分享问题、工单和团队协作时需要稳定锚点。<span class="src2">触点 1.3 / 3.1</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">页面正文进首屏 HTML，Tab 内容<b>预渲染</b></div><div class="rmi-why">开发者看得见但抓不到，会让 AI 和搜索索引同时失效。<span class="src2">供给侧 #3 / #5</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">建立<b>结构化 API / 算子 / 错误码索引</b></div><div class="rmi-why">让 Agent 能按函数、算子、错误码精准进入，不必从全文搜索里碰运气。<span class="src2">供给侧 #4 / #2</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">robots、meta、canonical 和版本正文<b>统一发布规范</b></div><div class="rmi-why">机器可读不是附加功能，而是文档发布流程的一部分。<span class="src2">供给侧 #5</span></div></div></div>
+        <div class="ahead p2">P2</div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">为 Agent 暴露<b>检索 API / sitemap 分区</b></div><div class="rmi-why">减少 D/K/O 这类任务的检索成本尖刺，让模型能稳定回到官方源。<span class="src2">AI 问题 #7</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 行动 · 板块：工具与工程（开发） -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="role-chip dev">开发</span><span class="ttl">工具与工程——把示例、IDE、调试、在线环境接成可跑闭环</span></div>
+        <div class="bk-strip"><span class="bkl">开发负责的板块：</span><span class="bk">机器可读出口</span><span class="bk on">工具与工程</span></div>
+      </div>
+      <div class="head-r">开发 · 板块 2 / 2</div>
+    </div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip dev">开发</span>
+      <div class="rgoal" data-board="08 · 工具与工程"><span class="gl">目标</span>把“资料里说能做”变成“环境里马上能跑”：在线实验、playground、IDE 插件、profiling、调试工具和完整工程样例共同承接首次运行与深水区排障。</div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">上线轻量 <b>playground</b>，浏览器里先试模型 / 算子效果</div><div class="rmi-why">HiDevLab 已有在线写代码能力，但评估期还需要零安装看效果。<span class="src2">触点 5.4</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">示例从代码片段升级为<b>完整工程 + 一键运行</b></div><div class="rmi-why">减少从复制代码到本地跑通之间的隐性工程成本。<span class="src2">触点 5.1 / 5.2</span></div></div></div>
+        <div class="ahead p1">P1</div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">MindStudio 与 VS Code 插件做到<b>开箱顺手</b></div><div class="rmi-why">工具全不等于工具好用，要用真实案例讲清工具解决了什么痛点。<span class="src2">触点 5.3</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">profiling / msSanitizer / msDebug 做<b>端到端排障样例</b></div><div class="rmi-why">X 类内存越界几乎没有第三方兜底，官方工具链必须直接接住。<span class="src2">社区承接 X / 触点 5.3</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">API 参考逐步支持<b>在线试调</b></div><div class="rmi-why">把查接口从“读说明”变成“边查边试”，降低 Ascend C 深水区门槛。<span class="src2">触点 3.4</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">每个工具页给出<b>输入、输出、失败现象、修复路径</b></div><div class="rmi-why">开发者能照着排障，AI 也能把工具调用嵌进回答。<span class="src2">供给侧 #2 / #8</span></div></div></div>
+        <div class="ahead p2">P2</div>
+<div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">发布<b>可运行样例仓 + 测试脚本 + 输出基线</b></div><div class="rmi-why">让 Agent 给出的代码不只“看起来对”，还能对齐官方可验证样例。<span class="src2">供给侧 #8 / 信任落差</span></div></div></div>
+      </div>
+    </div></div>
   </section>
 
   <!-- 结束页：呼应封面的深色谢幕 + 一句话收口 -->
@@ -1670,7 +1902,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="cv-center">
         <!-- <div class="cv-kicker">结论收口 · Closing</div> -->
         <div class="cv-sub" style="font-weight:600">Thanks</div>
-        <div class="cv-thesis">Agent 时代，用户既是人，也是 AI</div>
+        <div class="cv-thesis">Agent 时代，用户既包括开发者，也包括 AI</div>
         <div class="cv-lead">人与 AI 撞在同几道坎——版本散乱、可发现性弱、越往深处越塌。把碎片化的昇腾知识按场景结构化、可抓取、可运行：人少试错，AI 不杜撰。</div>
       </div>
       <div class="cv-bot">
@@ -1781,12 +2013,45 @@ function updateCurrent(i){
 /* 谁滚进视口 ≥55% 谁就是当前页 */
 /* fade 翻页：当前页由 .active 类驱动，无需 IntersectionObserver */
 
-function go(n){ if(document.body.classList.contains('overview'))return; const i=Math.max(0,Math.min(slides.length-1,n)); if(i!==idx) updateCurrent(i); }
+function seqUrlForFull(src){
+  try{
+    const u=new URL(src||'seq-d3.html', location.href);
+    u.searchParams.set('full','1');
+    return u.pathname.split('/').pop()+u.search+u.hash;
+  }catch(e){
+    return (src||'seq-d3.html').replace(/([?&])full=0\b/,'$1full=1')+((src||'').indexOf('full=1')<0?((src||'').indexOf('?')>=0?'&':'?')+'full=1':'');
+  }
+}
+function triggerSeqMagic(fromIdx,toIdx){
+  const from=slides[fromIdx],to=slides[toIdx];
+  if(!from||!to||!from.matches('[data-seq-full]'))return false;
+  const srcBox=from.querySelector('[data-magic-seq]'),dstBox=to.querySelector('[data-magic-target]');
+  if(!srcBox||!dstBox)return false;
+  const a=srcBox.getBoundingClientRect(),b=dstBox.getBoundingClientRect();
+  const ghost=document.createElement('div');
+  ghost.className='magic-seq-ghost';
+  ghost.style.left=a.left+'px'; ghost.style.top=a.top+'px'; ghost.style.width=a.width+'px'; ghost.style.height=a.height+'px'; ghost.style.borderRadius='18px'; ghost.style.opacity='1';
+  ghost.innerHTML='<iframe src="seq-d3.html?full=1" title="时序图转场"></iframe>';
+  document.body.appendChild(ghost);
+  updateCurrent(toIdx);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    ghost.style.left=b.left+'px'; ghost.style.top=b.top+'px'; ghost.style.width=b.width+'px'; ghost.style.height=b.height+'px'; ghost.style.borderRadius='16px'; ghost.style.opacity='0';
+  }));
+  setTimeout(()=>ghost.remove(),820);
+  return true;
+}
+function go(n){
+  if(document.body.classList.contains('overview'))return;
+  const i=Math.max(0,Math.min(slides.length-1,n));
+  if(i!==idx && triggerSeqMagic(idx,i))return;
+  if(i!==idx) updateCurrent(i);
+}
 function next(){go(idx+1);} function prev(){go(idx-1);}
 prevBtn.onclick=prev; nextBtn.onclick=next;
 
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(e.key==='Escape'&&document.querySelector('.seq-modal.open')){closeSeqModal();return;}
   if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next();}
   else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}
   else if(e.key==='Home'){e.preventDefault();go(0);}
@@ -1814,6 +2079,39 @@ function reanchor(){}
 document.addEventListener('fullscreenchange',()=>{syncFsIcon();setTimeout(reanchor,90);});
 syncFsIcon();
 
+function openSeqModal(src){
+  let modal=document.getElementById('seqModal');
+  if(!modal){
+    modal=document.createElement('div');
+    modal.id='seqModal'; modal.className='seq-modal';
+    modal.innerHTML='<div class="seq-modal-panel"><button class="seq-modal-close" title="关闭">×</button><iframe title="全屏时序图"></iframe></div>';
+    document.body.appendChild(modal);
+    modal.addEventListener('click',e=>{if(e.target===modal)closeSeqModal();});
+    modal.querySelector('.seq-modal-close').onclick=closeSeqModal;
+  }
+  modal.querySelector('iframe').src=seqUrlForFull(src);
+  modal.classList.add('open');
+}
+function closeSeqModal(){
+  const modal=document.getElementById('seqModal'); if(!modal)return;
+  modal.classList.remove('open');
+  const fr=modal.querySelector('iframe'); if(fr)fr.src='about:blank';
+}
+function installSeqZoomButtons(){
+  const ico='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
+  document.querySelectorAll('iframe').forEach(fr=>{
+    const raw=fr.getAttribute('data-src')||fr.getAttribute('src')||'';
+    if(raw.indexOf('seq-d3.html')<0)return;
+    const host=fr.closest('.card')||fr.parentElement;
+    if(!host||host.querySelector(':scope>.seq-zoom-btn'))return;
+    host.classList.add('seq-zoom-host');
+    const btn=document.createElement('button');
+    btn.type='button'; btn.className='seq-zoom-btn'; btn.title='放大全屏查看时序图'; btn.innerHTML=ico;
+    btn.onclick=e=>{e.preventDefault();e.stopPropagation();openSeqModal(fr.getAttribute('src')||fr.getAttribute('data-src')||raw);};
+    host.appendChild(btn);
+  });
+}
+
 /* 总览 Overview：每页包进 .slide-inner 缩放成缩略图，排网格（按当前视窗比例）*/
 function applyOverviewScale(){if(!document.body.classList.contains('overview'))return;const cellW=slides[0].getBoundingClientRect().width,scale=cellW/window.innerWidth;slides.forEach(s=>{s.style.height=(window.innerHeight*scale)+'px';const inner=s.querySelector(':scope>.slide-inner');if(inner)inner.style.transform='scale('+scale+')';});}
 function enterOverview(){slides.forEach(s=>{if(!s.querySelector(':scope>.slide-inner')){const w=document.createElement('div');w.className='slide-inner';while(s.firstChild)w.appendChild(s.firstChild);s.appendChild(w);}});document.body.classList.add('overview');requestAnimationFrame(applyOverviewScale);}
@@ -1832,6 +2130,7 @@ document.addEventListener('mousemove',e=>{
 document.addEventListener('mouseleave',()=>{ controls.classList.remove('show'); navDots.classList.remove('show'); });
 
 slides.forEach(paintSlide);
+installSeqZoomButtons();
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
 (function(){const m=(location.hash||'').match(/(\d+)/);const start=m?Math.min(slides.length,Math.max(1,+m[1]))-1:0;
   updateCurrent(start>0?start:0);})();
@@ -1842,7 +2141,7 @@ slides.forEach(paintSlide);
     for(var i=0;i<fs.length;i++){ if(fs[i].contentWindow===e.source){ifr=fs[i];break;} }
     if(!ifr)return; var sec=ifr.closest('.slide'); if(!sec)return;
     var msg=d.__seqHover;
-    /* 人方法论页：悬浮「人→社区」分支线 → 右侧对应 7 阶段(setHStep) */
+    /* 开发者方法论页：悬浮「开发者→社区」分支线 → 右侧对应 7 阶段(setHStep) */
     if(sec.querySelector('#hstep0') && typeof window.setHStep==='function'){
       var B={b0:0,b1:3,bSoc:2,dSoc:2,b2:2,dVer:2,bTil:3,dTil:3,bAcc:5,dAcc:5};
       if(msg && (msg in B)) window.setHStep(B[msg]);
