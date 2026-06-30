@@ -1334,45 +1334,45 @@ const MVAL={
 TP.forEach(t=>{const m=MVAL[t.id];if(m){const A=djfiSide(m.a),N=djfiSide(m.nv);t.a=A.tp;t.nv=N.tp;t.djfi={a:A,nv:N,m};}});
 
 const JUDGES=[
- {id:'j1',g:'common',pin:'both',plab:'步骤 1–2',color:'#7c5cf0',h:'一句话钩子 vs 卡片菜单（落地都不弱）',cap:'开发者门户首屏 · 同维度对比',
-  one:'',
-  lead:'',
+ {id:'j1',g:'common',pin:'both',plab:'步骤 1–2',color:'#7c5cf0',h:'入口不弱，问题是“正确起点”藏得太深',cap:'开发者门户首屏 · 同维度对比',
+  one:'昇腾并不缺内容入口，缺的是让新开发者一眼知道“先从这里开始”。',
+  lead:'首屏能力不差：场景卡、工具、学习成长都在。真正的体验成本是 /developer 不够前置，场景卡也缺少一个最强行动按钮。',
   body:[
-   'NVIDIA 是<b>一句话钩子</b>：“Skip the setup. Start building.” + 紧跟教程流，视线落点单一、行动指令最强。',
-   '昇腾开发者中心是<b>卡片菜单</b>：首屏就铺 训练/推理/算子开发三张场景卡 + 开发工具 + 学习成长（在线实验/认证），信息更全、同样即答“我能干什么”，只是缺一个“先点这里”的最强单一 引导按钮。',
-   '昇腾真正的隐性成本不在文案，而在<b>这张好落地页埋在二级</b>：/developer 不在品牌首页一眼可达，直接访问 hiascend.com 的人第一眼仍是品牌页。<b>补法：把 /developer 提到一眼可达 + 给场景卡一个最强 引导按钮。</b>'],
+   'NVIDIA 的优势是<b>行动指令单一</b>：一句话钩子 + 直接开始教程，降低首次决策成本。',
+   '昇腾的优势是<b>场景覆盖完整</b>：训练、推理、算子开发、工具、在线实验都已铺开，内容基础并不弱。',
+   '结论：把 <b>/developer 前置到首页可见位置</b>，并为每张场景卡提供“开始上手”的主按钮。'],
   demo:'hero'},
- {id:'j2',g:'common',pin:'a',plab:'步骤 3 · 最高杠杆',color:'#C7000B',h:'零登录直取 vs 账号闸门',cap:'下载链路步数对比',
-  one:'从“想下载”到“真正跑起来”，中间隔了几道闸门？',
-  lead:'这是整份报告里 ROI 最高的单点。把下载路径摊开看，两边的步数与闸门差距巨大——而路径长度几乎等于上手流失率。',
+ {id:'j2',g:'common',pin:'a',plab:'步骤 3 · 最高杠杆',color:'#C7000B',h:'Toolkit 下载是最高杠杆单点：先让人拿到包',cap:'下载链路步数对比',
+  one:'从“想下载”到“真正跑起来”，昇腾多了公告、筛选、协议和登录闸门。',
+  lead:'这是整份报告里投入产出比最高的改造点。下载链路不是辅助流程，而是首次跑通的闸门。',
   body:[
-   'NVIDIA：关掉（可选的）邮件 modal → 逐级点绿按钮选平台 → 页面<b>内联给出安装命令，复制即跑</b>。全程不强制登录，账号是“想要更多时再说”的后置项。',
-   '昇腾：落地先被下载公告 modal 打断 → 选 CPU 架构 → 选版本 → 选软件包 → 勾选同意《CANN 软件用户许可协议》→ 关键动作<b>需登录华为账号</b> → 才能下载。每多一道闸门，就多一截流失。',
-   '改造方向明确：<b>游客可直接下载社区版</b>，把登录与协议同意后置到“下载之后 / 需要更多权益时”，并把多级选择折叠为带默认值的智能推荐。'],
+   'NVIDIA 的路径是<b>不登录先给命令</b>，安装命令直接在页面内呈现。',
+   '昇腾的路径是<b>关键动作前置登录</b>，且筛选项多，开发者还没开始就先处理流程。',
+   '结论：社区版 Toolkit 应支持<b>游客直取</b>，登录和协议尽量后置，版本选择改成默认推荐。'],
   demo:'flow'},
- {id:'j3',g:'common',pin:'both',plab:'账号 / 语言 / 社区',color:'#1f9fb8',h:'全球化 vs 本地化的镜像门槛',cap:'人群 × 平台 顺畅度矩阵',
-  one:'门槛不是“谁高谁低”，而是一组对角线镜像。',
-  lead:'昇腾和 NVIDIA 的门槛是镜像的：各自对本土人群极顺、对对方腹地很卡。把“人群 × 平台”摆成矩阵，对角线一目了然。',
+ {id:'j3',g:'common',pin:'both',plab:'账号 / 语言 / 社区',color:'#1f9fb8',h:'国内体验顺，海外体验会同时卡在账号、语言和社区',cap:'人群 × 平台 顺畅度矩阵',
+  one:'这不是单点翻译问题，而是账号、语言、社区三件事一起决定海外门槛。',
+  lead:'昇腾对国内开发者很顺，但一旦面向海外 / 学术场景，三处摩擦会叠加出现。',
   body:[
-   '昇腾对<b>国内开发者</b>几乎零摩擦——微信/QQ 一键登录、全中文内容、论坛按产品线细分版；但<b>海外开发者</b>撞上华为账号（无微信/QQ 可用）、偏薄的英文内容、中文社区。',
-   'NVIDIA 镜像地相反：全球账号、英文优先、Discourse 全球社区对海外极友好；但缺 Google / GitHub 之外的本地化登录，中文内容与社区氛围弱。',
-   '结论：<b>若昇腾战略只服务国内生态，现状已足够顺</b>；一旦要拓海外 / 学术，账号、语言、社区三处短板会同时显形，需成套补齐，而非单点修。'],
+   '国内开发者受益于<b>微信 / QQ 登录、中文内容和细分论坛</b>，路径很自然。',
+   '海外开发者会遇到<b>华为账号、英文内容偏薄、中文社区沉淀</b>三重门槛。',
+   '结论：拓海外时不要只补英文页，要把账号登录、英文内容、游客可读社区成套补齐。'],
   demo:'matrix'},
- {id:'j4',g:'op',pin:'win',plab:'步骤 2 · 算子长板',color:'#76B900',h:'算子开发的反转长板：算子 hub 5 环节 vs CUDA 资源堆',cap:'“上手到首次可跑”路径对比',
-  one:'写算子这件事上，昇腾的上手引导其实比 NVIDIA 更有结构。',
-  lead:'在“教开发者上手”这件事上，昇腾做得比 NVIDIA 更体系化、更新手友好。这是一个应该被“放大”而非“追平”的差异点。',
+ {id:'j4',g:'op',pin:'win',plab:'步骤 2 · 算子长板',color:'#76B900',h:'算子上手是昇腾长板，应该前置放大',cap:'“上手到首次可跑”路径对比',
+  one:'写算子这件事上，昇腾不是短板，反而比 CUDA 资源堆更有结构。',
+  lead:'算子 hub、在线实验、ModelZoo 三步引导已经构成体验资产，应该被放在更靠前的位置。',
   body:[
-   '昇腾把“快速入门”做成<b>按角色（应用 / 算子 / 训练 / 推理开发）的学习路径</b>，配在线课程、微认证，尤其是<b>“在线实验”——免装本地环境、浏览器里直接跑</b>；ModelZoo 也是“模型→工具→展示”的引导式三步 + DeepSeek 热点专区。',
-   'NVIDIA 的 quickstart 反而偏硬核：按 OS 给内联命令，但假设你有基础、sample 要去 GitHub 拉，首个可跑 build 约 15–60 分钟。',
-   '<b>建议把在线实验、引导式 ModelZoo 前置到首屏与产品页</b>，让“开箱即跑”成为昇腾的体验标签，把这块相对优势讲出来。'],
+   '昇腾把快速入门拆成<b>角色化路径</b>，还配在线课程、微认证和在线实验。',
+   'NVIDIA 的 quickstart 更像资源集合，默认开发者已有基础和本地环境。',
+   '结论：把<b>在线实验 + 引导式 ModelZoo + 算子 hub</b>前置，让“首次可跑”成为昇腾标签。'],
   demo:'path'},
- {id:'j5',g:'common',pin:'a',plab:'步骤 6–7 + 全局',color:'#e0a32e',h:'内容不差，差在“被全球搜到”',cap:'可发现性 / 可索引性对比',
-  one:'昇腾的博客、解决方案、文档质量都在线，瓶颈是“被发现”。',
-  lead:'更新过一轮取证后要说清楚：昇腾的博客（有分类/官方/热门排行）、解决方案（可筛选的方案市场）内容组织都不差——真正的差距在“被全球开发者搜到、点进”这一层。',
+ {id:'j5',g:'common',pin:'a',plab:'步骤 6–7 + 全局',color:'#e0a32e',h:'内容质量不是主矛盾，主矛盾是可发现性',cap:'可发现性 / 可索引性对比',
+  one:'博客、解决方案、文档并不差，问题是开发者和 AI 能不能在外部搜索里找到。',
+  lead:'内容已经存在，但入口埋深、英文覆盖和 SEO 会决定它是否被全球开发者与 Agent 使用。',
   body:[
-   '<b>SEO 与全球可索引性偏弱</b>：NVIDIA 的博客/文档/论坛是全球英文 + SEO 强，很多话题 Google 一搜就命中；昇腾以中文为主，海外开发者的搜索长尾覆盖明显不足。',
-   '<b>登录墙 + 入口不够靠前</b>：论坛发帖需华为账号；博客要从开发者中心进、首屏/顶栏没有直达入口（NVIDIA 顶部导航就有 Blog）。',
-   '<b>低成本高回报</b>：补英文版 + SEO + 把博客/方案入口提到顶部直达、提升游客可读，就能显著改善“被搜到、被点进”——内容本身不用重做。'],
+   '<b>SEO 与英文覆盖</b>决定海外长尾问题能否命中，尤其影响 Agent 检索。',
+   '<b>博客 / 方案入口</b>需要前置，论坛与 FAQ 也要尽量游客可读、可索引。',
+   '结论：优先做英文版、SEO、顶栏直达和可索引社区，先让已有内容被找到。'],
   demo:'discover'},
  {id:'jt1',g:'train',pin:'a',plab:'步骤 4 · 训练主摩擦',color:'#C7000B',h:'框架迁移：原生零迁移 vs torch_npu + MindSpeed',cap:'训练上手摩擦点',
   one:'训练这条线，昇腾最大的坎不是配环境，是“把 PyTorch 代码迁过来”。',
@@ -1698,7 +1698,7 @@ function djfiTableHtml(t){
    const cells=inds.map(c=>`<tr><td class="dj-ind">${摩擦指数_ANCHORS[c].lab}<span class="dj-anc">${摩擦指数_ANCHORS[c].t==='num'?摩擦指数_ANCHORS[c].best+'→'+摩擦指数_ANCHORS[c].worst:摩擦指数_ANCHORS[c].t==='boolF'?'有=0':摩擦指数_ANCHORS[c].t==='boolC'?'有=100':'×100'}</span></td><td class="dj-v a">${djfiFmt(c,m.a[c])} <i>${m.a[c]==null?'':'→'+djfiNorm(c,m.a[c])}</i></td><td class="dj-v n">${djfiFmt(c,m.nv[c])} <i>${m.nv[c]==null?'':'→'+djfiNorm(c,m.nv[c])}</i></td></tr>`).join('');
    return head+cells;
  }).join('');
- return `<details class="djfi"><summary><span class="dj-badge">摩擦指数 实测明细</span>触点分由公式算出 · 昇腾 <b class="a">${a.tp}</b> / NVIDIA <b class="n">${nv.tp}</b><span class="dj-open">点开看每项实测值 → 归一化分</span></summary>
+ return `<details class="djfi"><summary><span class="dj-badge">摩擦指数 实测明细</span><span class="dj-sum-desc">触点分由公式算出 · </span><span class="dj-scoreline">昇腾 <b class="a">${a.tp}</b> / NVIDIA <b class="n">${nv.tp}</b></span><span class="dj-open">点开看每项实测值 → 归一化分</span></summary>
    <div class="dj-pop"><div class="dj-scroll"><table class="dj-tbl"><thead><tr><th>维度分 / 指标(锚点)</th><th class="a">昇腾</th><th class="n">NVIDIA</th></tr></thead><tbody>${rows}</tbody></table></div>
    <div class="dj-note">维度分 = 维度内各指标归一化分的算术平均;触点分 = 5 维度分等权平均。归一化:数值 <code>(worst−实测)÷(worst−best)×100</code>;摩擦布尔 有=0/无=100;能力布尔 有=100/无=0;比例 ×100。<b>缺测</b>项排除出计算、不填值。</div></div></details>`;
 }
@@ -2030,18 +2030,24 @@ body.embed.tponly .wrap{max-width:none!important;padding:0!important;margin:0!im
 body.embed.sec-journey .wrap{max-width:none!important;padding:0 4px!important;margin:0!important}
 /* 单触点·证据页:顶部两张小卡(视角/摩擦),中间两张大图,底部只留简短分析 */
 body.embed.tponly .tpcard.tpsolo{max-width:none!important;width:100%!important;height:100vh!important;box-shadow:none!important;border:0!important;background:none!important;
-  display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:auto 1fr auto!important;column-gap:14px!important;row-gap:12px!important;align-content:stretch!important;overflow:visible!important}
+  display:grid!important;grid-template-columns:1.28fr .72fr!important;grid-template-rows:auto 1fr minmax(54px,auto)!important;column-gap:12px!important;row-gap:8px!important;align-content:stretch!important;overflow:visible!important}
 body.embed.tponly .tpcard .tpcard-hd{display:none!important}
-body.embed.tponly .tpcard .pov{grid-column:1!important;grid-row:1!important;margin:0!important;min-height:0!important}
-body.embed.tponly .tpcard .pov-flow{display:none!important}
-body.embed.tponly .tpcard .pov-say{font-size:13px!important;line-height:1.45!important}
+body.embed.tponly .tpcard .pov{grid-column:1!important;grid-row:1!important;margin:0!important;min-height:0!important;padding:7px 10px!important;display:flex!important;align-items:center!important;gap:10px!important;overflow:hidden!important}
+body.embed.tponly .tpcard .pov-flow{display:flex!important;gap:4px!important;margin-top:0!important;flex:1 1 auto!important;flex-wrap:nowrap!important;overflow:hidden!important;min-width:0!important}
+body.embed.tponly .tpcard .pov-say{font-size:12.5px!important;line-height:1.32!important;flex:0 1 48%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;min-width:0!important}
+body.embed.tponly .tpcard .pf-step{font-size:10px!important;padding:2px 6px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:30%!important}
+body.embed.tponly .tpcard .pf-arr{font-size:11px!important;flex:0 0 auto!important}
 body.embed.tponly .tpcard .tpleft{display:contents!important}
 body.embed.tponly .tpcard .tpcard-body{grid-column:1/3!important;grid-row:2!important;align-self:stretch!important;background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;padding:10px 10px!important;overflow:hidden!important;margin:0!important;min-height:0!important}
 body.embed.tponly .tpcard .djfi{grid-column:2!important;grid-row:1!important;margin:0!important;align-self:stretch!important}
-body.embed.tponly .tpcard .djfi>summary{height:100%!important;padding:12px 14px!important;font-size:13px!important;line-height:1.45!important;align-content:center!important}
+body.embed.tponly .tpcard .djfi>summary{height:100%!important;padding:7px 10px!important;font-size:11px!important;line-height:1.22!important;align-content:center!important;justify-content:center!important;gap:4px 6px!important}
+body.embed.tponly .tpcard .dj-badge{display:none!important}
+body.embed.tponly .tpcard .dj-sum-desc{display:none!important}
+body.embed.tponly .tpcard .dj-scoreline{font-size:12px!important;color:var(--ink2)!important}
+body.embed.tponly .tpcard .dj-scoreline b{font-size:18px!important;line-height:1!important}
 body.embed.tponly .tpcard .dj-open{display:none!important}
-body.embed.tponly .tpcard .djfi>summary::after{content:"点击展开明细";font-size:11px;color:var(--ink3);margin-left:auto}
-body.embed.tponly .tpcard .verdict{grid-column:1/3!important;grid-row:3!important;align-self:end!important;margin:0!important;border-top:0!important;border-radius:12px!important;padding:12px 18px!important;max-height:18vh!important;overflow:hidden!important}
+body.embed.tponly .tpcard .djfi>summary::after{content:none!important}
+body.embed.tponly .tpcard .verdict{grid-column:1/3!important;grid-row:3!important;align-self:end!important;margin:0!important;border-top:0!important;border-radius:12px!important;padding:8px 14px!important;max-height:20vh!important;overflow:auto!important}
 /* 长条图(很宽很矮)自动改上下排,放大更清楚;普通比例保持左右 */
 body.embed.tponly .tpcard.imgstack .tpcard-body{grid-template-columns:1fr 1fr!important}
 body.embed.tponly .tpcard.imgstack .tpside.left{border-right:1px solid var(--g2)!important;border-bottom:0!important}
@@ -2059,10 +2065,10 @@ body.embed.tponly .tpcard .rec .rec-dept{grid-area:dept!important;justify-self:e
 body.embed.tponly .tpcard .rec .rec-txt{grid-area:txt!important}
 /* 差异分析列表项右内边距=0,窄右栏里文字贴右边(左有 ◆ 缩进 26px、右却 0,失衡)——补右内边距 */
 body.embed.tponly .tpcard .vtitle{font-size:12px!important;margin-bottom:2px!important}
-body.embed.tponly .tpcard .concl{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0 14px!important;margin-top:4px!important}
-body.embed.tponly .tpcard .concl li{padding:5px 14px 5px 22px!important;font-size:13px!important;line-height:1.45!important;border-top:0!important}
+body.embed.tponly .tpcard .concl{display:flex!important;flex-direction:column!important;gap:2px!important;margin-top:4px!important}
+body.embed.tponly .tpcard .concl li{padding:3px 14px 3px 22px!important;font-size:12.6px!important;line-height:1.34!important;border-top:0!important}
 body.embed.tponly .tpcard .concl li:nth-child(n+3){display:none!important}
-body.embed.tponly .tpcard .concl li::before{left:5px!important;top:12px!important}
+body.embed.tponly .tpcard .concl li::before{left:5px!important;top:11px!important}
 /* 图填满各自半栏,消除 width:auto 留下的大空隙;两侧对称内边距,中间靠 .tpside.left 的分隔线 */
 body.embed.tponly .tpcard .tpside{padding:4px 11px 4px!important;display:flex!important;flex-direction:column!important;min-width:0!important;min-height:0!important}
 body.embed.tponly .tpcard .tpside .who{margin:0 0 8px!important;flex:0 0 auto!important}
@@ -2075,6 +2081,29 @@ body.embed .tpgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1
 /* 步骤分析 iframe:大图已在 deck 页原生放,这里只要分析——隐触点小图/视角条/摩擦明细/触点列表,留 分数+差异分析+建议 */
 body.embed.steps .tpcard .tpcard-body,body.embed.steps .tpcard .pov,body.embed.steps .tpcard .djfi,body.embed.steps .tpcard .djfi-tbl,body.embed.steps .floor-sub{display:none!important}
 body.embed.steps .tpcard{padding:8px 12px!important}
+/* 综述 / 行动 / 责任归属嵌入页:投影版放宽内容宽度,正文升到 body 档,避免被原报告窄版压小 */
+body.embed.sec-j1 .wrap,body.embed.sec-j2 .wrap,body.embed.sec-j3 .wrap,body.embed.sec-j4 .wrap,body.embed.sec-j5 .wrap,
+body.embed.sec-actions .wrap,body.embed.sec-dept .wrap{max-width:none!important;width:100%!important;padding:0 6px!important;margin:0!important}
+body.embed.sec-j1 .synth-body,body.embed.sec-j2 .synth-body,body.embed.sec-j3 .synth-body,body.embed.sec-j4 .synth-body,body.embed.sec-j5 .synth-body{
+  grid-template-columns:.92fr 1.08fr!important;gap:20px!important;align-items:stretch!important;margin-top:0!important}
+body.embed.sec-j1 .synth-text,body.embed.sec-j2 .synth-text,body.embed.sec-j3 .synth-text,body.embed.sec-j4 .synth-text,body.embed.sec-j5 .synth-text{
+  font-size:14px!important;line-height:1.62!important;display:flex!important;flex-direction:column!important;gap:10px!important}
+body.embed.sec-j1 .synth-text .lead,body.embed.sec-j2 .synth-text .lead,body.embed.sec-j3 .synth-text .lead,body.embed.sec-j4 .synth-text .lead,body.embed.sec-j5 .synth-text .lead{
+  font-size:16px!important;line-height:1.5!important;color:var(--ink)!important;background:linear-gradient(160deg,#fff,rgba(255,255,255,.72))!important;border:1px solid var(--g3)!important;border-radius:13px!important;padding:13px 16px!important;box-shadow:0 12px 30px -22px rgba(31,45,77,.35)!important;margin:0!important}
+body.embed.sec-j1 .synth-text p:not(.lead),body.embed.sec-j2 .synth-text p:not(.lead),body.embed.sec-j3 .synth-text p:not(.lead),body.embed.sec-j4 .synth-text p:not(.lead),body.embed.sec-j5 .synth-text p:not(.lead){
+  margin:0!important;color:var(--ink2)!important;background:rgba(255,255,255,.46)!important;border:1px solid rgba(227,232,240,.85)!important;border-radius:11px!important;padding:10px 13px!important}
+body.embed.sec-j1 .synth-text b,body.embed.sec-j2 .synth-text b,body.embed.sec-j3 .synth-text b,body.embed.sec-j4 .synth-text b,body.embed.sec-j5 .synth-text b{
+  color:var(--ink)!important;font-weight:900!important;background:linear-gradient(transparent 58%,rgba(47,111,237,.18) 0)!important;box-decoration-break:clone!important;-webkit-box-decoration-break:clone!important;padding:0 .04em!important}
+body.embed.sec-j1 .synth-demo,body.embed.sec-j2 .synth-demo,body.embed.sec-j3 .synth-demo,body.embed.sec-j4 .synth-demo,body.embed.sec-j5 .synth-demo{
+  min-height:0!important}
+body.embed.sec-actions .actions{margin-top:0!important}
+body.embed.sec-actions .actions table{font-size:14.5px!important}
+body.embed.sec-actions .actions th{font-size:12.5px!important;padding:10px 14px!important}
+body.embed.sec-actions .actions td{padding:11px 14px!important;line-height:1.55!important}
+body.embed.sec-dept .deptgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+body.embed.sec-dept .deptcard .dh{padding:12px 14px!important}
+body.embed.sec-dept .deptlist{padding:5px 14px 13px!important}
+body.embed.sec-dept .deptlist li{font-size:13.5px!important;line-height:1.48!important;padding:7px 0!important}
 </style>
 <script id="embedfixjs">
 (function(){
