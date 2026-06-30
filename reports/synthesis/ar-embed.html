@@ -2028,20 +2028,23 @@ body.embed.tponly{height:100vh!important}
 body.embed.tponly .wrap{max-width:none!important;padding:0!important;margin:0!important;width:100%!important}
 /* 旅程页:grid 内容,解开 1180 限宽让它铺满 iframe 右半区(文字类 sec 仍保持限宽利于阅读) */
 body.embed.sec-journey .wrap{max-width:none!important;padding:0 4px!important;margin:0!important}
-/* 单触点·左右版:视角横幅占顶部整宽;下方左列(55%)两张对比图、右列(45%)摩擦指数+差异分析+建议 */
-body.embed.tponly .tpcard.tpsolo{max-width:none!important;width:100%!important;box-shadow:none!important;border:0!important;background:none!important;
-  display:grid!important;grid-template-columns:64fr 36fr!important;column-gap:12px!important;row-gap:12px!important;align-content:start!important;overflow:visible!important}
+/* 单触点·证据页:顶部两张小卡(视角/摩擦),中间两张大图,底部只留简短分析 */
+body.embed.tponly .tpcard.tpsolo{max-width:none!important;width:100%!important;height:100vh!important;box-shadow:none!important;border:0!important;background:none!important;
+  display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:auto 1fr auto!important;column-gap:14px!important;row-gap:12px!important;align-content:stretch!important;overflow:visible!important}
 body.embed.tponly .tpcard .tpcard-hd{display:none!important}
-body.embed.tponly .tpcard .pov{grid-column:1/3!important;margin:0!important}
-/* 左栏容器:摩擦分(上)+ 两图卡紧挨成一列,右侧再高也不被撑开(空隙留底部、不插在两卡之间) */
-body.embed.tponly .tpcard .tpleft{grid-column:1!important;display:flex!important;flex-direction:column!important;gap:12px!important;align-self:start!important;min-width:0!important}
-/* 两张对比图也包成卡片(与视角/摩擦/差异分析一致) */
-body.embed.tponly .tpcard .tpcard-body{align-self:start!important;background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;padding:10px 6px!important;overflow:hidden!important;margin:0!important}
-body.embed.tponly .tpcard .djfi{margin:0!important}
-body.embed.tponly .tpcard .verdict{grid-column:2!important;align-self:start!important;margin:0!important;border-top:0!important;border-radius:12px!important}
+body.embed.tponly .tpcard .pov{grid-column:1!important;grid-row:1!important;margin:0!important;min-height:0!important}
+body.embed.tponly .tpcard .pov-flow{display:none!important}
+body.embed.tponly .tpcard .pov-say{font-size:13px!important;line-height:1.45!important}
+body.embed.tponly .tpcard .tpleft{display:contents!important}
+body.embed.tponly .tpcard .tpcard-body{grid-column:1/3!important;grid-row:2!important;align-self:stretch!important;background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;padding:10px 10px!important;overflow:hidden!important;margin:0!important;min-height:0!important}
+body.embed.tponly .tpcard .djfi{grid-column:2!important;grid-row:1!important;margin:0!important;align-self:stretch!important}
+body.embed.tponly .tpcard .djfi>summary{height:100%!important;padding:12px 14px!important;font-size:13px!important;line-height:1.45!important;align-content:center!important}
+body.embed.tponly .tpcard .dj-open{display:none!important}
+body.embed.tponly .tpcard .djfi>summary::after{content:"点击展开明细";font-size:11px;color:var(--ink3);margin-left:auto}
+body.embed.tponly .tpcard .verdict{grid-column:1/3!important;grid-row:3!important;align-self:end!important;margin:0!important;border-top:0!important;border-radius:12px!important;padding:12px 18px!important;max-height:18vh!important;overflow:hidden!important}
 /* 长条图(很宽很矮)自动改上下排,放大更清楚;普通比例保持左右 */
-body.embed.tponly .tpcard.imgstack .tpcard-body{grid-template-columns:1fr!important}
-body.embed.tponly .tpcard.imgstack .tpside.left{border-right:0!important;border-bottom:1px solid var(--g2)!important}
+body.embed.tponly .tpcard.imgstack .tpcard-body{grid-template-columns:1fr 1fr!important}
+body.embed.tponly .tpcard.imgstack .tpside.left{border-right:1px solid var(--g2)!important;border-bottom:0!important}
 /* 摩擦明细:hover 浮层弹出(绝对定位、不挤压布局、不触发整页缩放);覆盖 details 关闭时的 display:none */
 /* 摩擦明细:点击展开(details 原生开合),明细做成绝对定位浮层——浮在内容上、不挤压布局、不触发整页缩放 */
 body.embed.tponly .tpcard .djfi{position:relative!important;overflow:visible!important}
@@ -2049,16 +2052,21 @@ body.embed.tponly .tpcard .djfi>summary{cursor:pointer!important}
 body.embed.tponly .tpcard .djfi[open] .dj-pop{position:absolute!important;left:0!important;right:0!important;top:calc(100% + 6px)!important;z-index:60!important;
   background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;box-shadow:0 16px 40px -12px rgba(0,0,0,.32)!important;
   max-height:62vh!important;overflow:auto!important;padding:4px 10px 10px!important}
-/* rec(昇腾该怎么做):标签+主责同一行、说明文字另起一行铺满(窄右栏里三者并排会把 txt 挤成一条) */
-body.embed.tponly .tpcard .rec{display:grid!important;grid-template-columns:auto 1fr auto!important;grid-template-areas:"tag . dept" "txt txt txt"!important;column-gap:8px!important;row-gap:7px!important;align-items:center!important;padding:13px 18px!important}
+/* 行动建议后面统一讲,触点证据页只保留事实分析 */
+body.embed.tponly .tpcard .rec{display:none!important}
 body.embed.tponly .tpcard .rec .rec-tag{grid-area:tag!important;margin-top:0!important}
 body.embed.tponly .tpcard .rec .rec-dept{grid-area:dept!important;justify-self:end!important;margin-top:0!important}
 body.embed.tponly .tpcard .rec .rec-txt{grid-area:txt!important}
 /* 差异分析列表项右内边距=0,窄右栏里文字贴右边(左有 ◆ 缩进 26px、右却 0,失衡)——补右内边距 */
-body.embed.tponly .tpcard .concl li{padding-right:22px!important}
+body.embed.tponly .tpcard .vtitle{font-size:12px!important;margin-bottom:2px!important}
+body.embed.tponly .tpcard .concl{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0 14px!important;margin-top:4px!important}
+body.embed.tponly .tpcard .concl li{padding:5px 14px 5px 22px!important;font-size:13px!important;line-height:1.45!important;border-top:0!important}
+body.embed.tponly .tpcard .concl li:nth-child(n+3){display:none!important}
+body.embed.tponly .tpcard .concl li::before{left:5px!important;top:12px!important}
 /* 图填满各自半栏,消除 width:auto 留下的大空隙;两侧对称内边距,中间靠 .tpside.left 的分隔线 */
-body.embed.tponly .tpcard .tpside{padding:2px 11px 4px!important}
-body.embed.tponly .tpcard .shot,body.embed.tponly .tpcard .mock{width:100%!important;height:auto!important;max-height:60vh!important;object-fit:contain}
+body.embed.tponly .tpcard .tpside{padding:4px 11px 4px!important;display:flex!important;flex-direction:column!important;min-width:0!important;min-height:0!important}
+body.embed.tponly .tpcard .tpside .who{margin:0 0 8px!important;flex:0 0 auto!important}
+body.embed.tponly .tpcard .shot,body.embed.tponly .tpcard .mock{width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;flex:1 1 auto!important;min-height:0!important}
 body.embed.tponly .tpcard .shotcap{display:none!important}
 /* 单触点模式:tpgrid 不再分两列,让唯一卡铺满整宽 */
 body.embed.tponly .tpgrid{display:block!important;grid-template-columns:1fr!important}
@@ -2089,7 +2097,7 @@ body.embed.steps .tpcard{padding:8px 12px!important}
       }
       document.body.style.padding='0';document.body.style.margin='0';
       tc.style.display='';tc.classList.add('tpsolo');
-      /* 左栏:把 摩擦分(djfi,置顶)+ 两图卡 包进 .tpleft,使其紧挨、不被右侧高卡撑开 */
+      /* 用 .tpleft 保持旧 DOM 兼容,证据页 CSS 里 display:contents 让两图/分数进入主网格 */
       var _b=tc.querySelector('.tpcard-body'),_d=tc.querySelector('.djfi');
       if(_b&&!tc.querySelector(':scope > .tpleft')){
         var _L=document.createElement('div');_L.className='tpleft';

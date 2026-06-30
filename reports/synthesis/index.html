@@ -927,7 +927,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cmp-h"><span class="hk">Result</span>并非「全面落后」，而是<b>写 kernel 单项失守</b>（其余受限于版本散 / 第三方平台薄 / 自带弱）</div>
         <div class="card" style="padding:1.8vh 1.4vw">
           <div class="hm-grid" id="mOp" style="grid-template-columns:90px 54px repeat(6,1fr)"></div>
-          <div class="hm-legend"><span>第1列 检索问题 · 第2列 <b style="color:#C7000B">CANN</b>（昇腾）/ <b style="color:#5a8a00">CUDA</b>（NVIDIA），格内各自配色（1–5 分；<b>综合</b>：CANN 为合成小数，CUDA 原数据为档位<b>高 .88–1.0</b>）</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
+          <div class="hm-legend"><span>第1列 检索问题 · 第2列 <b style="color:#C7000B">CANN</b>（昇腾）/ <b style="color:#5a8a00">CUDA</b>（NVIDIA），格内各自配色（1–5 分；<b>综合</b>：两侧均为 opknow 公式复算小数）</span><span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
         </div>
         <div class="bridge" style="margin-top:.2vh">5 次检索只有写 kernel <b>官方真受阻（.41，单页应用 SPA 抓取为空 → 转第三方平台）</b>；M/X/O/L 官方均可抓取。<b>场景可用性 ≈ 最弱且最靠前的那一次检索。</b></div>
       </div>
@@ -939,13 +939,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
       function txt(s){return s<20?'#E02128':s<40?'#F4840C':s<60?'#058358':s<80?'#127180':'#3979F9';}
       function d(v){return v==='受阻'?['受阻',0]:[String(v),v*20];}
       var cols=['官方可抓','正文质量','版本清晰','第三方平台厚度','自带知识','综合'];
-      /* 数据=opknow 17 ROWS 实测；CUDA 综合原数据为档位「高」(.88-1.0) */
+      /* 数据=opknow ROWS + confCompute() 公式复算；综合列两侧均显示具体小数 */
       var rows=[
-        {no:'1',name:'写 kernel',sub:'自定义算子',lt:'D', cann:[d(2),['受阻',0],d(2),d(3),d(2),['.41',15]], cuda:[d(5),d(5),d(3),d(4),d(5),['高',95]]},
-        {no:'2',name:'Tiling',sub:'动态 shape',lt:'M', cann:[d(4),d(4),d(4),d(2),d(2),['.63',63]], cuda:[d(5),d(5),d(4),d(2),d(5),['高',95]]},
-        {no:'3',name:'内存越界',sub:'定位',lt:'X', cann:[d(4),d(5),d(2),d(2),d(2),['.74',74]], cuda:[d(5),d(5),d(3),d(3),d(4),['高',95]]},
-        {no:'4',name:'注册集成',sub:'接框架',lt:'O', cann:[d(4),d(5),d(3),d(3),d(3),['.72',72]], cuda:[d(5),d(5),d(3),d(2),d(5),['高',95]]},
-        {no:'5',name:'精度排查',sub:'比对',lt:'L', cann:[d(4),d(5),d(2),d(3),d(3),['.69',69]], cuda:[d(5),d(5),d(5),d(2),d(4),['高',95]]}
+        {no:'1',name:'写 kernel',sub:'自定义算子',lt:'D', cann:[d(2),['受阻',0],d(2),d(3),d(2),['.41',41]], cuda:[d(5),d(5),d(3),d(4),d(5),['.88',88]]},
+        {no:'2',name:'Tiling',sub:'动态 shape',lt:'M', cann:[d(4),d(4),d(4),d(2),d(2),['.63',63]], cuda:[d(5),d(5),d(4),d(2),d(5),['.94',94]]},
+        {no:'3',name:'内存越界',sub:'定位',lt:'X', cann:[d(4),d(5),d(2),d(2),d(2),['.74',74]], cuda:[d(5),d(5),d(3),d(3),d(4),['.88',88]]},
+        {no:'4',name:'注册集成',sub:'接框架',lt:'O', cann:[d(4),d(5),d(3),d(3),d(3),['.72',72]], cuda:[d(5),d(5),d(3),d(2),d(5),['.84',84]]},
+        {no:'5',name:'精度排查',sub:'比对',lt:'L', cann:[d(4),d(5),d(2),d(3),d(3),['.69',69]], cuda:[d(5),d(5),d(5),d(2),d(4),['.84',84]]}
       ];
       function scell(c,lt){return '<div class="hm-cell" data-letter="'+lt+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</div>';}
       var h='<div class="hm-corner" style="grid-column:span 2"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">检索问题</span></div>';
@@ -959,6 +959,60 @@ body.overview #panel,body.overview #toggle{display:none!important}
         r.cuda.forEach(function(c){ h+=scell(c,r.lt); });
       });
       grid.innerHTML=h;
+    })();
+    </script>
+  </section>
+
+  <style>
+    .hmfull-wrap{height:100%;min-height:0;display:flex;flex-direction:column;gap:1vh}
+    .hmfull-card{flex:1;min-height:0;padding:1.1vh .9vw!important;overflow:hidden}
+    .hmfull{width:100%;height:100%;border-collapse:separate;border-spacing:3px;table-layout:fixed}
+    .hmfull th{font-size:8.2px;font-weight:800;line-height:1.05;color:#3D4452;background:rgba(255,255,255,.82);border:1px solid rgba(223,223,223,.7);border-radius:5px;padding:2px 3px;text-align:center}
+    .hmfull td{font-size:8.5px;line-height:1.05;border-radius:5px;text-align:center;vertical-align:middle}
+    .hmfull .task{width:118px;text-align:left;padding:2px 5px;background:rgba(255,255,255,.7);border:1px solid rgba(223,223,223,.7);color:#1B2432;font-weight:700}
+    .hmfull .task b{display:inline-block;font-family:'JetBrains Mono';font-size:8px;color:#5B5BD6;margin-right:4px}
+    .hmfull .task small{display:block;font-weight:500;color:#8E96A3;font-size:7.6px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hmfull .stk{width:38px;color:#fff;font-family:'JetBrains Mono';font-size:8px;font-weight:900}
+    .hmfull .stk.asc{background:#C7000B}.hmfull .stk.nv{background:#76B900;color:#172100}
+    .hmfull .cell{font-family:'JetBrains Mono';font-size:8.2px;font-weight:900;border:1px solid transparent;padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hmfull .sum{font-size:8.5px}
+    .hmfull-note{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs);color:#8E96A3}
+    .hmfull-note b{color:#1B2432}.hmfull-note .hm-grad{width:92px}
+  </style>
+  <!-- 灰底：AI 侧 · opknow 全量矩阵 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">全量矩阵：26 个任务 × 11 项指标，短板不是均匀分布，而是集中在深层算子与排障场景</span></div>
+        <div class="subttl">AI 侧 · 内容可用性 · 「opknow 全量矩阵」</div>
+      </div>
+      <div class="head-r">17/ AI · 全量矩阵</div>
+    </div>
+    <div class="body-area">
+      <div class="hmfull-wrap">
+        <div class="card hmfull-card">
+          <table class="hmfull" id="mFull" aria-label="opknow 全量矩阵"></table>
+        </div>
+        <div class="hmfull-note"><b>读法：</b>每个任务两行：CUDA / CANN；前 10 列为 1-5 档实测，最后一列为综合置信度公式复算小数。<span style="flex:1"></span><span>低</span><span class="hm-grad"></span><span>高</span></div>
+      </div>
+    </div>
+    <script>
+    (function(){var table=document.getElementById('mFull');if(!table)return;
+      function heat(s){return s<20?'rgba(224,33,40,.09)':s<40?'rgba(244,132,12,.09)':s<60?'rgba(5,131,88,.09)':s<80?'rgba(18,113,128,.09)':'rgba(57,121,249,.09)';}
+      function bord(s){return s<20?'rgba(224,33,40,.24)':s<40?'rgba(244,132,12,.24)':s<60?'rgba(5,131,88,.24)':s<80?'rgba(18,113,128,.24)':'rgba(57,121,249,.24)';}
+      function txt(s){return s<20?'#C9262D':s<40?'#B86409':s<60?'#08734F':s<80?'#126B7C':'#2D67D7';}
+      var cols=['可发现','可抓取','正文','版本','二手量','二手可信','自带','成本','可锁','可复现','综合'];
+      var rows=[{"k":"A","n":"模型转换 / 导出","cs":0.75,"ns":0.94,"c":[["4",80],["4",80],["4",80],["2",40],["4",80],["4",80],["3",60],["1搜·3抓",80],["3",60],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["4",80],["4",80],["4",80],["4",80],["1搜",100],["5",100],["5",100],["高",100]]},{"k":"B","n":"Profiling 定位瓶颈","cs":0.7,"ns":0.93,"c":[["4",80],["4",80],["4",80],["2",40],["3",60],["3",60],["3",60],["1搜·2抓",80],["3",60],["3",60],["中高",80]],"u":[["4",80],["5",100],["5",100],["4",80],["4",80],["4",80],["4",80],["1搜",100],["4",80],["5",100],["高",100]]},{"k":"C","n":"算子库选型","cs":0.77,"ns":1,"c":[["4",80],["4",80],["3",60],["3",60],["3",60],["4",80],["3",60],["1搜",100],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["5",100],["5",100],["4",80],["5",100],["0–1",100],["5",100],["5",100],["高",100]]},{"k":"D","n":"自定义算子开发","cs":0.41,"ns":0.88,"c":[["2",40],["2",40],["受阻",0],["2",40],["3",60],["2",40],["2",40],["2搜✗",20],["2",40],["3",60],["低",40]],"u":[["5",100],["5",100],["5",100],["3",60],["4",80],["4",80],["5",100],["1搜",100],["5",100],["5",100],["高",100]]},{"k":"E","n":"报错码 / 异常排查","cs":0.55,"ns":0.99,"c":[["3",60],["4",80],["2",40],["2",40],["3",60],["3",60],["2",40],["2搜·1抓",80],["3",60],["3",60],["中",60]],"u":[["4",80],["5",100],["5",100],["5",100],["4",80],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"F","n":"分布式训练配置","cs":0.72,"ns":0.88,"c":[["4",80],["4",80],["4",80],["2",40],["3",60],["3",60],["3",60],["1搜·1抓",100],["3",60],["3",60],["中高",80]],"u":[["5",100],["5",100],["5",100],["3",60],["3",60],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"G","n":"CUDA → 昇腾 迁移","cs":0.84,"ns":0.88,"c":[["4",80],["4",80],["4",80],["4",80],["3",60],["4",80],["3",60],["1搜·1抓",100],["4",80],["4",80],["高",100]],"u":[["5",100],["5",100],["5",100],["3",60],["3",60],["4",80],["4",80],["1搜",100],["4",80],["5",100],["高",100]]},{"k":"H","n":"量化","cs":0.68,"ns":0.88,"c":[["3",60],["4",80],["3",60],["2",40],["4",80],["3",60],["3",60],["2搜·1抓",80],["4",80],["5",100],["中高",80]],"u":[["5",100],["5",100],["5",100],["3",60],["3",60],["4",80],["4",80],["1搜",100],["4",80],["5",100],["高",100]]},{"k":"I","n":"版本兼容排查","cs":0.73,"ns":0.85,"c":[["3",60],["4",80],["4",80],["4",80],["3",60],["4",80],["2",40],["2搜·2抓",60],["5",100],["5",100],["中高",80]],"u":[["3",60],["5",100],["5",100],["4",80],["2",40],["4",80],["4",80],["2搜·2抓",60],["5",100],["5",100],["高",100]]},{"k":"J","n":"安装与环境变量","cs":0.8,"ns":0.88,"c":[["5",100],["4",80],["5",100],["2",40],["3",60],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]],"u":[["4",80],["5",100],["5",100],["3",60],["3",60],["4",80],["5",100],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"K","n":"容器 / 镜像搭建","cs":0.86,"ns":0.98,"c":[["5",100],["5",100],["5",100],["4",80],["2",40],["2",40],["3",60],["1搜·4抓✗",20],["4",80],["5",100],["高",100]],"u":[["5",100],["5",100],["4",80],["5",100],["3",60],["4",80],["5",100],["1搜·2抓",80],["4",80],["5",100],["高",100]]},{"k":"L","n":"算子精度排查","cs":0.69,"ns":0.84,"c":[["2",40],["4",80],["5",100],["2",40],["3",60],["4",80],["3",60],["2搜·1抓",80],["3",60],["4",80],["中高",80]],"u":[["2",40],["5",100],["5",100],["5",100],["2",40],["4",80],["4",80],["2搜·2抓✗",20],["4",80],["4",80],["高",100]]},{"k":"M","n":"动态 shape / Tiling","cs":0.63,"ns":0.94,"c":[["2",40],["4",80],["4",80],["4",80],["2",40],["4",80],["2",40],["2搜·2抓",60],["4",80],["4",80],["中",60]],"u":[["5",100],["5",100],["5",100],["4",80],["2",40],["4",80],["5",100],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"N","n":"算子融合","cs":0.75,"ns":0.83,"c":[["5",100],["4",80],["5",100],["2",40],["2",40],["3",60],["2",40],["1搜·1抓",100],["4",80],["4",80],["中高",80]],"u":[["2",40],["5",100],["4",80],["5",100],["2",40],["4",80],["4",80],["2搜·3抓✗",20],["4",80],["4",80],["高",100]]},{"k":"O","n":"注册与框架集成","cs":0.72,"ns":0.84,"c":[["2",40],["4",80],["5",100],["3",60],["3",60],["5",100],["3",60],["2搜·4抓✗",20],["4",80],["5",100],["中高",80]],"u":[["5",100],["5",100],["5",100],["3",60],["2",40],["4",80],["5",100],["1搜·4抓",60],["4",80],["5",100],["高",100]]},{"k":"P","n":"混合精度训练","cs":0.83,"ns":0.98,"c":[["3",60],["4",80],["4",80],["4",80],["3",60],["4",80],["4",80],["2搜·5抓",40],["4",80],["4",80],["高",100]],"u":[["5",100],["5",100],["5",100],["5",100],["3",60],["4",80],["5",100],["1搜·3抓",80],["5",100],["5",100],["高",100]]},{"k":"Q","n":"显存 / OOM 优化","cs":0.86,"ns":0.94,"c":[["5",100],["4",80],["5",100],["4",80],["3",60],["4",80],["3",60],["1搜·4抓",60],["3",60],["4",80],["高",100]],"u":[["5",100],["5",100],["5",100],["5",100],["3",60],["4",80],["5",100],["1搜·2抓✗",40],["4",80],["5",100],["高",100]]},{"k":"R","n":"精度 / 收敛排查","cs":0.75,"ns":0.98,"c":[["3",60],["4",80],["5",100],["3",60],["3",60],["4",80],["3",60],["2搜·3抓",60],["3",60],["4",80],["中高",80]],"u":[["3",60],["5",100],["4",80],["5",100],["3",60],["3",60],["5",100],["2搜·1抓",80],["4",80],["4",80],["高",100]]},{"k":"S","n":"推理服务部署","cs":0.74,"ns":0.94,"c":[["5",100],["4",80],["4",80],["3",60],["2",40],["4",80],["2",40],["1搜·3抓",80],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["4",80],["3",60],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"T","n":"动态 batch / shape 推理","cs":0.72,"ns":0.92,"c":[["3",60],["4",80],["5",100],["2",40],["3",60],["5",100],["3",60],["2搜·2抓",60],["4",80],["4",80],["中高",80]],"u":[["3",60],["5",100],["5",100],["5",100],["2",40],["4",80],["5",100],["2搜·4抓✗",20],["5",100],["5",100],["高",100]]},{"k":"U","n":"访存 / occupancy 优化","cs":0.88,"ns":1,"c":[["4",80],["4",80],["4",80],["5",100],["3",60],["4",80],["3",60],["1搜·3抓",80],["4",80],["4",80],["高",100]],"u":[["5",100],["5",100],["5",100],["5",100],["3",60],["4",80],["5",100],["1搜·1抓",100],["4",80],["4",80],["高",100]]},{"k":"V","n":"计算与传输重叠","cs":0.72,"ns":0.98,"c":[["4",80],["4",80],["4",80],["2",40],["3",60],["4",80],["3",60],["1搜·3抓",80],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["5",100],["3",60],["4",80],["5",100],["1搜·2抓",80],["5",100],["5",100],["高",100]]},{"k":"W","n":"多卡通信优化","cs":0.7,"ns":0.92,"c":[["2",40],["4",80],["3",60],["3",60],["3",60],["4",80],["3",60],["2搜·2抓",60],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["4",80],["4",80],["3",60],["4",80],["4",80],["1搜·1抓",100],["5",100],["5",100],["高",100]]},{"k":"X","n":"内存越界定位","cs":0.74,"ns":0.88,"c":[["5",100],["4",80],["5",100],["2",40],["2",40],["4",80],["2",40],["1搜·2抓",80],["4",80],["5",100],["中高",80]],"u":[["5",100],["5",100],["5",100],["3",60],["3",60],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"Y","n":"跨芯片迁移","cs":0.68,"ns":0.92,"c":[["2",40],["4",80],["4",80],["3",60],["3",60],["4",80],["3",60],["2搜·4抓✗",20],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["4",80],["3",60],["4",80],["5",100],["1搜·2抓",80],["5",100],["5",100],["高",100]]},{"k":"Z","n":"概念心智模型对照","cs":0.9,"ns":0.92,"c":[["5",100],["4",80],["5",100],["5",100],["3",60],["4",80],["4",80],["1搜·3抓✗",20],["2",40],["2",40],["高",100]],"u":[["5",100],["5",100],["4",80],["5",100],["3",60],["4",80],["5",100],["1搜·4抓✗",20],["2",40],["2",40],["高",100]]}];
+      function fmt(v){return v>=0.995?'1.00':v.toFixed(2).replace(/^0/, '');}
+      function td(c,extra){return '<td class="cell '+(extra||'')+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</td>';}
+      var h='<thead><tr><th>任务</th><th>栈</th>'+cols.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr></thead><tbody>';
+      rows.forEach(function(r){
+        var c=r.c.slice(); c[10]=[fmt(r.cs),Math.round(r.cs*100)];
+        var u=r.u.slice(); u[10]=[fmt(r.ns),Math.round(r.ns*100)];
+        h+='<tr><td class="task" rowspan="2"><b>'+r.k+'</b>'+r.n+'<small>CANN '+fmt(r.cs)+' / CUDA '+fmt(r.ns)+'</small></td><td class="stk nv">CUDA</td>'+u.map(function(x,i){return td(x,i===10?'sum':'');}).join('')+'</tr>';
+        h+='<tr><td class="stk asc">CANN</td>'+c.map(function(x,i){return td(x,i===10?'sum':'');}).join('')+'</tr>';
+      });
+      table.innerHTML=h+'</tbody>';
     })();
     </script>
   </section>
@@ -1030,7 +1084,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">实测暴露的七个问题：版本混乱 +「自带 / 第三方双薄」是系统性短板</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「七大问题」</div>
       </div>
-      <div class="head-r">17/ AI · 七个问题</div>
+      <div class="head-r">18/ AI · 七个问题</div>
     </div>
     <div class="body-area">
       <div class="pg7">
@@ -1070,7 +1124,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 1／8 · 版本体系统一收口：首选网址 + 配套查询工具</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「1/8 版本收口」</div>
       </div>
-      <div class="head-r">18/ 供给侧 · 改文档站</div>
+      <div class="head-r">19/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=1" title="opknow19 卡1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1081,7 +1135,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 2／8 · 错误码一码一页：为每个错误码建独立的排查页</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「2/8 错误码」</div>
       </div>
-      <div class="head-r">19/ 供给侧 · 改文档站</div>
+      <div class="head-r">20/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1092,7 +1146,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 3／8 · 让核心 how-to 页可被抓取：改为服务端渲染</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「3/8 how-to 静态化」</div>
       </div>
-      <div class="head-r">20/ 供给侧 · 改文档站</div>
+      <div class="head-r">21/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=3" title="opknow19 卡3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1103,7 +1157,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 4／8 · 提供机器可读出口：llms.txt、Markdown 导出、结构化 API 索引</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「4/8 机器可读出口」</div>
       </div>
-      <div class="head-r">21/ 供给侧 · 改文档站</div>
+      <div class="head-r">22/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=4" title="opknow19 卡4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1114,7 +1168,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 5／8 · 面向 AI 抓取的页面组织方式</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「5/8 页面结构」</div>
       </div>
-      <div class="head-r">22/ 供给侧 · 改文档站</div>
+      <div class="head-r">23/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1125,7 +1179,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 6／8 · 扶持第三方生态：从「少而同质」到「多平台互证」</span></div>
         <div class="subttl">Supply side · 改的是「被检索的网站」——文档站怎么改（opknow 19 §3）</div>
       </div>
-      <div class="head-r">23/ 供给侧 · 改文档站</div>
+      <div class="head-r">24/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=6" title="opknow19 卡6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1136,7 +1190,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 7／8 · 改善面向开发者的站内体验：沿用同一套评估指标</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「7/8 站内体验」</div>
       </div>
-      <div class="head-r">24/ 供给侧 · 改文档站</div>
+      <div class="head-r">25/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=7" title="opknow19 卡7" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1147,7 +1201,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">供给侧 8／8 · 面向下一代模型的语料供给：官方与生态需共同支撑</span></div>
         <div class="subttl">AI 侧 · 供给侧建议 · 「8/8 语料供给」</div>
       </div>
-      <div class="head-r">25/ 供给侧 · 改文档站</div>
+      <div class="head-r">26/ 供给侧 · 改文档站</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=8" title="opknow19 卡8" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1170,7 +1224,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">人机协同时序：一个开发问题，在「官方 → 第三方 → 人工核查」之间逐级转向</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「时序图」</div>
       </div>
-      <div class="head-r">26/ 基础体验 · 时序图</div>
+      <div class="head-r">27/ 基础体验 · 时序图</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1195,7 +1249,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">走完 7 步生命周期：每步「触点 × 情绪 × 痛点 / 机会」，谷底在配环境</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程」</div>
       </div>
-      <div class="head-r">27/ 基础体验 · 旅程</div>
+      <div class="head-r">28/ 基础体验 · 旅程</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:1.4vw;align-items:stretch">
       <div style="flex:0 0 17%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
@@ -1213,7 +1267,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验评估方法论 · 理论依据 + 评估边界：每维挂靠权威，先划清测什么 / 不测什么</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 1/4 · 理论与边界」</div>
       </div>
-      <div class="head-r">28/ 摩擦指数 · 理论与边界</div>
+      <div class="head-r">29/ 摩擦指数 · 理论与边界</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=1" title="摩擦指数 理论依据+评估边界" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -1225,7 +1279,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验评估方法论 · 指标体系 + 测量协议 + 归一化：5 维 16 项，全公式可复现</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 2/4 · 指标与计算」</div>
       </div>
-      <div class="head-r">29/ 摩擦指数 · 指标与计算</div>
+      <div class="head-r">30/ 摩擦指数 · 指标与计算</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=2" title="摩擦指数 指标体系+测量协议+归一化" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -1237,7 +1291,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验评估方法论 · 锚点总表：16 指标 best/worst 全公开、对两边一视同仁</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 3/4 · 锚点总表」</div>
       </div>
-      <div class="head-r">30/ 摩擦指数 · 锚点总表</div>
+      <div class="head-r">31/ 摩擦指数 · 锚点总表</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=3" title="摩擦指数 六、锚点总表" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -1249,7 +1303,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验评估方法论 · 算例与效度局限：引擎实时计算 + 诚实陈述边界</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 4/4 · 算例与局限」</div>
       </div>
-      <div class="head-r">31/ 摩擦指数 · 算例与局限</div>
+      <div class="head-r">32/ 摩擦指数 · 算例与局限</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=4" title="摩擦指数 七、算例与局限" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -1274,7 +1328,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">触点评分：平均 73.6 分——Toolkit 下载和工具链差距最大，FAQ 自助反超 NVIDIA</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「触点评分」</div>
       </div>
-      <div class="head-r">32/ 基础体验 · 评分</div>
+      <div class="head-r">33/ 基础体验 · 评分</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1331,7 +1385,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">1.1 · 官网首页（落地第一眼）</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 74（差值 +2）</div>
       </div>
-      <div class="head-r">33/ 触点 1.1</div>
+      <div class="head-r">34/ 触点 1.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1" title="触点 1.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1342,7 +1396,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">1.1b · 开发者门户首屏</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 77（差值 +1）</div>
       </div>
-      <div class="head-r">34/ 触点 1.1b</div>
+      <div class="head-r">35/ 触点 1.1b</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1b" title="触点 1.1b" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1353,7 +1407,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">1.2 · 顶部导航 / 信息架构</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 76（差值 0）</div>
       </div>
-      <div class="head-r">35/ 触点 1.2</div>
+      <div class="head-r">36/ 触点 1.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.2" title="触点 1.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1364,7 +1418,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">2.1 · 产品总览</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
       </div>
-      <div class="head-r">36/ 触点 2.1</div>
+      <div class="head-r">37/ 触点 2.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.1" title="触点 2.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1375,7 +1429,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">2.3 · 规格参数</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
       </div>
-      <div class="head-r">37/ 触点 2.3</div>
+      <div class="head-r">38/ 触点 2.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.3" title="触点 2.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1386,7 +1440,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">2.4 · 解决方案 / 场景入口</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 77（差值 -1）</div>
       </div>
-      <div class="head-r">38/ 触点 2.4</div>
+      <div class="head-r">39/ 触点 2.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.4" title="触点 2.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1397,7 +1451,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">2.2 · 产品详情页</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 80（差值 -2）</div>
       </div>
-      <div class="head-r">39/ 触点 2.2</div>
+      <div class="head-r">40/ 触点 2.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.2" title="触点 2.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1408,7 +1462,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">3.2 · 快速入门</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 82 / NVIDIA 72（差值 +10）</div>
       </div>
-      <div class="head-r">40/ 触点 3.2</div>
+      <div class="head-r">41/ 触点 3.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.2" title="触点 3.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1419,7 +1473,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">3.3 · 教程</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 77 / NVIDIA 79（差值 -2）</div>
       </div>
-      <div class="head-r">41/ 触点 3.3</div>
+      <div class="head-r">42/ 触点 3.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.3" title="触点 3.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1430,7 +1484,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">5.4 · 在线体验 / Playground</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 80（差值 -4）</div>
       </div>
-      <div class="head-r">42/ 触点 5.4</div>
+      <div class="head-r">43/ 触点 5.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.4" title="触点 5.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1441,7 +1495,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">4.1 · 下载中心</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 70 / NVIDIA 74（差值 -4）</div>
       </div>
-      <div class="head-r">43/ 触点 4.1</div>
+      <div class="head-r">44/ 触点 4.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.1" title="触点 4.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1452,7 +1506,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">4.2 · 注册 / 登录</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 64 / NVIDIA 80（差值 -16）</div>
       </div>
-      <div class="head-r">44/ 触点 4.2</div>
+      <div class="head-r">45/ 触点 4.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.2" title="触点 4.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1463,7 +1517,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">4.3 · Toolkit 下载流程</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 66 / NVIDIA 82（差值 -16）</div>
       </div>
-      <div class="head-r">45/ 触点 4.3</div>
+      <div class="head-r">46/ 触点 4.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.3" title="触点 4.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1474,7 +1528,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">4.4 · 版本 / 环境选择</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 73 / NVIDIA 79（差值 -6）</div>
       </div>
-      <div class="head-r">46/ 触点 4.4</div>
+      <div class="head-r">47/ 触点 4.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.4" title="触点 4.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1485,7 +1539,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">3.1 · 文档中心首页</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 80 / NVIDIA 81（差值 -1）</div>
       </div>
-      <div class="head-r">47/ 触点 3.1</div>
+      <div class="head-r">48/ 触点 3.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.1" title="触点 3.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1496,7 +1550,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">3.4 · API / 接口参考</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
       </div>
-      <div class="head-r">48/ 触点 3.4</div>
+      <div class="head-r">49/ 触点 3.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.4" title="触点 3.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1507,7 +1561,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">5.1 · 代码示例 / Samples</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 79（差值 -1）</div>
       </div>
-      <div class="head-r">49/ 触点 5.1</div>
+      <div class="head-r">50/ 触点 5.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.1" title="触点 5.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1518,7 +1572,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">5.3 · 开发工具</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 79（差值 -4）</div>
       </div>
-      <div class="head-r">50/ 触点 5.3</div>
+      <div class="head-r">51/ 触点 5.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.3" title="触点 5.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1529,7 +1583,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">6.1 · 开发者社区 / 论坛</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
       </div>
-      <div class="head-r">51/ 触点 6.1</div>
+      <div class="head-r">52/ 触点 6.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.1" title="触点 6.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1540,7 +1594,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">6.2 · 技术支持入口</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 76（差值 -1）</div>
       </div>
-      <div class="head-r">52/ 触点 6.2</div>
+      <div class="head-r">53/ 触点 6.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.2" title="触点 6.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1551,7 +1605,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">6.3 · FAQ</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 73（差值 +3）</div>
       </div>
-      <div class="head-r">53/ 触点 6.3</div>
+      <div class="head-r">54/ 触点 6.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.3" title="触点 6.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1562,7 +1616,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">5.2 · 模型库</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 81 / NVIDIA 79（差值 +2）</div>
       </div>
-      <div class="head-r">54/ 触点 5.2</div>
+      <div class="head-r">55/ 触点 5.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.2" title="触点 5.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1573,7 +1627,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">6.4 · 博客 / 案例</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 73 / NVIDIA 81（差值 -8）</div>
       </div>
-      <div class="head-r">55/ 触点 6.4</div>
+      <div class="head-r">56/ 触点 6.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.4" title="触点 6.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1584,7 +1638,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">1.3 · 全站搜索</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 76（差值 0）</div>
       </div>
-      <div class="head-r">56/ 触点 1.3</div>
+      <div class="head-r">57/ 触点 1.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.3" title="触点 1.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1595,7 +1649,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">1.4 · 语言 / 地区切换</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 75（差值 0）</div>
       </div>
-      <div class="head-r">57/ 触点 1.4</div>
+      <div class="head-r">58/ 触点 1.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.4" title="触点 1.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1607,7 +1661,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论①：一句话钩子 vs 卡片菜单——落地都不弱，差在好落地页埋二级</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论① 落地」</div>
       </div>
-      <div class="head-r">58/ 结论 · 落地</div>
+      <div class="head-r">59/ 结论 · 落地</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j1" title="j1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1618,7 +1672,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论②：零登录直取 vs 账号闸门（Toolkit −66）——全篇投入产出比最高的单点</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论② 下载闸门」</div>
       </div>
-      <div class="head-r">59/ 结论 · 下载闸门</div>
+      <div class="head-r">60/ 结论 · 下载闸门</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1629,7 +1683,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论③：全球化 vs 本地化的镜像门槛——账号 / 语言 / 社区一组对角线</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论③ 门槛」</div>
       </div>
-      <div class="head-r">60/ 结论 · 门槛镜像</div>
+      <div class="head-r">61/ 结论 · 门槛镜像</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j3" title="j3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1640,7 +1694,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论④：算子上手的反转长板——hub 5 环节 + 在线实验比 CUDA 更体系</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论④ 上手长板」</div>
       </div>
-      <div class="head-r">61/ 结论 · 上手长板</div>
+      <div class="head-r">62/ 结论 · 上手长板</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j4" title="j4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1651,7 +1705,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论⑤：内容不差，差在「被全球搜到」——搜索引擎优化（SEO）/ 英文 / 入口埋深</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论⑤ 可发现性」</div>
       </div>
-      <div class="head-r">62/ 结论 · 可发现性</div>
+      <div class="head-r">63/ 结论 · 可发现性</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -1662,7 +1716,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论落地：三类角色共担一条链路，从「能看」改到「能跑、能搜、能被 AI 用」</span></div>
         <div class="subttl">结论 · 分角色行动方案 · 「总览」</div>
       </div>
-      <div class="head-r">63/ 结论 · 三角色</div>
+      <div class="head-r">64/ 结论 · 三角色</div>
     </div>
     <div class="body-area">
       <div class="ccg">
