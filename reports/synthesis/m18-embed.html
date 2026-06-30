@@ -8,9 +8,11 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap');
   :root{
-    --bg:#F2F3F7;--white:#fff;--black:#0A0A0F;--g1:#1C1C28;--g2:#3D3D50;--g3:#6B6B80;--g4:#A0A0B0;--g6:#ECEEF3;
-    --nv:#76B900;--hw:#C8102E;--blue:#2563EB;--purple:#7e3fb0;
-    --touch:#2f56b3;--qual:#7e3fb0;--cost:#B45309;--out:#0E7C66;
+    --bg:#E9EBEE;--white:#fff;--black:#16191e;--g1:#16191e;--g2:#5e646e;--g3:#747b87;--g4:#929aa6;--g6:#d4d8df;
+    --card:#fff;--card-2:#F1F3F6;--accent:#5B5BD6;--accent-soft:#ECECFB;
+    --nv:#76B900;--hw:#C8102E;--blue:#5B5BD6;--purple:#7C3AED;
+    --touch:#5B5BD6;--touch-soft:#ECECFB;--qual:#7C3AED;--qual-soft:#F1EAFE;--cost:#B45309;--cost-soft:#FEF3E2;--out:#1F7A4D;--out-soft:#E8F6EF;
+    --tag-bg:#F1F3F6;--tag-border:#D4D8DF;--tag-ink:#5E646E;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Noto Sans SC','PingFang SC',sans-serif;background:var(--bg);color:var(--black);padding:56px 0 64px 188px;line-height:1.65;}
@@ -60,22 +62,26 @@
   .core .sub{font-size:11.5px;opacity:.8;margin-top:7px;line-height:1.65;}
 
   /* 价值链漏斗 */
-  .chain{display:flex;gap:8px;align-items:stretch;margin:14px 0;flex-wrap:wrap;}
-  .stage{flex:1;min-width:150px;background:#fff;border:1px solid var(--g6);border-radius:10px;padding:12px 14px;position:relative;}
-  .stage .k{font-size:10px;font-weight:800;letter-spacing:.4px;color:#fff;border-radius:5px;padding:2px 8px;display:inline-block;margin-bottom:7px;}
-  .stage.s-touch .k{background:var(--touch);} .stage.s-qual .k{background:var(--qual);}
-  .stage.s-cost .k{background:var(--cost);} .stage.s-out .k{background:var(--out);}
+  .chain{display:flex;gap:10px;align-items:stretch;margin:14px 0 16px;flex-wrap:wrap;}
+  .stage{flex:1;min-width:150px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);border-radius:12px;padding:13px 14px;position:relative;box-shadow:0 9px 24px -18px rgba(30,40,70,.2),inset 0 1px 0 rgba(255,255,255,.85);}
+  .stage .k{font-size:10px;font-weight:800;letter-spacing:.35px;border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:7px;}
+  .stage.s-touch .k{color:var(--touch);background:var(--touch-soft);border:1px solid #DADAF6;}
+  .stage.s-qual .k{color:var(--qual);background:var(--qual-soft);border:1px solid #E0D2F5;}
+  .stage.s-cost .k{color:var(--cost);background:var(--cost-soft);border:1px solid #F1D7AD;}
+  .stage.s-out .k{color:var(--out);background:var(--out-soft);border:1px solid #CFE8DA;}
+  .stage.s-touch h4{color:var(--touch);} .stage.s-qual h4{color:var(--qual);}
+  .stage.s-cost h4{color:var(--cost);} .stage.s-out h4{color:var(--out);}
   .stage h4{font-size:13px;font-weight:800;color:var(--g1);margin-bottom:3px;}
   .stage p{font-size:10.5px;color:var(--g3);line-height:1.55;}
   .arrow{align-self:center;color:var(--g4);font-weight:800;font-size:15px;}
 
   /* 三源 × 两关 矩阵 */
-  table.fw{border-collapse:separate;border-spacing:3px;width:100%;margin:6px 0 4px;font-size:11.5px;}
+  table.fw{border-collapse:separate;border-spacing:4px;width:100%;margin:8px 0 5px;font-size:11.5px;}
   table.fw th,table.fw td{padding:9px 11px;text-align:left;vertical-align:top;border-radius:8px;}
-  table.fw thead th{background:#2f3d63;color:#fff;font-size:11px;font-weight:800;text-align:center;}
-  table.fw thead th.t-touch{background:var(--touch);} table.fw thead th.t-qual{background:var(--qual);}
-  table.fw td.src{background:#E7EAF1;color:var(--g1);font-weight:800;font-size:11.5px;width:120px;vertical-align:middle;text-align:center;}
-  table.fw td.cellm{background:#fff;border:1px solid var(--g6);}
+  table.fw thead th{background:var(--card-2);color:var(--g2);border:1px solid var(--g6);font-size:11px;font-weight:800;text-align:center;}
+  table.fw thead th.t-touch{background:var(--touch-soft);color:var(--touch);border-color:#DADAF6;} table.fw thead th.t-qual{background:var(--qual-soft);color:var(--qual);border-color:#E0D2F5;}
+  table.fw td.src{background:var(--card-2);color:var(--g1);font-weight:800;font-size:11.5px;width:120px;vertical-align:middle;text-align:center;border:1px solid var(--g6);}
+  table.fw td.cellm{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85);}
   table.fw td.cellm .mname{font-weight:800;color:var(--g1);font-size:11.5px;display:block;}
   table.fw td.cellm .mname.touch{color:var(--touch);} table.fw td.cellm .mname.qual{color:var(--qual);}
   table.fw td.cellm small{color:var(--g4);font-size:9.5px;}
@@ -119,10 +125,10 @@
   .mhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
   .mhead .nm{font-size:14.5px;font-weight:900;color:var(--g1);}
   .mhead .en{font-size:10px;color:var(--g4);letter-spacing:.3px;}
-  .mhead .tag{font-size:9px;font-weight:800;color:#fff;border-radius:4px;padding:1px 7px;letter-spacing:.3px;}
-  .tag.touch{background:var(--touch);} .tag.qual{background:var(--qual);}
-  .tag.cost{background:var(--cost);} .tag.out{background:var(--out);} .tag.sum{background:#5b6070;}
-  .tag.rev{background:#9A4A12;}
+  .mhead .tag{font-size:9px;font-weight:800;color:var(--tag-ink);background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:6px;padding:1px 7px;letter-spacing:.25px;}
+  .tag.touch{color:var(--touch);background:var(--touch-soft);border-color:#DADAF6;} .tag.qual{color:var(--qual);background:var(--qual-soft);border-color:#E0D2F5;}
+  .tag.cost{color:var(--cost);background:var(--cost-soft);border-color:#F1D7AD;} .tag.out{color:var(--out);background:var(--out-soft);border-color:#CFE8DA;} .tag.sum{color:#565d6b;background:var(--card-2);border-color:var(--g6);}
+  .tag.rev{color:#7A4D08;background:#FFF8EA;border-color:#EAD6A5;}
   .mrow{display:flex;gap:10px;font-size:11.5px;margin:5px 0;}
   .mrow .lbl{flex:0 0 64px;font-weight:800;color:var(--g3);font-size:10.5px;padding-top:1px;}
   .mrow .val{flex:1;color:var(--g2);line-height:1.65;}
@@ -149,13 +155,13 @@
   .cderiv .why b{color:#9A4A12;} .cderiv .why u{text-decoration-color:#E7C99B;}
   .cderiv .cseq{margin-top:8px;font-size:10.8px;color:var(--g3);line-height:1.7;}
   .cderiv .cseq b{color:var(--g1);}
-  .mfml{margin-top:8px;background:#F7FAFE;border:1px solid #D6E3F2;border-radius:7px;padding:7px 11px;font-size:11px;color:var(--g2);line-height:1.7;}
-  .mfml .ftag{display:inline-block;font-size:9.5px;font-weight:800;color:#1d5a93;background:#E6EFFA;border:1px solid #C9DCF0;border-radius:4px;padding:1px 6px;margin-right:7px;letter-spacing:.3px;}
+  .mfml{margin-top:8px;background:rgba(255,255,255,.52);border:1px solid rgba(212,216,223,.85);border-radius:8px;padding:7px 11px;font-size:11px;color:var(--g2);line-height:1.7;}
+  .mfml .ftag{display:inline-block;font-size:9.5px;font-weight:800;color:var(--accent);background:var(--accent-soft);border:1px solid #D9D9F5;border-radius:6px;padding:1px 6px;margin-right:7px;letter-spacing:.25px;}
   a.ftag{text-decoration:none;cursor:pointer;transition:background .15s;}
-  a.ftag:hover{background:#cfe0f5;border-color:#9cc0e8;}
+  a.ftag:hover{background:#E2E2FA;border-color:#C7C7EF;}
   a.ftag .ar{font-size:8.5px;opacity:.7;}
-  .mfml code{background:#fff;border:1px solid #DCE6F2;border-radius:3px;padding:0 3px;font-size:10px;color:#1d5a93;}
-  .mfml b{color:#1d5a93;}
+  .mfml code{background:#fff;border:1px solid #DCE1EA;border-radius:3px;padding:0 3px;font-size:10px;color:var(--accent);}
+  .mfml b{color:var(--accent);}
   .mfml .credtb{width:100%;border-collapse:collapse;font-size:10px;margin-top:5px;}
   .mfml .credtb td{padding:2px 7px;border-bottom:1px dashed #E0E8F2;}
   .mfml .credtb td:last-child{text-align:right;font-weight:800;color:#1d5a93;white-space:nowrap;}
@@ -544,7 +550,7 @@
   <table class="fw">
     <thead>
       <tr>
-        <th style="background:#2f3d63;width:120px">来源渠道 ＼ 关卡</th>
+        <th style="width:120px">来源渠道 ＼ 关卡</th>
         <th class="t-touch">第 1 关 · 能否触达</th>
         <th class="t-qual">第 2 关 · 内容质量</th>
       </tr>
