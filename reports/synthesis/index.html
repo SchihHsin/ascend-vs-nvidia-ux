@@ -555,7 +555,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         .seq-guide{margin:.2vh 0 .4vh;padding-left:1.05em;display:flex;flex-direction:column;gap:.5vh}
         .seq-guide li{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5}.seq-guide li b{color:var(--ink)}
       </style>
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
+      <div class="card" data-magic-seq data-magic-target style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
         <iframe data-src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
@@ -623,6 +623,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-row-label.nv-row{justify-content:flex-start;padding-left:18px;background:rgba(0,0,0,.022);border-top-color:transparent}
     .hm-row-label small{font-size:var(--fs-xs);font-weight:500;color:#A1A4AA;display:block}
     .hm-cell{border-radius:8px;min-height:28px;display:flex;align-items:center;justify-content:center;line-height:1.05;border:1px solid #EFF0F1;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:800}
+    .hm-cell,.hmfull .cell{position:relative;cursor:help}
+    .hm-tip{position:absolute;left:50%;bottom:calc(100% + 8px);z-index:80;width:230px;transform:translate(-50%,4px);background:#1f2430;color:#fff;border-radius:9px;padding:8px 10px;box-shadow:0 16px 36px -12px rgba(0,0,0,.5);font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:500;line-height:1.55;white-space:normal;text-align:left;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .14s,transform .14s}
+    .hm-tip b{font-family:'JetBrains Mono';color:#9bd1ff}
+    .hm-cell:hover,.hmfull .cell:hover{outline:2px solid rgba(47,61,99,.24);outline-offset:1px}
+    .hm-cell:hover .hm-tip,.hmfull .cell:hover .hm-tip{opacity:1;visibility:visible;transform:translate(-50%,0)}
     .hm-cell .cn{font-size:var(--fs-xs);font-weight:800;margin-top:2px}
     .hm-cell.pair{padding:0!important;border:0!important;background:none!important;display:flex;flex-direction:column;gap:3px;min-height:42px}
     .hm-half{flex:1;min-height:18px;border:1px solid #EFF0F1;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:.4em;font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-xs);line-height:1}
@@ -950,16 +955,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
         {no:'4',name:'注册集成',sub:'接框架',lt:'O', cann:[d(4),d(5),d(3),d(3),d(3),['.72',72]], cuda:[d(5),d(5),d(3),d(2),d(5),['.84',84]]},
         {no:'5',name:'精度排查',sub:'比对',lt:'L', cann:[d(4),d(5),d(2),d(3),d(3),['.69',69]], cuda:[d(5),d(5),d(5),d(2),d(4),['.84',84]]}
       ];
-      function scell(c,lt){return '<div class="hm-cell" data-letter="'+lt+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</div>';}
+      function desc(score){return score<=40?'低分：该渠道基本失效或需要明显绕行。':score<=60?'中低：能找到线索，但不够稳定或不够细。':score<=80?'中高：基本可用，仍有版本/生态/成本摩擦。':'高分：路径清晰，可直接支撑作答。';}
+      function scell(c,lt,task,stk,col){return '<div class="hm-cell" data-letter="'+lt+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'<span class="hm-tip"><b>'+task+' · '+stk+'</b><br>'+col+'：'+c[0]+'（'+c[1]+' / 100）<br>'+desc(c[1])+'</span></div>';}
       var h='<div class="hm-corner" style="grid-column:span 2"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">检索问题</span></div>';
       cols.forEach(function(c){h+='<div class="hm-header">'+c+'</div>';});
       rows.forEach(function(r){
         var cb=parseFloat(r.cann[5][0])*100, nc=(cb<60?'#E63838':cb<70?'#FD9A00':'#37C597');
         h+='<div class="hm-task" data-letter="'+r.lt+'" style="grid-row:span 2"><span class="hm-no" style="background:'+nc+'" title="综合 '+r.cann[5][0]+'">'+r.no+'</span><div><div>'+r.name+'</div><small>'+r.sub+'</small></div></div>';
         h+='<div class="hm-stk-cell asc" data-letter="'+r.lt+'">CANN</div>';
-        r.cann.forEach(function(c){ h+=scell(c,r.lt); });
+        r.cann.forEach(function(c,i){ h+=scell(c,r.lt,r.name,'CANN',cols[i]); });
         h+='<div class="hm-stk-cell nv" data-letter="'+r.lt+'">CUDA</div>';
-        r.cuda.forEach(function(c){ h+=scell(c,r.lt); });
+        r.cuda.forEach(function(c,i){ h+=scell(c,r.lt,r.name,'CUDA',cols[i]); });
       });
       grid.innerHTML=h;
     })();
@@ -1013,7 +1019,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
       var cols=['可发现','可抓取','正文','版本','第三方量','第三方可信','自带','成本','可锁','可复现','综合'];
       var rows=[{"k":"A","n":"模型转换 / 导出","cs":0.75,"ns":0.94,"c":[["4",80],["4",80],["4",80],["2",40],["4",80],["4",80],["3",60],["1搜·3抓",80],["3",60],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["4",80],["4",80],["4",80],["4",80],["1搜",100],["5",100],["5",100],["高",100]]},{"k":"B","n":"Profiling 定位瓶颈","cs":0.7,"ns":0.93,"c":[["4",80],["4",80],["4",80],["2",40],["3",60],["3",60],["3",60],["1搜·2抓",80],["3",60],["3",60],["中高",80]],"u":[["4",80],["5",100],["5",100],["4",80],["4",80],["4",80],["4",80],["1搜",100],["4",80],["5",100],["高",100]]},{"k":"C","n":"算子库选型","cs":0.77,"ns":1,"c":[["4",80],["4",80],["3",60],["3",60],["3",60],["4",80],["3",60],["1搜",100],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["5",100],["5",100],["4",80],["5",100],["0–1",100],["5",100],["5",100],["高",100]]},{"k":"D","n":"自定义算子开发","cs":0.41,"ns":0.88,"c":[["2",40],["2",40],["受阻",0],["2",40],["3",60],["2",40],["2",40],["2搜✗",20],["2",40],["3",60],["低",40]],"u":[["5",100],["5",100],["5",100],["3",60],["4",80],["4",80],["5",100],["1搜",100],["5",100],["5",100],["高",100]]},{"k":"E","n":"报错码 / 异常排查","cs":0.55,"ns":0.99,"c":[["3",60],["4",80],["2",40],["2",40],["3",60],["3",60],["2",40],["2搜·1抓",80],["3",60],["3",60],["中",60]],"u":[["4",80],["5",100],["5",100],["5",100],["4",80],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"F","n":"分布式训练配置","cs":0.72,"ns":0.88,"c":[["4",80],["4",80],["4",80],["2",40],["3",60],["3",60],["3",60],["1搜·1抓",100],["3",60],["3",60],["中高",80]],"u":[["5",100],["5",100],["5",100],["3",60],["3",60],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"G","n":"CUDA → 昇腾 迁移","cs":0.84,"ns":0.88,"c":[["4",80],["4",80],["4",80],["4",80],["3",60],["4",80],["3",60],["1搜·1抓",100],["4",80],["4",80],["高",100]],"u":[["5",100],["5",100],["5",100],["3",60],["3",60],["4",80],["4",80],["1搜",100],["4",80],["5",100],["高",100]]},{"k":"H","n":"量化","cs":0.68,"ns":0.88,"c":[["3",60],["4",80],["3",60],["2",40],["4",80],["3",60],["3",60],["2搜·1抓",80],["4",80],["5",100],["中高",80]],"u":[["5",100],["5",100],["5",100],["3",60],["3",60],["4",80],["4",80],["1搜",100],["4",80],["5",100],["高",100]]},{"k":"I","n":"版本兼容排查","cs":0.73,"ns":0.85,"c":[["3",60],["4",80],["4",80],["4",80],["3",60],["4",80],["2",40],["2搜·2抓",60],["5",100],["5",100],["中高",80]],"u":[["3",60],["5",100],["5",100],["4",80],["2",40],["4",80],["4",80],["2搜·2抓",60],["5",100],["5",100],["高",100]]},{"k":"J","n":"安装与环境变量","cs":0.8,"ns":0.88,"c":[["5",100],["4",80],["5",100],["2",40],["3",60],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]],"u":[["4",80],["5",100],["5",100],["3",60],["3",60],["4",80],["5",100],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"K","n":"容器 / 镜像搭建","cs":0.86,"ns":0.98,"c":[["5",100],["5",100],["5",100],["4",80],["2",40],["2",40],["3",60],["1搜·4抓✗",20],["4",80],["5",100],["高",100]],"u":[["5",100],["5",100],["4",80],["5",100],["3",60],["4",80],["5",100],["1搜·2抓",80],["4",80],["5",100],["高",100]]},{"k":"L","n":"算子精度排查","cs":0.69,"ns":0.84,"c":[["2",40],["4",80],["5",100],["2",40],["3",60],["4",80],["3",60],["2搜·1抓",80],["3",60],["4",80],["中高",80]],"u":[["2",40],["5",100],["5",100],["5",100],["2",40],["4",80],["4",80],["2搜·2抓✗",20],["4",80],["4",80],["高",100]]},{"k":"M","n":"动态 shape / Tiling","cs":0.63,"ns":0.94,"c":[["2",40],["4",80],["4",80],["4",80],["2",40],["4",80],["2",40],["2搜·2抓",60],["4",80],["4",80],["中",60]],"u":[["5",100],["5",100],["5",100],["4",80],["2",40],["4",80],["5",100],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"N","n":"算子融合","cs":0.75,"ns":0.83,"c":[["5",100],["4",80],["5",100],["2",40],["2",40],["3",60],["2",40],["1搜·1抓",100],["4",80],["4",80],["中高",80]],"u":[["2",40],["5",100],["4",80],["5",100],["2",40],["4",80],["4",80],["2搜·3抓✗",20],["4",80],["4",80],["高",100]]},{"k":"O","n":"注册与框架集成","cs":0.72,"ns":0.84,"c":[["2",40],["4",80],["5",100],["3",60],["3",60],["5",100],["3",60],["2搜·4抓✗",20],["4",80],["5",100],["中高",80]],"u":[["5",100],["5",100],["5",100],["3",60],["2",40],["4",80],["5",100],["1搜·4抓",60],["4",80],["5",100],["高",100]]},{"k":"P","n":"混合精度训练","cs":0.83,"ns":0.98,"c":[["3",60],["4",80],["4",80],["4",80],["3",60],["4",80],["4",80],["2搜·5抓",40],["4",80],["4",80],["高",100]],"u":[["5",100],["5",100],["5",100],["5",100],["3",60],["4",80],["5",100],["1搜·3抓",80],["5",100],["5",100],["高",100]]},{"k":"Q","n":"显存 / OOM 优化","cs":0.86,"ns":0.94,"c":[["5",100],["4",80],["5",100],["4",80],["3",60],["4",80],["3",60],["1搜·4抓",60],["3",60],["4",80],["高",100]],"u":[["5",100],["5",100],["5",100],["5",100],["3",60],["4",80],["5",100],["1搜·2抓✗",40],["4",80],["5",100],["高",100]]},{"k":"R","n":"精度 / 收敛排查","cs":0.75,"ns":0.98,"c":[["3",60],["4",80],["5",100],["3",60],["3",60],["4",80],["3",60],["2搜·3抓",60],["3",60],["4",80],["中高",80]],"u":[["3",60],["5",100],["4",80],["5",100],["3",60],["3",60],["5",100],["2搜·1抓",80],["4",80],["4",80],["高",100]]},{"k":"S","n":"推理服务部署","cs":0.74,"ns":0.94,"c":[["5",100],["4",80],["4",80],["3",60],["2",40],["4",80],["2",40],["1搜·3抓",80],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["4",80],["3",60],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"T","n":"动态 batch / shape 推理","cs":0.72,"ns":0.92,"c":[["3",60],["4",80],["5",100],["2",40],["3",60],["5",100],["3",60],["2搜·2抓",60],["4",80],["4",80],["中高",80]],"u":[["3",60],["5",100],["5",100],["5",100],["2",40],["4",80],["5",100],["2搜·4抓✗",20],["5",100],["5",100],["高",100]]},{"k":"U","n":"访存 / occupancy 优化","cs":0.88,"ns":1,"c":[["4",80],["4",80],["4",80],["5",100],["3",60],["4",80],["3",60],["1搜·3抓",80],["4",80],["4",80],["高",100]],"u":[["5",100],["5",100],["5",100],["5",100],["3",60],["4",80],["5",100],["1搜·1抓",100],["4",80],["4",80],["高",100]]},{"k":"V","n":"计算与传输重叠","cs":0.72,"ns":0.98,"c":[["4",80],["4",80],["4",80],["2",40],["3",60],["4",80],["3",60],["1搜·3抓",80],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["5",100],["3",60],["4",80],["5",100],["1搜·2抓",80],["5",100],["5",100],["高",100]]},{"k":"W","n":"多卡通信优化","cs":0.7,"ns":0.92,"c":[["2",40],["4",80],["3",60],["3",60],["3",60],["4",80],["3",60],["2搜·2抓",60],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["4",80],["4",80],["3",60],["4",80],["4",80],["1搜·1抓",100],["5",100],["5",100],["高",100]]},{"k":"X","n":"内存越界定位","cs":0.74,"ns":0.88,"c":[["5",100],["4",80],["5",100],["2",40],["2",40],["4",80],["2",40],["1搜·2抓",80],["4",80],["5",100],["中高",80]],"u":[["5",100],["5",100],["5",100],["3",60],["3",60],["4",80],["4",80],["1搜·1抓",100],["4",80],["5",100],["高",100]]},{"k":"Y","n":"跨芯片迁移","cs":0.68,"ns":0.92,"c":[["2",40],["4",80],["4",80],["3",60],["3",60],["4",80],["3",60],["2搜·4抓✗",20],["4",80],["4",80],["中高",80]],"u":[["5",100],["5",100],["5",100],["4",80],["3",60],["4",80],["5",100],["1搜·2抓",80],["5",100],["5",100],["高",100]]},{"k":"Z","n":"概念心智模型对照","cs":0.9,"ns":0.92,"c":[["5",100],["4",80],["5",100],["5",100],["3",60],["4",80],["4",80],["1搜·3抓✗",20],["2",40],["2",40],["高",100]],"u":[["5",100],["5",100],["4",80],["5",100],["3",60],["4",80],["5",100],["1搜·4抓✗",20],["2",40],["2",40],["高",100]]}];
       function fmt(v){return v>=0.995?'1.00':v.toFixed(2).replace(/^0/, '');}
-      function td(c,extra){return '<td class="cell '+(extra||'')+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</td>';}
+      function desc(score){return score<=40?'低分：信息链路断点明显。':score<=60?'中低：可用但需要绕行或证据偏弱。':score<=80?'中高：大体可用，仍有摩擦。':'高分：证据充分、路径清楚。';}
+      function td(c,extra,task,stk,col){return '<td class="cell '+(extra||'')+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'<span class="hm-tip"><b>'+task+' · '+stk+'</b><br>'+col+'：'+c[0]+'（'+c[1]+' / 100）<br>'+desc(c[1])+'</span></td>';}
       var scenes=[
         ['选型转换',0,3],['算子开发',3,2],['训练迁移',5,4],['环境容器',9,2],['算子排障',11,4],
         ['训练排障',15,3],['推理部署',18,2],['性能优化',20,3],['调试迁移',23,3]
@@ -1027,8 +1034,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var c=r.c.slice(); c[10]=[fmt(r.cs),Math.round(r.cs*100)];
         var u=r.u.slice(); u[10]=[fmt(r.ns),Math.round(r.ns*100)];
         var sc=sceneBy[ri], sceneCell=sc&&sc.first?'<td class="scene" rowspan="'+sc.span+'">'+sc.name+'</td>':'';
-        h+='<tr>'+sceneCell+'<td class="task" rowspan="2"><b>'+r.k+'</b>'+r.n+'<small>CANN '+fmt(r.cs)+' / CUDA '+fmt(r.ns)+'</small></td><td class="stk nv">CUDA</td>'+u.map(function(x,i){return td(x,i===10?'sum':'');}).join('')+'</tr>';
-        h+='<tr><td class="stk asc">CANN</td>'+c.map(function(x,i){return td(x,i===10?'sum':'');}).join('')+'</tr>';
+        h+='<tr>'+sceneCell+'<td class="task" rowspan="2"><b>'+r.k+'</b>'+r.n+'<small>CANN '+fmt(r.cs)+' / CUDA '+fmt(r.ns)+'</small></td><td class="stk nv">CUDA</td>'+u.map(function(x,i){return td(x,i===10?'sum':'',r.n,'CUDA',cols[i]);}).join('')+'</tr>';
+        h+='<tr><td class="stk asc">CANN</td>'+c.map(function(x,i){return td(x,i===10?'sum':'',r.n,'CANN',cols[i]);}).join('')+'</tr>';
       });
       table.innerHTML=h+'</tbody>';
     })();
@@ -1286,7 +1293,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验评估方法论 · 理论依据 + 评估边界：每维挂靠权威，先划清测什么 / 不测什么</span></div>
+        <div class="brand"><span class="ttl">基础体验评估方法论 · 理论依据 + 评估边界：每维有权威依据，先划清测什么 / 不测什么</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 1/4 · 理论与边界」</div>
       </div>
       <div class="head-r">29/ 摩擦指数 · 理论与边界</div>
@@ -1322,7 +1329,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验评估方法论 · 算例与效度局限：引擎实时计算 + 诚实陈述边界</span></div>
+        <div class="brand"><span class="ttl">基础体验评估方法论 · 算例与效度局限：公式现算 + 诚实陈述边界</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 4/4 · 算例与局限」</div>
       </div>
       <div class="head-r">32/ 摩擦指数 · 算例与局限</div>
@@ -1393,9 +1400,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .cc.hu .cc-h b{background:linear-gradient(transparent 60%,rgba(91,91,214,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
     .cc.ai .cc-h b{background:linear-gradient(transparent 60%,rgba(31,159,184,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
     .cc.both .cc-h b{background:linear-gradient(transparent 60%,rgba(47,111,237,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
-    .cc-d b{color:var(--ink);font-weight:800}
-    .cc-focus{font-size:var(--fs-sm);font-weight:900;line-height:1.35;color:#fff;background:var(--ink);border-radius:9px;padding:.85vh .75vw;align-self:flex-start;box-shadow:0 10px 24px -18px rgba(13,18,30,.55)}
-    .cc-focus b{color:#fff;background:linear-gradient(transparent 60%,rgba(255,255,255,.28) 0)}
+    .cc-d b{color:var(--ink);font-weight:900;border-radius:4px;padding:0 .08em;background:linear-gradient(transparent 55%,rgba(91,91,214,.18) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
+    .cc.ai .cc-d b{background:linear-gradient(transparent 55%,rgba(31,159,184,.18) 0)}
+    .cc.both .cc-d b{background:linear-gradient(transparent 55%,rgba(47,111,237,.18) 0)}
     .chain{display:grid;grid-template-columns:62px 1.35fr 1fr 1.15fr;gap:1.5vh .8vw;align-items:stretch}
     .chain .ch-h{font-size:var(--fs-sm);font-weight:700;color:var(--ink-3);letter-spacing:.04em;display:flex;align-items:flex-end;padding:0 .2vw .2vh}
     .chain .ch-b{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px}
@@ -1755,9 +1762,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area" style="align-items:stretch">
       <div class="ccg">
         <div class="cc hu">
-          <span class="cc-tag">体验设计</span>
+          <span class="cc-tag">用户体验</span>
           <div class="cc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9l8-5 8 5v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 18v-5h6v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="cc-focus">优先压缩 <b>首次跑通路径</b></div>
           <div class="cc-h">把入口、下载、学习、文档体验做成一条短路径</div>
           <div class="cc-d">负责官网与落地、下载与账号、学习与上手、文档体验。核心指标：<b>少选、少登录、少跳转</b>，让开发者尽早看到结果。</div>
           <div class="cc-ev"><span>Toolkit 下载 −66</span><span>L2 上手反超</span><span>搜索 / FAQ 可聚合</span></div>
@@ -1765,7 +1771,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cc ai">
           <span class="cc-tag">资料内容</span>
           <div class="cc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h9l3 3v13H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 11h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 15h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="cc-focus">优先建立 <b>可信知识口径</b></div>
           <div class="cc-h">把正文、版本、报错、社区内容收敛成可信知识体系</div>
           <div class="cc-d">负责文档内容与版本、社区与内容。核心指标：<b>当前版明确、错误码有解、案例可检索</b>，让开发者和 AI 读到同一套答案。</div>
           <div class="cc-ev"><span>版本清晰 12/26 偏低</span><span>EZ9999 说明泛化</span><span>第三方少而同质</span></div>
@@ -1773,7 +1778,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cc both">
           <span class="cc-tag">开发</span>
           <div class="cc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8 4 12l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="cc-focus">优先补齐 <b>机器可读与可运行</b></div>
           <div class="cc-h">把站点与工具链改成可抓取、可运行、可集成的基础设施</div>
           <div class="cc-d">负责机器可读出口、工具与工程。核心指标：<b>Agent 能抓、代码能跑、工具能接住深水区问题</b>，降低凭记忆补全的风险。</div>
           <div class="cc-ev"><span>SPA 正文 0 字</span><span>llms.txt 缺失</span><span>D/K/O 成本尖刺</span></div>
@@ -1782,22 +1786,22 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 行动 · 板块：官网与落地（体验设计） -->
+  <!-- 行动 · 板块：官网与落地（用户体验） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip exp">体验设计</span><span class="ttl">官网与落地——让开发者不懂产品名也能走到正确起点</span></div>
+        <div class="brand"><span class="role-chip exp">用户体验</span><span class="ttl">官网与落地——让开发者不懂产品名也能走到正确起点</span></div>
       </div>
       <div class="head-r board-tabs exp"><div class="bk-strip" data-group="exp"><span class="bk on">官网与落地</span><span class="bk">下载与账号</span><span class="bk">学习与上手</span><span class="bk">文档体验</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">体验设计</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">用户体验</span>
       <div class="rgoal" data-board="1.1 · 官网与落地"><span class="gl">目标</span><span class="rgoal-t">把首屏、导航、产品矩阵从「展示有什么」改成「<b>我该从哪里开始</b>」；让算子开发者无需先认识 CANN / Ascend C / Atlas 之间的关系，也能被分流到正确路径。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
 <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">官网首屏给一个<b>开发者起步 / 场景直达</b>主入口</div><div class="rmi-why">昇腾官网单站整合是优势，但品牌信息会盖住开发动作；入口要在首屏一眼可见。<span class="src2">触点 1.1</span></div></div></div>
-<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">开发者中心三张场景卡只保留一个<b>最强 CTA</b></div><div class="rmi-why">“算子开发 · 5 分钟跑通”比多入口平铺更能降低首次点击成本。<span class="src2">触点 1.1b</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">开发者中心三张场景卡只保留一个<b>最强行动入口</b></div><div class="rmi-why">“算子开发 · 5 分钟跑通”比多入口平铺更能降低首次点击成本。<span class="src2">触点 1.1b</span></div></div></div>
         <div class="ahead p1">P1</div>
-<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">顶栏补<b>按场景 / 按角色</b>横切入口</div><div class="rmi-why">新手通常知道“我要做算子 / 推理 / 训练”，不一定知道应点哪个产品名。<span class="src2">触点 1.2</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">补充<b>按场景 / 按角色</b>的入口</div><div class="rmi-why">新手通常知道“我要做算子 / 推理 / 训练”，不一定知道应点哪个产品名；入口可以放在导航、首屏或场景页内，不固定为顶栏。<span class="src2">触点 1.2</span></div></div></div>
 <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">产品矩阵前置<b>选型分诊</b>，几步问答推荐路径</div><div class="rmi-why">把平铺产品罗列改成“你是谁、要做什么、该从哪里开始”的引导。<span class="src2">触点 2.1</span></div></div></div>
 <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">方案市场补<b>按开发场景的自助起步路径</b></div><div class="rmi-why">场景页不仅展示方案，还要指向对应模型、算子、教程和可跑样例。<span class="src2">触点 2.4</span></div></div></div>
         <div class="ahead p2">P2</div>
@@ -1808,15 +1812,15 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div></div>
   </section>
 
-  <!-- 行动 · 板块：下载与账号（体验设计） -->
+  <!-- 行动 · 板块：下载与账号（用户体验） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip exp">体验设计</span><span class="ttl">下载与账号——把上手前的下载 / 登录摩擦砍到最小</span></div>
+        <div class="brand"><span class="role-chip exp">用户体验</span><span class="ttl">下载与账号——把上手前的下载 / 登录摩擦砍到最小</span></div>
       </div>
       <div class="head-r board-tabs exp"><div class="bk-strip" data-group="exp"><span class="bk">官网与落地</span><span class="bk on">下载与账号</span><span class="bk">学习与上手</span><span class="bk">文档体验</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">体验设计</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">用户体验</span>
       <div class="rgoal" data-board="1.2 · 下载与账号"><span class="gl">目标</span><span class="rgoal-t">让试用开发者<b>零阻力</b>拿到能跑的包：把 7 步下载链路砍到 ~2 步，补上 <b>Toolkit 下载 −66</b> 这个最大缺口；安装信息也要让 AI 可读、可照着装。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
@@ -1835,15 +1839,15 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div></div>
   </section>
 
-  <!-- 行动 · 板块：学习与上手（体验设计） -->
+  <!-- 行动 · 板块：学习与上手（用户体验） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip exp">体验设计</span><span class="ttl">学习与上手——把“内容完整”变成“第一次就跑通”</span></div>
+        <div class="brand"><span class="role-chip exp">用户体验</span><span class="ttl">学习与上手——把“内容完整”变成“第一次就跑通”</span></div>
       </div>
       <div class="head-r board-tabs exp"><div class="bk-strip" data-group="exp"><span class="bk">官网与落地</span><span class="bk">下载与账号</span><span class="bk on">学习与上手</span><span class="bk">文档体验</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">体验设计</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">用户体验</span>
       <div class="rgoal" data-board="1.3 · 学习与上手"><span class="gl">目标</span><span class="rgoal-t">把昇腾已经有优势的在线实验、ModelZoo、算子 hub 放大成统一心智：从任一入口进入，都能在 <b>5 分钟内跑出第一个结果</b>。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
@@ -1860,24 +1864,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div></div>
   </section>
 
-  <!-- 行动 · 板块：文档体验（体验设计） -->
+  <!-- 行动 · 板块：文档体验（用户体验） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip exp">体验设计</span><span class="ttl">文档体验——让开发者更快找到、读懂并带着问题继续走</span></div>
+        <div class="brand"><span class="role-chip exp">用户体验</span><span class="ttl">文档体验——让开发者更快找到、读懂并带着问题继续走</span></div>
       </div>
       <div class="head-r board-tabs exp"><div class="bk-strip" data-group="exp"><span class="bk">官网与落地</span><span class="bk">下载与账号</span><span class="bk">学习与上手</span><span class="bk on">文档体验</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">体验设计</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">用户体验</span>
       <div class="rgoal" data-board="1.4 · 文档体验"><span class="gl">目标</span><span class="rgoal-t">把文档中心从“资料目录”改成开发者的 <b>阅读工作台</b>：能按场景进入、带报错检索、在卡住的位置看到局部 FAQ 和下一步求助入口。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
-<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档中心补<b>按场景 / 角色 / 主题</b>筛选</div><div class="rmi-why">体验设计负责的是找文档的路径，而不是正文内容；新手要能从“我要做什么”进入，而不是先读产品树。<span class="src2">触点 3.1</span></div></div></div>
+<div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档中心补<b>按场景 / 角色 / 主题</b>筛选</div><div class="rmi-why">用户体验负责的是找文档的路径，而不是正文内容；新手要能从“我要做什么”进入，而不是先读产品树。<span class="src2">触点 3.1</span></div></div></div>
 <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档搜索支持<b>粘贴报错 / 日志</b>并按资源类型筛选</div><div class="rmi-why">报错检索是最高频求助入口；体验上要先接住“我卡住了”，再把人分流到文档、FAQ、论坛或工单。<span class="src2">触点 1.3 / 6.3</span></div></div></div>
         <div class="ahead p1">P1</div>
 <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">搜索联想沉淀<b>热门报错、API、版本组合</b></div><div class="rmi-why">把反复出现的问题前置，降低重复提问和人工支持压力。<span class="src2">触点 1.3 / 6.3</span></div></div></div>
 <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档页提供<b>局部 FAQ + 下一步求助</b></div><div class="rmi-why">FAQ 不只放在集中页面，而要出现在安装、API、工具、报错这些开发者卡住的位置。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
-<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档阅读页强化<b>目录、锚点、复制链接、版本切换</b></div><div class="rmi-why">体验设计关注的是阅读与协作成本：能定位、能分享、能回到正确版本，减少在长文档里迷路。<span class="src2">触点 3.4</span></div></div></div>
+<div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档阅读页强化<b>目录、锚点、复制链接、版本切换</b></div><div class="rmi-why">用户体验关注的是阅读与协作成本：能定位、能分享、能回到正确版本，减少在长文档里迷路。<span class="src2">触点 3.4</span></div></div></div>
         <div class="ahead p2">P2</div>
 <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">文档助手入口只做<b>分诊与跳转</b>，回答带来源</div><div class="rmi-why">体验上不要让助手变成黑箱总结器；它应把人带回对应版本、对应段落和可执行下一步。<span class="src2">设计点 ①②</span></div></div></div>
       </div>
@@ -2118,10 +2122,13 @@ function seqUrlForFull(src){
 }
 function triggerSeqMagic(fromIdx,toIdx){
   const from=slides[fromIdx],to=slides[toIdx];
-  if(!from||!to||!from.matches('[data-seq-full]'))return false;
-  const srcBox=from.querySelector('[data-magic-seq]'),dstBox=to.querySelector('[data-magic-target]');
+  if(!from||!to)return false;
+  const srcBox=from.querySelector('[data-magic-seq][data-magic-target]')||from.querySelector('[data-magic-seq]');
+  const dstBox=to.querySelector('[data-magic-target]')||to.querySelector('[data-magic-seq]');
   if(!srcBox||!dstBox)return false;
   const a=srcBox.getBoundingClientRect(),b=dstBox.getBoundingClientRect();
+  window.__lastSeqMagic={from:fromIdx,to:toIdx,start:{left:a.left,top:a.top,width:a.width,height:a.height},end:{left:b.left,top:b.top,width:b.width,height:b.height},at:Date.now()};
+  document.body.dataset.lastSeqMagic=fromIdx+'->'+toIdx;
   const ghost=document.createElement('div');
   ghost.className='magic-seq-ghost';
   ghost.style.left=a.left+'px'; ghost.style.top=a.top+'px'; ghost.style.width=a.width+'px'; ghost.style.height=a.height+'px'; ghost.style.borderRadius='18px'; ghost.style.opacity='1';
@@ -2172,6 +2179,11 @@ fsBtn.onclick=toggleFullscreen;
 function reanchor(){}
 document.addEventListener('fullscreenchange',()=>{syncFsIcon();setTimeout(reanchor,90);});
 syncFsIcon();
+
+function focusOverviewCurrent(){
+  if(!document.body.classList.contains('overview'))return;
+  const s=slides[idx]; if(s)s.scrollIntoView({block:'center',inline:'nearest',behavior:'auto'});
+}
 
 function openSeqModal(src){
   let modal=document.getElementById('seqModal');
@@ -2238,7 +2250,7 @@ function installBoardTabs(){
 
 /* 总览 Overview：每页包进 .slide-inner 缩放成缩略图，排网格（按当前视窗比例）*/
 function applyOverviewScale(){if(!document.body.classList.contains('overview'))return;const cellW=slides[0].getBoundingClientRect().width,scale=cellW/window.innerWidth;slides.forEach(s=>{s.style.height=(window.innerHeight*scale)+'px';const inner=s.querySelector(':scope>.slide-inner');if(inner)inner.style.transform='scale('+scale+')';});}
-function enterOverview(){slides.forEach(s=>{if(!s.querySelector(':scope>.slide-inner')){const w=document.createElement('div');w.className='slide-inner';while(s.firstChild)w.appendChild(s.firstChild);s.appendChild(w);}});document.body.classList.add('overview');requestAnimationFrame(applyOverviewScale);}
+function enterOverview(){slides.forEach(s=>{if(!s.querySelector(':scope>.slide-inner')){const w=document.createElement('div');w.className='slide-inner';while(s.firstChild)w.appendChild(s.firstChild);s.appendChild(w);}});document.body.classList.add('overview');requestAnimationFrame(()=>{applyOverviewScale();requestAnimationFrame(focusOverviewCurrent);});}
 function exitOverview(){slides.forEach(s=>{const w=s.querySelector(':scope>.slide-inner');if(w){while(w.firstChild)s.insertBefore(w.firstChild,w);w.remove();}s.style.height='';});document.body.classList.remove('overview');setTimeout(()=>updateCurrent(idx),20);}
 function toggleOverview(){document.body.classList.contains('overview')?exitOverview():enterOverview();}
 ovBtn.onclick=toggleOverview;

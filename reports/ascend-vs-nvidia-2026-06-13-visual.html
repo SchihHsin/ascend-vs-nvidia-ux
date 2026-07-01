@@ -278,7 +278,7 @@ a{color:inherit;text-decoration:none}
 .synth-text .lead{font-size:14.5px;color:var(--ink);font-weight:650;margin:0 0 14px;line-height:1.72}
 .synth-text p{font-size:13.5px;color:var(--ink2);margin:0 0 12px;line-height:1.74}
 .synth-text p b{color:var(--ink);font-weight:700}
-.synth-demo{background:var(--g1);border:1px solid var(--g3);border-radius:16px;padding:20px;position:relative}
+.synth-demo{background:rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.72);border-radius:16px;padding:20px;position:relative;box-shadow:0 10px 30px -16px rgba(30,40,70,.2),inset 0 1px 0 rgba(255,255,255,.85)}
 .demo-cap{font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--g6);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .demo-cap::before{content:'DEMO';font-family:var(--mono);background:var(--ink);color:#fff;padding:2px 7px;border-radius:5px;font-size:9px;letter-spacing:.5px}
 /* hero demo */
@@ -389,6 +389,8 @@ a{color:inherit;text-decoration:none}
 .synth-gh{flex:1 1 100%;font-weight:800;font-size:12.5px;color:var(--g7);margin:10px 0 0;padding-left:2px;letter-spacing:.3px}
 .synth-grouphd{text-align:center;padding:6px 0 0;box-shadow:none;background:none;border:none}
 .synth-grouphd h2{font-size:21px;color:var(--g8);display:inline-block;border-bottom:3px solid var(--coral);padding-bottom:7px;margin:0}
+.synth-conclusion{font-size:14.5px;color:#fff;background:linear-gradient(140deg,#22262f,#14171c);border-radius:14px;padding:14px 17px;box-shadow:0 16px 38px -20px rgba(13,18,30,.56);font-weight:750;line-height:1.48}
+.synth-conclusion b{color:#fff!important;background:linear-gradient(transparent 58%,rgba(124,92,250,.52) 0)!important}
 /* 用户视角动线条 */
 .pov{margin:2px 0 14px;padding:11px 14px;border-radius:11px;background:#f6f4fe;border:1px solid #e6e1fb}
 .pov.train{background:#eef8fb;border-color:#d3ecf2}
@@ -458,7 +460,7 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="metrics">
       <div class="metric blue"><div class="k">触点均分（昇腾 / NVIDIA）</div><div class="v" id="coverAvg">—<span style="font-size:18px;color:var(--g5)"> / </span>—</div><div class="vsub" id="coverGapSub">摩擦指数 计算结果 · 24 主触点等权均分</div></div>
-      <div class="metric bad"><div class="k">最深摩擦点 · SDK下载(4.3)</div><div class="v">21<span style="font-size:18px;color:var(--g5)"> / </span>87</div><div class="vsub">登录+协议+7步 → 摩擦指数 算出的全局谷底</div></div>
+      <div class="metric bad"><div class="k">最深摩擦点 · Toolkit 下载(4.3)</div><div class="v">21<span style="font-size:18px;color:var(--g5)"> / </span>87</div><div class="vsub">登录+协议+7步 → 摩擦指数 算出的全局谷底</div></div>
       <div class="metric good"><div class="k">昇腾占优触点</div><div class="v">5<span style="font-size:18px;color:var(--g5)"> 个</span></div><div class="vsub">首页 / 规格 / 快速入门 / 模型库 / FAQ</div></div>
       <div class="metric"><div class="k">真实截图取证</div><div class="v">25<span style="font-size:18px;color:var(--g5)">张</span></div><div class="vsub">昇腾9 · NVIDIA16 · 全触点真图、0 mockup</div></div>
     </div>
@@ -510,7 +512,7 @@ a{color:inherit;text-decoration:none}
   <section class="floor" id="method">
     <div class="floor-hd"><span class="fno">摩擦指数</span><h2>评估方法论 · 开发者旅程摩擦指数</h2></div>
     <p class="floor-sub">本报告的所有分数,均由<b>可观测、可计数的指标</b>经公开公式<b>计算</b>得出,不含逐项主观打分。框架名为 <b>摩擦指数(Developer Journey Friction Index)</b>——测量开发者完成真实任务时遇到的、可被复现测量的摩擦。给定测量值与公式,任何人重算得同一结果。</p>
-    <h3 style="margin:6px 0 12px;font-size:16px;color:var(--ink)">一、理论依据(每一层均挂靠权威来源)</h3>
+    <h3 style="margin:6px 0 12px;font-size:16px;color:var(--ink)">一、理论依据(每一层均依据权威来源)</h3>
     <div class="ia-finds">
       <div class="ia-find"><div class="ia-find-h">ISO 9241-11:2018</div>可用性的国际标准定义——<b>有效性 / 效率 / 满意度</b>三要素,构成评估维度的总框架。</div>
       <div class="ia-find"><div class="ia-find-h">Nielsen / NN/g</div>启发式评估、<b>交互成本(Interaction Cost)</b>与<b>竞品可用性基准测试法</b>——竞品同维度对比的标准做法。</div>
@@ -523,7 +525,7 @@ a{color:inherit;text-decoration:none}
       <b>二、评估对象与边界(精确界定,不越界)</b><br>
       <b>测量:</b>开发者门户中<b>可观测、可计数的旅程摩擦</b>——点击成本、准入门槛、决策负荷、内容可执行性、可发现性。<br>
       <b>不纳入计算:</b>视觉美感、文案质量、主观"清晰度"感受、品牌好感——这些无法在不引入判断的前提下量化,故<b>不计入分数</b>,仅作不计分的"定性观察"另列。<br>
-      <b>适用范围:</b>PC 端 Web 开发者门户;移动 SDK / IDE 插件 / 端侧部署需各自扩展指标层。
+      <b>适用范围:</b>PC 端 Web 开发者门户;移动端 Toolkit / IDE 插件 / 端侧部署需各自扩展指标层。
     </div>
     <h3 style="margin:22px 0 12px;font-size:16px;color:var(--ink)" data-pgstart="2">三、指标体系(5 维度 · 全部可观测)</h3>
     <div class="ia-finds">
@@ -548,13 +550,13 @@ a{color:inherit;text-decoration:none}
     </div>
     <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)" data-pgstart="3">六、锚点总表(全部公开 · 对两边一视同仁)</h3>
     <div id="djfiRules"></div>
-    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)" data-pgstart="4">七、算例(触点 4.3 · SDK 下载)—— 由引擎实时计算</h3>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)" data-pgstart="4">七、算例(触点 4.3 · Toolkit 下载)—— 由公式现算</h3>
     <div id="djfiExample"></div>
     <p class="floor-sub" style="margin-top:8px">这张表不是手写、而是页面加载时由公式现算;每个触点卡底部都能展开同样的「摩擦指数 实测明细」,数字与触点分严格一致——给定测量表,任何人重算得同一结果。<b>样板已铺 8 个触点(4.3 / 4.2 / 4.1 / 3.2 / 1.1b / T2 / T4 / T5),其余触点暂仍为同维度手工分,正逐步补齐实测。</b></p>
     <div class="method" style="margin-top:14px">
       <b>七、可复现性、效度与局限(诚实陈述)</b><br>
       <b>可复现性(强):</b>测量协议 + 公开锚点 + 公开公式 ⇒ 给定输入,输出唯一。<br>
-      <b>构念效度(中):</b>指标均挂靠权威构念,但"可观测摩擦"是体验的<b>代理</b>,非体验全部(见边界)。<br>
+      <b>构念效度(中):</b>指标均依据权威构念,但"可观测摩擦"是体验的<b>代理</b>,非体验全部(见边界)。<br>
       <b>信度(待补):</b>当前为单评估者;提升路径为多评估者独立测量并报告一致性。<br>
       <b>局限:</b>① 仅覆盖可观测摩擦,主观维度不计入分;② 锚点与权重为框架设定(公开且对称),已用敏感性分析控制影响;③ 个别指标受站点限制缺测时如实标注、排除计算;④ 结论对应评估时点的站点版本;⑤ 非经用户实测验证之标准量表。
     </div>
@@ -966,7 +968,7 @@ let curScen='op';
 const STEPS=[
  {k:1,id:'L1',name:'落地·找入口·选型',sub:'第一次来，找到“从哪开始开发”'},
  {k:2,id:'L2',name:'上手引导',        sub:'看清“要怎么做”（算子 hub / CUDA 页）'},
- {k:3,id:'L3',name:'配环境·拿 SDK',   sub:'装 CANN / CUDA Toolkit'},
+ {k:3,id:'L3',name:'配环境·拿 Toolkit',   sub:'装 CANN / CUDA Toolkit'},
  {k:4,id:'L4',name:'动手写·查文档',   sub:'写第一个算子，边写边查参考'},
  {k:5,id:'L5',name:'编译跑通',        sub:'用工具链编译 → 第一次成功'},
  {k:6,id:'L6',name:'调试·求助',       sub:'出错怎么查、卡住去哪问'},
@@ -1017,7 +1019,7 @@ ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句
  c:[['同维度算下来，这一步 NVIDIA 占优','摩擦指数 实测 80 / 92：NVIDIA 一句“Skip the setup. Start building.”行动指令单一、门户本身就是独立强入口，交互成本最低；昇腾开发者中心首屏是卡片菜单（多一道“先点哪张”的决策）、且门户埋在二级，认知负荷与可达性都吃亏。'],
     ['昇腾不弱在“内容”，弱在“摩擦”','场景卡 + 开发工具 + 学习成长一应俱全，论内容并不输；差距全在“多一次选择 + 入口埋深”这类可计数的摩擦上——这正是 摩擦指数 只测摩擦、不奖励信息量的体现。'],
     ['昇腾的隐性成本：门户埋在二级','开发者中心不在官网首页一眼可达，要从“开发者与合作伙伴”二级进；NVIDIA 虽分两站，但开发者门户是独立强入口。']],
- rec:'把开发者中心<b>提到官网首页一眼可达（顶栏直达 + 首屏入口）</b>，并在三张场景卡上给一个最强单一 CTA（如“算子开发 · 5 分钟跑通”），把已经不弱的内容补上“先点这里”的指令性。'},
+ rec:'把开发者中心<b>提到官网首页一眼可达（顶栏直达 + 首屏入口）</b>，并在三张场景卡上给一个最强单一行动入口（如“算子开发 · 5 分钟跑通”），把已经不弱的内容补上“先点这里”的指令性。'},
 {id:'1.2',s:1,name:'顶部导航 / 信息架构',a:74,nv:80,bar:true,
  aimg:{op:'08-ascend-dev-nav-op.png',train:'08-ascend-dev-nav-train.png'},atag:'real',
  nimg:{op:'01-nvidia-nav-op.png',train:'01-nvidia-nav-train.png'},
@@ -1064,7 +1066,7 @@ ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句
  ndesc:'NVIDIA CUDA Toolkit 产品页以“a development environment for GPU-accelerated apps”定位，主按钮是醒目的 Download Now，下面列组件、链接到 docs / samples / forums / DLI，结构直奔“下载并开始”。',
  c:[['两边产品页都很扎实，但气质不同','昇腾页强“社区与共建”（开发者日历、SIG、开源专区），NVIDIA 页强“直达下载”（Download Now 居首）。前者像生态主页，后者像上手入口。'],
     ['昇腾的“快速体验”是亮点','产品页上直接给“快速体验”按钮，降低了试用门槛，方向正确——只是它的视觉权重还不够，容易被周围信息淹没。']],
- rec:'把 CANN 页的<b>“快速体验”提为页面主 CTA</b>（视觉权重对齐 NVIDIA 的 Download Now），并让它直通在线实验/在线开发，让“看完介绍立刻能试”成为详情页的默认动作。'},
+ rec:'把 CANN 页的<b>“快速体验”提为页面主行动入口</b>（视觉权重对齐 NVIDIA 的 Download Now），并让它直通在线实验/在线开发，让“看完介绍立刻能试”成为详情页的默认动作。'},
 {id:'2.3',s:2,name:'规格参数',a:74,nv:76,win:true,bar:true,
  aimg:'07-ascend-specs-2.3.png',atag:'real',nimg:'06-nvidia-specs-2.3.png',
  adesc:'这是昇腾文档中心的“硬件产品”区：Atlas 系列按 开发者套件 / 加速模块 / 加速卡 / 智能小站 / 服务器 / 集群 分门别类列全（200I、300I、800、900 等型号一目了然），信息齐全。',
@@ -1134,7 +1136,7 @@ ndesc:'NVIDIA 开发者门户 developer.nvidia.com：深色背景，首屏一句
  c:[['账号体系是一对镜像门槛','昇腾绑华为账号、给微信/QQ，对国内一键直达，但海外开发者没有微信/QQ、还要新注册华为账号，门槛陡升；NVIDIA 正好相反，对全球顺、对国内缺本地化登录。'],
     ['更关键的是“登录的时机”','昇腾把登录卡在下载之前；NVIDIA 把登录完全后置。前者恰恰在最该“先试试”的环节设了闸。']],
  rec:'把登录从下载的前置条件改为<b>后置项——游客可先下社区版、跑通后再提示登录解锁更多</b>；若要出海，再补邮箱直注册与 Google/GitHub 等国际第三方登录。'},
-{id:'4.3',s:4,name:'SDK / Toolkit 下载流程',a:64,nv:84,bar:true,
+{id:'4.3',s:4,name:'Toolkit 下载流程',a:64,nv:84,bar:true,
  aimg:'02-ascend-download-4.3.png',atag:'real',nimg:'02-nvidia-cuda-download-4.3.png',ntag:'real',
  adesc:'昇腾社区版下载页：要先在“社区版 / 商用版”里选对分支，再依次选 CPU 架构（AArch64 / X86_64）、CANN 版本、具体软件包，并勾选同意《CANN 软件用户许可协议》，关键下载动作还要求登录华为账号。落地时先弹一个“资源下载中心公告”把页面挡住。',
 ndesc:'CUDA 下载页（关掉订阅弹窗后）：一行行绿色按钮，依次点 操作系统（图为第一步 Linux/Windows）→ 架构 → 发行版 → 版本 → 安装类型（Network / Full），每点一步只展示下一步的合法选项；选完页面就内联给出一条可直接复制的安装命令，全程不要求登录。',
@@ -1336,8 +1338,8 @@ const JUDGES=[
   lead:'此处必须同维度：拿昇腾<b>开发者中心 /developer</b> 对位 developer.nvidia.com（而非用品牌页 hiascend.com）。换对页面后，之前“品牌叙事 vs 动作导向”的判断不成立——两边首屏都在回答“我能干什么”。',
   body:[
    'NVIDIA 是<b>一句话钩子</b>：“Skip the setup. Start building.” + 紧跟教程流，视线落点单一、行动指令最强。',
-   '昇腾开发者中心是<b>卡片菜单</b>：首屏就铺 训练/推理/算子开发三张场景卡 + 开发工具 + 学习成长（在线实验/认证），信息更全、同样即答“我能干什么”，只是缺一个“先点这里”的最强单一 CTA。',
-   '昇腾真正的隐性成本不在文案，而在<b>这张好落地页埋在二级</b>：/developer 不在品牌首页一眼可达，直接访问 hiascend.com 的人第一眼仍是品牌页。<b>补法：把 /developer 提到一眼可达 + 给场景卡一个最强 CTA。</b>'],
+   '昇腾开发者中心是<b>卡片菜单</b>：首屏就铺 训练/推理/算子开发三张场景卡 + 开发工具 + 学习成长（在线实验/认证），信息更全、同样即答“我能干什么”，只是缺一个“先点这里”的最强单一行动入口。',
+   '昇腾真正的隐性成本不在文案，而在<b>这张好落地页埋在二级</b>：/developer 不在品牌首页一眼可达，直接访问 hiascend.com 的人第一眼仍是品牌页。<b>补法：把 /developer 提到一眼可达 + 给场景卡一个最强行动入口。</b>'],
   demo:'hero'},
  {id:'j2',g:'common',pin:'a',plab:'步骤 3 · 最高杠杆',color:'#C7000B',h:'零登录直取 vs 账号闸门',cap:'下载链路步数对比',
   one:'从“想下载”到“真正跑起来”，中间隔了几道闸门？',
@@ -1401,18 +1403,18 @@ const ACTIONS=[
 
 // 改进措施 → 主责部门（6 部门口径；协同部门此处不展开）
 const DEPT_META=[
- ['体验设计','#7c5cf0','交互 · 信息架构 · 官网视觉'],
+ ['用户体验','#7c5cf0','交互 · 信息架构 · 官网视觉'],
  ['资料','#1f9fb8','文档 · API · FAQ · 内容本地化'],
  ['官网平台','#2f6fed','前端 · 账号 · 下载 · URL · 搜索'],
- ['产品','#c8881a','选型 · CTA · 在线体验规划'],
+ ['产品','#c8881a','选型 · 行动入口 · 在线体验规划'],
  ['研发·工具链','#5b6bb5','MindStudio · 在线实验 · ModelZoo'],
  ['社区运营','#cf5a86','论坛 · 博客 SEO · 认证 · 求助'],
 ];
 const DEPT_OF={
- '1.1':'体验设计','1.1b':'体验设计','1.2':'体验设计','1.3':'官网平台','1.4':'资料',
+ '1.1':'用户体验','1.1b':'用户体验','1.2':'用户体验','1.3':'官网平台','1.4':'资料',
  '2.1':'产品','2.2':'产品','2.3':'产品','2.4':'产品',
  '3.1':'资料','3.2':'产品','3.3':'社区运营','3.4':'资料',
- '4.1':'体验设计','4.2':'官网平台','4.3':'官网平台','4.4':'官网平台',
+ '4.1':'用户体验','4.2':'官网平台','4.3':'官网平台','4.4':'官网平台',
  '5.1':'资料','5.2':'研发·工具链','5.3':'研发·工具链','5.4':'研发·工具链',
  '6.1':'社区运营','6.2':'社区运营','6.3':'资料','6.4':'社区运营',
  'T2':'产品','T4':'研发·工具链','T5':'研发·工具链',
@@ -1538,15 +1540,15 @@ const JOURNEY_OP=[
   action:'搜索·品牌页落地 → 找到「算子开发」入口 → 看产品/规格/方案选型',
   aY:42,nY:36,emoji:'😐',eL:'入口要绕',eC:'#D97706',
   pains:['开发者中心埋在二级、找「算子开发」要绕；好在首屏有「算子开发」场景卡，比想象直接'],
-  opps:[['首屏/导航补「按场景·按角色」横切入口，让“我要做算子”一步直达','体验设计']]},
+  opps:[['首屏/导航补「按场景·按角色」横切入口，让“我要做算子”一步直达','用户体验']]},
  {n:'02',name:'上手引导',acc:'#16A34A',meta:'昇 78 / NV 78 · 微反超',
   touch:['算子开发 hub','产品详情（CANN）','快速入门（学习路径）','在线实验'],
   action:'进算子开发 hub 看 5 环节 → 选 Ascend C → 看学习路径 → 在线实验试跑',
   aY:30,nY:34,emoji:'🙂',eL:'结构更清',eC:'#059669',
   pains:['算子 hub 有 5 环节框架，但缺“先装 CANN”的明确第一步；不过结构已胜过 NVIDIA 的 CUDA 资源堆'],
   opps:[['算子 hub 顶部加“按 4 步开始”主线 + 在线实验前置，把结构优势讲足','产品']]},
- {n:'03',name:'配环境·拿 SDK',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
-  touch:['下载中心','注册 / 登录','SDK 下载流程','版本选择'],
+ {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
+  touch:['下载中心','注册 / 登录','Toolkit 下载流程','版本选择'],
   action:'关下载公告 → 选架构/版本/包 → 同意 CANN 协议 → 登录华为账号 → 下载（约 7 步）',
   aY:82,nY:22,emoji:'😣',eL:'卡在下载',eC:'#DC2626',
   pains:['“先跑起来”<b>7 步</b> + 登录前置 + 协议同意，链路最长；NVIDIA 绿按钮零登录、内联命令约 2 步'],
@@ -1582,15 +1584,15 @@ const JOURNEY_TRAIN=[
   action:'落地开发者中心 → 点「训练开发」场景卡 → 看框架/硬件选型',
   aY:42,nY:36,emoji:'😐',eL:'入口清晰',eC:'#D97706',
   pains:['和算子一样，开发者中心埋在二级；好在「训练开发」场景卡直给入口'],
-  opps:[['首屏「按场景」横切入口，训练/推理/算子并列直达','体验设计']]},
+  opps:[['首屏「按场景」横切入口，训练/推理/算子并列直达','用户体验']]},
  {n:'02',name:'上手引导',acc:'#16A34A',meta:'昇 78 / NV 77',
   touch:['训练开发 hub','快速入门','教程','在线实验'],
   action:'进训练 hub 看框架路径 → 选 MindSpore/PyTorch → 走学习路径 → 在线实验',
   aY:32,nY:34,emoji:'🙂',eL:'引导清晰',eC:'#059669',
   pains:['MindSpeed / MindSpore 等专用栈需额外认知；NVIDIA 多数原生框架即可起步'],
   opps:[['训练 hub 给“按框架选路径 + 一键拉可训模型在线跑”最短线','产品']]},
- {n:'03',name:'配环境·拿 SDK',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
-  touch:['下载中心','注册 / 登录','SDK 流程','版本选择'],
+ {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
+  touch:['下载中心','注册 / 登录','Toolkit 流程','版本选择'],
   action:'装 CANN + 框架(torch_npu/MindSpeed) + 数据集 → 同意协议 → 登录 → 备好',
   aY:80,nY:24,emoji:'😣',eL:'环境最重',eC:'#DC2626',
   pains:['训练环境更重：CANN + 框架 + 数据，叠加登录前置 / 协议，比算子还多步'],
@@ -1712,7 +1714,7 @@ function renderDjfiRules(){
 function renderDjfiExample(){
  const el=document.getElementById('djfiExample');if(!el)return;
  const t=TP.find(x=>x.id==='4.3');if(!t||!t.djfi){el.innerHTML='';return;}
- el.innerHTML=djfiTableHtml(t).replace('<details class="djfi">','<div class="djfi open">').replace('</details>','</div>').replace(/<summary>[\s\S]*?<\/summary>/,`<div class="dj-exhd">触点 4.3 · SDK 下载流程 —— 实时由引擎计算:昇腾 <b class="a">${t.djfi.a.tp}</b> / NVIDIA <b class="n">${t.djfi.nv.tp}</b></div>`);
+ el.innerHTML=djfiTableHtml(t).replace('<details class="djfi">','<div class="djfi open">').replace('</details>','</div>').replace(/<summary>[\s\S]*?<\/summary>/,`<div class="dj-exhd">触点 4.3 · Toolkit 下载流程 —— 由公式现算:昇腾 <b class="a">${t.djfi.a.tp}</b> / NVIDIA <b class="n">${t.djfi.nv.tp}</b></div>`);
 }
 function updateCover(){
  const main=TP.filter(t=>/^\d/.test(t.id));
@@ -1901,7 +1903,7 @@ function demoHero(){return `
    <div class="herocard light">
      <div class="lbl">昇腾 · hiascend.com/developer 首屏（开发者中心）</div>
      <div class="big">训练开发　·　推理开发　·　算子开发</div>
-     <div class="small">场景卡 + 开发工具 + 学习成长（在线实验/认证）铺在首屏；信息全，但缺一个最强单一 CTA，且这张页埋在二级</div>
+     <div class="small">场景卡 + 开发工具 + 学习成长（在线实验/认证）铺在首屏；信息全，但缺一个最强单一行动入口，且这张页埋在二级</div>
      <span class="pinq yes">“我能干什么” ✓ 卡片即答（菜单式）</span>
    </div>
  </div>`;}
@@ -1954,14 +1956,8 @@ function demoPath(){return `
      <span class="ps">自己装环境</span><span class="arrow">→</span>
      <span class="ps">GitHub 拉 sample</span>
    </div>
- </div>
- <img class="shot" style="margin-top:6px;aspect-ratio:16/9" src="${IMG}07-ascend-learn-path.png" loading="lazy" onclick="zoom(this.src)" alt="昇腾学习路径实拍">
- <div style="font-size:10.5px;color:var(--ink2);text-align:center;margin-top:5px">实拍：昇腾「学习路径」四条角色路径 + 在线实验</div>`;}
+ </div>`;}
 function demoDiscover(){return `
- <div class="disc-evid">
-   <figure><img src="${IMG}08-ascend-blog.png" loading="lazy" onclick="zoom(this.src)" alt="昇腾博客"><figcaption style="color:#047857">昇腾博客 · 分类 + 热门排行（内容不差）</figcaption></figure>
-   <figure><img src="${IMG}06-ascend-solution.png" loading="lazy" onclick="zoom(this.src)" alt="昇腾解决方案"><figcaption style="color:#047857">昇腾解决方案 · 可筛选方案市场</figcaption></figure>
- </div>
  <div class="health">
    <div class="hrow"><span class="hl">SEO / 全球可索引</span><div class="hbar" style="background:#e0a32e">昇腾 · 中文为主，SEO 弱</div><div class="hbar" style="background:#76B900">NVIDIA · 全球英文，Google 可达</div></div>
    <div class="hrow"><span class="hl">入口可见性</span><div class="hbar" style="background:#e0a32e">博客要从开发者中心进</div><div class="hbar" style="background:#76B900">顶栏直达 Blog</div></div>
@@ -2002,12 +1998,14 @@ function demoDist(){return `
       const a=document.createElement('a');a.href='#'+j.id;
       a.innerHTML=`<span class="n" style="background:${j.color}">${n}</span>${j.h}`;toc.appendChild(a);
       const sec=document.createElement('section');sec.className='floor synth-floor';sec.id=j.id;
+      const conclusion=j.body.find(p=>/^结论[:：]/.test(p))||j.body[j.body.length-1]||'';
+      const bullets=j.body.filter(p=>p!==conclusion);
       sec.innerHTML=`
         <div class="floor-hd"><span class="fno" style="background:${j.color}1f;color:${j.color}">综述 ${n}</span>
           <h2>${j.h}</h2><span class="pin ${j.pin}">${plab[j.pin]} · ${j.plab}</span></div>
         <p class="floor-sub">${j.one}</p>
         <div class="synth-body">
-          <div class="synth-text"><p class="lead">${j.lead}</p>${j.body.map(p=>`<p>${p}</p>`).join('')}</div>
+          <div class="synth-text"><p class="lead">${j.lead}</p>${bullets.map(p=>`<p>${p}</p>`).join('')}<div class="synth-conclusion">${conclusion}</div></div>
           <div class="synth-demo"><div class="demo-cap">${j.cap}</div>${demos[j.demo]()}</div>
         </div>`;
       host.appendChild(sec);
