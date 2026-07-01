@@ -462,8 +462,8 @@ NeMo / NIM / Jetson → llms.txt
     <div class="who">提升 ⑤⑥ 第三方生态 · 慢变量、需持续运营</div>
     <h3>6. 扶持第三方生态：从「少而同质」到「多平台互证」</h3>
     <ul class="tight">
-      <li>鼓励在 CSDN <b>之外</b>的平台（个人博客、英文 Medium／dev.to 等）产出带版本号的完整教程——独立性因子实测在惩罚「CSDN×2 回声」。</li>
-      <li><b>选平台先看 Agent 可抓性</b>：优质教程若只发在知乎（实测 403），对 AI 助手近乎不存在；应优先落在可抓平台，或同步一份到官方博客／gitee 仓 markdown。</li>
+      <li>由官方博客／开发者论坛做首发与背书，同时鼓励 CSDN、个人博客、Medium／dev.to 等多平台同步产出带版本号的完整教程——独立性因子惩罚的不是某个平台，而是「单一平台重复转载」。</li>
+      <li><b>选平台先看 Agent 可抓性</b>：优质教程若只发在知乎（实测 403），对 AI 助手近乎不存在；应优先落在可抓平台，或同步一份到官方博客／Gitee 仓 markdown。</li>
       <li>优先覆盖深水区（算子开发、Tiling、报错案例、排错工具实战）——上手侧已不缺。每篇硬性要求：注明版本 + 可复制命令 + 日期。</li>
     </ul>
     <div class="why">第三方是官方文档的冗余通道。CUDA 的韧性正源于这条通道足够厚——官方页即便不足也有 StackOverflow 承接；NVIDIA 官方还亲自参与补充（技术博客、开发者论坛）。落地后 ⑤⑥ 各 +1（§5-3 测算 ⑪ +0.056、ROI 第二）。</div>
@@ -473,7 +473,7 @@ NeMo / NIM / Jetson → llms.txt
         <div class="bad">
           <div class="duolab">✕ 昇腾现状 · 少而同质，优质内容抓不到</div>
           <div class="cov" style="padding:4px 2px">
-            <div class="covrow"><span class="pf">CSDN</span><span class="st mid">×2 · 扎堆，独立性被罚</span></div>
+            <div class="covrow"><span class="pf">CSDN 等平台</span><span class="st mid">同源重复 · 独立性不足</span></div>
             <div class="covrow"><span class="pf">知乎（优质）</span><span class="st no">403 · 反爬抓不到 ✕</span></div>
             <div class="covrow"><span class="pf">整体有效量</span><span class="st no">K/M/N/S/X 仅 2 / 26</span></div>
           </div>
@@ -515,7 +515,7 @@ NeMo / NIM / Jetson → llms.txt
     <div class="who">提升 ⑦ 自带知识 · 最深的短板、最慢的变量 · 26 全量后新增（§5-3 反事实测算：⑦+1 → 综合分平均 +0.048、4 格跨档，长期 ROI 第三、高于 llms.txt）</div>
     <h3>8. 面向下一代模型的语料供给：官方与生态需共同支撑</h3>
     <ul class="tight">
-      <li><b>为什么独立成条</b>：以 X 内存越界为例——官方 msSanitizer 文档满分 5，但第三方仅 1、自带 ⑦ 仅 2，综合仍只到中高。<b>文档写好 ≠ 任务被兜住</b>（见右侧噪声-OR）。</li>
+      <li><b>建议做法</b>：把深水区内容从「官方页面可读」推进到「生态与模型都能吸收」——以 X 内存越界为例，官方 msSanitizer 文档满分 5，但第三方仅 1、自带 ⑦ 仅 2，综合仍只到中高。</li>
       <li>站方可控的杠杆：把官方内容以<b>最易被训练集收录的形态</b>同步一份——公开 git 仓 markdown、关键文档出英文版、教程带可跑代码而非截图。</li>
       <li>与卡 4 的分工：llms.txt 解决「<b>当代</b>模型检索时抓得到」，本条解决「<b>下一代</b>模型不检索也知道」——前者应急，后者根治。</li>
     </ul>
@@ -991,7 +991,7 @@ body.embed .ux-left ul.tight{list-style:none!important;padding:0!important;margi
 body.embed .ux-left ul.tight li{margin:0!important;padding-left:21px!important;position:relative!important;line-height:1.55!important;color:var(--ink)!important}
 body.embed .ux-left ul.tight li::before{content:''!important;position:absolute!important;left:1px!important;top:.5em!important;width:8px!important;height:8px!important;border-radius:2px!important;background:var(--nv)!important;transform:rotate(45deg)!important}
 body.embed .ux-left ul.tight li:nth-child(n+3){display:none!important}
-body.embed .ux-left .nvref{display:none!important}
+body.embed .ux-left .nvref{display:block!important;font-size:12px!important;line-height:1.5!important;margin:0 0 13px!important;padding:9px 12px!important;max-height:18vh!important;overflow:auto!important}
 body.embed .ux-left .why{font-size:13px!important;line-height:1.55!important;margin:0!important;padding-top:11px!important}
 body.embed .ux-left .why~.why{display:none!important}
 body.embed .ux-right .demotitle{font-size:13px!important;line-height:1.45!important;margin-bottom:8px!important}

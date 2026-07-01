@@ -520,14 +520,28 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 3 灰底：人机协同时序图 -->
+  <!-- 3 灰底：全屏时序图 -->
+  <section class="slide s-gray seq-full-slide" data-seq-full>
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">先把全链路摊开：AI 与开发者分别在哪里依赖昇腾社区内容</span></div>
+        <div class="subttl">立论 · 全屏时序图</div>
+      </div>
+      <div class="head-r">03/ 时序图 · 全屏<br/>Projection View</div>
+    </div>
+    <div class="seq-full-stage" data-magic-seq>
+      <iframe data-src="seq-d3.html?full=1" title="自定义算子开发 · 全屏时序图"></iframe>
+    </div>
+  </section>
+
+  <!-- 4 灰底：人机协同时序图 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">一次「自定义算子开发」背后，是开发者与 AI 同时在使用昇腾社区</span></div>
         <div class="subttl">立论 · 「人机协同」</div>
       </div>
-      <div class="head-r">03/ 人机协同旅程<br/>opknow 20</div>
+      <div class="head-r">04/ 人机协同旅程<br/>opknow 20</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <style>
@@ -567,19 +581,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 3a 灰底：全屏时序图 -->
-  <section class="slide s-gray seq-full-slide" data-seq-full>
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">先把全链路摊开：AI 与开发者分别在哪里依赖昇腾社区内容</span></div>
-        <div class="subttl">立论 · 全屏时序图</div>
-      </div>
-      <div class="head-r">04/ 时序图 · 全屏<br/>Projection View</div>
-    </div>
-    <div class="seq-full-stage" data-magic-seq>
-      <iframe data-src="seq-d3.html?full=1" title="自定义算子开发 · 全屏时序图"></iframe>
-    </div>
-  </section>
+
 
   <style>
     .lc-stages{font-family:'JetBrains Mono';font-size:var(--fs-body);color:var(--ink-2);background:rgba(0,0,0,.035);border-radius:8px;padding:.9vh 1vw;text-align:center;letter-spacing:.01em}
@@ -1068,7 +1070,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .p7 .p7h{font-weight:700;font-size:var(--fs-body);color:var(--ink);line-height:1.32;min-height:2.64em}
     .p7 .p7d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5;min-height:3em}
     .p7 .p7e{margin-top:.4vh;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);background:rgba(0,0,0,.04);border-radius:6px;padding:3px 8px;align-self:flex-start}
-    .p7.struct{border-color:rgba(255,90,110,.5)}
+    .p7.struct{
+      background:radial-gradient(120% 95% at 0% 0%,rgba(255,90,110,.22),rgba(255,90,110,0) 54%),rgba(255,255,255,.62);
+      border-color:rgba(255,255,255,.76);
+      box-shadow:0 12px 30px -18px rgba(229,72,77,.42),inset 0 1px 0 rgba(255,255,255,.9);
+    }
     .p7.struct .p7n{background:var(--g-red)}
     .p7.sum{background:var(--g-ink);border:0;color:#fff;justify-content:center;gap:1vh}
     /* 每张问题卡配一个内容相关小示意 mini-mock */

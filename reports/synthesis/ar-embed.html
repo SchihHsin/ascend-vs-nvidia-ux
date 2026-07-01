@@ -2075,7 +2075,8 @@ body.embed.tponly .tpcard.imgstack .tpside.left{border-right:1px solid var(--g2)
 /* 摩擦明细:点击展开(details 原生开合),明细做成绝对定位浮层——浮在内容上、不挤压布局、不触发整页缩放 */
 body.embed.tponly .tpcard .djfi{position:relative!important;overflow:visible!important}
 body.embed.tponly .tpcard .djfi>summary{cursor:pointer!important}
-body.embed.tponly .tpcard .djfi[open] .dj-pop{position:absolute!important;left:0!important;right:0!important;top:calc(100% + 6px)!important;z-index:60!important;
+body.embed.tponly .tpcard .djfi[open] .dj-pop{position:absolute!important;right:0!important;left:auto!important;top:calc(100% + 6px)!important;z-index:60!important;
+  width:min(560px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;
   background:#fff!important;border:1px solid var(--g3)!important;border-radius:12px!important;box-shadow:0 16px 40px -12px rgba(0,0,0,.32)!important;
   max-height:62vh!important;overflow:auto!important;padding:4px 10px 10px!important}
 /* 行动建议后面统一讲,触点证据页只保留事实分析 */
