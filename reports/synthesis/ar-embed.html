@@ -553,9 +553,9 @@ a{color:inherit;text-decoration:none}
     </div>
     <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">六、锚点总表(全部公开 · 对两边一视同仁)</h3>
     <div id="djfiRules"></div>
-    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">七、算例(触点 4.3 · Toolkit 下载)—— 由公式现算</h3>
+    <h3 style="margin:22px 0 10px;font-size:16px;color:var(--ink)">七、算例(触点 4.3 · Toolkit 下载)—— 由公式计算</h3>
     <div id="djfiExample"></div>
-    <p class="floor-sub" style="margin-top:8px">这张表不是手写、而是页面加载时由公式现算;每个触点卡底部都能展开同样的「摩擦指数 实测明细」,数字与触点分严格一致——给定测量表,任何人重算得同一结果。<b>样板已铺 8 个触点(4.3 / 4.2 / 4.1 / 3.2 / 1.1b / T2 / T4 / T5),其余触点暂仍为同维度手工分,正逐步补齐实测。</b></p>
+    <p class="floor-sub" style="margin-top:8px">这张表不是手写、而是页面加载时由公式计算;每个触点卡底部都能展开同样的「摩擦指数 实测明细」,数字与触点分严格一致——给定测量表,任何人重算得同一结果。<b>样板已铺 8 个触点(4.3 / 4.2 / 4.1 / 3.2 / 1.1b / T2 / T4 / T5),其余触点暂仍为同维度手工分,正逐步补齐实测。</b></p>
     <div class="method" style="margin-top:14px">
       <b>七、可复现性、效度与局限(诚实陈述)</b><br>
       <b>可复现性(强):</b>测量协议 + 公开锚点 + 公开公式 ⇒ 给定输入,输出唯一。<br>
@@ -1717,7 +1717,7 @@ function renderDjfiRules(){
 function renderDjfiExample(){
  const el=document.getElementById('djfiExample');if(!el)return;
  const t=TP.find(x=>x.id==='4.3');if(!t||!t.djfi){el.innerHTML='';return;}
- el.innerHTML=djfiTableHtml(t).replace('<details class="djfi">','<div class="djfi open">').replace('</details>','</div>').replace(/<summary>[\s\S]*?<\/summary>/,`<div class="dj-exhd">触点 4.3 · Toolkit 下载流程 —— 由公式现算:昇腾 <b class="a">${t.djfi.a.tp}</b> / NVIDIA <b class="n">${t.djfi.nv.tp}</b></div>`);
+ el.innerHTML=djfiTableHtml(t).replace('<details class="djfi">','<div class="djfi open">').replace('</details>','</div>').replace(/<summary>[\s\S]*?<\/summary>/,`<div class="dj-exhd">触点 4.3 · Toolkit 下载流程 —— 由公式计算:昇腾 <b class="a">${t.djfi.a.tp}</b> / NVIDIA <b class="n">${t.djfi.nv.tp}</b></div>`);
 }
 function updateCover(){
  const main=TP.filter(t=>/^\d/.test(t.id));
@@ -2021,7 +2021,7 @@ body.embed .floor{padding:10px 0 6px!important;scroll-margin-top:0!important}
 /* 单触点卡 ?tp 模式:卡铺满宽度(去 max-width、padding 归 0 与 deck 题目左右对齐)、上下居中 */
 /* 所有嵌入页(触点 + sec 综述/行动/责任等)都垂直居中,别顶对齐留下半空 */
 body.embed{display:flex!important;flex-direction:column!important;justify-content:center!important}
-body.embed.sec-journey{justify-content:flex-start!important}
+body.embed.sec-journey{justify-content:center!important}
 html.embed body.embed{min-height:100vh}
 body.embed.tponly{height:100vh!important}
 body.embed.tponly .wrap{max-width:none!important;padding:0!important;margin:0!important;width:100%!important}

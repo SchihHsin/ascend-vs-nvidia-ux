@@ -691,7 +691,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 <svg viewBox="0 0 720 712" style="width:100%;max-width:660px;height:auto;display:block;margin:0 auto" role="img" aria-label="Agent 执行流程：路由→是否需要检索→三来源(官方/第三方平台/自带)→研判证据是否充分→充分则收敛终答；不足则判断能否继续检索，检索穷尽且无可靠证据时模型会凭记忆杜撰">
   <defs>
     <marker id="aae" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse"><path d="M0,0 L9,4.5 L0,9 z" fill="#8a8a8a"/></marker>
-    <marker id="aaeh" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse"><path d="M0,0 L9,4.5 L0,9 z" fill="#8a6d1a"/></marker>
+    <marker id="aaeh" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7 z" fill="#8a6d1a"/></marker>
     <marker id="aaeg" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse"><path d="M0,0 L9,4.5 L0,9 z" fill="#2a7a68"/></marker>
     <marker id="aaer" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse"><path d="M0,0 L9,4.5 L0,9 z" fill="#D0454F"/></marker>
   </defs>
@@ -2077,7 +2077,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
         if(ek){
           var hit=ek.split(/\s+/).some(function(x){return act.indexOf(x)>=0;});
           el.style.opacity=hit?'1':'0.12';
-          if(hit){el.setAttribute('stroke','#8a6d1a');el.setAttribute('stroke-width','2.2');el.setAttribute('marker-end','url(#aaeh)');}
+          if(hit){el.setAttribute('stroke','#8a6d1a');el.setAttribute('stroke-width','1.7');el.setAttribute('marker-end','url(#aaeh)');}
           else {el.setAttribute('stroke',el.getAttribute('data-stroke')||'#8a8a8a');el.setAttribute('stroke-width',el.getAttribute('data-sw')||'1.2');var mk=el.getAttribute('data-mk');if(mk)el.setAttribute('marker-end',mk);}
         } else el.style.opacity=(k&&act.indexOf(k)>=0)?'1':'0.12';
       }
