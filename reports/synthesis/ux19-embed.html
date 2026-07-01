@@ -278,9 +278,9 @@ a.hit:hover{text-decoration:underline;color:#444}
   昇腾的 AI 可用性问题<b>不是「文档烂」这种一刀切的故事</b>。上手侧（迁移/安装/部署）已经做到接近 CUDA 的水平；真正的结构性缺口是三个：<b>① 版本体系混乱（全局税）、② 模型自带知识＋第三方生态双薄（检索链路没有兜底）、③ 高难度场景单点塌方（Ascend C 自定义算子 + 报错码两个场景）</b>。修复优先级应该按这个结构排，而不是泛泛「改进文档」。
 </div>
 
-<!-- ============ 3 供给侧 UX ============ -->
-<h2 id="s3"><span class="no">§3</span>UX/UIUX 发力点 · 面向昇腾社区（供给侧：文档与站点该怎么改）</h2>
-<div class="sechint"><b>本节改的是「被检索的网站」</b>（§4 改的是「做检索的 Agent 产品」）：问题出在信息供给上，所以发力点是改网站本身——改完后任何 AI 工具拿到的原料都变好，对应 ②③④⑤⑥ 指标的抬升。按「本度量体系下抬分效率」排序——每条注明它抬的是哪个指标、影响哪些格。核心视角转变：<b>文档站的新「用户」是 AI Agent</b>，传统 UIUX 优化（视觉、导航、信息架构）之外，要加一层「Agent 体验（AX）」设计。每张卡尽量给全三件：<b>Before（实测现状，一句话或 demo）→ NVIDIA 是怎么做的（一段话参照）→ After（建议形态）</b>；英伟达没做、外部观测不到的，按「有对照才讲」规则留空并注明。</div>
+<!-- ============ 3 供给侧用户体验 ============ -->
+<h2 id="s3"><span class="no">§3</span>用户体验发力点 · 面向昇腾社区（供给侧：文档与站点该怎么改）</h2>
+<div class="sechint"><b>本节改的是「被检索的网站」</b>（§4 改的是「做检索的 Agent 产品」）：问题出在信息供给上，所以发力点是改网站本身——改完后任何 AI 工具拿到的原料都变好，对应 ②③④⑤⑥ 指标的抬升。按「本度量体系下抬分效率」排序——每条注明它抬的是哪个指标、影响哪些格。核心视角转变：<b>文档站的新「用户」是 AI Agent</b>，传统用户体验优化（视觉、导航、信息架构）之外，要加一层「面向 Agent 的可读取体验」设计。每张卡尽量给全三件：<b>Before（实测现状，一句话或 demo）→ NVIDIA 是怎么做的（一段话参照）→ After（建议形态）</b>；英伟达没做、外部观测不到的，按「有对照才讲」规则留空并注明。</div>
 
 <div>
   <div class="card uxcard">
@@ -510,23 +510,40 @@ NeMo / NIM / Jetson → llms.txt
   </div>
 
   <div class="card uxcard">
-    <div class="who">UIUX 经典议题在 AI 时代的重写</div>
-    <h3>7. 改善面向开发者的站内体验：沿用同一套评估指标</h3>
+    <div class="who">用户体验经典议题在 AI 时代的重写</div>
+    <h3>7. 站内体验要支撑完成任务，而不是只让人找到页面</h3>
     <ul class="tight">
       <li>本项目最反直觉的发现：<b>为 AI 优化与为开发者优化是同一件事</b>——参数表齐全、命令可复制、版本明确、网址可直达，对人与对 Agent 是同一组需求。</li>
-      <li>AI 亲和改造要落到发布流程里：把 ①–⑩ 指标直接作为文档站的<b>发布前验收清单</b>。</li>
-      <li>站内搜索按错误码／API 名直达（①），减少「搜到列表页、找不到正文」的两段式挫败。</li>
+      <li>站内体验的目标不是“把人送到页面”，而是让开发者在同一条链路里完成：确认版本、复制命令、运行样例、遇错排查、继续下一步。</li>
+      <li>站内搜索按错误码／API 名直达任务页，减少「搜到列表页、找不到可执行步骤」的两段式挫败。</li>
     </ul>
-    <div class="why">把度量体系反向用作供给侧验收标准，是这套研究对站方最可直接落地的输出。（文档验收属内部流程、外部观测不到，故本卡无 NVIDIA 参照——按「有对照才讲」的规则留空。）</div>
-    <div class="demotitle">Demo · 把 ①–⑩ 指标当作发布前机检清单 <span class="mockdisc">每项可机器自动检查</span></div>
+    <div class="why">这页的落点是开发者任务闭环：AI 侧指标可以帮助识别页面是否“可用”，但最终要转译成开发者能不能从页面继续做事。</div>
+    <div class="demotitle">Demo · 从“找到页面”到“完成一次上手任务” <span class="mockdisc">任务闭环</span></div>
     <div class="demo">
-      <ul class="ckl">
-        <li><b>无 JS 抓取，看正文还在不在</b><span class="ckhint">对应指标 ② 可抓取性</span></li>
-        <li><b>查正文是否含可执行命令与参数表</b><span class="ckhint">对应 ③ 详尽度 · ⑩ 可复现</span></li>
-        <li><b>查正文头部是否有版本声明</b><span class="ckhint">对应 ④ 版本清晰度</span></li>
-        <li><b>站内搜索按错误码／API 名能否直达正文</b><span class="ckhint">对应 ① 可发现性</span></li>
-      </ul>
-      <div class="dnote" style="margin-top:9px">现状缺的正是这道把关：D 的 SPA 链路、E 的兜底页、12 个 ④=2 的版本散页，都在没有 Agent 视角审查的情况下上线了。</div>
+      <div class="dnote">以“自定义算子开发”为例，找到文档只是起点。真正的站内体验要让开发者在页面内完成关键判断和操作，遇到报错时也能顺着同一条链路继续排查。</div>
+      <div class="duo">
+        <div class="bad">
+          <div class="duolab">✕ 只支撑找到页面</div>
+          <div class="cov" style="padding:4px 2px">
+            <div class="covrow"><span class="pf">版本判断</span><span class="st no">分散在多页，需自己拼</span></div>
+            <div class="covrow"><span class="pf">上手命令</span><span class="st mid">能看到说明，但缺少连续步骤</span></div>
+            <div class="covrow"><span class="pf">样例验证</span><span class="st no">不知道跑通后应看到什么</span></div>
+            <div class="covrow"><span class="pf">报错排查</span><span class="st no">错误码、工具、论坛答案断开</span></div>
+            <div class="covrow"><span class="pf">下一步</span><span class="st mid">读完页面后仍要回搜索</span></div>
+          </div>
+        </div>
+        <div class="good">
+          <div class="duolab">✓ 支撑完成任务</div>
+          <div class="cov" style="padding:4px 2px">
+            <div class="covrow"><span class="pf">版本判断</span><span class="st ok">当前版本、芯片、依赖一屏确认</span></div>
+            <div class="covrow"><span class="pf">上手命令</span><span class="st ok">命令块可复制，参数有默认值</span></div>
+            <div class="covrow"><span class="pf">样例验证</span><span class="st ok">给出预期输出与失败表现</span></div>
+            <div class="covrow"><span class="pf">报错排查</span><span class="st ok">错误码直达工具和问答</span></div>
+            <div class="covrow"><span class="pf">下一步</span><span class="st ok">直接进入集成、调试、性能优化</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="note">衡量口径也随之变化：不是“有没有这个页面”，而是开发者能否不反复回到搜索框，完成一次可验证的任务闭环。</div>
     </div>
   </div>
 
