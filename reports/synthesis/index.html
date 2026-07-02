@@ -428,6 +428,37 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .fstep.ok .sn{background:#2E7D46;color:#fff}
 .fbig{margin-top:auto;font-size:11px;line-height:1.5;color:var(--ink-2);padding-top:1vh;border-top:1px dashed var(--line)}
 .fbig b{color:#E5484D}.fcol.good .fbig b{color:#2E7D46}
+
+/* 研究产出汇总页：可点击资产卡片 */
+.deliver-layout{flex:1;min-height:0;display:grid;grid-template-columns:1.15fr repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:1.05vw;align-items:stretch}
+.deliver-card{position:relative;min-width:0;min-height:0;display:flex;flex-direction:column;gap:1vh;text-decoration:none;color:inherit;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.82);border-radius:15px;padding:1.25vh 1vw;box-shadow:0 14px 34px -24px rgba(30,40,70,.32),inset 0 1px 0 rgba(255,255,255,.86);overflow:hidden;transition:transform .16s,border-color .16s,box-shadow .16s}
+.deliver-card::after{content:'';position:absolute;right:-34px;bottom:-42px;width:150px;height:150px;border-radius:50%;background:var(--asset-accent,#5B5BD6);opacity:.08;pointer-events:none}
+.deliver-card:hover,.deliver-card:focus-visible{transform:translateY(-3px);border-color:color-mix(in srgb,var(--asset-accent,#5B5BD6) 38%,rgba(255,255,255,.82));box-shadow:0 18px 42px -24px rgba(30,40,70,.44),inset 0 1px 0 rgba(255,255,255,.9);outline:none}
+.deliver-card.feature{grid-row:1/3;--asset-accent:#5B5BD6;padding:1.45vh 1.15vw}
+.deliver-card.ai{--asset-accent:#1788a8}.deliver-card.exp{--asset-accent:#2f6fed}.deliver-card.skill{--asset-accent:#7c3aed}.deliver-card.matrix{--asset-accent:#23a06b}.deliver-card.seq{--asset-accent:#d07a1f}
+.deliver-shot{position:relative;flex:0 0 36%;min-height:0;border-radius:11px;overflow:hidden;border:1px solid rgba(212,216,223,.86);background:#f6f8fb;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+.deliver-card.feature .deliver-shot{flex-basis:44%}
+.deliver-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.deliver-shot.matrix img{object-position:center top}
+.deliver-shot::before{content:attr(data-cap);position:absolute;left:9px;top:8px;z-index:2;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;letter-spacing:.06em;color:#fff;background:rgba(20,23,28,.68);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:2px 8px;backdrop-filter:blur(8px)}
+.deliver-mini-seq{height:100%;padding:3.7vh .9vw 1vh;background:linear-gradient(160deg,#fff,#f4f0e8);display:grid;grid-template-columns:repeat(4,1fr);gap:.55vw;align-items:stretch}
+.deliver-mini-seq .lane{position:relative;border-left:1px dashed rgba(60,66,78,.24);display:flex;flex-direction:column;justify-content:space-around}
+.deliver-mini-seq .lane::before{content:attr(data-lane);position:absolute;left:-5px;top:-2.7vh;font-size:var(--fs-xs);font-weight:900;color:#8b6a37;white-space:nowrap}
+.deliver-mini-seq .node{width:72%;height:12px;border-radius:999px;background:rgba(208,122,31,.3);box-shadow:0 0 0 1px rgba(208,122,31,.18) inset}
+.deliver-mini-seq .node.dark{background:#272b34}.deliver-mini-seq .node.ai{background:#5B5BD6}.deliver-mini-seq .node.hu{background:#E60012}
+.deliver-mini-seq .arrow{position:absolute;height:2px;background:linear-gradient(90deg,#d07a1f,rgba(208,122,31,.18));left:42%;right:-58%;top:48%}
+.deliver-mini-seq .arrow::after{content:'';position:absolute;right:-2px;top:-3px;border-left:7px solid rgba(208,122,31,.82);border-top:4px solid transparent;border-bottom:4px solid transparent}
+.deliver-code{height:100%;padding:1.1vh .8vw;background:linear-gradient(160deg,#ffffff,#eef2fb);display:flex;flex-direction:column;gap:.56vh}
+.deliver-code .bar{display:flex;gap:5px;margin-bottom:.25vh}.deliver-code .bar i{width:7px;height:7px;border-radius:50%;background:#c6cedb}.deliver-code .bar i:nth-child(1){background:#ff6b6b}.deliver-code .bar i:nth-child(2){background:#f5b84b}.deliver-code .bar i:nth-child(3){background:#3cc76a}
+.deliver-code .path{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;color:var(--asset-accent,#5B5BD6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deliver-code .line{height:7px;border-radius:999px;background:#d9dfeb}.deliver-code .line.w1{width:92%}.deliver-code .line.w2{width:74%}.deliver-code .line.w3{width:86%}.deliver-code .line.w4{width:60%;background:color-mix(in srgb,var(--asset-accent,#5B5BD6) 32%,#d9dfeb)}
+.deliver-kind{align-self:flex-start;font-size:var(--fs-xs);font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--asset-accent,#5B5BD6);background:color-mix(in srgb,var(--asset-accent,#5B5BD6) 10%,#fff);border:1px solid color-mix(in srgb,var(--asset-accent,#5B5BD6) 22%,transparent);border-radius:999px;padding:.32vh .64vw}
+.deliver-title{font-size:var(--fs-h3);font-weight:900;line-height:1.22;color:var(--ink);letter-spacing:-.01em;position:relative;z-index:1}
+.deliver-card.feature .deliver-title{font-size:var(--fs-h2)}
+.deliver-desc{font-size:var(--fs-sm);line-height:1.46;color:var(--ink-2);position:relative;z-index:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.deliver-card.feature .deliver-desc{-webkit-line-clamp:4;font-size:var(--fs-body);line-height:1.55}
+.deliver-link{margin-top:auto;display:flex;align-items:center;gap:.45em;min-width:0;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:700;color:#4d5562;background:rgba(255,255,255,.72);border:1px solid rgba(212,216,223,.72);border-radius:9px;padding:.52vh .62vw;position:relative;z-index:1}
+.deliver-link svg{width:13px;height:13px;flex:none}.deliver-link span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1970,6 +2001,76 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">跨团队</span></div><div class="rmi-act">把专题指标接入<b>版本发布与内容运营节奏</b></div><div class="rmi-why">CANN、Toolkit、文档和社区内容同步更新，才不会继续制造版本散乱和入口漂移。<span class="src2">版本治理</span></div></div></div>
       </div>
     </div></div>
+  </section>
+
+  <!-- 研究产出：报告、方法与可复用工具汇总 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">本研究产出件汇总——报告、方法与可复用工具已沉淀</span></div>
+        <div class="subttl">研究资产 · 可点击查看线上报告与 GitHub 仓库</div>
+      </div>
+      <div class="head-r">研究产出 · Links</div>
+    </div>
+    <div class="body-area">
+      <div class="deliver-layout">
+        <a class="deliver-card feature" href="https://schihhsin.github.io/ascend-vs-nvidia-ux/reports/synthesis/" target="_blank" rel="noopener">
+          <div class="deliver-shot" data-cap="SYNTHESIS"><img src="cover-bg.png" alt="双视角综合汇报截图"></div>
+          <div class="deliver-kind">综合汇报</div>
+          <div class="deliver-title">双视角综合汇报</div>
+          <div class="deliver-desc">把 AI 侧内容可用性与开发者侧基础体验放到同一条人机协同链路中，沉淀关键结论、改进专题与责任闭环。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/ascend-vs-nvidia-ux/reports/synthesis/</span></div>
+        </a>
+
+        <a class="deliver-card ai" href="https://schihhsin.github.io/opknow/22_deck.html" target="_blank" rel="noopener">
+          <div class="deliver-shot" data-cap="AI REPORT"><img src="ai-usability-heat.png" alt="AI 侧内容可用性分析报告截图"></div>
+          <div class="deliver-kind">分析报告</div>
+          <div class="deliver-title">AI 侧内容可用性分析报告</div>
+          <div class="deliver-desc">模拟大模型围绕开发任务检索、抓取、判断与作答，评估昇腾内容能否被 AI 找到、读懂、用对。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/22_deck.html</span></div>
+        </a>
+
+        <a class="deliver-card exp" href="https://schihhsin.github.io/ascend-vs-nvidia-ux/reports/ascend-vs-nvidia-2026-06-13-visual.html#op" target="_blank" rel="noopener">
+          <div class="deliver-shot" data-cap="UX REPORT"><img src="touchpoint-heat.png" alt="开发者侧基础体验分析报告截图"></div>
+          <div class="deliver-kind">分析报告</div>
+          <div class="deliver-title">开发者侧基础体验分析报告</div>
+          <div class="deliver-desc">按真实开发者旅程拆解官网触点，对比昇腾与 NVIDIA 从入口、环境、文档到支持社区的体验差异。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/ascend-vs-nvidia-ux/reports/...</span></div>
+        </a>
+
+        <a class="deliver-card matrix" href="https://schihhsin.github.io/opknow/17_official_site_focus.html" target="_blank" rel="noopener">
+          <div class="deliver-shot matrix" data-cap="MATRIX"><img src="ai-usability-heat.png" alt="AI 可用性评分矩阵截图"></div>
+          <div class="deliver-kind">评分资产</div>
+          <div class="deliver-title">AI 可用性评分矩阵</div>
+          <div class="deliver-desc">按任务 × 指标呈现官方可发现、可抓取、正文质量、版本清晰度、生态支撑与综合置信度。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/17_official_site_focus.html</span></div>
+        </a>
+
+        <a class="deliver-card seq" href="https://schihhsin.github.io/opknow/20_human_ai_journey.html" target="_blank" rel="noopener">
+          <div class="deliver-shot seq" data-cap="SEQUENCE"><div class="deliver-mini-seq"><div class="lane" data-lane="开发者"><span class="node hu"></span><span class="node"></span><span class="arrow"></span><span class="node hu"></span></div><div class="lane" data-lane="AI"><span class="node ai"></span><span class="arrow"></span><span class="node ai"></span><span class="node"></span></div><div class="lane" data-lane="官方"><span class="node dark"></span><span class="node"></span><span class="arrow"></span><span class="node dark"></span></div><div class="lane" data-lane="生态"><span class="node"></span><span class="node dark"></span><span class="node"></span><span class="node dark"></span></div></div></div>
+          <div class="deliver-kind">分析图谱</div>
+          <div class="deliver-title">人机协同时序图分析</div>
+          <div class="deliver-desc">把开发者、AI、官方内容、第三方生态与工具链放在一张链路图上，定位人与 AI 共同依赖的知识触点。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/20_human_ai_journey.html</span></div>
+        </a>
+
+        <a class="deliver-card skill" href="https://github.com/SchihHsin/ai-usability-benchmark" target="_blank" rel="noopener">
+          <div class="deliver-shot" data-cap="SKILL"><div class="deliver-code"><div class="bar"><i></i><i></i><i></i></div><div class="path">ai-usability-benchmark / SKILL.md</div><div class="line w1"></div><div class="line w3"></div><div class="line w2"></div><div class="line w4"></div><div class="line w1"></div></div></div>
+          <div class="deliver-kind">可复用 Skill</div>
+          <div class="deliver-title">AI 可用性基准测试 Skill</div>
+          <div class="deliver-desc">复用同一套任务、指标、抓取记录和评分模板，持续评估 AI 对技术内容的获取与作答质量。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>github.com/SchihHsin/ai-usability-benchmark</span></div>
+        </a>
+
+        <a class="deliver-card skill" href="https://github.com/SchihHsin/materials/tree/main/.claude/skills/journey-touchpoint-analysis" target="_blank" rel="noopener">
+          <div class="deliver-shot" data-cap="SKILL"><div class="deliver-code"><div class="bar"><i></i><i></i><i></i></div><div class="path">journey-touchpoint-analysis / SKILL.md</div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="line w4"></div><div class="line w1"></div></div></div>
+          <div class="deliver-kind">可复用 Skill</div>
+          <div class="deliver-title">基础体验旅程分析 Skill</div>
+          <div class="deliver-desc">沉淀模拟用户旅程、网页实跑取证、点击标注、触点评分与图文报告生成的方法。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>github.com/SchihHsin/materials/tree/main/.claude/skills/...</span></div>
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- 结束页：呼应封面的深色谢幕 + 一句话收口 -->
