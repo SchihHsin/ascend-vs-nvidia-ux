@@ -284,6 +284,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .bridge{flex:0 0 auto;margin-top:1.4vh;background:var(--g-ink);color:#fff;border-radius:13px;padding:1.7vh 1.6vw;font-size:var(--fs-body);line-height:1.6}
 .bridge b{color:#fff;font-weight:700;background:linear-gradient(transparent 58%,rgba(124,92,250,.5) 0)}
 .bridge.lite b{color:var(--ink);background:linear-gradient(transparent 60%,rgba(91,91,214,.22) 0)}
+.msg-alert{flex:0 0 auto;margin-bottom:1.2vh;border-radius:13px;padding:1.25vh 1.35vw;font-size:var(--fs-body);font-weight:800;line-height:1.45;color:#2c2465;background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(236,236,251,.86));border:1px solid rgba(124,92,240,.26);box-shadow:0 12px 28px -22px rgba(60,55,120,.38),inset 0 1px 0 rgba(255,255,255,.86)}
+.msg-alert b{color:#16191e;background:linear-gradient(transparent 58%,rgba(124,92,240,.22) 0)}
 /* 时序图（3 lane：用户 / AI / 工具·源）*/
 .seq{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1vw;align-content:start}
 .seq-col{display:flex;flex-direction:column;min-height:0}
@@ -1280,7 +1282,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div class="head-r">22/ 内容可用性结论 · 5</div>
     </div>
-    <div class="body-area"><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area"><div class="msg-alert">旻硕详细展开<b>AI可抓取性研究</b></div><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
   <!-- 灰底：opknow19 卡6（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
