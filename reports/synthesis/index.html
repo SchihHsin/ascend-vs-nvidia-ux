@@ -356,8 +356,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .warn .bridge.lite b{background:linear-gradient(transparent 60%,rgba(255,90,110,.3) 0)}  /* 问题页加粗高亮底也用红，不再蓝 */
 /* ===== 一页一板块行动方案：左侧决策摘要 + 右侧优先级行动板 ===== */
 .rolewrap{--role:#5b5bd6;--role-soft:rgba(91,91,214,.1);flex:1;min-height:0;display:grid;grid-template-columns:minmax(250px,30%) 1fr;gap:1.7vw;align-items:stretch}
-.rolewrap:has(.role-chip.doc){--role:#1788a8;--role-soft:rgba(31,159,184,.11)}
-.rolewrap:has(.role-chip.dev){--role:#2f6fed;--role-soft:rgba(47,111,237,.1)}
+.rolewrap:has(.role-chip.doc),.rolewrap:has(.role-chip.t2){--role:#1788a8;--role-soft:rgba(31,159,184,.11)}
+.rolewrap:has(.role-chip.dev),.rolewrap:has(.role-chip.t3){--role:#2f6fed;--role-soft:rgba(47,111,237,.1)}
+.rolewrap:has(.role-chip.t1){--role:#5b5bd6;--role-soft:rgba(91,91,214,.1)}
+.rolewrap:has(.role-chip.t4){--role:#c7771d;--role-soft:rgba(199,119,29,.11)}
+.rolewrap:has(.role-chip.t5){--role:#23a06a;--role-soft:rgba(35,160,106,.1)}
+.rolewrap:has(.role-chip.t6){--role:#a33c72;--role-soft:rgba(163,60,114,.1)}
 .rolewrap .role-chip{display:none}
 .ameasures{min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vh 1vw;align-content:center}
 .ahead{grid-column:1/-1;display:flex;align-items:center;font-size:var(--fs-sm);font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin:.25vh 0 -.25vh;color:var(--ink-3)}
@@ -368,13 +372,28 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .role-chip.exp{background:linear-gradient(135deg,#8b6df2,#5b5bd6)}
 .role-chip.doc{background:linear-gradient(135deg,#23a6bf,#1577a0)}
 .role-chip.dev{background:linear-gradient(135deg,#3a78f0,#2453c0)}
-.head-l:has(.role-chip.exp){--tab-role:#5b5bd6;--tab-soft:rgba(91,91,214,.1)}
-.head-l:has(.role-chip.doc){--tab-role:#1788a8;--tab-soft:rgba(31,159,184,.11)}
-.head-l:has(.role-chip.dev){--tab-role:#2f6fed;--tab-soft:rgba(47,111,237,.1)}
+.role-chip.t1{background:linear-gradient(135deg,#8b6df2,#5b5bd6)}
+.role-chip.t2{background:linear-gradient(135deg,#23a6bf,#1577a0)}
+.role-chip.t3{background:linear-gradient(135deg,#3a78f0,#2453c0)}
+.role-chip.t4{background:linear-gradient(135deg,#f2a13a,#c7771d)}
+.role-chip.t5{background:linear-gradient(135deg,#40c98f,#16875c)}
+.role-chip.t6{background:linear-gradient(135deg,#d66aa0,#a33c72)}
+.head-l:has(.role-chip.exp),.head-l:has(.role-chip.t1){--tab-role:#5b5bd6;--tab-soft:rgba(91,91,214,.1)}
+.head-l:has(.role-chip.doc),.head-l:has(.role-chip.t2){--tab-role:#1788a8;--tab-soft:rgba(31,159,184,.11)}
+.head-l:has(.role-chip.dev),.head-l:has(.role-chip.t3){--tab-role:#2f6fed;--tab-soft:rgba(47,111,237,.1)}
+.head-l:has(.role-chip.t4){--tab-role:#c7771d;--tab-soft:rgba(199,119,29,.11)}
+.head-l:has(.role-chip.t5){--tab-role:#23a06a;--tab-soft:rgba(35,160,106,.1)}
+.head-l:has(.role-chip.t6){--tab-role:#a33c72;--tab-soft:rgba(163,60,114,.1)}
 .head-r.board-tabs{font-family:inherit;font-size:inherit;letter-spacing:0;text-transform:none;line-height:1.2;min-width:28vw;display:flex;justify-content:flex-end}
 .head-r.board-tabs.exp{--tab-role:#5b5bd6;--tab-soft:rgba(91,91,214,.1)}
 .head-r.board-tabs.doc{--tab-role:#1788a8;--tab-soft:rgba(31,159,184,.11)}
 .head-r.board-tabs.dev{--tab-role:#2f6fed;--tab-soft:rgba(47,111,237,.1)}
+.head-r.board-tabs.t1{--tab-role:#5b5bd6;--tab-soft:rgba(91,91,214,.1)}
+.head-r.board-tabs.t2{--tab-role:#1788a8;--tab-soft:rgba(31,159,184,.11)}
+.head-r.board-tabs.t3{--tab-role:#2f6fed;--tab-soft:rgba(47,111,237,.1)}
+.head-r.board-tabs.t4{--tab-role:#c7771d;--tab-soft:rgba(199,119,29,.11)}
+.head-r.board-tabs.t5{--tab-role:#23a06a;--tab-soft:rgba(35,160,106,.1)}
+.head-r.board-tabs.t6{--tab-role:#a33c72;--tab-soft:rgba(163,60,114,.1)}
 .bk-strip{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:1vh}
 .head-r.board-tabs .bk-strip{margin-top:0;justify-content:flex-end}
 .bk-strip .bkl{font-size:var(--fs-sm);color:var(--ink-3);margin-right:2px}
@@ -435,14 +454,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .deliver-card::after{content:'';position:absolute;right:-34px;bottom:-42px;width:150px;height:150px;border-radius:50%;background:var(--asset-accent,#5B5BD6);opacity:.08;pointer-events:none}
 .deliver-card:hover,.deliver-card:focus-visible{transform:translateY(-3px);border-color:color-mix(in srgb,var(--asset-accent,#5B5BD6) 38%,rgba(255,255,255,.82));box-shadow:0 18px 42px -24px rgba(30,40,70,.44),inset 0 1px 0 rgba(255,255,255,.9);outline:none}
 .deliver-card.ai,.deliver-card.exp{--asset-accent:#2f6fed}.deliver-card.skill{--asset-accent:#7c3aed}.deliver-card.matrix{--asset-accent:#23a06b}.deliver-card.seq{--asset-accent:#d07a1f}
-.deliver-shot{position:relative;flex:0 0 42%;min-height:0;border-radius:11px;overflow:hidden;border:1px solid rgba(212,216,223,.86);background:#f6f8fb;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+.deliver-shot{position:relative;flex:0 0 52%;min-height:0;border-radius:11px;overflow:hidden;border:1px solid rgba(212,216,223,.86);background:#f6f8fb;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
 .deliver-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.deliver-card.ai .deliver-shot img,.deliver-card.exp .deliver-shot img,.deliver-shot.seq img{object-fit:contain;object-position:center center;background:#fff}
-.deliver-shot.matrix img{object-position:center top}
+.deliver-card.ai .deliver-shot img,.deliver-card.exp .deliver-shot img{object-fit:cover;object-position:center center;background:#fff}
+.deliver-shot.seq{background:#fff url("sequence-journey-thumb-tight.png?crop=wide") center center/cover no-repeat}
+.deliver-shot.seq img{opacity:0}
+.deliver-shot.matrix img{object-fit:cover;object-position:45% center;background:#fff}
 .deliver-code{height:100%;padding:1.1vh .8vw;background:linear-gradient(160deg,#ffffff,#eef2fb);display:flex;flex-direction:column;gap:.56vh}
 .deliver-code .bar{display:flex;gap:5px;margin-bottom:.25vh}.deliver-code .bar i{width:7px;height:7px;border-radius:50%;background:#c6cedb}.deliver-code .bar i:nth-child(1){background:#ff6b6b}.deliver-code .bar i:nth-child(2){background:#f5b84b}.deliver-code .bar i:nth-child(3){background:#3cc76a}
 .deliver-code .path{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;color:var(--asset-accent,#5B5BD6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .deliver-code .line{height:7px;border-radius:999px;background:#d9dfeb}.deliver-code .line.w1{width:92%}.deliver-code .line.w2{width:74%}.deliver-code .line.w3{width:86%}.deliver-code .line.w4{width:60%;background:color-mix(in srgb,var(--asset-accent,#5B5BD6) 32%,#d9dfeb)}
+.deliver-doc{height:100%;padding:1vh .85vw;background:linear-gradient(160deg,#fff,#f1eefb);display:flex;flex-direction:column;gap:.34vh}
+.deliver-doc .bar{display:flex;gap:5px;margin-bottom:.2vh}.deliver-doc .bar i{width:7px;height:7px;border-radius:50%}.deliver-doc .bar i:nth-child(1){background:#ff6b6b}.deliver-doc .bar i:nth-child(2){background:#f5b84b}.deliver-doc .bar i:nth-child(3){background:#3cc76a}
+.deliver-doc .path{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;color:var(--asset-accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deliver-doc p{font-size:var(--fs-xs);line-height:1.34;color:#4e5664;margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
+.deliver-doc b{color:#211f33;font-weight:900;background:linear-gradient(transparent 58%,rgba(124,58,237,.16) 0)}
 .deliver-meta{display:flex;align-items:center;gap:.55vw;position:relative;z-index:1}
 .deliver-no{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.08em;color:#fff;background:var(--asset-accent,#5B5BD6);border-radius:8px;padding:.34vh .48vw;box-shadow:0 8px 18px -12px color-mix(in srgb,var(--asset-accent,#5B5BD6) 80%,#000)}
 .deliver-kind{align-self:flex-start;font-size:var(--fs-xs);font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--asset-accent,#5B5BD6);background:color-mix(in srgb,var(--asset-accent,#5B5BD6) 10%,#fff);border:1px solid color-mix(in srgb,var(--asset-accent,#5B5BD6) 22%,transparent);border-radius:999px;padding:.32vh .64vw}
@@ -1425,7 +1451,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <style>
     .ccg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;flex:1;min-height:0;align-content:stretch}
     .ccg.topic-overview{grid-template-rows:repeat(2,minmax(0,1fr));gap:1.05vw;align-content:stretch}
-    .topic-overview .cc{padding:1.7vh 1.15vw;gap:.72vh;justify-content:flex-start}
+    .topic-overview .cc{padding:1.55vh 1.15vw;gap:.62vh;justify-content:flex-start}
     .topic-overview .cc-tag{font-size:var(--fs-xs);padding:3px 10px}
     .topic-overview .cc-h{font-size:var(--fs-h3);line-height:1.24}
     .topic-overview .cc-d{font-size:var(--fs-sm);line-height:1.46}
@@ -1436,6 +1462,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .cc.ai .cc-tag{background:rgba(31,159,184,.13);color:#1577a0}
     .cc.hu .cc-tag{background:rgba(91,91,214,.12);color:#5b5bd6}
     .cc.both .cc-tag{background:rgba(47,111,237,.12);color:#2453c0}
+    .cc-top{display:flex;align-items:center;justify-content:space-between;gap:.8vw;position:relative;z-index:1}
+    .cc-symbol{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--topic,#5b5bd6);background:var(--topic-soft,rgba(91,91,214,.1));border:1px solid color-mix(in srgb,var(--topic,#5b5bd6) 22%,transparent);flex:none}
+    .cc-symbol svg{width:19px;height:19px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .cc-h{font-weight:800;font-size:var(--fs-h2);color:var(--ink);line-height:1.32}
     .cc-d{font-size:var(--fs-body);color:var(--ink-2);line-height:1.65}
     .cc-ev{display:flex;flex-wrap:wrap;gap:.4em;margin-top:.8vh;padding-top:.4vh}
@@ -1446,6 +1475,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .cc.hu{color:#5b5bd6;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(91,91,214,.08));border-color:rgba(91,91,214,.2)}
     .cc.ai{color:#1788a8;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(31,159,184,.09));border-color:rgba(31,159,184,.22)}
     .cc.both{color:#2f6fed;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(47,111,237,.08));border-color:rgba(47,111,237,.2)}
+    .cc.t1{--topic:#5b5bd6;--topic-soft:rgba(91,91,214,.1);color:#5b5bd6;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(91,91,214,.08));border-color:rgba(91,91,214,.2)}
+    .cc.t2{--topic:#1788a8;--topic-soft:rgba(31,159,184,.11);color:#1788a8;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(31,159,184,.09));border-color:rgba(31,159,184,.22)}
+    .cc.t3{--topic:#2f6fed;--topic-soft:rgba(47,111,237,.1);color:#2f6fed;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(47,111,237,.08));border-color:rgba(47,111,237,.2)}
+    .cc.t4{--topic:#c7771d;--topic-soft:rgba(199,119,29,.11);color:#c7771d;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(199,119,29,.09));border-color:rgba(199,119,29,.22)}
+    .cc.t5{--topic:#23a06a;--topic-soft:rgba(35,160,106,.1);color:#23a06a;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(35,160,106,.08));border-color:rgba(35,160,106,.22)}
+    .cc.t6{--topic:#a33c72;--topic-soft:rgba(163,60,114,.1);color:#a33c72;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(163,60,114,.08));border-color:rgba(163,60,114,.22)}
+    .cc.t1 .cc-tag,.cc.t2 .cc-tag,.cc.t3 .cc-tag,.cc.t4 .cc-tag,.cc.t5 .cc-tag,.cc.t6 .cc-tag{background:var(--topic-soft);color:var(--topic)}
+    .cc.t1 .cc-d b,.cc.t2 .cc-d b,.cc.t3 .cc-d b,.cc.t4 .cc-d b,.cc.t5 .cc-d b,.cc.t6 .cc-d b{background:linear-gradient(transparent 55%,color-mix(in srgb,var(--topic) 18%,transparent) 0)}
     .cc.hu .cc-h b{background:linear-gradient(transparent 60%,rgba(91,91,214,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
     .cc.ai .cc-h b{background:linear-gradient(transparent 60%,rgba(31,159,184,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
     .cc.both .cc-h b{background:linear-gradient(transparent 60%,rgba(47,111,237,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
@@ -1799,40 +1836,40 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area" style="align-items:stretch">
       <div class="ccg topic-overview">
-        <div class="cc hu">
-          <span class="cc-tag">专题 1</span>
+        <div class="cc t1">
+          <div class="cc-top"><span class="cc-tag">专题 1</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/><path d="M8 11h6"/><path d="M11 8v6"/></svg></span></div>
           <div class="cc-h">搜索与入口可发现性</div>
-          <div class="cc-d">先让官方答案进入开发者和 AI 的第一屏：外部搜索、站内搜索、首屏入口、场景入口都要指向正确起点。</div>
+          <div class="cc-d">先让官方答案进入开发者和 AI 的第一屏：外部搜索、站内搜索、首屏入口、场景入口都要指向<b>正确起点</b>。</div>
           <div class="cc-ev"><span>外部搜索</span><span>站内搜索</span><span>正确起点</span></div>
         </div>
-        <div class="cc ai">
-          <span class="cc-tag">专题 2</span>
+        <div class="cc t2">
+          <div class="cc-top"><span class="cc-tag">专题 2</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h11v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h5"/><path d="M8 11h6"/><path d="M8 15h4"/></svg></span></div>
           <div class="cc-h">内容结构与 AI 可用性</div>
-          <div class="cc-d">文档不单独成块，而是作为知识基础设施：版本、结构、正文可读、机器可读出口共同决定 AI 能不能用对。</div>
+          <div class="cc-d">文档不单独成块，而是作为知识基础设施：版本、结构、正文可读、机器可读出口共同决定 AI 能不能<b>用对</b>。</div>
           <div class="cc-ev"><span>版本</span><span>可抓取</span><span>结构化索引</span></div>
         </div>
-        <div class="cc both">
-          <span class="cc-tag">专题 3</span>
+        <div class="cc t3">
+          <div class="cc-top"><span class="cc-tag">专题 3</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/><path d="M5 5v14"/></svg></span></div>
           <div class="cc-h">上手与运行路径</div>
-          <div class="cc-d">把 HiDevLab、ModelZoo、GitCode 工程和教程代码接起来，让开发者从看到内容走到第一次跑通。</div>
+          <div class="cc-d">把 HiDevLab、ModelZoo、GitCode 工程和教程代码接起来，让开发者从看到内容走到<b>第一次跑通</b>。</div>
           <div class="cc-ev"><span>HiDevLab</span><span>GitCode</span><span>一键运行</span></div>
         </div>
-        <div class="cc hu">
-          <span class="cc-tag">专题 4</span>
+        <div class="cc t4">
+          <div class="cc-top"><span class="cc-tag">专题 4</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M5 17h14"/><path d="M7 21h10"/></svg></span></div>
           <div class="cc-h">账号、下载与环境门槛</div>
-          <div class="cc-d">登录、协议、Toolkit 包选择、版本配套是最大硬摩擦；先把“拿到包、装对版”变简单。</div>
+          <div class="cc-d">登录、协议、Toolkit 包选择、版本配套是最大硬摩擦；先把“拿到包、装对版”变<b>简单</b>。</div>
           <div class="cc-ev"><span>登录前置</span><span>Toolkit</span><span>配套矩阵</span></div>
         </div>
-        <div class="cc ai">
-          <span class="cc-tag">专题 5</span>
+        <div class="cc t5">
+          <div class="cc-top"><span class="cc-tag">专题 5</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span></div>
           <div class="cc-h">问题诊断与社区承接</div>
-          <div class="cc-d">报错、FAQ、论坛、工具排障和第三方内容要接住长尾问题，尤其是内存越界、精度、注册集成等高难度场景。</div>
+          <div class="cc-d">报错、FAQ、论坛、工具排障和第三方内容要接住长尾问题，尤其是内存越界、精度、注册集成等<b>高难度场景</b>。</div>
           <div class="cc-ev"><span>报错检索</span><span>FAQ</span><span>社区互证</span></div>
         </div>
-        <div class="cc both">
-          <span class="cc-tag">专题 6</span>
+        <div class="cc t6">
+          <div class="cc-top"><span class="cc-tag">专题 6</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span></div>
           <div class="cc-h">运营机制与责任闭环</div>
-          <div class="cc-d">专题可以跨团队，但每块都要有牵头方、发布清单、衡量指标和复盘节奏，避免建议停在页面改文案。</div>
+          <div class="cc-d">专题可以跨团队，但每块都要有牵头方、发布清单、衡量指标和复盘节奏，避免建议停在<b>页面改文案</b>。</div>
           <div class="cc-ev"><span>牵头方</span><span>发布清单</span><span>指标复盘</span></div>
         </div>
       </div>
@@ -1843,11 +1880,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip exp">专题 1</span><span class="ttl">搜索与入口可发现性——先让官方答案进入第一屏</span></div>
+        <div class="brand"><span class="role-chip t1">专题 1</span><span class="ttl">搜索与入口可发现性——先让官方答案进入第一屏</span></div>
       </div>
-      <div class="head-r board-tabs exp"><div class="bk-strip" data-group="topic"><span class="bk on">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">诊断社区</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r board-tabs t1"><div class="bk-strip" data-group="topic"><span class="bk on">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">诊断社区</span><span class="bk">责任闭环</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">专题</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip t1">专题</span>
       <div class="rgoal" data-board="1.1 · 搜索入口"><span class="gl">目标</span><span class="rgoal-t">把外部搜索、站内搜索、首屏入口和场景入口接成一条路径：开发者不必知道产品名，AI 也不必反复换关键词，就能回到<b>官方、当前、可执行</b>的答案。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
@@ -1869,11 +1906,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip doc">专题 2</span><span class="ttl">内容结构与 AI 可用性——文档是贯穿全链路的知识基础设施</span></div>
+        <div class="brand"><span class="role-chip t2">专题 2</span><span class="ttl">内容结构与 AI 可用性——文档是贯穿全链路的知识基础设施</span></div>
       </div>
-      <div class="head-r board-tabs doc"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk on">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">诊断社区</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r board-tabs t2"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk on">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">诊断社区</span><span class="bk">责任闭环</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip doc">专题</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip t2">专题</span>
       <div class="rgoal" data-board="2.1 · AI 可用性"><span class="gl">目标</span><span class="rgoal-t">文档不单独作为一个部门任务，而是贯穿搜索、上手、安装和排障的底座：正文要能被人读懂，也要能被 AI <b>抓到、引用、按版本使用</b>。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
@@ -1895,11 +1932,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip dev">专题 3</span><span class="ttl">上手与运行路径——把“内容完整”变成“第一次就跑通”</span></div>
+        <div class="brand"><span class="role-chip t3">专题 3</span><span class="ttl">上手与运行路径——把“内容完整”变成“第一次就跑通”</span></div>
       </div>
-      <div class="head-r board-tabs dev"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk on">上手运行</span><span class="bk">环境门槛</span><span class="bk">诊断社区</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r board-tabs t3"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk on">上手运行</span><span class="bk">环境门槛</span><span class="bk">诊断社区</span><span class="bk">责任闭环</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip dev">专题</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip t3">专题</span>
       <div class="rgoal" data-board="1.3 · 上手运行"><span class="gl">目标</span><span class="rgoal-t">把昇腾已经有优势的 HiDevLab 在线实验、ModelZoo、算子 hub 放大成统一心智：从任一入口进入，都能在 <b>5 分钟内跑出第一个结果</b>。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
@@ -1921,11 +1958,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip exp">专题 4</span><span class="ttl">账号、下载与环境门槛——先解决登录和版本配套这两个硬阻断</span></div>
+        <div class="brand"><span class="role-chip t4">专题 4</span><span class="ttl">账号、下载与环境门槛——先解决登录和版本配套这两个硬阻断</span></div>
       </div>
-      <div class="head-r board-tabs exp"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk on">环境门槛</span><span class="bk">诊断社区</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r board-tabs t4"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk on">环境门槛</span><span class="bk">诊断社区</span><span class="bk">责任闭环</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip exp">专题</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip t4">专题</span>
       <div class="rgoal" data-board="1.2 · 环境门槛"><span class="gl">目标</span><span class="rgoal-t">让试用开发者<b>零阻力</b>拿到能跑的包：把登录、协议、Toolkit 包选择和版本配套从上手前的阻断，改成有默认值、有解释、有下一步的路径。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
@@ -1947,11 +1984,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip doc">专题 5</span><span class="ttl">问题诊断与社区承接——让报错和长尾问题有人接、能回流</span></div>
+        <div class="brand"><span class="role-chip t5">专题 5</span><span class="ttl">问题诊断与社区承接——让报错和长尾问题有人接、能回流</span></div>
       </div>
-      <div class="head-r board-tabs doc"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk on">诊断社区</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r board-tabs t5"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk on">诊断社区</span><span class="bk">责任闭环</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip doc">专题</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip t5">专题</span>
       <div class="rgoal" data-board="2.2 · 诊断社区"><span class="gl">目标</span><span class="rgoal-t">把报错、FAQ、论坛、工具排障和第三方内容连成承接层：开发者卡住时能找到下一步，AI 遇到复杂问题时也能回到可信证据。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
@@ -1973,11 +2010,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip dev">专题 6</span><span class="ttl">运营机制与责任闭环——专题跨团队，但每块都要有人牵头</span></div>
+        <div class="brand"><span class="role-chip t6">专题 6</span><span class="ttl">运营机制与责任闭环——专题跨团队，但每块都要有人牵头</span></div>
       </div>
-      <div class="head-r board-tabs dev"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">诊断社区</span><span class="bk on">责任闭环</span></div></div>
+      <div class="head-r board-tabs t6"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">诊断社区</span><span class="bk on">责任闭环</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip dev">专题</span>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip t6">专题</span>
       <div class="rgoal" data-board="3.1 · 责任闭环"><span class="gl">目标</span><span class="rgoal-t">按专题推进，不等于弱化责任。每个专题都要明确牵头方、协同方、发布清单和衡量指标：文档、平台、工具、社区共同对“人能跑、AI 能用”负责。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
@@ -2030,7 +2067,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         </a>
 
         <a class="deliver-card seq" href="https://schihhsin.github.io/opknow/20_human_ai_journey.html" target="_blank" rel="noopener">
-          <div class="deliver-shot seq"><img src="sequence-journey-thumb.png" alt="人机协同时序图分析截图"></div>
+          <div class="deliver-shot seq"><img src="sequence-journey-thumb-tight.png" alt="人机协同时序图分析截图"></div>
           <div class="deliver-meta"><span class="deliver-no">04</span><span class="deliver-kind">分析图谱</span></div>
           <div class="deliver-title">人机协同时序图分析</div>
           <div class="deliver-desc">把开发者、AI、官方内容、第三方生态与工具链放在一张链路图上，定位人与 AI 共同依赖的知识触点。</div>
@@ -2038,7 +2075,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         </a>
 
         <a class="deliver-card skill" href="https://github.com/SchihHsin/ai-usability-benchmark" target="_blank" rel="noopener">
-          <div class="deliver-shot"><div class="deliver-code"><div class="bar"><i></i><i></i><i></i></div><div class="path">ai-usability-benchmark / SKILL.md</div><div class="line w1"></div><div class="line w3"></div><div class="line w2"></div><div class="line w4"></div><div class="line w1"></div></div></div>
+          <div class="deliver-shot"><div class="deliver-doc"><div class="bar"><i></i><i></i><i></i></div><div class="path">ai-usability-benchmark / SKILL.md</div><p><b>适用：</b>评估技术内容能否被 AI 搜到、抓到、引用。</p><p><b>流程：</b>定义任务 → 真实检索 → 记录证据 → 评分。</p><p><b>指标：</b>官方触达、可抓取、版本清晰、二手支撑。</p><p><b>产出：</b>矩阵分数、问题证据、改进建议、可复跑记录。</p></div></div>
           <div class="deliver-meta"><span class="deliver-no">05</span><span class="deliver-kind">可复用 Skill</span></div>
           <div class="deliver-title">AI 可用性基准测试 Skill</div>
           <div class="deliver-desc">复用同一套任务、指标、抓取记录和评分模板，持续评估 AI 对技术内容的获取与作答质量。</div>
@@ -2046,7 +2083,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         </a>
 
         <a class="deliver-card skill" href="https://github.com/SchihHsin/materials/tree/main/.claude/skills/journey-touchpoint-analysis" target="_blank" rel="noopener">
-          <div class="deliver-shot"><div class="deliver-code"><div class="bar"><i></i><i></i><i></i></div><div class="path">journey-touchpoint-analysis / SKILL.md</div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="line w4"></div><div class="line w1"></div></div></div>
+          <div class="deliver-shot"><div class="deliver-doc"><div class="bar"><i></i><i></i><i></i></div><div class="path">journey-touchpoint-analysis / SKILL.md</div><p><b>适用：</b>模拟开发者从入口到跑通的真实路径。</p><p><b>流程：</b>浏览网页 → 截图取证 → 点击标注 → 触点评分。</p><p><b>产出：</b>旅程图、触点卡、竞品对比、机会点。</p><p><b>复用：</b>适合官网、开发者门户、工具链和文档体验分析。</p></div></div>
           <div class="deliver-meta"><span class="deliver-no">06</span><span class="deliver-kind">可复用 Skill</span></div>
           <div class="deliver-title">基础体验旅程分析 Skill</div>
           <div class="deliver-desc">沉淀模拟用户旅程、网页实跑取证、点击标注、触点评分与图文报告生成的方法。</div>
