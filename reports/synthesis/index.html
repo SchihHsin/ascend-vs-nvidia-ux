@@ -284,8 +284,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .bridge{flex:0 0 auto;margin-top:1.4vh;background:var(--g-ink);color:#fff;border-radius:13px;padding:1.7vh 1.6vw;font-size:var(--fs-body);line-height:1.6}
 .bridge b{color:#fff;font-weight:700;background:linear-gradient(transparent 58%,rgba(124,92,250,.5) 0)}
 .bridge.lite b{color:var(--ink);background:linear-gradient(transparent 60%,rgba(91,91,214,.22) 0)}
-.msg-alert{flex:0 0 auto;margin-bottom:1.2vh;border-radius:13px;padding:1.25vh 1.35vw;font-size:var(--fs-body);font-weight:800;line-height:1.45;color:#2c2465;background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(236,236,251,.86));border:1px solid rgba(124,92,240,.26);box-shadow:0 12px 28px -22px rgba(60,55,120,.38),inset 0 1px 0 rgba(255,255,255,.86)}
-.msg-alert b{color:#16191e;background:linear-gradient(transparent 58%,rgba(124,92,240,.22) 0)}
+.msg-alert{flex:0 0 auto;margin-bottom:1.2vh;border-radius:10px;padding:1.05vh 1.05vw;font-size:var(--fs-body);font-weight:700;line-height:1.45;color:#194a8d;background:linear-gradient(135deg,rgba(232,243,255,.96),rgba(244,249,255,.9));border:1px solid rgba(47,111,237,.34);box-shadow:0 10px 24px -22px rgba(47,111,237,.45),inset 0 1px 0 rgba(255,255,255,.9);display:flex;align-items:center;gap:.7vw}
+.msg-alert .msg-ic{width:24px;height:24px;border-radius:999px;background:#2f6fed;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 8px 18px -12px rgba(47,111,237,.8)}
+.msg-alert .msg-ic svg{width:15px;height:15px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.msg-alert b{color:#0f3470;font-weight:900;background:linear-gradient(transparent 58%,rgba(47,111,237,.2) 0)}
 /* 时序图（3 lane：用户 / AI / 工具·源）*/
 .seq{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1vw;align-content:start}
 .seq-col{display:flex;flex-direction:column;min-height:0}
@@ -1282,7 +1284,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div class="head-r">22/ 内容可用性结论 · 5</div>
     </div>
-    <div class="body-area"><div class="msg-alert">旻硕详细展开<b>AI可抓取性研究</b></div><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area"><div class="msg-alert"><span class="msg-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span>旻硕详细展开<b>AI可抓取性研究</b></span></div><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
   <!-- 灰底：opknow19 卡6（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
