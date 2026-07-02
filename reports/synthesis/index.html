@@ -434,10 +434,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .deliver-card{position:relative;min-width:0;min-height:0;display:flex;flex-direction:column;gap:1vh;text-decoration:none;color:inherit;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.82);border-radius:15px;padding:1.25vh 1vw;box-shadow:0 14px 34px -24px rgba(30,40,70,.32),inset 0 1px 0 rgba(255,255,255,.86);overflow:hidden;transition:transform .16s,border-color .16s,box-shadow .16s}
 .deliver-card::after{content:'';position:absolute;right:-34px;bottom:-42px;width:150px;height:150px;border-radius:50%;background:var(--asset-accent,#5B5BD6);opacity:.08;pointer-events:none}
 .deliver-card:hover,.deliver-card:focus-visible{transform:translateY(-3px);border-color:color-mix(in srgb,var(--asset-accent,#5B5BD6) 38%,rgba(255,255,255,.82));box-shadow:0 18px 42px -24px rgba(30,40,70,.44),inset 0 1px 0 rgba(255,255,255,.9);outline:none}
-.deliver-card.ai{--asset-accent:#1788a8}.deliver-card.exp{--asset-accent:#2f6fed}.deliver-card.skill{--asset-accent:#7c3aed}.deliver-card.matrix{--asset-accent:#23a06b}.deliver-card.seq{--asset-accent:#d07a1f}
+.deliver-card.ai,.deliver-card.exp{--asset-accent:#2f6fed}.deliver-card.skill{--asset-accent:#7c3aed}.deliver-card.matrix{--asset-accent:#23a06b}.deliver-card.seq{--asset-accent:#d07a1f}
 .deliver-shot{position:relative;flex:0 0 42%;min-height:0;border-radius:11px;overflow:hidden;border:1px solid rgba(212,216,223,.86);background:#f6f8fb;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
 .deliver-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.deliver-card.ai .deliver-shot img,.deliver-shot.seq img{object-fit:contain;object-position:center center;background:#fff}
+.deliver-card.ai .deliver-shot img,.deliver-card.exp .deliver-shot img,.deliver-shot.seq img{object-fit:contain;object-position:center center;background:#fff}
 .deliver-shot.matrix img{object-position:center top}
 .deliver-code{height:100%;padding:1.1vh .8vw;background:linear-gradient(160deg,#ffffff,#eef2fb);display:flex;flex-direction:column;gap:.56vh}
 .deliver-code .bar{display:flex;gap:5px;margin-bottom:.25vh}.deliver-code .bar i{width:7px;height:7px;border-radius:50%;background:#c6cedb}.deliver-code .bar i:nth-child(1){background:#ff6b6b}.deliver-code .bar i:nth-child(2){background:#f5b84b}.deliver-code .bar i:nth-child(3){background:#3cc76a}
@@ -2014,7 +2014,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         </a>
 
         <a class="deliver-card exp" href="https://schihhsin.github.io/ascend-vs-nvidia-ux/reports/ascend-vs-nvidia-2026-06-13-visual.html#op" target="_blank" rel="noopener">
-          <div class="deliver-shot"><img src="touchpoint-heat.png" alt="开发者侧基础体验分析报告截图"></div>
+          <div class="deliver-shot"><img src="dev-experience-report-thumb.png" alt="开发者侧基础体验分析报告截图"></div>
           <div class="deliver-meta"><span class="deliver-no">02</span><span class="deliver-kind">分析报告</span></div>
           <div class="deliver-title">开发者侧基础体验分析报告</div>
           <div class="deliver-desc">按真实开发者旅程拆解官网触点，对比昇腾与 NVIDIA 从入口、环境、文档到支持社区的体验差异。</div>
