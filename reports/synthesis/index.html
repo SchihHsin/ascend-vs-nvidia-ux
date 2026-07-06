@@ -511,7 +511,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">开发者都在用 AI——昇腾的「用户」已经是 人 &#8853; AI</span></div>
         <div class="subttl">立论 · 「用户 = 人 ⊕ AI」</div>
       </div>
-      <div class="head-r">01/ 为什么双视角<br/>2026</div>
+      <div class="head-r">01/ 双视角背景<br/>2026</div>
     </div>
     <div class="body-area">
       <div class="dh-wrap">
@@ -597,7 +597,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe data-src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
-        <div class="cmp-h"><span class="hk">How to read</span>如何阅读本图</div>
+        <div class="cmp-h"><span class="hk">How to read</span>本图用于说明两条评估链路</div>
         <p class="cmp-desc">这是开发者完成<b>一次「自定义算子开发」</b>的全过程，自上而下按<b>时间</b>推进。图中有两个「获取知识」的主体——<b>开发者本人</b>，以及受其委托查阅资料、编写代码的 <b>AI 助手</b>。</p>
         <ul class="seq-guide">
           <li><b>竖线＝参与方</b>：用户 · AI 助手 · 昇腾官方文档 · 第三方平台（CSDN / 博客）· AI 自带知识。</li>
@@ -719,7 +719,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 如何完成这几次检索：检索受阻则转换方向，证据不足则再检索一轮</span></div>
+        <div class="brand"><span class="ttl">AI 的检索链路依赖三类证据，受阻时会转向或追加检索</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「检索路径」</div>
       </div>
       <div class="head-r">05/ AI · 执行架构<br/>opknow 20</div>
@@ -730,7 +730,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cmp-cap" style="text-align:center;color:var(--ink-3)">受阻则转向、不足则再检索 — <b style="color:var(--ink-2)">悬浮任意环节查看其职责</b>（opknow 20 · 公开 Messages API 示范实现）</div>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.4vh">
-        <div class="cmp-h"><span class="hk">How it runs</span>如何运行</div>
+        <div class="cmp-h"><span class="hk">How it runs</span>AI 检索按证据充分度循环推进</div>
         <p class="cmp-desc">将一个开发问题拆成<b>子目标</b>，逐个判断<b>是否需要检索</b>；用 <b>web_search / web_fetch</b> 检索<b>官方站 + 第三方平台 + 自带知识</b>三路，回灌后<b>研判证据是否充分</b>，据此决定收敛或继续。</p>
         <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">三种结局</span>证据充分 / 不足 / 缺失</div>
         <p class="cmp-desc"><b>① 收敛</b>：证据充分 → 给出带出处的答案。<br/><b>② 遇阻回路</b>：抓取为空或证据不足 → 换 URL / 换平台 / 换关键词，↺ 再检索一轮。<br/><b style="color:#C7000B">③ 凭记忆杜撰</b>：三路均弱、又无法可靠识别自身不确定时，模型会生成看似正确、实则有误的答案。</p>
@@ -742,7 +742,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 可用性怎么测：同一套开发任务，在 CANN / 昇腾 与 CUDA / 英伟达 上各实测一遍</span></div>
+        <div class="brand"><span class="ttl">AI 可用性评估以同一开发任务对照实测 CANN 与 CUDA</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「测试设计」</div>
       </div>
       <div class="head-r">06/ AI 可用性 · 方法</div>
@@ -771,10 +771,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">同样的需求，如何提问：5 个开发问题，在 CANN / 昇腾 与 CUDA / 英伟达 上各提问一遍</span></div>
+        <div class="brand"><span class="ttl">5 个对照问题覆盖算子开发中的关键知识需求</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「问题编写」</div>
       </div>
-      <div class="head-r">07/ 问题对 · 怎么问</div>
+      <div class="head-r">07/ 问题对 · 对照设计</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -783,7 +783,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center">
       <div class="bridge" style="margin-top:0;flex:0 0 auto"><b>真实开发者口吻</b>、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>。</div>
       <div class="qpx">
-        <div class="qhead"><div class="qx-h cu">CUDA / 英伟达 怎么问</div><div class="qx-h ca">CANN / 昇腾 怎么问</div></div>
+        <div class="qhead"><div class="qx-h cu">CUDA / 英伟达 对照问题</div><div class="qx-h ca">CANN / 昇腾 对照问题</div></div>
         <div class="qtask" data-letter="D">
           <div class="qx-intent"><span class="ql">1</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一意图</b>写个自定义算子并集成进 PyTorch</span></div>
           <div class="qpair">
@@ -924,10 +924,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">指标怎么形成：从「到底在测什么」一步步推出 触达→质量→成本→产出 价值链</span></div>
+        <div class="brand"><span class="ttl">指标体系从 AI 作答链路推导出触达、质量、成本与产出</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「指标形成」</div>
       </div>
-      <div class="head-r">09/ AI 指标 · 怎么形成</div>
+      <div class="head-r">09/ AI 指标 · 形成逻辑</div>
     </div>
     <div class="body-area"><iframe data-src="m18-embed.html?sec=s3" title="opknow18 sec=s3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -935,7 +935,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">逐项定义 · 官方触达：能否找到、能否抓到（① ②）</span></div>
+        <div class="brand"><span class="ttl">官方触达决定 AI 对权威来源的发现与抓取（① ②）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「官方触达 ①②」</div>
       </div>
       <div class="head-r">10/ AI 指标 · 官方触达</div>
@@ -946,7 +946,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">逐项定义 · 第三方 & 自带：社区丰富度与模型先验（⑤ ⑦）</span></div>
+        <div class="brand"><span class="ttl">生态支撑由第三方资料与模型先验共同补位（⑤ ⑦）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「第三方&自带 ⑤⑦」</div>
       </div>
       <div class="head-r">11/ AI 指标 · 第三方&自带</div>
@@ -957,7 +957,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">逐项定义 · 官方质量：正文够不够细、版本说不说得清（③ ④）</span></div>
+        <div class="brand"><span class="ttl">官方质量重点看正文详尽度与版本清晰度（③ ④）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「官方质量 ③④」</div>
       </div>
       <div class="head-r">12/ AI 指标 · 官方质量</div>
@@ -968,7 +968,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">逐项定义 · 第三方质量：可信度、时效与一致性（⑥）</span></div>
+        <div class="brand"><span class="ttl">第三方质量取决于可信度、时效与多源一致性（⑥）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「第三方质量 ⑥」</div>
       </div>
       <div class="head-r">13/ AI 指标 · 第三方质量</div>
@@ -979,7 +979,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">逐项定义 · 成本与产出：检索摩擦 + 版本锁定与可复现（⑧ ⑨ ⑩）</span></div>
+        <div class="brand"><span class="ttl">成本与产出衡量检索摩擦、版本锁定和步骤复现（⑧ ⑨ ⑩）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「成本产出 ⑧⑨⑩」</div>
       </div>
       <div class="head-r">14/ AI 指标 · 成本产出</div>
@@ -990,7 +990,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">逐项定义 · 综合置信度：三源噪声-OR 汇总公式（⑪）</span></div>
+        <div class="brand"><span class="ttl">综合置信度用三源噪声-OR 公式汇总（⑪）</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「综合置信度 ⑪」</div>
       </div>
       <div class="head-r">15/ AI 指标 · 综合</div>
@@ -1363,7 +1363,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe data-src="seq-d3.html?hi=2" title="时序图 · 人↔昇腾社区 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Interaction</span>开发者带着一个问题，如何在社区里逐级转向</div>
+        <div class="cmp-h"><span class="hk">Interaction</span>开发者问题会在社区里逐级转向</div>
         <p class="cmp-desc">左图是<b>开发者 ↔ 社区</b>的协同时序：开发者带着一个具体问题，<b>先查官方</b>；官方受阻或不足时<b>转向第三方社区</b>；仍不确定、或需要做版本 / 精度决策时，<b>再回到官方 + 论坛人工核查</b>。三个转向点对应三类触发。</p>
         <div class="trig">
           <div class="trig-i"><span class="tn">触发 1</span><div class="tx"><b>AI 检索官方失败</b><small>官方 how-to 页单页应用（SPA）受阻 → 转第三方社区 / 人工核查官方</small></div></div>
@@ -1378,7 +1378,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验评估方法论 · 理论依据 + 评估边界：每维有权威依据，先划清测什么 / 不测什么</span></div>
+        <div class="brand"><span class="ttl">基础体验评估先界定理论依据与评估边界</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 1/3 · 理论与边界」</div>
       </div>
       <div class="head-r">27/ 摩擦指数 · 理论与边界</div>
@@ -1390,7 +1390,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验评估方法论 · 指标体系 + 测量协议 + 归一化：5 维 16 项，全公式可复现</span></div>
+        <div class="brand"><span class="ttl">基础体验评分由 5 维 16 项指标按统一协议归一化</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 2/3 · 指标与计算」</div>
       </div>
       <div class="head-r">28/ 摩擦指数 · 指标与计算</div>
@@ -1402,7 +1402,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验评估方法论 · 锚点总表：16 指标 best/worst 全公开、对两边一视同仁</span></div>
+        <div class="brand"><span class="ttl">16 个 best/worst 锚点公开，保证两边同尺对比</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 3/3 · 锚点总表」</div>
       </div>
       <div class="head-r">29/ 摩擦指数 · 锚点总表</div>
@@ -1535,276 +1535,276 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </style>
 
 
-  <!-- 灰底：触点 1.1 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 1.1 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">1.1 · 官网首页（落地第一眼）</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 74（差值 +2）</div>
+        <div class="brand"><span class="ttl">官网首页已露出开发入口，但起步动作需要更明确</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 74（差值 +2）</div>
       </div>
       <div class="head-r">32/ 触点 1.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1" title="触点 1.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 1.1b 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 1.1b 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">1.1b · 开发者门户首屏</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 77（差值 +1）</div>
+        <div class="brand"><span class="ttl">开发者门户内容不弱，入口埋深和选择成本拖慢上手</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 77（差值 +1）</div>
       </div>
       <div class="head-r">33/ 触点 1.1b</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1b" title="触点 1.1b" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 1.2 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 1.2 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">1.2 · 顶部导航 / 信息架构</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 76（差值 0）</div>
+        <div class="brand"><span class="ttl">导航入口基本完整，但缺少按场景和角色的横切路径</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 76（差值 0）</div>
       </div>
       <div class="head-r">34/ 触点 1.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.2" title="触点 1.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 2.1 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 2.1 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">2.1 · 产品总览</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
+        <div class="brand"><span class="ttl">产品矩阵覆盖完整，但新手仍需要选型分诊</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
       </div>
       <div class="head-r">35/ 触点 2.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.1" title="触点 2.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 2.3 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 2.3 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">2.3 · 规格参数</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
+        <div class="brand"><span class="ttl">规格集中列全是优势，下一步要支持并排选型</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
       </div>
       <div class="head-r">36/ 触点 2.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.3" title="触点 2.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 2.4 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 2.4 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">2.4 · 解决方案 / 场景入口</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 77（差值 -1）</div>
+        <div class="brand"><span class="ttl">方案入口具备筛选能力，开发者自助起步路径还需补齐</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 77（差值 -1）</div>
       </div>
       <div class="head-r">37/ 触点 2.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.4" title="触点 2.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 2.2 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 2.2 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">2.2 · 产品详情页</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 80（差值 -2）</div>
+        <div class="brand"><span class="ttl">CANN 页面内容扎实，快速体验应成为主动作</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 80（差值 -2）</div>
       </div>
       <div class="head-r">38/ 触点 2.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.2" title="触点 2.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 3.2 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 3.2 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">3.2 · 快速入门</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 82 / NVIDIA 72（差值 +10）</div>
+        <div class="brand"><span class="ttl">学习路径和 HiDevLab 构成昇腾上手长板</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 82 / NVIDIA 72（差值 +10）</div>
       </div>
       <div class="head-r">39/ 触点 3.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.2" title="触点 3.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 3.3 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 3.3 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">3.3 · 教程</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 77 / NVIDIA 79（差值 -2）</div>
+        <div class="brand"><span class="ttl">教程体系已经成形，认证影响力仍需建立</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 77 / NVIDIA 79（差值 -2）</div>
       </div>
       <div class="head-r">40/ 触点 3.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.3" title="触点 3.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 5.4 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 5.4 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">5.4 · 在线体验 / Playground</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 80（差值 -4）</div>
+        <div class="brand"><span class="ttl">HiDevLab 已有在线开发基础，轻量试用入口还可加强</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 80（差值 -4）</div>
       </div>
       <div class="head-r">41/ 触点 5.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.4" title="触点 5.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 4.1 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 4.1 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">4.1 · 下载中心</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 70 / NVIDIA 74（差值 -4）</div>
+        <div class="brand"><span class="ttl">下载中心入口清楚，但公告弹窗会打断首次任务</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 70 / NVIDIA 74（差值 -4）</div>
       </div>
       <div class="head-r">42/ 触点 4.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.1" title="触点 4.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 4.2 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 4.2 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">4.2 · 注册 / 登录</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 64 / NVIDIA 80（差值 -16）</div>
+        <div class="brand"><span class="ttl">登录前置把试用意愿挡在下载之前</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 64 / NVIDIA 80（差值 -16）</div>
       </div>
       <div class="head-r">43/ 触点 4.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.2" title="触点 4.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 4.3 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 4.3 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">4.3 · Toolkit 下载流程</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 66 / NVIDIA 82（差值 -16）</div>
+        <div class="brand"><span class="ttl">Toolkit 下载链路过长，是首次上手的最大阻断</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 66 / NVIDIA 82（差值 -16）</div>
       </div>
       <div class="head-r">44/ 触点 4.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.3" title="触点 4.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 4.4 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 4.4 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">4.4 · 版本 / 环境选择</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 73 / NVIDIA 79（差值 -6）</div>
+        <div class="brand"><span class="ttl">版本与环境选择需要默认推荐和配套校验</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 73 / NVIDIA 79（差值 -6）</div>
       </div>
       <div class="head-r">45/ 触点 4.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.4" title="触点 4.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 3.1 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 3.1 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">3.1 · 文档中心首页</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 80 / NVIDIA 81（差值 -1）</div>
+        <div class="brand"><span class="ttl">文档中心搜索显眼，但角色与主题筛选还不够强</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 80 / NVIDIA 81（差值 -1）</div>
       </div>
       <div class="head-r">46/ 触点 3.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.1" title="触点 3.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 3.4 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 3.4 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">3.4 · API / 接口参考</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
+        <div class="brand"><span class="ttl">API 文档可查，但版本切换和结构一致性仍需统一</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
       </div>
       <div class="head-r">47/ 触点 3.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.4" title="触点 3.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 5.1 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 5.1 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">5.1 · 代码示例 / Samples</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 78 / NVIDIA 79（差值 -1）</div>
+        <div class="brand"><span class="ttl">站内代码示例方便复制，完整工程和在线运行要同步提供</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 79（差值 -1）</div>
       </div>
       <div class="head-r">48/ 触点 5.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.1" title="触点 5.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 5.3 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 5.3 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">5.3 · 开发工具</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 79（差值 -4）</div>
+        <div class="brand"><span class="ttl">工具链覆盖完整，MindStudio 的心智与插件体验还要增强</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 79（差值 -4）</div>
       </div>
       <div class="head-r">49/ 触点 5.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.3" title="触点 5.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 6.1 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 6.1 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">6.1 · 开发者社区 / 论坛</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
+        <div class="brand"><span class="ttl">论坛分版精细，但游客可读和搜索索引能力不足</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
       </div>
       <div class="head-r">50/ 触点 6.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.1" title="触点 6.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 6.2 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 6.2 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">6.2 · 技术支持入口</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 76（差值 -1）</div>
+        <div class="brand"><span class="ttl">技术支持入口正式，但 FAQ、论坛和工单需要串联</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 76（差值 -1）</div>
       </div>
       <div class="head-r">51/ 触点 6.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.2" title="触点 6.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 6.3 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 6.3 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">6.3 · FAQ</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 73（差值 +3）</div>
+        <div class="brand"><span class="ttl">集中 FAQ 是优势，价值要通过搜索和产品页入口释放</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 73（差值 +3）</div>
       </div>
       <div class="head-r">52/ 触点 6.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.3" title="触点 6.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 5.2 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 5.2 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">5.2 · 模型库</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 81 / NVIDIA 79（差值 +2）</div>
+        <div class="brand"><span class="ttl">ModelZoo 的引导式路径是昇腾可放大的上手优势</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 81 / NVIDIA 79（差值 +2）</div>
       </div>
       <div class="head-r">53/ 触点 5.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.2" title="触点 5.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 6.4 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 6.4 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">6.4 · 博客 / 案例</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 73 / NVIDIA 81（差值 -8）</div>
+        <div class="brand"><span class="ttl">博客内容组织不差，短板在全球搜索可发现性</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 73 / NVIDIA 81（差值 -8）</div>
       </div>
       <div class="head-r">54/ 触点 6.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.4" title="触点 6.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 1.3 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 1.3 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">1.3 · 全站搜索</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 76 / NVIDIA 76（差值 0）</div>
+        <div class="brand"><span class="ttl">搜索入口显眼，下一步要支持报错日志和资源筛选</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 76（差值 0）</div>
       </div>
       <div class="head-r">55/ 触点 1.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.3" title="触点 1.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 灰底：触点 1.4 卡（?tp 单卡，deck 头给标题） -->
+  <!-- 灰底：关键触点 1.4 分析（?tp，deck 头给标题） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">1.4 · 语言 / 地区切换</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 触点详情　·　昇腾 75 / NVIDIA 75（差值 0）</div>
+        <div class="brand"><span class="ttl">中文体验顺畅，英文内容同步决定出海可达性</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 75（差值 0）</div>
       </div>
       <div class="head-r">56/ 触点 1.4</div>
     </div>
