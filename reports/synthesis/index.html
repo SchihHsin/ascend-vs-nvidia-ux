@@ -1055,23 +1055,32 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
   <style>
     .hmfull-wrap{height:100%;min-height:0;display:flex;flex-direction:column;gap:.55vh}
-    .hmfull-card{flex:1;min-height:0;padding:.65vh .8vw!important;overflow:hidden}
-    .hmfull{width:100%;height:100%;border-collapse:separate;border-spacing:2px;table-layout:fixed}
+    .hmfull-diag{display:grid;grid-template-columns:repeat(4,1fr);gap:.7vw;flex:0 0 auto}
+    .hmd{position:relative;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.72);box-shadow:0 10px 26px -20px rgba(30,40,70,.28),inset 0 1px 0 rgba(255,255,255,.86);padding:.62vh .78vw;min-height:0}
+    .hmd:after{content:"";position:absolute;right:-18px;bottom:-22px;width:90px;height:70px;border-radius:999px;background:radial-gradient(circle at 50% 50%,rgba(199,0,11,.16),rgba(199,0,11,0) 68%);pointer-events:none}
+    .hmd .k{font-size:var(--fs-xs);font-weight:800;color:#5C6472;line-height:1.2}
+    .hmd .v{margin-top:.24vh;font-family:'JetBrains Mono';font-size:var(--fs-h3);font-weight:900;color:#C7000B;line-height:1}
+    .hmd .d{margin-top:.18vh;font-size:var(--fs-xs);line-height:1.28;color:var(--ink-2)}
+    .hmfull-card{flex:1;min-height:0;padding:.45vh .65vw!important;overflow:hidden}
+    .hmfull{width:100%;height:100%;border-collapse:separate;border-spacing:1px;table-layout:fixed}
     .hmfull col.scene-col{width:48px}
     .hmfull col.task-col{width:178px}
     .hmfull col.stk-col{width:30px}
-    .hmfull th{font-size:8.2px;font-weight:800;line-height:1.05;color:#3D4452;background:rgba(255,255,255,.82);border:1px solid rgba(223,223,223,.7);border-radius:5px;padding:2px 3px;text-align:center}
-    .hmfull th.cat{font-size:8px;color:#2F3D63;background:rgba(47,111,237,.08);border-color:rgba(47,111,237,.16)}
+    .hmfull th{font-size:7.8px;font-weight:800;line-height:1;color:#3D4452;background:rgba(255,255,255,.82);border:1px solid rgba(223,223,223,.7);border-radius:4px;padding:1px 3px;text-align:center}
+    .hmfull th.cat{font-size:7.6px;color:#2F3D63;background:rgba(47,111,237,.08);border-color:rgba(47,111,237,.16)}
     .hmfull th.rowhead{vertical-align:middle}
-    .hmfull td{font-size:8.5px;line-height:1.05;border-radius:5px;text-align:center;vertical-align:middle}
-    .hmfull .scene{font-size:8px;font-weight:900;letter-spacing:.04em;color:#2F3D63;background:rgba(47,61,99,.08);border:1px solid rgba(47,61,99,.16);writing-mode:vertical-rl;text-orientation:mixed;padding:4px 0}
-    .hmfull .task{text-align:left;padding:2px 6px;background:rgba(255,255,255,.7);border:1px solid rgba(223,223,223,.7);color:#1B2432;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .hmfull .task b{display:inline-block;font-family:'JetBrains Mono';font-size:8px;color:#5B5BD6;margin-right:4px}
-    .hmfull .task small{display:block;font-weight:500;color:#8E96A3;font-size:7.6px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .hmfull .stk{color:#fff;font-family:'JetBrains Mono';font-size:7.4px;font-weight:900}
+    .hmfull tr.avg td{font-size:7px;line-height:1.05;font-weight:800;border-radius:4px;padding:1px 2px;background:rgba(199,0,11,.055);border:1px solid rgba(199,0,11,.14);color:#6C1D25}
+    .hmfull tr.avg td b{font-family:'JetBrains Mono';font-size:7px;color:#C7000B}
+    .hmfull tr.avg td:first-child{text-align:left;color:#3D4452;background:rgba(47,61,99,.06);border-color:rgba(47,61,99,.14)}
+    .hmfull td{font-size:7.8px;line-height:1;border-radius:4px;text-align:center;vertical-align:middle}
+    .hmfull .scene{font-size:7.4px;font-weight:900;letter-spacing:.04em;color:#2F3D63;background:rgba(47,61,99,.08);border:1px solid rgba(47,61,99,.16);writing-mode:vertical-rl;text-orientation:mixed;padding:3px 0}
+    .hmfull .task{text-align:left;padding:1px 5px;background:rgba(255,255,255,.7);border:1px solid rgba(223,223,223,.7);color:#1B2432;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hmfull .task b{display:inline-block;font-family:'JetBrains Mono';font-size:7.6px;color:#5B5BD6;margin-right:4px}
+    .hmfull .task small{display:block;font-weight:500;color:#8E96A3;font-size:7.1px;margin-top:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hmfull .stk{color:#fff;font-family:'JetBrains Mono';font-size:7px;font-weight:900}
     .hmfull .stk.asc{background:#C7000B}.hmfull .stk.nv{background:#76B900;color:#172100}
-    .hmfull .cell{font-family:'JetBrains Mono';font-size:8.2px;font-weight:900;border:1px solid transparent;padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .hmfull .sum{font-size:8.5px}
+    .hmfull .cell{font-family:'JetBrains Mono';font-size:7.6px;font-weight:900;border:1px solid transparent;padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hmfull .sum{font-size:7.8px}
     .hmfull-note{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs);color:#8E96A3}
     .hmfull-note b{color:#1B2432}.hmfull-note .hm-grad{width:92px}
   </style>
@@ -1086,6 +1095,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
+        <div class="hmfull-diag" aria-label="AI 可用性按指标汇总诊断">
+          <div class="hmd"><div class="k">最大缺口 · 模型自带知识</div><div class="v">−33.8</div><div class="d">CANN 56.9 / CUDA 90.8；模型记忆里对昇腾算子与排障经验沉淀不足。</div></div>
+          <div class="hmd"><div class="k">版本清晰度</div><div class="v">−25.4</div><div class="d">CANN 58.5 / CUDA 83.8；版本号、适配矩阵、历史文档需要更稳定地被识别。</div></div>
+          <div class="hmd"><div class="k">官方可抓取性</div><div class="v">−20.8</div><div class="d">CANN 79.2 / CUDA 100.0；深层页面仍有抓取受阻，AI 不能只靠人眼可见页面。</div></div>
+          <div class="hmd"><div class="k">综合可用性</div><div class="v">−18.5</div><div class="d">CANN 73.5 / CUDA 92.0；差距不是平均散落，而是集中在深层算子、排障与迁移任务。</div></div>
+        </div>
         <div class="card hmfull-card">
           <table class="hmfull" id="mFull" aria-label="opknow 全量矩阵"></table>
         </div>
@@ -1112,6 +1127,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
       var h='<colgroup><col class="scene-col"><col class="task-col"><col class="stk-col">'+cols.map(function(){return '<col>';}).join('')+'</colgroup><thead>'
         +'<tr><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>场景</b><br>按开发任务类型分组。')+'">场景</th><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>任务</b><br>每行是一道模拟开发者会问的问题。')+'">任务</th><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>栈</b><br>CUDA / CANN 使用同一指标口径对比。')+'">栈</th><th class="cat" colspan="2" data-tip="'+hmAttr('<b>官方触达</b><br>能否找到官方来源、能否抓取正文。')+'">官方触达</th><th class="cat" colspan="2" data-tip="'+hmAttr('<b>官方质量</b><br>正文是否详尽、版本是否清楚。')+'">官方质量</th><th class="cat" colspan="3" data-tip="'+hmAttr('<b>生态支撑</b><br>第三方平台与模型自带知识是否能补位。')+'">生态支撑</th><th class="cat" colspan="4" data-tip="'+hmAttr('<b>成本与产出</b><br>检索成本、结论可锁定性、复现性与综合分。')+'">成本与产出</th></tr>'
         +'<tr>'+cols.map(function(c,i){return '<th data-tip="'+hmAttr(hmColTip(i,c))+'">'+c+'</th>';}).join('')+'</tr></thead><tbody>';
+      function avgCell(i,side){
+        return rows.reduce(function(sum,r){return sum+(i===10?Math.round((side==='c'?r.cs:r.ns)*100):(side==='c'?r.c[i][1]:r.u[i][1]));},0)/rows.length;
+      }
+      h+='<tr class="avg"><td colspan="3">指标均值差</td>'+cols.map(function(c,i){
+        var ca=avgCell(i,'c'), cu=avgCell(i,'u'), gap=ca-cu;
+        return '<td data-tip="'+hmAttr('<b>'+c+' · 26 任务均值</b><br>CANN '+ca.toFixed(1)+' / CUDA '+cu.toFixed(1)+'<br>差值 '+gap.toFixed(1))+'">差 <b>'+gap.toFixed(1)+'</b><br>C '+ca.toFixed(0)+' / N '+cu.toFixed(0)+'</td>';
+      }).join('')+'</tr>';
       rows.forEach(function(r,ri){
         var c=r.c.slice(); c[10]=[fmt(r.cs),Math.round(r.cs*100)];
         var u=r.u.slice(); u[10]=[fmt(r.ns),Math.round(r.ns*100)];
@@ -1147,6 +1169,16 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .scard .pill{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);padding:3px 0;border-radius:7px;color:#fff;text-align:center;min-width:42px}
     .scard .dlt{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);padding:3px 0;border-radius:7px;text-align:center;min-width:50px}
     .scard .dlt.up{background:rgba(35,160,106,.14);color:#1f7a4d}.scard .dlt.dn{background:rgba(230,0,18,.1);color:#C7000B}
+    .uxdiag{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75vw}
+    .uxd{position:relative;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.76);box-shadow:0 10px 26px -20px rgba(30,40,70,.25),inset 0 1px 0 rgba(255,255,255,.86);padding:.9vh .85vw;min-height:0}
+    .uxd.main{grid-column:span 2;background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(255,255,255,.46))}
+    .uxd:after{content:"";position:absolute;right:-18px;bottom:-24px;width:104px;height:78px;border-radius:999px;background:radial-gradient(circle at 50% 50%,rgba(47,111,237,.15),rgba(47,111,237,0) 70%);pointer-events:none}
+    .uxd.dn:after{background:radial-gradient(circle at 50% 50%,rgba(199,0,11,.14),rgba(199,0,11,0) 70%)}
+    .uxd.up:after{background:radial-gradient(circle at 50% 50%,rgba(35,160,106,.16),rgba(35,160,106,0) 70%)}
+    .uxd .k{font-size:var(--fs-xs);font-weight:800;color:#5C6472;line-height:1.2}
+    .uxd .v{margin-top:.22vh;font-family:'JetBrains Mono';font-weight:900;font-size:var(--fs-h3);line-height:1;color:#2F3D63}
+    .uxd.dn .v{color:#C7000B}.uxd.up .v{color:#1F7A4D}
+    .uxd .d{margin-top:.24vh;font-size:var(--fs-xs);line-height:1.38;color:var(--ink-2)}
   </style>
 
   <!-- 灰底：AI 侧 · 七个问题（opknow 19 §1，重排） -->
@@ -1423,6 +1455,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.3vh">
         <div class="cmp-h"><span class="hk">Scores</span>差距集中在<b>下载与工具链</b>，FAQ / 规格存在反超点</div>
+        <div class="uxdiag" aria-label="基础体验按专题汇总诊断">
+          <div class="uxd main dn"><div class="k">最大体验断点 · 登录与下载</div><div class="v">−27.5</div><div class="d">昇腾 57.8 / NVIDIA 85.3；下载前置登录、协议、版本包选择叠加，是人类开发者最容易流失的位置。</div></div>
+          <div class="uxd up"><div class="k">学习与文档</div><div class="v">+1.5</div><div class="d">昇腾 83.0 / NVIDIA 81.5；快速入门、学习路径、HiDevLab 在线实验形成反超。</div></div>
+          <div class="uxd dn"><div class="k">入口与搜索</div><div class="v">−3.8</div><div class="d">入口内容不弱，但开发者门户埋深、英文与全球搜索可发现性仍拖后腿。</div></div>
+          <div class="uxd dn"><div class="k">问题支持与生态</div><div class="v">−2.8</div><div class="d">FAQ 集中是亮点；论坛、博客的全球可索引与英文长尾内容还需要补。</div></div>
+          <div class="uxd dn"><div class="k">开发与运行</div><div class="v">−3.0</div><div class="d">ModelZoo 与站内代码示例可用，但工具链心智、Playground 轻量试用仍弱于 NVIDIA。</div></div>
+        </div>
         <div class="scard card" style="padding:1.4vh 1.4vw">
           <div class="sr"><span class="sh">触点（节选 6 / 24）</span><span class="sh" style="text-align:center">昇腾</span><span class="sh" style="text-align:center">NVIDIA</span><span class="sh" style="text-align:center">差值</span></div>
           <div class="sr"><span class="nm">官网首页</span><span class="pill" style="background:#23A06A">82</span><span class="pill" style="background:#23A06A">74</span><span class="dlt up">+8</span></div>
