@@ -1055,13 +1055,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
   <style>
     .hmfull-wrap{height:100%;min-height:0;display:flex;flex-direction:column;gap:.55vh}
-    .hmfull-diag{display:grid;grid-template-columns:repeat(4,1fr);gap:.7vw;flex:0 0 auto}
-    .hmd{position:relative;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.72);box-shadow:0 10px 26px -20px rgba(30,40,70,.28),inset 0 1px 0 rgba(255,255,255,.86);padding:.62vh .78vw;min-height:0}
-    .hmd:after{content:"";position:absolute;right:-18px;bottom:-22px;width:90px;height:70px;border-radius:999px;background:radial-gradient(circle at 50% 50%,rgba(199,0,11,.16),rgba(199,0,11,0) 68%);pointer-events:none}
-    .hmd .k{font-size:var(--fs-xs);font-weight:800;color:#5C6472;line-height:1.2}
-    .hmd .v{margin-top:.24vh;font-family:'JetBrains Mono';font-size:var(--fs-h3);font-weight:900;color:#C7000B;line-height:1}
-    .hmd .d{margin-top:.18vh;font-size:var(--fs-xs);line-height:1.28;color:var(--ink-2)}
-    .hmfull-card{flex:1;min-height:0;padding:.45vh .65vw!important;overflow:hidden}
+    .hmfull-card{flex:1;min-height:0;padding:.48vh .65vw!important;overflow:hidden;position:relative}
     .hmfull{width:100%;height:100%;border-collapse:separate;border-spacing:1px;table-layout:fixed}
     .hmfull col.scene-col{width:48px}
     .hmfull col.task-col{width:178px}
@@ -1069,9 +1063,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull th{font-size:7.8px;font-weight:800;line-height:1;color:#3D4452;background:rgba(255,255,255,.82);border:1px solid rgba(223,223,223,.7);border-radius:4px;padding:1px 3px;text-align:center}
     .hmfull th.cat{font-size:7.6px;color:#2F3D63;background:rgba(47,111,237,.08);border-color:rgba(47,111,237,.16)}
     .hmfull th.rowhead{vertical-align:middle}
-    .hmfull tr.avg td{font-size:7px;line-height:1.05;font-weight:800;border-radius:4px;padding:1px 2px;background:rgba(199,0,11,.055);border:1px solid rgba(199,0,11,.14);color:#6C1D25}
-    .hmfull tr.avg td b{font-family:'JetBrains Mono';font-size:7px;color:#C7000B}
-    .hmfull tr.avg td:first-child{text-align:left;color:#3D4452;background:rgba(47,61,99,.06);border-color:rgba(47,61,99,.14)}
     .hmfull td{font-size:7.8px;line-height:1;border-radius:4px;text-align:center;vertical-align:middle}
     .hmfull .scene{font-size:7.4px;font-weight:900;letter-spacing:.04em;color:#2F3D63;background:rgba(47,61,99,.08);border:1px solid rgba(47,61,99,.16);writing-mode:vertical-rl;text-orientation:mixed;padding:3px 0}
     .hmfull .task{text-align:left;padding:1px 5px;background:rgba(255,255,255,.7);border:1px solid rgba(223,223,223,.7);color:#1B2432;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1081,6 +1072,23 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull .stk.asc{background:#C7000B}.hmfull .stk.nv{background:#76B900;color:#172100}
     .hmfull .cell{font-family:'JetBrains Mono';font-size:7.6px;font-weight:900;border:1px solid transparent;padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .hmfull .sum{font-size:7.8px}
+    .hmfull.is-spot th,.hmfull.is-spot td{opacity:.18;transition:opacity .32s ease,filter .32s ease,transform .32s ease}
+    .hmfull.is-spot .hm-on{opacity:1;filter:saturate(1.25);position:relative;z-index:2}
+    .hmfull.is-spot .hm-on.cell{box-shadow:inset 0 0 0 1px rgba(199,0,11,.34)}
+    .hm-ring{position:absolute;z-index:5;border:2px solid rgba(199,0,11,.86);border-radius:14px;background:linear-gradient(135deg,rgba(199,0,11,.045),rgba(199,0,11,.012));box-shadow:0 0 0 9999px rgba(233,235,238,.58),0 18px 45px rgba(199,0,11,.18);pointer-events:none;transition:all .42s cubic-bezier(.2,.8,.2,1)}
+    .hm-callout{position:absolute;z-index:6;width:min(348px,27vw);padding:1.15vh 1vw 1.05vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
+    .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:center}
+    .hm-callout .hm-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#C7000B;background:radial-gradient(circle at 30% 25%,rgba(199,0,11,.15),rgba(199,0,11,.035) 70%);border:1px solid rgba(199,0,11,.12)}
+    .hm-callout .hm-ico svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .hm-callout .k{font-size:var(--fs-sm);font-weight:850;color:#465063;line-height:1.18}
+    .hm-callout .v{margin-top:.22vh;font-family:'JetBrains Mono';font-size:var(--fs-h3);font-weight:950;color:#C7000B;line-height:1}
+    .hm-callout .d{margin-top:.62vh;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
+    .hm-callout .hm-demo{margin-top:.78vh;display:flex;align-items:center;gap:6px}
+    .hm-callout .hm-demo span{height:8px;border-radius:999px;background:linear-gradient(90deg,rgba(199,0,11,.18),rgba(199,0,11,.42));border:1px solid rgba(199,0,11,.12)}
+    .hm-callout .hm-demo span:nth-child(1){width:42px}.hm-callout .hm-demo span:nth-child(2){width:72px}.hm-callout .hm-demo span:nth-child(3){width:34px}.hm-callout .hm-demo span:nth-child(4){width:58px}
+    .hm-steps{position:absolute;z-index:7;right:1vw;bottom:1.2vh;display:flex;gap:6px}
+    .hm-step{width:8px;height:8px;border-radius:50%;border:0;background:rgba(47,61,99,.22);padding:0;cursor:pointer}
+    .hm-step.on{width:22px;border-radius:999px;background:#C7000B}
     .hmfull-note{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs);color:#8E96A3}
     .hmfull-note b{color:#1B2432}.hmfull-note .hm-grad{width:92px}
   </style>
@@ -1095,14 +1103,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
-        <div class="hmfull-diag" aria-label="AI 可用性按指标汇总诊断">
-          <div class="hmd"><div class="k">最大缺口 · 模型自带知识</div><div class="v">−33.8</div><div class="d">CANN 56.9 / CUDA 90.8；模型记忆里对昇腾算子与排障经验沉淀不足。</div></div>
-          <div class="hmd"><div class="k">版本清晰度</div><div class="v">−25.4</div><div class="d">CANN 58.5 / CUDA 83.8；版本号、适配矩阵、历史文档需要更稳定地被识别。</div></div>
-          <div class="hmd"><div class="k">官方可抓取性</div><div class="v">−20.8</div><div class="d">CANN 79.2 / CUDA 100.0；深层页面仍有抓取受阻，AI 不能只靠人眼可见页面。</div></div>
-          <div class="hmd"><div class="k">综合可用性</div><div class="v">−18.5</div><div class="d">CANN 73.5 / CUDA 92.0；差距不是平均散落，而是集中在深层算子、排障与迁移任务。</div></div>
-        </div>
         <div class="card hmfull-card">
           <table class="hmfull" id="mFull" aria-label="opknow 全量矩阵"></table>
+          <div class="hm-ring" id="hmRing" aria-hidden="true"></div>
+          <div class="hm-callout" id="hmCallout" aria-live="polite"></div>
+          <div class="hm-steps" id="hmSteps" aria-label="矩阵聚焦讲解"></div>
         </div>
         <div class="hmfull-note"><b>读法：</b>左侧为任务场景；每个任务两行：CUDA / CANN；指标按触达、质量、生态支撑、成本与产出四类展开；2 红 / 3 橙 / 4 绿 / 5 蓝。<span style="flex:1"></span><span>2</span><span class="hm-grad"></span><span>5</span></div>
       </div>
@@ -1117,7 +1122,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       function fmt(v){return v>=0.995?'1.00':v.toFixed(2).replace(/^0/, '');}
       function desc(score){return score<=40?'低分：信息链路断点明显。':score<=60?'中低：可用但需要绕行或证据偏弱。':score<=80?'中高：大体可用，仍有摩擦。':'高分：证据充分、路径清楚。';}
       function cellTip(c,task,stk,col){return '<b>'+task+' · '+stk+'</b><br>'+col+'：'+c[0]+'（'+c[1]+' / 100）<br>'+desc(c[1]);}
-      function td(c,extra,task,stk,col,k,side,ci){return '<td class="cell '+(extra||'')+'" data-tip="'+hmAttr(hmTipRich(k,side,ci,cellTip(c,task,stk,col)))+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</td>';}
+      function td(c,extra,task,stk,col,k,side,ci){return '<td class="cell '+(extra||'')+'" data-col="'+ci+'" data-side="'+side+'" data-task="'+k+'" data-score="'+c[1]+'" data-tip="'+hmAttr(hmTipRich(k,side,ci,cellTip(c,task,stk,col)))+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</td>';}
       var scenes=[
         ['选型转换',0,3],['算子开发',3,2],['训练迁移',5,4],['环境容器',9,2],['算子排障',11,4],
         ['训练排障',15,3],['推理部署',18,2],['性能优化',20,3],['调试迁移',23,3]
@@ -1126,22 +1131,82 @@ body.overview #panel,body.overview #toggle{display:none!important}
       scenes.forEach(function(g){for(var i=g[1];i<g[1]+g[2];i++)sceneBy[i]={name:g[0],first:i===g[1],span:g[2]*2};});
       var h='<colgroup><col class="scene-col"><col class="task-col"><col class="stk-col">'+cols.map(function(){return '<col>';}).join('')+'</colgroup><thead>'
         +'<tr><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>场景</b><br>按开发任务类型分组。')+'">场景</th><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>任务</b><br>每行是一道模拟开发者会问的问题。')+'">任务</th><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>栈</b><br>CUDA / CANN 使用同一指标口径对比。')+'">栈</th><th class="cat" colspan="2" data-tip="'+hmAttr('<b>官方触达</b><br>能否找到官方来源、能否抓取正文。')+'">官方触达</th><th class="cat" colspan="2" data-tip="'+hmAttr('<b>官方质量</b><br>正文是否详尽、版本是否清楚。')+'">官方质量</th><th class="cat" colspan="3" data-tip="'+hmAttr('<b>生态支撑</b><br>第三方平台与模型自带知识是否能补位。')+'">生态支撑</th><th class="cat" colspan="4" data-tip="'+hmAttr('<b>成本与产出</b><br>检索成本、结论可锁定性、复现性与综合分。')+'">成本与产出</th></tr>'
-        +'<tr>'+cols.map(function(c,i){return '<th data-tip="'+hmAttr(hmColTip(i,c))+'">'+c+'</th>';}).join('')+'</tr></thead><tbody>';
-      function avgCell(i,side){
-        return rows.reduce(function(sum,r){return sum+(i===10?Math.round((side==='c'?r.cs:r.ns)*100):(side==='c'?r.c[i][1]:r.u[i][1]));},0)/rows.length;
-      }
-      h+='<tr class="avg"><td colspan="3">指标均值差</td>'+cols.map(function(c,i){
-        var ca=avgCell(i,'c'), cu=avgCell(i,'u'), gap=ca-cu;
-        return '<td data-tip="'+hmAttr('<b>'+c+' · 26 任务均值</b><br>CANN '+ca.toFixed(1)+' / CUDA '+cu.toFixed(1)+'<br>差值 '+gap.toFixed(1))+'">差 <b>'+gap.toFixed(1)+'</b><br>C '+ca.toFixed(0)+' / N '+cu.toFixed(0)+'</td>';
-      }).join('')+'</tr>';
+        +'<tr>'+cols.map(function(c,i){return '<th data-col="'+i+'" data-tip="'+hmAttr(hmColTip(i,c))+'">'+c+'</th>';}).join('')+'</tr></thead><tbody>';
       rows.forEach(function(r,ri){
         var c=r.c.slice(); c[10]=[fmt(r.cs),Math.round(r.cs*100)];
         var u=r.u.slice(); u[10]=[fmt(r.ns),Math.round(r.ns*100)];
         var sc=sceneBy[ri], sceneCell=sc&&sc.first?'<td class="scene" rowspan="'+sc.span+'">'+sc.name+'</td>':'';
-        h+='<tr>'+sceneCell+'<td class="task" rowspan="2" data-tip="'+hmAttr(hmTaskTip(r.k,'<b>'+r.n+'</b><br>CANN '+fmt(r.cs)+' / CUDA '+fmt(r.ns)))+'"><b>'+r.k+'</b>'+r.n+'<small>CANN '+fmt(r.cs)+' / CUDA '+fmt(r.ns)+'</small></td><td class="stk nv">CUDA</td>'+u.map(function(x,i){return td(x,i===10?'sum':'',r.n,'CUDA',cols[i],r.k,'cuda',i);}).join('')+'</tr>';
-        h+='<tr><td class="stk asc">CANN</td>'+c.map(function(x,i){return td(x,i===10?'sum':'',r.n,'CANN',cols[i],r.k,'cann',i);}).join('')+'</tr>';
+        h+='<tr data-task="'+r.k+'" data-side="cuda">'+sceneCell+'<td class="task" rowspan="2" data-task="'+r.k+'" data-tip="'+hmAttr(hmTaskTip(r.k,'<b>'+r.n+'</b><br>CANN '+fmt(r.cs)+' / CUDA '+fmt(r.ns)))+'"><b>'+r.k+'</b>'+r.n+'<small>CANN '+fmt(r.cs)+' / CUDA '+fmt(r.ns)+'</small></td><td class="stk nv" data-side="cuda" data-task="'+r.k+'">CUDA</td>'+u.map(function(x,i){return td(x,i===10?'sum':'',r.n,'CUDA',cols[i],r.k,'cuda',i);}).join('')+'</tr>';
+        h+='<tr data-task="'+r.k+'" data-side="cann"><td class="stk asc" data-side="cann" data-task="'+r.k+'">CANN</td>'+c.map(function(x,i){return td(x,i===10?'sum':'',r.n,'CANN',cols[i],r.k,'cann',i);}).join('')+'</tr>';
       });
       table.innerHTML=h+'</tbody>';
+      var card=table.closest('.hmfull-card'), ring=document.getElementById('hmRing'), callout=document.getElementById('hmCallout'), stepBox=document.getElementById('hmSteps');
+      var focus=[
+        {k:'own',title:'最大缺口 · 模型自带知识',val:'−33.8',desc:'CANN 56.9 / CUDA 90.8。模型记忆里对昇腾算子与排障经验沉淀不足；官方或第三方抓取一旦受阻，就缺少可替代证据。',icon:'brain',sel:'[data-col="6"]',ring:'[data-col="6"]'},
+        {k:'version',title:'版本清晰度',val:'−25.4',desc:'CANN 58.5 / CUDA 83.8。版本号、适配矩阵、历史文档散在多处，AI 不容易判断当前推荐版本。',icon:'tag',sel:'[data-col="3"]',ring:'[data-col="3"]'},
+        {k:'fetch',title:'官方抓取受阻集中在关键任务',val:'D 正文 = 0',desc:'不是所有官方页都不可抓，而是自定义算子 how-to 这类深层页面受阻；这会直接拖低“写算子”任务。',icon:'doc',sel:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell',ring:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell'},
+        {k:'deep',title:'深层算子与排障场景形成综合低谷',val:'D / M / L',desc:'综合低分集中在自定义算子、Tiling、精度排查等深层任务；上手类任务接近 CUDA，真正短板在专业问题链路。',icon:'target',sel:'[data-task="D"].task, [data-task="M"].task, [data-task="L"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell, tr[data-task="L"][data-side="cann"] .stk, tr[data-task="L"][data-side="cann"] .cell',ring:'[data-task="D"].task, [data-task="M"].task, [data-task="L"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell, tr[data-task="L"][data-side="cann"] .stk, tr[data-task="L"][data-side="cann"] .cell'}
+      ];
+      function iconSvg(type){
+        var p={
+          brain:'<path d="M9 4.5a3 3 0 0 0-3 3v.2A3.5 3.5 0 0 0 4.5 14c0 2 1.5 3.5 3.5 3.5h1V4.5Z"/><path d="M15 4.5a3 3 0 0 1 3 3v.2A3.5 3.5 0 0 1 19.5 14c0 2-1.5 3.5-3.5 3.5h-1V4.5Z"/><path d="M9 8h2M13 8h2M9 13h2M13 13h2"/>',
+          tag:'<path d="M4.5 5.5v5.2c0 .5.2 1 .6 1.4l6.7 6.7a2 2 0 0 0 2.8 0l4.2-4.2a2 2 0 0 0 0-2.8L12.1 5a2 2 0 0 0-1.4-.6H5.5a1 1 0 0 0-1 1Z"/><circle cx="8.2" cy="8.2" r="1.2"/>',
+          doc:'<path d="M7 3.8h6l4 4v12.4H7z"/><path d="M13 3.8v4h4M9.5 11h5M9.5 14h5M9.5 17h3"/>',
+          target:'<circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3"/>'
+        };
+        return '<svg viewBox="0 0 24 24" aria-hidden="true">'+(p[type]||p.target)+'</svg>';
+      }
+      function calloutHtml(f){
+        return '<div class="hm-top"><div class="hm-ico">'+iconSvg(f.icon)+'</div><div><div class="k">'+f.title+'</div><div class="v">'+f.val+'</div></div></div><div class="d">'+f.desc+'</div><div class="hm-demo" aria-hidden="true"><span></span><span></span><span></span><span></span></div>';
+      }
+      function placeCallout(box){
+        if(!callout||!card)return;
+        var cr=card.getBoundingClientRect(), cw=callout.offsetWidth||320, ch=callout.offsetHeight||128, gap=14;
+        var rel={l:box.l-cr.left,t:box.t-cr.top,r:box.r-cr.left,b:box.b-cr.top};
+        var x=rel.r+gap;
+        if(x+cw>cr.width-10)x=rel.l-cw-gap;
+        if(x<10)x=Math.min(cr.width-cw-10,Math.max(10,rel.r-cw));
+        var y=rel.t;
+        if(rel.r-rel.l>cr.width*.68)y=rel.t-ch-gap;
+        if(y<10)y=rel.b+gap;
+        if(y+ch>cr.height-10)y=Math.max(10,cr.height-ch-10);
+        callout.style.left=x+'px';
+        callout.style.top=y+'px';
+      }
+      function setStep(idx){
+        var f=focus[idx%focus.length];
+        table.classList.add('is-spot');
+        table.querySelectorAll('.hm-on').forEach(function(el){el.classList.remove('hm-on');});
+        var els=[].slice.call(table.querySelectorAll(f.sel));
+        var ringEls=[].slice.call(table.querySelectorAll(f.ring||f.sel));
+        els.forEach(function(el){el.classList.add('hm-on');});
+        table.querySelectorAll('th[data-col]').forEach(function(th){
+          var col=th.getAttribute('data-col');
+          if(els.some(function(el){return el.getAttribute('data-col')===col;}))th.classList.add('hm-on');
+        });
+        if(ringEls.length&&ring&&card){
+          var cr=card.getBoundingClientRect(), box=ringEls.reduce(function(b,el){
+            var r=el.getBoundingClientRect();
+            return{l:Math.min(b.l,r.left),t:Math.min(b.t,r.top),r:Math.max(b.r,r.right),b:Math.max(b.b,r.bottom)};
+          },{l:Infinity,t:Infinity,r:-Infinity,b:-Infinity});
+          ring.style.left=(box.l-cr.left-7)+'px'; ring.style.top=(box.t-cr.top-7)+'px';
+          ring.style.width=(box.r-box.l+14)+'px'; ring.style.height=(box.b-box.t+14)+'px';
+          if(callout){
+            callout.innerHTML=calloutHtml(f);
+            placeCallout(box);
+          }
+        }
+        if(stepBox)stepBox.querySelectorAll('.hm-step').forEach(function(b,i){b.classList.toggle('on',i===idx%focus.length);});
+        window.__hmStep=idx%focus.length;
+      }
+      if(stepBox){
+        stepBox.innerHTML=focus.map(function(_,i){return '<button class="hm-step" type="button" aria-label="聚焦 '+(i+1)+'"></button>';}).join('');
+        stepBox.querySelectorAll('.hm-step').forEach(function(b,i){b.addEventListener('click',function(){setStep(i);});});
+      }
+      setStep(0);
+      clearInterval(window.__hmTimer);
+      window.__hmTimer=setInterval(function(){setStep((window.__hmStep||0)+1);},4200);
+      addEventListener('resize',function(){setStep(window.__hmStep||0);},{passive:true});
     })();
     </script>
   </section>
