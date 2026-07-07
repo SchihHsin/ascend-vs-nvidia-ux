@@ -1076,22 +1076,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull.is-spot .hm-on{opacity:1;filter:saturate(1.25);position:relative;z-index:2}
     .hmfull.is-spot .hm-on.cell{box-shadow:inset 0 0 0 1px rgba(199,0,11,.34)}
     .hm-ring{position:absolute;z-index:5;border:2px solid rgba(199,0,11,.86);border-radius:14px;background:linear-gradient(135deg,rgba(199,0,11,.045),rgba(199,0,11,.012));box-shadow:0 0 0 9999px rgba(233,235,238,.58),0 18px 45px rgba(199,0,11,.18);pointer-events:none;transition:all .42s cubic-bezier(.2,.8,.2,1)}
-    .hm-callout{position:absolute;z-index:6;width:min(364px,28vw);padding:1.15vh 1vw 1.05vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:auto;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
+    .hm-callout{position:absolute;z-index:6;width:min(382px,29vw);padding:1.28vh 1.08vw 1.16vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
     .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center}
     .hm-callout .hm-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#C7000B;background:radial-gradient(circle at 30% 25%,rgba(199,0,11,.15),rgba(199,0,11,.035) 70%);border:1px solid rgba(199,0,11,.12)}
     .hm-callout .hm-ico svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .hm-callout .hm-no{align-self:start;display:block;width:auto;height:auto;border-radius:0;background:transparent;border:0;font-family:'JetBrains Mono';font-size:var(--fs-h3);font-weight:500;color:rgba(199,0,11,.48);line-height:.9;padding:0}
-    .hm-callout .k{font-size:var(--fs-sm);font-weight:850;color:#465063;line-height:1.18}
+    .hm-callout .hm-no{align-self:start;display:block;width:auto;height:auto;border-radius:0;background:transparent;border:0;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:calc(var(--fs-h3)*1.28);font-weight:300;color:rgba(199,0,11,.42);line-height:.82;letter-spacing:.02em;padding:0}
+    .hm-callout .k{font-size:var(--fs-body);font-weight:850;color:#465063;line-height:1.2}
     .hm-callout .v{margin-top:.22vh;font-family:'JetBrains Mono';font-size:var(--fs-h3);font-weight:950;color:#C7000B;line-height:1}
-    .hm-callout .d{margin-top:.62vh;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
-    .hm-callout .hm-demo{margin-top:.78vh;display:flex;align-items:center;gap:6px}
-    .hm-callout .hm-demo span{height:8px;border-radius:999px;background:linear-gradient(90deg,rgba(199,0,11,.18),rgba(199,0,11,.42));border:1px solid rgba(199,0,11,.12)}
-    .hm-callout .hm-demo span:nth-child(1){width:42px}.hm-callout .hm-demo span:nth-child(2){width:72px}.hm-callout .hm-demo span:nth-child(3){width:34px}.hm-callout .hm-demo span:nth-child(4){width:58px}
-    .hm-nav{margin-top:.82vh;display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .hm-nav button{width:32px;height:28px;border:0;border-radius:9px;background:rgba(47,61,99,.09);color:#2F3D63;font-family:'JetBrains Mono';font-size:var(--fs-body);font-weight:900;cursor:pointer;transition:background .15s,color .15s,transform .15s}
-    .hm-nav button:hover{background:#C7000B;color:#fff;transform:translateY(-1px)}
-    .hm-nav .hm-progress{flex:1;height:5px;border-radius:999px;background:rgba(47,61,99,.1);overflow:hidden}
-    .hm-nav .hm-progress i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(199,0,11,.42),rgba(199,0,11,.86));transition:width .28s ease}
+    .hm-callout .d{margin-top:.72vh;font-size:var(--fs-body);line-height:1.46;color:var(--ink-2)}
     .hm-steps{position:absolute;z-index:7;right:1vw;bottom:1.2vh;display:flex;gap:5px}
     .hm-step{min-width:22px;height:20px;border-radius:999px;border:1px solid rgba(47,61,99,.13);background:rgba(255,255,255,.72);color:#6B7280;padding:0 6px;cursor:pointer;font-family:'JetBrains Mono';font-size:10px;font-weight:850}
     .hm-step.on{background:#C7000B;border-color:#C7000B;color:#fff}
@@ -1164,8 +1156,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       }
       function calloutHtml(f,idx,total){
         var no=String(idx+1).padStart(2,'0');
-        var pct=((idx+1)/total*100).toFixed(2)+'%';
-        return '<div class="hm-top"><div class="hm-ico">'+iconSvg(f.icon)+'</div><div><div class="k">'+f.title+'</div><div class="v">'+f.val+'</div></div><div class="hm-no">'+no+'</div></div><div class="d">'+f.desc+'</div><div class="hm-demo" aria-hidden="true"><span></span><span></span><span></span><span></span></div><div class="hm-nav"><button type="button" data-dir="-1" aria-label="上一条">‹</button><div class="hm-progress" aria-hidden="true"><i style="width:'+pct+'"></i></div><button type="button" data-dir="1" aria-label="下一条">›</button></div>';
+        return '<div class="hm-top"><div class="hm-ico">'+iconSvg(f.icon)+'</div><div><div class="k">'+f.title+'</div><div class="v">'+f.val+'</div></div><div class="hm-no">'+no+'</div></div><div class="d">'+f.desc+'</div>';
       }
       function placeCallout(box){
         if(!callout||!card)return;
@@ -1210,16 +1201,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
       if(stepBox){
         stepBox.innerHTML=focus.map(function(_,i){return '<button class="hm-step" type="button" aria-label="聚焦 '+(i+1)+'">'+(i+1)+'</button>';}).join('');
         stepBox.querySelectorAll('.hm-step').forEach(function(b,i){b.addEventListener('click',function(){setStep(i);});});
-      }
-      if(callout){
-        callout.addEventListener('click',function(ev){
-          var btn=ev.target.closest('button[data-dir]');
-          if(!btn)return;
-          ev.preventDefault();
-          ev.stopPropagation();
-          var dir=Number(btn.getAttribute('data-dir'))||1;
-          setStep((window.__hmStep||0)+dir+focus.length);
-        });
       }
       setStep(0);
       clearInterval(window.__hmTimer);
