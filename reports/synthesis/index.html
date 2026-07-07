@@ -1197,34 +1197,34 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var co=coBox||callout.getBoundingClientRect();
         var kx=co.left+co.width/2, ky=co.top+co.height/2;
         var dx=kx-cx, dy=ky-cy;
-        var len=76, thick=3, pad=12;
+        var thick=3, pad=12, near=7;
         function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
         if((co.top>=box.b)||(co.bottom<=box.t)){
           var below=co.top>=box.b||(!(co.bottom<=box.t)&&dy>=0);
-          var y=below?(box.b+co.top)/2:(co.bottom+box.t)/2;
-          if(!isFinite(y))y=below?box.b+16:box.t-16;
-          var x=clamp((cx+kx)/2,cr.left+pad+len/2,cr.right-pad-len/2);
-          ring.style.left=(x-len/2-cr.left)+'px';
+          var hLen=Math.min(co.width,cr.width-pad*2);
+          var y=below?co.top-near:co.bottom+near;
+          var x=clamp(co.left+co.width/2,cr.left+pad+hLen/2,cr.right-pad-hLen/2);
+          ring.style.left=(x-hLen/2-cr.left)+'px';
           ring.style.top=(clamp(y,cr.top+pad,cr.bottom-pad)-thick/2-cr.top)+'px';
-          ring.style.width=len+'px';
+          ring.style.width=hLen+'px';
           ring.style.height=thick+'px';
         }else if((co.left>=box.r)||(co.right<=box.l)||(Math.abs(dx)>=Math.abs(dy))){
           var right=co.left>=box.r||(!(co.right<=box.l)&&dx>=0);
-          var x=right?(box.r+co.left)/2:(co.right+box.l)/2;
-          if(!isFinite(x))x=right?box.r+16:box.l-16;
-          var y=clamp((cy+ky)/2,cr.top+pad+len/2,cr.bottom-pad-len/2);
+          var vLen=Math.min(co.height,cr.height-pad*2);
+          var x=right?co.left-near:co.right+near;
+          var y=clamp(co.top+co.height/2,cr.top+pad+vLen/2,cr.bottom-pad-vLen/2);
           ring.style.left=(clamp(x,cr.left+pad,cr.right-pad)-thick/2-cr.left)+'px';
-          ring.style.top=(y-len/2-cr.top)+'px';
+          ring.style.top=(y-vLen/2-cr.top)+'px';
           ring.style.width=thick+'px';
-          ring.style.height=len+'px';
+          ring.style.height=vLen+'px';
         }else{
           var below=dy>=0;
-          var y=below?(box.b+co.top)/2:(co.bottom+box.t)/2;
-          if(!isFinite(y))y=below?box.b+16:box.t-16;
-          var x=clamp((cx+kx)/2,cr.left+pad+len/2,cr.right-pad-len/2);
-          ring.style.left=(x-len/2-cr.left)+'px';
+          var hLen=Math.min(co.width,cr.width-pad*2);
+          var y=below?co.top-near:co.bottom+near;
+          var x=clamp(co.left+co.width/2,cr.left+pad+hLen/2,cr.right-pad-hLen/2);
+          ring.style.left=(x-hLen/2-cr.left)+'px';
           ring.style.top=(clamp(y,cr.top+pad,cr.bottom-pad)-thick/2-cr.top)+'px';
-          ring.style.width=len+'px';
+          ring.style.width=hLen+'px';
           ring.style.height=thick+'px';
         }
       }
