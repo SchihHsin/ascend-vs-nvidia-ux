@@ -1068,8 +1068,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull.is-spot .hm-ref,.hmfull.is-spot .hm-on{opacity:1;filter:saturate(1.18);position:relative;z-index:2}
     .hmfull.is-spot.hm-mark-col .hm-on.cell[data-side="cann"]{box-shadow:inset 2px 0 0 rgba(199,0,11,.95)}
     .hmfull.is-spot.hm-mark-col .hm-ref.cell[data-side="cuda"]{box-shadow:inset 2px 0 0 rgba(118,185,0,.95)}
-    .hm-ring{position:absolute;z-index:5;box-sizing:border-box;border:2px dotted rgba(55,61,72,.9);border-radius:14px;background:transparent;box-shadow:none;pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),width .42s cubic-bezier(.2,.8,.2,1),height .42s cubic-bezier(.2,.8,.2,1),opacity .24s ease}
-    .hm-ring.off{opacity:0}
+    .hm-rings{position:absolute;inset:0;z-index:5;pointer-events:none}
+    .hm-ring{position:absolute;box-sizing:border-box;border:2px dotted rgba(55,61,72,.9);border-radius:14px;background:transparent;box-shadow:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),width .42s cubic-bezier(.2,.8,.2,1),height .42s cubic-bezier(.2,.8,.2,1),opacity .24s ease}
+    .hm-rings.off{opacity:0}
     .hm-callout{position:absolute;z-index:6;width:min(382px,29vw);padding:1.28vh 1.08vw 1.16vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
     .hm-callout.off{opacity:0;transform:translateY(4px)}
     .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:start}
@@ -1122,7 +1123,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <table class="hmfull" id="mFull" aria-label="opknow 全量矩阵"></table>
           <div class="hm-callout" id="hmCallout" aria-live="polite"></div>
         </div>
-        <div class="hm-ring" id="hmRing" aria-hidden="true"></div>
+        <div class="hm-rings off" id="hmRings" aria-hidden="true"></div>
       </div>
     </div>
     <script>
@@ -1152,15 +1153,15 @@ body.overview #panel,body.overview #toggle{display:none!important}
         h+='<tr data-task="'+r.k+'" data-side="cann"><td class="stk asc" data-side="cann" data-task="'+r.k+'">CANN</td>'+c.map(function(x,i){return td(x,i===10?'sum':'',r.n,'CANN',cols[i],r.k,'cann',i);}).join('')+'</tr>';
       });
       table.innerHTML=h+'</tbody>';
-      var card=table.closest('.hmfull-card'), wrap=table.closest('.hmfull-wrap'), ring=document.getElementById('hmRing'), callout=document.getElementById('hmCallout'), stepBox=document.getElementById('hmSteps');
+      var card=table.closest('.hmfull-card'), wrap=table.closest('.hmfull-wrap'), rings=document.getElementById('hmRings'), callout=document.getElementById('hmCallout'), stepBox=document.getElementById('hmSteps');
       var focus=[
         {k:'version',mark:'col',title:'问题 1 · 版本体系混乱',val:'④ 多数低分',desc:'同一主题散落在多棵版本树，缺少当前推荐版本；AI 和开发者都需要先判断“该看哪一版”。',icon:'tag',sel:'tr[data-side="cann"] [data-col="3"]',ref:'tr[data-side="cuda"] [data-col="3"]',ring:'tr[data-side="cann"] [data-col="3"]',demo:`<div class="qb"><i></i><i></i><i></i><span>搜“atc 模型转换”命中</span></div><div class="qd"><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">8.0RC2</span></div><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">8.0RC3</span></div><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">800alpha</span></div></div>`},
         {k:'own',mark:'col',title:'问题 2 · 模型自带知识偏薄',val:'−33.8',desc:'CANN 56.9 / CUDA 90.8。官方或第三方抓取一旦受阻，模型记忆里缺少可替代证据。',icon:'brain',sel:'tr[data-side="cann"] [data-col="6"]',ref:'tr[data-side="cuda"] [data-col="6"]',ring:'tr[data-side="cann"] [data-col="6"]',demo:`<div class="qd"><div><span class="muted">CUDA</span> <span class="ok">不检索也能答 ✓</span></div><div style="margin-top:4px"><span class="muted">CANN</span> <span class="bad">不检索就答不了 ✕</span></div></div>`},
         {k:'third',mark:'col',title:'问题 3 · 第三方生态少而同质',val:'⑤ K/M/N/S/X = 2',desc:'第三方内容多集中在少数平台，互证不足；对 Agent 有效的第三方来源比人能看到的更窄。',icon:'target',sel:'tr[data-side="cann"] [data-col="4"], tr[data-side="cann"] [data-col="5"]',ref:'tr[data-side="cuda"] [data-col="4"], tr[data-side="cuda"] [data-col="5"]',ring:'tr[data-side="cann"] [data-col="4"], tr[data-side="cann"] [data-col="5"]',demo:`<div class="qd"><div class="chips"><span class="chip">CSDN ×2</span><span class="chip">华为云 bbs</span><span class="chip bad">知乎 403 ✕</span></div></div>`},
         {k:'spa',title:'问题 4 · 官方 SPA 正文不可取回',val:'D 正文 = 0',desc:'不是所有官方页都不可抓，而是自定义算子 how-to 这类深层页面受阻，直接拖低“写算子”任务。',icon:'doc',sel:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',ref:'tr[data-task="D"][data-side="cuda"] [data-col="1"], tr[data-task="D"][data-side="cuda"] [data-col="2"]',ring:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',demo:`<div class="qb"><i></i><i></i><i></i><span>Agent 抓 opdevg 页</span></div><div class="qd" style="font-family:'JetBrains Mono';color:#999;font-size:10.5px"><div>&lt;title&gt;算子开发-CANN文档</div><div>导航：首页／文档／社区…</div><div class="zero">—— 正文 0 字 ——</div></div>`},
         {k:'err',title:'问题 5 · 可取回不等于可解决',val:'E 综合 .55',desc:'错误码能命中专属页、正文也可取回，但内容过于泛化，与正文不可取回是两类不同失败。',icon:'doc',sel:'[data-task="E"].task, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] [data-col="1"], tr[data-task="E"][data-side="cann"] [data-col="2"], tr[data-task="E"][data-side="cann"] [data-col="10"]',ref:'tr[data-task="E"][data-side="cuda"] .stk, tr[data-task="E"][data-side="cuda"] [data-col="1"], tr[data-task="E"][data-side="cuda"] [data-col="2"], tr[data-task="E"][data-side="cuda"] [data-col="10"]',ring:'[data-task="E"].task, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] [data-col="1"], tr[data-task="E"][data-side="cann"] [data-col="2"], tr[data-task="E"][data-side="cann"] [data-col="10"]',demo:`<div class="qd" style="font-family:'JetBrains Mono'"><div style="font-weight:700;color:#222">EZ9999 AclNN Inner Error</div><div style="margin-top:4px">可能原因：<span class="bad">N/A</span></div><div class="muted">仅 2 条通用建议 · 无排查步骤</div></div>`},
-        {k:'funnel',title:'问题 6 · 深层算子与场景形成综合低谷',val:'D / M / L',desc:'自定义算子、Tiling、精度排查等任务连续低分，说明问题不在单页，而在高难度场景知识链路不足。',icon:'target',sel:'[data-task="D"].task, [data-task="M"].task, [data-task="L"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell, tr[data-task="L"][data-side="cann"] .stk, tr[data-task="L"][data-side="cann"] .cell',ref:'tr[data-task="D"][data-side="cuda"] .stk, tr[data-task="D"][data-side="cuda"] .cell, tr[data-task="M"][data-side="cuda"] .stk, tr[data-task="M"][data-side="cuda"] .cell, tr[data-task="L"][data-side="cuda"] .stk, tr[data-task="L"][data-side="cuda"] .cell',ring:'[data-task="D"].task, [data-task="M"].task, [data-task="L"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell, tr[data-task="L"][data-side="cann"] .stk, tr[data-task="L"][data-side="cann"] .cell',demo:`<div class="qd"><div class="bars"><div class="bar" style="height:34px"><span>D .41</span></div><div class="bar" style="height:29px"><span>M .63</span></div><div class="bar" style="height:25px;background:linear-gradient(#e07a7d,#f0b3b5)"><span>L .69</span></div></div></div>`},
-        {k:'cost',title:'问题 7 · 检索成本尖刺',val:'D / K / O = 1',desc:'多数任务成本正常，少数深层任务一次抓取失败就把成本打穿，响应变慢且证据链变脆。',icon:'brain',sel:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',ref:'tr[data-task="D"][data-side="cuda"] [data-col="7"], tr[data-task="K"][data-side="cuda"] [data-col="7"], tr[data-task="O"][data-side="cuda"] [data-col="7"]',ring:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',demo:`<div class="qd"><svg viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div>`}
+        {k:'funnel',split:true,title:'问题 6 · 深层算子与场景形成综合低谷',val:'D / M / L',desc:'自定义算子、Tiling、精度排查等任务连续低分，说明问题不在单页，而在高难度场景知识链路不足。',icon:'target',sel:'[data-task="D"].task, [data-task="M"].task, [data-task="L"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell, tr[data-task="L"][data-side="cann"] .stk, tr[data-task="L"][data-side="cann"] .cell',ref:'tr[data-task="D"][data-side="cuda"] .stk, tr[data-task="D"][data-side="cuda"] .cell, tr[data-task="M"][data-side="cuda"] .stk, tr[data-task="M"][data-side="cuda"] .cell, tr[data-task="L"][data-side="cuda"] .stk, tr[data-task="L"][data-side="cuda"] .cell',ring:'[data-task="D"].task, [data-task="M"].task, [data-task="L"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell, tr[data-task="L"][data-side="cann"] .stk, tr[data-task="L"][data-side="cann"] .cell',demo:`<div class="qd"><div class="bars"><div class="bar" style="height:34px"><span>D .41</span></div><div class="bar" style="height:29px"><span>M .63</span></div><div class="bar" style="height:25px;background:linear-gradient(#e07a7d,#f0b3b5)"><span>L .69</span></div></div></div>`},
+        {k:'cost',split:true,title:'问题 7 · 检索成本尖刺',val:'D / K / O = 1',desc:'多数任务成本正常，少数深层任务一次抓取失败就把成本打穿，响应变慢且证据链变脆。',icon:'brain',sel:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',ref:'tr[data-task="D"][data-side="cuda"] [data-col="7"], tr[data-task="K"][data-side="cuda"] [data-col="7"], tr[data-task="O"][data-side="cuda"] [data-col="7"]',ring:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',demo:`<div class="qd"><svg viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div>`}
       ];
       function iconSvg(type){
         var p={
@@ -1190,11 +1191,51 @@ body.overview #panel,body.overview #toggle{display:none!important}
         callout.style.top=y+'px';
         return{left:cr.left+x,top:cr.top+y,right:cr.left+x+cw,bottom:cr.top+y+ch,width:cw,height:ch};
       }
+      function rowKey(el){
+        var task=el.getAttribute('data-task');
+        var side=el.getAttribute('data-side');
+        if(el.classList.contains('task'))side='task';
+        return task+'|'+(side||'task');
+      }
+      function groupRingEls(els){
+        var rows={};
+        els.forEach(function(el){
+          var key=rowKey(el), r=el.getBoundingClientRect();
+          if(!rows[key])rows[key]={l:Infinity,t:Infinity,r:-Infinity,b:-Infinity};
+          rows[key]={l:Math.min(rows[key].l,r.left),t:Math.min(rows[key].t,r.top),r:Math.max(rows[key].r,r.right),b:Math.max(rows[key].b,r.bottom)};
+        });
+        var parts=Object.keys(rows).map(function(k){return rows[k];}).sort(function(a,b){return a.t-b.t;});
+        if(!parts.length)return[];
+        var groups=[], gap=34;
+        parts.forEach(function(p){
+          var last=groups[groups.length-1];
+          if(!last||p.t-last.b>gap){groups.push({l:p.l,t:p.t,r:p.r,b:p.b});}
+          else{last.l=Math.min(last.l,p.l);last.t=Math.min(last.t,p.t);last.r=Math.max(last.r,p.r);last.b=Math.max(last.b,p.b);}
+        });
+        return groups;
+      }
+      function drawRings(boxes){
+        if(!rings||!card)return;
+        rings.innerHTML='';
+        var cr=card.getBoundingClientRect(), wr=(wrap||card).getBoundingClientRect(), pad=7;
+        boxes.forEach(function(box){
+          var vbox={l:Math.max(box.l,cr.left),t:Math.max(box.t,cr.top),r:Math.min(box.r,cr.right),b:Math.min(box.b,cr.bottom)};
+          if(vbox.r<=vbox.l||vbox.b<=vbox.t)return;
+          var left=Math.max(vbox.l-pad,cr.left), top=Math.max(vbox.t-pad,cr.top), right=Math.min(vbox.r+pad,cr.right), bottom=Math.min(vbox.b+pad,cr.bottom);
+          var el=document.createElement('div');
+          el.className='hm-ring';
+          el.style.left=(left-wr.left)+'px';
+          el.style.top=(top-wr.top)+'px';
+          el.style.width=(right-left)+'px';
+          el.style.height=(bottom-top)+'px';
+          rings.appendChild(el);
+        });
+      }
       function setStep(idx){
         table.querySelectorAll('.hm-on,.hm-ref').forEach(function(el){el.classList.remove('hm-on','hm-ref');});
         if(idx<0){
           table.classList.remove('is-spot','hm-mark-col','hm-mark-row');
-          if(ring)ring.classList.add('off');
+          if(rings){rings.classList.add('off');rings.innerHTML='';}
           if(callout)callout.classList.add('off');
           updatePager(-1);
           window.__hmStep=-1;
@@ -1203,7 +1244,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var f=focus[idx%focus.length];
         table.classList.remove('hm-mark-col','hm-mark-row');
         table.classList.add('is-spot',f.mark==='col'?'hm-mark-col':'hm-mark-row');
-        if(ring)ring.classList.remove('off');
+        if(rings)rings.classList.remove('off');
         if(callout)callout.classList.remove('off');
         var els=[].slice.call(table.querySelectorAll(f.sel));
         var refs=f.ref?[].slice.call(table.querySelectorAll(f.ref)):[];
@@ -1214,18 +1255,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
           var col=th.getAttribute('data-col');
           if(els.concat(refs).some(function(el){return el.getAttribute('data-col')===col;}))th.classList.add('hm-on');
         });
-        if(ringEls.length&&ring&&card){
+        if(ringEls.length&&rings&&card){
           var box=ringEls.reduce(function(b,el){
             var r=el.getBoundingClientRect();
             return{l:Math.min(b.l,r.left),t:Math.min(b.t,r.top),r:Math.max(b.r,r.right),b:Math.max(b.b,r.bottom)};
           },{l:Infinity,t:Infinity,r:-Infinity,b:-Infinity});
-          var cr=card.getBoundingClientRect(), wr=(wrap||card).getBoundingClientRect();
-          var vbox={l:Math.max(box.l,cr.left),t:Math.max(box.t,cr.top),r:Math.min(box.r,cr.right),b:Math.min(box.b,cr.bottom)};
-          if(vbox.r>vbox.l&&vbox.b>vbox.t){
-            var pad=7, left=Math.max(vbox.l-pad,cr.left), top=Math.max(vbox.t-pad,cr.top), right=Math.min(vbox.r+pad,cr.right), bottom=Math.min(vbox.b+pad,cr.bottom);
-            ring.style.left=(left-wr.left)+'px'; ring.style.top=(top-wr.top)+'px';
-            ring.style.width=(right-left)+'px'; ring.style.height=(bottom-top)+'px';
-          }
+          drawRings(f.split?groupRingEls(ringEls):[box]);
           if(callout){
             callout.innerHTML=calloutHtml(f,idx%focus.length,focus.length);
             placeCallout(box);
