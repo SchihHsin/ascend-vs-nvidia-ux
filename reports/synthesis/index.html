@@ -1067,7 +1067,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull.is-spot .hm-on{opacity:1;filter:saturate(1.25);position:relative;z-index:2}
     .hmfull.is-spot .hm-on.cell{box-shadow:inset 0 0 0 1px rgba(199,0,11,.34)}
     .hm-ring{position:absolute;z-index:5;border:2px solid rgba(199,0,11,.86);border-radius:14px;background:linear-gradient(135deg,rgba(199,0,11,.045),rgba(199,0,11,.012));box-shadow:0 0 0 9999px rgba(233,235,238,.58),0 18px 45px rgba(199,0,11,.18);pointer-events:none;transition:all .42s cubic-bezier(.2,.8,.2,1)}
+    .hm-ring.off{opacity:0;box-shadow:none}
     .hm-callout{position:absolute;z-index:6;width:min(382px,29vw);padding:1.28vh 1.08vw 1.16vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
+    .hm-callout.off{opacity:0;transform:translateY(4px)}
     .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:start}
     .hm-callout .hm-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#C7000B;background:radial-gradient(circle at 30% 25%,rgba(199,0,11,.15),rgba(199,0,11,.035) 70%);border:1px solid rgba(199,0,11,.12)}
     .hm-callout .hm-ico svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -1077,7 +1079,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-callout .d{margin-top:.82vh;font-size:var(--fs-body);line-height:1.46;color:var(--ink-2)}
     .hm-steps{position:absolute;z-index:7;right:1vw;bottom:1.2vh;display:flex;gap:5px}
     .hm-step{min-width:22px;height:20px;border-radius:999px;border:1px solid rgba(47,61,99,.13);background:rgba(255,255,255,.72);color:#6B7280;padding:0 6px;cursor:pointer;font-family:'JetBrains Mono';font-size:10px;font-weight:850}
+    .hm-step.overview{font-family:'HarmonyOS Sans SC','Noto Sans SC',sans-serif;font-size:10.5px;padding:0 9px}
+    .hm-step.arrow{min-width:24px;font-size:13px;line-height:1;padding:0 7px}
     .hm-step.on{background:#C7000B;border-color:#C7000B;color:#fff}
+    .hm-step:disabled{opacity:.32;cursor:default;background:rgba(255,255,255,.54);color:#8E96A3}
     .hmfull-note{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs);color:#8E96A3}
     .hmfull-note b{color:#1B2432}.hmfull-note .hm-grad{width:92px}
   </style>
@@ -1164,9 +1169,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
         callout.style.top=y+'px';
       }
       function setStep(idx){
+        table.querySelectorAll('.hm-on').forEach(function(el){el.classList.remove('hm-on');});
+        if(idx<0){
+          table.classList.remove('is-spot');
+          if(ring)ring.classList.add('off');
+          if(callout)callout.classList.add('off');
+          updatePager(-1);
+          window.__hmStep=-1;
+          return;
+        }
         var f=focus[idx%focus.length];
         table.classList.add('is-spot');
-        table.querySelectorAll('.hm-on').forEach(function(el){el.classList.remove('hm-on');});
+        if(ring)ring.classList.remove('off');
+        if(callout)callout.classList.remove('off');
         var els=[].slice.call(table.querySelectorAll(f.sel));
         var ringEls=[].slice.call(table.querySelectorAll(f.ring||f.sel));
         els.forEach(function(el){el.classList.add('hm-on');});
@@ -1186,17 +1201,25 @@ body.overview #panel,body.overview #toggle{display:none!important}
             placeCallout(box);
           }
         }
-        if(stepBox)stepBox.querySelectorAll('.hm-step').forEach(function(b,i){b.classList.toggle('on',i===idx%focus.length);});
+        updatePager(idx%focus.length);
         window.__hmStep=idx%focus.length;
       }
-      if(stepBox){
-        stepBox.innerHTML=focus.map(function(_,i){return '<button class="hm-step" type="button" aria-label="聚焦 '+(i+1)+'">'+(i+1)+'</button>';}).join('');
-        stepBox.querySelectorAll('.hm-step').forEach(function(b,i){b.addEventListener('click',function(){setStep(i);});});
+      function updatePager(idx){
+        if(!stepBox)return;
+        stepBox.querySelectorAll('.hm-page').forEach(function(b,i){b.classList.toggle('on',i===idx+1);});
+        var prev=stepBox.querySelector('[data-dir="-1"]'), next=stepBox.querySelector('[data-dir="1"]');
+        if(prev)prev.disabled=idx<0;
+        if(next)next.disabled=idx>=focus.length-1;
       }
-      setStep(0);
+      if(stepBox){
+        stepBox.innerHTML='<button class="hm-step arrow" type="button" data-dir="-1" aria-label="上一页">‹</button><button class="hm-step hm-page overview" type="button" data-page="-1" aria-label="总览">总览</button>'+focus.map(function(_,i){return '<button class="hm-step hm-page" type="button" data-page="'+i+'" aria-label="聚焦 '+(i+1)+'">'+(i+1)+'</button>';}).join('')+'<button class="hm-step arrow" type="button" data-dir="1" aria-label="下一页">›</button>';
+        stepBox.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){setStep(Number(b.getAttribute('data-page')));});});
+        stepBox.querySelectorAll('[data-dir]').forEach(function(b){b.addEventListener('click',function(){setStep((typeof window.__hmStep==='number'?window.__hmStep:-1)+Number(b.getAttribute('data-dir')));});});
+      }
+      setStep(-1);
       clearInterval(window.__hmTimer);
       window.__hmTimer=null;
-      addEventListener('resize',function(){setStep(window.__hmStep||0);},{passive:true});
+      addEventListener('resize',function(){setStep(typeof window.__hmStep==='number'?window.__hmStep:-1);},{passive:true});
     })();
     </script>
   </section>
