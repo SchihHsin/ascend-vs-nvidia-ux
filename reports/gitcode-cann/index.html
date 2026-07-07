@@ -136,6 +136,8 @@
     .tp-note b{display:block;font-size:12px;margin-bottom:5px;color:var(--ink)}
     .tp-note span{font-size:12px;color:var(--sub);line-height:1.48}
     .tp-tags{margin-top:11px}
+    .tp-evi{margin-top:10px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,#fff,rgba(234,241,255,.62));padding:9px 11px;font-size:12px;color:var(--sub);line-height:1.48}
+    .tp-evi b{color:var(--ink);margin-right:5px}
     .mini{font-size:12px;color:var(--sub)}
     .bar{height:8px;background:var(--soft);border-radius:999px;overflow:hidden;margin-top:10px}
     .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--gold),var(--green));width:var(--w)}
@@ -160,18 +162,18 @@
 <body>
   <nav class="nav">
     <div class="navin">
-      <div class="brand"><b>GitCode CANN</b> 算子开发体验</div>
+      <div class="brand"><b>GitCode CANN</b> 算子开发评测</div>
       <div class="navlinks">
-        <a href="#question">问题</a><a href="#journey">旅程</a><a href="#touchpoints">触点分析</a><a href="#ai">AI 可用性</a><a href="#findings">结论与方案</a><a href="#actions">行动</a>
+        <a href="#question">问题</a><a href="#evidence">细证据</a><a href="#journey">旅程</a><a href="#touchpoints">触点分析</a><a href="#ai">AI 可用性</a><a href="#findings">结论与方案</a><a href="#actions">行动</a>
       </div>
     </div>
   </nav>
 
   <main class="wrap">
     <section class="hero">
-      <div class="eyebrow">Operator development full run · 2026-07-06</div>
-      <h1>GitCode CANN 算子开发链路完整体验报告</h1>
-      <p class="lede">本报告完整跑「算子开发」场景：从 GitCode CANN 入口进入，覆盖 learning hub、10 分钟自定义算子、在线体验、Ascend C 系列、CANNJudge、asc-devkit、ops-test-kit、catlass、cann-samples 与 ops-* 算子库，并同步评估这些内容是否适合作为 AI 助手的可检索知识源。</p>
+      <div class="eyebrow">Operator development full run</div>
+      <h1>基于 GitCode CANN 仓库开发 Ascend C 算子的体验评测</h1>
+      <p class="lede">本报告聚焦一个更具体的问题：开发者基于 GitCode 上的 CANN 仓库开发 Ascend C 自定义算子时，能否拿到足够明确的工程骨架、编译运行、API/样例映射、测试验证、性能调优和贡献路径信息。</p>
       <div class="chips">
         <span class="chip">研究对象：cann-learning-hub</span>
         <span class="chip">研究对象：CANN 组织仓库</span>
@@ -179,57 +181,76 @@
         <span class="chip">范围：算子开发完整链路，不含训练/推理扩展</span>
       </div>
       <div class="grid metrics">
-        <div class="metric"><div class="k">旅程触点</div><div class="v blue">18</div><div class="s">覆盖入口、学习、练习、工程、贡献</div></div>
+        <div class="metric"><div class="k">开发触点</div><div class="v blue">18</div><div class="s">覆盖学习、工程、编译、验证、样例、贡献</div></div>
         <div class="metric"><div class="k">AI 问句</div><div class="v green">5</div><div class="s">搜索 + 抓取 + 评分</div></div>
-        <div class="metric"><div class="k">平均体验分</div><div class="v gold">75</div><div class="s">内容强，首跑与分诊弱</div></div>
-        <div class="metric"><div class="k">AI 可用性</div><div class="v green">82</div><div class="s">README 可抓，仓库关系需补</div></div>
+        <div class="metric"><div class="k">开发承接分</div><div class="v gold">75</div><div class="s">资料厚，工程化承接弱</div></div>
+        <div class="metric"><div class="k">AI 可用性</div><div class="v green">82</div><div class="s">正文可抓，运行/版本/仓库关系需结构化</div></div>
       </div>
     </section>
 
     <section id="question" class="floor">
       <div class="head"><span class="num">01</span><h2>问题定义</h2></div>
       <div class="card pad">
-        <div class="quote">GitCode 上的 CANN learning hub 与 CANN 组织仓库，能否承担「开发者学习入口 + 开源生态索引 + AI 可检索知识库」这三重角色？</div>
+        <div class="quote">基于 GitCode 上这些 CANN 仓库，开发者能否从“看懂一个 Ascend C 自定义算子”走到“本地工程开发、编译运行、测试验证、性能优化和反馈贡献”？</div>
         <div class="grid three" style="margin-top:16px">
-          <div><h3>不是在评估什么</h3><p class="mini">不是泛泛评价 GitCode UI，也不是复刻官网竞品分析。这里看的是 CANN 内容迁入 GitCode 后，能不能成为开发者和 AI 的下一层承接。</p></div>
-          <div><h3>用户是谁</h3><p class="mini">第一次认真做 Ascend C / 自定义算子的开发者，知道目标但不知道先看哪门课、进哪个仓、如何在线或本地跑、怎么测试、去哪练习和贡献。</p></div>
-          <div><h3>成功标准</h3><p class="mini">能完成「找入口 → 学路径 → 跑第一个算子 → 进阶开发 → 测试验证 → 看样例/模板 → 练题 → 反馈/贡献」的完整闭环。</p></div>
+          <div><h3>不是在评估什么</h3><p class="mini">不是泛泛评价 GitCode 界面，也不是看资料是否容易点到。这里看的是仓库内容是否足以支撑真实 Ascend C 算子开发：代码怎么落到工程、怎么编译、怎么验证、怎么调优、怎么贡献。</p></div>
+          <div><h3>用户是谁</h3><p class="mini">第一次认真开发 Ascend C 自定义算子的开发者，目标不是“逛资料”，而是要在本地或在线环境里写出一个算子，接入工程，跑通验证，再找到可复用样例或贡献路径。</p></div>
+          <div><h3>成功标准</h3><p class="mini">能完成「选定算子任务 → 找到最小工程 → 编译运行 → 接入测试 → 对比 Golden → 看样例/模板优化 → 练题或提交反馈」的开发闭环。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="evidence" class="floor">
+      <div class="head"><span class="num">02</span><h2>这次具体抓到了什么</h2></div>
+      <div class="card pad">
+        <p class="mini">下面这些不是推断，而是本轮在 GitCode 页面、README、目录页和截图中实际抓到的内容颗粒。它们说明：CANN 资料不是空的，真正的问题是这些证据没有被组织成“开发 ASC 算子”的工程闭环。</p>
+        <div class="insight-grid" style="margin-top:14px">
+          <div class="insight"><span class="iid">E1</span><h4>learning hub 已有版本与课程事实</h4><dl><dt>抓到</dt><dd>README 写明支持 CANN <b>9.0.0</b>，并展示教程、示例、优化方案和在线互动运行。</dd><dt>问题</dt><dd>这些信息没有汇成“最小 ASC 工程”的固定卡片。</dd></dl></div>
+          <div class="insight"><span class="iid">E2</span><h4>Ascend C 系列目录非常细</h4><dl><dt>抓到</dt><dd>目录包含 HelloWorld、kernel 函数、泛化 Tiling、CPU/NPU 调试、msProf 性能分析等章节。</dd><dt>问题</dt><dd>章节按知识点排布，未按写 kernel、调试、验收、调优的开发动作排布。</dd></dl></div>
+          <div class="insight"><span class="iid">E3</span><h4>在线 Notebook 链接数量足够</h4><dl><dt>抓到</dt><dd>Ascend C 目录页中“在线体验”出现 <b>82</b> 次，且链接带 repoUrl、path、scanFilePath。</dd><dt>问题</dt><dd>在线能跑不等于本地能开发，缺本地等价工程、CMake 和输入输出说明。</dd></dl></div>
+          <div class="insight"><span class="iid">E4</span><h4>硬件限制能抓到，但不够产品化</h4><dl><dt>抓到</dt><dd>Ascend C 系列页提示当前仅针对 <b>Atlas A2</b> 系列验证，其它产品可能存在问题。</dd><dt>问题</dt><dd>该限制没有固定沉淀到每个样例、命令和 AI 可读摘要里。</dd></dl></div>
+          <div class="insight"><span class="iid">E5</span><h4>CANN org 抓到 68 个项目</h4><dl><dt>抓到</dt><dd>组织页显示全部项目 <b>68</b> 个，首屏能见 hcomm、ops-*、asc-devkit、ops-test-kit、catlass、cann-samples 等。</dd><dt>问题</dt><dd>列表能说明“有什么”，不能说明“开发 ASC 算子下一步该用哪个”。</dd></dl></div>
+          <div class="insight"><span class="iid">E6</span><h4>asc-devkit 是真实工程承接点</h4><dl><dt>抓到</dt><dd>README 覆盖 API 层级、目录结构、快速入门、clangd/IDE、相关资源和 Roadmap。</dd><dt>问题</dt><dd>缺 Notebook 样例到 asc-devkit 工程的目录映射和调试配置迁移。</dd></dl></div>
+          <div class="insight"><span class="iid">E7</span><h4>ops-test-kit 具备验收能力</h4><dl><dt>抓到</dt><dd>仓库内容围绕 Golden、批量测试、性能验证、编译运行等关键词展开。</dd><dt>问题</dt><dd>它没有被教程声明为“写完 kernel 后必须进入的验收步骤”。</dd></dl></div>
+          <div class="insight"><span class="iid">E8</span><h4>正式算子库有版本和贡献信号</h4><dl><dt>抓到</dt><dd>ops-nn 等仓包含版本配套、环境准备、源码下载、学习教程、贡献指南和 Issues。</dd><dt>问题</dt><dd>缺“新开发者可以学什么、复用什么、提交什么”的边界说明。</dd></dl></div>
         </div>
       </div>
     </section>
 
     
     <section id="journey" class="floor">
-      <div class="head"><span class="num">02</span><h2>算子开发者旅程</h2></div>
+      <div class="head"><span class="num">03</span><h2>算子开发者旅程</h2></div>
       <div class="journey-card"><div class="jrn-wrap">
-        <div class="jrn-grid"><div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#3B82F6"><div class="pn">01</div><div class="pt">发现入口</div><div class="ptm">搜索 / org</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#F59E0B"><div class="pn">02</div><div class="pt">理解定位</div><div class="ptm">代码仓首屏</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#10B981"><div class="pn">03</div><div class="pt">选择学习</div><div class="ptm">路线表</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#EF4444"><div class="pn">04</div><div class="pt">首次运行</div><div class="ptm">Notebook</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#3B82F6"><div class="pn">05</div><div class="pt">工程开发</div><div class="ptm">asc-devkit</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#F59E0B"><div class="pn">06</div><div class="pt">测试验证</div><div class="ptm">ops-test-kit</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#8B5CF6"><div class="pn">07</div><div class="pt">样例复用</div><div class="ptm">模板/样例/算子库</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#10B981"><div class="pn">08</div><div class="pt">练习贡献</div><div class="ptm">题库 / Issues</div></div></div></div>
+        <div class="jrn-grid"><div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#3B82F6"><div class="pn">01</div><div class="pt">确定任务</div><div class="ptm">算子目标 / 约束</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#F59E0B"><div class="pn">02</div><div class="pt">选开发路径</div><div class="ptm">课程 / 工程</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#10B981"><div class="pn">03</div><div class="pt">掌握前置</div><div class="ptm">Ascend C / Tiling</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#EF4444"><div class="pn">04</div><div class="pt">跑通样例</div><div class="ptm">Notebook / 本地</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#3B82F6"><div class="pn">05</div><div class="pt">落到工程</div><div class="ptm">asc-devkit / IDE</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#F59E0B"><div class="pn">06</div><div class="pt">测试验证</div><div class="ptm">ops-test-kit</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#8B5CF6"><div class="pn">07</div><div class="pt">复用优化</div><div class="ptm">模板 / 样例 / ops</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#10B981"><div class="pn">08</div><div class="pt">练习贡献</div><div class="ptm">题库 / Issues</div></div></div></div>
         <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">触点</div><div class="jrn-re">Touch</div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">learning hub</div><div class="jrn-touch">CANN org</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">文件树</div><div class="jrn-touch">README</div><div class="jrn-touch">CANNLab</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">版本表</div><div class="jrn-touch">学习路径</div><div class="jrn-touch">在线体验</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">CANNLab</div><div class="jrn-touch">Notebook</div><div class="jrn-touch">登录弹窗</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">asc-devkit</div><div class="jrn-touch">clangd</div><div class="jrn-touch">Roadmap</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">ops-test-kit</div><div class="jrn-touch">Golden</div><div class="jrn-touch">性能</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">catlass</div><div class="jrn-touch">cann-samples</div><div class="jrn-touch">ops-*</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">CANNJudge</div><div class="jrn-touch">Issues</div><div class="jrn-touch">PR</div></div></div></div>
-        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">行为</div><div class="jrn-re">Action</div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:90%;background:#dbe6f7"></div><div class="jmb" style="width:65%;background:#e5e7eb"></div><div class="jmb" style="width:78%;background:#e5e7eb"></div><div class="jmb" style="width:40%;background:#c7d2fe"></div></div></div><div class="jrn-fl">搜索 GitCode → 进入 CANN org</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:55%;background:#dbe6f7"></div><div class="jmb" style="width:84%;background:#e5e7eb"></div><div class="jmb" style="width:70%;background:#e5e7eb"></div><div class="jmb" style="width:45%;background:#c7d2fe"></div></div></div><div class="jrn-fl">扫首屏 → 读 README</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:78%;background:#dbe6f7"></div><div class="jmb" style="width:92%;background:#e5e7eb"></div><div class="jmb" style="width:62%;background:#e5e7eb"></div><div class="jmb" style="width:50%;background:#c7d2fe"></div></div></div><div class="jrn-fl">找 10 分钟体验 → 看 Ascend C 章节</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:88%;background:#dbe6f7"></div><div class="jmb" style="width:35%;background:#e5e7eb"></div><div class="jmb" style="width:55%;background:#e5e7eb"></div><div class="jmb" style="width:55%;background:#c7d2fe"></div></div></div><div class="jrn-fl">点在线体验 → 进入 AtomGit AI</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:70%;background:#dbe6f7"></div><div class="jmb" style="width:86%;background:#e5e7eb"></div><div class="jmb" style="width:46%;background:#e5e7eb"></div><div class="jmb" style="width:60%;background:#c7d2fe"></div></div></div><div class="jrn-fl">看 API 层级 → 配置 IDE</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:84%;background:#dbe6f7"></div><div class="jmb" style="width:72%;background:#e5e7eb"></div><div class="jmb" style="width:90%;background:#e5e7eb"></div><div class="jmb" style="width:65%;background:#c7d2fe"></div></div></div><div class="jrn-fl">查 Golden → 批量测试 → 性能验证</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:48%;background:#dbe6f7"></div><div class="jmb" style="width:77%;background:#e5e7eb"></div><div class="jmb" style="width:68%;background:#e5e7eb"></div><div class="jmb" style="width:70%;background:#c7d2fe"></div></div></div><div class="jrn-fl">找高性能模板 → 看正式算子库</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:72%;background:#dbe6f7"></div><div class="jmb" style="width:50%;background:#e5e7eb"></div><div class="jmb" style="width:88%;background:#e5e7eb"></div><div class="jmb" style="width:75%;background:#c7d2fe"></div></div></div><div class="jrn-fl">刷题 → 看 Roadmap → 提 Issue/PR</div></div></div></div>
+        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">行为</div><div class="jrn-re">Action</div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:90%;background:#dbe6f7"></div><div class="jmb" style="width:65%;background:#e5e7eb"></div><div class="jmb" style="width:78%;background:#e5e7eb"></div><div class="jmb" style="width:40%;background:#c7d2fe"></div></div></div><div class="jrn-fl">明确要开发哪类 ASC 算子</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:55%;background:#dbe6f7"></div><div class="jmb" style="width:84%;background:#e5e7eb"></div><div class="jmb" style="width:70%;background:#e5e7eb"></div><div class="jmb" style="width:45%;background:#c7d2fe"></div></div></div><div class="jrn-fl">判断该看课程还是工程仓</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:78%;background:#dbe6f7"></div><div class="jmb" style="width:92%;background:#e5e7eb"></div><div class="jmb" style="width:62%;background:#e5e7eb"></div><div class="jmb" style="width:50%;background:#c7d2fe"></div></div></div><div class="jrn-fl">补齐 Tiling / API / 版本前置</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:88%;background:#dbe6f7"></div><div class="jmb" style="width:35%;background:#e5e7eb"></div><div class="jmb" style="width:55%;background:#e5e7eb"></div><div class="jmb" style="width:55%;background:#c7d2fe"></div></div></div><div class="jrn-fl">运行 Add 样例并拿到本地命令</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:70%;background:#dbe6f7"></div><div class="jmb" style="width:86%;background:#e5e7eb"></div><div class="jmb" style="width:46%;background:#e5e7eb"></div><div class="jmb" style="width:60%;background:#c7d2fe"></div></div></div><div class="jrn-fl">创建工程骨架并配置 IDE/clangd</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:84%;background:#dbe6f7"></div><div class="jmb" style="width:72%;background:#e5e7eb"></div><div class="jmb" style="width:90%;background:#e5e7eb"></div><div class="jmb" style="width:65%;background:#c7d2fe"></div></div></div><div class="jrn-fl">接入 Golden / 批量 / 性能验证</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:48%;background:#dbe6f7"></div><div class="jmb" style="width:77%;background:#e5e7eb"></div><div class="jmb" style="width:68%;background:#e5e7eb"></div><div class="jmb" style="width:70%;background:#c7d2fe"></div></div></div><div class="jrn-fl">选择模板、样例或正式算子复用</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:72%;background:#dbe6f7"></div><div class="jmb" style="width:50%;background:#e5e7eb"></div><div class="jmb" style="width:88%;background:#e5e7eb"></div><div class="jmb" style="width:75%;background:#c7d2fe"></div></div></div><div class="jrn-fl">练题、定位 Roadmap、提交反馈</div></div></div></div>
         <div class="jrn-grid je"><div class="jrn-rl"><div class="jrn-rn">情绪</div><div class="jrn-re">Emotion</div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981" stop-opacity=".16"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,41 50,36 100,33 100,100 0,100" fill="url(#jeg0)"/><polyline points="0,41 50,36 100,33" fill="none" stroke="#10B981" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:36%;background:#10B981"></div><div class="e" style="top:calc(36% - 19px)">🙂</div><div class="l" style="color:#10B981">顺畅</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".16"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,48 50,43 100,40 100,100 0,100" fill="url(#jeg1)"/><polyline points="0,48 50,43 100,40" fill="none" stroke="#F59E0B" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:43%;background:#F59E0B"></div><div class="e" style="top:calc(43% - 19px)">😕</div><div class="l" style="color:#F59E0B">犹豫</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981" stop-opacity=".16"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,37 50,32 100,29 100,100 0,100" fill="url(#jeg2)"/><polyline points="0,37 50,32 100,29" fill="none" stroke="#10B981" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:32%;background:#10B981"></div><div class="e" style="top:calc(32% - 19px)">🙂</div><div class="l" style="color:#10B981">顺畅</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EF4444" stop-opacity=".16"/><stop offset="1" stop-color="#EF4444" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,58 50,53 100,50 100,100 0,100" fill="url(#jeg3)"/><polyline points="0,58 50,53 100,50" fill="none" stroke="#EF4444" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:53%;background:#EF4444"></div><div class="e" style="top:calc(53% - 19px)">😩</div><div class="l" style="color:#EF4444">受阻</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981" stop-opacity=".16"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,37 50,32 100,29 100,100 0,100" fill="url(#jeg4)"/><polyline points="0,37 50,32 100,29" fill="none" stroke="#10B981" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:32%;background:#10B981"></div><div class="e" style="top:calc(32% - 19px)">🙂</div><div class="l" style="color:#10B981">顺畅</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".16"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,45 50,40 100,37 100,100 0,100" fill="url(#jeg5)"/><polyline points="0,45 50,40 100,37" fill="none" stroke="#F59E0B" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:40%;background:#F59E0B"></div><div class="e" style="top:calc(40% - 19px)">😕</div><div class="l" style="color:#F59E0B">犹豫</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".16"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,47 50,42 100,39 100,100 0,100" fill="url(#jeg6)"/><polyline points="0,47 50,42 100,39" fill="none" stroke="#F59E0B" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:42%;background:#F59E0B"></div><div class="e" style="top:calc(42% - 19px)">😕</div><div class="l" style="color:#F59E0B">犹豫</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".16"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,47 50,42 100,39 100,100 0,100" fill="url(#jeg7)"/><polyline points="0,47 50,42 100,39" fill="none" stroke="#F59E0B" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:42%;background:#F59E0B"></div><div class="e" style="top:calc(42% - 19px)">😕</div><div class="l" style="color:#F59E0B">犹豫</div></div></div></div>
-        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">痛点</div><div class="jrn-re">Pain</div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">入口分散在搜索、org、仓库</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">主行动藏在 README 下方</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">课程多但层级略长</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">10 分钟承诺被中断</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">从课程到仓库跳转不够自然</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">learning hub 未显性连接测试工具</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">学习/复用/贡献角色混在一起</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">练习和贡献未接回教程</div></div></div></div></div>
-        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">机会点</div><div class="jrn-re">Opps</div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">统一“算子开发入口”短链</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">首屏任务化 CTA</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">路线图 + 推荐顺序</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">失败兜底 + 本地命令</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">教程末尾接 asc-devkit</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">写完算子后推荐测试链路</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">仓库地图按任务分层</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">学-练-赛-贡献闭环</div></div></div></div></div>
+        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">痛点</div><div class="jrn-re">Pain</div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">缺最小工程、版本和硬件约束</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">课程目录不能直接生成开发清单</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">知识点未映射到 kernel/Tiling/调试阶段</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">Notebook 缺本地等价工程与失败兜底</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">缺工程骨架、CMake、clangd 配置清单</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">写完 kernel 后缺 Golden/性能验收</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">模板、样例、正式算子库边界不清</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">练习、反馈和 PR 验收未绑定开发阶段</div></div></div></div></div>
+        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">机会点</div><div class="jrn-re">Opps</div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">给出最小 ASC 工程卡</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">输出可执行开发清单</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">按开发阶段标注课程价值</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">补本地工程映射与环境兜底</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">教程末尾生成 asc-devkit 工程</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">强制接入 ops-test-kit 验收</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">仓库地图按开发产物分层</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">绑定题单、Roadmap、PR 检查项</div></div></div></div></div>
       </div></div>
     </section>
 
 <section id="touchpoints" class="floor">
-      <div class="head"><span class="num">03</span><h2>18 个触点图文分析与评分</h2></div>
+      <div class="head"><span class="num">04</span><h2>18 个开发触点图文分析与评分</h2></div>
       <div class="tpgrid audit">
         <div class="card tp-card">
-          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/01-cann-learning-hub-home.png" alt="搜索入口"></div>
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/01-cann-learning-hub-home.png" alt="任务检索与最小工程定位"></div>
           <div class="tp-main">
-            <div class="tp-top"><div><span class="tp-kicker">T1</span><h3 class="tp-title">搜索入口</h3></div><div class="tp-score"><div class="numscore good">82</div><div class="scorelab">score</div></div></div>
+            <div class="tp-top"><div><span class="tp-kicker">T1</span><h3 class="tp-title">任务检索与最小工程定位</h3></div><div class="tp-score"><div class="numscore good">82</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:82%"><i></i></div>
-            <div class="tp-tags"><span class="tag ok">可发现性好</span><span class="tag risk">入口承接弱</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>关键词能命中官方 learning hub、Ascend C 系列与 asc-devkit，说明外部可发现性不是主要短板。</span></div><div class="tp-note"><b>问题在哪里</b><span>搜索把用户带到 GitCode 后，页面首屏仍像普通代码仓，缺少“算子开发从这里开始”的明确承接。</span></div><div class="tp-note"><b>接下来怎么改</b><span>为算子开发建立固定短链和搜索标题规范，让搜索结果直接表达任务：10 分钟上手、学习路线、工程开发。</span></div></div>
+            <div class="tp-tags"><span class="tag ok">可发现性好</span><span class="tag risk">任务上下文弱</span></div>
+            <div class="tp-evi"><b>实测抓到</b>GitCode 可命中 cann-learning-hub、Ascend C 课程和 asc-devkit，但搜索摘要没有直接暴露“最小工程、CANN 版本、硬件限制、本地命令”。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>能找到 learning hub、Ascend C 系列和 asc-devkit，但搜索结果没有直接告诉开发者“开发一个 ASC 算子应从哪个最小工程开始”。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者进入后仍要自己判断任务上下文：算子类型、硬件版本、在线/本地环境、首个可运行工程分别在哪里。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>搜索落地页和标题应直接暴露“最小 ASC 算子工程 / CANN 版本 / 硬件要求 / 本地运行命令”。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
-          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/01-cann-learning-hub-home.png" alt="learning hub 首屏"></div>
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/01-cann-learning-hub-home.png" alt="learning hub 最小工程承接"></div>
           <div class="tp-main">
-            <div class="tp-top"><div><span class="tp-kicker">T2</span><h3 class="tp-title">learning hub 首屏</h3></div><div class="tp-score"><div class="numscore warn">72</div><div class="scorelab">score</div></div></div>
+            <div class="tp-top"><div><span class="tp-kicker">T2</span><h3 class="tp-title">learning hub 最小工程承接</h3></div><div class="tp-score"><div class="numscore warn">72</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:72%"><i></i></div>
-            <div class="tp-tags"><span class="tag risk">内容集中</span><span class="tag risk">主 CTA 不突出</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>首屏同时出现文件树、README、CANNLab、下载、Clone、Issues、健康度和下载量，信息很全。</span></div><div class="tp-note"><b>问题在哪里</b><span>对第一次用户来说，这些仓库控件抢走了“我要先做什么”的注意力，学习入口感弱。</span></div><div class="tp-note"><b>接下来怎么改</b><span>首屏前置任务化模块：在线体验、本地运行、完整路线、测试验证、工程开发；文件树后置。</span></div></div>
+            <div class="tp-tags"><span class="tag ok">资料集中</span><span class="tag risk">最小工程不突出</span></div>
+            <div class="tp-evi"><b>实测抓到</b>README 说明 learning hub 支持在线互动运行、边学边练，并含教程、示例和优化方案；但第一对象仍是仓库/课程集合，不是可 clone 的最小 ASC 工程。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>learning hub 集中了课程、Notebook、在线环境和相关链接，但没有把“最小可运行 ASC 算子工程”作为第一对象。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者想开发 ASC 算子时，最需要先确认工程骨架、CMake/编译命令、输入输出、验证方式，而不是先读完整仓库说明。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>前置“最小工程卡”：代码目录、编译命令、运行命令、Golden 对比、下一步迁移到 asc-devkit。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -237,8 +258,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T3</span><h3 class="tp-title">README 学习路径</h3></div><div class="tp-score"><div class="numscore good">88</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:88%"><i></i></div>
-            <div class="tp-tags"><span class="tag ok">路线完整</span><span class="tag risk">需要推荐顺序</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>README 中有版本配套、方向分组、在线体验、学练赛链接，算子路线覆盖较完整。</span></div><div class="tp-note"><b>问题在哪里</b><span>内容厚度足，但初级/中级/高级与真实任务的优先级关系仍需要用户自己判断。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在 README 顶部增加“推荐学习顺序”和“适合谁/预计耗时/前置条件”。</span></div></div>
+            <div class="tp-tags"><span class="tag ok">知识覆盖完整</span><span class="tag risk">任务顺序需固化</span></div>
+            <div class="tp-evi"><b>实测抓到</b>README 能抓到 CANN 9.0.0 配套、10 分钟自定义算子、Ascend C 初/中/高级、MC2、HiXL、CANNJudge、比赛专区等模块。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>README 能提供课程顺序和版本配套，但它更像学习目录，不像 ASC 算子开发任务清单。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者要自己把“基础语法、Tiling、调试、性能分析”映射到具体开发阶段，容易学了很多但不知道当前任务缺哪一步。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>按开发动作重排 README：写 kernel 前置、Tiling 前置、调试前置、性能优化前置、贡献前置。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -246,8 +268,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T4</span><h3 class="tp-title">10 分钟自定义算子 Notebook</h3></div><div class="tp-score"><div class="numscore mid">74</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:74%"><i></i></div>
-            <div class="tp-tags"><span class="tag ok">上手主题明确</span><span class="tag risk">首屏预览不足</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>“10 分钟自定义算子”主题清楚，能连接 CANNLab/下载，适合作为第一任务。</span></div><div class="tp-note"><b>问题在哪里</b><span>代码预览和关键执行步骤在首屏表达不足，用户还不能立刻判断是否能复制到本地跑。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在 Notebook 页顶部放最短步骤、运行环境、在线/本地两种路径，以及下一步测试验证入口。</span></div></div>
+            <div class="tp-tags"><span class="tag ok">上手主题明确</span><span class="tag risk">本地工程映射不足</span></div>
+            <div class="tp-evi"><b>实测抓到</b>首个样例围绕 Add、kernel、raw、ipynb 展开，适合演示第一个算子；但未同步给出本地 CMake 工程目录和等价 run 命令。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>10 分钟 Notebook 能作为第一个 ASC 算子样例，但对本地工程开发者来说，代码、依赖、编译和运行边界不够前置。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者不知道 Notebook 里的步骤如何迁移到本地工程：哪些文件要拷、CMake 怎么写、输入输出怎么构造、失败时去哪查。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>在 Notebook 顶部补“本地等价工程”：目录结构、构建命令、运行命令、常见错误和 ops-test-kit 验证入口。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -256,16 +279,18 @@
             <div class="tp-top"><div><span class="tp-kicker">T5</span><h3 class="tp-title">Ascend C 系列目录</h3></div><div class="tp-score"><div class="numscore good">86</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:86%"><i></i></div>
             <div class="tp-tags"><span class="tag ok">课程体系强</span><span class="tag risk">难度标尺不足</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>系列目录覆盖基础、Tiling、调试、msProf 等进阶内容，在线体验入口多。</span></div><div class="tp-note"><b>问题在哪里</b><span>课程很多但没有足够醒目的任务难度标记，新手容易不知道哪些必须先学。</span></div><div class="tp-note"><b>接下来怎么改</b><span>给每个 Notebook 标注“入门必做/工程必做/性能选学/贡献前置”。</span></div></div>
+            <div class="tp-evi"><b>实测抓到</b>Ascend C 目录包含 HelloWorld、kernel API、泛化 Tiling、矩阵乘、融合算子、CPU/NPU 调试、msProf 性能分析等章节。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>Ascend C 系列覆盖语法、Tiling、调试、性能分析，开发前置知识比较完整。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>课程按知识点组织，但 ASC 算子开发按任务推进；开发者难判断当前卡点应该补 API、Tiling、内存、调试还是性能分析。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>给每节课标注“解决哪个开发卡点”：kernel 编写、Tiling、搬运/内存、精度排查、性能 profiling。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
-          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/06-online-experience.png" alt="在线体验 / CANNLab"></div>
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/06-online-experience.png" alt="在线环境 / CANNLab"></div>
           <div class="tp-main">
-            <div class="tp-top"><div><span class="tp-kicker">T6</span><h3 class="tp-title">在线体验 / CANNLab</h3></div><div class="tp-score"><div class="numscore bad">58</div><div class="scorelab">score</div></div></div>
+            <div class="tp-top"><div><span class="tp-kicker">T6</span><h3 class="tp-title">在线环境 / CANNLab</h3></div><div class="tp-score"><div class="numscore bad">58</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:58%"><i></i></div>
             <div class="tp-tags"><span class="tag bad">首跑谷底</span><span class="tag bad">登录闸门</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>在线体验入口本身很强，能把用户从学习内容带到可运行环境。</span></div><div class="tp-note"><b>问题在哪里</b><span>实测进入 AtomGit AI 后被登录弹窗和启动状态打断，“10 分钟体验”的信任被削弱。</span></div><div class="tp-note"><b>接下来怎么改</b><span>登录前说明资源、限制、耗时；失败时给重试、本地命令、FAQ、提交 Issue 四个兜底动作。</span></div></div>
+            <div class="tp-evi"><b>实测抓到</b>在线链接包含 repoUrl、ttl、diskSize、path、scanFilePath 等参数，说明 Notebook 能定位到具体文件；浏览器实测会遇到登录/启动状态不确定。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>在线环境能降低部署门槛，适合验证 ASC 算子样例是否能跑。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者在首跑阶段最怕环境不确定：账号、资源、镜像、CANN 版本、硬件类型和本地替代方案都不透明。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>CANNLab 启动前应给出版本/硬件/镜像说明，并在失败时给本地等价命令和环境问题 Issue 模板。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -273,8 +298,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T7</span><h3 class="tp-title">CANN 组织仓库</h3></div><div class="tp-score"><div class="numscore mid">70</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:70%"><i></i></div>
-            <div class="tp-tags"><span class="tag ok">资产丰富</span><span class="tag risk">分诊不足</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>CANN org 聚合了大量仓库，元数据、搜索和活跃度信息对熟手有价值。</span></div><div class="tp-note"><b>问题在哪里</b><span>新手面对大量仓库时无法判断 learning hub、asc-devkit、ops-test-kit、catlass、ops-* 的先后关系。</span></div><div class="tp-note"><b>接下来怎么改</b><span>新增“算子开发仓库地图”，按学习、工程、验证、模板、样例、正式算子库、练习、贡献分层。</span></div></div>
+            <div class="tp-tags"><span class="tag ok">资产丰富</span><span class="tag risk">仓库职责未标明</span></div>
+            <div class="tp-evi"><b>实测抓到</b>CANN org 显示全部项目 68 个，首屏/元数据可抓到 hcomm、ops-*、asc-devkit、ops-test-kit、catlass、cann-samples 等。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>CANN org 能看到很多仓库，但开发 ASC 算子时需要的是“我应该进入哪个仓完成哪一步”。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发任务跨仓：学习在 learning hub，工程在 asc-devkit，验证在 ops-test-kit，复用在 catlass/samples/ops-*；现在这些边界要靠猜。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>做“ASC 算子开发仓库地图”：每个仓标明负责开发流程的哪一步、输入是什么、输出是什么、下一仓是什么。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -283,7 +309,8 @@
             <div class="tp-top"><div><span class="tp-kicker">T8</span><h3 class="tp-title">asc-devkit 首页</h3></div><div class="tp-score"><div class="numscore good">90</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:90%"><i></i></div>
             <div class="tp-tags"><span class="tag ok">工程承接强</span><span class="tag risk">迁移桥缺失</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>页面能承接 API 层级、IDE 支持、样例、贡献与 Roadmap，是工程开发核心仓。</span></div><div class="tp-note"><b>问题在哪里</b><span>它自身很强，但从 learning hub/Notebook 跳到工程仓的过渡不自然。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在教程末尾增加“从 Notebook 到 asc-devkit 工程”的迁移卡和 IDE 配置 checklist。</span></div></div>
+            <div class="tp-evi"><b>实测抓到</b>asc-devkit README 覆盖 API 层级、目录结构、快速入门、clangd/IDE 支持、相关资源和 Roadmap，是最接近真实工程的证据点。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>asc-devkit 提供 API、IDE 支持、样例和 Roadmap，是最接近真实 ASC 工程开发的仓。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>当前缺口在开发迁移：开发者缺少从 Notebook 样例到 asc-devkit 工程的说明，包括工程骨架、构建系统、代码放置、调试配置。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>补“Notebook → asc-devkit 工程”迁移指南：目录对应表、CMake 模板、clangd 配置、调试入口和最小 PR 检查项。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -291,8 +318,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T9</span><h3 class="tp-title">asc-devkit Issues / Roadmap</h3></div><div class="tp-score"><div class="numscore mid">78</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:78%"><i></i></div>
-            <div class="tp-tags"><span class="tag ok">贡献入口存在</span><span class="tag risk">链路不自然</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>Issues 中能看到 Ascend C Development Roadmap，说明贡献路线不是空白。</span></div><div class="tp-note"><b>问题在哪里</b><span>Roadmap 位于仓库问题区，对第一次学习者来说不是自然下一步。</span></div><div class="tp-note"><b>接下来怎么改</b><span>把 Roadmap 前置到 learning hub 的“下一步参与”模块，并按适合新手/熟手标注议题。</span></div></div>
+            <div class="tp-tags"><span class="tag ok">贡献议题存在</span><span class="tag risk">贡献门槛未分级</span></div>
+            <div class="tp-evi"><b>实测抓到</b>asc-devkit 可见 Issues/Roadmap 入口，能承接反馈；但议题没有按文档、样例、测试、算子实现、性能优化等贡献难度分层。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>Issues/Roadmap 能看到开发方向，但这些议题没有和 ASC 算子开发阶段绑定。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者不知道哪些 Roadmap 适合初次贡献，哪些需要熟悉 API/测试框架/性能优化后才能参与。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>按开发能力标注 Roadmap：文档补全、样例补全、测试补全、算子实现、性能优化，并给 PR 验收清单。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -300,8 +328,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T10</span><h3 class="tp-title">ops-test-kit</h3></div><div class="tp-score"><div class="numscore mid">76</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:76%"><i></i></div>
-            <div class="tp-tags"><span class="tag ok">验证能力明确</span><span class="tag risk">入口关系弱</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>README/页面中测试、Golden、性能、验证、编译、运行等信号明显。</span></div><div class="tp-note"><b>问题在哪里</b><span>它是写完算子后的关键步骤，但没有被显性接在入门教程之后。</span></div><div class="tp-note"><b>接下来怎么改</b><span>所有算子教程末尾统一追加“用 ops-test-kit 做 Golden 对比和性能验证”的固定模块。</span></div></div>
+            <div class="tp-tags"><span class="tag ok">验证能力明确</span><span class="tag risk">验证未前置</span></div>
+            <div class="tp-evi"><b>实测抓到</b>ops-test-kit 页面/README 命中测试、Golden、性能、验证、编译、运行等关键词，说明它已经具备 ASC 算子验收能力。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>ops-test-kit 已经覆盖 ASC 算子开发后必须做的 Golden 对比、批量测试和性能验证。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者写完 kernel 后，最需要知道如何构造输入、如何生成 Golden、如何判断精度误差和性能退化；这些没有接到教程链路里。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>为每个入门/样例算子补 ops-test-kit 配套用例：输入、Golden、运行命令、性能阈值、失败解释。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -310,7 +339,8 @@
             <div class="tp-top"><div><span class="tp-kicker">T11</span><h3 class="tp-title">catlass</h3></div><div class="tp-score"><div class="numscore mid">74</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:74%"><i></i></div>
             <div class="tp-tags"><span class="tag ok">模板能力强</span><span class="tag risk">边界需解释</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>catlass 面向高性能矩阵乘及融合类算子模板，是进阶优化资产。</span></div><div class="tp-note"><b>问题在哪里</b><span>对初学者来说，它和 asc-devkit、cann-samples、ops-* 的关系不直观。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在仓库地图中标明 catlass 的角色是“模板复用/高性能优化”，并给前置知识提示。</span></div></div>
+            <div class="tp-evi"><b>实测抓到</b>catlass 描述为 NPU 上高性能矩阵乘及相关融合类算子模板样例，适合优化复用阶段，不是最小 ASC 工程起点。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>catlass 对高性能矩阵乘和融合算子有价值，但它更适合优化阶段，不适合作为第一个 ASC 工程样板。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者需要知道什么时候从自写 kernel 转向模板复用：适用算子形态、参数约束、性能收益和不可用边界。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>catlass README 顶部补“适用算子类型 / 前置知识 / 复用步骤 / 与 asc-devkit 工程的接入方式”。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -319,7 +349,8 @@
             <div class="tp-top"><div><span class="tp-kicker">T12</span><h3 class="tp-title">cann-samples</h3></div><div class="tp-score"><div class="numscore good">80</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:80%"><i></i></div>
             <div class="tp-tags"><span class="tag ok">样例/调优强</span><span class="tag risk">需接课程末尾</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>页面体现样例、编译、运行、性能调优等内容，适合从教程过渡到实战。</span></div><div class="tp-note"><b>问题在哪里</b><span>如果用户只看 learning hub，不一定知道跑完第一个算子后应该看这里。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在课程末尾推荐同类 samples，并说明它是“看真实工程写法”的下一站。</span></div></div>
+            <div class="tp-evi"><b>实测抓到</b>cann-samples 描述为算子领域高性能实战演进样例与体系化调优知识库，适合从教学样例过渡到真实工程样例。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>cann-samples 能提供更接近真实工程的样例、编译运行和性能调优材料。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者缺少从“教学样例”到“真实样例”的映射：同类算子应该看哪个 sample，sample 能复用哪些工程结构。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>每个课程页关联同类 cann-samples：目录、编译命令、可复用代码片段、性能调优点。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -327,8 +358,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T13</span><h3 class="tp-title">ops-nn</h3></div><div class="tp-score"><div class="numscore warn">72</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:72%"><i></i></div>
-            <div class="tp-tags"><span class="tag risk">正式算子库</span><span class="tag risk">新手导航弱</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>ops-nn 活跃度高，Issue/PR 信号强，是神经网络高阶算子承接点。</span></div><div class="tp-note"><b>问题在哪里</b><span>它更像正式算子货架，缺少“学习/复用/贡献”的角色说明。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在仓库 README 顶部增加适用场景、适合复用的目录、适合新手参与的 issue。</span></div></div>
+            <div class="tp-tags"><span class="tag risk">正式算子库</span><span class="tag risk">贡献边界弱</span></div>
+            <div class="tp-evi"><b>实测抓到</b>ops-nn README 包含概述、版本配套、环境准备、源码下载、学习教程、贡献指南、Issues/讨论/Wiki 等信息。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>ops-nn 是正式算子库，能作为神经网络类 ASC 算子实现和贡献参考。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者不清楚正式库代码哪些适合学习、哪些可以复用、哪些目录可以提交新算子或测试。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>ops-* 仓库顶部补“开发者说明”：算子分类、目录结构、添加新算子的步骤、测试要求和贡献门槛。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -336,8 +368,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T14</span><h3 class="tp-title">ops-math</h3></div><div class="tp-score"><div class="numscore warn">72</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:72%"><i></i></div>
-            <div class="tp-tags"><span class="tag risk">数学算子活跃</span><span class="tag risk">任务分诊弱</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>ops-math 有数学类算子库活跃信号，测试/验证/版本信息较多。</span></div><div class="tp-note"><b>问题在哪里</b><span>用户很难从 org 列表判断它和 ops-nn、ops-transformer 的选择边界。</span></div><div class="tp-note"><b>接下来怎么改</b><span>按算子类型建立选择器：数学/神经网络/Transformer，并配“我该进哪个仓”的问答。</span></div></div>
+            <div class="tp-tags"><span class="tag risk">数学算子活跃</span><span class="tag risk">选仓规则弱</span></div>
+            <div class="tp-evi"><b>实测抓到</b>ops-math 作为数学类算子库进入 CANN org 列表，和 ops-nn、ops-transformer 同属正式算子仓，但选择规则未集中说明。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>ops-math 能作为数学类 ASC 算子实现参考，包含测试/验证/版本信息。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者在选仓时不知道按算子语义、模型领域还是实现形态进入哪个 ops 仓。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>增加算子类型选择器：输入算子名称或领域，输出推荐仓库、参考实现、测试模板和贡献入口。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -345,8 +378,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T15</span><h3 class="tp-title">ops-transformer</h3></div><div class="tp-score"><div class="numscore warn">71</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:71%"><i></i></div>
-            <div class="tp-tags"><span class="tag ok">专项明确</span><span class="tag ok">入门不友好</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>ops-transformer 面向大模型 Transformer 算子，专项定位清楚。</span></div><div class="tp-note"><b>问题在哪里</b><span>专项仓对新手跨度大，缺少前置学习、样例复用和贡献门槛说明。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在页面顶部补“适合谁、先学什么、从哪个样例开始、如何提贡献”。</span></div></div>
+            <div class="tp-tags"><span class="tag ok">专项明确</span><span class="tag risk">进入门槛高</span></div>
+            <div class="tp-evi"><b>实测抓到</b>ops-transformer 是 Transformer 方向的正式算子仓；和基础 Ascend C 教程之间缺“先具备哪些 API/shape/tiling 知识”的门槛说明。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>ops-transformer 面向 Transformer 类 ASC 算子，专项方向清楚。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者需要知道从基础 Ascend C 到 Transformer 算子的跨度：前置 API、shape/tiling、性能约束、测试数据。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>仓库顶部补“进入门槛”：先学章节、推荐 sample、最小可改算子、测试数据和 PR 要求。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -355,7 +389,8 @@
             <div class="tp-top"><div><span class="tp-kicker">T16</span><h3 class="tp-title">CANNJudge 题库</h3></div><div class="tp-score"><div class="numscore good">82</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:82%"><i></i></div>
             <div class="tp-tags"><span class="tag ok">练习承接好</span><span class="tag risk">未接回教程</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>题库可见 25 道题、芯片类型、通过率、尝试人数和出题时间。</span></div><div class="tp-note"><b>问题在哪里</b><span>练习平台是强资产，但没有被每个教程自然调用，学完以后练什么仍要自己找。</span></div><div class="tp-note"><b>接下来怎么改</b><span>每个入门教程末尾推荐一道同类 CANNJudge 题，形成“学完马上练”。</span></div></div>
+            <div class="tp-evi"><b>实测抓到</b>CANNJudge 页面实测可见题目、芯片类型、通过率、尝试人数等练习信号，说明它适合承接“学完后练一题”。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>CANNJudge 能提供 ASC 算子练习题、芯片类型、通过率和尝试人数。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者学完一个开发动作后，没有被引导到对应练习题来巩固 kernel、tiling、调试或性能优化能力。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>为每个教程绑定 CANNJudge 题：题目目标、涉及 API、预期知识点、通过标准和下一题。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -363,8 +398,9 @@
           <div class="tp-main">
             <div class="tp-top"><div><span class="tp-kicker">T17</span><h3 class="tp-title">比赛专区</h3></div><div class="tp-score"><div class="numscore warn">65</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:65%"><i></i></div>
-            <div class="tp-tags"><span class="tag risk">赛事入口有</span><span class="tag risk">算子聚焦弱</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>learning hub 能导向大赛/比赛专区，说明运营承接入口存在。</span></div><div class="tp-note"><b>问题在哪里</b><span>页面信息偏泛赛事集合，无法直接回答“有没有算子开发相关比赛/题单”。</span></div><div class="tp-note"><b>接下来怎么改</b><span>单独做算子开发挑战入口，聚合题单、赛题、赛后题解和获奖方案。</span></div></div>
+            <div class="tp-tags"><span class="tag risk">挑战承接有</span><span class="tag risk">算子聚焦弱</span></div>
+            <div class="tp-evi"><b>实测抓到</b>learning hub 中能看到 CANN 大赛/比赛专区相关承接，但没有把 ASC 算子专项题单、赛后代码、性能榜集中成开发者下一步。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>比赛专区能承接进阶挑战，但当前对 ASC 算子开发的专项任务不够明确。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者想做更复杂 ASC 算子时，不知道有哪些题单、赛题、赛后代码可作为进阶练习。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>建立 ASC 算子挑战页：题单、赛题、参考实现、性能榜、赛后复盘和可贡献 issue。</span></div></div>
           </div>
         </div>
         <div class="card tp-card">
@@ -373,62 +409,63 @@
             <div class="tp-top"><div><span class="tp-kicker">T18</span><h3 class="tp-title">贡献/反馈闭环</h3></div><div class="tp-score"><div class="numscore warn">68</div><div class="scorelab">score</div></div></div>
             <div class="bar" style="--w:68%"><i></i></div>
             <div class="tp-tags"><span class="tag risk">反馈渠道有</span><span class="tag risk">闭环提示弱</span></div>
-            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>Issues、PR、讨论、贡献指南、Roadmap 在不同仓库中都存在。</span></div><div class="tp-note"><b>问题在哪里</b><span>这些入口分散在各仓，教程链路没有告诉用户什么时候提 Issue、看 Roadmap 或发 PR。</span></div><div class="tp-note"><b>接下来怎么改</b><span>教程末尾固定加入“练一道题/看一个样例/提一个 Issue/关注 Roadmap”的闭环卡。</span></div></div>
+            <div class="tp-evi"><b>实测抓到</b>多个仓库可见 Issues、PR、贡献指南或 Roadmap，但没有统一说明环境问题、样例问题、测试问题、新算子贡献分别该投向哪个仓。</div>
+            <div class="tp-cols"><div class="tp-note"><b>开发者拿到什么</b><span>反馈和贡献入口分散在多个仓库，但开发者确实可以找到 Issues、PR、Roadmap。</span></div><div class="tp-note"><b>开发 ASC 卡在哪里</b><span>开发者不知道“代码跑不通、测试失败、样例缺失、想加算子”分别应该在哪个仓提什么类型的问题。</span></div><div class="tp-note"><b>应补什么开发信息</b><span>给每个开发阶段配置反馈入口：环境问题、文档问题、样例问题、测试问题、算子贡献分别路由到对应仓。</span></div></div>
           </div>
         </div>
       </div>
     </section>
 
     <section id="ai" class="floor">
-      <div class="head"><span class="num">04</span><h2>AI 可用性 benchmark</h2></div>
+      <div class="head"><span class="num">05</span><h2>AI 可用性 benchmark</h2></div>
       <div class="card pad">
-        <p class="mini">本轮按 ai-usability-benchmark 的 11 项压缩评分：①官方可发现 ②可抓取 ③正文详尽 ④版本清晰 ⑤二手丰富 ⑥二手可信 ⑦自带知识 ⑧检索成本 ⑨版本可锁 ⑩步骤可复现 ⑪综合置信。分数是 1-5 档；这里是算子开发链路结论，不代表训练/推理场景。</p>
+        <p class="mini">本轮按 ai-usability-benchmark 的 11 项压缩评分：①官方可发现 ②可抓取 ③正文详尽 ④版本清晰 ⑤二手丰富 ⑥二手可信 ⑦自带知识 ⑧检索成本 ⑨版本可锁 ⑩步骤可复现 ⑪综合置信。分数是 1-5 档；重点不是“AI 能不能搜到页面”，而是“AI 能不能基于仓库生成可落地的 ASC 算子开发方案”。</p>
         <table class="ai-table">
           <thead><tr><th>问句</th><th>实测摘要</th><th>①</th><th>②</th><th>③</th><th>④</th><th>⑧</th><th>⑨</th><th>⑩</th><th>⑪</th></tr></thead>
           <tbody>
-<tr><td>如何 10 分钟跑通第一个 Ascend C 自定义算子？</td><td>搜索能命中 learning hub；HTML 中能抓到 ipynb、Add、kernel、raw 等内容；在线体验被登录拦截，复现性打折。</td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4.1</span></td></tr>
-            <tr><td>Ascend C 算子开发从入门到性能优化应该按什么 Notebook 顺序学习？</td><td>README 和目录页有大量章节、82 个“在线体验”匹配，覆盖基础、Tiling、调试、msProf；Atlas A2 限制也能抓到。</td><td><span class="pill h">5</span></td><td><span class="pill h">5</span></td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4.6</span></td></tr>
-            <tr><td>写完一个 Ascend C 算子后，怎么做 Golden 对比、批量测试和性能验证？</td><td>ops-test-kit README/HTML 中“测试、Golden、性能、验证、编译、运行”高频出现；官方源可抓，但 learning hub 到该仓的引导弱。</td><td><span class="pill h">4</span></td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4.0</span></td></tr>
-            <tr><td>catlass、cann-samples、ops-* 分别适合学习、复用还是贡献？</td><td>多个仓库 README 可抓，描述和活跃度足；但角色分层需要 AI 推断，缺一张官方关系图。</td><td><span class="pill h">4</span></td><td><span class="pill h">5</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3.5</span></td></tr>
-            <tr><td>哪里可以练 Ascend C 算子题并参与贡献？</td><td>CANNJudge 浏览器实测可见 25 道题、芯片类型、通过率；asc-devkit Issues 可见 Roadmap。练习和贡献有入口，但链路分散。</td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3.4</span></td></tr>
+<tr><td>如何 10 分钟跑通第一个 Ascend C 自定义算子？</td><td>AI 能抓到 ipynb、Add、kernel、raw 等内容，但很难稳定补出本地等价工程、CMake/运行命令、镜像/硬件约束和登录失败后的替代路径。</td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4.1</span></td></tr>
+            <tr><td>Ascend C 算子开发从入门到性能优化应该按什么 Notebook 顺序学习？</td><td>AI 能读到基础、Tiling、调试、msProf 和 Atlas A2 限制，但仍要自己推断“写 kernel 前看什么、调试前看什么、性能前看什么”。</td><td><span class="pill h">5</span></td><td><span class="pill h">5</span></td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4.6</span></td></tr>
+            <tr><td>写完一个 Ascend C 算子后，怎么做 Golden 对比、批量测试和性能验证？</td><td>ops-test-kit 信息可抓，但 learning hub 的教程没有把“实现后必须验收”变成固定下一步；AI 容易给出泛化测试建议，而不是具体用例结构和阈值。</td><td><span class="pill h">4</span></td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4.0</span></td></tr>
+            <tr><td>catlass、cann-samples、ops-* 分别适合学习、复用还是贡献？</td><td>多个仓 README 可抓，但缺官方关系图和适用边界；AI 需要猜 catlass 是优化模板、cann-samples 是工程样例、ops-* 是正式算子库。</td><td><span class="pill h">4</span></td><td><span class="pill h">5</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3.5</span></td></tr>
+            <tr><td>哪里可以练 Ascend C 算子题并参与贡献？</td><td>CANNJudge 和 asc-devkit Roadmap 都存在，但 AI 难判断某个学习阶段对应哪道题、哪类 Issue、哪种 PR 检查项。</td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3.4</span></td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
 <section id="findings" class="floor">
-      <div class="head"><span class="num">05</span><h2>结论与方案 Demo：每个问题都要落成一个可改的界面/内容模块</h2></div>
-      <div class="finding-lead"><h3>总判断：不是资料少，而是“下一步”没有被产品化</h3><p>18 个触点和 5 个 AI benchmark 问句共同指向同一个问题：CANN GitCode 已经有课程、Notebook、工程仓、测试工具、样例库、题库和贡献入口，但它们没有被组织成连续任务路径。下面把结论和对应 demo 放在同一张卡里，避免“分析很多、方案很少”。</p></div>
+      <div class="head"><span class="num">06</span><h2>结论与方案 Demo：围绕 ASC 算子开发卡点落成具体模块</h2></div>
+      <div class="finding-lead"><h3>总判断：不是资料少，而是开发动作没有被工程化串起来</h3><p>18 个触点和 5 个 AI benchmark 问句共同指向同一个问题：CANN GitCode 已经有课程、Notebook、工程仓、测试工具、样例库、题库和贡献入口，但开发者基于这些仓开发 ASC 算子时，仍要自己补齐工程骨架、编译运行、API/样例映射、验证命令、性能调优和反馈路由。</p></div>
       <div class="solution-grid">
         <div class="card solution-card" style="--c:var(--red);--tone:var(--red2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S1</span><span class="solution-tag">入口承接</span></div><h3>learning hub 要从代码仓首屏变成算子开发任务首页</h3><p>人类用户会把 learning hub 当成代码仓；AI 虽能抓到 README，但生成答案时会把入口、路线和运行方式混在一起。</p><dl><dt>来自</dt><dd>T1/T2；AI Q1。搜索能带来用户，但首屏没有马上回答“我现在该点哪里”。</dd><dt>应做</dt><dd>首屏先给任务入口，再给文件树。主 CTA 应覆盖在线体验、本地运行、学习路线、测试验证和工程开发。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S1</span><span class="solution-tag">最小工程</span></div><h3>learning hub 要先回答“如何开发一个最小 ASC 算子工程”</h3><p>开发者不是只需要资料链接，而是需要最小工程、CANN/硬件版本、编译运行命令和验证方式；AI 也需要这些字段才能稳定回答。</p><dl><dt>来自</dt><dd>T1/T2；AI Q1。内容可发现，但没有直接给出最小 ASC 算子工程、环境约束和可运行命令。</dd><dt>应做</dt><dd>优先给“最小 ASC 工程卡”，包含目录、CMake/编译、运行、Golden 验证、在线/本地两条路径。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-hero"><b>10 分钟跑通第一个 Ascend C 自定义算子</b><span>先选运行方式，完成后自动进入测试验证。</span></div><div class="mock-actions"><div class="mock-btn primary">开始在线体验</div><div class="mock-btn">复制本地命令</div><div class="mock-btn">查看学习路线</div><div class="mock-btn">进入测试验证</div></div></div>
         </div>
         <div class="card solution-card" style="--c:var(--gold);--tone:var(--gold2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S2</span><span class="solution-tag">学习路径</span></div><h3>README 内容够厚，但需要把“推荐顺序”产品化</h3><p>用户和 AI 都能找到内容，但都要推断哪些是必做、哪些是进阶、哪些受硬件限制。</p><dl><dt>来自</dt><dd>T3/T5；AI Q2 最高 4.6。课程体系强，覆盖基础、Tiling、调试、msProf。</dd><dt>应做</dt><dd>把课程按目标和难度重排：入门必做、工程必做、性能选学、贡献前置，并写明耗时和限制。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S2</span><span class="solution-tag">学习路径</span></div><h3>README 要按开发动作重排，而不是只按课程目录展开</h3><p>开发者和 AI 都能找到内容，但要自己判断写 kernel、补 Tiling、调试、性能分析分别该看哪一节。</p><dl><dt>来自</dt><dd>T3/T5；AI Q2 最高 4.6。课程体系强，覆盖基础、Tiling、调试、msProf。</dd><dt>应做</dt><dd>把课程按开发动作重排：kernel 编写、Tiling、内存搬运、调试、性能 profiling、贡献前置，并写明版本/硬件约束。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-list"><div class="mock-row"><span class="mock-badge">必做 1</span><b>Add 算子</b><span>10 分钟 · 在线/本地</span></div><div class="mock-row"><span class="mock-badge">必做 2</span><b>Tiling 基础</b><span>30 分钟 · Atlas A2</span></div><div class="mock-row"><span class="mock-badge">进阶</span><b>msProf 性能分析</b><span>调优阶段再看</span></div><div class="mock-row"><span class="mock-badge">贡献前置</span><b>工程规范</b><span>连接 asc-devkit</span></div></div></div>
         </div>
         <div class="card solution-card" style="--c:var(--red);--tone:var(--red2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S3</span><span class="solution-tag">首跑兜底</span></div><h3>在线体验不是只要有入口，还要有失败兜底</h3><p>“10 分钟”会变成高风险承诺；AI 可以写出步骤，但不知道当前环境是否能跑。</p><dl><dt>来自</dt><dd>T4/T6；AI Q1 的步骤可复现只有中档。入口强，但登录/启动状态打断首跑。</dd><dt>应做</dt><dd>把账号要求、资源状态、预计耗时、本地替代命令和 Issue 反馈做成启动页固定模块。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S3</span><span class="solution-tag">首跑兜底</span></div><h3>在线环境要给出失败兜底和本地等价命令</h3><p>“10 分钟”会变成高风险承诺；AI 可以写出步骤，但不知道当前资源、镜像、硬件和账号状态是否能支撑用户跑通。</p><dl><dt>来自</dt><dd>T4/T6；AI Q1 的步骤可复现只有中档。登录/启动状态会打断第一次编译运行。</dd><dt>应做</dt><dd>把账号要求、资源状态、预计耗时、本地替代命令和 Issue 反馈做成启动前固定模块。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-panel"><b>Notebook 启动未完成</b><div class="mock-chipline"><span class="mock-chip bad">需要登录</span><span class="mock-chip warn">资源排队</span><span class="mock-chip">保留当前 Notebook</span></div></div><div class="mock-list"><div class="mock-row"><b>动作 1</b><span>登录后重试</span></div><div class="mock-row"><b>动作 2</b><span>复制本地 clone + run 命令</span></div><div class="mock-row"><b>动作 3</b><span>提交环境问题 Issue</span></div></div></div>
         </div>
         <div class="card solution-card" style="--c:var(--blue);--tone:var(--blue2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S4</span><span class="solution-tag">工程迁移</span></div><h3>跑完 Notebook 后，要立刻接到工程开发路径</h3><p>用户能完成演示样例，却不知道如何进入真实项目结构、IDE 配置和 Roadmap。</p><dl><dt>来自</dt><dd>T4/T8/T9。asc-devkit 很强，但 learning hub 到工程仓的迁移桥不明显。</dd><dt>应做</dt><dd>每个教程末尾增加“从 Notebook 到 asc-devkit 工程”的迁移卡，包含目录、API、IDE、Roadmap。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S4</span><span class="solution-tag">工程迁移</span></div><h3>Notebook 样例要能迁移成 asc-devkit 本地工程</h3><p>用户能完成演示样例，却不知道如何把代码放入真实工程结构、配置 CMake/IDE、接入测试并准备贡献。</p><dl><dt>来自</dt><dd>T4/T8/T9。asc-devkit 很强，但缺少 Notebook 到本地工程的目录对应、构建模板和调试配置。</dd><dt>应做</dt><dd>每个教程末尾增加“Notebook → asc-devkit 工程”迁移卡：文件映射、CMake 模板、clangd、调试入口、PR 检查项。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-flow"><div class="mock-node">Notebook 示例</div><span class="mock-arrow">→</span><div class="mock-node">生成工程骨架</div><span class="mock-arrow">→</span><div class="mock-node">IDE/clangd</div><span class="mock-arrow">→</span><div class="mock-node">Roadmap Issue</div></div><div class="mock-list"><div class="mock-row"><span class="mock-badge">check</span><span>复制工程模板与 CMake</span></div><div class="mock-row"><span class="mock-badge">check</span><span>打开 asc-devkit API 对照</span></div></div></div>
         </div>
         <div class="card solution-card" style="--c:var(--gold);--tone:var(--gold2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S5</span><span class="solution-tag">验证必经</span></div><h3>ops-test-kit 应该成为“写完算子”的固定下一步</h3><p>用户可能跑通算子但不知道如何证明正确；AI 也会把验证步骤写得偏泛。</p><dl><dt>来自</dt><dd>T10；AI Q3。测试、Golden、性能验证信号强，但入口关系弱。</dd><dt>应做</dt><dd>所有算子教程末尾统一接 ops-test-kit，并给最短 Golden 对比、批量测试、性能验证命令。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S5</span><span class="solution-tag">验证必经</span></div><h3>ops-test-kit 应该成为“写完算子”的固定下一步</h3><p>用户可能跑通算子但不知道如何证明正确；AI 也会把验证步骤写得偏泛。</p><dl><dt>来自</dt><dd>T10；AI Q3。测试、Golden、性能验证信号强，但没有被教程声明为实现后的验收契约。</dd><dt>应做</dt><dd>所有算子教程末尾统一接 ops-test-kit，并给最短 Golden 对比、批量测试、性能验证命令。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-flow"><div class="mock-node">实现算子</div><span class="mock-arrow">→</span><div class="mock-node">Golden 对比</div><span class="mock-arrow">→</span><div class="mock-node">批量测试</div><span class="mock-arrow">→</span><div class="mock-node">性能报告</div></div><pre class="mock-code">next_step:
   repo: ops-test-kit
   command: run_golden --case add
   output: correctness + perf report</pre></div>
         </div>
         <div class="card solution-card" style="--c:var(--gold);--tone:var(--gold2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S6</span><span class="solution-tag">仓库地图</span></div><h3>CANN org 要补“按任务选仓”的解释层</h3><p>人会迷路，AI 会把 catlass、cann-samples、ops-* 的用途混在一起。</p><dl><dt>来自</dt><dd>T7/T11-T15；AI Q4 综合 3.5。仓库可抓，但角色关系要靠推断。</dd><dt>应做</dt><dd>在 org 和 learning hub 放官方仓库地图，明确学习、工程、验证、模板、样例、正式算子库、练习、贡献。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S6</span><span class="solution-tag">仓库地图</span></div><h3>CANN org 要补“按开发动作选仓”的解释层</h3><p>开发者会迷路，AI 也会把工程开发、模板复用、样例学习、正式算子贡献混在一起。</p><dl><dt>来自</dt><dd>T7/T11-T15；AI Q4 综合 3.5。仓库可抓，但角色关系要靠推断。</dd><dt>应做</dt><dd>在 org 和 learning hub 放官方开发动作地图：学习、工程、验证、模板复用、真实样例、正式算子库、练习、贡献。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-flow"><div class="mock-node">learning hub<br>入门</div><span class="mock-arrow">→</span><div class="mock-node">asc-devkit<br>工程</div><span class="mock-arrow">→</span><div class="mock-node">ops-test-kit<br>验证</div><span class="mock-arrow">→</span><div class="mock-node">catlass/samples<br>优化</div><span class="mock-arrow">→</span><div class="mock-node">ops-*<br>贡献</div></div></div>
         </div>
         <div class="card solution-card" style="--c:var(--green);--tone:var(--green2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S7</span><span class="solution-tag">AI 可用性</span></div><h3>README 要按 AI 可读字段重写，而不是只写给人读</h3><p>AI 会引用到正文，但对“能不能跑、适合哪个版本、下一仓库去哪”回答不稳。</p><dl><dt>来自</dt><dd>C7；AI Q1-Q4。GitCode 页面可抓是长板，但版本、硬件、在线状态、相关仓库不够结构化。</dd><dt>应做</dt><dd>核心仓 README 顶部固定机器可读摘要：适用场景、硬件/版本、最短命令、在线状态、相关仓库。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S7</span><span class="solution-tag">AI 可用性</span></div><h3>README 要按 AI 可读字段重写，而不是只写给人读</h3><p>AI 会引用到正文，但对“能不能跑、适合哪个版本、下一仓库去哪”回答不稳。</p><dl><dt>来自</dt><dd>AI Q1-Q4。GitCode HTML 可抓是长板，但版本、硬件、在线状态、相关仓库、验收命令不够结构化。</dd><dt>应做</dt><dd>核心仓 README 顶部固定机器可读摘要：适用场景、硬件/版本、最短命令、在线状态、相关仓库。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><pre class="mock-code">cann_task:
   goal: first_custom_operator
   hardware: Atlas A2 / 910B
@@ -438,28 +475,28 @@
   next_repo: ops-test-kit</pre></div>
         </div>
         <div class="card solution-card" style="--c:var(--blue);--tone:var(--blue2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S8</span><span class="solution-tag">练习贡献</span></div><h3>CANNJudge、Roadmap、Issues 要接成学练贡献闭环</h3><p>用户学完以后不知道练哪题、看哪个 Roadmap、何时提反馈；AI 也难生成推荐顺序。</p><dl><dt>来自</dt><dd>T16/T18；AI Q5 综合 3.4。练习和贡献入口存在，但链路分散。</dd><dt>应做</dt><dd>每个教程结束页都固定展示一题练习、一个样例、一个 Roadmap、一个反馈入口。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S8</span><span class="solution-tag">练习贡献</span></div><h3>CANNJudge、Roadmap、Issues 要接成学练贡献闭环</h3><p>用户学完以后不知道练哪题、看哪个 Roadmap、何时提反馈；AI 也难生成推荐顺序。</p><dl><dt>来自</dt><dd>T16/T18；AI Q5 综合 3.4。练习题、Roadmap 和 Issues 都存在，但没有按开发阶段绑定。</dd><dt>应做</dt><dd>每个教程结束页都固定展示一题练习、一个样例、一个 Roadmap、一个反馈模板。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-split"><div class="mock-panel"><b>学</b>已完成 Add 自定义算子</div><div class="mock-panel"><b>练</b>CANNJudge 推荐题 001</div><div class="mock-panel"><b>测</b>ops-test-kit Golden 对比</div><div class="mock-panel"><b>贡献</b>Roadmap / Issue / PR</div></div></div>
         </div>
         <div class="card solution-card" style="--c:var(--gold);--tone:var(--gold2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S9</span><span class="solution-tag">赛事承接</span></div><h3>比赛专区需要算子开发专项入口，而不是泛赛事列表</h3><p>用户想继续挑战时，还要重新筛选哪些赛事、题单、赛后材料与算子开发有关。</p><dl><dt>来自</dt><dd>T17。入口存在，但对算子开发者的专题承接弱。</dd><dt>应做</dt><dd>从 learning hub 直连算子挑战页，聚合题单、赛题、赛后题解、优秀 PR。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S9</span><span class="solution-tag">挑战题单</span></div><h3>比赛专区需要算子开发专项题单，而不是泛赛事列表</h3><p>用户想继续挑战时，还要重新筛选哪些赛事、题单、赛后材料与 ASC 算子开发有关。</p><dl><dt>来自</dt><dd>T17。挑战资源存在，但对算子开发者的专题承接弱。</dd><dt>应做</dt><dd>从 learning hub 直连算子挑战页，聚合题单、赛题、赛后题解、优秀 PR。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-list"><div class="mock-row"><span class="mock-badge">挑战</span><b>Ascend C 算子题单</b><span>按难度分级</span></div><div class="mock-row"><span class="mock-badge">赛题</span><b>往期算子赛</b><span>题解 + 代码</span></div><div class="mock-row"><span class="mock-badge">贡献</span><b>优秀 PR 展示</b><span>可复用路径</span></div></div></div>
         </div>
         <div class="card solution-card" style="--c:var(--blue);--tone:var(--blue2)">
-          <div class="solution-left"><div class="solution-top"><span class="solution-id">S10</span><span class="solution-tag">运营指标</span></div><h3>最终要运营的是“完成闭环”，不是页面访问量</h3><p>只看仓库活跃度或 README 完整度，会漏掉用户是否真的完成第一个算子、测试和反馈。</p><dl><dt>来自</dt><dd>全链路；高分和低分交错，说明资产散点充足、路径串联不足。</dd><dt>应做</dt><dd>建立 journey KPI：完成第一个算子、完成一次验证、练一道题、提交一次反馈、AI 置信度达标。</dd></dl></div>
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S10</span><span class="solution-tag">运营指标</span></div><h3>最终要运营的是“开发闭环完成率”，不是页面访问量</h3><p>只看仓库活跃度或 README 完整度，会漏掉用户是否真的完成编译、运行、Golden 验证、性能检查和反馈。</p><dl><dt>来自</dt><dd>全链路；高分和低分交错，说明资产散点充足、路径串联不足。</dd><dt>应做</dt><dd>建立开发 KPI：最小工程运行完成率、ops-test-kit 验证完成率、样例复用率、CANNJudge 练习转化率、AI 回答可复现率。</dd></dl></div>
           <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-list"><div class="mock-row"><span class="mock-badge">KPI 1</span><span>首次算子运行完成率</span></div><div class="mock-row"><span class="mock-badge">KPI 2</span><span>ops-test-kit 验证完成率</span></div><div class="mock-row"><span class="mock-badge">KPI 3</span><span>CANNJudge 练习转化率</span></div><div class="mock-row"><span class="mock-badge">KPI 4</span><span>AI 任务回答置信度</span></div></div></div>
         </div>
       </div>
     </section>
 
     <section id="actions" class="floor">
-      <div class="head"><span class="num">06</span><h2>行动优先级</h2></div>
+      <div class="head"><span class="num">07</span><h2>行动优先级</h2></div>
       <div class="card pad">
         <h3>总判断：GitCode CANN 已经有内容资产，下一步要做“路径产品化”</h3>
-        <p>本轮完整跑完后，最重要的发现不是“CANN 算子开发资料少”，而是相反：资料、Notebook、在线环境、练习平台、工程仓、测试工具、模板库、样例库和正式算子库已经有一批了。真正影响体验的是这些资产没有被组织成一个可立即行动的开发者路径，也没有被组织成一个 AI 稳定可引用的任务图谱。</p>
-        <div class="rec"><div class="prio">P0</div><div><b>先做 learning hub 首屏重构：把仓库首页改造成任务入口。</b><br><span class="mini">首屏放 5 个明确动作：① 10 分钟在线体验 ② 本地运行命令 ③ 完整学习路线 ④ 测试验证入口 ⑤ 进入 asc-devkit 工程开发。文件列表和运营指标可以后置。</span></div><div class="owner">learning hub / 官网平台</div></div>
+        <p>本轮核心发现不是“CANN 算子开发资料少”，而是资料没有围绕真实 ASC 开发动作组织：最小工程、编译运行、Tiling/API 前置、Golden 验证、性能调优、样例复用和贡献反馈需要被串成一条可执行路径。</p>
+        <div class="rec"><div class="prio">P0</div><div><b>先做 learning hub 任务重构：把默认交付物改成最小 ASC 算子工程卡。</b><br><span class="mini">前置 5 个开发动作：① 最小工程目录 ② 本地编译/运行命令 ③ 在线环境 ④ Golden/性能验证 ⑤ 迁移到 asc-devkit。文件列表和运营指标后置。</span></div><div class="owner">learning hub / 官网平台</div></div>
         <div class="rec"><div class="prio">P0</div><div><b>给在线体验补“失败兜底路径”，否则 10 分钟承诺会反噬。</b><br><span class="mini">登录前说明资源和限制；启动失败时给出原因、重试入口、登录要求、本地 clone + 执行命令。不要让用户停在一个泛化登录弹窗。</span></div><div class="owner">AtomGit AI / CANNLab</div></div>
-        <div class="rec"><div class="prio">P1</div><div><b>做 CANN 算子开发仓库地图，解决“我该看哪个仓”。</b><br><span class="mini">按任务而非仓库名组织：入门学习 learning hub；工程开发 asc-devkit；验证 ops-test-kit；模板 catlass；样例 cann-samples；算子库 ops-nn/ops-math/ops-transformer；练习 CANNJudge；反馈 Issues/Roadmap。</span></div><div class="owner">CANN 开源运营</div></div>
+        <div class="rec"><div class="prio">P1</div><div><b>做 ASC 算子开发仓库地图，解决“哪个开发动作该进哪个仓”。</b><br><span class="mini">按开发动作组织：学习 learning hub；工程 asc-devkit；验证 ops-test-kit；模板 catlass；样例 cann-samples；正式算子 ops-nn/ops-math/ops-transformer；练习 CANNJudge；反馈 Issues/Roadmap。</span></div><div class="owner">CANN 开源运营</div></div>
         <div class="rec"><div class="prio">P1</div><div><b>把 AI 友好当成内容发布标准。</b><br><span class="mini">每个核心仓 README 顶部固定四块：适用场景、版本/硬件限制、最短可运行步骤、相关仓库。这样开发者更快理解，AI 也更少胡乱推断。</span></div><div class="owner">资料 / 生态内容</div></div>
         <div class="rec"><div class="prio">P2</div><div><b>把“学-练-赛-贡献”做成闭环指标，而不是分散链接。</b><br><span class="mini">每个教程末尾指向下一步：练一道 CANNJudge 题、看一个 asc-devkit 样例、提交 issue/PR、进入 Roadmap。让用户完成一次小闭环，而不是只读完一页。</span></div><div class="owner">社区运营 / 教程维护</div></div>
       </div>
@@ -468,24 +505,24 @@
   </main>
   <script>
     const painItems = [
-      ['入口分散在搜索、org、仓库', '用户不知道 learning hub 是主入口', '官网与 GitCode 之间缺少明显跳转'],
-      ['首屏更像代码仓，不像课程首页', '主行动藏在 README 下方', '文件树、健康度、下载量抢注意力'],
-      ['课程多，但层级和路径略长', '初级/中级/高级与真实任务映射不够明确', 'Atlas A2 等限制不够醒目'],
-      ['在线体验被登录弹窗打断', '启动失败原因不透明', '本地替代命令不够显眼'],
-      ['从课程到 asc-devkit 跳转不自然', 'API 层级对新手仍偏重', 'IDE/clangd 配置藏在 README 深处'],
-      ['learning hub 未显性连接 ops-test-kit', 'Golden/性能验证何时做不明确', '测试命令缺少最短上手路径'],
-      ['catlass/cann-samples/ops-* 角色混在一起', '学习、复用、贡献边界不清', '高性能样例对新手跳跃大'],
-      ['CANNJudge 与教程断开', 'Roadmap/Issues 分散在各仓', '比赛专区信息泛，不聚焦算子赛']
+      ['不知道最小 ASC 算子工程在哪里', '硬件/CANN 版本约束不前置', '在线与本地路径边界不清'],
+      ['课程目录和工程仓角色混在一起', '缺“先学什么再写代码”的判定', 'README 不能直接生成开发清单'],
+      ['Tiling/API/调试知识与开发阶段未映射', '初级/高级不等于任务优先级', '版本和硬件限制不够固定可见'],
+      ['Notebook 难迁移到本地工程', 'CMake/运行命令/输入输出不前置', '环境失败时缺本地等价路径'],
+      ['工程骨架、代码放置和构建系统要自己摸索', 'IDE/clangd/调试配置缺检查清单', 'Roadmap 未按贡献门槛分级'],
+      ['写完 kernel 后不知道如何构造 Golden', '精度误差和性能退化判断不前置', '测试工具未接入教程末尾'],
+      ['模板、样例、正式算子库适用边界不清', '不知道何时复用 catlass 或 samples', 'ops-* 贡献步骤和测试要求不显眼'],
+      ['练习题没有按开发动作绑定', '问题反馈不知道该进哪个仓', '贡献闭环缺 PR 验收清单']
     ];
     const oppItems = [
-      ['统一“算子开发入口”短链', '搜索结果标题写明任务', '官网开发者中心挂 GitCode 学习入口'],
-      ['首屏改成任务化 CTA', '文件列表后置为资产区', '增加“我该先做什么”模块'],
-      ['给出推荐学习顺序', '按目标拆路线：入门/调试/性能/贡献', '硬件与版本限制做固定提示'],
-      ['提供在线失败兜底', '登录前说明资源、耗时和限制', '一键复制本地运行命令'],
-      ['教程末尾接 asc-devkit', '补“从 Notebook 到工程”迁移页', '提供 IDE 配置 checklist'],
-      ['写完算子后推荐测试链路', '教程模板内置验证步骤', 'ops-test-kit 首页放最短示例'],
-      ['仓库地图按任务分层', '标注学习/复用/贡献/参考实现', '样例页补前置知识提示'],
-      ['教程末尾导向一道练习题', 'Roadmap 卡片前置', '形成学-练-赛-贡献闭环指标']
+      ['给出最小 ASC 工程卡', '固定展示版本/硬件/本地命令', '在线失败时给等价本地路径'],
+      ['按开发动作重排 README', '标注课程/工程/验证仓职责', '输出一张可执行开发清单'],
+      ['给每课标注解决的开发卡点', '按 kernel/Tiling/调试/性能分组', '把版本限制做成固定字段'],
+      ['Notebook 顶部补本地工程映射', '提供 CMake/运行/输入输出模板', '失败页接环境 FAQ 和 Issue 模板'],
+      ['提供 Notebook 到 asc-devkit 迁移卡', '补 IDE/clangd/调试 checklist', 'Roadmap 按新手/熟手/专家分级'],
+      ['教程末尾强接 ops-test-kit', '配套 Golden/批测/性能最短命令', '给失败解释和阈值说明'],
+      ['仓库地图按开发动作分层', '标注学习/复用/贡献/参考实现', '为 ops-* 补添加新算子步骤'],
+      ['每课绑定 CANNJudge 同类题', '按问题类型路由到对应仓', '形成学-测-练-贡献验收指标']
     ];
     const painIcon = '<div class="jrn-pi-icon" aria-hidden="true"></div>';
     function rowHtml(label, en, cellClass, itemClass, textClass, items, dotHtml){
