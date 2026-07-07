@@ -1287,12 +1287,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
         if(prev)prev.disabled=idx<0;
         if(next)next.disabled=idx>=focus.length-1;
       }
+      function syncHash(){
+        var step=typeof window.__hmStep==='number'?window.__hmStep:-1;
+        try{history.replaceState(null,'','#17'+(step>=0?'-hm'+(step+1):''));}catch(e){}
+      }
       if(stepBox){
         stepBox.innerHTML='<button class="hm-step arrow" type="button" data-dir="-1" aria-label="上一页">‹</button><button class="hm-step hm-page overview" type="button" data-page="-1" aria-label="总览">总览</button>'+focus.map(function(_,i){return '<button class="hm-step hm-page" type="button" data-page="'+i+'" aria-label="聚焦 '+(i+1)+'">'+(i+1)+'</button>';}).join('')+'<button class="hm-step arrow" type="button" data-dir="1" aria-label="下一页">›</button>';
-        stepBox.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){setStep(Number(b.getAttribute('data-page')));});});
-        stepBox.querySelectorAll('[data-dir]').forEach(function(b){b.addEventListener('click',function(){setStep((typeof window.__hmStep==='number'?window.__hmStep:-1)+Number(b.getAttribute('data-dir')));});});
+        stepBox.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){setStep(Number(b.getAttribute('data-page')));syncHash();});});
+        stepBox.querySelectorAll('[data-dir]').forEach(function(b){b.addEventListener('click',function(){setStep((typeof window.__hmStep==='number'?window.__hmStep:-1)+Number(b.getAttribute('data-dir')));syncHash();});});
       }
-      setStep(-1);
+      var hmMatch=(location.hash||'').match(/^#17-hm([1-7])$/);
+      setStep(hmMatch?Number(hmMatch[1])-1:-1);
       clearInterval(window.__hmTimer);
       window.__hmTimer=null;
       addEventListener('resize',function(){setStep(typeof window.__hmStep==='number'?window.__hmStep:-1);},{passive:true});
@@ -2400,13 +2405,18 @@ function updateCurrent(i){
   idx=i; const s=slides[idx];
   lazyFrames(idx);
   slides.forEach((sl,k)=>sl.classList.toggle('active',k===idx));
-  try{history.replaceState(null,'','#'+(idx+1));}catch(e){}   /* 网址带当前页码 */
+  try{history.replaceState(null,'',deckHash(idx));}catch(e){}   /* 网址带当前页码 */
   counter.textContent=pad(idx+1)+' / '+pad(slides.length);
   prevBtn.disabled=idx<=0; nextBtn.disabled=idx>=slides.length-1;
   document.body.classList.toggle('on-dark', s.classList.contains('s-cover')||s.classList.contains('s-glow'));
   const panel=document.getElementById('panel'),toggle=document.getElementById('toggle');
   if(s.dataset.chapter && s.classList.contains('chapter-cover')){ if(panel)s.appendChild(panel); if(toggle){s.appendChild(toggle);toggle.style.display='flex';} setPanelOpen(false); apply(); syncPanel(); }
   else if(toggle){ toggle.style.display='none'; setPanelOpen(false); }
+}
+function deckHash(i){
+  var h='#'+(i+1);
+  if(i===16&&typeof window.__hmStep==='number'&&window.__hmStep>=0)h+='-hm'+(window.__hmStep+1);
+  return h;
 }
 /* 谁滚进视口 ≥55% 谁就是当前页 */
 /* fade 翻页：当前页由 .active 类驱动，无需 IntersectionObserver */
