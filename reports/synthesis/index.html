@@ -244,15 +244,6 @@ body.overview .s-cover .slide-inner{padding:0}
 #toggle:hover{color:#fff}#toggle svg{width:22px;height:22px}
 
 /* ===== 导航 ===== */
-/* 右侧竖排导航点（鼠标到底部才显隐；亮/暗随当前页）*/
-.nav-dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:300;display:flex;flex-direction:column;gap:7px;padding:10px 7px;border-radius:999px;background:rgba(150,150,170,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transition:opacity .25s}
-.nav-dots.show{opacity:1}
-.nav-dot{width:7px;height:7px;border-radius:50%;background:rgba(40,45,60,.28);cursor:pointer;border:0;padding:0;transition:all .25s cubic-bezier(.4,0,.2,1)}
-.nav-dot:hover{background:rgba(40,45,60,.5);transform:scale(1.25)}
-.nav-dot.active{background:var(--accent);height:18px;border-radius:4px}
-body.on-dark .nav-dots{background:rgba(255,255,255,.1)}
-body.on-dark .nav-dot{background:rgba(255,255,255,.3)}
-body.on-dark .nav-dot.active{background:#fff}
 /* 底部居中控制栏：小而透，默认隐藏，鼠标到底部才出现 */
 #controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:3px;padding:3px 7px;border-radius:999px;background:rgba(22,25,30,.42);backdrop-filter:blur(10px) saturate(1.2);-webkit-backdrop-filter:blur(10px) saturate(1.2);color:#fff;box-shadow:0 6px 18px -10px rgba(0,0,0,.4);opacity:0;transition:opacity .25s}
 #controls.show{opacity:.92}
@@ -1077,10 +1068,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull.is-spot .hm-on.cell{box-shadow:inset 0 0 0 1px rgba(199,0,11,.34)}
     .hm-ring{position:absolute;z-index:5;border:2px solid rgba(199,0,11,.86);border-radius:14px;background:linear-gradient(135deg,rgba(199,0,11,.045),rgba(199,0,11,.012));box-shadow:0 0 0 9999px rgba(233,235,238,.58),0 18px 45px rgba(199,0,11,.18);pointer-events:none;transition:all .42s cubic-bezier(.2,.8,.2,1)}
     .hm-callout{position:absolute;z-index:6;width:min(382px,29vw);padding:1.28vh 1.08vw 1.16vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
-    .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center}
+    .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:start}
     .hm-callout .hm-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#C7000B;background:radial-gradient(circle at 30% 25%,rgba(199,0,11,.15),rgba(199,0,11,.035) 70%);border:1px solid rgba(199,0,11,.12)}
     .hm-callout .hm-ico svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .hm-callout .hm-no{align-self:start;display:block;width:auto;height:auto;border-radius:0;background:transparent;border:0;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:calc(var(--fs-h3)*1.28);font-weight:300;color:rgba(199,0,11,.42);line-height:.82;letter-spacing:.02em;padding:0}
+    .hm-callout .hm-no{align-self:start;justify-self:end;display:block;width:auto;height:auto;border-radius:0;background:transparent;border:0;font-family:'Avenir Next Condensed','Helvetica Neue Condensed','Arial Narrow','Inter',sans-serif;font-size:calc(var(--fs-h3)*2.22);font-stretch:condensed;font-weight:200;color:rgba(199,0,11,.34);line-height:.64;letter-spacing:-.035em;padding:0;margin-top:1px;transform:scaleX(.66);transform-origin:right top}
     .hm-callout .k{font-size:var(--fs-body);font-weight:850;color:#465063;line-height:1.2}
     .hm-callout .v{margin-top:.22vh;font-family:'JetBrains Mono';font-size:var(--fs-h3);font-weight:950;color:#C7000B;line-height:1}
     .hm-callout .d{margin-top:.72vh;font-size:var(--fs-body);line-height:1.46;color:var(--ink-2)}
@@ -2241,7 +2232,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
 </div>
 <button id="toggle" style="display:none" title="调色面板"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="10" cy="7" r="2.4"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2.4"/></svg></button>
 
-<nav class="nav-dots" id="navDots"></nav>
 <!-- 底部居中控制栏（默认隐藏，鼠标移到底部才出现）-->
 <div id="controls">
   <button id="prevBtn" title="上一页 ↑/←"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg></button>
@@ -2284,7 +2274,7 @@ document.addEventListener('click',e=>{const panel=document.getElementById('panel
   if(toggle.contains(e.target)){setPanelOpen(panel.style.display!=='block');syncPanel();return;}
   if(panel.contains(e.target))return; setPanelOpen(false);});
 
-/* ===== 纵向 scroll-snap 翻页 + 右侧点 + 控制栏 + 总览 + 全屏 ===== */
+/* ===== 纵向 scroll-snap 翻页 + 控制栏 + 总览 + 全屏 ===== */
 if('scrollRestoration' in history) history.scrollRestoration='manual';
 /* 滚动条默认隐藏，滚动时淡入、停 700ms 后淡出（body 是滚动容器，事件挂 body 不是 window；wheel 兜底）*/
 let scrollbarTimer;
@@ -2292,10 +2282,9 @@ function flashScrollbar(){document.body.classList.add('scrolling');clearTimeout(
 document.body.addEventListener('scroll',flashScrollbar,{passive:true});
 addEventListener('scroll',flashScrollbar,{passive:true});
 addEventListener('wheel',flashScrollbar,{passive:true});
-const navDots=document.getElementById('navDots'), controls=document.getElementById('controls'), counter=document.getElementById('counter');
+const controls=document.getElementById('controls'), counter=document.getElementById('counter');
 const prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn'), ovBtn=document.getElementById('ovBtn'), fsBtn=document.getElementById('fsBtn');
 const pad=n=>String(n).padStart(2,'0');
-const dots=slides.map((s,i)=>{const b=document.createElement('button');b.className='nav-dot';b.title=pad(i+1)+' / '+pad(slides.length);b.onclick=()=>go(i);navDots.appendChild(b);return b;});
 
 /* iframe 懒加载:只给当前页及相邻 ±1 注入 src,避免一打开就并发加载 60 个内嵌页(太慢)。相邻预载让顺序翻页时下一页已就绪。 */
 function lazyFrames(center){
@@ -2310,7 +2299,6 @@ function updateCurrent(i){
   lazyFrames(idx);
   slides.forEach((sl,k)=>sl.classList.toggle('active',k===idx));
   try{history.replaceState(null,'','#'+(idx+1));}catch(e){}   /* 网址带当前页码 */
-  dots.forEach((d,k)=>d.classList.toggle('active',k===idx));
   counter.textContent=pad(idx+1)+' / '+pad(slides.length);
   prevBtn.disabled=idx<=0; nextBtn.disabled=idx>=slides.length-1;
   document.body.classList.toggle('on-dark', s.classList.contains('s-cover')||s.classList.contains('s-glow'));
@@ -2499,13 +2487,11 @@ ovBtn.onclick=toggleOverview;
 document.body.addEventListener('click',e=>{if(!document.body.classList.contains('overview'))return;const sl=e.target.closest('.slide');if(sl){const i=slides.indexOf(sl);if(i>=0){idx=i;exitOverview();}}});
 addEventListener('resize',()=>{if(document.body.classList.contains('overview'))applyOverviewScale();else reanchor();});
 
-/* 默认隐藏控制栏+右侧点；鼠标移到屏幕底部才出现，离开 2.5s 淡出 */
-/* 底部控制栏 / 右侧导航点各自独立显隐：移到底部出底部栏、移到右侧出右侧点，离开该区即淡出 */
+/* 默认隐藏控制栏；鼠标移到屏幕底部才出现 */
 document.addEventListener('mousemove',e=>{
   controls.classList.toggle('show', e.clientY > window.innerHeight - 120);
-  navDots.classList.toggle('show', e.clientX > window.innerWidth - 120);
 });
-document.addEventListener('mouseleave',()=>{ controls.classList.remove('show'); navDots.classList.remove('show'); });
+document.addEventListener('mouseleave',()=>{ controls.classList.remove('show'); });
 
 slides.forEach(paintSlide);
 installSeqZoomButtons();
