@@ -1221,7 +1221,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         boxes.forEach(function(box){
           var vbox={l:Math.max(box.l,cr.left),t:Math.max(box.t,cr.top),r:Math.min(box.r,cr.right),b:Math.min(box.b,cr.bottom)};
           if(vbox.r<=vbox.l||vbox.b<=vbox.t)return;
-          var left=Math.max(vbox.l-pad,cr.left), top=Math.max(vbox.t-pad,cr.top), right=Math.min(vbox.r+pad,cr.right), bottom=Math.min(vbox.b+pad,cr.bottom);
+          var left=vbox.l-pad, top=vbox.t-pad, right=vbox.r+pad, bottom=vbox.b+pad;
           var el=document.createElement('div');
           el.className='hm-ring';
           el.style.left=(left-wr.left)+'px';
@@ -1256,6 +1256,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
           if(els.concat(refs).some(function(el){return el.getAttribute('data-col')===col;}))th.classList.add('hm-on');
         });
         if(ringEls.length&&rings&&card){
+          if(f.mark==='col'){
+            var colsOn={};
+            els.concat(refs).forEach(function(el){
+              var col=el.getAttribute('data-col');
+              if(col!==null)colsOn[col]=true;
+            });
+            Object.keys(colsOn).forEach(function(col){
+              table.querySelectorAll('th[data-col="'+col+'"]').forEach(function(th){ringEls.push(th);});
+            });
+            if(f.ref)refs.forEach(function(el){ringEls.push(el);});
+          }
           var box=ringEls.reduce(function(b,el){
             var r=el.getBoundingClientRect();
             return{l:Math.min(b.l,r.left),t:Math.min(b.t,r.top),r:Math.max(b.r,r.right),b:Math.max(b.b,r.bottom)};
