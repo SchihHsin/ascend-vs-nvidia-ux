@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitCode CANN 算子开发体验与 AI 可用性报告</title>
+  <style>
+    :root{
+      --red:#c7000b; --red2:#fbe8ea; --blue:#2867df; --blue2:#eaf1ff;
+      --teal:#1d9a9a; --teal2:#e6f7f6; --gold:#d8911d; --gold2:#fff5dc;
+      --green:#168a45; --green2:#e8f7ee; --ink:#202737; --sub:#617086;
+      --line:#dfe6f1; --soft:#f6f8fc; --bg:#eef3f8; --card:#fff;
+      --shadow:0 12px 34px rgba(26,42,72,.08),0 2px 8px rgba(26,42,72,.05);
+      --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",sans-serif;line-height:1.65}
+    a{color:inherit}
+    .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .navin{max-width:1180px;margin:auto;padding:12px 22px;display:flex;gap:18px;align-items:center}
+    .brand{font-weight:850;white-space:nowrap}
+    .brand b{color:var(--red)}
+    .navlinks{display:flex;gap:6px;overflow:auto}
+    .navlinks a{text-decoration:none;color:var(--sub);font-size:13px;padding:5px 10px;border-radius:8px;white-space:nowrap}
+    .navlinks a:hover{background:var(--soft);color:var(--ink)}
+    .wrap{max-width:1180px;margin:auto;padding:0 22px 64px}
+    section{scroll-margin-top:70px}
+    .hero{padding:58px 0 28px}
+    .eyebrow{font:700 12px/1 var(--mono);letter-spacing:.08em;color:var(--red);text-transform:uppercase}
+    h1{font-size:42px;line-height:1.15;margin:12px 0 16px;letter-spacing:-.02em}
+    h2{font-size:24px;margin:0 0 8px}
+    h3{font-size:16px;margin:0 0 8px}
+    p{margin:0 0 12px}
+    .lede{max-width:820px;color:var(--sub);font-size:16px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:13px;box-shadow:0 2px 8px rgba(26,42,72,.04)}
+    .grid{display:grid;gap:16px}
+    .metrics{grid-template-columns:repeat(4,1fr);margin-top:26px}
+    .metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px 18px;box-shadow:var(--shadow)}
+    .metric .k{font-size:12px;color:var(--sub);font-weight:700}
+    .metric .v{font:850 30px/1.2 var(--mono);margin-top:7px}
+    .metric .s{font-size:12px;color:var(--sub)}
+    .red{color:var(--red)} .blue{color:var(--blue)} .green{color:var(--green)} .gold{color:var(--gold)}
+    .floor{padding:34px 0}
+    .head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+    .num{font:800 12px/1 var(--mono);color:var(--blue);background:var(--blue2);border-radius:7px;padding:5px 8px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+    .pad{padding:18px}
+    .twocol{grid-template-columns:1fr 1fr}
+    .three{grid-template-columns:repeat(3,1fr)}
+    .path{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+    .step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;min-height:146px;position:relative}
+    .step:after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:4px;border-radius:4px 4px 0 0;background:var(--c)}
+    .sid{font:800 11px/1 var(--mono);color:var(--sub)}
+    .st{font-weight:850;margin:8px 0 6px;line-height:1.35}
+    .sd{font-size:12px;color:var(--sub)}
+    .score{font:800 18px/1 var(--mono);margin-top:10px}
+    .score.good{color:var(--green)} .score.mid{color:var(--blue)} .score.warn{color:var(--gold)} .score.bad{color:var(--red)}
+    .evidence{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:start}
+    .shot{background:#f3f5f9;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .shot img{display:block;width:100%;height:auto}
+    .cap{font-size:12px;color:var(--sub);padding:10px 12px;border-top:1px solid var(--line);background:#fff}
+    .bullets{margin:0;padding-left:18px;color:var(--sub);font-size:14px}
+    .bullets li{margin:6px 0}
+    .tag{display:inline-flex;align-items:center;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:750;background:var(--soft);color:var(--sub);margin:2px 4px 2px 0}
+    .tag.ok{background:var(--green2);color:var(--green)} .tag.risk{background:var(--gold2);color:#8a5b0f} .tag.bad{background:var(--red2);color:var(--red)} .tag.ai{background:var(--blue2);color:var(--blue)}
+    .finding-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .finding{padding:18px;border-top:5px solid var(--c)}
+    .finding .ftop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+    .finding .fid{font:850 13px/1 var(--mono);color:var(--c);background:var(--soft);border-radius:8px;padding:6px 8px}
+    .finding .impact{font:800 12px/1 var(--mono);border-radius:999px;padding:6px 9px;background:var(--tone);color:var(--c);white-space:nowrap}
+    .finding h3{font-size:17px;margin:0 0 8px}
+    .finding dl{display:grid;grid-template-columns:58px 1fr;gap:7px 10px;margin:12px 0 0;font-size:13px}
+    .finding dt{font-weight:850;color:var(--ink)}
+    .finding dd{margin:0;color:var(--sub)}
+    .finding.wide{grid-column:1/-1}
+    .finding-lead{margin:20px 0 14px;padding:18px;background:linear-gradient(135deg,#fff,rgba(234,241,255,.72));border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+    .finding-lead h3{font-size:18px;margin:0 0 8px}
+    .finding-lead p{color:var(--sub);font-size:14px;margin:0}
+    .insight-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .insight{padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.82);box-shadow:0 6px 20px rgba(26,42,72,.05)}
+    .insight .iid{font:850 11px/1 var(--mono);color:var(--blue);background:var(--blue2);border-radius:7px;padding:5px 7px;display:inline-block;margin-bottom:8px}
+    .insight h4{font-size:14px;line-height:1.35;margin:0 0 8px}
+    .insight dl{display:grid;grid-template-columns:44px 1fr;gap:5px 8px;margin:0;font-size:12px;line-height:1.45}
+    .insight dt{font-weight:850;color:var(--ink)}
+    .insight dd{margin:0;color:var(--sub)}
+    .insight dd b{color:var(--ink)}
+    .bench-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+    .bench-card{padding:16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#fff,rgba(246,248,252,.86));box-shadow:0 8px 24px rgba(26,42,72,.06)}
+    .bench-card .bid{font:850 12px/1 var(--mono);color:var(--red);background:var(--red2);border-radius:8px;padding:6px 8px;display:inline-block;margin-bottom:9px}
+    .bench-card h4{font-size:15px;line-height:1.35;margin:0 0 9px}
+    .bench-card p{font-size:12px;color:var(--sub);line-height:1.5;margin:0 0 10px}
+    .bench-card dl{display:grid;grid-template-columns:48px 1fr;gap:5px 8px;margin:0;font-size:12px;line-height:1.45}
+    .bench-card dt{font-weight:850;color:var(--ink)}
+    .bench-card dd{margin:0;color:var(--sub)}
+    .solution-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:16px}
+    .solution-card{display:grid;grid-template-columns:1.02fr .98fr;gap:18px;padding:18px;border-top:5px solid var(--c)}
+    .solution-left{min-width:0}.solution-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:9px}.solution-id{font:850 13px/1 var(--mono);color:var(--c);background:var(--tone);border-radius:8px;padding:7px 9px}.solution-tag{font:800 12px/1 var(--mono);color:var(--c);background:var(--tone);border-radius:999px;padding:7px 10px;white-space:nowrap}.solution-card h3{font-size:19px;line-height:1.34;margin:0 0 8px}.solution-card p{font-size:13px;color:var(--sub);margin:0 0 10px;line-height:1.58}.solution-card dl{display:grid;grid-template-columns:62px 1fr;gap:7px 10px;margin:12px 0 0;font-size:13px;line-height:1.5}.solution-card dt{font-weight:850;color:var(--ink)}.solution-card dd{margin:0;color:var(--sub)}
+    .solution-demo{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#f8fafc,#fff);padding:14px;min-height:230px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.75)}
+    .demo-mini-top{display:flex;align-items:center;gap:6px;font:850 11px/1 var(--mono);color:var(--sub);padding-bottom:8px;border-bottom:1px solid var(--line)}.demo-mini-dot{width:7px;height:7px;border-radius:50%;background:#cbd5e1}.demo-mini-title{margin-left:auto;color:var(--ink)}
+    .mock-hero{background:#172033;color:#fff;border-radius:12px;padding:14px}.mock-hero b{display:block;font-size:15px;margin-bottom:5px}.mock-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.mock-btn{border:1px solid #d9e2f0;background:#fff;border-radius:10px;padding:9px 10px;font-size:12px;font-weight:850;color:var(--ink)}.mock-btn.primary{background:var(--red);border-color:var(--red);color:#fff}.mock-list{display:grid;gap:7px}.mock-row{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:12px}.mock-row b{color:var(--blue)}.mock-badge{font:850 10px/1 var(--mono);border-radius:999px;padding:4px 7px;background:var(--blue2);color:var(--blue);white-space:nowrap}.mock-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mock-node{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:12px;font-weight:850;text-align:center;min-width:88px}.mock-arrow{color:var(--sub);font-weight:900}.mock-code{font:700 11px/1.5 var(--mono);background:#101827;color:#dbeafe;border-radius:12px;padding:12px;white-space:pre-wrap;min-height:150px}.mock-split{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.mock-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:12px}.mock-panel b{display:block;color:var(--ink);margin-bottom:5px}.mock-chipline{display:flex;flex-wrap:wrap;gap:6px}.mock-chip{font-size:11px;font-weight:850;border-radius:999px;padding:5px 8px;background:var(--green2);color:var(--green)}.mock-chip.warn{background:var(--gold2);color:#8a5b0f}.mock-chip.bad{background:var(--red2);color:var(--red)}
+
+    .journey-card{padding:18px;background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(255,255,255,.54));border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:auto}
+    .jrn-wrap{min-width:1080px;display:flex;flex-direction:column;gap:0}
+    .jrn-grid{display:grid;grid-template-columns:56px repeat(8,1fr);gap:0}
+    .jrn-rl{display:flex;flex-direction:column;justify-content:center;padding-right:9px;text-align:right}
+    .jrn-rn{font-size:10px;font-weight:800;color:var(--sub);line-height:1.4}.jrn-re{font-size:8px;color:#93a0b2;text-transform:uppercase;letter-spacing:.5px;margin-top:1px}
+    .jrn-pw,.jrn-tw,.jrn-fw,.jrn-ew,.jrn-pw2,.jrn-ow{padding-right:5px;display:flex;flex-direction:column}.jrn-ph{flex:1;border-radius:10px 10px 0 0;padding:12px 11px 14px;background:#172033;position:relative;overflow:hidden;min-height:92px}.jrn-ph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--c)}
+    .jrn-ph .pn{font-size:8.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px}.jrn-ph .pt{font-size:13px;font-weight:850;color:#fff;line-height:1.28}.jrn-ph .ptm{font-size:8px;margin-top:7px;display:inline-flex;align-items:center;padding:2px 7px;border-radius:100px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.58)}
+    .jrn-tc,.jrn-fc,.jrn-ec,.jrn-pc,.jrn-oc{border-left:1px solid rgba(255,255,255,.75);border-right:1px solid rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+    .jrn-tc{flex:1;padding:10px 10px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:94px}.jrn-touch{font-size:11px;color:var(--ink);line-height:1.33;display:flex;align-items:baseline;gap:.4em}.jrn-touch::before{content:'';width:4px;height:4px;border-radius:50%;background:#97a4b7;flex-shrink:0;align-self:center}
+    .jrn-fc{flex:1;padding:9px 10px;display:flex;flex-direction:column;gap:7px;min-height:120px}.jrn-scr{border-radius:6px;overflow:hidden;border:1px solid var(--line);background:#f8f9fb;flex:0 0 auto;height:76px;display:flex;flex-direction:column}.jrn-sb{display:flex;align-items:center;gap:3px;padding:4px 6px;background:#eceef2;border-bottom:1px solid var(--line);flex-shrink:0}.jrn-sd{width:4px;height:4px;border-radius:50%}.jrn-sc{padding:5px 6px;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:3px}.jmb{height:3px;border-radius:2px;background:#e0e5ee}.jrn-fl{font-size:10.5px;font-weight:600;color:var(--ink);line-height:1.35}
+    .jrn-grid.je{height:118px}.jrn-ec{flex:1;position:relative;height:100%;background:rgba(250,251,255,.62);overflow:hidden}.jrn-ec svg{position:absolute;inset:0;width:100%;height:100%;display:block}.jrn-ec .d{position:absolute;width:9px;height:9px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2);transform:translate(-50%,-50%);left:50%;z-index:3}.jrn-ec .e{position:absolute;font-size:13px;transform:translate(-50%,0);left:50%;z-index:3;line-height:1}.jrn-ec .l{position:absolute;font-family:var(--mono);font-size:8px;font-weight:800;transform:translateX(-50%);left:50%;bottom:4px;z-index:3;white-space:nowrap}
+    .jrn-pc{flex:1;padding:12px 10px;display:flex;flex-direction:column;justify-content:flex-start;gap:8px;min-height:174px;background:linear-gradient(160deg,rgba(254,236,236,.78),rgba(255,247,240,.58))}.jrn-pi{display:flex;gap:6px;align-items:flex-start}.jrn-pi-icon{width:14px;height:14px;border-radius:4px;background:#fef3c7;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}.jrn-pi-icon::before{content:'!';font:850 10px/1 var(--mono);color:#92400e}.jrn-pi-icon svg{display:none}.jrn-pt{font-size:10.5px;color:#7f1d1d;line-height:1.38}
+    .jrn-oc{flex:1;border-radius:0 0 9px 9px;padding:12px 10px;display:flex;flex-direction:column;justify-content:flex-start;gap:8px;min-height:174px;background:linear-gradient(160deg,rgba(220,252,231,.74),rgba(240,253,244,.58))}.jrn-oi{display:flex;gap:6px;align-items:flex-start}.jrn-oi-dot{width:7px;height:7px;border-radius:50%;background:#10b981;flex-shrink:0;margin-top:4px}.jrn-ot{font-size:10.5px;color:#064e3b;line-height:1.38}
+
+    .tpgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .tp{display:grid;grid-template-columns:132px 1fr;gap:14px;padding:15px}
+    .tp .id{font:850 18px/1 var(--mono);color:var(--blue)}
+    .tp .name{font-weight:850;margin:4px 0 6px}
+    .tpgrid.audit{grid-template-columns:1fr;gap:18px}
+    .tp-card{display:grid;grid-template-columns:360px 1fr;gap:18px;padding:16px}
+    .tp-shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#f3f5f9;align-self:start}
+    .tp-shot img{display:block;width:100%;height:224px;object-fit:cover;object-position:top}
+    .tp-main{min-width:0}
+    .tp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+    .tp-kicker{font:850 12px/1 var(--mono);color:var(--blue);background:var(--blue2);border-radius:8px;padding:6px 8px;display:inline-block;margin-bottom:8px}
+    .tp-title{font-size:18px;font-weight:850;line-height:1.32;margin:0}
+    .tp-score{flex:0 0 auto;text-align:right}
+    .tp-score .numscore{font:850 30px/1 var(--mono)}
+    .tp-score .numscore.good{color:var(--green)} .tp-score .numscore.mid{color:var(--blue)} .tp-score .numscore.warn{color:var(--gold)} .tp-score .numscore.bad{color:var(--red)}
+    .tp-score .scorelab{font:800 11px/1 var(--mono);color:var(--sub);text-transform:uppercase;margin-top:4px}
+    .tp-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+    .tp-note{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 12px;min-height:116px}
+    .tp-note b{display:block;font-size:12px;margin-bottom:5px;color:var(--ink)}
+    .tp-note span{font-size:12px;color:var(--sub);line-height:1.48}
+    .tp-tags{margin-top:11px}
+    .mini{font-size:12px;color:var(--sub)}
+    .bar{height:8px;background:var(--soft);border-radius:999px;overflow:hidden;margin-top:10px}
+    .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--gold),var(--green));width:var(--w)}
+    table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}
+    th,td{border-bottom:1px solid var(--line);padding:11px 10px;text-align:left;vertical-align:top}
+    th{color:var(--sub);font-size:12px;background:var(--soft)}
+    tr:last-child td{border-bottom:0}
+    .ai-table td:nth-child(n+3),.ai-table th:nth-child(n+3){text-align:center}
+    .pill{font:800 12px/1 var(--mono);display:inline-block;min-width:34px;text-align:center;border-radius:8px;padding:5px 6px;background:var(--soft)}
+    .pill.h{background:var(--green2);color:var(--green)} .pill.m{background:var(--blue2);color:var(--blue)} .pill.l{background:var(--gold2);color:#8a5b0f} .pill.x{background:var(--red2);color:var(--red)}
+    .quote{background:linear-gradient(135deg,#fff,var(--soft));border-left:4px solid var(--red);border-radius:12px;padding:16px 18px;color:var(--ink)}
+    .rec{display:grid;grid-template-columns:92px 1fr 120px;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line)}
+    .rec:last-child{border-bottom:0}
+    .prio{font:850 13px/1 var(--mono);border-radius:8px;padding:7px 8px;text-align:center;background:var(--red2);color:var(--red)}
+    .owner{font-size:12px;color:var(--sub);text-align:right}
+
+    .demo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.demo-card{padding:18px}.demo-title{font-size:17px;font-weight:850;margin-bottom:8px}.demo-sub{font-size:12px;color:var(--sub);margin-bottom:14px}.demo-screen{border:1px solid var(--line);border-radius:14px;background:#f8fafc;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}.demo-top{height:34px;background:#eef2f7;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:5px;padding:0 10px}.demo-dot{width:7px;height:7px;border-radius:50%;background:#c7d2e1}.demo-body{padding:14px}.demo-hero{border-radius:12px;background:#172033;color:#fff;padding:14px;margin-bottom:10px}.demo-hero b{display:block;font-size:16px;margin-bottom:4px}.demo-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.demo-btn{border:1px solid #d9e2f0;background:#fff;border-radius:10px;padding:10px;font-size:12px;font-weight:800;color:var(--ink)}.demo-btn.primary{background:var(--red);border-color:var(--red);color:#fff}.demo-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.demo-node{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:12px;font-weight:800;min-width:94px;text-align:center}.demo-arr{color:var(--sub);font-weight:900}.demo-fail{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}.demo-fail h4{margin:0 0 7px;font-size:14px}.demo-list{display:grid;gap:6px}.demo-list div{font-size:12px;color:var(--sub);background:var(--soft);border-radius:8px;padding:7px}.demo-loop{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.demo-loop div{min-height:74px;border-radius:12px;border:1px solid var(--line);background:#fff;padding:10px;font-size:12px}.demo-loop b{display:block;color:var(--blue);margin-bottom:5px}@media(max-width:920px){.demo-grid,.demo-actions,.demo-loop{grid-template-columns:1fr}}
+    .foot{color:var(--sub);font-size:12px;margin-top:18px}
+    @media(max-width:920px){.metrics,.twocol,.three,.path,.tpgrid,.evidence,.finding-grid,.insight-grid,.bench-grid,.solution-card,.mock-split,.tp-card,.tp-cols{grid-template-columns:1fr}.finding.wide{grid-column:auto}.tp{grid-template-columns:1fr}.navin{align-items:flex-start;flex-direction:column}.hero h1{font-size:32px}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="navin">
+      <div class="brand"><b>GitCode CANN</b> 算子开发体验</div>
+      <div class="navlinks">
+        <a href="#question">问题</a><a href="#journey">旅程</a><a href="#touchpoints">触点分析</a><a href="#ai">AI 可用性</a><a href="#findings">结论与方案</a><a href="#actions">行动</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Operator development full run · 2026-07-06</div>
+      <h1>GitCode CANN 算子开发链路完整体验报告</h1>
+      <p class="lede">本报告完整跑「算子开发」场景：从 GitCode CANN 入口进入，覆盖 learning hub、10 分钟自定义算子、在线体验、Ascend C 系列、CANNJudge、asc-devkit、ops-test-kit、catlass、cann-samples 与 ops-* 算子库，并同步评估这些内容是否适合作为 AI 助手的可检索知识源。</p>
+      <div class="chips">
+        <span class="chip">研究对象：cann-learning-hub</span>
+        <span class="chip">研究对象：CANN 组织仓库</span>
+        <span class="chip">方法：旅程触点 + AI 可用性</span>
+        <span class="chip">范围：算子开发完整链路，不含训练/推理扩展</span>
+      </div>
+      <div class="grid metrics">
+        <div class="metric"><div class="k">旅程触点</div><div class="v blue">18</div><div class="s">覆盖入口、学习、练习、工程、贡献</div></div>
+        <div class="metric"><div class="k">AI 问句</div><div class="v green">5</div><div class="s">搜索 + 抓取 + 评分</div></div>
+        <div class="metric"><div class="k">平均体验分</div><div class="v gold">75</div><div class="s">内容强，首跑与分诊弱</div></div>
+        <div class="metric"><div class="k">AI 可用性</div><div class="v green">82</div><div class="s">README 可抓，仓库关系需补</div></div>
+      </div>
+    </section>
+
+    <section id="question" class="floor">
+      <div class="head"><span class="num">01</span><h2>问题定义</h2></div>
+      <div class="card pad">
+        <div class="quote">GitCode 上的 CANN learning hub 与 CANN 组织仓库，能否承担「开发者学习入口 + 开源生态索引 + AI 可检索知识库」这三重角色？</div>
+        <div class="grid three" style="margin-top:16px">
+          <div><h3>不是在评估什么</h3><p class="mini">不是泛泛评价 GitCode UI，也不是复刻官网竞品分析。这里看的是 CANN 内容迁入 GitCode 后，能不能成为开发者和 AI 的下一层承接。</p></div>
+          <div><h3>用户是谁</h3><p class="mini">第一次认真做 Ascend C / 自定义算子的开发者，知道目标但不知道先看哪门课、进哪个仓、如何在线或本地跑、怎么测试、去哪练习和贡献。</p></div>
+          <div><h3>成功标准</h3><p class="mini">能完成「找入口 → 学路径 → 跑第一个算子 → 进阶开发 → 测试验证 → 看样例/模板 → 练题 → 反馈/贡献」的完整闭环。</p></div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="journey" class="floor">
+      <div class="head"><span class="num">02</span><h2>算子开发者旅程</h2></div>
+      <div class="journey-card"><div class="jrn-wrap">
+        <div class="jrn-grid"><div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#3B82F6"><div class="pn">01</div><div class="pt">发现入口</div><div class="ptm">搜索 / org</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#F59E0B"><div class="pn">02</div><div class="pt">理解定位</div><div class="ptm">代码仓首屏</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#10B981"><div class="pn">03</div><div class="pt">选择学习</div><div class="ptm">路线表</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#EF4444"><div class="pn">04</div><div class="pt">首次运行</div><div class="ptm">Notebook</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#3B82F6"><div class="pn">05</div><div class="pt">工程开发</div><div class="ptm">asc-devkit</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#F59E0B"><div class="pn">06</div><div class="pt">测试验证</div><div class="ptm">ops-test-kit</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#8B5CF6"><div class="pn">07</div><div class="pt">样例复用</div><div class="ptm">模板/样例/算子库</div></div></div><div class="jrn-pw"><div class="jrn-ph" style="--c:#10B981"><div class="pn">08</div><div class="pt">练习贡献</div><div class="ptm">题库 / Issues</div></div></div></div>
+        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">触点</div><div class="jrn-re">Touch</div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">learning hub</div><div class="jrn-touch">CANN org</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">文件树</div><div class="jrn-touch">README</div><div class="jrn-touch">CANNLab</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">版本表</div><div class="jrn-touch">学习路径</div><div class="jrn-touch">在线体验</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">CANNLab</div><div class="jrn-touch">Notebook</div><div class="jrn-touch">登录弹窗</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">asc-devkit</div><div class="jrn-touch">clangd</div><div class="jrn-touch">Roadmap</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">ops-test-kit</div><div class="jrn-touch">Golden</div><div class="jrn-touch">性能</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">catlass</div><div class="jrn-touch">cann-samples</div><div class="jrn-touch">ops-*</div></div></div><div class="jrn-tw"><div class="jrn-tc"><div class="jrn-touch">CANNJudge</div><div class="jrn-touch">Issues</div><div class="jrn-touch">PR</div></div></div></div>
+        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">行为</div><div class="jrn-re">Action</div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:90%;background:#dbe6f7"></div><div class="jmb" style="width:65%;background:#e5e7eb"></div><div class="jmb" style="width:78%;background:#e5e7eb"></div><div class="jmb" style="width:40%;background:#c7d2fe"></div></div></div><div class="jrn-fl">搜索 GitCode → 进入 CANN org</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:55%;background:#dbe6f7"></div><div class="jmb" style="width:84%;background:#e5e7eb"></div><div class="jmb" style="width:70%;background:#e5e7eb"></div><div class="jmb" style="width:45%;background:#c7d2fe"></div></div></div><div class="jrn-fl">扫首屏 → 读 README</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:78%;background:#dbe6f7"></div><div class="jmb" style="width:92%;background:#e5e7eb"></div><div class="jmb" style="width:62%;background:#e5e7eb"></div><div class="jmb" style="width:50%;background:#c7d2fe"></div></div></div><div class="jrn-fl">找 10 分钟体验 → 看 Ascend C 章节</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:88%;background:#dbe6f7"></div><div class="jmb" style="width:35%;background:#e5e7eb"></div><div class="jmb" style="width:55%;background:#e5e7eb"></div><div class="jmb" style="width:55%;background:#c7d2fe"></div></div></div><div class="jrn-fl">点在线体验 → 进入 AtomGit AI</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:70%;background:#dbe6f7"></div><div class="jmb" style="width:86%;background:#e5e7eb"></div><div class="jmb" style="width:46%;background:#e5e7eb"></div><div class="jmb" style="width:60%;background:#c7d2fe"></div></div></div><div class="jrn-fl">看 API 层级 → 配置 IDE</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:84%;background:#dbe6f7"></div><div class="jmb" style="width:72%;background:#e5e7eb"></div><div class="jmb" style="width:90%;background:#e5e7eb"></div><div class="jmb" style="width:65%;background:#c7d2fe"></div></div></div><div class="jrn-fl">查 Golden → 批量测试 → 性能验证</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:48%;background:#dbe6f7"></div><div class="jmb" style="width:77%;background:#e5e7eb"></div><div class="jmb" style="width:68%;background:#e5e7eb"></div><div class="jmb" style="width:70%;background:#c7d2fe"></div></div></div><div class="jrn-fl">找高性能模板 → 看正式算子库</div></div></div><div class="jrn-fw"><div class="jrn-fc"><div class="jrn-scr"><div class="jrn-sb"><div class="jrn-sd" style="background:#ff5f57"></div><div class="jrn-sd" style="background:#ffbd2e"></div><div class="jrn-sd" style="background:#28ca41"></div></div><div class="jrn-sc"><div class="jmb" style="width:72%;background:#dbe6f7"></div><div class="jmb" style="width:50%;background:#e5e7eb"></div><div class="jmb" style="width:88%;background:#e5e7eb"></div><div class="jmb" style="width:75%;background:#c7d2fe"></div></div></div><div class="jrn-fl">刷题 → 看 Roadmap → 提 Issue/PR</div></div></div></div>
+        <div class="jrn-grid je"><div class="jrn-rl"><div class="jrn-rn">情绪</div><div class="jrn-re">Emotion</div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981" stop-opacity=".16"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,41 50,36 100,33 100,100 0,100" fill="url(#jeg0)"/><polyline points="0,41 50,36 100,33" fill="none" stroke="#10B981" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:36%;background:#10B981"></div><div class="e" style="top:calc(36% - 19px)">🙂</div><div class="l" style="color:#10B981">顺畅</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".16"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,48 50,43 100,40 100,100 0,100" fill="url(#jeg1)"/><polyline points="0,48 50,43 100,40" fill="none" stroke="#F59E0B" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:43%;background:#F59E0B"></div><div class="e" style="top:calc(43% - 19px)">😕</div><div class="l" style="color:#F59E0B">犹豫</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981" stop-opacity=".16"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,37 50,32 100,29 100,100 0,100" fill="url(#jeg2)"/><polyline points="0,37 50,32 100,29" fill="none" stroke="#10B981" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:32%;background:#10B981"></div><div class="e" style="top:calc(32% - 19px)">🙂</div><div class="l" style="color:#10B981">顺畅</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EF4444" stop-opacity=".16"/><stop offset="1" stop-color="#EF4444" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,58 50,53 100,50 100,100 0,100" fill="url(#jeg3)"/><polyline points="0,58 50,53 100,50" fill="none" stroke="#EF4444" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:53%;background:#EF4444"></div><div class="e" style="top:calc(53% - 19px)">😩</div><div class="l" style="color:#EF4444">受阻</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981" stop-opacity=".16"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,37 50,32 100,29 100,100 0,100" fill="url(#jeg4)"/><polyline points="0,37 50,32 100,29" fill="none" stroke="#10B981" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:32%;background:#10B981"></div><div class="e" style="top:calc(32% - 19px)">🙂</div><div class="l" style="color:#10B981">顺畅</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".16"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,45 50,40 100,37 100,100 0,100" fill="url(#jeg5)"/><polyline points="0,45 50,40 100,37" fill="none" stroke="#F59E0B" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:40%;background:#F59E0B"></div><div class="e" style="top:calc(40% - 19px)">😕</div><div class="l" style="color:#F59E0B">犹豫</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".16"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,47 50,42 100,39 100,100 0,100" fill="url(#jeg6)"/><polyline points="0,47 50,42 100,39" fill="none" stroke="#F59E0B" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:42%;background:#F59E0B"></div><div class="e" style="top:calc(42% - 19px)">😕</div><div class="l" style="color:#F59E0B">犹豫</div></div></div><div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="jeg7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".16"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polygon points="0,47 50,42 100,39 100,100 0,100" fill="url(#jeg7)"/><polyline points="0,47 50,42 100,39" fill="none" stroke="#F59E0B" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg><div class="d" style="top:42%;background:#F59E0B"></div><div class="e" style="top:calc(42% - 19px)">😕</div><div class="l" style="color:#F59E0B">犹豫</div></div></div></div>
+        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">痛点</div><div class="jrn-re">Pain</div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">入口分散在搜索、org、仓库</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">主行动藏在 README 下方</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">课程多但层级略长</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">10 分钟承诺被中断</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">从课程到仓库跳转不够自然</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">learning hub 未显性连接测试工具</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">学习/复用/贡献角色混在一起</div></div></div></div><div class="jrn-pw2"><div class="jrn-pc"><div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">练习和贡献未接回教程</div></div></div></div></div>
+        <div class="jrn-grid"><div class="jrn-rl"><div class="jrn-rn">机会点</div><div class="jrn-re">Opps</div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">统一“算子开发入口”短链</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">首屏任务化 CTA</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">路线图 + 推荐顺序</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">失败兜底 + 本地命令</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">教程末尾接 asc-devkit</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">写完算子后推荐测试链路</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">仓库地图按任务分层</div></div></div></div><div class="jrn-ow"><div class="jrn-oc"><div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">学-练-赛-贡献闭环</div></div></div></div></div>
+      </div></div>
+    </section>
+
+<section id="touchpoints" class="floor">
+      <div class="head"><span class="num">03</span><h2>18 个触点图文分析与评分</h2></div>
+      <div class="tpgrid audit">
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/01-cann-learning-hub-home.png" alt="搜索入口"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T1</span><h3 class="tp-title">搜索入口</h3></div><div class="tp-score"><div class="numscore good">82</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:82%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">可发现性好</span><span class="tag risk">入口承接弱</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>关键词能命中官方 learning hub、Ascend C 系列与 asc-devkit，说明外部可发现性不是主要短板。</span></div><div class="tp-note"><b>问题在哪里</b><span>搜索把用户带到 GitCode 后，页面首屏仍像普通代码仓，缺少“算子开发从这里开始”的明确承接。</span></div><div class="tp-note"><b>接下来怎么改</b><span>为算子开发建立固定短链和搜索标题规范，让搜索结果直接表达任务：10 分钟上手、学习路线、工程开发。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/01-cann-learning-hub-home.png" alt="learning hub 首屏"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T2</span><h3 class="tp-title">learning hub 首屏</h3></div><div class="tp-score"><div class="numscore warn">72</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:72%"><i></i></div>
+            <div class="tp-tags"><span class="tag risk">内容集中</span><span class="tag risk">主 CTA 不突出</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>首屏同时出现文件树、README、CANNLab、下载、Clone、Issues、健康度和下载量，信息很全。</span></div><div class="tp-note"><b>问题在哪里</b><span>对第一次用户来说，这些仓库控件抢走了“我要先做什么”的注意力，学习入口感弱。</span></div><div class="tp-note"><b>接下来怎么改</b><span>首屏前置任务化模块：在线体验、本地运行、完整路线、测试验证、工程开发；文件树后置。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/03-learning-path.png" alt="README 学习路径"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T3</span><h3 class="tp-title">README 学习路径</h3></div><div class="tp-score"><div class="numscore good">88</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:88%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">路线完整</span><span class="tag risk">需要推荐顺序</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>README 中有版本配套、方向分组、在线体验、学练赛链接，算子路线覆盖较完整。</span></div><div class="tp-note"><b>问题在哪里</b><span>内容厚度足，但初级/中级/高级与真实任务的优先级关系仍需要用户自己判断。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在 README 顶部增加“推荐学习顺序”和“适合谁/预计耗时/前置条件”。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/04-first-custom-operator.png" alt="10 分钟自定义算子 Notebook"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T4</span><h3 class="tp-title">10 分钟自定义算子 Notebook</h3></div><div class="tp-score"><div class="numscore mid">74</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:74%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">上手主题明确</span><span class="tag risk">首屏预览不足</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>“10 分钟自定义算子”主题清楚，能连接 CANNLab/下载，适合作为第一任务。</span></div><div class="tp-note"><b>问题在哪里</b><span>代码预览和关键执行步骤在首屏表达不足，用户还不能立刻判断是否能复制到本地跑。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在 Notebook 页顶部放最短步骤、运行环境、在线/本地两种路径，以及下一步测试验证入口。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/05-ascendc-series.png" alt="Ascend C 系列目录"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T5</span><h3 class="tp-title">Ascend C 系列目录</h3></div><div class="tp-score"><div class="numscore good">86</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:86%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">课程体系强</span><span class="tag risk">难度标尺不足</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>系列目录覆盖基础、Tiling、调试、msProf 等进阶内容，在线体验入口多。</span></div><div class="tp-note"><b>问题在哪里</b><span>课程很多但没有足够醒目的任务难度标记，新手容易不知道哪些必须先学。</span></div><div class="tp-note"><b>接下来怎么改</b><span>给每个 Notebook 标注“入门必做/工程必做/性能选学/贡献前置”。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/06-online-experience.png" alt="在线体验 / CANNLab"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T6</span><h3 class="tp-title">在线体验 / CANNLab</h3></div><div class="tp-score"><div class="numscore bad">58</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:58%"><i></i></div>
+            <div class="tp-tags"><span class="tag bad">首跑谷底</span><span class="tag bad">登录闸门</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>在线体验入口本身很强，能把用户从学习内容带到可运行环境。</span></div><div class="tp-note"><b>问题在哪里</b><span>实测进入 AtomGit AI 后被登录弹窗和启动状态打断，“10 分钟体验”的信任被削弱。</span></div><div class="tp-note"><b>接下来怎么改</b><span>登录前说明资源、限制、耗时；失败时给重试、本地命令、FAQ、提交 Issue 四个兜底动作。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/02-cann-org-repos.png" alt="CANN 组织仓库"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T7</span><h3 class="tp-title">CANN 组织仓库</h3></div><div class="tp-score"><div class="numscore mid">70</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:70%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">资产丰富</span><span class="tag risk">分诊不足</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>CANN org 聚合了大量仓库，元数据、搜索和活跃度信息对熟手有价值。</span></div><div class="tp-note"><b>问题在哪里</b><span>新手面对大量仓库时无法判断 learning hub、asc-devkit、ops-test-kit、catlass、ops-* 的先后关系。</span></div><div class="tp-note"><b>接下来怎么改</b><span>新增“算子开发仓库地图”，按学习、工程、验证、模板、样例、正式算子库、练习、贡献分层。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/08-asc-devkit.png" alt="asc-devkit 首页"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T8</span><h3 class="tp-title">asc-devkit 首页</h3></div><div class="tp-score"><div class="numscore good">90</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:90%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">工程承接强</span><span class="tag risk">迁移桥缺失</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>页面能承接 API 层级、IDE 支持、样例、贡献与 Roadmap，是工程开发核心仓。</span></div><div class="tp-note"><b>问题在哪里</b><span>它自身很强，但从 learning hub/Notebook 跳到工程仓的过渡不自然。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在教程末尾增加“从 Notebook 到 asc-devkit 工程”的迁移卡和 IDE 配置 checklist。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/16-asc-devkit-issues.png" alt="asc-devkit Issues / Roadmap"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T9</span><h3 class="tp-title">asc-devkit Issues / Roadmap</h3></div><div class="tp-score"><div class="numscore mid">78</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:78%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">贡献入口存在</span><span class="tag risk">链路不自然</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>Issues 中能看到 Ascend C Development Roadmap，说明贡献路线不是空白。</span></div><div class="tp-note"><b>问题在哪里</b><span>Roadmap 位于仓库问题区，对第一次学习者来说不是自然下一步。</span></div><div class="tp-note"><b>接下来怎么改</b><span>把 Roadmap 前置到 learning hub 的“下一步参与”模块，并按适合新手/熟手标注议题。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/10-ops-test-kit.png" alt="ops-test-kit"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T10</span><h3 class="tp-title">ops-test-kit</h3></div><div class="tp-score"><div class="numscore mid">76</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:76%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">验证能力明确</span><span class="tag risk">入口关系弱</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>README/页面中测试、Golden、性能、验证、编译、运行等信号明显。</span></div><div class="tp-note"><b>问题在哪里</b><span>它是写完算子后的关键步骤，但没有被显性接在入门教程之后。</span></div><div class="tp-note"><b>接下来怎么改</b><span>所有算子教程末尾统一追加“用 ops-test-kit 做 Golden 对比和性能验证”的固定模块。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/11-catlass.png" alt="catlass"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T11</span><h3 class="tp-title">catlass</h3></div><div class="tp-score"><div class="numscore mid">74</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:74%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">模板能力强</span><span class="tag risk">边界需解释</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>catlass 面向高性能矩阵乘及融合类算子模板，是进阶优化资产。</span></div><div class="tp-note"><b>问题在哪里</b><span>对初学者来说，它和 asc-devkit、cann-samples、ops-* 的关系不直观。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在仓库地图中标明 catlass 的角色是“模板复用/高性能优化”，并给前置知识提示。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/12-cann-samples.png" alt="cann-samples"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T12</span><h3 class="tp-title">cann-samples</h3></div><div class="tp-score"><div class="numscore good">80</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:80%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">样例/调优强</span><span class="tag risk">需接课程末尾</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>页面体现样例、编译、运行、性能调优等内容，适合从教程过渡到实战。</span></div><div class="tp-note"><b>问题在哪里</b><span>如果用户只看 learning hub，不一定知道跑完第一个算子后应该看这里。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在课程末尾推荐同类 samples，并说明它是“看真实工程写法”的下一站。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/13-ops-nn.png" alt="ops-nn"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T13</span><h3 class="tp-title">ops-nn</h3></div><div class="tp-score"><div class="numscore warn">72</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:72%"><i></i></div>
+            <div class="tp-tags"><span class="tag risk">正式算子库</span><span class="tag risk">新手导航弱</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>ops-nn 活跃度高，Issue/PR 信号强，是神经网络高阶算子承接点。</span></div><div class="tp-note"><b>问题在哪里</b><span>它更像正式算子货架，缺少“学习/复用/贡献”的角色说明。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在仓库 README 顶部增加适用场景、适合复用的目录、适合新手参与的 issue。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/14-ops-math.png" alt="ops-math"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T14</span><h3 class="tp-title">ops-math</h3></div><div class="tp-score"><div class="numscore warn">72</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:72%"><i></i></div>
+            <div class="tp-tags"><span class="tag risk">数学算子活跃</span><span class="tag risk">任务分诊弱</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>ops-math 有数学类算子库活跃信号，测试/验证/版本信息较多。</span></div><div class="tp-note"><b>问题在哪里</b><span>用户很难从 org 列表判断它和 ops-nn、ops-transformer 的选择边界。</span></div><div class="tp-note"><b>接下来怎么改</b><span>按算子类型建立选择器：数学/神经网络/Transformer，并配“我该进哪个仓”的问答。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/15-ops-transformer.png" alt="ops-transformer"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T15</span><h3 class="tp-title">ops-transformer</h3></div><div class="tp-score"><div class="numscore warn">71</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:71%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">专项明确</span><span class="tag ok">入门不友好</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>ops-transformer 面向大模型 Transformer 算子，专项定位清楚。</span></div><div class="tp-note"><b>问题在哪里</b><span>专项仓对新手跨度大，缺少前置学习、样例复用和贡献门槛说明。</span></div><div class="tp-note"><b>接下来怎么改</b><span>在页面顶部补“适合谁、先学什么、从哪个样例开始、如何提贡献”。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/09-cannjudge.png" alt="CANNJudge 题库"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T16</span><h3 class="tp-title">CANNJudge 题库</h3></div><div class="tp-score"><div class="numscore good">82</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:82%"><i></i></div>
+            <div class="tp-tags"><span class="tag ok">练习承接好</span><span class="tag risk">未接回教程</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>题库可见 25 道题、芯片类型、通过率、尝试人数和出题时间。</span></div><div class="tp-note"><b>问题在哪里</b><span>练习平台是强资产，但没有被每个教程自然调用，学完以后练什么仍要自己找。</span></div><div class="tp-note"><b>接下来怎么改</b><span>每个入门教程末尾推荐一道同类 CANNJudge 题，形成“学完马上练”。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/17-competition.png" alt="比赛专区"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T17</span><h3 class="tp-title">比赛专区</h3></div><div class="tp-score"><div class="numscore warn">65</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:65%"><i></i></div>
+            <div class="tp-tags"><span class="tag risk">赛事入口有</span><span class="tag risk">算子聚焦弱</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>learning hub 能导向大赛/比赛专区，说明运营承接入口存在。</span></div><div class="tp-note"><b>问题在哪里</b><span>页面信息偏泛赛事集合，无法直接回答“有没有算子开发相关比赛/题单”。</span></div><div class="tp-note"><b>接下来怎么改</b><span>单独做算子开发挑战入口，聚合题单、赛题、赛后题解和获奖方案。</span></div></div>
+          </div>
+        </div>
+        <div class="card tp-card">
+          <div class="tp-shot"><img src="../../materials/gitcode-cann/screenshots/16-asc-devkit-issues.png" alt="贡献/反馈闭环"></div>
+          <div class="tp-main">
+            <div class="tp-top"><div><span class="tp-kicker">T18</span><h3 class="tp-title">贡献/反馈闭环</h3></div><div class="tp-score"><div class="numscore warn">68</div><div class="scorelab">score</div></div></div>
+            <div class="bar" style="--w:68%"><i></i></div>
+            <div class="tp-tags"><span class="tag risk">反馈渠道有</span><span class="tag risk">闭环提示弱</span></div>
+            <div class="tp-cols"><div class="tp-note"><b>图里看到什么</b><span>Issues、PR、讨论、贡献指南、Roadmap 在不同仓库中都存在。</span></div><div class="tp-note"><b>问题在哪里</b><span>这些入口分散在各仓，教程链路没有告诉用户什么时候提 Issue、看 Roadmap 或发 PR。</span></div><div class="tp-note"><b>接下来怎么改</b><span>教程末尾固定加入“练一道题/看一个样例/提一个 Issue/关注 Roadmap”的闭环卡。</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai" class="floor">
+      <div class="head"><span class="num">04</span><h2>AI 可用性 benchmark</h2></div>
+      <div class="card pad">
+        <p class="mini">本轮按 ai-usability-benchmark 的 11 项压缩评分：①官方可发现 ②可抓取 ③正文详尽 ④版本清晰 ⑤二手丰富 ⑥二手可信 ⑦自带知识 ⑧检索成本 ⑨版本可锁 ⑩步骤可复现 ⑪综合置信。分数是 1-5 档；这里是算子开发链路结论，不代表训练/推理场景。</p>
+        <table class="ai-table">
+          <thead><tr><th>问句</th><th>实测摘要</th><th>①</th><th>②</th><th>③</th><th>④</th><th>⑧</th><th>⑨</th><th>⑩</th><th>⑪</th></tr></thead>
+          <tbody>
+<tr><td>如何 10 分钟跑通第一个 Ascend C 自定义算子？</td><td>搜索能命中 learning hub；HTML 中能抓到 ipynb、Add、kernel、raw 等内容；在线体验被登录拦截，复现性打折。</td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4.1</span></td></tr>
+            <tr><td>Ascend C 算子开发从入门到性能优化应该按什么 Notebook 顺序学习？</td><td>README 和目录页有大量章节、82 个“在线体验”匹配，覆盖基础、Tiling、调试、msProf；Atlas A2 限制也能抓到。</td><td><span class="pill h">5</span></td><td><span class="pill h">5</span></td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4.6</span></td></tr>
+            <tr><td>写完一个 Ascend C 算子后，怎么做 Golden 对比、批量测试和性能验证？</td><td>ops-test-kit README/HTML 中“测试、Golden、性能、验证、编译、运行”高频出现；官方源可抓，但 learning hub 到该仓的引导弱。</td><td><span class="pill h">4</span></td><td><span class="pill h">5</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill h">4.0</span></td></tr>
+            <tr><td>catlass、cann-samples、ops-* 分别适合学习、复用还是贡献？</td><td>多个仓库 README 可抓，描述和活跃度足；但角色分层需要 AI 推断，缺一张官方关系图。</td><td><span class="pill h">4</span></td><td><span class="pill h">5</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3.5</span></td></tr>
+            <tr><td>哪里可以练 Ascend C 算子题并参与贡献？</td><td>CANNJudge 浏览器实测可见 25 道题、芯片类型、通过率；asc-devkit Issues 可见 Roadmap。练习和贡献有入口，但链路分散。</td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill h">4</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3</span></td><td><span class="pill m">3.4</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+<section id="findings" class="floor">
+      <div class="head"><span class="num">05</span><h2>结论与方案 Demo：每个问题都要落成一个可改的界面/内容模块</h2></div>
+      <div class="finding-lead"><h3>总判断：不是资料少，而是“下一步”没有被产品化</h3><p>18 个触点和 5 个 AI benchmark 问句共同指向同一个问题：CANN GitCode 已经有课程、Notebook、工程仓、测试工具、样例库、题库和贡献入口，但它们没有被组织成连续任务路径。下面把结论和对应 demo 放在同一张卡里，避免“分析很多、方案很少”。</p></div>
+      <div class="solution-grid">
+        <div class="card solution-card" style="--c:var(--red);--tone:var(--red2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S1</span><span class="solution-tag">入口承接</span></div><h3>learning hub 要从代码仓首屏变成算子开发任务首页</h3><p>人类用户会把 learning hub 当成代码仓；AI 虽能抓到 README，但生成答案时会把入口、路线和运行方式混在一起。</p><dl><dt>来自</dt><dd>T1/T2；AI Q1。搜索能带来用户，但首屏没有马上回答“我现在该点哪里”。</dd><dt>应做</dt><dd>首屏先给任务入口，再给文件树。主 CTA 应覆盖在线体验、本地运行、学习路线、测试验证和工程开发。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-hero"><b>10 分钟跑通第一个 Ascend C 自定义算子</b><span>先选运行方式，完成后自动进入测试验证。</span></div><div class="mock-actions"><div class="mock-btn primary">开始在线体验</div><div class="mock-btn">复制本地命令</div><div class="mock-btn">查看学习路线</div><div class="mock-btn">进入测试验证</div></div></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--gold);--tone:var(--gold2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S2</span><span class="solution-tag">学习路径</span></div><h3>README 内容够厚，但需要把“推荐顺序”产品化</h3><p>用户和 AI 都能找到内容，但都要推断哪些是必做、哪些是进阶、哪些受硬件限制。</p><dl><dt>来自</dt><dd>T3/T5；AI Q2 最高 4.6。课程体系强，覆盖基础、Tiling、调试、msProf。</dd><dt>应做</dt><dd>把课程按目标和难度重排：入门必做、工程必做、性能选学、贡献前置，并写明耗时和限制。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-list"><div class="mock-row"><span class="mock-badge">必做 1</span><b>Add 算子</b><span>10 分钟 · 在线/本地</span></div><div class="mock-row"><span class="mock-badge">必做 2</span><b>Tiling 基础</b><span>30 分钟 · Atlas A2</span></div><div class="mock-row"><span class="mock-badge">进阶</span><b>msProf 性能分析</b><span>调优阶段再看</span></div><div class="mock-row"><span class="mock-badge">贡献前置</span><b>工程规范</b><span>连接 asc-devkit</span></div></div></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--red);--tone:var(--red2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S3</span><span class="solution-tag">首跑兜底</span></div><h3>在线体验不是只要有入口，还要有失败兜底</h3><p>“10 分钟”会变成高风险承诺；AI 可以写出步骤，但不知道当前环境是否能跑。</p><dl><dt>来自</dt><dd>T4/T6；AI Q1 的步骤可复现只有中档。入口强，但登录/启动状态打断首跑。</dd><dt>应做</dt><dd>把账号要求、资源状态、预计耗时、本地替代命令和 Issue 反馈做成启动页固定模块。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-panel"><b>Notebook 启动未完成</b><div class="mock-chipline"><span class="mock-chip bad">需要登录</span><span class="mock-chip warn">资源排队</span><span class="mock-chip">保留当前 Notebook</span></div></div><div class="mock-list"><div class="mock-row"><b>动作 1</b><span>登录后重试</span></div><div class="mock-row"><b>动作 2</b><span>复制本地 clone + run 命令</span></div><div class="mock-row"><b>动作 3</b><span>提交环境问题 Issue</span></div></div></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--blue);--tone:var(--blue2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S4</span><span class="solution-tag">工程迁移</span></div><h3>跑完 Notebook 后，要立刻接到工程开发路径</h3><p>用户能完成演示样例，却不知道如何进入真实项目结构、IDE 配置和 Roadmap。</p><dl><dt>来自</dt><dd>T4/T8/T9。asc-devkit 很强，但 learning hub 到工程仓的迁移桥不明显。</dd><dt>应做</dt><dd>每个教程末尾增加“从 Notebook 到 asc-devkit 工程”的迁移卡，包含目录、API、IDE、Roadmap。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-flow"><div class="mock-node">Notebook 示例</div><span class="mock-arrow">→</span><div class="mock-node">生成工程骨架</div><span class="mock-arrow">→</span><div class="mock-node">IDE/clangd</div><span class="mock-arrow">→</span><div class="mock-node">Roadmap Issue</div></div><div class="mock-list"><div class="mock-row"><span class="mock-badge">check</span><span>复制工程模板与 CMake</span></div><div class="mock-row"><span class="mock-badge">check</span><span>打开 asc-devkit API 对照</span></div></div></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--gold);--tone:var(--gold2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S5</span><span class="solution-tag">验证必经</span></div><h3>ops-test-kit 应该成为“写完算子”的固定下一步</h3><p>用户可能跑通算子但不知道如何证明正确；AI 也会把验证步骤写得偏泛。</p><dl><dt>来自</dt><dd>T10；AI Q3。测试、Golden、性能验证信号强，但入口关系弱。</dd><dt>应做</dt><dd>所有算子教程末尾统一接 ops-test-kit，并给最短 Golden 对比、批量测试、性能验证命令。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-flow"><div class="mock-node">实现算子</div><span class="mock-arrow">→</span><div class="mock-node">Golden 对比</div><span class="mock-arrow">→</span><div class="mock-node">批量测试</div><span class="mock-arrow">→</span><div class="mock-node">性能报告</div></div><pre class="mock-code">next_step:
+  repo: ops-test-kit
+  command: run_golden --case add
+  output: correctness + perf report</pre></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--gold);--tone:var(--gold2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S6</span><span class="solution-tag">仓库地图</span></div><h3>CANN org 要补“按任务选仓”的解释层</h3><p>人会迷路，AI 会把 catlass、cann-samples、ops-* 的用途混在一起。</p><dl><dt>来自</dt><dd>T7/T11-T15；AI Q4 综合 3.5。仓库可抓，但角色关系要靠推断。</dd><dt>应做</dt><dd>在 org 和 learning hub 放官方仓库地图，明确学习、工程、验证、模板、样例、正式算子库、练习、贡献。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-flow"><div class="mock-node">learning hub<br>入门</div><span class="mock-arrow">→</span><div class="mock-node">asc-devkit<br>工程</div><span class="mock-arrow">→</span><div class="mock-node">ops-test-kit<br>验证</div><span class="mock-arrow">→</span><div class="mock-node">catlass/samples<br>优化</div><span class="mock-arrow">→</span><div class="mock-node">ops-*<br>贡献</div></div></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--green);--tone:var(--green2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S7</span><span class="solution-tag">AI 可用性</span></div><h3>README 要按 AI 可读字段重写，而不是只写给人读</h3><p>AI 会引用到正文，但对“能不能跑、适合哪个版本、下一仓库去哪”回答不稳。</p><dl><dt>来自</dt><dd>C7；AI Q1-Q4。GitCode 页面可抓是长板，但版本、硬件、在线状态、相关仓库不够结构化。</dd><dt>应做</dt><dd>核心仓 README 顶部固定机器可读摘要：适用场景、硬件/版本、最短命令、在线状态、相关仓库。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><pre class="mock-code">cann_task:
+  goal: first_custom_operator
+  hardware: Atlas A2 / 910B
+  cann_version: 8.x
+  online_status: login_required
+  local_command: git clone ...
+  next_repo: ops-test-kit</pre></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--blue);--tone:var(--blue2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S8</span><span class="solution-tag">练习贡献</span></div><h3>CANNJudge、Roadmap、Issues 要接成学练贡献闭环</h3><p>用户学完以后不知道练哪题、看哪个 Roadmap、何时提反馈；AI 也难生成推荐顺序。</p><dl><dt>来自</dt><dd>T16/T18；AI Q5 综合 3.4。练习和贡献入口存在，但链路分散。</dd><dt>应做</dt><dd>每个教程结束页都固定展示一题练习、一个样例、一个 Roadmap、一个反馈入口。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-split"><div class="mock-panel"><b>学</b>已完成 Add 自定义算子</div><div class="mock-panel"><b>练</b>CANNJudge 推荐题 001</div><div class="mock-panel"><b>测</b>ops-test-kit Golden 对比</div><div class="mock-panel"><b>贡献</b>Roadmap / Issue / PR</div></div></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--gold);--tone:var(--gold2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S9</span><span class="solution-tag">赛事承接</span></div><h3>比赛专区需要算子开发专项入口，而不是泛赛事列表</h3><p>用户想继续挑战时，还要重新筛选哪些赛事、题单、赛后材料与算子开发有关。</p><dl><dt>来自</dt><dd>T17。入口存在，但对算子开发者的专题承接弱。</dd><dt>应做</dt><dd>从 learning hub 直连算子挑战页，聚合题单、赛题、赛后题解、优秀 PR。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-list"><div class="mock-row"><span class="mock-badge">挑战</span><b>Ascend C 算子题单</b><span>按难度分级</span></div><div class="mock-row"><span class="mock-badge">赛题</span><b>往期算子赛</b><span>题解 + 代码</span></div><div class="mock-row"><span class="mock-badge">贡献</span><b>优秀 PR 展示</b><span>可复用路径</span></div></div></div>
+        </div>
+        <div class="card solution-card" style="--c:var(--blue);--tone:var(--blue2)">
+          <div class="solution-left"><div class="solution-top"><span class="solution-id">S10</span><span class="solution-tag">运营指标</span></div><h3>最终要运营的是“完成闭环”，不是页面访问量</h3><p>只看仓库活跃度或 README 完整度，会漏掉用户是否真的完成第一个算子、测试和反馈。</p><dl><dt>来自</dt><dd>全链路；高分和低分交错，说明资产散点充足、路径串联不足。</dd><dt>应做</dt><dd>建立 journey KPI：完成第一个算子、完成一次验证、练一道题、提交一次反馈、AI 置信度达标。</dd></dl></div>
+          <div class="solution-demo"><div class="demo-mini-top"><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-dot"></span><span class="demo-mini-title">Demo</span></div><div class="mock-list"><div class="mock-row"><span class="mock-badge">KPI 1</span><span>首次算子运行完成率</span></div><div class="mock-row"><span class="mock-badge">KPI 2</span><span>ops-test-kit 验证完成率</span></div><div class="mock-row"><span class="mock-badge">KPI 3</span><span>CANNJudge 练习转化率</span></div><div class="mock-row"><span class="mock-badge">KPI 4</span><span>AI 任务回答置信度</span></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="actions" class="floor">
+      <div class="head"><span class="num">06</span><h2>行动优先级</h2></div>
+      <div class="card pad">
+        <h3>总判断：GitCode CANN 已经有内容资产，下一步要做“路径产品化”</h3>
+        <p>本轮完整跑完后，最重要的发现不是“CANN 算子开发资料少”，而是相反：资料、Notebook、在线环境、练习平台、工程仓、测试工具、模板库、样例库和正式算子库已经有一批了。真正影响体验的是这些资产没有被组织成一个可立即行动的开发者路径，也没有被组织成一个 AI 稳定可引用的任务图谱。</p>
+        <div class="rec"><div class="prio">P0</div><div><b>先做 learning hub 首屏重构：把仓库首页改造成任务入口。</b><br><span class="mini">首屏放 5 个明确动作：① 10 分钟在线体验 ② 本地运行命令 ③ 完整学习路线 ④ 测试验证入口 ⑤ 进入 asc-devkit 工程开发。文件列表和运营指标可以后置。</span></div><div class="owner">learning hub / 官网平台</div></div>
+        <div class="rec"><div class="prio">P0</div><div><b>给在线体验补“失败兜底路径”，否则 10 分钟承诺会反噬。</b><br><span class="mini">登录前说明资源和限制；启动失败时给出原因、重试入口、登录要求、本地 clone + 执行命令。不要让用户停在一个泛化登录弹窗。</span></div><div class="owner">AtomGit AI / CANNLab</div></div>
+        <div class="rec"><div class="prio">P1</div><div><b>做 CANN 算子开发仓库地图，解决“我该看哪个仓”。</b><br><span class="mini">按任务而非仓库名组织：入门学习 learning hub；工程开发 asc-devkit；验证 ops-test-kit；模板 catlass；样例 cann-samples；算子库 ops-nn/ops-math/ops-transformer；练习 CANNJudge；反馈 Issues/Roadmap。</span></div><div class="owner">CANN 开源运营</div></div>
+        <div class="rec"><div class="prio">P1</div><div><b>把 AI 友好当成内容发布标准。</b><br><span class="mini">每个核心仓 README 顶部固定四块：适用场景、版本/硬件限制、最短可运行步骤、相关仓库。这样开发者更快理解，AI 也更少胡乱推断。</span></div><div class="owner">资料 / 生态内容</div></div>
+        <div class="rec"><div class="prio">P2</div><div><b>把“学-练-赛-贡献”做成闭环指标，而不是分散链接。</b><br><span class="mini">每个教程末尾指向下一步：练一道 CANNJudge 题、看一个 asc-devkit 样例、提交 issue/PR、进入 Roadmap。让用户完成一次小闭环，而不是只读完一页。</span></div><div class="owner">社区运营 / 教程维护</div></div>
+      </div>
+      <p class="foot">证据文件：`materials/gitcode-cann/` 下保存了本轮 HTML 抓取与截图；本报告为算子开发完整链路报告，训练/推理/通信未纳入本轮评分。</p>
+    </section>
+  </main>
+  <script>
+    const painItems = [
+      ['入口分散在搜索、org、仓库', '用户不知道 learning hub 是主入口', '官网与 GitCode 之间缺少明显跳转'],
+      ['首屏更像代码仓，不像课程首页', '主行动藏在 README 下方', '文件树、健康度、下载量抢注意力'],
+      ['课程多，但层级和路径略长', '初级/中级/高级与真实任务映射不够明确', 'Atlas A2 等限制不够醒目'],
+      ['在线体验被登录弹窗打断', '启动失败原因不透明', '本地替代命令不够显眼'],
+      ['从课程到 asc-devkit 跳转不自然', 'API 层级对新手仍偏重', 'IDE/clangd 配置藏在 README 深处'],
+      ['learning hub 未显性连接 ops-test-kit', 'Golden/性能验证何时做不明确', '测试命令缺少最短上手路径'],
+      ['catlass/cann-samples/ops-* 角色混在一起', '学习、复用、贡献边界不清', '高性能样例对新手跳跃大'],
+      ['CANNJudge 与教程断开', 'Roadmap/Issues 分散在各仓', '比赛专区信息泛，不聚焦算子赛']
+    ];
+    const oppItems = [
+      ['统一“算子开发入口”短链', '搜索结果标题写明任务', '官网开发者中心挂 GitCode 学习入口'],
+      ['首屏改成任务化 CTA', '文件列表后置为资产区', '增加“我该先做什么”模块'],
+      ['给出推荐学习顺序', '按目标拆路线：入门/调试/性能/贡献', '硬件与版本限制做固定提示'],
+      ['提供在线失败兜底', '登录前说明资源、耗时和限制', '一键复制本地运行命令'],
+      ['教程末尾接 asc-devkit', '补“从 Notebook 到工程”迁移页', '提供 IDE 配置 checklist'],
+      ['写完算子后推荐测试链路', '教程模板内置验证步骤', 'ops-test-kit 首页放最短示例'],
+      ['仓库地图按任务分层', '标注学习/复用/贡献/参考实现', '样例页补前置知识提示'],
+      ['教程末尾导向一道练习题', 'Roadmap 卡片前置', '形成学-练-赛-贡献闭环指标']
+    ];
+    const painIcon = '<div class="jrn-pi-icon" aria-hidden="true"></div>';
+    function rowHtml(label, en, cellClass, itemClass, textClass, items, dotHtml){
+      return `<div class="jrn-rl"><div class="jrn-rn">${label}</div><div class="jrn-re">${en}</div></div>` + items.map(col => {
+        const body = col.map(txt => `<div class="${itemClass}">${dotHtml}<div class="${textClass}">${txt}</div></div>`).join('');
+        const wrapClass = label === '痛点' ? 'jrn-pw2' : 'jrn-ow';
+        return `<div class="${wrapClass}"><div class="${cellClass}">${body}</div></div>`;
+      }).join('');
+    }
+    document.querySelectorAll('.jrn-grid').forEach(grid => {
+      const label = grid.querySelector('.jrn-rn')?.textContent?.trim();
+      if(label === '痛点'){
+        grid.innerHTML = rowHtml('痛点', 'Pain', 'jrn-pc', 'jrn-pi', 'jrn-pt', painItems, painIcon);
+      }
+      if(label === '机会点'){
+        grid.innerHTML = rowHtml('机会点', 'Opps', 'jrn-oc', 'jrn-oi', 'jrn-ot', oppItems, '<div class="jrn-oi-dot"></div>');
+      }
+    });
+  </script>
+</body>
+</html>
