@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>业界大模型对昇腾社区内容可获取性分析</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200&family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/IKKI2000/harmonyos-fonts@master/css/harmonyos_sans_sc.css">
 <style>
 /* ===== 设计 token ===== */
@@ -1071,10 +1071,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:start}
     .hm-callout .hm-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#C7000B;background:radial-gradient(circle at 30% 25%,rgba(199,0,11,.15),rgba(199,0,11,.035) 70%);border:1px solid rgba(199,0,11,.12)}
     .hm-callout .hm-ico svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .hm-callout .hm-no{align-self:start;justify-self:end;display:flex;align-items:center;justify-content:flex-end;width:auto;height:42px;border-radius:0;background:transparent;border:0;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:calc(var(--fs-h3)*1.92);font-weight:300;color:rgba(199,0,11,.38);line-height:1;letter-spacing:-.04em;padding:0;margin:0;transform:none}
-    .hm-callout .k{font-size:var(--fs-body);font-weight:850;color:#465063;line-height:1.2}
+    .hm-callout .hm-no{align-self:start;justify-self:end;display:flex;align-items:center;justify-content:flex-end;width:auto;height:42px;border-radius:0;background:transparent;border:0;font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;font-size:calc(var(--fs-h3)*2.3);font-weight:200;color:#C7000B;line-height:1;letter-spacing:-.025em;padding:0;margin:0;transform:none}
+    .hm-callout .k{font-size:var(--fs-h2);font-weight:850;color:#465063;line-height:1.18}
     .hm-callout .v{margin-top:.22vh;font-family:'JetBrains Mono';font-size:var(--fs-h3);font-weight:950;color:#C7000B;line-height:1}
-    .hm-callout .d{margin-top:.72vh;font-size:var(--fs-body);line-height:1.46;color:var(--ink-2)}
+    .hm-callout .d{margin-top:.82vh;font-size:var(--fs-body);line-height:1.46;color:var(--ink-2)}
     .hm-steps{position:absolute;z-index:7;right:1vw;bottom:1.2vh;display:flex;gap:5px}
     .hm-step{min-width:22px;height:20px;border-radius:999px;border:1px solid rgba(47,61,99,.13);background:rgba(255,255,255,.72);color:#6B7280;padding:0 6px;cursor:pointer;font-family:'JetBrains Mono';font-size:10px;font-weight:850}
     .hm-step.on{background:#C7000B;border-color:#C7000B;color:#fff}
@@ -1146,7 +1146,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         return '<svg viewBox="0 0 24 24" aria-hidden="true">'+(p[type]||p.target)+'</svg>';
       }
       function calloutHtml(f,idx,total){
-        var no=String(idx+1).padStart(2,'0');
+        var no='/'+String(idx+1).padStart(2,'0');
         return '<div class="hm-top"><div class="hm-ico">'+iconSvg(f.icon)+'</div><div><div class="k">'+f.title+'</div><div class="v">'+f.val+'</div></div><div class="hm-no">'+no+'</div></div><div class="d">'+f.desc+'</div>';
       }
       function placeCallout(box){
