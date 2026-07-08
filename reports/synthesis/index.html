@@ -1127,6 +1127,26 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .route-weights span{display:block;margin-top:.32vh;font-size:var(--fs-xs);line-height:1.25;color:#596273}
     .route-weights .w10{--w:#209067}.route-weights .w30{--w:#D9892B}.route-weights .w50{--w:#5B5BD6}
     .route-weights .w10 b{color:#209067}.route-weights .w30 b{color:#D9892B}.route-weights .w50 b{color:#5B5BD6}
+    body:not(.overview) .metric-calc-slide.active .metric-taxonomy{animation:metricTaxFocus 3.25s cubic-bezier(.2,.8,.2,1) both}
+    body:not(.overview) .metric-calc-slide.active .metric-route{animation:metricRouteFocus 3.25s cubic-bezier(.2,.8,.2,1) 1.85s both}
+    body:not(.overview) .metric-calc-slide.active .tax-group{animation:metricGroupFocus .92s cubic-bezier(.2,.8,.2,1) both}
+    body:not(.overview) .metric-calc-slide.active .tax-group.official{animation-delay:.18s}
+    body:not(.overview) .metric-calc-slide.active .tax-group.eco{animation-delay:.52s}
+    body:not(.overview) .metric-calc-slide.active .tax-group.own{animation-delay:.86s}
+    body:not(.overview) .metric-calc-slide.active .tax-group.process{animation-delay:1.2s}
+    body:not(.overview) .metric-calc-slide.active .tax-group.output{animation-delay:1.54s}
+    @keyframes metricTaxFocus{
+      0%,100%{transform:none;box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88)}
+      15%,58%{transform:translateY(-2px);box-shadow:0 0 0 3px rgba(91,91,214,.18),0 22px 54px -25px rgba(91,91,214,.52),inset 0 1px 0 rgba(255,255,255,.92)}
+    }
+    @keyframes metricRouteFocus{
+      0%,100%{transform:none;filter:none}
+      15%,58%{transform:translateY(-2px);filter:drop-shadow(0 18px 28px rgba(91,91,214,.22))}
+    }
+    @keyframes metricGroupFocus{
+      0%,100%{transform:none;box-shadow:none;border-color:rgba(198,203,214,.7)}
+      18%,64%{transform:translateX(3px);box-shadow:0 0 0 2px rgba(91,91,214,.16),0 16px 28px -24px rgba(91,91,214,.48);border-color:rgba(91,91,214,.28)}
+    }
   </style>
 
   <!-- 灰底：opknow18 sec=s3（iframe 嵌原节） -->
@@ -1142,7 +1162,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <!-- 灰底：AI 指标 · 定义与计算理由 -->
-  <section class="slide s-gray">
+  <section class="slide s-gray metric-calc-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">指标定义：①–⑩ 定义各项可观测得分，最终形成综合置信度⑪</span></div>
