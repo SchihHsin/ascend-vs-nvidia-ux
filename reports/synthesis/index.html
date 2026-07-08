@@ -1430,6 +1430,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .ditem.ok strong{color:#fff}
     .dcol.cause .ditem strong,.dcol.move .ditem strong{color:#fff}.dcol.cause .ditem p,.dcol.move .ditem p{color:rgba(255,255,255,.72)}
     .dcol.cause .ditem svg,.dcol.move .ditem svg{stroke:#fff;opacity:.9}
+    .goal-stack{justify-content:flex-start}
+    .goal-box{border-radius:10px;padding:1.05vh .95vw;border:1px solid rgba(255,255,255,.22);background:rgba(4,8,18,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+    .goal-box.before{background:rgba(7,10,18,.22)}
+    .goal-box.after{border-color:rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05))}
+    .goal-k{font-family:'JetBrains Mono';font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.64);margin-bottom:.58vh}
+    .goal-box.after .goal-k{color:#fff}
+    .goal-box p{margin:0;font-size:var(--fs-sm);line-height:1.32;color:rgba(255,255,255,.72)}
+    .goal-box.before p+ p{margin-top:.28vh}
+    .goal-arrow{display:flex;justify-content:center;align-items:center;color:#fff;min-height:2.1vh}
+    .goal-arrow svg{width:24px;height:24px;stroke-width:2.2}
+    .goal-actions{display:flex;flex-direction:column;gap:.56vh}
+    .goal-actions .ditem{padding-left:31px}
+    .goal-actions .ditem svg{width:17px;height:17px}
     .dlinks{display:flex;flex-direction:column;justify-content:flex-start;gap:.84vh;flex:1;min-height:0}
     .dlink{display:grid;grid-template-columns:auto 1fr;gap:.58vw;align-items:start;padding:.18vh .12vw;text-decoration:none;color:inherit}
     .dlink .no{font-family:'JetBrains Mono';font-size:12px;font-weight:900;color:#6B4DE6;padding-top:1px}
@@ -1481,11 +1494,22 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="dgroup move-g">
           <div class="dh"><span>Step 03</span><b>改造机会</b></div>
           <div class="dcol move">
-          <div class="dseq">
-            <div class="ditem ok rel" data-rel="version-move"><i data-lucide="arrow-right-to-line"></i><strong>统一版本与入口</strong><p>给首选网址、当前推荐版、配套查询和稳定 URL。</p></div>
-            <div class="ditem ok rel" data-rel="readable-move"><i data-lucide="file-code-2"></i><strong>提供机器可读出口</strong><p>llms.txt、Markdown、结构化索引、可抓取正文形成稳定入口。</p></div>
-            <div class="ditem ok rel" data-rel="task-move"><i data-lucide="package-check"></i><strong>建设高难度任务包</strong><p>围绕 D/E/M 把概念、步骤、代码、验证、常见坑打包。</p></div>
-            <div class="ditem ok rel" data-rel="ecosystem-move"><i data-lucide="list-tree"></i><strong>官方与生态共同供给语料</strong><p>官方论坛、GitCode、英文社区和技术博客形成多源互证。</p></div>
+          <div class="dseq goal-stack">
+            <div class="goal-box before">
+              <div class="goal-k">BEFORE 当前状态</div>
+              <p>内容可被人逐页找到，但版本、入口、任务链路和生态证据仍然分散。</p>
+              <p>AI 检索时容易停在片段证据，难以稳定形成可执行答案。</p>
+            </div>
+            <div class="goal-arrow"><i data-lucide="arrow-down"></i></div>
+            <div class="goal-box after">
+              <div class="goal-k">AFTER 理想状态</div>
+              <div class="goal-actions">
+                <div class="ditem ok rel" data-rel="version-move"><i data-lucide="arrow-right-to-line"></i><strong>统一版本与入口</strong><p>给首选网址、当前推荐版、配套查询和稳定 URL。</p></div>
+                <div class="ditem ok rel" data-rel="readable-move"><i data-lucide="file-code-2"></i><strong>提供机器可读出口</strong><p>llms.txt、Markdown、结构化索引、可抓取正文形成稳定入口。</p></div>
+                <div class="ditem ok rel" data-rel="task-move"><i data-lucide="package-check"></i><strong>建设高难度任务包</strong><p>围绕 D/E/M 把概念、步骤、代码、验证、常见坑打包。</p></div>
+                <div class="ditem ok rel" data-rel="ecosystem-move"><i data-lucide="list-tree"></i><strong>官方与生态共同供给语料</strong><p>官方论坛、GitCode、英文社区和技术博客形成多源互证。</p></div>
+              </div>
+            </div>
           </div>
           </div>
         </div>
