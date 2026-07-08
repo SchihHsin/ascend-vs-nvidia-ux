@@ -1373,6 +1373,14 @@ const JUDGES=[
    '<b>博客 / 方案入口</b>需要前置，论坛与 FAQ 也要尽量游客可读、可索引。',
    '做法：优先做英文版、搜索可发现性优化、清晰入口和可索引社区，先让已有内容被找到。'],
   demo:'discover'},
+ {id:'j6',g:'common',pin:'a',plab:'步骤 6 · 支持知识',color:'#23a06a',h:'把 FAQ、论坛、工单和案例沉淀成可复用支持知识',cap:'问题支持知识闭环',
+  one:'开发者卡住时，支持链路不能只完成一次答复，还要持续沉淀成下一次能搜到、能复用的知识。',
+  lead:'昇腾已有集中 FAQ、细分论坛和正式工单，但这些能力需要串成闭环：问题发生处先给自助答案，解决后的高质量内容再回流到文档、FAQ、案例和搜索结果。',
+  body:[
+   '文档页提供<b>局部 FAQ + 下一步求助入口</b>，让安装、API、工具、报错页面都能直接接住问题。',
+   '论坛内容尽量<b>游客可读、可被搜索引擎索引</b>，高质量论坛帖和工单要沉淀为官方 FAQ / 案例。',
+   '做法：把搜索词、论坛帖、工单和高频错误码按月回流到<b>FAQ / 文档 / 示例仓</b>，形成可复用的支持知识。'],
+  demo:'support'},
  {id:'jt1',g:'train',pin:'a',plab:'步骤 4 · 训练主摩擦',color:'#C7000B',h:'框架迁移：原生零迁移 vs torch_npu + MindSpeed',cap:'训练上手摩擦点',
   one:'训练这条线，昇腾最大的坎不是配环境，是“把 PyTorch 代码迁过来”。',
   lead:'NVIDIA 上训练基本是框架原生体验——PyTorch / TF 直接跑；昇腾要多一层“迁移 + 适配”。这是训练场景独有、算子场景没有的摩擦点。',
@@ -1905,6 +1913,27 @@ function demoDiscover(){return `
    <div class="hrow"><span class="hl">入口可见性</span><div class="hbar" style="background:#e0a32e">博客要从开发者中心进</div><div class="hbar" style="background:#76B900">顶栏直达 Blog</div></div>
    <div class="hrow"><span class="hl">社区门槛</span><div class="hbar" style="background:#e0a32e">发帖需华为账号 · 中文圈</div><div class="hbar" style="background:#76B900">全球开放 · 可索引</div></div>
  </div>`;}
+function demoSupport(){return `
+ <div class="pathlane base">
+   <div class="ph"><span>问题发生处先接住</span><span class="tofirst">触点 6.2 / 6.3</span></div>
+   <div class="psteps">
+     <span class="ps">文档页局部 FAQ</span><span class="arrow">→</span>
+     <span class="ps">下一步求助入口</span><span class="arrow">→</span>
+     <span class="ps">论坛 / 工单分流</span>
+   </div>
+ </div>
+ <div class="pathlane" style="background:#edf8f2;border-color:#cbe9da">
+   <div class="ph"><span style="color:#1d7f55">解决后沉淀复用</span><span class="tofirst" style="color:#1d7f55;border-color:#bfe2d0">每月回流</span></div>
+   <div class="psteps">
+     <span class="ps">高频错误码</span><span class="arrow">→</span>
+     <span class="ps">官方 FAQ / 案例</span><span class="arrow">→</span>
+     <span class="ps">搜索与 AI 可复用</span>
+   </div>
+ </div>
+ <div class="health" style="margin-top:10px">
+   <div class="hrow"><span class="hl">论坛</span><div class="hbar" style="background:#23a06a">游客可读</div><div class="hbar" style="background:#1788a8">搜索可索引</div></div>
+   <div class="hrow"><span class="hl">工单</span><div class="hbar" style="background:#23a06a">同类问题聚合</div><div class="hbar" style="background:#1788a8">回流文档</div></div>
+ </div>`;}
 
 function demoMigrate(){return `
  <div class="pathlane base">
@@ -1926,7 +1955,7 @@ function demoDist(){return `
 /* ---------- synthesis floors + actions（按 共性/算子/训练 三组渲染） ---------- */
 (function(){
   const plab={a:'昇腾短板',win:'昇腾长板',both:'双向'};
-  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,discover:demoDiscover,migrate:demoMigrate,dist:demoDist};
+  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,discover:demoDiscover,support:demoSupport,migrate:demoMigrate,dist:demoDist};
   const GROUPS=[['common','共性 · 两条场景都成立'],['op','算子开发 · 专属结论'],['train','训练 · 专属结论']];
   const toc=document.getElementById('synthtoc');
   const host=document.getElementById('synthfloors');
@@ -2098,28 +2127,28 @@ body.embed .tpgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1
 body.embed.steps .tpcard .tpcard-body,body.embed.steps .tpcard .pov,body.embed.steps .tpcard .djfi,body.embed.steps .tpcard .djfi-tbl,body.embed.steps .floor-sub{display:none!important}
 body.embed.steps .tpcard{padding:8px 12px!important}
 /* 综述 / 行动 / 责任归属嵌入页:投影版放宽内容宽度,正文升到 body 档,避免被原报告窄版压小 */
-body.embed.sec-j1 .wrap,body.embed.sec-j2 .wrap,body.embed.sec-j3 .wrap,body.embed.sec-j4 .wrap,body.embed.sec-j5 .wrap,
+body.embed.sec-j1 .wrap,body.embed.sec-j2 .wrap,body.embed.sec-j3 .wrap,body.embed.sec-j4 .wrap,body.embed.sec-j5 .wrap,body.embed.sec-j6 .wrap,
 body.embed.sec-actions .wrap,body.embed.sec-dept .wrap{max-width:none!important;width:100%!important;padding:0 6px!important;margin:0!important}
-body.embed.sec-j1 .floor,body.embed.sec-j2 .floor,body.embed.sec-j3 .floor,body.embed.sec-j4 .floor,body.embed.sec-j5 .floor{padding:0!important}
-body.embed.sec-j1 .synth-body,body.embed.sec-j2 .synth-body,body.embed.sec-j3 .synth-body,body.embed.sec-j4 .synth-body,body.embed.sec-j5 .synth-body{
+body.embed.sec-j1 .floor,body.embed.sec-j2 .floor,body.embed.sec-j3 .floor,body.embed.sec-j4 .floor,body.embed.sec-j5 .floor,body.embed.sec-j6 .floor{padding:0!important}
+body.embed.sec-j1 .synth-body,body.embed.sec-j2 .synth-body,body.embed.sec-j3 .synth-body,body.embed.sec-j4 .synth-body,body.embed.sec-j5 .synth-body,body.embed.sec-j6 .synth-body{
   grid-template-columns:.9fr 1.1fr!important;gap:18px!important;align-items:stretch!important;margin-top:0!important}
-body.embed.sec-j1 .synth-text,body.embed.sec-j2 .synth-text,body.embed.sec-j3 .synth-text,body.embed.sec-j4 .synth-text,body.embed.sec-j5 .synth-text{
+body.embed.sec-j1 .synth-text,body.embed.sec-j2 .synth-text,body.embed.sec-j3 .synth-text,body.embed.sec-j4 .synth-text,body.embed.sec-j5 .synth-text,body.embed.sec-j6 .synth-text{
   font-size:14px!important;line-height:1.55!important;display:flex!important;flex-direction:column!important;gap:9px!important;min-height:0!important}
-body.embed.sec-j1 .synth-text .lead,body.embed.sec-j2 .synth-text .lead,body.embed.sec-j3 .synth-text .lead,body.embed.sec-j4 .synth-text .lead,body.embed.sec-j5 .synth-text .lead{
+body.embed.sec-j1 .synth-text .lead,body.embed.sec-j2 .synth-text .lead,body.embed.sec-j3 .synth-text .lead,body.embed.sec-j4 .synth-text .lead,body.embed.sec-j5 .synth-text .lead,body.embed.sec-j6 .synth-text .lead{
   font-size:16px!important;line-height:1.48!important;color:var(--ink)!important;background:rgba(255,255,255,.68)!important;border:1px solid rgba(255,255,255,.78)!important;border-radius:14px!important;padding:14px 17px!important;box-shadow:0 12px 30px -18px rgba(30,40,70,.24)!important;margin:0!important;font-weight:750!important}
-body.embed.sec-j1 .synth-text p:not(.lead),body.embed.sec-j2 .synth-text p:not(.lead),body.embed.sec-j3 .synth-text p:not(.lead),body.embed.sec-j4 .synth-text p:not(.lead),body.embed.sec-j5 .synth-text p:not(.lead){
+body.embed.sec-j1 .synth-text p:not(.lead),body.embed.sec-j2 .synth-text p:not(.lead),body.embed.sec-j3 .synth-text p:not(.lead),body.embed.sec-j4 .synth-text p:not(.lead),body.embed.sec-j5 .synth-text p:not(.lead),body.embed.sec-j6 .synth-text p:not(.lead){
   position:relative!important;margin:0!important;color:var(--ink2)!important;background:rgba(255,255,255,.58)!important;border:1px solid rgba(255,255,255,.76)!important;border-radius:12px!important;padding:10px 13px 10px 24px!important;line-height:1.52!important;box-shadow:0 10px 26px -18px rgba(30,40,70,.22)!important}
-body.embed.sec-j1 .synth-text p:not(.lead)::before,body.embed.sec-j2 .synth-text p:not(.lead)::before,body.embed.sec-j3 .synth-text p:not(.lead)::before,body.embed.sec-j4 .synth-text p:not(.lead)::before,body.embed.sec-j5 .synth-text p:not(.lead)::before{
+body.embed.sec-j1 .synth-text p:not(.lead)::before,body.embed.sec-j2 .synth-text p:not(.lead)::before,body.embed.sec-j3 .synth-text p:not(.lead)::before,body.embed.sec-j4 .synth-text p:not(.lead)::before,body.embed.sec-j5 .synth-text p:not(.lead)::before,body.embed.sec-j6 .synth-text p:not(.lead)::before{
   content:''!important;position:absolute!important;left:11px!important;top:1.05em!important;width:6px!important;height:6px!important;border-radius:50%!important;background:var(--blue)!important}
-body.embed.sec-j1 .synth-text b,body.embed.sec-j2 .synth-text b,body.embed.sec-j3 .synth-text b,body.embed.sec-j4 .synth-text b,body.embed.sec-j5 .synth-text b{
+body.embed.sec-j1 .synth-text b,body.embed.sec-j2 .synth-text b,body.embed.sec-j3 .synth-text b,body.embed.sec-j4 .synth-text b,body.embed.sec-j5 .synth-text b,body.embed.sec-j6 .synth-text b{
   color:var(--ink)!important;font-weight:900!important;background:linear-gradient(transparent 58%,rgba(47,111,237,.18) 0)!important;box-decoration-break:clone!important;-webkit-box-decoration-break:clone!important;padding:0 .04em!important}
-body.embed.sec-j1 .synth-text .lead b,body.embed.sec-j2 .synth-text .lead b,body.embed.sec-j3 .synth-text .lead b,body.embed.sec-j4 .synth-text .lead b,body.embed.sec-j5 .synth-text .lead b{
+body.embed.sec-j1 .synth-text .lead b,body.embed.sec-j2 .synth-text .lead b,body.embed.sec-j3 .synth-text .lead b,body.embed.sec-j4 .synth-text .lead b,body.embed.sec-j5 .synth-text .lead b,body.embed.sec-j6 .synth-text .lead b{
   color:var(--ink)!important;background:linear-gradient(transparent 58%,rgba(47,111,237,.18) 0)!important}
-body.embed.sec-j1 .synth-demo,body.embed.sec-j2 .synth-demo,body.embed.sec-j3 .synth-demo,body.embed.sec-j4 .synth-demo,body.embed.sec-j5 .synth-demo{
+body.embed.sec-j1 .synth-demo,body.embed.sec-j2 .synth-demo,body.embed.sec-j3 .synth-demo,body.embed.sec-j4 .synth-demo,body.embed.sec-j5 .synth-demo,body.embed.sec-j6 .synth-demo{
   min-height:0!important;background:rgba(255,255,255,.58)!important;border:1px solid rgba(255,255,255,.76)!important;box-shadow:0 10px 30px -16px rgba(30,40,70,.2),inset 0 1px 0 rgba(255,255,255,.85)!important}
-body.embed.sec-j1 .synth-conclusion,body.embed.sec-j2 .synth-conclusion,body.embed.sec-j3 .synth-conclusion,body.embed.sec-j4 .synth-conclusion,body.embed.sec-j5 .synth-conclusion{
+body.embed.sec-j1 .synth-conclusion,body.embed.sec-j2 .synth-conclusion,body.embed.sec-j3 .synth-conclusion,body.embed.sec-j4 .synth-conclusion,body.embed.sec-j5 .synth-conclusion,body.embed.sec-j6 .synth-conclusion{
   font-size:16px!important;line-height:1.48!important;color:#fff!important;background:linear-gradient(140deg,#22262f,#14171c)!important;border:0!important;border-radius:14px!important;padding:14px 17px!important;box-shadow:0 16px 38px -20px rgba(13,18,30,.56)!important;font-weight:800!important}
-body.embed.sec-j1 .synth-conclusion b,body.embed.sec-j2 .synth-conclusion b,body.embed.sec-j3 .synth-conclusion b,body.embed.sec-j4 .synth-conclusion b,body.embed.sec-j5 .synth-conclusion b{
+body.embed.sec-j1 .synth-conclusion b,body.embed.sec-j2 .synth-conclusion b,body.embed.sec-j3 .synth-conclusion b,body.embed.sec-j4 .synth-conclusion b,body.embed.sec-j5 .synth-conclusion b,body.embed.sec-j6 .synth-conclusion b{
   color:#fff!important;background:linear-gradient(transparent 58%,rgba(124,92,250,.52) 0)!important}
 body.embed.sec-actions .actions{margin-top:0!important}
 body.embed.sec-actions .actions table{font-size:14.5px!important}
