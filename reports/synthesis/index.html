@@ -2734,21 +2734,40 @@ function renderDeriveRelations(){
       return rects.reduce((rm,rr)=>Math.max(rm,rr.right),m);
     },el.getBoundingClientRect().left);
   }
-  const signalItems=[...box.querySelectorAll('.signal-g [data-rel$="-signal"]')];
-  const signalAnchorX=signalItems.length ? Math.max(...signalItems.map(el=>textRight(el)))-br.left+6 : null;
+  function anchorMap(keys,side){
+    const nodes=keys.map(key=>box.querySelector(`[data-rel="${key}"]`)).filter(Boolean);
+    if(!nodes.length)return new Map();
+    const groups=new Map();
+    nodes.forEach(el=>{
+      const col=el.closest('.dgroup')||el.parentElement;
+      if(!groups.has(col))groups.set(col,[]);
+      groups.get(col).push(el);
+    });
+    const anchors=new Map();
+    groups.forEach(group=>{
+      const x=side==='right'
+        ? Math.max(...group.map(el=>textRight(el)))-br.left+6
+        : Math.min(...group.map(el=>{
+            const icon=el.querySelector('svg.lucide,i[data-lucide],.no');
+            const anchor=icon?icon.getBoundingClientRect():el.getBoundingClientRect();
+            return anchor.left;
+          }))-br.left-8;
+      group.forEach(el=>anchors.set(el.dataset.rel,x));
+    });
+    return anchors;
+  }
+  const fromKeys=[...new Set(pairs.map(([a])=>a))];
+  const toKeys=[...new Set(pairs.map(([,b])=>b))];
+  const outX=anchorMap(fromKeys,'right');
+  const inX=anchorMap(toKeys,'left');
   function point(key,side){
     const el=box.querySelector(`[data-rel="${key}"]`);
     if(!el)return null;
     const r=el.getBoundingClientRect();
     if(side==='right'){
-      if(key.endsWith('-signal') && signalAnchorX!=null){
-        return {x:signalAnchorX,y:r.top+r.height*.5-br.top};
-      }
-      return {x:textRight(el)-br.left+6,y:r.top+r.height*.5-br.top};
+      return {x:outX.get(key) ?? textRight(el)-br.left+6,y:r.top+r.height*.5-br.top};
     }
-    const icon=el.querySelector('svg.lucide,i[data-lucide],.no');
-    const anchor=icon?icon.getBoundingClientRect():r;
-    return {x:anchor.left-br.left-8,y:r.top+r.height*.5-br.top};
+    return {x:inX.get(key) ?? r.left-br.left-8,y:r.top+r.height*.5-br.top};
   }
   pairs.forEach(([a,b,cls])=>{
     const p1=point(a,'right'),p2=point(b,'left');
