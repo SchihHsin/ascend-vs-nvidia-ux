@@ -1086,7 +1086,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .tax-group.process{--a:#D9892B}
     .tax-group.output{--a:#209067}
     .tax-g-head{display:flex;align-items:center;gap:.58vw;min-width:0;border-right:1px dashed color-mix(in srgb,var(--a) 22%,transparent);padding-right:.7vw}
-    .tax-code{width:38px;height:34px;border-radius:10px;background:var(--a);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;display:flex;align-items:center;justify-content:center;flex:none}
+    .tax-code{width:42px;height:38px;border-radius:12px;background:color-mix(in srgb,var(--a) 10%,white);border:1px solid color-mix(in srgb,var(--a) 18%,white);color:color-mix(in srgb,var(--a) 78%,#1f2430);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+    .tax-code svg{width:20px;height:20px;display:block;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none}
     .tax-g-head b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}
     .tax-g-head span{display:block;margin-top:.16vh;font-size:var(--fs-xs);line-height:1.2;color:color-mix(in srgb,var(--a) 72%,#5e646e);font-weight:850}
     .tax-items{display:grid;gap:.34vh .62vw;align-content:center;min-height:0}
@@ -1096,7 +1097,15 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .tax-item .idx{width:22px;height:22px;border-radius:7px;background:color-mix(in srgb,var(--a) 10%,white);border:1px solid color-mix(in srgb,var(--a) 16%,white);color:color-mix(in srgb,var(--a) 76%,#1f2430);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;display:flex;align-items:center;justify-content:center;line-height:1}
     .tax-item b{display:block;font-size:var(--fs-sm);line-height:1.18;color:var(--ink);font-weight:900}
     .tax-item span{display:block;margin-top:.14vh;font-size:var(--fs-xs);line-height:1.26;color:var(--ink-2)}
+    .tax-item .flowtag{display:inline-flex;margin-left:.35em;vertical-align:1px;border-radius:999px;background:rgba(109,93,246,.09);border:1px solid rgba(109,93,246,.16);color:#5148BC;font-size:9px;line-height:1.1;font-weight:850;padding:1px 5px;white-space:nowrap}
+    .tax-item .flowtag.q{background:rgba(109,93,246,.09);border-color:rgba(109,93,246,.16);color:#5148BC}
+    .tax-item .flowtag.c{background:rgba(217,137,43,.1);border-color:rgba(217,137,43,.18);color:#B56F1D}
+    .tax-item .flowtag.o{background:rgba(32,144,103,.1);border-color:rgba(32,144,103,.18);color:#1B7C59}
     .tax-group.output .tax-items{gap:.34vh .74vw}
+    .view-bridge{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:.68vw;margin-top:.2vh}
+    .view-bridge div{border-radius:11px;background:rgba(255,255,255,.58);border:1px solid rgba(198,203,214,.58);padding:.62vh .65vw}
+    .view-bridge b{display:block;font-size:var(--fs-sm);line-height:1.18;color:var(--ink);font-weight:950}
+    .view-bridge span{display:block;margin-top:.22vh;font-size:var(--fs-xs);line-height:1.24;color:var(--ink-2)}
     .metric-route{display:grid;grid-template-rows:auto 1fr auto;gap:1vh;min-height:0}
     .route-card{border-radius:15px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88);padding:1.05vh .95vw}
     .route-card b{display:block;font-size:var(--fs-h2);line-height:1.24;color:var(--ink);font-weight:950}
@@ -1139,44 +1148,45 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div class="metric-class-layout">
         <div class="metric-taxonomy">
-          <div class="tax-head"><div><b>①–⑩ 先按指标类型归类，再定义每项怎么测</b><span>分类后再进入公式，避免编号散落在页面各处。</span></div><span>输入项 / 过程项 / 产出项</span></div>
+          <div class="tax-head"><div><b>同一套 ①–⑩，从两个视角说明：上一页讲“流程来源”，本页讲“定义类型”</b><span>流程视角说明指标从 AI 作答链路哪里来；定义视角说明每项具体怎么测。</span></div><span>定义类型 × 流程标签</span></div>
           <div class="tax-grid">
             <div class="tax-group official">
-              <div class="tax-g-head"><span class="tax-code">A</span><div><b>官方证据类</b><span>权威来源是否能进入答案</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="badge-check"></i></span><div><b>官方证据类</b><span>权威来源是否能进入答案</span></div></div>
               <div class="tax-items">
-                <div class="tax-item"><span class="idx">①</span><div><b>官方可发现性</b><span>官方资料在搜索中的命中排名、检索轮数、是否需要改词。</span></div></div>
-                <div class="tax-item"><span class="idx">②</span><div><b>官方可抓取性</b><span>页面正文能否被 AI 取回，按 static / SSR / SPA / robots 分档。</span></div></div>
-                <div class="tax-item"><span class="idx">③</span><div><b>官方正文详尽度</b><span>正文是否包含命令、参数、边界条件、样例与可执行路径。</span></div></div>
-                <div class="tax-item"><span class="idx">④</span><div><b>版本清晰度</b><span>是否能选对版本、芯片、框架和工具链组合。</span></div></div>
+                <div class="tax-item"><span class="idx">①</span><div><b>官方可发现性 <i class="flowtag q">触达</i></b><span>官方资料在搜索中的命中排名、检索轮数、是否需要改词。</span></div></div>
+                <div class="tax-item"><span class="idx">②</span><div><b>官方可抓取性 <i class="flowtag q">触达</i></b><span>页面正文能否被 AI 取回，按 static / SSR / SPA / robots 分档。</span></div></div>
+                <div class="tax-item"><span class="idx">③</span><div><b>官方正文详尽度 <i class="flowtag">质量</i></b><span>正文是否包含命令、参数、边界条件、样例与可执行路径。</span></div></div>
+                <div class="tax-item"><span class="idx">④</span><div><b>版本清晰度 <i class="flowtag">质量</i></b><span>是否能选对版本、芯片、框架和工具链组合。</span></div></div>
               </div>
             </div>
             <div class="tax-group eco">
-              <div class="tax-g-head"><span class="tax-code">B</span><div><b>生态互证类</b><span>第三方资料是否能补证</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="network"></i></span><div><b>生态互证类</b><span>第三方资料是否能补证</span></div></div>
               <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑤</span><div><b>第三方丰富度</b><span>可用第三方来源的去重数量。</span></div></div>
-                <div class="tax-item"><span class="idx">⑥</span><div><b>第三方可信度</b><span>来源权威、一致性、时效和平台独立性。</span></div></div>
+                <div class="tax-item"><span class="idx">⑤</span><div><b>第三方丰富度 <i class="flowtag q">触达</i></b><span>可用第三方来源的去重数量。</span></div></div>
+                <div class="tax-item"><span class="idx">⑥</span><div><b>第三方可信度 <i class="flowtag">质量</i></b><span>来源权威、一致性、时效和平台独立性。</span></div></div>
               </div>
             </div>
             <div class="tax-group own">
-              <div class="tax-g-head"><span class="tax-code">C</span><div><b>模型先验类</b><span>不检索时是否已有知识</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="brain-circuit"></i></span><div><b>模型先验类</b><span>不检索时是否已有知识</span></div></div>
               <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑦</span><div><b>模型自带知识</b><span>模型先验覆盖程度，并按技术迭代速度加入截止风险。</span></div></div>
+                <div class="tax-item"><span class="idx">⑦</span><div><b>模型自带知识 <i class="flowtag">质量</i></b><span>模型先验覆盖程度，并按技术迭代速度加入截止风险。</span></div></div>
               </div>
             </div>
             <div class="tax-group process">
-              <div class="tax-g-head"><span class="tax-code">D</span><div><b>检索过程类</b><span>拿到证据的摩擦</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="search"></i></span><div><b>检索过程类</b><span>拿到证据的摩擦</span></div></div>
               <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑧</span><div><b>检索成本</b><span>检索轮数 + 0.5×抓取次数 + 4×抓取失败。</span></div></div>
+                <div class="tax-item"><span class="idx">⑧</span><div><b>检索成本 <i class="flowtag c">成本</i></b><span>检索轮数 + 0.5×抓取次数 + 4×抓取失败。</span></div></div>
               </div>
             </div>
             <div class="tax-group output">
-              <div class="tax-g-head"><span class="tax-code">E</span><div><b>答案产出类</b><span>最终答案是否真的可用</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="package-check"></i></span><div><b>答案产出类</b><span>最终答案是否真的可用</span></div></div>
               <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑨</span><div><b>版本可锁定性</b><span>答案能否明确版本号、芯片或工具链条件。</span></div></div>
-                <div class="tax-item"><span class="idx">⑩</span><div><b>步骤可复现性</b><span>命令和步骤能否照抄或少量替换后运行。</span></div></div>
+                <div class="tax-item"><span class="idx">⑨</span><div><b>版本可锁定性 <i class="flowtag o">产出</i></b><span>答案能否明确版本号、芯片或工具链条件。</span></div></div>
+                <div class="tax-item"><span class="idx">⑩</span><div><b>步骤可复现性 <i class="flowtag o">产出</i></b><span>命令和步骤能否照抄或少量替换后运行。</span></div></div>
               </div>
             </div>
           </div>
+          <div class="view-bridge"><div><b>上一页：流程视角</b><span>触达 → 质量 → 成本 → 产出，解释指标从 AI 作答链路哪里来。</span></div><div><b>本页：定义视角</b><span>官方证据 / 生态互证 / 模型先验 / 检索过程 / 答案产出，解释每项怎么测。</span></div></div>
         </div>
         <div class="metric-route">
           <div class="route-card"><b>分类之后再进入 ⑪：输入链路、过程折扣、产出解释分开处理</b><p>官方、生态、模型先验回答“有没有证据”；版本和成本回答“证据能否稳定转化”；产出项回答“答案能否真正使用”。</p></div>
