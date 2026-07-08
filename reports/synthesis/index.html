@@ -1495,7 +1495,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="dlinks">
             <div class="dlink" data-rel="version-result"><span class="no">#1</span><div><b>版本体系统一入口</b><span>解决版本混乱与配套判断。</span></div></div>
             <div class="dlink" data-rel="readable-result"><span class="no">#4</span><div><b>机器可读出口</b><span>降低检索成本，减少抓取失败。</span></div></div>
-            <div class="dlink"><span class="no">#5</span><div><b>页面结构面向 AI 抓取</b><span>让正文、代码、表格和引用可直接读取。</span></div></div>
+            <div class="dlink" data-rel="structure-result"><span class="no">#5</span><div><b>页面结构面向 AI 抓取</b><span>让正文、代码、表格和引用可直接读取。</span></div></div>
             <div class="dlink" data-rel="task-result"><span class="no">#2 / #7</span><div><b>错误码与高难度任务专题</b><span>把 D/E/M 从“有页面”推进到“能解决”。</span></div></div>
             <div class="dlink" data-rel="ecosystem-result"><span class="no">#6 / #8</span><div><b>第三方互证与语料供给</b><span>补齐模型自带知识和生态替代证据。</span></div></div>
           </div>
@@ -2710,6 +2710,7 @@ function renderDeriveRelations(){
     ['ecosystem-cause','ecosystem-move','mid'],
     ['version-move','version-result','purple'],
     ['readable-move','readable-result','purple'],
+    ['readable-move','structure-result','purple'],
     ['task-move','task-result','purple'],
     ['ecosystem-move','ecosystem-result','purple']
   ];
