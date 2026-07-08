@@ -3183,35 +3183,54 @@ function installDevHmFocus(){
     el.style.width=(ringBox.r-ringBox.l)+'px';
     el.style.height=(ringBox.b-ringBox.t)+'px';
     rings.appendChild(el);
+    return ringBox;
   }
-  function placeCallout(box){
+  function placeCallout(box,avoidBoxes){
     if(!callout||!card)return;
     const cr=card.getBoundingClientRect();
     const cw=callout.offsetWidth||360;
     const ch=callout.offsetHeight||160;
     const gap=18;
     const margin=12;
-    const rel={l:box.l-cr.left,t:box.t-cr.top,r:box.r-cr.left,b:box.b-cr.top};
-    let x=rel.r+gap;
-    let y=rel.t;
-    const wide=(rel.r-rel.l)>cr.width*.62;
-    if(wide){
-      x=Math.max(margin,Math.min(cr.width-cw-margin,rel.r-cw));
-      const above=rel.t-ch-gap;
-      const below=rel.b+gap;
-      const aboveRoom=rel.t-margin;
-      const belowRoom=cr.height-rel.b-margin;
-      if(aboveRoom>=ch+gap)y=above;
-      else if(belowRoom>=ch+gap)y=below;
-      else if(aboveRoom>=belowRoom)y=Math.max(margin,rel.t-ch-gap*.45);
-      else y=Math.min(cr.height-ch-margin,rel.b+gap*.45);
-    }else{
-      if(x+cw>cr.width-margin)x=rel.l-cw-gap;
-      if(x<margin)x=Math.max(margin,Math.min(cr.width-cw-margin,rel.r-cw));
-      if(y+ch>cr.height-margin)y=Math.max(margin,cr.height-ch-margin);
+    const rawAvoid=(avoidBoxes&&avoidBoxes.length?avoidBoxes:[box])
+      .map(b=>({l:b.l-cr.left,t:b.t-cr.top,r:b.r-cr.left,b:b.b-cr.top}))
+      .filter(b=>b.r>b.l&&b.b>b.t);
+    const avoid=rawAvoid.length?rawAvoid:[{l:box.l-cr.left,t:box.t-cr.top,r:box.r-cr.left,b:box.b-cr.top}];
+    const union=avoid.reduce((u,b)=>({l:Math.min(u.l,b.l),t:Math.min(u.t,b.t),r:Math.max(u.r,b.r),b:Math.max(u.b,b.b)}),{l:Infinity,t:Infinity,r:-Infinity,b:-Infinity});
+    function clampX(x){return Math.max(margin,Math.min(cr.width-cw-margin,x));}
+    function clampY(y){return Math.max(margin,Math.min(cr.height-ch-margin,y));}
+    function rect(x,y){return{l:x,t:y,r:x+cw,b:y+ch};}
+    function overlap(a,b){
+      const w=Math.max(0,Math.min(a.r,b.r)-Math.max(a.l,b.l));
+      const h=Math.max(0,Math.min(a.b,b.b)-Math.max(a.t,b.t));
+      return w*h;
     }
-    callout.style.left=x+'px';
-    callout.style.top=y+'px';
+    function dist(a,b){
+      const dx=Math.max(b.l-a.r,a.l-b.r,0);
+      const dy=Math.max(b.t-a.b,a.t-b.b,0);
+      return Math.sqrt(dx*dx+dy*dy);
+    }
+    const anchors=[union].concat(avoid);
+    const candidates=[];
+    anchors.forEach((a,ai)=>{
+      const cy=a.t+(a.b-a.t-ch)/2;
+      const cx=a.l+(a.r-a.l-cw)/2;
+      candidates.push({x:a.r+gap,y:cy,pri:ai?2:0});
+      candidates.push({x:a.l-cw-gap,y:cy,pri:ai?3:1});
+      candidates.push({x:cx,y:a.b+gap,pri:ai?5:4});
+      candidates.push({x:cx,y:a.t-ch-gap,pri:ai?6:4});
+      candidates.push({x:a.r-cw,y:a.b+gap,pri:ai?7:5});
+      candidates.push({x:a.l,y:a.t-ch-gap,pri:ai?7:5});
+    });
+    const scored=candidates.map(c=>{
+      const x=clampX(c.x), y=clampY(c.y), r=rect(x,y);
+      const ov=avoid.reduce((s,b)=>s+overlap(r,b),0);
+      const near=Math.min(...avoid.map(b=>dist(r,b)));
+      const drift=Math.abs(x-c.x)+Math.abs(y-c.y);
+      return{x,y,score:ov*1000+drift*3+near*.08+c.pri};
+    }).sort((a,b)=>a.score-b.score);
+    callout.style.left=scored[0].x+'px';
+    callout.style.top=scored[0].y+'px';
   }
   function updatePager(idx){
     if(!stepBox)return;
@@ -3240,13 +3259,13 @@ function installDevHmFocus(){
     const groups=splitGroups(els);
     const box=groupBox(els);
     if(rings)rings.innerHTML='';
-    groups.forEach(g=>drawRing(groupBox(g)));
+    const ringBoxes=groups.map(g=>drawRing(groupBox(g))).filter(Boolean);
     if(callout){
       callout.classList.remove('wide');
       callout.innerHTML=calloutHtml(focus[idx],idx);
       requestAnimationFrame(()=>{
-        placeCallout(box);
-        callout.querySelectorAll('img').forEach(img=>img.addEventListener('load',()=>placeCallout(box),{once:true}));
+        placeCallout(box,ringBoxes);
+        callout.querySelectorAll('img').forEach(img=>img.addEventListener('load',()=>placeCallout(box,ringBoxes),{once:true}));
       });
     }
     window.__devHmStep=idx;
