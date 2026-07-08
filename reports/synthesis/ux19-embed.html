@@ -510,40 +510,40 @@ NeMo / NIM / Jetson → llms.txt
   </div>
 
   <div class="card uxcard">
-    <div class="who">用户体验经典议题在 AI 时代的重写</div>
-    <h3>7. 站内体验要支撑完成任务，而不是只让人找到页面</h3>
+    <div class="who">承接 D / E / M 三个最大差距任务 · 从页面供给改为任务供给</div>
+    <h3>7. 高难度任务需要端到端场景专题，而不是分散在多页文档里</h3>
     <ul class="tight">
-      <li>本项目最反直觉的发现：<b>为 AI 优化与为开发者优化是同一件事</b>——参数表齐全、命令可复制、版本明确、网址可直达，对人与对 Agent 是同一组需求。</li>
-      <li>站内体验的目标不是“把人送到页面”，而是让开发者在同一条链路里完成：确认版本、复制命令、运行样例、遇错排查、继续下一步。</li>
-      <li>站内搜索按错误码／API 名直达任务页，减少「搜到列表页、找不到可执行步骤」的两段式挫败。</li>
+      <li>#17 矩阵显示，CANN 与 CUDA 综合差距最大的三项是 <b>D 自定义算子、E 报错码、M 动态 shape / Tiling</b>。它们不是“没有页面”，而是证据分散、步骤断裂、验证不足。</li>
+      <li>这类专有知识密集任务不能只靠列表页或参考手册，需要按真实目标组织成<b>任务包</b>：前置条件、版本约束、完整步骤、可复制代码、预期输出、常见报错和下一步。</li>
+      <li>错误码一码一页解决 E 的最小单元；D / M 还需要跨页面串联，把开发、编译、部署、验证、调试放在同一条路径里。</li>
     </ul>
-    <div class="why">这页的落点是开发者任务闭环：AI 侧指标可以帮助识别页面是否“可用”，但最终要转译成开发者能不能从页面继续做事。</div>
-    <div class="demotitle">Demo · 从“找到页面”到“完成一次上手任务” <span class="mockdisc">任务闭环</span></div>
+    <div class="why">这页的落点是高难度任务闭环：把 AI 指标中暴露的“搜得到但用不稳”，转译成开发者和 Agent 都能执行的端到端专题。</div>
+    <div class="demotitle">Demo · 把 D / E / M 从分散页面整理成端到端任务包 <span class="mockdisc">任务供给</span></div>
     <div class="demo">
-      <div class="dnote">以“自定义算子开发”为例，找到文档只是起点。真正的站内体验要让开发者在页面内完成关键判断和操作，遇到报错时也能顺着同一条链路继续排查。</div>
+      <div class="dnote">这不是新增一个栏目，而是改变内容组织单位：从“按页面发布”改成“按开发任务交付”。同一任务包既给人看，也给 Agent 抓取和引用。</div>
       <div class="duo">
         <div class="bad">
-          <div class="duolab">✕ 只支撑找到页面</div>
+          <div class="duolab">✕ 分散页面：找到内容但难以完成</div>
           <div class="cov" style="padding:4px 2px">
-            <div class="covrow"><span class="pf">版本判断</span><span class="st no">分散在多页，需自己拼</span></div>
-            <div class="covrow"><span class="pf">上手命令</span><span class="st mid">能看到说明，但缺少连续步骤</span></div>
-            <div class="covrow"><span class="pf">样例验证</span><span class="st no">不知道跑通后应看到什么</span></div>
-            <div class="covrow"><span class="pf">报错排查</span><span class="st no">错误码、工具、论坛答案断开</span></div>
-            <div class="covrow"><span class="pf">下一步</span><span class="st mid">读完页面后仍要回搜索</span></div>
+            <div class="covrow"><span class="pf">D 自定义算子</span><span class="st no">定义、编译、部署、验证分散</span></div>
+            <div class="covrow"><span class="pf">E 报错码</span><span class="st no">原因泛化，缺少场景化修复</span></div>
+            <div class="covrow"><span class="pf">M Tiling</span><span class="st mid">概念可读，但约束和坑点分散</span></div>
+            <div class="covrow"><span class="pf">验证输出</span><span class="st no">不知道正确结果长什么样</span></div>
+            <div class="covrow"><span class="pf">AI 抓取</span><span class="st mid">能抓到片段，难组成可靠答案</span></div>
           </div>
         </div>
         <div class="good">
-          <div class="duolab">✓ 支撑完成任务</div>
+          <div class="duolab">✓ 任务包：围绕一个目标交付证据链</div>
           <div class="cov" style="padding:4px 2px">
-            <div class="covrow"><span class="pf">版本判断</span><span class="st ok">当前版本、芯片、依赖一屏确认</span></div>
-            <div class="covrow"><span class="pf">上手命令</span><span class="st ok">命令块可复制，参数有默认值</span></div>
-            <div class="covrow"><span class="pf">样例验证</span><span class="st ok">给出预期输出与失败表现</span></div>
-            <div class="covrow"><span class="pf">报错排查</span><span class="st ok">错误码直达工具和问答</span></div>
-            <div class="covrow"><span class="pf">下一步</span><span class="st ok">直接进入集成、调试、性能优化</span></div>
+            <div class="covrow"><span class="pf">D 自定义算子</span><span class="st ok">开发→编译→部署→调用→验证</span></div>
+            <div class="covrow"><span class="pf">E 报错码</span><span class="st ok">触发场景、原因、修复、复测</span></div>
+            <div class="covrow"><span class="pf">M Tiling</span><span class="st ok">shape 约束、样例、常见坑</span></div>
+            <div class="covrow"><span class="pf">验证输出</span><span class="st ok">给日志、预期结果、失败表现</span></div>
+            <div class="covrow"><span class="pf">AI 抓取</span><span class="st ok">稳定 URL + Markdown + 结构化索引</span></div>
           </div>
         </div>
       </div>
-      <div class="note">衡量口径也随之变化：不是“有没有这个页面”，而是开发者能否不反复回到搜索框，完成一次可验证的任务闭环。</div>
+      <div class="note">衡量口径也随之变化：不是“有没有这几页文档”，而是 D / E / M 三个任务能否被人和 AI 顺着同一条证据链完成。</div>
     </div>
   </div>
 

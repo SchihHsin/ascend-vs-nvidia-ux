@@ -6,6 +6,7 @@
 <title>业界大模型对昇腾社区内容可获取性分析</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200&family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/IKKI2000/harmonyos-fonts@master/css/harmonyos_sans_sc.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
 /* ===== 设计 token ===== */
 :root{
@@ -1066,8 +1067,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull .sum{font-size:7.8px}
     .hmfull.is-spot th,.hmfull.is-spot td{opacity:.18;transition:opacity .32s ease,filter .32s ease,transform .32s ease}
     .hmfull.is-spot .hm-ref,.hmfull.is-spot .hm-on{opacity:1;filter:saturate(1.18);position:relative;z-index:2}
-    .hmfull.is-spot.hm-mark-col .hm-on.cell[data-side="cann"]{box-shadow:inset 2px 0 0 rgba(199,0,11,.95)}
-    .hmfull.is-spot.hm-mark-col .hm-ref.cell[data-side="cuda"]{box-shadow:inset 2px 0 0 rgba(118,185,0,.95)}
+    .hmfull.is-spot.hm-mark-col .hm-on.cell.hm-edge[data-side="cann"]{box-shadow:inset 2px 0 0 rgba(199,0,11,.95)}
+    .hmfull.is-spot.hm-mark-col .hm-ref.cell.hm-edge[data-side="cuda"]{box-shadow:inset 2px 0 0 rgba(118,185,0,.95)}
     .hm-rings{position:absolute;inset:0;z-index:5;pointer-events:none}
     .hm-ring{position:absolute;box-sizing:border-box;border:2px dotted rgba(55,61,72,.9);border-radius:14px;background:transparent;box-shadow:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),width .42s cubic-bezier(.2,.8,.2,1),height .42s cubic-bezier(.2,.8,.2,1),opacity .24s ease}
     .hm-rings.off{opacity:0}
@@ -1161,7 +1162,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         {k:'spa',title:'问题 4 · 官方 SPA 正文不可取回',val:'D 正文 = 0',desc:'不是所有官方页都不可抓，而是自定义算子 how-to 这类深层页面受阻，直接拖低“写算子”任务。',icon:'doc',sel:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',ref:'tr[data-task="D"][data-side="cuda"] [data-col="1"], tr[data-task="D"][data-side="cuda"] [data-col="2"]',ring:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',demo:`<div class="qb"><i></i><i></i><i></i><span>Agent 抓 opdevg 页</span></div><div class="qd" style="font-family:'JetBrains Mono';color:#999;font-size:10.5px"><div>&lt;title&gt;算子开发-CANN文档</div><div>导航：首页／文档／社区…</div><div class="zero">—— 正文 0 字 ——</div></div>`},
         {k:'err',title:'问题 5 · 可取回不等于可解决',val:'E 综合 .55',desc:'错误码能命中专属页、正文也可取回，但内容过于泛化，与正文不可取回是两类不同失败。',icon:'doc',sel:'[data-task="E"].task, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] [data-col="1"], tr[data-task="E"][data-side="cann"] [data-col="2"], tr[data-task="E"][data-side="cann"] [data-col="10"]',ref:'tr[data-task="E"][data-side="cuda"] .stk, tr[data-task="E"][data-side="cuda"] [data-col="1"], tr[data-task="E"][data-side="cuda"] [data-col="2"], tr[data-task="E"][data-side="cuda"] [data-col="10"]',ring:'[data-task="E"].task, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] [data-col="1"], tr[data-task="E"][data-side="cann"] [data-col="2"], tr[data-task="E"][data-side="cann"] [data-col="10"]',demo:`<div class="qd" style="font-family:'JetBrains Mono'"><div style="font-weight:700;color:#222">EZ9999 AclNN Inner Error</div><div style="margin-top:4px">可能原因：<span class="bad">N/A</span></div><div class="muted">仅 2 条通用建议 · 无排查步骤</div></div>`},
         {k:'funnel',split:true,title:'问题 6 · 综合差距集中在算子开发与排障任务',val:'D / E / M',desc:'按 CANN 与 CUDA 综合分差值排序，D 自定义算子、E 报错码、M 动态 shape / Tiling 是差距最大的三项，说明高难度任务需要优先补齐可直接使用的证据链。',icon:'target',sel:'[data-task="D"].task, [data-task="E"].task, [data-task="M"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell',ref:'tr[data-task="D"][data-side="cuda"] .stk, tr[data-task="D"][data-side="cuda"] .cell, tr[data-task="E"][data-side="cuda"] .stk, tr[data-task="E"][data-side="cuda"] .cell, tr[data-task="M"][data-side="cuda"] .stk, tr[data-task="M"][data-side="cuda"] .cell',ring:'[data-task="D"].task, [data-task="E"].task, [data-task="M"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell',demo:`<div class="qd"><div class="bars"><div class="bar" style="height:34px"><span>D Δ.47</span></div><div class="bar" style="height:32px"><span>E Δ.44</span></div><div class="bar" style="height:25px;background:linear-gradient(#e07a7d,#f0b3b5)"><span>M Δ.31</span></div></div></div>`},
-        {k:'cost',split:true,title:'问题 7 · 检索成本尖刺',val:'D / K / O = 1',desc:'多数任务成本正常，少数深层任务一次抓取失败就把成本打穿，响应变慢且证据链变脆。',icon:'brain',sel:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',ref:'tr[data-task="D"][data-side="cuda"] [data-col="7"], tr[data-task="K"][data-side="cuda"] [data-col="7"], tr[data-task="O"][data-side="cuda"] [data-col="7"]',ring:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',demo:`<div class="qd"><svg viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div>`}
+        {k:'cost',split:true,title:'问题 7 · 检索成本尖刺',val:'D / K / O = 1',desc:'多数任务成本正常，少数深层任务一次抓取失败就把成本打穿，响应变慢且证据链变脆。',icon:'brain',sel:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',ring:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',demo:`<div class="qd"><svg viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div>`}
       ];
       function iconSvg(type){
         var p={
@@ -1232,7 +1233,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         });
       }
       function setStep(idx){
-        table.querySelectorAll('.hm-on,.hm-ref').forEach(function(el){el.classList.remove('hm-on','hm-ref');});
+        table.querySelectorAll('.hm-on,.hm-ref,.hm-edge').forEach(function(el){el.classList.remove('hm-on','hm-ref','hm-edge');});
         if(idx<0){
           table.classList.remove('is-spot','hm-mark-col','hm-mark-row');
           if(rings){rings.classList.add('off');rings.innerHTML='';}
@@ -1251,6 +1252,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var ringEls=[].slice.call(table.querySelectorAll(f.ring||f.sel));
         refs.forEach(function(el){el.classList.add('hm-ref');});
         els.forEach(function(el){el.classList.add('hm-on');});
+        if(f.mark==='col'){
+          var edgeCol=null;
+          els.forEach(function(el){
+            if(el.getAttribute('data-side')!=='cann')return;
+            var col=el.getAttribute('data-col');
+            if(col===null)return;
+            col=parseInt(col,10);
+            if(edgeCol===null||col<edgeCol)edgeCol=col;
+          });
+          if(edgeCol!==null){
+            els.concat(refs).forEach(function(el){
+              if(el.getAttribute('data-col')===String(edgeCol))el.classList.add('hm-edge');
+            });
+          }
+        }
         table.querySelectorAll('th[data-col]').forEach(function(th){
           var col=th.getAttribute('data-col');
           if(els.concat(refs).some(function(el){return el.getAttribute('data-col')===col;}))th.classList.add('hm-on');
@@ -1387,42 +1403,102 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .issue-map{flex:0 0 auto;margin-bottom:1vh;display:flex;align-items:center;gap:.72vw;border-radius:10px;padding:.82vh 1vw;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(245,248,255,.62));border:1px solid rgba(47,111,237,.18);box-shadow:0 10px 24px -22px rgba(47,111,237,.35),inset 0 1px 0 rgba(255,255,255,.88);font-size:var(--fs-body);line-height:1.42;color:#334155}
     .issue-map .im-tag{flex:none;font-size:var(--fs-xs);font-weight:900;letter-spacing:.06em;color:#1D4ED8;background:rgba(47,111,237,.1);border:1px solid rgba(47,111,237,.16);border-radius:7px;padding:.28vh .55vw}
     .issue-map b{color:#172554;font-weight:900;background:linear-gradient(transparent 60%,rgba(47,111,237,.18) 0)}
+    .derive{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.08fr;gap:1.25vw;flex:1;min-height:0;position:relative}
+    .derive-slide .brand .ttl{font-size:var(--fs-h2);letter-spacing:0}
+    .dgroup{--dc:#5B5BD6;--link:rgba(91,91,214,.48);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.72vh;position:relative}
+    .dgroup.cause-g{--dc:#fff;--link:rgba(255,255,255,.62)}
+    .dgroup.move-g{--dc:#fff;--link:rgba(132,109,238,.62)}
+    .dcol{--soft:rgba(91,91,214,.1);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.68vh;border-radius:14px;padding:1.7vh 1.24vw;box-shadow:0 16px 34px -18px rgba(20,25,36,.35);position:relative;overflow:visible;flex:1;backdrop-filter:blur(15px) saturate(1.5);-webkit-backdrop-filter:blur(15px) saturate(1.5)}
+    .dcol>*{position:relative;z-index:3}
+    .dcol.signal{--dc:#5B5BD6;--soft:rgba(91,91,214,.1);background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,0) 14%),rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.62)}
+    .dcol.cause{--soft:rgba(255,255,255,.14);background:radial-gradient(ellipse 130% 130% at 50% 48%,#0E1116 0%,#3A424F 100%);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .dcol.move{--soft:rgba(255,255,255,.16);background:radial-gradient(ellipse 130% 130% at 50% 48%,#3F2DBE 0%,#9D86EC 100%);border:1px solid rgba(255,255,255,.22);color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .dcol.result{--dc:#6B4DE6;--soft:rgba(107,77,230,.12);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0) 14%),radial-gradient(ellipse 130% 130% at 50% 48%,rgba(118,91,236,.22) 0%,rgba(255,255,255,.42) 100%);border:1px solid rgba(157,134,236,.28)}
+    .dh{display:flex;align-items:baseline;gap:.55vw;flex:0 0 auto;margin-bottom:.1vh}
+    .dh b{font-size:var(--fs-body);font-weight:950;color:var(--ink);line-height:1.2}
+    .cause-g .dh b,.move-g .dh b{color:var(--ink)}
+    .dh span{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;color:var(--dc);letter-spacing:.08em;text-transform:uppercase}
+    .cause-g .dh span{color:#3A424F}.move-g .dh span{color:#6B4DE6}
+    .dseq{display:flex;flex-direction:column;justify-content:flex-start;gap:.84vh;flex:1;min-height:0;position:relative}
+    .signal .dseq{gap:.58vh}
+    .ditem{padding:.12vh .12vw .12vh 34px;min-height:0;display:flex;flex-direction:column;gap:.12vh;position:relative}
+    .ditem svg,.ditem i[data-lucide]{position:absolute;left:4px;top:.24vh;width:18px;height:18px;fill:none;stroke:var(--dc);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;z-index:1}
+    .ditem strong{font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:900}
+    .ditem p{margin:0;font-size:var(--fs-sm);line-height:1.22;color:var(--ink-2)}
+    .ditem .metric{font-family:'JetBrains Mono';font-size:11px;font-weight:900;color:var(--dc);align-self:flex-start;line-height:1.18}
+    .ditem.hot strong{color:var(--ink)}
+    .ditem.ok strong{color:#fff}
+    .dcol.cause .ditem strong,.dcol.move .ditem strong{color:#fff}.dcol.cause .ditem p,.dcol.move .ditem p{color:rgba(255,255,255,.72)}
+    .dcol.cause .ditem svg,.dcol.move .ditem svg{stroke:#fff;opacity:.9}
+    .dlinks{display:flex;flex-direction:column;justify-content:flex-start;gap:.84vh;flex:1;min-height:0}
+    .dlink{display:grid;grid-template-columns:auto 1fr;gap:.58vw;align-items:start;padding:.18vh .12vw;text-decoration:none;color:inherit}
+    .dlink .no{font-family:'JetBrains Mono';font-size:12px;font-weight:900;color:#6B4DE6;padding-top:1px}
+    .dlink b{display:block;font-size:var(--fs-body);line-height:1.24;color:var(--ink);font-weight:900}
+    .dlink span{display:block;margin-top:.12vh;font-size:var(--fs-sm);line-height:1.28;color:var(--ink-3)}
+    .drel{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:9;overflow:visible}
+    .drel path{fill:none;stroke:rgba(90,96,112,.42);stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
+    .drel path.mid{stroke:rgba(255,255,255,.42)}
+    .drel path.purple{stroke:rgba(118,91,236,.4)}
   </style>
-  <section class="slide s-gray">
+  <section class="slide s-gray derive-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">实测暴露的七个问题：版本混乱 +「自带 / 第三方双薄」是系统性短板</span></div>
-        <div class="subttl">AI 侧 · 内容可用性 · 「七大问题」</div>
+        <div class="brand"><span class="ttl">七个矩阵信号收敛为四类内容改造路径</span></div>
+        <div class="subttl">AI 侧 · 内容可用性 · 「矩阵信号 → 机制归因 → 改造机会 → 后续结论」</div>
       </div>
-      <div class="head-r">18/ AI · 七个问题</div>
+      <div class="head-r">18/ AI · 推导页</div>
     </div>
     <div class="body-area">
-      <div class="pg7">
-        <div class="p7 struct"><div class="p7top"><span class="p7n">1</span><span class="p7tag">系统性</span></div><div class="p7h">版本体系混乱（影响全流程）</div><div class="p7d">同一文档散落在多棵版本树，缺少明确的当前推荐版本。</div>
-          <div class="mm"><div class="mbar"><i></i><i></i><i></i><span>搜「atc 模型转换」命中</span></div><div class="mbd">
-            <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">商用 8.0RC2</span></div>
-            <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">商用 8.0RC3</span></div>
-            <div class="vrow"><span>将 ONNX 转 OM 模型</span><span class="vbadge">社区 800alpha</span></div></div></div>
-          <div class="p7e">④版本清晰度 26 格 12 格＝2 分</div></div>
-        <div class="p7 struct"><div class="p7top"><span class="p7n">2</span><span class="p7tag">系统性</span></div><div class="p7h">模型自带知识偏薄</div><div class="p7d">AI 不检索就难以作答，CUDA 多数问题可凭模型先验完成；检索链路受阻时缺少替代来源。</div>
-          <div class="mm"><div class="mbd"><div class="mcmp"><span style="color:#8a909a;font-family:'JetBrains Mono';font-size:10px">CUDA</span><span class="mok">不检索也能答 ✓</span></div><div class="mcmp"><span style="color:#8a909a;font-family:'JetBrains Mono';font-size:10px">CANN</span><span class="mno">不检索就答不了 ✕</span></div></div></div>
-          <div class="p7e">⑦自带均 2.85 vs CUDA ≥ 4</div></div>
-        <div class="p7"><div class="p7top"><span class="p7n">3</span></div><div class="p7h">第三方生态少而同质</div><div class="p7d">多集中在 CSDN／华为云，知乎反爬抓不到；对 Agent 有效的第三方更窄。</div>
-          <div class="mm"><div class="mbd"><div class="mchips"><span class="mchip">CSDN ×2</span><span class="mchip">华为云 bbs</span><span class="mchip bad">知乎 403 ✕</span></div></div></div>
-          <div class="p7e">⑤丰富度 K/M/N/S/X 仅 2</div></div>
-        <div class="p7"><div class="p7top"><span class="p7n">4</span></div><div class="p7h">官方 SPA 正文不可取回 → 收窄成单点</div><div class="p7d">D（自定义算子）核心 how-to 页正文不可取回；其余任务的 SSR 页面可正常读取，优先改造该子树即可。</div>
-          <div class="mm"><div class="mbar"><i></i><i></i><i></i><span>Agent 抓 opdevg 页</span></div><div class="mbd" style="font-family:'JetBrains Mono';color:#999;font-size:10.5px"><div>&lt;title&gt;算子开发-CANN文档</div><div>导航：首页／文档／社区…</div><div class="mzero">—— 正文 0 字 ——</div></div></div>
-          <div class="p7e">②可抓取性 26 格仅 D＝2</div></div>
-        <div class="p7"><div class="p7top"><span class="p7n">5</span></div><div class="p7h">可取回 ≠ 可解决</div><div class="p7d">错误码能命中专属页、正文也可取回，但内容过于泛化，与正文不可取回属于两类不同失败。</div>
-          <div class="mm"><div class="mbd" style="font-family:'JetBrains Mono'"><div style="font-weight:700;color:#222">EZ9999 AclNN Inner Error</div><div class="mkv" style="margin-top:4px">可能原因：<b>N/A</b></div><div style="color:#999">仅 2 条通用建议 · 无排查步骤</div></div></div>
-          <div class="p7e">E：②4 但 ③2，综合 .55 倒二</div></div>
-        <div class="p7"><div class="p7top"><span class="p7n">6</span></div><div class="p7h">综合差距集中在算子开发与排障任务</div><div class="p7d">按 CANN 与 CUDA 综合分差值排序，D 自定义算子、E 报错码、M 动态 shape / Tiling 是差距最大的三项。</div>
-          <div class="mm"><div class="mbd"><div class="mbars"><div class="mb" style="height:34px"><span>Δ.47</span></div><div class="mb" style="height:32px"><span>Δ.44</span></div><div class="mb" style="height:25px;background:linear-gradient(#e07a7d,#f0b3b5)"><span>Δ.31</span></div></div></div></div>
-          <div class="p7e">D .41/.88、E .55/.99、M .63/.94</div></div>
-        <div class="p7"><div class="p7top"><span class="p7n">7</span></div><div class="p7h">检索成本尖刺</div><div class="p7d">多数任务成本正常，个别任务一次抓取失败即把成本打穿、响应变慢。</div>
-          <div class="mm"><div class="mbd"><svg class="mspk" viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div></div>
-          <div class="p7e">⑧检索成本 D / K / O ＝ 1</div></div>
-        <div class="p7 sum"><div class="sh">结论</div><div class="st">三个系统性短板：<b>① 版本体系混乱</b>；<b>② 模型自带知识与第三方生态同时偏薄</b>，检索失败后缺少替代证据来源；<b>③ 差距最大的任务集中在算子开发与排障</b>，其中自定义算子是全栈最低谷。上手侧已接近 CUDA，应据此排定优先级，而非泛泛「改进文档」。</div></div>
+      <div class="derive">
+        <svg class="drel" aria-hidden="true"></svg>
+        <div class="dgroup signal-g">
+          <div class="dh"><span>Step 01</span><b>矩阵七个信号</b></div>
+          <div class="dcol signal">
+          <div class="dseq">
+            <div class="ditem hot" data-rel="task-signal"><i data-lucide="bar-chart-3"></i><strong>综合差距最大</strong><p>D / E / M 位列差值前三。</p><div class="metric">Δ.47 / Δ.44 / Δ.31</div></div>
+            <div class="ditem" data-rel="version-signal"><i data-lucide="git-branch"></i><strong>版本体系混乱</strong><p>多版本树并存，首选入口不清。</p><div class="metric">④ 12 格 = 2 分</div></div>
+            <div class="ditem" data-rel="readable-signal"><i data-lucide="file-warning"></i><strong>官方正文存在单点受阻</strong><p>D 核心 how-to 抓取不足。</p><div class="metric">D 正文受阻</div></div>
+            <div class="ditem"><i data-lucide="scan-search"></i><strong>可取回不等于可解决</strong><p>E 有页面，但原因和修复路径泛化。</p><div class="metric">E 综合 .55</div></div>
+            <div class="ditem"><i data-lucide="download-cloud"></i><strong>检索成本尖刺</strong><p>少数任务失败后要换词和补证。</p><div class="metric">D / K / O = 1</div></div>
+            <div class="ditem"><i data-lucide="network"></i><strong>第三方少而同质</strong><p>有效互证平台偏少。</p><div class="metric">⑤ K/M/N/S/X = 2</div></div>
+            <div class="ditem" data-rel="ecosystem-signal"><i data-lucide="brain-circuit"></i><strong>模型自带知识偏薄</strong><p>检索受阻后缺少记忆兜底。</p><div class="metric">⑦ CANN 2.85</div></div>
+          </div>
+          </div>
+        </div>
+        <div class="dgroup cause-g">
+          <div class="dh"><span>Step 02</span><b>机制归因</b></div>
+          <div class="dcol cause">
+          <div class="dseq">
+            <div class="ditem rel" data-rel="version-cause"><i data-lucide="panel-top"></i><strong>内容按页面发布</strong><p>页面存在，但入口、版本、依赖和任务目标没有被统一组织。</p></div>
+            <div class="ditem rel" data-rel="readable-cause"><i data-lucide="file-text"></i><strong>证据链断在中途</strong><p>Agent 或开发者能读到片段，却缺少完整步骤、预期输出和失败处理。</p></div>
+            <div class="ditem" data-rel="task-cause"><i data-lucide="circle-plus"></i><strong>专有知识不可替代</strong><p>Ascend C、Tiling、错误码很难从 CUDA 常识外推，必须靠官方和生态供给。</p></div>
+            <div class="ditem rel" data-rel="ecosystem-cause"><i data-lucide="trending-up"></i><strong>长尾没有回流机制</strong><p>论坛、工单、搜索词和案例没有稳定反哺文档与示例仓。</p></div>
+          </div>
+          </div>
+        </div>
+        <div class="dgroup move-g">
+          <div class="dh"><span>Step 03</span><b>改造机会</b></div>
+          <div class="dcol move">
+          <div class="dseq">
+            <div class="ditem ok rel" data-rel="version-move"><i data-lucide="arrow-right-to-line"></i><strong>统一版本与入口</strong><p>给首选网址、当前推荐版、配套查询和稳定 URL。</p></div>
+            <div class="ditem ok rel" data-rel="readable-move"><i data-lucide="file-code-2"></i><strong>提供机器可读出口</strong><p>llms.txt、Markdown、结构化索引、可抓取正文形成稳定入口。</p></div>
+            <div class="ditem ok rel" data-rel="task-move"><i data-lucide="package-check"></i><strong>建设高难度任务包</strong><p>围绕 D/E/M 把概念、步骤、代码、验证、常见坑打包。</p></div>
+            <div class="ditem ok rel" data-rel="ecosystem-move"><i data-lucide="list-tree"></i><strong>官方与生态共同供给语料</strong><p>官方论坛、GitCode、英文社区和技术博客形成多源互证。</p></div>
+          </div>
+          </div>
+        </div>
+        <div class="dgroup result-g">
+          <div class="dh"><span>Step 04</span><b>后续结论</b></div>
+          <div class="dcol result">
+          <div class="dlinks">
+            <div class="dlink" data-rel="version-result"><span class="no">#1</span><div><b>版本体系统一入口</b><span>解决版本混乱与配套判断。</span></div></div>
+            <div class="dlink" data-rel="readable-result"><span class="no">#4</span><div><b>机器可读出口</b><span>降低检索成本，减少抓取失败。</span></div></div>
+            <div class="dlink"><span class="no">#5</span><div><b>页面结构面向 AI 抓取</b><span>让正文、代码、表格和引用可直接读取。</span></div></div>
+            <div class="dlink" data-rel="task-result"><span class="no">#2 / #7</span><div><b>错误码与高难度任务专题</b><span>把 D/E/M 从“有页面”推进到“能解决”。</span></div></div>
+            <div class="dlink" data-rel="ecosystem-result"><span class="no">#6 / #8</span><div><b>第三方互证与语料供给</b><span>补齐模型自带知识和生态替代证据。</span></div></div>
+          </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1447,7 +1523,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div class="head-r">20/ 内容可用性结论 · 2</div>
     </div>
-    <div class="body-area"><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#5 可取回不等于可解决</b>、<b>#6 综合差距集中在算子开发与排障任务</b>：错误码需要从“能搜到页面”推进到“能定位、能验证”。</span></div><iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area"><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#5 可取回不等于可解决</b>：错误码需要从“能搜到页面”推进到“能定位、能验证”。</span></div><iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
   <!-- 灰底：opknow19 卡4（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
@@ -1486,12 +1562,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 7：站内体验要支撑开发者完成任务，而不只是找到页面</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「7/8 站内体验」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 7：高难度任务需要端到端场景专题，而不是分散在多页文档里</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「7/8 高难度任务专题」</div>
       </div>
       <div class="head-r">24/ 内容可用性结论 · 7</div>
     </div>
-    <div class="body-area"><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#5 可取回不等于可解决</b>、<b>#6 综合差距集中在算子开发与排障任务</b>：站内体验要把开发者带到下一步，而不是只交付一个页面。</span></div><iframe data-src="ux19-embed.html?card=7" title="opknow19 卡7" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
+    <div class="body-area"><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#6 综合差距集中在算子开发与排障任务</b>：把 D / E / M 从分散文档整理成可验证、可复现的任务包。</span></div><iframe data-src="ux19-embed.html?card=7" title="opknow19 卡7" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
   <!-- 灰底：opknow19 卡8（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
@@ -2412,6 +2488,7 @@ function updateCurrent(i){
   const panel=document.getElementById('panel'),toggle=document.getElementById('toggle');
   if(s.dataset.chapter && s.classList.contains('chapter-cover')){ if(panel)s.appendChild(panel); if(toggle){s.appendChild(toggle);toggle.style.display='flex';} setPanelOpen(false); apply(); syncPanel(); }
   else if(toggle){ toggle.style.display='none'; setPanelOpen(false); }
+  setTimeout(renderDeriveRelations,60);
 }
 function deckHash(i){
   var h='#'+(i+1);
@@ -2590,6 +2667,70 @@ function installBoardTabs(){
   });
 }
 
+function balanceDeriveColumns(){
+  const slide=document.querySelector('.derive-slide');
+  if(!slide || document.body.classList.contains('overview'))return;
+  slide.querySelectorAll('.dcol').forEach(col=>{
+    const stack=col.querySelector('.dseq,.dlinks');
+    if(!stack)return;
+    const items=[...stack.children];
+    if(!items.length)return;
+    stack.style.paddingTop='0px';
+    stack.style.paddingBottom='0px';
+    stack.style.gap='0px';
+    const total=items.reduce((sum,el)=>sum+el.getBoundingClientRect().height,0);
+    const free=Math.max(0,stack.clientHeight-total);
+    const unit=free/(items.length+1);
+    stack.style.paddingTop=unit+'px';
+    stack.style.paddingBottom=unit+'px';
+    stack.style.gap=unit+'px';
+  });
+}
+
+function renderDeriveRelations(){
+  const slide=document.querySelector('.derive-slide');
+  if(!slide || document.body.classList.contains('overview'))return;
+  balanceDeriveColumns();
+  const box=slide.querySelector('.derive');
+  const svg=slide.querySelector('.drel');
+  if(!box||!svg)return;
+  const pairs=[
+    ['version-signal','version-cause',''],
+    ['readable-signal','readable-cause',''],
+    ['task-signal','task-cause',''],
+    ['ecosystem-signal','ecosystem-cause',''],
+    ['version-cause','version-move','mid'],
+    ['readable-cause','readable-move','mid'],
+    ['task-cause','task-move','mid'],
+    ['ecosystem-cause','ecosystem-move','mid'],
+    ['version-move','version-result','purple'],
+    ['readable-move','readable-result','purple'],
+    ['task-move','task-result','purple'],
+    ['ecosystem-move','ecosystem-result','purple']
+  ];
+  svg.style.display='block';
+  const br=box.getBoundingClientRect();
+  svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
+  svg.innerHTML='<defs><marker id="drelArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M1,1 L8,5 L1,9" fill="none" stroke="rgba(90,96,112,.54)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="drelArrowLight" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M1,1 L8,5 L1,9" fill="none" stroke="rgba(255,255,255,.58)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>';
+  function point(key,side){
+    const el=box.querySelector(`[data-rel="${key}"]`);
+    if(!el)return null;
+    const r=el.getBoundingClientRect();
+    return {x:(side==='left'?r.left:r.right)-br.left,y:r.top+r.height*.5-br.top};
+  }
+  pairs.forEach(([a,b,cls])=>{
+    const p1=point(a,'right'),p2=point(b,'left');
+    if(!p1||!p2)return;
+    const gap=p2.x-p1.x;
+    const dx=Math.min(Math.max(14,gap*.38),30);
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M ${p1.x+6} ${p1.y} C ${p1.x+dx} ${p1.y}, ${p2.x-dx} ${p2.y}, ${p2.x-8} ${p2.y}`);
+    if(cls)path.setAttribute('class',cls);
+    path.setAttribute('marker-end',cls==='mid'?'url(#drelArrowLight)':'url(#drelArrow)');
+    svg.appendChild(path);
+  });
+}
+
 /* 总览 Overview：每页包进 .slide-inner 缩放成缩略图，排网格（按当前视窗比例）*/
 function applyOverviewScale(){if(!document.body.classList.contains('overview'))return;const cellW=slides[0].getBoundingClientRect().width,scale=cellW/window.innerWidth;slides.forEach(s=>{s.style.height=(window.innerHeight*scale)+'px';const inner=s.querySelector(':scope>.slide-inner');if(inner)inner.style.transform='scale('+scale+')';});}
 function enterOverview(){slides.forEach(s=>{if(!s.querySelector(':scope>.slide-inner')){const w=document.createElement('div');w.className='slide-inner';while(s.firstChild)w.appendChild(s.firstChild);s.appendChild(w);}});document.body.classList.add('overview');requestAnimationFrame(()=>{applyOverviewScale();requestAnimationFrame(focusOverviewCurrent);});}
@@ -2597,7 +2738,7 @@ function exitOverview(){slides.forEach(s=>{const w=s.querySelector(':scope>.slid
 function toggleOverview(){document.body.classList.contains('overview')?exitOverview():enterOverview();}
 ovBtn.onclick=toggleOverview;
 document.body.addEventListener('click',e=>{if(!document.body.classList.contains('overview'))return;const sl=e.target.closest('.slide');if(sl){const i=slides.indexOf(sl);if(i>=0){idx=i;exitOverview();}}});
-addEventListener('resize',()=>{if(document.body.classList.contains('overview'))applyOverviewScale();else reanchor();});
+addEventListener('resize',()=>{if(document.body.classList.contains('overview'))applyOverviewScale();else{reanchor();renderDeriveRelations();}});
 
 /* 默认隐藏控制栏；鼠标移到屏幕底部才出现 */
 document.addEventListener('mousemove',e=>{
@@ -2606,8 +2747,10 @@ document.addEventListener('mousemove',e=>{
 document.addEventListener('mouseleave',()=>{ controls.classList.remove('show'); });
 
 slides.forEach(paintSlide);
+if(window.lucide)lucide.createIcons();
 installSeqZoomButtons();
 installBoardTabs();
+setTimeout(renderDeriveRelations,80);
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
 (function(){const m=(location.hash||'').match(/(\d+)/);const start=m?Math.min(slides.length,Math.max(1,+m[1]))-1:0;
   updateCurrent(start>0?start:0);})();
