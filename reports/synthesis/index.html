@@ -1408,7 +1408,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .dgroup{--dc:#5B5BD6;--link:rgba(91,91,214,.48);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.72vh;position:relative}
     .dgroup.cause-g{--dc:#fff;--link:rgba(255,255,255,.62)}
     .dgroup.move-g{--dc:#fff;--link:rgba(132,109,238,.62)}
-    .dcol{--soft:rgba(91,91,214,.1);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.68vh;border-radius:14px;padding:1.7vh 1.24vw;box-shadow:0 16px 34px -18px rgba(20,25,36,.35);position:relative;overflow:visible;flex:1;backdrop-filter:blur(15px) saturate(1.5);-webkit-backdrop-filter:blur(15px) saturate(1.5)}
+    .dcol{--soft:rgba(91,91,214,.1);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.68vh;border-radius:14px;padding:1.7vh 1.55vw;box-shadow:0 16px 34px -18px rgba(20,25,36,.35);position:relative;overflow:visible;flex:1;backdrop-filter:blur(15px) saturate(1.5);-webkit-backdrop-filter:blur(15px) saturate(1.5)}
     .dcol>*{position:relative;z-index:3}
     .dcol.signal{--dc:#5B5BD6;--soft:rgba(91,91,214,.1);background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,0) 14%),rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.62)}
     .dcol.cause{--soft:rgba(255,255,255,.14);background:radial-gradient(ellipse 130% 130% at 50% 48%,#0E1116 0%,#3A424F 100%);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -1436,9 +1436,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .dlink b{display:block;font-size:var(--fs-body);line-height:1.24;color:var(--ink);font-weight:900}
     .dlink span{display:block;margin-top:.12vh;font-size:var(--fs-sm);line-height:1.28;color:var(--ink-3)}
     .drel{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:9;overflow:visible}
-    .drel path{fill:none;stroke:rgba(90,96,112,.42);stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
-    .drel path.mid{stroke:rgba(255,255,255,.42)}
-    .drel path.purple{stroke:rgba(118,91,236,.4)}
+    .drel path{fill:none;stroke:#5F6673;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+    .drel path.mid,.drel path.purple{stroke:#5F6673}
   </style>
   <section class="slide s-gray derive-slide">
     <div class="head">
@@ -2711,7 +2710,7 @@ function renderDeriveRelations(){
   svg.style.display='block';
   const br=box.getBoundingClientRect();
   svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
-  svg.innerHTML='<defs><marker id="drelArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M1,1 L8,5 L1,9" fill="none" stroke="rgba(90,96,112,.54)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="drelArrowLight" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M1,1 L8,5 L1,9" fill="none" stroke="rgba(255,255,255,.58)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>';
+  svg.innerHTML='';
   function point(key,side){
     const el=box.querySelector(`[data-rel="${key}"]`);
     if(!el)return null;
@@ -2724,9 +2723,9 @@ function renderDeriveRelations(){
     const gap=p2.x-p1.x;
     const dx=Math.min(Math.max(14,gap*.38),30);
     const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('d',`M ${p1.x+6} ${p1.y} C ${p1.x+dx} ${p1.y}, ${p2.x-dx} ${p2.y}, ${p2.x-8} ${p2.y}`);
+    const ex=p2.x-6, ey=p2.y;
+    path.setAttribute('d',`M ${p1.x+6} ${p1.y} C ${p1.x+dx} ${p1.y}, ${p2.x-dx} ${p2.y}, ${ex} ${ey} m -7 -4 l 7 4 l -7 4`);
     if(cls)path.setAttribute('class',cls);
-    path.setAttribute('marker-end',cls==='mid'?'url(#drelArrowLight)':'url(#drelArrow)');
     svg.appendChild(path);
   });
 }
