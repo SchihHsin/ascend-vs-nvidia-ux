@@ -1087,7 +1087,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .tax-group.output{--a:#657182}
     .tax-g-head{display:flex;align-items:center;gap:.58vw;min-width:0;border-right:1px dashed rgba(143,151,164,.28);padding-right:.7vw}
     .tax-code{position:relative;width:42px;height:42px;border-radius:12px;background:var(--g-ink);border:1px solid rgba(255,255,255,.2);color:#fff;display:block;flex:0 0 42px;box-shadow:0 8px 18px -14px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.26);line-height:0}
-    .tax-code i,.tax-code svg{position:absolute;left:50%;top:calc(50% + 1px);width:20px;height:20px;display:block;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none;transform:translate(-50%,-50%)}
+    .tax-code i,.tax-code svg{position:absolute;left:50%;top:calc(50% + 1px);width:20px;height:20px;display:block;color:#fff!important;stroke:#fff!important;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none;transform:translate(-50%,-50%)}
     .tax-g-head b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}
     .tax-g-head span{display:block;margin-top:.16vh;font-size:var(--fs-xs);line-height:1.2;color:#667082;font-weight:850}
     .tax-items{display:grid;gap:.34vh .62vw;align-content:center;min-height:0}
@@ -1107,11 +1107,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .view-bridge b{display:block;font-size:var(--fs-sm);line-height:1.18;color:var(--ink);font-weight:950}
     .view-bridge span{display:block;margin-top:.22vh;font-size:var(--fs-xs);line-height:1.24;color:var(--ink-2)}
     .metric-route{display:grid;grid-template-rows:auto 1fr auto;gap:1vh;min-height:0}
-    .route-card{border-radius:15px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88);padding:1.05vh .95vw}
-    .route-card b{display:block;font-size:var(--fs-h2);line-height:1.24;color:var(--ink);font-weight:950}
-    .route-card p{margin:.42vh 0 0;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
+    .route-card{border-radius:15px;background:var(--g-ink);border:1px solid rgba(255,255,255,.18);box-shadow:0 16px 34px -24px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.24);padding:1.05vh .95vw;color:#fff}
+    .route-card b{display:block;font-size:var(--fs-h2);line-height:1.24;color:#fff;font-weight:950}
+    .route-card p{margin:.42vh 0 0;font-size:var(--fs-sm);line-height:1.42;color:rgba(255,255,255,.7)}
     .route-flow{border-radius:15px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88);padding:1vh .9vw;display:grid;grid-template-rows:1fr 1fr 1fr;gap:.72vh;min-height:0}
-    .route-node{border-radius:12px;background:rgba(245,247,250,.84);border:1px solid rgba(198,203,214,.72);padding:.82vh .78vw;display:flex;flex-direction:column;justify-content:center;min-height:0}
+    .route-node{position:relative;border-radius:12px;background:rgba(245,247,250,.84);border:1px solid rgba(198,203,214,.72);padding:.82vh .78vw .82vh 2.75vw;display:flex;flex-direction:column;justify-content:center;min-height:0}
+    .route-node:before{content:attr(data-step);position:absolute;left:.9vw;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:8px;background:var(--g-ink);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;display:flex;align-items:center;justify-content:center}
     .route-node b{display:block;font-size:var(--fs-body);line-height:1.2;color:var(--ink);font-weight:950}
     .route-node code{display:block;margin-top:.42vh;font-size:var(--fs-sm);line-height:1.34;color:#5B5BD6;font-weight:900}
     .route-node p{margin:.34vh 0 0;font-size:var(--fs-sm);line-height:1.38;color:var(--ink-2)}
@@ -1191,9 +1192,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="metric-route">
           <div class="route-card"><b>分类之后再进入 ⑪：输入链路、过程折扣、产出解释分开处理</b><p>官方、生态、模型先验回答“有没有证据”；版本和成本回答“证据能否稳定转化”；产出项回答“答案能否真正使用”。</p></div>
           <div class="route-flow">
-            <div class="route-node"><b>A/B/C 进入三条证据链</b><code>OFF = nm①×nm②×nm③<br>SEC = nm⑤×nm⑥<br>OWN = nm⑦</code><p>④版本属于跨渠道条件，不放进 OFF 内部重复相乘。</p></div>
-            <div class="route-node k"><b>⑪ 只合成证据可用性</b><code>K = 1-(1-OFF)(1-SEC)(1-OWN)</code><p>先算三条链同时失败的风险，再反推至少一条链可用。</p></div>
-            <div class="route-node"><b>D/E 分别做折扣与解释</b><code>综合 = K × 版本因子 × 成本因子</code><p>⑧成本按轻影响折扣；⑨⑩是产出表现，不进入⑪重复加权。</p></div>
+            <div class="route-node" data-step="1"><b>A/B/C 进入三条证据链</b><code>OFF = nm①×nm②×nm③<br>SEC = nm⑤×nm⑥<br>OWN = nm⑦</code><p>④版本属于跨渠道条件，不放进 OFF 内部重复相乘。</p></div>
+            <div class="route-node k" data-step="2"><b>⑪ 只合成证据可用性</b><code>K = 1-(1-OFF)(1-SEC)(1-OWN)</code><p>先算三条链同时失败的风险，再反推至少一条链可用。</p></div>
+            <div class="route-node" data-step="3"><b>D/E 分别做折扣与解释</b><code>综合 = K × 版本因子 × 成本因子</code><p>⑧成本按轻影响折扣；⑨⑩是产出表现，不进入⑪重复加权。</p></div>
           </div>
           <div class="route-weights">
             <div class="w10"><b>10%</b><span>轻影响：效率 / 体验</span></div>
