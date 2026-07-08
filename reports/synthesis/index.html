@@ -1403,7 +1403,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .issue-map{flex:0 0 auto;margin-bottom:1vh;display:flex;align-items:center;gap:.72vw;border-radius:10px;padding:.82vh 1vw;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(245,248,255,.62));border:1px solid rgba(47,111,237,.18);box-shadow:0 10px 24px -22px rgba(47,111,237,.35),inset 0 1px 0 rgba(255,255,255,.88);font-size:var(--fs-body);line-height:1.42;color:#334155}
     .issue-map .im-tag{flex:none;font-size:var(--fs-xs);font-weight:900;letter-spacing:.06em;color:#1D4ED8;background:rgba(47,111,237,.1);border:1px solid rgba(47,111,237,.16);border-radius:7px;padding:.28vh .55vw}
     .issue-map b{color:#172554;font-weight:900;background:linear-gradient(transparent 60%,rgba(47,111,237,.18) 0)}
-    .derive{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.08fr;gap:1.25vw;flex:1;min-height:0;position:relative}
+    .derive{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25vw;flex:1;min-height:0;position:relative}
     .derive-slide .brand .ttl{font-size:var(--fs-h2);letter-spacing:0}
     .dgroup{--dc:#5B5BD6;--link:rgba(91,91,214,.48);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.72vh;position:relative}
     .dgroup.cause-g{--dc:#fff;--link:rgba(255,255,255,.62)}
@@ -2716,10 +2716,26 @@ function renderDeriveRelations(){
   ];
   svg.style.display='block';
   const br=box.getBoundingClientRect();
-  const signalCol=box.querySelector('.signal-g .dcol')?.getBoundingClientRect();
-  const signalAnchorX=signalCol ? signalCol.right-br.left-18 : null;
   svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
   svg.innerHTML='';
+  function textRight(el){
+    const bits=[];
+    (function collect(node){
+      node.childNodes.forEach(child=>{
+        if(child.nodeType===3 && child.nodeValue.trim())bits.push(child);
+        else if(child.nodeType===1 && !child.matches('svg,i'))collect(child);
+      });
+    })(el);
+    return bits.reduce((m,node)=>{
+      const range=document.createRange();
+      range.selectNodeContents(node);
+      const rects=[...range.getClientRects()];
+      range.detach();
+      return rects.reduce((rm,rr)=>Math.max(rm,rr.right),m);
+    },el.getBoundingClientRect().left);
+  }
+  const signalItems=[...box.querySelectorAll('.signal-g [data-rel$="-signal"]')];
+  const signalAnchorX=signalItems.length ? Math.max(...signalItems.map(el=>textRight(el)))-br.left+6 : null;
   function point(key,side){
     const el=box.querySelector(`[data-rel="${key}"]`);
     if(!el)return null;
@@ -2728,21 +2744,7 @@ function renderDeriveRelations(){
       if(key.endsWith('-signal') && signalAnchorX!=null){
         return {x:signalAnchorX,y:r.top+r.height*.5-br.top};
       }
-      const bits=[];
-      (function collect(node){
-        node.childNodes.forEach(child=>{
-          if(child.nodeType===3 && child.nodeValue.trim())bits.push(child);
-          else if(child.nodeType===1 && !child.matches('svg,i'))collect(child);
-        });
-      })(el);
-      const maxRight=bits.reduce((m,node)=>{
-        const range=document.createRange();
-        range.selectNodeContents(node);
-        const rects=[...range.getClientRects()];
-        range.detach();
-        return rects.reduce((rm,rr)=>Math.max(rm,rr.right),m);
-      },r.left);
-      return {x:maxRight-br.left+6,y:r.top+r.height*.5-br.top};
+      return {x:textRight(el)-br.left+6,y:r.top+r.height*.5-br.top};
     }
     const icon=el.querySelector('svg.lucide,i[data-lucide],.no');
     const anchor=icon?icon.getBoundingClientRect():r;
