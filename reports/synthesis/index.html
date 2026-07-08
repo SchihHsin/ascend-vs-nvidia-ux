@@ -1381,6 +1381,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .tpstep b{font-size:var(--fs-body);line-height:1.25;color:var(--ink);font-weight:900}
     .tpstep span{font-size:var(--fs-xs);line-height:1.35;color:var(--ink-3)}
     .devhm th{font-size:var(--fs-sm);line-height:1.15;padding:.72vh .55vw;text-align:center}
+    .devhm th .jstage{display:block;margin-bottom:.22vh;font-size:10px;line-height:1;font-weight:900;color:#2F3D63;white-space:nowrap}
+    .devhm th .jname{display:block;font-size:var(--fs-sm);line-height:1.12;font-weight:900;color:#1B2432}
     .devhm td{font-size:var(--fs-body);line-height:1.28;padding:.62vh .5vw;text-align:center;border-bottom:1px solid rgba(47,61,99,.075)}
     .devhm .metric-head{width:8.4%;text-align:left;color:#465063;background:rgba(47,61,99,.055);font-weight:900}
     .devhm th small{display:block;margin-top:.18vh;font-size:10px;font-weight:800;color:#8E96A3;white-space:nowrap}
@@ -1391,21 +1393,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .devhm .gap.dn{background:rgba(199,0,11,.1);color:#C7000B}
     .devhm .gap.up{background:rgba(35,160,106,.14);color:#1F7A4D}
     .devhm .tp-note{color:var(--ink-2);font-size:var(--fs-sm);line-height:1.42}
-    .devhm-card{display:flex;flex-direction:column;gap:.5vh}
-    .devhm-card .devhm{flex:0 0 49%;height:49%!important;min-height:0}
+    .devhm-card{display:block}
+    .devhm-card .devhm{height:100%!important;min-height:0}
     .devhm-card .devhm th{padding:.72vh .45vw}
     .devhm-card .devhm td{padding:.72vh .45vw}
     .devhm-card .devhm .note-row td{font-size:12px;line-height:1.25;color:var(--ink-2);vertical-align:top;text-align:left}
-    .devhm-evidence{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72vw;transition:opacity .22s ease,transform .22s ease}
-    .devhm-evidence.off{display:none;opacity:0;transform:translateY(6px);pointer-events:none}
-    .devhm-shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:.78vh}
-    .devhm-shot{min-width:0;border:1px solid rgba(212,216,223,.82);border-radius:8px;background:#fff;overflow:hidden}
-    .devhm-shot img{display:block;width:100%;height:46px;object-fit:cover;object-position:top}
-    .devhm-shot span{display:block;padding:3px 6px;font-size:9.5px;line-height:1.15;font-weight:850;color:#596273;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .devhm-evidence .devhm-shot{background:rgba(255,255,255,.92);box-shadow:0 14px 32px -24px rgba(30,40,70,.45)}
-    .devhm-evidence .devhm-shot{display:flex;flex-direction:column;min-height:0}
-    .devhm-evidence .devhm-shot img{height:auto;flex:1;min-height:0}
-    .devhm-evidence .devhm-shot span{font-size:10.5px;padding:4px 7px}
+    .devhm-card .devhm tr:nth-child(1) td,.devhm-card .devhm tr:nth-child(2) td{padding:.48vh .34vw .54vh;vertical-align:top}
+    .devhm-card .devhm tr:nth-child(1) .score,.devhm-card .devhm tr:nth-child(2) .score{margin-bottom:.4vh}
+    .devhm-proof{min-height:0;border:1px solid rgba(199,0,11,.18);border-radius:8px;background:rgba(255,255,255,.86);box-shadow:0 10px 24px -22px rgba(30,40,70,.42);overflow:hidden;display:flex;flex-direction:column}
+    .devhm-proof.nv{border-color:rgba(118,185,0,.25)}
+    .devhm-proof img{display:block;width:100%;height:clamp(38px,6.1vh,66px);object-fit:cover;object-position:top;flex:0 0 auto}
+    .devhm-proof span{display:block;padding:3px 5px 4px;font-size:9.5px;line-height:1.12;font-weight:850;color:#596273;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.94)}
     .devhm-demo{padding:7px 9px}.devhm-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center}.devhm-flow .node{border:1px solid rgba(212,216,223,.9);border-radius:8px;background:#fff;padding:5px 6px;font-size:10.5px;font-weight:850;color:#465063;text-align:center}.devhm-flow .node.bad{border-color:#f0c0c2;background:#FDECEC;color:#C7000B}.devhm-flow .node.good{border-color:#bae5cd;background:#ECF8F1;color:#1F7A4D}.devhm-flow .arr{font-family:'JetBrains Mono';color:#8E96A3;font-weight:900}.devhm-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;align-items:end;height:54px;padding:4px 2px 0}.devhm-bars .bar{border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#C7000B,#F2B4B8);min-height:10px;position:relative}.devhm-bars .bar.good{background:linear-gradient(180deg,#1F9E68,#BDEAD1)}.devhm-bars .bar span{position:absolute;left:50%;top:-14px;transform:translateX(-50%);font-size:9.5px;font-family:'JetBrains Mono';font-weight:900;color:#465063;white-space:nowrap}.devhm-mini{display:grid;grid-template-columns:1fr 1fr;gap:7px}.devhm-mini .pane{border:1px solid rgba(212,216,223,.9);border-radius:8px;background:#fff;padding:5px 6px}.devhm-mini b{display:block;font-size:10px;color:#465063;margin-bottom:4px}.devhm-mini p{margin:0;font-size:10px;color:#8E96A3;line-height:1.35}.devhm-path{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.devhm-path span{border:1px solid rgba(212,216,223,.9);border-radius:999px;background:#fff;padding:2px 8px;font-size:10px;font-weight:800;color:#465063}.devhm-path span.hot{background:#FDECEC;border-color:#f0c0c2;color:#C7000B}.devhm-path i{font-style:normal;color:#A1A4AA;font-family:'JetBrains Mono'}
   </style>
 
@@ -2123,25 +2121,46 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <table class="hmfull devhm devhm-wide" id="devHmFull" aria-label="基础体验触点评分摘要">
             <thead><tr>
               <th class="metric-head">指标</th>
-              <th data-issue="0">Toolkit 下载<small>4.3</small></th>
-              <th data-issue="0">账号登录<small>4.2</small></th>
-              <th data-issue="1">博客 / 案例<small>6.4</small></th>
-              <th data-issue="1">门户 / 导航<small>1.1b / 1.2</small></th>
-              <th data-issue="2">学习路径 / HiDevLab<small>3.2</small></th>
-              <th data-issue="2">ModelZoo 引导<small>5.2</small></th>
-              <th data-issue="3">英文访问<small>1.4</small></th>
-              <th data-issue="3">社区 / 论坛<small>6.1</small></th>
-              <th data-issue="4">FAQ 自助<small>6.3</small></th>
-              <th data-issue="4">技术支持<small>6.2</small></th>
+              <th data-issue="0"><span class="jstage">L3 配环境</span><span class="jname">Toolkit 下载</span><small>触点 4.3</small></th>
+              <th data-issue="0"><span class="jstage">L3 配环境</span><span class="jname">账号登录</span><small>触点 4.2</small></th>
+              <th data-issue="1"><span class="jstage">L7 进阶生态</span><span class="jname">博客 / 案例</span><small>触点 6.4</small></th>
+              <th data-issue="1"><span class="jstage">L1 找入口</span><span class="jname">门户 / 导航</span><small>触点 1.1b / 1.2</small></th>
+              <th data-issue="2"><span class="jstage">L2 上手引导</span><span class="jname">学习路径 / HiDevLab</span><small>触点 3.2</small></th>
+              <th data-issue="2"><span class="jstage">L7 进阶生态</span><span class="jname">ModelZoo 引导</span><small>触点 5.2</small></th>
+              <th data-issue="3"><span class="jstage">贯穿能力</span><span class="jname">英文访问</span><small>触点 1.4</small></th>
+              <th data-issue="3"><span class="jstage">L6 调试求助</span><span class="jname">社区 / 论坛</span><small>触点 6.1</small></th>
+              <th data-issue="4"><span class="jstage">L6 调试求助</span><span class="jname">FAQ 自助</span><small>触点 6.3</small></th>
+              <th data-issue="4"><span class="jstage">L6 调试求助</span><span class="jname">技术支持</span><small>触点 6.2</small></th>
             </tr></thead>
             <tbody>
-              <tr><th class="metric-head">昇腾</th><td data-issue="0"><span class="score bad">21</span></td><td data-issue="0"><span class="score mid">64</span></td><td data-issue="1"><span class="score good">75</span></td><td data-issue="1"><span class="score good">78</span></td><td data-issue="2"><span class="score good">82</span></td><td data-issue="2"><span class="score good">81</span></td><td data-issue="3"><span class="score good">75</span></td><td data-issue="3"><span class="score good">73</span></td><td data-issue="4"><span class="score good">85</span></td><td data-issue="4"><span class="score good">75</span></td></tr>
-              <tr><th class="metric-head">NVIDIA</th><td data-issue="0"><span class="score good">87</span></td><td data-issue="0"><span class="score good">80</span></td><td data-issue="1"><span class="score good">92</span></td><td data-issue="1"><span class="score good">77</span></td><td data-issue="2"><span class="score mid">72</span></td><td data-issue="2"><span class="score good">79</span></td><td data-issue="3"><span class="score good">75</span></td><td data-issue="3"><span class="score good">88</span></td><td data-issue="4"><span class="score mid">63</span></td><td data-issue="4"><span class="score good">76</span></td></tr>
+              <tr><th class="metric-head">昇腾</th>
+                <td data-issue="0"><span class="score bad">21</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/02-ascend-download-4.3.png" alt="昇腾 Toolkit 下载截图"><span>Toolkit 下载页</span></div></td>
+                <td data-issue="0"><span class="score mid">64</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/05-ascend-login-4.2.png" alt="昇腾账号登录截图"><span>账号登录流程</span></div></td>
+                <td data-issue="1"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-blog-6.4.png" alt="昇腾博客和案例截图"><span>博客 / 案例页</span></div></td>
+                <td data-issue="1"><span class="score good">78</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-dev-nav.png" alt="昇腾门户导航截图"><span>门户导航入口</span></div></td>
+                <td data-issue="2"><span class="score good">82</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/07-ascend-learn-path-op.png" alt="昇腾学习路径截图"><span>学习路径</span></div></td>
+                <td data-issue="2"><span class="score good">81</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/03-ascend-modelzoo-op.png" alt="昇腾 ModelZoo 引导截图"><span>ModelZoo 引导</span></div></td>
+                <td data-issue="3"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-developer-1.4.png" alt="昇腾英文访问截图"><span>英文入口</span></div></td>
+                <td data-issue="3"><span class="score good">73</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/04-ascend-forum.png" alt="昇腾社区论坛截图"><span>社区 / 论坛</span></div></td>
+                <td data-issue="4"><span class="score good">85</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/07-ascend-document-6.3.png" alt="昇腾 FAQ 文档截图"><span>FAQ 自助</span></div></td>
+                <td data-issue="4"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-developer-6.2.png" alt="昇腾技术支持截图"><span>技术支持入口</span></div></td>
+              </tr>
+              <tr><th class="metric-head">NVIDIA</th>
+                <td data-issue="0"><span class="score good">87</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/02-nvidia-cuda-download-4.3.png" alt="NVIDIA CUDA 下载截图"><span>CUDA 下载页</span></div></td>
+                <td data-issue="0"><span class="score good">80</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/05-nvidia-program-4.2.png" alt="NVIDIA 开发者计划截图"><span>账号 / 开发者计划</span></div></td>
+                <td data-issue="1"><span class="score good">92</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-blog-6.4.png" alt="NVIDIA 博客截图"><span>NVIDIA 博客</span></div></td>
+                <td data-issue="1"><span class="score good">77</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/01-nvidia-nav.png" alt="NVIDIA 导航截图"><span>开发者导航</span></div></td>
+                <td data-issue="2"><span class="score mid">72</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/07-nvidia-quickstart-3.2-op.png" alt="NVIDIA 快速入门截图"><span>Quick Start</span></div></td>
+                <td data-issue="2"><span class="score good">79</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/03-nvidia-ngc-op.png" alt="NVIDIA NGC 截图"><span>NGC 资源</span></div></td>
+                <td data-issue="3"><span class="score good">75</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/01-nvidia-home-1.4.png" alt="NVIDIA 英文访问截图"><span>英文站点</span></div></td>
+                <td data-issue="3"><span class="score good">88</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-forum.png" alt="NVIDIA 论坛截图"><span>开发者论坛</span></div></td>
+                <td data-issue="4"><span class="score mid">63</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-forum-6.3.png" alt="NVIDIA FAQ 或论坛截图"><span>论坛问答</span></div></td>
+                <td data-issue="4"><span class="score good">76</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-support-6.2.png" alt="NVIDIA 技术支持截图"><span>技术支持入口</span></div></td>
+              </tr>
               <tr><th class="metric-head">差值</th><td data-issue="0"><span class="gap dn">−66</span></td><td data-issue="0"><span class="gap dn">−16</span></td><td data-issue="1"><span class="gap dn">−17</span></td><td data-issue="1"><span class="gap up">+1</span></td><td data-issue="2"><span class="gap up">+10</span></td><td data-issue="2"><span class="gap up">+2</span></td><td data-issue="3"><span class="gap">0</span></td><td data-issue="3"><span class="gap dn">−15</span></td><td data-issue="4"><span class="gap up">+22</span></td><td data-issue="4"><span class="gap dn">−1</span></td></tr>
               <tr class="note-row"><th class="metric-head">摩擦来源</th><td data-issue="0">登录、协议、包选择叠加。</td><td data-issue="0">下载前先进入账号流程。</td><td data-issue="1">外部搜索第一屏命中不稳。</td><td data-issue="1">任务入口需更直接。</td><td data-issue="2">长板未成为默认路径。</td><td data-issue="2">三步引导可继续复用。</td><td data-issue="3">语言不是唯一门槛。</td><td data-issue="3">游客可读与索引不足。</td><td data-issue="4">FAQ 是明确亮点。</td><td data-issue="4">支持链路需互相导流。</td></tr>
             </tbody>
           </table>
-          <div class="devhm-evidence off" id="devHmEvidence" aria-label="当前聚焦触点截图证据"></div>
           <div class="hm-callout" id="devHmCallout" aria-live="polite"></div>
         </div>
         <div class="hm-rings off" id="devHmRings" aria-hidden="true"></div>
@@ -2965,19 +2984,13 @@ function installDevHmFocus(){
   const wrap=table.closest('.hmfull-wrap');
   const rings=document.getElementById('devHmRings');
   const callout=document.getElementById('devHmCallout');
-  const evidence=document.getElementById('devHmEvidence');
   const stepBox=document.getElementById('devHmSteps');
-  const shotBase='../../materials/ascend-vs-nvidia/screenshots/';
-  function shotsHtml(items){
-    if(!items||!items.length)return '';
-    return '<div class="devhm-shots">'+items.map(s=>'<div class="devhm-shot"><img src="'+shotBase+s.src+'" alt="'+s.label+'"><span>'+s.label+'</span></div>').join('')+'</div>';
-  }
   const focus=[
-    {title:'问题 1 · 登录与下载是最大断点',val:'4.3：21 / 87',desc:'下载相关触点不是小幅落后，而是极端断点。开发者还没开始验证能力，就已经被账号、协议和包选择消耗掉耐心。',icon:'download',shots:[{src:'02-ascend-download-4.3.png',label:'昇腾 Toolkit 下载'},{src:'05-ascend-login-4.2.png',label:'昇腾账号登录'},{src:'02-nvidia-cuda-download-4.3.png',label:'NVIDIA 下载'}],demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node">想试用</div><div class="arr">→</div><div class="node bad">登录 / 协议</div><div class="arr">→</div><div class="node bad">选包判断</div></div><div class="devhm-bars"><div class="bar" style="height:18px"><span>21</span></div><div class="bar good" style="height:48px"><span>87</span></div><div class="bar" style="height:40px"><span>−66</span></div></div></div>`},
-    {title:'问题 2 · 正确起点与搜索命中不稳定',val:'6.4：−17',desc:'门户和内容并不弱，但开发者常从任务出发，而不是从产品名出发。外部搜索和站内入口需要更稳定地把人带回官方当前答案。',icon:'search',shots:[{src:'08-ascend-blog-6.4.png',label:'昇腾博客 / 案例'},{src:'08-ascend-dev-nav.png',label:'昇腾导航入口'},{src:'08-nvidia-blog-6.4.png',label:'NVIDIA 博客'}],demo:`<div class="devhm-demo"><div class="devhm-path"><span>任务词</span><i>→</i><span class="hot">搜索结果</span><i>→</i><span>官方当前答案</span></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>现状</b><p>案例内容存在，但第一屏命中不稳定。</p></div><div class="pane"><b>目标</b><p>按场景入口和搜索摘要导回官方答案。</p></div></div></div>`},
-    {title:'问题 3 · 上手长板没有成为默认路径',val:'3.2：+10',desc:'学习路径、HiDevLab 和 ModelZoo 是反超点。问题不是没有能力，而是这些能力还没有被前置为新手默认会走的起步路径。',icon:'play',shots:[{src:'07-ascend-learn-path-op.png',label:'学习路径'},{src:'08-ascend-onlinedev.png',label:'HiDevLab 在线实验'},{src:'03-ascend-modelzoo-op.png',label:'ModelZoo 引导'}],demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node good">学习路径</div><div class="arr">+</div><div class="node good">HiDevLab</div><div class="arr">+</div><div class="node good">ModelZoo</div></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>已有长板</b><p>快速上手 +10，示例模型 +2。</p></div><div class="pane"><b>改造方向</b><p>把它们前置为默认起步路径。</p></div></div></div>`},
-    {title:'问题 4 · 海外体验受多重门槛影响',val:'6.1：−15',desc:'语言触点本身不是唯一问题，账号登录、论坛游客可读、博客索引和英文内容同步会一起决定海外开发者能不能顺畅完成任务。',icon:'globe',shots:[{src:'08-ascend-developer-1.4.png',label:'英文入口'},{src:'04-ascend-forum.png',label:'昇腾论坛'},{src:'08-nvidia-forum-6.3.png',label:'NVIDIA 论坛'}],demo:`<div class="devhm-demo"><div class="devhm-path"><span>英文入口</span><i>+</i><span class="hot">账号注册</span><i>+</i><span class="hot">论坛可读</span><i>+</i><span>案例索引</span></div><div class="devhm-bars"><div class="bar good" style="height:34px"><span>语言 0</span></div><div class="bar" style="height:45px"><span>论坛 −15</span></div><div class="bar" style="height:30px"><span>案例 −17</span></div></div></div>`},
-    {title:'问题 5 · 支持内容没有稳定闭环',val:'6.3：+22',desc:'FAQ 自助是明确反超点，但开发者真正卡住时，还需要文档页、报错页、论坛和工单互相导流，并把高频问题沉淀回官方内容。',icon:'message',shots:[{src:'07-ascend-document-6.3.png',label:'昇腾 FAQ'},{src:'08-ascend-developer-6.2.png',label:'昇腾支持入口'},{src:'08-nvidia-support-6.2.png',label:'NVIDIA 支持'}],demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node good">FAQ</div><div class="arr">→</div><div class="node">论坛 / 工单</div><div class="arr">→</div><div class="node good">案例回流</div></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>亮点</b><p>FAQ 自助明显反超。</p></div><div class="pane"><b>缺口</b><p>支持链路还没有稳定沉淀。</p></div></div></div>`}
+    {title:'问题 1 · 登录与下载是最大断点',val:'4.3：21 / 87',desc:'下载相关触点不是小幅落后，而是极端断点。开发者还没开始验证能力，就已经被账号、协议和包选择消耗掉耐心。',icon:'download',demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node">想试用</div><div class="arr">→</div><div class="node bad">登录 / 协议</div><div class="arr">→</div><div class="node bad">选包判断</div></div><div class="devhm-bars"><div class="bar" style="height:18px"><span>21</span></div><div class="bar good" style="height:48px"><span>87</span></div><div class="bar" style="height:40px"><span>−66</span></div></div></div>`},
+    {title:'问题 2 · 正确起点与搜索命中不稳定',val:'6.4：−17',desc:'门户和内容并不弱，但开发者常从任务出发，而不是从产品名出发。外部搜索和站内入口需要更稳定地把人带回官方当前答案。',icon:'search',demo:`<div class="devhm-demo"><div class="devhm-path"><span>任务词</span><i>→</i><span class="hot">搜索结果</span><i>→</i><span>官方当前答案</span></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>现状</b><p>案例内容存在，但第一屏命中不稳定。</p></div><div class="pane"><b>目标</b><p>按场景入口和搜索摘要导回官方答案。</p></div></div></div>`},
+    {title:'问题 3 · 上手长板没有成为默认路径',val:'3.2：+10',desc:'学习路径、HiDevLab 和 ModelZoo 是反超点。问题不是没有能力，而是这些能力还没有被前置为新手默认会走的起步路径。',icon:'play',demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node good">学习路径</div><div class="arr">+</div><div class="node good">HiDevLab</div><div class="arr">+</div><div class="node good">ModelZoo</div></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>已有长板</b><p>快速上手 +10，示例模型 +2。</p></div><div class="pane"><b>改造方向</b><p>把它们前置为默认起步路径。</p></div></div></div>`},
+    {title:'问题 4 · 海外体验受多重门槛影响',val:'6.1：−15',desc:'语言触点本身不是唯一问题，账号登录、论坛游客可读、博客索引和英文内容同步会一起决定海外开发者能不能顺畅完成任务。',icon:'globe',demo:`<div class="devhm-demo"><div class="devhm-path"><span>英文入口</span><i>+</i><span class="hot">账号注册</span><i>+</i><span class="hot">论坛可读</span><i>+</i><span>案例索引</span></div><div class="devhm-bars"><div class="bar good" style="height:34px"><span>语言 0</span></div><div class="bar" style="height:45px"><span>论坛 −15</span></div><div class="bar" style="height:30px"><span>案例 −17</span></div></div></div>`},
+    {title:'问题 5 · 支持内容没有稳定闭环',val:'6.3：+22',desc:'FAQ 自助是明确反超点，但开发者真正卡住时，还需要文档页、报错页、论坛和工单互相导流，并把高频问题沉淀回官方内容。',icon:'message',demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node good">FAQ</div><div class="arr">→</div><div class="node">论坛 / 工单</div><div class="arr">→</div><div class="node good">案例回流</div></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>亮点</b><p>FAQ 自助明显反超。</p></div><div class="pane"><b>缺口</b><p>支持链路还没有稳定沉淀。</p></div></div></div>`}
   ];
   function iconSvg(type){
     const p={
@@ -3064,7 +3077,6 @@ function installDevHmFocus(){
       table.classList.remove('is-spot');
       if(rings){rings.classList.add('off');rings.innerHTML='';}
       if(callout)callout.classList.add('off');
-      if(evidence){evidence.classList.add('off');evidence.innerHTML='';}
       window.__devHmStep=-1;
       updatePager(-1);
       return;
@@ -3073,10 +3085,6 @@ function installDevHmFocus(){
     table.classList.add('is-spot');
     if(rings)rings.classList.remove('off');
     if(callout)callout.classList.remove('off');
-    if(evidence){
-      evidence.innerHTML=shotsHtml(focus[idx].shots).replace('<div class="devhm-shots">','').replace(/<\/div>$/,'');
-      evidence.classList.remove('off');
-    }
     const els=[...table.querySelectorAll('[data-issue="'+idx+'"]')];
     els.forEach(el=>el.classList.add('hm-on'));
     const box=groupBox(els);
