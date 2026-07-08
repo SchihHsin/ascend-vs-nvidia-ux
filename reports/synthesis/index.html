@@ -1439,8 +1439,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .drel path{fill:none;stroke:#B8BEC8;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
     .drel circle{fill:#B8BEC8;stroke:#B8BEC8;stroke-width:1.1}
     .drel circle.start{fill:transparent}
-    .drel path.mid{stroke:#fff}.drel circle.mid{fill:#fff;stroke:#fff}.drel circle.mid.start{fill:transparent}
-    .drel path.purple{stroke:#5F6673}.drel circle.purple{fill:#5F6673;stroke:#5F6673}.drel circle.purple.start{fill:transparent}
+    .drel path.mid{stroke:#B8BEC8}.drel circle.mid{fill:#B8BEC8;stroke:#B8BEC8}.drel circle.mid.start{fill:transparent}
+    .drel path.purple{stroke:#fff}.drel circle.purple{fill:#fff;stroke:#fff}.drel circle.purple.start{fill:transparent}
   </style>
   <section class="slide s-gray derive-slide">
     <div class="head">
@@ -2715,6 +2715,8 @@ function renderDeriveRelations(){
   ];
   svg.style.display='block';
   const br=box.getBoundingClientRect();
+  const signalCol=box.querySelector('.signal-g .dcol')?.getBoundingClientRect();
+  const signalAnchorX=signalCol ? signalCol.right-br.left-18 : null;
   svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
   svg.innerHTML='';
   function point(key,side){
@@ -2722,6 +2724,9 @@ function renderDeriveRelations(){
     if(!el)return null;
     const r=el.getBoundingClientRect();
     if(side==='right'){
+      if(key.endsWith('-signal') && signalAnchorX!=null){
+        return {x:signalAnchorX,y:r.top+r.height*.5-br.top};
+      }
       const bits=[];
       (function collect(node){
         node.childNodes.forEach(child=>{
