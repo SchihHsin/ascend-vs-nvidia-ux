@@ -1359,6 +1359,31 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .uxd .d{margin-top:.24vh;font-size:var(--fs-xs);line-height:1.38;color:var(--ink-2)}
     .uxscore .scard{background:rgba(255,255,255,.48);border:1px solid rgba(255,255,255,.7);border-radius:10px;padding:.85vh .9vw;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
     .uxscore .scard .sr{padding:.3vh 0}
+    .tpguide{display:grid;grid-template-columns:1.02fr 1.18fr;gap:1.4vw;flex:1;min-height:0;align-items:stretch}
+    .tpguide-l,.tpguide-r{min-width:0;display:flex;flex-direction:column;gap:1.1vh}
+    .tpguide-card{border-radius:12px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.72);box-shadow:0 14px 32px -24px rgba(30,40,70,.28),inset 0 1px 0 rgba(255,255,255,.86);padding:1.3vh 1.1vw}
+    .tpguide-card b{display:block;font-size:var(--fs-h3);line-height:1.28;color:var(--ink);font-weight:900}
+    .tpguide-card p{margin:.45vh 0 0;font-size:var(--fs-body);line-height:1.5;color:var(--ink-2)}
+    .tpsteps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.75vw;flex:1;min-height:0}
+    .tpstep{display:flex;flex-direction:column;justify-content:center;gap:.55vh;border-radius:12px;background:rgba(47,61,99,.055);border:1px solid rgba(47,61,99,.14);padding:1.2vh .85vw;min-width:0}
+    .tpstep .n{font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;color:#2f3d63}
+    .tpstep b{font-size:var(--fs-body);line-height:1.25;color:var(--ink);font-weight:900}
+    .tpstep span{font-size:var(--fs-xs);line-height:1.35;color:var(--ink-3)}
+    .devhm col.name-col{width:22%}
+    .devhm col.score-col{width:10%}
+    .devhm col.gap-col{width:10%}
+    .devhm col.note-col{width:38%}
+    .devhm th{font-size:var(--fs-sm);line-height:1.15;padding:.72vh .72vw;text-align:left}
+    .devhm td{font-size:var(--fs-body);line-height:1.28;padding:.68vh .72vw;text-align:left;border-bottom:1px solid rgba(47,61,99,.075)}
+    .devhm .tp-name{font-weight:900;color:var(--ink)}
+    .devhm .tp-name small{display:block;margin-top:.12vh;font-size:var(--fs-xs);font-weight:750;color:#8E96A3}
+    .devhm .score,.devhm .gap{font-family:'JetBrains Mono';font-weight:950;text-align:center;border-radius:8px;padding:.35vh .35vw;display:block}
+    .devhm .score.good{background:rgba(35,160,106,.14);color:#1F7A4D}
+    .devhm .score.mid{background:rgba(232,163,23,.16);color:#A15C00}
+    .devhm .score.bad{background:rgba(199,0,11,.1);color:#C7000B}
+    .devhm .gap.dn{background:rgba(199,0,11,.1);color:#C7000B}
+    .devhm .gap.up{background:rgba(35,160,106,.14);color:#1F7A4D}
+    .devhm .tp-note{color:var(--ink-2);font-size:var(--fs-sm);line-height:1.42}
   </style>
 
   <!-- 灰底：AI 侧 · 七个问题（opknow 19 §1，重排） -->
@@ -1685,46 +1710,41 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div style="flex:1;min-width:0;height:100%;display:flex"><iframe data-src="ar-embed.html?sec=journey" title="journey" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
     </div>
   </section>
-  <!-- 8 灰底：触点评分（人↔昇腾，hi=2） -->
+  <!-- 8 灰底：触点证据阅读方式 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">触点评分：平均 73.6 分——Toolkit 下载和工具链差距最大，FAQ 自助反超 NVIDIA</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「触点评分」</div>
+        <div class="brand"><span class="ttl">接下来逐触点看证据：先看真实页面，再看分数差异如何形成</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「触点分析阅读方式」</div>
       </div>
-      <div class="head-r">31/ 基础体验 · 评分</div>
+      <div class="head-r">31/ 基础体验 · 触点证据</div>
     </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe data-src="seq-d3.html?hi=2" title="时序图 · 人↔昇腾社区 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.3vh">
-        <div class="cmp-h"><span class="hk">Scores</span>差距集中在<b>下载与工具链</b>，FAQ / 规格存在反超点</div>
-        <div class="uxscore card" aria-label="基础体验专题诊断与代表触点证据">
-          <div class="uxscore-l">
-            <div class="uxsec">专题诊断</div>
-            <div class="uxdiag">
-              <div class="uxd main dn"><div class="k">最大体验断点 · 登录与下载</div><div class="v">−27.5</div><div class="d">昇腾 57.8 / NVIDIA 85.3；下载前置登录、协议、版本包选择叠加，是人类开发者最容易流失的位置。</div></div>
-              <div class="uxd up"><div class="k">学习与文档</div><div class="v">+1.5</div><div class="d">快速入门、学习路径、HiDevLab 在线实验形成反超。</div></div>
-              <div class="uxd dn"><div class="k">入口与搜索</div><div class="v">−3.8</div><div class="d">入口内容不弱，但门户埋深、英文与全球搜索可发现性仍拖后腿。</div></div>
-              <div class="uxd dn"><div class="k">问题支持与生态</div><div class="v">−2.8</div><div class="d">FAQ 集中是亮点；论坛、博客的全球索引与英文长尾仍需补。</div></div>
-              <div class="uxd dn"><div class="k">开发与运行</div><div class="v">−3.0</div><div class="d">ModelZoo 与站内代码可用，但工具链心智、轻量试用仍弱于 NVIDIA。</div></div>
-            </div>
+    <div class="body-area">
+      <div class="tpguide">
+        <div class="tpguide-l">
+          <div class="cmp-h"><span class="hk">Evidence</span>每个触点都看同一件事：开发者能不能顺着页面完成下一步</div>
+          <div class="tpguide-card"><b>不是只比较页面好不好看</b><p>逐触点分析会同时看真实截图、用户此刻的任务、昇腾与 NVIDIA 的同位路径，以及分差背后的摩擦来源。</p></div>
+          <div class="tpguide-card"><b>先读证据，再收束为问题</b><p>后面 25 页是证据层；看完后再汇总成登录下载、搜索入口、上手运行、海外体验、问题闭环五类基础体验问题。</p></div>
+          <div class="bridge" style="margin-top:auto">阅读顺序：<b>页面证据</b> → <b>同位对比</b> → <b>分差解释</b> → <b>综合诊断</b>。</div>
+        </div>
+        <div class="tpguide-r">
+          <div class="tpsteps">
+            <div class="tpstep"><div class="n">01</div><b>入口与选型</b><span>官网首页、开发者门户、导航、产品矩阵、规格、方案入口。</span></div>
+            <div class="tpstep"><div class="n">02</div><b>学习与试用</b><span>CANN、学习路径、HiDevLab、教程和轻量体验。</span></div>
+            <div class="tpstep"><div class="n">03</div><b>下载与环境</b><span>下载入口、登录、Toolkit、版本配套和环境选择。</span></div>
+            <div class="tpstep"><div class="n">04</div><b>开发与运行</b><span>文档、API、代码示例、ModelZoo、工具链。</span></div>
+            <div class="tpstep"><div class="n">05</div><b>支持与外部可达</b><span>论坛、支持、FAQ、博客、搜索、语言。</span></div>
           </div>
-          <div class="uxscore-r">
-            <div class="uxsec">代表触点证据</div>
+          <div class="uxscore card" aria-label="触点分析读取提示" style="grid-template-columns:1fr;padding:1.25vh 1.1vw!important">
             <div class="scard">
-              <div class="sr"><span class="sh">节选 6 / 24</span><span class="sh" style="text-align:center">昇腾</span><span class="sh" style="text-align:center">NVIDIA</span><span class="sh" style="text-align:center">差值</span></div>
-              <div class="sr"><span class="nm">Toolkit 下载流程</span><span class="pill" style="background:#E60012">21</span><span class="pill" style="background:#23A06A">87</span><span class="dlt dn">−66</span></div>
-              <div class="sr"><span class="nm">博客 / 案例</span><span class="pill" style="background:#23A06A">75</span><span class="pill" style="background:#23A06A">92</span><span class="dlt dn">−17</span></div>
-              <div class="sr"><span class="nm">开发者社区 / 论坛</span><span class="pill" style="background:#23A06A">73</span><span class="pill" style="background:#23A06A">88</span><span class="dlt dn">−15</span></div>
-              <div class="sr"><span class="nm">教程 / Tutorial</span><span class="pill" style="background:#23A06A">87</span><span class="pill" style="background:#23A06A">93</span><span class="dlt dn">−6</span></div>
-              <div class="sr"><span class="nm">官网首页</span><span class="pill" style="background:#23A06A">82</span><span class="pill" style="background:#23A06A">74</span><span class="dlt up">+8</span></div>
-              <div class="sr"><span class="nm">FAQ 自助</span><span class="pill" style="background:#23A06A">85</span><span class="pill" style="background:#E8A317">63</span><span class="dlt up">+22</span></div>
+              <div class="sr"><span class="sh">观察项</span><span class="sh" style="text-align:center">看什么</span><span class="sh" style="text-align:center">产出</span><span class="sh" style="text-align:center">用途</span></div>
+              <div class="sr"><span class="nm">真实截图</span><span class="pill" style="background:#2F3D63">页面</span><span class="pill" style="background:#5B5BD6">证据</span><span class="dlt">定位</span></div>
+              <div class="sr"><span class="nm">同位路径</span><span class="pill" style="background:#2F3D63">动作</span><span class="pill" style="background:#5B5BD6">差异</span><span class="dlt">解释</span></div>
+              <div class="sr"><span class="nm">DJFI 分数</span><span class="pill" style="background:#2F3D63">摩擦</span><span class="pill" style="background:#5B5BD6">分差</span><span class="dlt">归因</span></div>
+              <div class="sr"><span class="nm">改进建议</span><span class="pill" style="background:#2F3D63">做法</span><span class="pill" style="background:#5B5BD6">结论</span><span class="dlt">承接</span></div>
             </div>
           </div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">总均分 <b>73.6</b>；<b>Toolkit 下载（−66）、工具 / 可观测性</b>对 CUDA 差距最大；<b>FAQ 自助（+22）、规格参数</b>反超。最该补「<b>官方直链能被 AI / 人抓到</b>」。</div>
       </div>
     </div>
   </section>
@@ -2064,6 +2084,97 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.4" title="触点 1.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
 
+  <!-- 灰底：基础体验问题聚光灯 -->
+  <section class="slide s-gray hmfull-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">触点证据聚光灯：从评分表里定位五类基础体验问题</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「触点问题聚光灯」</div>
+      </div>
+      <div class="head-r">57/ 基础体验 · 问题聚光灯</div>
+    </div>
+    <div class="body-area">
+      <div class="hmfull-wrap">
+        <div class="hmfull-note"><div class="hm-score-legend"><span>低</span><span class="hm-grad"></span><span>高</span></div><span style="flex:1"></span><div class="hm-steps" id="devHmSteps" aria-label="基础体验聚焦讲解"></div></div>
+        <div class="card hmfull-card">
+          <table class="hmfull devhm" id="devHmFull" aria-label="基础体验触点评分摘要">
+            <colgroup><col class="name-col"><col class="score-col"><col class="score-col"><col class="gap-col"><col class="note-col"></colgroup>
+            <thead><tr><th>代表触点</th><th>昇腾</th><th>NVIDIA</th><th>差值</th><th>摩擦来源</th></tr></thead>
+            <tbody>
+              <tr data-issue="0"><td class="tp-name">Toolkit 下载流程<small>触点 4.3 · 获取 Toolkit</small></td><td><span class="score bad">21</span></td><td><span class="score good">87</span></td><td><span class="gap dn">−66</span></td><td class="tp-note">登录、协议、版本包选择叠加，是首次试用前的最大硬阻断。</td></tr>
+              <tr data-issue="0"><td class="tp-name">账号登录<small>触点 4.2 · 登录</small></td><td><span class="score mid">64</span></td><td><span class="score good">80</span></td><td><span class="gap dn">−16</span></td><td class="tp-note">下载前置登录，开发者还没验证能力就先进入账号流程。</td></tr>
+              <tr data-issue="1"><td class="tp-name">博客 / 案例<small>触点 6.4 · 案例沉淀</small></td><td><span class="score good">75</span></td><td><span class="score good">92</span></td><td><span class="gap dn">−17</span></td><td class="tp-note">内容不弱，但外部搜索可发现性和英文索引仍影响第一屏命中。</td></tr>
+              <tr data-issue="1"><td class="tp-name">开发者门户 / 导航<small>触点 1.1b / 1.2 · 起点与导航</small></td><td><span class="score good">78</span></td><td><span class="score good">77</span></td><td><span class="gap up">+1</span></td><td class="tp-note">入口能力不弱，下一步要按任务和角色更直接地指向正确起点。</td></tr>
+              <tr data-issue="2"><td class="tp-name">学习路径 / HiDevLab<small>触点 3.2 · 快速上手</small></td><td><span class="score good">82</span></td><td><span class="score mid">72</span></td><td><span class="gap up">+10</span></td><td class="tp-note">在线实验和学习路径已经形成长板，但还没有成为默认起步路径。</td></tr>
+              <tr data-issue="2"><td class="tp-name">ModelZoo 引导<small>触点 5.2 · 示例与模型</small></td><td><span class="score good">81</span></td><td><span class="score good">79</span></td><td><span class="gap up">+2</span></td><td class="tp-note">三步引导可复用到 CANN、算子和更多开发任务入口。</td></tr>
+              <tr data-issue="3"><td class="tp-name">英文与海外访问<small>触点 1.4 · 语言与国际化</small></td><td><span class="score good">75</span></td><td><span class="score good">75</span></td><td><span class="gap">0</span></td><td class="tp-note">语言本身不是唯一问题，账号、论坛可读和案例索引会共同影响海外任务完成。</td></tr>
+              <tr data-issue="3"><td class="tp-name">开发者社区 / 论坛<small>触点 6.1 · 社区求助</small></td><td><span class="score good">73</span></td><td><span class="score good">88</span></td><td><span class="gap dn">−15</span></td><td class="tp-note">游客可读、搜索索引和英文案例不足，会削弱长尾问题的可达性。</td></tr>
+              <tr data-issue="4"><td class="tp-name">FAQ 自助<small>触点 6.3 · FAQ</small></td><td><span class="score good">85</span></td><td><span class="score mid">63</span></td><td><span class="gap up">+22</span></td><td class="tp-note">集中 FAQ 是明确亮点，应继续下沉到报错、文档和论坛链路。</td></tr>
+              <tr data-issue="4"><td class="tp-name">技术支持 / 工单<small>触点 6.2 · 支持入口</small></td><td><span class="score good">75</span></td><td><span class="score good">76</span></td><td><span class="gap dn">−1</span></td><td class="tp-note">FAQ、论坛、工单和案例还需要互相导流，形成可复用知识闭环。</td></tr>
+            </tbody>
+          </table>
+          <div class="hm-callout" id="devHmCallout" aria-live="polite"></div>
+        </div>
+        <div class="hm-rings off" id="devHmRings" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 灰底：基础体验问题推导 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">五类触点问题推导出四条基础体验结论</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「问题 → 机制 → 做法 → 结论」</div>
+      </div>
+      <div class="head-r">58/ 基础体验 · 推导页</div>
+    </div>
+    <div class="body-area">
+      <div class="derive">
+        <div class="dgroup signal-g">
+          <div class="dh"><span>Step 01</span><b>触点信号</b></div>
+          <div class="dcol signal"><div class="dseq">
+            <div class="ditem hot"><i data-lucide="download"></i><strong>登录与 Toolkit 下载是最大断点</strong><p>下载前置登录、协议、版本包选择叠加。</p><div class="metric">4.3：21 / 87</div></div>
+            <div class="ditem"><i data-lucide="search"></i><strong>正确起点与搜索命中不稳定</strong><p>内容存在，但外部搜索和入口没有稳定导向官方答案。</p><div class="metric">6.4：−17</div></div>
+            <div class="ditem"><i data-lucide="flask-conical"></i><strong>上手长板没有成为默认路径</strong><p>HiDevLab、学习路径、ModelZoo 已有优势，但露出不够前置。</p><div class="metric">3.2：+10</div></div>
+            <div class="ditem"><i data-lucide="globe-2"></i><strong>海外体验受多重门槛影响</strong><p>账号、英文同步、论坛可读、博客索引会叠加影响。</p><div class="metric">6.1：−15</div></div>
+            <div class="ditem"><i data-lucide="messages-square"></i><strong>问题支持没有稳定闭环</strong><p>FAQ 是亮点，但论坛、工单、案例还未持续沉淀。</p><div class="metric">6.3：+22</div></div>
+          </div></div>
+        </div>
+        <div class="dgroup cause-g">
+          <div class="dh"><span>Step 02</span><b>机制归因</b></div>
+          <div class="dcol cause"><div class="dseq">
+            <div class="ditem"><i data-lucide="lock-keyhole"></i><strong>资源获取被准入条件截断</strong><p>登录、协议和版本判断被放在“拿到包”之前。</p></div>
+            <div class="ditem"><i data-lucide="route"></i><strong>路径导航依赖用户先懂产品名</strong><p>开发者知道任务，却不一定知道该点哪个产品和文档。</p></div>
+            <div class="ditem"><i data-lucide="panels-top-left"></i><strong>可运行能力分散在多个入口</strong><p>在线实验、样例、ModelZoo 各自可用，但没有合成默认起步路径。</p></div>
+            <div class="ditem"><i data-lucide="network"></i><strong>全球可达性缺少统一标准</strong><p>语言、账号、社区和内容索引需要按海外旅程一起看。</p></div>
+            <div class="ditem"><i data-lucide="refresh-cw"></i><strong>支持内容没有回流成知识资产</strong><p>一次性问答、论坛帖和工单没有稳定回到 FAQ、文档和搜索结果。</p></div>
+          </div></div>
+        </div>
+        <div class="dgroup move-g">
+          <div class="dh"><span>Step 03</span><b>改造机会</b></div>
+          <div class="dcol move"><div class="dseq">
+            <div class="ditem ok"><i data-lucide="package-check"></i><strong>先让开发者拿到能跑的包</strong><p>社区版下载准入后置，版本和架构给默认推荐。</p></div>
+            <div class="ditem ok"><i data-lucide="corner-down-right"></i><strong>让官方答案更早出现</strong><p>首屏入口、场景入口、搜索摘要、博客索引围绕高频任务词组织。</p></div>
+            <div class="ditem ok"><i data-lucide="play-circle"></i><strong>把在线实验变成默认起步</strong><p>HiDevLab、ModelZoo、GitCode 工程和示例代码连成跑通路径。</p></div>
+            <div class="ditem ok"><i data-lucide="languages"></i><strong>按海外开发者旅程补齐门槛</strong><p>英文同步、邮箱 / GitHub 登录、论坛游客可读、英文案例共同推进。</p></div>
+            <div class="ditem ok"><i data-lucide="list-checks"></i><strong>把支持链路沉淀为可复用知识</strong><p>FAQ、错误码、论坛、工单、案例要互相导流。</p></div>
+          </div></div>
+        </div>
+        <div class="dgroup result-g">
+          <div class="dh"><span>Step 04</span><b>后续结论</b></div>
+          <div class="dcol result"><div class="dlinks">
+            <div class="dlink"><span class="no">#1</span><div><b>登录前置是最高杠杆单点</b><span>对应下载与账号硬阻断。</span></div></div>
+            <div class="dlink"><span class="no">#4</span><div><b>内容不缺，短板在搜索命中与索引可达</b><span>对应正确起点和外部搜索命中。</span></div></div>
+            <div class="dlink"><span class="no">#3</span><div><b>算子上手长板应该前置放大</b><span>对应 HiDevLab、ModelZoo 和学习路径。</span></div></div>
+            <div class="dlink"><span class="no">#2</span><div><b>海外体验会同时卡在账号、语言和社区</b><span>对应海外可达性的组合门槛。</span></div></div>
+            <div class="dlink"><span class="no">专题 5</span><div><b>问题支持与生态闭环</b><span>对应 FAQ 亮点与论坛 / 工单沉淀不足。</span></div></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 14 灰底：iframe 引主报告 #j2 -->
   <section class="slide s-gray">
     <div class="head">
@@ -2071,7 +2182,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验结论 1：登录前置是最高杠杆单点，先让开发者拿到包</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论① 下载闸门」</div>
       </div>
-      <div class="head-r">58/ 基础体验结论 · 1</div>
+      <div class="head-r">59/ 基础体验结论 · 1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2082,7 +2193,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验结论 2：海外体验会同时卡在账号、语言和社区</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论② 门槛」</div>
       </div>
-      <div class="head-r">59/ 基础体验结论 · 2</div>
+      <div class="head-r">60/ 基础体验结论 · 2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j3" title="j3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2093,7 +2204,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验结论 3：算子上手是昇腾长板，应该前置放大</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论③ 上手长板」</div>
       </div>
-      <div class="head-r">60/ 基础体验结论 · 3</div>
+      <div class="head-r">61/ 基础体验结论 · 3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j4" title="j4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2104,7 +2215,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验结论 4：内容不缺，短板在搜索命中与索引可达</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「结论④ 搜索命中与索引」</div>
       </div>
-      <div class="head-r">61/ 基础体验结论 · 4</div>
+      <div class="head-r">62/ 基础体验结论 · 4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2115,7 +2226,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">结论行动：按专题补齐六块能力</span></div>
         <div class="subttl">结论 · 专题板块行动方案 · 「总览」</div>
       </div>
-      <div class="head-r">62/ 结论行动 · 专题总览</div>
+      <div class="head-r">63/ 结论行动 · 专题总览</div>
     </div>
     <div class="body-area" style="align-items:stretch">
       <div class="ccg topic-overview">
@@ -2791,6 +2902,110 @@ function renderDeriveRelations(){
   });
 }
 
+function installDevHmFocus(){
+  const table=document.getElementById('devHmFull');
+  if(!table)return;
+  const card=table.closest('.hmfull-card');
+  const wrap=table.closest('.hmfull-wrap');
+  const rings=document.getElementById('devHmRings');
+  const callout=document.getElementById('devHmCallout');
+  const stepBox=document.getElementById('devHmSteps');
+  const focus=[
+    {title:'问题 1 · 登录与下载是最大断点',val:'4.3：21 / 87',desc:'下载相关触点不是小幅落后，而是极端断点。开发者还没开始验证能力，就已经被账号、协议和包选择消耗掉耐心。',icon:'download',demo:'<div class="qd"><div class="chips"><span class="chip bad">Toolkit −66</span><span class="chip bad">登录 −16</span><span class="chip">结论 1</span></div></div>'},
+    {title:'问题 2 · 正确起点与搜索命中不稳定',val:'6.4：−17',desc:'门户和内容并不弱，但开发者常从任务出发，而不是从产品名出发。外部搜索和站内入口需要更稳定地把人带回官方当前答案。',icon:'search',demo:'<div class="qd"><div class="chips"><span class="chip bad">博客 / 案例 −17</span><span class="chip">入口 +1</span><span class="chip">结论 4</span></div></div>'},
+    {title:'问题 3 · 上手长板没有成为默认路径',val:'3.2：+10',desc:'学习路径、HiDevLab 和 ModelZoo 是反超点。问题不是没有能力，而是这些能力还没有被前置为新手默认会走的起步路径。',icon:'play',demo:'<div class="qd"><div class="chips"><span class="chip">HiDevLab +10</span><span class="chip">ModelZoo +2</span><span class="chip">结论 3</span></div></div>'},
+    {title:'问题 4 · 海外体验受多重门槛影响',val:'6.1：−15',desc:'语言触点本身不是唯一问题，账号登录、论坛游客可读、博客索引和英文内容同步会一起决定海外开发者能不能顺畅完成任务。',icon:'globe',demo:'<div class="qd"><div class="chips"><span class="chip">语言 0</span><span class="chip bad">论坛 −15</span><span class="chip">结论 2</span></div></div>'},
+    {title:'问题 5 · 支持内容没有稳定闭环',val:'6.3：+22',desc:'FAQ 自助是明确反超点，但开发者真正卡住时，还需要文档页、报错页、论坛和工单互相导流，并把高频问题沉淀回官方内容。',icon:'message',demo:'<div class="qd"><div class="chips"><span class="chip">FAQ +22</span><span class="chip bad">论坛 −15</span><span class="chip">专题 5</span></div></div>'}
+  ];
+  function iconSvg(type){
+    const p={
+      download:'<path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M5 17h14"/><path d="M7 21h10"/>',
+      search:'<circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/>',
+      play:'<circle cx="12" cy="12" r="8"/><path d="m10 8 6 4-6 4Z"/>',
+      globe:'<circle cx="12" cy="12" r="8"/><path d="M4 12h16"/><path d="M12 4a12 12 0 0 1 0 16"/><path d="M12 4a12 12 0 0 0 0 16"/>',
+      message:'<path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 9h8"/><path d="M8 13h5"/>'
+    };
+    return '<svg viewBox="0 0 24 24" aria-hidden="true">'+(p[type]||p.search)+'</svg>';
+  }
+  function calloutHtml(f,idx){
+    return '<div class="hm-top"><div class="hm-ico">'+iconSvg(f.icon)+'</div><div><div class="k">'+f.title+'</div><div class="v">'+f.val+'</div></div><div class="hm-no">/'+String(idx+1).padStart(2,'0')+'</div></div><div class="d">'+f.desc+'</div><div class="qdemo">'+f.demo+'</div>';
+  }
+  function groupBox(els){
+    return els.reduce((b,el)=>{
+      const r=el.getBoundingClientRect();
+      return {l:Math.min(b.l,r.left),t:Math.min(b.t,r.top),r:Math.max(b.r,r.right),b:Math.max(b.b,r.bottom)};
+    },{l:Infinity,t:Infinity,r:-Infinity,b:-Infinity});
+  }
+  function drawRing(box){
+    if(!rings||!card||!wrap)return;
+    rings.innerHTML='';
+    const wr=wrap.getBoundingClientRect();
+    const pad=8;
+    const el=document.createElement('div');
+    el.className='hm-ring';
+    el.style.left=(box.l-wr.left-pad)+'px';
+    el.style.top=(box.t-wr.top-pad)+'px';
+    el.style.width=(box.r-box.l+pad*2)+'px';
+    el.style.height=(box.b-box.t+pad*2)+'px';
+    rings.appendChild(el);
+  }
+  function placeCallout(box){
+    if(!callout||!card)return;
+    const cr=card.getBoundingClientRect();
+    const cw=callout.offsetWidth||360;
+    const ch=callout.offsetHeight||160;
+    const gap=14;
+    let x=box.r-cr.left+gap;
+    if(x+cw>cr.width-10)x=box.l-cr.left-cw-gap;
+    if(x<10)x=Math.max(10,Math.min(cr.width-cw-10,box.r-cr.left-cw));
+    let y=box.t-cr.top;
+    if(y+ch>cr.height-10)y=Math.max(10,cr.height-ch-10);
+    callout.style.left=x+'px';
+    callout.style.top=y+'px';
+  }
+  function updatePager(idx){
+    if(!stepBox)return;
+    stepBox.querySelectorAll('.hm-page').forEach((b,i)=>b.classList.toggle('on',i===idx+1));
+    const prev=stepBox.querySelector('[data-dir="-1"]');
+    const next=stepBox.querySelector('[data-dir="1"]');
+    if(prev)prev.disabled=idx<0;
+    if(next)next.disabled=idx>=focus.length-1;
+  }
+  function setStep(idx){
+    table.querySelectorAll('.hm-on,.hm-ref').forEach(el=>el.classList.remove('hm-on','hm-ref'));
+    if(idx<0){
+      table.classList.remove('is-spot');
+      if(rings){rings.classList.add('off');rings.innerHTML='';}
+      if(callout)callout.classList.add('off');
+      window.__devHmStep=-1;
+      updatePager(-1);
+      return;
+    }
+    idx=idx%focus.length;
+    table.classList.add('is-spot');
+    if(rings)rings.classList.remove('off');
+    if(callout)callout.classList.remove('off');
+    const rows=[...table.querySelectorAll('tbody tr[data-issue="'+idx+'"]')];
+    const els=rows.flatMap(row=>[...row.children]);
+    els.forEach(el=>el.classList.add('hm-on'));
+    const box=groupBox(els);
+    drawRing(box);
+    if(callout){
+      callout.innerHTML=calloutHtml(focus[idx],idx);
+      placeCallout(box);
+    }
+    window.__devHmStep=idx;
+    updatePager(idx);
+  }
+  if(stepBox){
+    stepBox.innerHTML='<button class="hm-step arrow" type="button" data-dir="-1" aria-label="上一页">‹</button><button class="hm-step hm-page overview" type="button" data-page="-1" aria-label="总览">总览</button>'+focus.map((_,i)=>'<button class="hm-step hm-page" type="button" data-page="'+i+'" aria-label="聚焦 '+(i+1)+'">'+(i+1)+'</button>').join('')+'<button class="hm-step arrow" type="button" data-dir="1" aria-label="下一页">›</button>';
+    stepBox.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>setStep(Number(b.getAttribute('data-page')))));
+    stepBox.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>setStep((typeof window.__devHmStep==='number'?window.__devHmStep:-1)+Number(b.getAttribute('data-dir')))));
+  }
+  setStep(-1);
+  addEventListener('resize',()=>setStep(typeof window.__devHmStep==='number'?window.__devHmStep:-1),{passive:true});
+}
+
 /* 总览 Overview：每页包进 .slide-inner 缩放成缩略图，排网格（按当前视窗比例）*/
 function applyOverviewScale(){if(!document.body.classList.contains('overview'))return;const cellW=slides[0].getBoundingClientRect().width,scale=cellW/window.innerWidth;slides.forEach(s=>{s.style.height=(window.innerHeight*scale)+'px';const inner=s.querySelector(':scope>.slide-inner');if(inner)inner.style.transform='scale('+scale+')';});}
 function enterOverview(){slides.forEach(s=>{if(!s.querySelector(':scope>.slide-inner')){const w=document.createElement('div');w.className='slide-inner';while(s.firstChild)w.appendChild(s.firstChild);s.appendChild(w);}});document.body.classList.add('overview');requestAnimationFrame(()=>{applyOverviewScale();requestAnimationFrame(focusOverviewCurrent);});}
@@ -2810,6 +3025,7 @@ slides.forEach(paintSlide);
 if(window.lucide)lucide.createIcons();
 installSeqZoomButtons();
 installBoardTabs();
+installDevHmFocus();
 setTimeout(renderDeriveRelations,80);
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
 (function(){const m=(location.hash||'').match(/(\d+)/);const start=m?Math.min(slides.length,Math.max(1,+m[1]))-1:0;
