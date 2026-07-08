@@ -1014,6 +1014,65 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .logic-row .copy b{display:block;font-size:var(--fs-body);line-height:1.22;color:var(--ink);font-weight:950}
     .logic-row .copy p{margin:.36vh 0 0;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
     .logic-row .copy code{color:#5B5BD6;font-weight:850}
+    .metric-def-layout{display:grid;grid-template-columns:1.34fr .82fr;gap:1.4vw;flex:1;min-height:0;align-items:stretch}
+    .metric-board{position:relative;border-radius:16px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88);padding:1.35vh 1.05vw;display:grid;grid-template-rows:auto 1fr;gap:1vh;min-height:0;overflow:hidden}
+    .metric-board:after{content:"";position:absolute;right:-1px;bottom:-1px;width:40%;height:28%;border-radius:0 0 16px 0;background:radial-gradient(120% 100% at 100% 100%,rgba(109,93,246,.08),rgba(109,93,246,.03) 54%,transparent 78%);pointer-events:none}
+    .metric-board-head{position:relative;z-index:1;display:flex;justify-content:space-between;gap:1vw;align-items:flex-end}
+    .metric-board-head b{display:block;font-size:var(--fs-h2);line-height:1.24;color:var(--ink);font-weight:950}
+    .metric-board-head span{font-size:var(--fs-sm);line-height:1.35;color:var(--ink-2)}
+    .metric-def-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(5,1fr);gap:.62vh .62vw;min-height:0}
+    .metric-def{--a:#6D5DF6;display:grid;grid-template-columns:42px 1fr;gap:.58vw;align-items:center;min-height:0;border-radius:12px;background:rgba(255,255,255,.68);border:1px solid color-mix(in srgb,var(--a) 16%,white);padding:.68vh .72vw;overflow:hidden}
+    .metric-def .num{width:36px;height:36px;border-radius:10px;background:color-mix(in srgb,var(--a) 92%,#fff);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:950;display:flex;align-items:center;justify-content:center}
+    .metric-def b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}
+    .metric-def p{margin:.25vh 0 0;font-size:var(--fs-sm);line-height:1.32;color:var(--ink-2)}
+    .metric-def small{display:block;margin-top:.2vh;font-size:var(--fs-xs);line-height:1.2;color:#7a8391}
+    .metric-def.third{--a:#6D5DF6}.metric-def.own{--a:#D9892B}.metric-def.cost{--a:#D9892B}.metric-def.out{--a:#209067}
+    .metric-synth{display:grid;grid-template-rows:auto 1fr auto;gap:1vh;min-height:0}
+    .synth-head{border-radius:15px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88);padding:1.18vh 1vw}
+    .synth-head b{display:block;font-size:var(--fs-h2);line-height:1.24;color:var(--ink);font-weight:950}
+    .synth-head p{margin:.42vh 0 0;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
+    .synth-flow{border-radius:15px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88);padding:1.05vh .92vw;display:grid;grid-template-rows:1fr 1fr 1fr;gap:.72vh;min-height:0}
+    .synth-node{border-radius:12px;background:rgba(245,247,250,.82);border:1px solid rgba(198,203,214,.72);padding:.85vh .78vw;min-height:0}
+    .synth-node b{display:block;font-size:var(--fs-body);line-height:1.22;color:var(--ink);font-weight:950}
+    .synth-node code{display:block;margin-top:.45vh;font-size:var(--fs-sm);line-height:1.38;color:#5B5BD6;font-weight:900}
+    .synth-node p{margin:.42vh 0 0;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
+    .synth-node.k{background:linear-gradient(140deg,rgba(246,244,255,.94),rgba(255,255,255,.78));border-color:rgba(109,93,246,.22)}
+    .synth-node.k b{color:#342DA1}
+    .synth-weights{display:grid;grid-template-columns:repeat(3,1fr);gap:.55vw}
+    .synth-weights div{border-radius:11px;background:rgba(255,255,255,.66);border:1px solid rgba(198,203,214,.62);padding:.72vh .62vw}
+    .synth-weights b{display:block;font-family:'JetBrains Mono';font-size:var(--fs-h3);line-height:1;font-weight:950}
+    .synth-weights span{display:block;margin-top:.32vh;font-size:var(--fs-xs);line-height:1.25;color:var(--ink-2)}
+    .synth-weights .w10 b{color:#209067}.synth-weights .w30 b{color:#D9892B}.synth-weights .w50 b{color:#5B5BD6}
+    .metric-visual-layout{display:grid;grid-template-columns:1.22fr .92fr;gap:1.4vw;flex:1;min-height:0;align-items:stretch}
+    .metric-map{position:relative;border-radius:16px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88);padding:1.35vh 1.05vw;display:grid;grid-template-rows:auto 1fr auto;gap:1vh;min-height:0;overflow:hidden}
+    .metric-map:after{content:"";position:absolute;right:-1px;bottom:-1px;width:40%;height:28%;border-radius:0 0 16px 0;background:radial-gradient(120% 100% at 100% 100%,rgba(109,93,246,.08),rgba(109,93,246,.03) 54%,transparent 78%);pointer-events:none}
+    .metric-map-head{position:relative;z-index:1}
+    .metric-map-head b{display:block;font-size:var(--fs-h2);line-height:1.24;color:var(--ink);font-weight:950}
+    .metric-map-head span{display:block;margin-top:.42vh;font-size:var(--fs-body);line-height:1.45;color:var(--ink-2)}
+    .metric-path{position:relative;z-index:1;display:grid;grid-template-columns:1fr 34px 1fr;gap:.72vw;min-height:0;align-items:stretch}
+    .source-stack{display:grid;grid-template-rows:repeat(3,1fr);gap:.72vh;min-height:0}
+    .source-box{--a:#6D5DF6;border-radius:13px;background:rgba(255,255,255,.72);border:1px solid color-mix(in srgb,var(--a) 16%,white);padding:.84vh .78vw;display:grid;grid-template-columns:54px 1fr;gap:.68vw;align-items:center;min-height:0}
+    .source-box .src-code{width:48px;height:48px;border-radius:12px;background:var(--a);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:950;display:flex;align-items:center;justify-content:center}
+    .source-box b{display:block;font-size:var(--fs-body);line-height:1.2;color:var(--ink);font-weight:950}
+    .source-box p{margin:.28vh 0 .48vh;font-size:var(--fs-sm);line-height:1.32;color:var(--ink-2)}
+    .metric-chips{display:flex;flex-wrap:wrap;gap:.28vh .3vw}
+    .metric-chips span{display:inline-flex;align-items:center;border-radius:7px;background:color-mix(in srgb,var(--a) 9%,white);border:1px solid color-mix(in srgb,var(--a) 13%,white);color:color-mix(in srgb,var(--a) 75%,#1f2430);font-size:var(--fs-xs);line-height:1.16;font-weight:850;padding:2px 6px}
+    .source-box.third{--a:#6D5DF6}.source-box.own{--a:#D9892B}
+    .path-arrows{display:grid;grid-template-rows:repeat(3,1fr);align-items:center;justify-items:center;color:#8D96A4;font-size:22px;font-weight:800}
+    .combine-stack{display:grid;grid-template-rows:1fr 1fr 1fr;gap:.72vh;min-height:0}
+    .combine-box{border-radius:13px;background:rgba(245,247,250,.84);border:1px solid rgba(198,203,214,.72);padding:.84vh .78vw;display:flex;flex-direction:column;justify-content:center;min-height:0}
+    .combine-box b{display:block;font-size:var(--fs-body);line-height:1.22;color:var(--ink);font-weight:950}
+    .combine-box code{display:block;margin-top:.42vh;font-size:var(--fs-sm);line-height:1.34;color:#5B5BD6;font-weight:900}
+    .combine-box p{margin:.32vh 0 0;font-size:var(--fs-sm);line-height:1.34;color:var(--ink-2)}
+    .combine-box.k{background:linear-gradient(140deg,rgba(246,244,255,.94),rgba(255,255,255,.78));border-color:rgba(109,93,246,.22)}
+    .combine-box.k b{color:#342DA1}
+    .metric-bottom{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6vw}
+    .bottom-box{--a:#D9892B;border-radius:12px;background:rgba(255,255,255,.68);border:1px solid color-mix(in srgb,var(--a) 16%,white);padding:.72vh .7vw}
+    .bottom-box b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}
+    .bottom-box p{margin:.28vh 0 0;font-size:var(--fs-sm);line-height:1.28;color:var(--ink-2)}
+    .bottom-box span{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;color:var(--a)}
+    .bottom-box.out{--a:#209067}
+    .metric-explain{display:grid;grid-template-rows:auto 1fr auto;gap:1vh;min-height:0}
   </style>
 
   <!-- 灰底：opknow18 sec=s3（iframe 嵌原节） -->
@@ -1032,39 +1091,46 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">11 项指标按证据链成立条件定义，每个公式都对应 AI 作答的一个断点</span></div>
+        <div class="brand"><span class="ttl">①–⑩ 先定义各项可观测得分，⑪ 再合成综合置信度</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「定义与计算理由」</div>
       </div>
       <div class="head-r">10/ AI 指标 · 计算理由</div>
     </div>
     <div class="body-area">
-      <div class="metric-logic">
-        <div class="logic-map">
-          <div class="logic-title"><b>先把“能否支撑答案”拆成三条证据链</b><p>综合分不是把 11 项平均，而是先判断至少有一条证据链可用，再用版本和成本做全局折扣。</p></div>
-          <div class="logic-flow">
-            <div class="logic-chains">
-              <div class="chain-card"><span class="code">OFF</span><div><b>官方证据链</b><span>①发现 × ②抓取 × ③详尽</span></div></div>
-              <div class="chain-card sec"><span class="code">SEC</span><div><b>第三方证据链</b><span>⑤丰富度 × ⑥可信度</span></div></div>
-              <div class="chain-card own"><span class="code">OWN</span><div><b>模型自带知识</b><span>⑦先验覆盖 + 截止风险</span></div></div>
+      <div class="metric-visual-layout">
+        <div class="metric-map">
+          <div class="metric-map-head"><b>①–⑩ 先落到具体指标，再由证据链汇总到 ⑪</b><span>每个单项都面向 AI 作答链路中的一个可观测问题；⑪ 只负责合成，不替代前 10 项解释。</span></div>
+          <div class="metric-path">
+            <div class="source-stack">
+              <div class="source-box"><span class="src-code">OFF</span><div><b>官方证据链</b><p>官方资料能否进入并支撑答案。</p><div class="metric-chips"><span>① 可发现</span><span>② 可抓取</span><span>③ 正文详尽</span></div></div></div>
+              <div class="source-box third"><span class="src-code">SEC</span><div><b>第三方证据链</b><p>生态资料能否形成有效互证。</p><div class="metric-chips"><span>⑤ 丰富度</span><span>⑥ 可信度</span></div></div></div>
+              <div class="source-box own"><span class="src-code">OWN</span><div><b>模型自带知识</b><p>不检索时，模型先验能否覆盖任务。</p><div class="metric-chips"><span>⑦ 自带知识</span></div></div></div>
             </div>
-            <div class="logic-arrows"><span>→</span><span>→</span><span>→</span></div>
-            <div class="logic-result">
-              <div class="risk-box"><b>先算三链同时失败风险</b><code>(1-OFF)(1-SEC)(1-OWN)</code><span>每个 <code>1-X</code> 都是一条证据链不能支撑答案的风险。</span></div>
-              <div class="k-box"><b>再得到至少一条链可用</b><code>K = 1 - 同时失败风险</code><span>这对应 AI 实际作答：官方、生态、自带知识任一链路能支撑，就可能形成可靠答案。</span></div>
-              <div class="discount-box"><b>最后乘全局折扣</b><code>K × 版本因子 × 成本因子</code><span>版本和检索成本不新增证据，只影响证据能否稳定转化为答案。</span></div>
+            <div class="path-arrows"><span>→</span><span>→</span><span>→</span></div>
+            <div class="combine-stack">
+              <div class="combine-box"><b>三链同时失败风险</b><code>(1-OFF)(1-SEC)(1-OWN)</code><p><code>1-X</code> 表示对应证据链不能支撑答案。</p></div>
+              <div class="combine-box k"><b>至少一条证据链可用</b><code>K = 1 - 同时失败风险</code><p>官方、生态、自带知识任一链路成立，就可能支撑答案。</p></div>
+              <div class="combine-box"><b>形成 ⑪ 综合置信度</b><code>K × 版本因子 × 成本因子</code><p>再用④和⑧修正稳定性与取证效率。</p></div>
             </div>
           </div>
-          <div class="weight-bar">
-            <div class="weight-pill light"><b>10%</b><span>轻影响：主要影响效率或体验，如检索成本。</span></div>
-            <div class="weight-pill mid"><b>30%</b><span>中影响：跨渠道影响答案可靠性，如版本清晰度。</span></div>
-            <div class="weight-pill strong"><b>50%+</b><span>强影响：证据链是否成立，主导答案成败。</span></div>
+          <div class="metric-bottom">
+            <div class="bottom-box"><span>④</span><b>版本清晰度</b><p>跨渠道影响命令、依赖和 API 可靠性。</p></div>
+            <div class="bottom-box"><span>⑧</span><b>检索成本</b><p>影响 AI 拿到证据的效率和稳定性。</p></div>
+            <div class="bottom-box out"><span>⑨⑩</span><b>答案产出项</b><p>解释版本锁定和步骤复现，不进入⑪重复加权。</p></div>
           </div>
         </div>
-        <div class="logic-detail">
-          <div class="logic-row"><div class="tag"><b>OFF / SEC / OWN</b><span>三条证据链</span></div><div class="copy"><b>三条链各自表示“足以支撑答案”的程度</b><p><code>OFF</code> 看官方，<code>SEC</code> 看第三方，<code>OWN</code> 看模型自带知识；它们不是同一类材料的平均，而是三种不同证据来源。</p></div></div>
-          <div class="logic-row"><div class="tag"><b>1 - X</b><span>失败风险</span></div><div class="copy"><b>综合公式先计算“三条链同时不可用”的风险</b><p><code>1-OFF</code> 表示官方链不能支撑答案；三项相乘表示官方、第三方、自带知识同时都不能支撑答案。</p></div></div>
-          <div class="logic-row cost"><div class="tag"><b>④ / ⑧</b><span>全局折扣</span></div><div class="copy"><b>版本和成本按影响层级折扣，而不是新增证据链</b><p>版本影响命令、依赖和 API 是否对得上，给 30% 中影响；检索成本主要影响效率与稳定性，给 10% 轻影响。</p></div></div>
-          <div class="logic-row out"><div class="tag"><b>⑨ / ⑩</b><span>产出解释</span></div><div class="copy"><b>版本锁定和步骤复现用于解释答案质量</b><p>⑨⑩会受到前面证据链共同影响，因此不进入⑪重复加权；它们用来解释分数是否转化为真正可用的答案。</p></div></div>
+        <div class="metric-explain">
+          <div class="synth-head"><b>单项指标解释“哪一环出问题”，综合分解释“答案是否有证据支撑”</b><p>这页不是只解释 ⑪，而是把 ①–⑩ 放回作答链路中，说明每个得分面向哪个指标。</p></div>
+          <div class="synth-flow">
+            <div class="synth-node"><b>①–③ 面向官方链路</b><code>OFF = nm① × nm② × nm③</code><p>①看搜索排名和是否需要改词；②看 static / SSR / SPA / robots；③看命令、参数、边界和样例。任一环断掉，权威证据就进不了答案。</p></div>
+            <div class="synth-node"><b>⑤–⑦ 面向生态与模型先验</b><code>SEC = nm⑤ × nm⑥；OWN = nm⑦</code><p>⑤看去重来源数量；⑥看来源可信度、一致性、时效和平台独立性；⑦单列模型先验，避免把“检索补证”和“训练时已知道”混在一起。</p></div>
+            <div class="synth-node k"><b>⑪ 面向证据链可用性</b><code>1-(1-OFF)(1-SEC)(1-OWN)</code><p>先算三条链同时失败的风险，再反推至少一条链能支撑答案；④版本和⑧成本只做全局折扣，⑨⑩只解释答案质量。</p></div>
+          </div>
+          <div class="synth-weights">
+            <div class="w10"><b>10%</b><span>轻影响：效率 / 体验</span></div>
+            <div class="w30"><b>30%</b><span>中影响：跨渠道可靠性</span></div>
+            <div class="w50"><b>50%+</b><span>强影响：证据链成败</span></div>
+          </div>
         </div>
       </div>
     </div>
