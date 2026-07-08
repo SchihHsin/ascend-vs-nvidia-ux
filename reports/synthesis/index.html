@@ -2847,6 +2847,11 @@ function renderDeriveRelations(){
     const box=slide.querySelector('.derive');
     const svg=slide.querySelector('.drel');
     if(!box||!svg)return;
+    if(box.dataset.flow==='dev'){
+      svg.innerHTML='';
+      svg.style.display='none';
+      return;
+    }
     const pairs=box.dataset.flow==='dev'?devPairs:aiPairs;
     svg.style.display='block';
     const br=box.getBoundingClientRect();
