@@ -919,28 +919,38 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .met-thesis b{display:block;font-size:var(--fs-h2);line-height:1.28;color:var(--ink);font-weight:900}
     .met-thesis p{margin:.7vh 0 0;font-size:var(--fs-body);line-height:1.55;color:var(--ink-2)}
     .met-chain{display:grid;grid-template-rows:repeat(4,1fr);gap:.72vh;flex:1;min-height:0}
-    .met-step{position:relative;border-radius:12px;background:rgba(47,61,99,.055);border:1px solid rgba(47,61,99,.12);padding:1vh 1vw;display:grid;grid-template-columns:34px 1fr;gap:.75vw;align-items:center;min-height:0}
-    .met-step .n{width:30px;height:30px;border-radius:9px;background:#2F3D63;color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;display:flex;align-items:center;justify-content:center}
+    .met-step{--a:#2F3D63;--bg:rgba(47,61,99,.055);--bd:rgba(47,61,99,.12);position:relative;overflow:hidden;border-radius:12px;background:rgba(255,255,255,.6);border:1px solid var(--bd);padding:1vh 1vw;display:grid;grid-template-columns:34px 1fr;gap:.75vw;align-items:center;min-height:0}
+    .met-step:after{content:"";position:absolute;right:-1px;bottom:-1px;width:46%;height:38%;border-radius:0 0 12px 0;background:radial-gradient(130% 115% at 100% 100%,color-mix(in srgb,var(--a) 14%,transparent),color-mix(in srgb,var(--a) 5%,transparent) 46%,transparent 76%);pointer-events:none}
+    .met-step .n{width:30px;height:30px;border-radius:9px;background:var(--a);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;display:flex;align-items:center;justify-content:center}
     .met-step b{display:block;font-size:var(--fs-body);line-height:1.22;color:var(--ink);font-weight:900}
     .met-step span{display:block;margin-top:.25vh;font-size:var(--fs-sm);line-height:1.35;color:var(--ink-2)}
+    .met-step.t1{--a:#4F55B7;--bg:rgba(91,91,214,.075);--bd:rgba(91,91,214,.17)}
+    .met-step.t2{--a:#2E7D46;--bg:rgba(46,125,70,.072);--bd:rgba(46,125,70,.16)}
+    .met-step.t3{--a:#B87514;--bg:rgba(184,117,20,.08);--bd:rgba(184,117,20,.18)}
+    .met-step.t4{--a:#2F6F7C;--bg:rgba(47,111,124,.075);--bd:rgba(47,111,124,.17)}
     .met-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:.72vw .72vh;min-height:0}
     .met-card{position:relative;overflow:hidden;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.76);box-shadow:0 10px 26px -22px rgba(30,40,70,.32),inset 0 1px 0 rgba(255,255,255,.9);padding:1vh .86vw;display:flex;flex-direction:column;gap:.42vh;min-height:0}
-    .met-card:after{content:"";position:absolute;right:-22px;bottom:-28px;width:88px;height:70px;border-radius:999px;background:radial-gradient(circle,rgba(91,91,214,.13),rgba(91,91,214,0) 70%);pointer-events:none}
+    .met-card:after{content:"";position:absolute;right:-1px;bottom:-1px;width:44%;height:34%;border-radius:0 0 12px 0;background:radial-gradient(130% 110% at 100% 100%,rgba(91,91,214,.1),rgba(91,91,214,.035) 48%,rgba(91,91,214,0) 76%);pointer-events:none}
     .met-card .id{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;color:#5B5BD6}
     .met-card b{font-size:var(--fs-sm);line-height:1.18;color:var(--ink);font-weight:900}
     .met-card p{margin:0;font-size:var(--fs-xs);line-height:1.36;color:var(--ink-2)}
     .met-card small{margin-top:auto;font-size:10px;line-height:1.2;color:#8E96A3}
     .met-card.out{background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(232,237,255,.56));border-color:rgba(91,91,214,.18)}
     .why-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,1fr);gap:.86vw .82vh;min-height:0}
-    .why-card{position:relative;overflow:hidden;border-radius:13px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 12px 28px -24px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.9);padding:1vh .95vw;display:flex;flex-direction:column;min-height:0}
-    .why-card:after{content:"";position:absolute;right:-30px;bottom:-34px;width:92px;height:76px;border-radius:999px;background:radial-gradient(circle,rgba(91,91,214,.12),rgba(91,91,214,0) 70%);pointer-events:none}
-    .why-card .ids{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;color:#5B5BD6}
+    .why-card{--a:#5B5BD6;--bg:rgba(91,91,214,.07);--bd:rgba(91,91,214,.18);position:relative;overflow:hidden;border-radius:13px;background:rgba(255,255,255,.66);border:1px solid var(--bd);box-shadow:0 12px 28px -24px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.9);padding:1vh .95vw;display:flex;flex-direction:column;min-height:0}
+    .why-card:after{content:"";position:absolute;right:-1px;bottom:-1px;width:48%;height:36%;border-radius:0 0 13px 0;background:radial-gradient(130% 112% at 100% 100%,color-mix(in srgb,var(--a) 14%,transparent),color-mix(in srgb,var(--a) 5%,transparent) 48%,transparent 76%);pointer-events:none}
+    .why-card .ids{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;color:var(--a)}
     .why-card b{display:block;margin-top:.16vh;font-size:var(--fs-body);line-height:1.2;color:var(--ink);font-weight:900}
     .why-card p{margin:.42vh 0 0;font-size:var(--fs-sm);line-height:1.34;color:var(--ink-2)}
-    .why-card .rule{margin-top:.48vh;border-radius:8px;background:rgba(47,61,99,.06);border:1px solid rgba(47,61,99,.1);padding:.46vh .5vw;font-size:var(--fs-sm);line-height:1.28;color:#667082}
+    .why-card .rule{margin-top:.48vh;border-radius:8px;background:rgba(47,61,99,.045);border:1px solid rgba(47,61,99,.09);padding:.46vh .5vw;font-size:var(--fs-sm);line-height:1.28;color:#667082}
     .why-card .rule em{font-style:normal;color:#2F3D63;font-weight:900}
-    .why-card .calc{margin-top:.54vh;border-radius:8px;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.13);padding:.42vh .5vw;font-size:var(--fs-sm);line-height:1.25;color:#4F55B7;font-weight:750}
-    .why-card.out{background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(235,238,255,.58));border-color:rgba(91,91,214,.2)}
+    .why-card .calc{margin-top:.54vh;border-radius:8px;background:color-mix(in srgb,var(--a) 10%,white);border:1px solid color-mix(in srgb,var(--a) 18%,white);padding:.42vh .5vw;font-size:var(--fs-sm);line-height:1.25;color:color-mix(in srgb,var(--a) 82%,#1f2430);font-weight:750}
+    .why-card.w1{--a:#4F55B7;--bg:rgba(91,91,214,.068);--bd:rgba(91,91,214,.18)}
+    .why-card.w2{--a:#2E7D46;--bg:rgba(46,125,70,.064);--bd:rgba(46,125,70,.16)}
+    .why-card.w3{--a:#B87514;--bg:rgba(184,117,20,.072);--bd:rgba(184,117,20,.17)}
+    .why-card.w4{--a:#A23E73;--bg:rgba(162,62,115,.062);--bd:rgba(162,62,115,.16)}
+    .why-card.w5{--a:#C04F4F;--bg:rgba(192,79,79,.062);--bd:rgba(192,79,79,.17)}
+    .why-card.out{--a:#25314F;--bg:rgba(37,49,79,.09);--bd:rgba(37,49,79,.2)}
     .apply-grid{display:grid;grid-template-columns:1.12fr 1.38fr;gap:1.4vw;flex:1;min-height:0;align-items:stretch}
     .apply-lane{display:flex;flex-direction:column;gap:.78vh;min-height:0}
     .apply-card{border-radius:13px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.76);box-shadow:0 12px 30px -23px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);padding:1.08vh 1vw;display:grid;grid-template-columns:32px 1fr;gap:.75vw;align-items:start;min-height:0}
@@ -977,19 +987,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="met-left">
           <div class="met-thesis"><b>不是先定总分，而是先还原 AI 怎么把知识搬进答案</b><p>AI 只能按“搜 → 抓 → 读 → 组织答案”工作。指标因此拆成四关：触达、质量、成本、产出；再按官方、第三方、模型自带三类知识来源分别观察。</p></div>
           <div class="met-chain">
-            <div class="met-step"><span class="n">01</span><div><b>触达</b><span>官方页是否在第一轮检索出现，正文是否能被抓取。</span></div></div>
-            <div class="met-step"><span class="n">02</span><div><b>质量</b><span>正文是否足够细，版本是否清楚，第三方是否可互证。</span></div></div>
-            <div class="met-step"><span class="n">03</span><div><b>成本</b><span>需要几轮检索、几次抓取、是否遇到失败。</span></div></div>
-            <div class="met-step"><span class="n">04</span><div><b>产出</b><span>答案能否锁版本、命令能否照抄复现。</span></div></div>
+            <div class="met-step t1"><span class="n">01</span><div><b>触达</b><span>官方页是否在第一轮检索出现，正文是否能被抓取。</span></div></div>
+            <div class="met-step t2"><span class="n">02</span><div><b>质量</b><span>正文是否足够细，版本是否清楚，第三方是否可互证。</span></div></div>
+            <div class="met-step t3"><span class="n">03</span><div><b>成本</b><span>需要几轮检索、几次抓取、是否遇到失败。</span></div></div>
+            <div class="met-step t4"><span class="n">04</span><div><b>产出</b><span>答案能否锁版本、命令能否照抄复现。</span></div></div>
           </div>
         </div>
         <div class="why-grid">
-          <div class="why-card"><span class="ids">①</span><b>官方可发现性：用搜索排序替代主观“好不好找”</b><div class="calc">怎么算：首条官方=5；首屏但靠后=4/3；需要改写关键词二次检索=2。</div><div class="rule"><em>为什么</em>：AI 默认先读第一屏和前几条结果，官方越靠后，越容易被第三方或旧内容带偏。</div></div>
-          <div class="why-card"><span class="ids">② ③</span><b>可抓取性与正文详尽度：把“能读到”和“能用上”拆开</b><div class="calc">怎么算：静态页/服务端渲染高分，单页应用或抓取限制低分；正文再按命令、代码、参数、边界条件分档。</div><div class="rule"><em>为什么</em>：搜得到不等于抓得到，抓得到也不等于能生成可执行答案；混在一起会掩盖断点。</div></div>
-          <div class="why-card"><span class="ids">④ ⑨</span><b>版本相关指标：版本体系影响输入，锁定能力属于输出</b><div class="calc">怎么算：单版本/版本无关=高分；有支持矩阵=中高；多版本散乱=低分。⑨只看最终答案能否精确锁版本。</div><div class="rule"><em>为什么</em>：④会影响所有渠道，所以进入综合；⑨已经是结果，只解释答案质量，不再重复计入总分。</div></div>
-          <div class="why-card"><span class="ids">⑤ ⑥</span><b>第三方资料：数量解决“有没有”，可信度解决“能不能信”</b><div class="calc">怎么算：先去重统计第三方数量；再按来源类型、一致性、时效、平台独立性修正可信度。</div><div class="rule"><em>为什么</em>：同平台转载不等于互证，旧文也可能误导版本；够新、平台多样是基线，只对过旧和回声扣分。</div></div>
-          <div class="why-card"><span class="ids">⑦ ⑧</span><b>自带知识与检索成本：用时效和失败次数约束 AI 猜测</b><div class="calc">怎么算：自带知识按掌握档位给分，再按技术迭代速度扣时效；成本=检索轮数+0.5×抓取次数+4×抓取失败。</div><div class="rule"><em>为什么</em>：模型记忆会过期，抓取失败会切断证据链，所以失败比多抓几次更严重。</div></div>
-          <div class="why-card out"><span class="ids">⑩ ⑪</span><b>综合置信度：不用平均分，因为一条强证据链就能支撑答案</b><div class="calc">怎么算：官方、第三方、自带知识三路用“噪声或公式”合成；步骤复现性只作为产出解释，不进综合。</div><div class="rule"><em>为什么</em>：简单平均会把“官方已足够可靠但第三方少”的任务压低；产出再进总分会把结果重复算一遍。</div></div>
+          <div class="why-card w1"><span class="ids">①</span><b>官方可发现性：用搜索排序替代主观“好不好找”</b><div class="calc">怎么算：首条官方=5；首屏但靠后=4/3；需要改写关键词二次检索=2。</div><div class="rule"><em>系数/档位来源</em>：按 AI 实际检索路径分层，首条是默认权威路径；二次检索说明默认问法已找不到官方。</div></div>
+          <div class="why-card w2"><span class="ids">② ③</span><b>可抓取性与正文详尽度：把“能读到”和“能用上”拆开</b><div class="calc">怎么算：静态页/服务端渲染高分，单页应用或抓取限制低分；正文再按命令、代码、参数、边界条件分档。</div><div class="rule"><em>系数/档位来源</em>：这是断点分层，不做连续系数；通路断裂和内容不足分别归因，避免混成一个模糊分。</div></div>
+          <div class="why-card w3"><span class="ids">④ ⑨</span><b>版本相关指标：版本体系影响输入，锁定能力属于输出</b><div class="calc">怎么算：单版本/版本无关=高分；有支持矩阵=中高；多版本散乱=低分。综合里版本因子=0.7+0.3×版本分。</div><div class="rule"><em>系数/档位来源</em>：版本会影响所有渠道，但通常不会单独决定答案成败，所以设为最多 30% 的中度折扣；⑨只解释结果，不再进总分。</div></div>
+          <div class="why-card w4"><span class="ids">⑤ ⑥</span><b>第三方资料：数量解决“有没有”，可信度解决“能不能信”</b><div class="calc">怎么算：先去重统计第三方数量；再按来源类型、一致性、时效、平台独立性修正可信度。</div><div class="rule"><em>系数/档位来源</em>：来源类型用锚定表，官方镜像/官方仓最高，云厂商和学术次之，个人博客再低；时效、独立性只罚不奖。</div></div>
+          <div class="why-card w5"><span class="ids">⑦ ⑧</span><b>自带知识与检索成本：用时效和失败次数约束 AI 猜测</b><div class="calc">怎么算：自带知识按掌握档位给分，再按技术迭代速度扣时效；成本=检索轮数+0.5×抓取次数+4×抓取失败。</div><div class="rule"><em>系数来源</em>：抓取一次只是轻摩擦，所以 0.5；抓取失败会切断证据链、迫使 AI 改词或猜测，所以按 4 倍重罚。</div></div>
+          <div class="why-card out"><span class="ids">⑩ ⑪</span><b>综合置信度：不用平均分，因为一条强证据链就能支撑答案</b><div class="calc">怎么算：三路知识用“噪声或公式”合成；再乘版本因子=0.7+0.3×版本分，成本因子=0.9+0.1×成本分。</div><div class="rule"><em>系数来源</em>：版本会直接改变命令和依赖，影响较大，给 30%；成本主要影响获得证据的效率，给 10%；⑩是产出，不进综合。</div></div>
         </div>
       </div>
     </div>
