@@ -1174,13 +1174,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
               <div class="tax-g-head"><span class="tax-code"><i data-lucide="network"></i></span><div><b>生态互证类 <em>数量×可信</em></b><span>第三方链 SEC = (⑤/5)×(⑥/5)；第三方少或不可信都会削弱互证</span></div></div>
               <div class="tax-items">
                 <div class="tax-item"><span class="idx">⑤</span><div><b>第三方丰富度 <i class="flowtag q">触达</i></b><span>去重来源数：≥6=5；5=4；3–4=3；1–2=2；0=1。</span></div></div>
-                <div class="tax-item"><span class="idx">⑥</span><div><b>第三方可信度 <i class="flowtag">质量</i></b><span>来源可信均分 + 一致性 + 时效 + 平台独立性，限制在 1–5。</span></div></div>
+                <div class="tax-item"><span class="idx">⑥</span><div><b>第三方可信度 <i class="flowtag">质量</i></b><span>来源可信均分 + 一致性；再扣时效风险（中位月龄≤36不扣、≤48扣0.25、>48扣0.5）和平台重复风险（独立平台占比≥0.8不扣、≥0.6扣0.25、更低扣0.5）。</span></div></div>
               </div>
             </div>
             <div class="tax-group own">
               <div class="tax-g-head"><span class="tax-code"><i data-lucide="brain-circuit"></i></span><div><b>模型先验类 <em>单独成链</em></b><span>模型先验链 OWN = ⑦/5；训练知识可独立支撑，但受技术迭代影响</span></div></div>
               <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑦</span><div><b>模型自带知识 <i class="flowtag">质量</i></b><span>先验档位 + 截止风险：稳定 0；中等迭代 -0.25；快速迭代 -0.5。</span></div></div>
+                <div class="tax-item"><span class="idx">⑦</span><div><b>模型自带知识 <i class="flowtag">质量</i></b><span>先按训练覆盖给1–5档；再按技术迭代速度扣截止风险：稳定不扣，中等迭代扣0.25，alpha/RC高频变化扣0.5，防止模型用过期记忆作答。</span></div></div>
               </div>
             </div>
             <div class="tax-group process">
@@ -1195,14 +1195,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
                 <div class="tax-item"><span class="idx">⑨</span><div><b>版本可锁定性 <i class="flowtag o">产出</i></b><span>精确版本=5；基本可定=4；范围可定=3；无法定死=2。</span></div></div>
                 <div class="tax-item"><span class="idx">⑩</span><div><b>步骤可复现性 <i class="flowtag o">产出</i></b><span>照抄即跑=5；替参数=4；需小修=3；仅骨架=2。</span></div></div>
               </div>
-            </div>
-          </div>
-          <div class="view-bridge">
-            <div class="weight-title">⑪ 综合公式中的系数</div>
-            <div class="route-weights">
-              <div class="w50"><b>K</b><span>主体：三条证据链是否成立</span></div>
-              <div class="w30"><b>30%</b><span>版本因子：0.7 + 0.3×(④/5)</span></div>
-              <div class="w10"><b>10%</b><span>成本因子：0.9 + 0.1×(⑧/5)</span></div>
             </div>
           </div>
         </div>
