@@ -1012,8 +1012,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
     </div>
     <script>
-    (function(){var grid=document.getElementById('mOp');if(!grid)return;
+      (function(){var grid=document.getElementById('mOp');if(!grid)return;
       function heat(s){return s<=40?'rgba(229,72,77,.075)':s<=60?'rgba(245,158,11,.085)':s<=80?'rgba(35,160,106,.078)':'rgba(57,121,249,.075)';}
+      function bord(s){return s<=40?'rgba(229,72,77,.12)':s<=60?'rgba(245,158,11,.14)':s<=80?'rgba(35,160,106,.12)':'rgba(57,121,249,.12)';}
       function txt(s){return s<=40?'#C7000B':s<=60?'#A15C00':s<=80?'#1F7A4D':'#2F63D8';}
       function d(v){return v==='受阻'?['受阻',0]:[String(v),v*20];}
       var cols=['官方可抓','正文质量','版本清晰','第三方平台厚度','自带知识','综合'];
@@ -1384,6 +1385,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .devhm .gap.dn{background:rgba(199,0,11,.1);color:#C7000B}
     .devhm .gap.up{background:rgba(35,160,106,.14);color:#1F7A4D}
     .devhm .tp-note{color:var(--ink-2);font-size:var(--fs-sm);line-height:1.42}
+    .devhm-demo{padding:7px 9px}.devhm-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center}.devhm-flow .node{border:1px solid rgba(212,216,223,.9);border-radius:8px;background:#fff;padding:5px 6px;font-size:10.5px;font-weight:850;color:#465063;text-align:center}.devhm-flow .node.bad{border-color:#f0c0c2;background:#FDECEC;color:#C7000B}.devhm-flow .node.good{border-color:#bae5cd;background:#ECF8F1;color:#1F7A4D}.devhm-flow .arr{font-family:'JetBrains Mono';color:#8E96A3;font-weight:900}.devhm-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;align-items:end;height:54px;padding:4px 2px 0}.devhm-bars .bar{border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#C7000B,#F2B4B8);min-height:10px;position:relative}.devhm-bars .bar.good{background:linear-gradient(180deg,#1F9E68,#BDEAD1)}.devhm-bars .bar span{position:absolute;left:50%;top:-14px;transform:translateX(-50%);font-size:9.5px;font-family:'JetBrains Mono';font-weight:900;color:#465063;white-space:nowrap}.devhm-mini{display:grid;grid-template-columns:1fr 1fr;gap:7px}.devhm-mini .pane{border:1px solid rgba(212,216,223,.9);border-radius:8px;background:#fff;padding:5px 6px}.devhm-mini b{display:block;font-size:10px;color:#465063;margin-bottom:4px}.devhm-mini p{margin:0;font-size:10px;color:#8E96A3;line-height:1.35}.devhm-path{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.devhm-path span{border:1px solid rgba(212,216,223,.9);border-radius:999px;background:#fff;padding:2px 8px;font-size:10px;font-weight:800;color:#465063}.devhm-path span.hot{background:#FDECEC;border-color:#f0c0c2;color:#C7000B}.devhm-path i{font-style:normal;color:#A1A4AA;font-family:'JetBrains Mono'}
   </style>
 
   <!-- 灰底：AI 侧 · 七个问题（opknow 19 §1，重排） -->
@@ -2121,7 +2123,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <!-- 灰底：基础体验问题推导 -->
-  <section class="slide s-gray">
+  <section class="slide s-gray derive-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">五类触点问题推导出四条基础体验结论</span></div>
@@ -2130,45 +2132,46 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-r">58/ 基础体验 · 推导页</div>
     </div>
     <div class="body-area">
-      <div class="derive">
+      <div class="derive" data-flow="dev">
+        <svg class="drel" aria-hidden="true"></svg>
         <div class="dgroup signal-g">
           <div class="dh"><span>Step 01</span><b>触点信号</b></div>
           <div class="dcol signal"><div class="dseq">
-            <div class="ditem hot"><i data-lucide="download"></i><strong>登录与 Toolkit 下载是最大断点</strong><p>下载前置登录、协议、版本包选择叠加。</p><div class="metric">4.3：21 / 87</div></div>
-            <div class="ditem"><i data-lucide="search"></i><strong>正确起点与搜索命中不稳定</strong><p>内容存在，但外部搜索和入口没有稳定导向官方答案。</p><div class="metric">6.4：−17</div></div>
-            <div class="ditem"><i data-lucide="flask-conical"></i><strong>上手长板没有成为默认路径</strong><p>HiDevLab、学习路径、ModelZoo 已有优势，但露出不够前置。</p><div class="metric">3.2：+10</div></div>
-            <div class="ditem"><i data-lucide="globe-2"></i><strong>海外体验受多重门槛影响</strong><p>账号、英文同步、论坛可读、博客索引会叠加影响。</p><div class="metric">6.1：−15</div></div>
-            <div class="ditem"><i data-lucide="messages-square"></i><strong>问题支持没有稳定闭环</strong><p>FAQ 是亮点，但论坛、工单、案例还未持续沉淀。</p><div class="metric">6.3：+22</div></div>
+            <div class="ditem hot" data-rel="access-signal"><i data-lucide="download"></i><strong>登录与 Toolkit 下载是最大断点</strong><p>下载前置登录、协议、版本包选择叠加。</p><div class="metric">4.3：21 / 87</div></div>
+            <div class="ditem" data-rel="search-signal"><i data-lucide="search"></i><strong>正确起点与搜索命中不稳定</strong><p>内容存在，但外部搜索和入口没有稳定导向官方答案。</p><div class="metric">6.4：−17</div></div>
+            <div class="ditem" data-rel="onboard-signal"><i data-lucide="flask-conical"></i><strong>上手长板没有成为默认路径</strong><p>HiDevLab、学习路径、ModelZoo 已有优势，但露出不够前置。</p><div class="metric">3.2：+10</div></div>
+            <div class="ditem" data-rel="global-signal"><i data-lucide="globe-2"></i><strong>海外体验受多重门槛影响</strong><p>账号、英文同步、论坛可读、博客索引会叠加影响。</p><div class="metric">6.1：−15</div></div>
+            <div class="ditem" data-rel="support-signal"><i data-lucide="messages-square"></i><strong>问题支持没有稳定闭环</strong><p>FAQ 是亮点，但论坛、工单、案例还未持续沉淀。</p><div class="metric">6.3：+22</div></div>
           </div></div>
         </div>
         <div class="dgroup cause-g">
           <div class="dh"><span>Step 02</span><b>机制归因</b></div>
           <div class="dcol cause"><div class="dseq">
-            <div class="ditem"><i data-lucide="lock-keyhole"></i><strong>资源获取被准入条件截断</strong><p>登录、协议和版本判断被放在“拿到包”之前。</p></div>
-            <div class="ditem"><i data-lucide="route"></i><strong>路径导航依赖用户先懂产品名</strong><p>开发者知道任务，却不一定知道该点哪个产品和文档。</p></div>
-            <div class="ditem"><i data-lucide="panels-top-left"></i><strong>可运行能力分散在多个入口</strong><p>在线实验、样例、ModelZoo 各自可用，但没有合成默认起步路径。</p></div>
-            <div class="ditem"><i data-lucide="network"></i><strong>全球可达性缺少统一标准</strong><p>语言、账号、社区和内容索引需要按海外旅程一起看。</p></div>
-            <div class="ditem"><i data-lucide="refresh-cw"></i><strong>支持内容没有回流成知识资产</strong><p>一次性问答、论坛帖和工单没有稳定回到 FAQ、文档和搜索结果。</p></div>
+            <div class="ditem" data-rel="access-cause"><i data-lucide="lock-keyhole"></i><strong>资源获取被准入条件截断</strong><p>登录、协议和版本判断被放在“拿到包”之前。</p></div>
+            <div class="ditem" data-rel="search-cause"><i data-lucide="route"></i><strong>路径导航依赖用户先懂产品名</strong><p>开发者知道任务，却不一定知道该点哪个产品和文档。</p></div>
+            <div class="ditem" data-rel="onboard-cause"><i data-lucide="panels-top-left"></i><strong>可运行能力分散在多个入口</strong><p>在线实验、样例、ModelZoo 各自可用，但没有合成默认起步路径。</p></div>
+            <div class="ditem" data-rel="global-cause"><i data-lucide="network"></i><strong>全球可达性缺少统一标准</strong><p>语言、账号、社区和内容索引需要按海外旅程一起看。</p></div>
+            <div class="ditem" data-rel="support-cause"><i data-lucide="refresh-cw"></i><strong>支持内容没有回流成知识资产</strong><p>一次性问答、论坛帖和工单没有稳定回到 FAQ、文档和搜索结果。</p></div>
           </div></div>
         </div>
         <div class="dgroup move-g">
           <div class="dh"><span>Step 03</span><b>改造机会</b></div>
           <div class="dcol move"><div class="dseq">
-            <div class="ditem ok"><i data-lucide="package-check"></i><strong>先让开发者拿到能跑的包</strong><p>社区版下载准入后置，版本和架构给默认推荐。</p></div>
-            <div class="ditem ok"><i data-lucide="corner-down-right"></i><strong>让官方答案更早出现</strong><p>首屏入口、场景入口、搜索摘要、博客索引围绕高频任务词组织。</p></div>
-            <div class="ditem ok"><i data-lucide="play-circle"></i><strong>把在线实验变成默认起步</strong><p>HiDevLab、ModelZoo、GitCode 工程和示例代码连成跑通路径。</p></div>
-            <div class="ditem ok"><i data-lucide="languages"></i><strong>按海外开发者旅程补齐门槛</strong><p>英文同步、邮箱 / GitHub 登录、论坛游客可读、英文案例共同推进。</p></div>
-            <div class="ditem ok"><i data-lucide="list-checks"></i><strong>把支持链路沉淀为可复用知识</strong><p>FAQ、错误码、论坛、工单、案例要互相导流。</p></div>
+            <div class="ditem ok" data-rel="access-move"><i data-lucide="package-check"></i><strong>先让开发者拿到能跑的包</strong><p>社区版下载准入后置，版本和架构给默认推荐。</p></div>
+            <div class="ditem ok" data-rel="search-move"><i data-lucide="corner-down-right"></i><strong>让官方答案更早出现</strong><p>首屏入口、场景入口、搜索摘要、博客索引围绕高频任务词组织。</p></div>
+            <div class="ditem ok" data-rel="onboard-move"><i data-lucide="play-circle"></i><strong>把在线实验变成默认起步</strong><p>HiDevLab、ModelZoo、GitCode 工程和示例代码连成跑通路径。</p></div>
+            <div class="ditem ok" data-rel="global-move"><i data-lucide="languages"></i><strong>按海外开发者旅程补齐门槛</strong><p>英文同步、邮箱 / GitHub 登录、论坛游客可读、英文案例共同推进。</p></div>
+            <div class="ditem ok" data-rel="support-move"><i data-lucide="list-checks"></i><strong>把支持链路沉淀为可复用知识</strong><p>FAQ、错误码、论坛、工单、案例要互相导流。</p></div>
           </div></div>
         </div>
         <div class="dgroup result-g">
           <div class="dh"><span>Step 04</span><b>后续结论</b></div>
           <div class="dcol result"><div class="dlinks">
-            <div class="dlink"><span class="no">#1</span><div><b>登录前置是最高杠杆单点</b><span>对应下载与账号硬阻断。</span></div></div>
-            <div class="dlink"><span class="no">#4</span><div><b>内容不缺，短板在搜索命中与索引可达</b><span>对应正确起点和外部搜索命中。</span></div></div>
-            <div class="dlink"><span class="no">#3</span><div><b>算子上手长板应该前置放大</b><span>对应 HiDevLab、ModelZoo 和学习路径。</span></div></div>
-            <div class="dlink"><span class="no">#2</span><div><b>海外体验会同时卡在账号、语言和社区</b><span>对应海外可达性的组合门槛。</span></div></div>
-            <div class="dlink"><span class="no">专题 5</span><div><b>问题支持与生态闭环</b><span>对应 FAQ 亮点与论坛 / 工单沉淀不足。</span></div></div>
+            <div class="dlink" data-rel="access-result"><span class="no">#1</span><div><b>登录前置是最高杠杆单点</b><span>对应下载与账号硬阻断。</span></div></div>
+            <div class="dlink" data-rel="search-result"><span class="no">#4</span><div><b>内容不缺，短板在搜索命中与索引可达</b><span>对应正确起点和外部搜索命中。</span></div></div>
+            <div class="dlink" data-rel="onboard-result"><span class="no">#3</span><div><b>算子上手长板应该前置放大</b><span>对应 HiDevLab、ModelZoo 和学习路径。</span></div></div>
+            <div class="dlink" data-rel="global-result"><span class="no">#2</span><div><b>海外体验会同时卡在账号、语言和社区</b><span>对应海外可达性的组合门槛。</span></div></div>
+            <div class="dlink" data-rel="support-result"><span class="no">专题 5</span><div><b>问题支持与生态闭环</b><span>对应 FAQ 亮点与论坛 / 工单沉淀不足。</span></div></div>
           </div></div>
         </div>
       </div>
@@ -2606,6 +2609,7 @@ function updateCurrent(i){
 function deckHash(i){
   var h='#'+(i+1);
   if(i===16&&typeof window.__hmStep==='number'&&window.__hmStep>=0)h+='-hm'+(window.__hmStep+1);
+  if(i===56&&typeof window.__devHmStep==='number'&&window.__devHmStep>=0)h+='-hm'+(window.__devHmStep+1);
   return h;
 }
 /* 谁滚进视口 ≥55% 谁就是当前页 */
@@ -2781,33 +2785,30 @@ function installBoardTabs(){
 }
 
 function balanceDeriveColumns(){
-  const slide=document.querySelector('.derive-slide');
-  if(!slide || document.body.classList.contains('overview'))return;
-  slide.querySelectorAll('.dcol').forEach(col=>{
-    const stack=col.querySelector('.dseq,.dlinks');
-    if(!stack)return;
-    const items=[...stack.children];
-    if(!items.length)return;
-    stack.style.paddingTop='0px';
-    stack.style.paddingBottom='0px';
-    stack.style.gap='0px';
-    const total=items.reduce((sum,el)=>sum+el.getBoundingClientRect().height,0);
-    const free=Math.max(0,stack.clientHeight-total);
-    const unit=free/(items.length+1);
-    stack.style.paddingTop=unit+'px';
-    stack.style.paddingBottom=unit+'px';
-    stack.style.gap=unit+'px';
+  if(document.body.classList.contains('overview'))return;
+  document.querySelectorAll('.derive-slide').forEach(slide=>{
+    slide.querySelectorAll('.dcol').forEach(col=>{
+      const stack=col.querySelector('.dseq,.dlinks');
+      if(!stack)return;
+      const items=[...stack.children];
+      if(!items.length)return;
+      stack.style.paddingTop='0px';
+      stack.style.paddingBottom='0px';
+      stack.style.gap='0px';
+      const total=items.reduce((sum,el)=>sum+el.getBoundingClientRect().height,0);
+      const free=Math.max(0,stack.clientHeight-total);
+      const unit=free/(items.length+1);
+      stack.style.paddingTop=unit+'px';
+      stack.style.paddingBottom=unit+'px';
+      stack.style.gap=unit+'px';
+    });
   });
 }
 
 function renderDeriveRelations(){
-  const slide=document.querySelector('.derive-slide');
-  if(!slide || document.body.classList.contains('overview'))return;
+  if(document.body.classList.contains('overview'))return;
   balanceDeriveColumns();
-  const box=slide.querySelector('.derive');
-  const svg=slide.querySelector('.drel');
-  if(!box||!svg)return;
-  const pairs=[
+  const aiPairs=[
     ['version-signal','version-cause',''],
     ['readable-signal','readable-cause',''],
     ['recover-signal','task-cause',''],
@@ -2825,80 +2826,103 @@ function renderDeriveRelations(){
     ['task-move','task-result','purple'],
     ['ecosystem-move','ecosystem-result','purple']
   ];
-  svg.style.display='block';
-  const br=box.getBoundingClientRect();
-  svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
-  svg.innerHTML='';
-  function textRight(el){
-    const bits=[];
-    (function collect(node){
-      node.childNodes.forEach(child=>{
-        if(child.nodeType===3 && child.nodeValue.trim())bits.push(child);
-        else if(child.nodeType===1 && !child.matches('svg,i'))collect(child);
-      });
-    })(el);
-    return bits.reduce((m,node)=>{
-      const range=document.createRange();
-      range.selectNodeContents(node);
-      const rects=[...range.getClientRects()];
-      range.detach();
-      return rects.reduce((rm,rr)=>Math.max(rm,rr.right),m);
-    },el.getBoundingClientRect().left);
-  }
-  function anchorMap(keys,side){
-    const nodes=keys.map(key=>box.querySelector(`[data-rel="${key}"]`)).filter(Boolean);
-    if(!nodes.length)return new Map();
-    const groups=new Map();
-    nodes.forEach(el=>{
-      const col=el.closest('.dgroup')||el.parentElement;
-      if(!groups.has(col))groups.set(col,[]);
-      groups.get(col).push(el);
-    });
-    const anchors=new Map();
-    groups.forEach(group=>{
-      const x=side==='right'
-        ? Math.max(...group.map(el=>textRight(el)))-br.left+6
-        : Math.min(...group.map(el=>{
-            const icon=el.querySelector('svg.lucide,i[data-lucide],.no');
-            const anchor=icon?icon.getBoundingClientRect():el.getBoundingClientRect();
-            return anchor.left;
-          }))-br.left-8;
-      group.forEach(el=>anchors.set(el.dataset.rel,x));
-    });
-    return anchors;
-  }
-  const fromKeys=[...new Set(pairs.map(([a])=>a))];
-  const toKeys=[...new Set(pairs.map(([,b])=>b))];
-  const outX=anchorMap(fromKeys,'right');
-  const inX=anchorMap(toKeys,'left');
-  function point(key,side){
-    const el=box.querySelector(`[data-rel="${key}"]`);
-    if(!el)return null;
-    const r=el.getBoundingClientRect();
-    if(side==='right'){
-      return {x:outX.get(key) ?? textRight(el)-br.left+6,y:r.top+r.height*.5-br.top};
+  const devPairs=[
+    ['access-signal','access-cause',''],
+    ['search-signal','search-cause',''],
+    ['onboard-signal','onboard-cause',''],
+    ['global-signal','global-cause',''],
+    ['support-signal','support-cause',''],
+    ['access-cause','access-move','mid'],
+    ['search-cause','search-move','mid'],
+    ['onboard-cause','onboard-move','mid'],
+    ['global-cause','global-move','mid'],
+    ['support-cause','support-move','mid'],
+    ['access-move','access-result','purple'],
+    ['search-move','search-result','purple'],
+    ['onboard-move','onboard-result','purple'],
+    ['global-move','global-result','purple'],
+    ['support-move','support-result','purple']
+  ];
+  document.querySelectorAll('.derive-slide').forEach(slide=>{
+    const box=slide.querySelector('.derive');
+    const svg=slide.querySelector('.drel');
+    if(!box||!svg)return;
+    const pairs=box.dataset.flow==='dev'?devPairs:aiPairs;
+    svg.style.display='block';
+    const br=box.getBoundingClientRect();
+    svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
+    svg.innerHTML='';
+    function textRight(el){
+      const bits=[];
+      (function collect(node){
+        node.childNodes.forEach(child=>{
+          if(child.nodeType===3 && child.nodeValue.trim())bits.push(child);
+          else if(child.nodeType===1 && !child.matches('svg,i'))collect(child);
+        });
+      })(el);
+      return bits.reduce((m,node)=>{
+        const range=document.createRange();
+        range.selectNodeContents(node);
+        const rects=[...range.getClientRects()];
+        range.detach();
+        return rects.reduce((rm,rr)=>Math.max(rm,rr.right),m);
+      },el.getBoundingClientRect().left);
     }
-    return {x:inX.get(key) ?? r.left-br.left-8,y:r.top+r.height*.5-br.top};
-  }
-  pairs.forEach(([a,b,cls])=>{
-    const p1=point(a,'right'),p2=point(b,'left');
-    if(!p1||!p2)return;
-    const gap=p2.x-p1.x;
-    const dx=Math.min(Math.max(12,gap*.34),28);
-    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-    const ex=p2.x, ey=p2.y;
-    const sx=p1.x+3.2;
-    path.setAttribute('d',`M ${sx} ${p1.y} C ${sx+dx} ${p1.y}, ${p2.x-dx} ${p2.y}, ${ex} ${ey}`);
-    if(cls)path.setAttribute('class',cls);
-    svg.appendChild(path);
-    const startDot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    startDot.setAttribute('cx',p1.x); startDot.setAttribute('cy',p1.y); startDot.setAttribute('r','2.5');
-    startDot.setAttribute('class',(cls?cls+' ':'')+'start');
-    svg.appendChild(startDot);
-    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    dot.setAttribute('cx',ex); dot.setAttribute('cy',ey); dot.setAttribute('r','2.5');
-    if(cls)dot.setAttribute('class',cls);
-    svg.appendChild(dot);
+    function anchorMap(keys,side){
+      const nodes=keys.map(key=>box.querySelector(`[data-rel="${key}"]`)).filter(Boolean);
+      if(!nodes.length)return new Map();
+      const groups=new Map();
+      nodes.forEach(el=>{
+        const col=el.closest('.dgroup')||el.parentElement;
+        if(!groups.has(col))groups.set(col,[]);
+        groups.get(col).push(el);
+      });
+      const anchors=new Map();
+      groups.forEach(group=>{
+        const x=side==='right'
+          ? Math.max(...group.map(el=>textRight(el)))-br.left+6
+          : Math.min(...group.map(el=>{
+              const icon=el.querySelector('svg.lucide,i[data-lucide],.no');
+              const anchor=icon?icon.getBoundingClientRect():el.getBoundingClientRect();
+              return anchor.left;
+            }))-br.left-8;
+        group.forEach(el=>anchors.set(el.dataset.rel,x));
+      });
+      return anchors;
+    }
+    const fromKeys=[...new Set(pairs.map(([a])=>a))];
+    const toKeys=[...new Set(pairs.map(([,b])=>b))];
+    const outX=anchorMap(fromKeys,'right');
+    const inX=anchorMap(toKeys,'left');
+    function point(key,side){
+      const el=box.querySelector(`[data-rel="${key}"]`);
+      if(!el)return null;
+      const r=el.getBoundingClientRect();
+      if(side==='right'){
+        return {x:outX.get(key) ?? textRight(el)-br.left+6,y:r.top+r.height*.5-br.top};
+      }
+      return {x:inX.get(key) ?? r.left-br.left-8,y:r.top+r.height*.5-br.top};
+    }
+    pairs.forEach(([a,b,cls])=>{
+      const p1=point(a,'right'),p2=point(b,'left');
+      if(!p1||!p2)return;
+      const gap=p2.x-p1.x;
+      const dx=Math.min(Math.max(12,gap*.34),28);
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      const ex=p2.x, ey=p2.y;
+      const sx=p1.x+3.2;
+      path.setAttribute('d',`M ${sx} ${p1.y} C ${sx+dx} ${p1.y}, ${p2.x-dx} ${p2.y}, ${ex} ${ey}`);
+      if(cls)path.setAttribute('class',cls);
+      svg.appendChild(path);
+      const startDot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      startDot.setAttribute('cx',p1.x); startDot.setAttribute('cy',p1.y); startDot.setAttribute('r','2.5');
+      startDot.setAttribute('class',(cls?cls+' ':'')+'start');
+      svg.appendChild(startDot);
+      const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      dot.setAttribute('cx',ex); dot.setAttribute('cy',ey); dot.setAttribute('r','2.5');
+      if(cls)dot.setAttribute('class',cls);
+      svg.appendChild(dot);
+    });
   });
 }
 
@@ -2911,11 +2935,11 @@ function installDevHmFocus(){
   const callout=document.getElementById('devHmCallout');
   const stepBox=document.getElementById('devHmSteps');
   const focus=[
-    {title:'问题 1 · 登录与下载是最大断点',val:'4.3：21 / 87',desc:'下载相关触点不是小幅落后，而是极端断点。开发者还没开始验证能力，就已经被账号、协议和包选择消耗掉耐心。',icon:'download',demo:'<div class="qd"><div class="chips"><span class="chip bad">Toolkit −66</span><span class="chip bad">登录 −16</span><span class="chip">结论 1</span></div></div>'},
-    {title:'问题 2 · 正确起点与搜索命中不稳定',val:'6.4：−17',desc:'门户和内容并不弱，但开发者常从任务出发，而不是从产品名出发。外部搜索和站内入口需要更稳定地把人带回官方当前答案。',icon:'search',demo:'<div class="qd"><div class="chips"><span class="chip bad">博客 / 案例 −17</span><span class="chip">入口 +1</span><span class="chip">结论 4</span></div></div>'},
-    {title:'问题 3 · 上手长板没有成为默认路径',val:'3.2：+10',desc:'学习路径、HiDevLab 和 ModelZoo 是反超点。问题不是没有能力，而是这些能力还没有被前置为新手默认会走的起步路径。',icon:'play',demo:'<div class="qd"><div class="chips"><span class="chip">HiDevLab +10</span><span class="chip">ModelZoo +2</span><span class="chip">结论 3</span></div></div>'},
-    {title:'问题 4 · 海外体验受多重门槛影响',val:'6.1：−15',desc:'语言触点本身不是唯一问题，账号登录、论坛游客可读、博客索引和英文内容同步会一起决定海外开发者能不能顺畅完成任务。',icon:'globe',demo:'<div class="qd"><div class="chips"><span class="chip">语言 0</span><span class="chip bad">论坛 −15</span><span class="chip">结论 2</span></div></div>'},
-    {title:'问题 5 · 支持内容没有稳定闭环',val:'6.3：+22',desc:'FAQ 自助是明确反超点，但开发者真正卡住时，还需要文档页、报错页、论坛和工单互相导流，并把高频问题沉淀回官方内容。',icon:'message',demo:'<div class="qd"><div class="chips"><span class="chip">FAQ +22</span><span class="chip bad">论坛 −15</span><span class="chip">专题 5</span></div></div>'}
+    {title:'问题 1 · 登录与下载是最大断点',val:'4.3：21 / 87',desc:'下载相关触点不是小幅落后，而是极端断点。开发者还没开始验证能力，就已经被账号、协议和包选择消耗掉耐心。',icon:'download',demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node">想试用</div><div class="arr">→</div><div class="node bad">登录 / 协议</div><div class="arr">→</div><div class="node bad">选包判断</div></div><div class="devhm-bars"><div class="bar" style="height:18px"><span>21</span></div><div class="bar good" style="height:48px"><span>87</span></div><div class="bar" style="height:40px"><span>−66</span></div></div></div>`},
+    {title:'问题 2 · 正确起点与搜索命中不稳定',val:'6.4：−17',desc:'门户和内容并不弱，但开发者常从任务出发，而不是从产品名出发。外部搜索和站内入口需要更稳定地把人带回官方当前答案。',icon:'search',demo:`<div class="devhm-demo"><div class="devhm-path"><span>任务词</span><i>→</i><span class="hot">搜索结果</span><i>→</i><span>官方当前答案</span></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>现状</b><p>案例内容存在，但第一屏命中不稳定。</p></div><div class="pane"><b>目标</b><p>按场景入口和搜索摘要导回官方答案。</p></div></div></div>`},
+    {title:'问题 3 · 上手长板没有成为默认路径',val:'3.2：+10',desc:'学习路径、HiDevLab 和 ModelZoo 是反超点。问题不是没有能力，而是这些能力还没有被前置为新手默认会走的起步路径。',icon:'play',demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node good">学习路径</div><div class="arr">+</div><div class="node good">HiDevLab</div><div class="arr">+</div><div class="node good">ModelZoo</div></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>已有长板</b><p>快速上手 +10，示例模型 +2。</p></div><div class="pane"><b>改造方向</b><p>把它们前置为默认起步路径。</p></div></div></div>`},
+    {title:'问题 4 · 海外体验受多重门槛影响',val:'6.1：−15',desc:'语言触点本身不是唯一问题，账号登录、论坛游客可读、博客索引和英文内容同步会一起决定海外开发者能不能顺畅完成任务。',icon:'globe',demo:`<div class="devhm-demo"><div class="devhm-path"><span>英文入口</span><i>+</i><span class="hot">账号注册</span><i>+</i><span class="hot">论坛可读</span><i>+</i><span>案例索引</span></div><div class="devhm-bars"><div class="bar good" style="height:34px"><span>语言 0</span></div><div class="bar" style="height:45px"><span>论坛 −15</span></div><div class="bar" style="height:30px"><span>案例 −17</span></div></div></div>`},
+    {title:'问题 5 · 支持内容没有稳定闭环',val:'6.3：+22',desc:'FAQ 自助是明确反超点，但开发者真正卡住时，还需要文档页、报错页、论坛和工单互相导流，并把高频问题沉淀回官方内容。',icon:'message',demo:`<div class="devhm-demo"><div class="devhm-flow"><div class="node good">FAQ</div><div class="arr">→</div><div class="node">论坛 / 工单</div><div class="arr">→</div><div class="node good">案例回流</div></div><div class="devhm-mini" style="margin-top:7px"><div class="pane"><b>亮点</b><p>FAQ 自助明显反超。</p></div><div class="pane"><b>缺口</b><p>支持链路还没有稳定沉淀。</p></div></div></div>`}
   ];
   function iconSvg(type){
     const p={
@@ -2940,13 +2964,22 @@ function installDevHmFocus(){
     if(!rings||!card||!wrap)return;
     rings.innerHTML='';
     const wr=wrap.getBoundingClientRect();
+    const cr=card.getBoundingClientRect();
     const pad=8;
+    const vbox={l:Math.max(box.l,cr.left),t:Math.max(box.t,cr.top),r:Math.min(box.r,cr.right),b:Math.min(box.b,cr.bottom)};
+    if(vbox.r<=vbox.l||vbox.b<=vbox.t)return;
+    const ringBox={
+      l:Math.max(cr.left+2,vbox.l-pad),
+      t:Math.max(cr.top+2,vbox.t-pad),
+      r:Math.min(cr.right-2,vbox.r+pad),
+      b:Math.min(cr.bottom-2,vbox.b+pad)
+    };
     const el=document.createElement('div');
     el.className='hm-ring';
-    el.style.left=(box.l-wr.left-pad)+'px';
-    el.style.top=(box.t-wr.top-pad)+'px';
-    el.style.width=(box.r-box.l+pad*2)+'px';
-    el.style.height=(box.b-box.t+pad*2)+'px';
+    el.style.left=(ringBox.l-wr.left)+'px';
+    el.style.top=(ringBox.t-wr.top)+'px';
+    el.style.width=(ringBox.r-ringBox.l)+'px';
+    el.style.height=(ringBox.b-ringBox.t)+'px';
     rings.appendChild(el);
   }
   function placeCallout(box){
@@ -2955,11 +2988,23 @@ function installDevHmFocus(){
     const cw=callout.offsetWidth||360;
     const ch=callout.offsetHeight||160;
     const gap=14;
-    let x=box.r-cr.left+gap;
-    if(x+cw>cr.width-10)x=box.l-cr.left-cw-gap;
-    if(x<10)x=Math.max(10,Math.min(cr.width-cw-10,box.r-cr.left-cw));
-    let y=box.t-cr.top;
-    if(y+ch>cr.height-10)y=Math.max(10,cr.height-ch-10);
+    const margin=12;
+    const rel={l:box.l-cr.left,t:box.t-cr.top,r:box.r-cr.left,b:box.b-cr.top};
+    let x=rel.r+gap;
+    let y=rel.t;
+    const wide=(rel.r-rel.l)>cr.width*.62;
+    if(wide){
+      x=Math.max(margin,Math.min(cr.width-cw-margin,cr.width-cw-margin));
+      const above=rel.t-ch-gap;
+      const below=rel.b+gap;
+      if(above>=margin)y=above;
+      else if(below+ch<=cr.height-margin)y=below;
+      else y=Math.max(margin,Math.min(cr.height-ch-margin,rel.t));
+    }else{
+      if(x+cw>cr.width-margin)x=rel.l-cw-gap;
+      if(x<margin)x=Math.max(margin,Math.min(cr.width-cw-margin,rel.r-cw));
+      if(y+ch>cr.height-margin)y=Math.max(margin,cr.height-ch-margin);
+    }
     callout.style.left=x+'px';
     callout.style.top=y+'px';
   }
@@ -2997,13 +3042,39 @@ function installDevHmFocus(){
     window.__devHmStep=idx;
     updatePager(idx);
   }
+  function syncHash(){
+    const step=typeof window.__devHmStep==='number'?window.__devHmStep:-1;
+    try{history.replaceState(null,'','#57'+(step>=0?'-hm'+(step+1):''));}catch(e){}
+  }
+  function stepByKeyboard(dir){
+    const cur=typeof window.__devHmStep==='number'?window.__devHmStep:-1;
+    const next=cur+dir;
+    if(next>=-1&&next<focus.length){setStep(next);syncHash();return true;}
+    return false;
+  }
+  function onDevHmKey(e){
+    if(e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey||idx!==56)return;
+    if(e.target&&['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
+    const fwd=['ArrowDown','ArrowRight','PageDown',' '],back=['ArrowUp','ArrowLeft','PageUp'];
+    let handled=false;
+    if(fwd.includes(e.key))handled=stepByKeyboard(e.shiftKey?-1:1);
+    else if(back.includes(e.key))handled=stepByKeyboard(-1);
+    if(handled){e.preventDefault();e.stopImmediatePropagation();}
+  }
   if(stepBox){
     stepBox.innerHTML='<button class="hm-step arrow" type="button" data-dir="-1" aria-label="上一页">‹</button><button class="hm-step hm-page overview" type="button" data-page="-1" aria-label="总览">总览</button>'+focus.map((_,i)=>'<button class="hm-step hm-page" type="button" data-page="'+i+'" aria-label="聚焦 '+(i+1)+'">'+(i+1)+'</button>').join('')+'<button class="hm-step arrow" type="button" data-dir="1" aria-label="下一页">›</button>';
-    stepBox.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>setStep(Number(b.getAttribute('data-page')))));
-    stepBox.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>setStep((typeof window.__devHmStep==='number'?window.__devHmStep:-1)+Number(b.getAttribute('data-dir')))));
+    stepBox.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>{setStep(Number(b.getAttribute('data-page')));syncHash();}));
+    stepBox.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{setStep((typeof window.__devHmStep==='number'?window.__devHmStep:-1)+Number(b.getAttribute('data-dir')));syncHash();}));
   }
-  setStep(-1);
+  const m=(location.hash||'').match(/^#57-hm([1-5])$/);
+  setStep(m?Number(m[1])-1:-1);
   addEventListener('resize',()=>setStep(typeof window.__devHmStep==='number'?window.__devHmStep:-1),{passive:true});
+  addEventListener('hashchange',()=>{
+    const m=(location.hash||'').match(/^#57-hm([1-5])$/);
+    if(m)setStep(Number(m[1])-1);
+    else if(location.hash==='#57')setStep(-1);
+  },{passive:true});
+  document.addEventListener('keydown',onDevHmKey,true);
 }
 
 /* 总览 Overview：每页包进 .slide-inner 缩放成缩略图，排网格（按当前视窗比例）*/
