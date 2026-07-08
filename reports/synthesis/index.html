@@ -1073,23 +1073,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .bottom-box span{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;color:var(--a)}
     .bottom-box.out{--a:#209067}
     .metric-explain{display:grid;grid-template-rows:auto 1fr auto;gap:1vh;min-height:0}
-    .metric-class-layout{display:grid;grid-template-columns:1.34fr .82fr;gap:1.28vw;flex:1;min-height:0;align-items:stretch}
+    .metric-class-layout{display:grid;grid-template-columns:minmax(0,1.58fr) minmax(0,.64fr);gap:1.08vw;flex:1;min-height:0;align-items:stretch}
     .metric-taxonomy{position:relative;border-radius:16px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.88);padding:1.35vh 1.05vw;display:grid;grid-template-rows:auto 1fr;gap:.95vh;min-height:0;overflow:hidden}
     .metric-taxonomy:after{content:"";position:absolute;right:-1px;bottom:-1px;width:40%;height:28%;border-radius:0 0 16px 0;background:radial-gradient(120% 100% at 100% 100%,rgba(109,93,246,.08),rgba(109,93,246,.03) 54%,transparent 78%);pointer-events:none}
     .tax-head{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:1vw}
     .tax-head b{display:block;font-size:var(--fs-h2);line-height:1.22;color:var(--ink);font-weight:950}
     .tax-head span{display:block;font-size:var(--fs-sm);line-height:1.35;color:var(--ink-2)}
     .tax-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr;grid-template-rows:1.12fr .76fr .6fr .6fr .66fr;gap:.54vh;min-height:0}
-    .tax-group{--a:#657182;border-radius:14px;background:rgba(255,255,255,.7);border:1px solid rgba(198,203,214,.7);padding:.58vh .72vw;display:grid;grid-template-columns:156px 1fr;gap:.7vw;align-items:stretch;min-height:0;overflow:hidden}
+    .tax-group{--a:#657182;border-radius:14px;background:rgba(255,255,255,.7);border:1px solid rgba(198,203,214,.7);padding:.58vh .72vw;display:grid;grid-template-columns:180px 1fr;gap:.72vw;align-items:stretch;min-height:0;overflow:hidden}
     .tax-group.eco{--a:#657182}
     .tax-group.own{--a:#657182}
     .tax-group.process{--a:#657182}
     .tax-group.output{--a:#657182}
-    .tax-g-head{display:flex;align-items:center;gap:.58vw;min-width:0;border-right:1px dashed rgba(143,151,164,.28);padding-right:.7vw}
-    .tax-code{position:relative;width:42px;height:42px;border-radius:12px;background:var(--g-ink);border:1px solid rgba(255,255,255,.2);color:#fff;display:block;flex:0 0 42px;box-shadow:0 8px 18px -14px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.26);line-height:0}
-    .tax-code i,.tax-code svg{position:absolute;left:50%;top:calc(50% + 1px);width:20px;height:20px;display:block;color:#fff!important;stroke:#fff!important;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none;transform:translate(-50%,-50%)}
-    .tax-g-head b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}
-    .tax-g-head span{display:block;margin-top:.16vh;font-size:var(--fs-xs);line-height:1.2;color:#667082;font-weight:850}
+    .tax-g-head{display:flex;align-items:center;gap:.56vw;min-width:0;border-right:0;border-radius:12px;background:linear-gradient(135deg,#171b22,#2b313b);padding:.56vh .62vw;color:#fff;box-shadow:0 12px 24px -22px rgba(20,23,28,.75),inset 0 1px 0 rgba(255,255,255,.16)}
+    .tax-code{position:relative;width:28px;height:28px;border-radius:0;background:transparent;border:0;color:#fff;display:block;flex:0 0 28px;box-shadow:none;line-height:0}
+    .tax-code i,.tax-code svg{position:absolute;left:50%;top:50%;width:21px;height:21px;display:block;color:#fff!important;stroke:#fff!important;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round;fill:none;transform:translate(-50%,-50%)}
+    .tax-g-head b{display:flex;align-items:center;gap:.34vw;flex-wrap:wrap;font-size:var(--fs-body);line-height:1.18;color:#fff;font-weight:950}
+    .tax-g-head b em{font-style:normal;display:inline-flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.78);font-size:9px;line-height:1;font-weight:850;padding:3px 7px;white-space:nowrap}
+    .tax-g-head span{display:block;margin-top:.18vh;font-size:var(--fs-xs);line-height:1.22;color:rgba(255,255,255,.68);font-weight:850}
     .tax-items{display:grid;gap:.28vh .56vw;align-content:center;min-height:0}
     .tax-group.official .tax-items{grid-template-columns:1fr 1fr}
     .tax-group.eco .tax-items,.tax-group.output .tax-items{grid-template-columns:1fr 1fr}
@@ -1119,9 +1120,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .route-node.k{background:linear-gradient(140deg,rgba(246,244,255,.94),rgba(255,255,255,.78));border-color:rgba(109,93,246,.22)}
     .route-node.k b{color:#342DA1}
     .route-weights{display:grid;grid-template-columns:repeat(3,1fr);gap:.55vw}
-    .route-weights div{border-radius:11px;background:rgba(255,255,255,.66);border:1px solid rgba(198,203,214,.62);padding:.72vh .62vw}
+    .route-weights div{border-radius:11px;background:linear-gradient(135deg,#171b22,#2b313b);border:1px solid rgba(255,255,255,.14);padding:.72vh .62vw;box-shadow:0 12px 24px -22px rgba(20,23,28,.7),inset 0 1px 0 rgba(255,255,255,.14)}
     .route-weights b{display:block;font-family:'JetBrains Mono';font-size:var(--fs-h3);line-height:1;font-weight:950}
-    .route-weights span{display:block;margin-top:.32vh;font-size:var(--fs-xs);line-height:1.25;color:var(--ink-2)}
+    .route-weights span{display:block;margin-top:.32vh;font-size:var(--fs-xs);line-height:1.25;color:rgba(255,255,255,.68)}
     .route-weights .w10 b{color:#209067}.route-weights .w30 b{color:#D9892B}.route-weights .w50 b{color:#5B5BD6}
   </style>
 
@@ -1152,7 +1153,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="tax-head"><div><b>同一套 ①–⑩，从两个视角说明：上一页讲“流程来源”，本页讲“计算模式”</b><span>流程视角说明指标从 AI 作答链路哪里来；计算视角说明每项如何从原始观测换算成 1–5 分。</span></div><span>计算模式 × 流程标签</span></div>
           <div class="tax-grid">
             <div class="tax-group official">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="badge-check"></i></span><div><b>官方证据类｜串行相乘</b><span>OFF = nm①×nm②×nm③；任一环断掉都会打折</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="badge-check"></i></span><div><b>官方证据类 <em>串行相乘</em></b><span>OFF = nm①×nm②×nm③；任一环断掉都会打折</span></div></div>
               <div class="tax-items">
                 <div class="tax-item"><span class="idx">①</span><div><b>官方可发现性 <i class="flowtag q">触达</i></b><span>首条官方=5；首屏靠后=4/3；二次改词才找到=2。</span></div></div>
                 <div class="tax-item"><span class="idx">②</span><div><b>官方可抓取性 <i class="flowtag q">触达</i></b><span>静态=5；服务端渲染/部分可抓=4；单页应用=2；robots 拦截=1。</span></div></div>
@@ -1161,26 +1162,26 @@ body.overview #panel,body.overview #toggle{display:none!important}
               </div>
             </div>
             <div class="tax-group eco">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="network"></i></span><div><b>生态互证类｜数量×可信</b><span>SEC = nm⑤×nm⑥；第三方少或不可信都会削弱互证</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="network"></i></span><div><b>生态互证类 <em>数量×可信</em></b><span>SEC = nm⑤×nm⑥；第三方少或不可信都会削弱互证</span></div></div>
               <div class="tax-items">
                 <div class="tax-item"><span class="idx">⑤</span><div><b>第三方丰富度 <i class="flowtag q">触达</i></b><span>去重来源数：≥6=5；5=4；3–4=3；1–2=2；0=1。</span></div></div>
                 <div class="tax-item"><span class="idx">⑥</span><div><b>第三方可信度 <i class="flowtag">质量</i></b><span>来源可信均分 + 一致性 + 时效 + 平台独立性，限制在 1–5。</span></div></div>
               </div>
             </div>
             <div class="tax-group own">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="brain-circuit"></i></span><div><b>模型先验类｜单独成链</b><span>OWN = nm⑦；训练知识可独立支撑，但受技术迭代影响</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="brain-circuit"></i></span><div><b>模型先验类 <em>单独成链</em></b><span>OWN = nm⑦；训练知识可独立支撑，但受技术迭代影响</span></div></div>
               <div class="tax-items">
                 <div class="tax-item"><span class="idx">⑦</span><div><b>模型自带知识 <i class="flowtag">质量</i></b><span>先验档位 + 截止风险：稳定 0；中等迭代 -0.25；快速迭代 -0.5。</span></div></div>
               </div>
             </div>
             <div class="tax-group process">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="search"></i></span><div><b>检索过程类｜轻量折扣</b><span>成本因子 = 0.9 + 0.1×nm⑧；只影响效率，不主导成败</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="search"></i></span><div><b>检索过程类 <em>轻量折扣</em></b><span>成本因子 = 0.9 + 0.1×nm⑧；只影响效率，不主导成败</span></div></div>
               <div class="tax-items">
                 <div class="tax-item"><span class="idx">⑧</span><div><b>检索成本 <i class="flowtag c">成本</i></b><span>cost=轮数+0.5×抓取+4×失败；≤1.5=5，≤2.5=4，≤4=3，≤6=2。</span></div></div>
               </div>
             </div>
             <div class="tax-group output">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="package-check"></i></span><div><b>答案产出类｜结果解释</b><span>⑨⑩ 不进入 ⑪；用于说明 AI 最终答案能否落地</span></div></div>
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="package-check"></i></span><div><b>答案产出类 <em>结果解释</em></b><span>⑨⑩ 不进入 ⑪；用于说明 AI 最终答案能否落地</span></div></div>
               <div class="tax-items">
                 <div class="tax-item"><span class="idx">⑨</span><div><b>版本可锁定性 <i class="flowtag o">产出</i></b><span>精确版本=5；基本可定=4；范围可定=3；无法定死=2。</span></div></div>
                 <div class="tax-item"><span class="idx">⑩</span><div><b>步骤可复现性 <i class="flowtag o">产出</i></b><span>照抄即跑=5；替参数=4；需小修=3；仅骨架=2。</span></div></div>
@@ -1190,7 +1191,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="view-bridge"><div><b>上一页：流程视角</b><span>触达 → 质量 → 成本 → 产出，解释指标来源。</span></div><div><b>本页：计算视角</b><span>串行链、互证链、先验链、折扣项、产出项，解释算法定义。</span></div></div>
         </div>
         <div class="metric-route">
-          <div class="route-card"><b>⑪ 综合分只回答一件事：AI 有没有足够可靠的证据来作答</b><p>先分别计算官方资料、第三方资料、模型自带知识三条证据链；再用版本清晰度和检索成本做折扣；最后用 ⑨⑩ 单独解释答案能否落地。</p></div>
+          <div class="route-card"><b>⑪ 综合分只回答一件事：AI 有没有足够可靠的证据来作答</b><p>①–⑩ 采用 1–5 可解释档位：5 表示几乎不阻碍 AI 作答，3 表示需要拼接或判断，1/2 表示会明显拖累答案可靠性。随后再计算官方、第三方、模型自带知识三条证据链。</p></div>
           <div class="route-flow">
             <div class="route-node" data-step="1"><b>先算三条证据链各自是否成立</b><code>官方链 = nm①×nm②×nm③<br>第三方链 = nm⑤×nm⑥<br>模型先验链 = nm⑦</code><p>官方链是“搜得到、抓得到、正文够用”串起来；第三方链是“数量够、可信度够”共同成立。</p></div>
             <div class="route-node k" data-step="2"><b>再算至少一条证据链可用的概率</b><code>K = 1-(1-官方链)(1-第三方链)(1-模型先验链)</code><p>AI 作答不要求三条链都满分，只要有一条足以支撑答案，就能形成可靠回答。</p></div>
