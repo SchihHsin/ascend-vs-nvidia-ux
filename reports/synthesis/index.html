@@ -2888,7 +2888,7 @@ const metricSlide=document.querySelector('.metric-calc-slide');
 let metricSpot=0;
 function setMetricSpot(step,writeHash){
   if(!metricSlide)return;
-  metricSpot=Math.max(0,Math.min(1,step));
+  metricSpot=Math.max(0,Math.min(2,step));
   metricSlide.classList.toggle('metric-spot-left',metricSpot===0);
   metricSlide.classList.toggle('metric-spot-right',metricSpot===1);
   if(writeHash&&slides[idx]===metricSlide){try{history.replaceState(null,'',deckHash(idx));}catch(e){}}
@@ -2899,7 +2899,7 @@ function clearMetricSpot(){
 }
 function metricSpotNav(delta){
   if(document.body.classList.contains('overview')||slides[idx]!==metricSlide)return false;
-  if(delta>0&&metricSpot<1){setMetricSpot(metricSpot+1,true);return true;}
+  if(delta>0&&metricSpot<2){setMetricSpot(metricSpot+1,true);return true;}
   if(delta<0&&metricSpot>0){setMetricSpot(metricSpot-1,true);return true;}
   return false;
 }
@@ -2918,8 +2918,8 @@ function updateCurrent(i){
   lazyFrames(idx);
   slides.forEach((sl,k)=>sl.classList.toggle('active',k===idx));
   if(s===metricSlide){
-    const metricHash=(location.hash||'').match(/^#\d+-m([12])$/);
-    setMetricSpot(metricHash?Number(metricHash[1])-1:(from>idx?1:0),false);
+    const metricHash=(location.hash||'').match(/^#\d+-m([123])$/);
+    setMetricSpot(metricHash?Number(metricHash[1])-1:(from>idx?2:0),false);
   }else clearMetricSpot();
   try{history.replaceState(null,'',deckHash(idx));}catch(e){}   /* 网址带当前页码 */
   counter.textContent=pad(idx+1)+' / '+pad(slides.length);
