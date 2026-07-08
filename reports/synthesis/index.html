@@ -1745,7 +1745,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="tpguide-l">
           <div class="cmp-h"><span class="hk">Evidence</span>每个触点都看同一件事：开发者能不能顺着页面完成下一步</div>
           <div class="tpguide-card"><b>不是只比较页面好不好看</b><p>逐触点分析会同时看真实截图、用户此刻的任务、昇腾与 NVIDIA 的同位路径，以及分差背后的摩擦来源。</p></div>
-          <div class="tpguide-card"><b>先读证据，再收束为问题</b><p>后面 25 页是证据层；看完后再汇总成登录下载、搜索入口、上手运行、海外体验、问题闭环五类基础体验问题。</p></div>
+          <div class="tpguide-card"><b>先读证据，再收束为问题</b><p>后面 25 页是证据层；看完后再汇总成登录下载、搜索入口、上手运行、海外体验、支持知识沉淀五类基础体验问题。</p></div>
           <div class="bridge" style="margin-top:auto">阅读顺序：<b>页面证据</b> → <b>同位对比</b> → <b>分差解释</b> → <b>综合诊断</b>。</div>
         </div>
         <div class="tpguide-r">
@@ -1774,6 +1774,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <style>
     .ccg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;flex:1;min-height:0;align-content:stretch}
     .ccg.topic-overview{grid-template-rows:repeat(2,minmax(0,1fr));gap:1.05vw;align-content:stretch}
+    .ccg.topic-overview.four{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:1fr}
+    .topic-overview.four .cc{grid-column:auto}
     .topic-overview .cc{padding:1.85vh 1.35vw;gap:.86vh;justify-content:flex-start}
     .topic-overview .cc-tag{font-size:var(--fs-sm);padding:4px 12px}
     .topic-overview .cc-h{font-size:var(--fs-h2);line-height:1.2;position:relative;z-index:1}
@@ -2217,7 +2219,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="dlink" data-rel="search-result"><span class="no">#4</span><div><b>围绕高频任务词优化搜索可发现性与索引可达</b><span>对应正确起点和外部搜索命中。</span></div></div>
             <div class="dlink" data-rel="onboard-result"><span class="no">#3</span><div><b>把 HiDevLab、ModelZoo 与学习路径设为默认起步路径</b><span>对应 HiDevLab、ModelZoo 和学习路径。</span></div></div>
             <div class="dlink" data-rel="global-result"><span class="no">#2</span><div><b>按海外开发者旅程补齐账号、英文与社区可读性</b><span>对应海外可达性的组合门槛。</span></div></div>
-            <div class="dlink" data-rel="support-result"><span class="no">专题 5</span><div><b>把 FAQ、论坛、工单和案例沉淀成支持闭环</b><span>对应 FAQ 亮点与论坛 / 工单沉淀不足。</span></div></div>
+            <div class="dlink" data-rel="support-result"><span class="no">#5</span><div><b>把 FAQ、论坛、工单和案例沉淀成可复用支持知识</b><span>对应 FAQ 亮点与论坛 / 工单沉淀不足。</span></div></div>
           </div></div>
         </div>
       </div>
@@ -2268,28 +2270,52 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
+  <!-- 18 灰底：基础体验做法 5 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">基础体验做法 5：把 FAQ、论坛、工单和案例沉淀成可复用支持知识</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「做法⑤ 支持知识沉淀」</div>
+      </div>
+      <div class="head-r">63/ 基础体验做法 · 5</div>
+    </div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip t5">做法</span>
+      <div class="rgoal" data-board="2.2 · 支持知识"><span class="gl">目标</span><span class="rgoal-t">把开发者遇到的问题从“一次性答复”变成可复用知识：FAQ、论坛、工单、错误码和案例互相导流，让开发者卡住时能继续往下走。</span></div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档页提供<b>局部 FAQ + 下一步求助入口</b></div><div class="rmi-why">开发者通常是在安装、API、工具或报错页卡住；FAQ 要出现在问题发生的位置，而不是只放在集中页面。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">论坛内容<b>游客可读、可被搜索引擎索引</b></div><div class="rmi-why">论坛分版精细是基础，但登录墙和索引不足会削弱长尾问题的“一搜即达”。<span class="src2">触点 6.1</span></div></div></div>
+        <div class="ahead p1">P1</div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">每个高频错误码建<b>一码一页</b>，含原因、场景、修复样例</div><div class="rmi-why">错误码页面不能只解释“发生了什么”，还要给可验证的修复路径。<span class="src2">AI 问题 #5</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">把高质量论坛帖和工单沉淀为<b>官方 FAQ / 案例</b></div><div class="rmi-why">同类问题反复出现时，应回流到文档和搜索结果，而不是停留在一次性回复里。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
+        <div class="ahead p2">P2</div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">按 D/M/X/O/L 建<b>高难度任务专题内容池</b></div><div class="rmi-why">自定义算子、Tiling、msSanitizer、注册集成、精度排查要从零散页面整理成任务包。<span class="src2">AI 问题 #6</span></div></div></div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">把搜索词、论坛、工单每月回流到<b>FAQ / 文档 / 示例仓</b></div><div class="rmi-why">让支持链路成为内容更新的来源，持续减少同类问题的重复求助。<span class="src2">支持知识沉淀</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
   <!-- 结论行动 · 专题总览 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">结论行动：按专题补齐六块能力</span></div>
+        <div class="brand"><span class="ttl">结论行动：按四个官网板块补齐关键能力</span></div>
         <div class="subttl">结论 · 专题板块行动方案 · 「总览」</div>
       </div>
-      <div class="head-r">63/ 结论行动 · 专题总览</div>
+      <div class="head-r">64/ 结论行动 · 专题总览</div>
     </div>
     <div class="body-area" style="align-items:stretch">
-      <div class="ccg topic-overview">
+      <div class="ccg topic-overview four">
         <div class="cc t1">
-          <div class="cc-top"><span class="cc-tag">专题 1</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/><path d="M8 11h6"/><path d="M11 8v6"/></svg></span></div>
-          <div class="cc-h">搜索与入口可发现性</div>
-          <div class="cc-d">先让官方答案进入开发者和 AI 的第一屏：外部搜索、站内搜索、首屏入口、场景入口都要指向<b>正确起点</b>。</div>
-          <div class="cc-ev"><span>外部搜索</span><span>站内搜索</span><span>正确起点</span></div>
+          <div class="cc-top"><span class="cc-tag">专题 1</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h11v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h5"/><path d="M8 11h6"/><path d="M8 15h4"/></svg></span></div>
+          <div class="cc-h">文档内容与知识结构</div>
+          <div class="cc-d">文档、错误码、FAQ、案例和高难度任务专题一起治理，让开发者能读懂，AI 也能<b>抓到、引用、用对</b>。</div>
+          <div class="cc-ev"><span>版本</span><span>可抓取</span><span>错误码</span><span>FAQ</span></div>
         </div>
         <div class="cc t2">
-          <div class="cc-top"><span class="cc-tag">专题 2</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h11v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h5"/><path d="M8 11h6"/><path d="M8 15h4"/></svg></span></div>
-          <div class="cc-h">内容结构与 AI 可用性</div>
-          <div class="cc-d">文档不单独成块，而是作为知识基础设施：版本、结构、正文可读、机器可读出口共同决定 AI 能不能<b>用对</b>。</div>
-          <div class="cc-ev"><span>版本</span><span>可抓取</span><span>结构化索引</span></div>
+          <div class="cc-top"><span class="cc-tag">专题 2</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/><path d="M8 11h6"/><path d="M11 8v6"/></svg></span></div>
+          <div class="cc-h">首屏与入口可发现性</div>
+          <div class="cc-d">先让官方答案进入开发者和 AI 的第一屏：官网首屏、场景入口、外部搜索和站内搜索都指向<b>正确起点</b>。</div>
+          <div class="cc-ev"><span>首屏入口</span><span>外部搜索</span><span>站内搜索</span></div>
         </div>
         <div class="cc t3">
           <div class="cc-top"><span class="cc-tag">专题 3</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/><path d="M5 5v14"/></svg></span></div>
@@ -2303,36 +2329,50 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="cc-d">登录、协议、Toolkit 包选择、版本配套是最大硬摩擦；先把“拿到包、装对版”变<b>简单</b>。</div>
           <div class="cc-ev"><span>登录前置</span><span>Toolkit</span><span>配套矩阵</span></div>
         </div>
-        <div class="cc t5">
-          <div class="cc-top"><span class="cc-tag">专题 5</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span></div>
-          <div class="cc-h">问题支持与生态闭环</div>
-          <div class="cc-d">报错、FAQ、论坛、排障工具和第三方内容要形成持续支持链路，让内存越界、精度、注册集成等<b>高难度问题</b>有可信答案。</div>
-          <div class="cc-ev"><span>报错检索</span><span>FAQ</span><span>多源互证</span></div>
-        </div>
-        <div class="cc t6">
-          <div class="cc-top"><span class="cc-tag">专题 6</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span></div>
-          <div class="cc-h">运营机制与责任闭环</div>
-          <div class="cc-d">专题可以跨团队，但每块都要有牵头方、发布清单、衡量指标和复盘节奏，避免建议停在<b>页面改文案</b>。</div>
-          <div class="cc-ev"><span>牵头方</span><span>发布清单</span><span>指标复盘</span></div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- 行动 · 专题：搜索与入口可发现性 -->
+  <!-- 行动 · 专题：文档内容与知识结构 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip t1">专题 1</span><span class="ttl">搜索与入口可发现性——先让官方答案进入第一屏</span></div>
+        <div class="brand"><span class="role-chip t1">专题 1</span><span class="ttl">文档内容与知识结构——让开发者能读懂，AI 能用对</span></div>
       </div>
-      <div class="head-r board-tabs t1"><div class="bk-strip" data-group="topic"><span class="bk on">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">问题闭环</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r board-tabs t1"><div class="bk-strip" data-group="topic"><span class="bk on">文档内容</span><span class="bk">首屏入口</span><span class="bk">上手运行</span><span class="bk">环境门槛</span></div></div>
     </div>
     <div class="body-area"><div class="rolewrap"><span class="role-chip t1">专题</span>
-      <div class="rgoal" data-board="1.1 · 搜索入口"><span class="gl">目标</span><span class="rgoal-t">把外部搜索、站内搜索、首屏入口和场景入口接成一条路径：开发者不必知道产品名，AI 也不必反复换关键词，就能回到<b>官方、当前、可执行</b>的答案。</span></div>
+      <div class="rgoal" data-board="1.1 · 文档内容"><span class="gl">目标</span><span class="rgoal-t">把文档、错误码、FAQ、案例和高难度任务专题作为一套知识基础设施治理：人能顺着任务读下去，AI 能按版本、场景和证据给出可信回答。</span></div>
+      <div class="ameasures">
+        <div class="ahead p0">P0</div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">建立<b>首选网址 + 当前推荐版</b>规则</div><div class="rmi-why">版本混乱是 AI 侧覆盖面最大的问题，也会让开发者在下载和文档之间反复确认。<span class="src2">AI 问题 #1</span></div></div></div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">每个高频错误码建<b>一码一页</b>，含原因、场景、修复样例</div><div class="rmi-why">错误码页面不能只解释“发生了什么”，还要给可验证的修复路径。<span class="src2">AI 问题 #5 / 触点 6.3</span></div></div></div>
+        <div class="ahead p1">P1</div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">上线<b>llms.txt / llms-full.txt + Markdown 查看</b>出口</div><div class="rmi-why">给 Agent 一条稳定、低成本、可引用的读取通道，减少抓不到正文后的凭记忆补全。<span class="src2">内容可用性结论 #4</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">关键教程页保证<b>正文、代码、表格可直接读取</b></div><div class="rmi-why">开发者看到的是文档，Agent 抓到却可能是导航骨架；两套体验必须统一。<span class="src2">AI 问题 #4 / 结论 #5</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档页提供<b>局部 FAQ + 下一步求助入口</b></div><div class="rmi-why">FAQ 要出现在安装、API、工具、报错这些开发者卡住的位置。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">围绕 D/M/X/O/L 建<b>高难度任务专题内容池</b></div><div class="rmi-why">自定义算子、Tiling、msSanitizer、注册集成、精度排查要从零散页面整理成任务包。<span class="src2">AI 问题 #6</span></div></div></div>
+        <div class="ahead p2">P2</div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">把论坛、工单、搜索词每月回流到<b>FAQ / 文档 / 示例仓</b></div><div class="rmi-why">让支持链路成为文档更新的来源，持续减少同类问题的重复求助。<span class="src2">基础体验做法 #5</span></div></div></div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">提供面向开发者的<b>昇腾知识 Skill</b></div><div class="rmi-why">用户在 AI 工具中启用后，可按版本、场景、错误码更容易获取昇腾官方知识。<span class="src2">设计点 ⑤</span></div></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 行动 · 专题：首屏与入口可发现性 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="role-chip t2">专题 2</span><span class="ttl">首屏与入口可发现性——先让官方答案进入第一屏</span></div>
+      </div>
+      <div class="head-r board-tabs t2"><div class="bk-strip" data-group="topic"><span class="bk">文档内容</span><span class="bk on">首屏入口</span><span class="bk">上手运行</span><span class="bk">环境门槛</span></div></div>
+    </div>
+    <div class="body-area"><div class="rolewrap"><span class="role-chip t2">专题</span>
+      <div class="rgoal" data-board="2.1 · 首屏入口"><span class="gl">目标</span><span class="rgoal-t">把外部搜索、站内搜索、首屏入口和场景入口接成一条路径：开发者不必知道产品名，AI 也不必反复换关键词，就能回到<b>官方、当前、可执行</b>的答案。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
         <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">官网首屏给一个<b>开发者起步 / 场景直达</b>主入口</div><div class="rmi-why">昇腾官网单站整合是优势，但品牌信息会盖住开发动作；入口要在首屏一眼可见。<span class="src2">触点 1.1</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">站内搜索支持<b>粘贴报错 / 日志</b>并按资源类型筛选</div><div class="rmi-why">报错检索是最高频求助入口；先识别开发者的卡点，再分流到文档、FAQ、论坛或工单。<span class="src2">触点 1.3 / 6.3</span></div></div></div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">站内搜索支持<b>粘贴报错 / 日志</b>并按资源类型筛选</div><div class="rmi-why">报错检索是最高频求助入口；先识别卡点，再分流到文档、FAQ、论坛或工单。<span class="src2">触点 1.3 / 6.3</span></div></div></div>
         <div class="ahead p1">P1</div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">把高频任务词写进<b>标题、摘要、URL 与首屏正文</b></div><div class="rmi-why">NVIDIA 侧高频 CUDA 查询常能在搜索第一屏看到官方页；昇腾侧部分任务需要翻页或补关键词，官方页才浮出。<span class="src2">AI 指标①</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">补充<b>按场景 / 按角色</b>的入口</div><div class="rmi-why">新手通常知道“我要做算子 / 推理 / 训练”，不一定知道应点哪个产品名；入口位置不必固定在顶栏。<span class="src2">触点 1.2</span></div></div></div>
@@ -2345,40 +2385,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div></div>
   </section>
 
-  <!-- 行动 · 专题：内容结构与 AI 可用性 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="role-chip t2">专题 2</span><span class="ttl">内容结构与 AI 可用性——文档是贯穿全链路的知识基础设施</span></div>
-      </div>
-      <div class="head-r board-tabs t2"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk on">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">问题闭环</span><span class="bk">责任闭环</span></div></div>
-    </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip t2">专题</span>
-      <div class="rgoal" data-board="2.1 · AI 可用性"><span class="gl">目标</span><span class="rgoal-t">文档不单独作为一个部门任务，而是贯穿搜索、上手、安装和排障的底座：正文要能被人读懂，也要能被 AI <b>抓到、引用、按版本使用</b>。</span></div>
-      <div class="ameasures">
-        <div class="ahead p0">P0</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">建立<b>首选网址 + 当前推荐版</b>规则</div><div class="rmi-why">版本混乱是 AI 侧覆盖面最大的问题，也会让开发者在下载和文档之间反复确认。<span class="src2">AI 问题 #1</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">上线<b>llms.txt / llms-full.txt</b>站点级索引</div><div class="rmi-why">给 Agent 一条稳定、低成本、可引用的读取通道，减少抓不到正文后的凭记忆补全。<span class="src2">内容可用性结论 #4</span></div></div></div>
-        <div class="ahead p1">P1</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">每页提供<b>以 Markdown 查看</b>出口</div><div class="rmi-why">Markdown 能保留标题、代码块、表格和链接，是 Agent 低成本读取文档的通道。<span class="src2">内容可用性结论 #4</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">关键教程页保证<b>正文可直接读取</b></div><div class="rmi-why">开发者看到的是文档，Agent 抓到却可能是导航骨架；两套体验必须统一。<span class="src2">AI 问题 #4 / 结论 #5</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">建立<b>结构化 API / 算子 / 错误码索引</b></div><div class="rmi-why">让 Agent 能按函数、算子、错误码精准进入，不必从全文搜索里碰运气。<span class="src2">内容可用性结论 #4 / #2</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">提供面向开发者的<b>昇腾知识 Skill</b></div><div class="rmi-why">用户在 AI 工具中启用后，可按版本、场景、错误码更容易获取昇腾官方知识，而不是在网页碎片里猜。<span class="src2">设计点 ⑤</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">文档页显式写入<b>版本、适用芯片、依赖、最后更新时间</b></div><div class="rmi-why">让模型回答时能带上约束，降低把旧版本内容套到当前任务的风险。<span class="src2">内容可用性结论 #5 / #8</span></div></div></div>
-        <div class="ahead p2">P2</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">为 Agent 暴露<b>检索 API / sitemap 分区</b></div><div class="rmi-why">减少 D/K/O 这类任务的检索成本尖刺，让模型能稳定回到官方源。<span class="src2">AI 问题 #7</span></div></div></div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">公开可训练的<b>英文、Markdown、代码样例语料</b></div><div class="rmi-why">模型自带知识偏薄，下一代模型要靠更开放、更结构化的官方与生态语料补齐。<span class="src2">内容可用性结论 #8</span></div></div></div>
-      </div>
-    </div></div>
-  </section>
-
   <!-- 行动 · 专题：上手与运行路径 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="role-chip t3">专题 3</span><span class="ttl">上手与运行路径——把“内容完整”变成“第一次就跑通”</span></div>
       </div>
-      <div class="head-r board-tabs t3"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk on">上手运行</span><span class="bk">环境门槛</span><span class="bk">问题闭环</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r board-tabs t3"><div class="bk-strip" data-group="topic"><span class="bk">文档内容</span><span class="bk">首屏入口</span><span class="bk on">上手运行</span><span class="bk">环境门槛</span></div></div>
     </div>
     <div class="body-area"><div class="rolewrap"><span class="role-chip t3">专题</span>
       <div class="rgoal" data-board="1.3 · 上手运行"><span class="gl">目标</span><span class="rgoal-t">把昇腾已经有优势的 HiDevLab 在线实验、ModelZoo、算子 hub 放大成统一心智：从任一入口进入，都能在 <b>5 分钟内跑出第一个结果</b>。</span></div>
@@ -2404,7 +2417,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-l">
         <div class="brand"><span class="role-chip t4">专题 4</span><span class="ttl">账号、下载与环境门槛——先解决登录和版本配套这两个硬阻断</span></div>
       </div>
-      <div class="head-r board-tabs t4"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk on">环境门槛</span><span class="bk">问题闭环</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r board-tabs t4"><div class="bk-strip" data-group="topic"><span class="bk">文档内容</span><span class="bk">首屏入口</span><span class="bk">上手运行</span><span class="bk on">环境门槛</span></div></div>
     </div>
     <div class="body-area"><div class="rolewrap"><span class="role-chip t4">专题</span>
       <div class="rgoal" data-board="1.2 · 环境门槛"><span class="gl">目标</span><span class="rgoal-t">让试用开发者<b>零阻力</b>拿到能跑的包：把登录、协议、Toolkit 包选择和版本配套从上手前的阻断，改成有默认值、有解释、有下一步的路径。</span></div>
@@ -2415,7 +2428,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="ahead p1">P1</div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要做“架构 → 版本 → 包”三四道判断题；给默认值、少让开发者选。<span class="src2">触点 4.3</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">区分<b>在线增量包 / 离线整包</b>并按网络环境默认选好</div><div class="rmi-why">NVIDIA 用 Network / Full 照顾联网 / 离线；昇腾现状只分社区 / 商用。<span class="src2">触点 4.4</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">下载 / 安装页把<b>当前推荐版本 + 配套</b>写进正文文字</div><div class="rmi-why">开发者不会配错，AI 也读到对的版本；与“内容结构与 AI 可用性”专题互相支撑。<span class="src2">内容可用性结论 #1</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">下载 / 安装页把<b>当前推荐版本 + 配套</b>写进正文文字</div><div class="rmi-why">开发者不会配错，AI 也读到对的版本；与“文档内容与知识结构”专题互相支撑。<span class="src2">内容可用性结论 #1</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">下完跑通后<b>引导下一步</b>（HiDevLab 在线实验 / 文档 / 示例）</div><div class="rmi-why">把“下到包”延伸成“跑通第一个”，减少装完不知所措的流失。<span class="src2">行动建议</span></div></div></div>
         <div class="ahead p2">P2</div>
         <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">出海补<b>邮箱直注册 + Google / GitHub</b> 登录</div><div class="rmi-why">现状仅华为账号，海外 / 学术开发者注册门槛高。<span class="src2">触点 4.2 / 1.4</span></div></div></div>
@@ -2424,54 +2437,39 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div></div>
   </section>
 
-  <!-- 行动 · 专题：问题支持与生态闭环 -->
+  <!-- 结论行动 · 推进路线甘特 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="role-chip t5">专题 5</span><span class="ttl">问题支持与生态闭环——让报错有解法，复杂问题能沉淀为知识</span></div>
+        <div class="brand"><span class="ttl">推进路线：先打通硬阻断，再补齐入口与文档能力</span></div>
+        <div class="subttl">结论行动 · Roadmap · 四个专题推进节奏</div>
       </div>
-      <div class="head-r board-tabs t5"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk on">问题闭环</span><span class="bk">责任闭环</span></div></div>
+      <div class="head-r">69/ 结论行动 · Roadmap</div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip t5">专题</span>
-      <div class="rgoal" data-board="2.2 · 问题支持与生态闭环"><span class="gl">目标</span><span class="rgoal-t">把报错、FAQ、论坛、排障工具和第三方内容连成支持链路：开发者卡住时能找到下一步，AI 遇到复杂问题时也能回到可信证据。</span></div>
-      <div class="ameasures">
-        <div class="ahead p0">P0</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">论坛内容<b>游客可读、可被搜索引擎索引</b></div><div class="rmi-why">昇腾论坛分版精细，但登录和索引限制会削弱“一搜就解决”的长尾覆盖。<span class="src2">触点 6.1</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">每个错误码建<b>一码一页</b>，含场景、原因、修复样例</div><div class="rmi-why">EZ9999 这类泛化说明页即使可读取，也不足以支持排错，是最危险的流失点。<span class="src2">AI 问题 #5</span></div></div></div>
-        <div class="ahead p1">P1</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档页提供<b>局部 FAQ + 下一步求助</b></div><div class="rmi-why">FAQ 不只放在集中页面，而要出现在安装、API、工具、报错这些开发者卡住的位置。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">profiling / msSanitizer / msDebug 做<b>端到端排障样例</b></div><div class="rmi-why">X 类内存越界几乎没有第三方替代资料，官方工具链需要直接给出可复现排查路径。<span class="src2">长尾问题取证 X / 触点 5.3</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">围绕 D/M/X/O/L 建<b>高难度场景专题内容池</b></div><div class="rmi-why">自定义算子、Tiling、msSanitizer、注册集成、精度排查是开发者和 AI 都容易失误的高风险区。<span class="src2">AI 问题 #6 / 问题支持与生态闭环</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">高质量问答沉淀为<b>官方 FAQ / 案例反哺</b></div><div class="rmi-why">论坛与工单里的高频问题应回流到文档和搜索，而不是留在一次性回复里。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
-        <div class="ahead p2">P2</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">扶持多平台互证的<b>第三方生态</b></div><div class="rmi-why">当前第三方少而同质，集中在少数平台；官方缺口很难被社区绕行补偿。<span class="src2">内容可用性结论 #6</span></div></div></div>
+    <div class="body-area">
+      <div class="rm">
+        <div class="rm-pad">
+          <div class="rm-date" style="left:6%">0-1 个月</div>
+          <div class="rm-date" style="left:28%">1-2 个月</div>
+          <div class="rm-date" style="left:50%">2-3 个月</div>
+          <div class="rm-date" style="left:72%">3-6 个月</div>
+          <div class="rm-date" style="left:94%">持续迭代</div>
+          <div class="rm-now-pill" style="left:18%">Now</div>
+          <div class="rm-now-tri" style="left:18%"></div>
+          <div class="rm-now-line" style="left:18%"></div>
+          <div class="rm-bar dark" style="left:5%;width:28%;top:13%"><span class="lbl">账号、下载与环境门槛：登录后置 / Toolkit 推荐 / 配套查询</span><span class="rm-badge">P0</span></div>
+          <div class="rm-bar accent" style="left:9%;width:37%;top:27%"><span class="lbl">首屏与入口可发现性：首屏入口 / 高频任务词 / 站内搜索</span><span class="rm-badge">P0</span></div>
+          <div class="rm-bar white" style="left:22%;width:55%;top:41%"><span class="lbl">文档内容与知识结构：版本字段 / 可抓取正文 / 错误码 FAQ / 高难度任务专题</span><span class="rm-badge">P0-P2</span></div>
+          <div class="rm-bar white" style="left:36%;width:36%;top:55%"><span class="lbl">上手与运行路径：HiDevLab / ModelZoo / GitCode 一键运行</span><span class="rm-badge">P1</span></div>
+          <div class="rm-diamond" style="left:33%;top:84%"></div>
+          <div class="rm-ms" style="left:36%;top:82%">首批硬阻断修复完成</div>
+          <div class="rm-diamond" style="left:69%;top:84%"></div>
+          <div class="rm-ms" style="left:72%;top:82%">AI / 开发者双侧复测</div>
+          <div class="rm-diamond" style="left:90%;top:84%"></div>
+          <div class="rm-ms" style="left:78%;top:91%">搜索词、论坛、工单进入月度内容回流</div>
+        </div>
       </div>
-    </div></div>
-  </section>
-
-  <!-- 行动 · 专题：运营机制与责任闭环 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="role-chip t6">专题 6</span><span class="ttl">运营机制与责任闭环——专题跨团队，但每块都要有人牵头</span></div>
-      </div>
-      <div class="head-r board-tabs t6"><div class="bk-strip" data-group="topic"><span class="bk">搜索入口</span><span class="bk">AI 可用性</span><span class="bk">上手运行</span><span class="bk">环境门槛</span><span class="bk">问题闭环</span><span class="bk on">责任闭环</span></div></div>
     </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip t6">专题</span>
-      <div class="rgoal" data-board="3.1 · 责任闭环"><span class="gl">目标</span><span class="rgoal-t">按专题推进，不等于弱化责任。每个专题都要明确牵头方、协同方、发布清单和衡量指标：文档、平台、工具、社区共同对“人能跑、AI 能用”负责。</span></div>
-      <div class="ameasures">
-        <div class="ahead p0">P0</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">跨团队</span></div><div class="rmi-act">每个专题设<b>一个牵头方 + 两类指标</b></div><div class="rmi-why">体验指标看开发者是否少走弯路，AI 指标看搜索、抓取、版本、复现是否稳定；避免只按部门交付页面。<span class="src2">行动总览</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">跨团队</span></div><div class="rmi-act">建立<b>发布前检查清单</b>：入口、版本、正文、代码、索引、回链</div><div class="rmi-why">新页面上线前同步检查人类浏览与 AI 抓取，避免改完视觉但机器仍读不到。<span class="src2">内容可用性结论 #5</span></div></div></div>
-        <div class="ahead p1">P1</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">用真实任务复测<b>搜索第一屏、首次跑通、下载完成率</b></div><div class="rmi-why">专题改完后要回到任务验证，而不是只看页面访问量。<span class="src2">开发者旅程</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">用 D/M/X/O/L 固定题集复测<b>官方可发现、可抓取、可复现</b></div><div class="rmi-why">AI 侧的改进要用同一套问题持续回归，才能看到语料供给是否真正变好。<span class="src2">AI 矩阵</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">跨团队</span></div><div class="rmi-act">论坛、工单、搜索词每月回流到<b>FAQ / 文档 / 示例仓</b></div><div class="rmi-why">把一次性支持变成可复用知识，减少同类问题反复消耗。<span class="src2">问题支持与生态闭环</span></div></div></div>
-        <div class="ahead p2">P2</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">跨团队</span></div><div class="rmi-act">季度复盘<b>六个专题的缺口榜</b></div><div class="rmi-why">把零散优化沉淀成长期机制：哪些词还搜不到、哪些页仍抓不到、哪些场景仍跑不通。<span class="src2">责任闭环</span></div></div></div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">跨团队</span></div><div class="rmi-act">把专题指标接入<b>版本发布与内容运营节奏</b></div><div class="rmi-why">CANN、Toolkit、文档和社区内容同步更新，才不会继续制造版本散乱和入口漂移。<span class="src2">版本治理</span></div></div></div>
-      </div>
-    </div></div>
   </section>
 
   <!-- 研究产出：报告、方法与可复用工具汇总 -->
