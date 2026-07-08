@@ -1503,6 +1503,15 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .tpstep b{font-size:var(--fs-body);line-height:1.25;color:var(--ink);font-weight:900}
     .tpstep span{font-size:var(--fs-xs);line-height:1.35;color:var(--ink-3)}
     .devhm th{font-size:var(--fs-sm);line-height:1.15;padding:.72vh .55vw;text-align:center}
+    .devhm .stage-row th{padding:.52vh .45vw .48vh;border-bottom:1px solid rgba(47,61,99,.08)}
+    .devhm .stage-band{font-size:var(--fs-sm);line-height:1.1;font-weight:950;color:#2F3D63;background:rgba(47,61,99,.055);border-radius:8px}
+    .devhm .stage-band.l1{background:rgba(91,91,214,.08);color:#4F55B7}
+    .devhm .stage-band.l2{background:rgba(35,160,106,.1);color:#1F7A4D}
+    .devhm .stage-band.l3{background:rgba(199,119,29,.1);color:#A15C00}
+    .devhm .stage-band.l6{background:rgba(47,111,237,.09);color:#2453C0}
+    .devhm .stage-band.l7{background:rgba(163,60,114,.09);color:#8D315F}
+    .devhm .stage-band.cross{background:rgba(47,61,99,.07);color:#465063}
+    .devhm .touch-row th{padding-top:.58vh}
     .devhm th .jstage{display:block;margin-bottom:.22vh;font-size:10px;line-height:1;font-weight:900;color:#2F3D63;white-space:nowrap}
     .devhm th .jname{display:block;font-size:var(--fs-sm);line-height:1.12;font-weight:900;color:#1B2432}
     .devhm td{font-size:var(--fs-body);line-height:1.28;padding:.62vh .5vw;text-align:center;border-bottom:1px solid rgba(47,61,99,.075)}
@@ -1520,8 +1529,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .devhm-card .devhm th{padding:.72vh .45vw}
     .devhm-card .devhm td{padding:.72vh .45vw}
     .devhm-card .devhm .note-row td{font-size:12px;line-height:1.25;color:var(--ink-2);vertical-align:top;text-align:left}
-    .devhm-card .devhm tr:nth-child(1) td,.devhm-card .devhm tr:nth-child(2) td{padding:.62vh .34vw .68vh;vertical-align:top}
-    .devhm-card .devhm tr:nth-child(1) .score,.devhm-card .devhm tr:nth-child(2) .score{margin-bottom:.72vh}
+    .devhm-card .devhm tbody tr:nth-child(1) td,.devhm-card .devhm tbody tr:nth-child(2) td{padding:.62vh .34vw .68vh;vertical-align:top}
+    .devhm-card .devhm tbody tr:nth-child(1) .score,.devhm-card .devhm tbody tr:nth-child(2) .score{margin-bottom:.72vh}
     .devhm-proof{min-height:0;border:1px solid rgba(199,0,11,.18);border-radius:8px;background:rgba(255,255,255,.86);box-shadow:0 10px 24px -22px rgba(30,40,70,.42);overflow:hidden;display:flex;flex-direction:column}
     .devhm-proof.nv{border-color:rgba(118,185,0,.25)}
     .devhm-proof img{display:block;width:100%;height:clamp(64px,9.4vh,98px);object-fit:cover;object-position:top;flex:0 0 auto}
@@ -2243,46 +2252,56 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="hmfull-note"><div class="hm-score-legend"><span>低</span><span class="hm-grad"></span><span>高</span></div><span style="flex:1"></span><div class="hm-steps" id="devHmSteps" aria-label="基础体验聚焦讲解"></div></div>
         <div class="card hmfull-card devhm-card">
           <table class="hmfull devhm devhm-wide" id="devHmFull" aria-label="基础体验触点评分摘要">
-            <thead><tr>
-              <th class="metric-head">指标</th>
-              <th data-issue="0"><span class="jstage">L3 配环境</span><span class="jname">Toolkit 下载</span><small>触点 4.3</small></th>
-              <th data-issue="0"><span class="jstage">L3 配环境</span><span class="jname">账号登录</span><small>触点 4.2</small></th>
-              <th data-issue="1"><span class="jstage">L7 进阶生态</span><span class="jname">博客 / 案例</span><small>触点 6.4</small></th>
-              <th data-issue="1"><span class="jstage">L1 找入口</span><span class="jname">门户 / 导航</span><small>触点 1.1b / 1.2</small></th>
-              <th data-issue="2"><span class="jstage">L2 上手引导</span><span class="jname">学习路径 / HiDevLab</span><small>触点 3.2</small></th>
-              <th data-issue="2"><span class="jstage">L7 进阶生态</span><span class="jname">ModelZoo 引导</span><small>触点 5.2</small></th>
-              <th data-issue="3"><span class="jstage">贯穿能力</span><span class="jname">英文访问</span><small>触点 1.4</small></th>
-              <th data-issue="3"><span class="jstage">L6 调试求助</span><span class="jname">社区 / 论坛</span><small>触点 6.1</small></th>
-              <th data-issue="4"><span class="jstage">L6 调试求助</span><span class="jname">FAQ 自助</span><small>触点 6.3</small></th>
-              <th data-issue="4"><span class="jstage">L6 调试求助</span><span class="jname">技术支持</span><small>触点 6.2</small></th>
+            <thead>
+              <tr class="stage-row">
+                <th class="metric-head">旅程阶段</th>
+                <th class="stage-band l1" data-issue="1">L1 找入口</th>
+                <th class="stage-band l2" data-issue="2">L2 上手引导</th>
+                <th class="stage-band l3" colspan="2" data-issue="0">L3 配环境</th>
+                <th class="stage-band l6" colspan="3" data-issue="4">L6 调试求助</th>
+                <th class="stage-band l7" colspan="2" data-issue="1">L7 进阶生态</th>
+                <th class="stage-band cross" data-issue="3">贯穿能力</th>
+              </tr>
+              <tr class="touch-row">
+              <th class="metric-head">触点</th>
+              <th data-issue="1"><span class="jname">门户 / 导航</span><small>触点 1.1b / 1.2</small></th>
+              <th data-issue="2"><span class="jname">学习路径 / HiDevLab</span><small>触点 3.2</small></th>
+              <th data-issue="0"><span class="jname">账号登录</span><small>触点 4.2</small></th>
+              <th data-issue="0"><span class="jname">Toolkit 下载</span><small>触点 4.3</small></th>
+              <th data-issue="3"><span class="jname">社区 / 论坛</span><small>触点 6.1</small></th>
+              <th data-issue="4"><span class="jname">技术支持</span><small>触点 6.2</small></th>
+              <th data-issue="4"><span class="jname">FAQ 自助</span><small>触点 6.3</small></th>
+              <th data-issue="2"><span class="jname">ModelZoo 引导</span><small>触点 5.2</small></th>
+              <th data-issue="1"><span class="jname">博客 / 案例</span><small>触点 6.4</small></th>
+              <th data-issue="3"><span class="jname">英文访问</span><small>触点 1.4</small></th>
             </tr></thead>
             <tbody>
               <tr><th class="metric-head">昇腾</th>
-                <td data-issue="0"><span class="score bad">21</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/02-ascend-download-4.3.png" alt="昇腾 Toolkit 下载截图"><span>Toolkit 下载页</span></div></td>
-                <td data-issue="0"><span class="score mid">64</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/05-ascend-login-4.2.png" alt="昇腾账号登录截图"><span>账号登录流程</span></div></td>
-                <td data-issue="1"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-blog-6.4.png" alt="昇腾博客和案例截图"><span>博客 / 案例页</span></div></td>
                 <td data-issue="1"><span class="score good">78</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-dev-nav.png" alt="昇腾门户导航截图"><span>门户导航入口</span></div></td>
                 <td data-issue="2"><span class="score good">82</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/07-ascend-learn-path-op.png" alt="昇腾学习路径截图"><span>学习路径</span></div></td>
-                <td data-issue="2"><span class="score good">81</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/03-ascend-modelzoo-op.png" alt="昇腾 ModelZoo 引导截图"><span>ModelZoo 引导</span></div></td>
-                <td data-issue="3"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-developer-1.4.png" alt="昇腾英文访问截图"><span>英文入口</span></div></td>
+                <td data-issue="0"><span class="score mid">64</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/05-ascend-login-4.2.png" alt="昇腾账号登录截图"><span>账号登录流程</span></div></td>
+                <td data-issue="0"><span class="score bad">21</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/02-ascend-download-4.3.png" alt="昇腾 Toolkit 下载截图"><span>Toolkit 下载页</span></div></td>
                 <td data-issue="3"><span class="score good">73</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/04-ascend-forum.png" alt="昇腾社区论坛截图"><span>社区 / 论坛</span></div></td>
-                <td data-issue="4"><span class="score good">85</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/07-ascend-document-6.3.png" alt="昇腾 FAQ 文档截图"><span>FAQ 自助</span></div></td>
                 <td data-issue="4"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-developer-6.2.png" alt="昇腾技术支持截图"><span>技术支持入口</span></div></td>
+                <td data-issue="4"><span class="score good">85</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/07-ascend-document-6.3.png" alt="昇腾 FAQ 文档截图"><span>FAQ 自助</span></div></td>
+                <td data-issue="2"><span class="score good">81</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/03-ascend-modelzoo-op.png" alt="昇腾 ModelZoo 引导截图"><span>ModelZoo 引导</span></div></td>
+                <td data-issue="1"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-blog-6.4.png" alt="昇腾博客和案例截图"><span>博客 / 案例页</span></div></td>
+                <td data-issue="3"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-developer-1.4.png" alt="昇腾英文访问截图"><span>英文入口</span></div></td>
               </tr>
               <tr><th class="metric-head">NVIDIA</th>
-                <td data-issue="0"><span class="score good">87</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/02-nvidia-cuda-download-4.3.png" alt="NVIDIA CUDA 下载截图"><span>CUDA 下载页</span></div></td>
-                <td data-issue="0"><span class="score good">80</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/05-nvidia-program-4.2.png" alt="NVIDIA 开发者计划截图"><span>账号 / 开发者计划</span></div></td>
-                <td data-issue="1"><span class="score good">92</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-blog-6.4.png" alt="NVIDIA 博客截图"><span>NVIDIA 博客</span></div></td>
                 <td data-issue="1"><span class="score good">77</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/01-nvidia-nav.png" alt="NVIDIA 导航截图"><span>开发者导航</span></div></td>
                 <td data-issue="2"><span class="score mid">72</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/07-nvidia-quickstart-3.2-op.png" alt="NVIDIA 快速入门截图"><span>Quick Start</span></div></td>
-                <td data-issue="2"><span class="score good">79</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/03-nvidia-ngc-op.png" alt="NVIDIA NGC 截图"><span>NGC 资源</span></div></td>
-                <td data-issue="3"><span class="score good">75</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/01-nvidia-home-1.4.png" alt="NVIDIA 英文访问截图"><span>英文站点</span></div></td>
+                <td data-issue="0"><span class="score good">80</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/05-nvidia-program-4.2.png" alt="NVIDIA 开发者计划截图"><span>账号 / 开发者计划</span></div></td>
+                <td data-issue="0"><span class="score good">87</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/02-nvidia-cuda-download-4.3.png" alt="NVIDIA CUDA 下载截图"><span>CUDA 下载页</span></div></td>
                 <td data-issue="3"><span class="score good">88</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-forum.png" alt="NVIDIA 论坛截图"><span>开发者论坛</span></div></td>
-                <td data-issue="4"><span class="score mid">63</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-forum-6.3.png" alt="NVIDIA FAQ 或论坛截图"><span>论坛问答</span></div></td>
                 <td data-issue="4"><span class="score good">76</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-support-6.2.png" alt="NVIDIA 技术支持截图"><span>技术支持入口</span></div></td>
+                <td data-issue="4"><span class="score mid">63</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-forum-6.3.png" alt="NVIDIA FAQ 或论坛截图"><span>论坛问答</span></div></td>
+                <td data-issue="2"><span class="score good">79</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/03-nvidia-ngc-op.png" alt="NVIDIA NGC 截图"><span>NGC 资源</span></div></td>
+                <td data-issue="1"><span class="score good">92</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-blog-6.4.png" alt="NVIDIA 博客截图"><span>NVIDIA 博客</span></div></td>
+                <td data-issue="3"><span class="score good">75</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/01-nvidia-home-1.4.png" alt="NVIDIA 英文访问截图"><span>英文站点</span></div></td>
               </tr>
-              <tr><th class="metric-head">差值</th><td data-issue="0"><span class="gap dn">−66</span></td><td data-issue="0"><span class="gap dn">−16</span></td><td data-issue="1"><span class="gap dn">−17</span></td><td data-issue="1"><span class="gap up">+1</span></td><td data-issue="2"><span class="gap up">+10</span></td><td data-issue="2"><span class="gap up">+2</span></td><td data-issue="3"><span class="gap">0</span></td><td data-issue="3"><span class="gap dn">−15</span></td><td data-issue="4"><span class="gap up">+22</span></td><td data-issue="4"><span class="gap dn">−1</span></td></tr>
-              <tr class="note-row"><th class="metric-head">摩擦来源</th><td data-issue="0">登录、协议、包选择叠加。</td><td data-issue="0">下载前先进入账号流程。</td><td data-issue="1">外部搜索第一屏命中不稳。</td><td data-issue="1">任务入口需更直接。</td><td data-issue="2">长板未成为默认路径。</td><td data-issue="2">三步引导可继续复用。</td><td data-issue="3">语言不是唯一门槛。</td><td data-issue="3">游客可读与索引不足。</td><td data-issue="4">FAQ 是明确亮点。</td><td data-issue="4">支持链路需互相导流。</td></tr>
+              <tr><th class="metric-head">差值</th><td data-issue="1"><span class="gap up">+1</span></td><td data-issue="2"><span class="gap up">+10</span></td><td data-issue="0"><span class="gap dn">−16</span></td><td data-issue="0"><span class="gap dn">−66</span></td><td data-issue="3"><span class="gap dn">−15</span></td><td data-issue="4"><span class="gap dn">−1</span></td><td data-issue="4"><span class="gap up">+22</span></td><td data-issue="2"><span class="gap up">+2</span></td><td data-issue="1"><span class="gap dn">−17</span></td><td data-issue="3"><span class="gap">0</span></td></tr>
+              <tr class="note-row"><th class="metric-head">摩擦来源</th><td data-issue="1">任务入口需更直接。</td><td data-issue="2">长板未成为默认路径。</td><td data-issue="0">下载前先进入账号流程。</td><td data-issue="0">登录、协议、包选择叠加。</td><td data-issue="3">游客可读与索引不足。</td><td data-issue="4">支持链路需互相导流。</td><td data-issue="4">FAQ 是明确亮点。</td><td data-issue="2">三步引导可继续复用。</td><td data-issue="1">外部搜索第一屏命中不稳。</td><td data-issue="3">语言不是唯一门槛。</td></tr>
             </tbody>
           </table>
           <div class="hm-callout" id="devHmCallout" aria-live="polite"></div>
@@ -3132,9 +3151,20 @@ function installDevHmFocus(){
       return {l:Math.min(b.l,r.left),t:Math.min(b.t,r.top),r:Math.max(b.r,r.right),b:Math.max(b.b,r.bottom)};
     },{l:Infinity,t:Infinity,r:-Infinity,b:-Infinity});
   }
+  function splitGroups(els){
+    const items=els.map(el=>({el,r:el.getBoundingClientRect()})).filter(x=>x.r.width&&x.r.height).sort((a,b)=>a.r.left-b.r.left);
+    if(!items.length)return [els];
+    const runs=[];
+    items.forEach(item=>{
+      const last=runs[runs.length-1];
+      const lastRight=last?Math.max(...last.map(x=>x.r.right)):-Infinity;
+      if(!last||item.r.left-lastRight>24)runs.push([item]);
+      else last.push(item);
+    });
+    return runs.map(run=>run.map(x=>x.el));
+  }
   function drawRing(box){
     if(!rings||!card||!wrap)return;
-    rings.innerHTML='';
     const wr=wrap.getBoundingClientRect();
     const cr=card.getBoundingClientRect();
     const pad=8;
@@ -3207,8 +3237,10 @@ function installDevHmFocus(){
     if(callout)callout.classList.remove('off');
     const els=[...table.querySelectorAll('[data-issue="'+idx+'"]')];
     els.forEach(el=>el.classList.add('hm-on'));
+    const groups=splitGroups(els);
     const box=groupBox(els);
-    drawRing(box);
+    if(rings)rings.innerHTML='';
+    groups.forEach(g=>drawRing(groupBox(g)));
     if(callout){
       callout.classList.remove('wide');
       callout.innerHTML=calloutHtml(focus[idx],idx);
