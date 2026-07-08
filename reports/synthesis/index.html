@@ -985,7 +985,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div class="metflow">
         <div class="met-left">
-          <div class="met-thesis"><b>不是先定总分，而是先还原 AI 怎么把知识搬进答案</b><p>AI 只能按“搜 → 抓 → 读 → 组织答案”工作。指标因此拆成四关：触达、质量、成本、产出；再按官方、第三方、模型自带三类知识来源分别观察。</p></div>
+          <div class="met-thesis"><b>不是先定总分，而是先还原 AI 怎么把知识搬进答案</b><p>AI 只能按“搜 → 抓 → 读 → 组织答案”工作。指标因此拆成四关：触达、质量、成本、产出；口径来自 opknow 2026-06-10 的量化收口：实测日志进 <code>score_metrics.py</code>，每项一个 <code>score_N()</code> 函数。</p></div>
           <div class="met-chain">
             <div class="met-step t1"><span class="n">01</span><div><b>触达</b><span>官方页是否在第一轮检索出现，正文是否能被抓取。</span></div></div>
             <div class="met-step t2"><span class="n">02</span><div><b>质量</b><span>正文是否足够细，版本是否清楚，第三方是否可互证。</span></div></div>
@@ -994,12 +994,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
           </div>
         </div>
         <div class="why-grid">
-          <div class="why-card w1"><span class="ids">①</span><b>官方可发现性：用搜索排序替代主观“好不好找”</b><div class="calc">怎么算：首条官方=5；首屏但靠后=4/3；需要改写关键词二次检索=2。</div><div class="rule"><em>系数/档位来源</em>：按 AI 实际检索路径分层，首条是默认权威路径；二次检索说明默认问法已找不到官方。</div></div>
-          <div class="why-card w2"><span class="ids">② ③</span><b>可抓取性与正文详尽度：把“能读到”和“能用上”拆开</b><div class="calc">怎么算：静态页/服务端渲染高分，单页应用或抓取限制低分；正文再按命令、代码、参数、边界条件分档。</div><div class="rule"><em>系数/档位来源</em>：这是断点分层，不做连续系数；通路断裂和内容不足分别归因，避免混成一个模糊分。</div></div>
-          <div class="why-card w3"><span class="ids">④ ⑨</span><b>版本相关指标：版本体系影响输入，锁定能力属于输出</b><div class="calc">怎么算：单版本/版本无关=高分；有支持矩阵=中高；多版本散乱=低分。综合里版本因子=0.7+0.3×版本分。</div><div class="rule"><em>系数/档位来源</em>：版本会影响所有渠道，但通常不会单独决定答案成败，所以设为最多 30% 的中度折扣；⑨只解释结果，不再进总分。</div></div>
-          <div class="why-card w4"><span class="ids">⑤ ⑥</span><b>第三方资料：数量解决“有没有”，可信度解决“能不能信”</b><div class="calc">怎么算：先去重统计第三方数量；再按来源类型、一致性、时效、平台独立性修正可信度。</div><div class="rule"><em>系数/档位来源</em>：来源类型用锚定表，官方镜像/官方仓最高，云厂商和学术次之，个人博客再低；时效、独立性只罚不奖。</div></div>
-          <div class="why-card w5"><span class="ids">⑦ ⑧</span><b>自带知识与检索成本：用时效和失败次数约束 AI 猜测</b><div class="calc">怎么算：自带知识按掌握档位给分，再按技术迭代速度扣时效；成本=检索轮数+0.5×抓取次数+4×抓取失败。</div><div class="rule"><em>系数来源</em>：抓取一次只是轻摩擦，所以 0.5；抓取失败会切断证据链、迫使 AI 改词或猜测，所以按 4 倍重罚。</div></div>
-          <div class="why-card out"><span class="ids">⑩ ⑪</span><b>综合置信度：不用平均分，因为一条强证据链就能支撑答案</b><div class="calc">怎么算：三路知识用“噪声或公式”合成；再乘版本因子=0.7+0.3×版本分，成本因子=0.9+0.1×成本分。</div><div class="rule"><em>系数来源</em>：版本会直接改变命令和依赖，影响较大，给 30%；成本主要影响获得证据的效率，给 10%；⑩是产出，不进综合。</div></div>
+          <div class="why-card w1"><span class="ids">①</span><b>官方可发现性：用搜索排序替代主观“好不好找”</b><div class="calc">怎么算：<code>score1()</code> 读 rank / rounds / refine；首条官方=5，首屏靠后=4/3，改词二检=2。</div><div class="rule"><em>依据</em>：opknow 明确要求“每项由实测原始观测算出”；这里用的是 web_search 结果顺位和是否二次改词。</div></div>
+          <div class="why-card w2"><span class="ids">② ③</span><b>可抓取性与正文详尽度：把“能读到”和“能用上”拆开</b><div class="calc">怎么算：<code>score2()</code> 看 static / ssr / partial / spa / robots；<code>score3()</code> 看命令、代码、参数、边界条件。</div><div class="rule"><em>依据</em>：opknow 把“受阻”单独记为 BLOCKED，避免把“抓不到正文”和“正文质量低”混成一项。</div></div>
+          <div class="why-card w3"><span class="ids">④ ⑨</span><b>版本相关指标：版本体系影响输入，锁定能力属于输出</b><div class="calc">怎么算：④按版本数、支持矩阵、双轴配套分档；⑪ 中版本因子沿用 opknow 定稿：<code>0.7+0.3×nm④</code>。</div><div class="rule"><em>依据</em>：CLAUDE.md §3a 写明版本是跨渠道影响，最多 30% 折扣；⑨是产出项，不进综合，避免重复加权。</div></div>
+          <div class="why-card w4"><span class="ids">⑤ ⑥</span><b>第三方资料：数量解决“有没有”，可信度解决“能不能信”</b><div class="calc">怎么算：⑤数去重来源；⑥用 <code>SOURCE_CRED</code> 锚定表 + 一致性 + 时效 + 平台独立性。</div><div class="rule"><em>依据</em>：官方文档/仓=5，官方论坛=4.5，云厂商/论文=4，问答=3.5，个人博客=3，聚合站=2.5；时效和独立性只罚不奖。</div></div>
+          <div class="why-card w5"><span class="ids">⑦ ⑧</span><b>自带知识与检索成本：用时效和失败次数约束 AI 猜测</b><div class="calc">怎么算：⑦用 own 档位 + churn 罚分；⑧沿用 <code>score8()</code>：成本=检索轮数+0.5×抓取次数+4×抓取失败。</div><div class="rule"><em>依据</em>：opknow 将 ⑦ 标为唯一显式自评项，并用 stable / moderate / fast 给知识截止风险加客观锚；抓取失败按断链重罚。</div></div>
+          <div class="why-card out"><span class="ids">⑩ ⑪</span><b>综合置信度：不用平均分，因为一条强证据链就能支撑答案</b><div class="calc">怎么算：三源 noisy-OR：<code>1-(1-OFF)(1-SEC)(1-OWN)</code>，再乘版本因子与成本因子。</div><div class="rule"><em>依据</em>：opknow §3a 明确不用平均分：官方、第三方、自带任一渠道扛住即可答；成本只影响取证效率，所以系数为 <code>0.9+0.1×nm⑧</code>。</div></div>
         </div>
       </div>
     </div>
