@@ -931,6 +931,16 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .met-card p{margin:0;font-size:var(--fs-xs);line-height:1.36;color:var(--ink-2)}
     .met-card small{margin-top:auto;font-size:10px;line-height:1.2;color:#8E96A3}
     .met-card.out{background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(232,237,255,.56));border-color:rgba(91,91,214,.18)}
+    .why-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,1fr);gap:.86vw .82vh;min-height:0}
+    .why-card{position:relative;overflow:hidden;border-radius:13px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 12px 28px -24px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.9);padding:1vh .95vw;display:flex;flex-direction:column;min-height:0}
+    .why-card:after{content:"";position:absolute;right:-30px;bottom:-34px;width:92px;height:76px;border-radius:999px;background:radial-gradient(circle,rgba(91,91,214,.12),rgba(91,91,214,0) 70%);pointer-events:none}
+    .why-card .ids{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;color:#5B5BD6}
+    .why-card b{display:block;margin-top:.16vh;font-size:var(--fs-body);line-height:1.2;color:var(--ink);font-weight:900}
+    .why-card p{margin:.42vh 0 0;font-size:var(--fs-sm);line-height:1.34;color:var(--ink-2)}
+    .why-card .rule{margin-top:.48vh;border-radius:8px;background:rgba(47,61,99,.06);border:1px solid rgba(47,61,99,.1);padding:.46vh .5vw;font-size:var(--fs-sm);line-height:1.28;color:#667082}
+    .why-card .rule em{font-style:normal;color:#2F3D63;font-weight:900}
+    .why-card .calc{margin-top:.54vh;border-radius:8px;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.13);padding:.42vh .5vw;font-size:var(--fs-sm);line-height:1.25;color:#4F55B7;font-weight:750}
+    .why-card.out{background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(235,238,255,.58));border-color:rgba(91,91,214,.2)}
     .apply-grid{display:grid;grid-template-columns:1.12fr 1.38fr;gap:1.4vw;flex:1;min-height:0;align-items:stretch}
     .apply-lane{display:flex;flex-direction:column;gap:.78vh;min-height:0}
     .apply-card{border-radius:13px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.76);box-shadow:0 12px 30px -23px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);padding:1.08vh 1vw;display:grid;grid-template-columns:32px 1fr;gap:.75vw;align-items:start;min-height:0}
@@ -957,8 +967,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">11 项指标来自 AI 作答链路的逐关拆解，先定位断点再计算总分</span></div>
-        <div class="subttl">AI 侧 · 指标体系 · 「形成过程」</div>
+        <div class="brand"><span class="ttl">11 项指标按“可观测代理变量”计算，目的是定位断点而不是给印象分</span></div>
+        <div class="subttl">AI 侧 · 指标体系 · 「形成过程与计算理由」</div>
       </div>
       <div class="head-r">09/ AI 指标 · 形成过程</div>
     </div>
@@ -973,19 +983,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="met-step"><span class="n">04</span><div><b>产出</b><span>答案能否锁版本、命令能否照抄复现。</span></div></div>
           </div>
         </div>
-        <div class="met-grid">
-          <div class="met-card"><span class="id">①</span><b>官方可发现性</b><p>官方首条排名、检索轮数、是否要补关键词。</p><small>回答“搜不搜得到官方”。</small></div>
-          <div class="met-card"><span class="id">②</span><b>官方可抓取性</b><p>静态页、服务端渲染、部分可抓、单页应用、抓取限制分档。</p><small>回答“AI 能不能读到正文”。</small></div>
-          <div class="met-card"><span class="id">③</span><b>官方正文详尽度</b><p>命令、代码、参数表、边界条件是否齐全。</p><small>回答“抓到了是否够用”。</small></div>
-          <div class="met-card"><span class="id">④</span><b>版本清晰度</b><p>版本无关、单版本、支持矩阵、多版本散乱。</p><small>回答“会不会选错版本”。</small></div>
-          <div class="met-card"><span class="id">⑤</span><b>第三方丰富度</b><p>剔除官方渠道后，去重统计第三方来源数量。</p><small>回答“官方不足时有没有补位”。</small></div>
-          <div class="met-card"><span class="id">⑥</span><b>第三方可信度</b><p>来源类型锚定表 + 一致性 + 时效 + 独立性。</p><small>回答“第三方是不是可靠互证”。</small></div>
-          <div class="met-card"><span class="id">⑦</span><b>模型自带知识</b><p>自评档位叠加知识截止差距惩罚。</p><small>回答“不检索时模型会不会”。</small></div>
-          <div class="met-card"><span class="id">⑧</span><b>检索成本</b><p>轮数 + 0.5×抓取次数 + 4×抓取失败。</p><small>回答“拿到证据费不费劲”。</small></div>
-          <div class="met-card"><span class="id">⑨</span><b>版本可锁定性</b><p>精确锁定、基本锁定、范围锁定、无法锁定分档。</p><small>产出项，不进综合，避免重复加权。</small></div>
-          <div class="met-card"><span class="id">⑩</span><b>步骤可复现性</b><p>可直接运行、需补参数、部分可用、只有框架分档。</p><small>产出项，不进综合，保留作结果解释。</small></div>
-          <div class="met-card out"><span class="id">⑪</span><b>综合置信度</b><p>官方、第三方、模型自带三源用“噪声或公式”合成。</p><small>回答“这题 AI 最终能不能稳答”。</small></div>
-          <div class="met-card out"><span class="id">输出</span><b>任务 × 指标矩阵</b><p>每格保留实测证据，悬浮可看来源、版本、缺失和公式。</p><small>用于定位短板，不只用于展示分数。</small></div>
+        <div class="why-grid">
+          <div class="why-card"><span class="ids">①</span><b>官方可发现性：用搜索排序替代主观“好不好找”</b><div class="calc">怎么算：首条官方=5；首屏但靠后=4/3；需要改写关键词二次检索=2。</div><div class="rule"><em>为什么</em>：AI 默认先读第一屏和前几条结果，官方越靠后，越容易被第三方或旧内容带偏。</div></div>
+          <div class="why-card"><span class="ids">② ③</span><b>可抓取性与正文详尽度：把“能读到”和“能用上”拆开</b><div class="calc">怎么算：静态页/服务端渲染高分，单页应用或抓取限制低分；正文再按命令、代码、参数、边界条件分档。</div><div class="rule"><em>为什么</em>：搜得到不等于抓得到，抓得到也不等于能生成可执行答案；混在一起会掩盖断点。</div></div>
+          <div class="why-card"><span class="ids">④ ⑨</span><b>版本相关指标：版本体系影响输入，锁定能力属于输出</b><div class="calc">怎么算：单版本/版本无关=高分；有支持矩阵=中高；多版本散乱=低分。⑨只看最终答案能否精确锁版本。</div><div class="rule"><em>为什么</em>：④会影响所有渠道，所以进入综合；⑨已经是结果，只解释答案质量，不再重复计入总分。</div></div>
+          <div class="why-card"><span class="ids">⑤ ⑥</span><b>第三方资料：数量解决“有没有”，可信度解决“能不能信”</b><div class="calc">怎么算：先去重统计第三方数量；再按来源类型、一致性、时效、平台独立性修正可信度。</div><div class="rule"><em>为什么</em>：同平台转载不等于互证，旧文也可能误导版本；够新、平台多样是基线，只对过旧和回声扣分。</div></div>
+          <div class="why-card"><span class="ids">⑦ ⑧</span><b>自带知识与检索成本：用时效和失败次数约束 AI 猜测</b><div class="calc">怎么算：自带知识按掌握档位给分，再按技术迭代速度扣时效；成本=检索轮数+0.5×抓取次数+4×抓取失败。</div><div class="rule"><em>为什么</em>：模型记忆会过期，抓取失败会切断证据链，所以失败比多抓几次更严重。</div></div>
+          <div class="why-card out"><span class="ids">⑩ ⑪</span><b>综合置信度：不用平均分，因为一条强证据链就能支撑答案</b><div class="calc">怎么算：官方、第三方、自带知识三路用“噪声或公式”合成；步骤复现性只作为产出解释，不进综合。</div><div class="rule"><em>为什么</em>：简单平均会把“官方已足够可靠但第三方少”的任务压低；产出再进总分会把结果重复算一遍。</div></div>
         </div>
       </div>
     </div>
