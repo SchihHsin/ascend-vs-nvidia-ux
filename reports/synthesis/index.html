@@ -2553,7 +2553,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
   <!-- 15 灰底：基础体验做法 2 · 场景化组织 -->
-  <section class="slide s-gray scenario-org-slide">
+  <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">基础体验做法 2：以开发场景组织入口、内容与下一步路径</span></div>
@@ -2561,67 +2561,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div class="head-r">60/ 基础体验做法 · 2</div>
     </div>
-    <div class="body-area">
-      <div class="scenario-org">
-        <div class="scenario-org-left">
-          <div class="bridge" style="margin:0">开发者不是先想“我要点哪个产品”，而是先想<b>我要完成什么任务</b>。官网需要把算子开发、模型迁移、推理部署、训练、报错排查、首次跑通等任务做成稳定入口。</div>
-          <div class="scenario-pack">
-            <div class="sp-head"><span>场景页应聚合</span><b>一条任务路径</b></div>
-            <div class="sp-grid">
-              <div><b>文档</b><span>当前版本、前置条件、操作步骤</span></div>
-              <div><b>下载</b><span>Toolkit / 驱动 / 版本配套</span></div>
-              <div><b>示例</b><span>GitCode 工程、可复制命令</span></div>
-              <div><b>HiDevLab</b><span>在线实验、一键运行</span></div>
-              <div><b>支持</b><span>FAQ、错误码、论坛案例</span></div>
-              <div><b>搜索</b><span>稳定 URL、标题、摘要</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="scenario-org-right">
-          <div class="scenario-tabs">
-            <span>算子开发</span><span>模型迁移</span><span>推理部署</span><span>报错排查</span>
-          </div>
-          <div class="scenario-flow">
-            <div class="sf-step"><span>01</span><b>选任务</b><small>我想做什么</small></div>
-            <div class="sf-step"><span>02</span><b>看路径</b><small>需要哪些前置</small></div>
-            <div class="sf-step"><span>03</span><b>拿环境</b><small>下载 / 在线实验</small></div>
-            <div class="sf-step"><span>04</span><b>跑示例</b><small>GitCode / HiDevLab</small></div>
-            <div class="sf-step"><span>05</span><b>排问题</b><small>FAQ / 论坛 / 工单</small></div>
-          </div>
-          <div class="scenario-note">
-            <b>产品线仍保留</b>
-            <span>但作为场景页背后的资源层，而不是新手入口的唯一组织方式。场景页也能承接外部搜索和 Agent 检索。</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="body-area"><iframe data-src="ar-embed.html?sec=jscene" title="jscene" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <style>
-    .scenario-org{display:grid;grid-template-columns:.92fr 1.08fr;gap:1.6vw;flex:1;min-height:0;align-items:stretch}
-    .scenario-org-left,.scenario-org-right{min-width:0;min-height:0;display:flex;flex-direction:column;gap:1.25vh}
-    .scenario-pack{flex:1;min-height:0;border-radius:14px;background:rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.74);box-shadow:0 16px 38px -28px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.86);padding:1.5vh 1.25vw;display:flex;flex-direction:column;gap:1.05vh;overflow:hidden}
-    .sp-head{display:flex;align-items:baseline;justify-content:space-between;gap:1vw}
-    .sp-head span{font-size:var(--fs-sm);font-weight:900;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
-    .sp-head b{font-size:var(--fs-h3);font-weight:950;color:var(--ink)}
-    .sp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75vw;flex:1;min-height:0}
-    .sp-grid div{position:relative;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.62);border:1px solid rgba(47,61,99,.08);padding:1.05vh .9vw;display:flex;flex-direction:column;justify-content:center;gap:.28vh}
-    .sp-grid div:after{content:"";position:absolute;right:-22px;bottom:-28px;width:92px;height:72px;background:radial-gradient(circle at 50% 50%,rgba(91,91,214,.16),rgba(91,91,214,0) 70%);pointer-events:none}
-    .sp-grid b{position:relative;z-index:1;font-size:var(--fs-body);font-weight:950;color:var(--ink);line-height:1.2}
-    .sp-grid span{position:relative;z-index:1;font-size:var(--fs-sm);line-height:1.35;color:var(--ink-2)}
-    .scenario-org-right{border-radius:16px;background:linear-gradient(150deg,rgba(255,255,255,.68),rgba(245,247,252,.48));border:1px solid rgba(255,255,255,.8);box-shadow:0 18px 42px -30px rgba(30,40,70,.38),inset 0 1px 0 rgba(255,255,255,.9);padding:1.8vh 1.35vw;overflow:hidden}
-    .scenario-tabs{display:flex;gap:.55vw;flex-wrap:wrap}
-    .scenario-tabs span{font-size:var(--fs-sm);font-weight:850;color:#465063;background:rgba(255,255,255,.72);border:1px solid rgba(47,61,99,.12);border-radius:999px;padding:.42vh .82vw}
-    .scenario-tabs span:first-child{color:#fff;background:var(--g-blue);border-color:transparent}
-    .scenario-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.62vw;flex:1;min-height:0;align-items:stretch}
-    .sf-step{position:relative;border-radius:12px;background:rgba(47,61,99,.055);border:1px solid rgba(47,61,99,.13);padding:1.1vh .7vw;display:flex;flex-direction:column;justify-content:center;gap:.48vh;min-width:0}
-    .sf-step:not(:last-child):after{content:"";position:absolute;right:-.46vw;top:50%;width:.32vw;height:1px;background:#AEB6C4}
-    .sf-step span{font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:950;color:#5B5BD6}
-    .sf-step b{font-size:var(--fs-body);font-weight:950;color:var(--ink);line-height:1.2}
-    .sf-step small{font-size:var(--fs-sm);line-height:1.35;color:var(--ink-3)}
-    .scenario-note{background:var(--g-ink);color:#fff;border-radius:13px;padding:1.2vh 1.05vw;display:grid;grid-template-columns:auto 1fr;gap:.85vw;align-items:start}
-    .scenario-note b{font-size:var(--fs-h3);line-height:1.2}
-    .scenario-note span{font-size:var(--fs-body);line-height:1.55;color:rgba(255,255,255,.68)}
-  </style>
   <!-- 15 灰底：iframe 引主报告 #j5 -->
   <section class="slide s-gray">
     <div class="head">

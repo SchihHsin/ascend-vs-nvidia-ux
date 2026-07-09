@@ -1349,6 +1349,14 @@ const JUDGES=[
    '昇腾的路径是<b>关键动作前置登录</b>，且筛选项多，开发者还没开始就先处理流程。',
    '做法：社区版 Toolkit 支持<b>游客直取</b>，登录和协议尽量后置，版本选择改成默认推荐。'],
   demo:'flow'},
+ {id:'jscene',g:'common',pin:'both',plab:'步骤 1–5 · 场景路径',color:'#5B5BD6',h:'以开发场景组织入口、内容与下一步路径',cap:'从产品目录到任务路径',
+  one:'开发者通常先想“我要完成什么任务”，而不是先判断“该点哪个产品”。',
+  lead:'昇腾已有训练、推理、算子、学习、HiDevLab、ModelZoo、论坛和文档等能力，下一步要把这些资源按开发任务串成稳定路径。',
+  body:[
+   '场景入口应围绕<b>算子开发、模型迁移、推理部署、训练、报错排查、首次跑通</b>等任务组织，让新手不必先认识产品名。',
+   '同一个场景页内，应聚合<b>文档、下载、GitCode 示例、HiDevLab 在线实验、FAQ、论坛案例</b>，形成可执行路径。',
+   '做法：产品线仍保留为资源层，但首页、导航、搜索和场景页优先回答<b>“我要做这件事，下一步点哪里”</b>。'],
+  demo:'scenePath'},
  {id:'j3',g:'common',pin:'both',plab:'账号 / 语言 / 社区',color:'#1f9fb8',h:'按海外开发者旅程补齐账号、英文与社区可读性',cap:'人群 × 平台 顺畅度矩阵',
   one:'这不是单点翻译问题，而是账号、语言、社区三件事一起决定海外门槛。',
   lead:'昇腾对国内开发者很顺，但一旦面向海外 / 学术场景，三处摩擦会叠加出现。',
@@ -1907,6 +1915,23 @@ function demoPath(){return `
      <span class="ps">GitHub 拉 sample</span>
    </div>
  </div>`;}
+function demoScenePath(){return `
+ <div class="pathlane base">
+   <div class="ph"><span>当前常见入口 · 先认识产品</span><span class="tofirst">目录式</span></div>
+   <div class="psteps">
+     <span class="ps">产品 / 工具</span><span class="arrow">→</span>
+     <span class="ps">文档树</span><span class="arrow">→</span>
+     <span class="ps">自己拼下载 / 示例 / 求助</span>
+   </div>
+ </div>
+ <div class="pathlane win">
+   <div class="ph"><span>建议入口 · 先选择任务</span><span class="tofirst" style="color:#5e8a09;border-color:#d6e8ad">场景式</span></div>
+   <div class="psteps">
+     <span class="ps">算子开发</span><span class="arrow">→</span>
+     <span class="ps">文档 + Toolkit + GitCode</span><span class="arrow">→</span>
+     <span class="ps">HiDevLab + FAQ / 论坛</span>
+   </div>
+ </div>`;}
 function demoDiscover(){return `
  <div class="health">
    <div class="hrow"><span class="hl">搜索可发现性 / 全球可索引</span><div class="hbar" style="background:#e0a32e">昇腾 · 中文为主，搜索可发现性弱</div><div class="hbar" style="background:#76B900">NVIDIA · 全球英文，Google 可达</div></div>
@@ -1955,7 +1980,7 @@ function demoDist(){return `
 /* ---------- synthesis floors + actions（按 共性/算子/训练 三组渲染） ---------- */
 (function(){
   const plab={a:'昇腾短板',win:'昇腾长板',both:'双向'};
-  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,discover:demoDiscover,support:demoSupport,migrate:demoMigrate,dist:demoDist};
+  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,scenePath:demoScenePath,discover:demoDiscover,support:demoSupport,migrate:demoMigrate,dist:demoDist};
   const GROUPS=[['common','共性 · 两条场景都成立'],['op','算子开发 · 专属结论'],['train','训练 · 专属结论']];
   const toc=document.getElementById('synthtoc');
   const host=document.getElementById('synthfloors');
@@ -2127,28 +2152,28 @@ body.embed .tpgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1
 body.embed.steps .tpcard .tpcard-body,body.embed.steps .tpcard .pov,body.embed.steps .tpcard .djfi,body.embed.steps .tpcard .djfi-tbl,body.embed.steps .floor-sub{display:none!important}
 body.embed.steps .tpcard{padding:8px 12px!important}
 /* 综述 / 行动 / 责任归属嵌入页:投影版放宽内容宽度,正文升到 body 档,避免被原报告窄版压小 */
-body.embed.sec-j1 .wrap,body.embed.sec-j2 .wrap,body.embed.sec-j3 .wrap,body.embed.sec-j4 .wrap,body.embed.sec-j5 .wrap,body.embed.sec-j6 .wrap,
+body.embed.sec-j1 .wrap,body.embed.sec-j2 .wrap,body.embed.sec-j3 .wrap,body.embed.sec-j4 .wrap,body.embed.sec-j5 .wrap,body.embed.sec-j6 .wrap,body.embed.sec-jscene .wrap,
 body.embed.sec-actions .wrap,body.embed.sec-dept .wrap{max-width:none!important;width:100%!important;padding:0 6px!important;margin:0!important}
-body.embed.sec-j1 .floor,body.embed.sec-j2 .floor,body.embed.sec-j3 .floor,body.embed.sec-j4 .floor,body.embed.sec-j5 .floor,body.embed.sec-j6 .floor{padding:0!important}
-body.embed.sec-j1 .synth-body,body.embed.sec-j2 .synth-body,body.embed.sec-j3 .synth-body,body.embed.sec-j4 .synth-body,body.embed.sec-j5 .synth-body,body.embed.sec-j6 .synth-body{
+body.embed.sec-j1 .floor,body.embed.sec-j2 .floor,body.embed.sec-j3 .floor,body.embed.sec-j4 .floor,body.embed.sec-j5 .floor,body.embed.sec-j6 .floor,body.embed.sec-jscene .floor{padding:0!important}
+body.embed.sec-j1 .synth-body,body.embed.sec-j2 .synth-body,body.embed.sec-j3 .synth-body,body.embed.sec-j4 .synth-body,body.embed.sec-j5 .synth-body,body.embed.sec-j6 .synth-body,body.embed.sec-jscene .synth-body{
   grid-template-columns:.9fr 1.1fr!important;gap:18px!important;align-items:stretch!important;margin-top:0!important}
-body.embed.sec-j1 .synth-text,body.embed.sec-j2 .synth-text,body.embed.sec-j3 .synth-text,body.embed.sec-j4 .synth-text,body.embed.sec-j5 .synth-text,body.embed.sec-j6 .synth-text{
+body.embed.sec-j1 .synth-text,body.embed.sec-j2 .synth-text,body.embed.sec-j3 .synth-text,body.embed.sec-j4 .synth-text,body.embed.sec-j5 .synth-text,body.embed.sec-j6 .synth-text,body.embed.sec-jscene .synth-text{
   font-size:14px!important;line-height:1.55!important;display:flex!important;flex-direction:column!important;gap:9px!important;min-height:0!important}
-body.embed.sec-j1 .synth-text .lead,body.embed.sec-j2 .synth-text .lead,body.embed.sec-j3 .synth-text .lead,body.embed.sec-j4 .synth-text .lead,body.embed.sec-j5 .synth-text .lead,body.embed.sec-j6 .synth-text .lead{
+body.embed.sec-j1 .synth-text .lead,body.embed.sec-j2 .synth-text .lead,body.embed.sec-j3 .synth-text .lead,body.embed.sec-j4 .synth-text .lead,body.embed.sec-j5 .synth-text .lead,body.embed.sec-j6 .synth-text .lead,body.embed.sec-jscene .synth-text .lead{
   font-size:16px!important;line-height:1.48!important;color:var(--ink)!important;background:rgba(255,255,255,.68)!important;border:1px solid rgba(255,255,255,.78)!important;border-radius:14px!important;padding:14px 17px!important;box-shadow:0 12px 30px -18px rgba(30,40,70,.24)!important;margin:0!important;font-weight:750!important}
-body.embed.sec-j1 .synth-text p:not(.lead),body.embed.sec-j2 .synth-text p:not(.lead),body.embed.sec-j3 .synth-text p:not(.lead),body.embed.sec-j4 .synth-text p:not(.lead),body.embed.sec-j5 .synth-text p:not(.lead),body.embed.sec-j6 .synth-text p:not(.lead){
+body.embed.sec-j1 .synth-text p:not(.lead),body.embed.sec-j2 .synth-text p:not(.lead),body.embed.sec-j3 .synth-text p:not(.lead),body.embed.sec-j4 .synth-text p:not(.lead),body.embed.sec-j5 .synth-text p:not(.lead),body.embed.sec-j6 .synth-text p:not(.lead),body.embed.sec-jscene .synth-text p:not(.lead){
   position:relative!important;margin:0!important;color:var(--ink2)!important;background:rgba(255,255,255,.58)!important;border:1px solid rgba(255,255,255,.76)!important;border-radius:12px!important;padding:10px 13px 10px 24px!important;line-height:1.52!important;box-shadow:0 10px 26px -18px rgba(30,40,70,.22)!important}
-body.embed.sec-j1 .synth-text p:not(.lead)::before,body.embed.sec-j2 .synth-text p:not(.lead)::before,body.embed.sec-j3 .synth-text p:not(.lead)::before,body.embed.sec-j4 .synth-text p:not(.lead)::before,body.embed.sec-j5 .synth-text p:not(.lead)::before,body.embed.sec-j6 .synth-text p:not(.lead)::before{
+body.embed.sec-j1 .synth-text p:not(.lead)::before,body.embed.sec-j2 .synth-text p:not(.lead)::before,body.embed.sec-j3 .synth-text p:not(.lead)::before,body.embed.sec-j4 .synth-text p:not(.lead)::before,body.embed.sec-j5 .synth-text p:not(.lead)::before,body.embed.sec-j6 .synth-text p:not(.lead)::before,body.embed.sec-jscene .synth-text p:not(.lead)::before{
   content:''!important;position:absolute!important;left:11px!important;top:1.05em!important;width:6px!important;height:6px!important;border-radius:50%!important;background:var(--blue)!important}
-body.embed.sec-j1 .synth-text b,body.embed.sec-j2 .synth-text b,body.embed.sec-j3 .synth-text b,body.embed.sec-j4 .synth-text b,body.embed.sec-j5 .synth-text b,body.embed.sec-j6 .synth-text b{
+body.embed.sec-j1 .synth-text b,body.embed.sec-j2 .synth-text b,body.embed.sec-j3 .synth-text b,body.embed.sec-j4 .synth-text b,body.embed.sec-j5 .synth-text b,body.embed.sec-j6 .synth-text b,body.embed.sec-jscene .synth-text b{
   color:var(--ink)!important;font-weight:900!important;background:linear-gradient(transparent 58%,rgba(47,111,237,.18) 0)!important;box-decoration-break:clone!important;-webkit-box-decoration-break:clone!important;padding:0 .04em!important}
-body.embed.sec-j1 .synth-text .lead b,body.embed.sec-j2 .synth-text .lead b,body.embed.sec-j3 .synth-text .lead b,body.embed.sec-j4 .synth-text .lead b,body.embed.sec-j5 .synth-text .lead b,body.embed.sec-j6 .synth-text .lead b{
+body.embed.sec-j1 .synth-text .lead b,body.embed.sec-j2 .synth-text .lead b,body.embed.sec-j3 .synth-text .lead b,body.embed.sec-j4 .synth-text .lead b,body.embed.sec-j5 .synth-text .lead b,body.embed.sec-j6 .synth-text .lead b,body.embed.sec-jscene .synth-text .lead b{
   color:var(--ink)!important;background:linear-gradient(transparent 58%,rgba(47,111,237,.18) 0)!important}
-body.embed.sec-j1 .synth-demo,body.embed.sec-j2 .synth-demo,body.embed.sec-j3 .synth-demo,body.embed.sec-j4 .synth-demo,body.embed.sec-j5 .synth-demo,body.embed.sec-j6 .synth-demo{
+body.embed.sec-j1 .synth-demo,body.embed.sec-j2 .synth-demo,body.embed.sec-j3 .synth-demo,body.embed.sec-j4 .synth-demo,body.embed.sec-j5 .synth-demo,body.embed.sec-j6 .synth-demo,body.embed.sec-jscene .synth-demo{
   min-height:0!important;background:rgba(255,255,255,.58)!important;border:1px solid rgba(255,255,255,.76)!important;box-shadow:0 10px 30px -16px rgba(30,40,70,.2),inset 0 1px 0 rgba(255,255,255,.85)!important}
-body.embed.sec-j1 .synth-conclusion,body.embed.sec-j2 .synth-conclusion,body.embed.sec-j3 .synth-conclusion,body.embed.sec-j4 .synth-conclusion,body.embed.sec-j5 .synth-conclusion,body.embed.sec-j6 .synth-conclusion{
+body.embed.sec-j1 .synth-conclusion,body.embed.sec-j2 .synth-conclusion,body.embed.sec-j3 .synth-conclusion,body.embed.sec-j4 .synth-conclusion,body.embed.sec-j5 .synth-conclusion,body.embed.sec-j6 .synth-conclusion,body.embed.sec-jscene .synth-conclusion{
   font-size:16px!important;line-height:1.48!important;color:#fff!important;background:linear-gradient(140deg,#22262f,#14171c)!important;border:0!important;border-radius:14px!important;padding:14px 17px!important;box-shadow:0 16px 38px -20px rgba(13,18,30,.56)!important;font-weight:800!important}
-body.embed.sec-j1 .synth-conclusion b,body.embed.sec-j2 .synth-conclusion b,body.embed.sec-j3 .synth-conclusion b,body.embed.sec-j4 .synth-conclusion b,body.embed.sec-j5 .synth-conclusion b,body.embed.sec-j6 .synth-conclusion b{
+body.embed.sec-j1 .synth-conclusion b,body.embed.sec-j2 .synth-conclusion b,body.embed.sec-j3 .synth-conclusion b,body.embed.sec-j4 .synth-conclusion b,body.embed.sec-j5 .synth-conclusion b,body.embed.sec-j6 .synth-conclusion b,body.embed.sec-jscene .synth-conclusion b{
   color:#fff!important;background:linear-gradient(transparent 58%,rgba(124,92,250,.52) 0)!important}
 body.embed.sec-actions .actions{margin-top:0!important}
 body.embed.sec-actions .actions table{font-size:14.5px!important}
