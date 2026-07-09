@@ -745,8 +745,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾/第三方平台 高亮" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Tasks</span>这几个检索任务是怎么定义的</div>
-        <p class="cmp-desc">将开发者的真实工作流拆成 <b>7 个典型场景</b>，选取最难、最依赖查阅文档的 <b>「算子开发」</b>，再细分为开发者逐项检索的 <b>5 个子任务</b>——每个子任务即一次「携问题检索」，对应时序图中的 <b>5 次检索</b>。</p>
+        <div class="cmp-h"><span class="hk">Tasks</span>算子开发里的 5 个检索问题如何选取</div>
+        <p class="cmp-desc">围绕一次自定义算子从<b>能不能接入</b>到<b>能不能跑通</b>的关键断点选题：模型转换、性能定位、算子库选型、自定义 kernel、动态 shape / Tiling、内存越界、注册集成、精度排查、soc 版本决策等知识点中，优先抽取<b>最依赖官方文档、最容易卡住开发进度</b>的 5 类问题，作为时序图中的 <b>5 次携问题检索</b>。</p>
         <div class="lc-stages">装环境 · <b style="color:var(--accent)">开发算子</b> · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
         <div class="op5">
           <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
