@@ -143,6 +143,25 @@
     .metric .num.orange { color: var(--orange); }
     .muted { color: var(--muted); }
     .small { font-size: 13px; color: var(--muted); }
+    .scope-note {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 22px;
+      background: #fff;
+      color: #111;
+      font-weight: 750;
+    }
+    .scope-note span {
+      display: inline-flex;
+      margin-right: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #000;
+      color: #fff;
+      font-size: 12px;
+      vertical-align: middle;
+    }
     .tagrow { display: flex; gap: 8px; flex-wrap: wrap; }
     .tag {
       display: inline-flex;
@@ -589,6 +608,9 @@
           <p class="small">cmake 缺失、CANN Toolkit 环境缺失、TTK Python 依赖缺失。</p>
         </div>
       </div>
+      <div class="scope-note">
+        <span>评测边界</span>这次评测做到了“真实代码审视 + 一次实际改码 + 多次运行尝试”，但没有条件做到任何一个阶段的本地成功运行闭环。
+      </div>
     </header>
 
     <section id="problems" class="panel">
@@ -641,6 +663,9 @@
       <p class="muted">
         这次没有全量扫描 CANN 组织下所有仓库，而是以一个实际开发任务为主线选择代表仓：开发者要从入门样例出发，改出一个新算子，
         再理解正式 builtin 算子的工程化结构，补齐泛化 shape、测试与性能优化能力。
+      </p>
+      <p class="muted" style="margin-top:10px">
+        评测边界：本次完成的是真实代码审视、一次实际改码和多次运行尝试；受本地 CANN Toolkit、Bisheng、NPU 与 Python 依赖条件限制，没有形成任何阶段的本地成功运行闭环。
       </p>
       <div class="repo-grid" style="margin-top:16px">
         <div class="card pad repo-card"><h3>cann-learning-hub</h3><p class="small">课程和 notebook，提供 Ascend C 概念、工程化算子、开源仓贡献、调试、性能优化路径。</p><span class="repo-role">学习入口</span></div>
