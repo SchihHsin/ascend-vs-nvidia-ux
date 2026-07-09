@@ -568,7 +568,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">一次「自定义算子开发」背后，是开发者与 AI 同时在使用昇腾社区</span></div>
+        <div class="brand"><span class="ttl">人机协同开发时序图：一次「自定义算子开发」背后，是开发者与 AI 同时在使用昇腾社区</span></div>
         <div class="subttl">立论 · 「人机协同」</div>
       </div>
       <div class="head-r">04/ 人机协同旅程<br/>opknow 20</div>
@@ -1696,6 +1696,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .devhm-card .devhm th{padding:.72vh .45vw}
     .devhm-card .devhm td{padding:.72vh .45vw}
     .devhm-card .devhm .note-row td{font-size:12px;line-height:1.25;color:var(--ink-2);vertical-align:top;text-align:left}
+    .devhm-card .devhm .fric-list{display:flex;flex-direction:column;gap:.2vh}
+    .devhm-card .devhm .fric-list span{position:relative;display:block;padding-left:.62em}
+    .devhm-card .devhm .fric-list span:before{content:"";position:absolute;left:0;top:.55em;width:3px;height:3px;border-radius:50%;background:#5C6472}
     .devhm-card .devhm tbody tr:nth-child(1) td,.devhm-card .devhm tbody tr:nth-child(2) td{padding:.62vh .34vw .68vh;vertical-align:top}
     .devhm-card .devhm tbody tr:nth-child(1) .score,.devhm-card .devhm tbody tr:nth-child(2) .score{margin-bottom:.72vh}
     .devhm-proof{min-height:0;border:1px solid rgba(199,0,11,.18);border-radius:8px;background:rgba(255,255,255,.86);box-shadow:0 10px 24px -22px rgba(30,40,70,.42);overflow:hidden;display:flex;flex-direction:column}
@@ -2429,7 +2432,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
                 <td data-issue="3"><span class="score good">75</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/01-nvidia-home-1.4.png" alt="NVIDIA 英文访问截图"><span>英文站点</span></div></td>
               </tr>
               <tr><th class="metric-head">差值</th><td data-issue="1"><span class="gap up">+1</span></td><td data-issue="2"><span class="gap up">+10</span></td><td data-issue="0"><span class="gap dn">−16</span></td><td data-issue="0"><span class="gap dn">−66</span></td><td data-issue="3"><span class="gap dn">−15</span></td><td data-issue="4"><span class="gap dn">−1</span></td><td data-issue="4"><span class="gap up">+22</span></td><td data-issue="2"><span class="gap up">+2</span></td><td data-issue="1"><span class="gap dn">−17</span></td><td data-issue="3"><span class="gap">0</span></td></tr>
-              <tr class="note-row"><th class="metric-head">摩擦来源</th><td data-issue="1">入口显眼度；场景直达；任务词回流。</td><td data-issue="2">长板未前置；HiDevLab 衔接；默认起步弱。</td><td data-issue="0">先登录再试用；海外账号；试用中断。</td><td data-issue="0">登录、协议、包选择；版本配套手判。</td><td data-issue="3">游客可读；索引收录；高频问题沉淀。</td><td data-issue="4">入口分层；文档导流；工单回流。</td><td data-issue="4">FAQ 亮点；上下文嵌入；论坛联动。</td><td data-issue="2">三步引导；CANN 复用；在线实验联动。</td><td data-issue="1">第一屏命中；英文案例；顶部直达入口。</td><td data-issue="3">语言入口；账号注册；论坛可读。</td></tr>
+              <tr class="note-row"><th class="metric-head">摩擦来源</th><td data-issue="1"><div class="fric-list"><span>入口显眼度</span><span>场景直达</span><span>任务词回流</span></div></td><td data-issue="2"><div class="fric-list"><span>长板未前置</span><span>HiDevLab 衔接</span><span>默认起步弱</span></div></td><td data-issue="0"><div class="fric-list"><span>先登录再试用</span><span>海外账号</span><span>试用中断</span></div></td><td data-issue="0"><div class="fric-list"><span>登录、协议、包选择</span><span>版本配套手判</span></div></td><td data-issue="3"><div class="fric-list"><span>游客可读</span><span>索引收录</span><span>高频问题沉淀</span></div></td><td data-issue="4"><div class="fric-list"><span>入口分层</span><span>文档导流</span><span>工单回流</span></div></td><td data-issue="4"><div class="fric-list"><span>FAQ 亮点</span><span>上下文嵌入</span><span>论坛联动</span></div></td><td data-issue="2"><div class="fric-list"><span>三步引导</span><span>CANN 复用</span><span>在线实验联动</span></div></td><td data-issue="1"><div class="fric-list"><span>第一屏命中</span><span>英文案例</span><span>顶部直达入口</span></div></td><td data-issue="3"><div class="fric-list"><span>语言入口</span><span>账号注册</span><span>论坛可读</span></div></td></tr>
             </tbody>
           </table>
           <div class="hm-callout" id="devHmCallout" aria-live="polite"></div>
