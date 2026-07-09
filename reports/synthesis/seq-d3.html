@@ -2020,10 +2020,11 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
 
   /* ===== 按关系讲解：高亮某对生命线之间的所有箭头、其余压暗 ===== */
   var GROUPS=[
-    {name:'AI ↔ 昇腾 / 第三方平台 · 矩阵评分', pairs:['ai-off','ai-sec']},
+    {name:'AI ↔ 昇腾社区 · 矩阵评分', pairs:['ai-off','ai-sec']},
     {name:'开发者 ↔ 昇腾社区 · 基础体验', pairs:['hu-off']}
   ];
   var step=0, hoverMsg=null, pinnedMsg=null;  // 0=全亮；hoverMsg=悬浮临时聚焦；pinnedMsg=点击钉住
+  var TASK_MSG={D:'sD',M:'sM',X:'sX',O:'sO',L:'sL'};
   function curFocus(){return hoverMsg!=null?hoverMsg:pinnedMsg;}  // 有效聚焦：悬浮优先，否则用钉住的
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
   function notify(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqStep:step},'*');}catch(e){}}
@@ -2083,6 +2084,15 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     });
   })();
   function go(n){var N=GROUPS.length;step=((n%(N+1))+(N+1))%(N+1);hoverMsg=null;pinnedMsg=null;applyHi();}
+  window.addEventListener('message',function(e){
+    var d=e&&e.data;
+    if(!d||!('__seqFocusLetter' in d))return;
+    var letter=(d.__seqFocusLetter||'').toString().toUpperCase();
+    hoverMsg=TASK_MSG[letter]||null;
+    pinnedMsg=null;
+    if(hoverMsg)step=1;
+    applyHi();
+  });
   function buildCtrl(){
     if(document.getElementById('seqctrl'))return;
     var d=document.createElement('div');d.id='seqctrl';
