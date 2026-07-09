@@ -3020,7 +3020,7 @@ function openSeqModal(src){
   if(!modal){
     modal=document.createElement('div');
     modal.id='seqModal'; modal.className='seq-modal';
-    modal.innerHTML='<div class="seq-modal-panel"><button class="seq-modal-close" title="关闭">×</button><iframe title="全屏时序图"></iframe></div>';
+    modal.innerHTML='<div class="seq-modal-panel"><button class="seq-modal-close" title="关闭">×</button><iframe title="全屏图"></iframe></div>';
     document.body.appendChild(modal);
     modal.addEventListener('click',e=>{if(e.target===modal)closeSeqModal();});
     modal.querySelector('.seq-modal-close').onclick=closeSeqModal;
@@ -3037,12 +3037,14 @@ function installSeqZoomButtons(){
   const ico='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
   document.querySelectorAll('iframe').forEach(fr=>{
     const raw=fr.getAttribute('data-src')||fr.getAttribute('src')||'';
-    if(raw.indexOf('seq-d3.html')<0)return;
+    const isSeq=raw.indexOf('seq-d3.html')>=0;
+    const isArch=raw.indexOf('arch-d3.html')>=0;
+    if(!isSeq&&!isArch)return;
     const host=fr.closest('.card')||fr.parentElement;
     if(!host||host.querySelector(':scope>.seq-zoom-btn'))return;
     host.classList.add('seq-zoom-host');
     const btn=document.createElement('button');
-    btn.type='button'; btn.className='seq-zoom-btn'; btn.title='放大全屏查看时序图'; btn.innerHTML=ico;
+    btn.type='button'; btn.className='seq-zoom-btn'; btn.title=isArch?'放大全屏查看架构图':'放大全屏查看时序图'; btn.innerHTML=ico;
     btn.onclick=e=>{e.preventDefault();e.stopPropagation();openSeqModal(fr.getAttribute('src')||fr.getAttribute('data-src')||raw);};
     host.appendChild(btn);
   });
