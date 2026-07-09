@@ -243,9 +243,8 @@
     }
     .run-detail p { margin: 0; }
     .run-detail p + b { margin-top: 8px; }
-    .journey-next {
+    .journey-nav {
       position: absolute;
-      right: 6px;
       top: 50%;
       width: 48px;
       height: 48px;
@@ -261,21 +260,30 @@
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
       z-index: 2;
     }
-    .journey-next:hover {
+    .journey-prev { left: 6px; }
+    .journey-next { right: 6px; }
+    .journey-nav:hover {
       border-color: #000;
       box-shadow: 0 20px 34px rgba(0,0,0,.25);
       transform: translateY(-50%) scale(1.04);
     }
-    .journey-next span {
+    .journey-nav:disabled {
+      opacity: 0;
+      visibility: hidden;
+      cursor: default;
+      pointer-events: none;
+      box-shadow: none;
+    }
+    .journey-nav:disabled:hover {
+      transform: translateY(-50%);
+    }
+    .journey-nav span {
       display: block;
-      transform: translateX(1px);
       font-size: 28px;
       line-height: 1;
     }
-    .journey-next.is-wrap span {
-      transform: none;
-      font-size: 22px;
-    }
+    .journey-next span { transform: translateX(1px); }
+    .journey-prev span { transform: translateX(-1px); }
     .scorebar {
       height: 8px;
       border-radius: 999px;
@@ -451,6 +459,35 @@
       background: #fff;
       box-shadow: none;
     }
+    .problem-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .problem-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 50%;
+      background: #f1f1ee;
+      color: #000;
+    }
+    .problem-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+    .problem-icon .glyph {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
     .problem-card h3 { color: #000; }
     .problem-card .why {
       margin-top: 10px;
@@ -551,37 +588,37 @@
       </p>
       <div class="problem-grid" style="margin-top:16px">
         <div class="problem-card p0">
-          <div class="tag red">P0 · 任务链断裂</div>
+          <div class="problem-head"><div class="tag red">P0 · 任务链断裂</div><div class="problem-icon" aria-hidden="true"><span class="glyph">1→7</span></div></div>
           <h3>代码资产多，但没有一条端到端开发主线</h3>
           <p class="small">课程、样例、API、正式算子、测试、性能模板分散在多个仓，用户要自己拼“下一步该去哪”。</p>
           <div class="why">影响：开发者能找到局部答案，但很难从复现样例连续走到正式算子修改、测试和性能优化。</div>
         </div>
         <div class="problem-card p0">
-          <div class="tag red">P0 · 环境闸门</div>
+          <div class="problem-head"><div class="tag red">P0 · 环境闸门</div><div class="problem-icon" aria-hidden="true"><span class="glyph">&gt;_</span></div></div>
           <h3>环境失败太早暴露，且无法自诊断</h3>
           <p class="small">实际构建第一步卡在 <code>cmake</code> 缺失；TTK 卡在 <code>numpy</code> 缺失；后续还依赖 Toolkit、Bisheng、NPU。</p>
           <div class="why">影响：用户还没进入 ASC 代码问题，就已经不知道是工具链、依赖、硬件还是代码导致失败。</div>
         </div>
         <div class="problem-card p0">
-          <div class="tag red">P0 · 工程化桥缺失</div>
+          <div class="problem-head"><div class="tag red">P0 · 工程化桥缺失</div><div class="problem-icon" aria-hidden="true"><span class="glyph">{ }</span></div></div>
           <h3>从样例到正式算子仓没有脚手架</h3>
           <p class="small">我能手动从 vector_add 改出 vector_sub，但要自己改 target、install path、README、父级 CMake。</p>
           <div class="why">影响：基本功能实现可学，但迁移到 op_api / op_host / op_kernel / tests 的正式结构时容易断。</div>
         </div>
         <div class="problem-card p1">
-          <div class="tag orange">P1 · 改动面不透明</div>
+          <div class="problem-head"><div class="tag orange">P1 · 改动面不透明</div><div class="problem-icon" aria-hidden="true"><span class="glyph">MAP</span></div></div>
           <h3>builtin 定制不知道最小必改集合</h3>
           <p class="small">正式算子横跨接口定义、shape/tiling、kernel、ACLNN 参数校验、UT，多目录协作但缺变更地图。</p>
           <div class="why">影响：加 dtype、加 shape、改属性时，用户不知道漏改哪个文件会导致编译、运行或注册失败。</div>
         </div>
         <div class="problem-card p1">
-          <div class="tag orange">P1 · 泛化 shape 跳层</div>
+          <div class="problem-head"><div class="tag orange">P1 · 泛化 shape 跳层</div><div class="problem-icon" aria-hidden="true"><span class="glyph">N→*</span></div></div>
           <h3>简单 tiling 到正式 tiling 的抽象跨度太大</h3>
           <p class="small">样例里是 totalLength / tailTileElementNum，正式仓是 gert::TilingContext / tilingKey / workspace / blockDim。</p>
           <div class="why">影响：用户能看到两端代码，但缺“同一算子逐步升级”的中间层。</div>
         </div>
         <div class="problem-card p1">
-          <div class="tag orange">P1 · 性能决策黑箱</div>
+          <div class="problem-head"><div class="tag orange">P1 · 性能决策黑箱</div><div class="problem-icon" aria-hidden="true"><span class="glyph">SPD</span></div></div>
           <h3>性能模板强，但选择规则埋在代码里</h3>
           <p class="small">CATLASS 有 dynamic tiling 和 handler 选择，cann-samples 有性能 story，但没有 shape advisor。</p>
           <div class="why">影响：用户知道有 StreamK、SplitK、padding、swizzle，却不知道自己的 MNK/layout 应该先试哪条路径。</div>
@@ -624,7 +661,8 @@
         <div class="step" tabindex="0"><div class="top"><span class="idx">6</span>特定 shape 优化</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div>主阻断：优化路径选择难。<div class="scoreline"><div class="scorebar warn"><span style="width:60%"></span></div><span class="scoreval">60/100</span></div>性能代码丰富，但未上板实测，缺测量到改码的闭环。<div class="run-detail"><b>实际做了什么</b><p>阅读 cann-samples 的 rms_norm、moe、matmul performance story 和 CATLASS streamK 示例。</p><b>结果</b><p>只做代码审视，未上板 profiling；确认性能样例多，但缺“我的 shape 该先试哪个优化”的决策说明。</p></div></div></div>
         <div class="step" tabindex="0"><div class="top"><span class="idx">7</span>泛化性能优化</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div>主阻断：模板选择黑箱。<div class="scoreline"><div class="scorebar warn"><span style="width:55%"></span></div><span class="scoreval">55/100</span></div>handler 规则在代码里，本次未做性能运行。<div class="run-detail"><b>实际做了什么</b><p>阅读 CATLASS dynamic_optimized_matmul 的 TilingParams、DoTilingAndSelectKernel、select_kernel_b16 handlers 和 tilingKey。</p><b>结果</b><p>只做代码审视；确认泛化性能能力强，但需要把 handler 选择规则外显成 shape advisor。</p></div></div></div>
       </div>
-      <button class="journey-next" type="button" aria-label="查看下一组阶段" data-journey-next><span aria-hidden="true">›</span></button>
+      <button class="journey-nav journey-prev" type="button" aria-label="查看上一组阶段" data-journey-prev><span aria-hidden="true">‹</span></button>
+      <button class="journey-nav journey-next" type="button" aria-label="查看下一组阶段" data-journey-next><span aria-hidden="true">›</span></button>
       </div>
     </section>
 
@@ -1113,30 +1151,40 @@ handlers[] = {
       pickCurrent();
 
       const journeyTrack = document.querySelector('#journeyTrack');
+      const journeyPrev = document.querySelector('[data-journey-prev]');
       const journeyNext = document.querySelector('[data-journey-next]');
       const updateJourneyButton = () => {
-        if (!journeyTrack || !journeyNext) return;
+        if (!journeyTrack || !journeyPrev || !journeyNext) return;
         const maxScroll = journeyTrack.scrollWidth - journeyTrack.clientWidth;
+        const atStart = journeyTrack.scrollLeft <= 8;
         const atEnd = maxScroll <= 4 || journeyTrack.scrollLeft >= maxScroll - 8;
-        journeyNext.classList.toggle('is-wrap', atEnd);
-        journeyNext.setAttribute('aria-label', atEnd ? '回到第一组阶段' : '查看下一组阶段');
-        const icon = journeyNext.querySelector('span');
-        if (icon) icon.textContent = atEnd ? '↺' : '›';
+        journeyPrev.disabled = atStart;
+        journeyNext.disabled = atEnd;
       };
 
-      if (journeyTrack && journeyNext) {
-        journeyNext.addEventListener('click', () => {
+      if (journeyTrack && journeyPrev && journeyNext) {
+        const pageBy = dir => {
           const maxScroll = journeyTrack.scrollWidth - journeyTrack.clientWidth;
-          const nextLeft = journeyTrack.scrollLeft + Math.max(260, journeyTrack.clientWidth - 58);
+          const page = Math.max(240, journeyTrack.clientWidth - 108);
+          const nextLeft = Math.min(maxScroll, Math.max(0, journeyTrack.scrollLeft + dir * page));
           journeyTrack.scrollTo({
-            left: nextLeft >= maxScroll - 8 ? 0 : nextLeft,
+            left: nextLeft,
             behavior: 'smooth'
           });
           window.setTimeout(updateJourneyButton, 280);
-        });
+        };
+
+        const resetJourney = () => {
+          journeyTrack.scrollTo({ left: 0, behavior: 'auto' });
+          updateJourneyButton();
+        };
+
+        journeyPrev.addEventListener('click', () => pageBy(-1));
+        journeyNext.addEventListener('click', () => pageBy(1));
         journeyTrack.addEventListener('scroll', updateJourneyButton, { passive: true });
         window.addEventListener('resize', updateJourneyButton);
-        updateJourneyButton();
+        window.addEventListener('pageshow', resetJourney);
+        window.requestAnimationFrame(resetJourney);
       }
     })();
   </script>
