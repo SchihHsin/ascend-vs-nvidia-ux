@@ -245,6 +245,34 @@
     }
     .step .body { padding: 11px; font-size: 12px; color: var(--muted); }
     .step .methods { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .step-assets {
+      margin: 9px 0 8px;
+      padding: 8px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 14px;
+      background: #f7f7f4;
+    }
+    .step-assets b {
+      display: block;
+      margin-bottom: 6px;
+      color: #000;
+      font-size: 12px;
+    }
+    .asset-list {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .asset-list span {
+      display: inline-flex;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.12);
+      color: #111;
+      font-size: 11px;
+      font-family: var(--mono);
+    }
     .run-detail {
       margin-top: 10px;
       padding: 10px;
@@ -463,23 +491,6 @@
       padding: 12px;
       background: #fff;
     }
-    .repo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .repo-card { min-height: 128px; }
-    .repo-role {
-      display: inline-flex;
-      margin-top: 12px;
-      padding: 4px 10px;
-      border: 1px solid rgba(0,0,0,.14);
-      border-radius: 999px;
-      background: #f7f7f4;
-      color: #111;
-      font-size: 12px;
-      font-weight: 800;
-    }
     .problem-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -566,7 +577,7 @@
       color: #fff;
     }
     @media (max-width: 980px) {
-      .grid.cols-2, .grid.cols-3, .grid.cols-4, .repo-grid, .problem-grid, .finding, .evidence, .stage, .owner, .method-table {
+      .grid.cols-2, .grid.cols-3, .grid.cols-4, .problem-grid, .finding, .evidence, .stage, .owner, .method-table {
         grid-template-columns: 1fr;
       }
       .stage .side { position: static; }
@@ -577,7 +588,6 @@
   <nav class="nav">
     <b>CANN 代码级评测</b>
     <a href="#problems">核心问题</a>
-    <a href="#scope">评测范围</a>
     <a href="#journey">7 阶段旅程</a>
     <a href="#stages">逐阶段分析</a>
     <a href="#findings">结论与 demo</a>
@@ -664,27 +674,6 @@
       </div>
     </section>
 
-    <section id="scope" class="panel">
-      <h2>评测范围</h2>
-      <p class="muted">
-        这次没有全量扫描 CANN 组织下所有仓库，而是以一个实际开发任务为主线选择代表仓：开发者要从入门样例出发，改出一个新算子，
-        再理解正式 builtin 算子的工程化结构，补齐泛化 shape、测试与性能优化能力。
-      </p>
-      <p class="muted" style="margin-top:10px">
-        评测边界：本次完成的是真实代码审视、一次实际改码和多次运行尝试；受本地 CANN Toolkit、Bisheng、NPU 与 Python 依赖条件限制，没有条件做到本地成功运行闭环。
-      </p>
-      <div class="repo-grid" style="margin-top:16px">
-        <div class="card pad repo-card"><h3>cann-learning-hub</h3><p class="small">课程和 notebook，提供 Ascend C 概念、工程化算子、开源仓贡献、调试、性能优化路径。</p><span class="repo-role">学习入口</span></div>
-        <div class="card pad repo-card"><h3>cann-samples</h3><p class="small">实际复现和改码主仓，包含 vector_add、matmul story、simd_vf story 等可修改样例。</p><span class="repo-role">复现与改码主仓</span></div>
-        <div class="card pad repo-card"><h3>asc-devkit</h3><p class="small">Ascend C API、IDE/clangd、调试、profiling、sanitizer 样例和接口层说明。</p><span class="repo-role">API 与工具能力</span></div>
-        <div class="card pad repo-card"><h3>ops-math</h3><p class="small">正式算子结构样本：op_api、op_host、op_kernel、tests/ut 多目录协作。</p><span class="repo-role">正式算子结构</span></div>
-        <div class="card pad repo-card"><h3>ops-nn</h3><p class="small">builtin 类复杂算子样本，用 LSTM backward 看 ACLNN 参数校验、shape/dtype 检查。</p><span class="repo-role">builtin 定制样本</span></div>
-        <div class="card pad repo-card"><h3>ops-test-kit</h3><p class="small">Kernel / ACLNN / E2E 测试工具，验证“改完算子后怎么批量测”。</p><span class="repo-role">测试闭环工具</span></div>
-        <div class="card pad repo-card"><h3>catlass</h3><p class="small">特定 shape 和泛化 shape 性能优化样本，看模板选择、tilingKey、dynamic matmul。</p><span class="repo-role">性能优化模板</span></div>
-      </div>
-      <p class="small" style="margin-top:12px">注：仓库版本号已在取证记录中留档，报告正文只展示它们在算子开发任务链中的作用。</p>
-    </section>
-
     <section id="journey" class="panel">
       <h2>算子开发 7 阶段旅程</h2>
       <div class="tagrow" style="margin-bottom:14px">
@@ -695,13 +684,13 @@
       </div>
       <div class="journey-carousel">
       <div class="journey" id="journeyTrack">
-        <div class="step" tabindex="0"><div class="top"><span class="idx">1</span>复现部署</div><div class="body"><div class="methods"><span class="method review">代码审视</span><span class="method block">运行尝试受阻</span></div>主阻断：环境不可自诊断。<div class="scoreline"><div class="scorebar bad"><span style="width:48%"></span></div><span class="scoreval">48/100</span></div>代码可读，但 cmake / Toolkit / Bisheng / NPU 缺口没有预检。<div class="run-detail"><b>实际做了什么</b><p>阅读 cann-samples 的 README、vector_add/main.asc、CMakeLists 和 cmake/ascend.cmake；尝试执行 <code>cmake -S . -B build -DNPU_ARCH=dav-2201</code>。</p><b>结果</b><p>本机 <code>cmake</code> 不在 PATH，运行在第一步受阻；后续还会依赖 ASCEND_HOME_PATH、Toolkit 和 Bisheng。</p></div></div></div>
-        <div class="step" tabindex="0"><div class="top"><span class="idx">2</span>迁移部署</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div>主阻断：样例到正式工程无桥。<div class="scoreline"><div class="scorebar bad"><span style="width:45%"></span></div><span class="scoreval">45/100</span></div>课程和 API 有，但没有一键生成正式算子结构。<div class="run-detail"><b>实际做了什么</b><p>阅读 asc-devkit 的 API 层级、clangd 配置、examples，以及 cann-learning-hub 中 add_custom.asc 和开源仓贡献章节。</p><b>结果</b><p>以代码审视为主；没有找到从 cann-samples 单文件样例迁移到 op_api/op_host/op_kernel/tests 正式结构的脚手架。</p></div></div></div>
-        <div class="step" tabindex="0"><div class="top"><span class="idx">3</span>builtin 定制</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div>主阻断：改动面不透明。<div class="scoreline"><div class="scorebar warn"><span style="width:54%"></span></div><span class="scoreval">54/100</span></div>结构完整，但用户不知道必改文件和必测用例。<div class="run-detail"><b>实际做了什么</b><p>审视 ops-math 的 stateless_random_normal_v2 和 ops-nn 的 thnn_fused_lstm_cell_grad，定位 op_api、op_host、op_kernel、tests/ut。</p><b>结果</b><p>只做代码审视，未修改 builtin；确认正式算子改动面跨多目录，但缺面向任务的“必改文件清单”。</p></div></div></div>
-        <div class="step" tabindex="0"><div class="top"><span class="idx">4</span>基本功能</div><div class="body"><div class="methods"><span class="method edit">实际改码</span><span class="method block">运行尝试受阻</span></div>主阻断：靠手工复制派生。<div class="scoreline"><div class="scorebar warn"><span style="width:62%"></span></div><span class="scoreval">62/100</span></div>vector_sub 能改出来，但缺 sample fork 机制。<div class="run-detail"><b>实际做了什么</b><p>从 vector_add 复制出 vector_sub，修改 kernel 名、<code>AscendC::Add</code> 为 <code>AscendC::Sub</code>、CPU golden、CMake target、README 和父级 CMake。</p><b>结果</b><p>实际改码完成；构建仍受本机 cmake/CANN 工具链环境限制，未生成可执行文件。</p></div></div></div>
-        <div class="step" tabindex="0"><div class="top"><span class="idx">5</span>泛化 shape</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div>主阻断：抽象层跳跃。<div class="scoreline"><div class="scorebar warn"><span style="width:52%"></span></div><span class="scoreval">52/100</span></div>简单 tail tile 到正式 tiling context 缺中间教程。<div class="run-detail"><b>实际做了什么</b><p>对比 vector_add 中 totalLength、tileNum、tailTileElementNum 和 stateless_random_normal_v2_tiling_arch35.cpp 中 TilingContext、workspace、blockDim。</p><b>结果</b><p>代码审视显示两端都有实现，但从样例 tiling 到正式 tiling 的升级路径缺少中间层。</p></div></div></div>
-        <div class="step" tabindex="0"><div class="top"><span class="idx">6</span>特定 shape 优化</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div>主阻断：优化路径选择难。<div class="scoreline"><div class="scorebar warn"><span style="width:60%"></span></div><span class="scoreval">60/100</span></div>性能代码丰富，但未上板实测，缺测量到改码的闭环。<div class="run-detail"><b>实际做了什么</b><p>阅读 cann-samples 的 rms_norm、moe、matmul performance story 和 CATLASS streamK 示例。</p><b>结果</b><p>只做代码审视，未上板 profiling；确认性能样例多，但缺“我的 shape 该先试哪个优化”的决策说明。</p></div></div></div>
-        <div class="step" tabindex="0"><div class="top"><span class="idx">7</span>泛化性能优化</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div>主阻断：模板选择黑箱。<div class="scoreline"><div class="scorebar warn"><span style="width:55%"></span></div><span class="scoreval">55/100</span></div>handler 规则在代码里，本次未做性能运行。<div class="run-detail"><b>实际做了什么</b><p>阅读 CATLASS dynamic_optimized_matmul 的 TilingParams、DoTilingAndSelectKernel、select_kernel_b16 handlers 和 tilingKey。</p><b>结果</b><p>只做代码审视；确认泛化性能能力强，但需要把 handler 选择规则外显成 shape advisor。</p></div></div></div>
+        <div class="step" tabindex="0"><div class="top"><span class="idx">1</span>复现部署</div><div class="body"><div class="methods"><span class="method review">代码审视</span><span class="method block">运行尝试受阻</span></div><div class="step-assets"><b>使用资产</b><div class="asset-list"><span>cann-samples</span><span>vector_add</span><span>ascend.cmake</span></div></div>主阻断：环境不可自诊断。<div class="scoreline"><div class="scorebar bad"><span style="width:48%"></span></div><span class="scoreval">48/100</span></div>代码可读，但 cmake / Toolkit / Bisheng / NPU 缺口没有预检。<div class="run-detail"><b>实际做了什么</b><p>阅读 cann-samples 的 README、vector_add/main.asc、CMakeLists 和 cmake/ascend.cmake；尝试执行 <code>cmake -S . -B build -DNPU_ARCH=dav-2201</code>。</p><b>结果</b><p>本机 <code>cmake</code> 不在 PATH，运行在第一步受阻；后续还会依赖 ASCEND_HOME_PATH、Toolkit 和 Bisheng。</p></div></div></div>
+        <div class="step" tabindex="0"><div class="top"><span class="idx">2</span>迁移部署</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div><div class="step-assets"><b>使用资产</b><div class="asset-list"><span>asc-devkit</span><span>cann-learning-hub</span><span>add_custom.asc</span></div></div>主阻断：样例到正式工程无桥。<div class="scoreline"><div class="scorebar bad"><span style="width:45%"></span></div><span class="scoreval">45/100</span></div>课程和 API 有，但没有一键生成正式算子结构。<div class="run-detail"><b>实际做了什么</b><p>阅读 asc-devkit 的 API 层级、clangd 配置、examples，以及 cann-learning-hub 中 add_custom.asc 和开源仓贡献章节。</p><b>结果</b><p>以代码审视为主；没有找到从 cann-samples 单文件样例迁移到 op_api/op_host/op_kernel/tests 正式结构的脚手架。</p></div></div></div>
+        <div class="step" tabindex="0"><div class="top"><span class="idx">3</span>builtin 定制</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div><div class="step-assets"><b>使用资产</b><div class="asset-list"><span>ops-math</span><span>ops-nn</span><span>tests/ut</span></div></div>主阻断：改动面不透明。<div class="scoreline"><div class="scorebar warn"><span style="width:54%"></span></div><span class="scoreval">54/100</span></div>结构完整，但用户不知道必改文件和必测用例。<div class="run-detail"><b>实际做了什么</b><p>审视 ops-math 的 stateless_random_normal_v2 和 ops-nn 的 thnn_fused_lstm_cell_grad，定位 op_api、op_host、op_kernel、tests/ut。</p><b>结果</b><p>只做代码审视，未修改 builtin；确认正式算子改动面跨多目录，但缺面向任务的“必改文件清单”。</p></div></div></div>
+        <div class="step" tabindex="0"><div class="top"><span class="idx">4</span>基本功能</div><div class="body"><div class="methods"><span class="method edit">实际改码</span><span class="method block">运行尝试受阻</span></div><div class="step-assets"><b>使用资产</b><div class="asset-list"><span>cann-samples</span><span>vector_add</span><span>vector_sub</span></div></div>主阻断：靠手工复制派生。<div class="scoreline"><div class="scorebar warn"><span style="width:62%"></span></div><span class="scoreval">62/100</span></div>vector_sub 能改出来，但缺 sample fork 机制。<div class="run-detail"><b>实际做了什么</b><p>从 vector_add 复制出 vector_sub，修改 kernel 名、<code>AscendC::Add</code> 为 <code>AscendC::Sub</code>、CPU golden、CMake target、README 和父级 CMake。</p><b>结果</b><p>实际改码完成；构建仍受本机 cmake/CANN 工具链环境限制，未生成可执行文件。</p></div></div></div>
+        <div class="step" tabindex="0"><div class="top"><span class="idx">5</span>泛化 shape</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div><div class="step-assets"><b>使用资产</b><div class="asset-list"><span>vector_add</span><span>ops-math</span><span>tiling</span></div></div>主阻断：抽象层跳跃。<div class="scoreline"><div class="scorebar warn"><span style="width:52%"></span></div><span class="scoreval">52/100</span></div>简单 tail tile 到正式 tiling context 缺中间教程。<div class="run-detail"><b>实际做了什么</b><p>对比 vector_add 中 totalLength、tileNum、tailTileElementNum 和 stateless_random_normal_v2_tiling_arch35.cpp 中 TilingContext、workspace、blockDim。</p><b>结果</b><p>代码审视显示两端都有实现，但从样例 tiling 到正式 tiling 的升级路径缺少中间层。</p></div></div></div>
+        <div class="step" tabindex="0"><div class="top"><span class="idx">6</span>特定 shape 优化</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div><div class="step-assets"><b>使用资产</b><div class="asset-list"><span>cann-samples</span><span>asc-devkit</span><span>catlass</span></div></div>主阻断：优化路径选择难。<div class="scoreline"><div class="scorebar warn"><span style="width:60%"></span></div><span class="scoreval">60/100</span></div>性能代码丰富，但未上板实测，缺测量到改码的闭环。<div class="run-detail"><b>实际做了什么</b><p>阅读 cann-samples 的 rms_norm、moe、matmul performance story 和 CATLASS streamK 示例。</p><b>结果</b><p>只做代码审视，未上板 profiling；确认性能样例多，但缺“我的 shape 该先试哪个优化”的决策说明。</p></div></div></div>
+        <div class="step" tabindex="0"><div class="top"><span class="idx">7</span>泛化性能优化</div><div class="body"><div class="methods"><span class="method review">代码审视</span></div><div class="step-assets"><b>使用资产</b><div class="asset-list"><span>catlass</span><span>dynamic matmul</span><span>handlers</span></div></div>主阻断：模板选择黑箱。<div class="scoreline"><div class="scorebar warn"><span style="width:55%"></span></div><span class="scoreval">55/100</span></div>handler 规则在代码里，本次未做性能运行。<div class="run-detail"><b>实际做了什么</b><p>阅读 CATLASS dynamic_optimized_matmul 的 TilingParams、DoTilingAndSelectKernel、select_kernel_b16 handlers 和 tilingKey。</p><b>结果</b><p>只做代码审视；确认泛化性能能力强，但需要把 handler 选择规则外显成 shape advisor。</p></div></div></div>
       </div>
       <button class="journey-nav journey-prev" type="button" aria-label="查看上一组阶段" data-journey-prev><span aria-hidden="true">‹</span></button>
       <button class="journey-nav journey-next" type="button" aria-label="查看下一组阶段" data-journey-next><span aria-hidden="true">›</span></button>
