@@ -2039,6 +2039,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 .fullarch #archcap{left:18px;bottom:14px;max-width:min(220px,calc(100vw - 36px));font-size:9.5px!important}
 #archView svg [data-edge]{transition:opacity .18s,stroke .18s,fill .18s}
 .maparch #archView svg>*{transition:opacity .18s,filter .18s}
+.maparch #archView svg .anode rect,.maparch #archView svg .anode polygon{transition:stroke .18s,stroke-width .18s,filter .18s}
 .maparch .embed-title,.maparch #archctrl,.maparch #archcap{display:none!important}
 </style>
 <script>
@@ -2131,18 +2132,46 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     window.__archGo=go;
     window.__archApply=apply;
     var METRIC_FOCUS={
-      search:{nodes:['route','gate','search'], edges:['route gate','gate search fetch','search relay']},
-      fetch:{nodes:['gate','fetch','relay'], edges:['gate search fetch','fetch relay','relay judge']},
-      read:{nodes:['own','relay'], edges:['own relay','relay judge']},
-      judge:{nodes:['relay','judge','redo','hasEv'], edges:['relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
-      answer:{nodes:['converge','final','hasEv'], edges:['judge converge','converge final','hasEv final','gate final']}
+      search:{color:'#5B5BD6',nodes:['route','gate','search'], edges:['route gate','gate search fetch','search relay']},
+      fetch:{color:'#3171DE',nodes:['gate','fetch','relay'], edges:['gate search fetch','fetch relay','relay judge']},
+      read:{color:'#209067',nodes:['own','relay'], edges:['own relay','relay judge']},
+      judge:{color:'#D9892B',nodes:['relay','judge','redo','hasEv'], edges:['relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
+      answer:{color:'#2f3d63',nodes:['converge','final','hasEv'], edges:['judge converge','converge final','hasEv final','gate final']}
     };
+    function nodeShape(el){return el&&el.querySelector&&el.querySelector('rect,polygon,circle');}
+    function rememberShape(s){
+      if(!s||s.dataset.shapeRemembered)return;
+      s.dataset.shapeRemembered='1';
+      s.dataset.stroke0=s.getAttribute('stroke')||'';
+      s.dataset.sw0=s.getAttribute('stroke-width')||'';
+      s.dataset.filter0=s.style.filter||'';
+    }
+    function resetMetricNode(el){
+      var s=nodeShape(el); if(!s)return;
+      rememberShape(s);
+      if(s.dataset.stroke0)s.setAttribute('stroke',s.dataset.stroke0); else s.removeAttribute('stroke');
+      if(s.dataset.sw0)s.setAttribute('stroke-width',s.dataset.sw0); else s.removeAttribute('stroke-width');
+      s.style.filter=s.dataset.filter0||'';
+    }
     function metricFocus(key){
       if(!IS_MAP_ARCH) return;
       var f=key&&METRIC_FOCUS[key];
       var kids=svg.children, i, el, k, ek, hit;
       if(!f){
-        for(i=0;i<kids.length;i++){el=kids[i]; if(el.tagName==='defs')continue; el.style.opacity=''; el.style.filter='';}
+        for(i=0;i<kids.length;i++){
+          el=kids[i]; if(el.tagName==='defs')continue;
+          el.style.opacity=''; el.style.filter='';
+          resetMetricNode(el);
+          if(el.getAttribute&&el.getAttribute('data-edge')){
+            if(el.getAttribute('data-edge-label')){
+              el.setAttribute('fill',el.getAttribute('data-fill')||'#333');
+              var fw0=el.getAttribute('data-fw'); if(fw0)el.setAttribute('font-weight',fw0); else el.removeAttribute('font-weight');
+            }else{
+              el.setAttribute('stroke',el.getAttribute('data-stroke')||'#8a8a8a');
+              el.setAttribute('stroke-width',el.getAttribute('data-sw')||'1.2');
+            }
+          }
+        }
         return;
       }
       for(i=0;i<kids.length;i++){
@@ -2154,6 +2183,25 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
         if(ek) hit=f.edges.some(function(x){return ek===x || ek.indexOf(x)>=0 || x.indexOf(ek)>=0;});
         el.style.opacity=hit?'1':'0.16';
         el.style.filter=hit?'none':'saturate(.45)';
+        if(k){
+          resetMetricNode(el);
+          if(hit){
+            var s=nodeShape(el);
+            rememberShape(s);
+            s.setAttribute('stroke',f.color);
+            s.setAttribute('stroke-width','3');
+            s.style.filter='drop-shadow(0 3px 5px rgba(30,40,70,.18))';
+          }
+        }
+        if(ek){
+          if(el.getAttribute('data-edge-label')){
+            el.setAttribute('fill',hit?f.color:'#9aa0aa');
+            if(hit)el.setAttribute('font-weight','850'); else {var fw=el.getAttribute('data-fw'); if(fw)el.setAttribute('font-weight',fw); else el.removeAttribute('font-weight');}
+          }else{
+            el.setAttribute('stroke',hit?f.color:(el.getAttribute('data-stroke')||'#8a8a8a'));
+            el.setAttribute('stroke-width',hit?'2.2':(el.getAttribute('data-sw')||'1.2'));
+          }
+        }
       }
     }
     window.__archMetricFocus=metricFocus;
