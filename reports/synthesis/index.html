@@ -808,6 +808,31 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
+  <script>
+    (function(){
+      function initArchMetricFocus(){
+        var layout=document.querySelector('.archmetric-layout');
+        if(!layout||layout.dataset.focusReady)return;
+        layout.dataset.focusReady='1';
+        var frame=layout.querySelector('.archmetric-archbox iframe');
+        var current=null;
+        function send(key){
+          current=key||null;
+          if(!frame||!frame.contentWindow)return;
+          try{ frame.contentWindow.postMessage({__archMetricFocus:current},'*'); }catch(e){}
+        }
+        layout.querySelectorAll('.archmetric-step[data-map]').forEach(function(step){
+          step.addEventListener('mouseenter',function(){send(step.dataset.map);});
+          step.addEventListener('mouseleave',function(){send(null);});
+          step.addEventListener('focusin',function(){send(step.dataset.map);});
+          step.addEventListener('focusout',function(){send(null);});
+        });
+        if(frame) frame.addEventListener('load',function(){send(current);});
+      }
+      if(document.readyState!=='loading')initArchMetricFocus();else document.addEventListener('DOMContentLoaded',initArchMetricFocus);
+    })();
+  </script>
+
   <!-- 3b 灰底：AI 可用性方法论 + 算子 5 场景 -->
   <section class="slide s-gray copy-large">
     <div class="head">

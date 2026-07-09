@@ -2038,6 +2038,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 .fullarch #archctrl .aclbl{font-size:14px;border-radius:10px;padding:8px 14px}
 .fullarch #archcap{left:18px;bottom:14px;max-width:min(220px,calc(100vw - 36px));font-size:9.5px!important}
 #archView svg [data-edge]{transition:opacity .18s,stroke .18s,fill .18s}
+.maparch #archView svg>*{transition:opacity .18s,filter .18s}
 .maparch .embed-title,.maparch #archctrl,.maparch #archcap{display:none!important}
 </style>
 <script>
@@ -2129,6 +2130,37 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     function go(d){ idx+=d; if(idx<0)idx=WALK.length; if(idx>WALK.length)idx=0; apply(); }
     window.__archGo=go;
     window.__archApply=apply;
+    var METRIC_FOCUS={
+      search:{nodes:['route','gate','search'], edges:['route gate','gate search fetch','search relay']},
+      fetch:{nodes:['gate','fetch','relay'], edges:['gate search fetch','fetch relay','relay judge']},
+      read:{nodes:['own','relay'], edges:['own relay','relay judge']},
+      judge:{nodes:['relay','judge','redo','hasEv'], edges:['relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
+      answer:{nodes:['converge','final','hasEv'], edges:['judge converge','converge final','hasEv final','gate final']}
+    };
+    function metricFocus(key){
+      if(!IS_MAP_ARCH) return;
+      var f=key&&METRIC_FOCUS[key];
+      var kids=svg.children, i, el, k, ek, hit;
+      if(!f){
+        for(i=0;i<kids.length;i++){el=kids[i]; if(el.tagName==='defs')continue; el.style.opacity=''; el.style.filter='';}
+        return;
+      }
+      for(i=0;i<kids.length;i++){
+        el=kids[i]; if(el.tagName==='defs')continue;
+        k=el.getAttribute&&el.getAttribute('data-k');
+        ek=el.getAttribute&&el.getAttribute('data-edge');
+        hit=false;
+        if(k) hit=f.nodes.indexOf(k)>=0;
+        if(ek) hit=f.edges.some(function(x){return ek===x || ek.indexOf(x)>=0 || x.indexOf(ek)>=0;});
+        el.style.opacity=hit?'1':'0.16';
+        el.style.filter=hit?'none':'saturate(.45)';
+      }
+    }
+    window.__archMetricFocus=metricFocus;
+    window.addEventListener('message',function(ev){
+      var d=ev.data||{};
+      if(d&&d.__archMetricFocus!==undefined) metricFocus(d.__archMetricFocus||null);
+    });
     var c=document.createElement('div'); c.id='archctrl';
     c.innerHTML='<button class="acb" id="acp">‹</button><span class="aclbl" id="archlbl">▶ 按环节讲解</span><button class="acb" id="acn">›</button>';
     document.body.appendChild(c);
