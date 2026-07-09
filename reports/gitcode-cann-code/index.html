@@ -369,10 +369,16 @@
       line-height: 1.55;
       white-space: pre;
     }
-    .code.light {
-      background: #f7f9fc;
-      color: #243043;
-      border: 1px solid var(--line);
+    .evidence-label {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #000;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
     }
     .filelist {
       display: grid;
@@ -609,7 +615,7 @@
         </div>
       </div>
       <div class="scope-note">
-        <span>评测边界</span>这次评测做到了“真实代码审视 + 一次实际改码 + 多次运行尝试”，但没有条件做到任何一个阶段的本地成功运行闭环。
+        <span>评测边界</span>这次评测做到了“真实代码审视 + 一次实际改码 + 多次运行尝试”，但没有条件做到本地成功运行闭环。
       </div>
     </header>
 
@@ -665,7 +671,7 @@
         再理解正式 builtin 算子的工程化结构，补齐泛化 shape、测试与性能优化能力。
       </p>
       <p class="muted" style="margin-top:10px">
-        评测边界：本次完成的是真实代码审视、一次实际改码和多次运行尝试；受本地 CANN Toolkit、Bisheng、NPU 与 Python 依赖条件限制，没有形成任何阶段的本地成功运行闭环。
+        评测边界：本次完成的是真实代码审视、一次实际改码和多次运行尝试；受本地 CANN Toolkit、Bisheng、NPU 与 Python 依赖条件限制，没有条件做到本地成功运行闭环。
       </p>
       <div class="repo-grid" style="margin-top:16px">
         <div class="card pad repo-card"><h3>cann-learning-hub</h3><p class="small">课程和 notebook，提供 Ascend C 概念、工程化算子、开源仓贡献、调试、性能优化路径。</p><span class="repo-role">学习入口</span></div>
@@ -714,7 +720,8 @@
         </div>
         <div class="evidence">
           <div>
-            <div class="code light">README 给出：source ${install_path}/ascend-toolkit/set_env.sh
+            <div class="evidence-label">运行命令证据</div>
+            <div class="code">README 给出：source ${install_path}/ascend-toolkit/set_env.sh
 cmake -S . -B build -DNPU_ARCH=dav-3510 或 dav-2201
 cmake --build build --target vector_add
 ./build/Samples/0_Introduction/vector_add/vector_add</div>
@@ -745,7 +752,8 @@ cmake --build build --target vector_add
         </div>
         <div class="evidence">
           <div>
-            <div class="code light">asc-devkit 提供：
+            <div class="evidence-label">结构摘录</div>
+            <div class="code">asc-devkit 提供：
 Tpipe/Tque 框架 API
 基础 API
 SIMD&SIMT C API
@@ -782,7 +790,8 @@ cann-learning-hub 提供：
         </div>
         <div class="evidence">
           <div>
-            <div class="code light">stateless_random_normal_v2/
+            <div class="evidence-label">正式算子目录结构</div>
+            <div class="code">stateless_random_normal_v2/
 ├── op_api
 ├── op_graph
 ├── op_host
@@ -826,6 +835,7 @@ thnn_fused_lstm_cell_grad/
         </div>
         <div class="evidence">
           <div>
+            <div class="evidence-label">实际改码 diff</div>
             <div class="code">- add_executable(vector_add main.asc)
 + add_executable(vector_sub main.asc)
 
@@ -866,7 +876,8 @@ thnn_fused_lstm_cell_grad/
         </div>
         <div class="evidence">
           <div>
-            <div class="code light">vector_add/main.asc:
+            <div class="evidence-label">tiling 对照摘录</div>
+            <div class="code">vector_add/main.asc:
 calc_tiling_params(totalLength)
 currentBlockLength
 tileNum
@@ -907,7 +918,8 @@ context_->SetBlockDim(...)</div>
         </div>
         <div class="evidence">
           <div>
-            <div class="code light">cann-samples/Samples/2_Performance/
+            <div class="evidence-label">性能样例摘录</div>
+            <div class="code">cann-samples/Samples/2_Performance/
 ├── rms_norm_quant_story/src/0_naive.asc ... 6_binary_sum.asc
 ├── moe_init_routing_story/src/0_native.asc ... 5_simt.asc
 ├── matmul_story/matmul_tutorials/0_naive ... 7_fullload
@@ -942,6 +954,7 @@ catlass/examples/66_ascend950_streamk_matmul:
         </div>
         <div class="evidence">
           <div>
+            <div class="evidence-label">动态模板选择规则</div>
             <div class="code">TilingParams{m, n, k, layoutTagA, layoutTagB, layoutTagC}
 DoTilingAndSelectKernel(tilingParams, platformInfo)
 ExecuteDynamicOptimizedMatmul(...)
