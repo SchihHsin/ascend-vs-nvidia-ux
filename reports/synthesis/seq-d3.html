@@ -2029,7 +2029,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   function notify(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqStep:step},'*');}catch(e){}}
   function notifyHover(){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqHover:curFocus()},'*');}catch(e){}}
   function updLbl(){var lbl=document.getElementById('sqLbl');if(!lbl)return;
-    lbl.textContent=step<1?'▶ 按关系讲解':('第 '+step+' / '+GROUPS.length+' · '+GROUPS[step-1].name);}
+    lbl.textContent=step<1?'默认 · 完整时序图':('模式 '+step+' · '+GROUPS[step-1].name);}
   function applyHi(){
     var svgEl=document.getElementById('journey'); if(!svgEl){updLbl();notify();return;}
     function clr(el){
@@ -2086,7 +2086,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   function buildCtrl(){
     if(document.getElementById('seqctrl'))return;
     var d=document.createElement('div');d.id='seqctrl';
-    d.innerHTML='<button id="sqPrev" class="sqbtn" title="上一个关系">‹</button><span id="sqLbl" class="sqlbl">▶ 按关系讲解</span><button id="sqNext" class="sqbtn" title="下一个关系">›</button>';
+    d.innerHTML='<button id="sqPrev" class="sqbtn" title="上一个模式">‹</button><span id="sqLbl" class="sqlbl">默认 · 完整时序图</span><button id="sqNext" class="sqbtn" title="下一个模式">›</button>';
     document.body.appendChild(d);
     document.getElementById('sqNext').onclick=function(){go(step+1);};
     document.getElementById('sqLbl').onclick=function(){go(step+1);};
@@ -2095,9 +2095,13 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   }
   function init(){
     buildCtrl();
-    var m=(location.search.match(/[?&]hi=(\d+)/));   // ?hi=1/2 → 嵌入时锁定某关系聚光灯、隐藏控制条
-    if(m){ go(+m[1]); var c=document.getElementById('seqctrl'); if(c)c.style.display='none'; }
+    var m=(location.search.match(/[?&]hi=(\d+)/));   // ?hi=1/2 仅作为初始模式；控制条仍保留，可继续翻到其它模式
+    if(m){ go(+m[1]); }
   }
+  window.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(step+1);}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();go(step-1);}
+  });
   if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
   window.addEventListener('load',function(){var m=(location.search.match(/[?&]hi=(\d+)/));if(m)go(+m[1]);});
 })();
