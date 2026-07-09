@@ -766,7 +766,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">任务执行：同一开发任务用 CANN 与 CUDA 成对提问</span></div>
+        <div class="brand"><span class="ttl">任务执行：基于同一开发任务用 CANN 与 CUDA 对比提问</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「问题编写」</div>
       </div>
       <div class="head-r">07/ 问题对 · 对照设计</div>
@@ -780,35 +780,35 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="qpx">
         <div class="qhead"><div class="qx-h cu">CUDA / 英伟达 对照问题</div><div class="qx-h ca">CANN / 昇腾 对照问题</div></div>
         <div class="qtask" data-letter="D">
-          <div class="qx-intent"><span class="ql">1</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一意图</b>写个自定义算子并集成进 PyTorch</span></div>
+          <div class="qx-intent"><span class="ql">1</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一开发任务</b>写个自定义算子并集成进 PyTorch</span></div>
           <div class="qpair">
             <div class="qx-c cu">怎么写自定义 CUDA kernel 并集成进 PyTorch（C++ extension）？给出完整步骤、<code>setup.py</code> 和注册代码。</div>
             <div class="qx-c ca">怎么用 Ascend C 开发自定义算子并集成进 PyTorch（<code>msOpGen</code> / <code>aclnn</code>）？给出完整步骤。</div>
           </div>
         </div>
         <div class="qtask" data-letter="M">
-          <div class="qx-intent"><span class="ql">2</span>Tiling<small>动态 shape</small><span class="qx-goal"><b>同一意图</b>算子 / 推理怎么支持动态 shape 输入</span></div>
+          <div class="qx-intent"><span class="ql">2</span>Tiling<small>动态 shape</small><span class="qx-goal"><b>同一开发任务</b>算子 / 推理怎么支持动态 shape 输入</span></div>
           <div class="qpair">
             <div class="qx-c cu">TensorRT / CUDA kernel 处理动态 shape 输入怎么做（optimization profile / 运行时 shape）？</div>
             <div class="qx-c ca">Ascend C 自定义算子做动态 shape，<code>Tiling</code> 怎么写、<code>TilingData</code> 怎么定义和传递？</div>
           </div>
         </div>
         <div class="qtask" data-letter="X">
-          <div class="qx-intent"><span class="ql">3</span>内存越界<small>定位</small><span class="qx-goal"><b>同一意图</b>kernel / 算子内存越界，怎么用工具定位是哪一行</span></div>
+          <div class="qx-intent"><span class="ql">3</span>内存越界<small>定位</small><span class="qx-goal"><b>同一开发任务</b>kernel / 算子内存越界，怎么用工具定位是哪一行</span></div>
           <div class="qpair">
             <div class="qx-c cu">CUDA kernel 报 illegal memory access，怎么用 <code>compute-sanitizer</code> 定位是哪一行越界？</div>
             <div class="qx-c ca">昇腾算子内存越界，怎么用 <code>msSanitizer</code> / 算子内存检测定位是哪一行？</div>
           </div>
         </div>
         <div class="qtask" data-letter="O">
-          <div class="qx-intent"><span class="ql">4</span>注册集成<small>接框架</small><span class="qx-goal"><b>同一意图</b>自定义算子怎么注册进框架让它能被调用</span></div>
+          <div class="qx-intent"><span class="ql">4</span>注册集成<small>接框架</small><span class="qx-goal"><b>同一开发任务</b>自定义算子怎么注册进框架让它能被调用</span></div>
           <div class="qpair">
             <div class="qx-c cu">自定义算子怎么注册进 PyTorch 让 <code>torch.ops</code> 能调（<code>TORCH_LIBRARY</code> / dispatcher）？</div>
             <div class="qx-c ca">Ascend C 算子怎么注册成 <code>aclnn</code> 接口并集成进 <code>torch_npu</code> / PyTorch 让框架能调？</div>
           </div>
         </div>
         <div class="qtask" data-letter="L">
-          <div class="qx-intent"><span class="ql">5</span>精度排查<small>逐层比对</small><span class="qx-goal"><b>同一意图</b>自定义算子结果和参考不一致，怎么逐层 / 逐元素比对定位</span></div>
+          <div class="qx-intent"><span class="ql">5</span>精度排查<small>逐层比对</small><span class="qx-goal"><b>同一开发任务</b>自定义算子结果和参考不一致，怎么逐层 / 逐元素比对定位</span></div>
           <div class="qpair">
             <div class="qx-c cu">自定义 CUDA 算子结果和 PyTorch 参考不一致，怎么定位数值精度（逐层 / 逐元素比对）？</div>
             <div class="qx-c ca">昇腾算子输出和标杆不一致，怎么用 <code>msaccucmp</code> / 精度比对 / dump 定位？</div>
