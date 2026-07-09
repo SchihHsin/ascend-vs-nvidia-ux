@@ -1355,6 +1355,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull .stk.asc{background:#C7000B}.hmfull .stk.nv{background:#76B900;color:#172100}
     .hmfull .cell{font-family:'JetBrains Mono';font-size:7.6px;font-weight:900;border:0!important;padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .hmfull .sum{font-size:7.8px}
+    .hmfull .hm-hover{outline:1.5px solid rgba(47,61,99,.34);outline-offset:-1px;box-shadow:inset 0 0 0 999px rgba(47,61,99,.045)}
+    .hmfull .hm-hover-source{outline:1.8px solid rgba(47,61,99,.5);outline-offset:-1px;box-shadow:inset 0 0 0 999px rgba(47,61,99,.075)}
+    .hmfull .task.hm-hover,.hmfull .stk.hm-hover{filter:saturate(1.12)}
     .hmfull.is-spot th,.hmfull.is-spot td{opacity:.18;transition:opacity .32s ease,filter .32s ease,transform .32s ease}
     .hmfull.is-spot .hm-ref,.hmfull.is-spot .hm-on{opacity:1;filter:saturate(1.18);position:relative;z-index:2}
     .hmfull.is-spot.hm-mark-col .hm-on.cell.hm-edge[data-side="cann"]{box-shadow:inset 2px 0 0 rgba(199,0,11,.95)}
@@ -1455,6 +1458,43 @@ body.overview #panel,body.overview #toggle{display:none!important}
       });
       table.innerHTML=h+'</tbody>';
       var card=table.closest('.hmfull-card'), wrap=table.closest('.hmfull-wrap'), rings=document.getElementById('hmRings'), callout=document.getElementById('hmCallout'), stepBox=document.getElementById('hmSteps');
+      function clearHoverLink(){
+        table.querySelectorAll('.hm-hover,.hm-hover-source').forEach(function(el){el.classList.remove('hm-hover','hm-hover-source');});
+      }
+      function applyHoverLink(src){
+        clearHoverLink();
+        if(!src)return;
+        var task=src.getAttribute('data-task'), side=src.getAttribute('data-side'), col=src.getAttribute('data-col');
+        if(!task&&col===null)return;
+        src.classList.add('hm-hover-source');
+        if(task){
+          table.querySelectorAll('[data-task="'+task+'"].task').forEach(function(el){el.classList.add('hm-hover');});
+          if(src.classList.contains('task')){
+            table.querySelectorAll('tr[data-task="'+task+'"] .stk, tr[data-task="'+task+'"] .cell').forEach(function(el){el.classList.add('hm-hover');});
+          }else{
+            var sideSel=side?'[data-side="'+side+'"]':'';
+            table.querySelectorAll('tr[data-task="'+task+'"]'+sideSel+' .stk, tr[data-task="'+task+'"]'+sideSel+' .cell').forEach(function(el){el.classList.add('hm-hover');});
+          }
+        }
+        if(col!==null){
+          table.querySelectorAll('th[data-col="'+col+'"]').forEach(function(el){el.classList.add('hm-hover');});
+        }
+      }
+      table.addEventListener('mouseover',function(e){
+        var src=e.target.closest('.task,.stk,.cell,th[data-col]');
+        if(!src||!table.contains(src)){clearHoverLink();return;}
+        applyHoverLink(src);
+      });
+      table.addEventListener('mouseout',function(e){
+        if(!table.contains(e.relatedTarget))clearHoverLink();
+      });
+      table.addEventListener('focusin',function(e){
+        var src=e.target.closest('.task,.stk,.cell,th[data-col]');
+        if(src&&table.contains(src))applyHoverLink(src);
+      });
+      table.addEventListener('focusout',function(e){
+        if(!table.contains(e.relatedTarget))clearHoverLink();
+      });
       var focus=[
         {k:'version',mark:'col',title:'问题 1 · 版本体系混乱',val:'④ 多数低分',desc:'同一主题散落在多棵版本树，缺少当前推荐版本；AI 和开发者都需要先判断“该看哪一版”。',icon:'tag',sel:'tr[data-side="cann"] [data-col="3"]',ref:'tr[data-side="cuda"] [data-col="3"]',ring:'tr[data-side="cann"] [data-col="3"]',demo:`<div class="qb"><i></i><i></i><i></i><span>搜“atc 模型转换”命中</span></div><div class="qd"><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">8.0RC2</span></div><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">8.0RC3</span></div><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">800alpha</span></div></div>`},
         {k:'own',mark:'col',title:'问题 2 · 模型自带知识偏薄',val:'−33.8',desc:'CANN 56.9 / CUDA 90.8。官方或第三方抓取一旦受阻，模型记忆里缺少可替代证据。',icon:'brain',sel:'tr[data-side="cann"] [data-col="6"]',ref:'tr[data-side="cuda"] [data-col="6"]',ring:'tr[data-side="cann"] [data-col="6"]',demo:`<div class="qd"><div><span class="muted">CUDA</span> <span class="ok">不检索也能答 ✓</span></div><div style="margin-top:4px"><span class="muted">CANN</span> <span class="bad">不检索就答不了 ✕</span></div></div>`},
