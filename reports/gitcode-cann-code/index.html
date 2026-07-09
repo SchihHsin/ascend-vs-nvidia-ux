@@ -444,7 +444,17 @@
       gap: 12px;
     }
     .repo-card { min-height: 128px; }
-    .repo-card code { font-family: var(--mono); font-size: 12px; color: #000; }
+    .repo-role {
+      display: inline-flex;
+      margin-top: 12px;
+      padding: 4px 10px;
+      border: 1px solid rgba(0,0,0,.14);
+      border-radius: 999px;
+      background: #f7f7f4;
+      color: #111;
+      font-size: 12px;
+      font-weight: 800;
+    }
     .problem-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -633,14 +643,15 @@
         再理解正式 builtin 算子的工程化结构，补齐泛化 shape、测试与性能优化能力。
       </p>
       <div class="repo-grid" style="margin-top:16px">
-        <div class="card pad repo-card"><h3>cann-learning-hub</h3><p class="small">课程和 notebook，提供 Ascend C 概念、工程化算子、开源仓贡献、调试、性能优化路径。</p><code>463eb26</code></div>
-        <div class="card pad repo-card"><h3>cann-samples</h3><p class="small">实际复现和改码主仓，包含 vector_add、matmul story、simd_vf story 等可修改样例。</p><code>本地工作区克隆</code></div>
-        <div class="card pad repo-card"><h3>asc-devkit</h3><p class="small">Ascend C API、IDE/clangd、调试、profiling、sanitizer 样例和接口层说明。</p><code>29313aa0</code></div>
-        <div class="card pad repo-card"><h3>ops-math</h3><p class="small">正式算子结构样本：op_api、op_host、op_kernel、tests/ut 多目录协作。</p><code>8cb49bac</code></div>
-        <div class="card pad repo-card"><h3>ops-nn</h3><p class="small">builtin 类复杂算子样本，用 LSTM backward 看 ACLNN 参数校验、shape/dtype 检查。</p><code>d2ac767d</code></div>
-        <div class="card pad repo-card"><h3>ops-test-kit</h3><p class="small">Kernel / ACLNN / E2E 测试工具，验证“改完算子后怎么批量测”。</p><code>7f1d28b</code></div>
-        <div class="card pad repo-card"><h3>catlass</h3><p class="small">特定 shape 和泛化 shape 性能优化样本，看模板选择、tilingKey、dynamic matmul。</p><code>3918a9c</code></div>
+        <div class="card pad repo-card"><h3>cann-learning-hub</h3><p class="small">课程和 notebook，提供 Ascend C 概念、工程化算子、开源仓贡献、调试、性能优化路径。</p><span class="repo-role">学习入口</span></div>
+        <div class="card pad repo-card"><h3>cann-samples</h3><p class="small">实际复现和改码主仓，包含 vector_add、matmul story、simd_vf story 等可修改样例。</p><span class="repo-role">复现与改码主仓</span></div>
+        <div class="card pad repo-card"><h3>asc-devkit</h3><p class="small">Ascend C API、IDE/clangd、调试、profiling、sanitizer 样例和接口层说明。</p><span class="repo-role">API 与工具能力</span></div>
+        <div class="card pad repo-card"><h3>ops-math</h3><p class="small">正式算子结构样本：op_api、op_host、op_kernel、tests/ut 多目录协作。</p><span class="repo-role">正式算子结构</span></div>
+        <div class="card pad repo-card"><h3>ops-nn</h3><p class="small">builtin 类复杂算子样本，用 LSTM backward 看 ACLNN 参数校验、shape/dtype 检查。</p><span class="repo-role">builtin 定制样本</span></div>
+        <div class="card pad repo-card"><h3>ops-test-kit</h3><p class="small">Kernel / ACLNN / E2E 测试工具，验证“改完算子后怎么批量测”。</p><span class="repo-role">测试闭环工具</span></div>
+        <div class="card pad repo-card"><h3>catlass</h3><p class="small">特定 shape 和泛化 shape 性能优化样本，看模板选择、tilingKey、dynamic matmul。</p><span class="repo-role">性能优化模板</span></div>
       </div>
+      <p class="small" style="margin-top:12px">注：仓库版本号已在取证记录中留档，报告正文只展示它们在算子开发任务链中的作用。</p>
     </section>
 
     <section id="journey" class="panel">
