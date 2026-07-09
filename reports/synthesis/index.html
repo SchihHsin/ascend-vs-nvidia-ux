@@ -2486,7 +2486,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray derive-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">五类触点问题推导出对应的基础体验做法</span></div>
+        <div class="brand"><span class="ttl">五类触点问题推导出六项基础体验做法</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「问题 → 机制 → 机会 → 做法」</div>
       </div>
       <div class="head-r">58/ 基础体验 · 推导页</div>
@@ -2508,7 +2508,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="dh"><span>Step 02</span><b>机制归因</b></div>
           <div class="dcol cause"><div class="dseq">
             <div class="ditem" data-rel="access-cause"><i data-lucide="lock-keyhole"></i><strong>资源获取被准入条件截断</strong><p>登录、协议和版本判断被放在“拿到包”之前。</p></div>
-            <div class="ditem" data-rel="search-cause"><i data-lucide="route"></i><strong>路径导航依赖用户先懂产品名</strong><p>开发者知道任务，却不一定知道该点哪个产品和文档。</p></div>
+            <div class="ditem" data-rel="scene-cause"><i data-lucide="route"></i><strong>入口和内容仍偏产品组织</strong><p>开发者知道要做推理、训练、算子或迁移，却不一定知道该点哪个产品和文档。</p></div>
+            <div class="ditem" data-rel="search-cause"><i data-lucide="search"></i><strong>搜索缺少稳定任务落点</strong><p>外部搜索和站内搜索需要把高频任务词导回官方、当前、可执行页面。</p></div>
             <div class="ditem" data-rel="onboard-cause"><i data-lucide="panels-top-left"></i><strong>学习、示例和在线实验分散</strong><p>课程路径、在线实验、样例工程各自可用，但没有合成从学习到跑通的路径。</p></div>
             <div class="ditem" data-rel="global-cause"><i data-lucide="network"></i><strong>全球可达性缺少统一标准</strong><p>语言、账号、社区和内容索引需要按海外旅程一起看。</p></div>
             <div class="ditem" data-rel="support-cause"><i data-lucide="refresh-cw"></i><strong>支持内容没有回流成知识资产</strong><p>一次性问答、论坛帖和工单没有稳定回到 FAQ、文档和搜索结果。</p></div>
@@ -2518,7 +2519,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="dh"><span>Step 03</span><b>改造机会</b></div>
           <div class="dcol move"><div class="dseq">
             <div class="ditem ok" data-rel="access-move"><i data-lucide="package-check"></i><strong>先让开发者拿到能跑的包</strong><p>社区版下载准入后置，版本和架构给默认推荐。</p></div>
-            <div class="ditem ok" data-rel="search-move"><i data-lucide="corner-down-right"></i><strong>让官方答案更早出现</strong><p>首屏入口、场景入口、搜索摘要、博客索引围绕高频任务词组织。</p></div>
+            <div class="ditem ok" data-rel="scene-move"><i data-lucide="layout-template"></i><strong>按开发场景组织入口与内容</strong><p>把文档、下载、示例、在线实验、FAQ 和论坛案例串到同一任务路径。</p></div>
+            <div class="ditem ok" data-rel="search-move"><i data-lucide="corner-down-right"></i><strong>让官方答案更早出现</strong><p>首屏入口、搜索摘要、博客索引围绕高频任务词组织。</p></div>
             <div class="ditem ok" data-rel="onboard-move"><i data-lucide="play-circle"></i><strong>把学习路径接到首次跑通</strong><p>学习路径、HiDevLab、ModelZoo、GitCode 工程和示例代码连成跑通路径。</p></div>
             <div class="ditem ok" data-rel="global-move"><i data-lucide="languages"></i><strong>按海外开发者旅程补齐门槛</strong><p>英文同步、邮箱 / GitHub 登录、论坛游客可读、英文案例共同推进。</p></div>
             <div class="ditem ok" data-rel="support-move"><i data-lucide="list-checks"></i><strong>把支持链路沉淀为可复用知识</strong><p>FAQ、错误码、论坛、工单、案例要互相导流。</p></div>
@@ -2528,10 +2530,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="dh"><span>Step 04</span><b>对应做法</b></div>
           <div class="dcol result"><div class="dlinks">
             <div class="dlink" data-rel="access-result"><span class="no">#1</span><div><b>后置登录与协议，先让开发者拿到可运行 Toolkit</b><span>对应下载与账号硬阻断。</span></div></div>
-            <div class="dlink" data-rel="search-result"><span class="no">#2</span><div><b>围绕高频任务词优化搜索可发现性与索引可达</b><span>对应正确起点和外部搜索命中。</span></div></div>
-            <div class="dlink" data-rel="onboard-result"><span class="no">#3</span><div><b>把学习路径、HiDevLab 与 ModelZoo 接成首次跑通路径</b><span>对应学习路径、HiDevLab 和 ModelZoo。</span></div></div>
-            <div class="dlink" data-rel="global-result"><span class="no">#4</span><div><b>按海外开发者旅程补齐账号、英文与社区可读性</b><span>对应海外可达性的组合门槛。</span></div></div>
-            <div class="dlink" data-rel="support-result"><span class="no">#5</span><div><b>把 FAQ、论坛、工单和案例沉淀成可复用支持知识</b><span>对应 FAQ 亮点与论坛 / 工单沉淀不足。</span></div></div>
+            <div class="dlink" data-rel="scene-result"><span class="no">#2</span><div><b>按开发场景组织入口与内容</b><span>对应产品名依赖和任务路径不连续。</span></div></div>
+            <div class="dlink" data-rel="search-result"><span class="no">#3</span><div><b>围绕高频任务词优化搜索可发现性与索引可达</b><span>对应正确起点和外部搜索命中。</span></div></div>
+            <div class="dlink" data-rel="onboard-result"><span class="no">#4</span><div><b>把学习路径、HiDevLab 与 ModelZoo 接成首次跑通路径</b><span>对应学习路径、HiDevLab 和 ModelZoo。</span></div></div>
+            <div class="dlink" data-rel="global-result"><span class="no">#5</span><div><b>按海外开发者旅程补齐账号、英文与社区可读性</b><span>对应海外可达性的组合门槛。</span></div></div>
+            <div class="dlink" data-rel="support-result"><span class="no">#6</span><div><b>把 FAQ、论坛、工单和案例沉淀成可复用支持知识</b><span>对应 FAQ 亮点与论坛 / 工单沉淀不足。</span></div></div>
           </div></div>
         </div>
       </div>
@@ -2549,14 +2552,84 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
+  <!-- 15 灰底：基础体验做法 2 · 场景化组织 -->
+  <section class="slide s-gray scenario-org-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">基础体验做法 2：以开发场景组织入口、内容与下一步路径</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「做法② 场景化组织」</div>
+      </div>
+      <div class="head-r">60/ 基础体验做法 · 2</div>
+    </div>
+    <div class="body-area">
+      <div class="scenario-org">
+        <div class="scenario-org-left">
+          <div class="bridge" style="margin:0">开发者不是先想“我要点哪个产品”，而是先想<b>我要完成什么任务</b>。官网需要把算子开发、模型迁移、推理部署、训练、报错排查、首次跑通等任务做成稳定入口。</div>
+          <div class="scenario-pack">
+            <div class="sp-head"><span>场景页应聚合</span><b>一条任务路径</b></div>
+            <div class="sp-grid">
+              <div><b>文档</b><span>当前版本、前置条件、操作步骤</span></div>
+              <div><b>下载</b><span>Toolkit / 驱动 / 版本配套</span></div>
+              <div><b>示例</b><span>GitCode 工程、可复制命令</span></div>
+              <div><b>HiDevLab</b><span>在线实验、一键运行</span></div>
+              <div><b>支持</b><span>FAQ、错误码、论坛案例</span></div>
+              <div><b>搜索</b><span>稳定 URL、标题、摘要</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="scenario-org-right">
+          <div class="scenario-tabs">
+            <span>算子开发</span><span>模型迁移</span><span>推理部署</span><span>报错排查</span>
+          </div>
+          <div class="scenario-flow">
+            <div class="sf-step"><span>01</span><b>选任务</b><small>我想做什么</small></div>
+            <div class="sf-step"><span>02</span><b>看路径</b><small>需要哪些前置</small></div>
+            <div class="sf-step"><span>03</span><b>拿环境</b><small>下载 / 在线实验</small></div>
+            <div class="sf-step"><span>04</span><b>跑示例</b><small>GitCode / HiDevLab</small></div>
+            <div class="sf-step"><span>05</span><b>排问题</b><small>FAQ / 论坛 / 工单</small></div>
+          </div>
+          <div class="scenario-note">
+            <b>产品线仍保留</b>
+            <span>但作为场景页背后的资源层，而不是新手入口的唯一组织方式。场景页也能承接外部搜索和 Agent 检索。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .scenario-org{display:grid;grid-template-columns:.92fr 1.08fr;gap:1.6vw;flex:1;min-height:0;align-items:stretch}
+    .scenario-org-left,.scenario-org-right{min-width:0;min-height:0;display:flex;flex-direction:column;gap:1.25vh}
+    .scenario-pack{flex:1;min-height:0;border-radius:14px;background:rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.74);box-shadow:0 16px 38px -28px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.86);padding:1.5vh 1.25vw;display:flex;flex-direction:column;gap:1.05vh;overflow:hidden}
+    .sp-head{display:flex;align-items:baseline;justify-content:space-between;gap:1vw}
+    .sp-head span{font-size:var(--fs-sm);font-weight:900;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+    .sp-head b{font-size:var(--fs-h3);font-weight:950;color:var(--ink)}
+    .sp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75vw;flex:1;min-height:0}
+    .sp-grid div{position:relative;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.62);border:1px solid rgba(47,61,99,.08);padding:1.05vh .9vw;display:flex;flex-direction:column;justify-content:center;gap:.28vh}
+    .sp-grid div:after{content:"";position:absolute;right:-22px;bottom:-28px;width:92px;height:72px;background:radial-gradient(circle at 50% 50%,rgba(91,91,214,.16),rgba(91,91,214,0) 70%);pointer-events:none}
+    .sp-grid b{position:relative;z-index:1;font-size:var(--fs-body);font-weight:950;color:var(--ink);line-height:1.2}
+    .sp-grid span{position:relative;z-index:1;font-size:var(--fs-sm);line-height:1.35;color:var(--ink-2)}
+    .scenario-org-right{border-radius:16px;background:linear-gradient(150deg,rgba(255,255,255,.68),rgba(245,247,252,.48));border:1px solid rgba(255,255,255,.8);box-shadow:0 18px 42px -30px rgba(30,40,70,.38),inset 0 1px 0 rgba(255,255,255,.9);padding:1.8vh 1.35vw;overflow:hidden}
+    .scenario-tabs{display:flex;gap:.55vw;flex-wrap:wrap}
+    .scenario-tabs span{font-size:var(--fs-sm);font-weight:850;color:#465063;background:rgba(255,255,255,.72);border:1px solid rgba(47,61,99,.12);border-radius:999px;padding:.42vh .82vw}
+    .scenario-tabs span:first-child{color:#fff;background:var(--g-blue);border-color:transparent}
+    .scenario-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.62vw;flex:1;min-height:0;align-items:stretch}
+    .sf-step{position:relative;border-radius:12px;background:rgba(47,61,99,.055);border:1px solid rgba(47,61,99,.13);padding:1.1vh .7vw;display:flex;flex-direction:column;justify-content:center;gap:.48vh;min-width:0}
+    .sf-step:not(:last-child):after{content:"";position:absolute;right:-.46vw;top:50%;width:.32vw;height:1px;background:#AEB6C4}
+    .sf-step span{font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:950;color:#5B5BD6}
+    .sf-step b{font-size:var(--fs-body);font-weight:950;color:var(--ink);line-height:1.2}
+    .sf-step small{font-size:var(--fs-sm);line-height:1.35;color:var(--ink-3)}
+    .scenario-note{background:var(--g-ink);color:#fff;border-radius:13px;padding:1.2vh 1.05vw;display:grid;grid-template-columns:auto 1fr;gap:.85vw;align-items:start}
+    .scenario-note b{font-size:var(--fs-h3);line-height:1.2}
+    .scenario-note span{font-size:var(--fs-body);line-height:1.55;color:rgba(255,255,255,.68)}
+  </style>
   <!-- 15 灰底：iframe 引主报告 #j5 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 2：优化搜索可发现性与索引可达，让官方答案更早出现</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法② 搜索命中与索引」</div>
+        <div class="brand"><span class="ttl">基础体验做法 3：优化搜索可发现性与索引可达，让官方答案更早出现</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「做法③ 搜索命中与索引」</div>
       </div>
-      <div class="head-r">60/ 基础体验做法 · 2</div>
+      <div class="head-r">61/ 基础体验做法 · 3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2564,10 +2637,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 3：把学习路径、HiDevLab 与 ModelZoo 接成首次跑通路径</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法③ 学习与首次跑通」</div>
+        <div class="brand"><span class="ttl">基础体验做法 4：把学习路径、HiDevLab 与 ModelZoo 接成首次跑通路径</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「做法④ 学习与首次跑通」</div>
       </div>
-      <div class="head-r">61/ 基础体验做法 · 3</div>
+      <div class="head-r">62/ 基础体验做法 · 4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j4" title="j4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2575,21 +2648,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 4：按海外开发者旅程补齐账号、英文与社区可读性</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法④ 门槛」</div>
+        <div class="brand"><span class="ttl">基础体验做法 5：按海外开发者旅程补齐账号、英文与社区可读性</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「做法⑤ 海外可达性」</div>
       </div>
-      <div class="head-r">62/ 基础体验做法 · 4</div>
+      <div class="head-r">63/ 基础体验做法 · 5</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j3" title="j3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
-  <!-- 18 灰底：基础体验做法 5 -->
+  <!-- 18 灰底：基础体验做法 6 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 5：把 FAQ、论坛、工单和案例沉淀成可复用支持知识</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法⑤ 支持知识沉淀」</div>
+        <div class="brand"><span class="ttl">基础体验做法 6：把 FAQ、论坛、工单和案例沉淀成可复用支持知识</span></div>
+        <div class="subttl">开发者侧 · 基础体验 · 「做法⑥ 支持知识沉淀」</div>
       </div>
-      <div class="head-r">63/ 基础体验做法 · 5</div>
+      <div class="head-r">64/ 基础体验做法 · 6</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j6" title="j6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2600,7 +2673,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">专题总览：四个官网板块的关键改进方向</span></div>
         <div class="subttl">结论 · 专题板块行动方案 · 「总览」</div>
       </div>
-      <div class="head-r">64/ 结论行动 · 专题总览</div>
+      <div class="head-r">65/ 结论行动 · 专题总览</div>
     </div>
     <div class="body-area" style="align-items:stretch">
       <div class="ccg topic-overview four">
@@ -2653,7 +2726,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档页提供<b>局部 FAQ + 下一步求助入口</b></div><div class="rmi-why">FAQ 要出现在安装、API、工具、报错这些开发者卡住的位置。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">围绕 D/M/X/O/L 建<b>高难度任务专题内容池</b></div><div class="rmi-why">自定义算子、Tiling、msSanitizer、注册集成、精度排查要从零散页面整理成任务包。<span class="src2">AI 问题 #6</span></div></div></div>
         <div class="ahead p2">P2</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">把论坛、工单、搜索词每月回流到<b>FAQ / 文档 / 示例仓</b></div><div class="rmi-why">让支持链路成为文档更新的来源，持续减少同类问题的重复求助。<span class="src2">基础体验做法 #5</span></div></div></div>
+        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">把论坛、工单、搜索词每月回流到<b>FAQ / 文档 / 示例仓</b></div><div class="rmi-why">让支持链路成为文档更新的来源，持续减少同类问题的重复求助。<span class="src2">基础体验做法 #6</span></div></div></div>
       </div>
     </div></div>
   </section>
@@ -2670,11 +2743,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="rgoal" data-board="2.1 · 入口搜索"><span class="gl">目标</span><span class="rgoal-t">把外部搜索、站内搜索、首屏入口和场景入口接成一条路径：开发者不必知道产品名，AI 也不必反复换关键词，就能回到<b>官方、当前、可执行</b>的答案。</span></div>
       <div class="ameasures">
         <div class="ahead p0">P0</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">官网首屏给一个<b>开发者起步 / 场景直达</b>主入口</div><div class="rmi-why">昇腾官网单站整合是优势，但品牌信息会盖住开发动作；入口要在首屏一眼可见。<span class="src2">触点 1.1</span></div></div></div>
+        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">官网首屏给一个<b>开发者起步 / 场景直达</b>主入口</div><div class="rmi-why">昇腾官网单站整合是优势，但品牌信息会盖住开发动作；入口要在首屏一眼可见。<span class="src2">基础体验做法 #2 / 触点 1.1</span></div></div></div>
         <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">站内搜索支持<b>粘贴报错 / 日志</b>并按资源类型筛选</div><div class="rmi-why">报错检索是最高频求助入口；先识别卡点，再分流到文档、FAQ、论坛或工单。<span class="src2">触点 1.3 / 6.3</span></div></div></div>
         <div class="ahead p1">P1</div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">把高频任务词写进<b>标题、摘要、URL 与首屏正文</b></div><div class="rmi-why">NVIDIA 侧高频 CUDA 查询常能在搜索第一屏看到官方页；昇腾侧部分任务需要翻页或补关键词，官方页才浮出。<span class="src2">AI 指标①</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">补充<b>按场景 / 按角色</b>的入口</div><div class="rmi-why">新手通常知道“我要做算子 / 推理 / 训练”，不一定知道应点哪个产品名；入口位置不必固定在顶栏。<span class="src2">触点 1.2</span></div></div></div>
+        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">补充<b>按场景 / 按角色</b>的入口</div><div class="rmi-why">新手通常知道“我要做算子 / 推理 / 训练”，不一定知道应点哪个产品名；入口位置不必固定在顶栏。<span class="src2">基础体验做法 #2 / 触点 1.2</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">产品矩阵前置<b>选型分诊</b>，几步问答推荐路径</div><div class="rmi-why">把平铺产品罗列改成“你是谁、要做什么、该从哪里开始”的引导。<span class="src2">触点 2.1</span></div></div></div>
         <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">为场景入口输出<b>稳定 URL + 可索引页面摘要</b></div><div class="rmi-why">Agent 需要可引用的入口页，而不是只能从 JS 菜单里推断路径。<span class="src2">AI 问题 #4</span></div></div></div>
         <div class="ahead p2">P2</div>
