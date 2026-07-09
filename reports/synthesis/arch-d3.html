@@ -2038,12 +2038,16 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 .fullarch #archctrl .aclbl{font-size:14px;border-radius:10px;padding:8px 14px}
 .fullarch #archcap{left:18px;bottom:14px;max-width:min(220px,calc(100vw - 36px));font-size:9.5px!important}
 #archView svg [data-edge]{transition:opacity .18s,stroke .18s,fill .18s}
+.maparch .embed-title,.maparch #archctrl,.maparch #archcap{display:none!important}
 </style>
 <script>
 (function(){
   var IS_FULL_ARCH=/(?:[?&])full=1(?:&|$)/.test(location.search);
+  var IS_MAP_ARCH=/(?:[?&])map=1(?:&|$)/.test(location.search);
   document.documentElement.classList.toggle('fullarch', IS_FULL_ARCH);
   document.body.classList.toggle('fullarch', IS_FULL_ARCH);
+  document.documentElement.classList.toggle('maparch', IS_MAP_ARCH);
+  document.body.classList.toggle('maparch', IS_MAP_ARCH);
   function init(){
     var av=document.getElementById('archView'); if(!av) return;
     var svg=av.querySelector('svg'); if(!svg) return;
