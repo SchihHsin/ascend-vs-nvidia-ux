@@ -128,6 +128,8 @@ body.overview .s-cover .slide-inner{padding:0}
 .cmp-h .hk{display:block;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5vh}
 .cmp-desc{font-size:var(--fs-body);line-height:1.72;color:var(--ink-2)}
 .cmp-desc b{color:var(--ink);font-weight:600;background:linear-gradient(transparent 60%,rgba(91,91,214,.16) 0)}
+.copy-large{--fs-body:clamp(15px,1.08vw,18px)}
+.copy-large .seq-intro{font-size:var(--fs-h3);line-height:1.58}
 .verdict{flex:0 0 auto;margin-top:1.6vh;display:grid;grid-template-columns:auto 1fr;gap:1.2vw;align-items:center;background:var(--g-ink);color:#fff;border-radius:12px;padding:1.8vh 1.6vw}
 .verdict .vk{font-size:var(--fs-h3);font-weight:700;color:var(--ink);background:#fff;border-radius:12px;padding:6px 15px;white-space:nowrap}
 .verdict .vv{font-size:var(--fs-body);line-height:1.55} .verdict .vv b{font-weight:700}
@@ -565,7 +567,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <!-- 4 灰底：人机协同时序图 -->
-  <section class="slide s-gray">
+  <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">人机协同开发时序图：一次「自定义算子开发」背后，是开发者与 AI 同时在使用昇腾社区</span></div>
@@ -583,14 +585,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
         .ovm-f{font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--accent);margin-top:.7vh}
         .seq-note{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}
         .seq-guide{margin:.2vh 0 .4vh;padding-left:1.05em;display:flex;flex-direction:column;gap:.5vh}
-        .seq-guide li{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5}.seq-guide li b{color:var(--ink)}
+        .seq-guide li{font-size:var(--fs-body);color:var(--ink-2);line-height:1.62}.seq-guide li b{color:var(--ink)}
       </style>
       <div class="card" data-magic-seq data-magic-target style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
         <iframe data-src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
         <!-- <div class="cmp-h"><span class="hk">How to read</span>本图用于说明两条评估链路</div> -->
-        <p class="cmp-desc">这是开发者完成<b>一次「自定义算子开发」</b>的全过程，自上而下按<b>时间</b>推进。图中有两个「获取知识」的主体——<b>开发者本人</b>，以及受其委托查阅资料、编写代码的 <b>AI 助手</b>。</p>
+        <p class="cmp-desc seq-intro">这是开发者完成<b>一次「自定义算子开发」</b>的全过程，自上而下按<b>时间</b>推进。图中有两个「获取知识」的主体——<b>开发者本人</b>，以及受其委托查阅资料、编写代码的 <b>AI 助手</b>。</p>
         <ul class="seq-guide">
           <li><b>竖线＝参与方</b>：用户 · AI 助手 · 昇腾官方文档 · 第三方平台（CSDN / 博客）· AI 自带知识。</li>
           <li><b>横箭头＝一次往返</b>：由谁向谁请求信息、是否取回。</li>
@@ -598,7 +600,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         </ul>
         <div class="ov-map">
           <div class="ovm">
-            <div class="ovm-h"><i style="background:#6B5BA8"></i>AI ↔ 昇腾 / 第三方平台</div>
+            <div class="ovm-h"><i style="background:#6B5BA8"></i>AI ↔ 昇腾社区</div>
             <div class="ovm-d">AI 每次<b>能否取回、是否够用</b> → 后续以「可用性矩阵」评分。</div>
           </div>
           <div class="ovm">
@@ -606,7 +608,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="ovm-d">开发者本人浏览官网的<b>直接体验</b> → 后续做触点评分。</div>
           </div>
         </div>
-        <div class="seq-note">点图右上「按关系讲解」高亮某条线 · 悬浮节点看每步细节</div>
       </div>
     </div>
   </section>
@@ -708,10 +709,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </script>
 
   <!-- 3b2 灰底：AI 执行架构（hi=1） -->
-  <section class="slide s-gray">
+  <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 的检索链路依赖三类证据，受阻时会转向或追加检索</span></div>
+        <div class="brand"><span class="ttl">AI检索架构图：依赖三类证据，受阻时会转向或追加检索</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「检索路径」</div>
       </div>
       <div class="head-r">05/ AI · 执行架构<br/>opknow 20</div>
@@ -731,7 +732,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <!-- 3b 灰底：AI 可用性方法论 + 算子 5 场景 -->
-  <section class="slide s-gray">
+  <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">AI 可用性评估以同一开发任务对照实测 CANN 与 CUDA</span></div>
@@ -760,7 +761,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <!-- 3c 灰底：CUDA vs CANN 问题对 -->
-  <section class="slide s-gray">
+  <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">5 个对照问题覆盖算子开发中的关键知识需求</span></div>
