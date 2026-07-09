@@ -2034,7 +2034,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
 .fullarch #archctrl{bottom:16px;right:22px;gap:8px}
 .fullarch #archctrl .acb{width:32px;height:32px;border-radius:9px;font-size:19px}
 .fullarch #archctrl .aclbl{font-size:14px;border-radius:10px;padding:8px 14px}
-#archView svg [data-edge]{transition:opacity .18s,stroke .18s}
+#archView svg [data-edge]{transition:opacity .18s,stroke .18s,fill .18s}
 </style>
 <script>
 (function(){
@@ -2061,6 +2061,28 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
       el.setAttribute('data-stroke',el.getAttribute('stroke')||'#8a8a8a');
       el.setAttribute('data-sw',el.getAttribute('stroke-width')||'1.2');
     });
+    var edgeLabelMap=[
+      ['是 · 调用工具检索','gate search fetch'],
+      ['否 · 不检索，直接依据自带知识作答','gate final'],
+      ['充分','judge converge'],
+      ['不足','judge redo'],
+      ['是 · ↺ 换检索词再检索','redo route'],
+      ['（官方与第三方平台仍一并返回）','redo route'],
+      ['否 · 检索已穷尽','redo hasEv'],
+      ['有 · 依据证据作答（可靠）','hasEv final'],
+      ['无 · 最高风险：','hasEv final'],
+      ['模型无法可靠识别「自身不知道」，遂凭记忆','hasEv final'],
+      ['填补空缺 = 杜撰（看似正确、实则有误）','hasEv final']
+    ];
+    Array.prototype.forEach.call(svg.querySelectorAll('text'),function(el){
+      var txt=(el.textContent||'').trim();
+      var hit=edgeLabelMap.find(function(x){return x[0]===txt;});
+      if(!hit)return;
+      el.setAttribute('data-edge',hit[1]);
+      el.setAttribute('data-fill',el.getAttribute('fill')||'#333');
+      el.setAttribute('data-fw',el.getAttribute('font-weight')||'');
+      el.setAttribute('data-edge-label','1');
+    });
     var WALK=[
       {n:['ask','msg'], c:'用户问句原样进入 messages（system 约束 + 历史 + 当前问句），不做预处理。'},
       {n:['intent','subgoal','route'], c:'模型先想清楚要查什么：① 解析意图 → ② 拆成可分别检索的子问题 → ③ 决定路由（检索 / 抓取 / 直接作答）。'},
@@ -2075,7 +2097,10 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     function post(html){ try{ if(window.parent&&window.parent!==window) window.parent.postMessage({__archCap:html},'*'); }catch(e){} }
     function apply(){
       var kids=svg.children, i, el, k;
-      if(idx<1){ for(i=0;i<kids.length;i++){kids[i].style.opacity=''; if(kids[i].getAttribute&&kids[i].getAttribute('data-edge')){kids[i].setAttribute('stroke',kids[i].getAttribute('data-stroke')||'#8a8a8a');kids[i].setAttribute('stroke-width',kids[i].getAttribute('data-sw')||'1.2');var mk0=kids[i].getAttribute('data-mk');if(mk0)kids[i].setAttribute('marker-end',mk0);}} if(cap){cap.innerHTML=orig;cap.classList.remove('walking');} post(null); updLbl(); return; }
+      if(idx<1){ for(i=0;i<kids.length;i++){kids[i].style.opacity=''; if(kids[i].getAttribute&&kids[i].getAttribute('data-edge')){
+        if(kids[i].getAttribute('data-edge-label')){kids[i].setAttribute('fill',kids[i].getAttribute('data-fill')||'#333');var fw0=kids[i].getAttribute('data-fw'); if(fw0)kids[i].setAttribute('font-weight',fw0); else kids[i].removeAttribute('font-weight');}
+        else {kids[i].setAttribute('stroke',kids[i].getAttribute('data-stroke')||'#8a8a8a');kids[i].setAttribute('stroke-width',kids[i].getAttribute('data-sw')||'1.2');var mk0=kids[i].getAttribute('data-mk');if(mk0)kids[i].setAttribute('marker-end',mk0);}
+      }} if(cap){cap.innerHTML=orig;cap.classList.remove('walking');} post(null); updLbl(); return; }
       var act=WALK[idx-1].n;
       for(i=0;i<kids.length;i++){ el=kids[i]; if(el.tagName==='defs') continue;
         k=el.getAttribute&&el.getAttribute('data-k');
@@ -2083,7 +2108,10 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
         if(ek){
           var hit=ek.split(/\s+/).some(function(x){return act.indexOf(x)>=0;});
           el.style.opacity=hit?'1':'0.12';
-          if(hit){el.setAttribute('stroke',el.getAttribute('data-stroke')||'#8a8a8a');el.setAttribute('stroke-width',el.getAttribute('data-sw')||'1.2');var hmk=el.getAttribute('data-mk');if(hmk)el.setAttribute('marker-end',hmk);}
+          if(el.getAttribute('data-edge-label')){
+            el.setAttribute('fill',hit?(el.getAttribute('data-fill')||'#333'):'#9aa0aa');
+            if(hit)el.setAttribute('font-weight','800'); else {var fw=el.getAttribute('data-fw'); if(fw)el.setAttribute('font-weight',fw); else el.removeAttribute('font-weight');}
+          } else if(hit){el.setAttribute('stroke',el.getAttribute('data-stroke')||'#8a8a8a');el.setAttribute('stroke-width',el.getAttribute('data-sw')||'1.2');var hmk=el.getAttribute('data-mk');if(hmk)el.setAttribute('marker-end',hmk);}
           else {el.setAttribute('stroke',el.getAttribute('data-stroke')||'#8a8a8a');el.setAttribute('stroke-width',el.getAttribute('data-sw')||'1.2');var mk=el.getAttribute('data-mk');if(mk)el.setAttribute('marker-end',mk);}
         } else el.style.opacity=(k&&act.indexOf(k)>=0)?'1':'0.12';
       }
