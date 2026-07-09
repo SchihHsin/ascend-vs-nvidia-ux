@@ -164,13 +164,13 @@
     }
     .journey {
       display: grid;
-      grid-template-columns: repeat(7, minmax(142px, 1fr));
+      grid-template-columns: repeat(7, minmax(230px, 1fr));
       gap: 10px;
       overflow-x: auto;
       padding-bottom: 4px;
     }
     .step {
-      min-width: 142px;
+      min-width: 230px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: #fff;
@@ -199,24 +199,13 @@
     .step .body { padding: 12px; font-size: 13px; color: var(--muted); }
     .step .methods { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
     .run-pop {
-      max-height: 0;
-      overflow: hidden;
-      margin-top: 0;
-      padding: 0 10px;
-      border: 0 solid transparent;
-      border-radius: 6px;
-      background: #f8fafc;
-      color: #334055;
-      opacity: 0;
-      transition: max-height .22s ease, opacity .18s ease, margin-top .18s ease, padding .18s ease, border-color .18s ease;
-    }
-    .step:hover .run-pop,
-    .step:focus-within .run-pop {
-      max-height: 260px;
       margin-top: 10px;
       padding: 10px;
       border: 1px solid var(--line);
-      opacity: 1;
+      border-radius: 6px;
+      background: #f8fafc;
+      color: #334055;
+      line-height: 1.5;
     }
     .run-pop b {
       display: block;
