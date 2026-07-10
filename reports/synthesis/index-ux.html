@@ -635,17 +635,50 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- UX 版新增：先用简单任务解释时序图读法 -->
+  <!-- UX 版新增：研究方法 1 / 为什么形成时序图 -->
   <section class="slide s-gray ux-method-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">先用简单任务读懂时序图，再展开复杂开发案例</span></div>
-        <div class="subttl">方法说明 · 「一次提问如何变成知识流动证据」</div>
+        <div class="brand"><span class="ttl">AI 时代的任务研究，需要把「页面路径」扩展为「知识流动」</span></div>
+        <div class="subttl">方法说明 · 为什么要形成一张人机协同时序图</div>
       </div>
       <div class="head-r">04/ UX 研究方法</div>
     </div>
     <style>
       .ux-method-slide .body-area{display:grid;grid-template-columns:minmax(0,1.36fr) minmax(320px,.64fr);gap:1.7vw;align-items:stretch}
+      .uxwhy-left{position:relative;min-height:0;border-radius:17px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.38),inset 0 1px 0 rgba(255,255,255,.94);padding:2.3vh 1.6vw;display:grid;grid-template-rows:auto 1fr auto;gap:1.25vh;overflow:hidden}
+      .uxwhy-left:after{content:"";position:absolute;right:-6%;bottom:-9%;width:42%;height:30%;background:radial-gradient(92% 92% at 100% 100%,rgba(91,91,214,.13),rgba(91,91,214,.045) 58%,transparent 78%);filter:blur(2px);pointer-events:none}
+      .uxwhy-title{position:relative;z-index:1}
+      .uxwhy-title b{display:block;font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950}
+      .uxwhy-title span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.45;color:var(--ink-2)}
+      .uxwhy-diagram{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.9fr) 56px minmax(0,1.1fr);gap:1vw;align-items:stretch;min-height:0}
+      .uxpath,.uxflow{border-radius:15px;background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(246,248,255,.58));border:1px solid rgba(47,61,99,.1);padding:1.55vh 1vw;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh;box-shadow:0 12px 26px -24px rgba(30,40,70,.26)}
+      .uxpath{opacity:.78}
+      .uxpane-h{font-size:var(--fs-body);line-height:1.22;color:var(--ink);font-weight:950}
+      .uxpath-line{display:grid;grid-template-columns:repeat(4,1fr);gap:.45vw;align-items:center}
+      .uxpath-node{height:58px;border-radius:12px;background:rgba(47,61,99,.06);border:1px solid rgba(47,61,99,.1);display:flex;align-items:center;justify-content:center;text-align:center;font-size:var(--fs-sm);font-weight:850;color:#485468;line-height:1.2;position:relative}
+      .uxpath-node:not(:last-child):after{content:"";position:absolute;right:-.38vw;top:50%;width:.34vw;height:2px;background:rgba(47,61,99,.24);border-radius:999px}
+      .uxpath-note,.uxflow-note{font-size:var(--fs-body);line-height:1.42;color:var(--ink-2)}
+      .uxmid-arrow{display:flex;align-items:center;justify-content:center;color:#5B5BD6}
+      .uxmid-arrow svg{width:42px;height:42px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .uxflow-map{position:relative;min-height:220px}
+      .uxflow-map svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+      .uxbubble{position:absolute;transform:translate(-50%,-50%);border-radius:13px;background:#fff;border:1px solid rgba(47,61,99,.12);box-shadow:0 12px 26px -24px rgba(30,40,70,.28);padding:.72vh .7vw;min-width:98px;text-align:center;font-size:var(--fs-sm);font-weight:900;color:var(--ink);line-height:1.2}
+      .uxbubble.ai{background:var(--g-ink);color:#fff;border:0}.uxbubble.src{color:#5B5BD6}.uxbubble.human{color:#202531}
+      .uxflow-link{stroke:#2F3D63;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.uxflow-link.soft{stroke:#7E8A9D;stroke-dasharray:6 6}.uxflow-link.block{stroke:#E15A5A;stroke-dasharray:6 6}.uxflow-link.good{stroke:#23A06A}
+      .uxwhy-foot{position:relative;z-index:1;border-radius:13px;background:var(--g-ink);color:#fff;padding:1.15vh 1vw;font-size:var(--fs-body);line-height:1.5;box-shadow:0 16px 34px -24px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.2)}
+      .uxwhy-foot b{color:#fff;font-weight:950}
+      .uxwhy-right{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.25vh}
+      .uxwhy-card{border-radius:16px;background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94);padding:1.85vh 1.18vw}
+      .uxwhy-card b{display:block;font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950}
+      .uxwhy-card p{margin:.78vh 0 0;font-size:var(--fs-body);line-height:1.52;color:var(--ink-2)}
+      .uxwhy-list{display:grid;gap:.85vh}
+      .uxwhy-item{display:grid;grid-template-columns:34px 1fr;gap:.72vw;align-items:start}
+      .uxwhy-no{width:34px;height:34px;border-radius:10px;background:var(--g-blue);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -18px rgba(91,91,214,.68),inset 0 1px 0 rgba(255,255,255,.26)}
+      .uxwhy-item:nth-child(2) .uxwhy-no{background:var(--g-teal)}
+      .uxwhy-item:nth-child(3) .uxwhy-no{background:var(--g-green)}
+      .uxwhy-t b{font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}
+      .uxwhy-t span{display:block;margin-top:.28vh;font-size:var(--fs-body);line-height:1.38;color:var(--ink-2)}
       .uxseq-card{position:relative;min-height:0;border-radius:17px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.38),inset 0 1px 0 rgba(255,255,255,.94);padding:2.1vh 1.55vw 1.65vh;display:grid;grid-template-rows:auto 1fr auto;gap:1.1vh;overflow:hidden}
       .uxseq-card:after{content:"";position:absolute;right:-6%;bottom:-9%;width:42%;height:30%;background:radial-gradient(92% 92% at 100% 100%,rgba(91,91,214,.13),rgba(91,91,214,.045) 58%,transparent 78%);filter:blur(2px);pointer-events:none}
       .uxseq-title{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:1vw}
@@ -678,7 +711,73 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxread-t span{display:block;margin-top:.3vh;font-size:var(--fs-body);line-height:1.42;color:var(--ink-2)}
       .uxread-next{flex:0 0 auto;border-radius:14px;background:var(--g-ink);color:#fff;padding:1.28vh 1.05vw;font-size:var(--fs-body);line-height:1.5;box-shadow:0 16px 34px -24px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.2)}
       .uxread-next b{color:#fff;font-weight:950}
+      .uxwhy{position:relative;border-radius:14px;background:linear-gradient(145deg,rgba(91,91,214,.1),rgba(79,172,254,.07));border:1px solid rgba(91,91,214,.15);padding:1.35vh .95vw;overflow:hidden}
+      .uxwhy:after{content:"";position:absolute;right:-10%;top:-30%;width:46%;height:88%;background:radial-gradient(circle at 50% 50%,rgba(91,91,214,.14),rgba(91,91,214,.045) 58%,transparent 76%);filter:blur(5px);pointer-events:none}
+      .uxwhy b{position:relative;z-index:1;display:block;font-size:var(--fs-body);line-height:1.22;color:var(--ink);font-weight:950}
+      .uxwhy span{position:relative;z-index:1;display:block;margin-top:.45vh;font-size:var(--fs-body);line-height:1.45;color:var(--ink-2)}
+      .uxread-main.out{background:rgba(255,255,255,.6);gap:.92vh}
     </style>
+    <div class="body-area">
+      <div class="uxwhy-left">
+        <div class="uxwhy-title"><b>传统旅程图只看人怎么走，AI 协同任务还要看知识怎么流动</b><span>开发者把问题交给 AI 后，答案质量取决于 AI 能否从社区内容中找到、抓到、读懂并回到任务。</span></div>
+        <div class="uxwhy-diagram">
+          <div class="uxpath">
+            <div class="uxpane-h">传统用户旅程</div>
+            <div class="uxpath-line">
+              <div class="uxpath-node">进入官网</div>
+              <div class="uxpath-node">查文档</div>
+              <div class="uxpath-node">下载工具</div>
+              <div class="uxpath-node">遇到问题</div>
+            </div>
+            <div class="uxpath-note">适合观察页面路径、触点体验与情绪变化。</div>
+          </div>
+          <div class="uxmid-arrow">
+            <svg viewBox="0 0 48 48"><path d="M8 24h30"/><path d="m27 13 11 11-11 11"/></svg>
+          </div>
+          <div class="uxflow">
+            <div class="uxpane-h">人机协同时序图</div>
+            <div class="uxflow-map">
+              <svg viewBox="0 0 420 220" preserveAspectRatio="none">
+                <path class="uxflow-link" d="M70 110 C125 70 150 70 205 102"/>
+                <path class="uxflow-link good" d="M205 102 C250 66 298 52 346 62"/>
+                <path class="uxflow-link block" d="M205 110 C252 112 300 112 350 116"/>
+                <path class="uxflow-link soft" d="M205 118 C252 156 298 170 348 158"/>
+                <path class="uxflow-link good" d="M205 128 C152 166 122 166 70 128"/>
+              </svg>
+              <div class="uxbubble human" style="left:15%;top:50%">开发者</div>
+              <div class="uxbubble ai" style="left:49%;top:52%">AI 助手</div>
+              <div class="uxbubble src" style="left:84%;top:22%">官方社区</div>
+              <div class="uxbubble src" style="left:85%;top:52%">受阻点</div>
+              <div class="uxbubble src" style="left:84%;top:82%">第三方 / 先验</div>
+            </div>
+            <div class="uxflow-note">适合观察谁向谁取证、证据是否足够、哪里需要返工或人工复核。</div>
+          </div>
+        </div>
+        <div class="uxwhy-foot">所以这张时序图不是技术流程图，而是把<b>任务中的知识请求、证据返回、受阻与复核</b>变成可观察对象。</div>
+      </div>
+      <div class="uxwhy-right">
+        <div class="uxwhy-card">
+          <b>为什么不用单页截图或普通旅程图</b>
+          <p>单页截图只能说明某个页面当下长什么样；普通旅程图能说明用户怎么走。但 AI 协同任务里的关键问题，常发生在“页面之外”：AI 搜了什么、抓到了什么、是否读懂、开发者何时回来复核。</p>
+        </div>
+        <div class="uxwhy-card uxwhy-list">
+          <div class="uxwhy-item"><div class="uxwhy-no">01</div><div class="uxwhy-t"><b>把隐性的检索过程显性化</b><span>原本看不见的搜索、抓取、换词、补证，会被摊开成一条条往返。</span></div></div>
+          <div class="uxwhy-item"><div class="uxwhy-no">02</div><div class="uxwhy-t"><b>把人的复核动作纳入研究</b><span>开发者不是退出链路，而是在高风险节点重新判断证据是否可靠。</span></div></div>
+          <div class="uxwhy-item"><div class="uxwhy-no">03</div><div class="uxwhy-t"><b>把体验问题连接到内容治理</b><span>问题不只来自界面，也来自内容是否可发现、可抓取、可复现。</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UX 版新增：研究方法 2 / 时序图能产出什么 -->
+  <section class="slide s-gray ux-method-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">时序图能把一次任务转成来源、阻断点与评分口径</span></div>
+        <div class="subttl">方法说明 · 通过时序图可以看到什么</div>
+      </div>
+      <div class="head-r">05/ UX 研究方法</div>
+    </div>
     <div class="body-area">
       <div class="uxseq-card">
         <div class="uxseq-title">
@@ -708,17 +807,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <path class="ux-msg good" marker-end="url(#uxArrowGood)" d="M354 388H154"/><circle class="ux-dot good" cx="354" cy="388" r="5"/><circle class="ux-dot good" cx="154" cy="388" r="5"/><text class="ux-label good" x="190" y="377">6. 回答 + 开发者复核</text>
           </svg>
         </div>
-        <div class="uxseq-foot"><i>谁在找知识</i><i>向哪里找</i><i>哪里受阻</i><i>怎样回到任务</i></div>
+        <div class="uxseq-foot"><i>用户任务</i><i>知识请求</i><i>证据状态</i><i>评估指标</i></div>
       </div>
       <div class="uxread">
-        <div class="uxread-main">
-          <div class="uxread-h">这张图主要看四件事</div>
-          <div class="uxread-row"><div class="uxread-no">01</div><div class="uxread-t"><b>竖线是参与方</b><span>开发者、AI、官方社区、第三方经验、模型先验分别承担不同角色。</span></div></div>
-          <div class="uxread-row"><div class="uxread-no">02</div><div class="uxread-t"><b>箭头是知识请求</b><span>每条横线表示一次提问、检索、抓取、返回或复核。</span></div></div>
-          <div class="uxread-row"><div class="uxread-no">03</div><div class="uxread-t"><b>虚线是受阻与返工</b><span>抓空、找不准、版本不清，会让 AI 换词、补证或转向其他来源。</span></div></div>
-          <div class="uxread-row"><div class="uxread-no">04</div><div class="uxread-t"><b>终点是任务能否继续</b><span>不是只看有没有页面，而是看证据能否支撑开发者继续操作。</span></div></div>
+        <div class="uxwhy">
+          <b>这页回答的是“图能产出什么”</b>
+          <span>不是解释每条线的图例，而是说明这类图如何把复杂任务拆成可复核的研究证据。</span>
         </div>
-        <div class="uxread-next">下一页把这套读法放大到<b>自定义算子开发</b>：问题更多、来源更多、受阻和复核也更密集，所以它适合作为完整案例展开。</div>
+        <div class="uxread-main">
+          <div class="uxread-h">通过时序图可以提取四类证据</div>
+          <div class="uxread-row"><div class="uxread-no">01</div><div class="uxread-t"><b>知识从哪里来</b><span>官方社区、第三方经验、模型先验分别在任务里承担什么作用。</span></div></div>
+          <div class="uxread-row"><div class="uxread-no">02</div><div class="uxread-t"><b>任务在哪里卡住</b><span>搜不到、抓不到、版本不清、证据不足，会在链路里变成返工点。</span></div></div>
+          <div class="uxread-row"><div class="uxread-no">03</div><div class="uxread-t"><b>开发者何时介入复核</b><span>AI 不能独立判断时，开发者会回到社区做交叉验证或关键决策。</span></div></div>
+          <div class="uxread-row"><div class="uxread-no">04</div><div class="uxread-t"><b>哪些证据可转成评分</b><span>触达、质量、成本、产出都来自链路中的可观察行为。</span></div></div>
+        </div>
+        <div class="uxread-next">下一页把这套方法放大到<b>自定义算子开发</b>：不是为了讲算子细节，而是用一个完整案例展示知识流动如何被记录、比较并量化。</div>
       </div>
     </div>
   </section>
@@ -730,7 +833,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">人机协同开发时序图：一次「自定义算子开发」背后，是开发者与 AI 同时在使用昇腾社区</span></div>
         <div class="subttl">立论 · 「人机协同」</div>
       </div>
-      <div class="head-r">05/ 人机协同旅程<br/>opknow 20</div>
+      <div class="head-r">06/ 人机协同旅程<br/>opknow 20</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <style>
@@ -801,7 +904,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">指标映射：11 项评分对应架构图里的检索、判断与作答动作</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「架构映射」</div>
       </div>
-      <div class="head-r">06/ AI 指标 · 架构映射</div>
+      <div class="head-r">07/ AI 指标 · 架构映射</div>
     </div>
     <div class="body-area">
         <div class="archmetric-layout">
@@ -861,7 +964,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">指标计算方式：①–⑩ 定义各项可观测得分，最终形成综合置信度⑪</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「定义与计算理由」</div>
       </div>
-      <div class="head-r">07/ AI 指标 · 计算理由</div>
+      <div class="head-r">08/ AI 指标 · 计算理由</div>
     </div>
     <div class="body-area">
       <div class="metric-class-layout">
@@ -1148,7 +1251,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">理论依据：每一维指标都对应成熟的检索 / 信息架构理论，且公式可复现</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「理论依据」</div>
       </div>
-      <div class="head-r">08/ AI 指标 · 理论依据</div>
+      <div class="head-r">09/ AI 指标 · 理论依据</div>
     </div>
     <div class="body-area">
       <div class="auth">
@@ -1230,7 +1333,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">任务设计：5 个检索问题来自算子开发中的关键知识需求</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「测试设计」</div>
       </div>
-      <div class="head-r">09/ AI 可用性 · 方法</div>
+      <div class="head-r">10/ AI 可用性 · 方法</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1337,7 +1440,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">任务执行：基于同一开发任务用 CANN 与 CUDA 对比提问</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「问题编写」</div>
       </div>
-      <div class="head-r">10/ 问题对 · 对照设计</div>
+      <div class="head-r">11/ 问题对 · 对照设计</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1560,7 +1663,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">可用性短板集中在深层算子任务：写算子最低，其余环节受版本、生态与模型先验共同影响</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「评估发现」</div>
       </div>
-      <div class="head-r">11/ 矩阵评分 · 结果</div>
+      <div class="head-r">12/ 矩阵评分 · 结果</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1639,7 +1742,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">全量矩阵：从 26 个任务中定位 7 个内容可用性问题</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「全量矩阵 → 7 个问题」</div>
       </div>
-      <div class="head-r">12/ AI · 全量矩阵</div>
+      <div class="head-r">13/ AI · 全量矩阵</div>
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
@@ -1894,7 +1997,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 1：版本体系需要统一入口，提供首选网址与配套查询工具</span></div>
         <div class="subttl">AI 侧 · 内容可用性结论 · 「1/8 版本入口」</div>
       </div>
-      <div class="head-r">13/ 内容可用性结论 · 1</div>
+      <div class="head-r">14/ 内容可用性结论 · 1</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=1" title="opknow19 卡1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#1 版本体系混乱</b>：把“版本散乱”收敛到首选网址、当前推荐版和配套查询。</span></div></div>
   </section>
@@ -1905,7 +2008,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 2：错误码一码一页，为每个错误码建独立排查页</span></div>
         <div class="subttl">AI 侧 · 内容可用性结论 · 「2/8 错误码」</div>
       </div>
-      <div class="head-r">14/ 内容可用性结论 · 2</div>
+      <div class="head-r">15/ 内容可用性结论 · 2</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#5 可取回不等于可解决</b>：错误码需要从“能搜到页面”推进到“能定位、能验证”。</span></div></div>
   </section>
@@ -1916,7 +2019,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 4：提供机器可读出口，支持 llms.txt、Markdown 和结构化索引</span></div>
         <div class="subttl">AI 侧 · 内容可用性结论 · 「4/8 机器可读出口」</div>
       </div>
-      <div class="head-r">15/ 内容可用性结论 · 4</div>
+      <div class="head-r">16/ 内容可用性结论 · 4</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=4" title="opknow19 卡4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#4 官方正文不可取回</b>、<b>#7 检索成本尖刺</b>：给 Agent 稳定入口，减少重复检索和凭记忆补全。</span></div></div>
   </section>
@@ -1927,7 +2030,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 5：页面结构需要面向 AI 抓取，而不只面向人浏览</span></div>
         <div class="subttl">AI 侧 · 内容可用性结论 · 「5/8 页面结构」</div>
       </div>
-      <div class="head-r">16/ 内容可用性结论 · 5</div>
+      <div class="head-r">17/ 内容可用性结论 · 5</div>
     </div>
     <div class="body-area"><div class="msg-alert"><span class="msg-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span>旻硕详细展开<b>AI可抓取性研究</b></span></div><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#4 官方正文不可取回</b>、<b>#5 可取回不等于可解决</b>：页面结构要同时支持机器抓取、代码复现和上下文引用。</span></div></div>
   </section>
@@ -1938,7 +2041,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 6：第三方生态要从少而同质，走向多平台互证</span></div>
         <div class="subttl">AI 侧 · 内容可用性结论 · 「6/8 第三方生态」</div>
       </div>
-      <div class="head-r">17/ 内容可用性结论 · 6</div>
+      <div class="head-r">18/ 内容可用性结论 · 6</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=6" title="opknow19 卡6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#3 第三方生态少而同质</b>：让官方论坛、技术博客、GitCode 和英文社区形成多平台互证。</span></div></div>
   </section>
@@ -1949,7 +2052,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 7：高难度任务需要端到端场景专题，而不是分散在多页文档里</span></div>
         <div class="subttl">AI 侧 · 内容可用性结论 · 「7/8 高难度任务专题」</div>
       </div>
-      <div class="head-r">18/ 内容可用性结论 · 7</div>
+      <div class="head-r">19/ 内容可用性结论 · 7</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=7" title="opknow19 卡7" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#6 综合差距集中在算子开发与排障任务</b>：把 D / E / M 从分散文档整理成可验证、可复现的任务包。</span></div></div>
   </section>
@@ -1960,7 +2063,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 8：面向下一代模型的语料供给，需要官方与生态共同支撑</span></div>
         <div class="subttl">AI 侧 · 内容可用性结论 · 「8/8 语料供给」</div>
       </div>
-      <div class="head-r">19/ 内容可用性结论 · 8</div>
+      <div class="head-r">20/ 内容可用性结论 · 8</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=8" title="opknow19 卡8" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#2 模型自带知识偏薄</b>、<b>#3 第三方生态少而同质</b>：面向下一代模型补充可训练、可引用、可验证的语料供给。</span></div></div>
   </section>
@@ -1983,7 +2086,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">人机协同时序：AI 时代开发者仍会在关键场景使用昇腾社区</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「时序图」</div>
       </div>
-      <div class="head-r">20/ 基础体验 · 时序图</div>
+      <div class="head-r">21/ 基础体验 · 时序图</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -2008,7 +2111,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验评估先界定理论依据与评估边界</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 1/3 · 理论与边界」</div>
       </div>
-      <div class="head-r">21/ 摩擦指数 · 理论与边界</div>
+      <div class="head-r">22/ 摩擦指数 · 理论与边界</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=1" title="摩擦指数 理论依据+评估边界" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -2020,7 +2123,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验评分由 5 维 16 项指标按统一协议归一化</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 2/3 · 指标与计算」</div>
       </div>
-      <div class="head-r">22/ 摩擦指数 · 指标与计算</div>
+      <div class="head-r">23/ 摩擦指数 · 指标与计算</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=2" title="摩擦指数 指标体系+测量协议+归一化" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -2032,7 +2135,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">16 个 best/worst 锚点公开，保证两边同尺对比</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 3/3 · 锚点总表」</div>
       </div>
-      <div class="head-r">23/ 摩擦指数 · 锚点总表</div>
+      <div class="head-r">24/ 摩擦指数 · 锚点总表</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=3" title="摩擦指数 六、锚点总表" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -2056,7 +2159,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">走完 7 步生命周期：每步「触点 × 情绪 × 痛点 / 机会」，谷底在配环境</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程」</div>
       </div>
-      <div class="head-r">24/ 基础体验 · 用户旅程</div>
+      <div class="head-r">25/ 基础体验 · 用户旅程</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:1.4vw;align-items:stretch">
       <div style="flex:0 0 17%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
@@ -2135,7 +2238,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">官网首页已露出开发入口，但起步动作需要更明确</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 74（差值 +2）</div>
       </div>
-      <div class="head-r">25/ 触点 1.1</div>
+      <div class="head-r">26/ 触点 1.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1" title="触点 1.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2146,7 +2249,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">开发者门户内容不弱，入口埋深和选择成本拖慢上手</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 77（差值 +1）</div>
       </div>
-      <div class="head-r">26/ 触点 1.1b</div>
+      <div class="head-r">27/ 触点 1.1b</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1b" title="触点 1.1b" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2157,7 +2260,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">导航入口基本完整，但缺少按场景和角色的横切路径</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 76（差值 0）</div>
       </div>
-      <div class="head-r">27/ 触点 1.2</div>
+      <div class="head-r">28/ 触点 1.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.2" title="触点 1.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2168,7 +2271,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">产品矩阵覆盖完整，但新手仍需要选型分诊</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
       </div>
-      <div class="head-r">28/ 触点 2.1</div>
+      <div class="head-r">29/ 触点 2.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.1" title="触点 2.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2179,7 +2282,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">规格集中列全是优势，下一步要支持并排选型</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
       </div>
-      <div class="head-r">29/ 触点 2.3</div>
+      <div class="head-r">30/ 触点 2.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.3" title="触点 2.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2190,7 +2293,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">方案入口具备筛选能力，开发者自助起步路径还需补齐</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 77（差值 -1）</div>
       </div>
-      <div class="head-r">30/ 触点 2.4</div>
+      <div class="head-r">31/ 触点 2.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.4" title="触点 2.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2201,7 +2304,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">CANN 页面内容扎实，下一步体验入口还可更清晰</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 80（差值 -2）</div>
       </div>
-      <div class="head-r">31/ 触点 2.2</div>
+      <div class="head-r">32/ 触点 2.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=2.2" title="触点 2.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2212,7 +2315,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">学习路径和 HiDevLab 构成昇腾首次跑通优势</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 82 / NVIDIA 72（差值 +10）</div>
       </div>
-      <div class="head-r">32/ 触点 3.2</div>
+      <div class="head-r">33/ 触点 3.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.2" title="触点 3.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2223,7 +2326,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">教程体系已经成形，认证影响力仍需建立</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 77 / NVIDIA 79（差值 -2）</div>
       </div>
-      <div class="head-r">33/ 触点 3.3</div>
+      <div class="head-r">34/ 触点 3.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.3" title="触点 3.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2234,7 +2337,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">HiDevLab 已有在线开发基础，轻量试用入口还可加强</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 80（差值 -4）</div>
       </div>
-      <div class="head-r">34/ 触点 5.4</div>
+      <div class="head-r">35/ 触点 5.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.4" title="触点 5.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2245,7 +2348,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">下载中心入口清楚，但公告弹窗会打断首次任务</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 70 / NVIDIA 74（差值 -4）</div>
       </div>
-      <div class="head-r">35/ 触点 4.1</div>
+      <div class="head-r">36/ 触点 4.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.1" title="触点 4.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2256,7 +2359,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">登录前置把试用意愿挡在下载之前</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 64 / NVIDIA 80（差值 -16）</div>
       </div>
-      <div class="head-r">36/ 触点 4.2</div>
+      <div class="head-r">37/ 触点 4.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.2" title="触点 4.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2267,7 +2370,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">Toolkit 下载链路过长，是首次上手的最大阻断</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 66 / NVIDIA 82（差值 -16）</div>
       </div>
-      <div class="head-r">37/ 触点 4.3</div>
+      <div class="head-r">38/ 触点 4.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.3" title="触点 4.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2278,7 +2381,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">版本与环境选择需要默认推荐和配套校验</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 73 / NVIDIA 79（差值 -6）</div>
       </div>
-      <div class="head-r">38/ 触点 4.4</div>
+      <div class="head-r">39/ 触点 4.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=4.4" title="触点 4.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2289,7 +2392,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">文档中心搜索显眼，但角色与主题筛选还不够强</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 80 / NVIDIA 81（差值 -1）</div>
       </div>
-      <div class="head-r">39/ 触点 3.1</div>
+      <div class="head-r">40/ 触点 3.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.1" title="触点 3.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2300,7 +2403,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">API 文档可查，但版本切换和结构一致性仍需统一</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
       </div>
-      <div class="head-r">40/ 触点 3.4</div>
+      <div class="head-r">41/ 触点 3.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=3.4" title="触点 3.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2311,7 +2414,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">站内代码示例方便复制，完整工程和在线运行要同步提供</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 79（差值 -1）</div>
       </div>
-      <div class="head-r">41/ 触点 5.1</div>
+      <div class="head-r">42/ 触点 5.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.1" title="触点 5.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2322,7 +2425,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">工具链覆盖完整，MindStudio 的心智与插件体验还要增强</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 79（差值 -4）</div>
       </div>
-      <div class="head-r">42/ 触点 5.3</div>
+      <div class="head-r">43/ 触点 5.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.3" title="触点 5.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2333,7 +2436,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">论坛分版精细，但游客可读和搜索索引能力不足</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
       </div>
-      <div class="head-r">43/ 触点 6.1</div>
+      <div class="head-r">44/ 触点 6.1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.1" title="触点 6.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2344,7 +2447,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">技术支持入口正式，但 FAQ、论坛和工单需要串联</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 76（差值 -1）</div>
       </div>
-      <div class="head-r">44/ 触点 6.2</div>
+      <div class="head-r">45/ 触点 6.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.2" title="触点 6.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2355,7 +2458,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">集中 FAQ 是优势，价值要通过搜索和产品页入口释放</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 73（差值 +3）</div>
       </div>
-      <div class="head-r">45/ 触点 6.3</div>
+      <div class="head-r">46/ 触点 6.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.3" title="触点 6.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2366,7 +2469,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">ModelZoo 的引导式路径是昇腾可放大的上手优势</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 81 / NVIDIA 79（差值 +2）</div>
       </div>
-      <div class="head-r">46/ 触点 5.2</div>
+      <div class="head-r">47/ 触点 5.2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=5.2" title="触点 5.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2377,7 +2480,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">博客内容组织不差，短板在全球搜索可发现性</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 73 / NVIDIA 81（差值 -8）</div>
       </div>
-      <div class="head-r">47/ 触点 6.4</div>
+      <div class="head-r">48/ 触点 6.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=6.4" title="触点 6.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2388,7 +2491,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">搜索入口显眼，下一步要支持报错日志和资源筛选</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 76（差值 0）</div>
       </div>
-      <div class="head-r">48/ 触点 1.3</div>
+      <div class="head-r">49/ 触点 1.3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.3" title="触点 1.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2399,7 +2502,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">中文体验顺畅，英文内容同步决定出海可达性</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 75（差值 0）</div>
       </div>
-      <div class="head-r">49/ 触点 1.4</div>
+      <div class="head-r">50/ 触点 1.4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?tp=1.4" title="触点 1.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2411,7 +2514,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">触点证据聚光灯：从评分表里定位五类基础体验问题</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「触点问题聚光灯」</div>
       </div>
-      <div class="head-r">50/ 基础体验 · 问题聚光灯</div>
+      <div class="head-r">51/ 基础体验 · 问题聚光灯</div>
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
@@ -2487,7 +2590,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验做法 1：后置登录与协议，先让开发者拿到可运行 Toolkit</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「做法① 下载闸门」</div>
       </div>
-      <div class="head-r">51/ 基础体验做法 · 1</div>
+      <div class="head-r">52/ 基础体验做法 · 1</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2498,7 +2601,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验做法 2：以开发场景组织入口、内容与下一步路径</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「做法② 场景化组织」</div>
       </div>
-      <div class="head-r">52/ 基础体验做法 · 2</div>
+      <div class="head-r">53/ 基础体验做法 · 2</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=jscene" title="jscene" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2509,7 +2612,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验做法 3：优化搜索可发现性与索引可达，让官方答案更早出现</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「做法③ 搜索命中与索引」</div>
       </div>
-      <div class="head-r">53/ 基础体验做法 · 3</div>
+      <div class="head-r">54/ 基础体验做法 · 3</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2520,7 +2623,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验做法 4：把学习路径、HiDevLab 与 ModelZoo 接成首次跑通路径</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「做法④ 学习与首次跑通」</div>
       </div>
-      <div class="head-r">54/ 基础体验做法 · 4</div>
+      <div class="head-r">55/ 基础体验做法 · 4</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j4" title="j4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2531,7 +2634,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验做法 5：按海外开发者旅程补齐账号、英文与社区可读性</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「做法⑤ 海外可达性」</div>
       </div>
-      <div class="head-r">55/ 基础体验做法 · 5</div>
+      <div class="head-r">56/ 基础体验做法 · 5</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j3" title="j3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2542,7 +2645,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验做法 6：把 FAQ、论坛、工单和案例沉淀成可复用支持知识</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「做法⑥ 支持知识沉淀」</div>
       </div>
-      <div class="head-r">56/ 基础体验做法 · 6</div>
+      <div class="head-r">57/ 基础体验做法 · 6</div>
     </div>
     <div class="body-area"><iframe data-src="ar-embed.html?sec=j6" title="j6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
   </section>
@@ -2553,7 +2656,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">专题总览：四个官网板块的关键改进方向</span></div>
         <div class="subttl">结论 · 专题板块行动方案 · 「总览」</div>
       </div>
-      <div class="head-r">57/ 结论行动 · 专题总览</div>
+      <div class="head-r">58/ 结论行动 · 专题总览</div>
     </div>
     <div class="body-area" style="align-items:stretch">
       <div class="ccg topic-overview four">
@@ -2696,7 +2799,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">本研究产出件汇总——报告、方法与可复用工具已沉淀</span></div>
         <div class="subttl">研究资产 · 可点击查看线上报告与 GitHub 仓库</div>
       </div>
-      <div class="head-r">62/ 研究产出件</div>
+      <div class="head-r">63/ 研究产出件</div>
     </div>
     <div class="body-area">
       <div class="deliver-layout">
