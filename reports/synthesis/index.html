@@ -779,7 +779,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="archmetric-steps">
             <div class="archmetric-step" data-map="search"><span class="num">01</span><div class="act"><b>检索来源</b><span>先去官方与第三方找证据。</span></div><div class="met"><b>① 官方可发现性 · ⑤ 第三方丰富度</b><span>衡量“能不能找到足够入口”。</span></div></div>
             <div class="archmetric-step fetch" data-map="fetch"><span class="num">02</span><div class="act"><b>抓取 / 读取证据</b><span>把网页正文、代码、表格取回来。</span></div><div class="met"><b>② 官方可抓取性 · ③ 正文详尽度</b><span>衡量“取回后够不够用”。</span></div></div>
-            <div class="archmetric-step read" data-map="read"><span class="num">03</span><div class="act"><b>调用模型先验</b><span>检索不足时，模型会用训练记忆补位。</span></div><div class="met"><b>⑦ 模型自带知识</b><span>衡量“不检索时能不能兜住”。</span></div></div>
+            <div class="archmetric-step read" data-map="read"><span class="num">03</span><div class="act"><b>调用模型先验</b><span>不检索时直接依赖；检索后也参与证据判断。</span></div><div class="met"><b>⑦ 模型自带知识</b><span>衡量“训练记忆能否支撑答案”。</span></div></div>
             <div class="archmetric-step judge" data-map="judge"><span class="num">04</span><div class="act"><b>判断证据是否充分</b><span>看版本、来源一致性和是否需要再检索。</span></div><div class="met"><b>④ 版本清晰度 · ⑥ 第三方可信度 · ⑧ 检索成本</b><span>衡量“证据能不能被放心采用”。</span></div></div>
             <div class="archmetric-step answer" data-map="answer"><span class="num">05</span><div class="act"><b>组织最终答案</b><span>把证据合成为可执行步骤。</span></div><div class="met"><b>⑨ 版本可锁定性 · ⑩ 步骤可复现性 · ⑪ 综合置信度</b><span>衡量“答案能不能落地”。</span></div></div>
           </div>
