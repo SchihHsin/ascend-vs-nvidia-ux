@@ -574,7 +574,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">AI正在重塑开发范式：昇腾的「用户」已经是 人 + AI</span></div>
         <div class="subttl">立论 · 「用户 = 人 ⊕ AI」</div>
       </div>
-      <div class="head-r">01/ 双视角背景<br/>2026</div>
+      <div class="head-r">02/ 双视角背景2026</div>
     </div>
     <div class="body-area">
       <div class="dh-wrap">
@@ -608,7 +608,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">用得多≠信得过——开发者对 AI 输出仍存在明显信任落差</span></div>
         <div class="subttl">立论 · 「信任落差」</div>
       </div>
-      <div class="head-r">02/ 信任落差<br/>2026</div>
+      <div class="head-r">03/ 信任落差2026</div>
     </div>
     <div class="body-area">
       <div class="dh-wrap">
@@ -767,46 +767,66 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .au .au-src{margin-top:auto;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);line-height:1.5;padding-top:.7vh;border-top:1px dashed var(--line)}
     .au .au-src b{color:var(--ink-2);font-weight:700}
   </style>
-  <section class="slide s-gray">
+  <section class="slide s-gray metric-calc-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">理论依据：每一维指标都对应成熟的检索 / 信息架构理论，且公式可复现</span></div>
-        <div class="subttl">AI 侧 · 指标体系 · 「理论依据」</div>
+        <div class="brand"><span class="ttl">指标计算方式：①–⑩ 定义各项可观测得分，最终形成综合置信度⑪</span></div>
+        <div class="subttl">AI 侧 · 指标体系 · 「定义与计算理由」</div>
       </div>
-      <div class="head-r">06/ AI 指标 · 理论依据</div>
+      <div class="head-r">06/ AI 指标 · 计算理由</div>
     </div>
     <div class="body-area">
-      <div class="auth">
-        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 44"><line x1="22" y1="13" x2="98" y2="13" stroke="#5B5BD6" stroke-width="2"/><line x1="60" y1="6" x2="60" y2="13" stroke="#5B5BD6" stroke-width="2"/><circle cx="60" cy="5" r="2.5" fill="#5B5BD6"/><line x1="22" y1="13" x2="22" y2="22" stroke="#9aa3b2" stroke-width="1.4"/><path d="M11 22 H33 L28 31 H16 Z" fill="#ECECFB" stroke="#5B5BD6" stroke-width="1.4"/><line x1="98" y1="13" x2="98" y2="22" stroke="#9aa3b2" stroke-width="1.4"/><path d="M87 22 H109 L104 31 H92 Z" fill="#ECECFB" stroke="#5B5BD6" stroke-width="1.4"/><text x="22" y="41" font-size="9" fill="#5e646e" text-anchor="middle">CUDA</text><text x="98" y="41" font-size="9" fill="#5e646e" text-anchor="middle">CANN</text></svg><div class="acap">同题同评分 · 两边各跑</div></div><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div>
-          <div class="au-step"><span class="au-k">依据</span>要把差异归因到「生态」，就得让生态成为<b>唯一变量</b>，任务 / 模型 / 评分口径全部固定。</div>
-          <div class="au-step do"><span class="au-k">做法</span>同一套任务在 CUDA / 英伟达 与 CANN / 昇腾 <b>各实测一遍</b>，同题、同 Agent、同评分。</div>
-          <div class="au-step out"><span class="au-k">指标</span>每项都是「昇腾实测 <b>vs</b> 英伟达实测」的<b>成对值</b>，差值即生态差距——非单边主观分。</div>
-          <div class="au-src">依据 · <b>R. A. Fisher</b>《实验设计 The Design of Experiments》1935</div></div>
-        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 46"><rect x="10" y="3" width="100" height="7" rx="2" fill="#5B5BD6" opacity=".85"/><rect x="22" y="14" width="76" height="7" rx="2" fill="#5B5BD6" opacity=".62"/><rect x="34" y="25" width="52" height="7" rx="2" fill="#5B5BD6" opacity=".42"/><rect x="46" y="36" width="28" height="7" rx="2" fill="#5B5BD6" opacity=".28"/></svg><div class="acap">触达›质量›成本›产出</div></div><span class="au-tag">拆解框架</span><div class="au-h">知识价值链<span class="en">information foraging</span></div>
-          <div class="au-step"><span class="au-k">依据</span>知识要起作用，得走完「<b>被找到 → 被取到 → 被用上</b>」整条链，任一关断掉价值就打折。</div>
-          <div class="au-step do"><span class="au-k">做法</span>把「能不能用上知识」拆成四段分别测：<b>触达 → 质量 → 成本 → 产出</b>。</div>
-          <div class="au-step out"><span class="au-k">指标</span>这条链决定了指标的<b>分层结构</b>：①②触达 / 质量 / ⑧成本 / ⑨⑩产出，逐关评。</div>
-          <div class="au-src">依据 · <b>Pirolli &amp; Card</b> “Information Foraging” · Psychological Review 1999</div></div>
-        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 38"><circle cx="20" cy="17" r="9" fill="none" stroke="#5B5BD6" stroke-width="2"/><line x1="27" y1="24" x2="33" y2="30" stroke="#5B5BD6" stroke-width="2"/><line x1="44" y1="19" x2="66" y2="19" stroke="#9aa3b2" stroke-width="1.5"/><path d="M62 15 l5 4 l-5 4" fill="none" stroke="#9aa3b2" stroke-width="1.5"/><rect x="80" y="4" width="26" height="29" rx="3" fill="#ECECFB" stroke="#5B5BD6" stroke-width="1.5"/><line x1="85" y1="12" x2="101" y2="12" stroke="#5B5BD6" stroke-width="1.4"/><line x1="85" y1="18" x2="101" y2="18" stroke="#5B5BD6" stroke-width="1.4"/><line x1="85" y1="24" x2="95" y2="24" stroke="#5B5BD6" stroke-width="1.4"/></svg><div class="acap">搜到 → 抓到正文</div></div><span class="au-tag">触达维度</span><div class="au-h">可发现 / 可取回<span class="en">findability / retrievability</span></div>
-          <div class="au-step"><span class="au-k">依据</span>信息架构与检索评估里，「能被找到」和「能取回正文」是<b>两个独立度量</b>，不能混。</div>
-          <div class="au-step do"><span class="au-k">做法</span>触达这关拆成两项实测：搜不搜得到官方源、点进去 web_fetch 抓不抓得到正文。</div>
-          <div class="au-step out"><span class="au-k">指标</span><b>① 可发现性</b>（命中排名 / 轮数）+ <b>② 可抓取性</b>（静态页、服务端渲染、单页应用、抓取限制）。</div>
-          <div class="au-src">依据 · <b>Morville</b>《Ambient Findability》2005 ／ <b>Azzopardi &amp; Vinay</b> “Retrievability” · CIKM 2008</div></div>
-        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 38"><rect x="6" y="12" width="72" height="9" rx="4" fill="#5B5BD6" opacity=".8"/><rect x="78" y="12" width="36" height="9" rx="4" fill="#e7e9ee"/><line x1="78" y1="7" x2="78" y2="26" stroke="#E5484D" stroke-width="2"/><text x="6" y="34" font-size="8.5" fill="#5e646e">训练截止</text><text x="113" y="34" font-size="8.5" fill="#E5484D" text-anchor="end">now</text></svg><div class="acap">gap 越大 · 自带越弱</div></div><span class="au-tag">自带知识</span><div class="au-h">参数化知识<span class="en">parametric knowledge</span></div>
-          <div class="au-step"><span class="au-k">依据</span>模型不检索也能凭训练时记住的<b>参数化知识</b>作答，RAG 评估里这是公认的一条独立来源。</div>
-          <div class="au-step do"><span class="au-k">做法</span>把「模型自带知识」<b>单列一项</b>，按知识截止日到当前的 gap <b>客观罚分</b>（越旧越扣）。</div>
-          <div class="au-step out"><span class="au-k">指标</span><b>⑦ 自带知识</b>——不依赖检索的先验能力，单独计、不和检索项混淆。</div>
-          <div class="au-src">依据 · <b>Lewis et al.</b> RAG · NeurIPS 2020 ／ <b>Petroni et al.</b> “LMs as Knowledge Bases?” · EMNLP 2019</div></div>
-        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 44"><circle cx="13" cy="8" r="4" fill="#2E7D46"/><circle cx="13" cy="22" r="4" fill="#c2c8d2"/><circle cx="13" cy="36" r="4" fill="#c2c8d2"/><path d="M17 8 Q46 8 56 22" fill="none" stroke="#9aa3b2" stroke-width="1.4"/><path d="M17 22 H56" fill="none" stroke="#9aa3b2" stroke-width="1.4"/><path d="M17 36 Q46 36 56 22" fill="none" stroke="#9aa3b2" stroke-width="1.4"/><text x="63" y="27" font-size="13" fill="#5B5BD6" font-weight="700">∨</text><line x1="76" y1="22" x2="92" y2="22" stroke="#9aa3b2" stroke-width="1.4"/><circle cx="99" cy="22" r="5" fill="#5B5BD6"/></svg><div class="acap">官方∨三方∨自带 · 任一即可</div></div><span class="au-tag">渠道合成</span><div class="au-h">噪声或公式<span class="en">noisy-OR · 概率图模型</span></div>
-          <div class="au-step"><span class="au-k">依据</span>官方 / 第三方 / 自带是三条<b>相对独立的渠道</b>，概率图里多条独立通路用“噪声或”合成。</div>
-          <div class="au-step do"><span class="au-k">做法</span>综合分不做简单加权平均，而是 <b>噪声或公式</b>：任一渠道达标即可作答，全断才记 0。</div>
-          <div class="au-step out"><span class="au-k">指标</span><b>⑪ 综合置信度</b>由三渠道“噪声或”合成——避免「一条够用却被均值拉低」。</div>
-          <div class="au-src">依据 · <b>Judea Pearl</b>《Probabilistic Reasoning in Intelligent Systems》1988</div></div>
-        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 38"><g transform="translate(6,6) scale(1.05)" fill="none" stroke="#5B5BD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></g><path d="M55 20 l6 6 l13 -15" fill="none" stroke="#2E7D46" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="86" y="24" font-size="9.5" fill="#5e646e">--diff</text></svg><div class="acap">实测代公式 · 可重跑</div></div><span class="au-tag">可复现</span><div class="au-h">公式可重跑<span class="en">reproducibility</span></div>
-          <div class="au-step"><span class="au-k">依据</span>ML 可复现性清单要求结论由<b>可重跑的流程</b>得出，而非主观研判。</div>
-          <div class="au-step do"><span class="au-k">做法</span>每格分都由实测观测<b>代入公开公式</b>算出，<code>--diff</code> 一键重跑核对。</div>
-          <div class="au-step out"><span class="au-k">指标</span><b>①–⑧</b> 全由 <code>score_metrics.py</code> 公式算出，第三方<b>可复现</b>。</div>
-          <div class="au-src">依据 · <b>Pineau et al.</b> ML 可复现性清单 · NeurIPS 2019</div></div>
+      <div class="metric-class-layout">
+        <div class="metric-taxonomy">
+          <div class="tax-head"><div><b>指标 ①–⑩：“指标形成页”讲“流程来源”，本页讲“计算模式”</b><span>流程视角说明指标从 AI 作答链路哪里来；计算视角说明每项如何从原始观测换算成 1–5 分。</span></div><span>计算模式 × 流程标签</span></div>
+          <div class="tax-grid">
+            <div class="tax-group official">
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="badge-check"></i></span><div><b>官方证据类 <em>串行相乘</em></b><span>官方链 OFF = (①/5)×(②/5)×(③/5)；任一环断掉都会打折</span></div></div>
+              <div class="tax-items">
+                <div class="tax-item"><span class="idx">①</span><div><b>官方可发现性 <i class="flowtag q">触达</i></b><span>首条官方=5；首屏靠后=4/3；二次改词才找到=2。</span></div></div>
+                <div class="tax-item"><span class="idx">②</span><div><b>官方可抓取性 <i class="flowtag q">触达</i></b><span>静态=5；服务端渲染/部分可抓=4；单页应用=2；robots 拦截=1。</span></div></div>
+                <div class="tax-item"><span class="idx">③</span><div><b>官方正文详尽度 <i class="flowtag">质量</i></b><span>穷尽=5/4；主路径=4/3；概述=3；片段=2；抓取受阻记 BLOCKED。</span></div></div>
+                <div class="tax-item"><span class="idx">④</span><div><b>版本清晰度 <i class="flowtag">质量</i></b><span>版本无关/单版本=5；矩阵=4；双轴可锁=3；多版本散乱=2。</span></div></div>
+              </div>
+            </div>
+            <div class="tax-group eco">
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="network"></i></span><div><b>生态互证类 <em>数量×可信</em></b><span>第三方链 SEC = (⑤/5)×(⑥/5)；第三方少或不可信都会削弱互证</span></div></div>
+              <div class="tax-items">
+                <div class="tax-item"><span class="idx">⑤</span><div><b>第三方丰富度 <i class="flowtag q">触达</i></b><span>去重来源数：≥6=5；5=4；3–4=3；1–2=2；0=1。</span></div></div>
+                <div class="tax-item"><span class="idx">⑥</span><div><b>第三方可信度 <i class="flowtag">质量</i></b><span>来源可信均分 + 一致性；再扣时效风险（中位月龄≤36不扣、≤48扣0.25、>48扣0.5）和平台重复风险（独立平台占比≥0.8不扣、≥0.6扣0.25、更低扣0.5）。</span></div></div>
+              </div>
+            </div>
+            <div class="tax-group own">
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="brain-circuit"></i></span><div><b>模型先验类 <em>单独成链</em></b><span>模型先验链 OWN = ⑦/5；训练知识可独立支撑，但受技术迭代影响</span></div></div>
+              <div class="tax-items">
+                <div class="tax-item"><span class="idx">⑦</span><div><b>模型自带知识 <i class="flowtag">质量</i></b><span>先按训练覆盖给1–5档；再按技术迭代速度扣截止风险：稳定不扣，中等迭代扣0.25，alpha/RC高频变化扣0.5，防止模型用过期记忆作答。</span></div></div>
+              </div>
+            </div>
+            <div class="tax-group process">
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="search"></i></span><div><b>检索过程类 <em>过程成本</em></b><span>⑧先计算检索成本，再映射为 1–5 分；进入综合分时只作为成本因子</span></div></div>
+              <div class="tax-items">
+                <div class="tax-item"><span class="idx">⑧</span><div><b>检索成本 <i class="flowtag c">成本</i></b><span>成本 = 检索轮数 + 0.5×成功抓取 + 4×抓取失败。检索轮数是基准单位；成功抓取只是核验证据，低于重搜，按半轮计；抓空会触发“识别空正文 → 换词/找镜像 → 重抓 → 复判”，按返工链路计。</span></div></div>
+              </div>
+            </div>
+            <div class="tax-group output">
+              <div class="tax-g-head"><span class="tax-code"><i data-lucide="package-check"></i></span><div><b>答案产出类 <em>结果解释</em></b><span>⑨⑩ 不进入 ⑪；用于说明 AI 最终答案能否落地</span></div></div>
+              <div class="tax-items">
+                <div class="tax-item"><span class="idx">⑨</span><div><b>版本可锁定性 <i class="flowtag o">产出</i></b><span>精确版本=5；基本可定=4；范围可定=3；无法定死=2。</span></div></div>
+                <div class="tax-item"><span class="idx">⑩</span><div><b>步骤可复现性 <i class="flowtag o">产出</i></b><span>照抄即跑=5；替参数=4；需小修=3；仅骨架=2。</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="metric-route">
+          <div class="route-card"><b>⑪ 综合分回答：AI 有没有足够可靠的证据来作答</b><p>①–⑩ 采用 1–5 可解释档位：5 表示几乎不阻碍 AI 作答，3 表示需要拼接或判断，1/2 表示会明显拖累答案可靠性。随后再计算官方、第三方、模型自带知识三条证据链。</p></div>
+          <div class="route-flow">
+            <div class="route-node" data-step="1"><b>先算三条证据链各自是否成立</b><code>官方链 OFF = (①/5)×(②/5)×(③/5)<br>第三方链 SEC = (⑤/5)×(⑥/5)<br>模型先验链 OWN = ⑦/5</code><p>官方链是“搜得到、抓得到、正文够用”串起来；第三方链是“数量够、可信度够”共同成立。</p></div>
+            <div class="route-arrow"><i data-lucide="arrow-down"></i></div>
+            <div class="route-node k" data-step="2"><b>再算至少一条证据链可用的概率</b><code>K = 1-(1-OFF)(1-SEC)(1-OWN)</code><p>OFF / SEC / OWN 分别对应官方链、第三方链、模型先验链；只要有一条足以支撑答案，就能形成可靠回答。</p></div>
+            <div class="route-arrow"><i data-lucide="arrow-down"></i></div>
+            <div class="route-node" data-step="3"><b>最后扣掉版本混乱和检索费力的影响</b><code>综合 = K × (0.7+0.3×④/5) × (0.9+0.1×⑧/5)</code><p>30% 用在版本因子，10% 用在成本因子；⑧先用检索轮数、成功抓取、抓取失败算出成本档位，再进入综合公式。⑨⑩保留为答案结果说明。</p></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1034,66 +1054,46 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </style>
 
   <!-- 灰底：AI 指标 · 定义与计算理由 -->
-  <section class="slide s-gray metric-calc-slide">
+  <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">指标计算方式：①–⑩ 定义各项可观测得分，最终形成综合置信度⑪</span></div>
-        <div class="subttl">AI 侧 · 指标体系 · 「定义与计算理由」</div>
+        <div class="brand"><span class="ttl">理论依据：每一维指标都对应成熟的检索 / 信息架构理论，且公式可复现</span></div>
+        <div class="subttl">AI 侧 · 指标体系 · 「理论依据」</div>
       </div>
-      <div class="head-r">07/ AI 指标 · 计算理由</div>
+      <div class="head-r">07/ AI 指标 · 理论依据</div>
     </div>
     <div class="body-area">
-      <div class="metric-class-layout">
-        <div class="metric-taxonomy">
-          <div class="tax-head"><div><b>指标 ①–⑩：“指标形成页”讲“流程来源”，本页讲“计算模式”</b><span>流程视角说明指标从 AI 作答链路哪里来；计算视角说明每项如何从原始观测换算成 1–5 分。</span></div><span>计算模式 × 流程标签</span></div>
-          <div class="tax-grid">
-            <div class="tax-group official">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="badge-check"></i></span><div><b>官方证据类 <em>串行相乘</em></b><span>官方链 OFF = (①/5)×(②/5)×(③/5)；任一环断掉都会打折</span></div></div>
-              <div class="tax-items">
-                <div class="tax-item"><span class="idx">①</span><div><b>官方可发现性 <i class="flowtag q">触达</i></b><span>首条官方=5；首屏靠后=4/3；二次改词才找到=2。</span></div></div>
-                <div class="tax-item"><span class="idx">②</span><div><b>官方可抓取性 <i class="flowtag q">触达</i></b><span>静态=5；服务端渲染/部分可抓=4；单页应用=2；robots 拦截=1。</span></div></div>
-                <div class="tax-item"><span class="idx">③</span><div><b>官方正文详尽度 <i class="flowtag">质量</i></b><span>穷尽=5/4；主路径=4/3；概述=3；片段=2；抓取受阻记 BLOCKED。</span></div></div>
-                <div class="tax-item"><span class="idx">④</span><div><b>版本清晰度 <i class="flowtag">质量</i></b><span>版本无关/单版本=5；矩阵=4；双轴可锁=3；多版本散乱=2。</span></div></div>
-              </div>
-            </div>
-            <div class="tax-group eco">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="network"></i></span><div><b>生态互证类 <em>数量×可信</em></b><span>第三方链 SEC = (⑤/5)×(⑥/5)；第三方少或不可信都会削弱互证</span></div></div>
-              <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑤</span><div><b>第三方丰富度 <i class="flowtag q">触达</i></b><span>去重来源数：≥6=5；5=4；3–4=3；1–2=2；0=1。</span></div></div>
-                <div class="tax-item"><span class="idx">⑥</span><div><b>第三方可信度 <i class="flowtag">质量</i></b><span>来源可信均分 + 一致性；再扣时效风险（中位月龄≤36不扣、≤48扣0.25、>48扣0.5）和平台重复风险（独立平台占比≥0.8不扣、≥0.6扣0.25、更低扣0.5）。</span></div></div>
-              </div>
-            </div>
-            <div class="tax-group own">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="brain-circuit"></i></span><div><b>模型先验类 <em>单独成链</em></b><span>模型先验链 OWN = ⑦/5；训练知识可独立支撑，但受技术迭代影响</span></div></div>
-              <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑦</span><div><b>模型自带知识 <i class="flowtag">质量</i></b><span>先按训练覆盖给1–5档；再按技术迭代速度扣截止风险：稳定不扣，中等迭代扣0.25，alpha/RC高频变化扣0.5，防止模型用过期记忆作答。</span></div></div>
-              </div>
-            </div>
-            <div class="tax-group process">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="search"></i></span><div><b>检索过程类 <em>过程成本</em></b><span>⑧先计算检索成本，再映射为 1–5 分；进入综合分时只作为成本因子</span></div></div>
-              <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑧</span><div><b>检索成本 <i class="flowtag c">成本</i></b><span>成本 = 检索轮数 + 0.5×成功抓取 + 4×抓取失败。检索轮数是基准单位；成功抓取只是核验证据，低于重搜，按半轮计；抓空会触发“识别空正文 → 换词/找镜像 → 重抓 → 复判”，按返工链路计。</span></div></div>
-              </div>
-            </div>
-            <div class="tax-group output">
-              <div class="tax-g-head"><span class="tax-code"><i data-lucide="package-check"></i></span><div><b>答案产出类 <em>结果解释</em></b><span>⑨⑩ 不进入 ⑪；用于说明 AI 最终答案能否落地</span></div></div>
-              <div class="tax-items">
-                <div class="tax-item"><span class="idx">⑨</span><div><b>版本可锁定性 <i class="flowtag o">产出</i></b><span>精确版本=5；基本可定=4；范围可定=3；无法定死=2。</span></div></div>
-                <div class="tax-item"><span class="idx">⑩</span><div><b>步骤可复现性 <i class="flowtag o">产出</i></b><span>照抄即跑=5；替参数=4；需小修=3；仅骨架=2。</span></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="metric-route">
-          <div class="route-card"><b>⑪ 综合分回答：AI 有没有足够可靠的证据来作答</b><p>①–⑩ 采用 1–5 可解释档位：5 表示几乎不阻碍 AI 作答，3 表示需要拼接或判断，1/2 表示会明显拖累答案可靠性。随后再计算官方、第三方、模型自带知识三条证据链。</p></div>
-          <div class="route-flow">
-            <div class="route-node" data-step="1"><b>先算三条证据链各自是否成立</b><code>官方链 OFF = (①/5)×(②/5)×(③/5)<br>第三方链 SEC = (⑤/5)×(⑥/5)<br>模型先验链 OWN = ⑦/5</code><p>官方链是“搜得到、抓得到、正文够用”串起来；第三方链是“数量够、可信度够”共同成立。</p></div>
-            <div class="route-arrow"><i data-lucide="arrow-down"></i></div>
-            <div class="route-node k" data-step="2"><b>再算至少一条证据链可用的概率</b><code>K = 1-(1-OFF)(1-SEC)(1-OWN)</code><p>OFF / SEC / OWN 分别对应官方链、第三方链、模型先验链；只要有一条足以支撑答案，就能形成可靠回答。</p></div>
-            <div class="route-arrow"><i data-lucide="arrow-down"></i></div>
-            <div class="route-node" data-step="3"><b>最后扣掉版本混乱和检索费力的影响</b><code>综合 = K × (0.7+0.3×④/5) × (0.9+0.1×⑧/5)</code><p>30% 用在版本因子，10% 用在成本因子；⑧先用检索轮数、成功抓取、抓取失败算出成本档位，再进入综合公式。⑨⑩保留为答案结果说明。</p></div>
-          </div>
-        </div>
+      <div class="auth">
+        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 44"><line x1="22" y1="13" x2="98" y2="13" stroke="#5B5BD6" stroke-width="2"/><line x1="60" y1="6" x2="60" y2="13" stroke="#5B5BD6" stroke-width="2"/><circle cx="60" cy="5" r="2.5" fill="#5B5BD6"/><line x1="22" y1="13" x2="22" y2="22" stroke="#9aa3b2" stroke-width="1.4"/><path d="M11 22 H33 L28 31 H16 Z" fill="#ECECFB" stroke="#5B5BD6" stroke-width="1.4"/><line x1="98" y1="13" x2="98" y2="22" stroke="#9aa3b2" stroke-width="1.4"/><path d="M87 22 H109 L104 31 H92 Z" fill="#ECECFB" stroke="#5B5BD6" stroke-width="1.4"/><text x="22" y="41" font-size="9" fill="#5e646e" text-anchor="middle">CUDA</text><text x="98" y="41" font-size="9" fill="#5e646e" text-anchor="middle">CANN</text></svg><div class="acap">同题同评分 · 两边各跑</div></div><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div>
+          <div class="au-step"><span class="au-k">依据</span>要把差异归因到「生态」，就得让生态成为<b>唯一变量</b>，任务 / 模型 / 评分口径全部固定。</div>
+          <div class="au-step do"><span class="au-k">做法</span>同一套任务在 CUDA / 英伟达 与 CANN / 昇腾 <b>各实测一遍</b>，同题、同 Agent、同评分。</div>
+          <div class="au-step out"><span class="au-k">指标</span>每项都是「昇腾实测 <b>vs</b> 英伟达实测」的<b>成对值</b>，差值即生态差距——非单边主观分。</div>
+          <div class="au-src">依据 · <b>R. A. Fisher</b>《实验设计 The Design of Experiments》1935</div></div>
+        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 46"><rect x="10" y="3" width="100" height="7" rx="2" fill="#5B5BD6" opacity=".85"/><rect x="22" y="14" width="76" height="7" rx="2" fill="#5B5BD6" opacity=".62"/><rect x="34" y="25" width="52" height="7" rx="2" fill="#5B5BD6" opacity=".42"/><rect x="46" y="36" width="28" height="7" rx="2" fill="#5B5BD6" opacity=".28"/></svg><div class="acap">触达›质量›成本›产出</div></div><span class="au-tag">拆解框架</span><div class="au-h">知识价值链<span class="en">information foraging</span></div>
+          <div class="au-step"><span class="au-k">依据</span>知识要起作用，得走完「<b>被找到 → 被取到 → 被用上</b>」整条链，任一关断掉价值就打折。</div>
+          <div class="au-step do"><span class="au-k">做法</span>把「能不能用上知识」拆成四段分别测：<b>触达 → 质量 → 成本 → 产出</b>。</div>
+          <div class="au-step out"><span class="au-k">指标</span>这条链决定了指标的<b>分层结构</b>：①②触达 / 质量 / ⑧成本 / ⑨⑩产出，逐关评。</div>
+          <div class="au-src">依据 · <b>Pirolli &amp; Card</b> “Information Foraging” · Psychological Review 1999</div></div>
+        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 38"><circle cx="20" cy="17" r="9" fill="none" stroke="#5B5BD6" stroke-width="2"/><line x1="27" y1="24" x2="33" y2="30" stroke="#5B5BD6" stroke-width="2"/><line x1="44" y1="19" x2="66" y2="19" stroke="#9aa3b2" stroke-width="1.5"/><path d="M62 15 l5 4 l-5 4" fill="none" stroke="#9aa3b2" stroke-width="1.5"/><rect x="80" y="4" width="26" height="29" rx="3" fill="#ECECFB" stroke="#5B5BD6" stroke-width="1.5"/><line x1="85" y1="12" x2="101" y2="12" stroke="#5B5BD6" stroke-width="1.4"/><line x1="85" y1="18" x2="101" y2="18" stroke="#5B5BD6" stroke-width="1.4"/><line x1="85" y1="24" x2="95" y2="24" stroke="#5B5BD6" stroke-width="1.4"/></svg><div class="acap">搜到 → 抓到正文</div></div><span class="au-tag">触达维度</span><div class="au-h">可发现 / 可取回<span class="en">findability / retrievability</span></div>
+          <div class="au-step"><span class="au-k">依据</span>信息架构与检索评估里，「能被找到」和「能取回正文」是<b>两个独立度量</b>，不能混。</div>
+          <div class="au-step do"><span class="au-k">做法</span>触达这关拆成两项实测：搜不搜得到官方源、点进去 web_fetch 抓不抓得到正文。</div>
+          <div class="au-step out"><span class="au-k">指标</span><b>① 可发现性</b>（命中排名 / 轮数）+ <b>② 可抓取性</b>（静态页、服务端渲染、单页应用、抓取限制）。</div>
+          <div class="au-src">依据 · <b>Morville</b>《Ambient Findability》2005 ／ <b>Azzopardi &amp; Vinay</b> “Retrievability” · CIKM 2008</div></div>
+        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 38"><rect x="6" y="12" width="72" height="9" rx="4" fill="#5B5BD6" opacity=".8"/><rect x="78" y="12" width="36" height="9" rx="4" fill="#e7e9ee"/><line x1="78" y1="7" x2="78" y2="26" stroke="#E5484D" stroke-width="2"/><text x="6" y="34" font-size="8.5" fill="#5e646e">训练截止</text><text x="113" y="34" font-size="8.5" fill="#E5484D" text-anchor="end">now</text></svg><div class="acap">gap 越大 · 自带越弱</div></div><span class="au-tag">自带知识</span><div class="au-h">参数化知识<span class="en">parametric knowledge</span></div>
+          <div class="au-step"><span class="au-k">依据</span>模型不检索也能凭训练时记住的<b>参数化知识</b>作答，RAG 评估里这是公认的一条独立来源。</div>
+          <div class="au-step do"><span class="au-k">做法</span>把「模型自带知识」<b>单列一项</b>，按知识截止日到当前的 gap <b>客观罚分</b>（越旧越扣）。</div>
+          <div class="au-step out"><span class="au-k">指标</span><b>⑦ 自带知识</b>——不依赖检索的先验能力，单独计、不和检索项混淆。</div>
+          <div class="au-src">依据 · <b>Lewis et al.</b> RAG · NeurIPS 2020 ／ <b>Petroni et al.</b> “LMs as Knowledge Bases?” · EMNLP 2019</div></div>
+        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 44"><circle cx="13" cy="8" r="4" fill="#2E7D46"/><circle cx="13" cy="22" r="4" fill="#c2c8d2"/><circle cx="13" cy="36" r="4" fill="#c2c8d2"/><path d="M17 8 Q46 8 56 22" fill="none" stroke="#9aa3b2" stroke-width="1.4"/><path d="M17 22 H56" fill="none" stroke="#9aa3b2" stroke-width="1.4"/><path d="M17 36 Q46 36 56 22" fill="none" stroke="#9aa3b2" stroke-width="1.4"/><text x="63" y="27" font-size="13" fill="#5B5BD6" font-weight="700">∨</text><line x1="76" y1="22" x2="92" y2="22" stroke="#9aa3b2" stroke-width="1.4"/><circle cx="99" cy="22" r="5" fill="#5B5BD6"/></svg><div class="acap">官方∨三方∨自带 · 任一即可</div></div><span class="au-tag">渠道合成</span><div class="au-h">噪声或公式<span class="en">noisy-OR · 概率图模型</span></div>
+          <div class="au-step"><span class="au-k">依据</span>官方 / 第三方 / 自带是三条<b>相对独立的渠道</b>，概率图里多条独立通路用“噪声或”合成。</div>
+          <div class="au-step do"><span class="au-k">做法</span>综合分不做简单加权平均，而是 <b>噪声或公式</b>：任一渠道达标即可作答，全断才记 0。</div>
+          <div class="au-step out"><span class="au-k">指标</span><b>⑪ 综合置信度</b>由三渠道“噪声或”合成——避免「一条够用却被均值拉低」。</div>
+          <div class="au-src">依据 · <b>Judea Pearl</b>《Probabilistic Reasoning in Intelligent Systems》1988</div></div>
+        <div class="au"><div class="au-demo"><svg viewBox="0 0 120 38"><g transform="translate(6,6) scale(1.05)" fill="none" stroke="#5B5BD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></g><path d="M55 20 l6 6 l13 -15" fill="none" stroke="#2E7D46" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="86" y="24" font-size="9.5" fill="#5e646e">--diff</text></svg><div class="acap">实测代公式 · 可重跑</div></div><span class="au-tag">可复现</span><div class="au-h">公式可重跑<span class="en">reproducibility</span></div>
+          <div class="au-step"><span class="au-k">依据</span>ML 可复现性清单要求结论由<b>可重跑的流程</b>得出，而非主观研判。</div>
+          <div class="au-step do"><span class="au-k">做法</span>每格分都由实测观测<b>代入公开公式</b>算出，<code>--diff</code> 一键重跑核对。</div>
+          <div class="au-step out"><span class="au-k">指标</span><b>①–⑧</b> 全由 <code>score_metrics.py</code> 公式算出，第三方<b>可复现</b>。</div>
+          <div class="au-src">依据 · <b>Pineau et al.</b> ML 可复现性清单 · NeurIPS 2019</div></div>
       </div>
     </div>
   </section>
@@ -1136,57 +1136,32 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
 
   <!-- 3d 灰底：矩阵评估发现（§9 重画，算子子集） -->
-  <section class="slide s-gray">
+  <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">可用性短板集中在深层算子任务：写算子最低，其余环节受版本、生态与模型先验共同影响</span></div>
-        <div class="subttl">AI 侧 · 内容可用性 · 「评估发现」</div>
+        <div class="brand"><span class="ttl">任务设计：5 个检索问题来自算子开发中的关键知识需求</span></div>
+        <div class="subttl">AI 侧 · 内容可用性 · 「测试设计」</div>
       </div>
-      <div class="head-r">08/ 矩阵评分 · 结果</div>
+      <div class="head-r">08/ AI 可用性 · 方法</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
         <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="card" style="padding:1.8vh 1.4vw">
-          <div class="hm-grid" id="mOp" style="grid-template-columns:112px 42px repeat(6,1fr)"></div>
-          <div class="hm-legend"><span>第1列 检索问题 · 第2列 <b style="color:#C7000B">CANN</b>（昇腾）/ <b style="color:#5a8a00">CUDA</b>（NVIDIA），2 红 / 3 橙 / 4 绿 / 5 蓝；<b>综合</b>为 opknow 公式复算小数</span><span style="flex:1"></span><span>2</span><span class="hm-grad"></span><span>5</span></div>
+        <div class="cmp-h"><span class="hk">Tasks</span>算子开发里的 5 个检索问题如何选取</div>
+        <p class="cmp-desc">围绕一次自定义算子从<b>能不能接入</b>到<b>能不能跑通</b>的真实路径选题：模型转换、性能定位、算子库选型、自定义 kernel、动态 shape / Tiling、内存越界、注册集成、精度排查、soc 版本决策等知识点中，选取开发者自然会带着问题查资料的关键节点，作为时序图中的 <b>5 次携问题检索</b>。</p>
+        <div class="lc-stages">装环境 · <b style="color:var(--accent)">开发算子</b> · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
+        <div class="op5">
+          <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
+          <div class="op5-i"><span class="c">2</span><b>Tiling</b><small>动态 shape</small></div>
+          <div class="op5-i"><span class="c">3</span><b>内存越界</b><small>定位</small></div>
+          <div class="op5-i"><span class="c">4</span><b>注册集成</b><small>接 PyTorch</small></div>
+          <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
         </div>
+        <div class="bridge" style="margin-top:.2vh">同一套 5 个任务，在 <b style="color:#5a8a00">CUDA / 英伟达</b> 与 <b style="color:#C7000B">CANN / 昇腾</b> 上各<b>实测一遍</b>，差异方可归于「生态」、而非「题目难度」。</div>
       </div>
     </div>
-    <script>
-      (function(){var grid=document.getElementById('mOp');if(!grid)return;
-      function heat(s){return s<=40?'rgba(229,72,77,.075)':s<=60?'rgba(245,158,11,.085)':s<=80?'rgba(35,160,106,.078)':'rgba(57,121,249,.075)';}
-      function bord(s){return s<=40?'rgba(229,72,77,.12)':s<=60?'rgba(245,158,11,.14)':s<=80?'rgba(35,160,106,.12)':'rgba(57,121,249,.12)';}
-      function txt(s){return s<=40?'#C7000B':s<=60?'#A15C00':s<=80?'#1F7A4D':'#2F63D8';}
-      function d(v){return v==='受阻'?['受阻',0]:[String(v),v*20];}
-      var cols=['官方可抓','正文质量','版本清晰','第三方平台厚度','自带知识','综合'];
-      /* 数据=opknow ROWS + confCompute() 公式复算；综合列两侧均显示具体小数 */
-      var rows=[
-        {no:'1',name:'写 kernel',sub:'自定义算子',lt:'D', cann:[d(2),['受阻',0],d(2),d(3),d(2),['.41',41]], cuda:[d(5),d(5),d(3),d(4),d(5),['.88',88]]},
-        {no:'2',name:'Tiling',sub:'动态 shape',lt:'M', cann:[d(4),d(4),d(4),d(2),d(2),['.63',63]], cuda:[d(5),d(5),d(4),d(2),d(5),['.94',94]]},
-        {no:'3',name:'内存越界',sub:'定位',lt:'X', cann:[d(4),d(5),d(2),d(2),d(2),['.74',74]], cuda:[d(5),d(5),d(3),d(3),d(4),['.88',88]]},
-        {no:'4',name:'注册集成',sub:'接框架',lt:'O', cann:[d(4),d(5),d(3),d(3),d(3),['.72',72]], cuda:[d(5),d(5),d(3),d(2),d(5),['.84',84]]},
-        {no:'5',name:'精度排查',sub:'比对',lt:'L', cann:[d(4),d(5),d(2),d(3),d(3),['.69',69]], cuda:[d(5),d(5),d(5),d(2),d(4),['.84',84]]}
-      ];
-      function desc(score){return score<=40?'低分：该渠道基本失效或需要明显绕行。':score<=60?'中低：能找到线索，但不够稳定或不够细。':score<=80?'中高：基本可用，仍有版本/生态/成本摩擦。':'高分：路径清晰，可直接支撑作答。';}
-      var opCols=[1,2,3,4,6,10];
-      function cellTip(c,task,stk,col){return '<b>'+task+' · '+stk+'</b><br>'+col+'：'+c[0]+'（'+c[1]+' / 100）<br>'+desc(c[1]);}
-      function scell(c,lt,side,ci,task,stk,col){return '<div class="hm-cell" data-letter="'+lt+'" data-tip="'+hmAttr(hmTipRich(lt,side,ci,cellTip(c,task,stk,col)))+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</div>';}
-      var h='<div class="hm-corner" style="grid-column:span 2"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">检索问题</span></div>';
-      cols.forEach(function(c,i){h+='<div class="hm-header" data-tip="'+hmAttr(hmColTip(opCols[i],c))+'">'+c+'</div>';});
-      rows.forEach(function(r){
-        var cb=parseFloat(r.cann[5][0])*100, nc=(cb<60?'#E63838':cb<70?'#FD9A00':'#37C597');
-        h+='<div class="hm-task" data-letter="'+r.lt+'" data-tip="'+hmAttr(hmTaskTip(r.lt,'<b>'+r.name+'</b><br>'+r.sub+'；CANN 综合 '+r.cann[5][0]+'，CUDA 综合 '+r.cuda[5][0]+'。'))+'" style="grid-row:span 2"><span class="hm-no" style="background:'+nc+'" title="综合 '+r.cann[5][0]+'">'+r.no+'</span><div><div>'+r.name+'</div><small>'+r.sub+'</small></div></div>';
-        h+='<div class="hm-stk-cell asc" data-letter="'+r.lt+'">CANN</div>';
-        r.cann.forEach(function(c,i){ h+=scell(c,r.lt,'cann',opCols[i],r.name,'CANN',cols[i]); });
-        h+='<div class="hm-stk-cell nv" data-letter="'+r.lt+'">CUDA</div>';
-        r.cuda.forEach(function(c,i){ h+=scell(c,r.lt,'cuda',opCols[i],r.name,'CUDA',cols[i]); });
-      });
-      grid.innerHTML=h;
-    })();
-    </script>
   </section>
 
   <style>
@@ -1268,13 +1243,315 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull-note b{color:#1B2432}.hmfull-note .hm-grad{width:92px}
   </style>
   <!-- 灰底：AI 侧 · opknow 全量矩阵 -->
+  <section class="slide s-gray copy-large">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">任务执行：基于同一开发任务用 CANN 与 CUDA 对比提问</span></div>
+        <div class="subttl">AI 侧 · 内容可用性 · 「问题编写」</div>
+      </div>
+      <div class="head-r">09/ 问题对 · 对照设计</div>
+    </div>
+    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
+      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
+        <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center">
+      <div class="bridge" style="margin-top:0;flex:0 0 auto"><b>模拟真实开发者口吻</b>、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>。</div>
+      <div class="qpx">
+        <div class="qhead"><div class="qx-h cu">CUDA / 英伟达 对照问题</div><div class="qx-h ca">CANN / 昇腾 对照问题</div></div>
+        <div class="qtask" data-letter="D">
+          <div class="qx-intent"><span class="ql">1</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一开发任务</b>写个自定义算子并集成进 PyTorch</span></div>
+          <div class="qpair">
+            <div class="qx-c cu">怎么写自定义 CUDA kernel 并集成进 PyTorch（C++ extension）？给出完整步骤、<code>setup.py</code> 和注册代码。</div>
+            <div class="qx-c ca">怎么用 Ascend C 开发自定义算子并集成进 PyTorch（<code>msOpGen</code> / <code>aclnn</code>）？给出完整步骤。</div>
+          </div>
+        </div>
+        <div class="qtask" data-letter="M">
+          <div class="qx-intent"><span class="ql">2</span>Tiling<small>动态 shape</small><span class="qx-goal"><b>同一开发任务</b>算子 / 推理怎么支持动态 shape 输入</span></div>
+          <div class="qpair">
+            <div class="qx-c cu">TensorRT / CUDA kernel 处理动态 shape 输入怎么做（optimization profile / 运行时 shape）？</div>
+            <div class="qx-c ca">Ascend C 自定义算子做动态 shape，<code>Tiling</code> 怎么写、<code>TilingData</code> 怎么定义和传递？</div>
+          </div>
+        </div>
+        <div class="qtask" data-letter="X">
+          <div class="qx-intent"><span class="ql">3</span>内存越界<small>定位</small><span class="qx-goal"><b>同一开发任务</b>kernel / 算子内存越界，怎么用工具定位是哪一行</span></div>
+          <div class="qpair">
+            <div class="qx-c cu">CUDA kernel 报 illegal memory access，怎么用 <code>compute-sanitizer</code> 定位是哪一行越界？</div>
+            <div class="qx-c ca">昇腾算子内存越界，怎么用 <code>msSanitizer</code> / 算子内存检测定位是哪一行？</div>
+          </div>
+        </div>
+        <div class="qtask" data-letter="O">
+          <div class="qx-intent"><span class="ql">4</span>注册集成<small>接框架</small><span class="qx-goal"><b>同一开发任务</b>自定义算子怎么注册进框架让它能被调用</span></div>
+          <div class="qpair">
+            <div class="qx-c cu">自定义算子怎么注册进 PyTorch 让 <code>torch.ops</code> 能调（<code>TORCH_LIBRARY</code> / dispatcher）？</div>
+            <div class="qx-c ca">Ascend C 算子怎么注册成 <code>aclnn</code> 接口并集成进 <code>torch_npu</code> / PyTorch 让框架能调？</div>
+          </div>
+        </div>
+        <div class="qtask" data-letter="L">
+          <div class="qx-intent"><span class="ql">5</span>精度排查<small>逐层比对</small><span class="qx-goal"><b>同一开发任务</b>自定义算子结果和参考不一致，怎么逐层 / 逐元素比对定位</span></div>
+          <div class="qpair">
+            <div class="qx-c cu">自定义 CUDA 算子结果和 PyTorch 参考不一致，怎么定位数值精度（逐层 / 逐元素比对）？</div>
+            <div class="qx-c ca">昇腾算子输出和标杆不一致，怎么用 <code>msaccucmp</code> / 精度比对 / dump 定位？</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .op7{display:grid;grid-template-columns:repeat(7,1fr);gap:.5vw}
+    .op7-i{display:flex;flex-direction:column;align-items:center;gap:.35em;text-align:center;background:rgba(47,61,99,.05);border:1px solid rgba(47,61,99,.16);border-radius:9px;padding:1.1vh .2vw}
+    .op7-i .n{width:22px;height:22px;border-radius:6px;background:#2f3d63;color:#fff;font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);display:flex;align-items:center;justify-content:center}
+    .op7-i b{font-size:var(--fs-sm);color:var(--ink);line-height:1.25;font-weight:600}
+    .op7-i.clk{cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
+    .op7-i.clk:hover{border-color:#2f3d63}
+    .op7-i.act{background:rgba(47,61,99,.13);border-color:#2f3d63;box-shadow:0 0 0 2px rgba(47,61,99,.22)}
+    .hs-ana{font-size:var(--fs-body);line-height:1.55;color:var(--ink-2);display:flex;flex-wrap:wrap;align-items:center;gap:.5em}
+    .hs-ana .hp{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-xs);padding:2px 7px;border-radius:6px;color:#fff}
+    .hs-ana .hd{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-xs);padding:2px 7px;border-radius:6px}
+    .hs-ana .hd.up{background:rgba(35,160,106,.14);color:#1f7a4d}.hs-ana .hd.dn{background:rgba(230,0,18,.1);color:#C7000B}
+    .cmp2{display:grid;grid-template-columns:1fr 1fr;gap:.8vw}
+    .cmp2 figure{margin:0;display:flex;flex-direction:column;gap:.3em}
+    .cmp2 img{width:100%;border:1px solid var(--line);border-radius:8px;display:block;aspect-ratio:16/10;object-fit:cover;object-position:top}
+    .cmp2 figcaption{font-size:var(--fs-xs);font-weight:600;text-align:center}
+    .scard .sr{display:grid;grid-template-columns:1.5fr auto auto auto;gap:.7vw;align-items:center;font-size:var(--fs-sm);padding:.35vh 0}
+    .scard .sr+.sr{border-top:1px solid rgba(0,0,0,.05)}
+    .scard .nm{color:var(--ink);font-weight:600}
+    .scard .sh{font-size:var(--fs-xs);color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+    .scard .pill{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);padding:3px 0;border-radius:7px;color:#fff;text-align:center;min-width:42px}
+    .scard .dlt{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);padding:3px 0;border-radius:7px;text-align:center;min-width:50px}
+    .scard .dlt.up{background:rgba(35,160,106,.14);color:#1f7a4d}.scard .dlt.dn{background:rgba(230,0,18,.1);color:#C7000B}
+    .uxscore{display:grid;grid-template-columns:1.08fr .92fr;gap:.9vw;padding:1.2vh 1.05vw!important;align-items:stretch}
+    .uxscore-l,.uxscore-r{min-width:0;display:flex;flex-direction:column;gap:.7vh}
+    .uxsec{font-size:var(--fs-xs);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+    .uxdiag{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65vw;flex:1;min-height:0}
+    .uxd{position:relative;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.76);box-shadow:0 10px 26px -20px rgba(30,40,70,.25),inset 0 1px 0 rgba(255,255,255,.86);padding:.9vh .85vw;min-height:0}
+    .uxd.main{grid-column:span 2;background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(255,255,255,.46))}
+    .uxd:after{content:"";position:absolute;right:-18px;bottom:-24px;width:104px;height:78px;border-radius:999px;background:radial-gradient(circle at 50% 50%,rgba(47,111,237,.15),rgba(47,111,237,0) 70%);pointer-events:none}
+    .uxd.dn:after{background:radial-gradient(circle at 50% 50%,rgba(199,0,11,.14),rgba(199,0,11,0) 70%)}
+    .uxd.up:after{background:radial-gradient(circle at 50% 50%,rgba(35,160,106,.16),rgba(35,160,106,0) 70%)}
+    .uxd .k{font-size:var(--fs-xs);font-weight:800;color:#5C6472;line-height:1.2}
+    .uxd .v{margin-top:.22vh;font-family:'JetBrains Mono';font-weight:900;font-size:var(--fs-h3);line-height:1;color:#2F3D63}
+    .uxd.dn .v{color:#C7000B}.uxd.up .v{color:#1F7A4D}
+    .uxd .d{margin-top:.24vh;font-size:var(--fs-xs);line-height:1.38;color:var(--ink-2)}
+    .uxscore .scard{background:rgba(255,255,255,.48);border:1px solid rgba(255,255,255,.7);border-radius:10px;padding:.85vh .9vw;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
+    .uxscore .scard .sr{padding:.3vh 0}
+    .tpguide{display:grid;grid-template-columns:1.02fr 1.18fr;gap:1.4vw;flex:1;min-height:0;align-items:stretch}
+    .tpguide-l,.tpguide-r{min-width:0;display:flex;flex-direction:column;gap:1.1vh}
+    .tpguide-card{border-radius:12px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.72);box-shadow:0 14px 32px -24px rgba(30,40,70,.28),inset 0 1px 0 rgba(255,255,255,.86);padding:1.3vh 1.1vw}
+    .tpguide-card b{display:block;font-size:var(--fs-h3);line-height:1.28;color:var(--ink);font-weight:900}
+    .tpguide-card p{margin:.45vh 0 0;font-size:var(--fs-body);line-height:1.5;color:var(--ink-2)}
+    .tpsteps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.75vw;flex:1;min-height:0}
+    .tpstep{display:flex;flex-direction:column;justify-content:center;gap:.55vh;border-radius:12px;background:rgba(47,61,99,.055);border:1px solid rgba(47,61,99,.14);padding:1.2vh .85vw;min-width:0}
+    .tpstep .n{font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;color:#2f3d63}
+    .tpstep b{font-size:var(--fs-body);line-height:1.25;color:var(--ink);font-weight:900}
+    .tpstep span{font-size:var(--fs-xs);line-height:1.35;color:var(--ink-3)}
+    .devhm th{font-size:var(--fs-sm);line-height:1.15;padding:.72vh .55vw;text-align:center}
+    .devhm .stage-row th{padding:.52vh .45vw .48vh;border-bottom:1px solid rgba(47,61,99,.08)}
+    .devhm .stage-band{font-size:var(--fs-sm);line-height:1.1;font-weight:950;color:#2F3D63;background:rgba(47,61,99,.055);border-radius:8px}
+    .devhm .stage-band.l1{background:rgba(91,91,214,.08);color:#4F55B7}
+    .devhm .stage-band.l2{background:rgba(35,160,106,.1);color:#1F7A4D}
+    .devhm .stage-band.l3{background:rgba(199,119,29,.1);color:#A15C00}
+    .devhm .stage-band.l6{background:rgba(47,111,237,.09);color:#2453C0}
+    .devhm .stage-band.l7{background:rgba(163,60,114,.09);color:#8D315F}
+    .devhm .stage-band.cross{background:rgba(47,61,99,.07);color:#465063}
+    .devhm .touch-row th{padding-top:.58vh}
+    .devhm th .jstage{display:block;margin-bottom:.22vh;font-size:10px;line-height:1;font-weight:900;color:#2F3D63;white-space:nowrap}
+    .devhm th .jname{display:block;font-size:var(--fs-sm);line-height:1.12;font-weight:900;color:#1B2432}
+    .devhm td{font-size:var(--fs-body);line-height:1.28;padding:.62vh .5vw;text-align:center;border-bottom:1px solid rgba(47,61,99,.075)}
+    .devhm .metric-head{width:8.4%;text-align:left;color:#465063;background:rgba(47,61,99,.055);font-weight:900}
+    .devhm th small{display:block;margin-top:.18vh;font-size:10px;font-weight:800;color:#8E96A3;white-space:nowrap}
+    .devhm .score,.devhm .gap{font-family:'JetBrains Mono';font-weight:950;text-align:center;border-radius:8px;padding:.35vh .35vw;display:block}
+    .devhm .score.good{background:rgba(35,160,106,.14);color:#1F7A4D}
+    .devhm .score.mid{background:rgba(232,163,23,.16);color:#A15C00}
+    .devhm .score.bad{background:rgba(199,0,11,.1);color:#C7000B}
+    .devhm .gap.dn{background:rgba(199,0,11,.1);color:#C7000B}
+    .devhm .gap.up{background:rgba(35,160,106,.14);color:#1F7A4D}
+    .devhm .tp-note{color:var(--ink-2);font-size:var(--fs-sm);line-height:1.42}
+    .devhm-card{display:block}
+    .devhm-card .devhm{height:100%!important;min-height:0}
+    .devhm-card .devhm th{padding:.72vh .45vw}
+    .devhm-card .devhm td{padding:.72vh .45vw}
+    .devhm-card .devhm .note-row td{font-size:12px;line-height:1.25;color:var(--ink-2);vertical-align:top;text-align:left}
+    .devhm-card .devhm .fric-list{display:flex;flex-direction:column;gap:.2vh}
+    .devhm-card .devhm .fric-list span{position:relative;display:block;padding-left:.62em}
+    .devhm-card .devhm .fric-list span:before{content:"";position:absolute;left:0;top:.55em;width:3px;height:3px;border-radius:50%;background:#5C6472}
+    .devhm-card .devhm tbody tr:nth-child(1) td,.devhm-card .devhm tbody tr:nth-child(2) td{padding:.62vh .34vw .68vh;vertical-align:top}
+    .devhm-card .devhm tbody tr:nth-child(1) .score,.devhm-card .devhm tbody tr:nth-child(2) .score{margin-bottom:.72vh}
+    .devhm-proof{min-height:0;border:1px solid rgba(199,0,11,.18);border-radius:8px;background:rgba(255,255,255,.86);box-shadow:0 10px 24px -22px rgba(30,40,70,.42);overflow:hidden;display:flex;flex-direction:column}
+    .devhm-proof.nv{border-color:rgba(118,185,0,.25)}
+    .devhm-proof img{display:block;width:100%;height:clamp(64px,9.4vh,98px);object-fit:cover;object-position:top;flex:0 0 auto}
+    .devhm-proof span{display:block;padding:4px 5px 5px;font-size:9.5px;line-height:1.12;font-weight:850;color:#596273;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.94)}
+    .devhm-demo{padding:8px 9px;display:flex;flex-direction:column;gap:9px;min-height:0}.devhm-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center}.devhm-flow .node{border:1px solid rgba(212,216,223,.9);border-radius:8px;background:#fff;padding:5px 6px;font-size:10.5px;font-weight:850;color:#465063;text-align:center}.devhm-flow .node.bad{border-color:#f0c0c2;background:#FDECEC;color:#C7000B}.devhm-flow .node.good{border-color:#bae5cd;background:#ECF8F1;color:#1F7A4D}.devhm-flow .arr{font-family:'JetBrains Mono';color:#8E96A3;font-weight:900}.devhm-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;align-items:end;height:72px;padding:22px 2px 0;box-sizing:border-box}.devhm-bars .bar{border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#C7000B,#F2B4B8);min-height:10px;position:relative}.devhm-bars .bar.good{background:linear-gradient(180deg,#1F9E68,#BDEAD1)}.devhm-bars .bar span{position:absolute;left:50%;top:-19px;transform:translateX(-50%);font-size:9.5px;line-height:1;font-family:'JetBrains Mono';font-weight:900;color:#465063;white-space:nowrap}.devhm-mini{display:grid;grid-template-columns:1fr 1fr;gap:7px}.devhm-mini .pane{border:1px solid rgba(212,216,223,.9);border-radius:8px;background:#fff;padding:5px 6px}.devhm-mini b{display:block;font-size:10px;color:#465063;margin-bottom:4px}.devhm-mini p{margin:0;font-size:10px;color:#8E96A3;line-height:1.35}.devhm-path{display:flex;gap:5px;row-gap:7px;align-items:center;flex-wrap:wrap}.devhm-path span{border:1px solid rgba(212,216,223,.9);border-radius:999px;background:#fff;padding:2px 8px;font-size:10px;font-weight:800;color:#465063}.devhm-path span.hot{border-color:#f0c0c2;background:#FDECEC;color:#C7000B}.devhm-path i{font-style:normal;color:#A1A4AA;font-family:'JetBrains Mono'}
+  </style>
+
+  <!-- 灰底：AI 侧 · 七个问题（opknow 19 §1，重排） -->
+  <style>
+    .pg7{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:1vw;flex:1;min-height:0}
+    .p7{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);border:1px solid rgba(255,255,255,.7);box-shadow:0 9px 26px -15px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.85);border-radius:13px;padding:1.6vh 1.1vw;display:flex;flex-direction:column;justify-content:flex-start;gap:.9vh;position:relative;overflow:hidden}
+    .p7 .p7n{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-h3);color:#fff;background:#3D4452;width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+    .p7 .p7top{display:flex;align-items:center;gap:.5em}
+    .p7 .p7tag{font-size:var(--fs-xs);font-weight:700;padding:2px 8px;border-radius:6px;background:var(--g-red);color:#fff;letter-spacing:.02em}
+    .p7 .p7h{font-weight:700;font-size:var(--fs-body);color:var(--ink);line-height:1.32;min-height:2.64em}
+    .p7 .p7d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5;min-height:3em}
+    .p7 .p7e{margin-top:.4vh;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);background:rgba(0,0,0,.04);border-radius:6px;padding:3px 8px;align-self:flex-start}
+    .p7.struct{
+      background:radial-gradient(120% 95% at 0% 0%,rgba(255,90,110,.22),rgba(255,90,110,0) 54%),rgba(255,255,255,.62);
+      border-color:rgba(255,255,255,.76);
+      box-shadow:0 12px 30px -18px rgba(229,72,77,.42),inset 0 1px 0 rgba(255,255,255,.9);
+    }
+    .p7.struct .p7n{background:var(--g-red)}
+    .p7.sum{background:var(--g-ink);border:0;color:#fff;justify-content:center;gap:1vh}
+    /* 每张问题卡配一个内容相关小示意 mini-mock */
+    .p7 .mm{margin-top:.4vh;border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden;font-size:11px;line-height:1.45}
+    .p7 .mm .mbar{background:#f6f7f9;border-bottom:1px solid var(--line);padding:4px 8px;display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono';font-size:10px;color:#8a909a}
+    .p7 .mm .mbar i{width:6px;height:6px;border-radius:50%;background:#d9dde3;display:inline-block}
+    .p7 .mm .mbd{padding:6px 9px}
+    .p7 .vrow{display:flex;justify-content:space-between;gap:6px;padding:2.5px 0;border-bottom:1px dashed #eee;font-family:'JetBrains Mono'}
+    .p7 .vrow:last-child{border-bottom:0}
+    .p7 .vbadge{font-weight:700;color:#fff;background:var(--hw,#C7000B);border-radius:4px;padding:0 5px;font-size:10px;white-space:nowrap}
+    .p7 .mzero{text-align:center;color:#b9bdc4;padding:7px 0;font-size:11.5px;font-family:'Noto Sans SC'}
+    .p7 .mkv b{color:var(--g-red,#E5484D)}
+    .p7 .mcmp{display:flex;gap:6px;align-items:baseline;padding:1.5px 0}
+    .p7 .mok{color:#2E7D46;font-weight:700}.p7 .mno{color:var(--g-red,#E5484D);font-weight:700}
+    .p7 .mchips{display:flex;gap:5px;flex-wrap:wrap}
+    .p7 .mchip{font-size:10.5px;border:1px solid var(--line);border-radius:20px;padding:2px 9px;background:#fafbfc}
+    .p7 .mchip.bad{border-color:#f0c0c2;background:#FDECEC;color:var(--g-red,#E5484D)}
+    .p7 .mbars{display:flex;align-items:flex-end;gap:13px;height:42px;padding:4px 4px 0}
+    .p7 .mbars .mb{width:28px;background:linear-gradient(#9aa3b2,#c2c8d2);border-radius:3px 3px 0 0;position:relative}
+    .p7 .mbars .mb span{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:9.5px;color:var(--ink-2);white-space:nowrap}
+    .p7 svg.mspk{display:block;width:100%;height:42px}
+    .p7.sum .sh{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+    .p7.sum .st{font-weight:700;font-size:var(--fs-body);line-height:1.5}
+    .p7.sum .st b{color:#FFB4B4}
+    .issue-map{flex:0 0 auto;margin-top:1vh;display:flex;align-items:center;gap:.72vw;border-radius:10px;padding:.82vh 1vw;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(245,248,255,.62));border:1px solid rgba(47,111,237,.18);box-shadow:0 10px 24px -22px rgba(47,111,237,.35),inset 0 1px 0 rgba(255,255,255,.88);font-size:var(--fs-body);line-height:1.42;color:#334155}
+    .issue-map .im-tag{flex:none;font-size:var(--fs-xs);font-weight:900;letter-spacing:.06em;color:#1D4ED8;background:rgba(47,111,237,.1);border:1px solid rgba(47,111,237,.16);border-radius:7px;padding:.28vh .55vw}
+    .issue-map b{color:#172554;font-weight:900;background:linear-gradient(transparent 60%,rgba(47,111,237,.18) 0)}
+    .derive{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25vw;flex:1;min-height:0;position:relative}
+    .dgroup{--dc:#5B5BD6;--link:rgba(91,91,214,.48);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.72vh;position:relative}
+    .dgroup.cause-g{--dc:#fff;--link:rgba(255,255,255,.62)}
+    .dgroup.move-g{--dc:#fff;--link:rgba(132,109,238,.62)}
+    .dcol{--soft:rgba(91,91,214,.1);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.68vh;border-radius:14px;padding:1.7vh 1.85vw;box-shadow:0 16px 34px -18px rgba(20,25,36,.35);position:relative;overflow:visible;flex:1;backdrop-filter:blur(15px) saturate(1.5);-webkit-backdrop-filter:blur(15px) saturate(1.5)}
+    .dcol>*{position:relative;z-index:3}
+    .dcol.signal{--dc:#5B5BD6;--soft:rgba(91,91,214,.1);background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,0) 14%),rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.62)}
+    .dcol.cause{--soft:rgba(255,255,255,.14);background:radial-gradient(ellipse 130% 130% at 50% 48%,#0E1116 0%,#3A424F 100%);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .dcol.move{--soft:rgba(255,255,255,.16);background:radial-gradient(ellipse 130% 130% at 50% 48%,#3F2DBE 0%,#9D86EC 100%);border:1px solid rgba(255,255,255,.22);color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .dcol.result{--dc:#6B4DE6;--soft:rgba(107,77,230,.12);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0) 14%),radial-gradient(ellipse 130% 130% at 50% 48%,rgba(118,91,236,.22) 0%,rgba(255,255,255,.42) 100%);border:1px solid rgba(157,134,236,.28)}
+    .derive .dh{display:flex;align-items:baseline;gap:.55vw;flex:0 0 auto;margin-bottom:.1vh}
+    .derive .dh b{font-size:var(--fs-body);font-weight:950;color:var(--ink);line-height:1.2}
+    .derive .cause-g .dh b,.derive .move-g .dh b{color:var(--ink)}
+    .derive .dh span{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;color:var(--dc);letter-spacing:.08em;text-transform:uppercase}
+    .derive .cause-g .dh span{color:#3A424F}.derive .move-g .dh span{color:#6B4DE6}
+    .dseq{display:flex;flex-direction:column;justify-content:flex-start;gap:.84vh;flex:1;min-height:0;position:relative}
+    .signal .dseq{gap:.58vh}
+    .ditem{padding:.12vh .12vw .12vh 34px;min-height:0;display:flex;flex-direction:column;gap:.12vh;position:relative}
+    .ditem svg,.ditem i[data-lucide]{position:absolute;left:4px;top:.24vh;width:18px;height:18px;fill:none;stroke:var(--dc);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;z-index:1}
+    .ditem strong{font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:900}
+    .ditem p{margin:0;font-size:var(--fs-sm);line-height:1.22;color:var(--ink-2)}
+    .ditem .metric{font-family:'JetBrains Mono';font-size:11px;font-weight:900;color:var(--dc);align-self:flex-start;line-height:1.18}
+    .ditem.hot strong{color:var(--ink)}
+    .ditem.ok strong{color:#fff}
+    .dcol.cause .ditem strong,.dcol.move .ditem strong{color:#fff}.dcol.cause .ditem p,.dcol.move .ditem p{color:rgba(255,255,255,.72)}
+    .dcol.cause .ditem svg,.dcol.move .ditem svg{stroke:#fff;opacity:.9}
+    .dlinks{display:flex;flex-direction:column;justify-content:flex-start;gap:.84vh;flex:1;min-height:0}
+    .dlink{display:grid;grid-template-columns:auto 1fr;gap:.58vw;align-items:start;padding:.18vh .12vw;text-decoration:none;color:inherit}
+    .dlink .no{font-family:'JetBrains Mono';font-size:12px;font-weight:900;color:#6B4DE6;padding-top:1px}
+    .dlink b{display:block;font-size:var(--fs-body);line-height:1.24;color:var(--ink);font-weight:900}
+    .dlink span{display:block;margin-top:.12vh;font-size:var(--fs-sm);line-height:1.28;color:var(--ink-3)}
+    .drel{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:40;overflow:visible}
+    .drel path{fill:none;stroke:#B8BEC8;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
+    .drel circle{fill:#B8BEC8;stroke:#B8BEC8;stroke-width:1.1}
+    .drel circle.start{fill:transparent}
+    .drel path.mid{stroke:#D9D0FF}.drel circle.mid{fill:#D9D0FF;stroke:#D9D0FF}.drel circle.mid.start{fill:transparent}
+    .drel path.purple{stroke:#fff}.drel circle.purple{fill:#fff;stroke:#fff}.drel circle.purple.start{fill:transparent}
+  </style>
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">可用性短板集中在深层算子任务：写算子最低，其余环节受版本、生态与模型先验共同影响</span></div>
+        <div class="subttl">AI 侧 · 内容可用性 · 「评估发现」</div>
+      </div>
+      <div class="head-r">10/ 矩阵评分 · 结果</div>
+    </div>
+    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
+      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
+        <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
+        <div class="card" style="padding:1.8vh 1.4vw">
+          <div class="hm-grid" id="mOp" style="grid-template-columns:112px 42px repeat(6,1fr)"></div>
+          <div class="hm-legend"><span>第1列 检索问题 · 第2列 <b style="color:#C7000B">CANN</b>（昇腾）/ <b style="color:#5a8a00">CUDA</b>（NVIDIA），2 红 / 3 橙 / 4 绿 / 5 蓝；<b>综合</b>为 opknow 公式复算小数</span><span style="flex:1"></span><span>2</span><span class="hm-grad"></span><span>5</span></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function(){var grid=document.getElementById('mOp');if(!grid)return;
+      function heat(s){return s<=40?'rgba(229,72,77,.075)':s<=60?'rgba(245,158,11,.085)':s<=80?'rgba(35,160,106,.078)':'rgba(57,121,249,.075)';}
+      function bord(s){return s<=40?'rgba(229,72,77,.12)':s<=60?'rgba(245,158,11,.14)':s<=80?'rgba(35,160,106,.12)':'rgba(57,121,249,.12)';}
+      function txt(s){return s<=40?'#C7000B':s<=60?'#A15C00':s<=80?'#1F7A4D':'#2F63D8';}
+      function d(v){return v==='受阻'?['受阻',0]:[String(v),v*20];}
+      var cols=['官方可抓','正文质量','版本清晰','第三方平台厚度','自带知识','综合'];
+      /* 数据=opknow ROWS + confCompute() 公式复算；综合列两侧均显示具体小数 */
+      var rows=[
+        {no:'1',name:'写 kernel',sub:'自定义算子',lt:'D', cann:[d(2),['受阻',0],d(2),d(3),d(2),['.41',41]], cuda:[d(5),d(5),d(3),d(4),d(5),['.88',88]]},
+        {no:'2',name:'Tiling',sub:'动态 shape',lt:'M', cann:[d(4),d(4),d(4),d(2),d(2),['.63',63]], cuda:[d(5),d(5),d(4),d(2),d(5),['.94',94]]},
+        {no:'3',name:'内存越界',sub:'定位',lt:'X', cann:[d(4),d(5),d(2),d(2),d(2),['.74',74]], cuda:[d(5),d(5),d(3),d(3),d(4),['.88',88]]},
+        {no:'4',name:'注册集成',sub:'接框架',lt:'O', cann:[d(4),d(5),d(3),d(3),d(3),['.72',72]], cuda:[d(5),d(5),d(3),d(2),d(5),['.84',84]]},
+        {no:'5',name:'精度排查',sub:'比对',lt:'L', cann:[d(4),d(5),d(2),d(3),d(3),['.69',69]], cuda:[d(5),d(5),d(5),d(2),d(4),['.84',84]]}
+      ];
+      function desc(score){return score<=40?'低分：该渠道基本失效或需要明显绕行。':score<=60?'中低：能找到线索，但不够稳定或不够细。':score<=80?'中高：基本可用，仍有版本/生态/成本摩擦。':'高分：路径清晰，可直接支撑作答。';}
+      var opCols=[1,2,3,4,6,10];
+      function cellTip(c,task,stk,col){return '<b>'+task+' · '+stk+'</b><br>'+col+'：'+c[0]+'（'+c[1]+' / 100）<br>'+desc(c[1]);}
+      function scell(c,lt,side,ci,task,stk,col){return '<div class="hm-cell" data-letter="'+lt+'" data-tip="'+hmAttr(hmTipRich(lt,side,ci,cellTip(c,task,stk,col)))+'" style="background:'+heat(c[1])+';color:'+txt(c[1])+';border-color:'+bord(c[1])+'">'+c[0]+'</div>';}
+      var h='<div class="hm-corner" style="grid-column:span 2"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#EFF0F1" stroke-width="1"/></svg><span class="hc-col">维度</span><span class="hc-row">检索问题</span></div>';
+      cols.forEach(function(c,i){h+='<div class="hm-header" data-tip="'+hmAttr(hmColTip(opCols[i],c))+'">'+c+'</div>';});
+      rows.forEach(function(r){
+        var cb=parseFloat(r.cann[5][0])*100, nc=(cb<60?'#E63838':cb<70?'#FD9A00':'#37C597');
+        h+='<div class="hm-task" data-letter="'+r.lt+'" data-tip="'+hmAttr(hmTaskTip(r.lt,'<b>'+r.name+'</b><br>'+r.sub+'；CANN 综合 '+r.cann[5][0]+'，CUDA 综合 '+r.cuda[5][0]+'。'))+'" style="grid-row:span 2"><span class="hm-no" style="background:'+nc+'" title="综合 '+r.cann[5][0]+'">'+r.no+'</span><div><div>'+r.name+'</div><small>'+r.sub+'</small></div></div>';
+        h+='<div class="hm-stk-cell asc" data-letter="'+r.lt+'">CANN</div>';
+        r.cann.forEach(function(c,i){ h+=scell(c,r.lt,'cann',opCols[i],r.name,'CANN',cols[i]); });
+        h+='<div class="hm-stk-cell nv" data-letter="'+r.lt+'">CUDA</div>';
+        r.cuda.forEach(function(c,i){ h+=scell(c,r.lt,'cuda',opCols[i],r.name,'CUDA',cols[i]); });
+      });
+      grid.innerHTML=h;
+    })();
+    </script>
+  </section>
+
+  <script>
+    (function(){
+      function initArchMetricFocus(){
+        var layout=document.querySelector('.archmetric-layout');
+        if(!layout||layout.dataset.focusReady)return;
+        layout.dataset.focusReady='1';
+        var frame=layout.querySelector('.archmetric-archbox iframe');
+        var current=null;
+        function send(key){
+          current=key||null;
+          if(!frame||!frame.contentWindow)return;
+          try{ frame.contentWindow.postMessage({__archMetricFocus:current},'*'); }catch(e){}
+        }
+        layout.querySelectorAll('.archmetric-step[data-map]').forEach(function(step){
+          step.addEventListener('mouseenter',function(){send(step.dataset.map);});
+          step.addEventListener('mouseleave',function(){send(null);});
+          step.addEventListener('focusin',function(){send(step.dataset.map);});
+          step.addEventListener('focusout',function(){send(null);});
+        });
+        if(frame) frame.addEventListener('load',function(){send(current);});
+      }
+      if(document.readyState!=='loading')initArchMetricFocus();else document.addEventListener('DOMContentLoaded',initArchMetricFocus);
+    })();
+  </script>
+
+  <!-- 3b 灰底：AI 可用性方法论 + 算子 5 场景 -->
   <section class="slide s-gray hmfull-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">全量矩阵：从 26 个任务中定位 7 个内容可用性问题</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「全量矩阵 → 7 个问题」</div>
       </div>
-      <div class="head-r">09/ AI · 全量矩阵</div>
+      <div class="head-r">11/ AI · 全量矩阵</div>
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
@@ -1519,180 +1796,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </script>
   </section>
 
-  <style>
-    .op7{display:grid;grid-template-columns:repeat(7,1fr);gap:.5vw}
-    .op7-i{display:flex;flex-direction:column;align-items:center;gap:.35em;text-align:center;background:rgba(47,61,99,.05);border:1px solid rgba(47,61,99,.16);border-radius:9px;padding:1.1vh .2vw}
-    .op7-i .n{width:22px;height:22px;border-radius:6px;background:#2f3d63;color:#fff;font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);display:flex;align-items:center;justify-content:center}
-    .op7-i b{font-size:var(--fs-sm);color:var(--ink);line-height:1.25;font-weight:600}
-    .op7-i.clk{cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
-    .op7-i.clk:hover{border-color:#2f3d63}
-    .op7-i.act{background:rgba(47,61,99,.13);border-color:#2f3d63;box-shadow:0 0 0 2px rgba(47,61,99,.22)}
-    .hs-ana{font-size:var(--fs-body);line-height:1.55;color:var(--ink-2);display:flex;flex-wrap:wrap;align-items:center;gap:.5em}
-    .hs-ana .hp{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-xs);padding:2px 7px;border-radius:6px;color:#fff}
-    .hs-ana .hd{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-xs);padding:2px 7px;border-radius:6px}
-    .hs-ana .hd.up{background:rgba(35,160,106,.14);color:#1f7a4d}.hs-ana .hd.dn{background:rgba(230,0,18,.1);color:#C7000B}
-    .cmp2{display:grid;grid-template-columns:1fr 1fr;gap:.8vw}
-    .cmp2 figure{margin:0;display:flex;flex-direction:column;gap:.3em}
-    .cmp2 img{width:100%;border:1px solid var(--line);border-radius:8px;display:block;aspect-ratio:16/10;object-fit:cover;object-position:top}
-    .cmp2 figcaption{font-size:var(--fs-xs);font-weight:600;text-align:center}
-    .scard .sr{display:grid;grid-template-columns:1.5fr auto auto auto;gap:.7vw;align-items:center;font-size:var(--fs-sm);padding:.35vh 0}
-    .scard .sr+.sr{border-top:1px solid rgba(0,0,0,.05)}
-    .scard .nm{color:var(--ink);font-weight:600}
-    .scard .sh{font-size:var(--fs-xs);color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-    .scard .pill{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);padding:3px 0;border-radius:7px;color:#fff;text-align:center;min-width:42px}
-    .scard .dlt{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-sm);padding:3px 0;border-radius:7px;text-align:center;min-width:50px}
-    .scard .dlt.up{background:rgba(35,160,106,.14);color:#1f7a4d}.scard .dlt.dn{background:rgba(230,0,18,.1);color:#C7000B}
-    .uxscore{display:grid;grid-template-columns:1.08fr .92fr;gap:.9vw;padding:1.2vh 1.05vw!important;align-items:stretch}
-    .uxscore-l,.uxscore-r{min-width:0;display:flex;flex-direction:column;gap:.7vh}
-    .uxsec{font-size:var(--fs-xs);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-    .uxdiag{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65vw;flex:1;min-height:0}
-    .uxd{position:relative;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.76);box-shadow:0 10px 26px -20px rgba(30,40,70,.25),inset 0 1px 0 rgba(255,255,255,.86);padding:.9vh .85vw;min-height:0}
-    .uxd.main{grid-column:span 2;background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(255,255,255,.46))}
-    .uxd:after{content:"";position:absolute;right:-18px;bottom:-24px;width:104px;height:78px;border-radius:999px;background:radial-gradient(circle at 50% 50%,rgba(47,111,237,.15),rgba(47,111,237,0) 70%);pointer-events:none}
-    .uxd.dn:after{background:radial-gradient(circle at 50% 50%,rgba(199,0,11,.14),rgba(199,0,11,0) 70%)}
-    .uxd.up:after{background:radial-gradient(circle at 50% 50%,rgba(35,160,106,.16),rgba(35,160,106,0) 70%)}
-    .uxd .k{font-size:var(--fs-xs);font-weight:800;color:#5C6472;line-height:1.2}
-    .uxd .v{margin-top:.22vh;font-family:'JetBrains Mono';font-weight:900;font-size:var(--fs-h3);line-height:1;color:#2F3D63}
-    .uxd.dn .v{color:#C7000B}.uxd.up .v{color:#1F7A4D}
-    .uxd .d{margin-top:.24vh;font-size:var(--fs-xs);line-height:1.38;color:var(--ink-2)}
-    .uxscore .scard{background:rgba(255,255,255,.48);border:1px solid rgba(255,255,255,.7);border-radius:10px;padding:.85vh .9vw;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
-    .uxscore .scard .sr{padding:.3vh 0}
-    .tpguide{display:grid;grid-template-columns:1.02fr 1.18fr;gap:1.4vw;flex:1;min-height:0;align-items:stretch}
-    .tpguide-l,.tpguide-r{min-width:0;display:flex;flex-direction:column;gap:1.1vh}
-    .tpguide-card{border-radius:12px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.72);box-shadow:0 14px 32px -24px rgba(30,40,70,.28),inset 0 1px 0 rgba(255,255,255,.86);padding:1.3vh 1.1vw}
-    .tpguide-card b{display:block;font-size:var(--fs-h3);line-height:1.28;color:var(--ink);font-weight:900}
-    .tpguide-card p{margin:.45vh 0 0;font-size:var(--fs-body);line-height:1.5;color:var(--ink-2)}
-    .tpsteps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.75vw;flex:1;min-height:0}
-    .tpstep{display:flex;flex-direction:column;justify-content:center;gap:.55vh;border-radius:12px;background:rgba(47,61,99,.055);border:1px solid rgba(47,61,99,.14);padding:1.2vh .85vw;min-width:0}
-    .tpstep .n{font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;color:#2f3d63}
-    .tpstep b{font-size:var(--fs-body);line-height:1.25;color:var(--ink);font-weight:900}
-    .tpstep span{font-size:var(--fs-xs);line-height:1.35;color:var(--ink-3)}
-    .devhm th{font-size:var(--fs-sm);line-height:1.15;padding:.72vh .55vw;text-align:center}
-    .devhm .stage-row th{padding:.52vh .45vw .48vh;border-bottom:1px solid rgba(47,61,99,.08)}
-    .devhm .stage-band{font-size:var(--fs-sm);line-height:1.1;font-weight:950;color:#2F3D63;background:rgba(47,61,99,.055);border-radius:8px}
-    .devhm .stage-band.l1{background:rgba(91,91,214,.08);color:#4F55B7}
-    .devhm .stage-band.l2{background:rgba(35,160,106,.1);color:#1F7A4D}
-    .devhm .stage-band.l3{background:rgba(199,119,29,.1);color:#A15C00}
-    .devhm .stage-band.l6{background:rgba(47,111,237,.09);color:#2453C0}
-    .devhm .stage-band.l7{background:rgba(163,60,114,.09);color:#8D315F}
-    .devhm .stage-band.cross{background:rgba(47,61,99,.07);color:#465063}
-    .devhm .touch-row th{padding-top:.58vh}
-    .devhm th .jstage{display:block;margin-bottom:.22vh;font-size:10px;line-height:1;font-weight:900;color:#2F3D63;white-space:nowrap}
-    .devhm th .jname{display:block;font-size:var(--fs-sm);line-height:1.12;font-weight:900;color:#1B2432}
-    .devhm td{font-size:var(--fs-body);line-height:1.28;padding:.62vh .5vw;text-align:center;border-bottom:1px solid rgba(47,61,99,.075)}
-    .devhm .metric-head{width:8.4%;text-align:left;color:#465063;background:rgba(47,61,99,.055);font-weight:900}
-    .devhm th small{display:block;margin-top:.18vh;font-size:10px;font-weight:800;color:#8E96A3;white-space:nowrap}
-    .devhm .score,.devhm .gap{font-family:'JetBrains Mono';font-weight:950;text-align:center;border-radius:8px;padding:.35vh .35vw;display:block}
-    .devhm .score.good{background:rgba(35,160,106,.14);color:#1F7A4D}
-    .devhm .score.mid{background:rgba(232,163,23,.16);color:#A15C00}
-    .devhm .score.bad{background:rgba(199,0,11,.1);color:#C7000B}
-    .devhm .gap.dn{background:rgba(199,0,11,.1);color:#C7000B}
-    .devhm .gap.up{background:rgba(35,160,106,.14);color:#1F7A4D}
-    .devhm .tp-note{color:var(--ink-2);font-size:var(--fs-sm);line-height:1.42}
-    .devhm-card{display:block}
-    .devhm-card .devhm{height:100%!important;min-height:0}
-    .devhm-card .devhm th{padding:.72vh .45vw}
-    .devhm-card .devhm td{padding:.72vh .45vw}
-    .devhm-card .devhm .note-row td{font-size:12px;line-height:1.25;color:var(--ink-2);vertical-align:top;text-align:left}
-    .devhm-card .devhm .fric-list{display:flex;flex-direction:column;gap:.2vh}
-    .devhm-card .devhm .fric-list span{position:relative;display:block;padding-left:.62em}
-    .devhm-card .devhm .fric-list span:before{content:"";position:absolute;left:0;top:.55em;width:3px;height:3px;border-radius:50%;background:#5C6472}
-    .devhm-card .devhm tbody tr:nth-child(1) td,.devhm-card .devhm tbody tr:nth-child(2) td{padding:.62vh .34vw .68vh;vertical-align:top}
-    .devhm-card .devhm tbody tr:nth-child(1) .score,.devhm-card .devhm tbody tr:nth-child(2) .score{margin-bottom:.72vh}
-    .devhm-proof{min-height:0;border:1px solid rgba(199,0,11,.18);border-radius:8px;background:rgba(255,255,255,.86);box-shadow:0 10px 24px -22px rgba(30,40,70,.42);overflow:hidden;display:flex;flex-direction:column}
-    .devhm-proof.nv{border-color:rgba(118,185,0,.25)}
-    .devhm-proof img{display:block;width:100%;height:clamp(64px,9.4vh,98px);object-fit:cover;object-position:top;flex:0 0 auto}
-    .devhm-proof span{display:block;padding:4px 5px 5px;font-size:9.5px;line-height:1.12;font-weight:850;color:#596273;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.94)}
-    .devhm-demo{padding:8px 9px;display:flex;flex-direction:column;gap:9px;min-height:0}.devhm-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center}.devhm-flow .node{border:1px solid rgba(212,216,223,.9);border-radius:8px;background:#fff;padding:5px 6px;font-size:10.5px;font-weight:850;color:#465063;text-align:center}.devhm-flow .node.bad{border-color:#f0c0c2;background:#FDECEC;color:#C7000B}.devhm-flow .node.good{border-color:#bae5cd;background:#ECF8F1;color:#1F7A4D}.devhm-flow .arr{font-family:'JetBrains Mono';color:#8E96A3;font-weight:900}.devhm-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;align-items:end;height:72px;padding:22px 2px 0;box-sizing:border-box}.devhm-bars .bar{border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#C7000B,#F2B4B8);min-height:10px;position:relative}.devhm-bars .bar.good{background:linear-gradient(180deg,#1F9E68,#BDEAD1)}.devhm-bars .bar span{position:absolute;left:50%;top:-19px;transform:translateX(-50%);font-size:9.5px;line-height:1;font-family:'JetBrains Mono';font-weight:900;color:#465063;white-space:nowrap}.devhm-mini{display:grid;grid-template-columns:1fr 1fr;gap:7px}.devhm-mini .pane{border:1px solid rgba(212,216,223,.9);border-radius:8px;background:#fff;padding:5px 6px}.devhm-mini b{display:block;font-size:10px;color:#465063;margin-bottom:4px}.devhm-mini p{margin:0;font-size:10px;color:#8E96A3;line-height:1.35}.devhm-path{display:flex;gap:5px;row-gap:7px;align-items:center;flex-wrap:wrap}.devhm-path span{border:1px solid rgba(212,216,223,.9);border-radius:999px;background:#fff;padding:2px 8px;font-size:10px;font-weight:800;color:#465063}.devhm-path span.hot{border-color:#f0c0c2;background:#FDECEC;color:#C7000B}.devhm-path i{font-style:normal;color:#A1A4AA;font-family:'JetBrains Mono'}
-  </style>
-
-  <!-- 灰底：AI 侧 · 七个问题（opknow 19 §1，重排） -->
-  <style>
-    .pg7{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:1vw;flex:1;min-height:0}
-    .p7{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);border:1px solid rgba(255,255,255,.7);box-shadow:0 9px 26px -15px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.85);border-radius:13px;padding:1.6vh 1.1vw;display:flex;flex-direction:column;justify-content:flex-start;gap:.9vh;position:relative;overflow:hidden}
-    .p7 .p7n{font-family:'JetBrains Mono';font-weight:800;font-size:var(--fs-h3);color:#fff;background:#3D4452;width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center}
-    .p7 .p7top{display:flex;align-items:center;gap:.5em}
-    .p7 .p7tag{font-size:var(--fs-xs);font-weight:700;padding:2px 8px;border-radius:6px;background:var(--g-red);color:#fff;letter-spacing:.02em}
-    .p7 .p7h{font-weight:700;font-size:var(--fs-body);color:var(--ink);line-height:1.32;min-height:2.64em}
-    .p7 .p7d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5;min-height:3em}
-    .p7 .p7e{margin-top:.4vh;font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);background:rgba(0,0,0,.04);border-radius:6px;padding:3px 8px;align-self:flex-start}
-    .p7.struct{
-      background:radial-gradient(120% 95% at 0% 0%,rgba(255,90,110,.22),rgba(255,90,110,0) 54%),rgba(255,255,255,.62);
-      border-color:rgba(255,255,255,.76);
-      box-shadow:0 12px 30px -18px rgba(229,72,77,.42),inset 0 1px 0 rgba(255,255,255,.9);
-    }
-    .p7.struct .p7n{background:var(--g-red)}
-    .p7.sum{background:var(--g-ink);border:0;color:#fff;justify-content:center;gap:1vh}
-    /* 每张问题卡配一个内容相关小示意 mini-mock */
-    .p7 .mm{margin-top:.4vh;border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden;font-size:11px;line-height:1.45}
-    .p7 .mm .mbar{background:#f6f7f9;border-bottom:1px solid var(--line);padding:4px 8px;display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono';font-size:10px;color:#8a909a}
-    .p7 .mm .mbar i{width:6px;height:6px;border-radius:50%;background:#d9dde3;display:inline-block}
-    .p7 .mm .mbd{padding:6px 9px}
-    .p7 .vrow{display:flex;justify-content:space-between;gap:6px;padding:2.5px 0;border-bottom:1px dashed #eee;font-family:'JetBrains Mono'}
-    .p7 .vrow:last-child{border-bottom:0}
-    .p7 .vbadge{font-weight:700;color:#fff;background:var(--hw,#C7000B);border-radius:4px;padding:0 5px;font-size:10px;white-space:nowrap}
-    .p7 .mzero{text-align:center;color:#b9bdc4;padding:7px 0;font-size:11.5px;font-family:'Noto Sans SC'}
-    .p7 .mkv b{color:var(--g-red,#E5484D)}
-    .p7 .mcmp{display:flex;gap:6px;align-items:baseline;padding:1.5px 0}
-    .p7 .mok{color:#2E7D46;font-weight:700}.p7 .mno{color:var(--g-red,#E5484D);font-weight:700}
-    .p7 .mchips{display:flex;gap:5px;flex-wrap:wrap}
-    .p7 .mchip{font-size:10.5px;border:1px solid var(--line);border-radius:20px;padding:2px 9px;background:#fafbfc}
-    .p7 .mchip.bad{border-color:#f0c0c2;background:#FDECEC;color:var(--g-red,#E5484D)}
-    .p7 .mbars{display:flex;align-items:flex-end;gap:13px;height:42px;padding:4px 4px 0}
-    .p7 .mbars .mb{width:28px;background:linear-gradient(#9aa3b2,#c2c8d2);border-radius:3px 3px 0 0;position:relative}
-    .p7 .mbars .mb span{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:9.5px;color:var(--ink-2);white-space:nowrap}
-    .p7 svg.mspk{display:block;width:100%;height:42px}
-    .p7.sum .sh{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-    .p7.sum .st{font-weight:700;font-size:var(--fs-body);line-height:1.5}
-    .p7.sum .st b{color:#FFB4B4}
-    .issue-map{flex:0 0 auto;margin-top:1vh;display:flex;align-items:center;gap:.72vw;border-radius:10px;padding:.82vh 1vw;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(245,248,255,.62));border:1px solid rgba(47,111,237,.18);box-shadow:0 10px 24px -22px rgba(47,111,237,.35),inset 0 1px 0 rgba(255,255,255,.88);font-size:var(--fs-body);line-height:1.42;color:#334155}
-    .issue-map .im-tag{flex:none;font-size:var(--fs-xs);font-weight:900;letter-spacing:.06em;color:#1D4ED8;background:rgba(47,111,237,.1);border:1px solid rgba(47,111,237,.16);border-radius:7px;padding:.28vh .55vw}
-    .issue-map b{color:#172554;font-weight:900;background:linear-gradient(transparent 60%,rgba(47,111,237,.18) 0)}
-    .derive{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25vw;flex:1;min-height:0;position:relative}
-    .dgroup{--dc:#5B5BD6;--link:rgba(91,91,214,.48);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.72vh;position:relative}
-    .dgroup.cause-g{--dc:#fff;--link:rgba(255,255,255,.62)}
-    .dgroup.move-g{--dc:#fff;--link:rgba(132,109,238,.62)}
-    .dcol{--soft:rgba(91,91,214,.1);min-width:0;min-height:0;display:flex;flex-direction:column;gap:.68vh;border-radius:14px;padding:1.7vh 1.85vw;box-shadow:0 16px 34px -18px rgba(20,25,36,.35);position:relative;overflow:visible;flex:1;backdrop-filter:blur(15px) saturate(1.5);-webkit-backdrop-filter:blur(15px) saturate(1.5)}
-    .dcol>*{position:relative;z-index:3}
-    .dcol.signal{--dc:#5B5BD6;--soft:rgba(91,91,214,.1);background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,0) 14%),rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.62)}
-    .dcol.cause{--soft:rgba(255,255,255,.14);background:radial-gradient(ellipse 130% 130% at 50% 48%,#0E1116 0%,#3A424F 100%);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
-    .dcol.move{--soft:rgba(255,255,255,.16);background:radial-gradient(ellipse 130% 130% at 50% 48%,#3F2DBE 0%,#9D86EC 100%);border:1px solid rgba(255,255,255,.22);color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
-    .dcol.result{--dc:#6B4DE6;--soft:rgba(107,77,230,.12);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0) 14%),radial-gradient(ellipse 130% 130% at 50% 48%,rgba(118,91,236,.22) 0%,rgba(255,255,255,.42) 100%);border:1px solid rgba(157,134,236,.28)}
-    .derive .dh{display:flex;align-items:baseline;gap:.55vw;flex:0 0 auto;margin-bottom:.1vh}
-    .derive .dh b{font-size:var(--fs-body);font-weight:950;color:var(--ink);line-height:1.2}
-    .derive .cause-g .dh b,.derive .move-g .dh b{color:var(--ink)}
-    .derive .dh span{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;color:var(--dc);letter-spacing:.08em;text-transform:uppercase}
-    .derive .cause-g .dh span{color:#3A424F}.derive .move-g .dh span{color:#6B4DE6}
-    .dseq{display:flex;flex-direction:column;justify-content:flex-start;gap:.84vh;flex:1;min-height:0;position:relative}
-    .signal .dseq{gap:.58vh}
-    .ditem{padding:.12vh .12vw .12vh 34px;min-height:0;display:flex;flex-direction:column;gap:.12vh;position:relative}
-    .ditem svg,.ditem i[data-lucide]{position:absolute;left:4px;top:.24vh;width:18px;height:18px;fill:none;stroke:var(--dc);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;z-index:1}
-    .ditem strong{font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:900}
-    .ditem p{margin:0;font-size:var(--fs-sm);line-height:1.22;color:var(--ink-2)}
-    .ditem .metric{font-family:'JetBrains Mono';font-size:11px;font-weight:900;color:var(--dc);align-self:flex-start;line-height:1.18}
-    .ditem.hot strong{color:var(--ink)}
-    .ditem.ok strong{color:#fff}
-    .dcol.cause .ditem strong,.dcol.move .ditem strong{color:#fff}.dcol.cause .ditem p,.dcol.move .ditem p{color:rgba(255,255,255,.72)}
-    .dcol.cause .ditem svg,.dcol.move .ditem svg{stroke:#fff;opacity:.9}
-    .dlinks{display:flex;flex-direction:column;justify-content:flex-start;gap:.84vh;flex:1;min-height:0}
-    .dlink{display:grid;grid-template-columns:auto 1fr;gap:.58vw;align-items:start;padding:.18vh .12vw;text-decoration:none;color:inherit}
-    .dlink .no{font-family:'JetBrains Mono';font-size:12px;font-weight:900;color:#6B4DE6;padding-top:1px}
-    .dlink b{display:block;font-size:var(--fs-body);line-height:1.24;color:var(--ink);font-weight:900}
-    .dlink span{display:block;margin-top:.12vh;font-size:var(--fs-sm);line-height:1.28;color:var(--ink-3)}
-    .drel{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:40;overflow:visible}
-    .drel path{fill:none;stroke:#B8BEC8;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
-    .drel circle{fill:#B8BEC8;stroke:#B8BEC8;stroke-width:1.1}
-    .drel circle.start{fill:transparent}
-    .drel path.mid{stroke:#D9D0FF}.drel circle.mid{fill:#D9D0FF;stroke:#D9D0FF}.drel circle.mid.start{fill:transparent}
-    .drel path.purple{stroke:#fff}.drel circle.purple{fill:#fff;stroke:#fff}.drel circle.purple.start{fill:transparent}
-  </style>
+  <!-- 3c 灰底：CUDA vs CANN 问题对 -->
   <section class="slide s-gray derive-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">七个矩阵信号收敛为四类内容改造路径</span></div>
         <div class="subttl">AI 侧 · 内容可用性 · 「矩阵信号 → 机制归因 → 改造机会 → 后续结论」</div>
       </div>
-      <div class="head-r">10/ AI · 推导页</div>
+      <div class="head-r">12/ AI · 推导页</div>
     </div>
     <div class="body-area">
       <div class="derive">
@@ -1745,117 +1856,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
           </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    (function(){
-      function initArchMetricFocus(){
-        var layout=document.querySelector('.archmetric-layout');
-        if(!layout||layout.dataset.focusReady)return;
-        layout.dataset.focusReady='1';
-        var frame=layout.querySelector('.archmetric-archbox iframe');
-        var current=null;
-        function send(key){
-          current=key||null;
-          if(!frame||!frame.contentWindow)return;
-          try{ frame.contentWindow.postMessage({__archMetricFocus:current},'*'); }catch(e){}
-        }
-        layout.querySelectorAll('.archmetric-step[data-map]').forEach(function(step){
-          step.addEventListener('mouseenter',function(){send(step.dataset.map);});
-          step.addEventListener('mouseleave',function(){send(null);});
-          step.addEventListener('focusin',function(){send(step.dataset.map);});
-          step.addEventListener('focusout',function(){send(null);});
-        });
-        if(frame) frame.addEventListener('load',function(){send(current);});
-      }
-      if(document.readyState!=='loading')initArchMetricFocus();else document.addEventListener('DOMContentLoaded',initArchMetricFocus);
-    })();
-  </script>
-
-  <!-- 3b 灰底：AI 可用性方法论 + 算子 5 场景 -->
-  <section class="slide s-gray copy-large">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">任务设计：5 个检索问题来自算子开发中的关键知识需求</span></div>
-        <div class="subttl">AI 侧 · 内容可用性 · 「测试设计」</div>
-      </div>
-      <div class="head-r">11/ AI 可用性 · 方法</div>
-    </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Tasks</span>算子开发里的 5 个检索问题如何选取</div>
-        <p class="cmp-desc">围绕一次自定义算子从<b>能不能接入</b>到<b>能不能跑通</b>的真实路径选题：模型转换、性能定位、算子库选型、自定义 kernel、动态 shape / Tiling、内存越界、注册集成、精度排查、soc 版本决策等知识点中，选取开发者自然会带着问题查资料的关键节点，作为时序图中的 <b>5 次携问题检索</b>。</p>
-        <div class="lc-stages">装环境 · <b style="color:var(--accent)">开发算子</b> · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
-        <div class="op5">
-          <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
-          <div class="op5-i"><span class="c">2</span><b>Tiling</b><small>动态 shape</small></div>
-          <div class="op5-i"><span class="c">3</span><b>内存越界</b><small>定位</small></div>
-          <div class="op5-i"><span class="c">4</span><b>注册集成</b><small>接 PyTorch</small></div>
-          <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
-        </div>
-        <div class="bridge" style="margin-top:.2vh">同一套 5 个任务，在 <b style="color:#5a8a00">CUDA / 英伟达</b> 与 <b style="color:#C7000B">CANN / 昇腾</b> 上各<b>实测一遍</b>，差异方可归于「生态」、而非「题目难度」。</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3c 灰底：CUDA vs CANN 问题对 -->
-  <section class="slide s-gray copy-large">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">任务执行：基于同一开发任务用 CANN 与 CUDA 对比提问</span></div>
-        <div class="subttl">AI 侧 · 内容可用性 · 「问题编写」</div>
-      </div>
-      <div class="head-r">12/ 问题对 · 对照设计</div>
-    </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1vh;justify-content:center">
-      <div class="bridge" style="margin-top:0;flex:0 0 auto"><b>模拟真实开发者口吻</b>、<b>都索要完整步骤 + 可照抄命令 / 代码</b>、<b>难度对等</b>。</div>
-      <div class="qpx">
-        <div class="qhead"><div class="qx-h cu">CUDA / 英伟达 对照问题</div><div class="qx-h ca">CANN / 昇腾 对照问题</div></div>
-        <div class="qtask" data-letter="D">
-          <div class="qx-intent"><span class="ql">1</span>写 kernel<small>自定义算子</small><span class="qx-goal"><b>同一开发任务</b>写个自定义算子并集成进 PyTorch</span></div>
-          <div class="qpair">
-            <div class="qx-c cu">怎么写自定义 CUDA kernel 并集成进 PyTorch（C++ extension）？给出完整步骤、<code>setup.py</code> 和注册代码。</div>
-            <div class="qx-c ca">怎么用 Ascend C 开发自定义算子并集成进 PyTorch（<code>msOpGen</code> / <code>aclnn</code>）？给出完整步骤。</div>
-          </div>
-        </div>
-        <div class="qtask" data-letter="M">
-          <div class="qx-intent"><span class="ql">2</span>Tiling<small>动态 shape</small><span class="qx-goal"><b>同一开发任务</b>算子 / 推理怎么支持动态 shape 输入</span></div>
-          <div class="qpair">
-            <div class="qx-c cu">TensorRT / CUDA kernel 处理动态 shape 输入怎么做（optimization profile / 运行时 shape）？</div>
-            <div class="qx-c ca">Ascend C 自定义算子做动态 shape，<code>Tiling</code> 怎么写、<code>TilingData</code> 怎么定义和传递？</div>
-          </div>
-        </div>
-        <div class="qtask" data-letter="X">
-          <div class="qx-intent"><span class="ql">3</span>内存越界<small>定位</small><span class="qx-goal"><b>同一开发任务</b>kernel / 算子内存越界，怎么用工具定位是哪一行</span></div>
-          <div class="qpair">
-            <div class="qx-c cu">CUDA kernel 报 illegal memory access，怎么用 <code>compute-sanitizer</code> 定位是哪一行越界？</div>
-            <div class="qx-c ca">昇腾算子内存越界，怎么用 <code>msSanitizer</code> / 算子内存检测定位是哪一行？</div>
-          </div>
-        </div>
-        <div class="qtask" data-letter="O">
-          <div class="qx-intent"><span class="ql">4</span>注册集成<small>接框架</small><span class="qx-goal"><b>同一开发任务</b>自定义算子怎么注册进框架让它能被调用</span></div>
-          <div class="qpair">
-            <div class="qx-c cu">自定义算子怎么注册进 PyTorch 让 <code>torch.ops</code> 能调（<code>TORCH_LIBRARY</code> / dispatcher）？</div>
-            <div class="qx-c ca">Ascend C 算子怎么注册成 <code>aclnn</code> 接口并集成进 <code>torch_npu</code> / PyTorch 让框架能调？</div>
-          </div>
-        </div>
-        <div class="qtask" data-letter="L">
-          <div class="qx-intent"><span class="ql">5</span>精度排查<small>逐层比对</small><span class="qx-goal"><b>同一开发任务</b>自定义算子结果和参考不一致，怎么逐层 / 逐元素比对定位</span></div>
-          <div class="qpair">
-            <div class="qx-c cu">自定义 CUDA 算子结果和 PyTorch 参考不一致，怎么定位数值精度（逐层 / 逐元素比对）？</div>
-            <div class="qx-c ca">昇腾算子输出和标杆不一致，怎么用 <code>msaccucmp</code> / 精度比对 / dump 定位？</div>
-          </div>
-        </div>
-      </div>
       </div>
     </div>
   </section>
@@ -2029,7 +2029,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">走完 7 步生命周期：每步「触点 × 情绪 × 痛点 / 机会」，谷底在配环境</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程」</div>
       </div>
-      <div class="head-r">24/ 基础体验 · 旅程</div>
+      <div class="head-r">24/ 基础体验 · 用户旅程</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:1.4vw;align-items:stretch">
       <div style="flex:0 0 17%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
@@ -2725,7 +2725,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">本研究产出件汇总——报告、方法与可复用工具已沉淀</span></div>
         <div class="subttl">研究资产 · 可点击查看线上报告与 GitHub 仓库</div>
       </div>
-      <div class="head-r">研究产出 · Links</div>
+      <div class="head-r">63/ 研究产出件</div>
     </div>
     <div class="body-area">
       <div class="deliver-layout">
