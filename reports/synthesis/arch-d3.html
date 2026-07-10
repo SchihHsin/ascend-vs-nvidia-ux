@@ -2132,11 +2132,11 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     window.__archGo=go;
     window.__archApply=apply;
     var METRIC_FOCUS={
-      search:{color:'#5B5BD6',nodes:['route','gate','search'], edges:['route gate','gate search fetch','search relay']},
-      fetch:{color:'#3171DE',nodes:['gate','fetch','relay'], edges:['gate search fetch','fetch relay','relay judge']},
-      read:{color:'#209067',nodes:['own','relay'], edges:['own relay','relay judge']},
-      judge:{color:'#D9892B',nodes:['relay','judge','redo','hasEv'], edges:['relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
-      answer:{color:'#2f3d63',nodes:['converge','final','hasEv'], edges:['judge converge','converge final','hasEv final','gate final']}
+      search:{color:'#667EEA',nodes:['route','gate','search'], edges:['route gate','gate search fetch','search relay']},
+      fetch:{color:'#38C9D7',nodes:['gate','fetch','relay'], edges:['gate search fetch','fetch relay','relay judge']},
+      read:{color:'#7C3AED',nodes:['own','relay'], edges:['own relay','relay judge']},
+      judge:{color:'#F59E0B',nodes:['relay','judge','redo','hasEv'], edges:['relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
+      answer:{color:'#22262F',nodes:['converge','final','hasEv'], edges:['judge converge','converge final','hasEv final','gate final']}
     };
     function nodeShape(el){return el&&el.querySelector&&el.querySelector('rect,polygon,circle');}
     function rememberShape(s){

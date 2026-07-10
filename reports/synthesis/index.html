@@ -17,7 +17,7 @@
   --accent:#5B5BD6; --accent-soft:#ECECFB; --red:#E60012;
   --g-red:linear-gradient(120deg,#FF5A6E,#FF6F55); --g-green:linear-gradient(120deg,#23CFA0,#45D65A);
   --g-blue:linear-gradient(120deg,#667EEA,#764BA2); --g-amber:linear-gradient(120deg,#FBBF60,#F59E0B);
-  --g-purple:linear-gradient(120deg,#A78BFA,#7C3AED); --g-neutral:#C4CAD4;
+  --g-purple:linear-gradient(120deg,#A78BFA,#7C3AED); --g-teal:linear-gradient(120deg,#38C9D7,#4FACFE); --g-neutral:#C4CAD4;
   --dark:#16191E; --g-ink:linear-gradient(140deg,#22262F,#14171C); --g-accent:linear-gradient(135deg,#5B5BD6,#7C3AED);
   /* 黑底光晕（每页可被 inline 变量覆盖，实现一章一色）*/
   --glow-h:234; --glow-h2:291; --glow-sat:95%; --glow-light:40%; --glow-spread:35; --glow-color-int:.68; --glow-white-int:.58;
@@ -744,12 +744,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .archmetric-head b{display:block;font-size:var(--fs-h2);line-height:1.24;color:var(--ink);font-weight:950}
     .archmetric-head span{display:block;margin-top:.42vh;font-size:var(--fs-body);line-height:1.48;color:var(--ink-2)}
     .archmetric-steps{position:relative;z-index:1;display:grid;grid-template-rows:repeat(5,1fr);gap:.68vh;min-height:0}
-    .archmetric-step{--a:#5B5BD6;border-radius:13px;background:rgba(255,255,255,.68);border:1px solid color-mix(in srgb,var(--a) 18%,white);display:grid;grid-template-columns:42px 1.08fr 1.08fr;gap:.68vw;align-items:center;padding:.78vh .82vw;min-height:0}
-    .archmetric-step .num{width:36px;height:36px;border-radius:10px;background:var(--a);color:#fff;font-family:'JetBrains Mono';font-weight:950;font-size:var(--fs-sm);display:flex;align-items:center;justify-content:center}
+    .archmetric-step{--a:#667EEA;--g:var(--g-blue);border-radius:13px;background:rgba(255,255,255,.68);border:1px solid color-mix(in srgb,var(--a) 18%,white);display:grid;grid-template-columns:42px 1.08fr 1.08fr;gap:.68vw;align-items:center;padding:.78vh .82vw;min-height:0}
+    .archmetric-step .num{width:36px;height:36px;border-radius:10px;background:var(--g);color:#fff;font-family:'JetBrains Mono';font-weight:950;font-size:var(--fs-sm);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 20px -16px color-mix(in srgb,var(--a) 70%,#111827),inset 0 1px 0 rgba(255,255,255,.28)}
     .archmetric-step .act b,.archmetric-step .met b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}
     .archmetric-step .act span,.archmetric-step .met span{display:block;margin-top:.28vh;font-size:var(--fs-sm);line-height:1.32;color:var(--ink-2)}
     .archmetric-step .met{border-left:1px dashed rgba(47,61,99,.22);padding-left:.75vw}
-    .archmetric-step.fetch{--a:#3171DE}.archmetric-step.read{--a:#209067}.archmetric-step.judge{--a:#D9892B}.archmetric-step.answer{--a:#2f3d63}
+    .archmetric-step.fetch{--a:#38C9D7;--g:var(--g-teal)}.archmetric-step.read{--a:#7C3AED;--g:var(--g-purple)}.archmetric-step.judge{--a:#F59E0B;--g:var(--g-amber)}.archmetric-step.answer{--a:#22262F;--g:var(--g-ink)}
     .archmetric-note{position:relative;z-index:1;border-radius:13px;background:var(--g-ink);color:#fff;padding:1.05vh .95vw;font-size:var(--fs-body);line-height:1.5;box-shadow:0 16px 34px -24px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.2)}
     .archmetric-note b{color:#fff;font-weight:950}
   </style>
