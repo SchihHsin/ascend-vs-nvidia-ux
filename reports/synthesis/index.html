@@ -726,7 +726,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.4vh">
         <div class="cmp-h"><span class="hk">How it runs</span>AI 检索按证据充分度循环推进</div>
-        <p class="cmp-desc">将一个开发问题拆成<b>子目标</b>，逐个判断<b>是否需要检索</b>；用 <b>web_search / web_fetch</b> 检索<b>官方站 + 第三方平台 + 自带知识</b>三路，回灌后<b>研判证据是否充分</b>，据此决定收敛或继续。</p>
+        <p class="cmp-desc">将一个开发问题拆成<b>子目标</b>，逐个判断<b>是否需要检索</b>；通常先用 <b>web_search</b> 发现官方 / 第三方候选页，再用 <b>web_fetch</b> 抓取选中页面正文，回灌后<b>研判证据是否充分</b>。已知 URL 时可直接抓取，<b>模型自带知识</b>则作为无需检索的补充证据。</p>
         <div class="cmp-h" style="font-size:var(--fs-h3);margin-top:.4vh"><span class="hk">三种结局</span>证据充分 / 不足 / 缺失</div>
         <p class="cmp-desc"><b>① 收敛</b>：证据充分 → 给出带出处的答案。<br/><b>② 遇阻回路</b>：抓取为空或证据不足 → 换 URL / 换平台 / 换关键词，↺ 再检索一轮。<br/><b style="color:#C7000B">③ 凭记忆杜撰</b>：三路均弱、又无法可靠识别自身不确定时，模型会生成看似正确、实则有误的答案。</p>
       </div>

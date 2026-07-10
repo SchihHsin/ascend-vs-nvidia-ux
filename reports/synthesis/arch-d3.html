@@ -684,11 +684,11 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 <div class="note">关键内部动作 = <b>「研判信息是否足够」与「遇阻是否编造」两个判断点</b>。D 任务的特殊性在于：官方受阻 + 第三方平台薄 + 自带知识在 Ascend C 深处也不厚 → 模型在第 2 轮就进入「没有强证据」状态，只能给骨架而非可照抄全程，这是综合分低的技术根因。</div>
 
 <h3>4.3 Agent 循环架构（图）+ 最小实现代码 <span class="disc">示范实现 · 基于公开 Anthropic Messages API，非 Claude 内部源码</span></h3>
-<div class="sechint">「我平常如何运行」的 agent 循环流程：<b>输入</b>（原始问句 + system 约束 → messages，不预处理）→ 模型推理 <b>①意图解析 → ②子目标拆解 → ③工具路由</b> → <b>需要工具?</b>（stop_reason）→ 是：调 <b>web_search</b>(服务端) / <b>web_fetch</b>(客户端) → <b>tool_result 回灌</b> → <b>④ 证据是否充分?</b> → 充分：<b>⑥ 收敛 → 终答</b>；不足：<b>能否继续检索</b>（未达上限且预期有效，则换检索词回 ③ 再检索一轮，官方与第三方平台仍一并返回）。检索穷尽后若仍无可靠证据，模型<b>无法可靠识别「自身不知道」，会凭记忆填补空缺 = 杜撰</b>（看似正确、实则有误）。否（end_turn）则不检索、直接依据自带知识作答。<b>右上角可切「代码」</b>看最小实现（逐段 A–D 对应）。</div>
+<div class="sechint">「我平常如何运行」的 agent 循环流程：<b>输入</b>（原始问句 + system 约束 → messages，不预处理）→ 模型推理 <b>①意图解析 → ②子目标拆解 → ③工具路由</b> → <b>需要工具?</b>（stop_reason）→ 是：通常先调 <b>web_search</b> 发现官方 / 第三方候选页，再调 <b>web_fetch</b> 抓取选中页面正文（已知 URL 时可直接 fetch）→ <b>tool_result 回灌</b> → <b>④ 证据是否充分?</b> → 充分：<b>⑥ 收敛 → 终答</b>；不足：<b>能否继续检索</b>（未达上限且预期有效，则换检索词回 ③ 再检索一轮）。检索穷尽后若仍无可靠证据，模型<b>无法可靠识别「自身不知道」，会凭记忆填补空缺 = 杜撰</b>（看似正确、实则有误）。否（end_turn）则不检索、直接依据自带知识作答。<b>右上角可切「代码」</b>看最小实现（逐段 A–D 对应）。</div>
 <div class="avbox">
   <div class="avhead"><div class="avtabs"><button class="avtab active" data-v="arch">架构图</button><button class="avtab" data-v="code">代码</button></div></div>
   <div id="archView">
-<svg viewBox="0 0 720 712" style="width:100%;max-width:660px;height:auto;display:block;margin:0 auto" role="img" aria-label="Agent 执行流程：路由→是否需要检索→三来源(官方/第三方平台/自带)→研判证据是否充分→充分则收敛终答；不足则判断能否继续检索，检索穷尽且无可靠证据时模型会凭记忆杜撰">
+<svg viewBox="0 0 720 712" style="width:100%;max-width:660px;height:auto;display:block;margin:0 auto" role="img" aria-label="Agent 执行流程：路由→是否需要检索→web_search 发现候选页→web_fetch 抓取选中正文→证据回灌；模型自带知识作为无需检索的补充证据；之后研判证据是否充分，充分则收敛终答，不足则判断能否继续检索，检索穷尽且无可靠证据时模型会凭记忆杜撰">
   <defs>
     <marker id="aae" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse"><path d="M0,0 L9,4.5 L0,9 z" fill="#8a8a8a"/></marker>
     <marker id="aaeh" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7 z" fill="#8a6d1a"/></marker>
@@ -709,30 +709,30 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <g class="anode" data-k="gate"><polygon points="280,212 348,238 280,264 212,238" fill="#FCEFC7" stroke="#8a6d1a"/>
   <text x="280" y="236" text-anchor="middle" font-size="10" fill="#8a6d1a">是否需要检索?</text>
   <text x="280" y="249" text-anchor="middle" font-size="8" fill="#a98a4a">stop_reason</text></g>
-  <g class="anode" data-k="search"><rect x="52" y="300" width="176" height="48" rx="8" fill="#eaf1f7" stroke="#bcd0e0"/>
-  <text x="140" y="318" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">web_search</text>
-  <text x="140" y="331" text-anchor="middle" font-size="8.2" fill="#3a6f9c">服务端自循环</text>
-  <text x="140" y="343" text-anchor="middle" font-size="8.2" fill="#3a6f9c">官方与第三方平台一并返回</text></g>
-  <g class="anode" data-k="fetch"><rect x="244" y="300" width="150" height="48" rx="8" fill="#eaf1f7" stroke="#bcd0e0"/>
-  <text x="319" y="320" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">web_fetch</text>
-  <text x="319" y="336" text-anchor="middle" font-size="8.2" fill="#3a6f9c">抓取官方正文</text></g>
+  <g class="anode" data-k="search"><rect x="92" y="292" width="176" height="48" rx="8" fill="#eaf1f7" stroke="#bcd0e0"/>
+  <text x="180" y="310" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">web_search</text>
+  <text x="180" y="323" text-anchor="middle" font-size="8.2" fill="#3a6f9c">发现候选页面</text>
+  <text x="180" y="335" text-anchor="middle" font-size="8.2" fill="#3a6f9c">官方 / 第三方平台一并返回</text></g>
+  <g class="anode" data-k="fetch"><rect x="92" y="352" width="176" height="48" rx="8" fill="#eaf1f7" stroke="#bcd0e0"/>
+  <text x="180" y="372" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">web_fetch</text>
+  <text x="180" y="388" text-anchor="middle" font-size="8.2" fill="#3a6f9c">抓取选中页面正文</text></g>
   <g class="anode" data-k="own"><rect x="412" y="294" width="178" height="56" rx="8" fill="#F1EBF8" stroke="#a98fd0"/>
   <text x="421" y="312" font-size="9.4" font-weight="700" fill="#5a3fa0">模型自带知识（⑦）</text>
   <text x="421" y="327" font-size="8.2" fill="#6a52a8">训练内置，无需检索亦可用；</text>
   <text x="421" y="340" font-size="8.2" fill="#9a5a8a">薄弱时即「杜撰」之源。</text></g>
-  <g class="anode" data-k="relay"><rect x="150" y="378" width="200" height="30" rx="8" fill="#f4f5f8" stroke="#d8dae0"/>
-  <text x="250" y="398" text-anchor="middle" font-size="10.5" fill="#333">汇总当前证据（回灌）</text></g>
-  <g class="anode" data-k="judge"><polygon points="250,420 320,450 250,480 180,450" fill="#FCEFC7" stroke="#8a6d1a"/>
-  <text x="250" y="447" text-anchor="middle" font-size="9.6" fill="#8a6d1a">④ 证据是否充分?</text>
-  <text x="250" y="460" text-anchor="middle" font-size="7.6" fill="#a98a4a">能否答好此题</text></g>
-  <g class="anode" data-k="converge"><rect x="172" y="500" width="156" height="30" rx="8" fill="#E3F4EA" stroke="#3a9b6e"/>
-  <text x="250" y="519" text-anchor="middle" font-size="10.5" fill="#1f7a52">⑥ 收敛（证据充分）</text></g>
-  <g class="anode" data-k="redo"><polygon points="470,422 552,450 470,478 388,450" fill="#FFF1D9" stroke="#c79023"/>
-  <text x="470" y="447" text-anchor="middle" font-size="9" fill="#9a6a18">能否继续检索?</text>
-  <text x="470" y="459" text-anchor="middle" font-size="7.2" fill="#b08a3a">未达上限 且 预期有效</text></g>
-  <g class="anode" data-k="hasEv"><polygon points="470,524 560,552 470,580 380,552" fill="#FBEAD9" stroke="#c0703a"/>
-  <text x="470" y="549" text-anchor="middle" font-size="9" fill="#9a4a18">是否仍有可靠证据?</text>
-  <text x="470" y="561" text-anchor="middle" font-size="7.2" fill="#b06a3a">官方/第三方平台/自带 任一充分</text></g>
+  <g class="anode" data-k="relay"><rect x="150" y="430" width="200" height="30" rx="8" fill="#f4f5f8" stroke="#d8dae0"/>
+  <text x="250" y="450" text-anchor="middle" font-size="10.5" fill="#333">汇总当前证据（回灌）</text></g>
+  <g class="anode" data-k="judge"><polygon points="250,472 320,502 250,532 180,502" fill="#FCEFC7" stroke="#8a6d1a"/>
+  <text x="250" y="499" text-anchor="middle" font-size="9.6" fill="#8a6d1a">④ 证据是否充分?</text>
+  <text x="250" y="512" text-anchor="middle" font-size="7.6" fill="#a98a4a">能否答好此题</text></g>
+  <g class="anode" data-k="converge"><rect x="172" y="548" width="156" height="30" rx="8" fill="#E3F4EA" stroke="#3a9b6e"/>
+  <text x="250" y="567" text-anchor="middle" font-size="10.5" fill="#1f7a52">⑥ 收敛（证据充分）</text></g>
+  <g class="anode" data-k="redo"><polygon points="470,474 552,502 470,530 388,502" fill="#FFF1D9" stroke="#c79023"/>
+  <text x="470" y="499" text-anchor="middle" font-size="9" fill="#9a6a18">能否继续检索?</text>
+  <text x="470" y="511" text-anchor="middle" font-size="7.2" fill="#b08a3a">未达上限 且 预期有效</text></g>
+  <g class="anode" data-k="hasEv"><polygon points="470,540 560,568 470,596 380,568" fill="#FBEAD9" stroke="#c0703a"/>
+  <text x="470" y="565" text-anchor="middle" font-size="9" fill="#9a4a18">是否仍有可靠证据?</text>
+  <text x="470" y="577" text-anchor="middle" font-size="7.2" fill="#b06a3a">官方/第三方平台/自带 任一充分</text></g>
   <g class="anode" data-k="final"><rect x="130" y="640" width="460" height="58" rx="9" fill="#eef0f3" stroke="#9aa0aa"/>
   <text x="360" y="661" text-anchor="middle" font-size="12" font-weight="700" fill="#3a3f48">终答 · end_turn</text>
   <text x="360" y="677" text-anchor="middle" font-size="8.4" fill="#5a6470">证据充分时可靠（可照抄命令 + 锁版本 + 标注核验）；</text>
@@ -742,34 +742,35 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <line x1="280" y1="126" x2="280" y2="133" stroke="#8a8a8a" marker-end="url(#aae)"/>
   <line x1="280" y1="162" x2="280" y2="169" stroke="#8a8a8a" marker-end="url(#aae)"/>
   <line x1="280" y1="202" x2="280" y2="211" stroke="#8a8a8a" marker-end="url(#aae)"/>
-  <path d="M280,264 V282" fill="none" stroke="#8a8a8a" stroke-width="1.2"/>
-  <path d="M280,282 H140 V300" fill="none" stroke="#8a8a8a" stroke-width="1.2" marker-end="url(#aae)"/>
-  <path d="M280,282 H319 V300" fill="none" stroke="#8a8a8a" stroke-width="1.2" marker-end="url(#aae)"/>
+  <path d="M280,264 V280 H180 V292" fill="none" stroke="#8a8a8a" stroke-width="1.2" marker-end="url(#aae)"/>
   <text x="300" y="278" font-size="8.4" fill="#2a7a68">是 · 调用工具检索</text>
   <path d="M348,238 H660 V666 H590" fill="none" stroke="#8a4fb0" stroke-width="1.2" marker-end="url(#aae)"/>
   <text x="430" y="232" font-size="8.4" fill="#7a4fa0">否 · 不检索，直接依据自带知识作答</text>
-  <line x1="150" y1="348" x2="212" y2="378" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)"/>
-  <line x1="319" y1="348" x2="290" y2="378" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)"/>
-  <path d="M460,350 V366 H300 V378" fill="none" stroke="#8a4fb0" stroke-width="1.1" marker-end="url(#aae)"/>
-  <line x1="250" y1="408" x2="250" y2="419" stroke="#8a8a8a" marker-end="url(#aae)"/>
-  <path d="M250,480 V500" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
-  <text x="258" y="494" font-size="8.4" fill="#2a7a68">充分</text>
-  <path d="M250,530 V640" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
-  <line x1="320" y1="450" x2="388" y2="450" stroke="#c79023" stroke-width="1.3" marker-end="url(#aae)"/>
-  <text x="338" y="444" font-size="8.4" fill="#9a6a18">不足</text>
-  <path d="M552,450 H652 V190 H364" fill="none" stroke="#c79023" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#aae)"/>
-  <text x="556" y="300" font-size="8.4" fill="#9a6a18">是 · ↺ 换检索词再检索</text>
-  <text x="556" y="312" font-size="7.6" fill="#b08a3a">（官方与第三方平台仍一并返回）</text>
-  <line x1="470" y1="478" x2="470" y2="524" stroke="#c0703a" stroke-width="1.3" marker-end="url(#aae)"/>
-  <text x="478" y="504" font-size="8" fill="#9a4a18">否 · 检索已穷尽</text>
-  <path d="M380,552 H320 V640" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
-  <text x="300" y="566" font-size="8" fill="#2a7a68">有 · 依据证据作答（可靠）</text>
-  <path d="M470,580 V640" fill="none" stroke="#D0454F" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aaer)"/>
-  <text x="300" y="602" font-size="8.2" font-weight="700" fill="#B0212B">无 · 最高风险：</text>
-  <text x="300" y="614" font-size="7.8" fill="#A03038">模型无法可靠识别「自身不知道」，遂凭记忆</text>
-  <text x="300" y="625" font-size="7.8" fill="#A03038">填补空缺 = 杜撰（看似正确、实则有误）</text>
+  <line x1="180" y1="340" x2="180" y2="352" stroke="#8a8a8a" stroke-width="1.15" marker-end="url(#aae)"/>
+  <text x="190" y="349" font-size="7.8" fill="#3a6f9c">选中 URL</text>
+  <line x1="180" y1="400" x2="222" y2="430" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)"/>
+  <path d="M460,350 V414 H300 V430" fill="none" stroke="#8a4fb0" stroke-width="1.1" marker-end="url(#aae)"/>
+  <path d="M280,282 H300 V376 H268" fill="none" stroke="#9aa0aa" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aae)"/>
+  <text x="305" y="330" font-size="7.6" fill="#8a8a8a">已知 URL 可直接抓取</text>
+  <line x1="250" y1="460" x2="250" y2="471" stroke="#8a8a8a" marker-end="url(#aae)"/>
+  <path d="M250,532 V548" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
+  <text x="258" y="544" font-size="8.4" fill="#2a7a68">充分</text>
+  <path d="M250,578 V640" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
+  <line x1="320" y1="502" x2="388" y2="502" stroke="#c79023" stroke-width="1.3" marker-end="url(#aae)"/>
+  <text x="338" y="496" font-size="8.4" fill="#9a6a18">不足</text>
+  <path d="M552,502 H652 V190 H364" fill="none" stroke="#c79023" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#aae)"/>
+  <text x="556" y="318" font-size="8.4" fill="#9a6a18">是 · ↺ 换检索词再 search</text>
+  <text x="556" y="330" font-size="7.6" fill="#b08a3a">再选择页面 fetch</text>
+  <line x1="470" y1="530" x2="470" y2="540" stroke="#c0703a" stroke-width="1.3" marker-end="url(#aae)"/>
+  <text x="478" y="536" font-size="8" fill="#9a4a18">否 · 检索已穷尽</text>
+  <path d="M380,568 H320 V640" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
+  <text x="300" y="584" font-size="8" fill="#2a7a68">有 · 依据证据作答（可靠）</text>
+  <path d="M470,596 V640" fill="none" stroke="#D0454F" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aaer)"/>
+  <text x="300" y="610" font-size="8.2" font-weight="700" fill="#B0212B">无 · 最高风险：</text>
+  <text x="300" y="622" font-size="7.8" fill="#A03038">模型无法可靠识别「自身不知道」，遂凭记忆</text>
+  <text x="300" y="633" font-size="7.8" fill="#A03038">填补空缺 = 杜撰（看似正确、实则有误）</text>
 </svg>
-<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px">悬浮任意节点查看该环节职责（锚 D 任务）。<b>① 官方与第三方平台由一次检索一并返回</b>，并非先检索官方、失败后才转第三方平台；<b>② 自带知识无需检索亦在其中</b> —— 三者即矩阵中的三来源。</div>
+<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px">悬浮任意节点查看该环节职责（锚 D 任务）。<b>主链路是先 search 发现候选页，再 fetch 抓取选中正文</b>；已知 URL 时可直接 fetch。<b>自带知识无需检索亦在其中</b>，是第三条证据来源。</div>
   </div>
   <div id="codeView" style="display:none">
   <div class="sechint" style="margin:0 0 6px">最小实现代码（A–D 段对应架构图各环节）：</div>
@@ -1939,10 +1940,10 @@ const ANODE={
   msg:{t:"组装 messages",b:"将 <b>system 约束</b>（要求给可照抄命令、锁定版本、抓取不到则如实标注）+ 历史 + 当前问句拼成模型输入；理解全部交给模型。"},
   intent:{t:"① 意图解析",b:"读出「需完成什么 + 目标产物 + 硬约束」。对 D＝识别「开发 Ascend C 算子并接入 PyTorch」，并捕捉隐含约束：可照抄、可运行、锁版本、与本机芯片型号强相关。"},
   subgoal:{t:"② 子目标拆解",b:"切分为可分别检索的子问题：① 官方 how-to（msopgen→编包→部署）② 工程脚手架 ③ 接入 PyTorch 的绑定方式。"},
-  route:{t:"③ 路由：检索 / 抓取 / 直接作答",b:"决定本轮如何获取信息：web_search 了解全貌 / web_fetch 抓取某官方页 / 信息已充分则直接作答。"},
+  route:{t:"③ 路由：检索 / 抓取 / 直接作答",b:"决定本轮如何获取信息：通常先 web_search 发现候选页，再 web_fetch 抓取选中页面正文；若 URL 已知，也可直接 fetch；信息已充分则直接作答。"},
   gate:{t:"是否需要检索?",b:"模型本轮是<b>调用工具检索</b>（tool_use），还是<b>不检索、直接依据自带知识作答</b>（end_turn）。注意：选择直接作答时，若自带知识不可靠，同样可能杜撰。"},
-  search:{t:"web_search · 服务端工具",b:"在<b>同一次调用内自循环</b>（生成 query→检索→研判→续检索/停止）。关键：它<b>一次检索即把官方文档与 CSDN/知乎/GitHub 等第三方平台内容一并返回</b>——并非先检索官方、失败后才转第三方平台。max_uses 封顶。"},
-  fetch:{t:"web_fetch · 客户端工具",b:"需查看某官方页正文时，返回 tool_use 交由客户端抓取；抓取为空则如实返回「正文无法取回」。"},
+  search:{t:"web_search · 发现候选页",b:"先生成检索 query，返回官方与第三方平台的候选页面、摘要和 URL。它解决的是<b>找不找得到入口</b>，不是直接读取完整正文。"},
+  fetch:{t:"web_fetch · 抓取选中正文",b:"在候选页或已知 URL 中选定目标后，再抓取页面正文、代码和表格；抓取为空则如实返回「正文无法取回」。"},
   own:{t:"模型自带知识（⑦）",b:"模型训练内置的知识，<b>无需检索亦可用</b>，是矩阵三来源（官方/第三方平台/自带）中的第三条。<b>充分时为可靠答案的底；薄弱、且检索未能补足时，即为「杜撰」之源</b>。"},
   relay:{t:"汇总当前证据（回灌）",b:"将本轮取回的官方正文、第三方平台内容连同自带知识一并提交模型，进入研判。"},
   judge:{t:"④ 证据是否充分?",b:"判断手中证据<b>是否足以答好本题</b>。充分→收敛输出终答；不足→评估能否继续检索。对 D：第 2 轮即发现官方核心页 SPA 抓取为空、第三方平台稀薄，判定「不足」。"},
@@ -2057,9 +2058,9 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     var cap=document.getElementById('archcap'); var orig=cap?cap.innerHTML:'';
     var edgeSeq=[
       'ask msg','msg intent','intent subgoal','subgoal route','route gate',
-      'gate search fetch','gate search fetch','gate search fetch','gate final',
-      'search relay','fetch relay','own relay','relay judge','judge converge','converge final',
-      'judge redo','redo retry','redo hasEv','hasEv final','hasEv final'
+      'gate search','gate final','search fetch','fetch relay','own relay','gate fetch',
+      'relay judge','judge converge','converge final','judge redo','redo retry','redo hasEv',
+      'hasEv final','hasEv final'
     ];
     Array.prototype.forEach.call(svg.querySelectorAll('line,path'),function(el,i){
       if(el.closest('defs'))return;
@@ -2071,12 +2072,14 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
       el.setAttribute('data-sw',el.getAttribute('stroke-width')||'1.2');
     });
     var edgeLabelMap=[
-      ['是 · 调用工具检索','gate search fetch'],
+      ['是 · 调用工具检索','gate search'],
+      ['选中 URL','search fetch'],
+      ['已知 URL 可直接抓取','gate fetch'],
       ['否 · 不检索，直接依据自带知识作答','gate final'],
       ['充分','judge converge'],
       ['不足','judge redo'],
-      ['是 · ↺ 换检索词再检索','redo retry'],
-      ['（官方与第三方平台仍一并返回）','redo retry'],
+      ['是 · ↺ 换检索词再 search','redo retry'],
+      ['再选择页面 fetch','redo retry'],
       ['否 · 检索已穷尽','redo hasEv'],
       ['有 · 依据证据作答（可靠）','hasEv final'],
       ['无 · 最高风险：','hasEv final'],
@@ -2095,7 +2098,7 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     var WALK=[
       {n:['ask','msg'], c:'用户问句原样进入 messages（system 约束 + 历史 + 当前问句），不做预处理。'},
       {n:['intent','subgoal','route'], c:'模型先想清楚要查什么：① 解析意图 → ② 拆成可分别检索的子问题 → ③ 决定路由（检索 / 抓取 / 直接作答）。'},
-      {n:['gate','search','fetch','own'], c:'是否需要检索。检索时 web_search 把官方与第三方平台一并返回、web_fetch 抓官方正文；模型自带知识无需检索亦在其中 —— 即矩阵中的三来源。'},
+      {n:['gate','search','fetch','own'], c:'是否需要检索。主链路是 web_search 发现候选页面，再 web_fetch 抓取选中正文；已知 URL 时可直接 fetch。模型自带知识无需检索，是另一条证据来源。'},
       {n:['relay','judge'], c:'④ 汇总当前证据后研判：是否足以答好这一题？'},
       {n:['converge','final'], c:'证据充分 → ⑥ 收敛 → 终答：可照抄命令 + 锁版本 + 标注核验，结果可靠。'},
       {n:['redo'], c:'证据不足时先评估能否继续检索：未达 max_uses 上限且预期有效，则换检索词回 ③ 再检索一轮。'},
@@ -2132,8 +2135,8 @@ html,body{height:100%;margin:0;padding:0!important;background:transparent!import
     window.__archGo=go;
     window.__archApply=apply;
     var METRIC_FOCUS={
-      search:{color:'#667EEA',nodes:['route','gate','search'], edges:['route gate','gate search fetch','search relay']},
-      fetch:{color:'#38C9D7',nodes:['gate','fetch','relay'], edges:['gate search fetch','fetch relay','relay judge']},
+      search:{color:'#667EEA',nodes:['route','gate','search'], edges:['route gate','gate search']},
+      fetch:{color:'#38C9D7',nodes:['search','fetch','relay'], edges:['gate search','search fetch','fetch relay','gate fetch','relay judge']},
       read:{color:'#23CFA0',nodes:['own','relay'], edges:['own relay','relay judge']},
       judge:{color:'#F59E0B',nodes:['relay','judge','redo','hasEv'], edges:['relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
       answer:{color:'#22262F',nodes:['converge','final','hasEv'], edges:['judge converge','converge final','hasEv final','gate final']}
