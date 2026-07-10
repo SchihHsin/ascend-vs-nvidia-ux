@@ -1119,9 +1119,9 @@ function renderV(){
   /* 4 条参与者生命线 + 列头 */
   ["hu","ai","off","tool","sec"].forEach(k=>{
     const x=LX[k];
-    svg.append("line").attr("data-lane",k).attr("data-col",PCOL[k]).attr("x1",x).attr("x2",x).attr("y1",vTop-34).attr("y2",Hv-26)
+    svg.append("line").attr("data-kind","lane").attr("data-lane",k).attr("data-col",PCOL[k]).attr("x1",x).attr("x2",x).attr("y1",vTop-34).attr("y2",Hv-26)
       .attr("stroke","#e3e3e3").attr("stroke-width",1.5);
-    const t=svg.append("text").attr("data-lane",k).attr("x",x).attr("y",vTop-46).attr("text-anchor","middle")
+    const t=svg.append("text").attr("data-kind","lane").attr("data-lane",k).attr("x",x).attr("y",vTop-46).attr("text-anchor","middle")
       .attr("font-size",seqFont(15.5)).attr("font-weight",800).attr("fill",PCOL[k]).text(PNAME[k]);
     if(k==="ai"||k==="hu") t.style("cursor","help")
       .on("mousemove",ev=>showLaneTip(ev,k)).on("mouseleave",hideTip).on("click",ev=>pinLaneTip(ev,k));
@@ -1145,7 +1145,7 @@ function renderV(){
     const y=Y(d.xi);
     if(d.kind==="decision"){
       const x=LX[d.lane];
-      const gx=svg.append("g").attr("data-pair",brSrc[d.id]||null).attr("data-msg",d.id).attr("transform",`translate(${x},${y})`).style("cursor","pointer")
+      const gx=svg.append("g").attr("data-kind","node").attr("data-pair",brSrc[d.id]||null).attr("data-msg",d.id).attr("transform",`translate(${x},${y})`).style("cursor","pointer")
         .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
       drawBarV(gx,d);                       // 菱形按 dtier 深浅
       // 决策标题：放菱形左上方(单行,去「决策：」前缀)——用户要求朝左,右边被箭头挤、不易看
@@ -1157,7 +1157,7 @@ function renderV(){
     const f=FLOW[d.id]; if(!f) return;
     const frm=role(f.frm), to=role(f.to), x1=LX[frm];
     if(to==="self" || frm===to){            // 自身动作 / 档②③ 交付·回灌塌缩为同侧
-      const gx=svg.append("g").attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
+      const gx=svg.append("g").attr("data-kind","node").attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
         .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
       drawMarker(gx,d,PCOL[frm],false);
       sideLabel(gx,d, !(frm==="hu"||frm==="tool"));   // AI/社区侧→标题朝右；人/工具侧→朝左
@@ -1168,21 +1168,21 @@ function renderV(){
     const isAi=frm==="ai"||to==="ai";
     const col=f.blocked?"#C8102E":(isAi?"#8156c9":"#7a8aa0");
     const mk=f.blocked?"url(#ahr)":(isAi?"url(#ah)":"url(#ahg)");
-    svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1+dir*14).attr("y1",y).attr("x2",x2-dir*3).attr("y2",y)
+    svg.append("line").attr("data-kind",f.blocked?"block":"message").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1+dir*14).attr("y1",y).attr("x2",x2-dir*3).attr("y2",y)
       .attr("stroke",col).attr("stroke-width",2).attr("marker-end",mk).attr("opacity",.92);
-    svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
-    const tt=svg.append("text").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",y-7).attr("text-anchor","middle")
+    svg.append("line").attr("data-kind","hit").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
+    const tt=svg.append("text").attr("data-kind","message").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",y-7).attr("text-anchor","middle")
       .attr("font-size",seqFont(13.5)).attr("font-weight",600).attr("fill", f.blocked?"#C8102E":"#333");
     tt.append("tspan").text(d.t);
-    const gx=svg.append("g").attr("data-pair",pair).attr("data-msg",d.id).attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
+    const gx=svg.append("g").attr("data-kind","node").attr("data-pair",pair).attr("data-msg",d.id).attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
     drawMarker(gx,d,PCOL[frm],f.blocked);
     if(f.blocked){                          // 红色空返回 + ✕（核心发现可视化）+ 对应矩阵分
       const ry=y+15;
-      svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x2-dir*3).attr("y1",ry).attr("x2",x1+dir*14).attr("y2",ry)
+      svg.append("line").attr("data-kind","block").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x2-dir*3).attr("y1",ry).attr("x2",x1+dir*14).attr("y2",ry)
         .attr("stroke","#C8102E").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ahr)").attr("opacity",.92);
-      svg.append("line").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",ry).attr("x2",x2).attr("y2",ry).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
-      svg.append("text").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
+      svg.append("line").attr("data-kind","hit").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",ry).attr("x2",x2).attr("y2",ry).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
+      svg.append("text").attr("data-kind","block").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
         .attr("font-size",seqFont(10.5,true)).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）");
     }
   });
@@ -1192,10 +1192,10 @@ function renderV(){
     const src=byId[br.from], y=Y(src.xi)+(br.above?-29:(src.kind==="decision"?0:34)), tgt=br.to||"off", x2=LX[tgt];
     const pair=['hu',tgt].sort().join('-');
     const x1b=(src.kind==="decision")?(LX[src.lane]+BARW/2):LX.hu;  // 决策→右缘中点起；否则从人生命线起
-    svg.append("line").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2+3).attr("y2",y)
+    svg.append("line").attr("data-kind","branch").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2+3).attr("y2",y)
       .attr("stroke","#2f3d63").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ab)").attr("opacity",.85);
-    svg.append("line").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
-    svg.append("text").attr("data-pair",pair).attr("data-msg",br.id).attr("x",(x1b+x2)/2).attr("y",y-5).attr("text-anchor","middle")
+    svg.append("line").attr("data-kind","hit").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
+    svg.append("text").attr("data-kind","branch").attr("data-pair",pair).attr("data-msg",br.id).attr("x",(x1b+x2)/2).attr("y",y-5).attr("text-anchor","middle")
       .attr("font-size",seqFont(10.5,true)).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
       .style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"第三方平台":"昇腾社区"),b:br.b})).on("mouseleave",hideTip);
@@ -1995,7 +1995,7 @@ html.fullseq .chartwrap{padding:18px 22px 14px!important}
 html.fullseq #seqctrl{bottom:14px;right:18px;gap:8px}
 html.fullseq #seqctrl .sqbtn{width:32px;height:32px;border-radius:9px;font-size:19px}
 html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
-#journey [data-pair],#journey [data-lane]{transition:opacity .28s}
+#journey [data-pair],#journey [data-lane],#journey [data-kind]{transition:opacity .28s,stroke-width .28s,filter .28s}
 #seqctrl{position:fixed;bottom:8px;right:12px;z-index:60;display:flex;gap:6px;align-items:center;font-family:'Noto Sans SC',sans-serif}
 #seqctrl .sqbtn{width:24px;height:24px;border-radius:7px;border:1px solid #d4d8df;background:rgba(255,255,255,.85);color:#444;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 #seqctrl .sqbtn:hover{background:#fff;border-color:#5B5BD6;color:#5B5BD6}
@@ -2024,6 +2024,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     {name:'开发者 ↔ 昇腾社区 · 基础体验', pairs:['hu-off']}
   ];
   var step=0, hoverMsg=null, pinnedMsg=null;  // 0=全亮；hoverMsg=悬浮临时聚焦；pinnedMsg=点击钉住
+  var methodFocus=null;
   var TASK_MSG={D:'sD',M:'sM',X:'sX',O:'sO',L:'sL'};
   function curFocus(){return hoverMsg!=null?hoverMsg:pinnedMsg;}  // 有效聚焦：悬浮优先，否则用钉住的
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
@@ -2032,6 +2033,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   function updLbl(){var lbl=document.getElementById('sqLbl');if(!lbl)return;
     lbl.textContent=step<1?'默认 · 完整时序图':('模式 '+step+' · '+GROUPS[step-1].name);}
   function applyHi(){
+    if(methodFocus){applyMethodFocus(methodFocus);return;}
     var svgEl=document.getElementById('journey'); if(!svgEl){updLbl();notify();return;}
     function clr(el){
       el.style.opacity='';
@@ -2071,6 +2073,44 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     updLbl(); notify();
   }
   window.__seqApplyHi=applyHi;
+  function applyMethodFocus(mode){
+    var svgEl=document.getElementById('journey'); if(!svgEl)return;
+    function inList(v,arr){return arr.indexOf(v)>=0;}
+    Array.prototype.forEach.call(svgEl.children,function(el){
+      var kind=el.getAttribute&&el.getAttribute('data-kind');
+      var pair=el.getAttribute&&el.getAttribute('data-pair');
+      var msg=el.getAttribute&&el.getAttribute('data-msg');
+      var lane=el.getAttribute&&el.getAttribute('data-lane');
+      var sourcePair=inList(pair,['ai-off','ai-sec']);
+      var reviewPair=inList(pair,['hu-off','hu-sec']);
+      var isRetrieval=sourcePair&&inList(kind,['message','block','hit','node']);
+      var isBranch=kind==='branch'||(kind==='hit'&&reviewPair);
+      var isSourceLane=kind==='lane'&&inList(lane,['ai','off','sec']);
+      var isReviewLane=kind==='lane'&&inList(lane,['hu','off','sec']);
+      var isBlocked=kind==='block'||(kind==='node'&&msg==='sD')||(kind==='hit'&&msg==='sD');
+      var keep=false;
+      if(!mode||mode==='all')keep=true;
+      else if(mode==='lanes')keep=kind==='lane';
+      else if(mode==='nodes')keep=kind==='node'||kind==='lane';
+      else if(mode==='events')keep=kind==='message'||kind==='node'||kind==='lane'||(kind==='hit'&&pair);
+      else if(mode==='loops')keep=kind==='block'||kind==='branch'||(kind==='node'&&/^(sD|sD2|b|d)/.test(msg||''))||kind==='lane';
+      else if(mode==='search')keep=isRetrieval||isSourceLane;
+      else if(mode==='review')keep=isBranch||reviewPair&&kind==='node'||isReviewLane;
+      else if(mode==='governance')keep=isRetrieval||isBranch||isBlocked||isSourceLane||isReviewLane;
+      else if(mode==='source')keep=sourcePair||reviewPair||isSourceLane||isReviewLane;
+      else if(mode==='block')keep=isBlocked||isSourceLane;
+      else if(mode==='score')keep=sourcePair||reviewPair||kind==='branch'||kind==='block'||(kind==='node'&&/^(s|b|d)/.test(msg||''))||kind==='lane';
+      el.style.opacity=keep?'1':'0.13';
+      if(keep&&kind==='lane'&&el.tagName==='line'){el.style.strokeWidth=(mode==='lanes'||mode==='source')?'3':'2';el.style.strokeOpacity='1';}
+      if(keep&&(kind==='block'||kind==='branch'||sourcePair||reviewPair))el.style.filter='drop-shadow(0 0 2px rgba(91,91,214,.28))';
+      else el.style.filter='';
+    });
+    var lbl=document.getElementById('sqLbl');
+    if(lbl){
+      var names={all:'完整时序图',lanes:'聚焦 · 生命线',nodes:'聚焦 · 节点',events:'聚焦 · 知识事件',loops:'聚焦 · 受阻 / 复核',search:'聚焦 · AI 检索过程',review:'聚焦 · 开发者复核',governance:'聚焦 · 内容治理线索',source:'聚焦 · 证据来源',block:'聚焦 · 任务阻断点',score:'聚焦 · 可评分证据'};
+      lbl.textContent=names[mode]||'默认 · 完整时序图';
+    }
+  }
   (function(){var svgEl=document.getElementById('journey'); if(!svgEl)return;
     svgEl.addEventListener('mouseover',function(e){ if(step<1)return; var el=e.target.closest&&e.target.closest('[data-msg]'); var m=el?el.getAttribute('data-msg'):null;
       if(m&&el){ var g=GROUPS[step-1],pr=el.getAttribute('data-pair'); if(!pr||g.pairs.indexOf(pr)<0) m=null; }   /* 只有当前组内的线才触发二级聚光 */
@@ -2092,6 +2132,14 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     pinnedMsg=null;
     if(hoverMsg)step=1;
     applyHi();
+  });
+  window.addEventListener('message',function(e){
+    var d=e&&e.data;
+    if(!d||!('__seqMethodFocus' in d))return;
+    methodFocus=d.__seqMethodFocus||null;
+    step=0; hoverMsg=null; pinnedMsg=null;
+    if(!methodFocus||methodFocus==='all'){methodFocus=null;applyHi();}
+    else applyMethodFocus(methodFocus);
   });
   function buildCtrl(){
     if(document.getElementById('seqctrl'))return;

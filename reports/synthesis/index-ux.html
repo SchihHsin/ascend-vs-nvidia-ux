@@ -636,7 +636,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <!-- UX 版新增：研究方法 1 / 为什么形成时序图 -->
-  <section class="slide s-gray ux-method-slide">
+  <section class="slide s-gray ux-method-slide seqfocus-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">AI 时代的任务研究，需要把「页面路径」扩展为「知识流动」</span></div>
@@ -663,7 +663,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxmid-arrow svg{width:42px;height:42px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
       .uxflow-map{position:relative;min-height:220px}
       .uxflow-map svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-      .uxbubble{position:absolute;transform:translate(-50%,-50%);border-radius:13px;background:#fff;border:1px solid rgba(47,61,99,.12);box-shadow:0 12px 26px -24px rgba(30,40,70,.28);padding:.72vh .7vw;min-width:98px;text-align:center;font-size:var(--fs-sm);font-weight:900;color:var(--ink);line-height:1.2}
+      .uxwhy-diagram.has-focus [data-why-focus]{opacity:.18;transition:opacity .22s,filter .22s}
+      .uxwhy-diagram.has-focus [data-why-focus].on{opacity:1;filter:drop-shadow(0 0 2px rgba(91,91,214,.22))}
+      .uxbubble{position:absolute;transition:opacity .22s,filter .22s;transform:translate(-50%,-50%);border-radius:13px;background:#fff;border:1px solid rgba(47,61,99,.12);box-shadow:0 12px 26px -24px rgba(30,40,70,.28);padding:.72vh .7vw;min-width:98px;text-align:center;font-size:var(--fs-sm);font-weight:900;color:var(--ink);line-height:1.2}
       .uxbubble.ai{background:var(--g-ink);color:#fff;border:0}.uxbubble.src{color:#5B5BD6}.uxbubble.human{color:#202531}
       .uxflow-link{stroke:#2F3D63;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.uxflow-link.soft{stroke:#7E8A9D;stroke-dasharray:6 6}.uxflow-link.block{stroke:#E15A5A;stroke-dasharray:6 6}.uxflow-link.good{stroke:#23A06A}
       .uxwhy-foot{position:relative;z-index:1;border-radius:13px;background:var(--g-ink);color:#fff;padding:1.15vh 1vw;font-size:var(--fs-body);line-height:1.5;box-shadow:0 16px 34px -24px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.2)}
@@ -673,7 +675,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxwhy-card b{display:block;font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950}
       .uxwhy-card p{margin:.78vh 0 0;font-size:var(--fs-body);line-height:1.52;color:var(--ink-2)}
       .uxwhy-list{display:grid;gap:.85vh}
-      .uxwhy-item{display:grid;grid-template-columns:34px 1fr;gap:.72vw;align-items:start}
+      .uxwhy-item{display:grid;grid-template-columns:34px 1fr;gap:.72vw;align-items:start;border-radius:12px;padding:.48vh .42vw;margin:-.48vh -.42vw;transition:opacity .2s,background .2s,transform .2s,box-shadow .2s;cursor:pointer}
+      .uxwhy-list.has-focus .uxwhy-item{opacity:.34}
+      .uxwhy-list.has-focus .uxwhy-item.on{opacity:1;background:rgba(255,255,255,.72);box-shadow:0 10px 24px -22px rgba(30,40,70,.42),inset 0 0 0 1px rgba(91,91,214,.16);transform:translateX(2px)}
       .uxwhy-no{width:34px;height:34px;border-radius:10px;background:var(--g-blue);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -18px rgba(91,91,214,.68),inset 0 1px 0 rgba(255,255,255,.26)}
       .uxwhy-item:nth-child(2) .uxwhy-no{background:var(--g-teal)}
       .uxwhy-item:nth-child(3) .uxwhy-no{background:var(--g-green)}
@@ -691,7 +695,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .ux-lane-head rect{fill:rgba(255,255,255,.72);stroke:rgba(47,61,99,.13);stroke-width:1}
       .ux-lane-head text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif;font-size:15px;font-weight:850;fill:#202531}
       .ux-time text{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;fill:#7A8495;letter-spacing:.08em}
-      .ux-msg{stroke:#2F3D63;stroke-width:2.1;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .ux-msg{stroke:#2F3D63;stroke-width:2.1;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:opacity .22s,stroke-width .22s,filter .22s}
+      .uxseq-svg.has-focus [data-ux-evidence]{opacity:.18}
+      .uxseq-svg.has-focus [data-ux-evidence].on{opacity:1;filter:drop-shadow(0 0 2px rgba(91,91,214,.22))}
       .ux-msg.soft{stroke:#7E8A9D;stroke-width:1.8}
       .ux-msg.good{stroke:#23A06A}.ux-msg.bad{stroke:#E15A5A;stroke-dasharray:6 6}.ux-msg.loop{stroke:#5B5BD6;stroke-width:2;stroke-dasharray:8 6}
       .ux-label{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif;font-size:14px;font-weight:780;fill:#232936}
@@ -702,7 +708,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxread{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.25vh}
       .uxread-main{flex:0 0 auto;border-radius:17px;background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94);padding:2vh 1.22vw;display:flex;flex-direction:column;justify-content:center;gap:1.15vh;min-height:0;overflow:hidden}
       .uxread-h{font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950;margin-bottom:.2vh}
-      .uxread-row{display:grid;grid-template-columns:34px 1fr;gap:.7vw;align-items:start}
+      .uxread-row{display:grid;grid-template-columns:34px 1fr;gap:.7vw;align-items:start;border-radius:12px;padding:.46vh .42vw;margin:-.46vh -.42vw;transition:opacity .2s,background .2s,transform .2s,box-shadow .2s;cursor:pointer}
+      .uxread-main.has-focus .uxread-row{opacity:.34}
+      .uxread-main.has-focus .uxread-row.on{opacity:1;background:rgba(255,255,255,.72);box-shadow:0 10px 24px -22px rgba(30,40,70,.42),inset 0 0 0 1px rgba(91,91,214,.16);transform:translateX(2px)}
       .uxread-no{width:34px;height:34px;border-radius:10px;background:var(--g-blue);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -18px rgba(91,91,214,.68),inset 0 1px 0 rgba(255,255,255,.26)}
       .uxread-row:nth-of-type(3) .uxread-no{background:var(--g-teal)}
       .uxread-row:nth-of-type(4) .uxread-no{background:var(--g-green)}
@@ -745,7 +753,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxreal-lead{border-radius:14px;background:linear-gradient(145deg,rgba(91,91,214,.1),rgba(79,172,254,.07));border:1px solid rgba(91,91,214,.15);padding:1.18vh .98vw;font-size:var(--fs-body);line-height:1.48;color:var(--ink-2)}
       .uxreal-lead b{color:var(--ink);font-weight:950}
       .uxreal-grid{border-radius:16px;background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94);padding:1.35vh 1.05vw;display:grid;grid-template-rows:repeat(4,1fr);gap:.72vh;min-height:0}
-      .uxreal-row{display:grid;grid-template-columns:38px 1fr;gap:.72vw;align-items:center;min-height:0}
+      .uxreal-grid.three{grid-template-rows:repeat(3,1fr)}
+      .uxreal-row{display:grid;grid-template-columns:38px 1fr;gap:.72vw;align-items:center;min-height:0;border-radius:12px;padding:.55vh .45vw;margin:-.55vh -.45vw;transition:opacity .2s,background .2s,transform .2s,box-shadow .2s;cursor:pointer}
+      .uxreal-grid.has-focus .uxreal-row{opacity:.34}
+      .uxreal-grid.has-focus .uxreal-row.on{opacity:1;background:rgba(255,255,255,.72);box-shadow:0 10px 24px -22px rgba(30,40,70,.42),inset 0 0 0 1px rgba(91,91,214,.16);transform:translateX(2px)}
       .uxreal-no{width:38px;height:30px;border-radius:10px;background:var(--g-blue);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -18px rgba(91,91,214,.68),inset 0 1px 0 rgba(255,255,255,.26)}
       .uxreal-row:nth-child(2) .uxreal-no{background:var(--g-teal)}.uxreal-row:nth-child(3) .uxreal-no{background:var(--g-green)}.uxreal-row:nth-child(4) .uxreal-no{background:var(--g-amber)}
       .uxreal-row b{display:block;font-size:var(--fs-body);line-height:1.16;color:var(--ink);font-weight:950}
@@ -754,59 +765,23 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxreal-note b{color:#fff;font-weight:950}
     </style>
     <div class="body-area">
-      <div class="uxwhy-left">
-        <div class="uxwhy-title"><b>传统旅程图只看人怎么走，AI 协同任务还要看知识怎么流动</b><span>开发者把问题交给 AI 后，答案质量取决于 AI 能否从社区内容中找到、抓到、读懂并回到任务。</span></div>
-        <div class="uxwhy-diagram">
-          <div class="uxpath">
-            <div class="uxpane-h">传统用户旅程</div>
-            <div class="uxpath-line">
-              <div class="uxpath-node">进入官网</div>
-              <div class="uxpath-node">查文档</div>
-              <div class="uxpath-node">下载工具</div>
-              <div class="uxpath-node">遇到问题</div>
-            </div>
-            <div class="uxpath-note">适合观察页面路径、触点体验与情绪变化。</div>
-          </div>
-          <div class="uxmid-arrow">
-            <svg viewBox="0 0 48 48"><path d="M8 24h30"/><path d="m27 13 11 11-11 11"/></svg>
-          </div>
-          <div class="uxflow">
-            <div class="uxpane-h">人机协同时序图</div>
-            <div class="uxflow-map">
-              <svg viewBox="0 0 420 220" preserveAspectRatio="none">
-                <path class="uxflow-link" d="M70 110 C125 70 150 70 205 102"/>
-                <path class="uxflow-link good" d="M205 102 C250 66 298 52 346 62"/>
-                <path class="uxflow-link block" d="M205 110 C252 112 300 112 350 116"/>
-                <path class="uxflow-link soft" d="M205 118 C252 156 298 170 348 158"/>
-                <path class="uxflow-link good" d="M205 128 C152 166 122 166 70 128"/>
-              </svg>
-              <div class="uxbubble human" style="left:15%;top:50%">开发者</div>
-              <div class="uxbubble ai" style="left:49%;top:52%">AI 助手</div>
-              <div class="uxbubble src" style="left:84%;top:22%">官方社区</div>
-              <div class="uxbubble src" style="left:85%;top:52%">受阻点</div>
-              <div class="uxbubble src" style="left:84%;top:82%">第三方 / 先验</div>
-            </div>
-            <div class="uxflow-note">适合观察谁向谁取证、证据是否足够、哪里需要返工或人工复核。</div>
-          </div>
-        </div>
-        <div class="uxwhy-foot">所以这张时序图不是技术流程图，而是把<b>任务中的知识请求、证据返回、受阻与复核</b>变成可观察对象。</div>
+      <div class="uxreal-seq">
+        <iframe data-src="seq-d3.html?full=1" title="真实人机协同时序图 · 为什么需要知识流动视角"></iframe>
       </div>
-      <div class="uxwhy-right">
-        <div class="uxwhy-card">
-          <b>为什么不用单页截图或普通旅程图</b>
-          <p>单页截图只能说明某个页面当下长什么样；普通旅程图能说明用户怎么走。但 AI 协同任务里的关键问题，常发生在“页面之外”：AI 搜了什么、抓到了什么、是否读懂、开发者何时回来复核。</p>
+      <div class="uxreal-side">
+        <div class="uxreal-lead"><b>这页回答为什么要画时序图。</b>单页截图只能说明页面状态，普通旅程图只能说明人怎么走；AI 协同任务还要看到 AI 如何取证、哪里受阻、开发者何时复核。</div>
+        <div class="uxreal-grid three">
+          <div class="uxreal-row" data-seq-focus="search"><div class="uxreal-no">01</div><div><b>把隐性的检索过程显性化</b><span>聚焦 AI 到官方社区、第三方平台的知识请求，看到搜索、抓取、换词和补证。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="review"><div class="uxreal-no">02</div><div><b>把人的复核动作纳入研究</b><span>聚焦开发者独立复核与交叉验证，说明人没有退出链路，而是在高风险节点重新判断。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="governance"><div class="uxreal-no">03</div><div><b>把体验问题连接到内容治理</b><span>聚焦受阻和证据来源，问题不只来自界面，也来自内容是否可发现、可抓取、可复现。</span></div></div>
         </div>
-        <div class="uxwhy-card uxwhy-list">
-          <div class="uxwhy-item"><div class="uxwhy-no">01</div><div class="uxwhy-t"><b>把隐性的检索过程显性化</b><span>原本看不见的搜索、抓取、换词、补证，会被摊开成一条条往返。</span></div></div>
-          <div class="uxwhy-item"><div class="uxwhy-no">02</div><div class="uxwhy-t"><b>把人的复核动作纳入研究</b><span>开发者不是退出链路，而是在高风险节点重新判断证据是否可靠。</span></div></div>
-          <div class="uxwhy-item"><div class="uxwhy-no">03</div><div class="uxwhy-t"><b>把体验问题连接到内容治理</b><span>问题不只来自界面，也来自内容是否可发现、可抓取、可复现。</span></div></div>
-        </div>
+        <div class="uxreal-note">方向键可以逐项切换聚焦状态；讲到哪一条，左侧时序图就只保留对应线索。</div>
       </div>
     </div>
   </section>
 
   <!-- UX 版新增：研究方法 2 / 时序图能产出什么 -->
-  <section class="slide s-gray ux-method-slide">
+  <section class="slide s-gray ux-method-slide seqfocus-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">时序图能把一次任务转成来源、阻断点与评分口径</span></div>
@@ -815,55 +790,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-r">05/ UX 研究方法</div>
     </div>
     <div class="body-area">
-      <div class="uxseq-card">
-        <div class="uxseq-title">
-          <div><b>一个常见任务的简化时序图</b><span>开发者遇到报错，先问 AI；AI 再到社区内容里找证据。</span></div>
-          <div class="uxseq-task">例：跑示例报错，如何定位并修复？</div>
-        </div>
-        <div class="uxseq-svg" aria-label="简化人机协同时序图">
-          <svg viewBox="0 0 980 470" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <marker id="uxArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#2F3D63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="uxArrowGood" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#23A06A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="uxArrowBad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#E15A5A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="uxArrowLoop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5B5BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-            </defs>
-            <g class="ux-time"><text x="18" y="72">TIME</text><path d="M35 92v310" stroke="#C6CDD8" stroke-width="1.4" stroke-linecap="round"/><path d="M29 392l6 12 6-12" fill="none" stroke="#C6CDD8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-            <g class="ux-lane-head"><rect x="92" y="26" width="124" height="42" rx="12"/><text x="154" y="53" text-anchor="middle">开发者</text></g>
-            <g class="ux-lane-head"><rect x="292" y="26" width="124" height="42" rx="12"/><text x="354" y="53" text-anchor="middle">AI 助手</text></g>
-            <g class="ux-lane-head"><rect x="492" y="26" width="124" height="42" rx="12"/><text x="554" y="53" text-anchor="middle">昇腾社区</text></g>
-            <g class="ux-lane-head"><rect x="692" y="26" width="124" height="42" rx="12"/><text x="754" y="53" text-anchor="middle">第三方经验</text></g>
-            <g class="ux-lane-head"><rect x="832" y="26" width="124" height="42" rx="12"/><text x="894" y="53" text-anchor="middle">模型先验</text></g>
-            <path class="ux-lane" d="M154 80v344"/><path class="ux-lane" d="M354 80v344"/><path class="ux-lane" d="M554 80v344"/><path class="ux-lane" d="M754 80v344"/><path class="ux-lane" d="M894 80v344"/>
-            <path class="ux-msg" marker-end="url(#uxArrow)" d="M154 112H354"/><circle class="ux-dot" cx="154" cy="112" r="6"/><circle class="ux-dot fill" cx="354" cy="112" r="6"/><text class="ux-label" x="185" y="101">1. 带着报错提问</text>
-            <path class="ux-msg" marker-end="url(#uxArrow)" d="M354 172H554"/><circle class="ux-dot" cx="354" cy="172" r="6"/><circle class="ux-dot fill" cx="554" cy="172" r="6"/><text class="ux-label" x="383" y="160">2. 优先查官方说明</text>
-            <path class="ux-msg bad" marker-end="url(#uxArrowBad)" d="M554 218H354"/><circle class="ux-dot bad" cx="554" cy="218" r="5"/><circle class="ux-dot bad" cx="354" cy="218" r="5"/><text class="ux-label bad" x="386" y="207">3. 受阻：抓不到 / 版本不清</text>
-            <path class="ux-msg loop" marker-end="url(#uxArrowLoop)" d="M354 274H754"/><circle class="ux-dot loop" cx="354" cy="274" r="5"/><circle class="ux-dot loop" cx="754" cy="274" r="5"/><text class="ux-label loop" x="433" y="263">4. 换词补证，找社区案例</text>
-            <path class="ux-msg soft" marker-end="url(#uxArrow)" d="M354 330H894"/><circle class="ux-dot" cx="354" cy="330" r="5"/><circle class="ux-dot fill" cx="894" cy="330" r="5"/><text class="ux-label soft" x="503" y="319">5. 证据不足时，模型先验会参与补全</text>
-            <path class="ux-msg good" marker-end="url(#uxArrowGood)" d="M354 388H154"/><circle class="ux-dot good" cx="354" cy="388" r="5"/><circle class="ux-dot good" cx="154" cy="388" r="5"/><text class="ux-label good" x="190" y="377">6. 回答 + 开发者复核</text>
-          </svg>
-        </div>
-        <div class="uxseq-foot"><i>用户任务</i><i>知识请求</i><i>证据状态</i><i>评估指标</i></div>
+      <div class="uxreal-seq">
+        <iframe data-src="seq-d3.html?full=1" title="真实人机协同时序图 · 研究证据提取"></iframe>
       </div>
-      <div class="uxread">
-        <div class="uxwhy">
-          <b>这页回答的是“图能产出什么”</b>
-          <span>不是解释每条线的图例，而是说明这类图如何把复杂任务拆成可复核的研究证据。</span>
+      <div class="uxreal-side">
+        <div class="uxreal-lead"><b>这页回答通过时序图可以看到什么。</b>不是另画一张例图，而是在真实链路上标出可沉淀为研究证据的部分。</div>
+        <div class="uxreal-grid">
+          <div class="uxreal-row" data-seq-focus="source"><div class="uxreal-no">01</div><div><b>知识从哪里来</b><span>昇腾社区、第三方平台、本机工具分别在任务里承担什么作用。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="block"><div class="uxreal-no">02</div><div><b>任务在哪里卡住</b><span>搜不到、抓不到、版本不清、证据不足，会在链路里变成返工点。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="review"><div class="uxreal-no">03</div><div><b>开发者何时介入复核</b><span>AI 不能独立判断时，开发者会回到社区做交叉验证或关键决策。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="score"><div class="uxreal-no">04</div><div><b>哪些证据可转成评分</b><span>触达、质量、成本、产出都来自链路中的可观察行为。</span></div></div>
         </div>
-        <div class="uxread-main">
-          <div class="uxread-h">通过时序图可以提取四类证据</div>
-          <div class="uxread-row"><div class="uxread-no">01</div><div class="uxread-t"><b>知识从哪里来</b><span>官方社区、第三方经验、模型先验分别在任务里承担什么作用。</span></div></div>
-          <div class="uxread-row"><div class="uxread-no">02</div><div class="uxread-t"><b>任务在哪里卡住</b><span>搜不到、抓不到、版本不清、证据不足，会在链路里变成返工点。</span></div></div>
-          <div class="uxread-row"><div class="uxread-no">03</div><div class="uxread-t"><b>开发者何时介入复核</b><span>AI 不能独立判断时，开发者会回到社区做交叉验证或关键决策。</span></div></div>
-          <div class="uxread-row"><div class="uxread-no">04</div><div class="uxread-t"><b>哪些证据可转成评分</b><span>触达、质量、成本、产出都来自链路中的可观察行为。</span></div></div>
-        </div>
-        <div class="uxread-next">下一页把这套方法放大到<b>自定义算子开发</b>：不是为了讲算子细节，而是用一个完整案例展示知识流动如何被记录、比较并量化。</div>
+        <div class="uxreal-note">下一页继续用同一张真实图建立读法：节点代表状态，连线代表一次知识事件。</div>
       </div>
     </div>
   </section>
 
   <!-- UX 版新增：研究方法 3 / 节点与线怎么读 -->
-  <section class="slide s-gray ux-method-slide">
+  <section class="slide s-gray ux-method-slide seqfocus-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">基于真实时序图读节点与连线，才能进入后面的完整案例</span></div>
@@ -878,12 +822,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="uxreal-side">
         <div class="uxreal-lead"><b>这页直接基于下一页的真实时序图讲读法。</b>先建立读图规则，再进入完整案例，观众不会在复杂图里重新猜节点和连线的含义。</div>
         <div class="uxreal-grid">
-          <div class="uxreal-row"><div class="uxreal-no">01</div><div><b>顶部竖线是参与方和知识来源</b><span>用户、AI、昇腾社区、第三方平台、模型自带知识；表示任务中谁在发起动作、谁在提供证据。</span></div></div>
-          <div class="uxreal-row"><div class="uxreal-no">02</div><div><b>图中节点是一次阶段或状态</b><span>阶段节点表示任务推进到哪里；受阻节点表示抓空、证据不足、版本不清等可观察问题。</span></div></div>
-          <div class="uxreal-row"><div class="uxreal-no">03</div><div><b>横向箭头是一次知识事件</b><span>一次提问、检索、抓取、返回或复核；记录“谁向谁要证据，以及证据有没有回来”。</span></div></div>
-          <div class="uxreal-row"><div class="uxreal-no">04</div><div><b>回路和分支是研究重点</b><span>换词再检索、转第三方、人工独立复核，说明任务不是顺滑完成，而是在补证中继续推进。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="lanes"><div class="uxreal-no">01</div><div><b>顶部竖线是参与方和知识来源</b><span>开发者、AI、昇腾社区、本机工具、第三方平台；表示任务中谁在发起动作、谁在提供证据。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="nodes"><div class="uxreal-no">02</div><div><b>图中节点是一次阶段或状态</b><span>阶段节点表示任务推进到哪里；受阻节点表示抓空、证据不足、版本不清等可观察问题。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="events"><div class="uxreal-no">03</div><div><b>横向箭头是一次知识事件</b><span>一次提问、检索、抓取、返回或复核；记录“谁向谁要证据，以及证据有没有回来”。</span></div></div>
+          <div class="uxreal-row" data-seq-focus="loops"><div class="uxreal-no">04</div><div><b>回路和分支是研究重点</b><span>换词再检索、转第三方、人工独立复核，说明任务不是顺滑完成，而是在补证中继续推进。</span></div></div>
         </div>
-        <div class="uxreal-note">进入完整案例时，先看真实图里<b>哪些生命线被频繁访问、哪些箭头出现受阻、哪些地方需要开发者复核</b>。</div>
+        <div class="uxreal-note">进入完整案例时，先看真实图里<b>哪些生命线被频繁访问、哪些箭头出现受阻、哪些地方需要开发者复核</b>。可用方向键逐项讲解。</div>
       </div>
     </div>
   </section>
@@ -1771,31 +1715,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
     })();
     </script>
   </section>
-
-  <script>
-    (function(){
-      function initArchMetricFocus(){
-        var layout=document.querySelector('.archmetric-layout');
-        if(!layout||layout.dataset.focusReady)return;
-        layout.dataset.focusReady='1';
-        var frame=layout.querySelector('.archmetric-archbox iframe');
-        var current=null;
-        function send(key){
-          current=key||null;
-          if(!frame||!frame.contentWindow)return;
-          try{ frame.contentWindow.postMessage({__archMetricFocus:current},'*'); }catch(e){}
-        }
-        layout.querySelectorAll('.archmetric-step[data-map]').forEach(function(step){
-          step.addEventListener('mouseenter',function(){send(step.dataset.map);});
-          step.addEventListener('mouseleave',function(){send(null);});
-          step.addEventListener('focusin',function(){send(step.dataset.map);});
-          step.addEventListener('focusout',function(){send(null);});
-        });
-        if(frame) frame.addEventListener('load',function(){send(current);});
-      }
-      if(document.readyState!=='loading')initArchMetricFocus();else document.addEventListener('DOMContentLoaded',initArchMetricFocus);
-    })();
-  </script>
 
   <!-- 3b 灰底：AI 可用性方法论 + 算子 5 场景 -->
   <section class="slide s-gray hmfull-slide">
@@ -3030,6 +2949,123 @@ function metricSpotNav(delta){
   return false;
 }
 
+const seqFocusSlides=[...document.querySelectorAll('.seqfocus-slide')];
+let seqFocusStep=0;
+function activeSeqFocusSlide(){
+  return seqFocusSlides.indexOf(slides[idx])>=0?slides[idx]:null;
+}
+function initUxEvidenceFocus(){
+  document.querySelectorAll('.ux-method-slide').forEach(slide=>{
+    const rows=[...slide.querySelectorAll('.uxread-row[data-ux-evidence]')];
+    if(!rows.length||slide.dataset.evidenceReady)return;
+    slide.dataset.evidenceReady='1';
+    const box=slide.querySelector('.uxseq-svg');
+    const list=slide.querySelector('.uxread-main');
+    function focus(key){
+      if(box)box.classList.toggle('has-focus',!!key);
+      if(list)list.classList.toggle('has-focus',!!key);
+      slide.querySelectorAll('[data-ux-evidence]').forEach(el=>el.classList.toggle('on',!!key&&el.dataset.uxEvidence===key));
+    }
+    rows.forEach(row=>{
+      row.tabIndex=0;
+      row.addEventListener('mouseenter',()=>focus(row.dataset.uxEvidence));
+      row.addEventListener('focusin',()=>focus(row.dataset.uxEvidence));
+      row.addEventListener('click',()=>focus(row.dataset.uxEvidence));
+    });
+    slide.addEventListener('mouseleave',()=>focus(null));
+  });
+}
+function initUxWhyFocus(){
+  document.querySelectorAll('.ux-method-slide').forEach(slide=>{
+    const rows=[...slide.querySelectorAll('.uxwhy-item[data-why-focus]')];
+    if(!rows.length||slide.dataset.whyReady)return;
+    slide.dataset.whyReady='1';
+    const diagram=slide.querySelector('.uxwhy-diagram');
+    const list=slide.querySelector('.uxwhy-list');
+    function focus(key){
+      if(diagram)diagram.classList.toggle('has-focus',!!key);
+      if(list)list.classList.toggle('has-focus',!!key);
+      rows.forEach(row=>row.classList.toggle('on',!!key&&row.dataset.whyFocus===key));
+      slide.querySelectorAll('[data-why-focus]').forEach(el=>{
+        const keys=(el.dataset.whyFocus||'').split(/\s+/);
+        el.classList.toggle('on',!!key&&keys.includes(key));
+      });
+    }
+    rows.forEach(row=>{
+      row.tabIndex=0;
+      row.addEventListener('mouseenter',()=>focus(row.dataset.whyFocus));
+      row.addEventListener('focusin',()=>focus(row.dataset.whyFocus));
+      row.addEventListener('click',()=>focus(row.dataset.whyFocus));
+    });
+    slide.addEventListener('mouseleave',()=>focus(null));
+  });
+}
+function setSeqFocus(step,writeHash,slide){
+  slide=slide||activeSeqFocusSlide();
+  if(!slide)return;
+  const rows=[...slide.querySelectorAll('[data-seq-focus]')];
+  seqFocusStep=Math.max(0,Math.min(rows.length,step));
+  const grid=slide.querySelector('.uxreal-grid');
+  if(grid)grid.classList.toggle('has-focus',seqFocusStep>0);
+  rows.forEach((r,i)=>r.classList.toggle('on',seqFocusStep===i+1));
+  const mode=seqFocusStep>0?rows[seqFocusStep-1].dataset.seqFocus:'all';
+  const fr=slide.querySelector('iframe[src*="seq-d3.html"],iframe[data-src*="seq-d3.html"]');
+  if(fr&&fr.contentWindow){try{fr.contentWindow.postMessage({__seqMethodFocus:mode},'*');}catch(e){}}
+  if(writeHash&&slides[idx]===slide){try{history.replaceState(null,'',deckHash(idx));}catch(e){}}
+}
+function clearSeqFocus(slide){
+  const targets=slide?[slide]:seqFocusSlides;
+  targets.forEach(s=>{
+    const grid=s.querySelector('.uxreal-grid');
+    if(grid)grid.classList.remove('has-focus');
+    s.querySelectorAll('[data-seq-focus]').forEach(r=>r.classList.remove('on'));
+    const fr=s.querySelector('iframe[src*="seq-d3.html"],iframe[data-src*="seq-d3.html"]');
+    if(fr&&fr.contentWindow){try{fr.contentWindow.postMessage({__seqMethodFocus:'all'},'*');}catch(e){}}
+  });
+}
+function seqFocusNav(delta){
+  const slide=activeSeqFocusSlide();
+  if(document.body.classList.contains('overview')||!slide)return false;
+  const max=slide.querySelectorAll('[data-seq-focus]').length;
+  if(delta>0&&seqFocusStep<max){setSeqFocus(seqFocusStep+1,true);return true;}
+  if(delta<0&&seqFocusStep>0){setSeqFocus(seqFocusStep-1,true);return true;}
+  return false;
+}
+function initSeqFocusSlide(){
+  seqFocusSlides.forEach(slide=>{
+    if(slide.dataset.focusReady)return;
+    slide.dataset.focusReady='1';
+    const rows=[...slide.querySelectorAll('[data-seq-focus]')];
+    rows.forEach((row,i)=>{
+      row.tabIndex=0;
+      row.addEventListener('mouseenter',()=>setSeqFocus(i+1,false,slide));
+      row.addEventListener('focusin',()=>setSeqFocus(i+1,false,slide));
+      row.addEventListener('click',()=>setSeqFocus(i+1,true,slide));
+    });
+    const fr=slide.querySelector('iframe[data-src],iframe[src]');
+    if(fr)fr.addEventListener('load',()=>setSeqFocus(slides[idx]===slide?seqFocusStep:0,false,slide));
+  });
+}
+function initArchMetricFocus(){
+  var layout=document.querySelector('.archmetric-layout');
+  if(!layout||layout.dataset.focusReady)return;
+  layout.dataset.focusReady='1';
+  var frame=layout.querySelector('.archmetric-archbox iframe');
+  var current=null;
+  function send(key){
+    current=key||null;
+    if(!frame||!frame.contentWindow)return;
+    try{ frame.contentWindow.postMessage({__archMetricFocus:current},'*'); }catch(e){}
+  }
+  layout.querySelectorAll('.archmetric-step[data-map]').forEach(function(step){
+    step.addEventListener('mouseenter',function(){send(step.dataset.map);});
+    step.addEventListener('mouseleave',function(){send(null);});
+    step.addEventListener('focusin',function(){send(step.dataset.map);});
+    step.addEventListener('focusout',function(){send(null);});
+  });
+  if(frame) frame.addEventListener('load',function(){send(current);});
+}
+
 /* iframe 懒加载:只给当前页及相邻 ±1 注入 src,避免一打开就并发加载 60 个内嵌页(太慢)。相邻预载让顺序翻页时下一页已就绪。 */
 function lazyFrames(center){
   for(var k=Math.max(0,center-1);k<=Math.min(slides.length-1,center+1);k++){
@@ -3048,6 +3084,11 @@ function updateCurrent(i){
     const directDefault=(location.hash||'')==='#'+(idx+1);
     setMetricSpot(metricHash?Number(metricHash[1])-1:(directDefault?2:(from>idx?2:0)),false);
   }else clearMetricSpot();
+  if(seqFocusSlides.indexOf(s)>=0){
+    const max=s.querySelectorAll('[data-seq-focus]').length;
+    const seqHash=(location.hash||'').match(/^#\d+-s(\d+)$/);
+    setSeqFocus(seqHash?Math.min(max,Number(seqHash[1])):0,false,s);
+  }else clearSeqFocus();
   try{history.replaceState(null,'',deckHash(idx));}catch(e){}   /* 网址带当前页码 */
   counter.textContent=pad(idx+1)+' / '+pad(slides.length);
   prevBtn.disabled=idx<=0; nextBtn.disabled=idx>=slides.length-1;
@@ -3060,6 +3101,7 @@ function updateCurrent(i){
 function deckHash(i){
   var h='#'+(i+1);
   if(slides[i]===metricSlide)h+='-m'+(metricSpot+1);
+  if(seqFocusSlides.indexOf(slides[i])>=0&&seqFocusStep>0)h+='-s'+seqFocusStep;
   if(slides[i]&&slides[i].querySelector('#mFull')&&typeof window.__hmStep==='number'&&window.__hmStep>=0)h+='-hm'+(window.__hmStep+1);
   if(slides[i]&&slides[i].querySelector('#devHmFull')&&typeof window.__devHmStep==='number'&&window.__devHmStep>=0)h+='-hm'+(window.__devHmStep+1);
   return h;
@@ -3104,7 +3146,7 @@ function go(n){
   if(i!==idx && triggerSeqMagic(idx,i))return;
   if(i!==idx) updateCurrent(i);
 }
-function next(){if(metricSpotNav(1))return;go(idx+1);} function prev(){if(metricSpotNav(-1))return;go(idx-1);}
+function next(){if(metricSpotNav(1))return;if(seqFocusNav(1))return;go(idx+1);} function prev(){if(metricSpotNav(-1))return;if(seqFocusNav(-1))return;go(idx-1);}
 prevBtn.onclick=prev; nextBtn.onclick=next;
 
 document.addEventListener('keydown',e=>{
@@ -3636,6 +3678,10 @@ if(window.lucide)lucide.createIcons();
 installSeqZoomButtons();
 installBoardTabs();
 installDevHmFocus();
+initUxEvidenceFocus();
+initUxWhyFocus();
+initSeqFocusSlide();
+initArchMetricFocus();
 setTimeout(renderDeriveRelations,80);
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
 (function(){const m=(location.hash||'').match(/(\d+)/);const start=m?Math.min(slides.length,Math.max(1,+m[1]))-1:0;
