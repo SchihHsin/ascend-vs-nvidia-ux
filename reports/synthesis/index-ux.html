@@ -816,52 +816,96 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- UX 版新增：研究方法 2 / 时序图能产出什么 -->
+  <!-- UX 版新增：研究方法 2 / 节点与线怎么读 -->
+  <section class="slide s-gray ux-method-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">先用简化时序图读懂参与方、节点名称与连线含义</span></div>
+        <div class="subttl">方法说明 · 时序图里的节点和线怎么读</div>
+      </div>
+      <div class="head-r">05/ UX 研究方法</div>
+    </div>
+    <div class="body-area">
+      <div class="uxseq-card">
+        <div class="uxseq-title">
+          <div><b>一个低复杂度的人机协同样例</b><span>先只看三类参与方和几条关键线，再进入完整真实案例。</span></div>
+          <div class="uxseq-task">例：跑示例报错，如何定位并修复？</div>
+        </div>
+        <div class="uxseq-svg" aria-label="简化人机协同时序图">
+          <svg viewBox="0 0 980 470" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <marker id="uxArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#2F3D63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+              <marker id="uxArrowGood" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#23A06A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+              <marker id="uxArrowBad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#E15A5A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+              <marker id="uxArrowLoop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5B5BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            </defs>
+            <g class="ux-time"><text x="20" y="72">TIME</text><path d="M38 92v310" stroke="#C6CDD8" stroke-width="1.4" stroke-linecap="round"/><path d="M32 392l6 12 6-12" fill="none" stroke="#C6CDD8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <g data-ux-evidence="lanes">
+              <g class="ux-lane-head"><rect x="120" y="28" width="130" height="42" rx="12"/><text x="185" y="55" text-anchor="middle">开发者</text></g>
+              <g class="ux-lane-head"><rect x="425" y="28" width="130" height="42" rx="12"/><text x="490" y="55" text-anchor="middle">AI 助手</text></g>
+              <g class="ux-lane-head"><rect x="730" y="28" width="130" height="42" rx="12"/><text x="795" y="55" text-anchor="middle">昇腾社区</text></g>
+              <path class="ux-lane" d="M185 82v342"/><path class="ux-lane" d="M490 82v342"/><path class="ux-lane" d="M795 82v342"/>
+            </g>
+            <g data-ux-evidence="events">
+              <path class="ux-msg" marker-end="url(#uxArrow)" d="M185 118H490"/><circle class="ux-dot" cx="185" cy="118" r="6"/><circle class="ux-dot fill" cx="490" cy="118" r="6"/><text class="ux-label" x="238" y="107">1. 带着报错提问</text>
+            </g>
+            <g data-ux-evidence="events names">
+              <path class="ux-msg" marker-end="url(#uxArrow)" d="M490 178H795"/><circle class="ux-dot" cx="490" cy="178" r="6"/><circle class="ux-dot fill" cx="795" cy="178" r="6"/><text class="ux-label" x="560" y="166">2. 检索 · 报错码说明</text>
+            </g>
+            <g data-ux-evidence="block loops">
+              <path class="ux-msg bad" marker-end="url(#uxArrowBad)" d="M795 226H490"/><circle class="ux-dot bad" cx="795" cy="226" r="5"/><circle class="ux-dot bad" cx="490" cy="226" r="5"/><text class="ux-label bad" x="570" y="214">3. 受阻：页面可见但正文抓不到</text>
+            </g>
+            <g data-ux-evidence="loops events">
+              <path class="ux-msg loop" marker-end="url(#uxArrowLoop)" d="M490 290C610 320 682 320 795 290"/><circle class="ux-dot loop" cx="490" cy="290" r="5"/><circle class="ux-dot loop" cx="795" cy="290" r="5"/><text class="ux-label loop" x="574" y="285">4. 换词再检索 / 补证</text>
+            </g>
+            <g data-ux-evidence="nodes names">
+              <rect x="428" y="342" width="124" height="48" rx="14" fill="#181C24" stroke="#181C24"/><text class="ux-label" x="490" y="361" text-anchor="middle" fill="#fff">组织答案</text><text class="ux-label soft" x="490" y="380" text-anchor="middle">交付 · 修复步骤</text>
+            </g>
+            <g data-ux-evidence="events">
+              <path class="ux-msg good" marker-end="url(#uxArrowGood)" d="M490 366H185"/><circle class="ux-dot good" cx="490" cy="366" r="5"/><circle class="ux-dot good" cx="185" cy="366" r="5"/><text class="ux-label good" x="235" y="354">5. 回答 + 开发者复核</text>
+            </g>
+          </svg>
+        </div>
+        <div class="uxseq-foot"><i>参与方</i><i>节点名称</i><i>知识事件</i><i>受阻 / 回路</i></div>
+      </div>
+      <div class="uxread">
+        <div class="uxwhy">
+          <b>这页只讲图例，不讲复杂业务</b>
+          <span>先学会读“谁、做了什么、向谁取证、结果如何”，后面再进入完整算子开发案例。</span>
+        </div>
+        <div class="uxread-main">
+          <div class="uxread-h">读图时先看五类元素</div>
+          <div class="uxread-row" data-ux-evidence="lanes"><div class="uxread-no">01</div><div class="uxread-t"><b>竖线表示参与方</b><span>每条竖线是一类角色或知识来源；动作落在哪条线，就表示由谁发起或承接。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点表示阶段或状态</b><span>节点不是页面，而是任务推进中的一次状态：提问、检索、执行、组织答案。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="names"><div class="uxread-no">03</div><div class="uxread-t"><b>节点名称按“动作 + 对象”读</b><span>例如“检索 · 报错码说明”表示 AI 带着具体问题去找对应资料。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="events"><div class="uxread-no">04</div><div class="uxread-t"><b>横线是一次知识事件</b><span>箭头方向表示谁向谁请求或返回信息；线上文字说明这次往返在做什么。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="loops"><div class="uxread-no">05</div><div class="uxread-t"><b>红线和回路表示风险</b><span>红线是受阻，虚线/回路是换词、补证、人工复核或再检索。</span></div></div>
+        </div>
+        <div class="uxread-next">这套读法建立后，下一页再把完整时序图拿出来，提取证据来源、阻断点和评分口径。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UX 版新增：研究方法 3 / 时序图能产出什么 -->
   <section class="slide s-gray ux-method-slide seqfocus-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">时序图能把一次任务转成来源、阻断点与评分口径</span></div>
-        <div class="subttl">方法说明 · 通过时序图可以看到什么</div>
+        <div class="brand"><span class="ttl">真实时序图能把一次任务转成来源、阻断点与评分口径</span></div>
+        <div class="subttl">方法说明 · 通过完整案例可以看到什么</div>
       </div>
-      <div class="head-r">05/ UX 研究方法</div>
+      <div class="head-r">06/ UX 研究方法</div>
     </div>
     <div class="body-area">
       <div class="uxreal-seq">
         <iframe data-src="seq-d3.html?full=1" title="真实人机协同时序图 · 研究证据提取"></iframe>
       </div>
       <div class="uxreal-side">
-        <div class="uxreal-lead"><b>这页回答通过时序图可以看到什么。</b>不是另画一张例图，而是在真实链路上标出可沉淀为研究证据的部分。</div>
+        <div class="uxreal-lead"><b>这页把刚才的读图规则放回真实案例。</b>不是为了讲算子细节，而是看时序图如何沉淀为可复核的研究证据。</div>
         <div class="uxreal-grid">
           <div class="uxreal-row" data-seq-focus="source"><div class="uxreal-no">01</div><div><b>知识从哪里来</b><span>昇腾社区、第三方平台、本机工具分别在任务里承担什么作用。</span></div></div>
           <div class="uxreal-row" data-seq-focus="block"><div class="uxreal-no">02</div><div><b>任务在哪里卡住</b><span>搜不到、抓不到、版本不清、证据不足，会在链路里变成返工点。</span></div></div>
           <div class="uxreal-row" data-seq-focus="review"><div class="uxreal-no">03</div><div><b>开发者何时介入复核</b><span>AI 不能独立判断时，开发者会回到社区做交叉验证或关键决策。</span></div></div>
           <div class="uxreal-row" data-seq-focus="score"><div class="uxreal-no">04</div><div><b>哪些证据可转成评分</b><span>触达、质量、成本、产出都来自链路中的可观察行为。</span></div></div>
-        </div>
-        <div class="uxreal-note">下一页继续用同一张真实图建立读法：节点代表状态，连线代表一次知识事件。</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- UX 版新增：研究方法 3 / 节点与线怎么读 -->
-  <section class="slide s-gray ux-method-slide seqfocus-slide">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基于真实时序图读节点与连线，才能进入后面的完整案例</span></div>
-        <div class="subttl">方法说明 · 时序图里的节点和线怎么读</div>
-      </div>
-      <div class="head-r">06/ UX 研究方法</div>
-    </div>
-    <div class="body-area">
-      <div class="uxreal-seq">
-        <iframe data-src="seq-d3.html?full=1" title="真实人机协同时序图 · 节点和连线读法"></iframe>
-      </div>
-      <div class="uxreal-side">
-        <div class="uxreal-lead"><b>这页直接基于下一页的真实时序图讲读法。</b>先建立读图规则，再进入完整案例，观众不会在复杂图里重新猜节点和连线的含义。</div>
-        <div class="uxreal-grid">
-          <div class="uxreal-row" data-seq-focus="lanes"><div class="uxreal-no">01</div><div><b>顶部竖线是参与方和知识来源</b><span>开发者、AI、昇腾社区、本机工具、第三方平台；表示任务中谁在发起动作、谁在提供证据。</span></div></div>
-          <div class="uxreal-row" data-seq-focus="nodes"><div class="uxreal-no">02</div><div><b>图中节点是一次阶段或状态</b><span>节点名由动作 + 对象组成：检索表示 AI 带问题找资料，决策表示开发者判断版本或策略，执行表示在本机落地，交付表示阶段产出。</span></div></div>
-          <div class="uxreal-row" data-seq-focus="events"><div class="uxreal-no">03</div><div><b>横向箭头是一次知识事件</b><span>一次提问、检索、抓取、返回或复核；记录“谁向谁要证据，以及证据有没有回来”。</span></div></div>
-          <div class="uxreal-row" data-seq-focus="loops"><div class="uxreal-no">04</div><div><b>回路和分支是研究重点</b><span>换词再检索、转第三方、人工独立复核，说明任务不是顺滑完成，而是在补证中继续推进。</span></div></div>
         </div>
         <div class="uxreal-note">进入完整案例时，先看真实图里<b>哪些生命线被频繁访问、哪些箭头出现受阻、哪些地方需要开发者复核</b>。可用方向键逐项讲解。</div>
       </div>
@@ -3000,7 +3044,10 @@ function initUxEvidenceFocus(){
     function focus(key){
       if(box)box.classList.toggle('has-focus',!!key);
       if(list)list.classList.toggle('has-focus',!!key);
-      slide.querySelectorAll('[data-ux-evidence]').forEach(el=>el.classList.toggle('on',!!key&&el.dataset.uxEvidence===key));
+      slide.querySelectorAll('[data-ux-evidence]').forEach(el=>{
+        const keys=(el.dataset.uxEvidence||'').split(/\s+/);
+        el.classList.toggle('on',!!key&&keys.includes(key));
+      });
     }
     rows.forEach(row=>{
       row.tabIndex=0;
