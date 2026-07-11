@@ -636,7 +636,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <!-- UX 版新增：研究方法 1 / 为什么形成时序图 -->
-  <section class="slide s-gray ux-method-slide seqfocus-slide">
+  <section class="slide s-gray ux-method-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">AI 时代的任务研究，需要把「页面路径」扩展为「知识流动」</span></div>
@@ -765,17 +765,53 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxreal-note b{color:#fff;font-weight:950}
     </style>
     <div class="body-area">
-      <div class="uxreal-seq">
-        <iframe data-src="seq-d3.html?full=1" title="真实人机协同时序图 · 为什么需要知识流动视角"></iframe>
-      </div>
-      <div class="uxreal-side">
-        <div class="uxreal-lead"><b>这页回答为什么要画时序图。</b>单页截图只能说明页面状态，普通旅程图只能说明人怎么走；AI 协同任务还要看到 AI 如何取证、哪里受阻、开发者何时复核。</div>
-        <div class="uxreal-grid three">
-          <div class="uxreal-row" data-seq-focus="search"><div class="uxreal-no">01</div><div><b>把隐性的检索过程显性化</b><span>聚焦 AI 到官方社区、第三方平台的知识请求，看到搜索、抓取、换词和补证。</span></div></div>
-          <div class="uxreal-row" data-seq-focus="review"><div class="uxreal-no">02</div><div><b>把人的复核动作纳入研究</b><span>聚焦开发者独立复核与交叉验证，说明人没有退出链路，而是在高风险节点重新判断。</span></div></div>
-          <div class="uxreal-row" data-seq-focus="governance"><div class="uxreal-no">03</div><div><b>把体验问题连接到内容治理</b><span>聚焦受阻和证据来源，问题不只来自界面，也来自内容是否可发现、可抓取、可复现。</span></div></div>
+      <div class="uxwhy-left">
+        <div class="uxwhy-title"><b>传统旅程图只看人怎么走，AI 协同任务还要看知识怎么流动</b><span>开发者把问题交给 AI 后，答案质量取决于 AI 能否从社区内容中找到、抓到、读懂并回到任务。</span></div>
+        <div class="uxwhy-diagram">
+          <div class="uxpath">
+            <div class="uxpane-h">传统用户旅程</div>
+            <div class="uxpath-line">
+              <div class="uxpath-node">进入官网</div>
+              <div class="uxpath-node">查文档</div>
+              <div class="uxpath-node">下载工具</div>
+              <div class="uxpath-node">遇到问题</div>
+            </div>
+            <div class="uxpath-note">适合观察页面路径、触点体验与情绪变化。</div>
+          </div>
+          <div class="uxmid-arrow">
+            <svg viewBox="0 0 48 48"><path d="M8 24h30"/><path d="m27 13 11 11-11 11"/></svg>
+          </div>
+          <div class="uxflow">
+            <div class="uxpane-h">人机协同时序图</div>
+            <div class="uxflow-map">
+              <svg viewBox="0 0 420 220" preserveAspectRatio="none">
+                <path class="uxflow-link" d="M70 110 C125 70 150 70 205 102"/>
+                <path class="uxflow-link good" d="M205 102 C250 66 298 52 346 62"/>
+                <path class="uxflow-link block" d="M205 110 C252 112 300 112 350 116"/>
+                <path class="uxflow-link soft" d="M205 118 C252 156 298 170 348 158"/>
+                <path class="uxflow-link good" d="M205 128 C152 166 122 166 70 128"/>
+              </svg>
+              <div class="uxbubble human" style="left:15%;top:50%">开发者</div>
+              <div class="uxbubble ai" style="left:49%;top:52%">AI 助手</div>
+              <div class="uxbubble src" style="left:84%;top:22%">官方社区</div>
+              <div class="uxbubble src" style="left:85%;top:52%">受阻点</div>
+              <div class="uxbubble src" style="left:84%;top:82%">第三方 / 先验</div>
+            </div>
+            <div class="uxflow-note">适合观察谁向谁取证、证据是否足够、哪里需要返工或人工复核。</div>
+          </div>
         </div>
-        <div class="uxreal-note">方向键可以逐项切换聚焦状态；讲到哪一条，左侧时序图就只保留对应线索。</div>
+        <div class="uxwhy-foot">所以这张时序图不是技术流程图，而是把<b>任务中的知识请求、证据返回、受阻与复核</b>变成可观察对象。</div>
+      </div>
+      <div class="uxwhy-right">
+        <div class="uxwhy-card">
+          <b>为什么不用单页截图或普通旅程图</b>
+          <p>单页截图只能说明某个页面当下长什么样；普通旅程图能说明用户怎么走。但 AI 协同任务里的关键问题，常发生在“页面之外”：AI 搜了什么、抓到了什么、是否读懂、开发者何时回来复核。</p>
+        </div>
+        <div class="uxwhy-card uxwhy-list">
+          <div class="uxwhy-item"><div class="uxwhy-no">01</div><div class="uxwhy-t"><b>把隐性的检索过程显性化</b><span>原本看不见的搜索、抓取、换词、补证，会被摊开成一条条往返。</span></div></div>
+          <div class="uxwhy-item"><div class="uxwhy-no">02</div><div class="uxwhy-t"><b>把人的复核动作纳入研究</b><span>开发者不是退出链路，而是在高风险节点重新判断证据是否可靠。</span></div></div>
+          <div class="uxwhy-item"><div class="uxwhy-no">03</div><div class="uxwhy-t"><b>把体验问题连接到内容治理</b><span>问题不只来自界面，也来自内容是否可发现、可抓取、可复现。</span></div></div>
+        </div>
       </div>
     </div>
   </section>
