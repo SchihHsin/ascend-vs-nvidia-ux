@@ -2103,7 +2103,11 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
       else if(mode==='block')keep=isBlocked||isSourceLaneLine;
       else if(mode==='score')keep=sourcePair||reviewPair||kind==='branch'||kind==='block'||(kind==='node'&&/^(s|b|d)/.test(msg||''))||isLaneLine;
       el.style.opacity=keep?(isLaneLine&&mode!=='lanes'?'.72':'1'):(isLaneLabel&&mode!=='lanes'?'.08':'0.13');
-      if(keep&&kind==='lane'&&el.tagName==='line'){el.style.strokeWidth=(mode==='lanes'||mode==='source')?'3':'2';el.style.strokeOpacity='1';}
+      if(keep&&kind==='lane'&&el.tagName==='line'){
+        el.style.strokeWidth=(mode==='lanes'||mode==='source')?'3':'2';
+        el.style.strokeOpacity='1';
+        el.style.stroke=mode==='lanes'?(el.getAttribute('data-col')||''):'';
+      }
       if(keep&&(kind==='block'||kind==='branch'||sourcePair||reviewPair))el.style.filter='drop-shadow(0 0 2px rgba(91,91,214,.28))';
       else el.style.filter='';
     });
