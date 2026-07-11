@@ -702,6 +702,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .ux-msg.good{stroke:#23A06A}.ux-msg.bad{stroke:#E15A5A;stroke-dasharray:6 6}.ux-msg.loop{stroke:#5B5BD6;stroke-width:2;stroke-dasharray:8 6}
       .ux-label{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif;font-size:14px;font-weight:780;fill:#232936}
       .ux-label.soft{fill:#5D6676}.ux-label.good{fill:#1E7B50}.ux-label.bad{fill:#C74444}.ux-label.loop{fill:#5B5BD6}
+      .ux-node-note{opacity:0;transition:opacity .18s;pointer-events:none}
+      .uxseq-svg.show-node-notes .ux-node-note{opacity:1}
       .ux-dot{fill:#fff;stroke:#2F3D63;stroke-width:2}.ux-dot.fill{fill:#2F3D63}.ux-dot.good{stroke:#23A06A}.ux-dot.bad{stroke:#E15A5A}.ux-dot.loop{stroke:#5B5BD6}
       .uxseq-foot{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:.62vw}
       .uxseq-foot i{font-style:normal;border-radius:10px;padding:.7vh .55vw;background:rgba(47,111,237,.075);border:1px solid rgba(47,111,237,.12);font-size:var(--fs-sm);font-weight:850;color:#2F3D63;text-align:center;white-space:nowrap}
@@ -850,8 +852,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
               <path class="ux-msg" marker-end="url(#uxArrow)" d="M185 118H490"/><circle class="ux-dot" cx="185" cy="118" r="6"/><circle class="ux-dot fill" cx="490" cy="118" r="6"/><text class="ux-label" x="238" y="107">1. 带着报错提问</text>
             </g>
             <g data-ux-evidence="nodes names">
-              <circle class="ux-dot" cx="185" cy="118" r="13"/><text class="ux-label" x="185" y="123" text-anchor="middle" fill="#2F3D63">n1</text><text class="ux-label soft" x="170" y="143" text-anchor="end">n = node，用户提问</text>
-              <circle class="ux-dot" cx="490" cy="174" r="13"/><text class="ux-label" x="490" y="179" text-anchor="middle" fill="#2F3D63">s1</text><text class="ux-label" x="510" y="166">s = search</text><text class="ux-label soft" x="510" y="184">检索 · 报错码说明</text>
+              <circle class="ux-dot" cx="185" cy="118" r="13"/><text class="ux-label" x="185" y="123" text-anchor="middle" fill="#2F3D63">n1</text><text class="ux-label soft ux-node-note" x="170" y="143" text-anchor="end">n = node，用户提问</text>
+              <circle class="ux-dot" cx="490" cy="174" r="13"/><text class="ux-label ux-node-note" x="510" y="166">s = search</text><text class="ux-label soft ux-node-note" x="510" y="184">检索 · 报错码说明</text><text class="ux-label" x="490" y="179" text-anchor="middle" fill="#2F3D63">s1</text>
             </g>
             <g data-ux-evidence="events names">
               <path class="ux-msg" marker-end="url(#uxArrow)" d="M503 174H795"/><circle class="ux-dot fill" cx="795" cy="174" r="6"/><text class="ux-label" x="585" y="161">2. 请求官方说明</text>
@@ -863,7 +865,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
               <path class="ux-msg loop" marker-end="url(#uxArrowLoop)" d="M490 290H795"/><circle class="ux-dot loop" cx="490" cy="290" r="5"/><circle class="ux-dot loop" cx="795" cy="290" r="5"/><text class="ux-label loop" x="574" y="279">4. 换词再检索 / 补证</text>
             </g>
             <g data-ux-evidence="nodes names">
-              <circle class="ux-dot" cx="490" cy="366" r="13"/><text class="ux-label" x="490" y="371" text-anchor="middle" fill="#2F3D63">g1</text><text class="ux-label" x="510" y="358">g = generate</text><text class="ux-label soft" x="510" y="376">组织答案 · 交付修复步骤</text>
+              <circle class="ux-dot" cx="490" cy="366" r="13"/><text class="ux-label ux-node-note" x="510" y="358">g = generate</text><text class="ux-label soft ux-node-note" x="510" y="376">组织答案 · 交付修复步骤</text><text class="ux-label" x="490" y="371" text-anchor="middle" fill="#2F3D63">g1</text>
             </g>
             <g data-ux-evidence="events">
               <path class="ux-msg good" marker-end="url(#uxArrowGood)" d="M476 366H185"/><circle class="ux-dot good" cx="185" cy="366" r="5"/><text class="ux-label good" x="235" y="354">5. 回答 + 开发者复核</text>
@@ -3047,6 +3049,7 @@ function initUxEvidenceFocus(){
     const list=slide.querySelector('.uxread-main');
     function focus(key){
       if(box)box.classList.toggle('has-focus',!!key);
+      if(box)box.classList.toggle('show-node-notes',key==='nodes'||key==='names');
       if(list)list.classList.toggle('has-focus',!!key);
       slide.querySelectorAll('[data-ux-evidence]').forEach(el=>{
         const keys=(el.dataset.uxEvidence||'').split(/\s+/);
