@@ -647,30 +647,46 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <style>
       .knowledge-pyramid-slide .body-area{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:2.3vw;align-items:stretch}
       .kp-stage{position:relative;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-      .kp-stage:before{content:"";position:absolute;left:8%;right:5%;bottom:3%;height:46%;background:radial-gradient(72% 78% at 48% 100%,rgba(91,91,214,.15),rgba(79,172,254,.07) 52%,transparent 78%);filter:blur(4px);pointer-events:none}
-      .kp-pyramid{position:relative;z-index:1;width:min(94%,720px);height:86%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1.15vh}
-      .kp-layer{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:.72vw;align-items:center;color:#fff;box-shadow:0 18px 32px -25px rgba(24,29,45,.66),inset 0 1px 0 rgba(255,255,255,.34);padding:1.35vh 2.2vw 1.35vh 3.15vw;clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
-      .kp-layer i{width:27px;height:27px;stroke-width:1.9}.kp-layer b{display:block;font-size:var(--fs-h3);line-height:1.15;font-weight:950}.kp-layer span{display:block;margin-top:.34vh;font-size:var(--fs-body);line-height:1.38;color:rgba(255,255,255,.86)}
-      .kp-layer.search{width:54%;min-height:19%;background:linear-gradient(135deg,#303B64,#5B5BD6)}.kp-layer.machine{width:74%;min-height:23%;background:linear-gradient(135deg,#436FA8,#4E9DB7)}.kp-layer.asset{width:96%;min-height:28%;background:linear-gradient(135deg,#2E7D63,#2F806E)}
-      .kp-level{position:absolute;left:-1.55vw;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.12em;color:#778195;writing-mode:vertical-rl}
+      .kp-stage:before{content:"";position:absolute;left:8%;right:5%;bottom:8%;height:50%;background:radial-gradient(72% 78% at 42% 100%,rgba(255,90,110,.12),rgba(255,111,85,.045) 52%,transparent 78%);filter:blur(4px);pointer-events:none}
+      .kp-pyramid{position:relative;z-index:1;width:min(96%,760px);height:76%;display:flex;align-items:center;justify-content:center}
+      .kp-pyramid svg{display:block;width:100%;height:100%;overflow:visible}.kp-pyramid .kp-num{font-family:'JetBrains Mono';font-size:18px;font-weight:900;fill:#969EAC;letter-spacing:.08em}.kp-pyramid .kp-title{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:22px;font-weight:900;fill:#fff}.kp-pyramid .kp-desc{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:14px;font-weight:600;fill:rgba(255,255,255,.82)}
       .kp-side{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.kp-side-lead{padding:1.25vh 1.1vw 1.35vh;border-radius:13px;background:var(--g-ink);color:#fff;box-shadow:0 16px 34px -24px rgba(20,23,28,.62),inset 0 1px 0 rgba(255,255,255,.18)}.kp-side-lead b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950}.kp-side-lead span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.43;color:rgba(255,255,255,.76)}
-      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:grid;grid-template-columns:28px minmax(0,1fr);gap:.68vw;align-items:start;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row span{display:block;margin-top:.28vh;font-size:var(--fs-sm);line-height:1.4;color:var(--ink-2)}.kp-row.search .kp-dot{background:#5B5BD6}.kp-row.machine .kp-dot{background:#3A91A6}.kp-row.asset .kp-dot{background:#2E7D63}
-      .kp-evidence{border-radius:12px;padding:1vh .9vw;background:rgba(91,91,214,.075);border:1px solid rgba(91,91,214,.13);font-size:var(--fs-sm);line-height:1.42;color:#4E586A}.kp-evidence b{font-weight:950;color:#252A35}
+      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:flex;align-items:flex-start;gap:.68vw;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row.search .kp-dot{background:#E84656}.kp-row.machine .kp-dot{background:#D62236}.kp-row.asset .kp-dot{background:#252B35}
+      .kp-chips{display:flex;flex-wrap:wrap;gap:.38vw;margin-top:.48vh}.kp-chips span{display:inline-flex;align-items:center;min-height:23px;border-radius:999px;padding:.24vh .55vw;background:#fff;border:1px solid rgba(47,61,99,.14);font-size:var(--fs-sm);line-height:1.2;color:#475264;font-weight:800}.kp-row.search .kp-chips span{border-color:rgba(232,70,86,.22);color:#B93644}.kp-row.machine .kp-chips span{border-color:rgba(214,34,54,.22);color:#A92B3A}.kp-row.asset .kp-chips span{border-color:rgba(37,43,53,.18);color:#3E4654}
+      .kp-evidence{border-radius:12px;padding:1.05vh .95vw;background:rgba(255,90,110,.08);border:1px solid rgba(255,90,110,.16);font-size:var(--fs-body);line-height:1.45;color:#4E586A}.kp-evidence b{font-weight:950;color:#252A35}
     </style>
     <div class="body-area">
       <div class="kp-stage">
         <div class="kp-pyramid">
-          <div class="kp-layer search"><span class="kp-level">L3</span><i data-lucide="search-x"></i><div><b>检索与引用</b><span>深层任务难搜到官方当前答案，引用路径不稳定</span></div></div>
-          <div class="kp-layer machine"><span class="kp-level">L2</span><i data-lucide="braces"></i><div><b>机器理解层</b><span>正文未必可取回；版本、代码与上下文难被正确理解</span></div></div>
-          <div class="kp-layer asset"><span class="kp-level">L1</span><i data-lucide="database-zap"></i><div><b>知识资产层</b><span>高难度任务缺完整知识包，生态与模型知识难以兜底</span></div></div>
+          <svg viewBox="0 0 820 520" role="img" aria-label="知识资产层、机器理解层、检索与引用三层问题金字塔">
+            <defs><filter id="kpShadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#25131A" flood-opacity=".16"/></filter></defs>
+            <g filter="url(#kpShadow)">
+              <polygon points="260,40 178,160 342,160" fill="#FF6F55"/>
+              <polygon points="260,40 342,160 260,160" fill="#D62236"/>
+              <polygon points="160,176 360,176 420,292 100,292" fill="#F15462"/>
+              <polygon points="260,176 360,176 420,292 260,292" fill="#B71E30"/>
+              <polygon points="76,310 444,310 518,446 0,446" fill="#3A424F"/>
+              <polygon points="260,310 444,310 518,446 260,482" fill="#1A1E26"/>
+              <polygon points="0,446 260,482 518,446 444,462 260,503 76,462" fill="#2A303A" opacity=".72"/>
+            </g>
+            <text class="kp-num" x="128" y="121">03</text><path d="M352 99H412" stroke="#FF6F55" stroke-width="2"/>
+            <rect x="424" y="62" width="334" height="76" rx="0" fill="#D62236"/><path d="M758 62V138L790 100Z" fill="#A81A29"/>
+            <text class="kp-title" x="448" y="91">检索与引用</text><text class="kp-desc" x="448" y="115">任务词难直达官方当前答案</text>
+            <text class="kp-num" x="112" y="250">02</text><path d="M430 232H492" stroke="#F15462" stroke-width="2"/>
+            <rect x="504" y="194" width="286" height="76" rx="0" fill="#F15462"/><path d="M790 194V270L818 232Z" fill="#BD2737"/>
+            <text class="kp-title" x="528" y="223">机器理解层</text><text class="kp-desc" x="528" y="247">找到页面，也未必读懂内容</text>
+            <text class="kp-num" x="48" y="390">01</text><path d="M530 371H570" stroke="#3A424F" stroke-width="2"/>
+            <rect x="582" y="333" width="208" height="76" rx="0" fill="#252B35"/><path d="M790 333V409L818 371Z" fill="#12151B"/>
+            <text class="kp-title" x="606" y="362">知识资产层</text><text class="kp-desc" x="606" y="386">专有难题缺完整知识包</text>
+          </svg>
         </div>
       </div>
       <div class="kp-side">
         <div class="kp-side-lead"><b>信任落差并非单一“文档不好用”，而是三层问题连续叠加</b><span>后续研究会分别测量这些问题；结论部分再展开每一层应如何改造。</span></div>
         <div class="kp-map">
-          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索层：官方答案不总能被任务词找到</b><span>26 个任务中，CANN 有 12 个需要二次检索，CUDA 为 5 个；难点集中在深层开发任务。</span></div></div>
-          <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-warning"></i></span><div><b>理解层：找到页面，不等于读到能支撑答案的内容</b><span>自定义算子教程正文未取回；错误码页能取回但缺少原因、场景与修复路径；版本也会使答案错配。</span></div></div>
-          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>资产层：专有难题缺少可复用、可互证的知识</b><span>D / E / M 等任务形成低谷；第三方来源少而同质，模型自带知识也难以补上专有细节。</span></div></div>
+          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索层：官方答案不总能被任务词找到</b><div class="kp-chips"><span>12 个任务需二次检索</span><span>深层任务官方不在首屏</span><span>引用入口不稳定</span></div></div></div>
+          <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-warning"></i></span><div><b>理解层：找到页面，不等于读到能支撑答案的内容</b><div class="kp-chips"><span>操作教程正文未取回</span><span>错误码缺修复路径</span><span>版本错配风险</span><span>代码与表格难读取</span></div></div></div>
+          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>资产层：专有难题缺少可复用、可互证的知识</b><div class="kp-chips"><span>D / E / M 形成低谷</span><span>第三方少而同质</span><span>模型自带知识偏薄</span><span>端到端专题缺失</span></div></div></div>
         </div>
         <div class="kp-evidence"><b>三层会相互放大：</b>资产不足时没有替代证据；机器读不懂时无法转成可靠答案；检索入口又决定人和 AI 能否遇见这份知识。</div>
       </div>
