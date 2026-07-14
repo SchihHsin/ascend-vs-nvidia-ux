@@ -239,13 +239,13 @@ a.hit:hover{text-decoration:underline;color:#444}
 </div></div></div>
 
 <div class="card"><div class="prob"><span class="prob-id">2</span><div class="body">
-  <h3>模型自带知识系统性偏薄：AI 助手「不检索就答不了」，而 CUDA 多数能直接答</h3>
+  <h3>AI 对昇腾知识积累不足：AI 助手「不检索就答不了」，而 CUDA 多数能直接答</h3>
   <p>⑦ 模型自带知识 CANN 侧均值约 2.9（多数 2–3 分），CUDA 侧 4–5 分。含义：对 CUDA 问题，AI 凭训练知识就能给七八成正确答案、检索只是校准版本；对 CANN 问题，<b>检索是答案的唯一来源</b>——一旦检索链路任何一环断掉（搜不到/抓不到/抓到不够细），答案质量直接坍塌，没有兜底。这放大了下面所有问题的后果。</p>
   <div class="evline"><b>证据</b>：⑦ 列 CANN 2 分格有 7 个（D/E/I/M/N/S/X），全 26 格均值 2.85；CUDA 侧无一格低于 4。训练语料里 CANN 内容密度低 + 迭代快（churn=fast 的 D/I/S 再罚 0.5）。<b>站方对策见 §3 卡 8（训练语料供给，26 全量后新增）</b>；Agent 侧对策见 §4 卡 G（按专有依赖度路由）。</div>
 </div></div></div>
 
 <div class="card"><div class="prob"><span class="prob-id">3</span><div class="body">
-  <h3>第三方生态「少而同质」，且各平台对 Agent 的可抓取程度参差：有的抓得全、有的整站抓不到</h3>
+  <h3>第三方来源少、内容相互重复，且各平台对 Agent 的可抓取程度参差：有的抓得全、有的整站抓不到</h3>
   <p>CANN 侧第三方来源普遍 2–3 条且集中在 CSDN/华为云 bbs，多次出现「CSDN×2 互抄」（独立性因子被罚）。叠加一个容易被忽略的维度——<b>第三方平台本身的可抓性分层</b>：CSDN、博客园、华为云 bbs、segmentfault、阿里云/天翼云开发者社区实测可整页抓全；<b>知乎反爬 403</b>，实测多次取不到正文、只剩搜索结果摘要可用。后果是双重的：① 对 Agent 而言<b>有效第三方 = 条数 × 可抓性</b>，知乎上的优质长文对 AI 助手近乎不存在，Agent 视角的第三方生态比人眼看到的更窄；② 「可抓的恰好是 CSDN」反过来加剧了同质化——Agent 能用的来源被进一步压向单一平台。对照 CUDA：StackOverflow、独立技术博客、大学课程、英文教程构成多平台互证网且基本可抓。第三方是官方文档之外唯一的「绕行通道」，这条通道窄，官方文档的任何缺陷就无法被社区内容补偿。</p>
   <div class="evline"><b>证据</b>：⑤第三方丰富度 CANN 26 格均 ≤4、K/M/N/S/X 仅 2；⑥ 一致性多为 mid；independence_factor 实罚 B.cann（CSDN×2）。知乎 403 见 N/O/Q 三任务 RAW 注记（O 明确「未取得不计」，不进 ⑤⑥）；抓取失败按 ⑧ 公式 <code>4·fetch_fail</code> 重罚。注意时效<b>不是</b>短板——实测 CANN 第三方多为 2024–2026 新文。</div>
 </div></div></div>
@@ -269,7 +269,7 @@ a.hit:hover{text-decoration:underline;color:#444}
 </div></div></div>
 
 <div class="card"><div class="prob"><span class="prob-id">7</span><div class="body">
-  <h3>检索成本「尖刺」：多数任务成本正常，但个别任务一次失败抓取就把成本打穿</h3>
+  <h3>检索成本高：多数任务成本正常，但个别任务一次失败抓取就把成本打穿</h3>
   <p>⑧检索成本 CANN 侧多数 3–5（正常），但 D/K/O 跌到 1：fetch 失败后要换 URL、换子树、换关键词绕行，轮数与抓取次数翻倍。对用户的含义：AI 助手回答这些任务时<b>响应慢、且过程中容易「看起来在瞎逛」</b>——这是用户体验要直面的（见 §4）。</p>
   <div class="evline"><b>证据</b>：⑧ = 1 的格：D.cann、K.cann、O.cann（均含 fetch_fail≥1，公式 cost = rounds + 0.5·fetch + 4·fetch_fail）。</div>
 </div></div></div>
@@ -506,7 +506,7 @@ NeMo / NIM / Jetson → llms.txt
 
   <div class="card uxcard">
     <div class="who">提升 ⑤⑥ 第三方生态 · 慢变量、需持续运营</div>
-    <h3>6. 扶持第三方生态：从「少而同质」到「多平台互证」</h3>
+    <h3>6. 扶持第三方生态：从单一来源到多平台互证</h3>
     <ul class="tight">
       <li>由官方博客／开发者论坛做首发与背书，同时鼓励 CSDN、个人博客、Medium／dev.to 等多平台同步产出带版本号的完整教程——独立性因子惩罚的不是某个平台，而是「单一平台重复转载」。</li>
       <li><b>选平台先看 Agent 可抓性</b>：优质教程若只发在知乎（实测 403），对 AI 助手近乎不存在；应优先落在可抓平台，或同步一份到官方博客／Gitee 仓 markdown。</li>
@@ -517,7 +517,7 @@ NeMo / NIM / Jetson → llms.txt
     <div class="demo">
       <div class="duo">
         <div class="bad">
-          <div class="duolab">✕ 昇腾现状 · 少而同质，优质内容抓不到</div>
+          <div class="duolab">✕ 昇腾现状 · 来源少，优质内容抓不到</div>
           <div class="cov" style="padding:4px 2px">
             <div class="covrow"><span class="pf">CSDN 等平台</span><span class="st mid">同源重复 · 独立性不足</span></div>
             <div class="covrow"><span class="pf">知乎（优质）</span><span class="st no">403 · 反爬抓不到 ✕</span></div>
@@ -585,14 +585,14 @@ NeMo / NIM / Jetson → llms.txt
     <div class="why">⑦ 是三条渠道中唯一可跨「当代 Agent 产品」起效的——它内化于模型，用户更换任何 AI 工具都随之带走。见效慢，但具复利效应。CUDA 的高分是 20 年自然生态的副产品；昇腾没有 20 年可等，「自然生长」在此并非可行方案，只能主动供给。</div>
     <div class="demotitle">Demo · 把时序图里的「模型自带知识」从薄弱兜底，变成可被训练吸收的知识底座 <span class="mockdisc">长期杠杆</span></div>
     <div class="demo">
-      <div class="dnote">在前面的 Agent 流程图里，「模型自带知识」是检索之外的兜底：检索受阻时，模型会回到自己训练中学过的内容。CANN 的问题是这个兜底偏薄，所以要把官方和生态内容做成更容易被下一代模型收录的形态。</div>
+      <div class="dnote">在前面的 Agent 流程图里，「模型自带知识」是检索之外的兜底：检索受阻时，模型会回到自己训练中学过的内容。CANN 的问题是这层知识积累不足，所以要把官方和生态内容做成更容易被下一代模型收录的形态。</div>
       <div style="display:grid;grid-template-columns:1fr 1.05fr;gap:14px;align-items:stretch">
         <div class="bw">
           <div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">当前 Agent 流程 · 受阻时的兜底</span></div>
           <div class="bbody">
             <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px">
               <div class="covrow"><span class="pf">检索官方</span><span class="st mid">部分任务可抓，部分受阻</span></div>
-              <div class="covrow"><span class="pf">第三方互证</span><span class="st mid">高难度场景偏薄</span></div>
+              <div class="covrow"><span class="pf">第三方互证</span><span class="st mid">高难度场景资料少</span></div>
               <div class="covrow" style="padding:8px;border-radius:9px;background:#FFF4E5;border:1px solid #ecd9a8"><span class="pf"><b>模型自带知识</b></span><span class="st no">CANN 多数仅 2-3 分</span></div>
             </div>
             <p style="font-size:12px;color:#666;margin-top:10px">结果：一旦检索链路断掉，模型更容易靠类比和记忆补空，答案看似完整但不够稳。</p>
@@ -705,7 +705,7 @@ NeMo / NIM / Jetson → llms.txt
     </div>
   </div>
 </div>
-    <div class="why">⑧成本尖刺格（D/K/O）的实测检索过程里，绕路重试占了大半时间。失败不可耻，不可见才致命。</div>
+    <div class="why">⑧检索成本低分格（D/K/O）的实测检索过程里，绕路重试占了大半时间。失败不可耻，不可见才致命。</div>
   </div>
 
   <div class="card uxcard agent">
