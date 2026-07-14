@@ -831,9 +831,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .seqdemo-empty{border-radius:10px;border:1px dashed #E15A5A;background:#FFF7F7;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#C74444;text-align:center;font-size:var(--fs-body);line-height:1.45;font-weight:850}
       .seqdemo-empty span{font-size:var(--fs-sm);font-weight:650;color:#8D4C4C;margin-top:.4vh}
       .seqdemo-doc{display:grid;grid-template-columns:1fr 1fr;gap:.8vw;height:100%}
-      .seqdemo-doc .pane{border-radius:13px;background:#fff;border:1px solid rgba(47,61,99,.1);padding:1vh .8vw;min-height:0;font-size:var(--fs-sm);line-height:1.45;color:#596274}
-      .seqdemo-doc .pane b{display:block;font-size:var(--fs-body);color:#202531;margin-bottom:.55vh}
-      .seqdemo-doc .pane.good{border-color:rgba(35,160,106,.26);box-shadow:inset 0 0 0 1px rgba(35,160,106,.1)}
+      .seqdemo-doc .pane{border-radius:13px;border:1px solid rgba(47,61,99,.1);padding:1vh .8vw;min-height:0;font-size:var(--fs-sm);line-height:1.45;color:#596274}
+      .seqdemo-doc .pane b{display:block;font-size:var(--fs-body);color:#202531;margin-bottom:.55vh}.seqdemo-doc .pane.mode-ai{background:linear-gradient(145deg,rgba(225,237,255,.92),rgba(255,255,255,.92));border-color:rgba(47,111,237,.24);box-shadow:inset 0 0 0 1px rgba(47,111,237,.08)}.seqdemo-doc .pane.mode-human{background:linear-gradient(145deg,rgba(243,238,255,.92),rgba(255,255,255,.92));border-color:rgba(100,112,133,.2);box-shadow:inset 0 0 0 1px rgba(91,91,214,.07)}
+      .seqdemo-default-head{display:flex;align-items:center;gap:.46vw;margin-bottom:.6vh}.seqdemo-default-head i{width:26px;height:26px;padding:5px;border-radius:8px;stroke-width:2.1}.seqdemo-default-head b{margin:0!important}.mode-ai .seqdemo-default-head i{color:#fff;background:#2F6FED}.mode-human .seqdemo-default-head i{color:#fff;background:#647085}
       .seqdemo-docnav{margin-bottom:.55vh;color:#7A8495;font-size:var(--fs-xs);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
       .seqdemo-copy{margin:0 0 .7vh;color:#596274;font-size:var(--fs-sm);line-height:1.42}.seqdemo-copy mark{background:#FFF1B9;color:#202531;border-radius:3px;padding:0 2px}
       .seqdemo-forum-meta{display:flex;align-items:center;gap:6px;margin-bottom:.6vh;color:#7A8495;font-size:var(--fs-xs);font-weight:750}.seqdemo-forum-meta:before{content:"";width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#647085,#BFC7D3)}
@@ -855,7 +855,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .seqdemo-chip{border-radius:10px;background:rgba(47,111,237,.075);border:1px solid rgba(47,111,237,.12);font-size:var(--fs-sm);font-weight:850;color:#2F3D63;text-align:center;padding:.65vh .4vw;cursor:pointer;transition:opacity .18s,background .18s,box-shadow .18s}
       .seqdemo-hint.has-focus .seqdemo-chip{opacity:.42}.seqdemo-hint.has-focus .seqdemo-chip.on{opacity:1;background:#fff;box-shadow:0 10px 24px -22px rgba(30,40,70,.42),inset 0 0 0 1px rgba(91,91,214,.16)}
       .seqdemo-pointer{position:absolute;width:18px;height:18px;z-index:4;color:#202531;stroke-width:2.25;fill:#fff;filter:drop-shadow(0 3px 4px rgba(20,23,28,.25));animation:seqPointer 3s ease-in-out infinite;pointer-events:none}
-      .seqdemo-panel.review .seqdemo-pointer{left:25%;top:44%;animation-delay:.4s}
+      .seqdemo-panel.human .seqdemo-pointer{left:31%;top:25%;animation-delay:.4s}
       @keyframes seqCursor{50%{opacity:0}}
       @keyframes seqPointer{0%,100%{transform:translate(0,0)}45%{transform:translate(7px,5px)}60%{transform:translate(4px,3px) scale(.92)}}
     </style>
@@ -976,8 +976,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
               <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><span class="seqdemo-browser-name">研究观察台</span><span class="seqdemo-browser-mode">双路径</span></div>
               <div class="seqdemo-content">
                 <div class="seqdemo-doc">
-                  <div class="pane good"><b>AI 侧</b>搜索、抓取、判断证据是否足够，并把过程留下可评分记录。<div class="seqdemo-check"><i>输入任务词</i><i>打开候选页面</i><i>读取正文与代码</i></div></div>
-                  <div class="pane"><b>开发者侧</b>在不确定、报错或需要决策时，回到社区做人工复核。<div class="seqdemo-check"><i>核对版本</i><i>查看论坛案例</i><i>决定是否采纳</i></div></div>
+                  <div class="pane mode-ai"><div class="seqdemo-default-head"><i data-lucide="bot"></i><b>AI 使用社区</b></div>搜索、抓取、判断证据是否足够，并把过程留下可评分记录。<div class="seqdemo-check"><i>输入任务词</i><i>打开候选页面</i><i>读取正文与代码</i></div></div>
+                  <div class="pane mode-human"><div class="seqdemo-default-head"><i data-lucide="user-round"></i><b>开发者使用社区</b></div>在不确定、报错或需要决策时，回到社区做人工复核。<div class="seqdemo-check"><i>核对版本</i><i>查看论坛案例</i><i>决定是否采纳</i></div></div>
                 </div>
               </div>
             </div>
@@ -988,10 +988,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="seqdemo-agent">
               <div class="seqdemo-agentbar"><span class="seqdemo-agent-status"></span><b>Agent 检索工作台</b><span>RUNNING</span></div>
               <div class="seqdemo-agentbody">
-                <div class="seqdemo-agenttask"><span>开发任务</span><b>示例报错 E19999 如何修复？</b></div>
-                <div class="seqdemo-agentstep"><i>01</i><div><b>生成查询</b><span>site:hiascend.com E19999 修复</span></div><em>done</em></div>
+                <div class="seqdemo-agenttask"><span>开发任务</span><b>自定义算子操作教程怎么找？</b></div>
+                <div class="seqdemo-agentstep"><i>01</i><div><b>生成查询</b><span>site:hiascend.com 自定义算子 操作教程</span></div><em>done</em></div>
                 <div class="seqdemo-agentstep active"><i>02</i><div><b>读取候选证据</b><span>官方文档 / 论坛问答 / 第三方案例</span></div><em>reading</em></div>
-                <div class="seqdemo-agent-evidence"><div class="seqdemo-evidence-head"><b>候选证据</b><span>可引用内容</span></div><div class="seqdemo-evidence-row good"><i data-lucide="file-text"></i><span>官方报错处理说明</span><b>正文 + 命令</b></div><div class="seqdemo-evidence-row"><i data-lucide="messages-square"></i><span>论坛同类案例</span><b>待核对版本</b></div><div class="seqdemo-evidence-row warn"><i data-lucide="file-warning"></i><span>页面正文为空</span><b>需换来源</b></div></div>
+                <div class="seqdemo-agent-evidence"><div class="seqdemo-evidence-head"><b>候选证据</b><span>可引用内容</span></div><div class="seqdemo-evidence-row warn"><i data-lucide="file-warning"></i><span>官方自定义算子操作教程</span><b>正文未返回</b></div><div class="seqdemo-evidence-row"><i data-lucide="messages-square"></i><span>论坛同类案例</span><b>待核对版本</b></div><div class="seqdemo-evidence-row"><i data-lucide="file-text"></i><span>第三方入门示例</span><b>需补官方依据</b></div></div>
               </div>
             </div>
             <div class="seqdemo-chip">重点观察：可发现性、可抓取性、内容是否能支撑作答</div>
