@@ -696,9 +696,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .seq-shared.has-focus [data-seq-item]{opacity:.13}.seq-shared.has-focus [data-seq-item].on{opacity:1;filter:drop-shadow(0 0 2px rgba(91,91,214,.26))}
       .seq-shared [data-seq-item]{transition:opacity .22s,filter .22s}
       .seq-shared.lines-step [data-seq-item^="line-"].on{animation:p2LineReveal .58s ease both}
-      .seq-shared.lines-step [data-seq-item="line-n1"].on{animation-delay:0s}.seq-shared.lines-step [data-seq-item="line-ai-off"].on{animation-delay:.42s}.seq-shared.lines-step [data-seq-item="line-ai-return"].on{animation-delay:.84s}.seq-shared.lines-step [data-seq-item="line-ai-third"].on{animation-delay:1.26s}.seq-shared.lines-step [data-seq-item="line-ai-answer"].on{animation-delay:1.68s}.seq-shared.lines-step [data-seq-item="line-work"].on{animation-delay:2.1s}.seq-shared.lines-step [data-seq-item="line-human"].on{animation-delay:2.52s}
+      .seq-shared.lines-step [data-seq-item="line-task"].on{animation-delay:0s}.seq-shared.lines-step [data-seq-item="line-ai-community"].on{animation-delay:.62s}.seq-shared.lines-step [data-seq-item="line-human"].on{animation-delay:1.24s}
       @keyframes p2LineReveal{from{opacity:.13;filter:none}to{opacity:1;filter:drop-shadow(0 0 2px rgba(91,91,214,.26))}}
-      .seq-shared text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif}.p2cap{font-size:12px;font-weight:850;fill:#647085}.p2phase{fill:#EFEAF7;stroke:rgba(107,91,168,.22);stroke-width:1}.p2phase-t{font-size:15px;font-weight:950;fill:#4F3F88}.p2phase-s{font-size:11px;font-weight:800;fill:#615582}.p2heads rect{fill:#fff;stroke:rgba(47,61,99,.16);stroke-width:1}.p2heads text{font-size:14px;font-weight:900;fill:#2F3D63}.p2heads text.off{fill:#C8102E}.p2lane{stroke:#D6DCE6;stroke-width:1.35;stroke-dasharray:5 7;fill:none}.p2msg{stroke:#8156C9;stroke-width:2.15;stroke-linecap:round;fill:none}.p2msg.blocked{stroke:#C8102E}.p2return{stroke:#C8102E;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2branch{stroke:#2F3D63;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2node{fill:#fff;stroke:#6B5BA8;stroke-width:2}.p2node.hu{stroke:#2F3D63}.p2node.ai{fill:#ECE7F6;stroke:#6B5BA8}.p2node.blocked-ring{stroke:#C8102E;stroke-width:2.5}.p2run{fill:#F1F5FC;stroke:#2F3D63;stroke-width:2}.p2id{font-size:13px;font-weight:900;fill:#2F3D63}.p2id.aiid{fill:#5C4D91}.p2label{font-size:13px;font-weight:800;fill:#313A49}.p2label.red,.p2tiny.red{fill:#C8102E}.p2label.humanlabel{fill:#2F3D63}.p2tiny{font-size:10.5px;font-weight:750;fill:#657084}
+      .seq-shared text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif}.p2cap{font-size:12px;font-weight:850;fill:#647085}.p2phase{fill:#EFEAF7;stroke:rgba(107,91,168,.22);stroke-width:1}.p2phase-t{font-size:15px;font-weight:950;fill:#4F3F88}.p2phase-s{font-size:11px;font-weight:800;fill:#615582}.p2heads rect{fill:#fff;stroke:rgba(47,61,99,.16);stroke-width:1}.p2heads text{font-size:14px;font-weight:900;fill:#2F3D63}.p2heads text.off{fill:#C8102E}.p2lane{stroke:#D6DCE6;stroke-width:1.35;stroke-dasharray:5 7;fill:none}.p2msg{stroke:#8156C9;stroke-width:2.15;stroke-linecap:round;fill:none}.p2msg.blocked{stroke:#C8102E}.p2return{stroke:#C8102E;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2branch{stroke:#2F3D63;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2node{fill:#fff;stroke:#6B5BA8;stroke-width:2}.p2node.hu{stroke:#2F3D63}.p2node.ai{fill:#ECE7F6;stroke:#6B5BA8}.p2node.blocked-ring{stroke:#C8102E;stroke-width:2.5}.p2id{font-size:13px;font-weight:900;fill:#2F3D63}.p2id.aiid{fill:#5C4D91}.p2label{font-size:13px;font-weight:800;fill:#313A49}.p2label.red,.p2tiny.red{fill:#C8102E}.p2label.humanlabel{fill:#2F3D63}.p2tiny{font-size:10.5px;font-weight:750;fill:#657084}.p2node-note{opacity:0;transition:opacity .18s;pointer-events:none}.seq-shared.show-node-notes .p2node-note{opacity:1}.p2node-note rect{fill:#16191E;stroke:none}.p2node-note text{fill:#fff;font-size:10.5px;font-weight:800}
       .ux-lane{stroke:#CAD0DB;stroke-width:1.3;stroke-dasharray:5 7}
       .ux-lane-head rect{fill:rgba(255,255,255,.72);stroke:rgba(47,61,99,.13);stroke-width:1}
       .ux-lane-head text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif;font-size:15px;font-weight:850;fill:#202531}
@@ -916,17 +916,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">先从全量时序图的同一任务阶段读懂参与方、节点与连线</span></div>
-        <div class="subttl">方法说明 · P2「写核函数」阶段局部</div>
+        <div class="subttl">方法说明 · 「写核函数」阶段局部</div>
       </div>
       <div class="head-r">05/ UX 研究方法</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card">
         <div class="uxseq-title">
-          <div><b>全量图中的 P2「写核函数」阶段</b><span>后续 #6 和 #7 将复用这张完全相同的局部图，只改变讲解重点。</span></div>
+          <div><b>全量图中的「写核函数」阶段</b><span>后续 #6 和 #7 将复用这张完全相同的局部图，只改变讲解重点。</span></div>
           <div class="uxseq-task">例：自定义算子 how-to</div>
         </div>
-        <div class="uxseq-svg seqslice seq-shared" data-seq-shared data-slice-mode="all" aria-label="全量时序图的 P2 写核函数阶段局部"></div>
+        <div class="uxseq-svg seqslice seq-shared" data-seq-shared data-slice-mode="all" aria-label="全量时序图的写核函数阶段局部"></div>
         <div class="uxseq-foot"><i>参与方</i><i>节点状态</i><i>知识事件</i><i>受阻 / 回路</i></div>
       </div>
       <div class="uxread">
@@ -937,7 +937,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="uxread-main">
           <div class="uxread-h">读图时先看四类元素</div>
           <div class="uxread-row" data-ux-evidence="lanes"><div class="uxread-no">01</div><div class="uxread-t"><b>竖线表示参与方</b><span>每条竖线是一类角色或知识来源；动作落在哪条线，就表示由谁发起或承接。</span></div></div>
-          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点用短 ID 标记状态</b><span>节点本体如 sD、dSoc，用来定位链路中的状态点；具体动作主要看所在生命线与箭头文字。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点用短 ID 标记状态</b><span>例如 n1 = 开发者提出任务，sD = AI 搜索官方文档；悬浮时显示缩写含义。</span></div></div>
           <div class="uxread-row" data-ux-evidence="events"><div class="uxread-no">03</div><div class="uxread-t"><b>横线是一次知识事件</b><span>箭头方向表示谁向谁请求或返回信息；线上文字说明这次往返在做什么。</span></div></div>
           <div class="uxread-row" data-ux-evidence="loops"><div class="uxread-no">04</div><div class="uxread-t"><b>红线和回路表示风险</b><span>红线是受阻，虚线/回路是换词、补证、人工复核或再检索。</span></div></div>
         </div>
@@ -959,9 +959,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="uxseq-card seqdemo-left">
         <div class="uxseq-title">
           <div><b>完整链路中重点观察两条与昇腾社区直接相关的线</b><span>AI 向社区取证，开发者回到社区核对；右侧分别呈现两种使用模式。</span></div>
-          <div class="uxseq-task">P2：自定义算子 how-to</div>
+          <div class="uxseq-task">自定义算子 how-to</div>
         </div>
-        <div class="uxseq-svg seqdemo-svg seqslice seq-shared" data-seq-shared data-slice-mode="community" aria-label="全量时序图的 P2 写核函数阶段局部"></div>
+        <div class="uxseq-svg seqdemo-svg seqslice seq-shared" data-seq-shared data-slice-mode="community" aria-label="全量时序图的写核函数阶段局部"></div>
         <div class="seqdemo-hint">
           <div class="seqdemo-chip" data-seq-focus="ai">01 AI 使用昇腾社区</div>
           <div class="seqdemo-chip" data-seq-focus="human">02 开发者使用昇腾社区</div>
@@ -1027,17 +1027,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .seqscope-sample{padding:1.65vh 1.05vw;display:grid;grid-template-rows:auto 1fr auto;gap:.85vh}.seqscope-sample h3,.seqscope-full h3{margin:0;color:var(--ink);font-size:var(--fs-h3);line-height:1.2;font-weight:950}.seqscope-sample p,.seqscope-full p{margin:.28vh 0 0;color:var(--ink-2);font-size:var(--fs-body);line-height:1.4}
       .seqscope-mini{min-height:0;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.52)}
       .seqscope-sample-foot{border-radius:10px;background:linear-gradient(135deg,rgba(47,111,237,.1),rgba(91,91,214,.07));border:1px solid rgba(47,111,237,.12);padding:.75vh .7vw;color:#3F495A;font-size:var(--fs-sm);line-height:1.35}.seqscope-sample-foot b{color:#202531;font-weight:950}
-      .seqscope-bridge{position:relative;min-height:0;display:flex;align-items:center;justify-content:center}.seqscope-bridge:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,#7AA6F8,#7C5CF0)}.seqscope-bridge:after{content:"";position:absolute;right:0;top:calc(50% - 5px);width:11px;height:11px;border-top:2px solid #7C5CF0;border-right:2px solid #7C5CF0;transform:rotate(45deg)}.seqscope-bridge span{position:relative;z-index:1;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid rgba(91,91,214,.2);box-shadow:0 10px 24px -18px rgba(91,91,214,.55);display:flex;align-items:center;justify-content:center;color:#5B5BD6}.seqscope-bridge i{width:20px;height:20px;stroke-width:2}
+      .seqscope-bridge{position:relative;min-height:0;display:flex;align-items:center;justify-content:center}.seqscope-bridge:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,#7AA6F8,#7C5CF0)}.seqscope-bridge:after{content:"";position:absolute;right:0;top:calc(50% - 5px);width:11px;height:11px;border-top:2px solid #7C5CF0;border-right:2px solid #7C5CF0;transform:rotate(45deg)}
       .seqscope-full{padding:1.35vh .7vw;display:grid;grid-template-rows:auto 1fr;gap:.7vh}.seqscope-full-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1vw;padding:0 .45vw}.seqscope-full-head div{min-width:0}.seqscope-stage-key{flex:0 0 auto;border-radius:999px;padding:.48vh .62vw;background:rgba(91,91,214,.1);border:1px solid rgba(91,91,214,.16);color:#5B4AB7;font-size:var(--fs-sm);font-weight:900;white-space:nowrap}.seqscope-stage-key:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#7C5CF0;margin-right:6px;box-shadow:0 0 0 3px rgba(124,92,240,.12)}
-      .seqscope-frame{position:relative;min-height:0;border-radius:12px;overflow:hidden;background:#fff;border:1px solid rgba(47,61,99,.1)}.seqscope-frame iframe{width:100%;height:100%;border:0;background:transparent}.seqscope-focusband{position:absolute;left:1.7%;top:19%;width:15.2%;height:27%;border:2px dashed #5B5BD6;border-radius:8px;background:rgba(124,92,240,.06);box-shadow:0 0 0 500px rgba(255,255,255,.12);pointer-events:none}.seqscope-focusnote{position:absolute;left:18%;top:29%;max-width:28%;border-radius:9px;background:#16191E;color:#fff;padding:.65vh .62vw;font-size:var(--fs-sm);line-height:1.32;box-shadow:0 12px 24px -16px rgba(20,23,28,.7);pointer-events:none}.seqscope-focusnote b{font-weight:950}.seqscope-focusnote:before{content:"";position:absolute;left:-26px;top:50%;width:25px;height:1px;background:#5B5BD6}.seqscope-summary{position:absolute;right:1.1%;bottom:1.2%;width:42%;border-radius:10px;background:rgba(255,255,255,.93);border:1px solid rgba(91,91,214,.18);box-shadow:0 12px 28px -18px rgba(30,40,70,.35);padding:.7vh .68vw;color:#4E586A;font-size:var(--fs-sm);line-height:1.34}.seqscope-summary b{display:block;color:#202531;font-weight:950;margin-bottom:.18vh}
+      .seqscope-frame{position:relative;min-height:0;border-radius:12px;overflow:hidden;background:#fff;border:1px solid rgba(47,61,99,.1)}.seqscope-frame iframe{width:100%;height:100%;border:0;background:transparent}.seqscope-focusband{position:absolute;left:20.5%;top:19.5%;width:43%;height:10%;border:2px dashed #5B5BD6;border-radius:8px;background:rgba(124,92,240,.06);box-shadow:0 0 0 500px rgba(255,255,255,.12);pointer-events:none}.seqscope-focusnote{position:absolute;left:65%;top:20%;max-width:24%;border-radius:9px;background:#16191E;color:#fff;padding:.65vh .62vw;font-size:var(--fs-sm);line-height:1.32;box-shadow:0 12px 24px -16px rgba(20,23,28,.7);pointer-events:none}.seqscope-focusnote b{font-weight:950}.seqscope-focusnote:before{content:"";position:absolute;left:-24px;top:50%;width:23px;height:1px;background:#5B5BD6}.seqscope-summary{position:absolute;right:1.1%;bottom:1.2%;width:42%;border-radius:10px;background:rgba(255,255,255,.93);border:1px solid rgba(91,91,214,.18);box-shadow:0 12px 28px -18px rgba(30,40,70,.35);padding:.7vh .68vw;color:#4E586A;font-size:var(--fs-sm);line-height:1.34}.seqscope-summary b{display:block;color:#202531;font-weight:950;margin-bottom:.18vh}
     </style>
     <div class="body-area">
       <div class="seqscope-sample">
-        <div><h3>任务阶段局部：P2 写核函数</h3><p>从全量开发过程取出同一片段，先读懂谁向社区请求知识、谁回到社区核对。</p></div>
-        <div class="seqscope-mini seq-shared" data-seq-shared data-slice-mode="community" aria-label="P2 写核函数阶段局部时序图"></div>
+        <div><h3>任务阶段局部：写核函数</h3><p>从全量开发过程取出同一片段，先读懂谁向社区请求知识、谁回到社区核对。</p></div>
+        <div class="seqscope-mini seq-shared" data-seq-shared data-slice-mode="community" aria-label="写核函数阶段局部时序图"></div>
         <div class="seqscope-sample-foot"><b>作用：</b>先把一次任务里的知识往返讲清楚，便于理解后续图中的每一条关系。</div>
       </div>
-      <div class="seqscope-bridge" aria-hidden="true"><span><i data-lucide="move-right"></i></span></div>
+      <div class="seqscope-bridge" aria-hidden="true"></div>
       <div class="seqscope-full">
         <div class="seqscope-full-head"><div><h3>完整过程：一次自定义算子开发</h3><p>把同一类往返放进开发全过程，才看得到问题集中在哪个任务阶段。</p></div><span class="seqscope-stage-key">左侧 = 任务阶段</span></div>
         <div class="seqscope-frame">
@@ -3116,21 +3116,18 @@ slides.forEach((slide,i)=>{
 let idx=0;
 
 function sharedP2SequenceHtml(){
-  return `<svg viewBox="0 0 1040 470" preserveAspectRatio="xMidYMid meet" role="img" aria-label="全量时序图 P2 写核函数阶段局部">
+  return `<svg viewBox="0 0 1040 470" preserveAspectRatio="xMidYMid meet" role="img" aria-label="全量时序图的写核函数阶段局部">
     <defs>
       <marker id="p2ArrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#8156C9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
       <marker id="p2ArrowRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
       <marker id="p2ArrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#2F3D63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
     </defs>
-    <g data-seq-item="lanes"><text x="72" y="26" text-anchor="middle" class="p2cap">阶段</text><rect x="20" y="44" width="104" height="356" rx="11" class="p2phase"/><text x="72" y="84" text-anchor="middle" class="p2phase-t">P2</text><text x="72" y="108" text-anchor="middle" class="p2phase-s">写核函数</text>
+    <g data-seq-item="lanes"><text x="72" y="26" text-anchor="middle" class="p2cap">阶段</text><rect x="20" y="44" width="104" height="356" rx="11" class="p2phase"/><text x="72" y="92" text-anchor="middle" class="p2phase-t">写核函数</text>
       <g class="p2heads"><rect x="250" y="34" width="104" height="34" rx="10"/><text x="302" y="56" text-anchor="middle">开发者</text><rect x="450" y="34" width="104" height="34" rx="10"/><text x="502" y="56" text-anchor="middle">AI (Agent)</text><rect x="650" y="34" width="104" height="34" rx="10"/><text x="702" y="56" text-anchor="middle" class="off">昇腾社区</text><rect x="850" y="34" width="104" height="34" rx="10"/><text x="902" y="56" text-anchor="middle">第三方平台</text></g>
       <path d="M302 82v336M502 82v336M702 82v336M902 82v336" class="p2lane"/></g>
-    <g data-seq-item="line-n1"><path d="M302 106H502" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="402" y="94" text-anchor="middle" class="p2label">立项·选型·开发算子接 PyTorch</text></g><g data-seq-item="node-n1"><circle cx="302" cy="106" r="13" class="p2node hu"/><text x="302" y="111" text-anchor="middle" class="p2id">n1</text></g>
-    <g data-seq-item="line-ai-off"><path d="M502 160H702" class="p2msg blocked" marker-end="url(#p2ArrowRed)"/><text x="602" y="147" text-anchor="middle" class="p2label red">1·自定义算子 how-to</text></g><g data-seq-item="node-sD"><circle cx="502" cy="160" r="16" class="p2node ai blocked-ring"/><text x="502" y="165" text-anchor="middle" class="p2id aiid">sD</text></g><g data-seq-item="line-ai-return"><path d="M702 180H502" class="p2return" marker-end="url(#p2ArrowRed)"/><text x="602" y="197" text-anchor="middle" class="p2tiny red">抓取为空（SPA）</text></g>
-    <g data-seq-item="line-ai-third"><path d="M502 238H902" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="702" y="226" text-anchor="middle" class="p2label">官方受阻 → 转第三方平台拼答案</text></g><g data-seq-item="node-sD2"><circle cx="502" cy="238" r="14" class="p2node ai"/><text x="502" y="243" text-anchor="middle" class="p2id aiid">sD2</text></g>
-    <g data-seq-item="line-ai-answer"><path d="M502 292H302" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="402" y="280" text-anchor="middle" class="p2label">给 msopgen / 编包骨架</text></g><g data-seq-item="node-gD"><circle cx="502" cy="292" r="14" class="p2node ai"/><text x="502" y="297" text-anchor="middle" class="p2id aiid">gD</text></g>
-    <g data-seq-item="line-work"><path d="M302 344H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="332" text-anchor="middle" class="p2tiny">本地 msopgen + 写核函数</text></g><g data-seq-item="node-eD"><rect x="286" y="328" width="32" height="32" rx="6" class="p2run"/><text x="302" y="349" text-anchor="middle" class="p2id">eD</text></g>
-    <g data-seq-item="line-human"><path d="M302 386H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="374" text-anchor="middle" class="p2label humanlabel">AI 受阻 → 开发者自查官方文档</text><text x="502" y="403" text-anchor="middle" class="p2tiny">版本、步骤与同类经验核对</text></g>
+    <g data-seq-item="line-task"><path d="M302 126H502" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="402" y="113" text-anchor="middle" class="p2label">开发者把算子任务交给 AI</text></g><g data-seq-item="node-n1"><circle cx="302" cy="126" r="13" class="p2node hu"/><text x="302" y="131" text-anchor="middle" class="p2id">n1</text><g class="p2node-note"><rect x="222" y="144" width="160" height="38" rx="7"/><text x="302" y="160" text-anchor="middle">n = need（提出任务）</text><text x="302" y="174" text-anchor="middle">开发者的知识需求起点</text></g></g>
+    <g data-seq-item="line-ai-community"><path d="M502 212H702" class="p2msg blocked" marker-end="url(#p2ArrowRed)"/><text x="602" y="199" text-anchor="middle" class="p2label red">AI 搜索「自定义算子 how-to」</text><path d="M702 232H502" class="p2return" marker-end="url(#p2ArrowRed)"/><text x="602" y="250" text-anchor="middle" class="p2tiny red">页面正文未能取回</text></g><g data-seq-item="node-sD"><circle cx="502" cy="212" r="16" class="p2node ai blocked-ring"/><text x="502" y="217" text-anchor="middle" class="p2id aiid">sD</text><g class="p2node-note"><rect x="422" y="258" width="160" height="38" rx="7"/><text x="502" y="274" text-anchor="middle">s = search（搜索）</text><text x="502" y="288" text-anchor="middle">AI 查询官方 how-to</text></g></g>
+    <g data-seq-item="line-human"><path d="M502 292H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="602" y="279" text-anchor="middle" class="p2label humanlabel">AI 受阻 → 开发者自查官方文档</text><text x="602" y="309" text-anchor="middle" class="p2tiny">核对版本、步骤与同类经验</text></g>
   </svg>`;
 }
 function initSharedP2Sequences(){
@@ -3208,7 +3205,6 @@ function initUxEvidenceFocus(){
     const list=slide.querySelector('.uxread-main');
     function focus(key){
       if(box)box.classList.toggle('has-focus',!!key);
-      if(box)box.classList.toggle('show-node-notes',key==='nodes');
       if(list)list.classList.toggle('has-focus',!!key);
       slide.querySelectorAll('[data-ux-evidence]').forEach(el=>{
         const keys=(el.dataset.uxEvidence||'').split(/\s+/);
@@ -3217,10 +3213,11 @@ function initUxEvidenceFocus(){
       const shared=slide.querySelector('.seq-shared');
       if(shared){
         shared.classList.toggle('has-focus',!!key);
+        shared.classList.toggle('show-node-notes',key==='nodes');
         shared.classList.toggle('lines-step',key==='events');
         shared.querySelectorAll('[data-seq-item]').forEach(item=>{
           const name=item.dataset.seqItem;
-          const hit=key==='lanes'?name==='lanes':key==='nodes'?name.startsWith('node-'):key==='events'?name.startsWith('line-'):key==='loops'?['line-ai-off','line-ai-return'].includes(name):false;
+          const hit=key==='lanes'?name==='lanes':key==='nodes'?name.startsWith('node-'):key==='events'?name.startsWith('line-'):key==='loops'?name==='line-ai-community':false;
           item.classList.toggle('on',hit);
         });
       }
@@ -3278,7 +3275,7 @@ function setSeqFocus(step,writeHash,slide){
     shared.classList.remove('lines-step');
     shared.querySelectorAll('[data-seq-item]').forEach(item=>{
       const name=item.dataset.seqItem;
-      const hit=mode==='ai'?['line-ai-off','line-ai-return'].includes(name):mode==='human'?name==='line-human':['line-ai-off','line-ai-return','line-human'].includes(name);
+      const hit=mode==='ai'?name==='line-ai-community':mode==='human'?name==='line-human':['line-ai-community','line-human'].includes(name);
       item.classList.toggle('on',hit);
     });
     slide.querySelectorAll('[data-seq-demo]').forEach(panel=>{
