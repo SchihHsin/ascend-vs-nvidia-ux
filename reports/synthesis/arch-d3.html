@@ -351,7 +351,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 
 <a id="s1"></a>
 <h2><span class="no">①</span>全链路时序图 · 4 参与者（拖动「AI 自主度」看场景切换 · 悬浮看每步细节）</h2>
-<div class="sechint">竖向时序图、<b>5 条生命线（昇腾社区 ｜ 第三方平台 ｜ AI ｜ 开发者 ｜ 本机工具）</b>。这是<b>「算子开发场景」全流程</b>：开发一个算子沿时间撞上 <b>5 次搜索（D→M→X→O→L）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行。拖滑块看 3 档自主度、<b>悬浮节点看细节</b>。<details class="moreinfo"><summary>展开：交互与核心发现</summary><div>每步是参与者间一条消息（横向箭头、标题在上）。<b>核心发现</b>：5 次搜索里<b>只有写 kernel 的 D（sD）官方真受阻</b>——AI 向昇腾社区 <code>web_fetch</code>，返回红色空箭头「✕ 抓取为空（SPA）」、再转第三方平台兜底；后面 M/X/O/L 官方都抓得到、但各有版本/第三方平台/自带的坑。拖动时执行/决策发起方 morph——越自动「开发者」线越靠边。（3 档为协作示意、仅 AI 检索步实测，口径见底部局限①）</div></details></div>
+<div class="sechint">竖向时序图、<b>5 条生命线（昇腾社区 ｜ 第三方平台 ｜ AI ｜ 开发者 ｜ 本机工具）</b>。这是<b>「算子开发场景」全流程</b>：开发一个算子沿时间撞上 <b>5 次搜索（D→M→X→O→L）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行。拖滑块看 3 档自主度、<b>悬浮节点看细节</b>。<details class="moreinfo"><summary>展开：交互与核心发现</summary><div>每步是参与者间一条消息（横向箭头、标题在上）。<b>核心发现</b>：5 次搜索里<b>只有写 kernel 的 D（sD）官方真受阻</b>——AI 向昇腾社区 <code>web_fetch</code>，返回红色空箭头「✕ 页面正文未能取回」、再转第三方平台兜底；后面 M/X/O/L 官方都抓得到、但各有版本/第三方平台/自带的坑。拖动时执行/决策发起方 morph——越自动「开发者」线越靠边。（3 档为协作示意、仅 AI 检索步实测，口径见底部局限①）</div></details></div>
 
 <div class="sctabs" id="sctabs"></div>
 
@@ -419,7 +419,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
           <div class="lofi-bar s-comm">昇腾社区文档站 · opdevg 写 kernel 页</div>
           <div class="lofi-body">
             <div class="ba2">
-              <div class="ba-col ba-b"><span class="ba-t">现状（SPA）</span>web_fetch 只回导航 + meta、<b>正文 0 字</b>——AI 抓取为空，错误地基由此而起</div>
+              <div class="ba-col ba-b"><span class="ba-t">现状（正文未返回）</span>web_fetch 只回导航 + meta、<b>正文 0 字</b>——AI 抓取为空，错误地基由此而起</div>
               <span class="ba-arr">→</span>
               <div class="ba-col ba-a"><span class="ba-t">改后（静态化）</span>正文 HTML 内含 msopgen 命令 + 参数表，<b>AI 一次抓全</b>、不必转第三方平台</div>
             </div>
@@ -429,7 +429,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
         <div class="lofi">
           <div class="lofi-bar s-ai">AI 助手 · 回答</div>
           <div class="lofi-body">
-            <div class="lofi-warn">⚠ 官方 how-to 页未取得（SPA 抓取为空）；以下据第三方平台 + 自带知识，请核对官方</div>
+            <div class="lofi-warn">⚠ 官方 how-to 页未取得（页面正文未能取回）；以下据第三方平台 + 自带知识，请核对官方</div>
             <p>步骤一：msopgen gen …<span class="src s-2">第三方平台</span></p>
             <p>步骤二：build.sh 编包 …<span class="src s-own">自带知识</span></p>
           </div>
@@ -664,7 +664,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
     <tbody>
       <tr><td><b>补约束</b>：写明「要<b>可照抄的完整命令 + 锁定版本号</b>」</td><td>逼 AI 在 s5 给出带真实 soc_version 占位说明的 msopgen 命令，而非泛泛描述，减少 d1 的来回。</td></tr>
       <tr><td><b>限范围</b>：写明芯片型号 / CANN 版本（如 910B1 + 8.0.RC3）</td><td>直接消解 d2 版本对齐这个卡点——AI 不必在多版本间猜，输出一次到位。</td></tr>
-      <tr><td><b>限渠道</b>：写明「优先官方文档，无法取得则说明受阻、不得编造」</td><td>触发 AI 在 s3 受阻时<b>诚实标注 SPA 无法抓取</b>并转第三方平台，而不是用记忆补全一个看似正确、实则无法运行的步骤。</td></tr>
+      <tr><td><b>限渠道</b>：写明「优先官方文档，无法取得则说明受阻、不得编造」</td><td>触发 AI 在 s3 受阻时<b>诚实标注页面正文未能取回</b>并转第三方平台，而不是用记忆补全一个看似正确、实则无法运行的步骤。</td></tr>
       <tr><td><b>给反馈</b>：把 s9 的编译报错<b>原文</b>贴回</td><td>AI 解读的准确度直接取决于报错原文，而非「我编译失败了」这类模糊描述。</td></tr>
     </tbody>
   </table>
@@ -677,7 +677,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <tbody>
     <tr><td>第 1 轮</td><td><b>规划</b>：解析「Ascend C 自定义算子 + 接 PyTorch」→ 拆成「找官方 how-to → 找工程脚手架 → 找 PyTorch 绑定方式」三个子目标；<b>决定先发 web_search</b>。</td><td>s2</td></tr>
     <tr><td>（服务端）</td><td><b>读结果 + 研判</b>：扫一遍搜索摘要，识别出官方页 + 知乎 + MindSpore + CSDN；判断官方页最权威 → <b>决定 web_fetch 官方 URL</b>。</td><td>s2→s3</td></tr>
-    <tr><td>第 2 轮</td><td><b>遇阻分支判断</b>：fetch 回来只有 meta、正文缺失 → 识别为 SPA 受阻 → <b>不编造</b>，改判「靠第三方平台 + 自带知识拼」→ 决定再读 MindSpore / CSDN。</td><td>s3（受阻）→s4</td></tr>
+    <tr><td>第 2 轮</td><td><b>遇阻分支判断</b>：fetch 回来只有 meta、正文缺失 → 确认页面正文未返回 → <b>不编造</b>，改判「靠第三方平台 + 自带知识拼」→ 决定再读 MindSpore / CSDN。</td><td>s3（受阻）→s4</td></tr>
     <tr><td>第 3 轮</td><td><b>结果生成</b>：把第三方平台碎片 + 自带知识合成步骤骨架，按「环境→msopgen→核函数→编包→部署→绑定」排序，<b>给占位 + 标注哪些需用户核验</b>（soc_version / 版本）→ 输出，<code>end_turn</code>。</td><td>s5</td></tr>
   </tbody>
 </table>
@@ -807,7 +807,7 @@ TOOLS = [
             <span class="k">if</span> b.type == <span class="s">"tool_use"</span> <span class="k">and</span> b.name == <span class="s">"web_fetch"</span>:
                 body = <span class="f">fetch_url</span>(b.input[<span class="s">"url"</span>])
                 results.<span class="f">append</span>({<span class="s">"type"</span>: <span class="s">"tool_result"</span>, <span class="s">"tool_use_id"</span>: b.id,
-                    <span class="s">"content"</span>: body <span class="k">or</span> <span class="s">"（SPA / robots：正文抽不到）"</span>})
+                    <span class="s">"content"</span>: body <span class="k">or</span> <span class="s">"（页面正文未能取回/robots 拦截）"</span>})
         messages.<span class="f">append</span>({<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: results})
 </pre>
 <div class="kv">
@@ -855,7 +855,7 @@ const D_NODES = [
   {id:"n1",   lane:"hu", kind:"start",   t:"立项·选型·开发算子接 PyTorch",
     meta:"用户主导 · P1 · 含 step1 落地·选型", b:`<b>用户给 AI 的原始输入：</b>「我要在昇腾 NPU 上写一个自定义算子（例如逐元素 AddCustom），用 Ascend C 实现，并注册进 PyTorch、能在 torch_npu 里调用——完整流程怎么走？」<br><br>目标：开发一个 Ascend C 自定义算子并接入 PyTorch。立项即含<b>选型（step1 落地·找入口·选型）</b>——先去社区找入口、判断走 aclnn 简易工程还是完整自定义算子工程。之后这次开发会沿时间撞上多次搜索，每次对应 26 任务里不同的一个。`},
   {id:"sD",   lane:"ai", kind:"fetch",   blocked:true, t:"🔍 检索 D·自定义算子 how-to",
-    meta:"Agent 自主 · P2 · 官方受阻", b:"写核函数前搜「怎么写自定义算子」。web_fetch 官方 how-to（devguide/opdevg SPA）正文抓取为空——<b>这是整条旅程唯一官方真受阻的一搜</b>。", blk:"实测受阻：SPA 页只回导航 + meta；26 任务里唯一「SPA 短板真正咬到结果」的格。"},
+    meta:"Agent 自主 · P2 · 官方受阻", b:"写核函数前搜「怎么写自定义算子」。web_fetch 官方 how-to（devguide/opdevg）页面正文未能取回——<b>这是整条旅程唯一官方真受阻的一搜</b>。", blk:"实测受阻：页面只返回导航和标题；26 任务里唯一「正文未能取回真正影响结果」的格。"},
   {id:"sD2",  lane:"ai", kind:"search",  t:"官方受阻 → 转第三方平台拼答案",
     meta:"Agent 自主 · P2", b:"官方抓不到，转 MindSpore 2.3.1 教程 + CSDN「AscendC 入门」+ 自带知识合成骨架。第三方平台薄、扎堆 CSDN。"},
   {id:"gD",   lane:"ai", kind:"draft",   t:"给 msopgen / 编包骨架",
@@ -901,7 +901,7 @@ const D_NODES = [
 const D_BRANCH = [
   {id:"b0", from:"n1", to:"off", step:"step1", above:true, t:"找入口·选型",
     b:`立项时人去昇腾社区找开发入口、判断走 aclnn 简易工程还是完整自定义算子工程。<div class="tt-sec"><span class="lbl">对应 ascend step1 落地·找入口·选型（据姊妹 UX 研究）</span>· 单站全包、官网首页即露开发入口（不弱）；<br>· 但<b>开发者中心埋在二级</b>，缺一个「先点这里」的最强单一行动入口。</div>`},
-  {id:"b1", from:"sD", to:"off", step:"step4·安全网", t:"AI 受阻 → 人自查官方 SPA",
+  {id:"b1", from:"sD", to:"off", step:"step4·安全网", t:"AI 受阻 → 人自查官方文档",
     b:`AI fetch 受阻时，用户开浏览器人眼看渲染后正文——人能看到 AI 抓不到的内容（这条是安全网，非决策）。<b>档①②都在</b>：受阻时人仍会去看；<b>但前提是 AI 把受阻暴露给人</b>——若 AI 静默退第三方平台不告知，人就看不到、安全网形同失效（越自主越不透明的风险）。<div class="tt-sec"><span class="lbl">对应 ascend step4 写·查文档（据姊妹 UX 研究 · 真实截图 2026-06-13）</span>· 文档中心搜索框带字符上限（约 100 字），贴一整段报错会被<b>截断</b>；<br>· 想去论坛提问，<b>发帖需登录华为账号</b>（门槛）；<br>· 好在论坛按产品线分版（综合 / Ascend C / CANN…）、另有集中的 <b>AscendFAQ</b>，自助定位还算准。</div>`},
   {id:"bSoc", from:"dSoc", to:"off", step:"step3", t:"查官方版本配套表",
     b:`选 soc_version 时，人去查官方版本配套表、npu-smi 对应关系。<div class="tt-sec"><span class="lbl">对应 ascend step3 配环境·拿 Toolkit（据姊妹 UX 研究）</span>· 多版本号并存，<b>选对版本本身就费劲</b>；<br>· 想搜博客佐证，昇腾内容<b>SEO 偏弱、海外搜不到</b>。</div>`},
@@ -1200,7 +1200,7 @@ function renderV(){
       svg.append("line").attr("x1",x2-dir*3).attr("y1",ry).attr("x2",x1+dir*14).attr("y2",ry)
         .attr("stroke","#C8102E").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ahr)").attr("opacity",.92);
       svg.append("text").attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
-        .attr("font-size",9.5).attr("font-weight",700).attr("fill","#C8102E").text("✕ 抓取为空（SPA）"+(NS[d.id]?" → 矩阵 "+NS[d.id]:""));
+        .attr("font-size",9.5).attr("font-weight",700).attr("fill","#C8102E").text("✕ 页面正文未能取回"+(NS[d.id]?" → 矩阵 "+NS[d.id]:""));
     }
   });
 
@@ -1268,7 +1268,7 @@ let pinned=false;
 const D_NDETAIL={
   s2:{arch:"① 意图解析 → ② 子目标拆解 → ③ 工具路由 → web_search"},
   s3:{arch:"③ 工具路由 → web_fetch → ④ 研判（抓取为空）→ ⑤ 遇阻处理",
-    full:`<div class="tt-sec"><span class="lbl">卡点（实测受阻）</span>官方 how-to 整段压在 <b>devguide/opdevg/</b> SPA 子树，web_fetch 只回导航 + meta、<b>正文抓不到</b>。</div>`
+    full:`<div class="tt-sec"><span class="lbl">卡点（实测受阻）</span>官方 how-to 位于 <b>devguide/opdevg/</b> 的操作教程页只返回导航和标题、<b>正文抓不到</b>。</div>`
         +`<div class="tt-sec"><span class="lbl">解决</span>转走第三方平台（s4）+ 让用户开浏览器人眼自查（分支 b1，人能看到 AI 抓不到的渲染后正文）。</div>`},
   s4:{arch:"⑤ 遇阻处理（转第三方平台 + 自带知识）→ 续检索 / 收敛"},
   s5:{arch:"⑥ 收敛 → 终答（end_turn）"},
@@ -1476,7 +1476,7 @@ function coopTipHtml(withFull){
   else html+=`<div class="tt-b">自主度拉满 → <b>用户独立分支归零</b>：决策也交给 AI、人不再独立核查，安全网消失。</div>`;
   if(withFull){
     if(curLvl<=1) html+=`<div class="tt-sec"><span class="lbl">${BRANCH.length} 条用户独立分支</span>${BRANCH.map(b=>b.id+" "+b.t+"（→"+((b.to||"off")==="sec"?"第三方平台":"昇腾社区")+"）").join("、")}——都是人直接和昇腾社区交互的后备动作（档①②都在，决策与受阻自查仍归人）。</div>`;
-    else html+=`<div class="tt-sec"><span class="lbl">安全网消失</span>自动化档 AI 遭遇同样的 SPA / 版本问题，但无人核查。</div>`;
+    else html+=`<div class="tt-sec"><span class="lbl">安全网消失</span>自动化档 AI 遭遇同样的“正文未返回”/版本问题，但无人核查。</div>`;
     html+=`<div class="tt-foot">点击空白处或 ✕ 关闭</div>`;
   } else html+=`<div class="tt-hint">点击查看完整说明 ↗</div>`;
   return html;
@@ -1489,7 +1489,7 @@ const D_ARCHFLOW={
   sD:{ title:"链路图 · 写 kernel 的官方 how-to 在哪一环受阻",
     steps:[
       {s:"ok",  t:"③ 工具路由",       note:"决定抓官方 how-to 页（devguide/opdevg）"},
-      {s:"err", t:"web_fetch 官方页",  note:"SPA 子树只回导航 + meta，<b>正文抓取为空</b>——出问题就在这一步（5 搜索里唯一）"},
+      {s:"err", t:"web_fetch 官方页",  note:"页面只返回导航和标题，<b>正文抓取为空</b>——出问题就在这一步（5 搜索里唯一）"},
       {s:"fix", t:"④ 研判",            note:"判定证据不足 / 官方受阻，<b>不凭记忆杜撰</b>"},
       {s:"fix", t:"⑤ 遇阻处理",        note:"转第三方平台（sD2）+ 自带知识 + 让用户开浏览器人眼自查（分支 b1）"}
     ]}
@@ -1502,7 +1502,7 @@ SCENARIOS.D={
   dscore:{
     META:[
       ["①","官方可发现","s2：web_search 命中第三方平台，官方 hiascend 未置顶"],
-      ["②","官方可抓取","s3：web_fetch 官方 how-to 受阻（SPA 抓取为空）"],
+      ["②","官方可抓取","s3：web_fetch 官方 how-to 受阻（页面正文未能取回）"],
       ["③","官方正文详尽","s3：抓不到正文 → 受阻态（不打推断分）"],
       ["④","版本清晰","d2：版本散乱，连 URL 都从 devguide/opdevg 漂到 opdevg/Ascendcopdevg"],
       ["⑤","第三方平台丰富","s4：转 MindSpore / CSDN 第三方平台，量薄"],
@@ -1517,7 +1517,7 @@ SCENARIOS.D={
     note:`这就是上图那段旅程的<b>「分数面」</b>——同一份 D 实测，时序图讲成旅程、这里量化成分：<b>s3 红空返回＝②③</b>、<b>d2 版本散乱＝④⑨</b>、第三方平台薄＝⑤⑥、自带兜底＝⑦、检索尖刺＝⑧。`
   },
   concl:{
-    insight:`26 任务里<b>最塌的一条（综合 .41）</b>。坑在哪：官方 how-to 整段压在 SPA 页、AI <b>抓取为空（s3 红）</b>，第三方平台又薄、版本又散——三重坑叠加。AI 能给步骤骨架，但本机芯片 / 版本 / 精度这些 <b>A 类决策永远回到人</b>；连<b>算子调优（dT Tiling 策略）</b>也得人按本机 shape 定夺。`,
+    insight:`26 任务里<b>最塌的一条（综合 .41）</b>。坑在哪：官方 how-to 只返回导航和标题，AI <b>取不到正文（s3 红）</b>，第三方平台又薄、版本又散——三重坑叠加。AI 能给步骤骨架，但本机芯片 / 版本 / 精度这些 <b>A 类决策永远回到人</b>；连<b>算子调优（dT Tiling 策略）</b>也得人按本机 shape 定夺。`,
     next:`① 把官方 opdevg 页<b>静态化</b>（让 AI 抓得到正文，直接救 s3）② 补<b>带版本号的完整第三方平台</b>（救 ⑤⑥）③ <b>收口版本</b>（一个 canonical + 配套查询器，救 ④⑨）。这三条最能把 .41 往上抬。`
   },
   nodeScore:{ sD:"→矩阵 D .41", sD2:"⑤3⑥2", sM:"→矩阵 M .63", sX:"→矩阵 X .74", sO:"→矩阵 O .72", sL:"→矩阵 L .69", dSoc:"④⑨ 本机", dVer:"④2⑨2" }
@@ -1946,7 +1946,7 @@ const ANODE={
   fetch:{t:"web_fetch · 抓取选中正文",b:"在候选页或已知 URL 中选定目标后，再抓取页面正文、代码和表格；抓取为空则如实返回「正文无法取回」。"},
   own:{t:"模型自带知识（⑦）",b:"模型训练内置的知识，<b>无需检索亦可用</b>，是矩阵三来源（官方/第三方平台/自带）中的第三条。<b>充分时为可靠答案的底；薄弱、且检索未能补足时，即为「杜撰」之源</b>。"},
   relay:{t:"汇总当前证据（回灌）",b:"将本轮取回的官方正文、第三方平台内容连同自带知识一并提交模型，进入研判。"},
-  judge:{t:"④ 证据是否充分?",b:"判断手中证据<b>是否足以答好本题</b>。充分→收敛输出终答；不足→评估能否继续检索。对 D：第 2 轮即发现官方核心页 SPA 抓取为空、第三方平台稀薄，判定「不足」。"},
+  judge:{t:"④ 证据是否充分?",b:"判断手中证据<b>是否足以答好本题</b>。充分→收敛输出终答；不足→评估能否继续检索。对 D：第 2 轮即发现官方核心页 页面正文未能取回、第三方平台稀薄，判定「不足」。"},
   converge:{t:"⑥ 收敛（证据充分）",b:"证据充分即停止检索，将片段组织为有序步骤（环境→msopgen→核函数→编包→部署→绑定），并标注需用户核验项。"},
   redo:{t:"能否继续检索?",b:"<b>继续检索的条件</b>：尚未达到检索次数上限（max_uses / 轮数），且模型判断「更换检索词或来源后再检索预期有效」。满足则<b>再检索一轮</b>（官方与第三方平台仍一并返回）。"},
   hasEv:{t:"是否仍有可靠证据?（检索穷尽后）",b:"<b>停止检索的条件</b>：要么证据已充分，要么已无法继续（达到上限 / 判断再检索亦无效）。停止后被迫作答，此时答案可靠与否取决于——官方/第三方平台/自带 中<b>是否至少有一条充分</b>。"},
