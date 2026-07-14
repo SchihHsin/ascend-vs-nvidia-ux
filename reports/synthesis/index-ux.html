@@ -826,6 +826,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .seqdemo-logrow{display:grid;grid-template-columns:.9fr 1.1fr .7fr;gap:.4vw;padding:.62vh .7vw;border-bottom:1px solid rgba(47,61,99,.08);align-items:center;color:#596274}
       .seqdemo-logrow.head{background:#F3F5FA;color:#202531;font-weight:950}
       .seqdemo-logrow:last-child{border-bottom:0}
+      .seqdemo-scale{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1.18fr);gap:.55vw;align-items:center;border-radius:10px;background:rgba(47,111,237,.055);border:1px solid rgba(47,111,237,.11);padding:.6vh .65vw;color:#596274}
+      .seqdemo-scale-step{min-width:0}.seqdemo-scale-step b{display:block;color:#202531;font-size:var(--fs-sm);line-height:1.18;font-weight:950}.seqdemo-scale-step span{display:block;margin-top:.18vh;font-size:var(--fs-xs);line-height:1.3;color:#647085}.seqdemo-scale-arrow{display:flex;align-items:center;justify-content:center;color:#5B5BD6}.seqdemo-scale-arrow i{width:17px;height:17px;stroke-width:1.9}
       .seqdemo-hint{display:grid;grid-template-columns:repeat(4,1fr);gap:.55vw}
       .seqdemo-chip{border-radius:10px;background:rgba(47,111,237,.075);border:1px solid rgba(47,111,237,.12);font-size:var(--fs-sm);font-weight:850;color:#2F3D63;text-align:center;padding:.65vh .4vw;cursor:pointer;transition:opacity .18s,background .18s,box-shadow .18s}
       .seqdemo-hint.has-focus .seqdemo-chip{opacity:.42}.seqdemo-hint.has-focus .seqdemo-chip.on{opacity:1;background:#fff;box-shadow:0 10px 24px -22px rgba(30,40,70,.42),inset 0 0 0 1px rgba(91,91,214,.16)}
@@ -1030,7 +1032,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
                 </div>
               </div>
             </div>
-            <div class="seqdemo-chip">按方向键逐条查看界面行为</div>
+            <div class="seqdemo-scale"><div class="seqdemo-scale-step"><b>当前：完成一个具体任务</b><span>用“跑示例报错”说明一次知识往返怎样发生。</span></div><div class="seqdemo-scale-arrow"><i data-lucide="arrow-right"></i></div><div class="seqdemo-scale-step"><b>后续：覆盖完整开发生命周期</b><span>沿左侧阶段带，持续记录各阶段的请求、受阻与复核。</span></div></div>
           </div>
           <div class="seqdemo-panel search" data-seq-demo="search">
             <div><div class="seqdemo-titleline"><h3>线 01：AI 在搜索界面输入任务问题</h3><span class="seqdemo-actor">AI 使用社区</span></div><p>“搜索”不是抽象步骤，而是一次带着开发任务的查询：AI 输入任务词，选择最可能能回答问题的社区页面。</p></div>
@@ -1106,8 +1108,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">人机协同开发时序图：一次「自定义算子开发」背后，是开发者与 AI 同时在使用昇腾社区</span></div>
-        <div class="subttl">立论 · 「人机协同」</div>
+        <div class="brand"><span class="ttl">将单任务读图方法扩展到完整开发过程：开发者与 AI 在各阶段共同使用昇腾社区</span></div>
+        <div class="subttl">研究方法 · 「完整开发过程」</div>
       </div>
       <div class="head-r">07/ 人机协同旅程<br/>opknow 20</div>
     </div>
@@ -1128,8 +1130,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4.5vh">
         <!-- <div class="cmp-h"><span class="hk">How to read</span>本图用于说明两条评估链路</div> -->
-        <div class="bridge seq-intro" style="margin-top:0">这是开发者完成<b>一次「自定义算子开发」</b>的全过程，自上而下按<b>时间</b>推进。图中有两个「获取知识」的主体——<b>开发者本人</b>，以及受其委托查阅资料、编写代码的 <b>AI Agent</b>。</div>
+        <div class="bridge seq-intro" style="margin-top:0">上一页用一个任务解释了<b>一次知识往返</b>怎样被观察；这张图把同一读法扩展到<b>一次「自定义算子开发」的完整过程</b>。左侧阶段带标明任务走到哪里，图中两类主体——<b>开发者本人</b>与受其委托查阅资料、编写代码的 <b>AI Agent</b>——在每个阶段都可能向社区取证。</div>
         <ul class="seq-guide">
+          <li><b>左侧阶段带＝任务所处环节</b>：从理解需求、查资料到开发、调试与交付，按时间向下推进。</li>
           <li><b>竖线＝参与方</b>：用户 · AI 助手 · 昇腾官方文档 · 第三方平台（CSDN / 博客）· AI 自带知识。</li>
           <li><b>横箭头＝一次往返</b>：由谁向谁请求信息、是否取回。</li>
           <li><b>读法</b>：用户将需求交给 AI → AI 分别从 官方 / 第三方 / 自带知识 检索 → 回灌后组织答案，证据不足则再检索一轮。一次开发共发起<b> 5 次检索</b>。</li>
