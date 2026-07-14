@@ -693,9 +693,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxseq-svg svg{display:block;width:100%;height:100%;overflow:visible}
       .uxseq-svg.seqslice{overflow:hidden;border-radius:10px;background:rgba(255,255,255,.52)}
       .seq-shared svg{display:block;width:100%;height:100%;overflow:visible}
-      .seq-shared.has-focus [data-seq-part]{opacity:.13}.seq-shared.has-focus [data-seq-part].on{opacity:1;filter:drop-shadow(0 0 2px rgba(91,91,214,.26))}
-      .seq-shared [data-seq-part]{transition:opacity .22s,filter .22s}
-      .seq-shared text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif}.p2cap{font-size:12px;font-weight:850;fill:#647085}.p2phase{fill:#EFEAF7;stroke:rgba(107,91,168,.22);stroke-width:1}.p2phase-t{font-size:15px;font-weight:950;fill:#4F3F88}.p2phase-s{font-size:11px;font-weight:800;fill:#615582}.p2owner{fill:#B7A9E0}.p2owner-t{font-size:11px;font-weight:850;fill:#413562}.p2heads rect{fill:#fff;stroke:rgba(47,61,99,.16);stroke-width:1}.p2heads text{font-size:14px;font-weight:900;fill:#2F3D63}.p2heads text.off{fill:#C8102E}.p2lane{stroke:#D6DCE6;stroke-width:1.35;stroke-dasharray:5 7;fill:none}.p2msg{stroke:#8156C9;stroke-width:2.15;stroke-linecap:round;fill:none}.p2msg.blocked{stroke:#C8102E}.p2return{stroke:#C8102E;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2branch{stroke:#2F3D63;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2node{fill:#fff;stroke:#6B5BA8;stroke-width:2}.p2node.hu{stroke:#2F3D63}.p2node.ai{fill:#ECE7F6;stroke:#6B5BA8}.p2node.blocked-ring{stroke:#C8102E;stroke-width:2.5}.p2run{fill:#F1F5FC;stroke:#2F3D63;stroke-width:2}.p2id{font-size:13px;font-weight:900;fill:#2F3D63}.p2id.aiid{fill:#5C4D91}.p2label{font-size:13px;font-weight:800;fill:#313A49}.p2label.red,.p2tiny.red{fill:#C8102E}.p2label.humanlabel{fill:#2F3D63}.p2tiny{font-size:10.5px;font-weight:750;fill:#657084}
+      .seq-shared.has-focus [data-seq-item]{opacity:.13}.seq-shared.has-focus [data-seq-item].on{opacity:1;filter:drop-shadow(0 0 2px rgba(91,91,214,.26))}
+      .seq-shared [data-seq-item]{transition:opacity .22s,filter .22s}
+      .seq-shared.lines-step [data-seq-item^="line-"].on{animation:p2LineReveal .58s ease both}
+      .seq-shared.lines-step [data-seq-item="line-n1"].on{animation-delay:0s}.seq-shared.lines-step [data-seq-item="line-ai-off"].on{animation-delay:.42s}.seq-shared.lines-step [data-seq-item="line-ai-return"].on{animation-delay:.84s}.seq-shared.lines-step [data-seq-item="line-ai-third"].on{animation-delay:1.26s}.seq-shared.lines-step [data-seq-item="line-ai-answer"].on{animation-delay:1.68s}.seq-shared.lines-step [data-seq-item="line-work"].on{animation-delay:2.1s}.seq-shared.lines-step [data-seq-item="line-human"].on{animation-delay:2.52s}
+      @keyframes p2LineReveal{from{opacity:.13;filter:none}to{opacity:1;filter:drop-shadow(0 0 2px rgba(91,91,214,.26))}}
+      .seq-shared text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif}.p2cap{font-size:12px;font-weight:850;fill:#647085}.p2phase{fill:#EFEAF7;stroke:rgba(107,91,168,.22);stroke-width:1}.p2phase-t{font-size:15px;font-weight:950;fill:#4F3F88}.p2phase-s{font-size:11px;font-weight:800;fill:#615582}.p2heads rect{fill:#fff;stroke:rgba(47,61,99,.16);stroke-width:1}.p2heads text{font-size:14px;font-weight:900;fill:#2F3D63}.p2heads text.off{fill:#C8102E}.p2lane{stroke:#D6DCE6;stroke-width:1.35;stroke-dasharray:5 7;fill:none}.p2msg{stroke:#8156C9;stroke-width:2.15;stroke-linecap:round;fill:none}.p2msg.blocked{stroke:#C8102E}.p2return{stroke:#C8102E;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2branch{stroke:#2F3D63;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2node{fill:#fff;stroke:#6B5BA8;stroke-width:2}.p2node.hu{stroke:#2F3D63}.p2node.ai{fill:#ECE7F6;stroke:#6B5BA8}.p2node.blocked-ring{stroke:#C8102E;stroke-width:2.5}.p2run{fill:#F1F5FC;stroke:#2F3D63;stroke-width:2}.p2id{font-size:13px;font-weight:900;fill:#2F3D63}.p2id.aiid{fill:#5C4D91}.p2label{font-size:13px;font-weight:800;fill:#313A49}.p2label.red,.p2tiny.red{fill:#C8102E}.p2label.humanlabel{fill:#2F3D63}.p2tiny{font-size:10.5px;font-weight:750;fill:#657084}
       .ux-lane{stroke:#CAD0DB;stroke-width:1.3;stroke-dasharray:5 7}
       .ux-lane-head rect{fill:rgba(255,255,255,.72);stroke:rgba(47,61,99,.13);stroke-width:1}
       .ux-lane-head text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif;font-size:15px;font-weight:850;fill:#202531}
@@ -3119,15 +3122,15 @@ function sharedP2SequenceHtml(){
       <marker id="p2ArrowRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
       <marker id="p2ArrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#2F3D63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
     </defs>
-    <g data-seq-part="lanes"><text x="72" y="26" text-anchor="middle" class="p2cap">阶段</text><rect x="20" y="44" width="104" height="356" rx="11" class="p2phase"/><text x="72" y="78" text-anchor="middle" class="p2phase-t">P2</text><text x="72" y="98" text-anchor="middle" class="p2phase-s">写核函数</text><text x="72" y="118" text-anchor="middle" class="p2phase-s">任务 1</text><rect x="142" y="44" width="62" height="356" rx="9" class="p2owner"/><text x="173" y="208" text-anchor="middle" class="p2owner-t">Agent</text><text x="173" y="224" text-anchor="middle" class="p2owner-t">主导</text>
+    <g data-seq-item="lanes"><text x="72" y="26" text-anchor="middle" class="p2cap">阶段</text><rect x="20" y="44" width="104" height="356" rx="11" class="p2phase"/><text x="72" y="84" text-anchor="middle" class="p2phase-t">P2</text><text x="72" y="108" text-anchor="middle" class="p2phase-s">写核函数</text>
       <g class="p2heads"><rect x="250" y="34" width="104" height="34" rx="10"/><text x="302" y="56" text-anchor="middle">开发者</text><rect x="450" y="34" width="104" height="34" rx="10"/><text x="502" y="56" text-anchor="middle">AI (Agent)</text><rect x="650" y="34" width="104" height="34" rx="10"/><text x="702" y="56" text-anchor="middle" class="off">昇腾社区</text><rect x="850" y="34" width="104" height="34" rx="10"/><text x="902" y="56" text-anchor="middle">第三方平台</text></g>
       <path d="M302 82v336M502 82v336M702 82v336M902 82v336" class="p2lane"/></g>
-    <g data-seq-part="context"><path d="M302 106H502" class="p2msg" marker-end="url(#p2ArrowPurple)"/><circle cx="302" cy="106" r="13" class="p2node hu"/><text x="302" y="111" text-anchor="middle" class="p2id">n1</text><text x="402" y="94" text-anchor="middle" class="p2label">立项·选型·开发算子接 PyTorch</text></g>
-    <g data-seq-part="ai"><path d="M502 160H702" class="p2msg blocked" marker-end="url(#p2ArrowRed)"/><circle cx="502" cy="160" r="16" class="p2node ai blocked-ring"/><text x="502" y="165" text-anchor="middle" class="p2id aiid">sD</text><text x="602" y="147" text-anchor="middle" class="p2label red">1·自定义算子 how-to</text><path d="M702 180H502" class="p2return" marker-end="url(#p2ArrowRed)"/><text x="602" y="197" text-anchor="middle" class="p2tiny red">抓取为空（SPA）</text>
-      <path d="M502 238H902" class="p2msg" marker-end="url(#p2ArrowPurple)"/><circle cx="502" cy="238" r="14" class="p2node ai"/><text x="502" y="243" text-anchor="middle" class="p2id aiid">sD2</text><text x="702" y="226" text-anchor="middle" class="p2label">官方受阻 → 转第三方平台拼答案</text>
-      <path d="M502 292H302" class="p2msg" marker-end="url(#p2ArrowPurple)"/><circle cx="502" cy="292" r="14" class="p2node ai"/><text x="502" y="297" text-anchor="middle" class="p2id aiid">gD</text><text x="402" y="280" text-anchor="middle" class="p2label">给 msopgen / 编包骨架</text></g>
-    <g data-seq-part="context"><path d="M302 344H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="332" text-anchor="middle" class="p2tiny">本地 msopgen + 写核函数</text><rect x="286" y="328" width="32" height="32" rx="6" class="p2run"/><text x="302" y="349" text-anchor="middle" class="p2id">eD</text></g>
-    <g data-seq-part="human"><path d="M302 386H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="374" text-anchor="middle" class="p2label humanlabel">AI 受阻 → 开发者自查官方文档</text><text x="502" y="403" text-anchor="middle" class="p2tiny">版本、步骤与同类经验核对</text></g>
+    <g data-seq-item="line-n1"><path d="M302 106H502" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="402" y="94" text-anchor="middle" class="p2label">立项·选型·开发算子接 PyTorch</text></g><g data-seq-item="node-n1"><circle cx="302" cy="106" r="13" class="p2node hu"/><text x="302" y="111" text-anchor="middle" class="p2id">n1</text></g>
+    <g data-seq-item="line-ai-off"><path d="M502 160H702" class="p2msg blocked" marker-end="url(#p2ArrowRed)"/><text x="602" y="147" text-anchor="middle" class="p2label red">1·自定义算子 how-to</text></g><g data-seq-item="node-sD"><circle cx="502" cy="160" r="16" class="p2node ai blocked-ring"/><text x="502" y="165" text-anchor="middle" class="p2id aiid">sD</text></g><g data-seq-item="line-ai-return"><path d="M702 180H502" class="p2return" marker-end="url(#p2ArrowRed)"/><text x="602" y="197" text-anchor="middle" class="p2tiny red">抓取为空（SPA）</text></g>
+    <g data-seq-item="line-ai-third"><path d="M502 238H902" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="702" y="226" text-anchor="middle" class="p2label">官方受阻 → 转第三方平台拼答案</text></g><g data-seq-item="node-sD2"><circle cx="502" cy="238" r="14" class="p2node ai"/><text x="502" y="243" text-anchor="middle" class="p2id aiid">sD2</text></g>
+    <g data-seq-item="line-ai-answer"><path d="M502 292H302" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="402" y="280" text-anchor="middle" class="p2label">给 msopgen / 编包骨架</text></g><g data-seq-item="node-gD"><circle cx="502" cy="292" r="14" class="p2node ai"/><text x="502" y="297" text-anchor="middle" class="p2id aiid">gD</text></g>
+    <g data-seq-item="line-work"><path d="M302 344H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="332" text-anchor="middle" class="p2tiny">本地 msopgen + 写核函数</text></g><g data-seq-item="node-eD"><rect x="286" y="328" width="32" height="32" rx="6" class="p2run"/><text x="302" y="349" text-anchor="middle" class="p2id">eD</text></g>
+    <g data-seq-item="line-human"><path d="M302 386H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="374" text-anchor="middle" class="p2label humanlabel">AI 受阻 → 开发者自查官方文档</text><text x="502" y="403" text-anchor="middle" class="p2tiny">版本、步骤与同类经验核对</text></g>
   </svg>`;
 }
 function initSharedP2Sequences(){
@@ -3214,9 +3217,11 @@ function initUxEvidenceFocus(){
       const shared=slide.querySelector('.seq-shared');
       if(shared){
         shared.classList.toggle('has-focus',!!key);
-        shared.querySelectorAll('[data-seq-part]').forEach(part=>{
-          const hit=key==='lanes'?part.dataset.seqPart==='lanes':key==='nodes'?['ai','context'].includes(part.dataset.seqPart):key==='events'?['ai','human','context'].includes(part.dataset.seqPart):key==='loops'?part.dataset.seqPart==='ai':false;
-          part.classList.toggle('on',hit);
+        shared.classList.toggle('lines-step',key==='events');
+        shared.querySelectorAll('[data-seq-item]').forEach(item=>{
+          const name=item.dataset.seqItem;
+          const hit=key==='lanes'?name==='lanes':key==='nodes'?name.startsWith('node-'):key==='events'?name.startsWith('line-'):key==='loops'?['line-ai-off','line-ai-return'].includes(name):false;
+          item.classList.toggle('on',hit);
         });
       }
     }
@@ -3270,9 +3275,11 @@ function setSeqFocus(step,writeHash,slide){
   if(demoSvg){
     const shared=demoSvg.querySelector('.seq-shared')||demoSvg;
     shared.classList.toggle('has-focus',true);
-    shared.querySelectorAll('[data-seq-part]').forEach(part=>{
-      const hit=mode==='ai'?part.dataset.seqPart==='ai':mode==='human'?part.dataset.seqPart==='human':['ai','human'].includes(part.dataset.seqPart);
-      part.classList.toggle('on',hit);
+    shared.classList.remove('lines-step');
+    shared.querySelectorAll('[data-seq-item]').forEach(item=>{
+      const name=item.dataset.seqItem;
+      const hit=mode==='ai'?['line-ai-off','line-ai-return'].includes(name):mode==='human'?name==='line-human':['line-ai-off','line-ai-return','line-human'].includes(name);
+      item.classList.toggle('on',hit);
     });
     slide.querySelectorAll('[data-seq-demo]').forEach(panel=>{
       panel.classList.toggle('on',panel.dataset.seqDemo===(mode==='all'?'all':mode));
@@ -3291,7 +3298,8 @@ function clearSeqFocus(slide){
     if(demoSvg){
       const shared=demoSvg.querySelector('.seq-shared')||demoSvg;
       shared.classList.remove('has-focus');
-      shared.querySelectorAll('[data-seq-part]').forEach(el=>el.classList.remove('on'));
+      shared.classList.remove('lines-step');
+      shared.querySelectorAll('[data-seq-item]').forEach(el=>el.classList.remove('on'));
       s.querySelectorAll('[data-seq-demo]').forEach(panel=>panel.classList.toggle('on',panel.dataset.seqDemo==='all'));
     }
   });
