@@ -768,10 +768,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxmode-row span{font-size:var(--fs-sm);line-height:1.36}
       .uxreal-note{border-radius:14px;background:var(--g-ink);color:#fff;padding:1.15vh 1vw;font-size:var(--fs-body);line-height:1.48;box-shadow:0 16px 34px -24px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.2)}
       .uxreal-note b{color:#fff;font-weight:950}
-      .seqdemo-slide .body-area{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:1.45vw}
+      .seqdemo-slide .body-area{grid-template-columns:minmax(0,1.22fr) minmax(0,.78fr);gap:1.45vw}
       .seqdemo-left{padding:2vh 1.35vw 1.45vh}
       .seqdemo-left .uxseq-title{align-items:flex-start}
       .seqdemo-left .uxseq-task{font-size:var(--fs-sm);max-width:210px}
+      .seqdemo-left .seqdemo-svg svg{width:110%;margin-left:0}
       .seqdemo-svg.has-focus [data-seq-line],.seqdemo-svg.has-focus [data-seq-node]{opacity:.18}
       .seqdemo-svg.has-focus [data-seq-line].on,.seqdemo-svg.has-focus [data-seq-node].on{opacity:1;filter:drop-shadow(0 0 3px rgba(91,91,214,.24))}
       .seqdemo-side{min-height:0;display:grid;grid-template-rows:auto 1fr;gap:1vh}
@@ -781,27 +782,38 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .seqdemo-stage:after{content:"";position:absolute;right:-9%;top:-16%;width:42%;height:34%;background:radial-gradient(80% 80% at 80% 20%,rgba(91,91,214,.13),rgba(91,91,214,.04) 58%,transparent 78%);filter:blur(3px);pointer-events:none}
       .seqdemo-panel{position:absolute;inset:1.45vh 1.08vw;z-index:1;display:grid;grid-template-rows:auto 1fr auto;gap:1vh;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .22s,transform .22s}
       .seqdemo-panel.on{opacity:1;pointer-events:auto;transform:translateY(0)}
+      .seqdemo-titleline{display:flex;align-items:flex-start;justify-content:space-between;gap:.75vw}
       .seqdemo-panel h3{margin:0;font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950}
       .seqdemo-panel p{margin:.35vh 0 0;font-size:var(--fs-body);line-height:1.42;color:var(--ink-2)}
-      .seqdemo-window{position:relative;min-height:0;border-radius:15px;background:#fff;border:1px solid rgba(47,61,99,.12);box-shadow:0 16px 34px -28px rgba(30,40,70,.38);overflow:hidden}
-      .seqdemo-bar{height:34px;background:#F0F2F6;border-bottom:1px solid rgba(47,61,99,.08);display:flex;align-items:center;gap:6px;padding:0 12px}
+      .seqdemo-actor{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;padding:.42vh .62vw;border-radius:999px;font-size:var(--fs-sm);font-weight:900;line-height:1;color:#2F3D63;background:rgba(47,111,237,.08);border:1px solid rgba(47,111,237,.14);white-space:nowrap}
+      .seqdemo-actor:before{content:"";width:7px;height:7px;border-radius:50%;background:#2F6FED;box-shadow:0 0 0 3px rgba(47,111,237,.12)}
+      .seqdemo-actor.human{color:#566070;background:rgba(86,96,112,.08);border-color:rgba(86,96,112,.14)}
+      .seqdemo-actor.human:before{background:#647085;box-shadow:0 0 0 3px rgba(100,112,133,.12)}
+      .seqdemo-actor.both{color:#5B4AB7;background:rgba(91,91,214,.08);border-color:rgba(91,91,214,.16)}
+      .seqdemo-actor.both:before{background:linear-gradient(135deg,#2F6FED 0 48%,#647085 52% 100%);box-shadow:0 0 0 3px rgba(91,91,214,.12)}
+      .seqdemo-window{position:relative;min-height:0;border-radius:12px;background:#fff;border:1px solid rgba(47,61,99,.16);box-shadow:0 18px 38px -28px rgba(30,40,70,.42);overflow:hidden}
+      .seqdemo-bar{height:34px;background:#F0F2F6;border-bottom:1px solid rgba(47,61,99,.1);display:flex;align-items:center;gap:6px;padding:0 12px}
       .seqdemo-dot{width:8px;height:8px;border-radius:50%;background:#D7DCE5}.seqdemo-dot:nth-child(1){background:#F06F6F}.seqdemo-dot:nth-child(2){background:#F0BE54}.seqdemo-dot:nth-child(3){background:#62C07B}
-      .seqdemo-content{position:absolute;left:0;right:0;top:34px;bottom:0;padding:1.25vh 1vw;background:linear-gradient(180deg,#fff,#F7F8FC)}
+      .seqdemo-browser-name{margin-left:5px;font-size:var(--fs-sm);font-weight:900;color:#3F495A}.seqdemo-browser-mode{margin-left:auto;font-size:var(--fs-xs);font-weight:800;color:#7A8495}
+      .seqdemo-content{position:absolute;left:0;right:0;top:34px;bottom:0;padding:1.25vh 1vw;background:#FAFBFD}
       .seqdemo-searchbox{height:42px;border-radius:12px;border:1px solid rgba(47,61,99,.15);background:#fff;display:flex;align-items:center;gap:10px;padding:0 13px;font-size:var(--fs-body);font-weight:850;color:#202531;box-shadow:0 10px 22px -20px rgba(30,40,70,.35)}
-      .seqdemo-searchbox:before{content:"";width:15px;height:15px;border:2px solid #5B5BD6;border-radius:50%;box-shadow:8px 8px 0 -6px #5B5BD6;flex:0 0 auto}
+      .seqdemo-search-icon{width:17px;height:17px;flex:0 0 auto;color:#5B5BD6;stroke-width:2.2}
       .seqdemo-cursor{display:inline-block;width:2px;height:1.05em;background:#202531;margin-left:3px;vertical-align:-2px;animation:seqCursor .9s steps(2,end) infinite}
       .seqdemo-results{display:grid;gap:.72vh;margin-top:1vh}
       .seqdemo-result{border-radius:12px;background:#fff;border:1px solid rgba(47,61,99,.1);padding:.78vh .72vw;font-size:var(--fs-sm);line-height:1.34;color:#596274}
       .seqdemo-result b{display:block;font-size:var(--fs-body);color:#202531;margin-bottom:.22vh}
       .seqdemo-result.hot{box-shadow:0 0 0 2px rgba(91,91,214,.16);border-color:rgba(91,91,214,.28)}
       .seqdemo-page{height:100%;display:grid;grid-template-rows:auto 1fr;gap:1vh}
-      .seqdemo-url{height:32px;border-radius:10px;background:#F0F2F6;color:#647085;font-size:var(--fs-sm);display:flex;align-items:center;padding:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-      .seqdemo-empty{border-radius:14px;border:1px dashed #E15A5A;background:#FFF4F4;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#C74444;text-align:center;font-size:var(--fs-body);line-height:1.45;font-weight:850}
+      .seqdemo-url{height:32px;border-radius:8px;background:#EEF1F6;color:#647085;font-size:var(--fs-sm);display:flex;align-items:center;padding:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .seqdemo-empty{border-radius:10px;border:1px dashed #E15A5A;background:#FFF7F7;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#C74444;text-align:center;font-size:var(--fs-body);line-height:1.45;font-weight:850}
       .seqdemo-empty span{font-size:var(--fs-sm);font-weight:650;color:#8D4C4C;margin-top:.4vh}
       .seqdemo-doc{display:grid;grid-template-columns:1fr 1fr;gap:.8vw;height:100%}
       .seqdemo-doc .pane{border-radius:13px;background:#fff;border:1px solid rgba(47,61,99,.1);padding:1vh .8vw;min-height:0;font-size:var(--fs-sm);line-height:1.45;color:#596274}
       .seqdemo-doc .pane b{display:block;font-size:var(--fs-body);color:#202531;margin-bottom:.55vh}
       .seqdemo-doc .pane.good{border-color:rgba(35,160,106,.26);box-shadow:inset 0 0 0 1px rgba(35,160,106,.1)}
+      .seqdemo-docnav{margin-bottom:.55vh;color:#7A8495;font-size:var(--fs-xs);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .seqdemo-copy{margin:0 0 .7vh;color:#596274;font-size:var(--fs-sm);line-height:1.42}.seqdemo-copy mark{background:#FFF1B9;color:#202531;border-radius:3px;padding:0 2px}
+      .seqdemo-forum-meta{display:flex;align-items:center;gap:6px;margin-bottom:.6vh;color:#7A8495;font-size:var(--fs-xs);font-weight:750}.seqdemo-forum-meta:before{content:"";width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#647085,#BFC7D3)}
       .seqdemo-check{display:grid;gap:.58vh;margin-top:.85vh}
       .seqdemo-check i{font-style:normal;border-radius:8px;background:#F5F7FB;border:1px solid rgba(47,61,99,.08);padding:.5vh .55vw;color:#3F495A;font-size:var(--fs-sm);line-height:1.25}
       .seqdemo-score{display:grid;grid-template-columns:repeat(4,1fr);gap:.7vw;align-items:end;height:100%}
@@ -817,11 +829,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .seqdemo-hint{display:grid;grid-template-columns:repeat(4,1fr);gap:.55vw}
       .seqdemo-chip{border-radius:10px;background:rgba(47,111,237,.075);border:1px solid rgba(47,111,237,.12);font-size:var(--fs-sm);font-weight:850;color:#2F3D63;text-align:center;padding:.65vh .4vw;cursor:pointer;transition:opacity .18s,background .18s,box-shadow .18s}
       .seqdemo-hint.has-focus .seqdemo-chip{opacity:.42}.seqdemo-hint.has-focus .seqdemo-chip.on{opacity:1;background:#fff;box-shadow:0 10px 24px -22px rgba(30,40,70,.42),inset 0 0 0 1px rgba(91,91,214,.16)}
-      .seqdemo-pointer{position:absolute;width:18px;height:18px;border-radius:50%;border:2px solid #202531;background:#fff;box-shadow:0 8px 18px -10px rgba(20,23,28,.65);z-index:4;animation:seqPointer 3s ease-in-out infinite}
-      .seqdemo-pointer:after{content:"";position:absolute;left:10px;top:10px;width:18px;height:2px;background:#202531;transform:rotate(45deg);border-radius:999px}
-      .seqdemo-panel.search .seqdemo-pointer{left:54%;top:38%}.seqdemo-panel.fetch .seqdemo-pointer{left:52%;top:42%;animation-delay:.25s}.seqdemo-panel.review .seqdemo-pointer{left:67%;top:48%;animation-delay:.4s}.seqdemo-panel.score .seqdemo-pointer{left:47%;top:55%;animation-delay:.55s}
+      .seqdemo-pointer{position:absolute;width:18px;height:18px;z-index:4;color:#202531;stroke-width:2.25;fill:#fff;filter:drop-shadow(0 3px 4px rgba(20,23,28,.25));animation:seqPointer 3s ease-in-out infinite;pointer-events:none}
+      .seqdemo-panel.review .seqdemo-pointer{left:25%;top:44%;animation-delay:.4s}
       @keyframes seqCursor{50%{opacity:0}}
-      @keyframes seqPointer{0%,100%{transform:translate(0,0)}35%{transform:translate(18px,8px)}68%{transform:translate(6px,24px)}}
+      @keyframes seqPointer{0%,100%{transform:translate(0,0)}45%{transform:translate(7px,5px)}60%{transform:translate(4px,3px) scale(.92)}}
     </style>
     <div class="body-area">
       <div class="uxwhy-left">
@@ -999,19 +1010,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
           </svg>
         </div>
         <div class="seqdemo-hint">
-          <div class="seqdemo-chip" data-seq-focus="search">01 搜索</div>
-          <div class="seqdemo-chip" data-seq-focus="fetch">02 抓取受阻</div>
-          <div class="seqdemo-chip" data-seq-focus="review">03 人工复核</div>
-          <div class="seqdemo-chip" data-seq-focus="score">04 评分记录</div>
+          <div class="seqdemo-chip" data-seq-focus="search">01 AI · 搜索</div>
+          <div class="seqdemo-chip" data-seq-focus="fetch">02 AI · 抓取受阻</div>
+          <div class="seqdemo-chip" data-seq-focus="review">03 开发者 · 复核</div>
+          <div class="seqdemo-chip" data-seq-focus="score">04 双方 · 评分记录</div>
         </div>
       </div>
       <div class="seqdemo-side">
         <div class="seqdemo-lead"><b>这页要回答的是“线代表什么行为”。</b>不是只看箭头方向，而是把箭头背后的搜索界面、页面抓取、人工复核和记录动作都具象化。</div>
         <div class="seqdemo-stage">
           <div class="seqdemo-panel on" data-seq-demo="all">
-            <div><h3>默认先看完整链路</h3><p>开发者提问后，AI 会搜索社区内容、打开页面读取证据；遇到受阻时需要补证，风险高时开发者会回到社区复核。</p></div>
+            <div><div class="seqdemo-titleline"><h3>默认先看 AI 与开发者如何分别使用社区</h3><span class="seqdemo-actor both">两条路径共同构成研究观察</span></div><p>AI 侧搜索、抓取和判断证据；开发者侧在不确定、报错或需要决策时回到社区复核。两条路径都留下可观察的研究记录。</p></div>
             <div class="seqdemo-window">
-              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i></div>
+              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><span class="seqdemo-browser-name">研究观察台</span><span class="seqdemo-browser-mode">双路径</span></div>
               <div class="seqdemo-content">
                 <div class="seqdemo-doc">
                   <div class="pane good"><b>AI 侧</b>搜索、抓取、判断证据是否足够，并把过程留下可评分记录。<div class="seqdemo-check"><i>输入任务词</i><i>打开候选页面</i><i>读取正文与代码</i></div></div>
@@ -1022,53 +1033,51 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="seqdemo-chip">按方向键逐条查看界面行为</div>
           </div>
           <div class="seqdemo-panel search" data-seq-demo="search">
-            <div><h3>线 01：AI 在搜索界面输入任务问题</h3><p>“搜索”不是抽象步骤，而是一次带着开发任务的查询：AI 输入任务词，选择最可能能回答问题的社区页面。</p></div>
+            <div><div class="seqdemo-titleline"><h3>线 01：AI 在搜索界面输入任务问题</h3><span class="seqdemo-actor">AI 使用社区</span></div><p>“搜索”不是抽象步骤，而是一次带着开发任务的查询：AI 输入任务词，选择最可能能回答问题的社区页面。</p></div>
             <div class="seqdemo-window">
-              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i></div>
+              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><span class="seqdemo-browser-name">AI 检索会话</span><span class="seqdemo-browser-mode">Search</span></div>
               <div class="seqdemo-content">
-                <div class="seqdemo-searchbox">site:hiascend.com 示例报错 E19999 修复<span class="seqdemo-cursor"></span></div>
+                <div class="seqdemo-searchbox"><i data-lucide="search" class="seqdemo-search-icon"></i>site:hiascend.com 示例报错 E19999 修复<span class="seqdemo-cursor"></span></div>
                 <div class="seqdemo-results">
                   <div class="seqdemo-result hot"><b>昇腾社区 · 报错处理说明</b>官方文档 / developer / troubleshooting</div>
                   <div class="seqdemo-result"><b>论坛问答</b>相似报错案例，需要进一步核对版本。</div>
                   <div class="seqdemo-result"><b>第三方博客</b>步骤可能可用，但可信度需要复核。</div>
                 </div>
               </div>
-              <div class="seqdemo-pointer"></div>
             </div>
             <div class="seqdemo-chip">对应指标：官方可发现性、第三方丰富度</div>
           </div>
           <div class="seqdemo-panel fetch" data-seq-demo="fetch">
-            <div><h3>线 02：搜到页面后，还要能抓到正文</h3><p>页面“人能看见”不等于 AI 能读取。正文为空时，AI 要换词、找镜像或补充第三方证据，检索成本立刻上升。</p></div>
+            <div><div class="seqdemo-titleline"><h3>线 02：搜到页面后，还要能抓到正文</h3><span class="seqdemo-actor">AI 使用社区</span></div><p>页面“人能看见”不等于 AI 能读取。正文为空时，AI 要换词、找镜像或补充第三方证据，检索成本立刻上升。</p></div>
             <div class="seqdemo-window">
-              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i></div>
+              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><span class="seqdemo-browser-name">AI 页面读取</span><span class="seqdemo-browser-mode">Fetch</span></div>
               <div class="seqdemo-content">
                 <div class="seqdemo-page">
                   <div class="seqdemo-url">https://www.hiascend.com/document/detail/...</div>
                   <div class="seqdemo-empty">正文抓取为空<span>AI 只能看到壳、导航或脚本，无法引用关键步骤</span></div>
                 </div>
               </div>
-              <div class="seqdemo-pointer"></div>
             </div>
             <div class="seqdemo-chip">对应指标：官方可抓取性、检索成本</div>
           </div>
           <div class="seqdemo-panel review" data-seq-demo="review">
-            <div><h3>线 03：开发者在高风险处回到社区复核</h3><p>当 AI 答案涉及版本、报错、参数或硬件选择时，开发者会亲自打开官方文档和论坛案例，判断能不能采纳。</p></div>
+            <div><div class="seqdemo-titleline"><h3>线 03：开发者在高风险处回到社区复核</h3><span class="seqdemo-actor human">开发者使用社区</span></div><p>当 AI 答案涉及版本、报错、参数或硬件选择时，开发者会亲自打开官方文档和论坛案例，判断能不能采纳。</p></div>
             <div class="seqdemo-window">
-              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i></div>
+              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><span class="seqdemo-browser-name">社区内容核对</span><span class="seqdemo-browser-mode">Review</span></div>
               <div class="seqdemo-content">
                 <div class="seqdemo-doc">
-                  <div class="pane good"><b>官方文档</b>版本、命令、参数约束是否和当前环境一致。<div class="seqdemo-check"><i>CANN 版本</i><i>命令参数</i><i>适用硬件</i></div></div>
-                  <div class="pane"><b>论坛 / 案例</b>是否有同类报错、真实修复路径和反例。<div class="seqdemo-check"><i>相同报错</i><i>复现环境</i><i>修复反馈</i></div></div>
+                  <div class="pane good"><div class="seqdemo-docnav">文档 / CANN / 报错处理</div><b>E19999：适用条件与处理步骤</b><p class="seqdemo-copy">确认 <mark>CANN 版本</mark>、硬件型号与命令参数是否一致，再按文档步骤排查。</p><div class="seqdemo-check"><i>版本匹配</i><i>参数可执行</i><i>硬件适用</i></div></div>
+                  <div class="pane"><div class="seqdemo-forum-meta">开发者论坛 · 已解决</div><b>同类环境下的修复案例</b><p class="seqdemo-copy">核对复现条件、修复反馈和可能的反例，避免只凭一条回答直接采纳。</p><div class="seqdemo-check"><i>相同现象</i><i>复现环境</i><i>修复反馈</i></div></div>
                 </div>
               </div>
-              <div class="seqdemo-pointer"></div>
+              <i data-lucide="mouse-pointer-2" class="seqdemo-pointer"></i>
             </div>
             <div class="seqdemo-chip">对应分析：人工复核点、基础体验触点</div>
           </div>
           <div class="seqdemo-panel score" data-seq-demo="score">
-            <div><h3>线 04：把过程记录成可评分证据</h3><p>每一次搜索、打开、抓取失败、复核和最终步骤，都能转成后续矩阵中的可观察指标，而不是只凭主观印象打分。</p></div>
+            <div><div class="seqdemo-titleline"><h3>线 04：把过程记录成可评分证据</h3><span class="seqdemo-actor both">AI 与开发者共同留下证据</span></div><p>每一次搜索、打开、抓取失败、复核和最终步骤，都能转成后续矩阵中的可观察指标，而不是只凭主观印象打分。</p></div>
             <div class="seqdemo-window">
-              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i></div>
+              <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><span class="seqdemo-browser-name">研究记录</span><span class="seqdemo-browser-mode">Evidence</span></div>
               <div class="seqdemo-content">
                 <div class="seqdemo-log">
                   <div class="seqdemo-logtable">
@@ -1085,7 +1094,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
                   </div>
                 </div>
               </div>
-              <div class="seqdemo-pointer"></div>
             </div>
             <div class="seqdemo-chip">对应产出：AI 可用性矩阵、基础体验评分</div>
           </div>
