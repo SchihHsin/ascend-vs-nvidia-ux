@@ -635,12 +635,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 立论后的结论先行：先给管理层一张三层改造图，再展开研究方法与证据 -->
+  <!-- 立论后的结论先行：先给管理层一张三层问题图，再展开研究方法与证据 -->
   <section class="slide s-gray knowledge-pyramid-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">要让 AI 的答案可被信任，昇腾知识需要补齐三层能力</span></div>
-        <div class="subttl">结论先行 · 内容可用性改造框架</div>
+        <div class="brand"><span class="ttl">AI 答案的信任落差，集中发生在昇腾知识的三层链路</span></div>
+        <div class="subttl">结论先行 · 内容可用性问题框架</div>
       </div>
       <div class="head-r">04/ 内容可用性结论</div>
     </div>
@@ -660,19 +660,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div class="kp-stage">
         <div class="kp-pyramid">
-          <div class="kp-layer search"><span class="kp-level">L3</span><i data-lucide="search-check"></i><div><b>检索与引用</b><span>让任务词能找到官方当前答案，并能稳定引用</span></div></div>
-          <div class="kp-layer machine"><span class="kp-level">L2</span><i data-lucide="braces"></i><div><b>机器理解层</b><span>让正文、代码、表格、版本与前置条件可直接读取</span></div></div>
-          <div class="kp-layer asset"><span class="kp-level">L1</span><i data-lucide="database"></i><div><b>知识资产层</b><span>把高难度任务、错误码、案例和语料建设成可验证资产</span></div></div>
+          <div class="kp-layer search"><span class="kp-level">L3</span><i data-lucide="search-x"></i><div><b>检索与引用</b><span>深层任务难搜到官方当前答案，引用路径不稳定</span></div></div>
+          <div class="kp-layer machine"><span class="kp-level">L2</span><i data-lucide="braces"></i><div><b>机器理解层</b><span>正文未必可取回；版本、代码与上下文难被正确理解</span></div></div>
+          <div class="kp-layer asset"><span class="kp-level">L1</span><i data-lucide="database-zap"></i><div><b>知识资产层</b><span>高难度任务缺完整知识包，生态与模型知识难以兜底</span></div></div>
         </div>
       </div>
       <div class="kp-side">
-        <div class="kp-side-lead"><b>不是只“补文档”，而是让知识从内容资产走到可被 AI 可靠使用</b><span>下面三层分别承接后续内容可用性结论；下一部分再说明这些结论如何由真实任务研究推导出来。</span></div>
+        <div class="kp-side-lead"><b>信任落差并非单一“文档不好用”，而是三层问题连续叠加</b><span>后续研究会分别测量这些问题；结论部分再展开每一层应如何改造。</span></div>
         <div class="kp-map">
-          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search"></i></span><div><b>任务词直达官方当前答案</b><span>稳定 URL、搜索摘要、结构化索引、llms.txt / Markdown 出口。</span></div></div>
-          <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-code-2"></i></span><div><b>页面既让人读，也让机器理解</b><span>正文、代码和表格可抓取；版本、适用范围和配套关系可识别。</span></div></div>
-          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>围绕真实任务沉淀可复用知识</b><span>错误码一码一页、端到端专题、多平台案例互证、面向下一代模型的语料供给。</span></div></div>
+          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索层：官方答案不总能被任务词找到</b><span>26 个任务中，CANN 有 12 个需要二次检索，CUDA 为 5 个；难点集中在深层开发任务。</span></div></div>
+          <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-warning"></i></span><div><b>理解层：找到页面，不等于读到能支撑答案的内容</b><span>自定义算子教程正文未取回；错误码页能取回但缺少原因、场景与修复路径；版本也会使答案错配。</span></div></div>
+          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>资产层：专有难题缺少可复用、可互证的知识</b><span>D / E / M 等任务形成低谷；第三方来源少而同质，模型自带知识也难以补上专有细节。</span></div></div>
         </div>
-        <div class="kp-evidence"><b>矩阵已经显示：</b>问题不只发生在“能否抓取”，还包括找不到、读不懂、没有替代证据，以及高难度任务没有完整知识包。</div>
+        <div class="kp-evidence"><b>三层会相互放大：</b>资产不足时没有替代证据；机器读不懂时无法转成可靠答案；检索入口又决定人和 AI 能否遇见这份知识。</div>
       </div>
     </div>
   </section>
