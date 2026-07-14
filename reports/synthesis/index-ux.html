@@ -635,6 +635,48 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
+  <!-- 立论后的结论先行：先给管理层一张三层改造图，再展开研究方法与证据 -->
+  <section class="slide s-gray knowledge-pyramid-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">要让 AI 的答案可被信任，昇腾知识需要补齐三层能力</span></div>
+        <div class="subttl">结论先行 · 内容可用性改造框架</div>
+      </div>
+      <div class="head-r">04/ 内容可用性结论</div>
+    </div>
+    <style>
+      .knowledge-pyramid-slide .body-area{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:2.3vw;align-items:stretch}
+      .kp-stage{position:relative;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+      .kp-stage:before{content:"";position:absolute;left:8%;right:5%;bottom:3%;height:46%;background:radial-gradient(72% 78% at 48% 100%,rgba(91,91,214,.15),rgba(79,172,254,.07) 52%,transparent 78%);filter:blur(4px);pointer-events:none}
+      .kp-pyramid{position:relative;z-index:1;width:min(94%,720px);height:86%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1.15vh}
+      .kp-layer{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:.72vw;align-items:center;color:#fff;box-shadow:0 18px 32px -25px rgba(24,29,45,.66),inset 0 1px 0 rgba(255,255,255,.34);padding:1.35vh 2.2vw 1.35vh 3.15vw;clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
+      .kp-layer i{width:27px;height:27px;stroke-width:1.9}.kp-layer b{display:block;font-size:var(--fs-h3);line-height:1.15;font-weight:950}.kp-layer span{display:block;margin-top:.34vh;font-size:var(--fs-body);line-height:1.38;color:rgba(255,255,255,.86)}
+      .kp-layer.search{width:54%;min-height:19%;background:linear-gradient(135deg,#303B64,#5B5BD6)}.kp-layer.machine{width:74%;min-height:23%;background:linear-gradient(135deg,#436FA8,#4E9DB7)}.kp-layer.asset{width:96%;min-height:28%;background:linear-gradient(135deg,#2E7D63,#2F806E)}
+      .kp-level{position:absolute;left:-1.55vw;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.12em;color:#778195;writing-mode:vertical-rl}
+      .kp-side{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.kp-side-lead{padding:1.25vh 1.1vw 1.35vh;border-radius:13px;background:var(--g-ink);color:#fff;box-shadow:0 16px 34px -24px rgba(20,23,28,.62),inset 0 1px 0 rgba(255,255,255,.18)}.kp-side-lead b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950}.kp-side-lead span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.43;color:rgba(255,255,255,.76)}
+      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:grid;grid-template-columns:28px minmax(0,1fr);gap:.68vw;align-items:start;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row span{display:block;margin-top:.28vh;font-size:var(--fs-sm);line-height:1.4;color:var(--ink-2)}.kp-row.search .kp-dot{background:#5B5BD6}.kp-row.machine .kp-dot{background:#3A91A6}.kp-row.asset .kp-dot{background:#2E7D63}
+      .kp-evidence{border-radius:12px;padding:1vh .9vw;background:rgba(91,91,214,.075);border:1px solid rgba(91,91,214,.13);font-size:var(--fs-sm);line-height:1.42;color:#4E586A}.kp-evidence b{font-weight:950;color:#252A35}
+    </style>
+    <div class="body-area">
+      <div class="kp-stage">
+        <div class="kp-pyramid">
+          <div class="kp-layer search"><span class="kp-level">L3</span><i data-lucide="search-check"></i><div><b>检索与引用</b><span>让任务词能找到官方当前答案，并能稳定引用</span></div></div>
+          <div class="kp-layer machine"><span class="kp-level">L2</span><i data-lucide="braces"></i><div><b>机器理解层</b><span>让正文、代码、表格、版本与前置条件可直接读取</span></div></div>
+          <div class="kp-layer asset"><span class="kp-level">L1</span><i data-lucide="database"></i><div><b>知识资产层</b><span>把高难度任务、错误码、案例和语料建设成可验证资产</span></div></div>
+        </div>
+      </div>
+      <div class="kp-side">
+        <div class="kp-side-lead"><b>不是只“补文档”，而是让知识从内容资产走到可被 AI 可靠使用</b><span>下面三层分别承接后续内容可用性结论；下一部分再说明这些结论如何由真实任务研究推导出来。</span></div>
+        <div class="kp-map">
+          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search"></i></span><div><b>任务词直达官方当前答案</b><span>稳定 URL、搜索摘要、结构化索引、llms.txt / Markdown 出口。</span></div></div>
+          <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-code-2"></i></span><div><b>页面既让人读，也让机器理解</b><span>正文、代码和表格可抓取；版本、适用范围和配套关系可识别。</span></div></div>
+          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>围绕真实任务沉淀可复用知识</b><span>错误码一码一页、端到端专题、多平台案例互证、面向下一代模型的语料供给。</span></div></div>
+        </div>
+        <div class="kp-evidence"><b>矩阵已经显示：</b>问题不只发生在“能否抓取”，还包括找不到、读不懂、没有替代证据，以及高难度任务没有完整知识包。</div>
+      </div>
+    </div>
+  </section>
+
   <!-- UX 版新增：研究方法 1 / 为什么形成时序图 -->
   <section class="slide s-gray ux-method-slide">
     <div class="head">
@@ -2200,14 +2242,45 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=1" title="opknow19 卡1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#1 版本体系混乱</b>：把“版本散乱”收敛到首选网址、当前推荐版和配套查询。</span></div></div>
   </section>
+  <!-- 新增：搜索可发现性独立结论，回应矩阵①列的系统性差距 -->
+  <section class="slide s-gray">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">内容可用性结论 2：让开发任务词直接找到官方当前答案</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「2/8 搜索可发现性」</div>
+      </div>
+      <div class="head-r">16/ 内容可用性结论 · 2</div>
+    </div>
+    <style>
+      .findability-conclusion{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.06fr) minmax(340px,.94fr);gap:1.6vw;align-items:stretch}
+      .fc-evidence,.fc-action{min-width:0;border-radius:16px;background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.88);box-shadow:0 18px 42px -28px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);overflow:hidden}.fc-evidence{padding:1.7vh 1.3vw;display:grid;grid-template-rows:auto auto 1fr;gap:1.1vh}.fc-k{font-size:var(--fs-sm);font-weight:900;color:#5B5BD6;letter-spacing:.08em}.fc-evidence h3,.fc-action h3{margin:0;font-size:var(--fs-h3);line-height:1.2;color:var(--ink);font-weight:950}.fc-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.8vw}.fc-stat{border-radius:11px;padding:1.05vh .9vw;background:rgba(91,91,214,.07);border:1px solid rgba(91,91,214,.12)}.fc-stat b{display:block;font-family:'JetBrains Mono';font-size:clamp(24px,2.1vw,36px);line-height:1;color:#2E3552;font-weight:900}.fc-stat span{display:block;margin-top:.46vh;font-size:var(--fs-sm);line-height:1.35;color:var(--ink-2)}.fc-evidence-body{min-height:0;display:flex;flex-direction:column;justify-content:space-between;gap:1.2vh}.fc-searchtrace{display:grid;grid-template-columns:minmax(0,1fr) 29px minmax(0,1.12fr);gap:.55vw;align-items:center;padding:1.2vh .9vw;border-radius:12px;background:linear-gradient(135deg,rgba(91,91,214,.07),rgba(79,172,254,.045));border:1px solid rgba(91,91,214,.11)}.fc-query{min-width:0;border-radius:8px;background:#fff;border:1px solid rgba(47,61,99,.12);padding:.65vh .65vw}.fc-query i{display:block;font-size:var(--fs-xs);line-height:1.2;color:#6B7587;font-style:normal}.fc-query b{display:block;margin-top:.2vh;font-size:var(--fs-sm);line-height:1.25;color:#2E3552;font-weight:900}.fc-trace-arrow{display:flex;align-items:center;justify-content:center;color:#6B5BA8}.fc-trace-arrow i{width:18px;height:18px;stroke-width:2}.fc-result{min-width:0;border-radius:8px;border-left:3px solid #5B5BD6;background:rgba(255,255,255,.8);padding:.6vh .65vw}.fc-result b{display:block;font-size:var(--fs-sm);line-height:1.2;color:#26304B;font-weight:950}.fc-result span{display:block;margin-top:.15vh;font-size:var(--fs-xs);line-height:1.28;color:#6A7585}.fc-tracks{display:flex;flex-direction:column;gap:.95vh}.fc-track{display:grid;grid-template-columns:76px 1fr 46px;gap:.6vw;align-items:center;font-size:var(--fs-sm);color:#526071}.fc-track b{font-size:var(--fs-body);color:var(--ink);font-weight:900}.fc-track i{display:block;height:10px;border-radius:999px;background:#EEF0F4;overflow:hidden}.fc-track i:before{content:"";display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7C5CF0,#4FADF6)}.fc-track.cuda i:before{width:88.5%}.fc-track.cann i:before{width:71.5%;background:linear-gradient(90deg,#4D89D9,#7C5CF0)}.fc-track em{font-style:normal;font-family:'JetBrains Mono';font-weight:900;text-align:right;color:#3D485C}
+      .fc-action{padding:1.7vh 1.3vw;display:flex;flex-direction:column;gap:1.05vh}.fc-action-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1vw}.fc-badge{flex:0 0 auto;border-radius:999px;padding:.5vh .65vw;background:#202532;color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900}.fc-rules{flex:1;display:flex;flex-direction:column;justify-content:center;gap:1.1vh}.fc-rule{display:grid;grid-template-columns:29px minmax(0,1fr);gap:.68vw;align-items:start}.fc-rule i{width:29px;height:29px;border-radius:8px;background:rgba(91,91,214,.1);color:#5B5BD6;display:flex;align-items:center;justify-content:center}.fc-rule i svg{width:16px;height:16px;stroke-width:2}.fc-rule b{display:block;font-size:var(--fs-body);line-height:1.22;color:var(--ink);font-weight:950}.fc-rule span{display:block;margin-top:.23vh;font-size:var(--fs-sm);line-height:1.39;color:var(--ink-2)}.fc-foot{margin-top:auto;border-radius:11px;background:var(--g-ink);color:#fff;padding:1vh .9vw;font-size:var(--fs-sm);line-height:1.42}.fc-foot b{color:#fff;font-weight:950}
+    </style>
+    <div class="body-area">
+      <div class="findability-conclusion">
+        <div class="fc-evidence">
+          <div class="fc-k">矩阵信号 · ① 官方可发现性</div>
+          <div><h3>深层开发任务里，CANN 的官方答案更常需要换词和二次检索</h3><div class="fc-stats"><div class="fc-stat"><b>3.58 / 5</b><span>CANN 26 个任务的平均官方可发现性</span></div><div class="fc-stat"><b>12 vs 5</b><span>CANN / CUDA 需要二次检索的任务数</span></div></div></div>
+          <div class="fc-evidence-body"><div class="fc-searchtrace"><div class="fc-query"><i>开发者 / AI 的任务词</i><b>“自定义算子操作教程”</b></div><div class="fc-trace-arrow"><i data-lucide="arrow-right"></i></div><div class="fc-result"><b>官方当前操作教程</b><span>版本、正文与代码可直接核对和引用</span></div></div><div class="fc-tracks"><div class="fc-track cuda"><b>CUDA</b><i></i><em>4.42</em></div><div class="fc-track cann"><b>CANN</b><i></i><em>3.58</em></div><div style="font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)">差距集中在自定义算子、Tiling、注册集成、多卡通信和跨芯片迁移等任务；安装、容器等任务并不弱，因此改造目标是补深层任务的搜索入口，而不是笼统评价全站内容。</div></div></div>
+        </div>
+        <div class="fc-action">
+          <div class="fc-action-head"><div><div class="fc-k">对应做法</div><h3>把任务词、官方答案与当前版本绑定在一起</h3></div><span class="fc-badge">SEO + IA</span></div>
+          <div class="fc-rules"><div class="fc-rule"><i data-lucide="link-2"></i><div><b>为任务页设置稳定网址和首选版本</b><span>历史页保留，但搜索引擎与 AI 默认落到当前可用的官方页面。</span></div></div>
+          <div class="fc-rule"><i data-lucide="text-search"></i><div><b>标题与摘要直接覆盖开发者会问的任务词</b><span>“自定义算子操作教程”“动态 shape / Tiling”“错误码 + 触发场景”都应能直达官方页。</span></div></div>
+          <div class="fc-rule"><i data-lucide="languages"></i><div><b>为重点案例补齐英文摘要与可索引入口</b><span>让全球搜索、技术社区和模型检索都能识别同一份官方当前答案。</span></div></div></div>
+          <div class="fc-foot"><b>与基础体验做法 3 的关系：</b>同一件事服务两类用户。开发者更快找到入口，AI 更早命中可引用的官方证据。</div>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- 灰底：opknow19 卡2（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 2：错误码一码一页，为每个错误码建独立排查页</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「2/8 错误码」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 3：错误码一码一页，为每个错误码建独立排查页</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「3/8 错误码」</div>
       </div>
-      <div class="head-r">16/ 内容可用性结论 · 2</div>
+      <div class="head-r">17/ 内容可用性结论 · 3</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">回应问题</span><span><b>#5 可取回不等于可解决</b>：错误码需要从“能搜到页面”推进到“能定位、能验证”。</span></div></div>
   </section>
