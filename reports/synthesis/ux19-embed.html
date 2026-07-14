@@ -294,14 +294,13 @@ a.hit:hover{text-decoration:underline;color:#444}
 
 <div>
   <div class="card uxcard">
-    <div class="who">提升 ④ 版本清晰度 · 覆盖全部 26 格 · 投入产出比最高（§5-3 反事实测算：综合分平均提升 0.10、16/26 格跨档）</div>
+    <div class="who">提升 ④ 版本清晰度 · 覆盖全部任务</div>
     <h3>1. 版本体系统一管理：首选网址 + 配套查询工具</h3>
     <ul class="tight">
-      <li>为每篇文档指定<b>首选网址（canonical）</b>，统一指向当前推荐版本；历史版本保留，但搜索引擎与 AI 默认落至该版本。</li>
-      <li>提供<b>配套查询器</b>：输入芯片型号与 PyTorch 版本，输出 CANN、driver、torch_npu 的<b>唯一</b>配套组合（实测中该配套需手工比对 6 个版本号）。</li>
-      <li>页面顶部明确标注<b>适用版本与最后验证日期</b>，为 AI 判断内容时效提供直接依据。</li>
+      <li>每篇文档设首选网址，默认指向当前推荐版本。</li>
+      <li>按芯片与框架版本返回唯一配套组合，并标注验证日期。</li>
     </ul>
-    <div class="nvref"><b>NVIDIA 的做法：</b><code>docs.nvidia.com/cuda/</code> 固定指向当前版，历史版本收进 archive；安装选择器按条件输出唯一命令，版本路径不混排。</div>
+    <div class="nvref"><b>NVIDIA 参照：</b>当前版固定入口，历史内容归档；安装选择器输出唯一命令。</div>
     <div class="demotitle">Demo · 左：现状的多版本散乱（实测）；右：建议的配套查询器（下拉框可实际选择） <span class="mockdisc">右侧为示意，占位数据非真实配套</span></div>
 <div class="demo">
   <div class="duo">
@@ -332,14 +331,13 @@ a.hit:hover{text-decoration:underline;color:#444}
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ① 官方可发现性 · 优先补深层开发任务的搜索入口</div>
+    <div class="who">提升 ① 官方可发现性 · 优先覆盖复杂任务</div>
     <h3>2. 让开发任务词直接找到官方当前答案</h3>
     <ul class="tight">
-      <li>为任务页设置稳定网址与首选版本，让搜索引擎和 AI 默认落到当前可用的官方答案。</li>
-      <li>标题与摘要直接覆盖开发者会问的任务词，如自定义算子操作教程、动态 shape、注册集成与错误码场景。</li>
-      <li>为重点案例补齐英文摘要与可索引入口，让全球搜索、技术社区和模型检索识别同一份官方内容。</li>
+      <li>稳定网址绑定当前版本，任务词直达官方教程。</li>
+      <li>标题、摘要和英文入口覆盖核心任务词。</li>
     </ul>
-    <div class="nvref"><b>NVIDIA 的做法：</b>任务词通常能直接命中 docs.nvidia.com 的当前教程或参考页；历史内容与当前入口分层，减少用户和 AI 先落到旧答案的概率。</div>
+    <div class="nvref"><b>NVIDIA 参照：</b>任务词可直接命中当前教程，历史内容与当前入口分层。</div>
     <div class="demotitle">Demo · 同一个任务词在搜索结果页中的两种呈现 <span class="mockdisc">结果页为示意</span></div>
     <div class="demo"><div class="duo">
       <div class="bad"><div class="duolab">✕ 现状 · 任务词命中结果混排，仍需判断和换词</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索引擎</span></div><div class="bbody serp"><div class="serp-query"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>自定义算子 操作教程 CANN</div><div class="serp-row"><span class="serp-url">blog.csdn.net / ... / custom-operator</span><span class="serp-title">CANN 自定义算子开发实践与踩坑</span><span class="serp-snippet">第三方案例，环境与版本条件不完整，无法确认是否仍适用。</span></div><div class="serp-row old"><span class="serp-url">hiascend.com / document / 80RC1 / ...</span><span class="serp-title">自定义算子开发指南 <span class="serp-meta">历史版本</span></span><span class="serp-snippet">官方页面，但未标明是否为当前推荐入口。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / document</span><span class="serp-title">CANN 文档中心</span><span class="serp-snippet">泛入口，需要再次进入文档树查找具体操作步骤。</span></div></div></div></div>
@@ -349,14 +347,13 @@ a.hit:hover{text-decoration:underline;color:#444}
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ③ 正文详尽度 · 直接改善 E（全栈最弱场景之一）</div>
+    <div class="who">提升 ③ 正文质量 · 错误码排查</div>
     <h3>2. 错误码一码一页：为每个错误码建独立的排查页</h3>
     <ul class="tight">
-      <li>每个错误码（EZ9999、EE 系列等）建独立静态页：含义、常见触发、排查步骤、修复样例，网址中包含错误码本身。</li>
-      <li>在报错信息中直接给出该页网址（CUDA 可由 StackOverflow 补充案例，昇腾第三方资料较薄，短期需官方补齐）。</li>
-      <li>这是开发者搜索意图最明确、最急于解决的场景——搜索「EZ9999」的人需要的是解决方案，而非错误码体系综述。</li>
+      <li>每个错误码提供独立页：触发条件、排查步骤与修复样例。</li>
+      <li>报错信息直接链接对应页面，便于定位与复测。</li>
     </ul>
-    <div class="nvref"><b>NVIDIA 的做法：</b>CUDA 错误码语义清楚，StackOverflow 可补案例；EZ9999 信息量不足，昇腾短期更需要官方“一码一页”。</div>
+    <div class="nvref"><b>NVIDIA 参照：</b>错误码语义明确，社区可补充真实案例。</div>
     <div class="demotitle">Demo · 左：实测现状的兜底页；右：建议的一码一页 <span class="mockdisc">右侧内容为示意</span></div>
 <div class="demo">
   <div class="dnote">E 任务实测：搜 EZ9999 命中官方页、抓得到（②4），EZ9999 甚至有专属页——但内容是泛化兜底：原因栏写 N/A、只有通用处理建议，没有按触发场景的逐条解释（③2）。右侧示意「一码一页」该有什么。</div>
@@ -388,14 +385,13 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ② 可抓取性 · 解决 D（全栈唯一「低」分）· 范围已由实测收窄到一个子树</div>
+    <div class="who">提升 ② 可抓取性 · 修复自定义算子教程</div>
     <h3>3. 让核心 how-to 页可被抓取：改为服务端渲染</h3>
     <ul class="tight">
-      <li>实测证明<b>无需全站重做</b>：26 格中 25 格官方页可抓取，连 opdevg 的 Tiling 正文页也是服务端渲染——仅剩 D 的自定义算子 how-to 引导链路为 SPA。</li>
-      <li>最小改动：为该链路提供服务端渲染镜像（O 任务的 doc_center 镜像即现成模式），或提供 Markdown / 纯文本导出。</li>
-      <li>叠加效应最大：D 同时受「SPA + 第三方稀缺 + 版本分散」三重影响，解决其一，另两项的权重也随之下降（AI 能抓到官方正文后，对第三方的依赖显著减少）。</li>
+      <li>为自定义算子教程提供服务端渲染或 Markdown 镜像。</li>
+      <li>发布前以无脚本抓取校验正文、代码与参数表。</li>
     </ul>
-    <div class="nvref"><b>NVIDIA 的做法：</b>docs.nvidia.com 默认静态可抓；实测 26 个 CUDA 官方页都能抓回正文，Agent 不必绕行。</div>
+    <div class="nvref"><b>NVIDIA 参照：</b>官方教程默认可抓，Agent 可直接读取正文。</div>
     <div class="demotitle">Demo · 同一个站，人眼 vs Agent 两双眼睛（同时支撑第 5 条「页面组织规范」）</div>
 <div class="demo">
   <div class="dnote">人眼里这两个页面渲染后几乎一样、都「有内容」。下面展示的是 <b>Agent 实际抓到的东西</b>——②可抓取性 26 格的全部分差就来自这个差别。左侧即 D 任务实测形态。</div>
@@ -428,14 +424,12 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ②③⑦ · Agent 体验（AX）基建 · 面向所有 AI 工具</div>
+    <div class="who">提升 ②③⑦ · 面向 AI 的统一入口</div>
     <h3>4. 提供机器可读出口：llms.txt、Markdown 导出、结构化 API 索引</h3>
     <ul class="tight">
-      <li>提供 <code>llms.txt</code>（站点级 AI 阅读指引）与每页「View as Markdown」出口——这正成为开发者文档站面向 AI 的通行做法。</li>
-      <li>API 参考提供结构化索引（JSON/CSV 的算子-版本-签名表），使 AI 一次抓取即获全量，无需逐页翻阅。</li>
-      <li>长期还可间接提升 ⑦：可抓取的官方语料更易进入下一代模型的训练集，逐步弥补「自带知识薄」这一最深的短板。</li>
+      <li>提供 <code>llms.txt</code>、Markdown 查看与结构化 API 索引。</li>
+      <li>让 AI 一次获取任务入口、版本与接口信息，减少逐页抓取。</li>
     </ul>
-    <div class="why">⑦ 短期无法直接改善（训练由模型厂商决定），但「让语料可被收录」是站方唯一可控的杠杆。落地后 ② 可整体提升至 5、D 的受阻同步解除（§5-3 反事实测算：综合分平均 +0.027、4 格跨档）。</div>
     <div class="demotitle">Demo · 左：现状 <code>llms.txt</code> 缺失；右：NVIDIA 已上线的 llms.txt 索引 <span class="mockdisc">右侧为 2026-06-11 实测</span></div>
 <div class="demo">
   <div class="dnote">「机器可读出口」= 给 AI 一个汇总入口，一次抓全、无需逐页翻；现状是这个入口还不存在。</div>
@@ -464,13 +458,12 @@ NeMo / NIM / Jetson → llms.txt
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ②③⑧① · 页面级组织规范 · 每条均来自实测中「抓到 / 抓不到」的正反对照</div>
+    <div class="who">提升 ①②③⑧ · 页面发布规范</div>
     <h3>5. 面向 AI 抓取的页面组织方式</h3>
     <ul class="tight">
-      <li>把右侧 7 条页面规范当作<b>发布前的机检清单</b>——每条都来自实测中「抓到 / 抓不到」的正反对照。</li>
-      <li>核心观念：<b>视觉层之下的 HTML 结构层，就是 Agent 的界面</b>；这是「界面设计」在 Agent 时代的直译。</li>
+      <li>主路径正文、代码和表格进入首屏 HTML，不依赖脚本渲染。</li>
+      <li>发布前无脚本抓取，校验版本、命令、参数表与下一步。</li>
     </ul>
-    <div class="why">验收法统一为「禁 JS 抓一遍」：参数表、命令、版本声明仍齐全才算过。注：人看的视觉界面好不好属方法盲区，需另做用户研究。</div>
     <div class="demotitle">Demo · 同一页给人看很完整，但 Agent 可能只抓到导航骨架 <span class="mockdisc">从现象到做法</span></div>
     <div class="demo">
       <div class="dnote">这页要证明的不是“某个技术方案”，而是：<b>页面的视觉结构</b>和 <b>Agent 能读取到的 HTML 结构</b>可能完全不同。验收要看右侧“无脚本抓取结果”，而不是只看浏览器截图。</div>
@@ -505,14 +498,12 @@ NeMo / NIM / Jetson → llms.txt
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ⑤⑥ 第三方生态 · 慢变量、需持续运营</div>
+    <div class="who">提升 ⑤⑥ · 第三方多平台互证</div>
     <h3>6. 扶持第三方生态：从单一来源到多平台互证</h3>
     <ul class="tight">
-      <li>由官方博客／开发者论坛做首发与背书，同时鼓励 CSDN、个人博客、Medium／dev.to 等多平台同步产出带版本号的完整教程——独立性因子惩罚的不是某个平台，而是「单一平台重复转载」。</li>
-      <li><b>选平台先看 Agent 可抓性</b>：优质教程若只发在知乎（实测 403），对 AI 助手近乎不存在；应优先落在可抓平台，或同步一份到官方博客／Gitee 仓 markdown。</li>
-      <li>优先覆盖高难度场景（算子开发、Tiling、报错案例、排错工具实战）——上手侧已不缺。每篇硬性要求：注明版本 + 可复制命令 + 日期。</li>
+      <li>官方博客、论坛与外部技术社区同步发布，避免单一平台转载。</li>
+      <li>优先覆盖算子、动态 shape 与报错案例；内容注明版本、日期和命令。</li>
     </ul>
-    <div class="why">第三方是官方文档的冗余通道。CUDA 的韧性正源于这条通道足够厚——官方页即便不足也有 StackOverflow 承接；NVIDIA 官方还亲自参与补充（技术博客、开发者论坛）。落地后 ⑤⑥ 各 +1（§5-3 测算 ⑪ +0.056、ROI 第二）。</div>
     <div class="demotitle">Demo · 第三方教程的平台覆盖：昇腾现状 vs NVIDIA <span class="mockdisc">均为实测</span></div>
     <div class="demo">
       <div class="duo">
@@ -537,14 +528,12 @@ NeMo / NIM / Jetson → llms.txt
   </div>
 
   <div class="card uxcard">
-    <div class="who">承接 D / E / M 三个最大差距任务 · 从页面供给改为任务供给</div>
+    <div class="who">覆盖自定义算子、错误码与动态 shape</div>
     <h3>7. 高难度任务需要端到端场景专题，而不是分散在多页文档里</h3>
     <ul class="tight">
-      <li>#17 矩阵显示，CANN 与 CUDA 综合差距最大的三项是 <b>D 自定义算子、E 报错码、M 动态 shape / Tiling</b>。它们不是“没有页面”，而是证据分散、步骤断裂、验证不足。</li>
-      <li>这类专有知识密集任务不能只靠列表页或参考手册，需要按真实目标组织成<b>任务包</b>：前置条件、版本约束、完整步骤、可复制代码、预期输出、常见报错和下一步。</li>
-      <li>错误码一码一页解决 E 的最小单元；D / M 还需要跨页面串联，把开发、编译、部署、验证、调试放在同一条路径里。</li>
+      <li>按真实任务组织内容，而非分散发布页面。</li>
+      <li>一个任务包覆盖前置条件、完整步骤、可复制代码、验证输出与常见报错。</li>
     </ul>
-    <div class="why">这页的落点是高难度任务闭环：把 AI 指标中暴露的“搜得到但用不稳”，转译成开发者和 Agent 都能执行的端到端专题。</div>
     <div class="demotitle">Demo · 把 D / E / M 从分散页面整理成端到端任务包 <span class="mockdisc">任务供给</span></div>
     <div class="demo">
       <div class="dnote">这不是新增一个栏目，而是改变内容组织单位：从“按页面发布”改成“按开发任务交付”。同一任务包既给人看，也给 Agent 抓取和引用。</div>
@@ -575,14 +564,12 @@ NeMo / NIM / Jetson → llms.txt
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ⑦ 自带知识 · 最深的短板、最慢的变量 · 26 全量后新增（§5-3 反事实测算：⑦+1 → 综合分平均 +0.048、4 格跨档，长期 ROI 第三、高于 llms.txt）</div>
+    <div class="who">提升 ⑦ · 面向下一代模型的知识供给</div>
     <h3>8. 面向下一代模型的语料供给：官方与生态需共同支撑</h3>
     <ul class="tight">
-      <li><b>把高难度内容从「官方页面可读」推进到「生态与模型都能吸收」</b>——以 X 内存越界为例，官方 msSanitizer 文档满分 5，但第三方仅 1、自带 ⑦ 仅 2，综合仍只到中高。</li>
-      <li>站方可控的杠杆：把官方内容以<b>最易被训练集收录的形态</b>同步一份——公开 git 仓 markdown、关键文档出英文版、教程带可跑代码而非截图。</li>
-      <li>与卡 4 的分工：llms.txt 解决「<b>当代</b>模型检索时抓得到」，本条解决「<b>下一代</b>模型不检索也知道」——前者应急，后者根治。</li>
+      <li>关键内容同步到公开 Git 仓与 Markdown，提供英文版和可运行样例。</li>
+      <li>将高质量问答沉淀为 FAQ 与案例，并标注版本、芯片和日期。</li>
     </ul>
-    <div class="why">⑦ 是三条渠道中唯一可跨「当代 Agent 产品」起效的——它内化于模型，用户更换任何 AI 工具都随之带走。见效慢，但具复利效应。CUDA 的高分是 20 年自然生态的副产品；昇腾没有 20 年可等，「自然生长」在此并非可行方案，只能主动供给。</div>
     <div class="demotitle">Demo · 把时序图里的「模型自带知识」从薄弱兜底，变成可被训练吸收的知识底座 <span class="mockdisc">长期杠杆</span></div>
     <div class="demo">
       <div class="dnote">在前面的 Agent 流程图里，「模型自带知识」是检索之外的兜底：检索受阻时，模型会回到自己训练中学过的内容。CANN 的问题是这层知识积累不足，所以要把官方和生态内容做成更容易被下一代模型收录的形态。</div>
@@ -1066,6 +1053,7 @@ body.embed .uxcard.ux-show.ux-flex{flex-direction:row;gap:30px;align-items:cente
 body.embed .ux-left{flex:0 0 27%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0}
 body.embed .ux-right{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:0}
 body.embed .ux-right .demo{margin:0!important}
+body.embed .ux-right .dnote,body.embed .ux-right .note{display:none!important}
 /* 左栏文字层次:眉标(灰·次)→ 建议(放大·菱形标记·重点)→ NVIDIA 范本(callout)→ 为何优先(脚注),拉开间距不堆叠 */
 body.embed .ux-left>*{margin:0!important}
 body.embed .ux-left .who{font-size:12px!important;font-weight:700!important;color:var(--sub)!important;letter-spacing:.02em!important;line-height:1.5!important;margin-bottom:13px!important;padding-bottom:9px!important;border-bottom:1px solid var(--line)!important}

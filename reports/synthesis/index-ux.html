@@ -64,6 +64,7 @@ body.overview .s-cover .slide-inner{padding:0}
 .brand .logo{height:clamp(19px,1.7vw,25px);width:auto;display:block;flex-shrink:0}  /* ⛔ 标题前只放 CANN logo（无合适 logo 就删掉 img 留空），绝不换成 Lucide/通用 icon */
 .brand .ttl{font-weight:800;font-size:var(--fs-h1);letter-spacing:-.01em}      /* 标题=结论 */
 .subttl{font-weight:300;font-size:var(--fs-sm);color:var(--ink-2)}
+.layer-tag{display:inline-block;margin-left:.55vw;padding:.18vh .46vw;border:1px solid rgba(48,57,74,.2);border-radius:999px;color:#4D586B;font-size:var(--fs-xs);font-weight:700;line-height:1.2}
 .head-r{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.8}
 .body-area{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
 .card{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);
@@ -2251,8 +2252,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 1：版本体系需要统一入口，提供首选网址与配套查询工具</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「1/8 版本入口」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 1：统一版本入口与配套查询</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「1/8 版本入口」<span class="layer-tag">金字塔：机器理解层</span></div>
       </div>
       <div class="head-r">15/ 内容可用性结论 · 1</div>
     </div>
@@ -2262,8 +2263,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 2：让开发任务词直接找到官方当前答案</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「2/8 搜索可发现性」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 2：让任务词直达官方当前教程</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「2/8 搜索可发现性」<span class="layer-tag">金字塔：检索与引用层</span></div>
       </div>
       <div class="head-r">16/ 内容可用性结论 · 2</div>
     </div>
@@ -2276,8 +2277,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 3：错误码一码一页，为每个错误码建独立排查页</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「3/8 错误码」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 3：错误码一码一页，提供排查路径</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「3/8 错误码」<span class="layer-tag">金字塔：机器理解层</span></div>
       </div>
       <div class="head-r">17/ 内容可用性结论 · 3</div>
     </div>
@@ -2287,8 +2288,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 4：提供机器可读出口，支持 llms.txt、Markdown 和结构化索引</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「4/8 机器可读出口」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 4：提供面向 AI 的机器可读入口</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「4/8 机器可读出口」<span class="layer-tag">金字塔：检索与引用层</span></div>
       </div>
       <div class="head-r">17/ 内容可用性结论 · 4</div>
     </div>
@@ -2298,8 +2299,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 5：页面结构需要面向 AI 抓取，而不只面向人浏览</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「5/8 页面结构」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 5：用页面结构保障 AI 可读</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「5/8 页面结构」<span class="layer-tag">金字塔：机器理解层</span></div>
       </div>
       <div class="head-r">18/ 内容可用性结论 · 5</div>
     </div>
@@ -2309,8 +2310,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 6：第三方来源要从单一走向多平台互证</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「6/8 第三方生态」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 6：建立多平台第三方互证</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「6/8 第三方生态」<span class="layer-tag">金字塔：知识资产层</span></div>
       </div>
       <div class="head-r">19/ 内容可用性结论 · 6</div>
     </div>
@@ -2320,8 +2321,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 7：高难度任务需要端到端场景专题，而不是分散在多页文档里</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「7/8 高难度任务专题」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 7：用端到端专题交付复杂任务</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「7/8 高难度任务专题」<span class="layer-tag">金字塔：知识资产层</span></div>
       </div>
       <div class="head-r">20/ 内容可用性结论 · 7</div>
     </div>
@@ -2331,8 +2332,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 8：面向下一代模型的语料供给，需要官方与生态共同支撑</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「8/8 语料供给」</div>
+        <div class="brand"><span class="ttl">内容可用性结论 8：建设可被模型吸收的知识供给</span></div>
+        <div class="subttl">AI 侧 · 内容可用性结论 · 「8/8 语料供给」<span class="layer-tag">金字塔：知识资产层</span></div>
       </div>
       <div class="head-r">21/ 内容可用性结论 · 8</div>
     </div>
