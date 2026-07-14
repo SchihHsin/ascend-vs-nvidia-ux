@@ -119,6 +119,16 @@ ul.tight li{margin-bottom:6px}
 .bw .dots i{width:9px;height:9px;border-radius:50%;background:#cfcfcf;display:block}
 .bw .url{flex:1;min-width:0;background:#fff;border:1px solid #ddd;border-radius:6px;padding:1px 10px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bw .bbody{padding:14px 16px}
+.serp{display:flex;flex-direction:column;gap:10px;padding:12px 14px!important}
+.serp-query{display:flex;align-items:center;gap:8px;border:1px solid #d9dce3;border-radius:999px;padding:6px 10px;color:#303643;font-size:11.5px;line-height:1.25;box-shadow:0 1px 3px rgba(28,36,54,.06)}
+.serp-query svg{width:13px;height:13px;stroke:#6d7685;stroke-width:2;flex:none}
+.serp-row{min-width:0;padding-left:2px}
+.serp-url{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#53714b;font-size:10.5px;line-height:1.25}
+.serp-title{display:block;margin-top:2px;color:#1a0dab;font-size:12.5px;font-weight:700;line-height:1.3}
+.serp-snippet{display:block;margin-top:2px;color:#647082;font-size:10.8px;line-height:1.38}
+.serp-row.old .serp-url{color:#8a6d1a}.serp-row.old .serp-title{color:#6b4f0f}
+.serp-row.direct{padding:7px 8px;border:1px solid #cae1ae;border-radius:8px;background:#f7fbf1}.serp-row.direct .serp-title{color:#276000}
+.serp-meta{display:inline-block;margin-left:5px;padding:1px 5px;border-radius:8px;background:#e7f4d5;color:#497b10;font-size:9.5px;font-weight:700;vertical-align:1px}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
 .duo>*{min-width:0}
 @media(max-width:860px){.duo{grid-template-columns:1fr}}
@@ -330,10 +340,10 @@ a.hit:hover{text-decoration:underline;color:#444}
       <li>为重点案例补齐英文摘要与可索引入口，让全球搜索、技术社区和模型检索识别同一份官方内容。</li>
     </ul>
     <div class="nvref"><b>NVIDIA 的做法：</b>任务词通常能直接命中 docs.nvidia.com 的当前教程或参考页；历史内容与当前入口分层，减少用户和 AI 先落到旧答案的概率。</div>
-    <div class="demotitle">Demo · 左：任务词需要换词再找；右：任务词直接命中官方当前答案 <span class="mockdisc">右侧为示意</span></div>
+    <div class="demotitle">Demo · 同一个任务词在搜索结果页中的两种呈现 <span class="mockdisc">结果页为示意</span></div>
     <div class="demo"><div class="duo">
-      <div class="bad"><div class="duolab">✕ 现状 · 深层任务的官方答案不总在首次搜索结果中</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索：自定义算子 操作教程</span></div><div class="bbody"><b>首次搜索：第三方案例与旧页面混排</b><p style="margin-top:8px;color:#666">26 个任务中，CANN 有 12 个需要二次检索；自定义算子、动态 shape、注册集成、多卡通信与跨芯片迁移最明显。</p></div></div></div>
-      <div class="good"><div class="duolab">✓ 建议 · 任务词直达当前官方教程，并保留可引用上下文</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">hiascend.com/docs/custom-operator（示意 URL）</span></div><div class="bbody"><b>自定义算子操作教程 · CANN 当前推荐版本</b><span class="verbadge">适用版本 + 最后验证日期</span><p style="margin:8px 0 0">正文、代码、前置条件与下一��入口完整可读；开发者能核对，AI 能稳定引用。</p></div></div></div>
+      <div class="bad"><div class="duolab">✕ 现状 · 任务词命中结果混排，仍需判断和换词</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索引擎</span></div><div class="bbody serp"><div class="serp-query"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>自定义算子 操作教程 CANN</div><div class="serp-row"><span class="serp-url">blog.csdn.net / ... / custom-operator</span><span class="serp-title">CANN 自定义算子开发实践与踩坑</span><span class="serp-snippet">第三方案例，环境与版本条件不完整，无法确认是否仍适用。</span></div><div class="serp-row old"><span class="serp-url">hiascend.com / document / 80RC1 / ...</span><span class="serp-title">自定义算子开发指南 <span class="serp-meta">历史版本</span></span><span class="serp-snippet">官方页面，但未标明是否为当前推荐入口。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / document</span><span class="serp-title">CANN 文档中心</span><span class="serp-snippet">泛入口，需要再次进入文档树查找具体操作步骤。</span></div></div></div></div>
+      <div class="good"><div class="duolab">✓ 建议 · 第一条直达官方当前教程，相关任务入口一并给出</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索引擎</span></div><div class="bbody serp"><div class="serp-query"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>自定义算子 操作教程 CANN</div><div class="serp-row direct"><span class="serp-url">hiascend.com / docs / custom-operator</span><span class="serp-title">自定义算子操作教程 · CANN <span class="serp-meta">当前推荐 · 8.2.RC1</span></span><span class="serp-snippet">从算子定义、编译、部署到验证；正文、代码与前置条件可直接读取。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / docs / custom-operator / compile</span><span class="serp-title">编译与部署自定义算子</span><span class="serp-snippet">同一专题内的下一步，附适用版本与最后验证日期。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / docs / custom-operator / troubleshoot</span><span class="serp-title">自定义算子常见报错与排查</span><span class="serp-snippet">按触发场景组织，可继续核对预期输出和修复方法。</span></div></div></div></div>
     </div></div>
     <div class="why">① 官方可发现性：CANN 平均 3.58 / 5，CUDA 为 4.42 / 5；把任务词、当前版本与官方页面绑定，是搜索体验和 AI 检索共同的入口改造。</div>
   </div>
