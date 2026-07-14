@@ -322,6 +322,23 @@ a.hit:hover{text-decoration:underline;color:#444}
   </div>
 
   <div class="card uxcard">
+    <div class="who">提升 ① 官方可发现性 · 优先补深层开发任务的搜索入口</div>
+    <h3>2. 让开发任务词直接找到官方当前答案</h3>
+    <ul class="tight">
+      <li>为任务页设置稳定网址与首选版本，让搜索引擎和 AI 默认落到当前可用的官方答案。</li>
+      <li>标题与摘要直接覆盖开发者会问的任务词，如自定义算子操作教程、动态 shape、注册集成与错误码场景。</li>
+      <li>为重点案例补齐英文摘要与可索引入口，让全球搜索、技术社区和模型检索识别同一份官方内容。</li>
+    </ul>
+    <div class="nvref"><b>NVIDIA 的做法：</b>任务词通常能直接命中 docs.nvidia.com 的当前教程或参考页；历史内容与当前入口分层，减少用户和 AI 先落到旧答案的概率。</div>
+    <div class="demotitle">Demo · 左：任务词需要换词再找；右：任务词直接命中官方当前答案 <span class="mockdisc">右侧为示意</span></div>
+    <div class="demo"><div class="duo">
+      <div class="bad"><div class="duolab">✕ 现状 · 深层任务的官方答案不总在首次搜索结果中</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索：自定义算子 操作教程</span></div><div class="bbody"><b>首次搜索：第三方案例与旧页面混排</b><p style="margin-top:8px;color:#666">26 个任务中，CANN 有 12 个需要二次检索；自定义算子、动态 shape、注册集成、多卡通信与跨芯片迁移最明显。</p></div></div></div>
+      <div class="good"><div class="duolab">✓ 建议 · 任务词直达当前官方教程，并保留可引用上下文</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">hiascend.com/docs/custom-operator（示意 URL）</span></div><div class="bbody"><b>自定义算子操作教程 · CANN 当前推荐版本</b><span class="verbadge">适用版本 + 最后验证日期</span><p style="margin:8px 0 0">正文、代码、前置条件与下一��入口完整可读；开发者能核对，AI 能稳定引用。</p></div></div></div>
+    </div></div>
+    <div class="why">① 官方可发现性：CANN 平均 3.58 / 5，CUDA 为 4.42 / 5；把任务词、当前版本与官方页面绑定，是搜索体验和 AI 检索共同的入口改造。</div>
+  </div>
+
+  <div class="card uxcard">
     <div class="who">提升 ③ 正文详尽度 · 直接改善 E（全栈最弱场景之一）</div>
     <h3>2. 错误码一码一页：为每个错误码建独立的排查页</h3>
     <ul class="tight">
