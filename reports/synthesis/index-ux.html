@@ -649,10 +649,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .kp-stage{position:relative;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
       .kp-stage:before{content:"";position:absolute;left:8%;right:5%;bottom:8%;height:50%;background:radial-gradient(72% 78% at 42% 100%,rgba(255,90,110,.12),rgba(255,111,85,.045) 52%,transparent 78%);filter:blur(4px);pointer-events:none}
       .kp-pyramid{position:relative;z-index:1;width:min(96%,760px);height:76%;display:flex;align-items:center;justify-content:center}
-      .kp-pyramid svg{display:block;width:100%;height:100%;overflow:visible}.kp-pyramid .kp-num{font-family:'JetBrains Mono';font-size:18px;font-weight:900;fill:#969EAC;letter-spacing:.08em}.kp-pyramid .kp-title{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:22px;font-weight:900;fill:#fff}.kp-pyramid .kp-desc{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:14px;font-weight:600;fill:rgba(255,255,255,.82)}
+      .kp-pyramid svg{display:block;width:100%;height:100%;overflow:visible}.kp-pyramid .kp-num{font-family:'JetBrains Mono';font-size:18px;font-weight:900;fill:#969EAC;letter-spacing:.08em}.kp-pyramid .kp-title{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:22px;font-weight:900;fill:#fff}.kp-pyramid .kp-desc{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:14px;font-weight:600;fill:rgba(255,255,255,.82)}.kp-pyramid .kp-title-dark{fill:#252B35}.kp-pyramid .kp-desc-dark{fill:#5E646E}
       .kp-side{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.kp-side-lead{padding:1.25vh 1.1vw 1.35vh;border-radius:13px;background:var(--g-ink);color:#fff;box-shadow:0 16px 34px -24px rgba(20,23,28,.62),inset 0 1px 0 rgba(255,255,255,.18)}.kp-side-lead b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950}.kp-side-lead span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.43;color:rgba(255,255,255,.76)}
-      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:flex;align-items:flex-start;gap:.68vw;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row.search .kp-dot{background:#E84656}.kp-row.machine .kp-dot{background:#D62236}.kp-row.asset .kp-dot{background:#252B35}
-      .kp-chips{display:flex;flex-wrap:wrap;gap:.38vw;margin-top:.48vh}.kp-chips span{display:inline-flex;align-items:center;min-height:23px;border-radius:999px;padding:.24vh .55vw;background:#fff;border:1px solid rgba(47,61,99,.14);font-size:var(--fs-sm);line-height:1.2;color:#475264;font-weight:800}.kp-row.search .kp-chips span{border-color:rgba(232,70,86,.22);color:#B93644}.kp-row.machine .kp-chips span{border-color:rgba(214,34,54,.22);color:#A92B3A}.kp-row.asset .kp-chips span{border-color:rgba(37,43,53,.18);color:#3E4654}
+      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:flex;align-items:flex-start;gap:.68vw;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row.search .kp-dot{background:#fff;color:#252B35;border:1px solid #D4D8DF}.kp-row.machine .kp-dot{background:#D62236}.kp-row.asset .kp-dot{background:#252B35}
+      .kp-chips{display:flex;flex-wrap:wrap;gap:.38vw;margin-top:.48vh}.kp-chips span{display:inline-flex;align-items:center;min-height:23px;border-radius:999px;padding:.24vh .55vw;background:#FFF7F7;border:1px solid rgba(232,70,86,.28);font-size:var(--fs-sm);line-height:1.2;color:#B93644;font-weight:800}
       .kp-evidence{border-radius:12px;padding:1.05vh .95vw;background:rgba(255,90,110,.08);border:1px solid rgba(255,90,110,.16);font-size:var(--fs-body);line-height:1.45;color:#4E586A}.kp-evidence b{font-weight:950;color:#252A35}
     </style>
     <div class="body-area">
@@ -661,17 +661,16 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <svg viewBox="0 0 820 520" role="img" aria-label="知识资产层、机器理解层、检索与引用三层问题金字塔">
             <defs><filter id="kpShadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#25131A" flood-opacity=".16"/></filter></defs>
             <g filter="url(#kpShadow)">
-              <polygon points="260,40 178,160 342,160" fill="#FF6F55"/>
-              <polygon points="260,40 342,160 260,160" fill="#D62236"/>
+              <polygon points="260,40 178,160 342,160" fill="#FFFFFF" stroke="#D4D8DF" stroke-width="1"/>
+              <polygon points="260,40 342,160 260,160" fill="#E6E9EF" stroke="#D4D8DF" stroke-width="1"/>
               <polygon points="160,176 360,176 420,292 100,292" fill="#F15462"/>
               <polygon points="260,176 360,176 420,292 260,292" fill="#B71E30"/>
               <polygon points="76,310 444,310 518,446 0,446" fill="#3A424F"/>
-              <polygon points="260,310 444,310 518,446 260,482" fill="#1A1E26"/>
-              <polygon points="0,446 260,482 518,446 444,462 260,503 76,462" fill="#2A303A" opacity=".72"/>
+              <polygon points="260,310 444,310 518,446 260,446" fill="#1A1E26"/>
             </g>
-            <text class="kp-num" x="128" y="121">03</text><path d="M352 99H412" stroke="#FF6F55" stroke-width="2"/>
-            <rect x="424" y="62" width="334" height="76" rx="0" fill="#D62236"/><path d="M758 62V138L790 100Z" fill="#A81A29"/>
-            <text class="kp-title" x="448" y="91">检索与引用</text><text class="kp-desc" x="448" y="115">任务词难直达官方当前答案</text>
+            <text class="kp-num" x="128" y="121">03</text><path d="M352 99H412" stroke="#B7BEC9" stroke-width="2"/>
+            <rect x="424" y="62" width="334" height="76" rx="0" fill="#FFFFFF" stroke="#D4D8DF" stroke-width="1"/><path d="M758 62V138L790 100Z" fill="#E3E6EB" stroke="#D4D8DF" stroke-width="1"/>
+            <text class="kp-title kp-title-dark" x="448" y="91">检索与引用</text><text class="kp-desc kp-desc-dark" x="448" y="115">任务词难直达官方当前答案</text>
             <text class="kp-num" x="112" y="250">02</text><path d="M430 232H492" stroke="#F15462" stroke-width="2"/>
             <rect x="504" y="194" width="286" height="76" rx="0" fill="#F15462"/><path d="M790 194V270L818 232Z" fill="#BD2737"/>
             <text class="kp-title" x="528" y="223">机器理解层</text><text class="kp-desc" x="528" y="247">找到页面，也未必读懂内容</text>
@@ -686,7 +685,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="kp-map">
           <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索层：官方答案不总能被任务词找到</b><div class="kp-chips"><span>12 个任务需二次检索</span><span>深层任务官方不在首屏</span><span>引用入口不稳定</span></div></div></div>
           <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-warning"></i></span><div><b>理解层：找到页面，不等于读到能支撑答案的内容</b><div class="kp-chips"><span>操作教程正文未取回</span><span>错误码缺修复路径</span><span>版本错配风险</span><span>代码与表格难读取</span></div></div></div>
-          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>资产层：专有难题缺少可复用、可互证的知识</b><div class="kp-chips"><span>D / E / M 形成低谷</span><span>第三方少而同质</span><span>模型自带知识偏薄</span><span>端到端专题缺失</span></div></div></div>
+          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>资产层：专有难题缺少可复用、可互证的知识</b><div class="kp-chips"><span>自定义算子、错误码、动态 shape 低谷</span><span>第三方少而同质</span><span>模型自带知识偏薄</span><span>端到端专题缺失</span></div></div></div>
         </div>
         <div class="kp-evidence"><b>三层会相互放大：</b>资产不足时没有替代证据；机器读不懂时无法转成可靠答案；检索入口又决定人和 AI 能否遇见这份知识。</div>
       </div>
