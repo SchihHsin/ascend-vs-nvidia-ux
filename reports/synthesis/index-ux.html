@@ -670,7 +670,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
             </g>
             <text class="kp-num" x="128" y="121">03</text><path d="M352 99H412" stroke="#B7BEC9" stroke-width="2"/>
             <rect x="424" y="62" width="334" height="76" rx="0" fill="#FFFFFF" stroke="#D4D8DF" stroke-width="1"/><path d="M758 62V138L790 100Z" fill="#E3E6EB" stroke="#D4D8DF" stroke-width="1"/>
-            <text class="kp-title kp-title-dark" x="448" y="91">检索与引用</text><text class="kp-desc kp-desc-dark" x="448" y="115">任务词首次搜不到官方当前答案</text>
+            <text class="kp-title kp-title-dark" x="448" y="91">检索与引用</text><text class="kp-desc kp-desc-dark" x="448" y="115">复杂任务检索时，官方页面不在首屏</text>
             <text class="kp-num" x="112" y="250">02</text><path d="M430 232H492" stroke="#F15462" stroke-width="2"/>
             <rect x="504" y="194" width="286" height="76" rx="0" fill="#F15462"/><path d="M790 194V270L818 232Z" fill="#BD2737"/>
             <text class="kp-title" x="528" y="223">机器理解层</text><text class="kp-desc" x="528" y="247">找到页面，也未必读懂内容</text>
@@ -683,7 +683,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="kp-side">
         <div class="kp-side-lead"><b>信任落差并非单一“文档不好用”，而是三层问题连续叠加</b><span>后续研究会分别测量这些问题；结论部分再展开每一层应如何改造。</span></div>
         <div class="kp-map">
-          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索层：任务词首次搜不到官方答案</b><div class="kp-chips"><span>12 个任务需二次检索</span><span>复杂任务官方结果不在首屏</span><span>引用入口不稳定</span></div></div></div>
+          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索层：复杂任务检索时，官方页面不在首屏</b><div class="kp-chips"><span>12 个任务需二次检索</span><span>需要换词才能找到官方页</span><span>引用入口不稳定</span></div></div></div>
           <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-warning"></i></span><div><b>理解层：找到页面，不等于读到能支撑答案的内容</b><div class="kp-chips"><span>操作教程正文未取回</span><span>错误码缺修复路径</span><span>版本错配风险</span><span>代码与表格难读取</span></div></div></div>
           <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>资产层：复杂任务缺少完整、可互证的知识</b><div class="kp-chips"><span>自定义算子、错误码、动态 shape 低谷</span><span>第三方来源少</span><span>AI 对昇腾知识积累不足</span><span>端到端专题缺失</span></div></div></div>
         </div>
@@ -2079,7 +2079,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       });
       var focus=[
         {k:'version',mark:'col',title:'问题 1 · 版本体系混乱',val:'④ 多数低分',desc:'同一主题散落在多棵版本树，缺少当前推荐版本；AI 和开发者都需要先判断“该看哪一版”。',icon:'tag',sel:'tr[data-side="cann"] [data-col="3"]',ref:'tr[data-side="cuda"] [data-col="3"]',ring:'tr[data-side="cann"] [data-col="3"]',demo:`<div class="qb"><i></i><i></i><i></i><span>搜“atc 模型转换”命中</span></div><div class="qd"><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">8.0RC2</span></div><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">8.0RC3</span></div><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">800alpha</span></div></div>`},
-        {k:'discover',mark:'col',title:'问题 2 · 任务词首次搜不到官方答案',val:'① 3.58 vs 4.42',desc:'CANN 有 12 个任务需要二次检索，CUDA 为 5 个；差距集中在自定义算子、动态 shape、注册集成、多卡通信和跨芯片迁移。',icon:'target',sel:'tr[data-side="cann"] [data-col="0"]',ref:'tr[data-side="cuda"] [data-col="0"]',ring:'tr[data-side="cann"] [data-col="0"]',demo:`<div class="qb"><i></i><i></i><i></i><span>任务词 → 首次搜索</span></div><div class="qd"><div><span class="muted">CANN</span> <span class="bad">12 个任务需换词再搜</span></div><div style="margin-top:4px"><span class="muted">CUDA</span> <span class="ok">5 个任务需二次检索</span></div></div>`},
+        {k:'discover',mark:'col',title:'问题 2 · 复杂任务检索时，官方页面不在首屏',val:'① 3.58 vs 4.42',desc:'CANN 有 12 个任务需要二次检索，CUDA 为 5 个；差距集中在自定义算子、动态 shape、注册集成、多卡通信和跨芯片迁移。',icon:'target',sel:'tr[data-side="cann"] [data-col="0"]',ref:'tr[data-side="cuda"] [data-col="0"]',ring:'tr[data-side="cann"] [data-col="0"]',demo:`<div class="qb"><i></i><i></i><i></i><span>任务词 → 首次搜索</span></div><div class="qd"><div><span class="muted">CANN</span> <span class="bad">12 个任务需换词再搜</span></div><div style="margin-top:4px"><span class="muted">CUDA</span> <span class="ok">5 个任务需二次检索</span></div></div>`},
         {k:'own',mark:'col',title:'问题 3 · AI 对昇腾知识积累不足',val:'−33.8',desc:'CANN 56.9 / CUDA 90.8。官方或第三方抓取一旦受阻，模型记忆里缺少可替代证据。',icon:'brain',sel:'tr[data-side="cann"] [data-col="6"]',ref:'tr[data-side="cuda"] [data-col="6"]',ring:'tr[data-side="cann"] [data-col="6"]',demo:`<div class="qd"><div><span class="muted">CUDA</span> <span class="ok">不检索也能答 ✓</span></div><div style="margin-top:4px"><span class="muted">CANN</span> <span class="bad">不检索就答不了 ✕</span></div></div>`},
         {k:'third',mark:'col',title:'问题 4 · 第三方来源少，难以互证',val:'⑤ K/M/N/S/X = 2',desc:'第三方内容多集中在少数平台，互证不足；对 Agent 有效的第三方来源比人能看到的更窄。',icon:'target',sel:'tr[data-side="cann"] [data-col="4"], tr[data-side="cann"] [data-col="5"]',ref:'tr[data-side="cuda"] [data-col="4"], tr[data-side="cuda"] [data-col="5"]',ring:'tr[data-side="cann"] [data-col="4"], tr[data-side="cann"] [data-col="5"]',demo:`<div class="qd"><div class="chips"><span class="chip">CSDN ×2</span><span class="chip">华为云 bbs</span><span class="chip bad">知乎 403 ✕</span></div></div>`},
         {k:'spa',title:'问题 5 · 官方操作教程正文抓不到',val:'自定义算子正文 = 0',desc:'不是所有官方页都不可抓，而是自定义算子操作教程这类页面只返回导航和标题，直接拖低“写算子”任务。',icon:'doc',sel:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',ref:'tr[data-task="D"][data-side="cuda"] [data-col="1"], tr[data-task="D"][data-side="cuda"] [data-col="2"]',ring:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',demo:`<div class="qb"><i></i><i></i><i></i><span>Agent 抓 opdevg 页</span></div><div class="qd" style="font-family:'JetBrains Mono';color:#999;font-size:10.5px"><div>&lt;title&gt;算子开发-CANN文档</div><div>导航：首页／文档／社区…</div><div class="zero">—— 正文 0 字 ——</div></div>`},
@@ -2269,7 +2269,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area">
       <iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2：搜索可发现性" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
-      <div class="issue-map"><span class="im-tag">回应问题</span><span><b>#2 任务词首次搜不到官方答案</b>：让开发者和 AI 都能以任务词更早命中官方当前答案。</span></div>
+      <div class="issue-map"><span class="im-tag">回应问题</span><span><b>#2 复杂任务检索时，官方页面不在首屏</b>：让开发者和 AI 都能以任务词更早命中官方当前答案。</span></div>
     </div>
   </section>
   <!-- 灰底：opknow19 卡2（iframe 嵌原卡，沿用 demo 样式） -->
