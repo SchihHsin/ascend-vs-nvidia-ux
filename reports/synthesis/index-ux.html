@@ -691,6 +691,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxseq-task{flex:0 0 auto;border-radius:11px;background:var(--g-ink);color:#fff;padding:.78vh .82vw;font-size:var(--fs-body);font-weight:850;line-height:1.35;box-shadow:0 14px 28px -22px rgba(20,23,28,.6)}
       .uxseq-svg{position:relative;z-index:1;min-height:0;width:100%;height:100%}
       .uxseq-svg svg{display:block;width:100%;height:100%;overflow:visible}
+      .uxseq-svg.seqslice{overflow:hidden;border-radius:10px;background:rgba(255,255,255,.52)}
+      .seq-shared svg{display:block;width:100%;height:100%;overflow:visible}
+      .seq-shared.has-focus [data-seq-part]{opacity:.13}.seq-shared.has-focus [data-seq-part].on{opacity:1;filter:drop-shadow(0 0 2px rgba(91,91,214,.26))}
+      .seq-shared [data-seq-part]{transition:opacity .22s,filter .22s}
+      .seq-shared text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif}.p2cap{font-size:12px;font-weight:850;fill:#647085}.p2phase{fill:#EFEAF7;stroke:rgba(107,91,168,.22);stroke-width:1}.p2phase-t{font-size:15px;font-weight:950;fill:#4F3F88}.p2phase-s{font-size:11px;font-weight:800;fill:#615582}.p2owner{fill:#B7A9E0}.p2owner-t{font-size:11px;font-weight:850;fill:#413562}.p2heads rect{fill:#fff;stroke:rgba(47,61,99,.16);stroke-width:1}.p2heads text{font-size:14px;font-weight:900;fill:#2F3D63}.p2heads text.off{fill:#C8102E}.p2lane{stroke:#D6DCE6;stroke-width:1.35;stroke-dasharray:5 7;fill:none}.p2msg{stroke:#8156C9;stroke-width:2.15;stroke-linecap:round;fill:none}.p2msg.blocked{stroke:#C8102E}.p2return{stroke:#C8102E;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2branch{stroke:#2F3D63;stroke-width:2;stroke-dasharray:5 4;fill:none}.p2node{fill:#fff;stroke:#6B5BA8;stroke-width:2}.p2node.hu{stroke:#2F3D63}.p2node.ai{fill:#ECE7F6;stroke:#6B5BA8}.p2node.blocked-ring{stroke:#C8102E;stroke-width:2.5}.p2run{fill:#F1F5FC;stroke:#2F3D63;stroke-width:2}.p2id{font-size:13px;font-weight:900;fill:#2F3D63}.p2id.aiid{fill:#5C4D91}.p2label{font-size:13px;font-weight:800;fill:#313A49}.p2label.red,.p2tiny.red{fill:#C8102E}.p2label.humanlabel{fill:#2F3D63}.p2tiny{font-size:10.5px;font-weight:750;fill:#657084}
       .ux-lane{stroke:#CAD0DB;stroke-width:1.3;stroke-dasharray:5 7}
       .ux-lane-head rect{fill:rgba(255,255,255,.72);stroke:rgba(47,61,99,.13);stroke-width:1}
       .ux-lane-head text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif;font-size:15px;font-weight:850;fill:#202531}
@@ -907,67 +912,29 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray ux-method-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">先用简化时序图读懂参与方、节点状态与连线含义</span></div>
-        <div class="subttl">方法说明 · 时序图里的节点和线怎么读</div>
+        <div class="brand"><span class="ttl">先从全量时序图的同一任务阶段读懂参与方、节点与连线</span></div>
+        <div class="subttl">方法说明 · P2「写核函数」阶段局部</div>
       </div>
       <div class="head-r">05/ UX 研究方法</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card">
         <div class="uxseq-title">
-          <div><b>一个低复杂度的人机协同样例</b><span>用三类参与方和几条关键线，建立后续完整案例的读图规则。</span></div>
-          <div class="uxseq-task">例：跑示例报错，如何定位并修复？</div>
+          <div><b>全量图中的 P2「写核函数」阶段</b><span>后续 #6 和 #7 将复用这张完全相同的局部图，只改变讲解重点。</span></div>
+          <div class="uxseq-task">例：自定义算子 how-to</div>
         </div>
-        <div class="uxseq-svg" aria-label="简化人机协同时序图">
-          <svg viewBox="0 0 980 470" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <marker id="uxArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#2F3D63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="uxArrowGood" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#23A06A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="uxArrowBad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#E15A5A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="uxArrowLoop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5B5BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-            </defs>
-            <g class="ux-time"><text x="20" y="72">TIME</text><path d="M38 92v310" stroke="#C6CDD8" stroke-width="1.4" stroke-linecap="round"/><path d="M32 392l6 12 6-12" fill="none" stroke="#C6CDD8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-            <g data-ux-evidence="lanes">
-              <g class="ux-lane-head"><rect x="120" y="28" width="130" height="42" rx="12"/><text x="185" y="55" text-anchor="middle">开发者</text></g>
-              <g class="ux-lane-head"><rect x="425" y="28" width="130" height="42" rx="12"/><text x="490" y="55" text-anchor="middle">AI 助手</text></g>
-              <g class="ux-lane-head"><rect x="730" y="28" width="130" height="42" rx="12"/><text x="795" y="55" text-anchor="middle">昇腾社区</text></g>
-              <path class="ux-lane" d="M185 82v342"/><path class="ux-lane" d="M490 82v342"/><path class="ux-lane" d="M795 82v342"/>
-            </g>
-            <g data-ux-evidence="events">
-              <path class="ux-msg" marker-end="url(#uxArrow)" d="M185 118H490"/><circle class="ux-dot" cx="185" cy="118" r="6"/><circle class="ux-dot fill" cx="490" cy="118" r="6"/><text class="ux-label" x="238" y="107">1. 带着报错提问</text>
-            </g>
-            <g data-ux-evidence="nodes">
-              <circle class="ux-dot" cx="185" cy="118" r="13"/><text class="ux-label" x="185" y="123" text-anchor="middle" fill="#2F3D63">n1</text><text class="ux-label soft ux-node-note" x="170" y="143" text-anchor="end">n = node，用户提问</text>
-              <circle class="ux-dot" cx="490" cy="174" r="13"/><text class="ux-label ux-node-note" x="510" y="166">s = search</text><text class="ux-label soft ux-node-note" x="510" y="184">检索 · 报错码说明</text><text class="ux-label" x="490" y="179" text-anchor="middle" fill="#2F3D63">s1</text>
-            </g>
-            <g data-ux-evidence="events">
-              <path class="ux-msg" marker-end="url(#uxArrow)" d="M503 174H795"/><circle class="ux-dot fill" cx="795" cy="174" r="6"/><text class="ux-label" x="585" y="161">2. 请求官方说明</text>
-            </g>
-            <g data-ux-evidence="block loops">
-              <path class="ux-msg bad" marker-end="url(#uxArrowBad)" d="M795 226H504"/><circle class="ux-dot bad" cx="795" cy="226" r="5"/><text class="ux-label bad" x="570" y="214">3. 受阻：页面可见但正文抓不到</text>
-            </g>
-            <g data-ux-evidence="loops events">
-              <path class="ux-msg loop" marker-end="url(#uxArrowLoop)" d="M490 290H795"/><circle class="ux-dot loop" cx="490" cy="290" r="5"/><circle class="ux-dot loop" cx="795" cy="290" r="5"/><text class="ux-label loop" x="574" y="279">4. 换词再检索 / 补证</text>
-            </g>
-            <g data-ux-evidence="nodes">
-              <circle class="ux-dot" cx="490" cy="366" r="13"/><text class="ux-label ux-node-note" x="510" y="358">g = generate</text><text class="ux-label soft ux-node-note" x="510" y="376">组织答案 · 交付修复步骤</text><text class="ux-label" x="490" y="371" text-anchor="middle" fill="#2F3D63">g1</text>
-            </g>
-            <g data-ux-evidence="events">
-              <path class="ux-msg good" marker-end="url(#uxArrowGood)" d="M476 366H185"/><circle class="ux-dot good" cx="185" cy="366" r="5"/><text class="ux-label good" x="235" y="354">5. 回答 + 开发者复核</text>
-            </g>
-          </svg>
-        </div>
+        <div class="uxseq-svg seqslice seq-shared" data-seq-shared data-slice-mode="all" aria-label="全量时序图的 P2 写核函数阶段局部"></div>
         <div class="uxseq-foot"><i>参与方</i><i>节点状态</i><i>知识事件</i><i>受阻 / 回路</i></div>
       </div>
       <div class="uxread">
         <div class="uxwhy">
-          <b>简化样例用于建立读图规则</b>
+          <b>任务阶段局部用于建立读图规则</b>
           <span>读图重点是识别“谁发起动作、动作是什么、向谁取证、结果如何”。</span>
         </div>
         <div class="uxread-main">
           <div class="uxread-h">读图时先看四类元素</div>
           <div class="uxread-row" data-ux-evidence="lanes"><div class="uxread-no">01</div><div class="uxread-t"><b>竖线表示参与方</b><span>每条竖线是一类角色或知识来源；动作落在哪条线，就表示由谁发起或承接。</span></div></div>
-          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点用短 ID 标记状态</b><span>节点本体是 n1 / s1 / g1 这类短标记，用来定位链路中的状态点；具体动作主要看所在生命线与箭头文字。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点用短 ID 标记状态</b><span>节点本体如 sD、dSoc，用来定位链路中的状态点；具体动作主要看所在生命线与箭头文字。</span></div></div>
           <div class="uxread-row" data-ux-evidence="events"><div class="uxread-no">03</div><div class="uxread-t"><b>横线是一次知识事件</b><span>箭头方向表示谁向谁请求或返回信息；线上文字说明这次往返在做什么。</span></div></div>
           <div class="uxread-row" data-ux-evidence="loops"><div class="uxread-no">04</div><div class="uxread-t"><b>红线和回路表示风险</b><span>红线是受阻，虚线/回路是换词、补证、人工复核或再检索。</span></div></div>
         </div>
@@ -988,44 +955,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div class="uxseq-card seqdemo-left">
         <div class="uxseq-title">
-          <div><b>完整链路中重点观察两条与昇腾社区直接相关的线</b><span>第 2 条是 AI 检索社区证据，第 5 条是开发者回到社区核对；右侧分别呈现两种使用模式。</span></div>
-          <div class="uxseq-task">例：跑示例报错，AI 协助定位</div>
+          <div><b>完整链路中重点观察两条与昇腾社区直接相关的线</b><span>AI 向社区取证，开发者回到社区核对；右侧分别呈现两种使用模式。</span></div>
+          <div class="uxseq-task">P2：自定义算子 how-to</div>
         </div>
-        <div class="uxseq-svg seqdemo-svg" aria-label="界面 demo 对应的简化时序图">
-          <svg viewBox="0 0 980 470" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <marker id="seqDemoArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#2F3D63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="seqDemoArrowGood" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#23A06A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="seqDemoArrowBad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#E15A5A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              <marker id="seqDemoArrowLoop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5B5BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-            </defs>
-            <g class="ux-time"><text x="20" y="72">TIME</text><path d="M38 92v310" stroke="#C6CDD8" stroke-width="1.4" stroke-linecap="round"/><path d="M32 392l6 12 6-12" fill="none" stroke="#C6CDD8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-            <g data-seq-node="base">
-              <g class="ux-lane-head"><rect x="120" y="28" width="130" height="42" rx="12"/><text x="185" y="55" text-anchor="middle">开发者</text></g>
-              <g class="ux-lane-head"><rect x="425" y="28" width="130" height="42" rx="12"/><text x="490" y="55" text-anchor="middle">AI 助手</text></g>
-              <g class="ux-lane-head"><rect x="730" y="28" width="130" height="42" rx="12"/><text x="795" y="55" text-anchor="middle">昇腾社区</text></g>
-              <path class="ux-lane" d="M185 82v342"/><path class="ux-lane" d="M490 82v342"/><path class="ux-lane" d="M795 82v342"/>
-            </g>
-            <g data-seq-line="ask" data-seq-node="search">
-              <path class="ux-msg" marker-end="url(#seqDemoArrow)" d="M185 118H490"/><circle class="ux-dot" cx="185" cy="118" r="6"/><circle class="ux-dot fill" cx="490" cy="118" r="6"/><text class="ux-label" x="238" y="107">1. 带着报错提问</text>
-            </g>
-            <g data-seq-line="search" data-seq-node="search">
-              <circle class="ux-dot" cx="490" cy="174" r="13"/><text class="ux-label" x="490" y="179" text-anchor="middle" fill="#2F3D63">s1</text>
-              <path class="ux-msg" marker-end="url(#seqDemoArrow)" d="M503 174H795"/><circle class="ux-dot fill" cx="795" cy="174" r="6"/><text class="ux-label" x="585" y="161">2. 搜索官方说明</text>
-            </g>
-            <g data-seq-line="context">
-              <path class="ux-msg bad" marker-end="url(#seqDemoArrowBad)" d="M795 226H504"/><circle class="ux-dot bad" cx="795" cy="226" r="5"/><text class="ux-label bad" x="570" y="214">3. 打开页面后正文抓不到</text>
-              <path class="ux-msg loop" marker-end="url(#seqDemoArrowLoop)" d="M490 290H795"/><circle class="ux-dot loop" cx="490" cy="290" r="5"/><circle class="ux-dot loop" cx="795" cy="290" r="5"/><text class="ux-label loop" x="574" y="279">4. 换词再检索 / 补证</text>
-            </g>
-            <g data-seq-line="review" data-seq-node="review">
-              <path class="ux-msg soft" marker-end="url(#seqDemoArrow)" d="M185 334H795"/><circle class="ux-dot" cx="185" cy="334" r="5"/><circle class="ux-dot" cx="795" cy="334" r="5"/><text class="ux-label soft" x="320" y="322">5. 开发者人工查文档 / 论坛复核</text>
-            </g>
-            <g data-seq-line="context">
-              <circle class="ux-dot" cx="490" cy="382" r="13"/><text class="ux-label" x="490" y="387" text-anchor="middle" fill="#2F3D63">g1</text>
-              <path class="ux-msg good" marker-end="url(#seqDemoArrowGood)" d="M476 382H185"/><circle class="ux-dot good" cx="185" cy="382" r="5"/><text class="ux-label good" x="235" y="370">6. 输出修复步骤 + 记录证据</text>
-            </g>
-          </svg>
-        </div>
+        <div class="uxseq-svg seqdemo-svg seqslice seq-shared" data-seq-shared data-slice-mode="community" aria-label="全量时序图的 P2 写核函数阶段局部"></div>
         <div class="seqdemo-hint">
           <div class="seqdemo-chip" data-seq-focus="ai">01 AI 使用昇腾社区</div>
           <div class="seqdemo-chip" data-seq-focus="human">02 开发者使用昇腾社区</div>
@@ -1086,10 +1019,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-r">07/ 研究尺度</div>
     </div>
     <style>
-      .seqscope-slide .body-area{display:grid;grid-template-columns:minmax(0,.83fr) 54px minmax(0,1.32fr);gap:1.05vw;align-items:stretch}
+      .seqscope-slide .body-area{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1.15fr);gap:1.05vw;align-items:stretch}
       .seqscope-sample,.seqscope-full{position:relative;min-width:0;min-height:0;border-radius:17px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94);overflow:hidden}
       .seqscope-sample{padding:1.65vh 1.05vw;display:grid;grid-template-rows:auto 1fr auto;gap:.85vh}.seqscope-sample h3,.seqscope-full h3{margin:0;color:var(--ink);font-size:var(--fs-h3);line-height:1.2;font-weight:950}.seqscope-sample p,.seqscope-full p{margin:.28vh 0 0;color:var(--ink-2);font-size:var(--fs-body);line-height:1.4}
-      .seqscope-mini{min-height:0}.seqscope-mini svg{width:100%;height:100%;display:block}.seqscope-mini .lane{stroke:#CAD0DB;stroke-width:1.35;stroke-dasharray:5 7}.seqscope-mini .head{fill:#fff;stroke:rgba(47,61,99,.16);stroke-width:1}.seqscope-mini text{font-family:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif;fill:#2F3D63}.seqscope-mini .headt{font-size:15px;font-weight:900}.seqscope-mini .line{fill:none;stroke:#2F3D63;stroke-width:2.4;stroke-linecap:round}.seqscope-mini .line.ai{stroke:#2F6FED}.seqscope-mini .line.human{stroke:#647085}.seqscope-mini .dot{fill:#fff;stroke:#2F3D63;stroke-width:2}.seqscope-mini .dot.fill{fill:#2F3D63}.seqscope-mini .label{font-size:13px;font-weight:850}.seqscope-mini .small{font-size:11px;fill:#647085;font-weight:750}
+      .seqscope-mini{min-height:0;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.52)}
       .seqscope-sample-foot{border-radius:10px;background:linear-gradient(135deg,rgba(47,111,237,.1),rgba(91,91,214,.07));border:1px solid rgba(47,111,237,.12);padding:.75vh .7vw;color:#3F495A;font-size:var(--fs-sm);line-height:1.35}.seqscope-sample-foot b{color:#202531;font-weight:950}
       .seqscope-bridge{position:relative;min-height:0;display:flex;align-items:center;justify-content:center}.seqscope-bridge:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,#7AA6F8,#7C5CF0)}.seqscope-bridge:after{content:"";position:absolute;right:0;top:calc(50% - 5px);width:11px;height:11px;border-top:2px solid #7C5CF0;border-right:2px solid #7C5CF0;transform:rotate(45deg)}.seqscope-bridge span{position:relative;z-index:1;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid rgba(91,91,214,.2);box-shadow:0 10px 24px -18px rgba(91,91,214,.55);display:flex;align-items:center;justify-content:center;color:#5B5BD6}.seqscope-bridge i{width:20px;height:20px;stroke-width:2}
       .seqscope-full{padding:1.35vh .7vw;display:grid;grid-template-rows:auto 1fr;gap:.7vh}.seqscope-full-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1vw;padding:0 .45vw}.seqscope-full-head div{min-width:0}.seqscope-stage-key{flex:0 0 auto;border-radius:999px;padding:.48vh .62vw;background:rgba(91,91,214,.1);border:1px solid rgba(91,91,214,.16);color:#5B4AB7;font-size:var(--fs-sm);font-weight:900;white-space:nowrap}.seqscope-stage-key:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#7C5CF0;margin-right:6px;box-shadow:0 0 0 3px rgba(124,92,240,.12)}
@@ -1097,17 +1030,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </style>
     <div class="body-area">
       <div class="seqscope-sample">
-        <div><h3>任务样例：一次报错排查</h3><p>用一个可理解的任务，先读懂谁向社区请求知识、谁回到社区核对。</p></div>
-        <div class="seqscope-mini">
-          <svg viewBox="0 0 560 430" preserveAspectRatio="xMidYMid meet" aria-label="一个任务的简化时序图">
-            <defs><marker id="scopeArrowA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#2F6FED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="scopeArrowH" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#647085" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-            <rect class="head" x="48" y="30" width="118" height="40" rx="12"/><text class="headt" x="107" y="55" text-anchor="middle">开发者</text><rect class="head" x="221" y="30" width="118" height="40" rx="12"/><text class="headt" x="280" y="55" text-anchor="middle">AI 助手</text><rect class="head" x="394" y="30" width="118" height="40" rx="12"/><text class="headt" x="453" y="55" text-anchor="middle">昇腾社区</text>
-            <path class="lane" d="M107 85v292"/><path class="lane" d="M280 85v292"/><path class="lane" d="M453 85v292"/>
-            <path class="line" d="M107 132H280" marker-end="url(#scopeArrowA)"/><circle class="dot" cx="107" cy="132" r="5"/><circle class="dot fill" cx="280" cy="132" r="5"/><text class="label" x="150" y="119">带着报错提问</text>
-            <path class="line ai" d="M280 212H453" marker-end="url(#scopeArrowA)"/><circle class="dot" cx="280" cy="212" r="5"/><circle class="dot fill" cx="453" cy="212" r="5"/><text class="label" x="313" y="198">AI 检索社区证据</text><text class="small" x="313" y="228">搜索 · 读取 · 判断是否够用</text>
-            <path class="line human" d="M107 308H453" marker-end="url(#scopeArrowH)"/><circle class="dot" cx="107" cy="308" r="5"/><circle class="dot" cx="453" cy="308" r="5"/><text class="label" x="163" y="294">开发者回到社区核对</text><text class="small" x="163" y="324">版本 · 步骤 · 同类经验</text>
-          </svg>
-        </div>
+        <div><h3>任务阶段局部：P2 写核函数</h3><p>从全量开发过程取出同一片段，先读懂谁向社区请求知识、谁回到社区核对。</p></div>
+        <div class="seqscope-mini seq-shared" data-seq-shared data-slice-mode="community" aria-label="P2 写核函数阶段局部时序图"></div>
         <div class="seqscope-sample-foot"><b>作用：</b>先把一次任务里的知识往返讲清楚，便于理解后续图中的每一条关系。</div>
       </div>
       <div class="seqscope-bridge" aria-hidden="true"><span><i data-lucide="move-right"></i></span></div>
@@ -3188,6 +3112,28 @@ slides.forEach((slide,i)=>{
 });
 let idx=0;
 
+function sharedP2SequenceHtml(){
+  return `<svg viewBox="0 0 1040 470" preserveAspectRatio="xMidYMid meet" role="img" aria-label="全量时序图 P2 写核函数阶段局部">
+    <defs>
+      <marker id="p2ArrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#8156C9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      <marker id="p2ArrowRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      <marker id="p2ArrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#2F3D63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <g data-seq-part="lanes"><text x="72" y="26" text-anchor="middle" class="p2cap">阶段</text><rect x="20" y="44" width="104" height="356" rx="11" class="p2phase"/><text x="72" y="78" text-anchor="middle" class="p2phase-t">P2</text><text x="72" y="98" text-anchor="middle" class="p2phase-s">写核函数</text><text x="72" y="118" text-anchor="middle" class="p2phase-s">任务 1</text><rect x="142" y="44" width="62" height="356" rx="9" class="p2owner"/><text x="173" y="208" text-anchor="middle" class="p2owner-t">Agent</text><text x="173" y="224" text-anchor="middle" class="p2owner-t">主导</text>
+      <g class="p2heads"><rect x="250" y="34" width="104" height="34" rx="10"/><text x="302" y="56" text-anchor="middle">开发者</text><rect x="450" y="34" width="104" height="34" rx="10"/><text x="502" y="56" text-anchor="middle">AI (Agent)</text><rect x="650" y="34" width="104" height="34" rx="10"/><text x="702" y="56" text-anchor="middle" class="off">昇腾社区</text><rect x="850" y="34" width="104" height="34" rx="10"/><text x="902" y="56" text-anchor="middle">第三方平台</text></g>
+      <path d="M302 82v336M502 82v336M702 82v336M902 82v336" class="p2lane"/></g>
+    <g data-seq-part="context"><path d="M302 106H502" class="p2msg" marker-end="url(#p2ArrowPurple)"/><circle cx="302" cy="106" r="13" class="p2node hu"/><text x="302" y="111" text-anchor="middle" class="p2id">n1</text><text x="402" y="94" text-anchor="middle" class="p2label">立项·选型·开发算子接 PyTorch</text></g>
+    <g data-seq-part="ai"><path d="M502 160H702" class="p2msg blocked" marker-end="url(#p2ArrowRed)"/><circle cx="502" cy="160" r="16" class="p2node ai blocked-ring"/><text x="502" y="165" text-anchor="middle" class="p2id aiid">sD</text><text x="602" y="147" text-anchor="middle" class="p2label red">1·自定义算子 how-to</text><path d="M702 180H502" class="p2return" marker-end="url(#p2ArrowRed)"/><text x="602" y="197" text-anchor="middle" class="p2tiny red">抓取为空（SPA）</text>
+      <path d="M502 238H902" class="p2msg" marker-end="url(#p2ArrowPurple)"/><circle cx="502" cy="238" r="14" class="p2node ai"/><text x="502" y="243" text-anchor="middle" class="p2id aiid">sD2</text><text x="702" y="226" text-anchor="middle" class="p2label">官方受阻 → 转第三方平台拼答案</text>
+      <path d="M502 292H302" class="p2msg" marker-end="url(#p2ArrowPurple)"/><circle cx="502" cy="292" r="14" class="p2node ai"/><text x="502" y="297" text-anchor="middle" class="p2id aiid">gD</text><text x="402" y="280" text-anchor="middle" class="p2label">给 msopgen / 编包骨架</text></g>
+    <g data-seq-part="context"><path d="M302 344H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="332" text-anchor="middle" class="p2tiny">本地 msopgen + 写核函数</text><rect x="286" y="328" width="32" height="32" rx="6" class="p2run"/><text x="302" y="349" text-anchor="middle" class="p2id">eD</text></g>
+    <g data-seq-part="human"><path d="M302 386H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="374" text-anchor="middle" class="p2label humanlabel">AI 受阻 → 开发者自查官方文档</text><text x="502" y="403" text-anchor="middle" class="p2tiny">版本、步骤与同类经验核对</text></g>
+  </svg>`;
+}
+function initSharedP2Sequences(){
+  document.querySelectorAll('[data-seq-shared]').forEach(el=>{el.innerHTML=sharedP2SequenceHtml();});
+}
+
 /* ===== 黑底光晕：每章一组色值，可调 + localStorage 持久记忆 ===== */
 const chapters={'1':{h:234,gap:57,sat:95,light:40,spread:35,cint:68,wint:58}};
 const GLOW_KEY='deck-glow-chapters';
@@ -3265,6 +3211,14 @@ function initUxEvidenceFocus(){
         const keys=(el.dataset.uxEvidence||'').split(/\s+/);
         el.classList.toggle('on',!!key&&keys.includes(key));
       });
+      const shared=slide.querySelector('.seq-shared');
+      if(shared){
+        shared.classList.toggle('has-focus',!!key);
+        shared.querySelectorAll('[data-seq-part]').forEach(part=>{
+          const hit=key==='lanes'?part.dataset.seqPart==='lanes':key==='nodes'?['ai','context'].includes(part.dataset.seqPart):key==='events'?['ai','human','context'].includes(part.dataset.seqPart):key==='loops'?part.dataset.seqPart==='ai':false;
+          part.classList.toggle('on',hit);
+        });
+      }
     }
     rows.forEach(row=>{
       row.tabIndex=0;
@@ -3314,19 +3268,16 @@ function setSeqFocus(step,writeHash,slide){
   if(mode==='human')slide.classList.add('seqmode-human');
   const demoSvg=slide.querySelector('.seqdemo-svg');
   if(demoSvg){
-    demoSvg.classList.toggle('has-focus',mode!=='all');
-    demoSvg.querySelectorAll('[data-seq-line],[data-seq-node]').forEach(el=>{
-      const line=el.getAttribute('data-seq-line')||'';
-      const nodes=(el.getAttribute('data-seq-node')||'').split(/\s+/);
-      const activeLine=mode==='ai'?'search':mode==='human'?'review':mode;
-      el.classList.toggle('on',mode!=='all'&&(line===activeLine||nodes.includes(activeLine)||nodes.includes('base')));
+    const shared=demoSvg.querySelector('.seq-shared')||demoSvg;
+    shared.classList.toggle('has-focus',true);
+    shared.querySelectorAll('[data-seq-part]').forEach(part=>{
+      const hit=mode==='ai'?part.dataset.seqPart==='ai':mode==='human'?part.dataset.seqPart==='human':['ai','human'].includes(part.dataset.seqPart);
+      part.classList.toggle('on',hit);
     });
     slide.querySelectorAll('[data-seq-demo]').forEach(panel=>{
       panel.classList.toggle('on',panel.dataset.seqDemo===(mode==='all'?'all':mode));
     });
   }
-  const fr=slide.querySelector('iframe[src*="seq-d3.html"],iframe[data-src*="seq-d3.html"]');
-  if(fr&&fr.contentWindow){try{fr.contentWindow.postMessage({__seqMethodFocus:mode},'*');}catch(e){}}
   if(writeHash&&slides[idx]===slide){try{history.replaceState(null,'',deckHash(idx));}catch(e){}}
 }
 function clearSeqFocus(slide){
@@ -3338,12 +3289,11 @@ function clearSeqFocus(slide){
     s.querySelectorAll('[data-seq-focus]').forEach(r=>r.classList.remove('on'));
     const demoSvg=s.querySelector('.seqdemo-svg');
     if(demoSvg){
-      demoSvg.classList.remove('has-focus');
-      demoSvg.querySelectorAll('[data-seq-line],[data-seq-node]').forEach(el=>el.classList.remove('on'));
+      const shared=demoSvg.querySelector('.seq-shared')||demoSvg;
+      shared.classList.remove('has-focus');
+      shared.querySelectorAll('[data-seq-part]').forEach(el=>el.classList.remove('on'));
       s.querySelectorAll('[data-seq-demo]').forEach(panel=>panel.classList.toggle('on',panel.dataset.seqDemo==='all'));
     }
-    const fr=s.querySelector('iframe[src*="seq-d3.html"],iframe[data-src*="seq-d3.html"]');
-    if(fr&&fr.contentWindow){try{fr.contentWindow.postMessage({__seqMethodFocus:'all'},'*');}catch(e){}}
   });
 }
 function seqFocusNav(delta){
@@ -4001,6 +3951,7 @@ if(window.lucide)lucide.createIcons();
 installSeqZoomButtons();
 installBoardTabs();
 installDevHmFocus();
+initSharedP2Sequences();
 initUxEvidenceFocus();
 initUxWhyFocus();
 initSeqFocusSlide();

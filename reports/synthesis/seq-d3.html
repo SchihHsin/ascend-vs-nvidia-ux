@@ -2099,7 +2099,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
       else if(mode==='search')keep=isRetrieval||isSourceLaneLine;
       else if(mode==='review')keep=isBranch||reviewPair&&kind==='node'||isReviewLaneLine;
       else if(mode==='governance')keep=isRetrieval||isBranch||isBlocked||isSourceLaneLine||isReviewLaneLine;
-      else if(mode==='source')keep=sourcePair||reviewPair||isSourceLaneLine||isReviewLaneLine;
+      else if(mode==='source'||mode==='community')keep=sourcePair||reviewPair||isSourceLaneLine||isReviewLaneLine;
       else if(mode==='block')keep=isBlocked||isSourceLaneLine;
       else if(mode==='score')keep=sourcePair||reviewPair||kind==='branch'||kind==='block'||(kind==='node'&&/^(s|b|d)/.test(msg||''))||isLaneLine;
       el.style.opacity=keep?(isLaneLine&&mode!=='lanes'?'.72':'1'):(isLaneLabel&&mode!=='lanes'?'.08':'0.13');
@@ -2113,7 +2113,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     });
     var lbl=document.getElementById('sqLbl');
     if(lbl){
-      var names={all:'完整时序图',lanes:'聚焦 · 生命线',nodes:'聚焦 · 节点',events:'聚焦 · 知识事件',loops:'聚焦 · 受阻 / 复核',search:'聚焦 · AI 检索过程',review:'聚焦 · 开发者复核',governance:'聚焦 · 内容治理线索',source:'聚焦 · 证据来源',block:'聚焦 · 任务阻断点',score:'聚焦 · 可评分证据'};
+      var names={all:'完整时序图',lanes:'聚焦 · 生命线',nodes:'聚焦 · 节点',events:'聚焦 · 知识事件',loops:'聚焦 · 受阻 / 复核',search:'聚焦 · AI 检索过程',review:'聚焦 · 开发者复核',governance:'聚焦 · 内容治理线索',source:'聚焦 · 证据来源',community:'聚焦 · 两类社区使用',block:'聚焦 · 任务阻断点',score:'聚焦 · 可评分证据'};
       lbl.textContent=names[mode]||'默认 · 完整时序图';
     }
   }
@@ -2160,7 +2160,9 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   function init(){
     buildCtrl();
     var m=(location.search.match(/[?&]hi=(\d+)/));   // ?hi=1/2 仅作为初始模式；控制条仍保留，可继续翻到其它模式
-    if(m){ go(+m[1]); }
+    var method=(location.search.match(/[?&]method=([^&]+)/));
+    if(method){ methodFocus=decodeURIComponent(method[1]); applyMethodFocus(methodFocus); }
+    else if(m){ go(+m[1]); }
   }
   window.addEventListener('keydown',function(e){
     if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(step+1);}
