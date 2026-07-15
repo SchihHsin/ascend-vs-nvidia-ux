@@ -65,7 +65,13 @@ body.overview .s-cover .slide-inner{padding:0}
 .brand .ttl{font-weight:800;font-size:var(--fs-h1);letter-spacing:-.01em}      /* 标题=结论 */
 .subttl{font-weight:300;font-size:var(--fs-sm);color:var(--ink-2)}
 .layer-tag{display:inline-block;margin-left:.55vw;padding:.18vh .46vw;border-radius:999px;font-size:var(--fs-xs);font-weight:700;line-height:1.2}.layer-tag.search{color:#313945;background:#fff;border:1px solid #D4D8DF}.layer-tag.machine{color:#5146A8;background:rgba(91,91,214,.12);border:1px solid rgba(91,91,214,.25)}.layer-tag.asset{color:#fff;background:#252B35;border:1px solid #252B35}
-.head-r{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.8}
+    .head-r{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.8}
+    /* 章节标签替代孤立页码：始终标出材料当前所处的叙事位置。 */
+    .head-r.chapter-tabs{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:inherit;letter-spacing:0;text-transform:none;line-height:1;min-width:37vw;display:flex;justify-content:flex-end}
+    .chapter-tabset{display:flex;align-items:center;justify-content:flex-end;gap:4px;flex-wrap:wrap;max-width:100%}
+    .chapter-tab{appearance:none;border:1px solid rgba(47,61,99,.12);border-radius:999px;background:rgba(255,255,255,.45);color:#7B8495;padding:.42vh .52vw;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:var(--fs-xs);font-weight:800;line-height:1;white-space:nowrap;cursor:pointer;transition:background .16s,color .16s,border-color .16s,transform .16s}
+    .chapter-tab:hover,.chapter-tab:focus-visible{border-color:rgba(47,61,99,.32);color:#2F3D63;transform:translateY(-1px);outline:none}
+    .chapter-tab[aria-current="page"]{background:#252B35;border-color:#252B35;color:#fff;box-shadow:0 8px 18px -14px rgba(20,23,28,.7)}
 .body-area{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
 .card{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(15px) saturate(1.4);backdrop-filter:blur(15px) saturate(1.4);
   border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 10px 30px -16px rgba(30,40,70,.2),inset 0 1px 0 rgba(255,255,255,.85);padding:2.2vh 1.6vw}
@@ -653,7 +659,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .kp-pyramid svg{display:block;width:100%;height:100%;overflow:visible}.kp-pyramid .kp-num{font-family:'JetBrains Mono';font-size:18px;font-weight:900;fill:#969EAC;letter-spacing:.08em}.kp-pyramid .kp-title{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:22px;font-weight:900;fill:#fff}.kp-pyramid .kp-desc{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:14px;font-weight:600;fill:rgba(255,255,255,.82)}.kp-pyramid .kp-title-dark{fill:#252B35}.kp-pyramid .kp-desc-dark{fill:#5E646E}
       .kp-side{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.kp-side-lead{padding:1.25vh 1.1vw 1.35vh;border-radius:13px;background:var(--g-ink);color:#fff;box-shadow:0 16px 34px -24px rgba(20,23,28,.62),inset 0 1px 0 rgba(255,255,255,.18)}.kp-side-lead b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950}.kp-side-lead span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.43;color:rgba(255,255,255,.76)}
       .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:flex;align-items:flex-start;gap:.68vw;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row.search .kp-dot{background:#fff;color:#252B35;border:1px solid #D4D8DF}.kp-row.machine .kp-dot{background:#5B5BD6}.kp-row.asset .kp-dot{background:#252B35}
-      .kp-chips{display:flex;flex-wrap:wrap;gap:.38vw;margin-top:.48vh}.kp-chips span{display:inline-flex;align-items:center;min-height:23px;border-radius:999px;padding:.24vh .55vw;font-size:var(--fs-sm);line-height:1.2;font-weight:800}.kp-row.search .kp-chips span{background:#fff;border:1px solid #D4D8DF;color:#3D4654}.kp-row.machine .kp-chips span{background:rgba(91,91,214,.1);border:1px solid rgba(91,91,214,.22);color:#5146A8}.kp-row.asset .kp-chips span{background:#252B35;border:1px solid #252B35;color:#fff}
+      .kp-chips{display:flex;flex-wrap:wrap;gap:.38vw;margin-top:.48vh}.kp-chips span{display:inline-flex;align-items:center;min-height:23px;border-radius:999px;padding:.24vh .55vw;background:#FFF5F5;border:1px solid rgba(232,70,86,.28);color:#B93644;font-size:var(--fs-sm);line-height:1.2;font-weight:800}
       .kp-evidence{border-radius:12px;padding:1.05vh .95vw;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.16);font-size:var(--fs-body);line-height:1.45;color:#4E586A}.kp-evidence b{font-weight:950;color:#252A35}
     </style>
     <div class="body-area">
@@ -682,7 +688,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         </div>
       </div>
       <div class="kp-side">
-        <div class="kp-side-lead"><b>信任落差并非单一“文档不好用”，而是三层问题连续叠加</b><span>后续研究会分别测量这些问题；结论部分再展开每一层应如何改造。</span></div>
+        <div class="kp-side-lead"><b>信任落差并非单一“文档不好用”，而是三层问题连续叠加</b><span>检索入口、机器理解与知识供给共同决定一项开发任务能否获得可靠答案。</span></div>
         <div class="kp-map">
           <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索与引用层</b><div class="kp-chips"><span>复杂任务检索时，官方页面不在首屏</span><span>检索成本高</span></div></div></div>
           <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-warning"></i></span><div><b>机器理解层</b><div class="kp-chips"><span>版本体系混乱</span><span>官方操作教程正文抓不到</span><span>错误码能抓到，但正文质量低，无法解决问题</span></div></div></div>
@@ -697,10 +703,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray ux-method-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 时代的任务研究，需要把「页面路径」扩展为「知识流动」</span></div>
-        <div class="subttl">方法说明 · 为什么要形成一张人机协同时序图</div>
+        <div class="brand"><span class="ttl">定义研究对象：从页面路径扩展到任务中的知识流动</span></div>
+        <div class="subttl">研究对象 · 人与 AI 如何在任务中获取社区知识</div>
       </div>
-      <div class="head-r">04/ UX 研究方法</div>
+      <div class="head-r">04/ 研究对象 · 入口</div>
     </div>
     <style>
       .ux-method-slide .body-area{display:grid;grid-template-columns:minmax(0,1.36fr) minmax(320px,.64fr);gap:1.7vw;align-items:stretch}
@@ -973,10 +979,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray ux-method-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">先从全量时序图的同一任务阶段读懂参与方、节点与连线</span></div>
-        <div class="subttl">方法说明 · 「写核函数」阶段局部</div>
+        <div class="brand"><span class="ttl">定义研究对象：一次知识往返由谁发起、如何受阻</span></div>
+        <div class="subttl">研究对象 · 「写核函数」阶段局部</div>
       </div>
-      <div class="head-r">05/ UX 研究方法</div>
+      <div class="head-r">05/ 研究对象 · 局部往返</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card">
@@ -999,7 +1005,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="uxread-row" data-ux-evidence="events"><div class="uxread-no">03</div><div class="uxread-t"><b>横线是一次知识事件</b><span>箭头方向表示谁向谁请求或返回信息；线上文字说明这次往返在做什么。</span></div></div>
           <div class="uxread-row" data-ux-evidence="loops"><div class="uxread-no">04</div><div class="uxread-t"><b>红线和回路表示风险</b><span>红线是受阻，虚线/回路是换词、补证、人工复核或再检索。</span></div></div>
         </div>
-        <div class="uxread-next">同一套读图规则可用于完整时序图，进一步提取证据来源、阻断点和评分口径。</div>
+        <div class="uxread-next">每一次知识往返都记录需求、证据来源、受阻状态与复核动作，据此识别业务任务与测量信号。</div>
       </div>
     </div>
   </section>
@@ -1008,10 +1014,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray ux-method-slide seqfocus-slide seqdemo-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">聚焦两种使用模式：AI 检索证据，开发者核对与决策</span></div>
-        <div class="subttl">方法说明 · 在完整链路中重点观察与昇腾社区直接相关的两条线</div>
+        <div class="brand"><span class="ttl">研究对象包含两种使用社区的行为：AI 取证，开发者核验与决策</span></div>
+        <div class="subttl">研究对象 · 人与 AI 在同一任务中的不同知识需求</div>
       </div>
-      <div class="head-r">06/ UX 研究方法</div>
+      <div class="head-r">06/ 研究对象 · 两种行为</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card seqdemo-left">
@@ -1026,10 +1032,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
         </div>
       </div>
       <div class="seqdemo-side">
-        <div class="seqdemo-lead"><b>这页要回答的是“线代表什么行为”。</b>不是只看箭头方向，而是把箭头背后的搜索界面、页面抓取、人工复核和记录动作都具象化。</div>
+        <div class="seqdemo-lead"><b>两条知识事件对应可观察的界面行为。</b>箭头背后分别是搜索、页面抓取、人工复核与记录动作。</div>
         <div class="seqdemo-stage">
           <div class="seqdemo-panel on" data-seq-demo="all">
-            <div><div class="seqdemo-titleline"><h3>默认先看 AI 与开发者如何分别使用社区</h3><span class="seqdemo-actor both">两条路径共同构成研究观察</span></div><p>AI 侧搜索、抓取和判断证据；开发者侧回到社区核对操作教程、适用版本与前置条件。两条路径都留下可观察的研究记录。</p></div>
+            <div><div class="seqdemo-titleline"><h3>AI 与开发者分别使用社区</h3><span class="seqdemo-actor both">两条路径共同构成研究观察</span></div><p>AI 侧搜索、抓取和判断证据；开发者侧回到社区核对操作教程、适用版本与前置条件。两条路径都留下可观察的研究记录。</p></div>
             <div class="seqdemo-window">
               <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><span class="seqdemo-browser-name">研究观察台</span><span class="seqdemo-browser-mode">双路径</span></div>
               <div class="seqdemo-content">
@@ -1039,7 +1045,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
                 </div>
               </div>
             </div>
-            <div class="seqdemo-chip">下一页：将一个任务样例映射到完整开发生命周期</div>
+            <div class="seqdemo-chip">局部任务映射至完整开发生命周期</div>
           </div>
           <div class="seqdemo-panel ai" data-seq-demo="ai">
             <div><div class="seqdemo-titleline"><h3>模式 01：AI 把社区作为可检索的证据源</h3><span class="seqdemo-actor">AI 使用社区</span></div><p>AI 接到任务后，先生成查询，再从社区候选页面中取回正文与代码；这里观察的是“能不能找到、能不能读到、够不够支撑回答”。</p></div>
@@ -1074,10 +1080,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray seqscope-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">一个任务样例用于读懂往返；完整时序图用于定位生命周期中的问题</span></div>
-        <div class="subttl">研究方法 · 「单任务观察 → 全过程分析」</div>
+        <div class="brand"><span class="ttl">研究对象从一次知识往返扩展到完整开发旅程</span></div>
+        <div class="subttl">研究对象 · 「局部任务 → 自定义算子开发全过程」</div>
       </div>
-      <div class="head-r">07/ 研究尺度</div>
+      <div class="head-r">07/ 研究对象 · 观察范围</div>
     </div>
     <style>
       .seqscope-slide .body-area{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1.15fr);gap:1.05vw;align-items:stretch}
@@ -1093,7 +1099,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="seqscope-sample">
         <div><h3>任务阶段局部：写核函数</h3><p>从全量开发过程取出同一片段，先读懂谁向社区请求知识、谁回到社区核对。</p></div>
         <div class="seqscope-mini seq-shared" data-seq-shared data-slice-mode="community" aria-label="写核函数阶段局部时序图"></div>
-        <div class="seqscope-sample-foot"><b>作用：</b>先把一次任务里的知识往返讲清楚，便于理解后续图中的每一条关系。</div>
+        <div class="seqscope-sample-foot"><b>局部观察：</b>呈现一次任务中的知识请求、证据返回与人工核验。</div>
       </div>
       <div class="seqscope-bridge" aria-hidden="true"></div>
       <div class="seqscope-full">
@@ -1111,10 +1117,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">将单任务读图方法扩展到完整开发过程：开发者与 AI 在各阶段共同使用昇腾社区</span></div>
-        <div class="subttl">研究方法 · 「完整开发过程」</div>
+        <div class="brand"><span class="ttl">研究对象：自定义算子开发中，知识需求贯穿从开发到调试的全过程</span></div>
+        <div class="subttl">研究对象 · 「完整开发旅程」</div>
       </div>
-      <div class="head-r">07/ 人机协同旅程<br/>opknow 20</div>
+      <div class="head-r">08/ 研究对象 · 完整旅程</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <style>
@@ -1133,23 +1139,52 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4.5vh">
         <!-- <div class="cmp-h"><span class="hk">How to read</span>本图用于说明两条评估链路</div> -->
-        <div class="bridge seq-intro" style="margin-top:0">上一页用一个任务解释了<b>一次知识往返</b>怎样被观察；这张图把同一读法扩展到<b>一次「自定义算子开发」的完整过程</b>。左侧阶段带标明任务走到哪里，图中两类主体——<b>开发者本人</b>与受其委托查阅资料、编写代码的 <b>AI Agent</b>——在每个阶段都可能向社区取证。</div>
+        <div class="bridge seq-intro" style="margin-top:0">一次自定义算子开发从需求理解、写核函数、编译部署到调试交付，都可能触发知识请求。图中同时记录<b>开发者本人</b>与 <b>AI Agent</b>何时向昇腾社区获取、核验或补充信息。</div>
         <ul class="seq-guide">
-          <li><b>左侧阶段带＝任务所处环节</b>：从理解需求、查资料到开发、调试与交付，按时间向下推进。</li>
-          <li><b>竖线＝参与方</b>：用户 · AI 助手 · 昇腾官方文档 · 第三方平台（CSDN / 博客）· AI 自带知识。</li>
-          <li><b>横箭头＝一次往返</b>：由谁向谁请求信息、是否取回。</li>
-          <li><b>读法</b>：用户将需求交给 AI → AI 分别从 官方 / 第三方 / 自带知识 检索 → 回灌后组织答案，证据不足则再检索一轮。一次开发共发起<b> 5 次检索</b>。</li>
+          <li><b>左侧阶段带</b>标明业务任务走到哪里：理解需求、开发、调试与交付按时间向下推进。</li>
+          <li><b>知识往返</b>显示任务在何处需要官方文档、第三方经验或模型已有知识。</li>
+          <li><b>受阻与回路</b>标出需要换词、补证或开发者人工核验的位置。</li>
+          <li><b>五次关键检索</b>集中在写 kernel、动态 shape、内存定位、注册集成与精度排查，并纳入实测。</li>
         </ul>
         <div class="ov-map">
           <div class="ovm">
             <div class="ovm-h"><i style="background:#6B5BA8"></i>AI ↔ 昇腾社区</div>
-            <div class="ovm-d">AI 每次<b>能否取回、是否够用</b> → 后续以「可用性矩阵」评分。</div>
+            <div class="ovm-d">AI 每次<b>能否取回、是否够用</b>，以「可用性矩阵」评分。</div>
           </div>
           <div class="ovm">
             <div class="ovm-h"><i style="background:#2f3d63"></i>开发者 ↔ 昇腾社区</div>
-            <div class="ovm-d">开发者本人浏览官网的<b>直接体验</b> → 后续做触点评分。</div>
+            <div class="ovm-d">开发者本人浏览官网的<b>直接体验</b>，以触点评分衡量。</div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 从完整旅程抽取五项关键实测任务 -->
+  <section class="slide s-gray copy-large">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">实测任务：从完整开发旅程抽取 5 项关键知识需求</span></div>
+        <div class="subttl">研究对象 · 完整旅程中的关键任务</div>
+      </div>
+      <div class="head-r">09/ 研究对象 · 任务抽取</div>
+    </div>
+    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
+      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
+        <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
+        <div class="cmp-h"><span class="hk">Tasks</span>五项任务覆盖自定义算子从开发到排障的关键知识需求</div>
+        <p class="cmp-desc">围绕开发者完成一次自定义算子的真实过程，选择自然产生资料查询的五类知识需求：<b>如何开发</b>、<b>如何适配动态 shape</b>、<b>如何定位内存问题</b>、<b>如何完成框架集成</b>与<b>如何排查精度问题</b>。</p>
+        <div class="lc-stages">开发算子 · 编译部署 · 调试定位</div>
+        <div class="op5">
+          <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
+          <div class="op5-i"><span class="c">2</span><b>Tiling</b><small>动态 shape</small></div>
+          <div class="op5-i"><span class="c">3</span><b>内存越界</b><small>问题定位</small></div>
+          <div class="op5-i"><span class="c">4</span><b>注册集成</b><small>框架接入</small></div>
+          <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
+        </div>
+        <div class="bridge" style="margin-top:.2vh">以同一组任务和评分协议，在 <b style="color:#5a8a00">CUDA / 英伟达</b> 与 <b style="color:#C7000B">CANN / 昇腾</b> 上分别实测，比较知识供给与作答条件的差异。</div>
       </div>
     </div>
   </section>
@@ -1183,8 +1218,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">指标映射：11 项评分对应架构图里的检索、判断与作答动作</span></div>
-        <div class="subttl">AI 侧 · 指标体系 · 「架构映射」</div>
+        <div class="brand"><span class="ttl">定义测量方法：11 项评分对应架构图中的知识获取与作答动作</span></div>
+        <div class="subttl">测量方法 · 「架构图 → 可观测指标」</div>
       </div>
       <div class="head-r">08/ AI 指标 · 架构映射</div>
     </div>
@@ -1196,15 +1231,15 @@ body.overview #panel,body.overview #toggle{display:none!important}
             </div>
         </div>
         <div class="archmetric-map">
-          <div class="archmetric-head"><b>先看 Agent 如何工作，再解释指标为什么这样算</b><span>左侧架构图里的每个关键动作，都被转成一个或几个可观测指标；后面的矩阵不是另起一套口径，而是在量化这张架构图能不能顺利走完。</span></div>
+          <div class="archmetric-head"><b>一次 AI 知识往返被拆解为可观测动作</b><span>架构图中的关键动作对应一个或多个指标，用于衡量外部知识与模型先验能否共同支撑可靠作答。</span></div>
           <div class="archmetric-steps">
-            <div class="archmetric-step read" data-map="read"><span class="num">01</span><div class="act"><b>调用模型先验</b><span>先判断已有知识能否支撑；检索后也参与证据判断。</span></div><div class="met"><b>⑦ 模型自带知识</b><span>衡量“训练记忆能否支撑答案”。</span></div></div>
-            <div class="archmetric-step" data-map="search"><span class="num">02</span><div class="act"><b>检索来源</b><span>已有知识不足时，去官方与第三方找证据。</span></div><div class="met"><b>① 官方可发现性 · ⑤ 第三方丰富度</b><span>衡量“能不能找到足够入口”。</span></div></div>
+            <div class="archmetric-step read" data-map="read"><span class="num">01</span><div class="act"><b>模型先验与外部检索</b><span>训练记忆与检索证据共同形成答案依据。</span></div><div class="met"><b>⑦ 模型自带知识</b><span>衡量“训练记忆能否支撑答案”。</span></div></div>
+            <div class="archmetric-step" data-map="search"><span class="num">02</span><div class="act"><b>检索官方与第三方来源</b><span>需要外部证据时，定位可用的官方页面与第三方信息。</span></div><div class="met"><b>① 官方可发现性 · ⑤ 第三方丰富度</b><span>衡量“能不能找到足够入口”。</span></div></div>
             <div class="archmetric-step fetch" data-map="fetch"><span class="num">03</span><div class="act"><b>抓取 / 读取证据</b><span>把网页正文、代码、表格取回来。</span></div><div class="met"><b>② 官方可抓取性 · ③ 正文详尽度</b><span>衡量“取回后够不够用”。</span></div></div>
             <div class="archmetric-step judge" data-map="judge"><span class="num">04</span><div class="act"><b>判断证据是否充分</b><span>看版本、来源一致性和是否需要再检索。</span></div><div class="met"><b>④ 版本清晰度 · ⑥ 第三方可信度 · ⑧ 检索成本</b><span>衡量“证据能不能被放心采用”。</span></div></div>
             <div class="archmetric-step answer" data-map="answer"><span class="num">05</span><div class="act"><b>组织最终答案</b><span>把证据合成为可执行步骤。</span></div><div class="met"><b>⑨ 版本可锁定性 · ⑩ 步骤可复现性 · ⑪ 综合置信度</b><span>衡量“答案能不能落地”。</span></div></div>
           </div>
-          <div class="archmetric-note"><b>指标来源：</b>架构图中的关键动作对应可观测指标，并用于计算最终的综合置信度。</div>
+          <div class="archmetric-note"><b>评分口径：</b>关键动作被转化为可观测指标，并共同形成综合置信度。</div>
         </div>
       </div>
     </div>
@@ -1251,7 +1286,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div class="metric-class-layout">
         <div class="metric-taxonomy">
-          <div class="tax-head"><div><b>指标 ①–⑩：“指标形成页”讲“流程来源”，本页讲“计算模式”</b><span>流程视角说明指标从 AI 作答链路哪里来；计算视角说明每项如何从原始观测换算成 1–5 分。</span></div><span>计算模式 × 流程标签</span></div>
+          <div class="tax-head"><div><b>指标 ①–⑩：将实测记录换算为可比较的 1–5 分</b><span>每项指标采用明确的观测输入与分档规则，避免以主观印象代替证据。</span></div><span>计算模式</span></div>
           <div class="tax-grid">
             <div class="tax-group official">
               <div class="tax-g-head"><span class="tax-code"><i data-lucide="badge-check"></i></span><div><b>官方证据类 <em>串行相乘</em></b><span>官方链 OFF = (①/5)×(②/5)×(③/5)；任一环断掉都会打折</span></div></div>
@@ -1530,8 +1565,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">理论依据：每一维指标都对应成熟的检索 / 信息架构理论，且公式可复现</span></div>
-        <div class="subttl">AI 侧 · 指标体系 · 「理论依据」</div>
+        <div class="brand"><span class="ttl">理论依据：指标与公式建立在信息检索、信息架构和可复现评测方法上</span></div>
+        <div class="subttl">测量方法 · 「理论依据」</div>
       </div>
       <div class="head-r">10/ AI 指标 · 理论依据</div>
     </div>
@@ -1607,35 +1642,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
     }
   </script>
 
-
-  <!-- 3d 灰底：矩阵评估发现（§9 重画，算子子集） -->
-  <section class="slide s-gray copy-large">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">任务设计：5 个检索问题来自算子开发中的关键知识需求</span></div>
-        <div class="subttl">AI 侧 · 内容可用性 · 「测试设计」</div>
-      </div>
-      <div class="head-r">11/ AI 可用性 · 方法</div>
-    </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Tasks</span>算子开发里的 5 个检索问题如何选取</div>
-        <p class="cmp-desc">围绕一次自定义算子从<b>能不能接入</b>到<b>能不能跑通</b>的真实路径选题：模型转换、性能定位、算子库选型、自定义 kernel、动态 shape / Tiling、内存越界、注册集成、精度排查、soc 版本决策等知识点中，选取开发者自然会带着问题查资料的关键节点，作为时序图中的 <b>5 次携问题检索</b>。</p>
-        <div class="lc-stages">装环境 · <b style="color:var(--accent)">开发算子</b> · 训练 · 推理部署 · 性能优化 · 调试 · 迁移</div>
-        <div class="op5">
-          <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
-          <div class="op5-i"><span class="c">2</span><b>Tiling</b><small>动态 shape</small></div>
-          <div class="op5-i"><span class="c">3</span><b>内存越界</b><small>定位</small></div>
-          <div class="op5-i"><span class="c">4</span><b>注册集成</b><small>接 PyTorch</small></div>
-          <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
-        </div>
-        <div class="bridge" style="margin-top:.2vh">同一套 5 个任务，在 <b style="color:#5a8a00">CUDA / 英伟达</b> 与 <b style="color:#C7000B">CANN / 昇腾</b> 上各<b>实测一遍</b>，差异方可归于「生态」、而非「题目难度」。</div>
-      </div>
-    </div>
-  </section>
 
   <style>
     .hmfull-slide{padding-top:4.3vh;padding-bottom:3.7vh}
@@ -2372,7 +2378,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="trig-i"><span class="tn">触发 2</span><div class="tx"><b>人工独立复核</b><small>不确定、拉安全网 → 官方 + 第三方交叉验证</small></div></div>
           <div class="trig-i"><span class="tn">触发 3</span><div class="tx"><b>需要决策</b><small>版本 / soc / 精度 → 官方文档 + Gitee 样例 + 论坛</small></div></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">因此，社区不是只在“求助”时才出现，而是在<b>检索受阻、答案复核、关键决策</b>三个节点进入开发旅程。后续基础体验评分继续衡量这些入口是否容易找到、是否能支持完成任务。</div>
+        <div class="bridge" style="margin-top:.2vh">社区不仅承接“求助”，也在<b>检索受阻、答案复核、关键决策</b>三个节点进入开发旅程；基础体验评分衡量这些入口是否容易找到、能否支持任务完成。</div>
       </div>
     </div>
   </section>
@@ -3181,11 +3187,38 @@ body.overview #panel,body.overview #toggle{display:none!important}
 const root=document.documentElement;
 const deck=document.getElementById('deck');
 const slides=[...document.querySelectorAll('.slide')];
-// Inserting method pages should not leave the visible counter out of sync with the URL page number.
-slides.forEach((slide,i)=>{
-  const page=slide.querySelector('.head-r');
-  if(page)page.innerHTML=page.innerHTML.replace(/^\s*\d{2}\//,String(i+1).padStart(2,'0')+'/');
-});
+const CHAPTERS=[
+  {id:'findings',label:'结论先行',range:[2,4]},
+  {id:'object',label:'研究对象',range:[5,10]},
+  {id:'measure',label:'测量方法',range:[11,13]},
+  {id:'evidence',label:'实测验证',range:[14,16]},
+  {id:'action',label:'改造方向',range:[17,68]}
+];
+function chapterFor(index){return CHAPTERS.find(function(ch){return index+1>=ch.range[0]&&index+1<=ch.range[1];})||CHAPTERS[CHAPTERS.length-1];}
+function renderChapterTabs(){
+  slides.forEach(function(slide,i){
+    const page=slide.querySelector('.head-r');
+    if(!page)return;
+    const chapter=chapterFor(i);
+    page.className='head-r chapter-tabs';
+    page.setAttribute('aria-label','章节导航');
+    page.innerHTML='<div class="chapter-tabset">'+CHAPTERS.map(function(ch){
+      return '<button class="chapter-tab" type="button" data-chapter-target="'+ch.range[0]+'"'+(ch.id===chapter.id?' aria-current="page"':'')+'>'+ch.label+'</button>';
+    }).join('')+'</div>';
+  });
+  document.querySelectorAll('[data-chapter-target]').forEach(function(tab){
+    tab.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();go(Number(tab.dataset.chapterTarget)-1);
+    });
+  });
+}
+renderChapterTabs();
+function syncChapterTabs(){
+  const current=chapterFor(idx);
+  document.querySelectorAll('.chapter-tab').forEach(function(tab){
+    tab.toggleAttribute('aria-current',Number(tab.dataset.chapterTarget)===current.range[0]);
+  });
+}
 let idx=0;
 
 function sharedP2SequenceHtml(){
@@ -3432,6 +3465,7 @@ function updateCurrent(i){
   idx=i; const s=slides[idx];
   lazyFrames(idx);
   slides.forEach((sl,k)=>sl.classList.toggle('active',k===idx));
+  syncChapterTabs();
   if(s===metricSlide){
     const metricHash=(location.hash||'').match(/^#\d+-m([123])$/);
     const directDefault=(location.hash||'')==='#'+(idx+1);
