@@ -1124,34 +1124,35 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <style>
-        .seq-object{padding:1.18vh 1vw 1.05vh;border-radius:11px;background:var(--g-ink);color:#F3F5FA;box-shadow:0 14px 28px -23px rgba(14,18,29,.72)}.seq-object b{display:block;font-size:var(--fs-h3);line-height:1.23;font-weight:950}.seq-object p{margin:.42vh 0 0;color:rgba(243,245,250,.78);font-size:var(--fs-body);line-height:1.48}.seq-object strong{color:#fff;font-weight:950}
-        .seq-taskchain{display:flex;align-items:stretch;gap:0;margin:-.35vh .3vw -.05vh}.seq-taskchain span{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:32px;padding:.42vh .28vw;background:rgba(91,91,214,.07);color:#414B5C;text-align:center;font-size:var(--fs-sm);font-weight:850;line-height:1.18}.seq-taskchain span:first-child{border-radius:8px 0 0 8px}.seq-taskchain span:last-child{border-radius:0 8px 8px 0}.seq-taskchain span+span:before{content:"";position:absolute;left:-1px;top:25%;bottom:25%;width:1px;background:rgba(47,61,99,.17)}
-        .phase-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.58vh .85vw;padding:.05vh 0}
-        .phase-item{position:relative;display:grid;grid-template-columns:29px minmax(0,1fr);gap:.52vw;align-items:start;min-height:0;padding:.66vh .65vw;background:rgba(255,255,255,.42);border:1px solid transparent;border-bottom-color:rgba(47,61,99,.12);cursor:pointer;transition:opacity .18s,background .18s,border-color .18s,box-shadow .18s}
+        .seq-compare{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:1.05vw;align-items:stretch;min-height:0}
+        .seq-why{border-radius:11px;background:var(--g-ink);color:#F3F5FA;padding:1.05vh .9vw;box-shadow:0 14px 28px -23px rgba(14,18,29,.72);display:flex;flex-direction:column;justify-content:center;min-width:0}.seq-why h3,.seq-how h3{margin:0;font-size:var(--fs-h3);line-height:1.2;font-weight:950}.seq-why h3{color:#fff}.seq-why p{margin:.42vh 0 .66vh;color:rgba(243,245,250,.76);font-size:var(--fs-sm);line-height:1.38}.seq-why-list{display:flex;flex-direction:column;gap:.58vh}.seq-why-list div{display:grid;grid-template-columns:16px minmax(0,1fr);gap:.42vw;align-items:start;font-size:var(--fs-sm);line-height:1.34;color:rgba(243,245,250,.84)}.seq-why-list i{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.13);color:#fff;font-style:normal;font-family:'JetBrains Mono';font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center}.seq-why-list b{color:#fff;font-weight:900}
+        .seq-how{min-width:0;padding:.04vh .12vw;display:flex;flex-direction:column;gap:.68vh}.seq-how h3{color:var(--ink)}.seq-how p{margin:.1vh 0 0;color:var(--ink-2);font-size:var(--fs-sm);line-height:1.33}
+        .seq-taskchain{display:flex;align-items:stretch;gap:0;margin:0}.seq-taskchain span{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:31px;padding:.36vh .18vw;background:rgba(91,91,214,.07);color:#414B5C;text-align:center;font-size:var(--fs-xs);font-weight:850;line-height:1.15}.seq-taskchain span:first-child{border-radius:8px 0 0 8px}.seq-taskchain span:last-child{border-radius:0 8px 8px 0}.seq-taskchain span+span:before{content:"";position:absolute;left:-1px;top:25%;bottom:25%;width:1px;background:rgba(47,61,99,.17)}
+        .phase-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.42vh .52vw;padding:0}
+        .phase-item{position:relative;display:grid;grid-template-columns:25px minmax(0,1fr);gap:.38vw;align-items:start;min-height:0;padding:.46vh .44vw;background:rgba(255,255,255,.42);border:1px solid transparent;border-bottom-color:rgba(47,61,99,.12);cursor:pointer;transition:opacity .18s,background .18s,border-color .18s,box-shadow .18s}
         .phase-item:nth-child(7){grid-column:1/-1}
         .phase-map:has(.phase-item:hover) .phase-item,.phase-map:has(.phase-item:focus-visible) .phase-item,.phase-map.has-phase-focus .phase-item{opacity:.32}.phase-map:has(.phase-item:hover) .phase-item:hover,.phase-map:has(.phase-item:focus-visible) .phase-item:focus-visible,.phase-map.has-phase-focus .phase-item.is-active{opacity:1;background:rgba(255,255,255,.84);border-color:rgba(91,91,214,.24);box-shadow:0 10px 22px -20px rgba(36,42,60,.45);outline:none}
-        .phase-item .phase-no{width:25px;height:25px;border-radius:7px;background:#EEF1F7;color:#3D4654;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950}
+        .phase-item .phase-no{width:22px;height:22px;border-radius:6px;background:#EEF1F7;color:#3D4654;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:10px;font-weight:950}
         .phase-item:nth-child(2) .phase-no{background:#EFEAF7;color:#5B4AB7}.phase-item:nth-child(3) .phase-no,.phase-item:nth-child(4) .phase-no{background:#E9F4F0;color:#19745B}.phase-item:nth-child(5) .phase-no{background:#FBF0E0;color:#A56217}.phase-item:nth-child(6) .phase-no{background:#E9F4F0;color:#19745B}.phase-item:nth-child(7) .phase-no{background:#E6EDF8;color:#2F5F9D}
-        .phase-item b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}.phase-item span{display:block;margin-top:.14vh;font-size:var(--fs-sm);line-height:1.27;color:var(--ink-2)}.phase-item small{display:block;margin-top:.18vh;font-size:var(--fs-xs);line-height:1.25;color:#7B8495}
-        .phase-outcome{padding:.78vh .82vw;border-top:1px solid rgba(47,61,99,.13);color:#4C5668;font-size:var(--fs-sm);line-height:1.42}.phase-outcome b{color:#252B37;font-weight:950}
+        .phase-item b{display:block;font-size:var(--fs-sm);line-height:1.14;color:var(--ink);font-weight:950}.phase-item span{display:block;margin-top:.1vh;font-size:var(--fs-xs);line-height:1.2;color:var(--ink-2)}.phase-item small{display:none}
+        .phase-outcome{padding:.52vh .58vw;border-top:1px solid rgba(47,61,99,.13);color:#4C5668;font-size:var(--fs-xs);line-height:1.35}.phase-outcome b{color:#252B37;font-weight:950}
       </style>
       <div class="card" data-magic-seq data-magic-target style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
         <iframe data-src="seq-d3.html?phase-focus=1" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.25vh">
-        <!-- <div class="cmp-h"><span class="hk">How to read</span>本图用于说明两条评估链路</div> -->
-        <div class="seq-object"><b>阶段把一次开发任务组织成可观察、可比较的研究对象</b><p>每个阶段都有明确的完成目标；围绕目标发生的<strong>知识请求、证据核验与受阻回路</strong>，构成后续实测与评分的观察单元。</p></div>
-        <div class="seq-taskchain" aria-label="完整任务的阶段链"><span>明确目标</span><span>开发实现</span><span>编译调试</span><span>框架集成</span><span>验证交付</span></div>
-        <div class="phase-map" aria-label="自定义算子开发的七个阶段">
-          <div class="phase-item" data-phase-focus="0" tabindex="0"><span class="phase-no">P1</span><div><b>立项与选型</b><span>明确算子目标与开发路径。</span><small>关注：入口、方案与环境前置条件。</small></div></div>
-          <div class="phase-item" data-phase-focus="1" tabindex="0"><span class="phase-no">P2</span><div><b>写核函数</b><span>查操作教程并生成工程骨架。</span><small>关注：官方正文能否支撑开发。</small></div></div>
-          <div class="phase-item" data-phase-focus="2" tabindex="0"><span class="phase-no">P3</span><div><b>动态 shape / Tiling</b><span>确定切分方式与调优策略。</span><small>关注：动态 shape 的实现与版本适配。</small></div></div>
-          <div class="phase-item" data-phase-focus="3" tabindex="0"><span class="phase-no">P4</span><div><b>编译与内存定位</b><span>编包部署并排查内存越界。</span><small>关注：诊断工具、命令与第三方经验。</small></div></div>
-          <div class="phase-item" data-phase-focus="4" tabindex="0"><span class="phase-no">P5</span><div><b>框架注册与集成</b><span>接入 PyTorch 并验证扩展。</span><small>关注：注册流程与版本配套。</small></div></div>
-          <div class="phase-item" data-phase-focus="5" tabindex="0"><span class="phase-no">P6</span><div><b>精度验证与排查</b><span>逐层比对并定位误差来源。</span><small>关注：验证方法与业务阈值。</small></div></div>
-          <div class="phase-item" data-phase-focus="6" tabindex="0"><span class="phase-no">P7</span><div><b>交付</b><span>完成验收并交付可用算子。</span><small>关注：结果是否达到可用标准。</small></div></div>
+      <div style="flex:1;min-width:0;display:flex;align-items:center">
+        <div class="seq-compare">
+          <div class="seq-why"><h3>为什么不能直接挑五个问题打分</h3><p>开发者不是孤立地搜索问题，而是在完整任务中持续推进、受阻并核验。</p><div class="seq-why-list"><div><i>1</i><span><b>问题依赖前后条件</b><br>同一资料在不同阶段的可用性不同。</span></div><div><i>2</i><span><b>受阻位置决定影响</b><br>开发、编译或集成阶段的中断，后果并不相同。</span></div><div><i>3</i><span><b>任务必须来自真实过程</b><br>先还原完整旅程，才能抽取具有代表性的知识需求。</span></div></div></div>
+          <div class="seq-how"><div><h3>如何形成可实测的任务单元</h3><p>将完整开发过程按业务目标拆成七阶段，再从高频、关键的知识需求中抽取五项任务。</p></div><div class="seq-taskchain" aria-label="完整任务的阶段链"><span>明确目标</span><span>开发实现</span><span>编译调试</span><span>框架集成</span><span>验证交付</span></div><div class="phase-map" aria-label="自定义算子开发的七个阶段">
+            <div class="phase-item" data-phase-focus="0" tabindex="0"><span class="phase-no">P1</span><div><b>立项与选型</b><span>明确目标与开发路径。</span></div></div>
+            <div class="phase-item" data-phase-focus="1" tabindex="0"><span class="phase-no">P2</span><div><b>写核函数</b><span>查教程并生成工程骨架。</span></div></div>
+            <div class="phase-item" data-phase-focus="2" tabindex="0"><span class="phase-no">P3</span><div><b>动态 shape / Tiling</b><span>确定切分与调优策略。</span></div></div>
+            <div class="phase-item" data-phase-focus="3" tabindex="0"><span class="phase-no">P4</span><div><b>编译与内存定位</b><span>部署并排查内存越界。</span></div></div>
+            <div class="phase-item" data-phase-focus="4" tabindex="0"><span class="phase-no">P5</span><div><b>框架注册与集成</b><span>接入 PyTorch 并验证扩展。</span></div></div>
+            <div class="phase-item" data-phase-focus="5" tabindex="0"><span class="phase-no">P6</span><div><b>精度验证与排查</b><span>逐层比对定位误差。</span></div></div>
+            <div class="phase-item" data-phase-focus="6" tabindex="0"><span class="phase-no">P7</span><div><b>交付</b><span>验收并交付可用算子。</span></div></div>
+          </div><div class="phase-outcome"><b>实测抽取：</b>P2–P6 对应写 kernel、Tiling、内存越界、注册集成与精度排查；以同一协议比较 CANN 与 CUDA。</div></div>
         </div>
-        <div class="phase-outcome"><b>实测抽取：</b>P2–P6 对应写 kernel、Tiling、内存越界、注册集成与精度排查五类任务；以同一评分协议比较 CANN 与 CUDA 的知识供给。</div>
       </div>
     </div>
   </section>
