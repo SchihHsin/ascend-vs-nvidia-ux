@@ -1095,15 +1095,15 @@ function renderV(){
     .attr("font-size",10).attr("font-weight",800).attr("fill","#555").text("阶段·开发者/AI");
   PHASE.forEach((d,i)=>{
     const y0=Y(d.a)-dyV/2+5, h=(d.b-d.a)*dyV + dyV-10, cy=(Y(d.a)+Y(d.b))/2, cxp=phX+phW/2, st=phaseStats(d);
-    svg.append("rect").attr("x",phX).attr("y",y0).attr("width",phW).attr("height",h)
+    svg.append("rect").attr("data-phase",i).attr("x",phX).attr("y",y0).attr("width",phW).attr("height",h)
       .attr("rx",8).attr("fill",phaseColors[i]).attr("opacity",.6).style("cursor","help")
       .on("mousemove",e=>showPhaseTip(e,i)).on("mouseleave",hideTip).on("click",e=>pinPhaseTip(e,i));
-    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",9.5).attr("font-weight",700).attr("fill","#555");
+    const lab=svg.append("text").attr("data-phase",i).attr("text-anchor","middle").attr("font-size",9.5).attr("font-weight",700).attr("fill","#555");
     wrapText(lab, d.n, 6, 11, cxp, false); lab.attr("y",cy-24);
     drawRatioBar(svg, cxp, cy-6, Math.min(phW-14,84), st);
     drawCount(svg, cxp, cy+10, st);
     drawAxisDots(svg, cxp, cy+24, st);
-    svg.append("rect").attr("x",phX).attr("y",y0).attr("width",phW).attr("height",h)
+    svg.append("rect").attr("data-phase",i).attr("x",phX).attr("y",y0).attr("width",phW).attr("height",h)
       .attr("rx",8).attr("fill","transparent").style("cursor","help")
       .on("mousemove",e=>showPhaseTip(e,i)).on("mouseleave",hideTip).on("click",e=>pinPhaseTip(e,i));
   });
@@ -1111,8 +1111,8 @@ function renderV(){
     .attr("font-size",10).attr("font-weight",800).attr("fill","#555").text("主导方");
   PHASE.forEach(d=>{
     const k=phaseOwner(d), y0=Y(d.a)-dyV/2+5, h=(d.b-d.a)*dyV + dyV-10;
-    svg.append("rect").attr("x",owX).attr("y",y0).attr("width",owW).attr("height",h).attr("rx",6).attr("fill",ownColors[k]);
-    const lab=svg.append("text").attr("text-anchor","middle").attr("font-size",9.5).attr("font-weight",700).attr("fill","#2b2b2b");
+    svg.append("rect").attr("data-phase",PHASE.indexOf(d)).attr("x",owX).attr("y",y0).attr("width",owW).attr("height",h).attr("rx",6).attr("fill",ownColors[k]);
+    const lab=svg.append("text").attr("data-phase",PHASE.indexOf(d)).attr("text-anchor","middle").attr("font-size",9.5).attr("font-weight",700).attr("fill","#2b2b2b");
     wrapText(lab, ownName[k], 4, 12, owX+owW/2, true); lab.attr("y",(Y(d.a)+Y(d.b))/2+3);
   });
 
@@ -1145,7 +1145,7 @@ function renderV(){
     const y=Y(d.xi);
     if(d.kind==="decision"){
       const x=LX[d.lane];
-      const gx=svg.append("g").attr("data-kind","node").attr("data-pair",brSrc[d.id]||null).attr("data-msg",d.id).attr("transform",`translate(${x},${y})`).style("cursor","pointer")
+      const gx=svg.append("g").attr("data-kind","node").attr("data-phase",PHASE.findIndex(ph=>d.xi>=ph.a&&d.xi<=ph.b)).attr("data-pair",brSrc[d.id]||null).attr("data-msg",d.id).attr("transform",`translate(${x},${y})`).style("cursor","pointer")
         .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
       drawBarV(gx,d);                       // 菱形按 dtier 深浅
       // 决策标题：放菱形左上方(单行,去「决策：」前缀)——用户要求朝左,右边被箭头挤、不易看
@@ -1157,7 +1157,7 @@ function renderV(){
     const f=FLOW[d.id]; if(!f) return;
     const frm=role(f.frm), to=role(f.to), x1=LX[frm];
     if(to==="self" || frm===to){            // 自身动作 / 档②③ 交付·回灌塌缩为同侧
-      const gx=svg.append("g").attr("data-kind","node").attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
+      const gx=svg.append("g").attr("data-kind","node").attr("data-phase",PHASE.findIndex(ph=>d.xi>=ph.a&&d.xi<=ph.b)).attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
         .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
       drawMarker(gx,d,PCOL[frm],false);
       sideLabel(gx,d, !(frm==="hu"||frm==="tool"));   // AI/社区侧→标题朝右；人/工具侧→朝左
@@ -1168,21 +1168,22 @@ function renderV(){
     const isAi=frm==="ai"||to==="ai";
     const col=f.blocked?"#C8102E":(isAi?"#8156c9":"#7a8aa0");
     const mk=f.blocked?"url(#ahr)":(isAi?"url(#ah)":"url(#ahg)");
-    svg.append("line").attr("data-kind",f.blocked?"block":"message").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1+dir*14).attr("y1",y).attr("x2",x2-dir*3).attr("y2",y)
+    const phaseIndex=PHASE.findIndex(ph=>d.xi>=ph.a&&d.xi<=ph.b);
+    svg.append("line").attr("data-kind",f.blocked?"block":"message").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1+dir*14).attr("y1",y).attr("x2",x2-dir*3).attr("y2",y)
       .attr("stroke",col).attr("stroke-width",2).attr("marker-end",mk).attr("opacity",.92);
-    svg.append("line").attr("data-kind","hit").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
-    const tt=svg.append("text").attr("data-kind","message").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",y-7).attr("text-anchor","middle")
+    svg.append("line").attr("data-kind","hit").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
+    const tt=svg.append("text").attr("data-kind","message").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",y-7).attr("text-anchor","middle")
       .attr("font-size",seqFont(13.5)).attr("font-weight",600).attr("fill", f.blocked?"#C8102E":"#333");
     tt.append("tspan").text(d.t);
-    const gx=svg.append("g").attr("data-kind","node").attr("data-pair",pair).attr("data-msg",d.id).attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
+    const gx=svg.append("g").attr("data-kind","node").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",d.id).attr("transform",`translate(${x1},${y})`).style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,d)).on("mouseleave",hideTip).on("click",(e)=>pinTip(e,d));
     drawMarker(gx,d,PCOL[frm],f.blocked);
     if(f.blocked){                          // 红色空返回 + ✕（核心发现可视化）+ 对应矩阵分
       const ry=y+15;
-      svg.append("line").attr("data-kind","block").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x2-dir*3).attr("y1",ry).attr("x2",x1+dir*14).attr("y2",ry)
+      svg.append("line").attr("data-kind","block").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x2-dir*3).attr("y1",ry).attr("x2",x1+dir*14).attr("y2",ry)
         .attr("stroke","#C8102E").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ahr)").attr("opacity",.92);
-      svg.append("line").attr("data-kind","hit").attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",ry).attr("x2",x2).attr("y2",ry).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
-      svg.append("text").attr("data-kind","block").attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
+      svg.append("line").attr("data-kind","hit").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",d.id).attr("x1",x1).attr("y1",ry).attr("x2",x2).attr("y2",ry).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
+      svg.append("text").attr("data-kind","block").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",d.id).attr("x",(x1+x2)/2).attr("y",ry-4).attr("text-anchor","middle")
         .attr("font-size",seqFont(10.5,true)).attr("font-weight",700).attr("fill","#C8102E").text("✕ 页面正文未能取回");
     }
   });
@@ -1192,10 +1193,11 @@ function renderV(){
     const src=byId[br.from], y=Y(src.xi)+(br.above?-29:(src.kind==="decision"?0:34)), tgt=br.to||"off", x2=LX[tgt];
     const pair=['hu',tgt].sort().join('-');
     const x1b=(src.kind==="decision")?(LX[src.lane]+BARW/2):LX.hu;  // 决策→右缘中点起；否则从人生命线起
-    svg.append("line").attr("data-kind","branch").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2+3).attr("y2",y)
+    const phaseIndex=PHASE.findIndex(ph=>src.xi>=ph.a&&src.xi<=ph.b);
+    svg.append("line").attr("data-kind","branch").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2+3).attr("y2",y)
       .attr("stroke","#2f3d63").attr("stroke-width",2).attr("stroke-dasharray","5,4").attr("marker-end","url(#ab)").attr("opacity",.85);
-    svg.append("line").attr("data-kind","hit").attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
-    svg.append("text").attr("data-kind","branch").attr("data-pair",pair).attr("data-msg",br.id).attr("x",(x1b+x2)/2).attr("y",y-5).attr("text-anchor","middle")
+    svg.append("line").attr("data-kind","hit").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",br.id).attr("x1",x1b).attr("y1",y).attr("x2",x2).attr("y2",y).attr("stroke","transparent").attr("stroke-width",18).style("cursor","pointer");
+    svg.append("text").attr("data-kind","branch").attr("data-phase",phaseIndex).attr("data-pair",pair).attr("data-msg",br.id).attr("x",(x1b+x2)/2).attr("y",y-5).attr("text-anchor","middle")
       .attr("font-size",seqFont(10.5,true)).attr("fill","#2f3d63").attr("font-weight",600).text(br.step ? (br.t+" · ascend "+br.step) : (br.id+" "+br.t))
       .style("cursor","pointer")
       .on("mousemove",(e)=>showTip(e,{id:br.id,t:br.t,meta:"用户独立分支 · 脱离 AI · 目标："+(tgt==="sec"?"第三方平台":"昇腾社区"),b:br.b})).on("mouseleave",hideTip);
@@ -2024,7 +2026,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     {name:'开发者 ↔ 昇腾社区 · 基础体验', pairs:['hu-off']}
   ];
   var step=0, hoverMsg=null, pinnedMsg=null;  // 0=全亮；hoverMsg=悬浮临时聚焦；pinnedMsg=点击钉住
-  var methodFocus=null;
+  var methodFocus=null, phaseFocus=null;
   var TASK_MSG={D:'sD',M:'sM',X:'sX',O:'sO',L:'sL'};
   function curFocus(){return hoverMsg!=null?hoverMsg:pinnedMsg;}  // 有效聚焦：悬浮优先，否则用钉住的
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
@@ -2033,6 +2035,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   function updLbl(){var lbl=document.getElementById('sqLbl');if(!lbl)return;
     lbl.textContent=step<1?'默认 · 完整时序图':('模式 '+step+' · '+GROUPS[step-1].name);}
   function applyHi(){
+    if(phaseFocus!=null){applyPhaseFocus(phaseFocus);return;}
     if(methodFocus){applyMethodFocus(methodFocus);return;}
     var svgEl=document.getElementById('journey'); if(!svgEl){updLbl();notify();return;}
     function clr(el){
@@ -2073,6 +2076,17 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     updLbl(); notify();
   }
   window.__seqApplyHi=applyHi;
+  function applyPhaseFocus(phase){
+    var svgEl=document.getElementById('journey'); if(!svgEl)return;
+    Array.prototype.forEach.call(svgEl.children,function(el){
+      var hit=String(el.getAttribute&&el.getAttribute('data-phase'))===String(phase);
+      var lane=el.getAttribute&&el.getAttribute('data-kind')==='lane';
+      el.style.opacity=hit?'1':(lane?'.22':'.11');
+      el.style.filter=hit?'drop-shadow(0 0 2px rgba(91,91,214,.26))':'';
+    });
+    var lbl=document.getElementById('sqLbl');
+    if(lbl)lbl.textContent='聚焦 · '+((PHASE[phase]&&PHASE[phase].n)||('P'+(Number(phase)+1)));
+  }
   function applyMethodFocus(mode){
     var svgEl=document.getElementById('journey'); if(!svgEl)return;
     function inList(v,arr){return arr.indexOf(v)>=0;}
@@ -2129,7 +2143,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
       if(pinnedMsg!=null){ pinnedMsg=null; applyHi(); notifyHover(); }   /* 点空白/非组内 → 取消钉住（模态）*/
     });
   })();
-  function go(n){var N=GROUPS.length;step=((n%(N+1))+(N+1))%(N+1);hoverMsg=null;pinnedMsg=null;applyHi();}
+  function go(n){var N=GROUPS.length;phaseFocus=null;methodFocus=null;step=((n%(N+1))+(N+1))%(N+1);hoverMsg=null;pinnedMsg=null;applyHi();}
   window.addEventListener('message',function(e){
     var d=e&&e.data;
     if(!d||!('__seqFocusLetter' in d))return;
@@ -2141,7 +2155,16 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   });
   window.addEventListener('message',function(e){
     var d=e&&e.data;
+    if(!d||!('__seqPhaseFocus' in d))return;
+    var next=d.__seqPhaseFocus;
+    phaseFocus=(next===null||next===undefined||next==='')?null:Number(next);
+    methodFocus=null; step=0; hoverMsg=null; pinnedMsg=null;
+    applyHi();
+  });
+  window.addEventListener('message',function(e){
+    var d=e&&e.data;
     if(!d||!('__seqMethodFocus' in d))return;
+    phaseFocus=null;
     methodFocus=d.__seqMethodFocus||null;
     step=0; hoverMsg=null; pinnedMsg=null;
     if(!methodFocus||methodFocus==='all'){methodFocus=null;applyHi();}

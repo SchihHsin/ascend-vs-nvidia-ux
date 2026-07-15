@@ -1125,11 +1125,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <style>
         .phase-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.58vh .85vw;padding:.15vh 0}
-        .phase-item{position:relative;display:grid;grid-template-columns:29px minmax(0,1fr);gap:.52vw;align-items:center;min-height:0;padding:.56vh .65vw;background:rgba(255,255,255,.42);border-bottom:1px solid rgba(47,61,99,.12)}
+        .phase-item{position:relative;display:grid;grid-template-columns:29px minmax(0,1fr);gap:.52vw;align-items:start;min-height:0;padding:.66vh .65vw;background:rgba(255,255,255,.42);border:1px solid transparent;border-bottom-color:rgba(47,61,99,.12);cursor:pointer;transition:opacity .18s,background .18s,border-color .18s,box-shadow .18s}
         .phase-item:nth-child(7){grid-column:1/-1}
+        .phase-map:has(.phase-item:hover) .phase-item,.phase-map:has(.phase-item:focus-visible) .phase-item{opacity:.32}.phase-map:has(.phase-item:hover) .phase-item:hover,.phase-map:has(.phase-item:focus-visible) .phase-item:focus-visible{opacity:1;background:rgba(255,255,255,.84);border-color:rgba(91,91,214,.24);box-shadow:0 10px 22px -20px rgba(36,42,60,.45);outline:none}
         .phase-item .phase-no{width:25px;height:25px;border-radius:7px;background:#EEF1F7;color:#3D4654;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950}
         .phase-item:nth-child(2) .phase-no{background:#EFEAF7;color:#5B4AB7}.phase-item:nth-child(3) .phase-no,.phase-item:nth-child(4) .phase-no{background:#E9F4F0;color:#19745B}.phase-item:nth-child(5) .phase-no{background:#FBF0E0;color:#A56217}.phase-item:nth-child(6) .phase-no{background:#E9F4F0;color:#19745B}.phase-item:nth-child(7) .phase-no{background:#E6EDF8;color:#2F5F9D}
-        .phase-item b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}.phase-item span{display:block;margin-top:.12vh;font-size:var(--fs-sm);line-height:1.25;color:var(--ink-2)}
+        .phase-item b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}.phase-item span{display:block;margin-top:.14vh;font-size:var(--fs-sm);line-height:1.27;color:var(--ink-2)}.phase-item small{display:block;margin-top:.18vh;font-size:var(--fs-xs);line-height:1.25;color:#7B8495}
         .seq-note{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}
         .seq-guide{margin:.2vh 0 .4vh;padding-left:1.05em;display:flex;flex-direction:column;gap:.5vh}
         .seq-guide li{font-size:var(--fs-body);color:var(--ink-2);line-height:1.62}.seq-guide li b{color:var(--ink)}
@@ -1146,13 +1147,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <li><b>受阻与回路</b>标记需要换词、补证或人工复核的具体位置。</li>
         </ul>
         <div class="phase-map" aria-label="自定义算子开发的七个阶段">
-          <div class="phase-item"><span class="phase-no">P1</span><div><b>立项与选型</b><span>确定目标与开发路径</span></div></div>
-          <div class="phase-item"><span class="phase-no">P2</span><div><b>写核函数</b><span>查操作教程与前置条件</span></div></div>
-          <div class="phase-item"><span class="phase-no">P3</span><div><b>动态 shape / Tiling</b><span>确定切分与调优策略</span></div></div>
-          <div class="phase-item"><span class="phase-no">P4</span><div><b>编译与内存定位</b><span>编包部署与排查越界</span></div></div>
-          <div class="phase-item"><span class="phase-no">P5</span><div><b>框架注册与集成</b><span>接入 PyTorch 并验证版本</span></div></div>
-          <div class="phase-item"><span class="phase-no">P6</span><div><b>精度验证与排查</b><span>逐层比对并定位误差</span></div></div>
-          <div class="phase-item"><span class="phase-no">P7</span><div><b>交付</b><span>完成验收并交付可用算子</span></div></div>
+          <div class="phase-item" data-phase-focus="0" tabindex="0"><span class="phase-no">P1</span><div><b>立项与选型</b><span>明确算子目标与开发路径。</span><small>关注：入口、方案与环境前置条件。</small></div></div>
+          <div class="phase-item" data-phase-focus="1" tabindex="0"><span class="phase-no">P2</span><div><b>写核函数</b><span>查操作教程并生成工程骨架。</span><small>关注：官方正文能否支撑开发。</small></div></div>
+          <div class="phase-item" data-phase-focus="2" tabindex="0"><span class="phase-no">P3</span><div><b>动态 shape / Tiling</b><span>确定切分方式与调优策略。</span><small>关注：动态 shape 的实现与版本适配。</small></div></div>
+          <div class="phase-item" data-phase-focus="3" tabindex="0"><span class="phase-no">P4</span><div><b>编译与内存定位</b><span>编包部署并排查内存越界。</span><small>关注：诊断工具、命令与第三方经验。</small></div></div>
+          <div class="phase-item" data-phase-focus="4" tabindex="0"><span class="phase-no">P5</span><div><b>框架注册与集成</b><span>接入 PyTorch 并验证扩展。</span><small>关注：注册流程与版本配套。</small></div></div>
+          <div class="phase-item" data-phase-focus="5" tabindex="0"><span class="phase-no">P6</span><div><b>精度验证与排查</b><span>逐层比对并定位误差来源。</span><small>关注：验证方法与业务阈值。</small></div></div>
+          <div class="phase-item" data-phase-focus="6" tabindex="0"><span class="phase-no">P7</span><div><b>交付</b><span>完成验收并交付可用算子。</span><small>关注：结果是否达到可用标准。</small></div></div>
         </div>
       </div>
     </div>
@@ -3450,6 +3451,27 @@ function initArchMetricFocus(){
   });
   if(frame) frame.addEventListener('load',function(){send(current);});
 }
+function initPhaseFocus(){
+  document.querySelectorAll('.phase-map').forEach(function(map){
+    if(map.dataset.phaseReady)return;
+    map.dataset.phaseReady='1';
+    const slide=map.closest('.slide');
+    const frame=slide&&slide.querySelector('iframe[src*="seq-d3"],iframe[data-src*="seq-d3"]');
+    if(!slide||!frame)return;
+    function send(phase){
+      try{if(frame.contentWindow)frame.contentWindow.postMessage({__seqPhaseFocus:phase},'*');}catch(e){}
+    }
+    map.querySelectorAll('[data-phase-focus]').forEach(function(item){
+      const phase=Number(item.dataset.phaseFocus);
+      item.addEventListener('mouseenter',function(){send(phase);});
+      item.addEventListener('focusin',function(){send(phase);});
+      item.addEventListener('click',function(){send(phase);});
+    });
+    map.addEventListener('mouseleave',function(){send(null);});
+    map.addEventListener('focusout',function(e){if(!map.contains(e.relatedTarget))send(null);});
+    frame.addEventListener('load',function(){send(null);});
+  });
+}
 
 /* iframe 懒加载:只给当前页及相邻 ±1 注入 src,避免一打开就并发加载 60 个内嵌页(太慢)。相邻预载让顺序翻页时下一页已就绪。 */
 function lazyFrames(center){
@@ -4069,6 +4091,7 @@ initUxEvidenceFocus();
 initUxWhyFocus();
 initSeqFocusSlide();
 initArchMetricFocus();
+initPhaseFocus();
 setTimeout(renderDeriveRelations,80);
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
 (function(){const m=(location.hash||'').match(/(\d+)/);const start=m?Math.min(slides.length,Math.max(1,+m[1]))-1:0;
