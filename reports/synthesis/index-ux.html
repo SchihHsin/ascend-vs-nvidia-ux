@@ -67,7 +67,7 @@ body.overview .s-cover .slide-inner{padding:0}
 .layer-tag{display:inline-block;margin-left:.55vw;padding:.18vh .46vw;border-radius:999px;font-size:var(--fs-xs);font-weight:700;line-height:1.2}.layer-tag.search{color:#313945;background:#fff;border:1px solid #D4D8DF}.layer-tag.machine{color:#5146A8;background:rgba(91,91,214,.12);border:1px solid rgba(91,91,214,.25)}.layer-tag.asset{color:#fff;background:#252B35;border:1px solid #252B35}
     .head-r{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.8}
     /* 章节标签替代孤立页码：始终标出材料当前所处的叙事位置。 */
-    .head-r.chapter-tabs{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:inherit;letter-spacing:0;text-transform:none;line-height:1;min-width:37vw;display:flex;justify-content:flex-end}
+    .head-r.chapter-tabs{align-self:center;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:inherit;letter-spacing:0;text-transform:none;line-height:1;min-width:37vw;display:flex;justify-content:flex-end}
     .chapter-tabset{display:flex;align-items:center;justify-content:flex-end;gap:4px;flex-wrap:wrap;max-width:100%}
     .chapter-tab{appearance:none;border:1px solid rgba(47,61,99,.12);border-radius:999px;background:rgba(255,255,255,.45);color:#7B8495;padding:.42vh .52vw;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:var(--fs-xs);font-weight:800;line-height:1;white-space:nowrap;cursor:pointer;transition:background .16s,color .16s,border-color .16s,transform .16s}
     .chapter-tab:hover,.chapter-tab:focus-visible{border-color:rgba(47,61,99,.32);color:#2F3D63;transform:translateY(-1px);outline:none}
@@ -642,12 +642,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 立论后的结论先行：先给管理层一张三层问题图，再展开研究方法与证据 -->
+  <!-- 立论后的研究概览：先给管理层一张三层问题图，再展开研究方法与证据 -->
   <section class="slide s-gray knowledge-pyramid-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">AI 答案的信任落差，集中发生在昇腾知识的三层链路</span></div>
-        <div class="subttl">结论先行 · 内容可用性问题框架</div>
+        <div class="subttl">研究概览 · 内容可用性问题框架</div>
       </div>
       <div class="head-r">04/ 内容可用性结论</div>
     </div>
@@ -1151,36 +1151,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="phase-item" data-phase-focus="5" tabindex="0"><span class="phase-no">P6</span><div><b>精度验证与排查</b><span>逐层比对并定位误差来源。</span><small>关注：验证方法与业务阈值。</small></div></div>
           <div class="phase-item" data-phase-focus="6" tabindex="0"><span class="phase-no">P7</span><div><b>交付</b><span>完成验收并交付可用算子。</span><small>关注：结果是否达到可用标准。</small></div></div>
         </div>
-        <div class="phase-outcome"><b>P2–P6</b> 形成五类决定开发成败的知识需求：开发、适配、定位、集成与验证。</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 从完整旅程抽取五项关键实测任务 -->
-  <section class="slide s-gray copy-large">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">实测任务：从完整开发旅程抽取 5 项关键知识需求</span></div>
-        <div class="subttl">研究对象 · 完整旅程中的关键任务</div>
-      </div>
-      <div class="head-r">09/ 研究对象 · 任务抽取</div>
-    </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Tasks</span>五项任务覆盖自定义算子从开发到排障的关键知识需求</div>
-        <p class="cmp-desc">围绕开发者完成一次自定义算子的真实过程，选择自然产生资料查询的五类知识需求：<b>如何开发</b>、<b>如何适配动态 shape</b>、<b>如何定位内存问题</b>、<b>如何完成框架集成</b>与<b>如何排查精度问题</b>。</p>
-        <div class="lc-stages">开发算子 · 编译部署 · 调试定位</div>
-        <div class="op5">
-          <div class="op5-i"><span class="c">1</span><b>写 kernel</b><small>自定义算子</small></div>
-          <div class="op5-i"><span class="c">2</span><b>Tiling</b><small>动态 shape</small></div>
-          <div class="op5-i"><span class="c">3</span><b>内存越界</b><small>问题定位</small></div>
-          <div class="op5-i"><span class="c">4</span><b>注册集成</b><small>框架接入</small></div>
-          <div class="op5-i"><span class="c">5</span><b>精度排查</b><small>逐层比对</small></div>
-        </div>
-        <div class="bridge" style="margin-top:.2vh">以同一组任务和评分协议，在 <b style="color:#5a8a00">CUDA / 英伟达</b> 与 <b style="color:#C7000B">CANN / 昇腾</b> 上分别实测，比较知识供给与作答条件的差异。</div>
+        <div class="phase-outcome"><b>实测抽取：</b>P2–P6 对应写 kernel、Tiling、内存越界、注册集成与精度排查五类任务；以同一评分协议比较 CANN 与 CUDA 的知识供给。</div>
       </div>
     </div>
   </section>
@@ -3184,11 +3155,11 @@ const root=document.documentElement;
 const deck=document.getElementById('deck');
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
-  {id:'findings',label:'结论先行',range:[2,4]},
-  {id:'object',label:'研究对象',range:[5,10]},
-  {id:'measure',label:'测量方法',range:[11,13]},
-  {id:'evidence',label:'实测验证',range:[14,16]},
-  {id:'action',label:'改造方向',range:[17,68]}
+  {id:'findings',label:'研究概览',range:[2,4]},
+  {id:'object',label:'研究对象',range:[5,9]},
+  {id:'measure',label:'测量方法',range:[10,12]},
+  {id:'evidence',label:'实测验证',range:[13,15]},
+  {id:'action',label:'改造方向',range:[16,68]}
 ];
 function chapterFor(index){return CHAPTERS.find(function(ch){return index+1>=ch.range[0]&&index+1<=ch.range[1];})||CHAPTERS[CHAPTERS.length-1];}
 function renderChapterTabs(){
