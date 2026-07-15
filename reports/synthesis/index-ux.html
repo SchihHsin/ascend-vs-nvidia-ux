@@ -3214,7 +3214,8 @@ renderChapterTabs();
 function syncChapterTabs(){
   const current=chapterFor(idx);
   document.querySelectorAll('.chapter-tab').forEach(function(tab){
-    tab.toggleAttribute('aria-current',Number(tab.dataset.chapterTarget)===current.range[0]);
+    if(Number(tab.dataset.chapterTarget)===current.range[0]) tab.setAttribute('aria-current','page');
+    else tab.removeAttribute('aria-current');
   });
 }
 let idx=0;
