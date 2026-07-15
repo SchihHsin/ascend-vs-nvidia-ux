@@ -105,11 +105,9 @@ ul.tight li{margin-bottom:6px}
 .stat .num{font-size:26px;font-weight:900}
 .stat .lab{font-size:12px;color:var(--sub);margin-top:2px}
 /* ===== Demo 示意稿 ===== */
-.demotitle{font-size:14.5px;font-weight:900;margin:26px 0 4px;display:flex;align-items:center;gap:8px}
-.demotitle::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--nv);flex:none}
-.agentset .demotitle::before,.uxcard.agent .demotitle::before{background:#5b5390}
 .card .demo{background:#fbfbfd;margin:8px 0 6px}
 .demo{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:8px 0 24px}
+.duo-state{display:inline-flex;align-items:center;min-height:18px;margin-right:7px;padding:1px 6px;border-radius:999px;font-family:var(--mono);font-size:10px;font-weight:900;letter-spacing:.04em;vertical-align:1px}.duo-state.before{background:#FFF1F2;color:#B4232D;border:1px solid rgba(180,35,45,.18)}.duo-state.after{background:#ECFDF3;color:#137A45;border:1px solid rgba(19,122,69,.18)}
 .demo .dnote{font-size:12.5px;color:var(--sub);margin-bottom:12px}
 .mockdisc{display:inline-block;font-size:11px;background:#FDF3E0;color:#9a6b00;border:1px solid #ecd9a8;border-radius:10px;padding:0 8px;margin-left:6px;vertical-align:2px;font-weight:400}
 /* 浏览器窗框 */
@@ -301,11 +299,10 @@ a.hit:hover{text-decoration:underline;color:#444}
       <li>按芯片与框架版本返回唯一配套组合，并标注验证日期。</li>
     </ul>
     <div class="nvref"><b>NVIDIA 参照：</b>当前版固定入口，历史内容归档；安装选择器输出唯一命令。</div>
-    <div class="demotitle">Demo · 左：现状的多版本散乱（实测）；右：建议的配套查询器（下拉框可实际选择） <span class="mockdisc">右侧为示意，占位数据非真实配套</span></div>
-<div class="demo">
+    <div class="demo">
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ 现状 · 多版本并列，配套信息分散</div>
+      <div class="duolab"><span class="duo-state before">Before</span>多版本并列，配套信息分散</div>
       <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索：hiascend atc 模型转换（实测命中形态）</span></div>
       <div class="bbody" style="font-size:12px">
         <div style="border-bottom:1px dashed #eee;padding:5px 0"><b style="color:#1a0dab">将ONNX模型转换为OM模型 - CANN <b style="color:var(--hw)">商用版 8.0.RC2</b></b><br><a class="hit" href="https://www.hiascend.com/document/detail/zh/canncommercial/80RC2/quickstart/quickstart/quickstart_18_0012.html" target="_blank" rel="noopener">hiascend.com/document/detail/zh/canncommercial/<b>80RC2</b>/quickstart/quickstart/quickstart_18_0012.html ↗</a></div>
@@ -315,7 +312,7 @@ a.hit:hover{text-decoration:underline;color:#444}
       </div></div>
     </div>
     <div class="good">
-      <div class="duolab">✓ 建议 · 两步得到唯一配套</div>
+      <div class="duolab"><span class="duo-state after">After</span>两步得到唯一配套</div>
       <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">hiascend.com/compat-picker（示意 URL）</span></div>
       <div class="bbody">
         <div class="picker">
@@ -331,17 +328,16 @@ a.hit:hover{text-decoration:underline;color:#444}
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ① 官方可发现性 · 优先覆盖复杂任务</div>
+    <div class="who">优先覆盖复杂任务</div>
     <h3>2. 让任务词的检索直达官方页面</h3>
     <ul class="tight">
       <li>稳定网址绑定当前版本，任务词直达官方教程。</li>
       <li>标题、摘要和英文入口覆盖核心任务词。</li>
     </ul>
     <div class="nvref"><b>NVIDIA 参照：</b>任务词可直接命中当前教程，历史内容与当前入口分层。</div>
-    <div class="demotitle">Demo · 搜索结果：当前状态 / 建议形态</div>
-    <div class="demo"><div class="duo">
-      <div class="bad"><div class="duolab">✕ 现状 · 任务词命中结果混排，仍需判断和换词</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索引擎</span></div><div class="bbody serp"><div class="serp-query"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>自定义算子 操作教程 CANN</div><div class="serp-row"><span class="serp-url">blog.csdn.net / ... / custom-operator</span><span class="serp-title">CANN 自定义算子开发实践与踩坑</span><span class="serp-snippet">第三方案例，环境与版本条件不完整，无法确认是否仍适用。</span></div><div class="serp-row old"><span class="serp-url">hiascend.com / document / 80RC1 / ...</span><span class="serp-title">自定义算子开发指南 <span class="serp-meta">历史版本</span></span><span class="serp-snippet">官方页面，但未标明是否为当前推荐入口。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / document</span><span class="serp-title">CANN 文档中心</span><span class="serp-snippet">泛入口，需要再次进入文档树查找具体操作步骤。</span></div></div></div></div>
-      <div class="good"><div class="duolab">✓ 建议 · 第一条直达官方当前教程，相关任务入口一并给出</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索引擎</span></div><div class="bbody serp"><div class="serp-query"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>自定义算子 操作教程 CANN</div><div class="serp-row direct"><span class="serp-url">hiascend.com / docs / custom-operator</span><span class="serp-title">自定义算子操作教程 · CANN <span class="serp-meta">当前推荐 · 8.2.RC1</span></span><span class="serp-snippet">从算子定义、编译、部署到验证；正文、代码与前置条件可直接读取。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / docs / custom-operator / compile</span><span class="serp-title">编译与部署自定义算子</span><span class="serp-snippet">同一专题内的下一步，附适用版本与最后验证日期。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / docs / custom-operator / troubleshoot</span><span class="serp-title">自定义算子常见报错与排查</span><span class="serp-snippet">按触发场景组织，可继续核对预期输出和修复方法。</span></div></div></div></div>
+        <div class="demo"><div class="duo">
+      <div class="bad"><div class="duolab"><span class="duo-state before">Before</span>任务词命中结果混排，仍需判断和换词</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索引擎</span></div><div class="bbody serp"><div class="serp-query"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>自定义算子 操作教程 CANN</div><div class="serp-row"><span class="serp-url">blog.csdn.net / ... / custom-operator</span><span class="serp-title">CANN 自定义算子开发实践与踩坑</span><span class="serp-snippet">第三方案例，环境与版本条件不完整，无法确认是否仍适用。</span></div><div class="serp-row old"><span class="serp-url">hiascend.com / document / 80RC1 / ...</span><span class="serp-title">自定义算子开发指南 <span class="serp-meta">历史版本</span></span><span class="serp-snippet">官方页面，但未标明是否为当前推荐入口。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / document</span><span class="serp-title">CANN 文档中心</span><span class="serp-snippet">泛入口，需要再次进入文档树查找具体操作步骤。</span></div></div></div></div>
+      <div class="good"><div class="duolab"><span class="duo-state after">After</span>第一条直达官方当前教程，相关任务入口一并给出</div><div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">搜索引擎</span></div><div class="bbody serp"><div class="serp-query"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>自定义算子 操作教程 CANN</div><div class="serp-row direct"><span class="serp-url">hiascend.com / docs / custom-operator</span><span class="serp-title">自定义算子操作教程 · CANN <span class="serp-meta">当前推荐 · 8.2.RC1</span></span><span class="serp-snippet">从算子定义、编译、部署到验证；正文、代码与前置条件可直接读取。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / docs / custom-operator / compile</span><span class="serp-title">编译与部署自定义算子</span><span class="serp-snippet">同一专题内的下一步，附适用版本与最后验证日期。</span></div><div class="serp-row"><span class="serp-url">hiascend.com / docs / custom-operator / troubleshoot</span><span class="serp-title">自定义算子常见报错与排查</span><span class="serp-snippet">按触发场景组织，可继续核对预期输出和修复方法。</span></div></div></div></div>
     </div></div>
     <div class="why">① 官方可发现性：CANN 平均 3.58 / 5，CUDA 为 4.42 / 5；把任务词、当前版本与官方页面绑定，是搜索体验和 AI 检索共同的入口改造。</div>
   </div>
@@ -354,12 +350,11 @@ a.hit:hover{text-decoration:underline;color:#444}
       <li>报错信息直接链接对应页面，便于定位与复测。</li>
     </ul>
     <div class="nvref"><b>NVIDIA 参照：</b>错误码语义明确，社区可补充真实案例。</div>
-    <div class="demotitle">Demo · 错误码页面：当前状态 / 建议形态</div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">E 任务实测：搜 EZ9999 命中官方页、抓得到（②4），EZ9999 甚至有专属页——但内容是泛化兜底：原因栏写 N/A、只有通用处理建议，没有按触发场景的逐条解释（③2）。右侧示意「一码一页」该有什么。</div>
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ 现状 · 有专属页，但只有通用建议</div>
+      <div class="duolab"><span class="duo-state before">Before</span>有专属页，但只有通用建议</div>
       <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><a href="https://www.hiascend.com/document/detail/zh/canncommercial/80RC1/developmentguide/maintenref/troubleshooting/atlaserrorcode_15_0313.html" target="_blank" rel="noopener">hiascend.com/document/detail/zh/canncommercial/80RC1/…/atlaserrorcode_15_0313.html ↗（现网真实地址）</a></span></div>
       <div class="bbody" style="color:#555">
         <b style="color:#222">EZ9999 AclNN Inner Error</b>
@@ -368,7 +363,7 @@ a.hit:hover{text-decoration:underline;color:#444}
       </div></div>
     </div>
     <div class="good">
-      <div class="duolab">✓ 建议 · 一码一页，附可复测路径</div>
+      <div class="duolab"><span class="duo-state after">After</span>一码一页，附可复测路径</div>
       <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">hiascend.com/errors/EZ9999（示意 URL）</span></div>
       <div class="bbody">
         <b>EZ9999 — AI Core 算子执行内部错误</b> <span class="verbadge">适用 CANN 8.x · 最后验证 2026-06</span>
@@ -392,12 +387,11 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
       <li>发布前以无脚本抓取校验正文、代码与参数表。</li>
     </ul>
     <div class="nvref"><b>NVIDIA 参照：</b>官方教程默认可抓，Agent 可直接读取正文。</div>
-    <div class="demotitle">Demo · 浏览器可见内容 / Agent 可读内容</div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">人眼里这两个页面渲染后几乎一样、都「有内容」。下面展示的是 <b>Agent 实际抓到的东西</b>——②可抓取性 26 格的全部分差就来自这个差别。左侧即 D 任务实测形态。</div>
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ SPA 页：Agent 只抓到页面骨架</div>
+      <div class="duolab"><span class="duo-state before">Before</span>SPA 页：Agent 只抓到页面骨架</div>
       <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><a href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/82RC1alpha003/opdevg/Ascendcopdevg/atlas_ascendc_10_0006.html" target="_blank" rel="noopener">hiascend.com/…/CANNCommunityEdition/82RC1alpha003/opdevg/Ascendcopdevg/atlas_ascendc_10_0006.html ↗（现网真实地址）</a></span></div>
       <div class="bbody" style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#888">
         &lt;title&gt;算子开发-CANN文档&lt;/title&gt;<br>
@@ -407,7 +401,7 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
       </div></div>
     </div>
     <div class="good">
-      <div class="duolab">✓ SSR 页：Agent 可直接读取正文</div>
+      <div class="duolab"><span class="duo-state after">After</span>SSR 页：Agent 可直接读取正文</div>
       <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><a href="https://www.hiascend.com/document/detail/zh/canncommercial/80RC2/quickstart/quickstart/quickstart_18_0012.html" target="_blank" rel="noopener">hiascend.com/…/canncommercial/80RC2/quickstart/quickstart/quickstart_18_0012.html ↗（现网真实地址）</a></span></div>
       <div class="bbody">
         <b style="font-size:12.5px">使用 ATC 转换模型（正文完整可抓 · 实测原文）</b>
@@ -430,12 +424,11 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
       <li>提供 <code>llms.txt</code>、Markdown 查看与结构化 API 索引。</li>
       <li>让 AI 一次获取任务入口、版本与接口信息，减少逐页抓取。</li>
     </ul>
-    <div class="demotitle">Demo · 机器可读入口：当前状态 / NVIDIA 参照</div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">「机器可读出口」= 给 AI 一个汇总入口，一次抓全、无需逐页翻；现状是这个入口还不存在。</div>
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ 现状 · hiascend.com/llms.txt（实测 404）</div>
+      <div class="duolab"><span class="duo-state before">Before</span>hiascend.com/llms.txt（实测 404）</div>
       <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">hiascend.com/llms.txt</span></div>
       <div class="bbody">
         <div style="text-align:center;color:#c0392b;font-weight:800;font-size:16px;padding:10px 0;font-family:ui-monospace,Menlo,monospace">404 Not Found</div>
@@ -443,7 +436,7 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
       </div></div>
     </div>
     <div class="good">
-      <div class="duolab">✓ NVIDIA · docs.nvidia.com/llms.txt（已上线）</div>
+      <div class="duolab"><span class="duo-state after">After</span>docs.nvidia.com/llms.txt（已上线）</div>
       <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">docs.nvidia.com/llms.txt</span></div>
       <div class="bbody">
         <pre class="cmd" style="margin:0"># NVIDIA Docs · 约 20 个产品索引
@@ -458,18 +451,17 @@ NeMo / NIM / Jetson → llms.txt
   </div>
 
   <div class="card uxcard">
-    <div class="who">提升 ①②③⑧ · 页面发布规范</div>
+    <div class="who">页面发布规范</div>
     <h3>5. 面向 AI 抓取的页面组织方式</h3>
     <ul class="tight">
       <li>主路径正文、代码和表格进入首屏 HTML，不依赖脚本渲染。</li>
       <li>发布前无脚本抓取，校验版本、命令、参数表与下一步。</li>
     </ul>
-    <div class="demotitle">Demo · 页面完整显示，不等于 AI 可读</div>
-    <div class="demo">
+        <div class="demo">
       <div class="dnote">这页要证明的不是“某个技术方案”，而是：<b>页面的视觉结构</b>和 <b>Agent 能读取到的 HTML 结构</b>可能完全不同。验收要看右侧“无脚本抓取结果”，而不是只看浏览器截图。</div>
       <div class="duo">
         <div class="bad">
-          <div class="duolab">✕ 当前风险 · 人眼看到完整页面</div>
+          <div class="duolab"><span class="duo-state before">Before</span>人眼看到完整页面</div>
           <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">文档页浏览器渲染结果</span></div>
           <div class="bbody">
             <b>自定义算子开发流程</b>
@@ -481,7 +473,7 @@ NeMo / NIM / Jetson → llms.txt
           </div></div>
         </div>
         <div class="good">
-          <div class="duolab">✓ 建议做法 · 无脚本抓取仍保留主路径</div>
+          <div class="duolab"><span class="duo-state after">After</span>无脚本抓取仍保留主路径</div>
           <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">发布前机检输出</span></div>
           <div class="bbody">
             <pre class="cmd">✓ H1 / 摘要 / 当前版本
@@ -504,11 +496,10 @@ NeMo / NIM / Jetson → llms.txt
       <li>官方博客、论坛与外部技术社区同步发布，避免单一平台转载。</li>
       <li>优先覆盖算子、动态 shape 与报错案例；内容注明版本、日期和命令。</li>
     </ul>
-    <div class="demotitle">Demo · 第三方来源：昇腾现状 / NVIDIA 参照</div>
-    <div class="demo">
+        <div class="demo">
       <div class="duo">
         <div class="bad">
-          <div class="duolab">✕ 昇腾现状 · 来源少，优质内容抓不到</div>
+          <div class="duolab"><span class="duo-state before">Before</span>来源少，优质内容抓不到</div>
           <div class="cov" style="padding:4px 2px">
             <div class="covrow"><span class="pf">CSDN 等平台</span><span class="st mid">同源重复 · 独立性不足</span></div>
             <div class="covrow"><span class="pf">知乎（优质）</span><span class="st no">403 · 反爬抓不到 ✕</span></div>
@@ -516,7 +507,7 @@ NeMo / NIM / Jetson → llms.txt
           </div>
         </div>
         <div class="good">
-          <div class="duolab">✓ NVIDIA · 多平台互证、官方亦参与</div>
+          <div class="duolab"><span class="duo-state after">After</span>多平台互证、官方亦参与</div>
           <div class="cov" style="padding:4px 2px">
             <div class="covrow"><span class="pf">官方技术博客</span><span class="st ok">✓ L／N 任务可用来源</span></div>
             <div class="covrow"><span class="pf">开发者论坛</span><span class="st ok">✓ 承接 B／E 长尾问答</span></div>
@@ -534,12 +525,11 @@ NeMo / NIM / Jetson → llms.txt
       <li>按真实任务组织内容，而非分散发布页面。</li>
       <li>一个任务包覆盖前置条件、完整步骤、可复制代码、验证输出与常见报错。</li>
     </ul>
-    <div class="demotitle">Demo · 分散页面 / 端到端任务包</div>
-    <div class="demo">
+        <div class="demo">
       <div class="dnote">这不是新增一个栏目，而是改变内容组织单位：从“按页面发布”改成“按开发任务交付”。同一任务包既给人看，也给 Agent 抓取和引用。</div>
       <div class="duo">
         <div class="bad">
-          <div class="duolab">✕ 分散页面：找到内容但难以完成</div>
+          <div class="duolab"><span class="duo-state before">Before</span>分散页面：找到内容但难以完成</div>
           <div class="cov" style="padding:4px 2px">
             <div class="covrow"><span class="pf">D 自定义算子</span><span class="st no">定义、编译、部署、验证分散</span></div>
             <div class="covrow"><span class="pf">E 报错码</span><span class="st no">原因泛化，缺少场景化修复</span></div>
@@ -549,7 +539,7 @@ NeMo / NIM / Jetson → llms.txt
           </div>
         </div>
         <div class="good">
-          <div class="duolab">✓ 任务包：围绕一个目标交付证据链</div>
+          <div class="duolab"><span class="duo-state after">After</span>任务包：围绕一个目标交付证据链</div>
           <div class="cov" style="padding:4px 2px">
             <div class="covrow"><span class="pf">D 自定义算子</span><span class="st ok">开发→编译→部署→调用→验证</span></div>
             <div class="covrow"><span class="pf">E 报错码</span><span class="st ok">触发场景、原因、修复、复测</span></div>
@@ -570,8 +560,7 @@ NeMo / NIM / Jetson → llms.txt
       <li>关键内容同步到公开 Git 仓与 Markdown，提供英文版和可运行样例。</li>
       <li>将高质量问答沉淀为 FAQ 与案例，并标注版本、芯片和日期。</li>
     </ul>
-    <div class="demotitle">Demo · 当前知识缺口 / 下一代模型供给</div>
-    <div class="demo">
+        <div class="demo">
       <div class="dnote">在前面的 Agent 流程图里，「模型自带知识」是检索之外的兜底：检索受阻时，模型会回到自己训练中学过的内容。CANN 的问题是这层知识积累不足，所以要把官方和生态内容做成更容易被下一代模型收录的形态。</div>
       <div style="display:grid;grid-template-columns:1fr 1.05fr;gap:14px;align-items:stretch">
         <div class="bw">
@@ -616,12 +605,11 @@ NeMo / NIM / Jetson → llms.txt
       <li>低置信段落在行内标注，而不是只在结尾放一句「请自行验证」。</li>
     </ul>
     <div class="nvref"><b>英伟达侧对照：</b>CUDA 官方页可抓、分数稳定，答案多来自一手材料；CANN 来源成色参差，更需要把证据透明展示。</div>
-    <div class="demotitle">Demo · 左：现状——外推无痕混进答案；右：成色一眼可见（来源 chip 同时是 E「人审抓手」的入口）<span class="mockdisc">对话为示意稿</span></div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">左右是<b>同一段回答</b>。区别只有一个：成分标没标。左侧四句话来源天差地别，却被抹平成同一种自信语气；右侧行内标出来，顶部一条成分布局条（沿用 18 的五段口径）。</div>
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ 现状 · 默认行为：流畅、自信、看不出成色</div>
+      <div class="duolab"><span class="duo-state before">Before</span>默认行为：流畅、自信、看不出成色</div>
       <div class="chat">
         <div class="bub user">把 ResNet50 的 ONNX 转成昇腾能跑的 .om，怎么做？</div>
         <div class="bub">
@@ -631,7 +619,7 @@ NeMo / NIM / Jetson → llms.txt
       </div>
     </div>
     <div class="good">
-      <div class="duolab">✓ 建议 · 同一段回答，成色行内标出</div>
+      <div class="duolab"><span class="duo-state after">After</span>同一段回答，成色行内标出</div>
       <div class="chat">
         <div class="bub user">把 ResNet50 的 ONNX 转成昇腾能跑的 .om，怎么做？</div>
         <div class="bub">
@@ -657,12 +645,11 @@ NeMo / NIM / Jetson → llms.txt
       <li><b>绕路知识沉淀为产品资产</b>（26 全量后补）：Y / O 两任务实测都靠「hiascend 主站受阻 → 换 <code>doc_center</code> 镜像」兜底——这类绕路经验应进产品的检索策略库被复用，而不是每次会话现场重新发现一遍。</li>
     </ul>
     <div class="nvref"><b>英伟达侧对照：</b>26 个 CUDA 任务没有“抓不到”；CANN 会遇到 SPA、镜像和第三方受阻，因此需要清楚说明失败原因。</div>
-    <div class="demotitle">Demo · 左：现状——沉默转圈、缺口被藏起来；右：过程可见 + 诚实失败态（同时支撑 D 条；步骤来自 D 任务实测检索旅程）</div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">同一次 D 任务式的提问。左侧：用户只看到长时间转圈，然后得到一段没有任何缺口声明的答案。右侧：绕路过程流式可见，抓不到的权威页明说、URL 交给用户。</div>
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ 现状 · 默认行为：黑箱等待 + 沉默的缺口</div>
+      <div class="duolab"><span class="duo-state before">Before</span>默认行为：黑箱等待 + 沉默的缺口</div>
       <div class="chat">
         <div class="bub user">想给 910B 写一个自定义 Add 算子，从工程创建到部署的完整流程？</div>
         <div class="silence">● ● ●　思考中…（45 秒，没有任何反馈）</div>
@@ -673,7 +660,7 @@ NeMo / NIM / Jetson → llms.txt
       </div>
     </div>
     <div class="good">
-      <div class="duolab">✓ 建议 · 绕路看得见，死路变捷径</div>
+      <div class="duolab"><span class="duo-state after">After</span>绕路看得见，死路变捷径</div>
       <div class="chat">
         <div class="bub user">想给 910B 写一个自定义 Add 算子，从工程创建到部署的完整流程？</div>
         <div class="bub">
@@ -705,12 +692,11 @@ NeMo / NIM / Jetson → llms.txt
       <li>对版本敏感度「高」的任务（转换/算子/迁移），无版本声明时主动追问而不是默认猜。</li>
     </ul>
     <div class="nvref"><b>英伟达侧对照：</b>CUDA 文档主线清楚，多数按当前版回答也能对；CANN 版本树分散，回答前必须先确认版本。</div>
-    <div class="demotitle">Demo · 左：现状——版本核对发生在跑炸之后；右：环境卡前置 <span class="mockdisc">版本号为占位示意</span></div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">同一个问题，有没有环境卡的两种命运。左侧是 ④ 版本散乱（26 格中 12 格 2 分）落到用户身上的真实体感：「看起来对、跑不通」。</div>
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ 现状 · 先答后炸，版本是事后才想起来的事</div>
+      <div class="duolab"><span class="duo-state before">Before</span>先答后炸，版本是事后才想起来的事</div>
       <div class="chat">
         <div class="bub user">torch_npu 的 profiler 怎么开？</div>
         <div class="bub">
@@ -724,7 +710,7 @@ NeMo / NIM / Jetson → llms.txt
       </div>
     </div>
     <div class="good">
-      <div class="duolab">✓ 建议 · 环境一次声明，命令次次核对</div>
+      <div class="duolab"><span class="duo-state after">After</span>环境一次声明，命令次次核对</div>
       <div class="chat">
         <div class="envbar">我的环境：<span class="envchip">Atlas 800T A2</span><span class="envchip">CANN 8.0.RC2</span><span class="envchip">torch 2.1.0</span><span class="envchip">torch_npu 2.1.0.postX（示意）</span><span style="margin-left:auto;font-size:11px;text-decoration:underline;cursor:pointer">修改</span></div>
         <div class="bub user">torch_npu 的 profiler 怎么开？</div>
@@ -752,12 +738,11 @@ with torch_npu.profiler.profile(...) as prof:   # 参数表见官方 ptmigr 页�
       <li>过程记录可回放（本项目的 <code>task_run_log.md</code> 就是范本）：用户事后可审计 Agent 当时看了什么、漏了什么。</li>
     </ul>
     <div class="nvref"><b>英伟达侧对照：</b>CUDA 多数任务一次检索即可；CANN 的 D/K/O 会反复重试，所以需要展示“正在查什么”。</div>
-    <div class="demotitle">Demo · D 特有的两件：预期管理 + 过程回放（「绕路看得见」的步骤流见 B 条 Demo）<span class="mockdisc">对话为示意稿，耗时为示意</span></div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">B 条 demo 画的是「绕路过程本身可见」；这里补 D 独有的两个交互：<b>开始前</b>把成本说在前头（预期管理），<b>结束后</b>整个过程可审计（回放）。</div>
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ 现状 · 没有预期，用户把正常绕路当成卡死</div>
+      <div class="duolab"><span class="duo-state before">Before</span>没有预期，用户把正常绕路当成卡死</div>
       <div class="chat">
         <div class="bub user">想自定义一个融合算子，怎么从头搭工程？</div>
         <div class="silence">● ● ●　（转圈一分多钟，没有任何预告和中间反馈）</div>
@@ -767,7 +752,7 @@ with torch_npu.profiler.profile(...) as prof:   # 参数表见官方 ptmigr 页�
       </div>
     </div>
     <div class="good">
-      <div class="duolab">✓ 建议 · 成本说在前头，过程可回放，最后落到答案</div>
+      <div class="duolab"><span class="duo-state after">After</span>成本说在前头，过程可回放，最后落到答案</div>
       <div class="chat">
         <div class="bub user">想自定义一个融合算子，怎么从头搭工程？</div>
         <div class="bub">
@@ -802,12 +787,11 @@ with torch_npu.profiler.profile(...) as prof:   # 参数表见官方 ptmigr 页�
       <li>可纠错回流：用户发现「这个命令在我的版本跑不通」时，一键把失败反馈进会话上下文，而不是从头重问。</li>
     </ul>
     <div class="nvref"><b>英伟达侧对照：</b>CUDA 多由 docs.nvidia.com 单源支撑；CANN 来源更分散，必须能下钻到平台、版本、时间和证据片段。</div>
-    <div class="demotitle">Demo · 三级下钻 + 纠错回流（第一级的来源 chip 长什么样见 A 条 Demo）<span class="mockdisc">对话为示意稿</span></div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">验收需要抓手。左侧是现状：「据官方文档」四个字不可验收。右侧：第一级来源 chip → 第二级原文段落对照 → 第三级跳原始页面（现网真实地址）；底部纠错回流——「跑不通」一键变成新上下文。</div>
   <div class="duo">
     <div class="bad">
-      <div class="duolab">✕ 现状 · 「据官方文档」没有锚点，核对成本全在用户身上</div>
+      <div class="duolab"><span class="duo-state before">Before</span>「据官方文档」没有锚点，核对成本全在用户身上</div>
       <div class="chat">
         <div class="bub"><p>结论：转换用 <code>atc --model=resnet50.onnx --framework=5 …</code>（来源：官方文档）</p></div>
         <div class="bub user">哪份官方文档？哪个版本的？我想核对一下。</div>
@@ -816,7 +800,7 @@ with torch_npu.profiler.profile(...) as prof:   # 参数表见官方 ptmigr 页�
       </div>
     </div>
     <div class="good">
-      <div class="duolab">✓ 建议 · 三级下钻可核对，纠错不重来</div>
+      <div class="duolab"><span class="duo-state after">After</span>三级下钻可核对，纠错不重来</div>
       <div class="chat">
         <div class="bub">
           <p>结论：转换用 <code>atc --model=resnet50.onnx --framework=5 …</code> <span class="srcchip">官方 quickstart · hiascend · CANN 8.0.RC2 ▾ 已展开</span></p>
@@ -844,11 +828,10 @@ with torch_npu.profiler.profile(...) as prof:   # 参数表见官方 ptmigr 页�
       <li>风险提示按角色定制：对算子开发者（落在漏斗深谷的人群），Agent 应主动声明「这个领域我的资料可信度低于平均」——置信度披露本身也要分角色校准。</li>
     </ul>
     <div class="nvref"><b>英伟达侧对照：</b>CUDA 不同角色拿到的答案质量接近；CANN 角色差异更大，回答时要识别角色并提示风险。</div>
-    <div class="demotitle">Demo · 同一个问题，两种角色两种答案 <span class="mockdisc">回答内容为示意</span></div>
-<div class="demo">
+    <div class="demo">
   <div class="dnote">同一句「矩阵类算子太慢怎么办」。最上面是现状：角色无感知的一刀切清单。下面两栏是建议：按角色给深度，且高难度场景角色得到的<b>不是更含糊的回答，而是更显式的风险声明</b>——置信度披露分角色校准，数据来自漏斗实测。</div>
   <div class="bad" style="margin-bottom:12px">
-    <div class="duolab" style="color:var(--hw)">✕ 现状 · 角色无感知：一刀切清单，对谁都不对</div>
+    <div class="duolab" style="color:var(--hw)"><span class="duo-state before">Before</span>角色无感知：一刀切清单，对谁都不对</div>
     <div class="chat">
       <div class="bub user">矩阵类算子太慢怎么办？</div>
       <div class="bub"><p>可以从这几方面优化：① 更换高性能算子库；② 开启算子融合；③ 优化 Tiling 切分与流水排布；④ 用 profiling 工具定位热点……</p></div>
@@ -857,7 +840,7 @@ with torch_npu.profiler.profile(...) as prof:   # 参数表见官方 ptmigr 页�
   </div>
   <div class="duo">
     <div>
-      <div class="duolab" style="color:#3d6500">✓ 建议 · 角色：应用开发者（AscendCL / 高层库，不写 kernel）</div>
+      <div class="duolab" style="color:#3d6500"><span class="duo-state after">After</span>应用开发者（AscendCL / 高层库，不写 kernel）</div>
       <div class="chat">
         <div class="bub user">矩阵类算子太慢怎么办？</div>
         <div class="bub"><p>不必自己写 kernel：优先换官方库算子（基础矩阵类看 AOL，Transformer/大模型场景用 ATB），再确认算子融合开关是否启用。</p>
@@ -865,7 +848,7 @@ with torch_npu.profiler.profile(...) as prof:   # 参数表见官方 ptmigr 页�
       </div>
     </div>
     <div>
-      <div class="duolab" style="color:#5b5390">✓ 建议 · 角色：算子开发者（Ascend C，漏斗深谷人群）</div>
+      <div class="duolab" style="color:#5b5390"><span class="duo-state after">After</span>算子开发者（Ascend C，漏斗深谷人群）</div>
       <div class="chat">
         <div class="bub user">矩阵类算子太慢怎么办？</div>
         <div class="bub"><p>从 Tiling 切分与流水排布查起（方向性建议，具体实现以官方算子开发文档为准）。</p>
@@ -1066,7 +1049,6 @@ body.embed .why,
 body.embed .uxcard .why,
 body.embed .ux-left .why{display:none!important}
 body.embed .why~.why{display:none!important}
-body.embed .ux-right .demotitle{font-size:15px!important;line-height:1.4!important;margin-bottom:10px!important}
 body.embed .ux-right .duolab{font-size:13px!important;line-height:1.35!important;margin-bottom:8px!important}
 body.embed .ux-right .bbody{font-size:13px!important}
 body.embed .ux-right .serp-title{font-size:13px!important}
@@ -1089,7 +1071,7 @@ body.embed .ux-right .serp-url,.ux-right .url{font-size:11.5px!important}
     var h=t.querySelector('h3');if(h)h.style.display='none';
     if(!t.dataset.laid){
       t.dataset.laid='1';
-      var dt=t.querySelector('.demotitle')||t.querySelector('.demo');
+      var dt=t.querySelector('.demo');
       if(dt){
         var left=document.createElement('div');left.className='ux-left';
         var right=document.createElement('div');right.className='ux-right';
