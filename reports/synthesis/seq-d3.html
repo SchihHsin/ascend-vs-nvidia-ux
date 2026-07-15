@@ -2184,8 +2184,13 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     buildCtrl();
     var m=(location.search.match(/[?&]hi=(\d+)/));   // ?hi=1/2 仅作为初始模式；控制条仍保留，可继续翻到其它模式
     var method=(location.search.match(/[?&]method=([^&]+)/));
-    if(method){ methodFocus=decodeURIComponent(method[1]); applyMethodFocus(methodFocus); }
+    var phase=(location.search.match(/[?&]phase=(\d+)/));
+    var phaseMode=/(?:[?&])phase-focus=1(?:&|$)/.test(location.search);
+    if(phaseMode)document.body.classList.add('phase-focus-ready');
+    if(phase){ phaseFocus=Number(phase[1]); applyHi(); }
+    else if(method){ methodFocus=decodeURIComponent(method[1]); applyMethodFocus(methodFocus); }
     else if(m){ go(+m[1]); }
+    try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqPhaseReady:true},'*');}catch(e){}
   }
   window.addEventListener('keydown',function(e){
     if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(step+1);}

@@ -1124,28 +1124,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <style>
-        .phase-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.58vh .85vw;padding:.15vh 0}
+        .seq-object{padding:1.18vh 1vw 1.05vh;border-radius:11px;background:var(--g-ink);color:#F3F5FA;box-shadow:0 14px 28px -23px rgba(14,18,29,.72)}.seq-object b{display:block;font-size:var(--fs-h3);line-height:1.23;font-weight:950}.seq-object p{margin:.42vh 0 0;color:rgba(243,245,250,.78);font-size:var(--fs-body);line-height:1.48}.seq-object strong{color:#fff;font-weight:950}
+        .seq-taskchain{display:flex;align-items:stretch;gap:0;margin:-.35vh .3vw -.05vh}.seq-taskchain span{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:32px;padding:.42vh .28vw;background:rgba(91,91,214,.07);color:#414B5C;text-align:center;font-size:var(--fs-sm);font-weight:850;line-height:1.18}.seq-taskchain span:first-child{border-radius:8px 0 0 8px}.seq-taskchain span:last-child{border-radius:0 8px 8px 0}.seq-taskchain span+span:before{content:"";position:absolute;left:-1px;top:25%;bottom:25%;width:1px;background:rgba(47,61,99,.17)}
+        .phase-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.58vh .85vw;padding:.05vh 0}
         .phase-item{position:relative;display:grid;grid-template-columns:29px minmax(0,1fr);gap:.52vw;align-items:start;min-height:0;padding:.66vh .65vw;background:rgba(255,255,255,.42);border:1px solid transparent;border-bottom-color:rgba(47,61,99,.12);cursor:pointer;transition:opacity .18s,background .18s,border-color .18s,box-shadow .18s}
         .phase-item:nth-child(7){grid-column:1/-1}
-        .phase-map:has(.phase-item:hover) .phase-item,.phase-map:has(.phase-item:focus-visible) .phase-item{opacity:.32}.phase-map:has(.phase-item:hover) .phase-item:hover,.phase-map:has(.phase-item:focus-visible) .phase-item:focus-visible{opacity:1;background:rgba(255,255,255,.84);border-color:rgba(91,91,214,.24);box-shadow:0 10px 22px -20px rgba(36,42,60,.45);outline:none}
+        .phase-map:has(.phase-item:hover) .phase-item,.phase-map:has(.phase-item:focus-visible) .phase-item,.phase-map.has-phase-focus .phase-item{opacity:.32}.phase-map:has(.phase-item:hover) .phase-item:hover,.phase-map:has(.phase-item:focus-visible) .phase-item:focus-visible,.phase-map.has-phase-focus .phase-item.is-active{opacity:1;background:rgba(255,255,255,.84);border-color:rgba(91,91,214,.24);box-shadow:0 10px 22px -20px rgba(36,42,60,.45);outline:none}
         .phase-item .phase-no{width:25px;height:25px;border-radius:7px;background:#EEF1F7;color:#3D4654;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950}
         .phase-item:nth-child(2) .phase-no{background:#EFEAF7;color:#5B4AB7}.phase-item:nth-child(3) .phase-no,.phase-item:nth-child(4) .phase-no{background:#E9F4F0;color:#19745B}.phase-item:nth-child(5) .phase-no{background:#FBF0E0;color:#A56217}.phase-item:nth-child(6) .phase-no{background:#E9F4F0;color:#19745B}.phase-item:nth-child(7) .phase-no{background:#E6EDF8;color:#2F5F9D}
         .phase-item b{display:block;font-size:var(--fs-body);line-height:1.18;color:var(--ink);font-weight:950}.phase-item span{display:block;margin-top:.14vh;font-size:var(--fs-sm);line-height:1.27;color:var(--ink-2)}.phase-item small{display:block;margin-top:.18vh;font-size:var(--fs-xs);line-height:1.25;color:#7B8495}
-        .seq-note{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}
-        .seq-guide{margin:.2vh 0 .4vh;padding-left:1.05em;display:flex;flex-direction:column;gap:.5vh}
-        .seq-guide li{font-size:var(--fs-body);color:var(--ink-2);line-height:1.62}.seq-guide li b{color:var(--ink)}
+        .phase-outcome{padding:.78vh .82vw;border-top:1px solid rgba(47,61,99,.13);color:#4C5668;font-size:var(--fs-sm);line-height:1.42}.phase-outcome b{color:#252B37;font-weight:950}
       </style>
       <div class="card" data-magic-seq data-magic-target style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe data-src="seq-d3.html" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
+        <iframe data-src="seq-d3.html?phase-focus=1" title="自定义算子开发 · 人机协同全链路时序图（D3 原图）" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4.5vh">
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.25vh">
         <!-- <div class="cmp-h"><span class="hk">How to read</span>本图用于说明两条评估链路</div> -->
-        <div class="bridge seq-intro" style="margin-top:0">时序图先按业务阶段组织一次自定义算子开发，再在每个阶段记录知识请求、证据来源与受阻位置。阶段带提供全程坐标，便于比较问题出现在哪一段。</div>
-        <ul class="seq-guide">
-          <li><b>阶段带</b>按时间串联立项、开发、编译、集成、验证与交付。</li>
-          <li><b>知识往返</b>标记每个阶段需要查阅、核验或补充的信息。</li>
-          <li><b>受阻与回路</b>标记需要换词、补证或人工复核的具体位置。</li>
-        </ul>
+        <div class="seq-object"><b>阶段把一次开发任务组织成可观察、可比较的研究对象</b><p>每个阶段都有明确的完成目标；围绕目标发生的<strong>知识请求、证据核验与受阻回路</strong>，构成后续实测与评分的观察单元。</p></div>
+        <div class="seq-taskchain" aria-label="完整任务的阶段链"><span>明确目标</span><span>开发实现</span><span>编译调试</span><span>框架集成</span><span>验证交付</span></div>
         <div class="phase-map" aria-label="自定义算子开发的七个阶段">
           <div class="phase-item" data-phase-focus="0" tabindex="0"><span class="phase-no">P1</span><div><b>立项与选型</b><span>明确算子目标与开发路径。</span><small>关注：入口、方案与环境前置条件。</small></div></div>
           <div class="phase-item" data-phase-focus="1" tabindex="0"><span class="phase-no">P2</span><div><b>写核函数</b><span>查操作教程并生成工程骨架。</span><small>关注：官方正文能否支撑开发。</small></div></div>
@@ -1155,6 +1151,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="phase-item" data-phase-focus="5" tabindex="0"><span class="phase-no">P6</span><div><b>精度验证与排查</b><span>逐层比对并定位误差来源。</span><small>关注：验证方法与业务阈值。</small></div></div>
           <div class="phase-item" data-phase-focus="6" tabindex="0"><span class="phase-no">P7</span><div><b>交付</b><span>完成验收并交付可用算子。</span><small>关注：结果是否达到可用标准。</small></div></div>
         </div>
+        <div class="phase-outcome"><b>P2–P6</b> 形成五类决定开发成败的知识需求：开发、适配、定位、集成与验证。</div>
       </div>
     </div>
   </section>
@@ -3458,7 +3455,11 @@ function initPhaseFocus(){
     const slide=map.closest('.slide');
     const frame=slide&&slide.querySelector('iframe[src*="seq-d3"],iframe[data-src*="seq-d3"]');
     if(!slide||!frame)return;
+    let activePhase=null;
     function send(phase){
+      activePhase=phase;
+      map.classList.toggle('has-phase-focus',phase!==null&&phase!==undefined);
+      map.querySelectorAll('[data-phase-focus]').forEach(function(item){item.classList.toggle('is-active',Number(item.dataset.phaseFocus)===Number(phase));});
       try{if(frame.contentWindow)frame.contentWindow.postMessage({__seqPhaseFocus:phase},'*');}catch(e){}
     }
     map.querySelectorAll('[data-phase-focus]').forEach(function(item){
@@ -3469,7 +3470,10 @@ function initPhaseFocus(){
     });
     map.addEventListener('mouseleave',function(){send(null);});
     map.addEventListener('focusout',function(e){if(!map.contains(e.relatedTarget))send(null);});
-    frame.addEventListener('load',function(){send(null);});
+    frame.addEventListener('load',function(){send(activePhase);});
+    window.addEventListener('message',function(e){
+      if(e.source===frame.contentWindow&&e.data&&e.data.__seqPhaseReady)send(activePhase);
+    });
   });
 }
 
