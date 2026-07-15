@@ -2143,7 +2143,7 @@ body.maparch #codeView{display:none!important}
       search:{color:'#667EEA',nodes:['route','gate','search'], edges:['route gate','gate search'], softNodes:['ask','msg','intent','subgoal'], softEdges:['ask msg','msg intent','intent subgoal','subgoal route']},
       fetch:{color:'#38C9D7',nodes:['fetch'], edges:['search fetch'], softNodes:['search','relay'], softEdges:['gate search','fetch relay','gate fetch']},
       read:{color:'#23CFA0',nodes:['own'], edges:['gate own','own relay'], softNodes:['gate','relay'], softEdges:['relay judge']},
-      judge:{color:'#F59E0B',nodes:['relay','judge','redo','hasEv'], edges:['relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
+      judge:{color:'#F59E0B',nodes:['own','relay','judge','redo','hasEv'], edges:['gate own','own relay','relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
       answer:{color:'#22262F',keepLabelColor:true,nodes:['converge','final','hasEv'], edges:['judge converge','converge final','hasEv final']}
     };
     function nodeShape(el){return el&&el.querySelector&&el.querySelector('rect,polygon,circle');}
