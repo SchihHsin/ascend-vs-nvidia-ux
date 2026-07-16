@@ -2050,12 +2050,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
       });
       var focus=[
         {k:'version',mark:'col',title:'问题 1 · 版本体系混乱',val:'④ 多数低分',desc:'同一主题散落在多棵版本树，缺少当前推荐版本；AI 和开发者都需要先判断“该看哪一版”。',icon:'tag',sel:'tr[data-side="cann"] [data-col="3"]',ref:'tr[data-side="cuda"] [data-col="3"]',ring:'tr[data-side="cann"] [data-col="3"]',demo:`<div class="qb"><i></i><i></i><i></i><span>搜“atc 模型转换”命中</span></div><div class="qd"><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">8.0RC2</span></div><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">8.0RC3</span></div><div class="qr"><span>将 ONNX 转 OM 模型</span><span class="badge">800alpha</span></div></div>`},
-        {k:'discover',mark:'col',title:'问题 2 · 复杂任务检索时，官方页面不在首屏',val:'① 3.58 vs 4.42',desc:'CANN 有 12 个任务需要二次检索，CUDA 为 5 个；差距集中在自定义算子、动态 shape、注册集成、多卡通信和跨芯片迁移。',icon:'target',sel:'tr[data-side="cann"] [data-col="0"]',ref:'tr[data-side="cuda"] [data-col="0"]',ring:'tr[data-side="cann"] [data-col="0"]',demo:`<div class="qb"><i></i><i></i><i></i><span>任务词 → 首次搜索</span></div><div class="qd"><div><span class="muted">CANN</span> <span class="bad">12 个任务需换词再搜</span></div><div style="margin-top:4px"><span class="muted">CUDA</span> <span class="ok">5 个任务需二次检索</span></div></div>`},
-        {k:'own',mark:'col',title:'问题 3 · AI 对昇腾知识积累不足',val:'−33.8',desc:'CANN 56.9 / CUDA 90.8。官方或第三方抓取一旦受阻，模型记忆里缺少可替代证据。',icon:'brain',sel:'tr[data-side="cann"] [data-col="6"]',ref:'tr[data-side="cuda"] [data-col="6"]',ring:'tr[data-side="cann"] [data-col="6"]',demo:`<div class="qd"><div><span class="muted">CUDA</span> <span class="ok">不检索也能答 ✓</span></div><div style="margin-top:4px"><span class="muted">CANN</span> <span class="bad">不检索就答不了 ✕</span></div></div>`},
-        {k:'third',mark:'col',title:'问题 4 · 第三方来源少，难以互证',val:'⑤ K/M/N/S/X = 2',desc:'第三方内容多集中在少数平台，互证不足；对 Agent 有效的第三方来源比人能看到的更窄。',icon:'target',sel:'tr[data-side="cann"] [data-col="4"], tr[data-side="cann"] [data-col="5"]',ref:'tr[data-side="cuda"] [data-col="4"], tr[data-side="cuda"] [data-col="5"]',ring:'tr[data-side="cann"] [data-col="4"], tr[data-side="cann"] [data-col="5"]',demo:`<div class="qd"><div class="chips"><span class="chip">CSDN ×2</span><span class="chip">华为云 bbs</span><span class="chip bad">知乎 403 ✕</span></div></div>`},
-        {k:'spa',title:'问题 5 · 官方操作教程正文抓不到',val:'自定义算子正文 = 0',desc:'不是所有官方页都不可抓，而是自定义算子操作教程这类页面只返回导航和标题，直接拖低“写算子”任务。',icon:'doc',sel:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',ref:'tr[data-task="D"][data-side="cuda"] [data-col="1"], tr[data-task="D"][data-side="cuda"] [data-col="2"]',ring:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',demo:`<div class="qb"><i></i><i></i><i></i><span>Agent 抓 opdevg 页</span></div><div class="qd" style="font-family:'JetBrains Mono';color:#999;font-size:10.5px"><div>&lt;title&gt;算子开发-CANN文档</div><div>导航：首页／文档／社区…</div><div class="zero">—— 正文 0 字 ——</div></div>`},
-        {k:'err',title:'问题 6 · 错误码能抓到，但正文质量低，无法解决问题',val:'错误码排查综合 .55',desc:'错误码能命中专属页、正文也可取回，但内容过于泛化，缺少排查和修复路径。',icon:'doc',sel:'[data-task="E"].task, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] [data-col="1"], tr[data-task="E"][data-side="cann"] [data-col="2"], tr[data-task="E"][data-side="cann"] [data-col="10"]',ref:'tr[data-task="E"][data-side="cuda"] .stk, tr[data-task="E"][data-side="cuda"] [data-col="1"], tr[data-task="E"][data-side="cuda"] [data-col="2"], tr[data-task="E"][data-side="cuda"] [data-col="10"]',ring:'[data-task="E"].task, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] [data-col="1"], tr[data-task="E"][data-side="cann"] [data-col="2"], tr[data-task="E"][data-side="cann"] [data-col="10"]',demo:`<div class="qd" style="font-family:'JetBrains Mono'"><div style="font-weight:700;color:#222">EZ9999 AclNN Inner Error</div><div style="margin-top:4px">可能原因：<span class="bad">N/A</span></div><div class="muted">仅 2 条通用建议 · 无排查步骤</div></div>`},
-        {k:'funnel',split:true,title:'问题 7 · 复杂任务的可用性更低',val:'自定义算子 / 错误码 / 动态 shape',desc:'按 CANN 与 CUDA 综合分差值排序，自定义算子、错误码、动态 shape / Tiling 是差距最大的三项，说明复杂任务需要优先补齐可直接使用的证据链。',icon:'target',sel:'[data-task="D"].task, [data-task="E"].task, [data-task="M"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell',ref:'tr[data-task="D"][data-side="cuda"] .stk, tr[data-task="D"][data-side="cuda"] .cell, tr[data-task="E"][data-side="cuda"] .stk, tr[data-task="E"][data-side="cuda"] .cell, tr[data-task="M"][data-side="cuda"] .stk, tr[data-task="M"][data-side="cuda"] .cell',ring:'[data-task="D"].task, [data-task="E"].task, [data-task="M"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell',demo:`<div class="qd"><div class="bars"><div class="bar" style="height:34px"><span>算子 Δ.47</span></div><div class="bar" style="height:32px"><span>错误码 Δ.44</span></div><div class="bar" style="height:25px;background:linear-gradient(#e07a7d,#f0b3b5)"><span>shape Δ.31</span></div></div></div>`},
+        {k:'err',title:'问题 2 · 错误码能抓到，但正文质量低，无法解决问题',val:'错误码排查综合 .55',desc:'错误码能命中专属页、正文也可取回，但内容过于泛化，缺少排查和修复路径。',icon:'doc',sel:'[data-task="E"].task, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] [data-col="1"], tr[data-task="E"][data-side="cann"] [data-col="2"], tr[data-task="E"][data-side="cann"] [data-col="10"]',ref:'tr[data-task="E"][data-side="cuda"] .stk, tr[data-task="E"][data-side="cuda"] [data-col="1"], tr[data-task="E"][data-side="cuda"] [data-col="2"], tr[data-task="E"][data-side="cuda"] [data-col="10"]',ring:'[data-task="E"].task, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] [data-col="1"], tr[data-task="E"][data-side="cann"] [data-col="2"], tr[data-task="E"][data-side="cann"] [data-col="10"]',demo:`<div class="qd" style="font-family:'JetBrains Mono'"><div style="font-weight:700;color:#222">EZ9999 AclNN Inner Error</div><div style="margin-top:4px">可能原因：<span class="bad">N/A</span></div><div class="muted">仅 2 条通用建议 · 无排查步骤</div></div>`},
+        {k:'third',mark:'col',title:'问题 3 · 第三方来源少，难以互证',val:'⑤ K/M/N/S/X = 2',desc:'第三方内容多集中在少数平台，互证不足；对 Agent 有效的第三方来源比人能看到的更窄。',icon:'target',sel:'tr[data-side="cann"] [data-col="4"], tr[data-side="cann"] [data-col="5"]',ref:'tr[data-side="cuda"] [data-col="4"], tr[data-side="cuda"] [data-col="5"]',ring:'tr[data-side="cann"] [data-col="4"], tr[data-side="cann"] [data-col="5"]',demo:`<div class="qd"><div class="chips"><span class="chip">CSDN ×2</span><span class="chip">华为云 bbs</span><span class="chip bad">知乎 403 ✕</span></div></div>`},
+        {k:'funnel',split:true,title:'问题 4 · 复杂任务的可用性更低',val:'自定义算子 / 错误码 / 动态 shape',desc:'按 CANN 与 CUDA 综合分差值排序，自定义算子、错误码、动态 shape / Tiling 是差距最大的三项，说明复杂任务需要优先补齐可直接使用的证据链。',icon:'target',sel:'[data-task="D"].task, [data-task="E"].task, [data-task="M"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell',ref:'tr[data-task="D"][data-side="cuda"] .stk, tr[data-task="D"][data-side="cuda"] .cell, tr[data-task="E"][data-side="cuda"] .stk, tr[data-task="E"][data-side="cuda"] .cell, tr[data-task="M"][data-side="cuda"] .stk, tr[data-task="M"][data-side="cuda"] .cell',ring:'[data-task="D"].task, [data-task="E"].task, [data-task="M"].task, tr[data-task="D"][data-side="cann"] .stk, tr[data-task="D"][data-side="cann"] .cell, tr[data-task="E"][data-side="cann"] .stk, tr[data-task="E"][data-side="cann"] .cell, tr[data-task="M"][data-side="cann"] .stk, tr[data-task="M"][data-side="cann"] .cell',demo:`<div class="qd"><div class="bars"><div class="bar" style="height:34px"><span>算子 Δ.47</span></div><div class="bar" style="height:32px"><span>错误码 Δ.44</span></div><div class="bar" style="height:25px;background:linear-gradient(#e07a7d,#f0b3b5)"><span>shape Δ.31</span></div></div></div>`},
+        {k:'own',mark:'col',title:'问题 5 · AI 对昇腾知识积累不足',val:'−33.8',desc:'CANN 56.9 / CUDA 90.8。官方或第三方抓取一旦受阻，模型记忆里缺少可替代证据。',icon:'brain',sel:'tr[data-side="cann"] [data-col="6"]',ref:'tr[data-side="cuda"] [data-col="6"]',ring:'tr[data-side="cann"] [data-col="6"]',demo:`<div class="qd"><div><span class="muted">CUDA</span> <span class="ok">不检索也能答 ✓</span></div><div style="margin-top:4px"><span class="muted">CANN</span> <span class="bad">不检索就答不了 ✕</span></div></div>`},
+        {k:'spa',title:'问题 6 · 官方操作教程正文抓不到',val:'自定义算子正文 = 0',desc:'不是所有官方页都不可抓，而是自定义算子操作教程这类页面只返回导航和标题，直接拖低“写算子”任务。',icon:'doc',sel:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',ref:'tr[data-task="D"][data-side="cuda"] [data-col="1"], tr[data-task="D"][data-side="cuda"] [data-col="2"]',ring:'[data-task="D"].task, tr[data-task="D"][data-side="cann"] [data-col="1"], tr[data-task="D"][data-side="cann"] [data-col="2"]',demo:`<div class="qb"><i></i><i></i><i></i><span>Agent 抓 opdevg 页</span></div><div class="qd" style="font-family:'JetBrains Mono';color:#999;font-size:10.5px"><div>&lt;title&gt;算子开发-CANN文档</div><div>导航：首页／文档／社区…</div><div class="zero">—— 正文 0 字 ——</div></div>`},
+        {k:'discover',mark:'col',title:'问题 7 · 复杂任务检索时，官方页面不在首屏',val:'① 3.58 vs 4.42',desc:'CANN 有 12 个任务需要二次检索，CUDA 为 5 个；差距集中在自定义算子、动态 shape、注册集成、多卡通信和跨芯片迁移。',icon:'target',sel:'tr[data-side="cann"] [data-col="0"]',ref:'tr[data-side="cuda"] [data-col="0"]',ring:'tr[data-side="cann"] [data-col="0"]',demo:`<div class="qb"><i></i><i></i><i></i><span>任务词 → 首次搜索</span></div><div class="qd"><div><span class="muted">CANN</span> <span class="bad">12 个任务需换词再搜</span></div><div style="margin-top:4px"><span class="muted">CUDA</span> <span class="ok">5 个任务需二次检索</span></div></div>`},
         {k:'cost',split:true,title:'问题 8 · 检索成本高',val:'算子 / 容器 / 注册集成 = 1',desc:'多数任务成本正常，少数任务抓取失败后要多次换词、换地址和重试，响应变慢且证据不稳。',icon:'brain',sel:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',ring:'[data-task="D"].task, [data-task="K"].task, [data-task="O"].task, tr[data-task="D"][data-side="cann"] [data-col="7"], tr[data-task="K"][data-side="cann"] [data-col="7"], tr[data-task="O"][data-side="cann"] [data-col="7"]',demo:`<div class="qd"><svg viewBox="0 0 200 42" preserveAspectRatio="none"><polyline points="0,34 30,32 60,33 90,7 120,32 150,31 200,33" fill="none" stroke="#E5484D" stroke-width="2"/><circle cx="90" cy="7" r="3" fill="#E5484D"/></svg></div>`}
       ];
       function iconSvg(type){
@@ -2218,7 +2218,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <!-- 3c 灰底：CUDA vs CANN 问题对 -->
 
 
-  <!-- 灰底：opknow19 卡1（iframe 嵌原卡，沿用 demo 样式） -->
+  <!-- 内容改造：按知识资产层 → 机器理解层 → 检索与引用层排列 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
@@ -2229,85 +2229,75 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=1" title="opknow19 卡1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>版本体系混乱</b>：把“版本散乱”收敛到首选网址、当前推荐版和配套查询。</span></div></div>
   </section>
-  <!-- 新增：搜索可发现性独立结论，回应矩阵①列的系统性差距 -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容改造做法 2：让任务词的检索直达官方页面</span></div>
-        <div class="subttl">改造方向 · 「2/8 搜索可发现性」<span class="layer-tag search">金字塔：检索与引用层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 2：错误码一码一页，提供排查路径</span></div>
+        <div class="subttl">改造方向 · 「2/8 错误码」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
       <div class="head-r">16/ 内容改造做法 · 2</div>
     </div>
-    <div class="body-area">
-      <iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2：搜索可发现性" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
-      <div class="issue-map"><span class="im-tag">改造目标</span><span><b>复杂任务检索时，官方页面不在首屏</b>：让开发者和 AI 都能以任务词更早命中官方当前答案。</span></div>
-    </div>
+    <div class="body-area"><iframe data-src="ux19-embed.html?card=3" title="opknow19 卡3：错误码" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>错误码正文质量低，无法解决问题</b>：错误码需要从“能搜到页面”推进到“能定位、能验证”。</span></div></div>
   </section>
-  <!-- 灰底：opknow19 卡2（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容改造做法 3：错误码一码一页，提供排查路径</span></div>
-        <div class="subttl">改造方向 · 「3/8 错误码」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 3：建立多平台第三方互证</span></div>
+        <div class="subttl">改造方向 · 「3/8 第三方生态」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
       <div class="head-r">17/ 内容改造做法 · 3</div>
     </div>
-    <div class="body-area"><iframe data-src="ux19-embed.html?card=3" title="opknow19 卡3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>错误码正文质量低，无法解决问题</b>：错误码需要从“能搜到页面”推进到“能定位、能验证”。</span></div></div>
+    <div class="body-area"><iframe data-src="ux19-embed.html?card=7" title="opknow19 卡7：第三方生态" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>第三方来源少，难以互证</b>：让官方论坛、技术博客、GitCode 和英文社区形成多平台互证。</span></div></div>
   </section>
-  <!-- 灰底：opknow19 卡4（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容改造做法 4：提供面向 AI 的机器可读入口</span></div>
-        <div class="subttl">改造方向 · 「4/8 机器可读出口」<span class="layer-tag search">金字塔：检索与引用层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 4：用端到端专题交付复杂任务</span></div>
+        <div class="subttl">改造方向 · 「4/8 高难度任务专题」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">17/ 内容改造做法 · 4</div>
+      <div class="head-r">18/ 内容改造做法 · 4</div>
     </div>
-    <div class="body-area"><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>官方操作教程正文抓不到、检索成本高</b>：给 Agent 稳定入口，减少重复检索和凭记忆补全。</span></div></div>
+    <div class="body-area"><iframe data-src="ux19-embed.html?card=8" title="opknow19 卡8：任务专题" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>复杂任务的可用性更低</b>：把自定义算子、错误码、动态 shape 从分散文档整理成可验证、可复现的任务包。</span></div></div>
   </section>
-  <!-- 灰底：opknow19 卡5（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容改造做法 5：用页面结构保障 AI 可读</span></div>
-        <div class="subttl">改造方向 · 「5/8 页面结构」<span class="layer-tag machine">金字塔：机器理解层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 5：建设可被模型吸收的知识供给</span></div>
+        <div class="subttl">改造方向 · 「5/8 语料供给」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">18/ 内容改造做法 · 5</div>
+      <div class="head-r">19/ 内容改造做法 · 5</div>
     </div>
-    <div class="body-area"><div class="msg-alert"><span class="msg-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span>旻硕详细展开<b>AI可抓取性研究</b></span></div><iframe data-src="ux19-embed.html?card=6" title="opknow19 卡6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>官方操作教程正文抓不到、错误码正文质量低</b>：页面结构要同时支持机器抓取、代码复现和上下文引用。</span></div></div>
+    <div class="body-area"><iframe data-src="ux19-embed.html?card=9" title="opknow19 卡9：语料供给" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>AI 对昇腾知识积累不足、第三方来源少</b>：面向下一代模型补充可训练、可引用、可验证的语料供给。</span></div></div>
   </section>
-  <!-- 灰底：opknow19 卡6（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容改造做法 6：建立多平台第三方互证</span></div>
-        <div class="subttl">改造方向 · 「6/8 第三方生态」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 6：用页面结构保障 AI 可读</span></div>
+        <div class="subttl">改造方向 · 「6/8 页面结构」<span class="layer-tag machine">金字塔：机器理解层</span></div>
       </div>
-      <div class="head-r">19/ 内容改造做法 · 6</div>
+      <div class="head-r">20/ 内容改造做法 · 6</div>
     </div>
-    <div class="body-area"><iframe data-src="ux19-embed.html?card=7" title="opknow19 卡7" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>第三方来源少，难以互证</b>：让官方论坛、技术博客、GitCode 和英文社区形成多平台互证。</span></div></div>
+    <div class="body-area"><div class="msg-alert"><span class="msg-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span>旻硕详细展开<b>AI可抓取性研究</b></span></div><iframe data-src="ux19-embed.html?card=6" title="opknow19 卡6：页面结构" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>官方操作教程正文抓不到</b>：页面结构要同时支持机器抓取、代码复现和上下文引用。</span></div></div>
   </section>
-  <!-- 灰底：opknow19 卡7（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容改造做法 7：用端到端专题交付复杂任务</span></div>
-        <div class="subttl">改造方向 · 「7/8 高难度任务专题」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 7：让任务词的检索直达官方页面</span></div>
+        <div class="subttl">改造方向 · 「7/8 搜索可发现性」<span class="layer-tag search">金字塔：检索与引用层</span></div>
       </div>
-      <div class="head-r">20/ 内容改造做法 · 7</div>
+      <div class="head-r">21/ 内容改造做法 · 7</div>
     </div>
-    <div class="body-area"><iframe data-src="ux19-embed.html?card=8" title="opknow19 卡8" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>复杂任务的可用性更低</b>：把自定义算子、错误码、动态 shape 从分散文档整理成可验证、可复现的任务包。</span></div></div>
+    <div class="body-area"><iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2：搜索可发现性" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>复杂任务检索时，官方页面不在首屏</b>：让开发者和 AI 都能以任务词更早命中官方当前答案。</span></div></div>
   </section>
-  <!-- 灰底：opknow19 卡8（iframe 嵌原卡，沿用 demo 样式） -->
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容改造做法 8：建设可被模型吸收的知识供给</span></div>
-        <div class="subttl">改造方向 · 「8/8 语料供给」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 8：提供面向 AI 的机器可读入口</span></div>
+        <div class="subttl">改造方向 · 「8/8 机器可读出口」<span class="layer-tag search">金字塔：检索与引用层</span></div>
       </div>
-      <div class="head-r">21/ 内容改造做法 · 8</div>
+      <div class="head-r">22/ 内容改造做法 · 8</div>
     </div>
-    <div class="body-area"><iframe data-src="ux19-embed.html?card=9" title="opknow19 卡9" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>AI 对昇腾知识积累不足、第三方来源少</b>：面向下一代模型补充可训练、可引用、可验证的语料供给。</span></div></div>
+    <div class="body-area"><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5：机器可读出口" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>检索成本高</b>：给 Agent 稳定的机器可读入口，减少逐页抓取、换词和重试。</span></div></div>
   </section>
 
   <!-- 7a 灰底：人机协同时序图（独立一页） -->

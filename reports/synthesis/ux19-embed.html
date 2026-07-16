@@ -329,7 +329,7 @@ a.hit:hover{text-decoration:underline;color:#444}
 
   <div class="card uxcard">
     <div class="who">优先覆盖复杂任务</div>
-    <h3>2. 让任务词的检索直达官方页面</h3>
+    <h3>7. 让任务词的检索直达官方页面</h3>
     <ul class="tight">
       <li>稳定网址绑定当前版本，任务词直达官方教程。</li>
       <li>标题、摘要和英文入口覆盖核心任务词。</li>
@@ -344,7 +344,7 @@ a.hit:hover{text-decoration:underline;color:#444}
 
   <div class="card uxcard">
     <div class="who">错误码内容质量</div>
-    <h3>3. 错误码一码一页：为每个错误码建独立的排查页</h3>
+    <h3>2. 错误码一码一页：为每个错误码建独立的排查页</h3>
     <ul class="tight">
       <li>每个错误码提供独立页：触发条件、排查步骤与修复样例。</li>
       <li>报错信息直接链接对应页面，便于定位与复测。</li>
@@ -419,7 +419,7 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
 
   <div class="card uxcard">
     <div class="who">面向 AI 的统一入口</div>
-    <h3>4. 提供机器可读出口：llms.txt、Markdown 导出、结构化 API 索引</h3>
+    <h3>8. 提供机器可读出口：llms.txt、Markdown 导出、结构化 API 索引</h3>
     <ul class="tight">
       <li>提供 <code>llms.txt</code>、Markdown 查看与结构化 API 索引。</li>
       <li>让 AI 一次获取任务入口、版本与接口信息，减少逐页抓取。</li>
@@ -452,23 +452,24 @@ NeMo / NIM / Jetson → llms.txt
 
   <div class="card uxcard">
     <div class="who">页面发布规范</div>
-    <h3>5. 面向 AI 抓取的页面组织方式</h3>
+    <h3>6. 面向 AI 抓取的页面组织方式</h3>
     <ul class="tight">
       <li>主路径正文、代码和表格进入首屏 HTML，不依赖脚本渲染。</li>
       <li>发布前无脚本抓取，校验版本、命令、参数表与下一步。</li>
     </ul>
         <div class="demo">
-      <div class="dnote">这页要证明的不是“某个技术方案”，而是：<b>页面的视觉结构</b>和 <b>Agent 能读取到的 HTML 结构</b>可能完全不同。验收要看右侧“无脚本抓取结果”，而不是只看浏览器截图。</div>
+      <div class="dnote">浏览器渲染结果与 <b>Agent 实际读取的 HTML</b> 可能不同。验收应以无脚本抓取结果为准，确认正文、代码和参数表均可读取。</div>
       <div class="duo">
         <div class="bad">
-          <div class="duolab"><span class="duo-state before">Before</span>人眼看到完整页面</div>
-          <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">文档页浏览器渲染结果</span></div>
+          <div class="duolab"><span class="duo-state before">Before</span>无脚本抓取仅返回页面骨架</div>
+          <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">Agent 无脚本抓取结果</span></div>
           <div class="bbody">
-            <b>自定义算子开发流程</b>
-            <p style="margin:7px 0;color:#555">页面上有步骤、命令、参数表、版本切换器，开发者肉眼能继续读。</p>
+            <pre class="cmd">&lt;title&gt;自定义算子开发流程&lt;/title&gt;
+&lt;div id="app"&gt;&lt;/div&gt;
+&lt;script src="/assets/docs.js"&gt;&lt;/script&gt;</pre>
             <div class="cov" style="margin-top:8px">
-              <div class="covrow"><span class="pf">视觉层</span><span class="st ok">有标题 / 有步骤 / 有代码</span></div>
-              <div class="covrow"><span class="pf">真实问题</span><span class="st no">内容由脚本渲染，抓取时可能不存在</span></div>
+              <div class="covrow"><span class="pf">页面骨架</span><span class="st mid">仅标题与脚本入口</span></div>
+              <div class="covrow"><span class="pf">核心正文</span><span class="st no">步骤 / 命令 / 参数表均缺失</span></div>
             </div>
           </div></div>
         </div>
@@ -491,7 +492,7 @@ NeMo / NIM / Jetson → llms.txt
 
   <div class="card uxcard">
     <div class="who">第三方多平台互证</div>
-    <h3>6. 扶持第三方生态：从单一来源到多平台互证</h3>
+    <h3>3. 扶持第三方生态：从单一来源到多平台互证</h3>
     <ul class="tight">
       <li>官方博客、论坛与外部技术社区同步发布，避免单一平台转载。</li>
       <li>优先覆盖算子、动态 shape 与报错案例；内容注明版本、日期和命令。</li>
@@ -520,7 +521,7 @@ NeMo / NIM / Jetson → llms.txt
 
   <div class="card uxcard">
     <div class="who">覆盖自定义算子、错误码与动态 shape</div>
-    <h3>7. 高难度任务需要端到端场景专题，而不是分散在多页文档里</h3>
+    <h3>4. 高难度任务需要端到端场景专题，而不是分散在多页文档里</h3>
     <ul class="tight">
       <li>按真实任务组织内容，而非分散发布页面。</li>
       <li>一个任务包覆盖前置条件、完整步骤、可复制代码、验证输出与常见报错。</li>
@@ -555,7 +556,7 @@ NeMo / NIM / Jetson → llms.txt
 
   <div class="card uxcard">
     <div class="who">面向下一代模型的知识供给</div>
-    <h3>8. 面向下一代模型的语料供给：官方与生态需共同支撑</h3>
+    <h3>5. 面向下一代模型的语料供给：官方与生态需共同支撑</h3>
     <ul class="tight">
       <li>关键内容同步到公开 Git 仓与 Markdown，提供英文版和可运行样例。</li>
       <li>将高质量问答沉淀为 FAQ 与案例，并标注版本、芯片和日期。</li>
