@@ -656,9 +656,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .kp-stage{position:relative;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
       .kp-stage:before{content:"";position:absolute;left:8%;right:5%;bottom:8%;height:50%;background:radial-gradient(72% 78% at 42% 100%,rgba(91,91,214,.12),rgba(124,58,237,.045) 52%,transparent 78%);filter:blur(4px);pointer-events:none}
       .kp-pyramid{position:relative;z-index:1;width:min(96%,760px);height:76%;display:flex;align-items:center;justify-content:center}
-      .kp-pyramid svg{display:block;width:100%;height:100%;overflow:visible}.kp-pyramid .kp-num{font-family:'JetBrains Mono';font-size:18px;font-weight:900;fill:#7D8798;letter-spacing:.08em}.kp-pyramid .kp-title{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:22px;font-weight:900;fill:#fff}.kp-pyramid .kp-desc{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:14px;font-weight:600;fill:rgba(255,255,255,.84)}
+      .kp-pyramid svg{display:block;width:100%;height:100%;overflow:visible}.kp-pyramid .kp-num{font-family:'JetBrains Mono';font-size:18px;font-weight:900;fill:#7D8798;letter-spacing:.08em}.kp-pyramid .kp-title{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:22px;font-weight:900;fill:#283543}.kp-pyramid .kp-desc{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:14px;font-weight:600;fill:#536272}
       .kp-side{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.kp-side-lead{padding:1.25vh 1.1vw 1.35vh;border-radius:13px;background:var(--g-ink);color:#fff;box-shadow:0 16px 34px -24px rgba(20,23,28,.62),inset 0 1px 0 rgba(255,255,255,.18)}.kp-side-lead b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950}.kp-side-lead span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.43;color:rgba(255,255,255,.76)}
-      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:flex;align-items:flex-start;gap:.68vw;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row.search .kp-dot{background:#2F91B7}.kp-row.machine .kp-dot{background:#5B63D6}.kp-row.asset .kp-dot{background:#5361B6}
+      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:flex;align-items:flex-start;gap:.68vw;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row.search .kp-dot{background:#BDE7EE;color:#237A8E}.kp-row.machine .kp-dot{background:#DDD0F7;color:#7152A8}.kp-row.asset .kp-dot{background:#C9D6F6;color:#4769AD}
       .kp-chips{display:flex;flex-wrap:wrap;gap:.38vw;margin-top:.48vh}.kp-chips span{display:inline-flex;align-items:center;min-height:23px;border-radius:999px;padding:.24vh .55vw;background:#FFF5F5;border:1px solid rgba(232,70,86,.28);color:#B93644;font-size:var(--fs-sm);line-height:1.2;font-weight:800}
       .kp-evidence{border-radius:12px;padding:1.05vh .95vw;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.16);font-size:var(--fs-body);line-height:1.45;color:#4E586A}.kp-evidence b{font-weight:950;color:#252A35}
     </style>
@@ -668,21 +668,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <svg viewBox="0 0 820 520" role="img" aria-label="知识资产层、机器理解层、检索与引用三层问题金字塔">
             <defs><filter id="kpShadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#25131A" flood-opacity=".16"/></filter></defs>
             <g filter="url(#kpShadow)">
-              <polygon points="260,40 178,160 342,160" fill="#2F91B7"/>
-              <polygon points="260,40 342,160 260,160" fill="#216F92"/>
-              <polygon points="160,176 360,176 420,292 100,292" fill="#5B63D6"/>
-              <polygon points="260,176 360,176 420,292 260,292" fill="#4149B1"/>
-              <polygon points="76,310 444,310 518,446 0,446" fill="#5361B6"/>
-              <polygon points="260,310 444,310 518,446 260,446" fill="#3B478F"/>
+              <polygon points="260,40 178,160 342,160" fill="#BDE7EE"/>
+              <polygon points="260,40 342,160 260,160" fill="#94D2E0"/>
+              <polygon points="160,176 360,176 420,292 100,292" fill="#DDD0F7"/>
+              <polygon points="260,176 360,176 420,292 260,292" fill="#BCA8E7"/>
+              <polygon points="76,310 444,310 518,446 0,446" fill="#C9D6F6"/>
+              <polygon points="260,310 444,310 518,446 260,446" fill="#A9BCEB"/>
             </g>
-            <text class="kp-num" x="128" y="121">03</text><path d="M352 99H412" stroke="#2F91B7" stroke-width="2"/>
-            <rect x="424" y="62" width="334" height="76" rx="0" fill="#2F91B7"/><path d="M758 62V138L790 100Z" fill="#216F92"/>
+            <text class="kp-num" x="128" y="121">03</text><path d="M352 99H412" stroke="#6BB8C9" stroke-width="2"/>
+            <rect x="424" y="62" width="334" height="76" rx="0" fill="#BDE7EE"/><path d="M758 62V138L790 100Z" fill="#94D2E0"/>
             <text class="kp-title" x="448" y="91">检索与引用</text><text class="kp-desc" x="448" y="115">复杂任务检索时，官方页面不在首屏</text>
-            <text class="kp-num" x="112" y="250">02</text><path d="M430 232H492" stroke="#5B63D6" stroke-width="2"/>
-            <rect x="504" y="194" width="286" height="76" rx="0" fill="#5B63D6"/><path d="M790 194V270L818 232Z" fill="#4149B1"/>
+            <text class="kp-num" x="112" y="250">02</text><path d="M430 232H492" stroke="#9B80D2" stroke-width="2"/>
+            <rect x="504" y="194" width="286" height="76" rx="0" fill="#DDD0F7"/><path d="M790 194V270L818 232Z" fill="#BCA8E7"/>
             <text class="kp-title" x="528" y="223">机器理解层</text><text class="kp-desc" x="528" y="247">找到页面，也未必读懂内容</text>
-            <text class="kp-num" x="48" y="390">01</text><path d="M530 371H570" stroke="#5361B6" stroke-width="2"/>
-            <rect x="582" y="333" width="208" height="76" rx="0" fill="#5361B6"/><path d="M790 333V409L818 371Z" fill="#3B478F"/>
+            <text class="kp-num" x="48" y="390">01</text><path d="M530 371H570" stroke="#7E9DD8" stroke-width="2"/>
+            <rect x="582" y="333" width="208" height="76" rx="0" fill="#C9D6F6"/><path d="M790 333V409L818 371Z" fill="#A9BCEB"/>
             <text class="kp-title" x="606" y="362">知识资产层</text><text class="kp-desc" x="606" y="386">版本、错误码与专题知识不完整</text>
           </svg>
         </div>
@@ -704,55 +704,48 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">研究全貌：两类用户、两组实测，共同定位昇腾社区可用性问题</span></div>
-        <div class="subttl">研究概览 · 「覆盖范围 → 分析方法 → 问题产出」</div>
+        <div class="subttl">研究概览 · 研究对象、范围、方法与产出</div>
       </div>
       <div class="head-r">05/ 研究全貌</div>
     </div>
     <style>
-      .research-map-slide .body-area{justify-content:stretch}
-      .research-map{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:.84fr 42px 1.1fr 42px 1.02fr 42px .9fr;align-items:stretch;gap:.45vw}
-      .research-map:before{content:"";position:absolute;z-index:0;left:5%;right:4%;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(91,91,214,.26) 8%,rgba(91,91,214,.26) 92%,transparent)}
-      .rm-stage{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.1vh}
-      .rm-stage-head{display:flex;align-items:center;gap:.55vw;margin-bottom:.15vh;color:var(--ink-3);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-      .rm-stage-head i{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;background:#252B35;font-style:normal;font-size:10px;letter-spacing:0}
-      .rm-node{position:relative;overflow:hidden;border:1px solid rgba(47,61,99,.13);border-radius:12px;background:rgba(255,255,255,.62);box-shadow:0 14px 28px -24px rgba(30,40,70,.38),inset 0 1px 0 rgba(255,255,255,.9);padding:1.2vh .9vw;min-height:0}
-      .rm-node:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--rm,#5B5BD6)}
-      .rm-node b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950;color:var(--ink)}
-      .rm-node span{display:block;margin-top:.38vh;font-size:var(--fs-sm);line-height:1.4;color:var(--ink-2)}
-      .rm-node .rm-number{margin-top:.65vh;font-family:'JetBrains Mono';font-size:clamp(20px,1.75vw,29px);line-height:1;font-weight:950;color:var(--rm,#5B5BD6)}
-      .rm-node .rm-number small{display:inline;margin-left:.18em;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:var(--fs-sm);font-weight:800;color:var(--ink-2)}
-      .rm-person{display:grid;grid-template-columns:30px 1fr;align-items:center;gap:.65vw}.rm-person i{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--rm,#5B5BD6) 12%,white);color:var(--rm,#5B5BD6)}.rm-person i svg{width:17px;height:17px}.rm-person b{font-size:var(--fs-body)}
-      .rm-arrow{position:relative;z-index:1;align-self:center;height:34px;display:flex;align-items:center;justify-content:center}.rm-arrow:before{content:"";position:absolute;left:0;right:0;height:2px;background:#B9C0CD}.rm-arrow:after{content:"";position:absolute;right:0;border-left:8px solid #788393;border-top:5px solid transparent;border-bottom:5px solid transparent}.rm-arrow span{position:relative;z-index:1;padding:.28vh .35vw;border-radius:999px;background:var(--paper);font-size:var(--fs-xs);font-weight:800;color:#7A8494;white-space:nowrap}
-      .rm-stage.scope .rm-node:first-of-type{--rm:#5B5BD6}.rm-stage.scope .rm-node:last-of-type{--rm:#23A06A}.rm-stage.methods .rm-node:first-of-type{--rm:#38A8B8}.rm-stage.methods .rm-node:last-of-type{--rm:#5B5BD6}.rm-stage.output .rm-node{--rm:#252B35;background:linear-gradient(145deg,#2A303A,#1B1F26);border-color:rgba(255,255,255,.12);box-shadow:0 18px 36px -24px rgba(18,22,28,.8),inset 0 1px 0 rgba(255,255,255,.16)}.rm-stage.output .rm-node b{color:#fff}.rm-stage.output .rm-node span{color:rgba(255,255,255,.72)}.rm-stage.output .rm-node .rm-number{color:#fff}
-      .rm-method{display:flex;align-items:center;gap:.55vw}.rm-method .rm-mini{width:46px;height:31px;flex:none;border:1px solid color-mix(in srgb,var(--rm,#5B5BD6) 30%,white);border-radius:7px;background:color-mix(in srgb,var(--rm,#5B5BD6) 8%,white);position:relative;overflow:hidden}.rm-method .rm-mini:before,.rm-method .rm-mini:after{content:"";position:absolute;left:8px;right:8px;height:2px;background:var(--rm,#5B5BD6);opacity:.75}.rm-method .rm-mini:before{top:9px;box-shadow:0 7px 0 var(--rm,#5B5BD6)}.rm-method .rm-mini:after{top:23px;left:20px;right:8px}.rm-method b{font-size:var(--fs-body)}
-      .rm-output-list{display:flex;gap:.42vw;flex-wrap:wrap;margin-top:.72vh}.rm-output-list span{display:inline-flex!important;margin:0!important;min-height:22px;align-items:center;padding:.2vh .5vw;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.86)!important;font-size:var(--fs-xs)!important;font-weight:800;line-height:1.2}
-      .rm-foot{position:relative;z-index:1;grid-column:1/-1;align-self:end;margin:0 7%;padding:1vh 1.05vw;border-radius:12px;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.15);font-size:var(--fs-body);line-height:1.46;color:var(--ink-2);text-align:center}.rm-foot b{color:var(--ink);font-weight:950}
+      .research-map-slide .body-area{justify-content:center}
+      .research-map{width:min(94%,1320px);margin:auto 0;display:grid;gap:.9vw;grid-auto-rows:auto}
+      .rm-row{display:grid;grid-template-columns:82px minmax(0,1fr);gap:1vw;align-items:stretch;min-height:0}
+      .rm-label{display:flex;flex-direction:column;justify-content:center;gap:.3vh;color:var(--ink-3)}
+      .rm-label b{font-size:var(--fs-sm);line-height:1.2;font-weight:950;color:var(--ink)}
+      .rm-label span{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase}
+      .rm-cells{display:flex;align-items:stretch;gap:.9vw;min-width:0}
+      .rm-band{--rm:#5B5BD6;position:relative;min-width:0;overflow:hidden;flex:1;border:1px solid rgba(255,255,255,.78);border-radius:14px;background:rgba(255,255,255,.52);box-shadow:0 8px 20px -16px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.92);padding:1.15vh 1vw;display:flex;flex-direction:column;justify-content:center;gap:.5vh}
+      .rm-band:after{content:"";position:absolute;width:44%;height:110%;right:-15%;top:-45%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--rm) 18%,transparent),transparent);filter:blur(12px);pointer-events:none}
+      .rm-band>*{position:relative;z-index:1}.rm-band b{display:block;font-size:var(--fs-h3);line-height:1.2;font-weight:950;color:var(--ink)}.rm-band p{margin:0;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
+      .rm-band.top{min-height:10.5vh;align-items:center;text-align:center;background:rgba(255,255,255,.62)}.rm-band.top b{font-size:var(--fs-h2)}.rm-band.top b em{font-style:normal;background:linear-gradient(100deg,#2F91B7,#7152A8,#4769AD);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+      .rm-band.scope-ai{--rm:#5B63D6}.rm-band.scope-dev{--rm:#38A8B8}.rm-band.method-seq{--rm:#7152A8}.rm-band.method-score{--rm:#2F91B7}.rm-band.person-ai{--rm:#5B63D6}.rm-band.person-dev{--rm:#4769AD}
+      .rm-number{font-family:'JetBrains Mono';font-size:clamp(21px,1.8vw,30px);line-height:1;font-weight:950;color:var(--rm);margin-bottom:.12vh}.rm-number small{margin-left:.2em;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:var(--fs-sm);font-weight:800;color:var(--ink-2)}
+      .rm-person{display:flex;align-items:center;gap:.65vw}.rm-person i{width:31px;height:31px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--rm) 12%,white);color:var(--rm)}.rm-person i svg{width:17px;height:17px}.rm-person b{font-size:var(--fs-body)}
+      .rm-method{display:flex;align-items:center;gap:.65vw}.rm-mini{position:relative;flex:0 0 42px;height:29px;border-radius:7px;border:1px solid color-mix(in srgb,var(--rm) 22%,white);background:color-mix(in srgb,var(--rm) 7%,white);overflow:hidden}.rm-mini:before,.rm-mini:after{content:"";position:absolute;left:8px;right:8px;height:2px;background:var(--rm);opacity:.68}.rm-mini:before{top:9px;box-shadow:0 7px 0 var(--rm)}.rm-mini:after{top:22px;left:19px}
+      .rm-chips{display:flex;justify-content:center;gap:.48vw;flex-wrap:wrap;margin-top:.2vh}.rm-chips span{display:inline-flex;align-items:center;min-height:23px;padding:.2vh .55vw;border-radius:999px;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.15);color:#4F5B70;font-size:var(--fs-xs);font-weight:850}.rm-chips span:nth-child(2){background:rgba(47,145,183,.09);border-color:rgba(47,145,183,.17)}
+      .rm-foot{margin:1.1vh 7% 0;padding:1vh 1.05vw;border-radius:12px;background:rgba(91,91,214,.07);border:1px solid rgba(91,91,214,.14);font-size:var(--fs-body);line-height:1.46;color:var(--ink-2);text-align:center}.rm-foot b{color:var(--ink);font-weight:950}
     </style>
     <div class="body-area">
       <div class="research-map">
-        <div class="rm-stage people">
-          <div class="rm-stage-head"><i>01</i>研究对象</div>
-          <div class="rm-node" style="--rm:#5B5BD6"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><span>检索、抓取、判断并组织答案</span></div></div></div>
-          <div class="rm-node" style="--rm:#252B35"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><span>在开发任务中查阅、复核与决策</span></div></div></div>
+        <div class="rm-row">
+          <div class="rm-label"><b>研究产出</b><span>Output · 04</span></div>
+          <div class="rm-cells"><div class="rm-band top"><b><em>三层问题框架</em>，收敛为 8 项内容改造方向</b><p>知识资产、机器理解、检索与引用共同决定昇腾社区能否支持可靠作答与任务完成。</p><div class="rm-chips"><span>3 层问题</span><span>8 项改造方向</span></div></div></div>
         </div>
-        <div class="rm-arrow"><span>实测</span></div>
-        <div class="rm-stage scope">
-          <div class="rm-stage-head"><i>02</i>覆盖范围</div>
-          <div class="rm-node"><b>AI 侧内容可用性</b><div class="rm-number">26<small>项开发任务</small></div><span>CANN 与 CUDA 双栈对照；记录搜索、抓取与作答证据。</span></div>
-          <div class="rm-node"><b>开发者侧基础体验</b><div class="rm-number">7<small>个生命周期阶段</small></div><span>24 个触点实跑；覆盖入口、上手、开发、调试与交付。</span></div>
+        <div class="rm-row">
+          <div class="rm-label"><b>分析方法</b><span>Method · 03</span></div>
+          <div class="rm-cells"><div class="rm-band method-seq"><div class="rm-method"><span class="rm-mini"></span><div><b>人机协同时序图</b><p>定义任务中的知识往返、受阻与复核位置。</p></div></div></div><div class="rm-band method-score"><div class="rm-method"><span class="rm-mini"></span><div><b>可观测评分体系</b><p>衡量知识获取、内容质量、成本与任务完成。</p></div></div></div></div>
         </div>
-        <div class="rm-arrow"><span>建模</span></div>
-        <div class="rm-stage methods">
-          <div class="rm-stage-head"><i>03</i>分析方法</div>
-          <div class="rm-node"><div class="rm-method"><span class="rm-mini"></span><div><b>人机协同时序图</b><span>定义一次任务中的知识往返与受阻位置。</span></div></div></div>
-          <div class="rm-node"><div class="rm-method"><span class="rm-mini"></span><div><b>可观测评分体系</b><span>衡量知识获取、内容质量、成本与任务完成。</span></div></div></div>
+        <div class="rm-row">
+          <div class="rm-label"><b>实测范围</b><span>Scope · 02</span></div>
+          <div class="rm-cells"><div class="rm-band scope-ai"><b>AI 侧内容可用性</b><div class="rm-number">26<small>项开发任务</small></div><p>CANN 与 CUDA 双栈对照，记录搜索、抓取与作答证据。</p></div><div class="rm-band scope-dev"><b>开发者侧基础体验</b><div class="rm-number">7<small>个阶段 · 24 个触点</small></div><p>实跑入口、上手、开发、调试与交付全过程。</p></div></div>
         </div>
-        <div class="rm-arrow"><span>收敛</span></div>
-        <div class="rm-stage output">
-          <div class="rm-stage-head"><i>04</i>研究产出</div>
-          <div class="rm-node"><b>三层问题框架</b><span>知识资产、机器理解、检索与引用共同影响答案可靠性。</span><div class="rm-output-list"><span>3 层问题</span><span>8 项改造方向</span></div></div>
+        <div class="rm-row">
+          <div class="rm-label"><b>研究对象</b><span>Subject · 01</span></div>
+          <div class="rm-cells"><div class="rm-band person-ai"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><p>检索、抓取、判断并组织答案</p></div></div></div><div class="rm-band person-dev"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><p>在开发任务中查阅、复核与决策</p></div></div></div></div>
         </div>
-        <div class="rm-foot"><b>研究路径：</b>时序图定义研究对象，评分体系定义测量方法，实测证据收敛为内容改造方向。</div>
+        <div class="rm-foot"><b>研究路径：</b>从两类用户的真实任务出发，经由时序图和评分体系，形成可验证的问题判断与改造方向。</div>
       </div>
     </div>
   </section>
