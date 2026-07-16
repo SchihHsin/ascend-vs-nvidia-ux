@@ -1127,11 +1127,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
         .seq-compare{display:flex;flex-direction:column;gap:.9vh;min-height:0}
         .seq-why{border-radius:11px;background:var(--g-ink);color:#F3F5FA;padding:1.05vh .9vw;box-shadow:0 14px 28px -23px rgba(14,18,29,.72);display:flex;flex-direction:column;justify-content:center;min-width:0}.seq-why h3,.seq-how h3{margin:0;font-size:var(--fs-h3);line-height:1.2;font-weight:950}.seq-why h3{color:#fff}.seq-why p{margin:.42vh 0 .66vh;color:rgba(243,245,250,.76);font-size:var(--fs-sm);line-height:1.38}.seq-why-list{display:flex;flex-direction:column;gap:.58vh}.seq-why-list div{display:grid;grid-template-columns:16px minmax(0,1fr);gap:.42vw;align-items:start;font-size:var(--fs-sm);line-height:1.34;color:rgba(243,245,250,.84)}.seq-why-list i{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.13);color:#fff;font-style:normal;font-family:'JetBrains Mono';font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center}.seq-why-list b{color:#fff;font-weight:900}
         .seq-how{min-width:0;padding:0;display:flex;flex-direction:column;gap:.62vh}.seq-how h3{color:var(--ink)}.seq-how p{margin:.1vh 0 0;color:var(--ink-2);font-size:var(--fs-sm);line-height:1.33}.seq-method{display:grid;grid-template-columns:minmax(116px,.52fr) minmax(0,1.48fr);gap:.88vw;align-items:stretch;min-height:0}
-        .seq-taskchain{display:flex;flex-direction:column;align-items:stretch;gap:0;margin:0}.seq-taskchain span{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:.38vh .26vw;background:rgba(91,91,214,.07);color:#414B5C;text-align:center;font-size:var(--fs-xs);font-weight:850;line-height:1.15}.seq-taskchain span:first-child{border-radius:8px 8px 0 0}.seq-taskchain span:last-child{border-radius:0 0 8px 8px}.seq-taskchain span+span:before{content:"";position:absolute;top:-1px;left:22%;right:22%;height:1px;background:rgba(47,61,99,.17)}
-        .phase-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.42vh .52vw;padding:0}
-        .phase-item{position:relative;display:grid;grid-template-columns:25px minmax(0,1fr);gap:.38vw;align-items:start;min-height:0;padding:.46vh .44vw;background:rgba(255,255,255,.42);border:1px solid transparent;border-bottom-color:rgba(47,61,99,.12);cursor:pointer;transition:opacity .18s,background .18s,border-color .18s,box-shadow .18s}
-        .phase-item:nth-child(7){grid-column:1/-1}
-        .phase-map:has(.phase-item:hover) .phase-item,.phase-map:has(.phase-item:focus-visible) .phase-item,.phase-map.has-phase-focus .phase-item{opacity:.32}.phase-map:has(.phase-item:hover) .phase-item:hover,.phase-map:has(.phase-item:focus-visible) .phase-item:focus-visible,.phase-map.has-phase-focus .phase-item.is-active{opacity:1;background:rgba(255,255,255,.84);border-color:rgba(91,91,214,.24);box-shadow:0 10px 22px -20px rgba(36,42,60,.45);outline:none}
+        .seq-taskchain,.phase-map{display:grid;grid-template-rows:repeat(5,minmax(0,1fr));gap:.42vh;align-items:stretch;min-height:0}.seq-taskchain span{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;padding:.28vh .26vw;background:rgba(91,91,214,.07);color:#414B5C;text-align:center;font-size:var(--fs-xs);font-weight:850;line-height:1.15;cursor:pointer;transition:opacity .18s,background .18s,color .18s,box-shadow .18s}.seq-taskchain span:first-child{border-radius:8px 8px 0 0}.seq-taskchain span:last-child{border-radius:0 0 8px 8px}.seq-taskchain span+span:before{content:"";position:absolute;top:-1px;left:22%;right:22%;height:1px;background:rgba(47,61,99,.17)}.seq-method.has-phase-focus .seq-taskchain span,.seq-method.has-phase-focus .phase-row{opacity:.3}.seq-method.has-phase-focus .seq-taskchain span.is-active,.seq-method.has-phase-focus .phase-row.is-active{opacity:1}.seq-method.has-phase-focus .seq-taskchain span.is-active{background:#252B35;color:#fff;box-shadow:0 8px 18px -14px rgba(20,23,28,.72)}
+        .phase-map{padding:0}.phase-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.52vw;min-height:0}.phase-row.one{grid-template-columns:1fr}.phase-item{position:relative;display:grid;grid-template-columns:25px minmax(0,1fr);gap:.38vw;align-items:center;min-height:0;padding:.34vh .44vw;background:rgba(255,255,255,.42);border:1px solid transparent;border-bottom-color:rgba(47,61,99,.12);cursor:pointer;transition:opacity .18s,background .18s,border-color .18s,box-shadow .18s}
+        .seq-method.has-phase-focus .phase-item{opacity:.32}.seq-method.has-phase-focus .phase-row.is-active .phase-item{opacity:1;background:rgba(255,255,255,.84);border-color:rgba(91,91,214,.24);box-shadow:0 10px 22px -20px rgba(36,42,60,.45);outline:none}
         .phase-item .phase-no{width:22px;height:22px;border-radius:6px;background:#EEF1F7;color:#3D4654;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:10px;font-weight:950}
         .phase-item:nth-child(2) .phase-no{background:#EFEAF7;color:#5B4AB7}.phase-item:nth-child(3) .phase-no,.phase-item:nth-child(4) .phase-no{background:#E9F4F0;color:#19745B}.phase-item:nth-child(5) .phase-no{background:#FBF0E0;color:#A56217}.phase-item:nth-child(6) .phase-no{background:#E9F4F0;color:#19745B}.phase-item:nth-child(7) .phase-no{background:#E6EDF8;color:#2F5F9D}
         .phase-item b{display:block;font-size:var(--fs-sm);line-height:1.14;color:var(--ink);font-weight:950}.phase-item span{display:block;margin-top:.1vh;font-size:var(--fs-xs);line-height:1.2;color:var(--ink-2)}.phase-item small{display:none}
@@ -1143,14 +1141,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div style="flex:1;min-width:0;display:flex;align-items:center">
         <div class="seq-compare">
           <div class="seq-why"><h3>为什么不能直接挑五个问题打分</h3><p>开发者不是孤立地搜索问题，而是在完整任务中持续推进、受阻并核验。</p><div class="seq-why-list"><div><i>1</i><span><b>问题依赖前后条件</b><br>同一资料在不同阶段的可用性不同。</span></div><div><i>2</i><span><b>受阻位置决定影响</b><br>开发、编译或集成阶段的中断，后果并不相同。</span></div><div><i>3</i><span><b>任务必须来自真实过程</b><br>先还原完整旅程，才能抽取具有代表性的知识需求。</span></div></div></div>
-          <div class="seq-how"><div><h3>如何形成可实测的任务单元</h3><p>将完整开发过程按业务目标拆成七阶段，再从高频、关键的知识需求中抽取五项任务。</p></div><div class="seq-method"><div class="seq-taskchain" aria-label="完整任务的阶段链"><span>明确目标</span><span>开发实现</span><span>编译调试</span><span>框架集成</span><span>验证交付</span></div><div class="phase-map" aria-label="自定义算子开发的七个阶段">
-            <div class="phase-item" data-phase-focus="0" tabindex="0"><span class="phase-no">P1</span><div><b>立项与选型</b><span>明确目标与开发路径。</span></div></div>
-            <div class="phase-item" data-phase-focus="1" tabindex="0"><span class="phase-no">P2</span><div><b>写核函数</b><span>查教程并生成工程骨架。</span></div></div>
-            <div class="phase-item" data-phase-focus="2" tabindex="0"><span class="phase-no">P3</span><div><b>动态 shape / Tiling</b><span>确定切分与调优策略。</span></div></div>
-            <div class="phase-item" data-phase-focus="3" tabindex="0"><span class="phase-no">P4</span><div><b>编译与内存定位</b><span>部署并排查内存越界。</span></div></div>
-            <div class="phase-item" data-phase-focus="4" tabindex="0"><span class="phase-no">P5</span><div><b>框架注册与集成</b><span>接入 PyTorch 并验证扩展。</span></div></div>
-            <div class="phase-item" data-phase-focus="5" tabindex="0"><span class="phase-no">P6</span><div><b>精度验证与排查</b><span>逐层比对定位误差。</span></div></div>
-            <div class="phase-item" data-phase-focus="6" tabindex="0"><span class="phase-no">P7</span><div><b>交付</b><span>验收并交付可用算子。</span></div></div>
+          <div class="seq-how"><div><h3>如何形成可实测的任务单元</h3><p>将完整开发过程按业务目标拆成七阶段，再从高频、关键的知识需求中抽取五项任务。</p></div><div class="seq-method"><div class="seq-taskchain" aria-label="完整任务的阶段链"><span data-phase-group="0" tabindex="0">明确目标</span><span data-phase-group="1,2" tabindex="0">开发实现</span><span data-phase-group="3" tabindex="0">编译调试</span><span data-phase-group="4" tabindex="0">框架集成</span><span data-phase-group="5,6" tabindex="0">验证交付</span></div><div class="phase-map" aria-label="自定义算子开发的七个阶段">
+            <div class="phase-row one" data-phase-group="0"><div class="phase-item" data-phase-focus="0" tabindex="0"><span class="phase-no">P1</span><div><b>立项与选型</b><span>明确目标与开发路径。</span></div></div></div>
+            <div class="phase-row" data-phase-group="1,2"><div class="phase-item" data-phase-focus="1" tabindex="0"><span class="phase-no">P2</span><div><b>写核函数</b><span>查教程并生成工程骨架。</span></div></div><div class="phase-item" data-phase-focus="2" tabindex="0"><span class="phase-no">P3</span><div><b>动态 shape / Tiling</b><span>确定切分与调优策略。</span></div></div></div>
+            <div class="phase-row one" data-phase-group="3"><div class="phase-item" data-phase-focus="3" tabindex="0"><span class="phase-no">P4</span><div><b>编译与内存定位</b><span>部署并排查内存越界。</span></div></div></div>
+            <div class="phase-row one" data-phase-group="4"><div class="phase-item" data-phase-focus="4" tabindex="0"><span class="phase-no">P5</span><div><b>框架注册与集成</b><span>接入 PyTorch 并验证扩展。</span></div></div></div>
+            <div class="phase-row" data-phase-group="5,6"><div class="phase-item" data-phase-focus="5" tabindex="0"><span class="phase-no">P6</span><div><b>精度验证与排查</b><span>逐层比对定位误差。</span></div></div><div class="phase-item" data-phase-focus="6" tabindex="0"><span class="phase-no">P7</span><div><b>交付</b><span>验收并交付可用算子。</span></div></div></div>
           </div></div><div class="phase-outcome"><b>实测抽取：</b>P2–P6 对应写 kernel、Tiling、内存越界、注册集成与精度排查；以同一协议比较 CANN 与 CUDA。</div></div>
         </div>
       </div>
@@ -1693,8 +1689,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray copy-large">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">任务执行：基于同一开发任务用 CANN 与 CUDA 对比提问</span></div>
-        <div class="subttl">AI 侧 · 内容可用性 · 「问题编写」</div>
+        <div class="brand"><span class="ttl">对照问题：将 5 项知识需求转写为 CANN 与 CUDA 的同难度提问</span></div>
+        <div class="subttl">实测验证 · 「任务抽取 → 对照问题」</div>
       </div>
       <div class="head-r">12/ 问题对 · 对照设计</div>
     </div>
@@ -1916,8 +1912,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">可用性短板集中在深层算子任务：写算子最低，其余环节受版本、生态与模型先验共同影响</span></div>
-        <div class="subttl">AI 侧 · 内容可用性 · 「评估发现」</div>
+        <div class="brand"><span class="ttl">五项任务结果：写算子可用性最低，其余任务受版本、生态与模型先验影响</span></div>
+        <div class="subttl">实测验证 · 「对照问题 → 五项结果」</div>
       </div>
       <div class="head-r">13/ 矩阵评分 · 结果</div>
     </div>
@@ -1970,8 +1966,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray hmfull-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">全量矩阵：从 26 个任务中定位 7 个内容可用性问题</span></div>
-        <div class="subttl">AI 侧 · 内容可用性 · 「全量矩阵 → 7 个问题」</div>
+        <div class="brand"><span class="ttl">全量矩阵：从 26 个任务中定位 8 个内容可用性问题</span></div>
+        <div class="subttl">实测验证 · 「五项结果 → 全量问题定位」</div>
       </div>
       <div class="head-r">14/ AI · 全量矩阵</div>
     </div>
@@ -2226,10 +2222,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 1：统一版本入口与配套查询</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「1/8 版本入口」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 1：统一版本入口与配套查询</span></div>
+        <div class="subttl">改造方向 · 「1/8 版本入口」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">15/ 内容可用性结论 · 1</div>
+      <div class="head-r">15/ 内容改造做法 · 1</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=1" title="opknow19 卡1" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>版本体系混乱</b>：把“版本散乱”收敛到首选网址、当前推荐版和配套查询。</span></div></div>
   </section>
@@ -2237,10 +2233,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 2：让任务词的检索直达官方页面</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「2/8 搜索可发现性」<span class="layer-tag search">金字塔：检索与引用层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 2：让任务词的检索直达官方页面</span></div>
+        <div class="subttl">改造方向 · 「2/8 搜索可发现性」<span class="layer-tag search">金字塔：检索与引用层</span></div>
       </div>
-      <div class="head-r">16/ 内容可用性结论 · 2</div>
+      <div class="head-r">16/ 内容改造做法 · 2</div>
     </div>
     <div class="body-area">
       <iframe data-src="ux19-embed.html?card=2" title="opknow19 卡2：搜索可发现性" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -2251,10 +2247,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 3：错误码一码一页，提供排查路径</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「3/8 错误码」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 3：错误码一码一页，提供排查路径</span></div>
+        <div class="subttl">改造方向 · 「3/8 错误码」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">17/ 内容可用性结论 · 3</div>
+      <div class="head-r">17/ 内容改造做法 · 3</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=3" title="opknow19 卡3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>错误码正文质量低，无法解决问题</b>：错误码需要从“能搜到页面”推进到“能定位、能验证”。</span></div></div>
   </section>
@@ -2262,10 +2258,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 4：提供面向 AI 的机器可读入口</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「4/8 机器可读出口」<span class="layer-tag search">金字塔：检索与引用层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 4：提供面向 AI 的机器可读入口</span></div>
+        <div class="subttl">改造方向 · 「4/8 机器可读出口」<span class="layer-tag search">金字塔：检索与引用层</span></div>
       </div>
-      <div class="head-r">17/ 内容可用性结论 · 4</div>
+      <div class="head-r">17/ 内容改造做法 · 4</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=5" title="opknow19 卡5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>官方操作教程正文抓不到、检索成本高</b>：给 Agent 稳定入口，减少重复检索和凭记忆补全。</span></div></div>
   </section>
@@ -2273,10 +2269,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 5：用页面结构保障 AI 可读</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「5/8 页面结构」<span class="layer-tag machine">金字塔：机器理解层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 5：用页面结构保障 AI 可读</span></div>
+        <div class="subttl">改造方向 · 「5/8 页面结构」<span class="layer-tag machine">金字塔：机器理解层</span></div>
       </div>
-      <div class="head-r">18/ 内容可用性结论 · 5</div>
+      <div class="head-r">18/ 内容改造做法 · 5</div>
     </div>
     <div class="body-area"><div class="msg-alert"><span class="msg-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span>旻硕详细展开<b>AI可抓取性研究</b></span></div><iframe data-src="ux19-embed.html?card=6" title="opknow19 卡6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>官方操作教程正文抓不到、错误码正文质量低</b>：页面结构要同时支持机器抓取、代码复现和上下文引用。</span></div></div>
   </section>
@@ -2284,10 +2280,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 6：建立多平台第三方互证</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「6/8 第三方生态」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 6：建立多平台第三方互证</span></div>
+        <div class="subttl">改造方向 · 「6/8 第三方生态」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">19/ 内容可用性结论 · 6</div>
+      <div class="head-r">19/ 内容改造做法 · 6</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=7" title="opknow19 卡7" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>第三方来源少，难以互证</b>：让官方论坛、技术博客、GitCode 和英文社区形成多平台互证。</span></div></div>
   </section>
@@ -2295,10 +2291,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 7：用端到端专题交付复杂任务</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「7/8 高难度任务专题」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 7：用端到端专题交付复杂任务</span></div>
+        <div class="subttl">改造方向 · 「7/8 高难度任务专题」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">20/ 内容可用性结论 · 7</div>
+      <div class="head-r">20/ 内容改造做法 · 7</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=8" title="opknow19 卡8" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>复杂任务的可用性更低</b>：把自定义算子、错误码、动态 shape 从分散文档整理成可验证、可复现的任务包。</span></div></div>
   </section>
@@ -2306,10 +2302,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">内容可用性结论 8：建设可被模型吸收的知识供给</span></div>
-        <div class="subttl">AI 侧 · 内容可用性结论 · 「8/8 语料供给」<span class="layer-tag asset">金字塔：知识资产层</span></div>
+        <div class="brand"><span class="ttl">内容改造做法 8：建设可被模型吸收的知识供给</span></div>
+        <div class="subttl">改造方向 · 「8/8 语料供给」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">21/ 内容可用性结论 · 8</div>
+      <div class="head-r">21/ 内容改造做法 · 8</div>
     </div>
     <div class="body-area"><iframe data-src="ux19-embed.html?card=9" title="opknow19 卡9" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="issue-map"><span class="im-tag">改造目标</span><span><b>AI 对昇腾知识积累不足、第三方来源少</b>：面向下一代模型补充可训练、可引用、可验证的语料供给。</span></div></div>
   </section>
@@ -3421,21 +3417,29 @@ function initArchMetricFocus(){
   if(frame) frame.addEventListener('load',function(){send(current);});
 }
 function initPhaseFocus(){
-  document.querySelectorAll('.phase-map').forEach(function(map){
+  document.querySelectorAll('.seq-method').forEach(function(map){
     if(map.dataset.phaseReady)return;
     map.dataset.phaseReady='1';
     const slide=map.closest('.slide');
     const frame=slide&&slide.querySelector('iframe[src*="seq-d3"],iframe[data-src*="seq-d3"]');
     if(!slide||!frame)return;
     let activePhase=null;
-    function send(phase){
-      activePhase=phase;
-      map.classList.toggle('has-phase-focus',phase!==null&&phase!==undefined);
-      map.querySelectorAll('[data-phase-focus]').forEach(function(item){item.classList.toggle('is-active',Number(item.dataset.phaseFocus)===Number(phase));});
-      try{if(frame.contentWindow)frame.contentWindow.postMessage({__seqPhaseFocus:phase},'*');}catch(e){}
+    function phasesOf(value){
+      if(value===null||value===undefined||value==='')return null;
+      return (Array.isArray(value)?value:String(value).split(',')).map(Number).filter(function(n){return Number.isFinite(n);});
     }
-    map.querySelectorAll('[data-phase-focus]').forEach(function(item){
-      const phase=Number(item.dataset.phaseFocus);
+    function send(value){
+      activePhase=phasesOf(value);
+      map.classList.toggle('has-phase-focus',!!activePhase);
+      map.querySelectorAll('[data-phase-group]').forEach(function(item){
+        var own=phasesOf(item.dataset.phaseGroup)||[];
+        item.classList.toggle('is-active',!!activePhase&&own.length===activePhase.length&&own.every(function(p){return activePhase.indexOf(p)>=0;}));
+      });
+      map.querySelectorAll('[data-phase-focus]').forEach(function(item){item.classList.toggle('is-active',!!activePhase&&activePhase.indexOf(Number(item.dataset.phaseFocus))>=0);});
+      try{if(frame.contentWindow)frame.contentWindow.postMessage({__seqPhaseFocus:activePhase},'*');}catch(e){}
+    }
+    map.querySelectorAll('[data-phase-group]').forEach(function(item){
+      const phase=item.dataset.phaseGroup;
       item.addEventListener('mouseenter',function(){send(phase);});
       item.addEventListener('focusin',function(){send(phase);});
       item.addEventListener('click',function(){send(phase);});

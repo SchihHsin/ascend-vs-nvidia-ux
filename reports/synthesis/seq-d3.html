@@ -2078,14 +2078,15 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   window.__seqApplyHi=applyHi;
   function applyPhaseFocus(phase){
     var svgEl=document.getElementById('journey'); if(!svgEl)return;
+    var phases=(Array.isArray(phase)?phase:[phase]).map(Number);
     Array.prototype.forEach.call(svgEl.children,function(el){
-      var hit=String(el.getAttribute&&el.getAttribute('data-phase'))===String(phase);
+      var hit=phases.indexOf(Number(el.getAttribute&&el.getAttribute('data-phase')))>=0;
       var lane=el.getAttribute&&el.getAttribute('data-kind')==='lane';
       el.style.opacity=hit?'1':(lane?'.22':'.11');
       el.style.filter=hit?'drop-shadow(0 0 2px rgba(91,91,214,.26))':'';
     });
     var lbl=document.getElementById('sqLbl');
-    if(lbl)lbl.textContent='聚焦 · '+((PHASE[phase]&&PHASE[phase].n)||('P'+(Number(phase)+1)));
+    if(lbl)lbl.textContent='聚焦 · '+phases.map(function(p){return (PHASE[p]&&PHASE[p].n)||('P'+(p+1));}).join(' / ');
   }
   function applyMethodFocus(mode){
     var svgEl=document.getElementById('journey'); if(!svgEl)return;
@@ -2157,7 +2158,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     var d=e&&e.data;
     if(!d||!('__seqPhaseFocus' in d))return;
     var next=d.__seqPhaseFocus;
-    phaseFocus=(next===null||next===undefined||next==='')?null:Number(next);
+    phaseFocus=(next===null||next===undefined||next===''||(Array.isArray(next)&&!next.length))?null:(Array.isArray(next)?next.map(Number):Number(next));
     methodFocus=null; step=0; hoverMsg=null; pinnedMsg=null;
     applyHi();
   });
