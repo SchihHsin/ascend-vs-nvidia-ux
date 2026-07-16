@@ -1061,7 +1061,8 @@ body.embed .ux-right .demo{margin:0!important}
 body.embed .ux-right .dnote,body.embed .ux-right .note{display:none!important}
 /* 左栏文字层次:眉标(灰·次)→ 建议(放大·菱形标记·重点)→ NVIDIA 范本(callout)→ 为何优先(脚注),拉开间距不堆叠 */
 body.embed .ux-left>*{margin:0!important}
-body.embed .ux-left .who{font-size:13px!important;font-weight:700!important;color:var(--sub)!important;letter-spacing:.02em!important;line-height:1.5!important;margin-bottom:15px!important;padding-bottom:10px!important;border-bottom:1px solid var(--line)!important}
+/* Deck 外层已承担行动说明，嵌入态不再重复显示卡片眉标。 */
+body.embed .ux-left .who{display:none!important}
 body.embed .ux-left ul.tight{list-style:none!important;padding:0!important;margin:0 0 16px!important;display:flex!important;flex-direction:column!important;gap:14px!important;font-size:17px!important}
 body.embed .ux-left ul.tight li{margin:0!important;padding-left:22px!important;position:relative!important;line-height:1.52!important;color:var(--ink)!important}
 body.embed .ux-left ul.tight li::before{content:''!important;position:absolute!important;left:1px!important;top:.5em!important;width:8px!important;height:8px!important;border-radius:2px!important;background:var(--nv)!important;transform:rotate(45deg)!important}
