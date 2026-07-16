@@ -1055,14 +1055,15 @@ body.embed .wrap{padding:0 30px!important;max-width:none!important;margin:0!impo
 body.embed .uxcard{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0!important;max-width:none!important}
 body.embed .uxcard.ux-show{display:flex!important;flex-direction:column;justify-content:center;height:100vh}
 body.embed .uxcard.ux-show.ux-flex{flex-direction:row;gap:30px;align-items:center}
-body.embed .ux-left{flex:0 0 27%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0}
+body.embed .ux-left{flex:0 0 31%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0}
 body.embed .ux-right{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:0}
 body.embed .ux-right .demo{margin:0!important}
 body.embed .ux-right .dnote,body.embed .ux-right .note{display:none!important}
 /* 左栏文字层次:眉标(灰·次)→ 建议(放大·菱形标记·重点)→ NVIDIA 范本(callout)→ 为何优先(脚注),拉开间距不堆叠 */
 body.embed .ux-left>*{margin:0!important}
-/* Deck 外层已承担行动说明，嵌入态不再重复显示卡片眉标。 */
-body.embed .ux-left .who{display:none!important}
+/* 将原卡片眉标改成紧凑目标块，放在改造要点之前。 */
+body.embed .ux-left .who{display:block!important;order:-1;margin:0 0 14px!important;padding:12px 13px!important;border-radius:10px!important;background:linear-gradient(140deg,#22262F,#14171C)!important;color:#fff!important;font-size:15px!important;font-weight:900!important;line-height:1.4!important;box-shadow:0 14px 28px -23px rgba(20,23,28,.8)!important}
+body.embed .ux-left .who::before{content:'改造目标';display:block;margin-bottom:5px;color:rgba(255,255,255,.62);font-family:'JetBrains Mono';font-size:10px;font-weight:900;letter-spacing:.08em;line-height:1;text-transform:uppercase}
 body.embed .ux-left ul.tight{list-style:none!important;padding:0!important;margin:0 0 16px!important;display:flex!important;flex-direction:column!important;gap:14px!important;font-size:17px!important}
 body.embed .ux-left ul.tight li{margin:0!important;padding-left:22px!important;position:relative!important;line-height:1.52!important;color:var(--ink)!important}
 body.embed .ux-left ul.tight li::before{content:''!important;position:absolute!important;left:1px!important;top:.5em!important;width:8px!important;height:8px!important;border-radius:2px!important;background:var(--nv)!important;transform:rotate(45deg)!important}
@@ -1091,6 +1092,8 @@ body.embed .ux-right .serp-url,.ux-right .url{font-size:11.5px!important}
       el.style.display='';el=par;
     }
     t.style.display='';t.classList.add('ux-show');
+    var goal=p.get('goal')||'';
+    var who=t.querySelector('.who');if(goal&&who)who.textContent=goal;
     var h=t.querySelector('h3');if(h)h.style.display='none';
     if(!t.dataset.laid){
       t.dataset.laid='1';
