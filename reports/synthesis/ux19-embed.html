@@ -1064,6 +1064,8 @@ body.embed .ux-left>*{margin:0!important}
 /* 将原卡片眉标改成紧凑目标块，放在改造要点之前。 */
 body.embed .ux-left .who{display:block!important;order:-1;margin:0 0 14px!important;padding:12px 13px!important;border-radius:10px!important;background:linear-gradient(140deg,#22262F,#14171C)!important;color:#fff!important;font-size:15px!important;font-weight:900!important;line-height:1.4!important;box-shadow:0 14px 28px -23px rgba(20,23,28,.8)!important}
 body.embed .ux-left .who::before{content:'改造目标';display:block;margin-bottom:5px;color:rgba(255,255,255,.62);font-family:'JetBrains Mono';font-size:10px;font-weight:900;letter-spacing:.08em;line-height:1;text-transform:uppercase}
+body.embed .ux-left .ux-issue{order:-1;display:flex!important;align-items:center;gap:7px;margin:0 0 12px!important;font-size:13px!important;font-weight:850!important;line-height:1.35!important;color:#9B3E79!important}
+body.embed .ux-left .ux-issue::before{content:'对应问题';flex:0 0 auto;padding:3px 7px;border-radius:999px;background:#F7D9EC;border:1px solid #E7ADD0;color:#9B3E79;font-family:'JetBrains Mono';font-size:9px;font-weight:900;letter-spacing:.05em;line-height:1}
 body.embed .ux-left ul.tight{list-style:none!important;padding:0!important;margin:0 0 16px!important;display:flex!important;flex-direction:column!important;gap:14px!important;font-size:17px!important}
 body.embed .ux-left ul.tight li{margin:0!important;padding-left:22px!important;position:relative!important;line-height:1.52!important;color:var(--ink)!important}
 body.embed .ux-left ul.tight li::before{content:''!important;position:absolute!important;left:1px!important;top:.5em!important;width:8px!important;height:8px!important;border-radius:2px!important;background:var(--nv)!important;transform:rotate(45deg)!important}
@@ -1092,8 +1094,9 @@ body.embed .ux-right .serp-url,.ux-right .url{font-size:11.5px!important}
       el.style.display='';el=par;
     }
     t.style.display='';t.classList.add('ux-show');
-    var goal=p.get('goal')||'';
+    var goal=p.get('goal')||'', issue=p.get('issue')||'';
     var who=t.querySelector('.who');if(goal&&who)who.textContent=goal;
+    if(issue&&who&&!t.querySelector('.ux-issue')){var issueEl=document.createElement('div');issueEl.className='ux-issue';issueEl.textContent=issue;who.insertAdjacentElement('afterend',issueEl);}
     var h=t.querySelector('h3');if(h)h.style.display='none';
     if(!t.dataset.laid){
       t.dataset.laid='1';
