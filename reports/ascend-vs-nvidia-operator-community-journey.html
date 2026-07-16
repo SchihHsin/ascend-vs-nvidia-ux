@@ -107,7 +107,7 @@ a{color:inherit;text-decoration:none}
 .jcurve{position:absolute;left:0;right:0;top:30px;height:130px;z-index:1;pointer-events:none}
 .jlegend{display:flex;gap:18px;justify-content:center;margin-top:14px;font-size:12px;color:var(--ink2)}
 .jlegend i{display:inline-block;width:14px;height:8px;border-radius:3px;margin-right:5px;vertical-align:middle}
-.jrn-cw{padding-right:5px;display:flex;flex-direction:column}.jrn-cc{flex:1;min-height:69px;border-left:1px solid var(--g3);border-right:1px solid var(--g3);border-bottom:1px solid var(--g3);background:#f7faff;padding:7px 6px;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.jrn-cw:last-child .jrn-cc{border-radius:0}.jrn-asset{font-size:10px;line-height:1.25;font-weight:800;color:var(--blue-d);text-decoration:none;background:#edf4ff;border:1px solid #cfe0fb;border-radius:5px;padding:4px 5px;min-width:80%;z-index:1}.jrn-handoff{position:absolute;right:-12px;top:26px;z-index:3;display:flex;align-items:center;gap:1px;white-space:nowrap;font-size:8px;font-weight:800;transform:rotate(-18deg);transform-origin:left center}.jrn-handoff::after{content:'→';font-size:15px;line-height:1}.jrn-handoff.ok{color:#45910a}.jrn-handoff.warn{color:#c88711}.jrn-handoff.bad{color:var(--coral)}.jrn-cnote{font-size:8px;color:var(--g6);line-height:1.3;margin-top:3px}.jrn-community-note{grid-column:2 / span 7;padding:6px 11px 0;color:var(--g6);font-size:10px;line-height:1.42;background:#f7faff;border-left:1px solid var(--g3);border-right:1px solid var(--g3);border-bottom:1px solid var(--g3)}
+.jrn-tc{position:relative}.jrn-touch.asset{font-weight:800;color:var(--blue-d)}.jrn-touch.handoff{font-size:9px;font-weight:800;margin:0 0 0 11px;white-space:nowrap}.jrn-touch.handoff::before{width:0;height:0}.jrn-touch.handoff.ok{color:#45910a}.jrn-touch.handoff.ok::after{content:' →';font-size:12px}.jrn-touch.handoff.warn{color:#c88711}.jrn-touch.handoff.warn::after{content:' →';font-size:12px}.jrn-touch.handoff.bad{color:var(--coral)}.jrn-touch.handoff.bad::after{content:' →';font-size:12px}.jrn-touch.next{font-size:9px;color:var(--g6);margin-left:11px}.jrn-touch.next::before{width:0;height:0}
 /* §4 用户旅程网格(适配自 report-ppt-skill,固定高度楼层版) */
 .jrn-wrap{display:flex;flex-direction:column;gap:0;margin-top:4px}
 .jrn-grid{display:grid;grid-template-columns:56px repeat(var(--jc,7),1fr);gap:0}
@@ -1616,46 +1616,46 @@ function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 
 /* ---------- journey overview ---------- */
 const JOURNEY_OP=[
- {n:'01',name:'落地·找入口·选型',acc:'#EF4444',meta:'昇 75 / NV 76',
+ {n:'01',name:'落地·找入口·选型',acc:'#EF4444',meta:'昇 79 / NV 82',
   touch:['官网首页','开发者门户','顶部导航','产品总览','规格','解决方案'],
   action:'搜索·品牌页落地 → 找到「算子开发」入口 → 看产品/规格/方案选型',
-  aY:42,nY:36,emoji:'😐',eL:'入口要绕',eC:'#D97706',
+  aY:38,nY:32,emoji:'😐',eL:'入口要绕',eC:'#D97706',
   pains:['开发者中心埋在二级、找「算子开发」要绕；好在首屏有「算子开发」场景卡，比想象直接'],
   opps:[['首屏/导航补「按场景·按角色」横切入口，让“我要做算子”一步直达','用户体验']]},
- {n:'02',name:'上手引导 · 首跑',acc:'#16A34A',meta:'昇 78 / NV 78 · 首跑顺',
+ {n:'02',name:'上手引导 · 首跑',acc:'#16A34A',meta:'昇 88 / NV 86 · 首跑顺',
   touch:['算子开发 hub','学习 / 在线实验','快速入门'],
   action:'进算子开发 hub → 选学习路径 → 在线实验跑通 Add',
-  aY:30,nY:34,emoji:'🙂',eL:'结构更清',eC:'#059669',
-  pains:['首跑路径好；但交给下一板块的路径不明确（见下一行“社区承接”）'],
+  aY:23,nY:25,emoji:'🙂',eL:'结构更清',eC:'#059669',
+  pains:['首跑路径好；但交给下一板块的路径不明确（见触点中的交接状态）'],
   opps:[['首跑完成页明确下一跳：文档/Tiling、样例/工程、工具/测试','产品']]},
- {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
+ {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'昇 58 / NV 85 · 谷底',
   touch:['下载中心','注册 / 登录','Toolkit 下载流程','版本选择'],
   action:'关下载公告 → 选架构/版本/包 → 同意 CANN 协议 → 登录华为账号 → 下载（约 7 步）',
   aY:82,nY:22,emoji:'😣',eL:'卡在下载',eC:'#DC2626',
   pains:['“先跑起来”<b>7 步</b> + 登录前置 + 协议同意，链路最长；NVIDIA 绿按钮零登录、内联命令约 2 步'],
   opps:[['游客可下、登录与协议后置、选项给默认值智能推荐','官网平台 · P0']]},
- {n:'04',name:'动手写·查文档',acc:'#3B82F6',meta:'昇 68 / NV 81 · 次低点',
+ {n:'04',name:'动手写·查文档',acc:'#3B82F6',meta:'昇 73 / NV 83 · 需拼接',
   touch:['文档中心','API 参考','Tiling 文档','代码示例'],
   action:'从首跑样例 → 查 Tiling/API → 改 shape → 用样例 / golden 验证',
-  aY:44,nY:30,emoji:'😐',eL:'查得到',eC:'#D97706',
+  aY:50,nY:29,emoji:'😐',eL:'查得到',eC:'#D97706',
   pains:['首跑后要自行跳到 Tiling/API/样例，改 shape 的任务与 golden 验证没有被串起；API 结构也待统一'],
   opps:[['把 Tiling 文档、样例骨架、两组 shape 和 golden 做成一张任务卡','资料']]},
- {n:'05',name:'工程接入·编译验证',acc:'#8B5CF6',meta:'昇 58 / NV 85 · 第二谷底',
+ {n:'05',name:'工程接入·编译验证',acc:'#8B5CF6',meta:'昇 61 / NV 87 · 第二谷底',
   touch:['asc-devkit / torch_npu','MindStudio / 工具链','ops-test-kit'],
   action:'Notebook 迁到工程 → 注册 PyTorch → 编译 → eager / compile → Golden',
-  aY:66,nY:26,emoji:'😣',eL:'迁移断层',eC:'#DC2626',
+  aY:70,nY:23,emoji:'😣',eL:'迁移断层',eC:'#DC2626',
   pains:['Notebook、代码仓、CMake、torch_npu 注册和 Golden 测试分散，用户须自行拼接；工具能力有，但任务迁移协议缺失'],
   opps:[['发布 Notebook → asc-devkit → torch_npu → ops-test-kit 的统一迁移卡','研发·工具链 · P0']]},
- {n:'06',name:'调试·求助',acc:'#0EA5B7',meta:'昇 66 / NV 79 · 低点',
+ {n:'06',name:'调试·求助',acc:'#0EA5B7',meta:'昇 70 / NV 76 · 低点',
   touch:['开发者社区 / 论坛','技术支持','FAQ'],
   action:'遇错 → msSanitizer / 文档 → FAQ → 论坛 → 回归测试',
-  aY:62,nY:28,emoji:'😣',eL:'恢复靠搜',eC:'#DC2626',
+  aY:55,nY:38,emoji:'😣',eL:'恢复靠搜',eC:'#DC2626',
   pains:['msSanitizer、FAQ、论坛和工具都存在，但错误发生后没有从样例/日志直达的路由；用户要重新搜索和判断'],
   opps:[['每个进阶样例附“错误 → 工具 → FAQ/论坛 → 回归”的故障路由','社区运营']]},
- {n:'07',name:'性能优化·复用交付',acc:'#e0a32e',meta:'昇 70 / NV 85',
+ {n:'07',name:'性能优化·复用交付',acc:'#e0a32e',meta:'昇 73 / NV 86',
   touch:['模型库（ModelZoo）','博客 / 案例'],
   action:'定位模型热点 → 参考实践改算子 → profiler / baseline → 环境清单交付',
-  aY:54,nY:28,emoji:'😐',eL:'参考实践埋深',eC:'#D97706',
+  aY:50,nY:25,emoji:'😐',eL:'参考实践埋深',eC:'#D97706',
   pains:['Qwen 等端到端参考实践与版本配套存在，却不是基础路径自然可达的毕业任务；性能/复用资产被埋在后方'],
   opps:[['把模型热点→算子优化→性能/环境交付做成学习与工具链的毕业任务','社区运营']]},
 ];
@@ -1714,7 +1714,20 @@ function renderJourney(){
   const seg=(a,i)=>{const p=i===0?a[i]:(a[i-1]+a[i])/2, q=i===N-1?a[i]:(a[i]+a[i+1])/2; return `0,${p} 50,${a[i]} 100,${q}`;};
   const rl=(rn,re)=>`<div class="jrn-rl"><div class="jrn-rn">${rn}</div><div class="jrn-re">${re}</div></div>`;
   const r1=`<div class="jrn-grid"><div></div>`+JOURNEY.map(s=>`<div class="jrn-pw"><div class="jrn-ph" style="--acc:${s.acc}"><div class="pn">${s.n}</div><div class="pt">${s.name}</div><div class="ptm">${s.meta}</div></div></div>`).join('')+`</div>`;
-  const r2=`<div class="jrn-grid">`+rl('触点','Touch')+JOURNEY.map(s=>`<div class="jrn-tw"><div class="jrn-tc">${s.touch.map(t=>`<div class="jrn-touch">${t}</div>`).join('')}</div></div>`).join('')+`</div>`;
+  // 资源接力属于每一步的触点信息：它解释下一步资产从哪里来，不另起一条平行旅程。
+  const handoffs=[
+    {asset:'开发者中心 / 场景入口',status:'顺畅',cls:'ok',next:'学习 / 在线实验',href:'#L1'},
+    {asset:'学习 / 在线实验',status:'断开',cls:'bad',next:'文档 / Tiling',href:'#tp-S2.1'},
+    {asset:'下载 / 版本配套',status:'需自行拼接',cls:'warn',next:'文档 / 样例',href:'#L3'},
+    {asset:'文档 / Tiling / 样例',status:'需自行拼接',cls:'warn',next:'工程 / 工具链',href:'#L4'},
+    {asset:'代码仓 / 工具链 / 测试',status:'断开',cls:'bad',next:'FAQ / 论坛 / 诊断',href:'#L5'},
+    {asset:'FAQ / 论坛 / 诊断',status:'需自行拼接',cls:'warn',next:'参考实践 / 版本配套',href:'#L6'},
+    {asset:'参考实践 / 版本配套',status:'顺畅但晚到',cls:'ok',next:'',href:'#L7'}
+  ];
+  const r2=`<div class="jrn-grid">`+rl('触点','Touch')+JOURNEY.map((s,i)=>{
+    const h=handoffs[i];
+    return `<div class="jrn-tw"><div class="jrn-tc">${s.touch.map(t=>`<div class="jrn-touch">${t}</div>`).join('')}<a class="jrn-touch asset" href="${h.href}">${h.asset}</a><div class="jrn-touch handoff ${h.cls}">${h.status}</div>${h.next?`<div class="jrn-touch next">→ ${h.next}</div>`:''}</div></div>`;
+  }).join('')+`</div>`;
   const r3=`<div class="jrn-grid">`+rl('行为','Action')+JOURNEY.map(s=>{
     // 把 action 按 → 拆成步骤,手画成竖向流程图(HTML 方框 + SVG 连接箭头)
     const steps=s.action.split(/\s*→\s*/);
@@ -1722,20 +1735,10 @@ function renderJourney(){
     const chart=steps.map((st,i)=>`<div class="jrn-node" style="border-color:${s.acc}">${st}</div>`+(i<steps.length-1?arr:'')).join('');
     return `<div class="jrn-fw"><div class="jrn-fc"><div class="jrn-flow">${chart}</div></div></div>`;
   }).join('')+`</div>`;
-  const assets=[
-    ['开发者中心','选路 / 场景入口','ok','顺畅'],
-    ['学习 / 在线实验','首跑与概念','bad','断开'],
-    ['下载 / 版本配套','环境与兼容组合','warn','需自行拼接'],
-    ['文档 / Tiling','API 与改造依据','warn','需自行拼接'],
-    ['样例 / 代码仓 / 工具','工程接入、Golden、编译','bad','断开'],
-    ['FAQ / 论坛 / 诊断','错误恢复','warn','需自行拼接'],
-    ['参考实践 / 版本配套','性能、复用与交付','ok','顺畅但晚到']
-  ];
-  const r3b=`<div class="jrn-grid">`+rl('社区承接','Handoff')+assets.map((x,i)=>`<div class="jrn-cw"><div class="jrn-cc"><a class="jrn-asset" href="${['#L1','#tp-S2.1','#L3','#L4','#L5','#L6','#L7'][i]}">${x[0]}</a><div class="jrn-cnote">${x[1]}</div>${i<assets.length-1?`<span class="jrn-handoff ${x[2]}">${x[3]}</span>`:''}</div></div>`).join('')+`<div class="jrn-community-note">社区承接线是用户旅程中的一行：它显示开发者完成当前动作后，实际由哪个板块接力，以及这次交接是顺畅、断开还是需自行拼接。它不参与情绪曲线或步骤均分。</div></div>`;
   const r4=`<div class="jrn-grid je">`+rl('情绪','Emotion')+JOURNEY.map((s,i)=>`<div class="jrn-ew"><div class="jrn-ec"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="50" x2="100" y2="50" stroke="#E5E7EB" stroke-width=".8" stroke-dasharray="3,3" vector-effect="non-scaling-stroke"/><polyline points="${seg(nY,i)}" fill="none" stroke="#76B900" stroke-width="1.2" opacity=".75" vector-effect="non-scaling-stroke"/><polyline points="${seg(aY,i)}" fill="none" stroke="#C7000B" stroke-width="1.8" vector-effect="non-scaling-stroke"/></svg><div class="dn" style="top:${nY[i]}%"></div><div class="d" style="top:${aY[i]}%;background:${s.eC}"></div><div class="e" style="top:calc(${aY[i]}% - 20px)">${s.emoji}</div><div class="l" style="color:${s.eC}">${s.eL}</div></div></div>`).join('')+`</div>`;
   const r5=`<div class="jrn-grid">`+rl('痛点','Pain')+JOURNEY.map(s=>`<div class="jrn-pw2"><div class="jrn-pc">${s.pains.map(p=>`<div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">${p}</div></div>`).join('')}</div></div>`).join('')+`</div>`;
   const r6=`<div class="jrn-grid">`+rl('机会点','Opps')+JOURNEY.map(s=>`<div class="jrn-ow"><div class="jrn-oc">${s.opps.map(o=>`<div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">${o[0]}<span class="jrn-od">${o[1]}</span></div></div>`).join('')}</div></div>`).join('')+`</div>`;
-  wrap.innerHTML=r1+r2+r3+r3b+r4+r5+r6;
+  wrap.innerHTML=r1+r2+r3+r4+r5+r6;
 }
 
 /* ---------- heatmap（按 7 步聚合 + 贯穿带） ---------- */
