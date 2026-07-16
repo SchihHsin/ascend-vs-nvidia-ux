@@ -699,6 +699,64 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
+  <!-- 研究概览收束：范围、方法与产出在一张图中对应，后续分别展开。 -->
+  <section class="slide s-gray research-map-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">研究全貌：两类用户、两组实测，共同定位昇腾社区可用性问题</span></div>
+        <div class="subttl">研究概览 · 「覆盖范围 → 分析方法 → 问题产出」</div>
+      </div>
+      <div class="head-r">05/ 研究全貌</div>
+    </div>
+    <style>
+      .research-map-slide .body-area{justify-content:stretch}
+      .research-map{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:.84fr 42px 1.1fr 42px 1.02fr 42px .9fr;align-items:stretch;gap:.45vw}
+      .research-map:before{content:"";position:absolute;z-index:0;left:5%;right:4%;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(91,91,214,.26) 8%,rgba(91,91,214,.26) 92%,transparent)}
+      .rm-stage{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.1vh}
+      .rm-stage-head{display:flex;align-items:center;gap:.55vw;margin-bottom:.15vh;color:var(--ink-3);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+      .rm-stage-head i{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;background:#252B35;font-style:normal;font-size:10px;letter-spacing:0}
+      .rm-node{position:relative;overflow:hidden;border:1px solid rgba(47,61,99,.13);border-radius:12px;background:rgba(255,255,255,.62);box-shadow:0 14px 28px -24px rgba(30,40,70,.38),inset 0 1px 0 rgba(255,255,255,.9);padding:1.2vh .9vw;min-height:0}
+      .rm-node:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--rm,#5B5BD6)}
+      .rm-node b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950;color:var(--ink)}
+      .rm-node span{display:block;margin-top:.38vh;font-size:var(--fs-sm);line-height:1.4;color:var(--ink-2)}
+      .rm-node .rm-number{margin-top:.65vh;font-family:'JetBrains Mono';font-size:clamp(20px,1.75vw,29px);line-height:1;font-weight:950;color:var(--rm,#5B5BD6)}
+      .rm-node .rm-number small{display:inline;margin-left:.18em;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:var(--fs-sm);font-weight:800;color:var(--ink-2)}
+      .rm-person{display:grid;grid-template-columns:30px 1fr;align-items:center;gap:.65vw}.rm-person i{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--rm,#5B5BD6) 12%,white);color:var(--rm,#5B5BD6)}.rm-person i svg{width:17px;height:17px}.rm-person b{font-size:var(--fs-body)}
+      .rm-arrow{position:relative;z-index:1;align-self:center;height:34px;display:flex;align-items:center;justify-content:center}.rm-arrow:before{content:"";position:absolute;left:0;right:0;height:2px;background:#B9C0CD}.rm-arrow:after{content:"";position:absolute;right:0;border-left:8px solid #788393;border-top:5px solid transparent;border-bottom:5px solid transparent}.rm-arrow span{position:relative;z-index:1;padding:.28vh .35vw;border-radius:999px;background:var(--paper);font-size:var(--fs-xs);font-weight:800;color:#7A8494;white-space:nowrap}
+      .rm-stage.scope .rm-node:first-of-type{--rm:#5B5BD6}.rm-stage.scope .rm-node:last-of-type{--rm:#23A06A}.rm-stage.methods .rm-node:first-of-type{--rm:#38A8B8}.rm-stage.methods .rm-node:last-of-type{--rm:#5B5BD6}.rm-stage.output .rm-node{--rm:#252B35;background:linear-gradient(145deg,#2A303A,#1B1F26);border-color:rgba(255,255,255,.12);box-shadow:0 18px 36px -24px rgba(18,22,28,.8),inset 0 1px 0 rgba(255,255,255,.16)}.rm-stage.output .rm-node b{color:#fff}.rm-stage.output .rm-node span{color:rgba(255,255,255,.72)}.rm-stage.output .rm-node .rm-number{color:#fff}
+      .rm-method{display:flex;align-items:center;gap:.55vw}.rm-method .rm-mini{width:46px;height:31px;flex:none;border:1px solid color-mix(in srgb,var(--rm,#5B5BD6) 30%,white);border-radius:7px;background:color-mix(in srgb,var(--rm,#5B5BD6) 8%,white);position:relative;overflow:hidden}.rm-method .rm-mini:before,.rm-method .rm-mini:after{content:"";position:absolute;left:8px;right:8px;height:2px;background:var(--rm,#5B5BD6);opacity:.75}.rm-method .rm-mini:before{top:9px;box-shadow:0 7px 0 var(--rm,#5B5BD6)}.rm-method .rm-mini:after{top:23px;left:20px;right:8px}.rm-method b{font-size:var(--fs-body)}
+      .rm-output-list{display:flex;gap:.42vw;flex-wrap:wrap;margin-top:.72vh}.rm-output-list span{display:inline-flex!important;margin:0!important;min-height:22px;align-items:center;padding:.2vh .5vw;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.86)!important;font-size:var(--fs-xs)!important;font-weight:800;line-height:1.2}
+      .rm-foot{position:relative;z-index:1;grid-column:1/-1;align-self:end;margin:0 7%;padding:1vh 1.05vw;border-radius:12px;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.15);font-size:var(--fs-body);line-height:1.46;color:var(--ink-2);text-align:center}.rm-foot b{color:var(--ink);font-weight:950}
+    </style>
+    <div class="body-area">
+      <div class="research-map">
+        <div class="rm-stage people">
+          <div class="rm-stage-head"><i>01</i>研究对象</div>
+          <div class="rm-node" style="--rm:#5B5BD6"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><span>检索、抓取、判断并组织答案</span></div></div></div>
+          <div class="rm-node" style="--rm:#252B35"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><span>在开发任务中查阅、复核与决策</span></div></div></div>
+        </div>
+        <div class="rm-arrow"><span>实测</span></div>
+        <div class="rm-stage scope">
+          <div class="rm-stage-head"><i>02</i>覆盖范围</div>
+          <div class="rm-node"><b>AI 侧内容可用性</b><div class="rm-number">26<small>项开发任务</small></div><span>CANN 与 CUDA 双栈对照；记录搜索、抓取与作答证据。</span></div>
+          <div class="rm-node"><b>开发者侧基础体验</b><div class="rm-number">7<small>个生命周期阶段</small></div><span>24 个触点实跑；覆盖入口、上手、开发、调试与交付。</span></div>
+        </div>
+        <div class="rm-arrow"><span>建模</span></div>
+        <div class="rm-stage methods">
+          <div class="rm-stage-head"><i>03</i>分析方法</div>
+          <div class="rm-node"><div class="rm-method"><span class="rm-mini"></span><div><b>人机协同时序图</b><span>定义一次任务中的知识往返与受阻位置。</span></div></div></div>
+          <div class="rm-node"><div class="rm-method"><span class="rm-mini"></span><div><b>可观测评分体系</b><span>衡量知识获取、内容质量、成本与任务完成。</span></div></div></div>
+        </div>
+        <div class="rm-arrow"><span>收敛</span></div>
+        <div class="rm-stage output">
+          <div class="rm-stage-head"><i>04</i>研究产出</div>
+          <div class="rm-node"><b>三层问题框架</b><span>知识资产、机器理解、检索与引用共同影响答案可靠性。</span><div class="rm-output-list"><span>3 层问题</span><span>8 项改造方向</span></div></div>
+        </div>
+        <div class="rm-foot"><b>研究路径：</b>时序图定义研究对象，评分体系定义测量方法，实测证据收敛为内容改造方向。</div>
+      </div>
+    </div>
+  </section>
+
   <!-- UX 版新增：研究方法 1 / 为什么形成时序图 -->
   <section class="slide s-gray ux-method-slide">
     <div class="head">
@@ -3142,11 +3200,11 @@ const root=document.documentElement;
 const deck=document.getElementById('deck');
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
-  {id:'findings',label:'研究概览',range:[2,4]},
-  {id:'object',label:'研究对象',range:[5,9]},
-  {id:'measure',label:'测量方法',range:[10,12]},
-  {id:'evidence',label:'实测验证',range:[13,15]},
-  {id:'action',label:'改造方向',range:[16,68]}
+  {id:'findings',label:'研究概览',range:[2,5]},
+  {id:'object',label:'研究对象',range:[6,10]},
+  {id:'measure',label:'测量方法',range:[11,13]},
+  {id:'evidence',label:'实测验证',range:[14,16]},
+  {id:'action',label:'改造方向',range:[17,69]}
 ];
 function chapterFor(index){return CHAPTERS.find(function(ch){return index+1>=ch.range[0]&&index+1<=ch.range[1];})||CHAPTERS[CHAPTERS.length-1];}
 function renderChapterTabs(){
