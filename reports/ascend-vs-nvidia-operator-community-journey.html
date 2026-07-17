@@ -122,16 +122,10 @@ a{color:inherit;text-decoration:none}
 .jrn-ph .ptm{font-size:9px;margin-top:7px;display:inline-flex;align-self:flex-start;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.62);font-family:var(--mono);font-weight:700}
 .jrn-tc,.jrn-fc,.jrn-pc,.jrn-oc,.jrn-ec{border-left:1px solid var(--g3);border-right:1px solid var(--g3);border-bottom:1px solid var(--g3)}
 .jrn-tc,.jrn-fc{background:rgba(255,255,255,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.jrn-tc{flex:1;padding:28px 10px 9px;display:flex;flex-direction:column;justify-content:center;min-height:64px}
-/* 承接质量发生在相邻阶段之间，沿触点行的阶段分界呈现，而非写进任一阶段。 */
+.jrn-tc{flex:1;padding:9px 10px;display:flex;flex-direction:column;justify-content:center;min-height:64px}
+/* 承接线从前一阶段的最后触点节点，实际连到下一阶段的首触点节点。 */
 .jrn-touch-grid{position:relative}
-.jrn-handoff-rail{position:absolute;inset:5px 5px auto 0;height:18px;display:grid;grid-template-columns:56px repeat(var(--jc,7),1fr);z-index:4;pointer-events:none}
-.jrn-handoff{position:relative;justify-self:end;width:22px;height:18px;transform:translateX(50%)}
-.jrn-handoff-line{position:absolute;left:-10px;right:-8px;top:12px;height:2px}.jrn-handoff-arrow{position:absolute;right:-9px;top:8px;width:7px;height:7px;border-right:2px solid;border-bottom:2px solid;transform:rotate(-45deg)}
-.jrn-handoff-label{position:absolute;top:-2px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:8px;font-weight:800;line-height:1;padding:3px 5px;border-radius:99px;box-shadow:0 1px 3px rgba(31,41,55,.12)}
-.jrn-handoff.smooth .jrn-handoff-line{background:#16A34A}.jrn-handoff.smooth .jrn-handoff-arrow{border-color:#16A34A}.jrn-handoff.smooth .jrn-handoff-label{color:#15803D;background:#F0FDF4}
-.jrn-handoff.bridge .jrn-handoff-line{background:repeating-linear-gradient(90deg,#D97706 0 5px,transparent 5px 8px)}.jrn-handoff.bridge .jrn-handoff-arrow{border-color:#D97706}.jrn-handoff.bridge .jrn-handoff-label{color:#92400E;background:#FFFBEB}
-.jrn-handoff.break .jrn-handoff-line{background:repeating-linear-gradient(90deg,#C7000B 0 4px,transparent 4px 9px)}.jrn-handoff.break .jrn-handoff-arrow{border-color:#C7000B}.jrn-handoff.break .jrn-handoff-label{color:#991B1B;background:#FEF2F2}
+.jrn-handoff-svg{position:absolute;inset:0;width:100%;height:100%;z-index:5;overflow:visible;pointer-events:none}
 .jrn-fc{flex:1;padding:9px 11px;display:flex;flex-direction:column;justify-content:center}
 /* 行为 = 竖向流程图(HTML 方框 + SVG 箭头) */
 .jrn-flow{display:flex;flex-direction:column;align-items:stretch}
@@ -1725,7 +1719,7 @@ function renderJourney(){
   const seg=(a,i)=>{const p=i===0?a[i]:(a[i-1]+a[i])/2, q=i===N-1?a[i]:(a[i]+a[i+1])/2; return `0,${p} 50,${a[i]} 100,${q}`;};
   const rl=(rn,re)=>`<div class="jrn-rl"><div class="jrn-rn">${rn}</div><div class="jrn-re">${re}</div></div>`;
   const r1=`<div class="jrn-grid"><div></div>`+JOURNEY.map(s=>`<div class="jrn-pw"><div class="jrn-ph" style="--acc:${s.acc}"><div class="pn">${s.n}</div><div class="pt">${s.name}</div><div class="ptm">${s.meta}</div></div></div>`).join('')+`</div>`;
-  // 触点在阶段内纵向串联；承接质量只在相邻阶段的分界线上表达。
+  // 触点在阶段内纵向串联；承接线实际从前一列末节点连到下一列首节点。
   const handoffs=[
     {status:'顺畅',cls:'smooth'},
     {status:'断开',cls:'break'},
@@ -1734,10 +1728,10 @@ function renderJourney(){
     {status:'断开',cls:'break'},
     {status:'需自行拼接',cls:'bridge'}
   ];
-  const r2=`<div class="jrn-grid jrn-touch-grid">`+rl('触点','Touch')+JOURNEY.map(s=>{
-    const chain=s.touch.map((t,j)=>`<div class="jrn-tp-node">${t}</div>${j<s.touch.length-1?'<div class="jrn-tp-arrow"></div>':''}`).join('');
+  const r2=`<div class="jrn-grid jrn-touch-grid">`+rl('触点','Touch')+JOURNEY.map((s,i)=>{
+    const chain=s.touch.map((t,j)=>`<div class="jrn-tp-node" data-handoff-node="${j===0?'start':j===s.touch.length-1?'end':''}" data-stage="${i}">${t}</div>${j<s.touch.length-1?'<div class="jrn-tp-arrow"></div>':''}`).join('');
     return `<div class="jrn-tw"><div class="jrn-tc">${chain}</div></div>`;
-  }).join('')+`<div class="jrn-handoff-rail"><div></div>${JOURNEY.map((s,i)=>i===N-1?'<div></div>':`<div class="jrn-handoff ${handoffs[i].cls}" title="${handoffs[i].status}"><i class="jrn-handoff-line"></i><i class="jrn-handoff-arrow"></i><span class="jrn-handoff-label">${handoffs[i].status}</span></div>`).join('')}</div></div>`;
+  }).join('')+`<svg class="jrn-handoff-svg" aria-hidden="true"></svg></div>`;
   const r3=`<div class="jrn-grid">`+rl('行为','Action')+JOURNEY.map(s=>{
     // 把 action 按 → 拆成步骤,手画成竖向流程图(HTML 方框 + SVG 连接箭头)
     const steps=s.action.split(/\s*→\s*/);
@@ -1749,6 +1743,31 @@ function renderJourney(){
   const r5=`<div class="jrn-grid">`+rl('痛点','Pain')+JOURNEY.map(s=>`<div class="jrn-pw2"><div class="jrn-pc">${s.pains.map(p=>`<div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">${p}</div></div>`).join('')}</div></div>`).join('')+`</div>`;
   const r6=`<div class="jrn-grid">`+rl('机会点','Opps')+JOURNEY.map(s=>`<div class="jrn-ow"><div class="jrn-oc">${s.opps.map(o=>`<div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">${o[0]}<span class="jrn-od">${o[1]}</span></div></div>`).join('')}</div></div>`).join('')+`</div>`;
   wrap.innerHTML=r1+r2+r3+r4+r5+r6;
+  requestAnimationFrame(()=>drawHandoffs(wrap,handoffs));
+}
+
+function drawHandoffs(wrap,handoffs){
+  const grid=wrap.querySelector('.jrn-touch-grid');
+  const svg=grid?.querySelector('.jrn-handoff-svg');
+  if(!grid||!svg)return;
+  const box=grid.getBoundingClientRect();
+  svg.setAttribute('viewBox',`0 0 ${box.width} ${box.height}`);
+  const defs=`<defs><marker id="handoff-smooth" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#16A34A"/></marker><marker id="handoff-bridge" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#D97706"/></marker><marker id="handoff-break" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#C7000B"/></marker></defs>`;
+  const lines=handoffs.map((h,i)=>{
+    const from=grid.querySelector(`[data-stage="${i}"][data-handoff-node="end"]`);
+    const to=grid.querySelector(`[data-stage="${i+1}"][data-handoff-node="start"]`);
+    if(!from||!to)return '';
+    const a=from.getBoundingClientRect(),b=to.getBoundingClientRect();
+    const x1=a.right-box.left, y1=a.top+a.height/2-box.top, x2=b.left-box.left, y2=b.top+b.height/2-box.top;
+    const mid=(x1+x2)/2, rise=Math.min(y1,y2)-18;
+    const color=h.cls==='smooth'?'#16A34A':h.cls==='break'?'#C7000B':'#D97706';
+    const dash=h.cls==='smooth'?'':h.cls==='break'?'4 5':'5 4';
+    const labelBg=h.cls==='smooth'?'#F0FDF4':h.cls==='break'?'#FEF2F2':'#FFFBEB';
+    const labelColor=h.cls==='smooth'?'#15803D':h.cls==='break'?'#991B1B':'#92400E';
+    const w=h.status.length*8+12;
+    return `<path d="M${x1} ${y1} C${x1+14} ${y1},${x2-14} ${y2},${x2} ${y2}" fill="none" stroke="${color}" stroke-width="1.8" ${dash?`stroke-dasharray="${dash}"`:''} marker-end="url(#handoff-${h.cls})"/><rect x="${mid-w/2}" y="${rise-9}" width="${w}" height="16" rx="8" fill="${labelBg}" stroke="${color}" stroke-opacity=".2"/><text x="${mid}" y="${rise+2}" text-anchor="middle" fill="${labelColor}" font-size="8" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">${h.status}</text>`;
+  }).join('');
+  svg.innerHTML=defs+lines;
 }
 
 /* ---------- heatmap（按 7 步聚合 + 贯穿带） ---------- */
