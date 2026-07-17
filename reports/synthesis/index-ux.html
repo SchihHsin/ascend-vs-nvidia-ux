@@ -725,7 +725,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .rm-person{display:flex;align-items:center;gap:.65vw}.rm-person>svg{width:31px;height:31px;padding:7px;border-radius:9px;background:color-mix(in srgb,var(--rm) 12%,white);color:var(--rm);fill:none;stroke:currentColor}.rm-person b{font-size:var(--fs-body)}
       .rm-method{display:flex;align-items:center;gap:.65vw}.rm-method-icon{width:34px;height:34px;flex:0 0 auto;padding:8px;border-radius:9px;background:color-mix(in srgb,var(--rm) 11%,white);border:1px solid color-mix(in srgb,var(--rm) 20%,white);color:var(--rm)}.rm-method-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
       .rm-band.person-ai{background:linear-gradient(140deg,#5B3FB0,#7C5CF0);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(91,63,176,.62),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-dev{background:linear-gradient(140deg,#2361CC,#2F91D4);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(35,97,204,.58),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-ai:after,.rm-band.person-dev:after{background:radial-gradient(closest-side,rgba(255,255,255,.24),transparent)}.rm-band.person-ai b,.rm-band.person-dev b{color:#fff}.rm-band.person-ai p,.rm-band.person-dev p{color:rgba(255,255,255,.78)}.rm-band.person-ai .rm-person>svg,.rm-band.person-dev .rm-person>svg{background:rgba(255,255,255,.18);stroke:#fff!important;color:#fff!important;stroke-width:2.1}
-      .rm-flow{position:relative;height:3.25vh;margin-left:93px;display:flex;align-items:center;justify-content:center;pointer-events:none}.rm-flow:before{content:"";width:34%;height:100%;clip-path:polygon(0 58%,40% 58%,40% 100%,60% 100%,60% 58%,100% 58%,50% 0);background:linear-gradient(90deg,rgba(47,111,237,.15),rgba(124,92,240,.31),rgba(47,111,237,.15))}.rm-flow.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vw}.rm-flow.split:before{display:none}.rm-flow-arrow{width:40%;height:100%;justify-self:center;clip-path:polygon(0 58%,40% 58%,40% 100%,60% 100%,60% 58%,100% 58%,50% 0)}.rm-flow-arrow.ai{background:linear-gradient(90deg,rgba(124,92,240,.15),rgba(124,92,240,.48),rgba(124,92,240,.15))}.rm-flow-arrow.dev{background:linear-gradient(90deg,rgba(47,111,237,.15),rgba(47,111,237,.48),rgba(47,111,237,.15))}
+      .rm-flow{position:relative;height:3.25vh;margin-left:93px;display:flex;align-items:center;justify-content:center;pointer-events:none;color:rgba(92,102,164,.65)}.rm-flow.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vw}.rm-flow-arrow{width:36px;height:100%;justify-self:center;overflow:visible}.rm-flow-arrow path{fill:none;stroke:currentColor;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}.rm-flow-arrow.ai{color:rgba(124,92,240,.72)}.rm-flow-arrow.dev{color:rgba(47,111,237,.72)}
     </style>
     <div class="body-area">
       <div class="research-map">
@@ -733,17 +733,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="rm-label"><b>研究产出</b><span>Output · 04</span></div>
           <div class="rm-cells"><div class="rm-band top"><b><em>三层问题框架</em>，收敛为 8 项内容改造方向</b><p>知识资产、机器理解、检索与引用共同决定昇腾社区能否支持可靠作答与任务完成。</p></div></div>
         </div>
-        <div class="rm-flow"></div>
+        <div class="rm-flow"><svg class="rm-flow-arrow" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>分析方法</b><span>Method · 03</span></div>
           <div class="rm-cells"><div class="rm-band method-seq"><div class="rm-method"><i class="rm-method-icon" data-lucide="git-compare-arrows"></i><div><b>人机协同时序图</b><p>定义任务中的知识往返、受阻与复核位置。</p></div></div></div><div class="rm-band method-score"><div class="rm-method"><i class="rm-method-icon" data-lucide="chart-no-axes-combined"></i><div><b>可观测评分体系</b><p>衡量知识获取、内容质量、成本与任务完成。</p></div></div></div></div>
         </div>
-        <div class="rm-flow split"><i class="rm-flow-arrow ai"></i><i class="rm-flow-arrow dev"></i></div>
+        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>实测范围</b><span>Scope · 02</span></div>
           <div class="rm-cells"><div class="rm-band scope-ai"><b>AI 侧内容可用性</b><div class="rm-number">26<small>项开发任务</small></div><p>CANN 与 CUDA 双栈对照，记录搜索、抓取与作答证据。</p></div><div class="rm-band scope-dev"><b>开发者侧基础体验</b><div class="rm-number">7<small>个阶段 · <strong>24</strong> 个触点</small></div><p>实跑入口、上手、开发、调试与交付全过程。</p></div></div>
         </div>
-        <div class="rm-flow split"><i class="rm-flow-arrow ai"></i><i class="rm-flow-arrow dev"></i></div>
+        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>研究对象</b><span>Subject · 01</span></div>
           <div class="rm-cells"><div class="rm-band person-ai"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><p>检索、抓取、判断并组织答案</p></div></div></div><div class="rm-band person-dev"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><p>在开发任务中查阅、复核与决策</p></div></div></div></div>
