@@ -1054,9 +1054,10 @@ body.embed .pagenav,body.embed .toc,body.embed .subtitle,body.embed h1,body.embe
 body.embed .wrap{padding:0 30px!important;max-width:none!important;margin:0!important;width:100%;height:100vh;box-sizing:border-box}
 body.embed .uxcard{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0!important;max-width:none!important}
 body.embed .uxcard.ux-show{display:flex!important;flex-direction:column;justify-content:center;height:100vh}
-body.embed .uxcard.ux-show.ux-flex{flex-direction:row;gap:30px;align-items:center}
-body.embed .ux-left{flex:0 0 31%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0}
-body.embed .ux-right{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:0}
+/* 改造页按叙事顺序展开：先说明目标与做法，再给出可视化 Demo。 */
+body.embed .uxcard.ux-show.ux-flex{flex-direction:column;gap:14px;align-items:stretch}
+body.embed .ux-left{flex:0 0 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0}
+body.embed .ux-right{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:0}
 body.embed .ux-right .demo{margin:0!important}
 body.embed .ux-right .dnote,body.embed .ux-right .note{display:none!important}
 /* 左栏文字层次:眉标(灰·次)→ 建议(放大·菱形标记·重点)→ NVIDIA 范本(callout)→ 为何优先(脚注),拉开间距不堆叠 */
