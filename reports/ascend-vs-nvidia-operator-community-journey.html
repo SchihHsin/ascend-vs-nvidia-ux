@@ -1471,9 +1471,12 @@ const P0SET={'4.3':1,'1.1':1};
 /* 社区承接视角的跨板块综述：学习只是其中一条支撑线。 */
 JUDGES.splice(0,JUDGES.length,
  {id:'jc1',g:'common',pin:'both',plab:'全旅程',color:'#2f6fed',h:'社区体验不是单页体验，而是“做完这步去哪”',cap:'社区板块接力图',one:'开发者不会在“学习”“文档”“下载”里生活，他只会试图把算子做出来。',lead:'算子开发的每一步都由多个社区板块共同承接：开发者中心负责选路，学习负责首跑，下载/版本表负责环境，文档/样例负责写与改，工具链负责编译验证，论坛/FAQ负责恢复，参考实践负责进阶。',body:['昇腾的资产覆盖很全，但很多交接要用户自己完成：课程结束后该去哪个工程仓、报错该先用什么工具、优化后怎样验收，都没有被系统化标成下一跳。','NVIDIA 也分散在 Docs、Samples、PyTorch、Nsight、Forums 等站点，但术语、工具和工程路径更容易连续；这降低了跨板块切换的认知成本。','结论：应把社区从“资源目录”升级为<b>按开发动作编排的接力系统</b>，每个板块显示输入、输出和下一目的地。'],demo:'flow'},
- {id:'jc2',g:'op',pin:'win',plab:'步骤 2–6 · 交接断点',color:'#76B900',h:'首跑接住了人，但资产没有继续接力',cap:'首跑到工程的资产交接',one:'在线实验的价值成立；问题是首跑完成态没有成为文档、样例和工具链的入口。',lead:'昇腾按角色学习路径与在线实验降低了首次成功门槛，这是算子开发旅程的真实长板；但优势在用户离开 Notebook 后没有继续传递。',body:['用户应被明确送往：可变 shape/Tiling 的文档和样例、asc-devkit/torch_npu 工程模板、ops-test-kit 的 golden、以及错误时的诊断路由。','没有这条资产接力，首跑只能制造一次成功，无法支撑后续写、编译、调试和优化。','补法：在首跑完成页输出<b>任务、交付物、下一板块链接与验收标准</b>，而不是只显示“课程完成”。'],demo:'path'},
- {id:'jc3',g:'op',pin:'a',plab:'步骤 3–5',color:'#C7000B',h:'下载、版本、文档、代码仓和工具链之间缺迁移协议',cap:'从环境到 PyTorch 工程',one:'“资料都在”不等于“能从环境走到工程”。',lead:'完成环境准备后，用户需要把学习样例变成本地工程，并接入 PyTorch；这涉及下载/版本配套、文档、asc-devkit、torch_npu、CMake 和测试工具。',body:['昇腾的 CANN/框架/硬件边界存在于不同页面，教程又可能只在中段提示 Atlas A2 等限制；用户无法一开始就选对路线。','Notebook 到工程的文件映射、构建、注册与 eager/compile 测试没有统一交付，用户被迫跨仓自拼。','补法：建立<b>每任务一张“环境→代码→测试”迁移卡</b>，把多个社区板块编成同一份可复制清单。'],demo:'migrate'},
- {id:'jc4',g:'op',pin:'a',plab:'步骤 6–7',color:'#e0a32e',h:'故障恢复与性能验证是社区板块协同的试金石',cap:'错误 → 工具 → 社区 → 回归',one:'真正的承接不是用户不出错，而是出错后无需重新开始。',lead:'msSanitizer、FAQ、论坛、MindStudio、ops-test-kit、参考实践各自都有价值；关键是错误发生时，用户能否被路由到正确资产，并带着修复结果回到任务。',body:['NVIDIA Compute Sanitizer 将错误类型、工具和命令明确对应；昇腾相关资产存在，但在学习与样例中没有形成默认的恢复路径。','性能优化同样如此：Qwen 等参考实践很有价值，却不是基础路径自然可达的毕业项目。','补法：每个挑战附<b>故障路由 + 回归 + 性能基线</b>，并把参考实践接为从工具链到进阶生态的下一站。'],demo:'discover'}
+ {id:'jc2',g:'op',pin:'win',plab:'步骤 2 · 首跑反转',color:'#76B900',h:'首跑体验强于竞品，但没有沉淀成工程能力',cap:'首次成功到工程交付',one:'昇腾擅长让人第一次跑通；短板在于第一次成功没有变成可以带走的成果。',lead:'按角色学习路径与在线实验把首次成功前置，步骤 2 反超 NVIDIA；但后续工程接入跌至 61 / 87，说明“会跟做”没有自然转化成“能交付”。',body:['首跑完成后，用户拿不到本地工程骨架、依赖版本、构建命令和验收标准，只能重新寻找文档和仓库。','这不是学习内容不足，而是首跑的输出没有被定义为下一步可复用的输入。','补法：让每次首跑固定产出<b>可下载工程 + 环境清单 + 下一项改造任务 + Golden</b>。'],demo:'path'},
+ {id:'jc3',g:'op',pin:'a',plab:'步骤 3 · 环境预检',color:'#D97706',h:'下载已从“能不能下”转为“能否一开始选对”',cap:'资源选择到可运行环境',one:'游客直下解决了准入问题，但没有替开发者完成兼容性判断。',lead:'当前 CANN 已有独立资源页，Toolkit 可以直接下载；真正留下来的摩擦是架构、版本、Toolkit/ops、框架和包格式的组合选择。',body:['开发者做算子时，需要的不是完整资源目录，而是“我的硬件和目标框架应装哪一套”的明确答案。','选择错误通常不会在下载时暴露，而会延迟到安装、编译或运行才显形，排错成本更高。','补法：在下载页增加<b>硬件 / OS / 框架预检</b>，直接给出默认包组合、安装命令和兼容性说明。'],demo:'flow'},
+ {id:'jc4',g:'op',pin:'a',plab:'步骤 4–5 · 交付物断层',color:'#C7000B',h:'真正缺的是可迁移的中间产物，不只是更多链接',cap:'环境 → 代码 → 测试',one:'文档、代码仓和工具都在，但用户无法把一个步骤的成果带到下一步。',lead:'从 Notebook 到本地工程，再到 PyTorch 注册、编译和 Golden，用户需要一组连续的中间产物；当前这些产物散在文档、asc-devkit、torch_npu 与 ops-test-kit 中。',body:['只补“下一步链接”仍不足：用户还要知道复制哪些文件、改哪些配置、怎样构建、什么结果才算通过。','这解释了为什么文档步骤只是轻度摩擦，但工程接入成为旅程最深谷底。','补法：按任务交付<b>工程骨架、目录映射、CMake、注册代码、eager/compile 命令与 Golden</b>的一套迁移包。'],demo:'migrate'},
+ {id:'jc5',g:'op',pin:'a',plab:'步骤 6 · 失败可恢复',color:'#0EA5B7',h:'社区不应只在用户搜索时出现，而应在错误发生时接管任务',cap:'日志 → 诊断 → 修复 → 回归',one:'真正的承接不是用户不出错，而是出错后无需重新开始。',lead:'msSanitizer、FAQ、论坛与技术支持都存在，但错误日志没有默认指向诊断命令、解释和回归步骤，用户只能重新搜索。',body:['NVIDIA 的诊断资产更容易把错误类型、工具和命令对应起来；昇腾的关键短板是这些资产没有被嵌回样例和任务流程。','因此论坛/FAQ 的价值不能只按内容量衡量，更要看它能否把用户送回可验证的任务状态。','补法：每个样例附<b>坏例 / 错误码 → 首选工具 → FAQ/论坛 → 修复后回归</b>的故障路由。'],demo:'recover'},
+ {id:'jc6',g:'op',pin:'a',plab:'步骤 7 · 成功可证明',color:'#e0a32e',h:'性能优化和参考实践没有成为“毕业任务”',cap:'Golden → baseline → 复现交付',one:'跑通算子不等于完成开发；成果必须能证明、复现并被下一位开发者复用。',lead:'MindStudio、ops-test-kit 和 Qwen 等参考实践都具备价值，但它们没有被基础路径组织成默认的性能验证与交付动作。',body:['用户需要知道优化是否有效、正确性是否回归、运行环境如何复现；缺少 baseline 与环境清单时，经验很难沉淀成团队资产。','参考实践被放在路径末端且入口较深，导致它们难以成为初学者进阶的自然下一站。','补法：把<b>Golden、性能 baseline、profiler 证据和环境清单</b>定义为算子开发的毕业交付物，并直连参考实践。'],demo:'deliver'},
+ {id:'jc7',g:'common',pin:'a',plab:'全局 · 发现与扩散',color:'#7c5cf0',h:'内容的瓶颈不只在质量，还在能否被全球开发者发现',cap:'可发现性 / 可索引性',one:'社区资产只有在开发者能搜到、能读懂、能进入任务时才真正产生价值。',lead:'昇腾的文档、博客和方案资产并不空，但英文覆盖、SEO、游客可读和入口可见性仍影响外部开发者的发现与复用。',body:['这会放大前述所有断点：当用户不知道下一步去哪时，如果站内外搜索也无法稳定把他带到正确资产，任务就会中断。','因此全球化不是单独的“语言问题”，而是社区接力系统的最后一层保障。','补法：为高频任务页补<b>英文摘要、结构化 SEO、稳定深链和可索引的错误/解决方案页</b>。'],demo:'discover'}
 );
 ACTIONS.splice(0,ACTIONS.length,
  ['p0','建立“算子开发社区接力图”：每个板块标输入、输出、下一跳','全旅程','从资源目录变为任务闭环'],
@@ -2057,6 +2060,26 @@ function demoDiscover(){return `
    <div class="hrow"><span class="hl">入口可见性</span><div class="hbar" style="background:#e0a32e">博客要从开发者中心进</div><div class="hbar" style="background:#76B900">顶栏直达 Blog</div></div>
    <div class="hrow"><span class="hl">社区门槛</span><div class="hbar" style="background:#e0a32e">发帖需华为账号 · 中文圈</div><div class="hbar" style="background:#76B900">全球开放 · 可索引</div></div>
  </div>`;}
+function demoRecover(){return `
+ <div class="flowlane">
+   <div class="lh"><span class="badge" style="background:var(--green-s);color:#5e8a09">NVIDIA · 错误到动作的路径较短</span></div>
+   <div class="flow"><span class="step ok">错误类型</span><span class="arrow">→</span><span class="step ok">Compute Sanitizer 命令</span><span class="arrow">→</span><span class="step ok">修复 / 验证</span></div>
+   <div class="lenbar" style="width:44%;background:linear-gradient(90deg,#a5d65a,#76B900)"></div>
+ </div>
+ <div class="flowlane">
+   <div class="lh"><span class="badge" style="background:#fff3df;color:#a86800">昇腾 · 资产存在，路由未嵌入任务</span></div>
+   <div class="flow"><span class="step warn">错误日志</span><span class="arrow">→</span><span class="step warn">自行搜索工具 / FAQ</span><span class="arrow">→</span><span class="step gate">论坛求助后再回归</span></div>
+   <div class="lenbar" style="width:76%;background:linear-gradient(90deg,#f0b76a,#d99018)"></div>
+ </div>`;}
+function demoDeliver(){return `
+ <div class="pathlane">
+   <div class="ph"><span>当前常见终点</span><span class="tofirst" style="color:#a86800;border-color:#f0cf97">“算子跑通”</span></div>
+   <div class="psteps"><span class="ps">样例跑通</span><span class="arrow">→</span><span class="ps">开发者自行决定是否优化 / 交付</span></div>
+ </div>
+ <div class="pathlane win">
+   <div class="ph"><span>应有的毕业交付</span><span class="tofirst" style="color:#5e8a09;border-color:#d6e8ad">可证明 · 可复现</span></div>
+   <div class="psteps"><span class="ps">Golden 正确性</span><span class="arrow">→</span><span class="ps">性能 baseline</span><span class="arrow">→</span><span class="ps">profiler 证据</span><span class="arrow">→</span><span class="ps">环境清单</span></div>
+ </div>`;}
 
 function demoMigrate(){return `
  <div class="pathlane base">
@@ -2078,7 +2101,7 @@ function demoDist(){return `
 /* ---------- synthesis floors + actions（按 共性/算子/训练 三组渲染） ---------- */
 (function(){
   const plab={a:'昇腾短板',win:'昇腾长板',both:'双向'};
-  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,discover:demoDiscover,migrate:demoMigrate,dist:demoDist};
+  const demos={hero:demoHero,flow:demoFlow,matrix:demoMatrix,path:demoPath,discover:demoDiscover,migrate:demoMigrate,dist:demoDist,recover:demoRecover,deliver:demoDeliver};
   const GROUPS=[['common','共性 · 两条场景都成立'],['op','算子开发 · 专属结论'],['train','训练 · 专属结论']];
   const toc=document.getElementById('synthtoc');
   const host=document.getElementById('synthfloors');
