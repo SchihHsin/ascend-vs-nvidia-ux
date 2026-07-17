@@ -988,9 +988,8 @@ const CROSS=['1.3','1.4'];
 const cnum=['①','②','③','④','⑤','⑥','⑦'];
 const stepOf=id=>(STEP_MAP[curScen]||{})[id];
 const isLearnSub=id=>id.startsWith('S2.');
-// 外层 7 步只统计原旅程触点；学习子链独立诊断，不扭曲情绪/热力/封面均分。
+// 外层 7 步只统计正式触点；内部校验任务不参与旅程、热力图或封面均分。
 const tpsOfStep=k=>TP.filter(t=>stepOf(t.id)===k&&!isLearnSub(t.id));
-const learnTps=()=>TP.filter(t=>isLearnSub(t.id));
 const _avg=a=>a.length?Math.round(a.reduce((s,x)=>s+x,0)/a.length):0;
 const stepAvg=k=>{const ts=tpsOfStep(k);return [_avg(ts.map(t=>t.a)),_avg(ts.map(t=>t.nv))];};
 const crossTps=()=>TP.filter(t=>CROSS.includes(t.id));
@@ -1474,16 +1473,16 @@ const P0SET={'4.3':1,'1.1':1};
 /* 社区承接视角的跨板块综述：学习只是其中一条支撑线。 */
 JUDGES.splice(0,JUDGES.length,
  {id:'jc1',g:'common',pin:'both',plab:'全旅程',color:'#2f6fed',h:'社区体验不是单页体验，而是“做完这步去哪”',cap:'社区板块接力图',one:'开发者不会在“学习”“文档”“下载”里生活，他只会试图把算子做出来。',lead:'算子开发的每一步都由多个社区板块共同承接：开发者中心负责选路，学习负责首跑，下载/版本表负责环境，文档/样例负责写与改，工具链负责编译验证，论坛/FAQ负责恢复，参考实践负责进阶。',body:['昇腾的资产覆盖很全，但很多交接要用户自己完成：课程结束后该去哪个工程仓、报错该先用什么工具、优化后怎样验收，都没有被系统化标成下一跳。','NVIDIA 也分散在 Docs、Samples、PyTorch、Nsight、Forums 等站点，但术语、工具和工程路径更容易连续；这降低了跨板块切换的认知成本。','结论：应把社区从“资源目录”升级为<b>按开发动作编排的接力系统</b>，每个板块显示输入、输出和下一目的地。'],demo:'flow'},
- {id:'jc2',g:'op',pin:'win',plab:'步骤 2 · 长板',color:'#76B900',h:'学习在首跑接住了人，但没有把人交给下一板块',cap:'学习子链 · 首跑到工程',one:'在线实验的价值成立；问题是它的完成态没有成为文档、样例和工具链的入口。',lead:'昇腾按角色学习路径与在线实验降低了首次成功门槛，这是算子开发旅程的真实长板。深挖显示，优势在用户离开 Notebook 后没有继续传递。',body:['用户应被明确送往：可变 shape/Tiling 的文档和样例、asc-devkit/torch_npu 工程模板、ops-test-kit 的 golden、以及错误时的诊断路由。','没有这条路，学习板块只能制造一次成功，无法支撑后续写、编译、调试和优化。','补法：在学习完成页输出<b>任务、交付物、下一板块链接与验收标准</b>，而不是只显示“课程完成”。'],demo:'path'},
+ {id:'jc2',g:'op',pin:'win',plab:'步骤 2–6 · 交接断点',color:'#76B900',h:'首跑接住了人，但资产没有继续接力',cap:'首跑到工程的资产交接',one:'在线实验的价值成立；问题是首跑完成态没有成为文档、样例和工具链的入口。',lead:'昇腾按角色学习路径与在线实验降低了首次成功门槛，这是算子开发旅程的真实长板；但优势在用户离开 Notebook 后没有继续传递。',body:['用户应被明确送往：可变 shape/Tiling 的文档和样例、asc-devkit/torch_npu 工程模板、ops-test-kit 的 golden、以及错误时的诊断路由。','没有这条资产接力，首跑只能制造一次成功，无法支撑后续写、编译、调试和优化。','补法：在首跑完成页输出<b>任务、交付物、下一板块链接与验收标准</b>，而不是只显示“课程完成”。'],demo:'path'},
  {id:'jc3',g:'op',pin:'a',plab:'步骤 3–5',color:'#C7000B',h:'下载、版本、文档、代码仓和工具链之间缺迁移协议',cap:'从环境到 PyTorch 工程',one:'“资料都在”不等于“能从环境走到工程”。',lead:'完成环境准备后，用户需要把学习样例变成本地工程，并接入 PyTorch；这涉及下载/版本配套、文档、asc-devkit、torch_npu、CMake 和测试工具。',body:['昇腾的 CANN/框架/硬件边界存在于不同页面，教程又可能只在中段提示 Atlas A2 等限制；用户无法一开始就选对路线。','Notebook 到工程的文件映射、构建、注册与 eager/compile 测试没有统一交付，用户被迫跨仓自拼。','补法：建立<b>每任务一张“环境→代码→测试”迁移卡</b>，把多个社区板块编成同一份可复制清单。'],demo:'migrate'},
  {id:'jc4',g:'op',pin:'a',plab:'步骤 6–7',color:'#e0a32e',h:'故障恢复与性能验证是社区板块协同的试金石',cap:'错误 → 工具 → 社区 → 回归',one:'真正的承接不是用户不出错，而是出错后无需重新开始。',lead:'msSanitizer、FAQ、论坛、MindStudio、ops-test-kit、参考实践各自都有价值；关键是错误发生时，用户能否被路由到正确资产，并带着修复结果回到任务。',body:['NVIDIA Compute Sanitizer 将错误类型、工具和命令明确对应；昇腾相关资产存在，但在学习与样例中没有形成默认的恢复路径。','性能优化同样如此：Qwen 等参考实践很有价值，却不是基础路径自然可达的毕业项目。','补法：每个挑战附<b>故障路由 + 回归 + 性能基线</b>，并把参考实践接为从工具链到进阶生态的下一站。'],demo:'discover'}
 );
 ACTIONS.splice(0,ACTIONS.length,
  ['p0','建立“算子开发社区接力图”：每个板块标输入、输出、下一跳','全旅程','从资源目录变为任务闭环'],
- ['p0','学习完成页直连 Tiling 文档/样例、工程模板、Golden 测试与故障路由','步骤 2 / S2.1–S2.4','保住首跑长板，减少后续掉队'],
- ['p0','发布 Notebook → asc-devkit → torch_npu → ops-test-kit 的统一迁移卡','步骤 3–5 / S2.3','解决跨仓工程接入断层'],
- ['p1','每个进阶样例内置坏例、诊断命令、FAQ/论坛路由、回归与性能基线','步骤 6 / S2.4','让失败可恢复'],
- ['p1','把 Qwen 等端到端参考实践前置为“模型热点→算子优化”毕业任务','步骤 7 / S2.5','连接学习、工具、样例与复用']
+ ['p0','首跑完成页直连 Tiling 文档/样例、工程模板、Golden 测试与故障路由','步骤 2 / 4 / 5 / 6','保住首跑长板，减少后续掉队'],
+ ['p0','发布 Notebook → asc-devkit → torch_npu → ops-test-kit 的统一迁移卡','步骤 4–5','解决跨仓工程接入断层'],
+ ['p1','每个进阶样例内置坏例、诊断命令、FAQ/论坛路由、回归与性能基线','步骤 6','让失败可恢复'],
+ ['p1','把 Qwen 等端到端参考实践前置为“模型热点→算子优化”毕业任务','步骤 7','连接工具、样例与复用']
 );
 
 // 每个触点的来源链接 [昇腾URL, NVIDIA URL]（与当前截图对应；重锚时同步更新）
@@ -1717,7 +1716,7 @@ function renderJourney(){
   // 资源接力属于每一步的触点信息：它解释下一步资产从哪里来，不另起一条平行旅程。
   const handoffs=[
     {asset:'开发者中心 / 场景入口',status:'顺畅',cls:'ok',next:'学习 / 在线实验',href:'#L1'},
-    {asset:'学习 / 在线实验',status:'断开',cls:'bad',next:'文档 / Tiling',href:'#tp-S2.1'},
+    {asset:'学习 / 在线实验',status:'断开',cls:'bad',next:'文档 / Tiling',href:'#L4'},
     {asset:'下载 / 版本配套',status:'需自行拼接',cls:'warn',next:'文档 / 样例',href:'#L3'},
     {asset:'文档 / Tiling / 样例',status:'需自行拼接',cls:'warn',next:'工程 / 工具链',href:'#L4'},
     {asset:'代码仓 / 工具链 / 测试',status:'断开',cls:'bad',next:'FAQ / 论坛 / 诊断',href:'#L5'},
@@ -1881,13 +1880,6 @@ function renderFloors(){
       <p class="floor-sub">${st.sub}　·　触点：${ts.map(t=>t.name).join(' / ')}</p>
       <div class="tpgrid">${ts.map(tpCardHtml).join('')}</div>`;
     host.appendChild(sec);
-    if(st.k===2){
-      const ls=learnTps();
-      const sec2=document.createElement('section');sec2.className='floor';sec2.id='community-handoffs';
-      const aa=_avg(ls.map(t=>t.a)),nn=_avg(ls.map(t=>t.nv));
-      sec2.innerHTML=`<div class="floor-hd"><span class="fno" style="background:var(--blue-s);color:var(--blue-d)">接</span><h2>社区承接诊断 · 从首跑到交付的 5 次交接</h2><span style="font-family:var(--mono);font-size:13px;color:var(--g6)">诊断分 <b style="color:var(--coral)">${aa}</b> / <b style="color:var(--green)">${nn}</b> · 不计入外层均分</span></div><p class="floor-sub">这里不是第 8 步，也不把学习单独拔高。它抽取社区承接线上最关键的 5 次交接：<b>学习/在线首跑 → 文档/样例 → 工程/代码仓 → 工具/FAQ/论坛 → 参考实践/复用</b>。用原报告同一 DJFI 计算，说明问题出在资产交接，而非简单说“学习不好”。</p><div class="tpgrid">${ls.map(tpCardHtml).join('')}</div>`;
-      host.appendChild(sec2);
-    }
   });
   const cx=crossTps();
   if(cx.length){
@@ -1904,11 +1896,11 @@ function renderFloors(){
 function renderCommunityOverview(){
  const ia=document.getElementById('ia'),method=document.getElementById('method');
  if(ia)ia.innerHTML=`<div class="floor-hd"><span class="fno">MAP</span><h2>社区承接地图：多个板块接力完成一个算子</h2></div><p class="floor-sub">本报告不把“社区”缩成论坛，也不把“学习”孤立出来。开发者完成一个自定义算子，需要多个板块在正确时刻接力；下面先摊开它们各自该承担的任务。</p><div class="ia-grid"><div class="ia-col"><h3 style="--c:var(--coral)">昇腾 · 社区板块</h3><div class="ia-tree"><div class="ia-root">开发者中心：选路 / 场景入口</div><div class="ia-lv1">学习 / 在线实验：首跑与概念</div><div class="ia-lv1">下载 / 版本配套：环境边界</div><div class="ia-lv1">文档 / 样例 / GitCode：写与改</div><div class="ia-lv1">asc-devkit / torch_npu / ops-test-kit：工程与验证</div><div class="ia-lv1">FAQ / 论坛 / 工单：故障恢复</div><div class="ia-lv1">参考实践 / ModelZoo / 博客：优化与复用</div></div></div><div class="ia-col"><h3 style="--c:var(--green)">NVIDIA · 对照板块</h3><div class="ia-tree"><div class="ia-root">Developer：开发任务入口</div><div class="ia-lv1">Tutorials / Quick Start：首跑</div><div class="ia-lv1">CUDA Downloads / Compatibility：环境边界</div><div class="ia-lv1">Docs / CUDA Samples / PyTorch Extension：写与接入</div><div class="ia-lv1">Nsight / Compute Sanitizer：验证与诊断</div><div class="ia-lv1">Forums / Stack Overflow：恢复与经验</div><div class="ia-lv1">NGC / Blog / recipes：优化与复用</div></div></div></div><div class="ia-finds"><div class="ia-find"><div class="ia-find-h">本次真正评估的对象</div>不是每个板块“好不好看”，而是上一板块完成后，用户是否被清楚地送到下一板块，并带上必要的上下文。</div><div class="ia-find"><div class="ia-find-h">学习的正确位置</div>学习承担首跑与能力爬坡的起点；它必须交接给文档、样例、工程、工具和社区，不能独自承担整条开发旅程。</div><div class="ia-find"><div class="ia-find-h">最可能暴露的问题</div>昇腾资产并不稀缺，但学习→代码仓、下载→版本、样例→工具、错误→FAQ/论坛等交接可能需要开发者自行拼接。</div></div>`;
- if(method)method.innerHTML=`<div class="floor-hd"><span class="fno">摩擦指数</span><h2>评估方法论 · 与原报告完全相同的开发者旅程摩擦指数</h2></div><p class="floor-sub">所有外层触点与新增社区承接诊断卡均使用同一套 <b>5 维度 / 16 指标 / 同一锚点 / 同一归一化公式 / 等权合成</b>。本页没有另造“学习分”或“交接分”。</p><div class="ia-finds"><div class="ia-find"><div class="ia-find-h">A · 效率与反馈</div>点击、步骤、上下文切换、首次成功时间。</div><div class="ia-find"><div class="ia-find-h">B · 认知负荷</div>版本/平台选择项、必做决策点、目标导航深度。</div><div class="ia-find"><div class="ia-find-h">C · 准入摩擦</div>登录、协议、审批、表单字段。</div><div class="ia-find"><div class="ia-find-h">D · 内容可执行</div>代码可复制即跑、完整快速入门、文档时效。</div><div class="ia-find"><div class="ia-find-h">E · 可发现性</div>关键词命中、死链/失败、关键入口可达性。</div></div><div class="method"><b>“板块交接”如何被原指标捕捉：</b>学习 → 文档/代码仓/工具的额外跳转计入 <b>A3 上下文切换</b>；不知道下一步去哪计入 <b>B2 决策点 / B3 导航深度 / E3 入口可达性</b>；缺工程、命令、golden 与回归计入 <b>D1/D2 内容可执行</b>；错误找不到工具或 FAQ 计入 <b>E1/E3 可发现性</b>。<br><b>社区承接诊断：</b>新增 5 卡均由以上原公式算分、可展开核对；它们只解释社区承接线的关键断点，<b>不计入外层 7 步情绪曲线、热力图均分或封面均分</b>。</div>`;
+ if(method)method.innerHTML=`<div class="floor-hd"><span class="fno">摩擦指数</span><h2>评估方法论 · 与原报告完全相同的开发者旅程摩擦指数</h2></div><p class="floor-sub">所有外层触点均使用同一套 <b>5 维度 / 16 指标 / 同一锚点 / 同一归一化公式 / 等权合成</b>。本页没有另造“学习分”或“交接分”。</p><div class="ia-finds"><div class="ia-find"><div class="ia-find-h">A · 效率与反馈</div>点击、步骤、上下文切换、首次成功时间。</div><div class="ia-find"><div class="ia-find-h">B · 认知负荷</div>版本/平台选择项、必做决策点、目标导航深度。</div><div class="ia-find"><div class="ia-find-h">C · 准入摩擦</div>登录、协议、审批、表单字段。</div><div class="ia-find"><div class="ia-find-h">D · 内容可执行</div>代码可复制即跑、完整快速入门、文档时效。</div><div class="ia-find"><div class="ia-find-h">E · 可发现性</div>关键词命中、死链/失败、关键入口可达性。</div></div><div class="method"><b>“板块交接”如何被原指标捕捉：</b>学习 → 文档/代码仓/工具的额外跳转计入 <b>A3 上下文切换</b>；不知道下一步去哪计入 <b>B2 决策点 / B3 导航深度 / E3 入口可达性</b>；缺工程、命令、golden 与回归计入 <b>D1/D2 内容可执行</b>；错误找不到工具或 FAQ 计入 <b>E1/E3 可发现性</b>。这些摩擦直接体现在相应生命周期触点中，而非另设一条学习或交接评分线。</div>`;
 }
 function renderAll(){renderCommunityOverview();renderJourney();renderHeat();renderFloors();}
 const SCEN_HEAD={
- op:['算子开发 · 社区承接全旅程','站在「写算子的人」视角走完整 7 步：入口、学习、下载、文档、样例/工程、工具、论坛与版本配套<b>共同承接</b>。第 2 步的学习子链被展开，用后续工程、排错和性能结果验证它是否真正有效。'],
+ op:['算子开发 · 社区承接全旅程','站在「写算子的人」视角走完整 7 步：入口、学习、下载、文档、样例/工程、工具、论坛与版本配套<b>共同承接</b>。学习是否有效，直接由后续写、工程接入、排错和性能交付的触点结果验证。'],
  train:['训练 · 生命周期旅程','站在「训练模型的人」视角走 7 步：落地官网 → 进开发者门户 → 配 CANN+框架+数据 → 框架迁移(torch_npu/MindSpeed) → 分布式跑通 → 调试求助 → 进阶。情绪有<b>两个谷底</b>——「配环境」和「框架迁移」。'],
 };
 function updateScenHead(){
