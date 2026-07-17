@@ -1759,13 +1759,15 @@ function drawHandoffs(wrap,handoffs){
     if(!from||!to)return '';
     const a=from.getBoundingClientRect(),b=to.getBoundingClientRect();
     const x1=a.right-box.left, y1=a.top+a.height/2-box.top, x2=b.left-box.left, y2=b.top+b.height/2-box.top;
-    const mid=(x1+x2)/2, rise=Math.min(y1,y2)-18;
+    const mid=(x1+x2)/2, rise=Math.min(y1,y2)-18, radius=10;
     const color=h.cls==='smooth'?'#16A34A':h.cls==='break'?'#C7000B':'#D97706';
     const dash=h.cls==='smooth'?'':h.cls==='break'?'4 5':'5 4';
     const labelBg=h.cls==='smooth'?'#F0FDF4':h.cls==='break'?'#FEF2F2':'#FFFBEB';
     const labelColor=h.cls==='smooth'?'#15803D':h.cls==='break'?'#991B1B':'#92400E';
     const w=h.status.length*8+12;
-    return `<path d="M${x1} ${y1} C${x1+14} ${y1},${x2-14} ${y2},${x2} ${y2}" fill="none" stroke="${color}" stroke-width="1.8" ${dash?`stroke-dasharray="${dash}"`:''} marker-end="url(#handoff-${h.cls})"/><rect x="${mid-w/2}" y="${rise-9}" width="${w}" height="16" rx="8" fill="${labelBg}" stroke="${color}" stroke-opacity=".2"/><text x="${mid}" y="${rise+2}" text-anchor="middle" fill="${labelColor}" font-size="8" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">${h.status}</text>`;
+    const turnY=Math.min(y1,y2)-22;
+    const d=`M${x1} ${y1} H${mid-radius} Q${mid} ${y1} ${mid} ${y1-radius} V${turnY+radius} Q${mid} ${turnY} ${mid+radius} ${turnY} H${x2-radius} Q${x2} ${turnY} ${x2} ${turnY+radius} V${y2}`;
+    return `<path d="${d}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ${dash?`stroke-dasharray="${dash}"`:''} marker-end="url(#handoff-${h.cls})"/><rect x="${mid-w/2}" y="${turnY-9}" width="${w}" height="16" rx="8" fill="${labelBg}" stroke="${color}" stroke-opacity=".2"/><text x="${mid}" y="${turnY+2}" text-anchor="middle" fill="${labelColor}" font-size="8" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">${h.status}</text>`;
   }).join('');
   svg.innerHTML=defs+lines;
 }
