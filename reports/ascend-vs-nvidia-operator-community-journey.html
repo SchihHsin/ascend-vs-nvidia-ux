@@ -107,7 +107,7 @@ a{color:inherit;text-decoration:none}
 .jcurve{position:absolute;left:0;right:0;top:30px;height:130px;z-index:1;pointer-events:none}
 .jlegend{display:flex;gap:18px;justify-content:center;margin-top:14px;font-size:12px;color:var(--ink2)}
 .jlegend i{display:inline-block;width:14px;height:8px;border-radius:3px;margin-right:5px;vertical-align:middle}
-.jrn-tc{position:relative}.jrn-tp-node{font-size:10px;line-height:1.25;color:var(--ink);font-weight:700;border:1px solid var(--g3);background:#fff;border-radius:5px;padding:3px 5px;text-align:center;box-shadow:0 1px 2px rgba(15,23,42,.03)}.jrn-tp-arrow{height:7px;position:relative;flex:0 0 7px}.jrn-tp-arrow::before{content:'';position:absolute;top:0;bottom:2px;left:50%;width:1px;background:var(--g4)}.jrn-tp-arrow::after{content:'';position:absolute;left:calc(50% - 3px);bottom:0;width:5px;height:5px;border-right:1px solid var(--g5);border-bottom:1px solid var(--g5);transform:rotate(45deg)}.jrn-tp-exit{display:flex;align-items:center;gap:4px;margin-top:1px;font-size:8.5px;font-weight:800;line-height:1.2;color:var(--g6)}.jrn-tp-exit::before{content:'';width:15px;border-top:1px solid currentColor;opacity:.7}.jrn-tp-exit::after{content:'›';font-size:15px;line-height:8px}.jrn-tp-exit.ok{color:#45910a}.jrn-tp-exit.warn{color:#c88711}.jrn-tp-exit.bad{color:var(--coral)}.jrn-tp-exit.bad::before{border-top-style:dashed}.jrn-tp-exit.warn::before{border-top-style:dashed}
+.jrn-tc{position:relative}.jrn-tp-node{font-size:10px;line-height:1.25;color:var(--ink);font-weight:700;border:1px solid var(--g3);background:#fff;border-radius:5px;padding:3px 5px;text-align:center;box-shadow:0 1px 2px rgba(15,23,42,.03)}.jrn-tp-arrow{height:7px;position:relative;flex:0 0 7px}.jrn-tp-arrow::before{content:'';position:absolute;top:0;bottom:2px;left:50%;width:1px;background:var(--g4)}.jrn-tp-arrow::after{content:'';position:absolute;left:calc(50% - 3px);bottom:0;width:5px;height:5px;border-right:1px solid var(--g5);border-bottom:1px solid var(--g5);transform:rotate(45deg)}
 /* §4 用户旅程网格(适配自 report-ppt-skill,固定高度楼层版) */
 .jrn-wrap{display:flex;flex-direction:column;gap:0;margin-top:4px}
 .jrn-grid{display:grid;grid-template-columns:56px repeat(var(--jc,7),1fr);gap:0}
@@ -122,7 +122,16 @@ a{color:inherit;text-decoration:none}
 .jrn-ph .ptm{font-size:9px;margin-top:7px;display:inline-flex;align-self:flex-start;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.62);font-family:var(--mono);font-weight:700}
 .jrn-tc,.jrn-fc,.jrn-pc,.jrn-oc,.jrn-ec{border-left:1px solid var(--g3);border-right:1px solid var(--g3);border-bottom:1px solid var(--g3)}
 .jrn-tc,.jrn-fc{background:rgba(255,255,255,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.jrn-tc{flex:1;padding:9px 10px;display:flex;flex-direction:column;justify-content:center;min-height:64px}
+.jrn-tc{flex:1;padding:28px 10px 9px;display:flex;flex-direction:column;justify-content:center;min-height:64px}
+/* 承接质量发生在相邻阶段之间，沿触点行的阶段分界呈现，而非写进任一阶段。 */
+.jrn-touch-grid{position:relative}
+.jrn-handoff-rail{position:absolute;inset:5px 5px auto 0;height:18px;display:grid;grid-template-columns:56px repeat(var(--jc,7),1fr);z-index:4;pointer-events:none}
+.jrn-handoff{position:relative;justify-self:end;width:22px;height:18px;transform:translateX(50%)}
+.jrn-handoff-line{position:absolute;left:-10px;right:-8px;top:12px;height:2px}.jrn-handoff-arrow{position:absolute;right:-9px;top:8px;width:7px;height:7px;border-right:2px solid;border-bottom:2px solid;transform:rotate(-45deg)}
+.jrn-handoff-label{position:absolute;top:-2px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:8px;font-weight:800;line-height:1;padding:3px 5px;border-radius:99px;box-shadow:0 1px 3px rgba(31,41,55,.12)}
+.jrn-handoff.smooth .jrn-handoff-line{background:#16A34A}.jrn-handoff.smooth .jrn-handoff-arrow{border-color:#16A34A}.jrn-handoff.smooth .jrn-handoff-label{color:#15803D;background:#F0FDF4}
+.jrn-handoff.bridge .jrn-handoff-line{background:repeating-linear-gradient(90deg,#D97706 0 5px,transparent 5px 8px)}.jrn-handoff.bridge .jrn-handoff-arrow{border-color:#D97706}.jrn-handoff.bridge .jrn-handoff-label{color:#92400E;background:#FFFBEB}
+.jrn-handoff.break .jrn-handoff-line{background:repeating-linear-gradient(90deg,#C7000B 0 4px,transparent 4px 9px)}.jrn-handoff.break .jrn-handoff-arrow{border-color:#C7000B}.jrn-handoff.break .jrn-handoff-label{color:#991B1B;background:#FEF2F2}
 .jrn-fc{flex:1;padding:9px 11px;display:flex;flex-direction:column;justify-content:center}
 /* 行为 = 竖向流程图(HTML 方框 + SVG 箭头) */
 .jrn-flow{display:flex;flex-direction:column;align-items:stretch}
@@ -1714,21 +1723,19 @@ function renderJourney(){
   const seg=(a,i)=>{const p=i===0?a[i]:(a[i-1]+a[i])/2, q=i===N-1?a[i]:(a[i]+a[i+1])/2; return `0,${p} 50,${a[i]} 100,${q}`;};
   const rl=(rn,re)=>`<div class="jrn-rl"><div class="jrn-rn">${rn}</div><div class="jrn-re">${re}</div></div>`;
   const r1=`<div class="jrn-grid"><div></div>`+JOURNEY.map(s=>`<div class="jrn-pw"><div class="jrn-ph" style="--acc:${s.acc}"><div class="pn">${s.n}</div><div class="pt">${s.name}</div><div class="ptm">${s.meta}</div></div></div>`).join('')+`</div>`;
-  // 每个触点均以节点和箭头串起来；最后一段箭头说明交给下一阶段时是否顺畅。
+  // 触点在阶段内纵向串联；承接质量只在相邻阶段的分界线上表达。
   const handoffs=[
-    {status:'顺畅',cls:'ok',next:'下一步：学习 / 在线实验'},
-    {status:'断开',cls:'bad',next:'下一步缺口：文档 / Tiling'},
-    {status:'需自行拼接',cls:'warn',next:'下一步：文档 / 样例'},
-    {status:'需自行拼接',cls:'warn',next:'下一步：工程 / 工具链'},
-    {status:'断开',cls:'bad',next:'下一步缺口：FAQ / 论坛 / 诊断'},
-    {status:'需自行拼接',cls:'warn',next:'下一步：参考实践 / 版本配套'},
-    {status:'顺畅但晚到',cls:'ok',next:''}
+    {status:'顺畅',cls:'smooth'},
+    {status:'断开',cls:'break'},
+    {status:'需自行拼接',cls:'bridge'},
+    {status:'需自行拼接',cls:'bridge'},
+    {status:'断开',cls:'break'},
+    {status:'需自行拼接',cls:'bridge'}
   ];
-  const r2=`<div class="jrn-grid">`+rl('触点','Touch')+JOURNEY.map((s,i)=>{
-    const h=handoffs[i];
+  const r2=`<div class="jrn-grid jrn-touch-grid">`+rl('触点','Touch')+JOURNEY.map(s=>{
     const chain=s.touch.map((t,j)=>`<div class="jrn-tp-node">${t}</div>${j<s.touch.length-1?'<div class="jrn-tp-arrow"></div>':''}`).join('');
-    return `<div class="jrn-tw"><div class="jrn-tc">${chain}${h.next?`<div class="jrn-tp-exit ${h.cls}" title="${h.status}">${h.next}</div>`:''}</div></div>`;
-  }).join('')+`</div>`;
+    return `<div class="jrn-tw"><div class="jrn-tc">${chain}</div></div>`;
+  }).join('')+`<div class="jrn-handoff-rail"><div></div>${JOURNEY.map((s,i)=>i===N-1?'<div></div>':`<div class="jrn-handoff ${handoffs[i].cls}" title="${handoffs[i].status}"><i class="jrn-handoff-line"></i><i class="jrn-handoff-arrow"></i><span class="jrn-handoff-label">${handoffs[i].status}</span></div>`).join('')}</div></div>`;
   const r3=`<div class="jrn-grid">`+rl('行为','Action')+JOURNEY.map(s=>{
     // 把 action 按 → 拆成步骤,手画成竖向流程图(HTML 方框 + SVG 连接箭头)
     const steps=s.action.split(/\s*→\s*/);
