@@ -107,7 +107,7 @@ a{color:inherit;text-decoration:none}
 .jcurve{position:absolute;left:0;right:0;top:30px;height:130px;z-index:1;pointer-events:none}
 .jlegend{display:flex;gap:18px;justify-content:center;margin-top:14px;font-size:12px;color:var(--ink2)}
 .jlegend i{display:inline-block;width:14px;height:8px;border-radius:3px;margin-right:5px;vertical-align:middle}
-.jrn-tc{position:relative}.jrn-touch.asset{font-weight:800;color:var(--blue-d)}.jrn-touch.handoff{font-size:9px;font-weight:800;margin:0 0 0 11px;white-space:nowrap}.jrn-touch.handoff::before{width:0;height:0}.jrn-touch.handoff.ok{color:#45910a}.jrn-touch.handoff.ok::after{content:' →';font-size:12px}.jrn-touch.handoff.warn{color:#c88711}.jrn-touch.handoff.warn::after{content:' →';font-size:12px}.jrn-touch.handoff.bad{color:var(--coral)}.jrn-touch.handoff.bad::after{content:' →';font-size:12px}.jrn-touch.next{font-size:9px;color:var(--g6);margin-left:11px}.jrn-touch.next::before{width:0;height:0}
+.jrn-tc{position:relative}.jrn-tp-node{font-size:10px;line-height:1.25;color:var(--ink);font-weight:700;border:1px solid var(--g3);background:#fff;border-radius:5px;padding:3px 5px;text-align:center;box-shadow:0 1px 2px rgba(15,23,42,.03)}.jrn-tp-arrow{height:7px;position:relative;flex:0 0 7px}.jrn-tp-arrow::before{content:'';position:absolute;top:0;bottom:2px;left:50%;width:1px;background:var(--g4)}.jrn-tp-arrow::after{content:'';position:absolute;left:calc(50% - 3px);bottom:0;width:5px;height:5px;border-right:1px solid var(--g5);border-bottom:1px solid var(--g5);transform:rotate(45deg)}.jrn-tp-exit{display:flex;align-items:center;gap:4px;margin-top:1px;font-size:8.5px;font-weight:800;line-height:1.2;color:var(--g6)}.jrn-tp-exit::before{content:'';width:15px;border-top:1px solid currentColor;opacity:.7}.jrn-tp-exit::after{content:'›';font-size:15px;line-height:8px}.jrn-tp-exit.ok{color:#45910a}.jrn-tp-exit.warn{color:#c88711}.jrn-tp-exit.bad{color:var(--coral)}.jrn-tp-exit.bad::before{border-top-style:dashed}.jrn-tp-exit.warn::before{border-top-style:dashed}
 /* §4 用户旅程网格(适配自 report-ppt-skill,固定高度楼层版) */
 .jrn-wrap{display:flex;flex-direction:column;gap:0;margin-top:4px}
 .jrn-grid{display:grid;grid-template-columns:56px repeat(var(--jc,7),1fr);gap:0}
@@ -122,9 +122,7 @@ a{color:inherit;text-decoration:none}
 .jrn-ph .ptm{font-size:9px;margin-top:7px;display:inline-flex;align-self:flex-start;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.62);font-family:var(--mono);font-weight:700}
 .jrn-tc,.jrn-fc,.jrn-pc,.jrn-oc,.jrn-ec{border-left:1px solid var(--g3);border-right:1px solid var(--g3);border-bottom:1px solid var(--g3)}
 .jrn-tc,.jrn-fc{background:rgba(255,255,255,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.jrn-tc{flex:1;padding:9px 12px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:64px}
-.jrn-touch{font-size:11px;color:var(--ink);line-height:1.32;display:flex;align-items:center;gap:6px}
-.jrn-touch::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--g5);flex-shrink:0}
+.jrn-tc{flex:1;padding:9px 10px;display:flex;flex-direction:column;justify-content:center;min-height:64px}
 .jrn-fc{flex:1;padding:9px 11px;display:flex;flex-direction:column;justify-content:center}
 /* 行为 = 竖向流程图(HTML 方框 + SVG 箭头) */
 .jrn-flow{display:flex;flex-direction:column;align-items:stretch}
@@ -1713,19 +1711,20 @@ function renderJourney(){
   const seg=(a,i)=>{const p=i===0?a[i]:(a[i-1]+a[i])/2, q=i===N-1?a[i]:(a[i]+a[i+1])/2; return `0,${p} 50,${a[i]} 100,${q}`;};
   const rl=(rn,re)=>`<div class="jrn-rl"><div class="jrn-rn">${rn}</div><div class="jrn-re">${re}</div></div>`;
   const r1=`<div class="jrn-grid"><div></div>`+JOURNEY.map(s=>`<div class="jrn-pw"><div class="jrn-ph" style="--acc:${s.acc}"><div class="pn">${s.n}</div><div class="pt">${s.name}</div><div class="ptm">${s.meta}</div></div></div>`).join('')+`</div>`;
-  // 资源接力属于每一步的触点信息：它解释下一步资产从哪里来，不另起一条平行旅程。
+  // 每个触点均以节点和箭头串起来；最后一段箭头说明交给下一阶段时是否顺畅。
   const handoffs=[
-    {asset:'开发者中心 / 场景入口',status:'顺畅',cls:'ok',next:'学习 / 在线实验',href:'#L1'},
-    {asset:'学习 / 在线实验',status:'断开',cls:'bad',next:'文档 / Tiling',href:'#L4'},
-    {asset:'下载 / 版本配套',status:'需自行拼接',cls:'warn',next:'文档 / 样例',href:'#L3'},
-    {asset:'文档 / Tiling / 样例',status:'需自行拼接',cls:'warn',next:'工程 / 工具链',href:'#L4'},
-    {asset:'代码仓 / 工具链 / 测试',status:'断开',cls:'bad',next:'FAQ / 论坛 / 诊断',href:'#L5'},
-    {asset:'FAQ / 论坛 / 诊断',status:'需自行拼接',cls:'warn',next:'参考实践 / 版本配套',href:'#L6'},
-    {asset:'参考实践 / 版本配套',status:'顺畅但晚到',cls:'ok',next:'',href:'#L7'}
+    {status:'顺畅',cls:'ok',next:'下一步：学习 / 在线实验'},
+    {status:'断开',cls:'bad',next:'下一步缺口：文档 / Tiling'},
+    {status:'需自行拼接',cls:'warn',next:'下一步：文档 / 样例'},
+    {status:'需自行拼接',cls:'warn',next:'下一步：工程 / 工具链'},
+    {status:'断开',cls:'bad',next:'下一步缺口：FAQ / 论坛 / 诊断'},
+    {status:'需自行拼接',cls:'warn',next:'下一步：参考实践 / 版本配套'},
+    {status:'顺畅但晚到',cls:'ok',next:''}
   ];
   const r2=`<div class="jrn-grid">`+rl('触点','Touch')+JOURNEY.map((s,i)=>{
     const h=handoffs[i];
-    return `<div class="jrn-tw"><div class="jrn-tc">${s.touch.map(t=>`<div class="jrn-touch">${t}</div>`).join('')}<a class="jrn-touch asset" href="${h.href}">${h.asset}</a><div class="jrn-touch handoff ${h.cls}">${h.status}</div>${h.next?`<div class="jrn-touch next">→ ${h.next}</div>`:''}</div></div>`;
+    const chain=s.touch.map((t,j)=>`<div class="jrn-tp-node">${t}</div>${j<s.touch.length-1?'<div class="jrn-tp-arrow"></div>':''}`).join('');
+    return `<div class="jrn-tw"><div class="jrn-tc">${chain}${h.next?`<div class="jrn-tp-exit ${h.cls}" title="${h.status}">${h.next}</div>`:''}</div></div>`;
   }).join('')+`</div>`;
   const r3=`<div class="jrn-grid">`+rl('行为','Action')+JOURNEY.map(s=>{
     // 把 action 按 → 拆成步骤,手画成竖向流程图(HTML 方框 + SVG 连接箭头)
