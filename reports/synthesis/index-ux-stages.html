@@ -770,7 +770,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxwhy-title span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.45;color:var(--ink-2)}
       .uxwhy-diagram{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.9fr) 56px minmax(0,1.1fr);gap:1vw;align-items:stretch;min-height:0}
       .uxpath,.uxflow{border-radius:15px;background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(246,248,255,.58));border:1px solid rgba(47,61,99,.1);padding:1.55vh 1vw;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh;box-shadow:0 12px 26px -24px rgba(30,40,70,.26)}
-      .uxpath{opacity:.78}
+      .uxpath{opacity:.7}
       .uxpane-h{font-size:var(--fs-body);line-height:1.22;color:var(--ink);font-weight:950}
       .uxpath-line{display:grid;grid-template-columns:repeat(4,1fr);gap:.45vw;align-items:center}
       .uxpath-node{height:58px;border-radius:12px;background:rgba(47,61,99,.06);border:1px solid rgba(47,61,99,.1);display:flex;align-items:center;justify-content:center;text-align:center;font-size:var(--fs-sm);font-weight:850;color:#485468;line-height:1.2;position:relative}
@@ -791,6 +791,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .uxwhy-card{border-radius:16px;background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94);padding:1.85vh 1.18vw}
       .uxwhy-card b{display:block;font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950}
       .uxwhy-card p{margin:.78vh 0 0;font-size:var(--fs-body);line-height:1.52;color:var(--ink-2)}
+      .uxwhy-card.kicker{background:var(--g-ink);border-color:rgba(255,255,255,.2);box-shadow:0 18px 38px -26px rgba(20,23,28,.7),inset 0 1px 0 rgba(255,255,255,.18)}.uxwhy-card.kicker b{color:#fff}.uxwhy-card.kicker p{color:rgba(255,255,255,.76)}
       .uxwhy-list{display:grid;gap:.85vh}
       .uxwhy-item{display:grid;grid-template-columns:34px 1fr;gap:.72vw;align-items:start;border-radius:12px;padding:.48vh .42vw;margin:-.48vh -.42vw;transition:opacity .2s,background .2s,transform .2s,box-shadow .2s;cursor:pointer}
       .uxwhy-list.has-focus .uxwhy-item{opacity:.34}
@@ -978,23 +979,23 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </style>
     <div class="body-area">
       <div class="uxwhy-left">
-        <div class="uxwhy-title"><b>传统旅程图只看人怎么走，AI 协同任务还要看知识怎么流动</b><span>开发者把问题交给 AI 后，答案质量取决于 AI 能否从社区内容中找到、抓到、读懂并回到任务。</span></div>
+        <div class="uxwhy-title"><b>页面体验之外，答案如何形成同样决定任务能否完成</b><span>开发者把问题交给 AI 后，任务是否推进不只取决于页面是否易用，也取决于 AI 能否获得可靠知识，并在受阻时让人及时介入。</span></div>
         <div class="uxwhy-diagram">
           <div class="uxpath">
-            <div class="uxpane-h">传统用户旅程</div>
+            <div class="uxpane-h">只看页面路径</div>
             <div class="uxpath-line">
               <div class="uxpath-node">进入官网</div>
               <div class="uxpath-node">查文档</div>
               <div class="uxpath-node">下载工具</div>
               <div class="uxpath-node">遇到问题</div>
             </div>
-            <div class="uxpath-note">适合观察页面路径、触点体验与情绪变化。</div>
+            <div class="uxpath-note">能够观察用户在哪里点、是否顺利抵达。</div>
           </div>
           <div class="uxmid-arrow">
             <svg viewBox="0 0 48 48"><path d="M8 24h30"/><path d="m27 13 11 11-11 11"/></svg>
           </div>
           <div class="uxflow">
-            <div class="uxpane-h">人机协同时序图</div>
+            <div class="uxpane-h">补上知识形成过程</div>
             <div class="uxflow-map">
               <svg viewBox="0 0 420 220" preserveAspectRatio="none">
                 <path class="uxflow-link" d="M70 110 C125 70 150 70 205 102"/>
@@ -1009,20 +1010,20 @@ body.overview #panel,body.overview #toggle{display:none!important}
               <div class="uxbubble src" style="left:85%;top:52%">受阻点</div>
               <div class="uxbubble src" style="left:84%;top:82%">第三方 / 先验</div>
             </div>
-            <div class="uxflow-note">适合观察谁向谁取证、证据是否足够、哪里需要返工或人工复核。</div>
+            <div class="uxflow-note">观察谁在取证、证据是否返回、何时受阻、何时需要人工复核。</div>
           </div>
         </div>
-        <div class="uxwhy-foot">所以这张时序图不是技术流程图，而是把<b>任务中的知识请求、证据返回、受阻与复核</b>变成可观察对象。</div>
+        <div class="uxwhy-foot">因此，时序图不是技术流程图，而是把<b>任务中的知识请求、证据返回、受阻与复核</b>转化为可观察的研究对象。</div>
       </div>
       <div class="uxwhy-right">
-        <div class="uxwhy-card">
-          <b>为什么不用单页截图或普通旅程图</b>
-          <p>单页截图只能说明某个页面当下长什么样；普通旅程图能说明用户怎么走。但 AI 协同任务里的关键问题，常发生在“页面之外”：AI 搜了什么、抓到了什么、是否读懂、开发者何时回来复核。</p>
+        <div class="uxwhy-card kicker">
+          <b>研究关注的不是一个页面，而是一段任务中的知识协作</b>
+          <p>页面路径解释“人如何抵达内容”；知识流动解释“AI 与人如何共同把内容转化为可执行的答案”。</p>
         </div>
         <div class="uxwhy-card uxwhy-list">
-          <div class="uxwhy-item"><div class="uxwhy-no">01</div><div class="uxwhy-t"><b>把隐性的检索过程显性化</b><span>原本看不见的搜索、抓取、换词、补证，会被摊开成一条条往返。</span></div></div>
-          <div class="uxwhy-item"><div class="uxwhy-no">02</div><div class="uxwhy-t"><b>把人的复核动作纳入研究</b><span>开发者不是退出链路，而是在高风险节点重新判断证据是否可靠。</span></div></div>
-          <div class="uxwhy-item"><div class="uxwhy-no">03</div><div class="uxwhy-t"><b>把体验问题连接到内容治理</b><span>问题不只来自界面，也来自内容是否可发现、可抓取、可复现。</span></div></div>
+          <div class="uxwhy-item"><div class="uxwhy-no">01</div><div class="uxwhy-t"><b>AI 从哪里获得知识</b><span>识别官方内容、第三方内容和模型先验分别如何进入任务。</span></div></div>
+          <div class="uxwhy-item"><div class="uxwhy-no">02</div><div class="uxwhy-t"><b>知识在哪一步失效</b><span>记录搜索、抓取、理解或版本核验发生受阻的具体位置。</span></div></div>
+          <div class="uxwhy-item"><div class="uxwhy-no">03</div><div class="uxwhy-t"><b>开发者何时需要介入</b><span>识别必须由人复核、判断或补证的高风险节点。</span></div></div>
         </div>
       </div>
     </div>
