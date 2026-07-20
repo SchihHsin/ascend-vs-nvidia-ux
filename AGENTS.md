@@ -14,12 +14,21 @@
 reports/
   ascend-vs-nvidia-2026-06-13-visual.html   ← 主交付物:单文件楼层滚动可视化报告
   ascend-vs-nvidia-2026-06-13-v1.md         ← Stage3 文字版报告(早期版,未含责任归属/最新取证计数)
+  ascend-community-user-journey.html        ← 单边分析:昇腾社区开发者用户体验旅程
 materials/ascend-vs-nvidia/
   screenshots/        27 张真实截图 + 5 张「按重点裁」的区段图
   visual-analysis.md  截图视觉解析
   failed-links.md     取证失败/反爬记录
 tracking/ascend-vs-nvidia.md   竞品跟踪表(旅程定义、进度)
 ```
+
+## 昇腾社区单边体验旅程(2026-07)
+
+`reports/ascend-community-user-journey.html` 是不含 NVIDIA 对照的单文件 HTML 报告。它保留既有报告的浅色通透视觉、概览→旅程→触点→综述→行动机会架构，但只分析昇腾社区自身的开发者体验。
+
+- **一级阶段固定为用户指定的三项**:感知学习 / 开发实践 / 成长反馈。不要换回旧的 7 步生命周期口径；7 个连续动作(找到方向、建立首跑、配置环境、改代码查资料、工程接入验证、排错求助、沉淀进阶)只用于解释三个阶段内部的旅程。
+- **取证**:复用 `materials/ascend-vs-nvidia/screenshots/` 中的昇腾真实页面，触点卡为单边结构:用户原话→截图来源→当前体验→体验断点→优化机会，不含分数或 NVIDIA 栏。
+- **当前结论**:感知学习已有角色路径和在线实验的首跑长板，但学习成功没有交给下一任务；开发实践的最大摩擦是文档、样例、工程和工具的跨板块拼接；成长反馈中的排错、性能、认证、案例和贡献尚未形成闭环。
 
 ## 用户旅程(v2 重构 · 7 步生命周期 + 2 场景 tab)
 
