@@ -1778,10 +1778,12 @@ function drawHandoffs(wrap,handoffs){
     const dash=h.cls==='smooth'?'':h.cls==='break'?'4 5':'5 4';
     const labelBg=h.cls==='smooth'?'#F0FDF4':h.cls==='break'?'#FEF2F2':'#FFFBEB';
     const labelColor=h.cls==='smooth'?'#15803D':h.cls==='break'?'#991B1B':'#92400E';
-    const w=h.status.length*8+12;
     const turnY=Math.min(y1,y2)-22;
-    const d=`M${x1} ${y1} H${mid-radius} Q${mid} ${y1} ${mid} ${y1-radius} V${turnY+radius} Q${mid} ${turnY} ${mid+radius} ${turnY} H${x2-radius} Q${x2} ${turnY} ${x2} ${turnY+radius} V${y2}`;
-    return `<path d="${d}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ${dash?`stroke-dasharray="${dash}"`:''} marker-end="url(#handoff-${h.cls})"/><rect x="${mid-w/2}" y="${turnY-9}" width="${w}" height="16" rx="8" fill="${labelBg}" stroke="${color}" stroke-opacity=".2"/><text x="${mid}" y="${turnY+2}" text-anchor="middle" fill="${labelColor}" font-size="8" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">${h.status}</text>`;
+    // End with a horizontal segment, so the arrow enters the next action card at its left midpoint.
+    const d=`M${x1} ${y1} H${mid-radius} Q${mid} ${y1} ${mid} ${y1-radius} V${turnY+radius} Q${mid} ${turnY} ${mid+radius} ${turnY} H${x2-radius} Q${x2} ${turnY} ${x2} ${turnY+radius} V${y2} H${x2}`;
+    const chars=[...h.status], step=10, labelY=(y1+turnY-(chars.length-1)*step)/2;
+    const label=chars.map((c,j)=>`<tspan x="${mid}" dy="${j?'10':'0'}">${c}</tspan>`).join('');
+    return `<path d="${d}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ${dash?`stroke-dasharray="${dash}"`:''} marker-end="url(#handoff-${h.cls})"/><text x="${mid}" y="${labelY}" text-anchor="middle" fill="${labelColor}" font-size="8" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif" style="paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round">${label}</text>`;
   }).join('');
   svg.innerHTML=defs+lines;
 }
