@@ -2026,7 +2026,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     {name:'开发者 ↔ 昇腾社区 · 基础体验', pairs:['hu-off']}
   ];
   var step=0, hoverMsg=null, pinnedMsg=null;  // 0=全亮；hoverMsg=悬浮临时聚焦；pinnedMsg=点击钉住
-  var methodFocus=null, phaseFocus=null;
+  var methodFocus=null, phaseFocus=null, triggerFocus=null;
   var TASK_MSG={D:'sD',M:'sM',X:'sX',O:'sO',L:'sL'};
   function curFocus(){return hoverMsg!=null?hoverMsg:pinnedMsg;}  // 有效聚焦：悬浮优先，否则用钉住的
   function lanesOf(g){var s={};g.pairs.forEach(function(p){p.split('-').forEach(function(l){s[l]=1;});});return s;}
@@ -2037,6 +2037,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   function applyHi(){
     if(phaseFocus!=null){applyPhaseFocus(phaseFocus);return;}
     if(methodFocus){applyMethodFocus(methodFocus);return;}
+    if(triggerFocus){applyTriggerFocus(triggerFocus);return;}
     var svgEl=document.getElementById('journey'); if(!svgEl){updLbl();notify();return;}
     function clr(el){
       el.style.opacity='';
@@ -2076,6 +2077,29 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     updLbl(); notify();
   }
   window.__seqApplyHi=applyHi;
+  function applyTriggerFocus(key){
+    var svgEl=document.getElementById('journey'); if(!svgEl)return;
+    var MAP={
+      learn:{name:'聚焦 · 感知学习',msgs:['b0'],lanes:['hu','off']},
+      blocked:{name:'聚焦 · AI 检索官方失败',msgs:['sD','b1'],lanes:['hu','ai','off']},
+      decision:{name:'聚焦 · 需要决策',msgs:['dSoc','bSoc','dTil','bTil','dVer','b2','dAcc','bAcc'],lanes:['hu','off']}
+    };
+    var cfg=MAP[key]; if(!cfg){triggerFocus=null;applyHi();return;}
+    Array.prototype.forEach.call(svgEl.children,function(el){
+      var msg=el.getAttribute&&el.getAttribute('data-msg');
+      var lane=el.getAttribute&&el.getAttribute('data-lane');
+      var hit=cfg.msgs.indexOf(msg)>=0;
+      var laneHit=cfg.lanes.indexOf(lane)>=0;
+      el.style.opacity=hit?'1':(laneHit?'.62':'.11');
+      el.style.filter=hit?'drop-shadow(0 0 2px rgba(91,91,214,.38))':'';
+      if(el.tagName==='line'){
+        if(hit){el.style.strokeWidth='2.7';el.style.strokeOpacity='1';}
+        else if(laneHit){el.style.strokeWidth='2';el.style.strokeOpacity='.72';}
+        else {el.style.strokeWidth='';el.style.strokeOpacity='';}
+      }
+    });
+    var lbl=document.getElementById('sqLbl'); if(lbl)lbl.textContent=cfg.name;
+  }
   function applyPhaseFocus(phase){
     var svgEl=document.getElementById('journey'); if(!svgEl)return;
     var phases=(Array.isArray(phase)?phase:[phase]).map(Number);
@@ -2144,13 +2168,14 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
       if(pinnedMsg!=null){ pinnedMsg=null; applyHi(); notifyHover(); }   /* 点空白/非组内 → 取消钉住（模态）*/
     });
   })();
-  function go(n){var N=GROUPS.length;phaseFocus=null;methodFocus=null;step=((n%(N+1))+(N+1))%(N+1);hoverMsg=null;pinnedMsg=null;applyHi();}
+  function go(n){var N=GROUPS.length;phaseFocus=null;methodFocus=null;triggerFocus=null;step=((n%(N+1))+(N+1))%(N+1);hoverMsg=null;pinnedMsg=null;applyHi();}
   window.addEventListener('message',function(e){
     var d=e&&e.data;
     if(!d||!('__seqFocusLetter' in d))return;
     var letter=(d.__seqFocusLetter||'').toString().toUpperCase();
     hoverMsg=TASK_MSG[letter]||null;
     pinnedMsg=null;
+    triggerFocus=null;
     if(hoverMsg)step=1;
     applyHi();
   });
@@ -2159,7 +2184,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     if(!d||!('__seqPhaseFocus' in d))return;
     var next=d.__seqPhaseFocus;
     phaseFocus=(next===null||next===undefined||next===''||(Array.isArray(next)&&!next.length))?null:(Array.isArray(next)?next.map(Number):Number(next));
-    methodFocus=null; step=0; hoverMsg=null; pinnedMsg=null;
+    methodFocus=null; triggerFocus=null; step=0; hoverMsg=null; pinnedMsg=null;
     applyHi();
   });
   window.addEventListener('message',function(e){
@@ -2167,9 +2192,16 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     if(!d||!('__seqMethodFocus' in d))return;
     phaseFocus=null;
     methodFocus=d.__seqMethodFocus||null;
-    step=0; hoverMsg=null; pinnedMsg=null;
+    triggerFocus=null; step=0; hoverMsg=null; pinnedMsg=null;
     if(!methodFocus||methodFocus==='all'){methodFocus=null;applyHi();}
     else applyMethodFocus(methodFocus);
+  });
+  window.addEventListener('message',function(e){
+    var d=e&&e.data;
+    if(!d||!('__seqTriggerFocus' in d))return;
+    triggerFocus=d.__seqTriggerFocus||null;
+    phaseFocus=null; methodFocus=null; step=0; hoverMsg=null; pinnedMsg=null;
+    applyHi();
   });
   function buildCtrl(){
     if(document.getElementById('seqctrl'))return;

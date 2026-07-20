@@ -2357,7 +2357,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <!-- #26 右栏：三类转向触发 样式 -->
   <style>
     .trig{display:flex;flex-direction:column;gap:.7vh}
-    .trig-i{display:flex;align-items:center;gap:.8vw;background:rgba(91,91,214,.05);border:1px solid rgba(91,91,214,.18);border-radius:10px;padding:1vh 1vw}
+    .trig-i{display:flex;align-items:center;gap:.8vw;background:rgba(91,91,214,.05);border:1px solid rgba(91,91,214,.18);border-radius:10px;padding:1vh 1vw;cursor:pointer;transition:opacity .18s,background .18s,border-color .18s,box-shadow .18s}
+    .trig.has-focus .trig-i{opacity:.36}.trig.has-focus .trig-i.is-active{opacity:1;background:rgba(91,91,214,.11);border-color:rgba(91,91,214,.42);box-shadow:0 12px 24px -22px rgba(59,54,160,.72),inset 0 1px 0 rgba(255,255,255,.72)}
     .trig-i .tn{flex:0 0 auto;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;color:#fff;background:var(--accent);border-radius:6px;padding:.4vh .6vw;white-space:nowrap}
     .trig-i .tx{display:flex;flex-direction:column;min-width:0}
     .trig-i .tx b{font-size:var(--fs-body);color:var(--ink);line-height:1.3}
@@ -2381,9 +2382,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="cmp-h"><span class="hk">Interaction</span>开发者使用社区内容的关键场景</div>
         <p class="cmp-desc">即使有 AI 辅助，开发者仍会在<b>感知学习</b>、<b>检索受阻</b>、<b>需要决策</b>等场景依赖社区内容。社区在这里既包括官方文档，也包括第三方经验、样例仓和论坛讨论。</p>
         <div class="trig">
-          <div class="trig-i"><span class="tn">触发 1</span><div class="tx"><b>感知学习</b><small>接触新任务时，借助教程、样例与学习路径建立方向和首个可执行步骤</small></div></div>
-          <div class="trig-i"><span class="tn">触发 2</span><div class="tx"><b>AI 检索官方失败</b><small>官方操作教程抓取受阻时，转第三方社区或人工核查官方</small></div></div>
-          <div class="trig-i"><span class="tn">触发 3</span><div class="tx"><b>需要决策</b><small>答案不确定，或涉及版本、SoC、精度时：官方文档 + Gitee 样例 + 论坛交叉验证</small></div></div>
+          <div class="trig-i" tabindex="0" data-seq-trigger="learn"><span class="tn">触发 1</span><div class="tx"><b>感知学习</b><small>接触新任务时，借助教程、样例与学习路径建立方向和首个可执行步骤</small></div></div>
+          <div class="trig-i" tabindex="0" data-seq-trigger="blocked"><span class="tn">触发 2</span><div class="tx"><b>AI 检索官方失败</b><small>官方操作教程抓取受阻时，转第三方社区或人工核查官方</small></div></div>
+          <div class="trig-i" tabindex="0" data-seq-trigger="decision"><span class="tn">触发 3</span><div class="tx"><b>需要决策</b><small>答案不确定，或涉及版本、SoC、精度时：官方文档 + Gitee 样例 + 论坛交叉验证</small></div></div>
         </div>
         <div class="bridge" style="margin-top:.2vh">社区不仅承接“求助”，也在<b>感知学习</b>、<b>检索受阻</b>、<b>需要决策</b>三个节点进入开发旅程；基础体验评分衡量这些入口是否容易找到、能否支持任务完成。</div>
       </div>
@@ -3678,6 +3679,30 @@ function installSeqLetterHover(root){
   });
 }
 document.querySelectorAll('.qpx,.hm-grid').forEach(installSeqLetterHover);
+
+function initCommunityTriggerFocus(){
+  document.querySelectorAll('.trig').forEach(function(group){
+    if(group.dataset.seqTriggerReady==='1')return;
+    group.dataset.seqTriggerReady='1';
+    var slide=group.closest('.slide');
+    var frame=seqIframeForSection(slide);
+    var active=null;
+    function send(key){
+      active=key||null;
+      group.classList.toggle('has-focus',!!key);
+      group.querySelectorAll('[data-seq-trigger]').forEach(function(card){card.classList.toggle('is-active',card.dataset.seqTrigger===key);});
+      try{if(frame&&frame.contentWindow)frame.contentWindow.postMessage({__seqTriggerFocus:key||null},'*');}catch(e){}
+    }
+    group.querySelectorAll('[data-seq-trigger]').forEach(function(card){
+      card.addEventListener('mouseenter',function(){send(card.dataset.seqTrigger);});
+      card.addEventListener('focusin',function(){send(card.dataset.seqTrigger);});
+    });
+    group.addEventListener('mouseleave',function(){send(null);});
+    group.addEventListener('focusout',function(e){if(!group.contains(e.relatedTarget))send(null);});
+    if(frame)frame.addEventListener('load',function(){send(active);});
+  });
+}
+initCommunityTriggerFocus();
 
 function focusOverviewCurrent(){
   if(!document.body.classList.contains('overview'))return;
