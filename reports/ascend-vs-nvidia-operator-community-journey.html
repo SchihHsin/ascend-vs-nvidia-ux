@@ -1743,7 +1743,21 @@ function renderJourney(){
   const r5=`<div class="jrn-grid">`+rl('痛点','Pain')+JOURNEY.map(s=>`<div class="jrn-pw2"><div class="jrn-pc">${s.pains.map(p=>`<div class="jrn-pi"><div class="jrn-pi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="jrn-pt">${p}</div></div>`).join('')}</div></div>`).join('')+`</div>`;
   const r6=`<div class="jrn-grid">`+rl('机会点','Opps')+JOURNEY.map(s=>`<div class="jrn-ow"><div class="jrn-oc">${s.opps.map(o=>`<div class="jrn-oi"><div class="jrn-oi-dot"></div><div class="jrn-ot">${o[0]}<span class="jrn-od">${o[1]}</span></div></div>`).join('')}</div></div>`).join('')+`</div>`;
   wrap.innerHTML=r1+r2+r3+r4+r5+r6;
-  requestAnimationFrame(()=>drawHandoffs(wrap,handoffs));
+  // The scenario panel may still be hidden on first render, so wait for a real layout box.
+  scheduleHandoffs(wrap,handoffs);
+}
+
+function scheduleHandoffs(wrap,handoffs,attempt=0){
+  requestAnimationFrame(()=>{
+    const grid=wrap.querySelector('.jrn-touch-grid');
+    if(!grid)return;
+    const box=grid.getBoundingClientRect();
+    if((box.width<40||box.height<40)&&attempt<8){
+      setTimeout(()=>scheduleHandoffs(wrap,handoffs,attempt+1),60);
+      return;
+    }
+    drawHandoffs(wrap,handoffs);
+  });
 }
 
 function drawHandoffs(wrap,handoffs){
@@ -1956,12 +1970,19 @@ function showCommQ(q){
 function showTab(t){
   document.querySelectorAll('.tabpanel').forEach(p=>p.hidden=true);
   document.querySelectorAll('.l1tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
-  if(t==='op'||t==='train'){document.getElementById('tab-scenario').hidden=false;setScen(t);}
+  if(t==='op'||t==='train'){document.getElementById('tab-scenario').hidden=false;setScen(t);scheduleHandoffs(document.getElementById('jrnGrid'),[
+    {status:'顺畅',cls:'smooth'},{status:'断开',cls:'break'},{status:'需自行拼接',cls:'bridge'},
+    {status:'需自行拼接',cls:'bridge'},{status:'断开',cls:'break'},{status:'需自行拼接',cls:'bridge'}
+  ]);}
   else {document.getElementById('tab-'+t).hidden=false; if(t==='comm')showCommQ(window._commQ||'intro');}
   window.scrollTo(0,0);
   history.replaceState(null,'','#'+t);
 }
 renderAll();updateScenHead();
+window.addEventListener('resize',()=>scheduleHandoffs(document.getElementById('jrnGrid'),[
+  {status:'顺畅',cls:'smooth'},{status:'断开',cls:'break'},{status:'需自行拼接',cls:'bridge'},
+  {status:'需自行拼接',cls:'bridge'},{status:'断开',cls:'break'},{status:'需自行拼接',cls:'bridge'}
+]));
 renderDjfiRules();renderDjfiExample();updateCover();
 (function(){
   var TABS=['overview','op','comm','synth'];
