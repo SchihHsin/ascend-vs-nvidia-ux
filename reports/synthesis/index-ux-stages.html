@@ -1049,7 +1049,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         .stage-map-foot{padding:.85vh .9vw;border-radius:11px;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.13);color:#454F60;font-size:var(--fs-body);line-height:1.4}.stage-map-foot b{color:var(--ink);font-weight:950}
       </style>
       <div class="stage-map-frame">
-        <iframe data-src="seq-d3.html?phase-focus=1" title="自定义算子开发完整时序图"></iframe>
+        <iframe data-src="seq-stages.html" title="自定义算子开发阶段总览时序图"></iframe>
       </div>
       <div class="stage-map-side">
         <div class="stage-map-lead"><b>完整时序图先回答：问题发生在什么阶段。</b><span>先按任务阶段定位，再进入局部观察具体的知识往返与受阻。</span></div>
@@ -1088,7 +1088,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="seqscope-full">
         <div class="seqscope-full-head"><div><h3>完整过程：一次自定义算子开发</h3><p>开发过程先被展开为连续阶段，知识问题也因此拥有明确的位置。</p></div><span class="seqscope-stage-key">写核函数阶段</span></div>
         <div class="seqscope-frame">
-          <iframe data-src="seq-d3.html?full=1&phase=1" title="自定义算子开发全量时序图中的写核函数阶段"></iframe>
+          <iframe data-src="seq-stages.html?phase=1" title="自定义算子开发阶段总览中的写核函数阶段"></iframe>
           <div class="seqscope-focusnote"><b>阶段 02</b><br>写核函数</div>
           <div class="seqscope-summary"><b>全量图的意义</b>比较各阶段的检索、受阻与人工核验，识别问题出现的位置和影响。</div>
         </div>
@@ -3463,7 +3463,7 @@ function initPhaseFocus(){
     if(map.dataset.phaseReady)return;
     map.dataset.phaseReady='1';
     const slide=map.closest('.slide');
-    const frame=slide&&slide.querySelector('iframe[src*="seq-d3"],iframe[data-src*="seq-d3"]');
+    const frame=slide&&slide.querySelector('iframe[src*="seq-d3"],iframe[data-src*="seq-d3"],iframe[src*="seq-stages"],iframe[data-src*="seq-stages"]');
     if(!slide||!frame)return;
     let activePhase=null;
     function phasesOf(value){

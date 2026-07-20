@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{--ink:#222a38;--muted:#647085;--line:#d8dfeb;--ai:#7156d7;--human:#2f5f9d;--official:#c8102e;--soft:#f7f8fb}
+  *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;background:transparent;font-family:"HarmonyOS Sans SC","Microsoft YaHei",sans-serif;color:var(--ink)}
+  .chart{height:100%;padding:2.2% 2%;display:grid;grid-template-rows:auto 1fr;gap:1.5%;overflow:hidden}
+  .lanes{display:grid;grid-template-columns:18% 27.33% 27.33% 27.33%;align-items:end;min-height:0}.lane{height:100%;padding:1.4% 0;text-align:center;font-size:17px;font-weight:900;line-height:1.1}.lane:first-child{text-align:left;padding-left:9%}.lane.human{color:var(--human)}.lane.ai{color:var(--ai)}.lane.official{color:var(--official)}
+  .stages{min-height:0;display:grid;grid-template-rows:repeat(7,minmax(0,1fr));gap:1.25%}.stage{position:relative;display:grid;grid-template-columns:18% 27.33% 27.33% 27.33%;min-height:0;transition:opacity .2s,filter .2s}.stage:before{content:"";position:absolute;left:31.7%;right:13.7%;top:0;bottom:0;border-left:1px dashed var(--line);border-right:1px dashed var(--line);pointer-events:none}.stage-card{z-index:1;align-self:stretch;display:flex;align-items:center;gap:6%;padding:5% 6%;border-radius:10px;background:var(--bg,#f2f4f8);border:1px solid rgba(47,61,99,.08)}.stage-card i{display:flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:#fff;color:#4c596e;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-style:normal;font-weight:950}.stage-card b{display:block;font-size:15px;line-height:1.15;font-weight:950}.stage-card span{display:block;margin-top:3px;font-size:12px;line-height:1.22;color:var(--muted);font-weight:700}
+  .event{z-index:2;position:relative;display:flex;align-items:center;min-width:0}.event .dot{position:absolute;width:13px;height:13px;border:2px solid currentColor;border-radius:50%;background:#fff;z-index:3}.event .bar{position:absolute;height:2px;background:currentColor;top:50%;transform:translateY(-50%);border-radius:99px}.event .bar:after{content:"";position:absolute;right:-1px;top:50%;width:7px;height:7px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:translateY(-50%) rotate(45deg)}.event label{position:relative;z-index:4;padding:2px 5px;background:rgba(255,255,255,.92);border-radius:5px;font-size:12px;line-height:1.12;font-weight:850;white-space:nowrap}.event.to-ai{color:var(--ai)}.event.to-ai .dot{left:7%}.event.to-ai .bar{left:10%;width:81%}.event.to-ai label{margin-left:16%;margin-right:8%}.event.to-official{color:var(--official)}.event.to-official .dot{left:3%}.event.to-official .bar{left:5%;width:90%}.event.to-official label{margin-left:14%;margin-right:4%;text-align:center}.event.dev-to-official{color:var(--human);grid-column:2/5}.event.dev-to-official .dot{left:2%}.event.dev-to-official .bar{left:4%;width:92%;background-image:repeating-linear-gradient(90deg,currentColor 0 5px,transparent 5px 9px)}.event.dev-to-official label{margin-left:12%;margin-right:5%;text-align:center}.event.human-local{color:var(--human);grid-column:2/4}.event.human-local .dot{left:9%}.event.human-local .bar{left:12%;width:76%}.event.human-local label{margin-left:19%;margin-right:9%;text-align:center}
+  .stage:nth-child(1){--bg:#f0f3f8}.stage:nth-child(2){--bg:#f0ebf9}.stage:nth-child(3){--bg:#e8f3f0}.stage:nth-child(4){--bg:#e8f3f0}.stage:nth-child(5){--bg:#fcf1e3}.stage:nth-child(6){--bg:#e8f3f0}.stage:nth-child(7){--bg:#e9eff9}.chart.has-focus .stage{opacity:.18;filter:grayscale(.55)}.chart.has-focus .stage.on{opacity:1;filter:none}.chart.has-focus .stage.on .stage-card{box-shadow:0 8px 18px -13px rgba(36,42,60,.52);border-color:rgba(91,91,214,.3)}
+</style>
+</head>
+<body>
+<main class="chart" id="chart" aria-label="自定义算子开发阶段总览时序图">
+  <div class="lanes"><div class="lane">任务阶段</div><div class="lane human">开发者</div><div class="lane ai">AI 助手</div><div class="lane official">昇腾社区</div></div>
+  <div class="stages">
+    <section class="stage" data-phase="0"><div class="stage-card"><i>01</i><div><b>立项与选型</b><span>明确目标与开发路径</span></div></div><div class="event dev-to-official"><i class="dot"></i><i class="bar"></i><label>查开发入口与选型</label></div></section>
+    <section class="stage" data-phase="1"><div class="stage-card"><i>02</i><div><b>写核函数</b><span>查教程并生成工程骨架</span></div></div><div></div><div class="event to-official"><i class="dot"></i><i class="bar"></i><label>搜索官方教程 · 正文未取回</label></div></section>
+    <section class="stage" data-phase="2"><div class="stage-card"><i>03</i><div><b>动态 shape / Tiling</b><span>确定切分与调优策略</span></div></div><div class="event human-local"><i class="dot"></i><i class="bar"></i><label>AI 建议，开发者决策</label></div><div></div></section>
+    <section class="stage" data-phase="3"><div class="stage-card"><i>04</i><div><b>编译与内存定位</b><span>部署并排查运行问题</span></div></div><div></div><div class="event to-official"><i class="dot"></i><i class="bar"></i><label>检索内存定位方法</label></div></section>
+    <section class="stage" data-phase="4"><div class="stage-card"><i>05</i><div><b>框架注册与集成</b><span>接入 PyTorch 并验证扩展</span></div></div><div></div><div class="event to-official"><i class="dot"></i><i class="bar"></i><label>检索注册与集成方法</label></div></section>
+    <section class="stage" data-phase="5"><div class="stage-card"><i>06</i><div><b>精度验证与排查</b><span>逐层比对并定位误差</span></div></div><div class="event human-local"><i class="dot"></i><i class="bar"></i><label>AI 提供方法，开发者验收</label></div><div></div></section>
+    <section class="stage" data-phase="6"><div class="stage-card"><i>07</i><div><b>交付</b><span>验收并交付可用算子</span></div></div><div class="event dev-to-official"><i class="dot"></i><i class="bar"></i><label>沉淀工程与经验</label></div></section>
+  </div>
+</main>
+<script>
+  (function(){
+    var chart=document.getElementById('chart');
+    function setFocus(value){
+      var list=value==null?[]:(Array.isArray(value)?value:[value]).map(Number);
+      chart.classList.toggle('has-focus',list.length>0);
+      chart.querySelectorAll('[data-phase]').forEach(function(row){row.classList.toggle('on',list.indexOf(Number(row.dataset.phase))>=0);});
+    }
+    window.addEventListener('message',function(e){var d=e&&e.data;if(d&&Object.prototype.hasOwnProperty.call(d,'__seqPhaseFocus'))setFocus(d.__seqPhaseFocus);});
+    var m=location.search.match(/[?&]phase=([\d,]+)/);if(m)setFocus(m[1].split(','));
+    try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqPhaseReady:true},'*');}catch(e){}
+  })();
+</script>
+</body>
+</html>
