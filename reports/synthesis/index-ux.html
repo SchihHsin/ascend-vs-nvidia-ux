@@ -725,7 +725,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .rm-person{display:flex;align-items:center;gap:.65vw}.rm-person>svg{width:31px;height:31px;padding:7px;border-radius:9px;background:color-mix(in srgb,var(--rm) 12%,white);color:var(--rm);fill:none;stroke:currentColor}.rm-person b{font-size:var(--fs-body)}
       .rm-method{display:flex;align-items:center;gap:.65vw}.rm-method-icon{width:34px;height:34px;flex:0 0 auto;padding:8px;border-radius:9px;background:color-mix(in srgb,var(--rm) 11%,white);border:1px solid color-mix(in srgb,var(--rm) 20%,white);color:var(--rm)}.rm-method-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
       .rm-band.person-ai{background:linear-gradient(140deg,#5B3FB0,#7C5CF0);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(91,63,176,.62),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-dev{background:linear-gradient(140deg,#2361CC,#2F91D4);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(35,97,204,.58),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-ai:after,.rm-band.person-dev:after{background:radial-gradient(closest-side,rgba(255,255,255,.24),transparent)}.rm-band.person-ai b,.rm-band.person-dev b{color:#fff}.rm-band.person-ai p,.rm-band.person-dev p{color:rgba(255,255,255,.78)}.rm-band.person-ai .rm-person>svg,.rm-band.person-dev .rm-person>svg{background:rgba(255,255,255,.18);stroke:#fff!important;color:#fff!important;stroke-width:2.1}
-      .rm-flow{position:relative;height:3.25vh;margin-left:93px;display:flex;align-items:center;justify-content:center;pointer-events:none;color:rgba(92,102,164,.65)}.rm-flow.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vw}.rm-flow-arrow{width:36px;height:100%;justify-self:center;overflow:visible}.rm-flow-arrow path{fill:none;stroke:currentColor;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}.rm-flow-arrow.ai{color:rgba(124,92,240,.72)}.rm-flow-arrow.dev{color:rgba(47,111,237,.72)}
+      .rm-flow{position:relative;height:3.25vh;margin-left:93px;display:flex;align-items:center;justify-content:center;pointer-events:none;color:rgba(92,102,164,.54)}.rm-flow.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vw}.rm-flow-arrow{width:40px;height:100%;justify-self:center;overflow:visible}.rm-flow-arrow path{fill:currentColor}.rm-flow-arrow.ai{color:rgba(124,92,240,.68)}.rm-flow-arrow.dev{color:rgba(47,111,237,.68)}
     </style>
     <div class="body-area">
       <div class="research-map">
@@ -733,17 +733,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="rm-label"><b>研究产出</b><span>Output · 04</span></div>
           <div class="rm-cells"><div class="rm-band top"><b><em>三层问题框架</em>，收敛为 8 项内容改造方向</b><p>知识资产、机器理解、检索与引用共同决定昇腾社区能否支持可靠作答与任务完成。</p></div></div>
         </div>
-        <div class="rm-flow"><svg class="rm-flow-arrow" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg></div>
+        <div class="rm-flow"><svg class="rm-flow-arrow" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>分析方法</b><span>Method · 03</span></div>
           <div class="rm-cells"><div class="rm-band method-seq"><div class="rm-method"><i class="rm-method-icon" data-lucide="git-compare-arrows"></i><div><b>人机协同时序图</b><p>定义任务中的知识往返、受阻与复核位置。</p></div></div></div><div class="rm-band method-score"><div class="rm-method"><i class="rm-method-icon" data-lucide="chart-no-axes-combined"></i><div><b>可观测评分体系</b><p>衡量知识获取、内容质量、成本与任务完成。</p></div></div></div></div>
         </div>
-        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg></div>
+        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>实测范围</b><span>Scope · 02</span></div>
           <div class="rm-cells"><div class="rm-band scope-ai"><b>AI 侧内容可用性</b><div class="rm-number">26<small>项开发任务</small></div><p>CANN 与 CUDA 双栈对照，记录搜索、抓取与作答证据。</p></div><div class="rm-band scope-dev"><b>开发者侧基础体验</b><div class="rm-number">7<small>个阶段 · <strong>24</strong> 个触点</small></div><p>实跑入口、上手、开发、调试与交付全过程。</p></div></div>
         </div>
-        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M24 48V20M11 32 24 19l13 13"/></svg></div>
+        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>研究对象</b><span>Subject · 01</span></div>
           <div class="rm-cells"><div class="rm-band person-ai"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><p>检索、抓取、判断并组织答案</p></div></div></div><div class="rm-band person-dev"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><p>在开发任务中查阅、复核与决策</p></div></div></div></div>
@@ -2379,13 +2379,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
         <div class="cmp-h"><span class="hk">Interaction</span>开发者使用社区内容的关键场景</div>
-        <p class="cmp-desc">即使有 AI 辅助，开发者仍会在<b>检索受阻</b>、<b>答案复核</b>、<b>关键决策</b>等场景依赖社区内容。社区在这里既包括官方文档，也包括第三方经验、样例仓和论坛讨论。</p>
+        <p class="cmp-desc">即使有 AI 辅助，开发者仍会在<b>感知学习或检索受阻</b>、<b>答案复核与关键决策</b>等场景依赖社区内容。社区在这里既包括官方文档，也包括第三方经验、样例仓和论坛讨论。</p>
         <div class="trig">
-          <div class="trig-i"><span class="tn">触发 1</span><div class="tx"><b>AI 检索官方失败</b><small>官方操作教程页只返回导航和标题 → 转第三方社区 / 人工核查官方</small></div></div>
-          <div class="trig-i"><span class="tn">触发 2</span><div class="tx"><b>人工独立复核</b><small>不确定、拉安全网 → 官方 + 第三方交叉验证</small></div></div>
-          <div class="trig-i"><span class="tn">触发 3</span><div class="tx"><b>需要决策</b><small>版本 / soc / 精度 → 官方文档 + Gitee 样例 + 论坛</small></div></div>
+          <div class="trig-i"><span class="tn">触发 1</span><div class="tx"><b>感知学习或 AI 检索受阻</b><small>学习新任务时查教程、样例与路径；官方操作教程抓取受阻时，转第三方社区或人工核查官方</small></div></div>
+          <div class="trig-i"><span class="tn">触发 2</span><div class="tx"><b>需要复核或做关键决策</b><small>答案不确定，或涉及版本、SoC、精度时：官方文档 + Gitee 样例 + 论坛交叉验证</small></div></div>
         </div>
-        <div class="bridge" style="margin-top:.2vh">社区不仅承接“求助”，也在<b>检索受阻、答案复核、关键决策</b>三个节点进入开发旅程；基础体验评分衡量这些入口是否容易找到、能否支持任务完成。</div>
+        <div class="bridge" style="margin-top:.2vh">社区不仅承接“求助”，也在<b>感知学习或检索受阻</b>、<b>复核与关键决策</b>两个节点进入开发旅程；基础体验评分衡量这些入口是否容易找到、能否支持任务完成。</div>
       </div>
     </div>
   </section>
