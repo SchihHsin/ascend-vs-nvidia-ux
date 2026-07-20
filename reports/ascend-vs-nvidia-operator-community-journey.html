@@ -107,7 +107,7 @@ a{color:inherit;text-decoration:none}
 .jcurve{position:absolute;left:0;right:0;top:30px;height:130px;z-index:1;pointer-events:none}
 .jlegend{display:flex;gap:18px;justify-content:center;margin-top:14px;font-size:12px;color:var(--ink2)}
 .jlegend i{display:inline-block;width:14px;height:8px;border-radius:3px;margin-right:5px;vertical-align:middle}
-.jrn-tc{position:relative}.jrn-tp-node{font-size:10px;line-height:1.25;color:var(--ink);font-weight:700;border:1px solid var(--g3);background:#fff;border-radius:5px;padding:3px 5px;text-align:center;box-shadow:0 1px 2px rgba(15,23,42,.03)}
+.jrn-tc{position:relative;gap:5px;padding:9px 12px}.jrn-touch{font-size:11px;color:var(--ink);line-height:1.32;display:flex;align-items:center;gap:6px}.jrn-touch::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--g5);flex-shrink:0}
 /* §4 用户旅程网格(适配自 report-ppt-skill,固定高度楼层版) */
 .jrn-wrap{display:flex;flex-direction:column;gap:0;margin-top:4px}
 .jrn-grid{display:grid;grid-template-columns:56px repeat(var(--jc,7),1fr);gap:0}
@@ -1729,7 +1729,7 @@ function renderJourney(){
     {status:'需自行拼接',cls:'bridge'}
   ];
   const r2=`<div class="jrn-grid">`+rl('触点','Touch')+JOURNEY.map(s=>{
-    const chain=s.touch.map(t=>`<div class="jrn-tp-node">${t}</div>`).join('');
+    const chain=s.touch.map(t=>`<div class="jrn-touch">${t}</div>`).join('');
     return `<div class="jrn-tw"><div class="jrn-tc">${chain}</div></div>`;
   }).join('')+`</div>`;
   const r3=`<div class="jrn-grid jrn-action-grid">`+rl('行为','Action')+JOURNEY.map((s,stage)=>{
