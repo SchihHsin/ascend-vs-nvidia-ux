@@ -612,8 +612,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray warn">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">用得多≠信得过——开发者对 AI 输出仍存在明显信任落差</span></div>
-        <div class="subttl">立论 · 「信任落差」</div>
+        <div class="brand"><span class="ttl">AI 已进入开发日常，可靠性仍需通过验证建立</span></div>
+        <div class="subttl">研究背景 · 「信任与验证」</div>
       </div>
       <div class="head-r">03/ 信任落差2026</div>
     </div>
@@ -637,129 +637,21 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="dh-d">问题从“能生成”转向“能验证”<span class="dh-src">Sonar 2026 · 1,100+ 专业开发者</span></div>
           </div>
         </div>
-        <div class="bridge lite" style="margin:0 auto;max-width:1040px;width:100%;background:rgba(91,91,214,.1);color:var(--ink);text-align:center">AI 回答是否准确，关键看它会不会出现<b>抓不到、找不准、读不懂、读不顺</b>相关知识的问题，这就是「AI 可用性」。于是昇腾要从两个视角去看：AI 侧<b>「内容可用性」</b> + 开发者侧<b>「基础体验」</b>。</div>
+        <div class="bridge lite" style="margin:0 auto;max-width:1040px;width:100%;background:rgba(91,91,214,.1);color:var(--ink);text-align:center">AI 回答的可靠性取决于相关知识能否<b>被找到、被抓取、被理解并被验证</b>。本研究从两个视角观察：AI 侧<b>「内容可用性」</b> + 开发者侧<b>「基础体验」</b>。</div>
       </div>
     </div>
   </section>
 
-  <!-- 立论后的研究概览：先给管理层一张三层问题图，再展开研究方法与证据 -->
-  <section class="slide s-gray knowledge-pyramid-slide">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">AI 答案的信任落差，集中发生在昇腾知识的三层链路</span></div>
-        <div class="subttl">研究概览 · 内容可用性问题框架</div>
-      </div>
-      <div class="head-r">04/ 内容可用性结论</div>
-    </div>
-    <style>
-      .knowledge-pyramid-slide .body-area{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:2.3vw;align-items:stretch}
-      .kp-stage{position:relative;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-      .kp-stage:before{content:"";position:absolute;left:8%;right:5%;bottom:8%;height:50%;background:radial-gradient(72% 78% at 42% 100%,rgba(243,166,111,.13),rgba(245,202,125,.05) 52%,transparent 78%);filter:blur(4px);pointer-events:none}
-      .kp-pyramid{position:relative;z-index:1;width:min(96%,760px);height:76%;display:flex;align-items:center;justify-content:center}
-      .kp-pyramid svg{display:block;width:100%;height:100%;overflow:visible}.kp-pyramid .kp-num{font-family:'JetBrains Mono';font-size:18px;font-weight:900;fill:#7D8798;letter-spacing:.08em}.kp-pyramid .kp-title{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:22px;font-weight:900;fill:#283543}.kp-pyramid .kp-desc{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:14px;font-weight:600;fill:#536272}
-      .kp-side{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.kp-side-lead{padding:1.25vh 1.1vw 1.35vh;border-radius:13px;background:var(--g-ink);color:#fff;box-shadow:0 16px 34px -24px rgba(20,23,28,.62),inset 0 1px 0 rgba(255,255,255,.18)}.kp-side-lead b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950}.kp-side-lead span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.43;color:rgba(255,255,255,.76)}
-      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:flex;align-items:flex-start;gap:.68vw;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row.search .kp-dot{background:#FFF0BF;color:#8A681B}.kp-row.machine .kp-dot{background:#FFDCC3;color:#A55A2C}.kp-row.asset .kp-dot{background:#F7D9EC;color:#9B3E79}
-      .kp-chips{display:flex;flex-wrap:wrap;gap:.38vw;margin-top:.48vh}.kp-chips span{display:inline-flex;align-items:center;min-height:23px;border-radius:999px;padding:.24vh .55vw;background:#FFF5F5;border:1px solid rgba(232,70,86,.28);color:#B93644;font-size:var(--fs-sm);line-height:1.2;font-weight:800}
-      .kp-evidence{border-radius:12px;padding:1.05vh .95vw;background:rgba(242,180,121,.13);border:1px solid rgba(220,149,89,.25);font-size:var(--fs-body);line-height:1.45;color:#4E586A}.kp-evidence b{font-weight:950;color:#252A35}
-    </style>
-    <div class="body-area">
-      <div class="kp-stage">
-        <div class="kp-pyramid">
-          <svg viewBox="0 0 820 520" role="img" aria-label="知识资产层、机器理解层、检索与引用三层问题金字塔">
-            <defs><filter id="kpShadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#25131A" flood-opacity=".16"/></filter></defs>
-            <g filter="url(#kpShadow)">
-              <polygon points="260,40 178,160 342,160" fill="#FFF0BF"/>
-              <polygon points="260,40 342,160 260,160" fill="#F2CD70"/>
-              <polygon points="160,176 360,176 420,292 100,292" fill="#FFDCC3"/>
-              <polygon points="260,176 360,176 420,292 260,292" fill="#F3AF7C"/>
-              <polygon points="76,310 444,310 518,446 0,446" fill="#F7D9EC"/>
-              <polygon points="260,310 444,310 518,446 260,446" fill="#E7A8D2"/>
-            </g>
-            <text class="kp-num" x="128" y="121">03</text><path d="M352 99H412" stroke="#D2AA45" stroke-width="2"/>
-            <rect x="424" y="62" width="334" height="76" rx="0" fill="#FFF0BF"/><path d="M758 62V138L790 100Z" fill="#F2CD70"/>
-            <text class="kp-title" x="448" y="91">检索与引用</text><text class="kp-desc" x="448" y="115">复杂任务检索时，官方页面不在首屏</text>
-            <text class="kp-num" x="112" y="250">02</text><path d="M430 232H492" stroke="#D4814C" stroke-width="2"/>
-            <rect x="504" y="194" width="286" height="76" rx="0" fill="#FFDCC3"/><path d="M790 194V270L818 232Z" fill="#F3AF7C"/>
-            <text class="kp-title" x="528" y="223">机器理解层</text><text class="kp-desc" x="528" y="247">找到页面，也未必读懂内容</text>
-            <text class="kp-num" x="48" y="390">01</text><path d="M530 371H570" stroke="#C677A6" stroke-width="2"/>
-            <rect x="582" y="333" width="208" height="76" rx="0" fill="#F7D9EC"/><path d="M790 333V409L818 371Z" fill="#E7A8D2"/>
-            <text class="kp-title" x="606" y="362">知识资产层</text><text class="kp-desc" x="606" y="386">版本、错误码与专题知识不完整</text>
-          </svg>
-        </div>
-      </div>
-      <div class="kp-side">
-        <div class="kp-side-lead"><b>信任落差并非单一“文档不好用”，而是三层问题连续叠加</b><span>检索入口、机器理解与知识供给共同决定一项开发任务能否获得可靠答案。</span></div>
-        <div class="kp-map">
-          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索与引用层</b><div class="kp-chips"><span>复杂任务检索时，官方页面不在首屏</span><span>检索成本高</span></div></div></div>
-          <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-warning"></i></span><div><b>机器理解层</b><div class="kp-chips"><span>官方操作教程正文抓不到</span></div></div></div>
-          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>知识资产层</b><div class="kp-chips"><span>版本体系混乱</span><span>错误码能抓到，但正文质量低，无法解决问题</span><span>AI 对昇腾知识积累不足</span><span>第三方来源少，难以互证</span><span>复杂任务的可用性更低</span></div></div></div>
-        </div>
-        <div class="kp-evidence"><b>三层会相互放大：</b>资产不足时没有替代证据；机器读不懂时无法转成可靠答案；检索入口又决定人和 AI 能否遇见这份知识。</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 研究概览收束：范围、方法与产出在一张图中对应，后续分别展开。 -->
-  <section class="slide s-gray research-map-slide">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">研究全貌：两类用户、两组实测，共同定位昇腾社区可用性问题</span></div>
-        <div class="subttl">研究概览 · 研究对象、范围、方法与产出</div>
-      </div>
-      <div class="head-r">05/ 研究全貌</div>
-    </div>
-    <style>
-      .research-map-slide .body-area{justify-content:center}
-      .research-map{width:min(94%,1320px);margin:auto 0;display:grid;gap:.36vh;grid-auto-rows:auto}
-      .rm-row{display:grid;grid-template-columns:82px minmax(0,1fr);gap:1vw;align-items:stretch;min-height:0}
-      .rm-label{display:flex;flex-direction:column;justify-content:center;gap:.3vh;color:var(--ink-3)}
-      .rm-label b{font-size:var(--fs-sm);line-height:1.2;font-weight:950;color:var(--ink)}
-      .rm-label span{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase}
-      .rm-cells{display:flex;align-items:stretch;gap:.9vw;min-width:0}
-      .rm-band{--rm:#5B5BD6;position:relative;min-width:0;overflow:hidden;flex:1;border:1px solid rgba(255,255,255,.78);border-radius:14px;background:rgba(255,255,255,.52);box-shadow:0 8px 20px -16px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.92);padding:1.15vh 1vw;display:flex;flex-direction:column;justify-content:center;gap:.5vh}
-      .rm-band:after{content:"";position:absolute;width:44%;height:110%;right:-15%;top:-45%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--rm) 18%,transparent),transparent);filter:blur(12px);pointer-events:none}
-      .rm-band>*{position:relative;z-index:1}.rm-band b{display:block;font-size:var(--fs-h3);line-height:1.2;font-weight:950;color:var(--ink)}.rm-band p{margin:0;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
-      .rm-band.top{min-height:10.5vh;align-items:center;text-align:center;background:var(--g-ink);border-color:rgba(255,255,255,.2);box-shadow:0 18px 36px -24px rgba(20,23,28,.72),inset 0 1px 0 rgba(255,255,255,.18)}.rm-band.top b{font-size:var(--fs-h2);color:#fff}.rm-band.top b em{font-style:normal;color:#fff}.rm-band.top p{color:rgba(255,255,255,.74)}
-      .rm-band.scope-ai{--rm:#7C5CF0}.rm-band.scope-dev{--rm:#2F6FED}.rm-band.method-seq{--rm:#7C5CF0}.rm-band.method-score{--rm:#2F6FED}.rm-band.person-ai{--rm:#7C5CF0}.rm-band.person-dev{--rm:#2F6FED}
-      .rm-number{font-family:'JetBrains Mono';font-size:clamp(21px,1.8vw,30px);line-height:1;font-weight:950;color:var(--rm);margin-bottom:.12vh}.rm-number small{margin-left:.2em;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:var(--fs-sm);font-weight:800;color:var(--ink-2)}.rm-number small strong{font-family:'JetBrains Mono';font-size:clamp(21px,1.8vw,30px);line-height:1;color:var(--rm);vertical-align:-.1em}
-      .rm-person{display:flex;align-items:center;gap:.65vw}.rm-person>svg{width:31px;height:31px;padding:7px;border-radius:9px;background:color-mix(in srgb,var(--rm) 12%,white);color:var(--rm);fill:none;stroke:currentColor}.rm-person b{font-size:var(--fs-body)}
-      .rm-method{display:flex;align-items:center;gap:.65vw}.rm-method-icon{width:34px;height:34px;flex:0 0 auto;padding:8px;border-radius:9px;background:color-mix(in srgb,var(--rm) 11%,white);border:1px solid color-mix(in srgb,var(--rm) 20%,white);color:var(--rm)}.rm-method-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
-      .rm-band.person-ai{background:linear-gradient(140deg,#5B3FB0,#7C5CF0);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(91,63,176,.62),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-dev{background:linear-gradient(140deg,#2361CC,#2F91D4);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(35,97,204,.58),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-ai:after,.rm-band.person-dev:after{background:radial-gradient(closest-side,rgba(255,255,255,.24),transparent)}.rm-band.person-ai b,.rm-band.person-dev b{color:#fff}.rm-band.person-ai p,.rm-band.person-dev p{color:rgba(255,255,255,.78)}.rm-band.person-ai .rm-person>svg,.rm-band.person-dev .rm-person>svg{background:rgba(255,255,255,.18);stroke:#fff!important;color:#fff!important;stroke-width:2.1}
-      .rm-flow{position:relative;z-index:2;height:3.25vh;margin-left:93px;display:flex;align-items:center;justify-content:center;pointer-events:none;color:rgba(92,102,164,.54)}.rm-flow.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vw}.rm-flow-arrow{width:40px;height:100%;justify-self:center;overflow:visible}.rm-flow-arrow path{fill:currentColor}.rm-flow-arrow.ai{color:rgba(124,92,240,.68)}.rm-flow-arrow.dev{color:rgba(47,111,237,.68)}
-    </style>
-    <div class="body-area">
-      <div class="research-map">
-        <div class="rm-row">
-          <div class="rm-label"><b>研究产出</b><span>Output · 04</span></div>
-          <div class="rm-cells"><div class="rm-band top"><b><em>三层问题框架</em>，收敛为 8 项内容改造方向</b><p>知识资产、机器理解、检索与引用共同决定昇腾社区能否支持可靠作答与任务完成。</p></div></div>
-        </div>
-        <div class="rm-flow"><svg class="rm-flow-arrow" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
-        <div class="rm-row">
-          <div class="rm-label"><b>分析方法</b><span>Method · 03</span></div>
-          <div class="rm-cells"><div class="rm-band method-seq"><div class="rm-method"><i class="rm-method-icon" data-lucide="git-compare-arrows"></i><div><b>人机协同时序图</b><p>定义任务中的知识往返、受阻与复核位置。</p></div></div></div><div class="rm-band method-score"><div class="rm-method"><i class="rm-method-icon" data-lucide="chart-no-axes-combined"></i><div><b>可观测评分体系</b><p>衡量知识获取、内容质量、成本与任务完成。</p></div></div></div></div>
-        </div>
-        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
-        <div class="rm-row">
-          <div class="rm-label"><b>实测范围</b><span>Scope · 02</span></div>
-          <div class="rm-cells"><div class="rm-band scope-ai"><b>AI 侧内容可用性</b><div class="rm-number">26<small>项开发任务</small></div><p>CANN 与 CUDA 双栈对照，记录搜索、抓取与作答证据。</p></div><div class="rm-band scope-dev"><b>开发者侧基础体验</b><div class="rm-number">7<small>个阶段 · <strong>24</strong> 个触点</small></div><p>实跑入口、上手、开发、调试与交付全过程。</p></div></div>
-        </div>
-        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
-        <div class="rm-row">
-          <div class="rm-label"><b>研究对象</b><span>Subject · 01</span></div>
-          <div class="rm-cells"><div class="rm-band person-ai"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><p>检索、抓取、判断并组织答案</p></div></div></div><div class="rm-band person-dev"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><p>在开发任务中查阅、复核与决策</p></div></div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- UX 版新增：研究方法 1 / 为什么形成时序图 -->
+  <!-- UX 版新增：研究动机 / 为什么研究任务中的知识流动 -->
   <section class="slide s-gray ux-method-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">定义研究对象：从页面路径扩展到任务中的知识流动</span></div>
-        <div class="subttl">研究对象 · 人与 AI 如何在任务中获取社区知识</div>
+        <div class="brand"><span class="ttl">为什么要研究任务中的知识流动</span></div>
+        <div class="subttl">研究动机 · 人与 AI 如何共同获得可执行的社区知识</div>
       </div>
-      <div class="head-r">04/ 研究对象 · 入口</div>
+      <div class="head-r">04/ 研究动机</div>
     </div>
     <style>
       .ux-method-slide .body-area{display:grid;grid-template-columns:minmax(0,1.36fr) minmax(320px,.64fr);gap:1.7vw;align-items:stretch}
@@ -979,7 +871,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </style>
     <div class="body-area">
       <div class="uxwhy-left">
-        <div class="uxwhy-title"><b>页面体验之外，答案如何形成同样决定任务能否完成</b><span>开发者把问题交给 AI 后，任务是否推进不只取决于页面是否易用，也取决于 AI 能否获得可靠知识，并在受阻时让人及时介入。</span></div>
+        <div class="uxwhy-title"><b>任务能否完成，取决于知识如何流动</b><span>开发者把问题交给 AI 后，任务推进取决于页面体验、知识获取与人工复核能否顺畅衔接。</span></div>
         <div class="uxwhy-diagram">
           <div class="uxpath">
             <div class="uxpane-h">只看页面路径</div>
@@ -1017,7 +909,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       <div class="uxwhy-right">
         <div class="uxwhy-card kicker">
-          <b>研究关注的不是一个页面，而是一段任务中的知识协作</b>
+          <b>研究对象：一段任务中的知识协作</b>
           <p>页面路径解释“人如何抵达内容”；知识流动解释“AI 与人如何共同把内容转化为可执行的答案”。</p>
         </div>
         <div class="uxwhy-card uxwhy-list">
@@ -1029,6 +921,118 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
+
+  <!-- 研究概览收束：范围、方法与产出在一张图中对应，后续分别展开。 -->
+  <section class="slide s-gray research-map-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">研究概览：两类使用者、两条观察路径、两组研究产出</span></div>
+        <div class="subttl">研究概览 · 从研究问题到证据与改进方向</div>
+      </div>
+      <div class="head-r">05/ 研究全貌</div>
+    </div>
+    <style>
+      .research-map-slide .body-area{justify-content:center}
+      .research-map{width:min(94%,1320px);margin:auto 0;display:grid;gap:.36vh;grid-auto-rows:auto}
+      .rm-row{display:grid;grid-template-columns:82px minmax(0,1fr);gap:1vw;align-items:stretch;min-height:0}
+      .rm-label{display:flex;flex-direction:column;justify-content:center;gap:.3vh;color:var(--ink-3)}
+      .rm-label b{font-size:var(--fs-sm);line-height:1.2;font-weight:950;color:var(--ink)}
+      .rm-label span{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase}
+      .rm-cells{display:flex;align-items:stretch;gap:.9vw;min-width:0}
+      .rm-band{--rm:#5B5BD6;position:relative;min-width:0;overflow:hidden;flex:1;border:1px solid rgba(255,255,255,.78);border-radius:14px;background:rgba(255,255,255,.52);box-shadow:0 8px 20px -16px rgba(30,40,70,.22),inset 0 1px 0 rgba(255,255,255,.92);padding:1.15vh 1vw;display:flex;flex-direction:column;justify-content:center;gap:.5vh}
+      .rm-band:after{content:"";position:absolute;width:44%;height:110%;right:-15%;top:-45%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--rm) 18%,transparent),transparent);filter:blur(12px);pointer-events:none}
+      .rm-band>*{position:relative;z-index:1}.rm-band b{display:block;font-size:var(--fs-h3);line-height:1.2;font-weight:950;color:var(--ink)}.rm-band p{margin:0;font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}
+      .rm-band.top{min-height:10.5vh;align-items:center;text-align:center;background:var(--g-ink);border-color:rgba(255,255,255,.2);box-shadow:0 18px 36px -24px rgba(20,23,28,.72),inset 0 1px 0 rgba(255,255,255,.18)}.rm-band.top b{font-size:var(--fs-h2);color:#fff}.rm-band.top b em{font-style:normal;color:#fff}.rm-band.top p{color:rgba(255,255,255,.74)}
+      .rm-band.scope-ai{--rm:#7C5CF0}.rm-band.scope-dev{--rm:#2F6FED}.rm-band.method-seq{--rm:#7C5CF0}.rm-band.method-score{--rm:#2F6FED}.rm-band.person-ai{--rm:#7C5CF0}.rm-band.person-dev{--rm:#2F6FED}
+      .rm-number{font-family:'JetBrains Mono';font-size:clamp(21px,1.8vw,30px);line-height:1;font-weight:950;color:var(--rm);margin-bottom:.12vh}.rm-number small{margin-left:.2em;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:var(--fs-sm);font-weight:800;color:var(--ink-2)}.rm-number small strong{font-family:'JetBrains Mono';font-size:clamp(21px,1.8vw,30px);line-height:1;color:var(--rm);vertical-align:-.1em}
+      .rm-person{display:flex;align-items:center;gap:.65vw}.rm-person>svg{width:31px;height:31px;padding:7px;border-radius:9px;background:color-mix(in srgb,var(--rm) 12%,white);color:var(--rm);fill:none;stroke:currentColor}.rm-person b{font-size:var(--fs-body)}
+      .rm-method{display:flex;align-items:center;gap:.65vw}.rm-method-icon{width:34px;height:34px;flex:0 0 auto;padding:8px;border-radius:9px;background:color-mix(in srgb,var(--rm) 11%,white);border:1px solid color-mix(in srgb,var(--rm) 20%,white);color:var(--rm)}.rm-method-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+      .rm-band.person-ai{background:linear-gradient(140deg,#5B3FB0,#7C5CF0);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(91,63,176,.62),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-dev{background:linear-gradient(140deg,#2361CC,#2F91D4);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(35,97,204,.58),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-ai:after,.rm-band.person-dev:after{background:radial-gradient(closest-side,rgba(255,255,255,.24),transparent)}.rm-band.person-ai b,.rm-band.person-dev b{color:#fff}.rm-band.person-ai p,.rm-band.person-dev p{color:rgba(255,255,255,.78)}.rm-band.person-ai .rm-person>svg,.rm-band.person-dev .rm-person>svg{background:rgba(255,255,255,.18);stroke:#fff!important;color:#fff!important;stroke-width:2.1}
+      .rm-flow{position:relative;z-index:2;height:3.25vh;margin-left:93px;display:flex;align-items:center;justify-content:center;pointer-events:none;color:rgba(92,102,164,.54)}.rm-flow.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vw}.rm-flow-arrow{width:40px;height:100%;justify-self:center;overflow:visible}.rm-flow-arrow path{fill:currentColor}.rm-flow-arrow.ai{color:rgba(124,92,240,.68)}.rm-flow-arrow.dev{color:rgba(47,111,237,.68)}
+    </style>
+    <div class="body-area">
+      <div class="research-map">
+        <div class="rm-row">
+          <div class="rm-label"><b>研究产出</b><span>Output · 04</span></div>
+          <div class="rm-cells"><div class="rm-band top"><b><em>三层问题框架</em>，收敛为 8 项内容改造方向</b><p>知识资产、机器理解、检索与引用共同决定昇腾社区能否支持可靠作答与任务完成。</p></div></div>
+        </div>
+        <div class="rm-flow"><svg class="rm-flow-arrow" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
+        <div class="rm-row">
+          <div class="rm-label"><b>分析方法</b><span>Method · 03</span></div>
+          <div class="rm-cells"><div class="rm-band method-seq"><div class="rm-method"><i class="rm-method-icon" data-lucide="git-compare-arrows"></i><div><b>人机协同时序图</b><p>定义任务中的知识往返、受阻与复核位置。</p></div></div></div><div class="rm-band method-score"><div class="rm-method"><i class="rm-method-icon" data-lucide="chart-no-axes-combined"></i><div><b>可观测评分体系</b><p>衡量知识获取、内容质量、成本与任务完成。</p></div></div></div></div>
+        </div>
+        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
+        <div class="rm-row">
+          <div class="rm-label"><b>实测范围</b><span>Scope · 02</span></div>
+          <div class="rm-cells"><div class="rm-band scope-ai"><b>AI 侧内容可用性</b><div class="rm-number">26<small>项开发任务</small></div><p>CANN 与 CUDA 双栈对照，记录搜索、抓取与作答证据。</p></div><div class="rm-band scope-dev"><b>开发者侧基础体验</b><div class="rm-number">7<small>个阶段 · <strong>24</strong> 个触点</small></div><p>实跑入口、上手、开发、调试与交付全过程。</p></div></div>
+        </div>
+        <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
+        <div class="rm-row">
+          <div class="rm-label"><b>研究对象</b><span>Subject · 01</span></div>
+          <div class="rm-cells"><div class="rm-band person-ai"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><p>检索、抓取、判断并组织答案</p></div></div></div><div class="rm-band person-dev"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><p>在开发任务中查阅、复核与决策</p></div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 立论后的研究概览：先给管理层一张三层问题图，再展开研究方法与证据 -->
+  <section class="slide s-gray knowledge-pyramid-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">AI 答案的信任落差，来自昇腾知识的三层问题链</span></div>
+        <div class="subttl">研究概览 · 内容可用性问题框架</div>
+      </div>
+      <div class="head-r">04/ 内容可用性结论</div>
+    </div>
+    <style>
+      .knowledge-pyramid-slide .body-area{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:2.3vw;align-items:stretch}
+      .kp-stage{position:relative;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+      .kp-stage:before{content:"";position:absolute;left:8%;right:5%;bottom:8%;height:50%;background:radial-gradient(72% 78% at 42% 100%,rgba(243,166,111,.13),rgba(245,202,125,.05) 52%,transparent 78%);filter:blur(4px);pointer-events:none}
+      .kp-pyramid{position:relative;z-index:1;width:min(96%,760px);height:76%;display:flex;align-items:center;justify-content:center}
+      .kp-pyramid svg{display:block;width:100%;height:100%;overflow:visible}.kp-pyramid .kp-num{font-family:'JetBrains Mono';font-size:18px;font-weight:900;fill:#7D8798;letter-spacing:.08em}.kp-pyramid .kp-title{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:22px;font-weight:900;fill:#283543}.kp-pyramid .kp-desc{font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:14px;font-weight:600;fill:#536272}
+      .kp-side{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.kp-side-lead{padding:1.25vh 1.1vw 1.35vh;border-radius:13px;background:var(--g-ink);color:#fff;box-shadow:0 16px 34px -24px rgba(20,23,28,.62),inset 0 1px 0 rgba(255,255,255,.18)}.kp-side-lead b{display:block;font-size:var(--fs-h3);line-height:1.22;font-weight:950}.kp-side-lead span{display:block;margin-top:.48vh;font-size:var(--fs-body);line-height:1.43;color:rgba(255,255,255,.76)}
+      .kp-map{display:flex;flex-direction:column;gap:.72vh}.kp-row{display:flex;align-items:flex-start;gap:.68vw;padding:1.02vh .72vw;border-radius:11px;border:1px solid rgba(47,61,99,.1);background:rgba(255,255,255,.59)}.kp-row .kp-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none}.kp-row .kp-dot i{width:15px;height:15px;stroke-width:2}.kp-row b{display:block;font-size:var(--fs-body);line-height:1.22;font-weight:950;color:var(--ink)}.kp-row.search .kp-dot{background:#FFF0BF;color:#8A681B}.kp-row.machine .kp-dot{background:#FFDCC3;color:#A55A2C}.kp-row.asset .kp-dot{background:#F7D9EC;color:#9B3E79}
+      .kp-chips{display:flex;flex-wrap:wrap;gap:.38vw;margin-top:.48vh}.kp-chips span{display:inline-flex;align-items:center;min-height:23px;border-radius:999px;padding:.24vh .55vw;background:#FFF5F5;border:1px solid rgba(232,70,86,.28);color:#B93644;font-size:var(--fs-sm);line-height:1.2;font-weight:800}
+      .kp-evidence{border-radius:12px;padding:1.05vh .95vw;background:rgba(242,180,121,.13);border:1px solid rgba(220,149,89,.25);font-size:var(--fs-body);line-height:1.45;color:#4E586A}.kp-evidence b{font-weight:950;color:#252A35}
+    </style>
+    <div class="body-area">
+      <div class="kp-stage">
+        <div class="kp-pyramid">
+          <svg viewBox="0 0 820 520" role="img" aria-label="知识资产层、机器理解层、检索与引用三层问题金字塔">
+            <defs><filter id="kpShadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#25131A" flood-opacity=".16"/></filter></defs>
+            <g filter="url(#kpShadow)">
+              <polygon points="260,40 178,160 342,160" fill="#FFF0BF"/>
+              <polygon points="260,40 342,160 260,160" fill="#F2CD70"/>
+              <polygon points="160,176 360,176 420,292 100,292" fill="#FFDCC3"/>
+              <polygon points="260,176 360,176 420,292 260,292" fill="#F3AF7C"/>
+              <polygon points="76,310 444,310 518,446 0,446" fill="#F7D9EC"/>
+              <polygon points="260,310 444,310 518,446 260,446" fill="#E7A8D2"/>
+            </g>
+            <text class="kp-num" x="128" y="121">03</text><path d="M352 99H412" stroke="#D2AA45" stroke-width="2"/>
+            <rect x="424" y="62" width="334" height="76" rx="0" fill="#FFF0BF"/><path d="M758 62V138L790 100Z" fill="#F2CD70"/>
+            <text class="kp-title" x="448" y="91">检索与引用</text><text class="kp-desc" x="448" y="115">复杂任务检索时，官方页面不在首屏</text>
+            <text class="kp-num" x="112" y="250">02</text><path d="M430 232H492" stroke="#D4814C" stroke-width="2"/>
+            <rect x="504" y="194" width="286" height="76" rx="0" fill="#FFDCC3"/><path d="M790 194V270L818 232Z" fill="#F3AF7C"/>
+            <text class="kp-title" x="528" y="223">机器理解层</text><text class="kp-desc" x="528" y="247">找到页面，也未必读懂内容</text>
+            <text class="kp-num" x="48" y="390">01</text><path d="M530 371H570" stroke="#C677A6" stroke-width="2"/>
+            <rect x="582" y="333" width="208" height="76" rx="0" fill="#F7D9EC"/><path d="M790 333V409L818 371Z" fill="#E7A8D2"/>
+            <text class="kp-title" x="606" y="362">知识资产层</text><text class="kp-desc" x="606" y="386">版本、错误码与专题知识不完整</text>
+          </svg>
+        </div>
+      </div>
+      <div class="kp-side">
+        <div class="kp-side-lead"><b>信任落差来自三层问题的连续叠加</b><span>检索入口、机器理解与知识供给共同决定一项开发任务能否获得可靠答案。</span></div>
+        <div class="kp-map">
+          <div class="kp-row search"><span class="kp-dot"><i data-lucide="search-x"></i></span><div><b>检索与引用层</b><div class="kp-chips"><span>复杂任务检索时，官方页面不在首屏</span><span>检索成本高</span></div></div></div>
+          <div class="kp-row machine"><span class="kp-dot"><i data-lucide="file-warning"></i></span><div><b>机器理解层</b><div class="kp-chips"><span>官方操作教程正文抓不到</span></div></div></div>
+          <div class="kp-row asset"><span class="kp-dot"><i data-lucide="layers-3"></i></span><div><b>知识资产层</b><div class="kp-chips"><span>版本体系混乱</span><span>错误码能抓到，但正文质量低，无法解决问题</span><span>AI 对昇腾知识积累不足</span><span>第三方来源少，难以互证</span><span>复杂任务的可用性更低</span></div></div></div>
+        </div>
+        <div class="kp-evidence"><b>三层会相互放大：</b>资产不足时没有替代证据；机器读不懂时无法转成可靠答案；检索入口又决定人和 AI 能否遇见这份知识。</div>
+      </div>
+    </div>
+  </section>
+
   <!-- 阶段优先版：先用完整生命周期定位问题 -->
   <section class="slide s-gray copy-large stage-map-slide">
     <div class="head">
@@ -1036,7 +1040,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">定义研究对象：从完整开发旅程定位知识需求</span></div>
         <div class="subttl">研究对象 · 「全局阶段地图」</div>
       </div>
-      <div class="head-r">05/ 研究对象 · 全局阶段</div>
+      <div class="head-r">07/ 研究对象 · 全局阶段</div>
     </div>
     <div class="body-area">
       <style>
@@ -1073,7 +1077,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">从全局阶段地图进入一次具体的知识往返</span></div>
         <div class="subttl">研究对象 · 「完整旅程 → 写核函数阶段局部」</div>
       </div>
-      <div class="head-r">06/ 研究对象 · 全局到局部</div>
+      <div class="head-r">08/ 研究对象 · 全局到局部</div>
     </div>
     <style>
       .seqscope-slide .body-area{display:grid;grid-template-columns:minmax(0,1.18fr) 54px minmax(0,.82fr);gap:1.05vw;align-items:stretch}
@@ -1110,7 +1114,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">定义研究对象：一次知识往返由谁发起、如何受阻</span></div>
         <div class="subttl">研究对象 · 「写核函数」阶段局部</div>
       </div>
-      <div class="head-r">07/ 研究对象 · 局部往返</div>
+      <div class="head-r">09/ 研究对象 · 局部往返</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card">
@@ -1145,7 +1149,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">研究对象包含两种使用社区的行为：AI 取证，开发者核验与决策</span></div>
         <div class="subttl">研究对象 · 人与 AI 在同一任务中的不同知识需求</div>
       </div>
-      <div class="head-r">08/ 研究对象 · 两种行为</div>
+      <div class="head-r">10/ 研究对象 · 两种行为</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card seqdemo-left">
@@ -1236,7 +1240,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">定义测量方法：11 项评分对应架构图中的知识获取与作答动作</span></div>
         <div class="subttl">测量方法 · 「架构图 → 可观测指标」</div>
       </div>
-      <div class="head-r">08/ AI 指标 · 架构映射</div>
+      <div class="head-r">11/ AI 指标 · 架构映射</div>
     </div>
     <div class="body-area">
         <div class="archmetric-layout">
@@ -1296,7 +1300,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">指标计算方式：①–⑩ 定义各项可观测得分，最终形成综合置信度⑪</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「定义与计算理由」</div>
       </div>
-      <div class="head-r">09/ AI 指标 · 计算理由</div>
+      <div class="head-r">12/ AI 指标 · 计算理由</div>
     </div>
     <div class="body-area">
       <div class="metric-class-layout">
@@ -1583,7 +1587,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">理论依据：指标与公式建立在信息检索、信息架构和可复现评测方法上</span></div>
         <div class="subttl">测量方法 · 「理论依据」</div>
       </div>
-      <div class="head-r">10/ AI 指标 · 理论依据</div>
+      <div class="head-r">13/ AI 指标 · 理论依据</div>
     </div>
     <div class="body-area">
       <div class="auth">
@@ -1743,7 +1747,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">对照问题：将 5 项知识需求转写为 CANN 与 CUDA 的同难度提问</span></div>
         <div class="subttl">实测验证 · 「任务抽取 → 对照问题」</div>
       </div>
-      <div class="head-r">12/ 问题对 · 对照设计</div>
+      <div class="head-r">15/ 问题对 · 对照设计</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -1965,7 +1969,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">五项任务结果：写算子可用性最低，其余任务受版本、生态与模型先验影响</span></div>
         <div class="subttl">实测验证 · 「对照问题 → 五项结果」</div>
       </div>
-      <div class="head-r">13/ 矩阵评分 · 结果</div>
+      <div class="head-r">16/ 矩阵评分 · 结果</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -2019,7 +2023,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">全量矩阵：从 26 个任务中定位 8 个内容可用性问题</span></div>
         <div class="subttl">实测验证 · 「五项结果 → 全量问题定位」</div>
       </div>
-      <div class="head-r">14/ AI · 全量矩阵</div>
+      <div class="head-r">17/ AI · 全量矩阵</div>
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
@@ -2277,7 +2281,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 1：统一版本入口与配套查询</span></div>
         <div class="subttl">内容可用性结论 · 「1/8 版本入口」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">15/ 内容可用性结论 · 1</div>
+      <div class="head-r">18/ 内容可用性结论 · 1</div>
     </div>
     <div class="body-area action-layout"><iframe data-src="ux19-embed.html?card=1&amp;goal=把“版本散乱”收敛到首选网址、当前推荐版和配套查询。&amp;issue=版本体系混乱&amp;layer=asset" data-goal="把“版本散乱”收敛到首选网址、当前推荐版和配套查询。" title="opknow19 卡1"></iframe></div>
   </section>
@@ -2287,7 +2291,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 2：错误码一码一页，提供排查路径</span></div>
         <div class="subttl">内容可用性结论 · 「2/8 错误码」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">16/ 内容可用性结论 · 2</div>
+      <div class="head-r">19/ 内容可用性结论 · 2</div>
     </div>
     <div class="body-area action-layout"><iframe data-src="ux19-embed.html?card=3&amp;goal=错误码需要从“能搜到页面”推进到“能定位、能验证”。&amp;issue=错误码正文质量低，无法解决问题&amp;layer=asset" data-goal="错误码需要从“能搜到页面”推进到“能定位、能验证”。" title="opknow19 卡3：错误码"></iframe></div>
   </section>
@@ -2297,7 +2301,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 3：建立多平台第三方互证</span></div>
         <div class="subttl">内容可用性结论 · 「3/8 第三方生态」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">17/ 内容可用性结论 · 3</div>
+      <div class="head-r">20/ 内容可用性结论 · 3</div>
     </div>
     <div class="body-area action-layout"><iframe data-src="ux19-embed.html?card=7&amp;goal=用官方博客与论坛提供版本基线、问题入口和案例源，带动 GitCode 与外部社区形成独立、可复现的供给。&amp;issue=第三方来源少，难以互证&amp;layer=asset" data-goal="用官方博客与论坛提供版本基线、问题入口和案例源，带动 GitCode 与外部社区形成独立、可复现的供给。" title="opknow19 卡7：第三方生态"></iframe></div>
   </section>
@@ -2307,7 +2311,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 4：用端到端专题牵引复杂任务</span></div>
         <div class="subttl">内容可用性结论 · 「4/8 高难度任务专题」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">18/ 内容可用性结论 · 4</div>
+      <div class="head-r">21/ 内容可用性结论 · 4</div>
     </div>
     <div class="body-area action-layout"><iframe data-src="ux19-embed.html?card=8&amp;goal=将分散页面组织为完整、可验证的任务路径。&amp;issue=复杂任务的可用性更低&amp;layer=asset" data-goal="将分散页面组织为完整、可验证的任务路径。" title="opknow19 卡8：任务专题"></iframe></div>
   </section>
@@ -2317,7 +2321,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 5：建设可被模型吸收的知识供给</span></div>
         <div class="subttl">内容可用性结论 · 「5/8 语料供给」<span class="layer-tag asset">金字塔：知识资产层</span></div>
       </div>
-      <div class="head-r">19/ 内容可用性结论 · 5</div>
+      <div class="head-r">22/ 内容可用性结论 · 5</div>
     </div>
     <div class="body-area action-layout"><iframe data-src="ux19-embed.html?card=9&amp;goal=面向下一代模型补充可训练、可引用、可验证的语料供给。&amp;issue=AI 对昇腾知识积累不足、第三方来源少&amp;layer=asset" data-goal="面向下一代模型补充可训练、可引用、可验证的语料供给。" title="opknow19 卡9：语料供给"></iframe></div>
   </section>
@@ -2327,7 +2331,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 6：用页面结构保障 AI 可读</span></div>
         <div class="subttl">内容可用性结论 · 「6/8 页面结构」<span class="layer-tag machine">金字塔：机器理解层</span></div>
       </div>
-      <div class="head-r">20/ 内容可用性结论 · 6</div>
+      <div class="head-r">23/ 内容可用性结论 · 6</div>
     </div>
     <div class="body-area action-layout"><div style="display:flex;flex-direction:column;min-height:0"><iframe data-src="ux19-embed.html?card=6&amp;goal=页面结构要同时支持机器抓取、代码复现和上下文引用。&amp;issue=官方操作教程正文抓不到&amp;layer=machine" data-goal="页面结构要同时支持机器抓取、代码复现和上下文引用。" title="opknow19 卡6：页面结构" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe><div class="msg-alert"><span class="msg-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span>旻硕详细展开<b>AI可抓取性研究</b></span></div></div></div>
   </section>
@@ -2337,7 +2341,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 7：让任务词的检索直达官方页面</span></div>
         <div class="subttl">内容可用性结论 · 「7/8 搜索可发现性」<span class="layer-tag search">金字塔：检索与引用层</span></div>
       </div>
-      <div class="head-r">21/ 内容可用性结论 · 7</div>
+      <div class="head-r">24/ 内容可用性结论 · 7</div>
     </div>
     <div class="body-area action-layout"><iframe data-src="ux19-embed.html?card=2&amp;goal=让开发者和 AI 都能以任务词更早命中官方当前答案。&amp;issue=复杂任务检索时，官方页面不在首屏&amp;layer=search" data-goal="让开发者和 AI 都能以任务词更早命中官方当前答案。" title="opknow19 卡2：搜索可发现性"></iframe></div>
   </section>
@@ -2347,7 +2351,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">内容可用性结论 8：提供面向 AI 的机器可读入口</span></div>
         <div class="subttl">内容可用性结论 · 「8/8 机器可读出口」<span class="layer-tag search">金字塔：检索与引用层</span></div>
       </div>
-      <div class="head-r">22/ 内容可用性结论 · 8</div>
+      <div class="head-r">25/ 内容可用性结论 · 8</div>
     </div>
     <div class="body-area action-layout"><iframe data-src="ux19-embed.html?card=5&amp;goal=给 Agent 稳定的机器可读入口，减少逐页抓取、换词和重试。&amp;issue=检索成本高&amp;layer=search" data-goal="给 Agent 稳定的机器可读入口，减少逐页抓取、换词和重试。" title="opknow19 卡5：机器可读出口"></iframe></div>
   </section>
@@ -2371,7 +2375,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">人机协同时序：AI 时代开发者仍会在关键场景使用昇腾社区</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「时序图」</div>
       </div>
-      <div class="head-r">22/ 基础体验 · 时序图</div>
+      <div class="head-r">26/ 基础体验 · 时序图</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -2396,7 +2400,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验评估先界定理论依据与评估边界</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 1/3 · 理论与边界」</div>
       </div>
-      <div class="head-r">23/ 摩擦指数 · 理论与边界</div>
+      <div class="head-r">27/ 摩擦指数 · 理论与边界</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=1" title="摩擦指数 理论依据+评估边界" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -2408,7 +2412,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">基础体验评分由 5 维 16 项指标按统一协议归一化</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 2/3 · 指标与计算」</div>
       </div>
-      <div class="head-r">24/ 摩擦指数 · 指标与计算</div>
+      <div class="head-r">28/ 摩擦指数 · 指标与计算</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=2" title="摩擦指数 指标体系+测量协议+归一化" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -2420,7 +2424,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">16 个 best/worst 锚点公开，保证两边同尺对比</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 3/3 · 锚点总表」</div>
       </div>
-      <div class="head-r">25/ 摩擦指数 · 锚点总表</div>
+      <div class="head-r">29/ 摩擦指数 · 锚点总表</div>
     </div>
     <div class="body-area">
       <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=3" title="摩擦指数 六、锚点总表" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
@@ -2444,7 +2448,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">走完 7 步生命周期：每步「触点 × 情绪 × 痛点 / 机会」，谷底在配环境</span></div>
         <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程」</div>
       </div>
-      <div class="head-r">26/ 基础体验 · 用户旅程</div>
+      <div class="head-r">30/ 基础体验 · 用户旅程</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:1.4vw;align-items:stretch">
       <div style="flex:0 0 17%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
@@ -3195,9 +3199,9 @@ const root=document.documentElement;
 const deck=document.getElementById('deck');
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
-  {id:'findings',label:'研究概览',range:[2,5]},
-  {id:'object',label:'研究对象',range:[6,10]},
-  {id:'measure',label:'测量方法',range:[11,13]},
+  {id:'findings',label:'研究概览',range:[2,6]},
+  {id:'object',label:'研究对象',range:[7,10]},
+  {id:'measure',label:'测量方法',range:[11,14]},
   {id:'evidence',label:'实测验证',range:[14,16]},
   {id:'action',label:'改造方向',range:[17,69]}
 ];
