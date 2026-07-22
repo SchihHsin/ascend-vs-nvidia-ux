@@ -584,8 +584,10 @@ python test.py</pre><div class="topic-check"><span>✓ 预期日志</span><span>
     </ul>
         <div class="demo">
       <div class="dnote">在前面的 Agent 流程图里，「模型自带知识」是检索之外的兜底：检索受阻时，模型会回到自己训练中学过的内容。CANN 的问题是这层知识积累不足，所以要把官方和生态内容做成更容易被下一代模型收录的形态。</div>
-      <div style="display:grid;grid-template-columns:1fr 1.05fr;gap:14px;align-items:stretch">
-        <div class="bw">
+      <div class="duo">
+        <div class="bad">
+          <div class="duolab"><span class="duo-state before">Before</span>检索受阻时缺少知识兜底</div>
+          <div class="bw">
           <div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">当前 Agent 流程 · 受阻时的兜底</span></div>
           <div class="bbody">
             <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px">
@@ -595,8 +597,11 @@ python test.py</pre><div class="topic-check"><span>✓ 预期日志</span><span>
             </div>
             <p style="font-size:12px;color:#666;margin-top:10px">检索受阻时，答案容易缺少可靠依据。</p>
           </div>
+          </div>
         </div>
-        <div class="bw">
+        <div class="good">
+          <div class="duolab"><span class="duo-state after">After</span>官方与生态语料持续供给</div>
+          <div class="bw">
           <div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">建议供给 · 让下一代模型学得到</span></div>
           <div class="bbody">
             <ul class="ckl" style="gap:7px">
@@ -605,6 +610,7 @@ python test.py</pre><div class="topic-check"><span>✓ 预期日志</span><span>
               <li><b>论坛高质量问答沉淀为 FAQ / 案例</b><span class="ckhint">把一次性回复变成可训练、可检索的公共知识</span></li>
               <li><b>每篇内容带版本、芯片、日期、输出基线</b><span class="ckhint">避免模型学到过期或不可复现的片段</span></li>
             </ul>
+          </div>
           </div>
         </div>
       </div>
@@ -1082,10 +1088,49 @@ body.embed .ux-right .bbody{font-size:13px!important}
 body.embed .ux-right .serp-title{font-size:13px!important}
 body.embed .ux-right .serp-snippet{font-size:11.5px!important}
 body.embed .ux-right .serp-url,.ux-right .url{font-size:11.5px!important}
+/* 矩阵页仅复用原卡中的 Demo 本体：外层问题、说明和底色由父页面统一承载。
+   不再把 Demo 强行拉成 100vh；内容少就按内容高，内容多则把真实高度交给父页计算缩放比例，避免空白和截断。 */
+html.embed.demo-only,
+html.embed.demo-only body{overflow-y:hidden!important;overflow-x:hidden!important}
+body.embed.demo-only{height:auto!important;min-height:0!important}
+body.embed.demo-only .wrap{padding:0!important;min-height:0!important;height:auto!important;background:transparent!important}
+body.embed.demo-only .uxcard.ux-show.ux-demo-only{display:block!important;min-height:0!important;height:auto!important;max-width:none!important}
+body.embed.demo-only .uxcard.ux-demo-only>*:not(.demo){display:none!important}
+body.embed.demo-only .uxcard.ux-demo-only .demo{height:auto!important;box-sizing:border-box!important;overflow:visible!important;background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;margin:0!important}
+body.embed.demo-only .uxcard.ux-demo-only .demo>.dnote,
+body.embed.demo-only .uxcard.ux-demo-only .demo>.note{display:none!important}
+/* 右侧以一张原 Demo 呈现一组上下对照；上下块按内容自然高度排列。 */
+body.embed.demo-only .uxcard.ux-demo-only .demo{--demo-scale:1;--demo-gap:12px}
+body.embed.demo-only .uxcard.ux-demo-only .demo>.duo{height:auto!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;gap:var(--demo-gap)!important;align-items:start!important}
+body.embed.demo-only .uxcard.ux-demo-only .demo>.duo>.bad,
+body.embed.demo-only .uxcard.ux-demo-only .demo>.duo>.good{min-width:0!important;min-height:0!important;overflow:visible!important}
+body.embed.demo-only .uxcard.ux-demo-only .demo>.duo .bw{height:auto!important;box-sizing:border-box!important}
+/* 版本配套 / 搜索结果类 Demo 保持足够大，Before 的多条搜索结果不再被上半区裁掉。 */
+body.embed.demo-only[data-demo-card="1"] .uxcard.ux-demo-only .demo{--demo-scale:1;--demo-gap:10px}
+/* 错误码与无脚本抓取内容更长，轻微缩放但不裁剪。 */
+body.embed.demo-only[data-demo-card="3"] .uxcard.ux-demo-only .demo,
+body.embed.demo-only[data-demo-card="6"] .uxcard.ux-demo-only .demo{--demo-scale:1}
+/* 第 5 个原 Demo 使用内联双列网格，单独改为上下排列，而不是遗漏在通用 duo 规则之外。 */
+body.embed.demo-only[data-demo-card="2"] .uxcard.ux-demo-only .demo{--demo-scale:1}
+body.embed.demo-only[data-demo-card="5"] .uxcard.ux-demo-only .demo{--demo-scale:1}
+body.embed.demo-only[data-demo-card="7"] .uxcard.ux-demo-only .demo{--demo-scale:1}
+body.embed.demo-only[data-demo-card="8"] .uxcard.ux-demo-only .demo{--demo-scale:1}
+body.embed.demo-only[data-demo-card="9"] .uxcard.ux-demo-only .demo{--demo-scale:1}
+body.embed.demo-only[data-demo-card="9"] .uxcard.ux-demo-only .demo>div[style*="grid-template-columns"]{height:auto!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;gap:12px!important;align-items:start!important}
+body.embed.demo-only[data-demo-card="9"] .uxcard.ux-demo-only .demo>div[style*="grid-template-columns"]>.bw{height:auto!important;min-height:0!important;box-sizing:border-box!important;overflow:visible!important}
+/* 保持字号尽量大；缩放只用于极长 Demo，且不再改变内容高度计算。 */
+body.embed.demo-only .uxcard.ux-demo-only .demo{transform:scale(var(--demo-scale))!important;transform-origin:top left!important;width:calc(100% / var(--demo-scale))!important}
 </style>
 <script id="embedfixjs">
 (function(){
-  var p=new URLSearchParams(location.search);var n=parseInt(p.get('card'),10);if(!n)return;
+  var p=new URLSearchParams(location.search);var n=parseInt(p.get('card'),10),demoOnly=p.has('demoOnly');if(!n)return;
+  function reportDemoHeight(){
+    if(!demoOnly)return;
+    var demo=document.querySelector('.uxcard.ux-demo-only .demo')||document.body;
+    var rect=demo.getBoundingClientRect();
+    var h=Math.ceil(Math.max(rect.height,demo.scrollHeight));
+    try{parent.postMessage({__ux19DemoHeight:h},'*');}catch(e){}
+  }
   function apply(){
     document.documentElement.classList.add('embed');document.body.classList.add('embed');
     var cards=document.querySelectorAll('.uxcard');var t=cards[n-1];if(!t)return false;
@@ -1096,6 +1141,14 @@ body.embed .ux-right .serp-url,.ux-right .url{font-size:11.5px!important}
       el.style.display='';el=par;
     }
     t.style.display='';t.classList.add('ux-show');
+    if(demoOnly){
+      document.documentElement.classList.add('demo-only');document.body.classList.add('demo-only');
+      t.classList.add('ux-demo-only');document.body.dataset.demoCard=String(n);window.scrollTo(0,0);
+      requestAnimationFrame(reportDemoHeight);
+      setTimeout(reportDemoHeight,120);
+      setTimeout(reportDemoHeight,420);
+      return true;
+    }
     var goal=p.get('goal')||'', issue=p.get('issue')||'', layer=p.get('layer')||'asset';
     var who=t.querySelector('.who');if(goal&&who)who.textContent=goal;
     if(issue&&who&&!t.querySelector('.ux-issue')){who.dataset.layer=layer;var issueEl=document.createElement('div');issueEl.className='ux-issue';issueEl.textContent=issue;who.appendChild(issueEl);}
@@ -1121,6 +1174,7 @@ body.embed .ux-right .serp-url,.ux-right .url{font-size:11.5px!important}
   function reveal(){document.documentElement.classList.remove('embed-wait');}
   var i=0,iv=setInterval(function(){i++;if(apply()){clearInterval(iv);reveal();}else if(i>60){clearInterval(iv);reveal();}},40);
   document.addEventListener('DOMContentLoaded',function(){if(apply())reveal();});
+  addEventListener('resize',reportDemoHeight,{passive:true});
 })();
 </script>
 <script id="deckwheelfwd">window.addEventListener("wheel",function(e){try{if(window.parent&&window.parent!==window)window.parent.postMessage({__deckWheel:e.deltaY},"*");}catch(_){}},{passive:true});</script>
