@@ -87,7 +87,8 @@
 /* Peer cards use one same-hue top wash; the lower-right watermark stays neutral. */
 .domain-pack,.time-card,.current-right .break,.target{background:var(--card-glass)!important}
 .domain-pack::before,.time-card::before,.current-right .break::before,.target::before{left:-14%!important;right:-14%!important;top:-12%!important;height:25%!important;background:linear-gradient(105deg,rgba(var(--pc-rgb),.20),rgba(var(--pc-rgb),.08) 52%,transparent 88%)!important;filter:blur(32px)!important}
-.domain-pack::after,.time-card::after,.current-right .break::after,.target::after{background:var(--ink)!important;opacity:.055!important}
+.domain-pack::after,.time-card::after,.current-right .break::after,.target::after{background:rgb(var(--pc-rgb))!important;opacity:.10!important}
+.qcc-roadmap .rm-bar .rm-badge{color:var(--ink);font-weight:700}
 .jrn-ot::before{display:none}
 /* Five time samples remain legible as a deliberate 3+2 evidence grid. */
 .time-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.time-card{padding:1.55vh 1.1vw!important}.time-card h2{font-size:var(--fs-h3);line-height:1.28}.time-card:nth-child(4),.time-card:nth-child(5){grid-column:span 1}.time-card:nth-child(4){grid-column:1 / span 1}.time-card:nth-child(5){grid-column:2 / span 1}.time-card:nth-child(5){--pc:var(--c-blue);--tone:var(--c-blue);--pc-rgb:75,141,255}.time-card:nth-child(5)::before{background:radial-gradient(125% 106% at 0% 0%,rgba(75,141,255,.13) 0%,rgba(75,141,255,.035) 43%,transparent 72%)!important}.time-card:nth-child(5)::after{background:rgb(75,141,255)!important}.time-card:nth-child(5){--mark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3v11m0 0 4-4m-4 4-4-4M5 19h14' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
