@@ -196,7 +196,12 @@
   </section>
 
   <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">01 / 选择课题 · 痛点优先级</div><h1>真实证据、核验调整与研究范围，是讨论中最集中的三类问题</h1><p class="sub">#10 的讨论样本在 #11 的分析旅程中展开；按提及情况收束后，先解决这三类问题，才能缩短分析周期并提升结论可用性。</p></div><div class="page-no">12 / 16</div></header>
+    <header class="head"><div class="head-l"><div class="eyebrow">01 / 选择课题 · 分析用时</div><h1>分析时间主要消耗在搜集真实证据与反复核验，而不是最后形成结论</h1><p class="sub">范围不清会拉长搜集，真实状态缺失会带来反复实操；这两个环节叠加，才是竞品分析周期被拉长的主要原因。</p></div><div class="page-no">12 / 17</div></header>
+    <div class="body-area"><div class="journey-brief"><article class="journey-stage"><div class="journey-num">01</div><h2>限定范围</h2><p>产品、板块、角色与任务</p><div class="journey-pain">阻力：边界常不清</div></article><article class="journey-stage"><div class="journey-num">02</div><h2>寻找竞品</h2><p>直接竞品、替代方案与标杆</p><div class="journey-pain">阻力：类比不够发散</div></article><article class="journey-stage critical"><div class="journey-num">03</div><h2>搜集真实证据</h2><p>页面、截图、视频与源链接</p><div class="journey-pain">耗时：证据需要补齐</div></article><article class="journey-stage critical"><div class="journey-num">04</div><h2>进入产品核验</h2><p>真实状态、交互与边缘场景</p><div class="journey-pain">最耗时：反复实操</div></article><article class="journey-stage"><div class="journey-num">05</div><h2>形成评审结论</h2><p>差异、优先级与设计判断</p><div class="journey-pain">阻力：材料重复整理</div></article></div></div><div class="foot">TIME BOTTLENECK / EVIDENCE COLLECTION → PRODUCT VERIFICATION</div>
+  </section>
+
+  <section class="slide s-gray">
+    <header class="head"><div class="head-l"><div class="eyebrow">01 / 选择课题 · 痛点优先级</div><h1>真实证据、核验调整与研究范围，是讨论中最集中的三类问题</h1><p class="sub">#10 的讨论样本在 #11 的分析旅程中展开；按提及情况收束后，先解决这三类问题，才能缩短分析周期并提升结论可用性。</p></div><div class="page-no">13 / 17</div></header>
     <div class="body-area"><div class="pareto-layout"><aside class="pareto-callout"><div class="big">65<small>%</small></div><h2>前三类问题最集中</h2><p>真实证据、核验调整与研究范围三项，占全部讨论提及的 65%。</p></aside><div class="pareto-chart-card"><div id="paretoChart" aria-label="竞品分析痛点柏拉图"></div></div></div></div><div class="foot">PAIN PRIORITY / EVIDENCE · VERIFICATION · SCOPE</div>
   </section>
 
@@ -234,7 +239,7 @@
   const slides=[...document.querySelectorAll('.slide')],dots=document.querySelector('.dots'),controls=document.querySelector('#controls'),page=document.querySelector('#page'),overview=document.querySelector('#overview'),grid=document.querySelector('#overviewGrid');
   const prevBtn=document.querySelector('[data-action="prev"]'),nextBtn=document.querySelector('[data-action="next"]'),fsBtn=document.querySelector('[data-action="fullscreen"]');let current=0,scrollbarTimer;
   const pad=n=>String(n).padStart(2,'0'),dark=s=>s.classList.contains('s-cover')||s.classList.contains('s-glow');
-  slides.forEach((slide,i)=>{const counter=`${pad(i+1)} / ${pad(slides.length)}`;slide.querySelector('.page-no')?.textContent=counter;slide.querySelector('.dark-chrome span:last-child')?.textContent=counter});
+  slides.forEach((slide,i)=>{const counter=`${pad(i+1)} / ${pad(slides.length)}`;const pageNo=slide.querySelector('.page-no'),chapterNo=slide.querySelector('.dark-chrome span:last-child');if(pageNo)pageNo.textContent=counter;if(chapterNo)chapterNo.textContent=counter});
   const ICON_MAX='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 1 2 2h3"/></svg>',ICON_MIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M16 21v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/></svg>';
   slides.forEach((slide,i)=>{const b=document.createElement('button');b.title=`第 ${i+1} 页`;b.addEventListener('click',()=>go(i));dots.append(b);const thumb=document.createElement('button');thumb.className='thumb';thumb.innerHTML=`<span>${pad(i+1)}</span><strong>${slide.querySelector('.head h1,.chapter-title,.cover-title')?.textContent.replace(/\s+/g,' ').trim()||'ICT 竞品分析效率提升'}</strong>`;thumb.addEventListener('click',()=>{closeOverview();go(i)});grid.append(thumb)});
   const buttons=[...dots.children];
