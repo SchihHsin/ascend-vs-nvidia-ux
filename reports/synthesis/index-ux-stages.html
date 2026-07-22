@@ -59,7 +59,7 @@ body.overview .s-cover .slide-inner{padding:0}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 480' preserveAspectRatio='none'%3E%3Cpath d='M0 320 C 380 250 760 330 1080 195 C 1280 140 1380 185 1440 130 L1440 480 L0 480 Z' fill='%237e8696' fill-opacity='0.07'/%3E%3Cpath d='M0 372 C 430 305 820 405 1180 245 C 1340 198 1402 240 1440 190 L1440 480 L0 480 Z' fill='%23949bab' fill-opacity='0.08'/%3E%3C/svg%3E"),linear-gradient(125deg,rgba(120,128,145,.05),transparent 50%);
   background-position:bottom center,0 0;background-size:100% 50%,100% 100%;background-repeat:no-repeat,no-repeat}
 .head{display:flex;align-items:flex-start;justify-content:space-between;flex:0 0 auto;margin-bottom:3.4vh}
-.head-l{display:flex;flex-direction:column-reverse;gap:.8vh}  /* 小标题(.subttl=章节名)在上、大标题在下 */
+.head-l{display:flex;flex:1 1 auto;min-width:0;flex-direction:column-reverse;gap:.8vh}  /* 小标题(.subttl=章节名)在上、大标题在下 */
 .brand{display:flex;align-items:center;gap:.5em}
 .brand .logo{height:clamp(19px,1.7vw,25px);width:auto;display:block;flex-shrink:0}  /* ⛔ 标题前只放 CANN logo（无合适 logo 就删掉 img 留空），绝不换成 Lucide/通用 icon */
 .brand .ttl{font-weight:800;font-size:var(--fs-h1);letter-spacing:-.01em}      /* 标题=结论 */
@@ -67,7 +67,7 @@ body.overview .s-cover .slide-inner{padding:0}
 .layer-tag{display:inline-block;margin-left:.55vw;padding:.18vh .46vw;border-radius:999px;font-size:var(--fs-xs);font-weight:700;line-height:1.2}.layer-tag.search{color:#8A681B;background:#FFF4CD;border:1px solid #EBCB75}.layer-tag.machine{color:#A55A2C;background:#FFE3CD;border:1px solid #F1B684}.layer-tag.asset{color:#9B3E79;background:#F7D9EC;border:1px solid #E7ADD0}
     .head-r{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.8}
     /* 章节标签替代孤立页码：始终标出材料当前所处的叙事位置。 */
-    .head-r.chapter-tabs{align-self:center;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:inherit;letter-spacing:0;text-transform:none;line-height:1;min-width:42vw;display:flex;justify-content:flex-end}
+    .head-r.chapter-tabs{align-self:center;flex:0 1 auto;min-width:0;width:fit-content;max-width:42vw;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:inherit;letter-spacing:0;text-transform:none;line-height:1;display:flex;justify-content:flex-end}
     .chapter-nav{display:flex;flex-direction:column;align-items:flex-end;gap:6px;max-width:100%}
     .chapter-tabset{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:wrap;max-width:100%}
     .chapter-tab{appearance:none;border:1px solid rgba(47,61,99,.14);border-radius:999px;background:rgba(255,255,255,.48);color:#667184;padding:.56vh .72vw;font-family:'HarmonyOS Sans SC','Inter',sans-serif;font-size:var(--fs-sm);font-weight:850;line-height:1.05;white-space:nowrap;cursor:pointer;transition:background .16s,color .16s,border-color .16s,transform .16s}
