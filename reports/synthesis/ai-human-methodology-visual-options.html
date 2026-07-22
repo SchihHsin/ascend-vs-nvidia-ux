@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>人与 AI 协同体验白皮书 · 视觉方案</title>
+  <style>
+    :root {
+      --ink: #17191f;
+      --muted: #69707c;
+      --line: #d8dbe2;
+      --line-strong: #aeb5c1;
+      --paper: #fff;
+      --canvas: #e5e6e7;
+      --soft: #f3f4f6;
+      --blue: #304ffe;
+      --blue-dark: #1f37c7;
+      --blue-soft: #eef0ff;
+      --shadow: 0 2px 4px rgba(22, 25, 31, .07), 0 20px 46px rgba(22, 25, 31, .10);
+    }
+
+    * {
+      box-sizing: border-box;
+      letter-spacing: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--canvas);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: "HarmonyOS Sans SC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 58px;
+      padding: 0 28px;
+      border-bottom: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar strong {
+      font-size: 13px;
+    }
+
+    .topbar nav {
+      display: flex;
+      gap: 4px;
+    }
+
+    .topbar a {
+      padding: 7px 11px;
+      border-radius: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .topbar a:hover,
+    .topbar a:focus-visible {
+      color: #fff;
+      background: var(--blue);
+      outline: none;
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 48px 28px 100px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 60px;
+      margin-bottom: 64px;
+      padding-bottom: 34px;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .intro .eyebrow,
+    .section-title .eyebrow {
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .intro h1 {
+      max-width: 750px;
+      margin: 12px 0 18px;
+      font-size: 48px;
+      line-height: 1.15;
+    }
+
+    .intro p {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .intro-note {
+      align-self: end;
+      padding: 22px;
+      border-top: 4px solid var(--blue);
+      background: var(--paper);
+      font-size: 12px;
+    }
+
+    .intro-note strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--blue-dark);
+      font-size: 14px;
+    }
+
+    .section-title {
+      display: grid;
+      grid-template-columns: 1fr minmax(260px, 420px);
+      gap: 40px;
+      align-items: end;
+      margin: 76px 0 28px;
+    }
+
+    .section-title h2 {
+      margin: 9px 0 0;
+      font-size: 32px;
+      line-height: 1.2;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .option {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+      margin-bottom: 68px;
+      scroll-margin-top: 82px;
+    }
+
+    .option-info {
+      position: sticky;
+      top: 82px;
+      padding-top: 16px;
+      border-top: 1px solid var(--ink);
+    }
+
+    .option-code {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .option-info h3 {
+      margin: 8px 0 10px;
+      font-size: 23px;
+      line-height: 1.25;
+    }
+
+    .option-info p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 7px;
+      border: 1px solid var(--line-strong);
+      border-radius: 3px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .tag.recommended {
+      color: #fff;
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+
+    .page {
+      position: relative;
+      width: min(760px, 100%);
+      aspect-ratio: 210 / 297;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .page-head {
+      position: absolute;
+      z-index: 3;
+      top: 42px;
+      right: 48px;
+      left: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line-strong);
+      color: var(--muted);
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .plus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 9px);
+      gap: 4px 8px;
+      color: var(--blue);
+      font-size: 15px;
+      line-height: 8px;
+    }
+
+    .cover-copy {
+      position: absolute;
+      z-index: 2;
+      top: 114px;
+      right: 52px;
+      left: 52px;
+    }
+
+    .cover-copy .kicker {
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 9px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .cover-copy h4 {
+      margin: 0;
+      font-size: 46px;
+      line-height: 1.12;
+    }
+
+    .cover-copy p {
+      margin: 15px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .cover-foot {
+      position: absolute;
+      z-index: 3;
+      right: 48px;
+      bottom: 42px;
+      left: 48px;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .cover-foot > div {
+      min-height: 58px;
+      padding: 10px 12px 9px 0;
+    }
+
+    .cover-foot > div + div {
+      padding-left: 12px;
+      border-left: 1px solid var(--line);
+    }
+
+    .cover-foot small {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 7px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .cover-foot strong {
+      display: block;
+      font-size: 8px;
+      line-height: 1.4;
+    }
+
+    .visual-a {
+      position: absolute;
+      top: 338px;
+      right: 52px;
+      left: 52px;
+      height: 360px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--soft);
+    }
+
+    .visual-a svg,
+    .visual-c svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .cover-b {
+      background: #17191f;
+    }
+
+    .cover-b .page-head,
+    .cover-b .cover-foot {
+      color: rgba(255, 255, 255, .62);
+      border-color: rgba(255, 255, 255, .28);
+    }
+
+    .cover-b .cover-copy h4,
+    .cover-b .cover-copy p,
+    .cover-b .cover-foot strong {
+      color: #fff;
+    }
+
+    .cover-b .cover-foot > div + div {
+      border-color: rgba(255, 255, 255, .18);
+    }
+
+    .matrix-visual {
+      position: absolute;
+      top: 338px;
+      right: 52px;
+      left: 52px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 12px;
+      height: 368px;
+    }
+
+    .matrix-core {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 1px;
+      padding: 1px;
+      background: rgba(255, 255, 255, .22);
+    }
+
+    .matrix-core div {
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      color: rgba(255, 255, 255, .62);
+      background: #17191f;
+      font-size: 8px;
+      text-align: center;
+    }
+
+    .matrix-core .focus {
+      color: #fff;
+      background: var(--blue);
+      font-size: 17px;
+      font-weight: 850;
+    }
+
+    .dimension-stack {
+      display: grid;
+      grid-template-rows: repeat(6, 1fr);
+      gap: 5px;
+    }
+
+    .dimension-stack div {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 9px;
+      align-items: center;
+      padding: 0 10px;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .24);
+      font-size: 8px;
+    }
+
+    .dimension-stack b {
+      color: #8291ff;
+      font-size: 12px;
+    }
+
+    .visual-c {
+      position: absolute;
+      top: 315px;
+      right: 52px;
+      left: 52px;
+      height: 410px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .cover-c::before {
+      content: "";
+      position: absolute;
+      top: 286px;
+      right: 0;
+      width: 7px;
+      height: 240px;
+      background: var(--blue);
+    }
+
+    .cover-d .cover-copy {
+      right: 320px;
+    }
+
+    .cover-d .cover-copy h4 {
+      font-size: 41px;
+    }
+
+    .profile-visual {
+      position: absolute;
+      top: 110px;
+      right: 52px;
+      width: 222px;
+      height: 322px;
+      padding: 24px;
+      border: 1px solid var(--line-strong);
+      background: var(--blue);
+    }
+
+    .profile-visual strong {
+      display: block;
+      margin-bottom: 16px;
+      color: #fff;
+      font-size: 11px;
+    }
+
+    .profile-row {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 8px;
+      align-items: center;
+      margin: 12px 0;
+      color: rgba(255, 255, 255, .75);
+      font-size: 7px;
+    }
+
+    .profile-row i {
+      display: block;
+      height: 6px;
+      border: 1px solid rgba(255, 255, 255, .55);
+    }
+
+    .profile-row i::before {
+      content: "";
+      display: block;
+      width: var(--score);
+      height: 100%;
+      background: #fff;
+    }
+
+    .score-84 { --score: 84%; }
+    .score-68 { --score: 68%; }
+    .score-76 { --score: 76%; }
+    .score-82 { --score: 82%; }
+    .score-61 { --score: 61%; }
+    .score-73 { --score: 73%; }
+
+    .profile-grid {
+      position: absolute;
+      top: 480px;
+      right: 52px;
+      left: 52px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line-strong);
+      border-left: 1px solid var(--line);
+    }
+
+    .profile-grid div {
+      min-height: 98px;
+      padding: 14px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .profile-grid b {
+      color: var(--blue);
+      font-size: 16px;
+    }
+
+    .profile-grid span {
+      display: block;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .chapter-page {
+      min-height: auto;
+    }
+
+    .chapter-number {
+      position: absolute;
+      top: 128px;
+      left: 52px;
+      color: var(--blue);
+      font-size: 82px;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .chapter-title {
+      position: absolute;
+      top: 232px;
+      left: 52px;
+      margin: 0;
+      font-size: 38px;
+      line-height: 1.2;
+    }
+
+    .chapter-accent {
+      position: absolute;
+      top: 330px;
+      left: 52px;
+      width: 66px;
+      height: 5px;
+      background: var(--blue);
+    }
+
+    .chapter-index-list {
+      position: absolute;
+      right: 52px;
+      bottom: 64px;
+      left: 52px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 26px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .chapter-index-list div {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 8px;
+    }
+
+    .chapter-index-list b {
+      color: var(--blue);
+    }
+
+    .chapter-a::before {
+      content: "RESEARCH DESIGN";
+      position: absolute;
+      top: 150px;
+      right: 34px;
+      padding-left: 12px;
+      border-left: 3px solid var(--blue);
+      color: var(--muted);
+      font-size: 7px;
+      font-weight: 850;
+      writing-mode: vertical-rl;
+    }
+
+    .chapter-a::after {
+      content: "";
+      position: absolute;
+      top: 115px;
+      right: 48px;
+      bottom: 64px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .chapter-b .inset-field {
+      position: absolute;
+      top: 118px;
+      right: 36px;
+      width: 226px;
+      height: 520px;
+      padding: 170px 25px 24px;
+      background: var(--soft);
+    }
+
+    .chapter-b .chapter-title {
+      right: 270px;
+    }
+
+    .chapter-b .inset-field strong {
+      display: block;
+      margin-bottom: 16px;
+      color: var(--blue-dark);
+      font-size: 10px;
+    }
+
+    .chapter-b .inset-field p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .chapter-b .chapter-index-list {
+      right: 288px;
+      grid-template-columns: 1fr;
+    }
+
+    .chapter-c .chapter-number {
+      top: 142px;
+      right: 52px;
+      left: auto;
+      color: var(--line-strong);
+      font-size: 122px;
+    }
+
+    .chapter-c .chapter-title {
+      top: 164px;
+      max-width: 430px;
+    }
+
+    .chapter-c .chapter-accent {
+      top: 276px;
+      width: 105px;
+    }
+
+    .chapter-c .bottom-band {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 292px;
+      background: var(--soft);
+    }
+
+    .chapter-c .chapter-index-list {
+      z-index: 2;
+      bottom: 58px;
+      border-top-color: var(--ink);
+    }
+
+    .chapter-c .band-label {
+      position: absolute;
+      z-index: 3;
+      right: 52px;
+      bottom: 248px;
+      color: var(--blue);
+      font-size: 8px;
+      font-weight: 850;
+    }
+
+    .decision {
+      margin-top: 56px;
+      padding: 28px;
+      border-top: 5px solid var(--blue);
+      background: var(--paper);
+    }
+
+    .decision strong {
+      font-size: 18px;
+    }
+
+    .decision p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        align-items: flex-start;
+        gap: 12px;
+        padding: 13px 16px;
+      }
+
+      .topbar nav {
+        max-width: 60vw;
+        overflow-x: auto;
+      }
+
+      main {
+        padding: 34px 14px 70px;
+      }
+
+      .intro,
+      .section-title,
+      .option {
+        grid-template-columns: 1fr;
+      }
+
+      .intro h1 {
+        font-size: 34px;
+      }
+
+      .option-info {
+        position: static;
+      }
+
+      .page {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <strong>人与 AI 协同体验白皮书 · 视觉方案</strong>
+    <nav aria-label="方案导航">
+      <a href="#cover-a">封面 A</a>
+      <a href="#cover-b">封面 B</a>
+      <a href="#cover-c">封面 C</a>
+      <a href="#cover-d">封面 D</a>
+      <a href="#chapter-a">章节方案</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <div class="eyebrow">Visual Direction Study · v1</div>
+        <h1>封面主图与章节开页<br>分开选择</h1>
+        <p>四个封面方案分别强调“协同系统、测量矩阵、交接时序、体验剖面”。章节开页提供三种灰色关系的处理，均不再使用贯穿整页的硬切色块。</p>
+      </div>
+      <aside class="intro-note" aria-label="当前视觉方案建议">
+        <strong>当前建议</strong>
+        封面优先看 A 或 C；章节优先看 1。A 更像完整研究框架，C 更直接表现人和 AI 的协同过程。章节 1 的留白最好，也最接近参考图中的高级咨询报告感。
+      </aside>
+    </section>
+
+    <section class="section-title" id="covers">
+      <div><div class="eyebrow">01 · Cover directions</div><h2>封面主图方案</h2></div>
+      <p>不再使用“人—任务—AI”三个普通方块，而是让封面主图直接表达这套方法论的独特结构。</p>
+    </section>
+
+    <article class="option" id="cover-a">
+      <div class="option-info">
+        <div class="option-code">COVER A</div>
+        <h3>协同系统图</h3>
+        <p>以共同任务为中心，把人、AI、七阶段旅程和六个测量维度组织成一个系统。信息量丰富但仍保持留白。</p>
+        <span class="tag recommended">推荐</span>
+      </div>
+      <div class="page cover-a">
+        <div class="page-head"><span>Human × AI Collaboration Research</span><span class="plus-grid"><i>+</i><i>+</i><i>+</i><i>+</i></span></div>
+        <div class="cover-copy"><div class="kicker">Methodology Whitepaper · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>面向不同领域、任务与 AI 系统的通用研究框架</p></div>
+        <div class="visual-a">
+          <svg viewBox="0 0 600 360" role="img" aria-label="人与 AI 围绕共同任务协同的系统图">
+            <g fill="none" stroke="#b9bec8" stroke-width="1">
+              <path d="M90 180H510"/>
+              <path d="M300 54V306" stroke-dasharray="4 6"/>
+              <path d="M90 180C165 80 235 76 300 180C365 284 435 280 510 180"/>
+              <path d="M90 180C165 280 235 284 300 180C365 76 435 80 510 180"/>
+            </g>
+            <g fill="#fff" stroke="#17191f" stroke-width="1.5">
+              <circle cx="90" cy="180" r="42"/>
+              <circle cx="510" cy="180" r="42"/>
+            </g>
+            <circle cx="300" cy="180" r="54" fill="#304ffe"/>
+            <g fill="#fff" stroke="#304ffe" stroke-width="1.5">
+              <circle cx="172" cy="108" r="10"/><circle cx="236" cy="112" r="10"/><circle cx="364" cy="248" r="10"/><circle cx="428" cy="252" r="10"/>
+              <circle cx="170" cy="250" r="10"/><circle cx="430" cy="110" r="10"/>
+            </g>
+            <g fill="#17191f" font-family="Arial, sans-serif" font-size="11" font-weight="700" text-anchor="middle">
+              <text x="90" y="184">HUMAN</text><text x="510" y="184">AI</text>
+            </g>
+            <g fill="#fff" font-family="Arial, sans-serif" text-anchor="middle">
+              <text x="300" y="176" font-size="13" font-weight="700">共同任务</text><text x="300" y="195" font-size="8">TASK EVENT</text>
+            </g>
+            <g fill="#69707c" font-family="Arial, sans-serif" font-size="8">
+              <text x="145" y="86">理解诉求</text><text x="218" y="88">启动协作</text><text x="388" y="278">结果验证</text><text x="451" y="282">执行交付</text>
+              <text x="126" y="278">失败恢复</text><text x="438" y="84">经验沉淀</text>
+            </g>
+            <g fill="#304ffe" font-family="Arial, sans-serif" font-size="8" font-weight="700">
+              <text x="18" y="28">成效 · 效率 · 可靠</text><text x="462" y="28">协作 · 主体性 · 恢复</text>
+            </g>
+          </svg>
+        </div>
+        <div class="cover-foot"><div><small>Scope</small><strong>跨领域的人机协同任务</strong></div><div><small>Framework</small><strong>7 阶段 × 6 维度</strong></div><div><small>Edition</small><strong>方法论草案 v0.1</strong></div></div>
+      </div>
+    </article>
+
+    <article class="option" id="cover-b">
+      <div class="option-info">
+        <div class="option-code">COVER B</div>
+        <h3>测量矩阵</h3>
+        <p>深色版本，把“任务 × 用户 × AI × 环境 × 治理”与六维指标做成封面信息架构。更像研究机构或年度趋势报告。</p>
+        <span class="tag">理性 / 数据感</span>
+      </div>
+      <div class="page cover-b">
+        <div class="page-head"><span>Human × AI Collaboration Research</span><span class="plus-grid"><i>+</i><i>+</i><i>+</i><i>+</i></span></div>
+        <div class="cover-copy"><div class="kicker">Measurement System · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>从一次真实任务，建立可跨领域复用的协同证据系统</p></div>
+        <div class="matrix-visual">
+          <div class="matrix-core">
+            <div>用户与角色</div><div>任务与目标</div><div>AI 系统</div><div>知识与工具</div><div class="focus">TASK<br>EVENT</div><div>组织与治理</div><div>行为证据</div><div>过程证据</div><div>产出证据</div>
+          </div>
+          <div class="dimension-stack"><div><b>A</b>任务成效</div><div><b>B</b>效率与负担</div><div><b>C</b>可靠与追溯</div><div><b>D</b>协作质量</div><div><b>E</b>主体性与信任</div><div><b>F</b>风险与恢复</div></div>
+        </div>
+        <div class="cover-foot"><div><small>Scope</small><strong>跨领域的人机协同任务</strong></div><div><small>Framework</small><strong>变量 × 证据 × 指标</strong></div><div><small>Edition</small><strong>方法论草案 v0.1</strong></div></div>
+      </div>
+    </article>
+
+    <article class="option" id="cover-c">
+      <div class="option-info">
+        <div class="option-code">COVER C</div>
+        <h3>交接时序</h3>
+        <p>把人的判断和 AI 的检索 / 生成画成两条生命线，中间突出“验证”和“接管”。最直接说明这份白皮书研究的对象。</p>
+        <span class="tag recommended">推荐</span>
+      </div>
+      <div class="page cover-c">
+        <div class="page-head"><span>Human × AI Collaboration Research</span><span class="plus-grid"><i>+</i><i>+</i><i>+</i><i>+</i></span></div>
+        <div class="cover-copy"><div class="kicker">Journey-based Measurement · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>看见任务如何推进、责任如何交接、失败如何恢复</p></div>
+        <div class="visual-c">
+          <svg viewBox="0 0 600 410" role="img" aria-label="人与 AI 的任务交接时序图">
+            <g font-family="Arial, sans-serif">
+              <text x="110" y="34" fill="#17191f" font-size="11" font-weight="700" text-anchor="middle">HUMAN</text>
+              <text x="490" y="34" fill="#304ffe" font-size="11" font-weight="700" text-anchor="middle">AI</text>
+              <line x1="110" y1="52" x2="110" y2="372" stroke="#17191f"/>
+              <line x1="490" y1="52" x2="490" y2="372" stroke="#304ffe"/>
+              <g fill="#17191f"><circle cx="110" cy="82" r="7"/><circle cx="110" cy="190" r="7"/><circle cx="110" cy="298" r="7"/></g>
+              <g fill="#304ffe"><circle cx="490" cy="126" r="7"/><circle cx="490" cy="236" r="7"/><circle cx="490" cy="342" r="7"/></g>
+              <g fill="none" stroke="#aeb5c1" stroke-width="1.2">
+                <path d="M118 82L482 126"/><path d="M482 126L118 190"/><path d="M118 190L482 236"/><path d="M482 236L118 298"/><path d="M118 298L482 342"/>
+              </g>
+              <g fill="#fff" stroke="#304ffe"><rect x="252" y="96" width="96" height="34"/><rect x="252" y="206" width="96" height="34"/><rect x="252" y="314" width="96" height="34"/></g>
+              <g fill="#304ffe" font-size="8" font-weight="700" text-anchor="middle"><text x="300" y="117">理解与检索</text><text x="300" y="227">验证与修正</text><text x="300" y="335">交付与沉淀</text></g>
+              <g fill="#69707c" font-size="8"><text x="126" y="78">提出诉求</text><text x="126" y="186">补充判断</text><text x="126" y="294">人工接管</text><text x="422" y="121">形成计划</text><text x="414" y="231">生成结果</text><text x="423" y="337">协同完成</text></g>
+            </g>
+          </svg>
+        </div>
+        <div class="cover-foot"><div><small>Scope</small><strong>完整任务而非单轮回答</strong></div><div><small>Focus</small><strong>交接 · 验证 · 恢复</strong></div><div><small>Edition</small><strong>方法论草案 v0.1</strong></div></div>
+      </div>
+    </article>
+
+    <article class="option" id="cover-d">
+      <div class="option-info">
+        <div class="option-code">COVER D</div>
+        <h3>体验剖面</h3>
+        <p>让六维评分成为第一视觉信号，适合后续要持续发布年度测量结果的白皮书系列。</p>
+        <span class="tag">可系列化</span>
+      </div>
+      <div class="page cover-d">
+        <div class="page-head"><span>Human × AI Collaboration Research</span><span class="plus-grid"><i>+</i><i>+</i><i>+</i><i>+</i></span></div>
+        <div class="cover-copy"><div class="kicker">Experience Profile · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>用体验剖面保留收益、负担、信任与风险之间的真实差异</p></div>
+        <div class="profile-visual"><strong>体验剖面 / PROFILE</strong><div class="profile-row"><span>任务成效</span><i class="score-84"></i></div><div class="profile-row"><span>效率负担</span><i class="score-68"></i></div><div class="profile-row"><span>可靠追溯</span><i class="score-76"></i></div><div class="profile-row"><span>协作质量</span><i class="score-82"></i></div><div class="profile-row"><span>主体信任</span><i class="score-61"></i></div><div class="profile-row"><span>风险恢复</span><i class="score-73"></i></div></div>
+        <div class="profile-grid"><div><b>01</b><span>任务事件</span></div><div><b>02</b><span>五类变量</span></div><div><b>03</b><span>七阶段旅程</span></div><div><b>04</b><span>四类证据</span></div><div><b>05</b><span>领域模块</span></div><div><b>06</b><span>持续回归</span></div></div>
+        <div class="cover-foot"><div><small>Scope</small><strong>跨领域的人机协同任务</strong></div><div><small>Framework</small><strong>6 维体验剖面</strong></div><div><small>Edition</small><strong>方法论草案 v0.1</strong></div></div>
+      </div>
+    </article>
+
+    <section class="section-title" id="chapter-options">
+      <div><div class="eyebrow">02 · Chapter openers</div><h2>章节开页方案</h2></div>
+      <p>当前问题不是“灰色不能用”，而是灰色没有承载内容、又贯穿整页，形成不必要的硬分割。下面三种都让灰色与信息结构产生关系。</p>
+    </section>
+
+    <article class="option" id="chapter-a">
+      <div class="option-info"><div class="option-code">CHAPTER 1</div><h3>白底 + 边栏细线</h3><p>去掉大色块，只保留右侧细线和竖向章节标签。留白最大，标题与目录成为真正的主角。</p><span class="tag recommended">推荐</span></div>
+      <div class="page chapter-page chapter-a"><div class="page-head"><span>Human × AI Collaboration Experience</span><span>18 / 82</span></div><div class="chapter-number">04</div><h4 class="chapter-title">第四章 研究设计</h4><div class="chapter-accent"></div><div class="chapter-index-list"><div><b>01</b><span>4.1 先确定研究类型</span></div><div><b>02</b><span>4.2 固定条件与可变条件</span></div><div><b>03</b><span>4.3 选择比较方式</span></div><div><b>04</b><span>4.4 研究协议</span></div><div><b>05</b><span>4.5 三种基准条件</span></div><div><b>06</b><span>4.6 样本、分配与顺序效应</span></div><div><b>07</b><span>4.7 预注册核心判断</span></div></div></div>
+    </article>
+
+    <article class="option" id="chapter-b">
+      <div class="option-info"><div class="option-code">CHAPTER 2</div><h3>内嵌信息区</h3><p>保留灰色，但缩成有上下边界的内嵌区域，并让它承载“本章关注”的说明，不再是纯装饰。</p><span class="tag">信息更强</span></div>
+      <div class="page chapter-page chapter-b"><div class="page-head"><span>Human × AI Collaboration Experience</span><span>18 / 82</span></div><div class="chapter-number">04</div><h4 class="chapter-title">第四章 研究设计</h4><div class="chapter-accent"></div><aside class="inset-field" aria-label="本章关注内容"><strong>本章关注 / FOCUS</strong><p>先明确研究类型，再固定任务、用户与 AI 条件。</p><p>用无 AI、人机协同与 AI 独立三种条件识别真实贡献。</p></aside><div class="chapter-index-list"><div><b>01</b><span>4.1 先确定研究类型</span></div><div><b>02</b><span>4.2 固定条件与可变条件</span></div><div><b>03</b><span>4.3 选择比较方式</span></div><div><b>04</b><span>4.4 研究协议</span></div><div><b>05</b><span>4.5 三种基准条件</span></div><div><b>06</b><span>4.6 样本、分配与顺序效应</span></div><div><b>07</b><span>4.7 预注册核心判断</span></div></div></div>
+    </article>
+
+    <article class="option" id="chapter-c">
+      <div class="option-info"><div class="option-code">CHAPTER 3</div><h3>底部索引带</h3><p>灰色只出现在目录所在的下半部，成为章节索引的容器；上半部保持完整白色，视觉分区更有理由。</p><span class="tag">稳妥</span></div>
+      <div class="page chapter-page chapter-c"><div class="page-head"><span>Human × AI Collaboration Experience</span><span>18 / 82</span></div><div class="chapter-number">04</div><h4 class="chapter-title">第四章 研究设计</h4><div class="chapter-accent"></div><div class="bottom-band"></div><div class="band-label">SECTION INDEX / 本章目录</div><div class="chapter-index-list"><div><b>01</b><span>4.1 先确定研究类型</span></div><div><b>02</b><span>4.2 固定条件与可变条件</span></div><div><b>03</b><span>4.3 选择比较方式</span></div><div><b>04</b><span>4.4 研究协议</span></div><div><b>05</b><span>4.5 三种基准条件</span></div><div><b>06</b><span>4.6 样本、分配与顺序效应</span></div><div><b>07</b><span>4.7 预注册核心判断</span></div></div></div>
+    </article>
+
+    <aside class="decision" aria-label="视觉方案组合建议"><strong>建议组合：封面 A 或 C + 章节 1</strong><p>A 更能说明“这是一套完整测量系统”；C 更能突出“研究的是人和 AI 的交接过程”。章节 1 去掉了没有信息作用的灰色块，只留下克制的边栏信号，最适合当前整本白皮书的冷静编辑风格。</p></aside>
+  </main>
+</body>
+</html>
