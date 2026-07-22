@@ -329,8 +329,15 @@
       align-self: center;
       margin: 58px 0 48px;
       padding: 34px;
-      border: 1px solid var(--line);
+      border: 0;
       background: var(--soft);
+    }
+
+    .collab-system {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 270px;
     }
 
     .collab-map {
@@ -441,12 +448,7 @@
     }
 
     .chapter-opener::before {
-      content: "";
-      position: absolute;
-      z-index: 0;
-      inset: 0 0 0 auto;
-      width: 34%;
-      background: var(--soft);
+      display: none;
     }
 
     .chapter-opener > * {
@@ -464,7 +466,7 @@
     }
 
     .chapter-opener h1 {
-      max-width: 620px;
+      max-width: 570px;
       margin: 0;
       font-size: 50px;
       line-height: 1.16;
@@ -482,7 +484,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0 28px;
-      max-width: 640px;
+      max-width: none;
       margin-top: 64px;
       border-top: 1px solid var(--line-strong);
     }
@@ -504,6 +506,51 @@
 
     .chapter-index a:hover {
       color: var(--blue);
+    }
+
+    .chapter-focus {
+      position: absolute;
+      z-index: 1;
+      top: 150px;
+      right: 44px;
+      width: 252px;
+      height: 520px;
+      padding: 188px 28px 30px;
+      background-color: #f3f4f6;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(48, 79, 254, .055) 0,
+        rgba(48, 79, 254, .055) 4px,
+        transparent 4px,
+        transparent 16px
+      );
+    }
+
+    .chapter-focus strong {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--blue-dark);
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .chapter-focus p {
+      margin: 0 0 18px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.65;
+    }
+
+    .chapter-focus small {
+      display: block;
+      padding-top: 14px;
+      border-top: 1px solid rgba(48, 79, 254, .22);
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 750;
+      line-height: 1.55;
     }
 
     .front-sheet h2,
@@ -579,9 +626,15 @@
       margin: 26px 0;
       padding: 22px 26px;
       border: 0;
-      border-left: 5px solid var(--blue);
       color: var(--ink);
-      background: var(--blue-soft);
+      background-color: #f3f4f6;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(48, 79, 254, .06) 0,
+        rgba(48, 79, 254, .06) 3px,
+        transparent 3px,
+        transparent 14px
+      );
       font-size: 18px;
       font-weight: 650;
       line-height: 1.65;
@@ -853,6 +906,22 @@
         font-size: 38px;
       }
 
+      .chapter-opener h1,
+      .chapter-index {
+        max-width: none;
+      }
+
+      .chapter-focus {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        width: auto;
+        height: auto;
+        margin: 38px 0 0;
+        padding: 28px;
+      }
+
       .chapter-index,
       .front-sheet.contents-sheet ol {
         grid-template-columns: 1fr;
@@ -967,18 +1036,48 @@
         <p class="cover-subtitle">面向不同领域、任务与 AI 系统的通用研究框架</p>
       </div>
 
-      <div class="cover-visual" role="img" aria-label="人与 AI 围绕共同任务协作的关系图">
-        <div class="collab-map">
-          <div class="actor human">
-            <small>Agency · Judgment · Context</small>
-            <strong>人</strong>
-          </div>
-          <div class="task-node">TASK</div>
-          <div class="actor ai">
-            <small>Reasoning · Retrieval · Action</small>
-            <strong>AI</strong>
-          </div>
-        </div>
+      <div class="cover-visual">
+        <svg class="collab-system" viewBox="0 0 720 330" role="img" aria-label="人与 AI 围绕共同任务协同推进并形成体验测量证据的系统图">
+          <g fill="none" stroke="#b9bec8" stroke-width="1.2">
+            <path d="M92 165H628"/>
+            <path d="M360 44V286" stroke-dasharray="5 7"/>
+            <path d="M92 165C182 54 276 67 360 165C444 263 538 276 628 165"/>
+            <path d="M92 165C182 276 276 263 360 165C444 67 538 54 628 165"/>
+          </g>
+          <g fill="#fff" stroke="#17191f" stroke-width="1.8">
+            <circle cx="92" cy="165" r="48"/>
+            <circle cx="628" cy="165" r="48"/>
+          </g>
+          <circle cx="360" cy="165" r="62" fill="#304ffe"/>
+          <g fill="#fff" stroke="#304ffe" stroke-width="1.8">
+            <circle cx="184" cy="88" r="11"/>
+            <circle cx="276" cy="98" r="11"/>
+            <circle cx="444" cy="232" r="11"/>
+            <circle cx="536" cy="242" r="11"/>
+            <circle cx="186" cy="240" r="11"/>
+            <circle cx="534" cy="90" r="11"/>
+          </g>
+          <g fill="#17191f" font-family="HarmonyOS Sans SC, PingFang SC, Arial, sans-serif" font-size="14" font-weight="800" text-anchor="middle">
+            <text x="92" y="170">HUMAN</text>
+            <text x="628" y="170">AI</text>
+          </g>
+          <g fill="#fff" font-family="HarmonyOS Sans SC, PingFang SC, Arial, sans-serif" text-anchor="middle">
+            <text x="360" y="160" font-size="17" font-weight="800">共同任务</text>
+            <text x="360" y="183" font-size="10" font-weight="700">TASK EVENT</text>
+          </g>
+          <g fill="#69707c" font-family="HarmonyOS Sans SC, PingFang SC, Arial, sans-serif" font-size="11" font-weight="650">
+            <text x="142" y="65">理解诉求</text>
+            <text x="247" y="70">启动协作</text>
+            <text x="465" y="269">结果验证</text>
+            <text x="560" y="280">执行交付</text>
+            <text x="137" y="278">失败恢复</text>
+            <text x="548" y="67">经验沉淀</text>
+          </g>
+          <g fill="#304ffe" font-family="HarmonyOS Sans SC, PingFang SC, Arial, sans-serif" font-size="10" font-weight="800">
+            <text x="14" y="28">成效 · 效率 · 可靠</text>
+            <text x="580" y="28">协作 · 主体性 · 恢复</text>
+          </g>
+        </svg>
       </div>
 
       <div class="cover-meta">
@@ -2376,11 +2475,44 @@
         }
       }
 
+      const chapterFocusCopy = new Map([
+        ['第一章 研究定位与适用边界', '明确研究要回答的问题、适用场景，以及能够被稳定观察的最小任务单位。'],
+        ['第二章 核心概念与研究对象', '统一协同体验、研究变量、结果状态与证据类型的基本定义。'],
+        ['第三章 协同体验模型', '用七阶段旅程与六个测量维度描述一次完整的人机协同过程。'],
+        ['第四章 研究设计', '确定研究类型、比较条件、基准组、样本与预注册判断。'],
+        ['第五章 任务与场景的构造', '从真实结果出发构造任务，并控制难度、角色与跨系统问法。'],
+        ['第六章 观测与证据采集', '记录事件、上下文与停止条件，形成可复核的过程证据。'],
+        ['第七章 通用测量指标', '定义核心指标、计算规则、缺测处理、不确定性与风险门槛。'],
+        ['第八章 领域模块与变量替换', '在稳定核心框架上增加领域特有指标，并支持替换研究变量。'],
+        ['第九章 分析与归因', '从结果回到过程，识别失败模式、交接成本、分群差异与机制。'],
+        ['第十章 改进验证与持续治理', '把发现转为可检验假设，并通过前后对照和持续回归验证。'],
+        ['第十一章 白皮书与研究报告写法', '组织白皮书结构，区分事实、解释与建议，适配不同读者。'],
+        ['第十二章 局限、伦理与质量控制', '说明证据边界、数据与隐私要求，以及高风险场景的额外控制。'],
+        ['第十三章 实施路线', '从定义与试跑开始，逐步形成基准、回归机制和最小研究包。'],
+        ['附录 A：通用任务记录模板', '提供可直接复用的任务信息、事件过程与结果记录结构。'],
+        ['附录 B：六维评分锚点示例', '给出六个核心维度的评分锚点，帮助不同研究保持一致口径。'],
+        ['附录 C：领域模块编制模板', '提供领域适用场景、特有风险、指标、门槛与示例任务模板。'],
+        ['附录 D：研究报告结论模板', '规范实测事实、机制解释、体验影响、改造建议与证据边界。'],
+        ['附录 E：术语表', '统一方法中关键术语的含义，减少跨团队解释差异。']
+      ]);
+
       chapterOpeners.forEach((opener) => {
         if (!opener.isConnected || opener.classList.contains('closing-sheet')) return;
         const chapter = opener.dataset.chapter;
         const sections = contentSheets.filter((sheet) => sheet.isConnected && sheet.dataset.chapter === chapter);
         if (!sections.length) return;
+        const chapterTitle = opener.querySelector('h1')?.textContent.trim() || '';
+        const focus = document.createElement('aside');
+        focus.className = 'chapter-focus';
+        focus.setAttribute('aria-label', `${chapterTitle}本章关注`);
+        const focusTitle = document.createElement('strong');
+        focusTitle.textContent = '本章关注 / FOCUS';
+        const focusText = document.createElement('p');
+        focusText.textContent = chapterFocusCopy.get(chapterTitle) || '提供本章的核心方法、使用边界与可执行研究要点。';
+        const focusMeta = document.createElement('small');
+        focusMeta.textContent = `${sections.length} 个主题 · 从方法到可执行研究步骤`;
+        focus.append(focusTitle, focusText, focusMeta);
+        opener.appendChild(focus);
         const index = document.createElement('div');
         index.className = 'chapter-index';
         sections.forEach((sheet, i) => {
