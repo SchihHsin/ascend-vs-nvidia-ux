@@ -281,7 +281,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .bignum .bn .u{font-size:.32em;font-weight:400;color:var(--ink-2);margin-left:.06em}
 .bignum .bl{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.5;margin-top:.7vh}
 .bignum .bsrc{font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--accent);margin-top:auto;padding-top:.6vh;letter-spacing:.02em}
-/* 双视角对照（人 / AI）*/
+/* AI 任务与知识来源对照 */
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:1.5vw;flex:1;min-height:0;align-items:stretch}
 .duo .card{display:flex;flex-direction:column;gap:1.1vh}
 .duo-h{font-weight:800;font-size:var(--fs-h2);display:flex;align-items:center;gap:.6em;letter-spacing:-.01em}
@@ -531,7 +531,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .fbig b{color:#E5484D}.fcol.good .fbig b{color:#2E7D46}
 
 /* 研究产出汇总页：可点击资产卡片 */
-.deliver-layout{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:1.05vw;align-items:stretch}
+      .deliver-layout{flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:1.05vw;align-items:stretch;width:min(920px,100%);margin:auto}
 .deliver-card{position:relative;min-width:0;min-height:0;display:flex;flex-direction:column;gap:1vh;text-decoration:none;color:inherit;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.82);border-radius:15px;padding:1.25vh 1vw;box-shadow:0 14px 34px -24px rgba(30,40,70,.32),inset 0 1px 0 rgba(255,255,255,.86);overflow:hidden;transition:transform .16s,border-color .16s,box-shadow .16s}
 .deliver-card::after{content:'';position:absolute;right:-1px;bottom:-1px;width:54%;height:42%;z-index:0;background:radial-gradient(130% 105% at 100% 100%,color-mix(in srgb,var(--asset-accent,#5B5BD6) 20%,transparent),color-mix(in srgb,var(--asset-accent,#5B5BD6) 8%,transparent) 46%,transparent 72%);pointer-events:none}
 .deliver-card:hover,.deliver-card:focus-visible{transform:translateY(-3px);border-color:color-mix(in srgb,var(--asset-accent,#5B5BD6) 38%,rgba(255,255,255,.82));box-shadow:0 18px 42px -24px rgba(30,40,70,.44),inset 0 1px 0 rgba(255,255,255,.9);outline:none}
@@ -568,12 +568,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="cv-bg"></div>
     <div class="cv-content">
       <div class="cv-top">
-        <div class="cv-meta" style="margin-left:auto">Human &#8853; AI Usability</div>
+        <div class="cv-meta" style="margin-left:auto">AI Usability</div>
       </div>
       <div class="cv-center">
-        <div class="cv-kicker">Developer Experience &#8853; LLM Usability · 昇腾社区 · 2026</div>
-        <div class="cv-sub">昇腾社区可用性 · 双视角分析<br/>AI 侧「内容可用性」&times; 开发者侧「基础体验」</div>
-        <div class="cv-lead">本报告从两个视角回答同一问题：AI 侧看业界大模型能否搜到 / 抓到 / 用对昇腾社区知识；开发者侧看开发者从浏览官网到跑通的真实旅程。</div>
+        <div class="cv-kicker">AI Usability · 昇腾社区 · 2026</div>
+        <div class="cv-sub">昇腾社区 AI 可用性分析</div>
+        <div class="cv-lead">围绕真实计算开发任务，评估业界大模型能否搜到、抓到、读懂并用对昇腾社区知识；以 CUDA 为成熟参照，定位知识供给的可改进空间。</div>
       </div>
       <div class="cv-bot">
         <div class="cv-ucd">2012 UCD &middot; DEV LAB</div>
@@ -587,24 +587,26 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">目录</span></div>
-        <div class="subttl">CONTENTS · 围绕同一开发任务，依次观察 AI 与开发者的可用性</div>
+        <div class="subttl">CONTENTS · 围绕同一开发任务，依次说明 AI 可用性的测量、实测与可复用产出</div>
       </div>
       <div class="head-r">01/ 目录</div>
     </div>
     <style>
       .contents-slide .body-area{min-height:0;display:flex;flex-direction:column;justify-content:center}
-      .contents-directory{width:min(1240px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1vw;align-items:stretch}
-      .directory-card{--dir:#5B5BD6;position:relative;min-width:0;min-height:48vh;overflow:hidden;padding:2.35vh 1.25vw 1.7vh;display:flex;flex-direction:column;background:radial-gradient(ellipse 130% 130% at 50% 48%,#0E1116 0%,#3A424F 100%);border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 42px -25px rgba(20,25,35,.56),inset 0 1px 0 rgba(255,255,255,.22)}
-      .directory-card:first-child{border-radius:17px 4px 4px 17px}.directory-card:last-child{border-radius:4px 17px 17px 4px}.directory-card:not(:first-child):not(:last-child){border-radius:4px}.directory-card:after{content:"";position:absolute;right:-25%;bottom:-24%;width:90%;height:46%;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--dir) 18%,transparent),transparent 70%);pointer-events:none}.directory-card.overview{--dir:#5B5BD6}.directory-card.ai{--dir:#2F6FED}.directory-card.exp{--dir:#D17724}.directory-card.sum{--dir:#0F9F9B}
+      .contents-directory{width:min(1120px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1vw;align-items:stretch}
+      .directory-card{--dir:#5B5BD6;position:relative;min-width:0;min-height:22vh;overflow:hidden;padding:1.8vh 1.25vw 1.35vh;display:flex;flex-direction:column;background:radial-gradient(ellipse 130% 130% at 50% 48%,#0E1116 0%,#3A424F 100%);border:1px solid rgba(255,255,255,.18);border-radius:14px;box-shadow:0 18px 42px -25px rgba(20,25,35,.56),inset 0 1px 0 rgba(255,255,255,.22)}
+      .directory-card:after{content:"";position:absolute;right:-25%;bottom:-24%;width:90%;height:46%;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--dir) 18%,transparent),transparent 70%);pointer-events:none}.directory-card.overview{--dir:#5B5BD6}.directory-card.measure{--dir:#2F6FED}.directory-card.task{--dir:#0F9F9B}.directory-card.result{--dir:#B455A0}.directory-card.general{--dir:#D17724}.directory-card.sum{--dir:#637187}
       .directory-no,.directory-name,.directory-en,.directory-items,.directory-note{position:relative;z-index:1}.directory-no{font-family:'Barlow Condensed','Inter',sans-serif;font-size:clamp(54px,5.4vw,86px);line-height:.82;letter-spacing:-.035em;font-weight:700;color:var(--dir);text-shadow:0 0 28px color-mix(in srgb,var(--dir) 36%,transparent)}.directory-name{margin-top:1.35vh;font-size:var(--fs-h2);line-height:1.2;font-weight:950;color:#fff}.directory-en{margin-top:.42vh;font-family:'Inter',sans-serif;font-size:var(--fs-sm);font-weight:700;color:color-mix(in srgb,var(--dir) 62%,#fff)}
       .directory-items{display:grid;gap:.52vh;margin-top:2.65vh}.directory-items span{font-size:var(--fs-body);line-height:1.36;color:rgba(255,255,255,.74)}.directory-items span:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;vertical-align:middle;margin:-2px .48em 0 0;background:var(--dir);box-shadow:0 0 12px color-mix(in srgb,var(--dir) 42%,transparent)}.directory-note{margin-top:auto;padding-top:1.25vh;border-top:1px solid rgba(255,255,255,.16);font-size:var(--fs-sm);font-weight:900;line-height:1.35;color:color-mix(in srgb,var(--dir) 54%,#fff)}
     </style>
     <div class="body-area">
       <div class="contents-directory">
-        <article class="directory-card overview"><div class="directory-no">01</div><h2 class="directory-name">研究概览</h2><div class="directory-en">Research Overview</div><div class="directory-items"><span>AI 进入开发任务</span><span>从 AI 失效到开发者接管</span></div><div class="directory-note">定义共同问题与两个研究视角</div></article>
-        <article class="directory-card ai"><div class="directory-no">02</div><h2 class="directory-name">AI 可用性研究</h2><div class="directory-en">AI Usability Research</div><div class="directory-items"><span>测量方法：指标定义与计算方法</span><span>任务定义</span><span>实测结果</span><span>通用性</span></div><div class="directory-note">看 AI 能否找到、读懂、用对知识</div></article>
-        <article class="directory-card exp"><div class="directory-no">03</div><h2 class="directory-name">开发者基础体验分析</h2><div class="directory-en">Developer Experience</div><div class="directory-items"><span>人机协同与摩擦指数</span><span>生命周期与真实触点</span><span>证据聚光灯</span></div><div class="directory-note">看开发者如何在社区完成任务</div></article>
-        <article class="directory-card sum"><div class="directory-no">04</div><h2 class="directory-name">总览与附录</h2><div class="directory-en">Summary &amp; Appendix</div><div class="directory-items"><span>基础体验改造方向</span><span>研究产出与可复用工具</span><span>指标、公式与理论依据</span></div><div class="directory-note">沉淀可执行结论与研究资产</div></article>
+        <article class="directory-card overview"><div class="directory-no">01</div><h2 class="directory-name">研究概览</h2><div class="directory-en">Research Overview</div><div class="directory-items"><span>AI 进入开发任务</span><span>输出为何仍需验证</span></div><div class="directory-note">明确 AI 可用性研究问题</div></article>
+        <article class="directory-card measure"><div class="directory-no">02</div><h2 class="directory-name">测量方法</h2><div class="directory-en">Measurement</div><div class="directory-items"><span>指标定义</span><span>评分计算</span></div><div class="directory-note">以统一量尺记录证据</div></article>
+        <article class="directory-card task"><div class="directory-no">03</div><h2 class="directory-name">任务定义</h2><div class="directory-en">Task Definition</div><div class="directory-items"><span>共同任务</span><span>CANN / CUDA 问法</span></div><div class="directory-note">确保双栈对照可比</div></article>
+        <article class="directory-card result"><div class="directory-no">04</div><h2 class="directory-name">实测结果</h2><div class="directory-en">Field Results</div><div class="directory-items"><span>任务矩阵</span><span>问题定位</span></div><div class="directory-note">识别知识供给短板</div></article>
+        <article class="directory-card general"><div class="directory-no">05</div><h2 class="directory-name">通用性</h2><div class="directory-en">Generality</div><div class="directory-items"><span>变量实验</span><span>白皮书产出</span></div><div class="directory-note">扩展为长期研究资产</div></article>
+        <article class="directory-card sum"><div class="directory-no">06</div><h2 class="directory-name">研究产出与附录</h2><div class="directory-en">Outputs &amp; Appendix</div><div class="directory-items"><span>报告与评分资产</span><span>指标理论依据</span></div><div class="directory-note">沉淀可复用方法与工具</div></article>
       </div>
     </div>
   </section>
@@ -613,7 +615,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-glow chapter-cover" data-chapter="overview" style="--glow-h:236;--glow-h2:182;--glow-sat:82%;--glow-light:42%;--glow-spread:42;--glow-color-int:.68;--glow-white-int:.4">
     <div class="glow"></div><div class="glow-white"></div>
     <div class="chrome"><span>CHAPTER 01</span><span>RESEARCH OVERVIEW</span></div>
-    <div class="inner"><div class="cover-block"><div class="ch-no">01</div><h1 class="ch-cover-title">研究概览</h1><p class="ch-cover-sub">先说明 AI 如何进入开发任务，以及为什么当 AI 无法形成可执行答案时，需要同时观察 AI 协同可用性与开发者基础体验。</p></div></div>
+    <div class="inner"><div class="cover-block"><div class="ch-no">01</div><h1 class="ch-cover-title">研究概览</h1><p class="ch-cover-sub">先说明 AI 如何进入开发任务，以及为什么当 AI 无法形成可执行答案时，需要系统评估其知识获取与作答能力。</p></div></div>
   </section>
 
   <!-- 2 灰底：AI 采用趋势 -->
@@ -681,14 +683,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 5 灰底：从 AI 答不出来到开发者接管任务 -->
+  <!-- 5 灰底：从开发者任务到 AI 可用性观察 -->
   <section class="slide s-gray research-branch-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">AI 答不出来，任务未解决，开发者接管任务</span></div>
-        <div class="subttl">研究范围 · 定位 AI 为什么答不出来，并观察开发者在社区的基础体验</div>
+        <div class="brand"><span class="ttl">开发者提出任务，AI 能否形成可直接执行的答案</span></div>
+        <div class="subttl">研究范围 · 定位 AI 在理解任务、检索知识与组织答案时的受阻位置</div>
       </div>
-      <div class="head-r">05/ 两个研究视角</div>
+      <div class="head-r">05/ AI 可用性观察</div>
     </div>
     <style>
       .research-branch-slide .body-area{display:flex;align-items:center;justify-content:center;min-height:0}
@@ -696,7 +698,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </style>
     <div class="body-area">
       <div class="branch-canvas">
-        <svg viewBox="0 0 1400 660" role="img" aria-label="AI 答不出来后，开发任务尚未解决，开发者接管任务的两个研究视角">
+        <svg viewBox="0 0 1400 660" role="img" aria-label="开发者提出任务后，AI 通过检索知识形成可执行答案的观察范围">
           <defs>
             <marker id="branch-c-red-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#c93646" stroke-width="1.8"/></marker>
             <marker id="branch-c-orange-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#d98113" stroke-width="1.8"/></marker>
@@ -709,27 +711,27 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <path d="M435 200 Q545 344 435 490 Q560 555 700 345 Q840 135 965 200 Q855 345 965 490 Q840 555 700 345 Q560 135 435 200" fill="rgba(255,255,255,.62)" stroke="rgba(69,77,92,.08)"/>
           <circle cx="300" cy="345" r="108" fill="rgba(255,255,255,.92)" stroke="#c93646" stroke-opacity=".5" stroke-width="2"/><circle cx="1100" cy="345" r="108" fill="rgba(255,255,255,.92)" stroke="#d98113" stroke-opacity=".5" stroke-width="2"/><circle cx="700" cy="345" r="106" fill="#303440"/>
           <text x="300" y="334" text-anchor="middle" class="c-title">AI</text><text x="300" y="359" text-anchor="middle" class="c-title">答不出来</text><text x="300" y="383" text-anchor="middle" class="c-small">未形成可靠操作建议</text>
-          <text x="1100" y="334" text-anchor="middle" class="c-title">开发者</text><text x="1100" y="359" text-anchor="middle" class="c-title">接管任务</text><text x="1100" y="383" text-anchor="middle" class="c-small">自己回社区找依据</text>
+          <text x="1100" y="334" text-anchor="middle" class="c-title">AI 检索</text><text x="1100" y="359" text-anchor="middle" class="c-title">与组织答案</text><text x="1100" y="383" text-anchor="middle" class="c-small">形成可验证的操作建议</text>
           <text x="700" y="326" text-anchor="middle" class="c-title c-white">开发任务</text><text x="700" y="351" text-anchor="middle" class="c-title c-white">尚未解决</text><text x="700" y="378" text-anchor="middle" class="c-small c-white">AI 未能给出可直接执行的答案</text>
           <g transform="translate(300 58)" fill="none" stroke="#c93646" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle r="13"/><circle r="4"/><path d="M0-21v7M0 14v7M-21 0h7M14 0h7"/></g><text x="300" y="108" text-anchor="middle" class="c-label c-focus c-label-ai">定位 AI 为什么答不出来</text>
-          <g transform="translate(1083 36)" fill="none" stroke="#d98113" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 1v25l7-7 5 11 5-2-5-11 10-1Z"/><path d="M22 5 27 0M25 13h7"/></g><text x="1100" y="108" text-anchor="middle" class="c-label c-focus c-label-dev">观察开发者在社区的基础体验</text>
+          <g transform="translate(1083 36)" fill="none" stroke="#d98113" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 1v25l7-7 5 11 5-2-5-11 10-1Z"/><path d="M22 5 27 0M25 13h7"/></g><text x="1100" y="108" text-anchor="middle" class="c-label c-focus c-label-dev">观察 AI 如何获得可用知识</text>
           <g><text x="112" y="184" class="c-label">任务理解</text><text x="112" y="209" class="c-sub">目标与约束</text><text x="112" y="235" class="c-sub">代码上下文</text><text x="112" y="261" class="c-sub">版本环境</text><text x="112" y="287" class="c-sub">运行结果</text></g>
           <g><text x="80" y="430" class="c-label">为什么答不出</text><text x="80" y="455" class="c-sub">任务词没有命中</text><text x="80" y="481" class="c-sub">正文无法读取</text><text x="80" y="507" class="c-sub">版本无法判断</text><text x="80" y="533" class="c-sub">步骤无法组织</text></g>
-          <g text-anchor="end"><text x="1288" y="184" class="c-label">开发者的补救</text><text x="1288" y="209" class="c-sub">发现 AI 无法解决</text><text x="1288" y="235" class="c-sub">自己搜索社区入口</text><text x="1288" y="261" class="c-sub">手动查页面与工程</text><text x="1288" y="287" class="c-sub">比对版本和步骤</text></g>
-          <g text-anchor="end"><text x="1320" y="430" class="c-label">补救成本</text><text x="1320" y="455" class="c-sub">入口是否找得到</text><text x="1320" y="481" class="c-sub">链路是否走得通</text><text x="1320" y="507" class="c-sub">内容能否直接执行</text><text x="1320" y="533" class="c-sub">问题是否得到解决</text></g>
+          <g text-anchor="end"><text x="1288" y="184" class="c-label">AI 的作答过程</text><text x="1288" y="209" class="c-sub">搜索官方与第三方来源</text><text x="1288" y="235" class="c-sub">抓取正文与工程证据</text><text x="1288" y="261" class="c-sub">判断版本与适用条件</text><text x="1288" y="287" class="c-sub">组织可执行操作步骤</text></g>
+          <g text-anchor="end"><text x="1320" y="430" class="c-label">可用性判断</text><text x="1320" y="455" class="c-sub">答案是否有可靠来源</text><text x="1320" y="481" class="c-sub">版本是否能正确判断</text><text x="1320" y="507" class="c-sub">步骤能否直接执行</text><text x="1320" y="533" class="c-sub">输出是否需要进一步核验</text></g>
           <path d="M422 275 C510 275 540 285 594 312" fill="none" stroke="#c93646" stroke-width="3" stroke-linecap="round" marker-end="url(#branch-c-red-arr)"/><path d="M422 414 C510 414 540 405 594 378" fill="none" stroke="#c93646" stroke-width="3" stroke-linecap="round" marker-end="url(#branch-c-red-arr)"/><path d="M806 312 C860 285 890 275 978 275" fill="none" stroke="#d98113" stroke-width="3" stroke-linecap="round" marker-end="url(#branch-c-orange-arr)"/><path d="M806 378 C860 405 890 414 978 414" fill="none" stroke="#d98113" stroke-width="3" stroke-linecap="round" marker-end="url(#branch-c-orange-arr)"/>
-          <path d="M645 230 Q700 175 755 230" fill="none" stroke="#7d8795" stroke-width="2" stroke-dasharray="5 7" stroke-linecap="round" marker-end="url(#branch-c-neutral-arr)"/><text x="700" y="166" text-anchor="middle" class="c-small">无法形成可靠答案</text><path d="M755 458 Q700 515 645 458" fill="none" stroke="#7d8795" stroke-width="2" stroke-dasharray="5 7" stroke-linecap="round" marker-end="url(#branch-c-neutral-arr)"/><text x="700" y="548" text-anchor="middle" class="c-small">开发者接管后的执行结果</text>
+          <path d="M645 230 Q700 175 755 230" fill="none" stroke="#7d8795" stroke-width="2" stroke-dasharray="5 7" stroke-linecap="round" marker-end="url(#branch-c-neutral-arr)"/><text x="700" y="166" text-anchor="middle" class="c-small">知识是否足以支持可靠作答</text><path d="M755 458 Q700 515 645 458" fill="none" stroke="#7d8795" stroke-width="2" stroke-dasharray="5 7" stroke-linecap="round" marker-end="url(#branch-c-neutral-arr)"/><text x="700" y="548" text-anchor="middle" class="c-small">答案能否用于下一步操作</text>
         </svg>
       </div>
     </div>
   </section>
 
-<!-- 8 灰底：用局部时序图呈现两个研究视角 -->
+<!-- 8 灰底：用局部时序图呈现 AI 知识往返 -->
   <section class="slide s-gray ux-method-slide local-seq-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">开发方式改变，研究对象随之扩展：从界面旅程到知识往返</span></div>
-        <div class="subttl">传统开发者任务 → AI 协同开发任务</div>
+        <div class="brand"><span class="ttl">开发方式改变，研究对象随之扩展：从任务输入到 AI 知识往返</span></div>
+        <div class="subttl">开发者任务 → AI 检索、判断与作答过程</div>
       </div>
       <div class="head-r">06/ 时序图观察</div>
     </div>
@@ -950,7 +952,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </style>
     <div class="body-area">
       <div class="uxwhy-left">
-        <div class="uxwhy-title"><b>传统界面旅程与 AI 协同任务的观察对象不同</b></div>
+        <div class="uxwhy-title"><b>AI 协同任务需要记录知识从哪里来、如何被使用</b></div>
         <div class="uxwhy-diagram">
           <div class="uxpath">
             <div class="method-panel-head"><span class="method-contrast-tag">BEFORE</span><div class="uxpane-h">传统开发者工作旅程</div><p class="uxpath-note">用阶段、触点、行为与界面串成路径。</p></div>
@@ -1011,7 +1013,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="seqdemo-lead"><b>两条知识事件对应可观察的界面行为。</b>箭头背后分别是搜索、页面抓取、人工复核与记录动作。</div>
         <div class="seqdemo-stage">
           <div class="seqdemo-panel on" data-seq-demo="all">
-            <div><div class="seqdemo-titleline"><h3>AI 与开发者分别使用社区</h3><span class="seqdemo-actor both">两个研究视角共同构成观察对象</span></div><p>AI 侧搜索、抓取和判断证据；开发者侧回到社区核对操作教程、适用版本与前置条件。两个视角都留下可观察的研究记录。</p></div>
+            <div><div class="seqdemo-titleline"><h3>AI 如何围绕任务使用社区知识</h3><span class="seqdemo-actor both">任务输入 → 检索证据 → 组织答案</span></div><p>记录 AI 如何搜索、抓取并判断知识证据，以及答案在何处因版本、正文或任务步骤不足而需要人工核验。</p></div>
             <div class="seqdemo-window">
               <div class="seqdemo-bar"><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><i class="seqdemo-dot"></i><span class="seqdemo-browser-name">研究观察台</span><span class="seqdemo-browser-mode">双路径</span></div>
               <div class="seqdemo-content">
@@ -1087,11 +1089,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-<!-- 9 灰底：从局部往返扩展到完整开发旅程 -->
+<!-- 9 灰底：从局部往返扩展到完整任务过程 -->
   <section class="slide s-gray seqscope-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">研究对象从一次知识往返扩展到完整开发旅程</span></div>
+        <div class="brand"><span class="ttl">研究对象从一次知识往返扩展到完整任务过程</span></div>
         <div class="subttl">研究对象 · 「局部任务 → 自定义算子开发全过程」</div>
       </div>
       <div class="head-r">09/ 研究对象 · 观察范围</div>
@@ -1132,8 +1134,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray research-map-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">从 AI 协同与开发者基础体验两个视角，提升昇腾开发任务的可用性</span></div>
-        <div class="subttl">研究设计 · 先定义研究对象，再对知识供给与任务体验进行实测</div>
+        <div class="brand"><span class="ttl">围绕真实任务，量化 AI 能否获得并组织可执行的昇腾知识</span></div>
+        <div class="subttl">研究设计 · 以任务、证据与评分为主线，定位 AI 可用性的受阻环节</div>
       </div>
       <div class="head-r">10/ 研究设计</div>
     </div>
@@ -1161,22 +1163,22 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="research-map">
         <div class="rm-row">
           <div class="rm-label"><b>研究目标</b><span>Goal · 04</span></div>
-          <div class="rm-cells"><div class="rm-band top"><b><em>面向更优的昇腾开发体验，提升 AI 协同可用性与开发者基础体验</em></b><p>以同一开发任务为锚点，一方面评估社区知识能否支持开发者借助 AI 获得可验证、可执行的开发建议；另一方面评估开发者在社区中独立完成入口定位、环境配置、排错验证等基础任务的连续性与摩擦点。</p></div></div>
+          <div class="rm-cells"><div class="rm-band top"><b><em>让开发者能够借助 AI 获得可验证、可执行的昇腾开发建议</em></b><p>以同一开发任务为锚点，评估 AI 能否找到合适知识、读取关键证据、判断版本条件，并组织为可执行的操作步骤。</p></div></div>
         </div>
         <div class="rm-flow"><svg class="rm-flow-arrow" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>观察方法</b><span>Method · 03</span></div>
-          <div class="rm-cells"><div class="rm-band method-seq"><div class="rm-method"><i class="rm-method-icon" data-lucide="git-compare-arrows"></i><div><b>人机协同时序图</b><p>定位任务中由谁发起知识请求、在哪里受阻、何时需要复核。</p></div></div></div><div class="rm-band method-score"><div class="rm-method"><i class="rm-method-icon" data-lucide="chart-no-axes-combined"></i><div><b>可观测评分体系</b><p>衡量知识是否可发现、可读取、可信、可执行。</p></div></div></div></div>
+          <div class="rm-cells"><div class="rm-band method-seq"><div class="rm-method"><i class="rm-method-icon" data-lucide="git-compare-arrows"></i><div><b>AI 检索过程记录</b><p>记录任务理解、知识请求、来源返回与受阻位置。</p></div></div></div><div class="rm-band method-score"><div class="rm-method"><i class="rm-method-icon" data-lucide="chart-no-axes-combined"></i><div><b>可观测评分体系</b><p>衡量知识是否可发现、可读取、可信、可执行。</p></div></div></div></div>
         </div>
         <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>实测范围</b><span>Scope · 02</span></div>
-          <div class="rm-cells"><div class="rm-band scope-ai"><b>AI 侧内容可用性</b><div class="rm-number">26<small>项开发任务</small></div><p>CANN 与 CUDA 双栈对照，记录搜索、抓取与作答证据。</p></div><div class="rm-band scope-dev"><b>开发者侧基础体验</b><div class="rm-number">7<small>个阶段 · <strong>24</strong> 个触点</small></div><p>实跑入口、上手、开发、调试与交付全过程。</p></div></div>
+          <div class="rm-cells"><div class="rm-band scope-ai"><b>AI 可用性实测</b><div class="rm-number">26<small>项开发任务</small></div><p>CANN 与 CUDA 双栈对照，记录搜索、抓取与作答证据。</p></div></div>
         </div>
         <div class="rm-flow split"><svg class="rm-flow-arrow ai" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg><svg class="rm-flow-arrow dev" viewBox="0 0 48 56" aria-hidden="true"><path d="M17 49Q14 49 14 46V32H9Q4 32 7.2 27.8L20.5 12.2Q24 8 27.5 12.2L40.8 27.8Q44 32 39 32H34V46Q34 49 31 49Z"/></svg></div>
         <div class="rm-row">
           <div class="rm-label"><b>任务角色</b><span>Subject · 01</span></div>
-          <div class="rm-cells"><div class="rm-band person-ai"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><p>检索、抓取、判断并组织答案</p></div></div></div><div class="rm-band person-dev"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><p>在开发任务中查阅、复核与决策</p></div></div></div></div>
+          <div class="rm-cells"><div class="rm-band person-ai"><div class="rm-person"><i data-lucide="bot"></i><div><b>AI 助手</b><p>检索、抓取、判断并组织答案</p></div></div></div><div class="rm-band person-dev"><div class="rm-person"><i data-lucide="user-round"></i><div><b>开发者</b><p>提出任务，并对 AI 输出进行必要核验</p></div></div></div></div>
         </div>
       </div>
     </div>
@@ -1185,8 +1187,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <!-- 章节封：AI 可用性研究 -->
   <section class="slide s-glow chapter-cover" data-chapter="ai" style="--glow-h:224;--glow-h2:278;--glow-sat:90%;--glow-light:43%;--glow-spread:42;--glow-color-int:.7;--glow-white-int:.42">
     <div class="glow"></div><div class="glow-white"></div>
-    <div class="chrome"><span>CHAPTER 02</span><span>AI USABILITY RESEARCH</span></div>
-    <div class="inner"><div class="cover-block"><div class="ch-no">02</div><h1 class="ch-cover-title">AI 可用性研究</h1><p class="ch-cover-sub">沿着一次真实计算开发任务，观察 AI 如何检索、读取、判断并组织答案；再用同一套问题与指标，对照 CANN 与 CUDA 的知识可用性。</p></div></div>
+    <div class="chrome"><span>CHAPTER 02</span><span>MEASUREMENT</span></div>
+    <div class="inner"><div class="cover-block"><div class="ch-no">02</div><h1 class="ch-cover-title">测量方法</h1><p class="ch-cover-sub">沿着一次真实计算开发任务，观察 AI 如何检索、读取、判断并组织答案；再以统一问题与指标，对照 CANN 与 CUDA 的知识可用性。</p></div></div>
   </section>
 
     <style>
@@ -2471,8 +2473,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="wp-outcomes">
         <div class="wp-lead"><b>白皮书持续回答三类协同体验问题</b><span>从“这次谁更好”进一步回答：人和 AI 在何处受阻、为什么受阻，以及应优先改造什么。</span></div>
         <article class="wp-card"><div class="wp-icon"><i data-lucide="chart-no-axes-combined"></i></div><div class="wp-copy"><b>不同协同条件下的体验比较</b><span>比较 CANN、CUDA 等技术栈，以及不同 AI 和任务场景中，<em>人能否高效借助 AI 完成任务</em>。</span></div></article>
-        <article class="wp-card source"><div class="wp-icon"><i data-lucide="network"></i></div><div class="wp-copy"><b>协同受阻的来源定位</b><span>区分问题来自知识供给、模型能力、工具交互还是开发者基础体验，明确 <em>应由谁优先改造哪一环</em>。</span></div></article>
-        <article class="wp-card action"><div class="wp-icon"><i data-lucide="route"></i></div><div class="wp-copy"><b>持续改造与验收的共同依据</b><span>将内容、检索、AI 与社区体验的改造放入同一量尺，为 <em>优先级制定、方案验证与长期追踪</em>提供证据。</span></div></article>
+        <article class="wp-card source"><div class="wp-icon"><i data-lucide="network"></i></div><div class="wp-copy"><b>AI 受阻的来源定位</b><span>区分问题来自知识供给、模型能力、检索配置还是 Agent 策略，明确 <em>应由谁优先改造哪一环</em>。</span></div></article>
+        <article class="wp-card action"><div class="wp-icon"><i data-lucide="route"></i></div><div class="wp-copy"><b>持续改造与验收的共同依据</b><span>将内容、检索、模型与 Agent 的改造放入同一量尺，为 <em>优先级制定、方案验证与长期追踪</em>提供证据。</span></div></article>
       </div>
     </div>
   </section>
@@ -2481,743 +2483,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
 
 
-  <!-- 章节封：开发者基础体验分析 -->
-  <section class="slide s-glow chapter-cover" data-chapter="experience" style="--glow-h:14;--glow-h2:337;--glow-sat:88%;--glow-light:42%;--glow-spread:44;--glow-color-int:.7;--glow-white-int:.4">
-    <div class="glow"></div><div class="glow-white"></div>
-    <div class="chrome"><span>CHAPTER 03</span><span>DEVELOPER EXPERIENCE ANALYSIS</span></div>
-    <div class="inner"><div class="cover-block"><div class="ch-no">03</div><h1 class="ch-cover-title">开发者基础体验分析</h1><p class="ch-cover-sub">当 AI 未能给出可直接执行的答案，开发者如何回到社区完成任务？沿着真实旅程拆解入口、环境、文档、支持与社区的基础体验。</p></div></div>
-  </section>
-
-  <!-- 7a 灰底：人机协同时序图（独立一页） -->
-  <!-- #26 右栏：三类转向触发 样式 -->
-  <style>
-    .trig{display:flex;flex-direction:column;gap:.7vh}
-    .trig-i{display:flex;align-items:center;gap:.8vw;background:rgba(91,91,214,.05);border:1px solid rgba(91,91,214,.18);border-radius:10px;padding:1vh 1vw;cursor:pointer;transition:opacity .18s,background .18s,border-color .18s,box-shadow .18s}
-    .trig.has-focus .trig-i{opacity:.36}.trig.has-focus .trig-i.is-active{opacity:1;background:rgba(91,91,214,.11);border-color:rgba(91,91,214,.42);box-shadow:0 12px 24px -22px rgba(59,54,160,.72),inset 0 1px 0 rgba(255,255,255,.72)}
-    .trig-i .tn{flex:0 0 auto;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:800;color:#fff;background:var(--accent);border-radius:6px;padding:.4vh .6vw;white-space:nowrap}
-    .trig-i .tx{display:flex;flex-direction:column;min-width:0}
-    .trig-i .tx b{font-size:var(--fs-body);color:var(--ink);line-height:1.3}
-    .trig-i .tx small{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.45}
-  </style>
-
-  <!-- 7a 灰底：人机协同时序图（图左·文右，仿 #6） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">人机协同时序：AI 时代开发者仍会在关键场景使用昇腾社区</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「时序图」</div>
-      </div>
-      <div class="head-r">26/ 基础体验 · 时序图</div>
-    </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
-      <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
-        <iframe data-src="seq-d3.html?hi=2" title="时序图 · 开发者↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
-      </div>
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.2vh">
-        <div class="cmp-h"><span class="hk">Interaction</span>开发者使用社区内容的关键场景</div>
-        <p class="cmp-desc">即使有 AI 辅助，开发者仍会在<b>感知学习</b>、<b>检索受阻</b>、<b>需要决策</b>等场景依赖社区内容。社区在这里既包括官方文档，也包括第三方经验、样例仓和论坛讨论。</p>
-        <div class="trig">
-          <div class="trig-i" tabindex="0" data-seq-trigger="learn"><span class="tn">触发 1</span><div class="tx"><b>感知学习</b><small>接触新任务时，借助教程、样例与学习路径建立方向和首个可执行步骤</small></div></div>
-          <div class="trig-i" tabindex="0" data-seq-trigger="blocked"><span class="tn">触发 2</span><div class="tx"><b>AI 检索官方失败</b><small>官方操作教程抓取受阻时，转第三方社区或人工核查官方</small></div></div>
-          <div class="trig-i" tabindex="0" data-seq-trigger="decision"><span class="tn">触发 3</span><div class="tx"><b>需要决策</b><small>答案不确定，或涉及版本、SoC、精度时：官方文档 + Gitee 样例 + 论坛交叉验证</small></div></div>
-        </div>
-        <div class="bridge" style="margin-top:.2vh">社区不仅承接“求助”，也在<b>感知学习</b>、<b>检索受阻</b>、<b>需要决策</b>三个节点进入开发旅程；基础体验评分衡量这些入口是否容易找到、能否支持任务完成。</div>
-      </div>
-    </div>
-  </section>
-  <!-- 7b-7d 灰底：开发者旅程摩擦指数评估方法论 = 3 页（一+二 / 三+四+五 / 六，iframe 嵌 visual.html #method） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验评估先界定理论依据与评估边界</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 1/3 · 理论与边界」</div>
-      </div>
-      <div class="head-r">27/ 摩擦指数 · 理论与边界</div>
-    </div>
-    <div class="body-area">
-      <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=1" title="摩擦指数 理论依据+评估边界" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
-    </div>
-  </section>
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验评分由 5 维 16 项指标按统一协议归一化</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 2/3 · 指标与计算」</div>
-      </div>
-      <div class="head-r">28/ 摩擦指数 · 指标与计算</div>
-    </div>
-    <div class="body-area">
-      <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=2" title="摩擦指数 指标体系+测量协议+归一化" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
-    </div>
-  </section>
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">16 个 best/worst 锚点公开，保证两边同尺对比</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程摩擦指数 3/3 · 锚点总表」</div>
-      </div>
-      <div class="head-r">29/ 摩擦指数 · 锚点总表</div>
-    </div>
-    <div class="body-area">
-      <iframe data-src="../ascend-vs-nvidia-2026-06-13-visual.html?emb=1&sec=method&pg=3" title="摩擦指数 六、锚点总表" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe>
-    </div>
-  </section>
-  <style>
-    .djg{display:flex;flex-direction:column;gap:.6vh}
-    .dj-row{display:grid;grid-template-columns:104px 1fr;gap:.6vw;align-items:stretch}
-    .dj-d{font-size:var(--fs-sm);font-weight:700;color:#2f3d63;background:rgba(47,61,99,.08);border:1px solid rgba(47,61,99,.18);border-radius:8px;padding:.6vh .4vw;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2}
-    .dj-ind{font-size:var(--fs-xs);color:var(--ink-2);line-height:1.55;background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:8px;padding:.55vh .7vw}
-    .dj-ind .ic{font-family:'JetBrains Mono';color:var(--accent);font-weight:800;font-size:var(--fs-xs)}
-    .dj-ind small{color:#A1A4AA}
-    .mxline2{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.5}.mxline2 b{color:var(--ink-2)}
-  </style>
-
-
-  <!-- 12 灰底：iframe 引主报告 #journey -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">走完 7 步生命周期：每步「触点 × 情绪 × 痛点 / 机会」，谷底在配环境</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「开发者旅程」</div>
-      </div>
-      <div class="head-r">30/ 基础体验 · 用户旅程</div>
-    </div>
-    <div class="body-area" style="display:flex;flex-direction:row;gap:1.4vw;align-items:stretch">
-      <div style="flex:0 0 17%;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1.5vh">
-        <div class="cmp-h"><span class="hk">算子开发 · 旅程</span>写算子的人，这样走完 7 步</div>
-        <p class="cmp-desc">落地官网 → 进开发者门户 → 配 <b>CANN</b> 环境 → 写 <b>Ascend C</b> 算子 → 编译跑通 → 调试求助 → 进阶。</p>
-        <div class="bridge" style="margin-top:.2vh">情绪在 <b style="color:#FF8A8A">「配环境」探底</b>（全旅程谷底）、<b style="color:#A6E05A">「上手引导」微反超 NVIDIA</b>。</div>
-      </div>
-      <div style="flex:1;min-width:0;height:100%;display:flex"><iframe data-src="ar-embed.html?sec=journey" title="journey" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-    </div>
-  </section>
-  <!-- 结论页：样式 -->
-  <style>
-    .ccg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;flex:1;min-height:0;align-content:stretch}
-    .ccg.topic-overview{grid-template-rows:repeat(2,minmax(0,1fr));gap:1.05vw;align-content:stretch}
-    .ccg.topic-overview.four{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));flex:0 0 auto;align-self:stretch;height:min(61vh,620px)}
-    .topic-overview.four .cc{grid-column:auto}
-    .topic-overview .cc{padding:2vh 1.55vw;gap:.78vh;justify-content:space-between}
-    .topic-overview .cc-tag{font-size:var(--fs-sm);padding:4px 12px}
-    .topic-overview .cc-h{font-size:var(--fs-h2);line-height:1.2;position:relative;z-index:1}
-    .topic-overview .cc-d{font-size:var(--fs-body);line-height:1.58;position:relative;z-index:1}
-    .topic-overview .cc-ev{margin-top:.12vh;padding-top:.12vh;position:relative;z-index:1}
-    .topic-overview .cc-ev span{font-size:var(--fs-sm);padding:3px 8px}
-    .cc{border-radius:14px;padding:2.8vh 1.55vw;background:rgba(255,255,255,.5);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;gap:1.35vh;position:relative;overflow:hidden}
-    .cc .cc-tag{align-self:flex-start;font-size:var(--fs-sm);font-weight:800;padding:4px 12px;border-radius:8px}
-    .cc.ai .cc-tag{background:rgba(31,159,184,.13);color:#1577a0}
-    .cc.hu .cc-tag{background:rgba(91,91,214,.12);color:#5b5bd6}
-    .cc.both .cc-tag{background:rgba(47,111,237,.12);color:#2453c0}
-    .cc-top{display:flex;align-items:center;justify-content:flex-start;gap:.8vw;position:static}
-    .cc-top .cc-tag{position:relative;z-index:2}
-    .cc-symbol{position:absolute;right:-1.2vw;bottom:-2.1vh;width:138px;height:138px;display:flex;align-items:center;justify-content:center;color:var(--topic,#5b5bd6);opacity:.12;pointer-events:none;z-index:0}
-    .cc-symbol svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
-    .cc-h{font-weight:800;font-size:var(--fs-h2);color:var(--ink);line-height:1.32}
-    .cc-d{font-size:var(--fs-body);color:var(--ink-2);line-height:1.65}
-    .cc-ev{display:flex;flex-wrap:wrap;gap:.4em;margin-top:.8vh;padding-top:.4vh}
-    .cc-ev span{font-family:'JetBrains Mono';font-size:var(--fs-xs);color:var(--ink-3);background:rgba(0,0,0,.045);border-radius:6px;padding:3px 9px;white-space:nowrap}
-
-    .cc-ic{position:absolute;right:12px;top:12px;width:76px;height:76px;opacity:.1;color:currentColor;pointer-events:none}
-    .cc-ic svg{width:100%;height:100%;display:block}
-    .cc.hu{color:#5b5bd6;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(91,91,214,.08));border-color:rgba(91,91,214,.2)}
-    .cc.ai{color:#1788a8;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(31,159,184,.09));border-color:rgba(31,159,184,.22)}
-    .cc.both{color:#2f6fed;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(47,111,237,.08));border-color:rgba(47,111,237,.2)}
-    .cc.t1{--topic:#5b5bd6;--topic-soft:rgba(91,91,214,.1);color:#5b5bd6;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(91,91,214,.08));border-color:rgba(91,91,214,.2)}
-    .cc.t2{--topic:#1788a8;--topic-soft:rgba(31,159,184,.11);color:#1788a8;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(31,159,184,.09));border-color:rgba(31,159,184,.22)}
-    .cc.t3{--topic:#2f6fed;--topic-soft:rgba(47,111,237,.1);color:#2f6fed;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(47,111,237,.08));border-color:rgba(47,111,237,.2)}
-    .cc.t4{--topic:#c7771d;--topic-soft:rgba(199,119,29,.11);color:#c7771d;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(199,119,29,.09));border-color:rgba(199,119,29,.22)}
-    .cc.t5{--topic:#23a06a;--topic-soft:rgba(35,160,106,.1);color:#23a06a;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(35,160,106,.08));border-color:rgba(35,160,106,.22)}
-    .cc.t6{--topic:#a33c72;--topic-soft:rgba(163,60,114,.1);color:#a33c72;background:linear-gradient(160deg,rgba(255,255,255,.58),rgba(163,60,114,.08));border-color:rgba(163,60,114,.22)}
-    .cc.t1 .cc-tag,.cc.t2 .cc-tag,.cc.t3 .cc-tag,.cc.t4 .cc-tag,.cc.t5 .cc-tag,.cc.t6 .cc-tag{background:var(--topic-soft);color:var(--topic)}
-    .cc.t1 .cc-d b,.cc.t2 .cc-d b,.cc.t3 .cc-d b,.cc.t4 .cc-d b,.cc.t5 .cc-d b,.cc.t6 .cc-d b{background:linear-gradient(transparent 55%,color-mix(in srgb,var(--topic) 18%,transparent) 0)}
-    .cc.hu .cc-h b{background:linear-gradient(transparent 60%,rgba(91,91,214,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
-    .cc.ai .cc-h b{background:linear-gradient(transparent 60%,rgba(31,159,184,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
-    .cc.both .cc-h b{background:linear-gradient(transparent 60%,rgba(47,111,237,.16) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
-    .cc-d b{color:var(--ink);font-weight:900;border-radius:4px;padding:0 .08em;background:linear-gradient(transparent 55%,rgba(91,91,214,.18) 0);box-decoration-break:clone;-webkit-box-decoration-break:clone}
-    .cc.ai .cc-d b{background:linear-gradient(transparent 55%,rgba(31,159,184,.18) 0)}
-    .cc.both .cc-d b{background:linear-gradient(transparent 55%,rgba(47,111,237,.18) 0)}
-    .chain{display:grid;grid-template-columns:62px 1.35fr 1fr 1.15fr;gap:1.5vh .8vw;align-items:stretch}
-    .chain .ch-h{font-size:var(--fs-sm);font-weight:700;color:var(--ink-3);letter-spacing:.04em;display:flex;align-items:flex-end;padding:0 .2vw .2vh}
-    .chain .ch-b{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px}
-    .chain .ch-b .bn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:800;font-family:'JetBrains Mono'}
-    .chain .ch-b small{font-size:var(--fs-xs);font-weight:700;letter-spacing:.04em}
-    .chain .ch-b.ai .bn{background:#7c5cf0}.chain .ch-b.ai small{color:#5a3fa0}
-    .chain .ch-b.hu .bn{background:#2f3d63}.chain .ch-b.hu small{color:#2f3d63}
-    .chain .cell{font-size:var(--fs-body);line-height:1.62;border-radius:10px;padding:1.2vh 1vw}
-    .chain .c-an{background:rgba(255,255,255,.5);border:1px solid var(--line);color:var(--ink-2)}
-    .chain .c-co{background:rgba(0,0,0,.03);color:var(--ink-2)}
-    .chain .c-dp{background:rgba(124,92,240,.08);border:1px solid rgba(124,92,240,.22);color:var(--ink);font-weight:600}
-    .chain .c-dp.hu{background:rgba(47,61,99,.07);border-color:rgba(47,61,99,.2)}
-    .chain b{color:var(--ink)}
-  </style>
-
-
-  <!-- 灰底：关键触点 1.1 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">官网首页已露出开发入口，但起步动作需要更明确</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 74（差值 +2）</div>
-      </div>
-      <div class="head-r">27/ 触点 1.1</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1" title="触点 1.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 1.1b 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">开发者门户内容不弱，入口埋深和选择成本拖慢上手</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 77（差值 +1）</div>
-      </div>
-      <div class="head-r">28/ 触点 1.1b</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=1.1b" title="触点 1.1b" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 1.2 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">导航入口基本完整，但缺少按场景和角色的横切路径</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 76（差值 0）</div>
-      </div>
-      <div class="head-r">29/ 触点 1.2</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=1.2" title="触点 1.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 2.1 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">产品矩阵覆盖完整，但新手仍需要选型分诊</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
-      </div>
-      <div class="head-r">30/ 触点 2.1</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=2.1" title="触点 2.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 2.3 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">规格集中列全是优势，下一步要支持并排选型</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 76（差值 -2）</div>
-      </div>
-      <div class="head-r">31/ 触点 2.3</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=2.3" title="触点 2.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 2.4 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">方案入口具备筛选能力，开发者自助起步路径还需补齐</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 77（差值 -1）</div>
-      </div>
-      <div class="head-r">32/ 触点 2.4</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=2.4" title="触点 2.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 2.2 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">CANN 页面内容扎实，下一步体验入口还可更清晰</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 80（差值 -2）</div>
-      </div>
-      <div class="head-r">33/ 触点 2.2</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=2.2" title="触点 2.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 3.2 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">学习路径和 HiDevLab 构成昇腾首次跑通优势</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 82 / NVIDIA 72（差值 +10）</div>
-      </div>
-      <div class="head-r">34/ 触点 3.2</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=3.2" title="触点 3.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 3.3 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">教程体系已经成形，认证影响力仍需建立</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 77 / NVIDIA 79（差值 -2）</div>
-      </div>
-      <div class="head-r">35/ 触点 3.3</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=3.3" title="触点 3.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 5.4 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">HiDevLab 已有在线开发基础，轻量试用入口还可加强</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 80（差值 -4）</div>
-      </div>
-      <div class="head-r">36/ 触点 5.4</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=5.4" title="触点 5.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 4.1 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">下载中心入口清楚，但公告弹窗会打断首次任务</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 70 / NVIDIA 74（差值 -4）</div>
-      </div>
-      <div class="head-r">37/ 触点 4.1</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=4.1" title="触点 4.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 4.2 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">登录前置把试用意愿挡在下载之前</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 64 / NVIDIA 80（差值 -16）</div>
-      </div>
-      <div class="head-r">38/ 触点 4.2</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=4.2" title="触点 4.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 4.3 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">Toolkit 下载链路过长，是首次上手的最大阻断</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 66 / NVIDIA 82（差值 -16）</div>
-      </div>
-      <div class="head-r">39/ 触点 4.3</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=4.3" title="触点 4.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 4.4 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">版本与环境选择需要默认推荐和配套校验</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 73 / NVIDIA 79（差值 -6）</div>
-      </div>
-      <div class="head-r">40/ 触点 4.4</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=4.4" title="触点 4.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 3.1 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">文档中心搜索显眼，但角色与主题筛选还不够强</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 80 / NVIDIA 81（差值 -1）</div>
-      </div>
-      <div class="head-r">41/ 触点 3.1</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=3.1" title="触点 3.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 3.4 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">API 文档可查，但版本切换和结构一致性仍需统一</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
-      </div>
-      <div class="head-r">42/ 触点 3.4</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=3.4" title="触点 3.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 5.1 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">站内代码示例方便复制，完整工程和在线运行要同步提供</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 78 / NVIDIA 79（差值 -1）</div>
-      </div>
-      <div class="head-r">43/ 触点 5.1</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=5.1" title="触点 5.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 5.3 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">工具链覆盖完整，MindStudio 的心智与插件体验还要增强</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 79（差值 -4）</div>
-      </div>
-      <div class="head-r">44/ 触点 5.3</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=5.3" title="触点 5.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 6.1 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">论坛分版精细，但游客可读和搜索索引能力不足</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 74 / NVIDIA 79（差值 -5）</div>
-      </div>
-      <div class="head-r">45/ 触点 6.1</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=6.1" title="触点 6.1" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 6.2 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">技术支持入口正式，但 FAQ、论坛和工单需要串联</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 76（差值 -1）</div>
-      </div>
-      <div class="head-r">46/ 触点 6.2</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=6.2" title="触点 6.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 6.3 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">集中 FAQ 是优势，价值要通过搜索和产品页入口释放</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 73（差值 +3）</div>
-      </div>
-      <div class="head-r">47/ 触点 6.3</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=6.3" title="触点 6.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 5.2 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">ModelZoo 的引导式路径是昇腾可放大的上手优势</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 81 / NVIDIA 79（差值 +2）</div>
-      </div>
-      <div class="head-r">48/ 触点 5.2</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=5.2" title="触点 5.2" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 6.4 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">博客内容组织不差，短板在全球搜索可发现性</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 73 / NVIDIA 81（差值 -8）</div>
-      </div>
-      <div class="head-r">49/ 触点 6.4</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=6.4" title="触点 6.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 1.3 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">搜索入口显眼，下一步要支持报错日志和资源筛选</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 76 / NVIDIA 76（差值 0）</div>
-      </div>
-      <div class="head-r">50/ 触点 1.3</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=1.3" title="触点 1.3" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 灰底：关键触点 1.4 分析（?tp，deck 头给标题） -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">中文体验顺畅，英文内容同步决定出海可达性</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 关键触点分析　·　昇腾 75 / NVIDIA 75（差值 0）</div>
-      </div>
-      <div class="head-r">51/ 触点 1.4</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?tp=1.4" title="触点 1.4" style="flex:1;width:100%;height:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-
-  <!-- 灰底：基础体验问题聚光灯 -->
-  <section class="slide s-gray hmfull-slide">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">触点证据聚光灯：从评分表里定位五类基础体验问题</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「触点问题聚光灯」</div>
-      </div>
-      <div class="head-r">52/ 基础体验 · 问题聚光灯</div>
-    </div>
-    <div class="body-area">
-      <div class="hmfull-wrap">
-        <div class="hmfull-note"><div class="hm-score-legend"><span>低</span><span class="hm-grad"></span><span>高</span></div><span style="flex:1"></span><div class="hm-steps" id="devHmSteps" aria-label="基础体验聚焦讲解"></div></div>
-        <div class="card hmfull-card devhm-card">
-          <table class="hmfull devhm devhm-wide" id="devHmFull" aria-label="基础体验触点评分摘要">
-            <thead>
-              <tr class="stage-row">
-                <th class="metric-head">旅程阶段</th>
-                <th class="stage-band l1" data-issue="1">L1 找入口</th>
-                <th class="stage-band l2" data-issue="2">L2 上手引导</th>
-                <th class="stage-band l3" colspan="2" data-issue="0">L3 配环境</th>
-                <th class="stage-band l6" colspan="3" data-issue="4">L6 调试求助</th>
-                <th class="stage-band l7" colspan="2" data-issue="1">L7 进阶生态</th>
-                <th class="stage-band cross" data-issue="3">贯穿能力</th>
-              </tr>
-              <tr class="touch-row">
-              <th class="metric-head">触点</th>
-              <th data-issue="1"><span class="jname">门户 / 导航</span><small>触点 1.1b / 1.2</small></th>
-              <th data-issue="2"><span class="jname">学习路径 / HiDevLab</span><small>触点 3.2</small></th>
-              <th data-issue="0"><span class="jname">账号登录</span><small>触点 4.2</small></th>
-              <th data-issue="0"><span class="jname">Toolkit 下载</span><small>触点 4.3</small></th>
-              <th data-issue="3"><span class="jname">社区 / 论坛</span><small>触点 6.1</small></th>
-              <th data-issue="4"><span class="jname">技术支持</span><small>触点 6.2</small></th>
-              <th data-issue="4"><span class="jname">FAQ 自助</span><small>触点 6.3</small></th>
-              <th data-issue="2"><span class="jname">ModelZoo 引导</span><small>触点 5.2</small></th>
-              <th data-issue="1"><span class="jname">博客 / 案例</span><small>触点 6.4</small></th>
-              <th data-issue="3"><span class="jname">英文访问</span><small>触点 1.4</small></th>
-            </tr></thead>
-            <tbody>
-              <tr><th class="metric-head">昇腾</th>
-                <td data-issue="1"><span class="score good">78</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-dev-nav.png" alt="昇腾门户导航截图"><span>门户导航入口</span></div></td>
-                <td data-issue="2"><span class="score good">82</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/07-ascend-learn-path-op.png" alt="昇腾学习路径截图"><span>学习路径</span></div></td>
-                <td data-issue="0"><span class="score mid">64</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/05-ascend-login-4.2.png" alt="昇腾账号登录截图"><span>账号登录流程</span></div></td>
-                <td data-issue="0"><span class="score bad">21</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/02-ascend-download-4.3.png" alt="昇腾 Toolkit 下载截图"><span>Toolkit 下载页</span></div></td>
-                <td data-issue="3"><span class="score good">73</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/04-ascend-forum.png" alt="昇腾社区论坛截图"><span>社区 / 论坛</span></div></td>
-                <td data-issue="4"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-developer-6.2.png" alt="昇腾技术支持截图"><span>技术支持入口</span></div></td>
-                <td data-issue="4"><span class="score good">85</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/07-ascend-document-6.3.png" alt="昇腾 FAQ 文档截图"><span>FAQ 自助</span></div></td>
-                <td data-issue="2"><span class="score good">81</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/03-ascend-modelzoo-op.png" alt="昇腾 ModelZoo 引导截图"><span>ModelZoo 引导</span></div></td>
-                <td data-issue="1"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-blog-6.4.png" alt="昇腾博客和案例截图"><span>博客 / 案例页</span></div></td>
-                <td data-issue="3"><span class="score good">75</span><div class="devhm-proof"><img src="../../materials/ascend-vs-nvidia/screenshots/08-ascend-developer-1.4.png" alt="昇腾英文访问截图"><span>英文入口</span></div></td>
-              </tr>
-              <tr><th class="metric-head">NVIDIA</th>
-                <td data-issue="1"><span class="score good">77</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/01-nvidia-nav.png" alt="NVIDIA 导航截图"><span>开发者导航</span></div></td>
-                <td data-issue="2"><span class="score mid">72</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/07-nvidia-quickstart-3.2-op.png" alt="NVIDIA 快速入门截图"><span>Quick Start</span></div></td>
-                <td data-issue="0"><span class="score good">80</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/05-nvidia-program-4.2.png" alt="NVIDIA 开发者计划截图"><span>账号 / 开发者计划</span></div></td>
-                <td data-issue="0"><span class="score good">87</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/02-nvidia-cuda-download-4.3.png" alt="NVIDIA CUDA 下载截图"><span>CUDA 下载页</span></div></td>
-                <td data-issue="3"><span class="score good">88</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-forum.png" alt="NVIDIA 论坛截图"><span>开发者论坛</span></div></td>
-                <td data-issue="4"><span class="score good">76</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-support-6.2.png" alt="NVIDIA 技术支持截图"><span>技术支持入口</span></div></td>
-                <td data-issue="4"><span class="score mid">63</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-forum-6.3.png" alt="NVIDIA FAQ 或论坛截图"><span>论坛问答</span></div></td>
-                <td data-issue="2"><span class="score good">79</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/03-nvidia-ngc-op.png" alt="NVIDIA NGC 截图"><span>NGC 资源</span></div></td>
-                <td data-issue="1"><span class="score good">92</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/08-nvidia-blog-6.4.png" alt="NVIDIA 博客截图"><span>NVIDIA 博客</span></div></td>
-                <td data-issue="3"><span class="score good">75</span><div class="devhm-proof nv"><img src="../../materials/ascend-vs-nvidia/screenshots/01-nvidia-home-1.4.png" alt="NVIDIA 英文访问截图"><span>英文站点</span></div></td>
-              </tr>
-              <tr><th class="metric-head">差值</th><td data-issue="1"><span class="gap up">+1</span></td><td data-issue="2"><span class="gap up">+10</span></td><td data-issue="0"><span class="gap dn">−16</span></td><td data-issue="0"><span class="gap dn">−66</span></td><td data-issue="3"><span class="gap dn">−15</span></td><td data-issue="4"><span class="gap dn">−1</span></td><td data-issue="4"><span class="gap up">+22</span></td><td data-issue="2"><span class="gap up">+2</span></td><td data-issue="1"><span class="gap dn">−17</span></td><td data-issue="3"><span class="gap">0</span></td></tr>
-              <tr class="note-row"><th class="metric-head">摩擦来源</th><td data-issue="1"><div class="fric-list"><span>入口显眼度</span><span>场景直达</span><span>任务词回流</span></div></td><td data-issue="2"><div class="fric-list"><span>长板未前置</span><span>HiDevLab 衔接</span><span>默认起步弱</span></div></td><td data-issue="0"><div class="fric-list"><span>先登录再试用</span><span>海外账号</span><span>试用中断</span></div></td><td data-issue="0"><div class="fric-list"><span>登录、协议、包选择</span><span>版本配套手判</span></div></td><td data-issue="3"><div class="fric-list"><span>游客可读</span><span>索引收录</span><span>高频问题沉淀</span></div></td><td data-issue="4"><div class="fric-list"><span>入口分层</span><span>文档导流</span><span>工单回流</span></div></td><td data-issue="4"><div class="fric-list"><span>FAQ 亮点</span><span>上下文嵌入</span><span>论坛联动</span></div></td><td data-issue="2"><div class="fric-list"><span>三步引导</span><span>CANN 复用</span><span>在线实验联动</span></div></td><td data-issue="1"><div class="fric-list"><span>第一屏命中</span><span>英文案例</span><span>顶部直达入口</span></div></td><td data-issue="3"><div class="fric-list"><span>语言入口</span><span>账号注册</span><span>论坛可读</span></div></td></tr>
-            </tbody>
-          </table>
-          <div class="hm-callout" id="devHmCallout" aria-live="polite"></div>
-        </div>
-        <div class="hm-rings off" id="devHmRings" aria-hidden="true"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 灰底：基础体验问题推导 -->
-
-
-  <!-- 章节封：总览与附录 -->
+  <!-- 章节封：研究产出与附录 -->
   <section class="slide s-glow chapter-cover" data-chapter="summary" style="--glow-h:282;--glow-h2:330;--glow-sat:90%;--glow-light:43%;--glow-spread:43;--glow-color-int:.72;--glow-white-int:.42">
     <div class="glow"></div><div class="glow-white"></div>
-    <div class="chrome"><span>CHAPTER 04</span><span>SUMMARY &amp; APPENDIX</span></div>
-    <div class="inner"><div class="cover-block"><div class="ch-no">04</div><h1 class="ch-cover-title">总览与附录</h1><p class="ch-cover-sub">汇总两个研究视角导出的改造方向、研究产出与测量依据，帮助后续复用、复核与持续追踪。</p></div></div>
-  </section>
-
-  <!-- 14 灰底：iframe 引主报告 #j2 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 1：后置登录与协议，先让开发者拿到可运行 Toolkit</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法① 下载闸门」</div>
-      </div>
-      <div class="head-r">53/ 基础体验做法 · 1</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=j2" title="j2" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 15 灰底：基础体验做法 2 · 场景化组织 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 2：以开发场景组织入口、内容与下一步路径</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法② 场景化组织」</div>
-      </div>
-      <div class="head-r">54/ 基础体验做法 · 2</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=jscene" title="jscene" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 15 灰底：iframe 引主报告 #j5 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 3：优化搜索可发现性与索引可达，让官方答案更早出现</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法③ 搜索命中与索引」</div>
-      </div>
-      <div class="head-r">55/ 基础体验做法 · 3</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=j5" title="j5" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 16 灰底：iframe 引主报告 #j4 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 4：把学习路径、HiDevLab 与 ModelZoo 接成首次跑通路径</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法④ 学习与首次跑通」</div>
-      </div>
-      <div class="head-r">56/ 基础体验做法 · 4</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=j4" title="j4" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 17 灰底：iframe 引主报告 #j3 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 5：按海外开发者旅程补齐账号、英文与社区可读性</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法⑤ 海外可达性」</div>
-      </div>
-      <div class="head-r">57/ 基础体验做法 · 5</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=j3" title="j3" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 18 灰底：基础体验做法 6 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">基础体验做法 6：把 FAQ、论坛、工单和案例沉淀成可复用支持知识</span></div>
-        <div class="subttl">开发者侧 · 基础体验 · 「做法⑥ 支持知识沉淀」</div>
-      </div>
-      <div class="head-r">58/ 基础体验做法 · 6</div>
-    </div>
-    <div class="body-area"><iframe data-src="ar-embed.html?sec=j6" title="j6" style="flex:1;width:100%;border:0;background:transparent;min-height:0"></iframe></div>
-  </section>
-  <!-- 结论行动 · 专题总览 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">专题总览：四个官网板块的关键改进方向</span></div>
-        <div class="subttl">结论 · 专题板块行动方案 · 「总览」</div>
-      </div>
-      <div class="head-r">59/ 结论行动 · 专题总览</div>
-    </div>
-    <div class="body-area" style="align-items:stretch">
-      <div class="ccg topic-overview four">
-        <div class="cc t1">
-          <div class="cc-top"><span class="cc-tag">专题 1</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h11v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h5"/><path d="M8 11h6"/><path d="M8 15h4"/></svg></span></div>
-          <div class="cc-h">文档内容与知识服务</div>
-          <div class="cc-d">文档、错误码、FAQ、案例和高难度任务专题一起治理，并提供官方知识 Skill，让开发者能读懂，AI 也能<b>抓到、引用、用对</b>。</div>
-          <div class="cc-ev"><span>版本</span><span>可抓取</span><span>错误码</span><span>知识 Skill</span></div>
-        </div>
-        <div class="cc t2">
-          <div class="cc-top"><span class="cc-tag">专题 2</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/><path d="M8 11h6"/><path d="M11 8v6"/></svg></span></div>
-          <div class="cc-h">开发者入口与搜索路径</div>
-          <div class="cc-d">先让官方答案进入开发者和 AI 的第一屏：官网首屏、场景入口、外部搜索和站内搜索都指向<b>正确起点</b>。</div>
-          <div class="cc-ev"><span>首屏入口</span><span>外部搜索</span><span>站内搜索</span></div>
-        </div>
-        <div class="cc t3">
-          <div class="cc-top"><span class="cc-tag">专题 3</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/><path d="M5 5v14"/></svg></span></div>
-          <div class="cc-h">学习路径与首次跑通</div>
-          <div class="cc-d">把学习路径、HiDevLab、ModelZoo、GitCode 工程和教程代码接起来，让开发者从学到做走到<b>第一次跑通</b>。</div>
-          <div class="cc-ev"><span>HiDevLab</span><span>GitCode</span><span>一键运行</span></div>
-        </div>
-        <div class="cc t4">
-          <div class="cc-top"><span class="cc-tag">专题 4</span><span class="cc-symbol"><svg viewBox="0 0 24 24"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M5 17h14"/><path d="M7 21h10"/></svg></span></div>
-          <div class="cc-h">账号下载与环境门槛</div>
-          <div class="cc-d">登录、协议、Toolkit 包选择、版本配套是最大硬摩擦；先把“拿到包、装对版”变<b>简单</b>。</div>
-          <div class="cc-ev"><span>登录前置</span><span>Toolkit</span><span>配套矩阵</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 行动 · 专题：文档内容与知识服务 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="role-chip t1">专题 1</span><span class="ttl">文档内容与知识服务——让开发者能读懂，AI 能用对</span></div>
-      </div>
-      <div class="head-r board-tabs t1"><div class="bk-strip" data-group="topic"><span class="bk on">知识服务</span><span class="bk">入口搜索</span><span class="bk">学习跑通</span><span class="bk">环境门槛</span></div></div>
-    </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip t1">专题</span>
-      <div class="rgoal" data-board="1.1 · 知识服务"><span class="gl">目标</span><span class="rgoal-t">把文档、错误码、FAQ、案例和高难度任务专题作为一套知识服务治理：人能顺着任务读下去，AI 能按版本、场景和证据给出可信回答。</span></div>
-      <div class="ameasures">
-        <div class="ahead p0">P0</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">建立<b>首选网址 + 当前推荐版</b>规则</div><div class="rmi-why">版本混乱是 AI 侧覆盖面最大的问题，也会让开发者在下载和文档之间反复确认。<span class="src2">AI 问题 #1</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">每个高频错误码建<b>一码一页</b>，含原因、场景、修复样例</div><div class="rmi-why">错误码页面不能只解释“发生了什么”，还要给可验证的修复路径。<span class="src2">AI 问题 #6 / 触点 6.3</span></div></div></div>
-        <div class="ahead p1">P1</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">提供面向开发者的<b>官方昇腾知识 Skill</b></div><div class="rmi-why">用户在 AI 工具中启用后，可按版本、场景、错误码和任务类型获取昇腾官方知识，降低“搜不到、抓不准、用错版本”的问题。<span class="src2">设计点 ⑤</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">上线<b>llms.txt / llms-full.txt + Markdown 查看</b>出口</div><div class="rmi-why">给 Agent 一条稳定、低成本、可引用的读取通道，减少抓不到正文后的凭记忆补全。<span class="src2">内容可用性结论 #4</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">关键教程页保证<b>正文、代码、表格可直接读取</b></div><div class="rmi-why">开发者看到的是文档，Agent 抓到却可能是导航骨架；两套体验必须统一。<span class="src2">AI 问题 #4 / 结论 #5</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">文档页提供<b>局部 FAQ + 下一步求助入口</b></div><div class="rmi-why">FAQ 要出现在安装、API、工具、报错这些开发者卡住的位置。<span class="src2">触点 6.2 / 6.3</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">围绕 D/M/X/O/L 建<b>高难度任务专题内容池</b></div><div class="rmi-why">自定义算子、Tiling、msSanitizer、注册集成、精度排查要从零散页面整理成任务包。<span class="src2">AI 问题 #6</span></div></div></div>
-        <div class="ahead p2">P2</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">把论坛、工单、搜索词每月回流到<b>FAQ / 文档 / 示例仓</b></div><div class="rmi-why">让支持链路成为文档更新的来源，持续减少同类问题的重复求助。<span class="src2">基础体验做法 #6</span></div></div></div>
-      </div>
-    </div></div>
-  </section>
-
-  <!-- 行动 · 专题：开发者入口与搜索路径 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="role-chip t2">专题 2</span><span class="ttl">开发者入口与搜索路径——先让官方答案进入第一屏</span></div>
-      </div>
-      <div class="head-r board-tabs t2"><div class="bk-strip" data-group="topic"><span class="bk">知识服务</span><span class="bk on">入口搜索</span><span class="bk">学习跑通</span><span class="bk">环境门槛</span></div></div>
-    </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip t2">专题</span>
-      <div class="rgoal" data-board="2.1 · 入口搜索"><span class="gl">目标</span><span class="rgoal-t">把外部搜索、站内搜索、首屏入口和场景入口接成一条路径：开发者不必知道产品名，AI 也不必反复换关键词，就能回到<b>官方、当前、可执行</b>的答案。</span></div>
-      <div class="ameasures">
-        <div class="ahead p0">P0</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">官网首屏给一个<b>开发者起步 / 场景直达</b>主入口</div><div class="rmi-why">昇腾官网单站整合是优势，但品牌信息会盖住开发动作；入口要在首屏一眼可见。<span class="src2">基础体验做法 #2 / 触点 1.1</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">站内搜索支持<b>粘贴报错 / 日志</b>并按资源类型筛选</div><div class="rmi-why">报错检索是最高频求助入口；先识别卡点，再分流到文档、FAQ、论坛或工单。<span class="src2">触点 1.3 / 6.3</span></div></div></div>
-        <div class="ahead p1">P1</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">把高频任务词写进<b>标题、摘要、URL 与首屏正文</b></div><div class="rmi-why">NVIDIA 侧高频 CUDA 查询常能在搜索第一屏看到官方页；昇腾侧部分任务需要翻页或补关键词，官方页才浮出。<span class="src2">AI 指标①</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">补充<b>按场景 / 按角色</b>的入口</div><div class="rmi-why">新手通常知道“我要做算子 / 推理 / 训练”，不一定知道应点哪个产品名；入口位置不必固定在顶栏。<span class="src2">基础体验做法 #2 / 触点 1.2</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">产品矩阵前置<b>选型分诊</b>，几步问答推荐路径</div><div class="rmi-why">把平铺产品罗列改成“你是谁、要做什么、该从哪里开始”的引导。<span class="src2">触点 2.1</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">为场景入口输出<b>稳定 URL + 可索引页面摘要</b></div><div class="rmi-why">Agent 需要可引用的入口页，而不是只能从 JS 菜单里推断路径。<span class="src2">AI 问题 #4</span></div></div></div>
-        <div class="ahead p2">P2</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">博客案例补<b>英文版、搜索可发现性优化、顶部直达入口</b></div><div class="rmi-why">内容质量不差，但入口埋深和全球可发现性拉低海外 / 学术场景。<span class="src2">触点 6.4 / 1.4</span></div></div></div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">规格页增加<b>勾选型号并排对比</b></div><div class="rmi-why">昇腾规格集中列全已经不弱，下一步是把信息变成可决策工具。<span class="src2">触点 2.3</span></div></div></div>
-      </div>
-    </div></div>
-  </section>
-
-  <!-- 行动 · 专题：学习路径与首次跑通 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="role-chip t3">专题 3</span><span class="ttl">学习路径与首次跑通——把“内容完整”变成“第一次就跑通”</span></div>
-      </div>
-      <div class="head-r board-tabs t3"><div class="bk-strip" data-group="topic"><span class="bk">知识服务</span><span class="bk">入口搜索</span><span class="bk on">学习跑通</span><span class="bk">环境门槛</span></div></div>
-    </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip t3">专题</span>
-      <div class="rgoal" data-board="1.3 · 学习跑通"><span class="gl">目标</span><span class="rgoal-t">把昇腾已经有优势的学习路径、HiDevLab 在线实验、ModelZoo、算子 hub 放大成统一心智：从任一入口进入，都能在 <b>5 分钟内跑出第一个结果</b>。</span></div>
-      <div class="ameasures">
-        <div class="ahead p0">P0</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">把<b>HiDevLab 在线实验 + 引导式 ModelZoo</b>前置</div><div class="rmi-why">这是昇腾少数明确反超 NVIDIA 的体验长板，应主动放大。<span class="src2">触点 3.2</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">在 CANN 页补充更清晰的<b>在线体验入口</b></div><div class="rmi-why">产品页内容扎实，可在相关模块旁提供通向 HiDevLab 在线实验 / 在线开发的下一步，而不是只停留在阅读。<span class="src2">触点 2.2</span></div></div></div>
-        <div class="ahead p1">P1</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">每段示例提供<b>HiDevLab 一键运行 + GitCode 完整工程</b></div><div class="rmi-why">站内内联代码方便复制，HiDevLab 方便立即试跑，GitCode 工程方便带走，二者要同时给。<span class="src2">触点 5.1</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">示例从代码片段升级为<b>完整工程 + 一键运行</b></div><div class="rmi-why">减少从复制代码到本地跑通之间的隐性工程成本。<span class="src2">触点 5.1 / 5.2</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">把 ModelZoo 的<b>三步引导</b>复用到 CANN / 算子入口</div><div class="rmi-why">让硬核入口也有“选模型 / 看命令 / 跑起来”的渐进路径。<span class="src2">触点 5.2</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">根据开发者意图推荐<b>学习路径</b></div><div class="rmi-why">每条路径写清目标、前置条件、预计耗时、成功标准，开发者知道自己走到哪一步，AI 也能拆成可执行计划。<span class="src2">设计点 ③④</span></div></div></div>
-        <div class="ahead p2">P2</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">上线轻量 <b>playground</b>，浏览器里先试模型 / 算子效果</div><div class="rmi-why">HiDevLab 已有在线写代码能力，但评估期还需要零安装看效果。<span class="src2">触点 5.4</span></div></div></div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">教程代码块保持<b>可复制、可抓取、可验证输出</b></div><div class="rmi-why">避免 Agent 只读到叙述，却拿不到命令、依赖和预期结果。<span class="src2">内容可用性结论 #5 / #8</span></div></div></div>
-      </div>
-    </div></div>
-  </section>
-
-  <!-- 行动 · 专题：账号下载与环境门槛 -->
-  <section class="slide s-gray">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="role-chip t4">专题 4</span><span class="ttl">账号下载与环境门槛——先解决登录和版本配套这两个硬阻断</span></div>
-      </div>
-      <div class="head-r board-tabs t4"><div class="bk-strip" data-group="topic"><span class="bk">知识服务</span><span class="bk">入口搜索</span><span class="bk">学习跑通</span><span class="bk on">环境门槛</span></div></div>
-    </div>
-    <div class="body-area"><div class="rolewrap"><span class="role-chip t4">专题</span>
-      <div class="rgoal" data-board="1.2 · 环境门槛"><span class="gl">目标</span><span class="rgoal-t">让试用开发者<b>零阻力</b>拿到能跑的包：把登录、协议、Toolkit 包选择和版本配套从上手前的阻断，改成有默认值、有解释、有下一步的路径。</span></div>
-      <div class="ameasures">
-        <div class="ahead p0">P0</div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">社区版<b>游客可直接下载，登录与协议后置</b></div><div class="rmi-why">现状把华为账号登录设成下载前置条件，对“只想先试”的人就是劝退点；NVIDIA 账号完全后置。<span class="src2">触点 4.3 / 4.2</span></div></div></div>
-        <div class="rmi"><span class="rp p0">P0</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">做 CANN / driver / torch_npu <b>配套查询工具</b></div><div class="rmi-why">任何一轴配错都跑不起来，配套关系应从文档段落升级成工具。<span class="src2">触点 4.4 / 内容可用性结论 #1</span></div></div></div>
-        <div class="ahead p1">P1</div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">架构 / 版本 / 软件包<b>配默认值做智能推荐</b></div><div class="rmi-why">现状要做“架构 → 版本 → 包”三四道判断题；给默认值、少让开发者选。<span class="src2">触点 4.3</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">区分<b>在线增量包 / 离线整包</b>并按网络环境默认选好</div><div class="rmi-why">NVIDIA 用 Network / Full 照顾联网 / 离线；昇腾现状只分社区 / 商用。<span class="src2">触点 4.4</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 co">开发者 + AI</span></div><div class="rmi-act">下载 / 安装页把<b>当前推荐版本 + 配套</b>写进正文文字</div><div class="rmi-why">开发者不会配错，AI 也读到对的版本；与“文档内容与知识服务”专题互相支撑。<span class="src2">内容可用性结论 #1</span></div></div></div>
-        <div class="rmi"><span class="rp p1">P1</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">下完跑通后<b>引导下一步</b>（HiDevLab 在线实验 / 文档 / 示例）</div><div class="rmi-why">把“下到包”延伸成“跑通第一个”，减少装完不知所措的流失。<span class="src2">行动建议</span></div></div></div>
-        <div class="ahead p2">P2</div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 hu">开发者</span></div><div class="rmi-act">出海补<b>邮箱直注册 + Google / GitHub</b> 登录</div><div class="rmi-why">现状仅华为账号，海外 / 学术开发者注册门槛高。<span class="src2">触点 4.2 / 1.4</span></div></div></div>
-        <div class="rmi"><span class="rp p2">P2</span><div class="rmi-b"><div class="rmi-meta"><span class="who2 ai">AI</span></div><div class="rmi-act">安装 / 上手命令做成<b>可复制文本、可被抓取</b></div><div class="rmi-why">命令不贴图、不靠 JS 注入，Agent 才能照着一步步装、不凭记忆杜撰。<span class="src2">内容可用性结论 #5</span></div></div></div>
-      </div>
-    </div></div>
+    <div class="chrome"><span>CHAPTER 06</span><span>OUTPUTS &amp; APPENDIX</span></div>
+    <div class="inner"><div class="cover-block"><div class="ch-no">06</div><h1 class="ch-cover-title">研究产出与附录</h1><p class="ch-cover-sub">汇总 AI 可用性研究的报告、评分资产、可复用工具与测量依据，支撑后续复用、复核与持续追踪。</p></div></div>
   </section>
 
   <!-- 研究产出：报告、方法与可复用工具汇总 -->
@@ -3227,7 +2497,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">本研究产出件汇总——报告、方法与可复用工具已沉淀</span></div>
         <div class="subttl">研究资产 · 可点击查看线上报告与 GitHub 仓库</div>
       </div>
-      <div class="head-r">64/ 研究产出件</div>
+      <div class="head-r">研究产出与附录</div>
     </div>
     <div class="body-area">
       <div class="deliver-layout">
@@ -3239,17 +2509,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/19_findings_ux_synthesis.html</span></div>
         </a>
 
-        <a class="deliver-card exp" href="https://schihhsin.github.io/ascend-vs-nvidia-ux/reports/ascend-vs-nvidia-2026-06-13-visual.html#op" target="_blank" rel="noopener">
-          <div class="deliver-shot"><img src="dev-experience-report-thumb.png" alt="开发者侧基础体验分析报告截图"></div>
-          <div class="deliver-meta"><span class="deliver-no">02</span><span class="deliver-kind">分析报告</span></div>
-          <div class="deliver-title">开发者侧基础体验分析报告</div>
-          <div class="deliver-desc">按真实开发者旅程拆解官网触点，对比昇腾与 NVIDIA 从入口、环境、文档到支持社区的体验差异。</div>
-          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/ascend-vs-nvidia-ux/reports/ascend-vs-nvidia-2026-06-13-visual.html#op</span></div>
-        </a>
-
         <a class="deliver-card matrix" href="https://schihhsin.github.io/opknow/17_official_site_focus.html" target="_blank" rel="noopener">
           <div class="deliver-shot matrix"><img src="ai-usability-heat.png" alt="AI 可用性评分矩阵截图"></div>
-          <div class="deliver-meta"><span class="deliver-no">03</span><span class="deliver-kind">评分资产</span></div>
+          <div class="deliver-meta"><span class="deliver-no">02</span><span class="deliver-kind">评分资产</span></div>
           <div class="deliver-title">AI 可用性评分矩阵</div>
           <div class="deliver-desc">按任务 × 指标呈现官方可发现、可抓取、正文质量、版本清晰度、生态支撑与综合置信度。</div>
           <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/17_official_site_focus.html</span></div>
@@ -3257,7 +2519,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
         <a class="deliver-card seq" href="https://schihhsin.github.io/opknow/20_human_ai_journey.html" target="_blank" rel="noopener">
           <div class="deliver-shot seq"><img src="sequence-journey-thumb-tight.png" alt="人机协同时序图分析截图"></div>
-          <div class="deliver-meta"><span class="deliver-no">04</span><span class="deliver-kind">分析图谱</span></div>
+          <div class="deliver-meta"><span class="deliver-no">03</span><span class="deliver-kind">分析图谱</span></div>
           <div class="deliver-title">人机协同时序图分析</div>
           <div class="deliver-desc">把开发者、AI、官方内容、第三方生态与工具链放在一张链路图上，定位人与 AI 共同依赖的知识触点。</div>
           <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/20_human_ai_journey.html</span></div>
@@ -3265,18 +2527,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
         <a class="deliver-card skill" href="https://github.com/SchihHsin/ai-usability-benchmark" target="_blank" rel="noopener">
           <div class="deliver-shot"><div class="deliver-doc"><div class="bar"><i></i><i></i><i></i></div><div class="path">ai-usability-benchmark / README.md</div><p><b># ai-usability-benchmark</b></p><p>一份可分享的 Claude Code Skill：衡量「一个会实时检索的 AI 助手，</p><p>回答某个生态的开发任务时，知识从哪来、可用性如何，</p><p>与另一个成熟生态相比差在哪」。</p><p>在若干开发者任务上，对两个生态各实测检索一遍（web_search / web_fetch），</p><p>按统一的 11 项指标量化打分、记录每一步、产出可下钻的对照矩阵。</p><p>默认对照：受测生态 = CANN（昇腾），基线生态 = CUDA（NVIDIA）。</p><p>视角是「会检索的 AI 助手」，不是「这个栈好不好用」。</p><p>AI 助手只能搜→抓→读正文→拼答案。</p></div></div>
-          <div class="deliver-meta"><span class="deliver-no">05</span><span class="deliver-kind">可复用 Skill</span></div>
+          <div class="deliver-meta"><span class="deliver-no">04</span><span class="deliver-kind">可复用 Skill</span></div>
           <div class="deliver-title">AI 可用性基准测试 Skill</div>
           <div class="deliver-desc">复用同一套任务、指标、抓取记录和评分模板，持续评估 AI 对技术内容的获取与作答质量。</div>
           <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>github.com/SchihHsin/ai-usability-benchmark</span></div>
-        </a>
-
-        <a class="deliver-card skill" href="https://github.com/SchihHsin/materials/tree/main/.claude/skills/journey-touchpoint-analysis" target="_blank" rel="noopener">
-          <div class="deliver-shot"><div class="deliver-doc"><div class="bar"><i></i><i></i><i></i></div><div class="path">journey-touchpoint-analysis / SKILL.md</div><p><b># Journey Touchpoint Analysis</b></p><p>Use this skill to turn "pretend I am a user trying to complete a task on this site"</p><p>into a rigorous, visual report: journey map, touchpoint cards, annotated screenshots,</p><p>scoring, heatmap, and recommendations.</p><p>This skill was distilled from the Ascend vs NVIDIA developer-portal analysis.</p><p>Core Output: Scenario and persona; Lifecycle journey; Touchpoint inventory;</p><p>Evidence: real screenshots and source URLs for both sides of a comparison;</p><p>Annotated click path: arrows and labels showing where the user actually clicks or looks;</p><p>Scoring: per-touchpoint scores based on explicit friction metrics, not vibes.</p></div></div>
-          <div class="deliver-meta"><span class="deliver-no">06</span><span class="deliver-kind">可复用 Skill</span></div>
-          <div class="deliver-title">基础体验旅程分析 Skill</div>
-          <div class="deliver-desc">沉淀模拟用户旅程、网页实跑取证、点击标注、触点评分与图文报告生成的方法。</div>
-          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>github.com/SchihHsin/materials/tree/main/.claude/skills/journey-touchpoint-analysis</span></div>
         </a>
       </div>
     </div>
@@ -3331,13 +2585,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="cv-bg"></div>
     <div class="cv-content">
       <div class="cv-top">
-        <div class="cv-meta" style="margin-left:auto">Human &#8853; AI Usability</div>
+        <div class="cv-meta" style="margin-left:auto">AI Usability</div>
       </div>
       <div class="cv-center">
         <!-- <div class="cv-kicker">结论总结 · Closing</div> -->
         <div class="cv-sub" style="font-weight:600">Thanks</div>
-        <div class="cv-thesis">Agent 时代，用户既包括开发者，也包括 AI</div>
-        <div class="cv-lead">人与 AI 撞在同几道坎——版本散乱、可发现性弱、越往深处越塌。把碎片化的昇腾知识按场景结构化、可抓取、可运行：人少试错，AI 不杜撰。</div>
+        <div class="cv-thesis">Agent 时代，技术知识必须同时对人可读、对 AI 可用</div>
+        <div class="cv-lead">版本散乱、可发现性弱、正文难读取，会让 AI 在复杂任务中失去可靠证据。把昇腾知识按场景结构化、可抓取、可运行，才能让 AI 给出更可信的开发建议。</div>
       </div>
       <div class="cv-bot">
         <div class="cv-ucd">2012 UCD &middot; DEV LAB</div>
@@ -3383,18 +2637,22 @@ const deck=document.getElementById('deck');
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
   {id:'overview',label:'研究概览',range:[1,12]},
-  {id:'ai',label:'AI 可用性研究',range:[13,23]},
-  {id:'experience',label:'开发者基础体验分析',range:[24,55]},
-  {id:'summary',label:'总览与附录',range:[56,70]}
+  {id:'method',label:'测量方法',range:[13,15]},
+  {id:'task',label:'任务定义',range:[16,17]},
+  {id:'result',label:'实测结果',range:[18,20]},
+  {id:'generality',label:'通用性',range:[21,23]},
+  {id:'outputs',label:'研究产出与附录',range:[24,27]}
 ];
 const SECTIONS=[
   {id:'overview-context',chapter:'overview',label:'背景判断',range:[4,6]},
   {id:'overview-branch',chapter:'overview',label:'问题分叉',range:[7,7]},
   {id:'overview-framework',chapter:'overview',label:'研究框架',range:[8,12]},
-  {id:'ai-method',chapter:'ai',label:'测量方法',range:[14,15]},
-  {id:'ai-task',chapter:'ai',label:'任务定义',range:[16,17]},
-  {id:'ai-result',chapter:'ai',label:'实测结果',range:[18,20]},
-  {id:'ai-generality',chapter:'ai',label:'通用性',range:[21,23]}
+  {id:'method-core',chapter:'method',label:'指标与计算',range:[14,15]},
+  {id:'task-pairs',chapter:'task',label:'问题对设计',range:[16,17]},
+  {id:'result-matrix',chapter:'result',label:'任务矩阵与问题',range:[18,20]},
+  {id:'generality-framework',chapter:'generality',label:'变量实验与白皮书',range:[21,23]},
+  {id:'outputs-assets',chapter:'outputs',label:'研究资产',range:[25,25]},
+  {id:'outputs-appendix',chapter:'outputs',label:'指标理论依据',range:[26,26]}
 ];
 function chapterFor(index){return CHAPTERS.find(function(ch){return index+1>=ch.range[0]&&index+1<=ch.range[1];})||CHAPTERS[CHAPTERS.length-1];}
 function sectionFor(index){
