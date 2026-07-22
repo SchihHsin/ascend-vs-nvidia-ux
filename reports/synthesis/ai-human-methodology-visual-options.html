@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <title>人与 AI 协同体验白皮书 · 视觉方案</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     :root {
       --ink: #17191f;
@@ -409,6 +410,147 @@
       background: #fff;
     }
 
+    .sequence-page .visual-c {
+      border: 0;
+      background: #f7f8fa;
+    }
+
+    .sequence-page .visual-c::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid var(--line);
+      pointer-events: none;
+    }
+
+    .sequence-page svg {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .sequence-page .seq-lane {
+      stroke: #c9cdd5;
+      stroke-width: 1;
+      stroke-dasharray: 3 7;
+    }
+
+    .sequence-page .seq-link {
+      fill: none;
+      stroke: #8e95a1;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sequence-page .seq-link.primary {
+      stroke: var(--blue);
+      stroke-width: 2.2;
+    }
+
+    .sequence-page .seq-link.takeover {
+      stroke: #d56f25;
+      stroke-width: 2;
+    }
+
+    .sequence-page .seq-link.return {
+      stroke-dasharray: 5 5;
+    }
+
+    .sequence-page .seq-node {
+      stroke: #fff;
+      stroke-width: 3;
+    }
+
+    .sequence-page .seq-node.human {
+      fill: var(--ink);
+    }
+
+    .sequence-page .seq-node.ai {
+      fill: var(--blue);
+    }
+
+    .sequence-page .seq-node.joint {
+      fill: #fff;
+      stroke: var(--blue);
+      stroke-width: 2;
+    }
+
+    .sequence-page .seq-node.takeover {
+      fill: #d56f25;
+    }
+
+    .sequence-page .seq-role {
+      fill: var(--ink);
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .sequence-page .seq-role.ai {
+      fill: var(--blue);
+    }
+
+    .sequence-page .seq-label {
+      fill: var(--muted);
+      font-size: 8px;
+      font-weight: 650;
+    }
+
+    .sequence-page .seq-label.strong {
+      fill: var(--ink);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .sequence-page .seq-label.blue {
+      fill: var(--blue-dark);
+    }
+
+    .sequence-page .seq-label.orange {
+      fill: #b45b1e;
+    }
+
+    .sequence-page .seq-step {
+      fill: #fff;
+      stroke: var(--line-strong);
+      stroke-width: 1;
+    }
+
+    .sequence-page .seq-step.ai {
+      fill: var(--blue-soft);
+      stroke: #aeb7ff;
+    }
+
+    .sequence-page .seq-step.takeover {
+      fill: #fff5ed;
+      stroke: #e5a477;
+    }
+
+    .sequence-page .seq-index {
+      fill: var(--blue);
+      font-size: 7px;
+      font-weight: 850;
+    }
+
+    .sequence-page .seq-caption {
+      fill: #8a909a;
+      font-size: 7px;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .sequence-page .seq-band {
+      fill: #eceef2;
+    }
+
+    .sequence-page .seq-band.active {
+      fill: var(--blue-soft);
+    }
+
+    .sequence-page .seq-band.takeover {
+      fill: #fff2e8;
+    }
+
     .cover-c::before {
       content: "";
       position: absolute;
@@ -677,6 +819,24 @@
       font-size: 13px;
     }
 
+    .selected-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      color: var(--blue-dark);
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .selected-note::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
     @media (max-width: 900px) {
       .topbar {
         align-items: flex-start;
@@ -719,7 +879,10 @@
     <nav aria-label="方案导航">
       <a href="#cover-a">封面 A</a>
       <a href="#cover-b">封面 B</a>
-      <a href="#cover-c">封面 C</a>
+      <a href="#cover-c">时序 C1</a>
+      <a href="#cover-c2">时序 C2</a>
+      <a href="#cover-c3">时序 C3</a>
+      <a href="#cover-c4">时序 C4</a>
       <a href="#cover-d">封面 D</a>
       <a href="#chapter-a">章节方案</a>
     </nav>
@@ -730,17 +893,18 @@
       <div>
         <div class="eyebrow">Visual Direction Study · v1</div>
         <h1>封面主图与章节开页<br>分开选择</h1>
-        <p>四个封面方案分别强调“协同系统、测量矩阵、交接时序、体验剖面”。章节开页提供三种灰色关系的处理，均不再使用贯穿整页的硬切色块。</p>
+        <p>封面方向已收敛到“人机协同时序”。本页进一步用 D3 生成四种时序结构，比较交接、连续任务、阶段推进与失败恢复四种表达；章节开页已选定“内嵌信息区”。</p>
       </div>
       <aside class="intro-note" aria-label="当前视觉方案建议">
-        <strong>当前建议</strong>
-        封面优先看 A 或 C；章节优先看 1。A 更像完整研究框架，C 更直接表现人和 AI 的协同过程。章节 1 的留白最好，也最接近参考图中的高级咨询报告感。
+        <strong>当前选择</strong>
+        章节使用方案 2“内嵌信息区”。封面建议重点比较 C2 与 C4：C2 更适合封面视觉，C4 对“验证失败后人工接管”的研究逻辑表达更完整。
+        <span class="selected-note">章节方案 2 已选定</span>
       </aside>
     </section>
 
     <section class="section-title" id="covers">
       <div><div class="eyebrow">01 · Cover directions</div><h2>封面主图方案</h2></div>
-      <p>不再使用“人—任务—AI”三个普通方块，而是让封面主图直接表达这套方法论的独特结构。</p>
+      <p>A、B、D 保留作为方向对照；C1–C4 是本轮重点，均由 D3 生成路径与连接关系。</p>
     </section>
 
     <article class="option" id="cover-a">
@@ -811,33 +975,63 @@
 
     <article class="option" id="cover-c">
       <div class="option-info">
-        <div class="option-code">COVER C</div>
-        <h3>交接时序</h3>
-        <p>把人的判断和 AI 的检索 / 生成画成两条生命线，中间突出“验证”和“接管”。最直接说明这份白皮书研究的对象。</p>
-        <span class="tag recommended">推荐</span>
+        <div class="option-code">SEQUENCE C1</div>
+        <h3>经典双生命线</h3>
+        <p>以标准时序图语法呈现人和 AI 的消息交换。连接最规整、阅读门槛最低，适合强调“谁在何时把任务交给谁”。</p>
+        <span class="tag">最清晰</span>
       </div>
-      <div class="page cover-c">
+      <div class="page cover-c sequence-page">
         <div class="page-head"><span>Human × AI Collaboration Research</span><span class="plus-grid"><i>+</i><i>+</i><i>+</i><i>+</i></span></div>
-        <div class="cover-copy"><div class="kicker">Journey-based Measurement · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>看见任务如何推进、责任如何交接、失败如何恢复</p></div>
+        <div class="cover-copy"><div class="kicker">Sequence-based Measurement · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>看见任务如何推进、责任如何交接、失败如何恢复</p></div>
         <div class="visual-c">
-          <svg viewBox="0 0 600 410" role="img" aria-label="人与 AI 的任务交接时序图">
-            <g font-family="Arial, sans-serif">
-              <text x="110" y="34" fill="#17191f" font-size="11" font-weight="700" text-anchor="middle">HUMAN</text>
-              <text x="490" y="34" fill="#304ffe" font-size="11" font-weight="700" text-anchor="middle">AI</text>
-              <line x1="110" y1="52" x2="110" y2="372" stroke="#17191f"/>
-              <line x1="490" y1="52" x2="490" y2="372" stroke="#304ffe"/>
-              <g fill="#17191f"><circle cx="110" cy="82" r="7"/><circle cx="110" cy="190" r="7"/><circle cx="110" cy="298" r="7"/></g>
-              <g fill="#304ffe"><circle cx="490" cy="126" r="7"/><circle cx="490" cy="236" r="7"/><circle cx="490" cy="342" r="7"/></g>
-              <g fill="none" stroke="#aeb5c1" stroke-width="1.2">
-                <path d="M118 82L482 126"/><path d="M482 126L118 190"/><path d="M118 190L482 236"/><path d="M482 236L118 298"/><path d="M118 298L482 342"/>
-              </g>
-              <g fill="#fff" stroke="#304ffe"><rect x="252" y="96" width="96" height="34"/><rect x="252" y="206" width="96" height="34"/><rect x="252" y="314" width="96" height="34"/></g>
-              <g fill="#304ffe" font-size="8" font-weight="700" text-anchor="middle"><text x="300" y="117">理解与检索</text><text x="300" y="227">验证与修正</text><text x="300" y="335">交付与沉淀</text></g>
-              <g fill="#69707c" font-size="8"><text x="126" y="78">提出诉求</text><text x="126" y="186">补充判断</text><text x="126" y="294">人工接管</text><text x="422" y="121">形成计划</text><text x="414" y="231">生成结果</text><text x="423" y="337">协同完成</text></g>
-            </g>
-          </svg>
+          <svg id="sequence-c1" viewBox="0 0 600 410" role="img" aria-label="经典双生命线人机协同时序图"></svg>
         </div>
-        <div class="cover-foot"><div><small>Scope</small><strong>完整任务而非单轮回答</strong></div><div><small>Focus</small><strong>交接 · 验证 · 恢复</strong></div><div><small>Edition</small><strong>方法论草案 v0.1</strong></div></div>
+        <div class="cover-foot"><div><small>Structure</small><strong>双生命线</strong></div><div><small>Focus</small><strong>角色交接清晰</strong></div><div><small>Edition</small><strong>方案 C1</strong></div></div>
+      </div>
+    </article>
+
+    <article class="option" id="cover-c2">
+      <div class="option-info">
+        <div class="option-code">SEQUENCE C2</div>
+        <h3>共同任务编织线</h3>
+        <p>把人和 AI 的动作编织成一条连续任务轨迹，弱化“两个系统对话”的技术感，突出协同是一个共同完成的过程。</p>
+        <span class="tag recommended">推荐 · 封面感强</span>
+      </div>
+      <div class="page cover-c sequence-page">
+        <div class="page-head"><span>Human × AI Collaboration Research</span><span class="plus-grid"><i>+</i><i>+</i><i>+</i><i>+</i></span></div>
+        <div class="cover-copy"><div class="kicker">Shared Task Journey · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>围绕同一目标，记录协同、验证、接管与完成</p></div>
+        <div class="visual-c"><svg id="sequence-c2" viewBox="0 0 600 410" role="img" aria-label="共同任务编织线人机协同时序图"></svg></div>
+        <div class="cover-foot"><div><small>Structure</small><strong>连续任务轨迹</strong></div><div><small>Focus</small><strong>协同关系整体感</strong></div><div><small>Edition</small><strong>方案 C2</strong></div></div>
+      </div>
+    </article>
+
+    <article class="option" id="cover-c3">
+      <div class="option-info">
+        <div class="option-code">SEQUENCE C3</div>
+        <h3>阶段接力</h3>
+        <p>将完整任务拆成五个阶段，每一阶段明确主导者和输出。信息密度适中，也便于与正文中的“七阶段研究框架”衔接。</p>
+        <span class="tag">结构最强</span>
+      </div>
+      <div class="page cover-c sequence-page">
+        <div class="page-head"><span>Human × AI Collaboration Research</span><span class="plus-grid"><i>+</i><i>+</i><i>+</i><i>+</i></span></div>
+        <div class="cover-copy"><div class="kicker">Stage-based Collaboration · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>以阶段记录协同主导权、结果验证与任务交付</p></div>
+        <div class="visual-c"><svg id="sequence-c3" viewBox="0 0 600 410" role="img" aria-label="阶段接力式人机协同时序图"></svg></div>
+        <div class="cover-foot"><div><small>Structure</small><strong>五阶段接力</strong></div><div><small>Focus</small><strong>主导权与阶段输出</strong></div><div><small>Edition</small><strong>方案 C3</strong></div></div>
+      </div>
+    </article>
+
+    <article class="option" id="cover-c4">
+      <div class="option-info">
+        <div class="option-code">SEQUENCE C4</div>
+        <h3>验证分支与回收</h3>
+        <p>把“结果验证”放在图的中心：通过则协同完成，失败则开发者接管，两条路径最终都回到经验沉淀。最贴近方法论逻辑。</p>
+        <span class="tag recommended">推荐 · 逻辑完整</span>
+      </div>
+      <div class="page cover-c sequence-page">
+        <div class="page-head"><span>Human × AI Collaboration Research</span><span class="plus-grid"><i>+</i><i>+</i><i>+</i><i>+</i></span></div>
+        <div class="cover-copy"><div class="kicker">Verification &amp; Recovery · 2026</div><h4>人与 AI<br>协同体验测量方法</h4><p>不仅测量协同收益，也记录失败、接管与恢复成本</p></div>
+        <div class="visual-c"><svg id="sequence-c4" viewBox="0 0 600 410" role="img" aria-label="包含验证分支与人工接管的人机协同时序图"></svg></div>
+        <div class="cover-foot"><div><small>Structure</small><strong>主线 + 失败分支</strong></div><div><small>Focus</small><strong>验证 · 接管 · 恢复</strong></div><div><small>Edition</small><strong>方案 C4</strong></div></div>
       </div>
     </article>
 
@@ -863,12 +1057,12 @@
     </section>
 
     <article class="option" id="chapter-a">
-      <div class="option-info"><div class="option-code">CHAPTER 1</div><h3>白底 + 边栏细线</h3><p>去掉大色块，只保留右侧细线和竖向章节标签。留白最大，标题与目录成为真正的主角。</p><span class="tag recommended">推荐</span></div>
+      <div class="option-info"><div class="option-code">CHAPTER 1</div><h3>白底 + 边栏细线</h3><p>去掉大色块，只保留右侧细线和竖向章节标签。留白最大，标题与目录成为真正的主角。</p><span class="tag">备选</span></div>
       <div class="page chapter-page chapter-a"><div class="page-head"><span>Human × AI Collaboration Experience</span><span>18 / 82</span></div><div class="chapter-number">04</div><h4 class="chapter-title">第四章 研究设计</h4><div class="chapter-accent"></div><div class="chapter-index-list"><div><b>01</b><span>4.1 先确定研究类型</span></div><div><b>02</b><span>4.2 固定条件与可变条件</span></div><div><b>03</b><span>4.3 选择比较方式</span></div><div><b>04</b><span>4.4 研究协议</span></div><div><b>05</b><span>4.5 三种基准条件</span></div><div><b>06</b><span>4.6 样本、分配与顺序效应</span></div><div><b>07</b><span>4.7 预注册核心判断</span></div></div></div>
     </article>
 
     <article class="option" id="chapter-b">
-      <div class="option-info"><div class="option-code">CHAPTER 2</div><h3>内嵌信息区</h3><p>保留灰色，但缩成有上下边界的内嵌区域，并让它承载“本章关注”的说明，不再是纯装饰。</p><span class="tag">信息更强</span></div>
+      <div class="option-info"><div class="option-code">CHAPTER 2</div><h3>内嵌信息区</h3><p>保留灰色，但缩成有上下边界的内嵌区域，并让它承载“本章关注”的说明，不再是纯装饰。</p><span class="tag recommended">已选定</span></div>
       <div class="page chapter-page chapter-b"><div class="page-head"><span>Human × AI Collaboration Experience</span><span>18 / 82</span></div><div class="chapter-number">04</div><h4 class="chapter-title">第四章 研究设计</h4><div class="chapter-accent"></div><aside class="inset-field" aria-label="本章关注内容"><strong>本章关注 / FOCUS</strong><p>先明确研究类型，再固定任务、用户与 AI 条件。</p><p>用无 AI、人机协同与 AI 独立三种条件识别真实贡献。</p></aside><div class="chapter-index-list"><div><b>01</b><span>4.1 先确定研究类型</span></div><div><b>02</b><span>4.2 固定条件与可变条件</span></div><div><b>03</b><span>4.3 选择比较方式</span></div><div><b>04</b><span>4.4 研究协议</span></div><div><b>05</b><span>4.5 三种基准条件</span></div><div><b>06</b><span>4.6 样本、分配与顺序效应</span></div><div><b>07</b><span>4.7 预注册核心判断</span></div></div></div>
     </article>
 
@@ -877,7 +1071,318 @@
       <div class="page chapter-page chapter-c"><div class="page-head"><span>Human × AI Collaboration Experience</span><span>18 / 82</span></div><div class="chapter-number">04</div><h4 class="chapter-title">第四章 研究设计</h4><div class="chapter-accent"></div><div class="bottom-band"></div><div class="band-label">SECTION INDEX / 本章目录</div><div class="chapter-index-list"><div><b>01</b><span>4.1 先确定研究类型</span></div><div><b>02</b><span>4.2 固定条件与可变条件</span></div><div><b>03</b><span>4.3 选择比较方式</span></div><div><b>04</b><span>4.4 研究协议</span></div><div><b>05</b><span>4.5 三种基准条件</span></div><div><b>06</b><span>4.6 样本、分配与顺序效应</span></div><div><b>07</b><span>4.7 预注册核心判断</span></div></div></div>
     </article>
 
-    <aside class="decision" aria-label="视觉方案组合建议"><strong>建议组合：封面 A 或 C + 章节 1</strong><p>A 更能说明“这是一套完整测量系统”；C 更能突出“研究的是人和 AI 的交接过程”。章节 1 去掉了没有信息作用的灰色块，只留下克制的边栏信号，最适合当前整本白皮书的冷静编辑风格。</p></aside>
+    <aside class="decision" aria-label="视觉方案组合建议"><strong>已确定章节方案 2；封面待选 C1–C4</strong><p>章节页使用“内嵌信息区”，让灰色区域承载本章关注点。封面当前建议优先比较 C2 与 C4：C2 更像完整白皮书封面，C4 更完整地说明这套方法如何记录验证失败与人工接管。</p></aside>
   </main>
+  <script>
+    (() => {
+      if (!window.d3) {
+        document.querySelectorAll('.sequence-page svg').forEach((node) => {
+          node.setAttribute('aria-label', '时序图库加载失败');
+        });
+        return;
+      }
+
+      const colors = {
+        ink: '#17191f',
+        muted: '#69707c',
+        line: '#aeb5c1',
+        blue: '#304ffe',
+        blueDark: '#1f37c7',
+        blueSoft: '#eef0ff',
+        orange: '#d56f25',
+        orangeDark: '#b45b1e',
+        white: '#ffffff'
+      };
+
+      function createArrow(svg, id, color) {
+        const marker = svg.append('defs').append('marker')
+          .attr('id', id)
+          .attr('viewBox', '0 -5 10 10')
+          .attr('refX', 9)
+          .attr('refY', 0)
+          .attr('markerWidth', 6)
+          .attr('markerHeight', 6)
+          .attr('orient', 'auto')
+          .attr('markerUnits', 'userSpaceOnUse');
+
+        marker.append('path')
+          .attr('d', 'M0,-4L8,0L0,4')
+          .attr('fill', 'none')
+          .attr('stroke', color)
+          .attr('stroke-width', 1.5)
+          .attr('stroke-linecap', 'round')
+          .attr('stroke-linejoin', 'round');
+
+        return `url(#${id})`;
+      }
+
+      function addText(group, x, y, text, className, anchor = 'start') {
+        return group.append('text')
+          .attr('x', x)
+          .attr('y', y)
+          .attr('class', className)
+          .attr('text-anchor', anchor)
+          .text(text);
+      }
+
+      function drawSequenceC1() {
+        const svg = d3.select('#sequence-c1');
+        const grayArrow = createArrow(svg, 'c1-gray-arrow', colors.line);
+        const blueArrow = createArrow(svg, 'c1-blue-arrow', colors.blue);
+        const orangeArrow = createArrow(svg, 'c1-orange-arrow', colors.orange);
+        const g = svg.append('g');
+        const laneX = { human: 132, ai: 468 };
+
+        addText(g, laneX.human, 40, 'HUMAN', 'seq-role', 'middle');
+        addText(g, laneX.ai, 40, 'AI', 'seq-role ai', 'middle');
+        addText(g, 300, 40, 'TASK SEQUENCE', 'seq-caption', 'middle');
+
+        g.selectAll('.lane')
+          .data(Object.values(laneX))
+          .join('line')
+          .attr('class', 'seq-lane')
+          .attr('x1', (d) => d)
+          .attr('x2', (d) => d)
+          .attr('y1', 58)
+          .attr('y2', 365);
+
+        g.append('rect').attr('x', laneX.ai - 8).attr('y', 106).attr('width', 16).attr('height', 94).attr('rx', 8).attr('fill', colors.blueSoft).attr('stroke', '#aeb7ff');
+        addText(g, laneX.ai - 15, 151, '检索', 'seq-caption', 'end');
+        addText(g, laneX.ai - 15, 165, '生成', 'seq-caption', 'end');
+        g.append('rect').attr('x', laneX.human - 8).attr('y', 225).attr('width', 16).attr('height', 95).attr('rx', 8).attr('fill', '#eceef2').attr('stroke', colors.line);
+        addText(g, laneX.human + 16, 268, '核验', 'seq-caption');
+        addText(g, laneX.human + 16, 282, '判断', 'seq-caption');
+
+        const messages = [
+          { y: 78, from: 'human', to: 'ai', label: '提出任务与成功标准', kind: 'primary' },
+          { y: 126, from: 'ai', to: 'human', label: '确认计划与所需信息' },
+          { y: 202, from: 'ai', to: 'human', label: '返回结果与证据', kind: 'primary' },
+          { y: 248, from: 'human', to: 'ai', label: '验证结果 · 补充判断' },
+          { y: 322, from: 'human', to: 'ai', label: '失败后接管 · 结果回流', kind: 'takeover' }
+        ];
+        const link = d3.linkHorizontal().x((d) => d.x).y((d) => d.y);
+
+        g.selectAll('.message')
+          .data(messages)
+          .join('path')
+          .attr('class', (d) => `seq-link ${d.kind || ''}`)
+          .attr('d', (d) => link({ source: { x: laneX[d.from], y: d.y }, target: { x: laneX[d.to], y: d.y } }))
+          .attr('marker-end', (d) => d.kind === 'primary' ? blueArrow : d.kind === 'takeover' ? orangeArrow : grayArrow);
+
+        g.selectAll('.message-label')
+          .data(messages)
+          .join('text')
+          .attr('x', 300)
+          .attr('y', (d) => d.y - 10)
+          .attr('class', (d) => `seq-label strong ${d.kind === 'primary' ? 'blue' : d.kind === 'takeover' ? 'orange' : ''}`)
+          .attr('text-anchor', 'middle')
+          .text((d) => d.label);
+
+        addText(g, 300, 366, '按时间向下阅读', 'seq-caption', 'middle');
+      }
+
+      function drawSequenceC2() {
+        const svg = d3.select('#sequence-c2');
+        const arrow = createArrow(svg, 'c2-blue-arrow', colors.blue);
+        const g = svg.append('g');
+        const points = [
+          { x: 150, y: 66, role: 'human', title: '提出任务', note: '目标与约束' },
+          { x: 450, y: 118, role: 'ai', title: '理解与规划', note: '拆解任务' },
+          { x: 420, y: 188, role: 'ai', title: '检索与执行', note: '调用知识和工具' },
+          { x: 175, y: 248, role: 'human', title: '验证结果', note: '核对证据与风险' },
+          { x: 205, y: 316, role: 'takeover', title: '必要时接管', note: '人工完成剩余任务' },
+          { x: 445, y: 362, role: 'joint', title: '协同完成', note: '交付并沉淀经验' }
+        ];
+        const path = d3.line().x((d) => d.x).y((d) => d.y).curve(d3.curveCatmullRom.alpha(.65));
+
+        addText(g, 74, 38, 'HUMAN', 'seq-role');
+        addText(g, 526, 38, 'AI', 'seq-role ai', 'end');
+        addText(g, 300, 38, 'ONE SHARED TASK', 'seq-caption', 'middle');
+
+        g.append('path')
+          .datum(points)
+          .attr('d', path)
+          .attr('fill', 'none')
+          .attr('stroke', colors.blue)
+          .attr('stroke-width', 16)
+          .attr('stroke-linecap', 'round')
+          .attr('opacity', .07);
+
+        g.append('path')
+          .datum(points)
+          .attr('d', path)
+          .attr('class', 'seq-link primary')
+          .attr('marker-end', arrow);
+
+        const node = g.selectAll('.woven-node')
+          .data(points)
+          .join('g');
+
+        node.append('circle')
+          .attr('class', (d) => `seq-node ${d.role}`)
+          .attr('cx', (d) => d.x)
+          .attr('cy', (d) => d.y)
+          .attr('r', 10);
+
+        node.append('text')
+          .attr('x', (d) => d.x + (d.x < 300 ? -18 : 18))
+          .attr('y', (d) => d.y - 2)
+          .attr('class', (d) => `seq-label strong ${d.role === 'ai' || d.role === 'joint' ? 'blue' : d.role === 'takeover' ? 'orange' : ''}`)
+          .attr('text-anchor', (d) => d.x < 300 ? 'end' : 'start')
+          .text((d) => d.title);
+
+        node.append('text')
+          .attr('x', (d) => d.x + (d.x < 300 ? -18 : 18))
+          .attr('y', (d) => d.y + 12)
+          .attr('class', 'seq-caption')
+          .attr('text-anchor', (d) => d.x < 300 ? 'end' : 'start')
+          .text((d) => d.note);
+
+        node.append('text')
+          .attr('x', (d) => d.x)
+          .attr('y', (d) => d.y + 3)
+          .attr('fill', colors.white)
+          .attr('font-size', 7)
+          .attr('font-weight', 850)
+          .attr('text-anchor', 'middle')
+          .text((d, i) => i + 1);
+      }
+
+      function drawSequenceC3() {
+        const svg = d3.select('#sequence-c3');
+        const arrow = createArrow(svg, 'c3-blue-arrow', colors.blue);
+        const g = svg.append('g');
+        const steps = [
+          { x: 178, y: 68, role: 'human', index: '01', title: '定义任务', note: '开发者明确目标与约束' },
+          { x: 422, y: 136, role: 'ai', index: '02', title: '规划任务', note: 'AI 拆解步骤与信息需求' },
+          { x: 422, y: 204, role: 'ai', index: '03', title: '检索并执行', note: 'AI 调用知识、工具与模型' },
+          { x: 178, y: 272, role: 'human', index: '04', title: '验证与决策', note: '开发者判断结果能否采用' },
+          { x: 300, y: 350, role: 'joint', index: '05', title: '交付与沉淀', note: '共同完成并记录过程证据' }
+        ];
+        const connector = d3.linkVertical().x((d) => d.x).y((d) => d.y);
+
+        addText(g, 76, 35, 'HUMAN-LED', 'seq-role');
+        addText(g, 524, 35, 'AI-LED', 'seq-role ai', 'end');
+        addText(g, 300, 35, 'COLLABORATION STAGES', 'seq-caption', 'middle');
+
+        g.selectAll('.stage-link')
+          .data(d3.pairs(steps))
+          .join('path')
+          .attr('class', 'seq-link primary')
+          .attr('d', (pair) => connector({ source: { x: pair[0].x, y: pair[0].y + 23 }, target: { x: pair[1].x, y: pair[1].y - 23 } }))
+          .attr('marker-end', arrow);
+
+        const card = g.selectAll('.stage-card')
+          .data(steps)
+          .join('g');
+
+        card.append('rect')
+          .attr('x', (d) => d.x - 92)
+          .attr('y', (d) => d.y - 22)
+          .attr('width', 184)
+          .attr('height', 44)
+          .attr('rx', 4)
+          .attr('class', (d) => `seq-step ${d.role === 'ai' ? 'ai' : ''}`);
+
+        card.append('text')
+          .attr('x', (d) => d.x - 76)
+          .attr('y', (d) => d.y - 2)
+          .attr('class', 'seq-index')
+          .text((d) => d.index);
+
+        card.append('text')
+          .attr('x', (d) => d.x - 46)
+          .attr('y', (d) => d.y - 2)
+          .attr('class', (d) => `seq-label strong ${d.role === 'ai' || d.role === 'joint' ? 'blue' : ''}`)
+          .text((d) => d.title);
+
+        card.append('text')
+          .attr('x', (d) => d.x - 46)
+          .attr('y', (d) => d.y + 12)
+          .attr('class', 'seq-caption')
+          .text((d) => d.note);
+      }
+
+      function drawSequenceC4() {
+        const svg = d3.select('#sequence-c4');
+        const grayArrow = createArrow(svg, 'c4-gray-arrow', colors.line);
+        const blueArrow = createArrow(svg, 'c4-blue-arrow', colors.blue);
+        const orangeArrow = createArrow(svg, 'c4-orange-arrow', colors.orange);
+        const g = svg.append('g');
+        const nodes = [
+          { id: 'task', x: 300, y: 58, role: 'human', title: '开发者提出任务' },
+          { id: 'plan', x: 300, y: 116, role: 'ai', title: 'AI 理解、检索与执行' },
+          { id: 'result', x: 300, y: 174, role: 'ai', title: 'AI 返回结果与证据' },
+          { id: 'verify', x: 300, y: 236, role: 'joint', title: '结果是否可靠可用？' },
+          { id: 'pass', x: 175, y: 310, role: 'joint', title: '协同完成' },
+          { id: 'takeover', x: 425, y: 310, role: 'takeover', title: '开发者接管' },
+          { id: 'learn', x: 300, y: 374, role: 'joint', title: '交付并沉淀过程证据' }
+        ];
+        const byId = new Map(nodes.map((d) => [d.id, d]));
+        const edges = [
+          { from: 'task', to: 'plan', kind: 'primary' },
+          { from: 'plan', to: 'result', kind: 'primary' },
+          { from: 'result', to: 'verify' },
+          { from: 'verify', to: 'pass', label: '通过', kind: 'primary' },
+          { from: 'verify', to: 'takeover', label: '未通过', kind: 'takeover' },
+          { from: 'pass', to: 'learn', kind: 'primary' },
+          { from: 'takeover', to: 'learn', kind: 'takeover' }
+        ];
+        const connector = d3.linkVertical().x((d) => d.x).y((d) => d.y);
+
+        addText(g, 70, 32, 'MAIN SEQUENCE', 'seq-role');
+        addText(g, 530, 32, 'FAILURE RECOVERY', 'seq-role ai', 'end');
+
+        g.selectAll('.branch-link')
+          .data(edges)
+          .join('path')
+          .attr('class', (d) => `seq-link ${d.kind || ''}`)
+          .attr('d', (d) => {
+            const source = byId.get(d.from);
+            const target = byId.get(d.to);
+            return connector({ source: { x: source.x, y: source.y + 18 }, target: { x: target.x, y: target.y - 18 } });
+          })
+          .attr('marker-end', (d) => d.kind === 'primary' ? blueArrow : d.kind === 'takeover' ? orangeArrow : grayArrow);
+
+        g.selectAll('.branch-label')
+          .data(edges.filter((d) => d.label))
+          .join('text')
+          .attr('x', (d) => (byId.get(d.from).x + byId.get(d.to).x) / 2 + (d.kind === 'takeover' ? 15 : -15))
+          .attr('y', 273)
+          .attr('class', (d) => `seq-label strong ${d.kind === 'takeover' ? 'orange' : 'blue'}`)
+          .attr('text-anchor', 'middle')
+          .text((d) => d.label);
+
+        const box = g.selectAll('.branch-node')
+          .data(nodes)
+          .join('g');
+
+        box.append('rect')
+          .attr('x', (d) => d.x - 82)
+          .attr('y', (d) => d.y - 18)
+          .attr('width', 164)
+          .attr('height', 36)
+          .attr('rx', 5)
+          .attr('class', (d) => `seq-step ${d.role === 'ai' || d.role === 'joint' ? 'ai' : d.role === 'takeover' ? 'takeover' : ''}`);
+
+        box.append('circle')
+          .attr('cx', (d) => d.x - 63)
+          .attr('cy', (d) => d.y)
+          .attr('r', 5)
+          .attr('fill', (d) => d.role === 'ai' || d.role === 'joint' ? colors.blue : d.role === 'takeover' ? colors.orange : colors.ink);
+
+        box.append('text')
+          .attr('x', (d) => d.x - 50)
+          .attr('y', (d) => d.y + 3)
+          .attr('class', (d) => `seq-label strong ${d.role === 'ai' || d.role === 'joint' ? 'blue' : d.role === 'takeover' ? 'orange' : ''}`)
+          .text((d) => d.title);
+      }
+
+      drawSequenceC1();
+      drawSequenceC2();
+      drawSequenceC3();
+      drawSequenceC4();
+    })();
+  </script>
 </body>
 </html>
