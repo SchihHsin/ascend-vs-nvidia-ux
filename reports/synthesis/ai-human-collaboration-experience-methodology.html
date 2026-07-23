@@ -330,7 +330,8 @@
         width: var(--paper-width);
         min-height: 1120px;
         aspect-ratio: auto;
-        margin: 0 auto calc(42px + 1120px * (var(--spread-page-scale) - 1));
+        /* zoom already reserves the scaled layout height for this standalone cover. */
+        margin: 0 auto 42px;
         zoom: var(--spread-page-scale);
       }
     }
