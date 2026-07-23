@@ -290,10 +290,12 @@
 
       body.spread-mode .sheet {
         z-index: 1;
-        width: 100%;
-        min-height: 0;
-        aspect-ratio: 960 / 1120;
-        margin: 0;
+        width: var(--paper-width);
+        min-height: 1120px;
+        /* zoom does not reduce the grid track, so reclaim that reserved height. */
+        margin: 0 0 calc(1120px * (var(--spread-page-scale) - 1));
+        /* Scale the complete page, rather than shrinking only its outer frame. */
+        zoom: var(--spread-page-scale, .8);
         box-shadow: none;
       }
 
@@ -318,9 +320,11 @@
       }
 
       body.spread-mode .cover {
-        width: min(1540px, calc(100vw - 64px));
+        width: var(--paper-width);
         min-height: 1120px;
         aspect-ratio: auto;
+        margin-right: auto;
+        margin-left: auto;
       }
     }
 
@@ -3030,8 +3034,14 @@
       const zoomRange = document.getElementById('zoomRange');
       const zoomValue = document.getElementById('zoomValue');
       const spreadQuery = window.matchMedia('(min-width: 1180px)');
+      const setSpreadPageScale = () => {
+        const spreadWidth = Math.min(1540, Math.max(0, window.innerWidth - 64));
+        const scale = Math.min(1, spreadWidth / (2 * 960));
+        document.documentElement.style.setProperty('--spread-page-scale', String(scale));
+      };
       const applySpread = (enabled) => {
         const usable = enabled && spreadQuery.matches;
+        setSpreadPageScale();
         document.body.classList.toggle('spread-mode', usable);
         spreadMode.setAttribute('aria-pressed', String(usable));
         spreadMode.textContent = usable ? '双页：开' : '双页：关';
@@ -3058,6 +3068,10 @@
       applyZoom(storedZoom);
       zoomRange.addEventListener('input', () => applyZoom(zoomRange.value));
       zoomRange.addEventListener('change', () => localStorage.setItem('collab-reader-zoom', zoomRange.value));
+      window.addEventListener('resize', () => {
+        setSpreadPageScale();
+        applySpread(wantsSpread);
+      });
       spreadQuery.addEventListener('change', () => applySpread(wantsSpread));
 
       const progressBar = document.getElementById('progressBar');
