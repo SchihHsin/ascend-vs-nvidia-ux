@@ -210,6 +210,10 @@
       padding: 42px 24px 80px;
     }
 
+    #paperStack {
+      display: block;
+    }
+
     .sheet {
       position: relative;
       width: min(var(--paper-width), calc(100vw - 48px));
@@ -229,6 +233,56 @@
       width: 5px;
       height: 82px;
       background: var(--blue);
+    }
+
+    @media (min-width: 1360px) {
+      body.spread-mode main {
+        padding-right: 32px;
+        padding-left: 32px;
+      }
+
+      body.spread-mode #paperStack {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 22px;
+        width: min(1540px, calc(100vw - 64px));
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      body.spread-mode #paperStack::before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 18px;
+        transform: translateX(-50%);
+        pointer-events: none;
+        background: linear-gradient(90deg, rgba(23, 25, 31, .08), rgba(23, 25, 31, 0) 50%, rgba(23, 25, 31, .06));
+        filter: blur(5px);
+      }
+
+      body.spread-mode .sheet {
+        z-index: 1;
+        width: 100%;
+        min-height: 1040px;
+        margin: 0;
+      }
+
+      body.spread-mode .sheet:nth-child(odd) {
+        box-shadow: -3px 3px 7px rgba(20, 24, 32, .05), 14px 2px 18px rgba(20, 24, 32, .10);
+      }
+
+      body.spread-mode .sheet:nth-child(even) {
+        box-shadow: 3px 3px 7px rgba(20, 24, 32, .05), -14px 2px 18px rgba(20, 24, 32, .10);
+      }
+
+      body.spread-mode .cover {
+        min-height: 1040px;
+      }
     }
 
     .running-head {
@@ -1140,6 +1194,7 @@
 
   <div class="toolbar" role="toolbar" aria-label="阅读工具">
     <button id="tocOpen" type="button" title="打开章节目录">目录</button>
+    <button id="spreadMode" type="button" title="在单页与双页书册视图之间切换" aria-pressed="false">双页</button>
     <span class="page-readout" id="pageReadout">01 / 01</span>
     <button id="printDoc" type="button" title="打印或导出 PDF">打印</button>
   </div>
@@ -2785,6 +2840,27 @@
       backdrop.addEventListener('click', () => setToc(false));
       tocNav.addEventListener('click', () => setToc(false));
       document.getElementById('printDoc').addEventListener('click', () => window.print());
+
+      const spreadMode = document.getElementById('spreadMode');
+      const spreadQuery = window.matchMedia('(min-width: 1360px)');
+      const applySpread = (enabled) => {
+        const usable = enabled && spreadQuery.matches;
+        document.body.classList.toggle('spread-mode', usable);
+        spreadMode.setAttribute('aria-pressed', String(usable));
+        spreadMode.textContent = usable ? '单页' : '双页';
+        spreadMode.title = usable ? '切换为单页阅读' : '切换为双页书册阅读';
+      };
+      const spreadFromUrl = new URLSearchParams(window.location.search).get('spread');
+      let wantsSpread = spreadFromUrl === null
+        ? localStorage.getItem('collab-spread-mode') === 'on'
+        : spreadFromUrl === '1';
+      applySpread(wantsSpread);
+      spreadMode.addEventListener('click', () => {
+        wantsSpread = !wantsSpread;
+        localStorage.setItem('collab-spread-mode', wantsSpread ? 'on' : 'off');
+        applySpread(wantsSpread);
+      });
+      spreadQuery.addEventListener('change', () => applySpread(wantsSpread));
 
       const progressBar = document.getElementById('progressBar');
       const pageReadout = document.getElementById('pageReadout');
