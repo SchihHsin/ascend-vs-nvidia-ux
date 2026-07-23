@@ -2963,6 +2963,12 @@
           rule.className = 'chapter-rule';
           currentSheet.appendChild(rule);
           chapterOpeners.push(currentSheet);
+          if (title.startsWith('附录')) {
+            // Appendix covers introduce the section; their templates and tables
+            // continue on regular reading pages instead of being discarded.
+            currentSheet = createSheet('content-sheet appendix-content', `${title}正文`, currentChapter);
+            contentSheets.push(currentSheet);
+          }
           return;
         }
 
@@ -2982,7 +2988,9 @@
         }
 
         if (!currentSheet) return;
-        if (currentChapter && !sectionOrder.has(currentSheet.querySelector(':scope > h2')?.textContent.trim())) return;
+        // Ordered section filtering applies only to the nine numbered chapters.
+        // Appendix material has no numbered H2 and must remain in the document.
+        if (currentChapter > 0 && currentChapter <= 9 && !sectionOrder.has(currentSheet.querySelector(':scope > h2')?.textContent.trim())) return;
         currentSheet.appendChild(node);
       });
 
@@ -3133,6 +3141,7 @@
         index.className = 'chapter-index';
         sections.forEach((sheet, i) => {
           const h2 = sheet.querySelector('h2');
+          if (!h2) return;
           const link = document.createElement('a');
           link.href = `#${sheet.id}`;
           const rawSection = h2.textContent.trim();
@@ -3140,7 +3149,7 @@
           link.innerHTML = `<span>${sectionMatch?.[1] || String(i + 1).padStart(2, '0')}</span><span>${sectionMatch?.[2] || rawSection}</span>`;
           index.appendChild(link);
         });
-        opener.appendChild(index);
+        if (index.childElementCount) opener.appendChild(index);
       });
 
       const visibleChapters = chapterOpeners.filter((sheet) => sheet.isConnected && !sheet.classList.contains('closing-sheet'));
@@ -3199,41 +3208,75 @@
         });
         contentsBody.appendChild(grid);
 
-        const flowContentsColumns = (contentsGrid) => {
-          const items = Array.from(contentsGrid.children).filter((child) => !child.classList.contains('contents-column'));
-          if (!items.length) return;
-          const splitAt = Math.ceil(items.length / 2);
+        const tocItems = Array.from(grid.children);
+        grid.remove();
+
+        // Split numbered chapters into flowing units. The chapter label stays
+        // with its first section, while later sections may continue in the
+        // same column or the next one, exactly like a printed contents page.
+        const tocUnits = [];
+        tocItems.forEach((chapter) => {
+          if (chapter.classList.contains('appendix')) {
+            tocUnits.push(chapter);
+            return;
+          }
+          const title = chapter.querySelector('h3');
+          const links = Array.from(chapter.querySelectorAll('.contents-sections a'));
+          const opening = document.createElement('section');
+          opening.className = 'contents-chapter toc-opening';
+          opening.appendChild(title);
+          if (links.length) {
+            const first = document.createElement('div');
+            first.className = 'contents-sections';
+            first.appendChild(links.shift());
+            opening.appendChild(first);
+          }
+          tocUnits.push(opening);
+          links.forEach((link) => {
+            const unit = document.createElement('div');
+            unit.className = 'contents-sections toc-unit';
+            unit.appendChild(link);
+            tocUnits.push(unit);
+          });
+        });
+
+        const addColumns = (page) => {
+          const pageBody = page.querySelector('.section-body');
+          const pageGrid = document.createElement('div');
+          pageGrid.className = 'contents-grid';
           const left = document.createElement('div');
           left.className = 'contents-column';
           const right = document.createElement('div');
           right.className = 'contents-column';
-          items.slice(0, splitAt).forEach((item) => left.appendChild(item));
-          items.slice(splitAt).forEach((item) => right.appendChild(item));
-          contentsGrid.replaceChildren(left, right);
+          pageGrid.append(left, right);
+          pageBody.appendChild(pageGrid);
+          return { page, left, right };
         };
 
-        // Let the fixed A4 frame decide the directory break; do not rely on a
-        // fixed chapter count, because sections differ greatly in length.
-        let contentsPage = stack.querySelector('.contents-sheet');
-        while (contentsPage.scrollHeight > contentsPage.clientHeight + 2) {
-          const currentBody = contentsPage.querySelector('.section-body');
-          const currentGrid = currentBody?.querySelector('.contents-grid');
-          if (!currentGrid || currentGrid.children.length < 2) break;
-          const continued = createContinuation(contentsPage);
-          continued.classList.add('contents-sheet');
-          const continuedBody = continued.querySelector('.section-body');
-          const continuedGrid = document.createElement('div');
-          continuedGrid.className = 'contents-grid';
-          continuedBody.appendChild(continuedGrid);
-          while (contentsPage.scrollHeight > contentsPage.clientHeight + 2 && currentGrid.lastElementChild) {
-            continuedGrid.insertBefore(currentGrid.lastElementChild, continuedGrid.firstChild);
-          }
-          contentsPage = continued;
-        }
-
-        // Each page reads top-to-bottom in its left column before continuing
-        // at the top of the right column, as in a conventional printed TOC.
-        Array.from(stack.querySelectorAll('.contents-sheet .contents-grid')).forEach(flowContentsColumns);
+        // Fill a printed TOC top-to-bottom down the left column, then continue
+        // at the top of the right column. A new page appears only when both
+        // columns have reached the fixed bottom page margin.
+        let columns = addColumns(stack.querySelector('.contents-sheet'));
+        tocUnits.forEach((item) => {
+          const fits = (column) => {
+            column.appendChild(item);
+            // The sheet hides overflow, so scrollHeight stays at the fixed
+            // frame height. Measure the actual rendered chapter block against
+            // the bottom page margin instead.
+            const pageBox = columns.page.getBoundingClientRect();
+            const itemBox = item.getBoundingClientRect();
+            const bottomMargin = 76;
+            const withinPage = itemBox.bottom <= pageBox.bottom - bottomMargin + 1;
+            if (!withinPage) item.remove();
+            return withinPage;
+          };
+          if (fits(columns.left)) return;
+          if (columns.left.childElementCount && fits(columns.right)) return;
+          const nextPage = createContinuation(columns.page);
+          nextPage.classList.add('contents-sheet');
+          columns = addColumns(nextPage);
+          columns.left.appendChild(item);
+        });
       }
 
       contentSheets.filter((sheet) => !sheet.classList.contains('contents-sheet')).forEach((sheet) => {
