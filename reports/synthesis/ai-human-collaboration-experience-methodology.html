@@ -20,9 +20,12 @@
       --blue-soft: #edf0ff;
       --red: #b52d36;
       --shadow: 0 2px 4px rgba(20, 24, 32, .08), 0 18px 44px rgba(20, 24, 32, .09);
-      /* Match the visual report: macOS resolves Chinese to PingFang and Latin to the system face. */
-      --report-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", Roboto, Arial, sans-serif;
-      --report-mono: "SFMono-Regular", Menlo, Consolas, monospace;
+      /* Reader type scale: keep body copy legible when a complete A4 page is scaled. */
+      --type-meta: 11px;
+      --type-detail: 13px;
+      --type-body: 16px;
+      --type-subhead: 19px;
+      --type-page-title: 32px;
       /* A4 portrait ratio: 210 : 297, while retaining the report's native type scale. */
       --paper-width: 960px;
       --paper-height: 1357px;
@@ -44,8 +47,8 @@
       margin: 0;
       color: var(--ink);
       background: var(--canvas);
-      font-family: var(--report-sans);
-      font-size: 15.5px;
+      font-family: "HarmonyOS Sans SC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      font-size: var(--type-body);
       line-height: 1.75;
       text-rendering: optimizeLegibility;
     }
@@ -431,7 +434,7 @@
       padding-bottom: 13px;
       border-bottom: 1px solid var(--line-strong);
       color: var(--muted);
-      font-size: 9.5px;
+      font-size: var(--type-meta);
       font-weight: 700;
       text-transform: uppercase;
     }
@@ -471,7 +474,7 @@
       padding-bottom: 16px;
       border-bottom: 1px solid var(--line-strong);
       color: var(--muted);
-      font-size: 10px;
+      font-size: var(--type-meta);
       font-weight: 700;
     }
 
@@ -493,7 +496,7 @@
     .cover-kicker {
       margin-bottom: 18px;
       color: var(--blue);
-      font-size: 12px;
+      font-size: var(--type-detail);
       font-weight: 800;
       text-transform: uppercase;
     }
@@ -547,7 +550,7 @@
 
     .actor small {
       color: var(--muted);
-      font-size: 9px;
+      font-size: var(--type-meta);
       font-weight: 800;
       text-transform: uppercase;
     }
@@ -577,7 +580,7 @@
       border: 1px solid var(--ink);
       border-radius: 50%;
       background: #fff;
-      font-size: 11px;
+      font-size: var(--type-detail);
       font-weight: 900;
     }
 
@@ -708,7 +711,7 @@
       gap: 10px;
       padding: 13px 0;
       border-bottom: 1px solid var(--line);
-      font-size: 11px;
+      font-size: var(--type-detail);
       line-height: 1.45;
     }
 
@@ -752,7 +755,7 @@
     .chapter-focus p {
       margin: 0 0 18px;
       color: var(--ink);
-      font-size: 15px;
+      font-size: var(--type-body);
       font-weight: 650;
       line-height: 1.65;
     }
@@ -762,7 +765,7 @@
       padding-top: 14px;
       border-top: 1px solid rgba(48, 79, 254, .22);
       color: var(--muted);
-      font-size: 10px;
+      font-size: var(--type-meta);
       font-weight: 750;
       line-height: 1.55;
     }
@@ -773,7 +776,7 @@
       margin: 0 0 34px;
       padding-bottom: 17px;
       border-bottom: 4px solid var(--blue);
-      font-size: 30px;
+      font-size: var(--type-page-title);
       line-height: 1.24;
     }
 
@@ -783,7 +786,7 @@
       display: block;
       margin-bottom: 13px;
       color: var(--blue);
-      font-size: 17px;
+      font-size: var(--type-subhead);
       font-weight: 400;
     }
 
@@ -812,7 +815,7 @@
     h3 {
       margin: 30px 0 10px;
       color: var(--blue-dark);
-      font-size: 17px;
+      font-size: var(--type-subhead);
       line-height: 1.4;
     }
 
@@ -850,7 +853,7 @@
         transparent 4px,
         transparent 16px
       );
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 650;
       line-height: 1.65;
     }
@@ -870,7 +873,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 12px;
+      font-size: var(--type-detail);
       line-height: 1.55;
     }
 
@@ -886,7 +889,7 @@
     th {
       color: #fff;
       background: var(--ink);
-      font-size: 10px;
+      font-size: var(--type-meta);
       font-weight: 800;
     }
 
@@ -907,7 +910,7 @@
       max-width: 760px;
       margin: -8px 0 24px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.65;
     }
 
@@ -944,7 +947,7 @@
     .case-field > strong {
       display: block;
       color: var(--blue-dark);
-      font-size: 9px;
+      font-size: var(--type-meta);
       font-weight: 850;
       line-height: 1.4;
       text-transform: uppercase;
@@ -953,7 +956,7 @@
     .case-scene h3 {
       margin: 10px 0 0;
       color: var(--ink);
-      font-size: 17px;
+      font-size: var(--type-subhead);
       line-height: 1.35;
     }
 
@@ -961,7 +964,7 @@
       display: block;
       margin-top: 10px;
       color: var(--muted);
-      font-size: 9px;
+      font-size: var(--type-meta);
       font-weight: 700;
       line-height: 1.45;
     }
@@ -969,14 +972,14 @@
     .case-field p {
       margin: 9px 0 0;
       color: var(--ink);
-      font-size: 11px;
+      font-size: 12px;
       line-height: 1.6;
     }
 
     .case-metrics {
       margin: 8px 0 0;
       padding-left: 1.15em;
-      font-size: 10.5px;
+      font-size: var(--type-meta);
       line-height: 1.5;
     }
 
@@ -990,7 +993,7 @@
       border-radius: 3px;
       color: var(--blue-dark);
       background: var(--blue-soft);
-      font-family: var(--report-mono);
+      font-family: "SFMono-Regular", Consolas, monospace;
       font-size: .88em;
     }
 
@@ -1001,7 +1004,7 @@
       overflow-x: auto;
       color: #eef1ff;
       background: #17191f;
-      font-size: 12px;
+      font-size: var(--type-detail);
       line-height: 1.65;
     }
 
@@ -1010,8 +1013,8 @@
       display: block;
       margin-bottom: 16px;
       color: #8d9cff;
-      font-family: var(--report-sans);
-      font-size: 9px;
+      font-family: "HarmonyOS Sans SC", "PingFang SC", sans-serif;
+      font-size: var(--type-meta);
       font-weight: 800;
     }
 
@@ -1032,7 +1035,7 @@
     .contents-part h3 {
       margin: 0 0 12px;
       color: var(--ink);
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 850;
       line-height: 1.4;
     }
@@ -1055,7 +1058,7 @@
     .contents-chapter h3 {
       margin: 0 0 10px;
       color: var(--ink);
-      font-size: 15px;
+      font-size: var(--type-body);
       font-weight: 850;
       line-height: 1.35;
     }
@@ -1078,7 +1081,7 @@
       padding: 3px 0;
       border: 0;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 12px;
       line-height: 1.4;
     }
 
@@ -1096,7 +1099,7 @@
       min-height: 50px;
       border-bottom: 1px solid var(--line);
       color: var(--ink);
-      font-size: 12px;
+      font-size: var(--type-detail);
       line-height: 1.4;
     }
 
@@ -1407,7 +1410,7 @@
             <marker id="seq-arrow-ai" viewBox="0 0 8 8" refX="6.6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#304ffe"/></marker>
             <marker id="seq-arrow-recover" viewBox="0 0 8 8" refX="6.6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#b52d36"/></marker>
           </defs>
-          <g font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Segoe UI, Roboto, Arial, sans-serif">
+          <g font-family="HarmonyOS Sans SC, PingFang SC, Arial, sans-serif">
             <g font-size="11" font-weight="850" text-anchor="middle">
               <rect x="44" y="44" width="116" height="34" rx="17" fill="#2a2e36" stroke="#2a2e36" stroke-width="1.4"/><text x="102" y="66" fill="#fff">人</text>
               <rect x="228" y="44" width="116" height="34" rx="17" fill="#304ffe"/><text x="286" y="66" fill="#fff">AI</text>
