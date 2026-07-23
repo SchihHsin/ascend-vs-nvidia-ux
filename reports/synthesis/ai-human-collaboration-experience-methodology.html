@@ -1968,48 +1968,48 @@
 <li>与核心指标的关系，避免重复计分；</li>
 <li>领域特有的最低安全门槛。</li>
 </ol>
-<h2>8.8 跨领域案例（一）：开发与高风险协同</h2>
-<p class="case-intro">以下内容用于演示同一套研究框架如何迁移到不同领域，不代表已经完成实测。每个案例都从共同任务出发，明确人和 AI 的分工、关键接管点与可量化指标。</p>
+<h2>8.8 用户体验研究案例（一）：开发与车载场景</h2>
+<p class="case-intro">以下案例展示如何把本方法转化为具体的用户体验研究方案，不代表已经完成实测。每个案例都从研究目标出发，明确需要观察的体验情境，以及可以组合使用的行为、主观与结果指标。</p>
 <div class="case-grid">
 <article class="case-row">
-<header class="case-scene"><span class="case-code">Case 01 · 技术开发</span><h3>算子开发</h3><small>知识密集 · 可执行结果</small></header>
-<div class="case-field"><strong>共同任务</strong><p>实现一个满足功能、版本与性能约束的自定义算子，并在目标环境中编译运行。</p></div>
-<div class="case-field"><strong>协同与接管</strong><p>AI 理解需求、检索文档与样例、生成代码骨架；开发者确认版本、编译测试和性能。当方案无法运行或证据不足时，开发者接管排错。</p></div>
-<div class="case-field"><strong>可量化指标</strong><ul class="case-metrics"><li>首次运行成功率</li><li>首跑耗时与修正轮数</li><li>证据覆盖度</li><li>人工接管率</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 01 · 开发者体验</span><h3>AI 辅助算子开发体验</h3><small>复杂工具链 · 专业用户</small></header>
+<div class="case-field"><strong>研究目标</strong><p>判断开发者能否把部分工作交给 AI，同时理解答案依据、有效验证结果，并在 AI 失效后顺利接管。</p></div>
+<div class="case-field"><strong>关键体验情境</strong><p>提出开发诉求、补充上下文、检查来源、运行代码、遇错追问、人工接管、把经验用于下一次任务。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>任务成功率与完成时间</li><li>验证负担与修正轮数</li><li>信任校准</li><li>接管成本</li><li>来源可追溯性</li></ul></div>
 </article>
 <article class="case-row">
-<header class="case-scene"><span class="case-code">Case 02 · 智能驾驶</span><h3>施工路段安全通行</h3><small>实时协同 · 安全关键</small></header>
-<div class="case-field"><strong>共同任务</strong><p>车辆在设计运行范围内识别车道封闭，完成安全变道；无法继续时进入最小风险状态。</p></div>
-<div class="case-field"><strong>协同与接管</strong><p>系统负责感知、预测、规划与控制，驾驶员监督风险。置信度下降、传感器冲突或超出运行范围时，应提前请求接管并清楚说明原因。</p></div>
-<div class="case-field"><strong>可量化指标</strong><ul class="case-metrics"><li>接管请求提前量</li><li>成功接管率</li><li>误报与漏报</li><li>干预平顺性</li><li>事件回放完整性</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 02 · 自动驾驶</span><h3>驾驶辅助监督与接管体验</h3><small>持续监督 · 安全关键</small></header>
+<div class="case-field"><strong>研究目标</strong><p>研究驾驶员是否理解系统能力边界、保持必要的情境意识，并在接管请求出现时恢复稳定控制。</p></div>
+<div class="case-field"><strong>关键体验情境</strong><p>开启功能、理解系统状态、持续监督、收到接管请求、恢复人工控制、事件解释与再次启用。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>情境意识与认知负荷</li><li>接管反应时间和质量</li><li>信任校准</li><li>感知控制感</li><li>接管后焦虑与恢复</li></ul></div>
 </article>
 <article class="case-row">
-<header class="case-scene"><span class="case-code">Case 03 · 医疗支持</span><h3>用药风险复核</h3><small>专业决策 · 责任边界</small></header>
-<div class="case-field"><strong>共同任务</strong><p>结合病史、检验结果与临床指南，识别处方中的禁忌、相互作用和需要进一步确认的信息。</p></div>
-<div class="case-field"><strong>协同与接管</strong><p>AI 汇总信息并提示风险，医生核对原始记录、判断适用性并作最终决策。证据缺失、冲突或超出适用范围时必须停止并转人工复核。</p></div>
-<div class="case-field"><strong>可量化指标</strong><ul class="case-metrics"><li>关键风险遗漏率</li><li>证据可追溯性</li><li>不安全建议率</li><li>复核时间</li><li>合理否决率</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 03 · 智能座舱</span><h3>车载智能助手多模态体验</h3><small>低干扰 · 多模态反馈</small></header>
+<div class="case-field"><strong>研究目标</strong><p>评估驾驶过程中语音与视觉反馈能否帮助用户完成任务，同时避免注意力被过度占用。</p></div>
+<div class="case-field"><strong>关键体验情境</strong><p>唤醒与表达意图、语音和屏幕确认、纠错、驾驶高负荷时的中断、敏感信息与隐私控制。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>任务成功率</li><li>视线离路时长</li><li>纠错轮数</li><li>中断成本</li><li>可控性与隐私感知</li></ul></div>
 </article>
 </div>
-<h2>8.9 跨领域案例（二）：知识工作与服务协同</h2>
-<p class="case-intro">知识工作中的“完成”不只等于生成内容，还包括数据可复核、政策合规、设计约束得到满足，以及用户保留最终控制。</p>
+<h2>8.9 用户体验研究案例（二）：服务、健康与学习</h2>
+<p class="case-intro">这些案例关注用户如何理解 AI、何时需要转交给人、过程是否连续，以及 AI 是否真正改善体验而不是只提高自动化比例。</p>
 <div class="case-grid">
 <article class="case-row">
-<header class="case-scene"><span class="case-code">Case 04 · 数据分析</span><h3>经营趋势诊断</h3><small>数据证据 · 可复现</small></header>
-<div class="case-field"><strong>共同任务</strong><p>从业务数据中解释转化率下降的原因，形成可以复核的分析结论和行动建议。</p></div>
-<div class="case-field"><strong>协同与接管</strong><p>AI 理解字段、生成查询和图表、提出假设；分析师确认口径、数据血缘与因果边界。字段误解或结论缺少证据时，由分析师修正查询并重新判断。</p></div>
-<div class="case-field"><strong>可量化指标</strong><ul class="case-metrics"><li>查询正确率</li><li>结果可复现率</li><li>分析耗时</li><li>无证据结论率</li><li>修正轮数</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 04 · 智能客服</span><h3>AI 客服转人工体验</h3><small>服务连续性 · 情绪恢复</small></header>
+<div class="case-field"><strong>研究目标</strong><p>研究用户在 AI 无法解决问题时，能否顺利转人工、保留上下文，并感到处理过程连续且公平。</p></div>
+<div class="case-field"><strong>关键体验情境</strong><p>首次描述问题、AI 误解、发现能力边界、触发转人工、上下文移交、人工接续与最终解决。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>重复说明成本</li><li>转人工成功率</li><li>解决率与放弃率</li><li>过程透明度</li><li>情绪变化与公平感</li></ul></div>
 </article>
 <article class="case-row">
-<header class="case-scene"><span class="case-code">Case 05 · 客服合规</span><h3>退款争议处理</h3><small>政策约束 · 服务升级</small></header>
-<div class="case-field"><strong>共同任务</strong><p>依据订单状态、退款政策和用户历史，给出准确、合规且能够继续执行的处理方案。</p></div>
-<div class="case-field"><strong>协同与接管</strong><p>AI 检索政策、汇总上下文并起草回复；客服确认权限、例外与情绪风险。涉及超权限补偿、政策冲突或高价值客户时转人工升级。</p></div>
-<div class="case-field"><strong>可量化指标</strong><ul class="case-metrics"><li>一次解决率</li><li>合规违规率</li><li>人工改写率</li><li>升级判断准确率</li><li>审计记录完整性</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 05 · 健康服务</span><h3>AI 问诊与分诊体验</h3><small>风险沟通 · 责任边界</small></header>
+<div class="case-field"><strong>研究目标</strong><p>研究用户是否理解 AI 的角色与局限、正确感知风险，并知道何时应转向医生或线下服务。</p></div>
+<div class="case-field"><strong>关键体验情境</strong><p>描述症状、AI 追问、风险解释、查看依据、建议转诊、联系医生、后续记录与隐私管理。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>信息理解度</li><li>合理转诊率</li><li>信任校准</li><li>焦虑变化</li><li>隐私控制感</li></ul></div>
 </article>
 <article class="case-row">
-<header class="case-scene"><span class="case-code">Case 06 · 设计协作</span><h3>产品界面概念设计</h3><small>创意探索 · 人的控制</small></header>
-<div class="case-field"><strong>共同任务</strong><p>在品牌、可访问性与业务约束内形成多套界面方向，并收敛为可评审的设计方案。</p></div>
-<div class="case-field"><strong>协同与接管</strong><p>AI 生成方向、整理反馈和检查基础约束；设计师设定判断标准、选择与深化方案。创意趋同、约束冲突或来源不清时，由设计师重新建立方向。</p></div>
-<div class="case-field"><strong>可量化指标</strong><ul class="case-metrics"><li>有效方案多样性</li><li>约束符合度</li><li>人工修改成本</li><li>决策可追溯性</li><li>用户控制感</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 06 · AI 教育</span><h3>学习助手的引导体验</h3><small>学习达成 · 主体性</small></header>
+<div class="case-field"><strong>研究目标</strong><p>判断 AI 是否帮助学习者理解和迁移知识，而不是通过直接给答案制造表面完成。</p></div>
+<div class="case-field"><strong>关键体验情境</strong><p>理解题目、请求提示、连续犯错、获得反馈、形成解释、独立完成相似任务与复习。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>学习增益与迁移表现</li><li>提示依赖度</li><li>认知负荷</li><li>感知主体性</li><li>持续学习意愿</li></ul></div>
 </article>
 </div>
 <hr>
