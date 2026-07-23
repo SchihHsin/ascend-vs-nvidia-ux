@@ -20,7 +20,9 @@
       --blue-soft: #edf0ff;
       --red: #b52d36;
       --shadow: 0 2px 4px rgba(20, 24, 32, .08), 0 18px 44px rgba(20, 24, 32, .09);
-      --paper-width: 960px;
+      /* A4 portrait ratio: 210 : 297. */
+      --paper-width: 792px;
+      --paper-height: 1120px;
       --paper-pad-x: 72px;
       --paper-pad-y: 66px;
     }
@@ -293,8 +295,8 @@
     .sheet {
       position: relative;
       width: min(var(--paper-width), calc(100vw - 48px));
-      height: 1120px;
-      min-height: 1120px;
+      height: var(--paper-height);
+      min-height: var(--paper-height);
       margin: 0 auto 42px;
       padding: var(--paper-pad-y) var(--paper-pad-x) 76px;
       overflow: hidden;
@@ -315,7 +317,7 @@
     @media (min-width: 781px) {
       body:not(.spread-mode) #paperStack {
         display: grid;
-        grid-template-columns: repeat(auto-fit, 960px);
+        grid-template-columns: repeat(auto-fit, var(--paper-width));
         gap: 42px;
         width: calc((100vw - 48px) / var(--reader-zoom, 1));
         margin: 0 auto;
@@ -323,7 +325,7 @@
       }
 
       body:not(.spread-mode) #paperStack .sheet {
-        width: 960px;
+        width: var(--paper-width);
         margin: 0;
       }
     }
@@ -336,7 +338,7 @@
 
       body.spread-mode #paperStack {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(calc(1920px * var(--spread-page-scale)), calc(1920px * var(--spread-page-scale))));
+        grid-template-columns: repeat(auto-fit, minmax(calc(2 * var(--paper-width) * var(--spread-page-scale)), calc(2 * var(--paper-width) * var(--spread-page-scale))));
         gap: 30px;
         width: calc((100vw - 64px) / var(--reader-zoom, 1));
         margin: 0 auto;
@@ -346,8 +348,8 @@
       body.spread-mode .spread {
         position: relative;
         display: block;
-        width: calc(1920px * var(--spread-page-scale));
-        height: calc(var(--spread-height, 1120px) * var(--spread-page-scale));
+        width: calc(2 * var(--paper-width) * var(--spread-page-scale));
+        height: calc(var(--spread-height, var(--paper-height)) * var(--spread-page-scale));
         margin: 0 auto;
         overflow: hidden;
         background: var(--paper);
@@ -357,9 +359,9 @@
         position: absolute;
         inset: 0 auto auto 0;
         display: grid;
-        grid-template-columns: repeat(2, 960px);
-        width: 1920px;
-        min-height: var(--spread-height, 1120px);
+        grid-template-columns: repeat(2, var(--paper-width));
+        width: calc(2 * var(--paper-width));
+        min-height: var(--spread-height, var(--paper-height));
         transform: scale(var(--spread-page-scale));
         transform-origin: top left;
       }
@@ -383,15 +385,15 @@
         z-index: 4;
         top: 0;
         bottom: 0;
-        left: 960px;
+        left: var(--paper-width);
         width: 2px;
         background: #fff;
       }
 
       body.spread-mode .sheet {
         width: var(--paper-width);
-        min-height: var(--spread-height, 1120px);
-        height: var(--spread-height, 1120px);
+        min-height: var(--spread-height, var(--paper-height));
+        height: var(--spread-height, var(--paper-height));
         margin: 0;
         overflow: hidden;
         background: transparent;
@@ -404,7 +406,7 @@
 
       body.spread-mode .cover {
         width: var(--paper-width);
-        min-height: 1120px;
+        min-height: var(--paper-height);
         aspect-ratio: auto;
         /* zoom already reserves the scaled layout height for this standalone cover. */
         margin: 0 auto 42px;
@@ -438,8 +440,8 @@
     .cover {
       display: grid;
       grid-template-rows: auto auto 1fr auto;
-      height: 1120px;
-      min-height: 1120px;
+      height: var(--paper-height);
+      min-height: var(--paper-height);
       padding-top: 44px;
       background: #fff;
     }
@@ -3211,7 +3213,7 @@
       const spreadQuery = window.matchMedia('(min-width: 1180px)');
       const setSpreadPageScale = () => {
         const spreadWidth = Math.min(1540, Math.max(0, window.innerWidth - 64));
-        const scale = Math.min(1, spreadWidth / (2 * 960));
+        const scale = Math.min(1, spreadWidth / (2 * 792));
         document.documentElement.style.setProperty('--spread-page-scale', String(scale));
       };
       const applySpread = (enabled) => {
