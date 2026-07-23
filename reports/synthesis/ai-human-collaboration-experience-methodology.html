@@ -118,6 +118,28 @@
       font-variant-numeric: tabular-nums;
     }
 
+    .zoom-control {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 5px 0 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .zoom-control input {
+      width: 74px;
+      accent-color: var(--blue);
+    }
+
+    .zoom-control output {
+      min-width: 33px;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
     .toc-panel {
       position: fixed;
       z-index: 60;
@@ -208,6 +230,7 @@
 
     main {
       padding: 42px 24px 80px;
+      zoom: var(--reader-zoom, 1);
     }
 
     #paperStack {
@@ -235,7 +258,7 @@
       background: var(--blue);
     }
 
-    @media (min-width: 1360px) {
+    @media (min-width: 1180px) {
       body.spread-mode main {
         padding-right: 32px;
         padding-left: 32px;
@@ -281,6 +304,7 @@
       }
 
       body.spread-mode .cover {
+        width: min(1540px, calc(100vw - 64px));
         min-height: 1040px;
       }
     }
@@ -910,6 +934,53 @@
       padding: 0;
     }
 
+    .contents-chapter {
+      break-inside: avoid;
+      min-width: 0;
+      padding: 16px 0 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contents-chapter h3 {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .contents-chapter h3 span {
+      display: inline-block;
+      min-width: 28px;
+      margin-right: 8px;
+      color: var(--blue);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .contents-sections {
+      display: grid;
+      gap: 2px;
+    }
+
+    .contents-sections a {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 8px;
+      align-items: baseline;
+      min-height: 0;
+      padding: 3px 0;
+      border: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .contents-sections a .contents-no {
+      color: var(--blue);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
     .contents-grid a {
       display: grid;
       grid-template-columns: 42px 1fr auto;
@@ -1194,7 +1265,8 @@
 
   <div class="toolbar" role="toolbar" aria-label="阅读工具">
     <button id="tocOpen" type="button" title="打开章节目录">目录</button>
-    <button id="spreadMode" type="button" title="在单页与双页书册视图之间切换" aria-pressed="false">双页</button>
+    <button id="spreadMode" type="button" title="切换双页书册阅读" aria-pressed="false">双页：关</button>
+    <label class="zoom-control" for="zoomRange">缩放 <input id="zoomRange" type="range" min="80" max="110" step="5" value="100"><output id="zoomValue">100%</output></label>
     <span class="page-readout" id="pageReadout">01 / 01</span>
     <button id="printDoc" type="button" title="打印或导出 PDF">打印</button>
   </div>
@@ -2886,11 +2958,10 @@
 
       const contentsBody = stack.querySelector('.contents-sheet .section-body');
       if (contentsBody) {
-        const targets = visibleChapters;
         contentsBody.innerHTML = '';
         const grid = document.createElement('div');
         grid.className = 'contents-grid';
-        targets.forEach((sheet) => {
+        visibleChapters.forEach((sheet) => {
           const h1 = sheet.querySelector('h1');
           const rawTitle = h1?.textContent.trim() || '';
           const chapterNumber = Number(sheet.dataset.chapter);
@@ -2899,10 +2970,30 @@
             ? rawTitle.replace(/^附录\s*[A-Z][：:\s]*/, '')
             : rawTitle.replace(/^第[一二三四五六七八九十]+章\s*/, '');
           const appendixNumber = rawTitle.match(/^附录\s*([A-Z])/i)?.[1] || '';
-          const link = document.createElement('a');
-          link.href = `#${sheet.id}`;
-          link.innerHTML = `<span class="contents-no">${isAppendix ? appendixNumber : `${chapterNumber}.X`}</span><span>${label}</span><span class="contents-arrow">↗</span>`;
-          grid.appendChild(link);
+          const chapter = document.createElement('section');
+          chapter.className = 'contents-chapter';
+          const title = document.createElement('h3');
+          title.innerHTML = `<span>${isAppendix ? appendixNumber : chapterNumber}</span>${label}`;
+          chapter.appendChild(title);
+          const sections = contentSheets
+            .filter((contentSheet) => contentSheet.isConnected && contentSheet.dataset.chapter === sheet.dataset.chapter)
+            .sort((a, b) => sectionRank(a.querySelector(':scope > h2')?.textContent.trim() || '') - sectionRank(b.querySelector(':scope > h2')?.textContent.trim() || ''));
+          if (!isAppendix && sections.length) {
+            const list = document.createElement('div');
+            list.className = 'contents-sections';
+            sections.forEach((contentSheet) => {
+              const h2 = contentSheet.querySelector(':scope > h2');
+              const rawSection = h2?.textContent.trim() || '';
+              const sectionMatch = rawSection.match(/^(\d+\.\d+)\s+(.+)$/);
+              if (!sectionMatch) return;
+              const link = document.createElement('a');
+              link.href = `#${contentSheet.id}`;
+              link.innerHTML = `<span class="contents-no">${sectionMatch[1]}</span><span>${sectionMatch[2]}</span>`;
+              list.appendChild(link);
+            });
+            chapter.appendChild(list);
+          }
+          grid.appendChild(chapter);
         });
         contentsBody.appendChild(grid);
       }
@@ -2922,13 +3013,22 @@
       document.getElementById('printDoc').addEventListener('click', () => window.print());
 
       const spreadMode = document.getElementById('spreadMode');
-      const spreadQuery = window.matchMedia('(min-width: 1360px)');
+      const zoomRange = document.getElementById('zoomRange');
+      const zoomValue = document.getElementById('zoomValue');
+      const spreadQuery = window.matchMedia('(min-width: 1180px)');
       const applySpread = (enabled) => {
         const usable = enabled && spreadQuery.matches;
         document.body.classList.toggle('spread-mode', usable);
         spreadMode.setAttribute('aria-pressed', String(usable));
-        spreadMode.textContent = usable ? '单页' : '双页';
-        spreadMode.title = usable ? '切换为单页阅读' : '切换为双页书册阅读';
+        spreadMode.textContent = usable ? '双页：开' : '双页：关';
+        spreadMode.title = usable ? '当前为双页书册阅读；点击切换为单页' : '当前为单页阅读；点击切换为双页书册阅读';
+      };
+      const applyZoom = (value) => {
+        const zoom = Math.max(80, Math.min(110, Number(value) || 100));
+        document.documentElement.style.setProperty('--reader-zoom', String(zoom / 100));
+        zoomRange.value = String(zoom);
+        zoomValue.value = `${zoom}%`;
+        zoomValue.textContent = `${zoom}%`;
       };
       const spreadFromUrl = new URLSearchParams(window.location.search).get('spread');
       let wantsSpread = spreadFromUrl === null
@@ -2940,6 +3040,10 @@
         localStorage.setItem('collab-spread-mode', wantsSpread ? 'on' : 'off');
         applySpread(wantsSpread);
       });
+      const storedZoom = new URLSearchParams(window.location.search).get('zoom') || localStorage.getItem('collab-reader-zoom') || '100';
+      applyZoom(storedZoom);
+      zoomRange.addEventListener('input', () => applyZoom(zoomRange.value));
+      zoomRange.addEventListener('change', () => localStorage.setItem('collab-reader-zoom', zoomRange.value));
       spreadQuery.addEventListener('change', () => applySpread(wantsSpread));
 
       const progressBar = document.getElementById('progressBar');
