@@ -245,10 +245,16 @@
   const slides=[...document.querySelectorAll('.slide')],dots=document.querySelector('.dots'),controls=document.querySelector('#controls'),page=document.querySelector('#page'),overview=document.querySelector('#overview'),grid=document.querySelector('#overviewGrid');
   const prevBtn=document.querySelector('[data-action="prev"]'),nextBtn=document.querySelector('[data-action="next"]'),fsBtn=document.querySelector('[data-action="fullscreen"]');let current=0,scrollbarTimer;
   const pad=n=>String(n).padStart(2,'0'),dark=s=>s.classList.contains('s-cover')||s.classList.contains('s-glow');
-  const chapterNames=['01 团队组建','02 课题达成性改进过程'];
+  const chapterNames=['01 团队组建','02 选择课题','03 现状调查','04 根因分析','05 目标设定'];
   slides.forEach(slide=>{
     const eyebrow=slide.querySelector('.head .eyebrow')?.textContent||'';
-    const section=eyebrow.startsWith('QCC')?0:(eyebrow.startsWith('01 /')||eyebrow.startsWith('02 /'))?1:-1;
+    const heading=slide.querySelector('.head h1')?.textContent||'';
+    let section=-1;
+    if(eyebrow.startsWith('QCC')) section=0;
+    else if(eyebrow.includes('选题背景')) section=1;
+    else if(eyebrow.includes('原声证据')||eyebrow.includes('痛点定位')||eyebrow.includes('痛点排序')) section=2;
+    else if(eyebrow.includes('研究聚焦')||eyebrow.includes('原因分析')) section=3;
+    else if(eyebrow.includes('目标体系')||heading.includes('结果目标')) section=4;
     const head=slide.querySelector('.head'),pageNo=slide.querySelector('.page-no');
     if(section<0||!head||!pageNo)return;
     const tabs=document.createElement('div');
