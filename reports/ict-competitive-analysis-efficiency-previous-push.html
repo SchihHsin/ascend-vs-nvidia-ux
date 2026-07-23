@@ -362,7 +362,7 @@
   if(paretoSlide){
     paretoSlide.querySelector('.head h1').textContent='角色任务链路、核验标准与业务上下文，是最集中出现的三类痛点';
     paretoSlide.querySelector('.head .sub').textContent='纳入石涵睿与时昕昱的讨论输入后，角色与任务链路缺失的提及最多；核验标准、业务领域知识与上下文紧随其后。';
-    paretoSlide.querySelector('.pareto-callout').innerHTML='<div class="big">67<small>%</small></div><h2>前三类痛点最集中</h2><p>10 / 15 次讨论提及，集中指向角色任务、核验标准与业务上下文。</p>';
+    paretoSlide.querySelector('.pareto-callout').innerHTML='<div class="big">64<small>%</small></div><h2>前三类痛点最集中</h2><p>9 / 14 次讨论提及，集中指向角色任务、核验标准与业务上下文。</p>';
   }
   const focusSlide=slideFor('本轮聚焦 P1、P2、P3');
   if(focusSlide){
@@ -391,7 +391,7 @@
     const pareto=echarts.init(paretoEl,null,{renderer:'svg'});
     const labels=['角色与任务\n链路缺失','核验与可采纳\n标准缺失','业务领域知识与\n上下文不足','研究范围\n未前置明确','抽象机制\n难对标','分析资产\n未沉淀复用'];
     // Each count comes from coding the designer quotes on slide 10; one quote may map to more than one cause.
-    const values=[4,3,3,3,1,1], total=values.reduce((a,b)=>a+b,0);
+    const values=[4,2,3,3,1,1], total=values.reduce((a,b)=>a+b,0);
     let sum=0;const cumulative=values.map(v=>{sum+=v;return +(sum/total*100).toFixed(1)});
     pareto.setOption({animation:false,grid:{left:'8%',right:'8%',top:'16%',bottom:'20%'},tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},xAxis:{type:'category',data:labels,axisTick:{show:false},axisLine:{lineStyle:{color:'#c7cdd8'}},axisLabel:{interval:0,hideOverlap:false,color:'#5e646e',fontSize:13,lineHeight:18,margin:15}},yAxis:[{type:'value',name:'编码提及数',min:0,max:5,interval:1,nameTextStyle:{color:'#7c8490',fontSize:13},axisLabel:{color:'#7c8490',fontSize:12},splitLine:{lineStyle:{type:'dashed',color:'rgba(130,140,156,.22)'}},axisLine:{show:false},axisTick:{show:false}},{type:'value',name:'累计占比',min:0,max:100,interval:20,axisLabel:{formatter:'{value}%',color:'#7c8490',fontSize:12},nameTextStyle:{color:'#7c8490',fontSize:13},splitLine:{show:false},axisLine:{show:false},axisTick:{show:false}}],series:[{name:'原声编码提及数',type:'bar',data:values,barWidth:'46%',itemStyle:{borderRadius:[8,8,0,0],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#5b5bd6'},{offset:1,color:'#9b8cff'}])},label:{show:true,position:'top',color:'#454b5a',fontSize:15,fontWeight:700}},{name:'累计占比',type:'line',yAxisIndex:1,data:cumulative,smooth:true,symbol:'circle',symbolSize:9,lineStyle:{width:3,color:'#f09a45'},itemStyle:{color:'#f09a45',borderColor:'#fff',borderWidth:2},label:{show:true,formatter:'{c}%',position:'top',color:'#9a5600',fontSize:12}}]});
     addEventListener('resize',()=>pareto.resize());
