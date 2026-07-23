@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>人与 AI 协同体验测量方法 · 通用研究框架</title>
+  <title>人与 AI 协同体验研究方法 · 通用研究框架</title>
   <meta name="description" content="面向不同领域、任务与 AI 系统的人与 AI 协同体验通用测量方法。">
   <style>
     :root {
@@ -1119,17 +1119,25 @@
     }
 
     .front-sheet.abstract-sheet .section-body {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 50px;
+      display: block;
     }
 
-    .front-sheet.abstract-sheet .section-body p:first-child {
-      grid-row: span 3;
+    .abstract-detail {
+      column-count: 2;
+      column-gap: 42px;
+      column-rule: 1px solid var(--line);
+    }
+
+    .abstract-detail > * {
+      break-inside: avoid-column;
+    }
+
+    .front-sheet.abstract-sheet .section-body > p:first-child {
+      margin-bottom: 30px;
       padding: 26px;
       border-top: 0;
       background: var(--soft);
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 650;
       line-height: 1.65;
     }
@@ -1192,16 +1200,14 @@
 
       .sheet {
         width: 100%;
-        min-height: auto;
+        height: auto;
+        min-height: 0;
         margin-bottom: 18px;
         box-shadow: 0 2px 14px rgba(20, 24, 32, .08);
       }
 
-      .running-head {
-        margin-bottom: 34px;
-      }
-
       .cover {
+        height: auto;
         min-height: 920px;
       }
 
@@ -1211,6 +1217,16 @@
 
       .cover-subtitle {
         font-size: 17px;
+      }
+
+      .cover-visual {
+        overflow: hidden;
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      .collab-system {
+        min-width: 0;
       }
 
       .collab-map {
@@ -1229,6 +1245,10 @@
       .cover-meta,
       .front-sheet.abstract-sheet .section-body {
         grid-template-columns: 1fr;
+      }
+
+      .abstract-detail {
+        column-count: 1;
       }
 
       .cover-meta > div + div {
@@ -1294,6 +1314,10 @@
       .case-row > * + * {
         border-top: 1px solid var(--line);
         border-left: 0;
+      }
+
+      .running-head {
+        margin-bottom: 34px;
       }
 
       .toolbar {
@@ -1399,7 +1423,7 @@
 
       <div class="cover-title">
         <div class="cover-kicker">Methodology Whitepaper · 2026</div>
-        <h1>人与 AI<br>协同体验测量方法</h1>
+        <h1>人与 AI<br>协同体验研究方法</h1>
         <p class="cover-subtitle">面向不同领域、任务与 AI 系统的通用研究框架</p>
       </div>
 
@@ -1444,7 +1468,7 @@
   </main>
 
   <div id="source-content" hidden>
-<h1>人与 AI 协同体验测量方法</h1>
+<h1>人与 AI 协同体验研究方法</h1>
 <h2>面向不同领域、任务与 AI 系统的通用研究框架</h2>
 <p><strong>版本：</strong> 方法论草案 v0.1<br>
 <strong>适用范围：</strong> 编程开发、企业知识问答、数据分析、设计协作、客户服务、教育辅导、运营与办公等人机协同场景<br>
@@ -2980,11 +3004,18 @@
           table.parentNode.insertBefore(wrap, table);
           wrap.appendChild(table);
         });
+
+        // The abstract has one lead statement followed by ordinary flowing copy.
+        if (sheet.classList.contains('abstract-sheet')) {
+          const detail = document.createElement('div');
+          detail.className = 'abstract-detail';
+          Array.from(body.children).slice(1).forEach((node) => detail.appendChild(node));
+          body.appendChild(detail);
+        }
       });
 
       const continuationSerial = new Map();
       const createContinuation = (sheet) => {
-        const originalTitle = sheet.querySelector(':scope > h2')?.textContent.trim() || '续页';
         const nextNumber = (continuationSerial.get(sheet.id) || 0) + 1;
         continuationSerial.set(sheet.id, nextNumber);
         const continuation = document.createElement('section');
@@ -2994,11 +3025,9 @@
         const head = document.createElement('div');
         head.className = 'running-head';
         head.innerHTML = '<span>Human × AI Collaboration Experience</span><span class="page-no"></span>';
-        const title = document.createElement('h2');
-        title.textContent = `${originalTitle.replace(/（续）$/, '')}（续）`;
         const body = document.createElement('div');
         body.className = sheet.querySelector('.section-body')?.className || 'section-body';
-        continuation.append(head, title, body);
+        continuation.append(head, body);
         stack.insertBefore(continuation, sheet.nextSibling);
         return continuation;
       };
@@ -3158,26 +3187,23 @@
         });
         contentsBody.appendChild(grid);
 
-        const chapters = Array.from(grid.children);
-        if (chapters.length > 7) {
-          const contentsSheet = stack.querySelector('.contents-sheet');
-          const continued = document.createElement('section');
-          continued.className = 'sheet front-sheet content-sheet contents-sheet continued-sheet';
-          continued.dataset.chapter = '0';
-          continued.id = '目录续页';
-          const head = document.createElement('div');
-          head.className = 'running-head';
-          head.innerHTML = '<span>Human × AI Collaboration Experience</span><span class="page-no"></span>';
-          const title = document.createElement('h2');
-          title.textContent = '目录（续）';
-          const continuedBody = document.createElement('div');
-          continuedBody.className = 'section-body';
+        // Let the fixed A4 frame decide the directory break; do not rely on a
+        // fixed chapter count, because sections differ greatly in length.
+        let contentsPage = stack.querySelector('.contents-sheet');
+        while (contentsPage.scrollHeight > contentsPage.clientHeight + 2) {
+          const currentBody = contentsPage.querySelector('.section-body');
+          const currentGrid = currentBody?.querySelector('.contents-grid');
+          if (!currentGrid || currentGrid.children.length < 2) break;
+          const continued = createContinuation(contentsPage);
+          continued.classList.add('contents-sheet');
+          const continuedBody = continued.querySelector('.section-body');
           const continuedGrid = document.createElement('div');
           continuedGrid.className = 'contents-grid';
-          chapters.slice(7).forEach((chapter) => continuedGrid.appendChild(chapter));
           continuedBody.appendChild(continuedGrid);
-          continued.append(head, title, continuedBody);
-          stack.insertBefore(continued, contentsSheet.nextSibling);
+          while (contentsPage.scrollHeight > contentsPage.clientHeight + 2 && currentGrid.lastElementChild) {
+            continuedGrid.insertBefore(currentGrid.lastElementChild, continuedGrid.firstChild);
+          }
+          contentsPage = continued;
         }
       }
 
