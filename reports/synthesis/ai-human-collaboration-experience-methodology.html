@@ -836,45 +836,50 @@
       display: none;
     }
 
-    .front-sheet.contents-sheet ol {
+    .contents-part + .contents-part {
+      margin-top: 28px;
+    }
+
+    .contents-part h3 {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 850;
+      line-height: 1.4;
+    }
+
+    .contents-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0 36px;
       margin: 0;
       padding: 0;
-      list-style: none;
-      counter-reset: toc;
     }
 
-    .front-sheet.contents-sheet li {
-      counter-increment: toc;
-      margin: 0;
-      padding: 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .front-sheet.contents-sheet li a {
+    .contents-grid a {
       display: grid;
       grid-template-columns: 42px 1fr auto;
       gap: 8px;
       align-items: center;
-      min-height: 58px;
+      min-height: 50px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
       font-size: 12px;
       line-height: 1.4;
     }
 
-    .front-sheet.contents-sheet li a::before {
-      content: counter(toc, decimal-leading-zero);
+    .contents-grid a .contents-no {
       color: var(--blue);
       font-weight: 800;
+      font-variant-numeric: tabular-nums;
     }
 
-    .front-sheet.contents-sheet li a::after {
-      content: "↗";
+    .contents-grid a .contents-arrow {
       color: var(--muted);
+      font-size: 14px;
     }
 
-    .front-sheet.contents-sheet li a:hover {
+    .contents-grid a:hover {
       color: var(--blue);
     }
 
@@ -1035,7 +1040,7 @@
       }
 
       .chapter-index,
-      .front-sheet.contents-sheet ol {
+      .contents-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1173,7 +1178,7 @@
               <rect x="44" y="44" width="116" height="34" rx="17" fill="#fff" stroke="#2a2e36" stroke-width="1.4"/><text x="102" y="66" fill="#2a2e36">用户</text>
               <rect x="228" y="44" width="116" height="34" rx="17" fill="#304ffe"/><text x="286" y="66" fill="#fff">AI</text>
               <rect x="412" y="44" width="116" height="34" rx="17" fill="#eceef2" stroke="#69707c" stroke-width="1.4"/><text x="470" y="66" fill="#3b414b">系统 / 服务</text>
-              <rect x="596" y="44" width="116" height="34" rx="17" fill="#fff" stroke="#69707c" stroke-width="1.4"/><text x="654" y="66" fill="#3b414b">知识 / 工具</text>
+              <rect x="596" y="44" width="116" height="34" rx="17" fill="#2a2e36" stroke="#2a2e36" stroke-width="1.4"/><text x="654" y="66" fill="#fff">知识 / 工具</text>
             </g>
             <g fill="none" stroke="#c8cdd5" stroke-width="1.2" stroke-dasharray="4 7"><path d="M102 94V404"/><path d="M286 94V404"/><path d="M470 94V404"/><path d="M654 94V404"/></g>
             <g fill="#fff" stroke="#c8cdd5" stroke-width="1.1">
@@ -1929,18 +1934,19 @@
 <h2>8.1 研究对象与问题边界</h2>
 <p>AI 可用性研究考察：当用户提出一个真实任务诉求时，AI 能否获得支撑任务的知识、判断这些知识是否足够可靠，并将其组织为可验证、可执行的下一步。研究对象是 AI 在具体知识与工具环境中的表现，而不是抽象的模型能力排名。</p>
 <p>它尤其回答三个问题：AI 为什么答不出来；AI 给出的答案为什么不能直接使用；以及当知识、证据或执行条件不足时，用户能否识别风险并顺利接管。CANN 与 CUDA 的技术知识可用性专项属于这一路径的一个具体实现。</p>
+<p>研究对象可以是开发助手、客服助手、分析 Agent、教育辅导工具或任何能够检索、调用工具并参与任务的 AI。只要任务目标、可用知识与验收条件明确，就可以用同一框架比较不同模型、知识源、工具权限或服务方案。</p>
 <h2>8.2 从知识获取到人工接管的研究过程</h2>
-<p>以同一类用户目标作为任务单位，分别记录 AI 的知识获取、回答组织、用户验证与失败恢复过程：</p>
+<p>以同一类用户目标作为任务单位，分别记录 AI 的知识获取、回答组织、用户验证与失败恢复过程。对照研究固定目标、上下文、版本和输出要求，只替换领域术语、生态或知识条件，避免把问题问法的差异误判为 AI 差异：</p>
 <ol>
-<li>定义用户最终要完成的结果与验收条件；</li>
-<li>将共同目标翻译成各生态、系统或领域中的真实问法；</li>
-<li>记录 AI 触达官方、第三方和自身知识的路径、证据与受阻情况；</li>
-<li>判断答案是否有依据、是否可执行、是否经得起用户验证；</li>
-<li>AI 无法可靠回答时，记录它是否暴露不确定性、指出缺失证据，并支持用户继续检索或人工接管。</li>
+<li><strong>定义配对任务：</strong>固定用户最终要完成的结果与验收条件，并将共同目标翻译成各生态、系统或领域中的真实问法。</li>
+<li><strong>实测知识链路：</strong>记录 AI 触达官方、第三方和自身知识的路径，包含检索轮数、正文是否可读取、是否存在版本和可执行步骤，以及受阻发生在哪里。</li>
+<li><strong>验证协作产出：</strong>判断答案是否有依据、是否可执行、是否经得起用户验证；同时记录用户额外的核查、修正、追问与返工。</li>
+<li><strong>标记受阻与接管：</strong>区分未观测、系统受阻、证据不足和已证实失败。AI 无法可靠继续时，记录它是否暴露不确定性、指出缺失证据，并支持用户继续检索或人工接管。</li>
+<li><strong>回溯问题机制：</strong>将差距归因到知识、可访问性、版本、工具权限、模型组织能力、交互提示或治理规则，再形成可复测的改造假设。</li>
 </ol>
 <p>输出不只是一张分数矩阵，还应包含知识断点、失败机制、验证负担与接管成本。这样才能区分“AI 不会推理”与“AI 无法获得正确知识”，也能说明知识环境应如何改造。</p>
 <h2>8.3 领域模块与变量替换</h2>
-<p>通用核心指标适合比较“是否完成、花费多少、是否可靠、能否恢复”。但不同领域的正确性、证据和风险形态不同。例如，代码能否运行与客服回复是否合规不是同一个质量标准。领域模块补充领域特有的观测，不改变核心定义。</p>
+<p>通用核心指标适合比较“是否完成、花费多少、是否可靠、能否恢复”。但不同领域的正确性、证据和风险形态不同。例如，代码能否运行与客服回复是否合规不是同一个质量标准。领域模块补充领域特有的观测，不改变核心定义；开发场景关注代码、环境和版本，客服场景关注政策、上下文和转人工，分析场景关注数据权限、计算过程和结论可追溯。</p>
 <h2>8.4 技术知识检索模块</h2>
 <p>技术知识检索是 AI 可用性研究中最成熟的一类领域模块。</p>
 <p>适用于开发、运维、科研和技术支持。可加入：</p>
@@ -2007,7 +2013,7 @@
 </ol>
 <h1>第九章 用户基础体验研究</h1>
 <h2>9.1 研究对象：用户在领域中的端到端基础体验</h2>
-<p>用户基础体验研究不把用户限定为开发者，也不把体验限定为技术操作。它研究的是：某类用户为了完成一个真实目标，在一个领域、服务或生态中经历入口、理解、操作、受阻和恢复时，基础条件是否足够顺畅。</p>
+<p>用户基础体验研究不把用户限定为开发者，也不把体验限定为技术操作。它研究的是：某类用户为了完成一个真实目标，在一个领域、服务或生态中经历入口、理解、操作、受阻和恢复时，基础条件是否足够顺畅。它关注用户能否完成事情，以及过程是否容易理解、操作、验证与恢复，而非仅评价某个页面或单一功能。</p>
 <p>AI 在这一路径中不是被打分的对象，而是可复现的模拟研究工具。研究者为 AI 提供明确的用户角色、已有知识、任务目标和现实约束，使其按用户视角走过旅程；每一步都保留实际访问、理解、操作、受阻与恢复的证据。</p>
 <h2>9.2 从领域目标定义用户旅程</h2>
 <p>不要套用固定的开发者阶段。每个领域应先定义用户最终要完成的结果，再据此构造相应的旅程、触点和验收条件。例如，算子开发可以是进入生态、学习、配置、开发、运行、排错与进阶；驾驶辅助可以是启用、理解、监督、接管与恢复；智能客服可以是描述问题、理解回复、补充信息、升级与解决。</p>
@@ -2023,6 +2029,7 @@
 </ol>
 <p>AI 的价值在于可批量、可重复地发现路径断点并比较不同条件；它不替代真人研究，也不应被当作用户情绪和真实行为的唯一证据。</p>
 <h2>9.4 基础体验的触点测量</h2>
+<p>每个触点都应保留真实页面、来源、操作轨迹与“画面显示了什么”的说明；不同方案或不同版本使用同一组摩擦锚点评分。按旅程顺序汇总为热力图和摩擦曲线，先解释关键断点，再提出改进方向。</p>
 <p>在不同领域的旅程触点中，可以稳定观察以下基础体验：</p>
 <ul>
 <li><strong>可发现性：</strong>用户是否找得到入口、下一步和所需资源；</li>
@@ -2729,8 +2736,9 @@
         if (pageNo) pageNo.textContent = `${String(i + 1).padStart(2, '0')} / ${String(allSheets.length).padStart(2, '0')}`;
       });
 
+      const visibleChapters = chapterOpeners.filter((sheet) => sheet.isConnected && !sheet.classList.contains('closing-sheet'));
       const tocNav = document.getElementById('tocNav');
-      chapterOpeners.filter((sheet) => sheet.isConnected).forEach((sheet, i) => {
+      visibleChapters.forEach((sheet, i) => {
         const h1 = sheet.querySelector('h1');
         const link = document.createElement('a');
         link.href = `#${sheet.id}`;
@@ -2739,16 +2747,37 @@
         tocNav.appendChild(link);
       });
 
-      const sourceContents = stack.querySelector('.contents-sheet ol');
-      if (sourceContents) {
-        const links = Array.from(sourceContents.querySelectorAll('li'));
-        const targets = chapterOpeners.filter((sheet) => sheet.isConnected);
-        links.forEach((item, i) => {
-          const anchor = document.createElement('a');
-          anchor.href = targets[i] ? `#${targets[i].id}` : '#cover';
-          anchor.textContent = item.textContent;
-          item.textContent = '';
-          item.appendChild(anchor);
+      const contentsBody = stack.querySelector('.contents-sheet .section-body');
+      if (contentsBody) {
+        const targets = visibleChapters;
+        const parts = [
+          { title: '第一部分｜通用研究框架', range: [0, 7] },
+          { title: '第二部分｜两条专项研究路径', range: [7, 10] },
+          { title: '第三部分｜分析、改进与持续研究', range: [10, targets.length] }
+        ];
+        contentsBody.innerHTML = '';
+        parts.forEach((part) => {
+          const group = document.createElement('section');
+          group.className = 'contents-part';
+          const title = document.createElement('h3');
+          title.textContent = part.title;
+          const grid = document.createElement('div');
+          grid.className = 'contents-grid';
+          targets.slice(part.range[0], part.range[1]).forEach((sheet) => {
+            const h1 = sheet.querySelector('h1');
+            const rawTitle = h1?.textContent.trim() || '';
+            const match = rawTitle.match(/^(第\d+章|附录\s*[A-Z])[：:\s]*(.*)$/);
+            const label = match?.[2] || rawTitle;
+            const number = rawTitle.startsWith('附录')
+              ? (rawTitle.match(/附录\s*([A-Z])/i)?.[1] || 'A')
+              : (rawTitle.match(/第(\d+)章/)?.[1]?.padStart(2, '0') || '');
+            const link = document.createElement('a');
+            link.href = `#${sheet.id}`;
+            link.innerHTML = `<span class="contents-no">${number}</span><span>${label}</span><span class="contents-arrow">↗</span>`;
+            grid.appendChild(link);
+          });
+          group.append(title, grid);
+          contentsBody.appendChild(group);
         });
       }
 
