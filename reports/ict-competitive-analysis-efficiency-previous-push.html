@@ -247,6 +247,8 @@
 <script>
 (() => {
   try{history.scrollRestoration='manual'}catch(e){}
+  const journeyOrderNode=document.querySelector('.jrn-wrap')?.closest('.slide'),paretoOrderNode=document.querySelector('#paretoChart')?.closest('.slide');
+  if(journeyOrderNode&&paretoOrderNode&&journeyOrderNode.nextElementSibling===paretoOrderNode)journeyOrderNode.parentElement.insertBefore(paretoOrderNode,journeyOrderNode);
   const slides=[...document.querySelectorAll('.slide')],dots=document.querySelector('.dots'),controls=document.querySelector('#controls'),page=document.querySelector('#page'),overview=document.querySelector('#overview'),grid=document.querySelector('#overviewGrid');
   const prevBtn=document.querySelector('[data-action="prev"]'),nextBtn=document.querySelector('[data-action="next"]'),fsBtn=document.querySelector('[data-action="fullscreen"]');let current=0,scrollbarTimer;
   const pad=n=>String(n).padStart(2,'0'),dark=s=>s.classList.contains('s-cover')||s.classList.contains('s-glow');
