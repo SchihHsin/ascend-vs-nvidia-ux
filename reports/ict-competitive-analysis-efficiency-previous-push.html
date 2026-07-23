@@ -76,7 +76,7 @@
 /* 4+ card hierarchy: translucent card, semantic label and a restrained colour wash. */
 .industry-grid{display:grid;gap:1vw;align-items:stretch;min-height:0}.domain-pack-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.pain-pack-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.domain-pack{--tone:var(--c-indigo);position:relative;display:flex;min-width:0;min-height:0;flex-direction:column;overflow:hidden;padding:2.2vh 1.35vw;background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(247,249,253,.46));border:1px solid var(--card-border);border-radius:18px;box-shadow:var(--card-shadow)}.domain-pack:nth-child(2){--tone:var(--c-blue)}.domain-pack:nth-child(3){--tone:var(--c-teal)}.domain-pack:nth-child(4){--tone:var(--c-green)}.domain-pack:nth-child(5){--tone:var(--c-pink)}.domain-pack::before{content:"";position:absolute;left:0;top:0;width:100%;height:7vh;background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 13%,transparent),transparent);pointer-events:none}.domain-pack::after{content:"";position:absolute;right:-2.8vw;bottom:-5vh;width:10vw;height:10vw;border:2px solid var(--tone);border-radius:50%;opacity:.1}.domain-pack>*{position:relative;z-index:1}.domain-pack .pack-label{color:var(--tone);font:600 var(--fs-xs)/1.2 "JetBrains Mono",monospace;letter-spacing:.08em}.domain-pack h2{font-size:var(--fs-h2);line-height:1.3}.domain-pack p{font-size:var(--fs-body);line-height:1.55}.domain-pack .pack-detail{display:grid;gap:.7vh;margin-top:auto;padding-top:1.3vh}.domain-pack .pack-detail div{font-size:var(--fs-sm);line-height:1.42}.domain-pack .pack-detail b{color:var(--tone)}.domain-shot{display:block;width:100%;height:12vh;margin:1.4vh 0;overflow:hidden;border-radius:10px;border:1px solid rgba(90,100,125,.13);background:#eef1f6}.domain-shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}.pain-pack-grid .domain-pack{min-height:46vh}.pain-pack-grid .domain-pack p{font-size:var(--fs-sm)}
 /* Dense journey remains a dedicated diagram, not a generic card grid. */
-.jrn-wrap{display:flex;flex:1;min-height:0;flex-direction:column;justify-content:center}.jrn-grid{display:grid;grid-template-columns:56px repeat(6,minmax(0,1fr));gap:0}.jpc6 .jrn-ph::after{background:#38c9d7}.jrn-pw,.jrn-tw,.jrn-fw,.jrn-ew,.jrn-pw2,.jrn-ow{display:flex;min-width:0;min-height:0;flex-direction:column;padding-right:5px}.jrn-fc{display:flex;min-height:11vh;flex-direction:column;justify-content:center;padding:1.2vh .9vw}.jrn-action-title,.jrn-pt,.jrn-ot{font-size:var(--fs-sm);line-height:1.42}.jrn-grid.je{height:11vh}.jrn-pc{display:flex;min-height:12vh;align-items:center}.jrn-oc{display:flex;min-height:10vh;align-items:center}
+.jrn-wrap{display:flex;flex:1;min-height:0;flex-direction:column;justify-content:center}.jrn-grid{display:grid;grid-template-columns:56px repeat(7,minmax(0,1fr));gap:0}.jpc6 .jrn-ph::after{background:#38c9d7}.jpc7 .jrn-ph::after{background:#39b982}.jrn-pw,.jrn-tw,.jrn-fw,.jrn-ew,.jrn-pw2,.jrn-ow{display:flex;min-width:0;min-height:0;flex-direction:column;padding-right:5px}.jrn-fc{display:flex;min-height:11vh;flex-direction:column;justify-content:center;padding:1.2vh .9vw}.jrn-action-title,.jrn-pt,.jrn-ot{font-size:var(--fs-sm);line-height:1.42}.jrn-grid.je{height:11vh}.jrn-pc{display:flex;min-height:12vh;align-items:center}.jrn-oc{display:flex;min-height:10vh;align-items:center}
 .jrn-action-demo{isolation:isolate}.jrn-fw:nth-child(2) .jrn-action-demo{background:linear-gradient(145deg,#fff,#f5f7ff)}.jrn-fw:nth-child(2) .jrn-demo-bar{display:none}.jrn-fw:nth-child(2) .jrn-demo-body{height:100%;padding:1vh .65vw;display:grid;grid-template-columns:.72fr 1fr;gap:.55vw;align-items:stretch}.jrn-fw:nth-child(2) .jrn-demo-row{display:grid;gap:.42vh}.jrn-fw:nth-child(2) .jrn-demo-chip{height:auto;min-height:1.1vh;border-radius:5px;background:rgba(91,91,214,.16)}.jrn-fw:nth-child(2) .jrn-demo-chip.active{background:#5b5bd6}.jrn-fw:nth-child(2) .jrn-demo-line{height:auto;min-height:1.05vh;border-radius:5px;background:rgba(34,38,47,.12)}.jrn-fw:nth-child(2) .jrn-demo-line.short{width:100%;background:rgba(91,91,214,.28)}
 .jrn-fw:nth-child(3) .jrn-action-demo{background:radial-gradient(circle at 50% 52%,rgba(47,111,237,.16) 0 23%,transparent 24%),radial-gradient(circle at 50% 52%,transparent 0 41%,rgba(47,111,237,.2) 42% 43%,transparent 44%),linear-gradient(145deg,#f8fbff,#eef4ff)}.jrn-fw:nth-child(3) .jrn-demo-bar{display:none}.jrn-fw:nth-child(3) .jrn-demo-body{position:relative;height:100%;padding:0}.jrn-fw:nth-child(3) .jrn-demo-row{position:absolute;inset:0}.jrn-fw:nth-child(3) .jrn-demo-card{position:absolute;width:29%;height:22%;border-radius:999px;background:rgba(47,111,237,.24);box-shadow:0 0 0 1px rgba(47,111,237,.25)}.jrn-fw:nth-child(3) .jrn-demo-card.hot{left:36%;top:38%;background:#2f6fed}.jrn-fw:nth-child(3) .jrn-demo-card:not(.hot){right:10%;top:18%;background:rgba(40,168,216,.34)}.jrn-fw:nth-child(3) .jrn-demo-line{position:absolute;left:12%;bottom:18%;width:76%;height:1px;background:linear-gradient(90deg,transparent,#2f6fed,transparent)}
 .jrn-fw:nth-child(4) .jrn-action-demo{background:linear-gradient(145deg,#fbfcff,#eef2f8)}.jrn-fw:nth-child(4) .jrn-demo-bar{height:100%;width:30%;float:left;display:grid;grid-template-rows:repeat(3,1fr);gap:.45vh;padding:.75vh .45vw;background:rgba(34,38,47,.06);border:0}.jrn-fw:nth-child(4) .jrn-demo-bar i{width:100%;height:auto;border-radius:5px;background:rgba(91,91,214,.2)}.jrn-fw:nth-child(4) .jrn-demo-body{height:100%;padding:.75vh .55vw .75vh 34%;display:grid;grid-template-columns:1fr 1fr;gap:.45vw}.jrn-fw:nth-child(4) .jrn-demo-row{gap:.45vw}.jrn-fw:nth-child(4) .jrn-demo-capture{border-radius:6px;background:linear-gradient(145deg,#dbe8fb,#fff);box-shadow:inset 0 0 0 1px rgba(47,111,237,.18)}.jrn-fw:nth-child(4) .jrn-demo-capture.mark{outline:2px solid rgba(40,168,216,.75);background:linear-gradient(145deg,#cfe7ff,#f8fbff)}.jrn-fw:nth-child(4) .jrn-demo-line{grid-column:1/-1;height:1.1vh;background:repeating-linear-gradient(90deg,rgba(34,38,47,.16) 0 18%,transparent 18% 24%)}
@@ -297,7 +297,7 @@
   }
   slides.forEach((slide,i)=>{const counter=`${pad(i+1)} / ${pad(slides.length)}`;const pageNo=slide.querySelector('.page-no'),chapterNo=slide.querySelector('.dark-chrome span:last-child');if(pageNo)pageNo.textContent=counter;if(chapterNo)chapterNo.textContent=counter});
   const journey=document.querySelector('.jrn-wrap');
-  if(journey){['接收分析需求','明确分析目标','补充业务上下文','等待生成初稿','审阅与反复调整','形成设计判断'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
+  if(journey){['接收分析需求','明确分析目标','生成前补充上下文','等待生成初稿','审阅与核验','补充上下文并调整','形成设计判断'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
   const ICON_MAX='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 1 2 2h3"/></svg>',ICON_MIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M16 21v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/></svg>';
   slides.forEach((slide,i)=>{const b=document.createElement('button');b.title=`第 ${i+1} 页`;b.addEventListener('click',()=>go(i));dots.append(b);const thumb=document.createElement('button');thumb.className='thumb';thumb.innerHTML=`<span>${pad(i+1)}</span><strong>${slide.querySelector('.head h1,.chapter-title,.cover-title')?.textContent.replace(/\s+/g,' ').trim()||'ICT 竞品分析效率提升'}</strong>`;thumb.addEventListener('click',()=>{closeOverview();go(i)});grid.append(thumb)});
   const buttons=[...dots.children];
@@ -328,27 +328,28 @@
   const journeyEl=document.querySelector('.jrn-wrap');
   if(journeyEl){
     const journeyRows=journeyEl.querySelectorAll(':scope > .jrn-grid');
-    const journeyClasses=['jrn-pw jpc6','jrn-tw','jrn-fw','jrn-ew','jrn-pw2','jrn-ow'];
+    const journeyClasses=['jrn-pw','jrn-tw','jrn-fw','jrn-ew','jrn-pw2','jrn-ow'];
     journeyRows.forEach((row,i)=>{
-      const lastCell=row.lastElementChild;
-      if(lastCell&&journeyClasses[i]){
-        const extraCell=lastCell.cloneNode(true);
-        extraCell.className=journeyClasses[i];
-        if(i===0)extraCell.querySelector('.pn').textContent='06';
-        row.append(extraCell);
+      if(row.lastElementChild&&journeyClasses[i]){
+        for(let n=6;n<=7;n++){
+          const extraCell=row.lastElementChild.cloneNode(true);
+          extraCell.className=`${journeyClasses[i]}${i===0?` jpc${n}`:''}`;
+          if(i===0)extraCell.querySelector('.pn').textContent=`0${n}`;
+          row.append(extraCell);
+        }
       }
     });
-    ['接收分析需求','明确分析目标','补充业务上下文','等待生成初稿','审阅与反复调整','形成设计判断'].forEach((label,i)=>{
+    ['接收分析需求','明确分析目标','生成前补充上下文','等待生成初稿','审阅与核验','补充上下文并调整','形成设计判断'].forEach((label,i)=>{
       const stage=journeyEl.querySelectorAll('.jrn-ph .pt')[i];
       if(stage)stage.textContent=label;
     });
-    ['Request','Target','Context','Generate','Review','Decision'].forEach((label,i)=>{
+    ['Request','Target','Context In','Generate','Review','Refine','Decision'].forEach((label,i)=>{
       const stageMeta=journeyEl.querySelectorAll('.jrn-ph .ptm')[i];
       if(stageMeta)stageMeta.textContent=label;
     });
-    const touchCopy=[['课题需求与交付物','时间窗口与协作对象'],['研究对象与核心问题','角色、任务与排除项'],['业务术语、机制与场景','已有材料、案例与来源'],['Skill 检索与生成过程','首轮分析结果'],['真实产品状态与权限','设计师反馈与调整指令'],['可采纳结论与优先级','设计判断与汇报材料']];
+    const touchCopy=[['课题需求与交付物','时间窗口与协作对象'],['研究对象与核心问题','角色、任务与排除项'],['业务术语、机制与场景','已有材料、案例与来源'],['Skill 检索与生成过程','首轮分析结果'],['真实产品状态与权限','结论、证据与边缘流程'],['偏差反馈与补充材料','修订指令与再次生成'],['可采纳结论与优先级','设计判断与汇报材料']];
     journeyEl.querySelectorAll('.jrn-tc').forEach((cell,i)=>{if(touchCopy[i])cell.innerHTML=touchCopy[i].map(x=>`<div class="jrn-touch">${x}</div>`).join('')});
-    const actions=['接收课题，确认交付物和时间窗口','锁定对象、角色、任务和问题','补充业务术语、机制、场景与已有材料','等待 Skill 检索并生成初稿','进入产品审阅，反馈并反复调整','收束可采纳结论，用于设计判断'];
+    const actions=['接收课题，确认交付物和时间窗口','锁定对象、角色、任务和问题','生成前输入业务术语、机制、场景与已有材料','等待 Skill 检索并生成初稿','对照真实产品、证据与边缘流程审阅首轮结果','补充偏差信息，调整输入后再次生成','收束可采纳结论，用于设计判断'];
     journeyEl.querySelectorAll('.jrn-action-title').forEach((node,i)=>{if(actions[i])node.textContent=actions[i]});
     const painCells=journeyEl.querySelectorAll('.jrn-pw2 .jrn-pt');
     const painCopy=[
@@ -356,7 +357,8 @@
       '<b>研究范围未前置明确</b><span>对象、角色和排除项持续漂移，后续判断容易偏离课题。</span>',
       '<b>业务领域知识与上下文不足</b><span>术语、机制、场景与材料不足，Skill 难理解要找什么，补充成本高。</span>',
       '<b>抽象机制难对标</b><span>抽象系统行为难以找到完全匹配的竞品场景，首轮结果易偏离。</span>',
-      '<b>结果审阅与反复调整</b><span>首轮结果仍需核对真实状态、权限和边缘流程，并反复纠正和重组。</span>',
+      '<b>首轮结果需要人工核验</b><span>真实状态、权限和边缘流程仍需逐项对照，才能判断结论是否成立。</span>',
+      '<b>结果审阅与反复调整</b><span>审阅发现偏差后，还要补充上下文、纠正输入、再次生成和重组材料。</span>',
       '<b>分析资产未沉淀复用</b><span>证据与结论未形成可复用输入，下一次分析仍会重复搜集。</span>'
     ];
     painCells.forEach((cell,i)=>{if(painCopy[i])cell.innerHTML=painCopy[i]});
@@ -364,17 +366,18 @@
     const focusCopy=[
       '<li>对齐课题、交付物与时间窗口</li><li>明确协作对象和决策节点</li>',
       '<li>输入模板锁定对象与边界</li><li>明确角色、任务和排除项</li>',
-      '<li>建设业务领域知识与上下文</li><li>沉淀术语、机制、案例与来源</li>',
+      '<li>生成前补充业务领域知识与上下文</li><li>沉淀术语、机制、案例与来源</li>',
       '<li>在等待阶段保留检查节点</li><li>标记需要补充的材料</li>',
-      '<li>明确结果审阅要点</li><li>记录调整时间与重大返工</li>',
+      '<li>明确结果审阅与核验要点</li><li>对照真实状态、证据与边缘流程</li>',
+      '<li>审阅后补充上下文并调整输入</li><li>记录调整时间与重大返工</li>',
       '<li>让结论进入设计判断与汇报</li><li>沉淀可复用的研究资产</li>'
     ];
     focusLists.forEach((list,i)=>{if(focusCopy[i])list.innerHTML=focusCopy[i]});
     const effortLabels=journeyEl.querySelectorAll('.jrn-grid.je .l');
-    ['需求信息待对齐','范围与边界需确认','上下文补充负担重','等待 Skill 生成','结果需审阅与调整','结论沉淀待完善'].forEach((label,i)=>{if(effortLabels[i])effortLabels[i].textContent=label});
+    ['需求信息待对齐','范围与边界需确认','生成前上下文补充','等待 Skill 生成','结果需审阅与核验','补充上下文并调整','结论沉淀待完善'].forEach((label,i)=>{if(effortLabels[i])effortLabels[i].textContent=label});
     const effortSvg=journeyEl.querySelectorAll('.jrn-grid.je svg polyline');
-    ['0,28 100,34','0,34 100,48','0,48 100,86','0,86 100,72','0,72 100,90','0,90 100,58'].forEach((points,i)=>{if(effortSvg[i])effortSvg[i].setAttribute('points',points)});
-    journeyEl.querySelectorAll('.jrn-grid.je .d').forEach((dot,i)=>{const top=['34%','48%','86%','72%','90%','58%'][i];if(top)dot.style.top=top});
+    ['0,28 100,34','0,34 100,48','0,48 100,82','0,82 100,70','0,70 100,89','0,89 100,92','0,92 100,58'].forEach((points,i)=>{if(effortSvg[i])effortSvg[i].setAttribute('points',points)});
+    journeyEl.querySelectorAll('.jrn-grid.je .d').forEach((dot,i)=>{const top=['34%','48%','82%','70%','89%','92%','58%'][i];if(top)dot.style.top=top});
   }
   const slideFor=text=>slides.find(s=>s.textContent.includes(text));
   const topicMethodsSlide=slideFor('UCD 现有重要分析方法，都包含竞品分析');
@@ -416,7 +419,7 @@
     voiceSlide.querySelector('.metric-link')?.remove();
   }
   const journeySlide=slideFor('原声中的“慢、不够可用、要重做”');
-  if(journeySlide){journeySlide.querySelector('.head .sub').textContent='第 03、05 阶段构成主要工作阻力：前者受 ToB 业务知识与上下文限制，材料搜集负担重；后者生成后仍需审阅与调整。二者共同拖长周期、压低可采纳率并推高返工。'}
+  if(journeySlide){journeySlide.querySelector('.head .sub').textContent='生成前需要输入 ToB 业务知识与上下文；首轮结果出来后，还要先审阅核验，再补充偏差信息并调整。两个上下文节点与审阅—调整闭环共同拖长周期、压低可采纳率并推高返工。'}
   const paretoSlide=slideFor('占全部问题提及的 65%');
   if(paretoSlide){
     paretoSlide.querySelector('.head h1').textContent='前四项达到 89%，进入 80% 优先改善范围';
