@@ -118,6 +118,54 @@
       font-variant-numeric: tabular-nums;
     }
 
+    .spread-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 5px 0 7px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .spread-toggle {
+      position: relative;
+      width: 34px;
+      min-height: 20px !important;
+      height: 20px;
+      padding: 0 !important;
+      border: 0;
+      border-radius: 999px !important;
+      background: #c9ced7 !important;
+      transition: background .18s ease;
+    }
+
+    .spread-toggle:hover,
+    .spread-toggle:focus-visible {
+      background: #aeb5c1 !important;
+    }
+
+    .spread-toggle[aria-pressed="true"] {
+      background: var(--blue) !important;
+    }
+
+    .spread-toggle .toggle-knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(20, 24, 32, .28);
+      transition: transform .18s ease;
+    }
+
+    .spread-toggle[aria-pressed="true"] .toggle-knob {
+      transform: translateX(14px);
+    }
+
     .zoom-control {
       display: flex;
       align-items: center;
@@ -245,6 +293,7 @@
     .sheet {
       position: relative;
       width: min(var(--paper-width), calc(100vw - 48px));
+      height: 1120px;
       min-height: 1120px;
       margin: 0 auto 42px;
       padding: var(--paper-pad-y) var(--paper-pad-x) 76px;
@@ -263,6 +312,22 @@
       background: var(--blue);
     }
 
+    @media (min-width: 781px) {
+      body:not(.spread-mode) #paperStack {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 960px);
+        gap: 42px;
+        width: calc((100vw - 48px) / var(--reader-zoom, 1));
+        margin: 0 auto;
+        justify-content: center;
+      }
+
+      body:not(.spread-mode) #paperStack .sheet {
+        width: 960px;
+        margin: 0;
+      }
+    }
+
     @media (min-width: 1180px) {
       body.spread-mode main {
         padding-right: 32px;
@@ -270,11 +335,12 @@
       }
 
       body.spread-mode #paperStack {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(calc(1920px * var(--spread-page-scale)), calc(1920px * var(--spread-page-scale))));
         gap: 30px;
-        width: min(1540px, calc(100vw - 64px));
+        width: calc((100vw - 64px) / var(--reader-zoom, 1));
         margin: 0 auto;
+        justify-content: center;
       }
 
       body.spread-mode .spread {
@@ -304,12 +370,22 @@
         z-index: 3;
         top: 0;
         bottom: 0;
-        left: 960px;
-        width: 22px;
-        transform: translateX(-50%);
+        left: 962px;
+        width: 34px;
         pointer-events: none;
-        background: linear-gradient(90deg, rgba(91, 98, 110, .13), rgba(255, 255, 255, 0) 48%, rgba(91, 98, 110, .12));
-        filter: blur(3px);
+        background: linear-gradient(90deg, rgba(91, 98, 110, .18), rgba(91, 98, 110, 0));
+        filter: none;
+      }
+
+      body.spread-mode .spread-inner::before {
+        content: "";
+        position: absolute;
+        z-index: 4;
+        top: 0;
+        bottom: 0;
+        left: 960px;
+        width: 2px;
+        background: #fff;
       }
 
       body.spread-mode .sheet {
@@ -333,6 +409,7 @@
         /* zoom already reserves the scaled layout height for this standalone cover. */
         margin: 0 auto 42px;
         zoom: var(--spread-page-scale);
+        background: #fff;
       }
     }
 
@@ -361,7 +438,8 @@
     .cover {
       display: grid;
       grid-template-rows: auto auto 1fr auto;
-      min-height: 1260px;
+      height: 1120px;
+      min-height: 1120px;
       padding-top: 44px;
       background: #fff;
     }
@@ -1288,7 +1366,7 @@
 
   <div class="toolbar" role="toolbar" aria-label="阅读工具">
     <button id="tocOpen" type="button" title="打开章节目录">目录</button>
-    <button id="spreadMode" type="button" title="切换双页书册阅读" aria-pressed="false">双页：关</button>
+    <div class="spread-control"><span>双页</span><button id="spreadMode" class="spread-toggle" type="button" title="切换双页书册阅读" aria-pressed="false" aria-label="切换双页书册阅读"><span class="toggle-knob" aria-hidden="true"></span></button></div>
     <label class="zoom-control" for="zoomRange">缩放 <input id="zoomRange" type="range" min="30" max="120" step="5" value="100"><output id="zoomValue">100%</output></label>
     <span class="page-readout" id="pageReadout">01 / 01</span>
     <button id="printDoc" type="button" title="打印或导出 PDF">打印</button>
@@ -2895,6 +2973,42 @@
         });
       });
 
+      const continuationSerial = new Map();
+      const createContinuation = (sheet) => {
+        const originalTitle = sheet.querySelector(':scope > h2')?.textContent.trim() || '续页';
+        const nextNumber = (continuationSerial.get(sheet.id) || 0) + 1;
+        continuationSerial.set(sheet.id, nextNumber);
+        const continuation = document.createElement('section');
+        continuation.className = 'sheet content-sheet continued-sheet';
+        continuation.dataset.chapter = sheet.dataset.chapter;
+        continuation.id = `${sheet.id}-continued-${nextNumber}`;
+        const head = document.createElement('div');
+        head.className = 'running-head';
+        head.innerHTML = '<span>Human × AI Collaboration Experience</span><span class="page-no"></span>';
+        const title = document.createElement('h2');
+        title.textContent = `${originalTitle.replace(/（续）$/, '')}（续）`;
+        const body = document.createElement('div');
+        body.className = sheet.querySelector('.section-body')?.className || 'section-body';
+        continuation.append(head, title, body);
+        stack.insertBefore(continuation, sheet.nextSibling);
+        return continuation;
+      };
+
+      // Every reading page has the same physical ratio. Move overflowing blocks
+      // to continuation pages instead of stretching one page vertically.
+      const paginateSheet = (firstSheet) => {
+        let sheet = firstSheet;
+        while (sheet.scrollHeight > sheet.clientHeight + 2) {
+          const body = sheet.querySelector('.section-body');
+          if (!body || body.children.length < 2) break;
+          const continuation = createContinuation(sheet);
+          const continuationBody = continuation.querySelector('.section-body');
+          while (sheet.scrollHeight > sheet.clientHeight + 2 && body.lastElementChild) {
+            continuationBody.insertBefore(body.lastElementChild, continuationBody.firstChild);
+          }
+          sheet = continuation;
+        }
+      };
       const conclusion = chapterOpeners.find((sheet) => sheet.querySelector('h1')?.textContent.trim() === '结语');
       if (conclusion) {
         conclusion.classList.remove('chapter-opener');
@@ -2961,44 +3075,6 @@
         opener.appendChild(index);
       });
 
-      // A spread is one landscape sheet made from two complete portrait pages.
-      // Keeping the pages inside one wrapper makes the spine belong to the spread,
-      // rather than looking like shadows on two independent cards.
-      const renderedSheets = Array.from(stack.querySelectorAll('.sheet'));
-      for (let i = 0; i < renderedSheets.length; i += 2) {
-        const spread = document.createElement('div');
-        spread.className = 'spread';
-        const inner = document.createElement('div');
-        inner.className = 'spread-inner';
-        stack.insertBefore(spread, renderedSheets[i]);
-        spread.appendChild(inner);
-        inner.appendChild(renderedSheets[i]);
-        if (renderedSheets[i + 1]) {
-          inner.appendChild(renderedSheets[i + 1]);
-        } else {
-          const blank = document.createElement('div');
-          blank.className = 'sheet spread-blank';
-          blank.setAttribute('aria-hidden', 'true');
-          inner.appendChild(blank);
-        }
-      }
-
-      const spreads = Array.from(stack.querySelectorAll('.spread'));
-      const updateSpreadHeights = () => {
-        spreads.forEach((spread) => {
-          const height = Math.max(1120, ...Array.from(spread.querySelectorAll('.sheet')).map((sheet) => sheet.scrollHeight));
-          spread.style.setProperty('--spread-height', `${height}px`);
-        });
-      };
-      updateSpreadHeights();
-
-      const allSheets = [document.getElementById('cover'), ...Array.from(stack.querySelectorAll('.sheet:not(.spread-blank)'))];
-      allSheets.forEach((sheet, i) => {
-        sheet.dataset.page = String(i + 1);
-        const pageNo = sheet.querySelector('.page-no');
-        if (pageNo) pageNo.textContent = `${String(i + 1).padStart(2, '0')} / ${String(allSheets.length).padStart(2, '0')}`;
-      });
-
       const visibleChapters = chapterOpeners.filter((sheet) => sheet.isConnected && !sheet.classList.contains('closing-sheet'));
       const tocNav = document.getElementById('tocNav');
       visibleChapters.forEach((sheet, i) => {
@@ -3053,7 +3129,67 @@
           grid.appendChild(chapter);
         });
         contentsBody.appendChild(grid);
+
+        const chapters = Array.from(grid.children);
+        if (chapters.length > 7) {
+          const contentsSheet = stack.querySelector('.contents-sheet');
+          const continued = document.createElement('section');
+          continued.className = 'sheet front-sheet content-sheet contents-sheet continued-sheet';
+          continued.dataset.chapter = '0';
+          continued.id = '目录续页';
+          const head = document.createElement('div');
+          head.className = 'running-head';
+          head.innerHTML = '<span>Human × AI Collaboration Experience</span><span class="page-no"></span>';
+          const title = document.createElement('h2');
+          title.textContent = '目录（续）';
+          const continuedBody = document.createElement('div');
+          continuedBody.className = 'section-body';
+          const continuedGrid = document.createElement('div');
+          continuedGrid.className = 'contents-grid';
+          chapters.slice(7).forEach((chapter) => continuedGrid.appendChild(chapter));
+          continuedBody.appendChild(continuedGrid);
+          continued.append(head, title, continuedBody);
+          stack.insertBefore(continued, contentsSheet.nextSibling);
+        }
       }
+
+      // Complex tables and multi-column sections retain their authored blocks;
+      // the fixed page frame prevents them from changing the document's page ratio.
+
+      // A spread is one landscape sheet made from two complete portrait pages.
+      const renderedSheets = Array.from(stack.querySelectorAll('.sheet'));
+      for (let i = 0; i < renderedSheets.length; i += 2) {
+        const spread = document.createElement('div');
+        spread.className = 'spread';
+        const inner = document.createElement('div');
+        inner.className = 'spread-inner';
+        stack.insertBefore(spread, renderedSheets[i]);
+        spread.appendChild(inner);
+        inner.appendChild(renderedSheets[i]);
+        if (renderedSheets[i + 1]) {
+          inner.appendChild(renderedSheets[i + 1]);
+        } else {
+          const blank = document.createElement('div');
+          blank.className = 'sheet spread-blank';
+          blank.setAttribute('aria-hidden', 'true');
+          inner.appendChild(blank);
+        }
+      }
+
+      const spreads = Array.from(stack.querySelectorAll('.spread'));
+      const updateSpreadHeights = () => {
+        spreads.forEach((spread) => {
+          spread.style.setProperty('--spread-height', '1120px');
+        });
+      };
+      updateSpreadHeights();
+
+      const allSheets = [document.getElementById('cover'), ...Array.from(stack.querySelectorAll('.sheet:not(.spread-blank)'))];
+      allSheets.forEach((sheet, i) => {
+        sheet.dataset.page = String(i + 1);
+        const pageNo = sheet.querySelector('.page-no');
+        if (pageNo) pageNo.textContent = `${String(i + 1).padStart(2, '0')} / ${String(allSheets.length).padStart(2, '0')}`;
+      });
 
       const panel = document.getElementById('tocPanel');
       const backdrop = document.getElementById('tocBackdrop');
@@ -3083,7 +3219,7 @@
         setSpreadPageScale();
         document.body.classList.toggle('spread-mode', usable);
         spreadMode.setAttribute('aria-pressed', String(usable));
-        spreadMode.textContent = usable ? '双页：开' : '双页：关';
+        spreadMode.setAttribute('aria-label', usable ? '双页阅读已开启' : '双页阅读已关闭');
         spreadMode.title = usable ? '当前为双页书册阅读；点击切换为单页' : '当前为单页阅读；点击切换为双页书册阅读';
       };
       const applyZoom = (value) => {
