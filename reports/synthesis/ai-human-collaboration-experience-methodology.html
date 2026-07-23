@@ -3012,7 +3012,8 @@
         Array.from(sheet.children).forEach((child) => {
           if (child !== title && !child.classList.contains('running-head')) body.appendChild(child);
         });
-        if (!body.querySelector('table, pre, blockquote') && body.textContent.trim().length > 760) {
+        // A case matrix has its own multi-column grid and must keep the full page width.
+        if (!body.querySelector('table, pre, blockquote, .case-grid') && body.textContent.trim().length > 760) {
           body.classList.add('two-col');
         }
         sheet.appendChild(body);
