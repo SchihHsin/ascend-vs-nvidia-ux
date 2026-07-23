@@ -1286,20 +1286,8 @@
 <p>最终产出不是一份模型排行榜，而是一套能够指导产品改进、知识治理、AI 设计和组织决策的证据系统：它说明谁在什么任务中如何使用 AI，AI 在哪里帮助了人，哪里让人重新接管，以及什么改造可以通过下一轮测量得到验证。</p>
 <hr>
 <h2>目录</h2>
-<p><strong>第一部分｜通用研究框架</strong></p>
-<ol>
-<li>通用研究框架</li>
-</ol>
-<p><strong>第二部分｜两条专项研究路径</strong></p>
-<ol start="8">
-<li>AI 可用性研究</li><li>用户基础体验研究</li><li>两条路径的组合与领域案例</li>
-</ol>
-<p><strong>第三部分｜分析、改进与持续研究</strong></p>
-<ol start="11">
-<li>分析与归因</li><li>改进验证与持续治理</li><li>白皮书与研究报告写法</li><li>局限、伦理与质量控制</li><li>实施路线</li><li>附录：模板、评分锚点与术语表</li>
-</ol>
+<p>第一章至第九章依次覆盖通用框架、AI 可用性、用户基础体验、组合案例、分析归因、改进治理、报告写法、质量控制与实施路线；附录提供任务记录、评分锚点、领域模块、结论模板与术语表。</p>
 <hr>
-<h1>第一部分｜通用研究框架</h1>
 <h1>第一章 通用研究框架</h1>
 <h2>1.1 研究要回答什么</h2>
 <p>本方法回答四个相互关联的问题：</p>
@@ -1978,7 +1966,6 @@
 <p>量化结果至少报告有效样本数、均值或中位数、离散程度和异常值范围。样本允许时，可报告置信区间或自助法区间；样本较小时，优先呈现每个任务的分布和具体案例，而不是制造过度精确的小数。</p>
 <p>定性结论应说明来自多少位用户、多少个任务事件，以及是否出现反例。若评分由多位专家完成，应报告评分一致性或至少说明分歧如何裁决。</p>
 <hr>
-<h1>第二部分｜两条专项研究路径</h1>
 <h1>第二章 AI 可用性研究</h1>
 <h2>2.1 研究对象与问题边界</h2>
 <p>AI 可用性研究考察：当用户提出一个真实任务诉求时，AI 能否获得支撑任务的知识、判断这些知识是否足够可靠，并将其组织为可验证、可执行的下一步。研究对象是 AI 在具体知识与工具环境中的表现，而不是抽象的模型能力排名。</p>
@@ -2119,7 +2106,6 @@
 </article>
 </div>
 <hr>
-<h1>第三部分｜分析、改进与持续研究</h1>
 <h1>第五章 分析与归因</h1>
 <h2>5.1 从结果回到过程</h2>
 <p>研究报告不应只列出分数，而应对每个显著问题完成“事实—机制—影响—建议”四步：</p>
@@ -2615,6 +2601,104 @@
     (() => {
       const stack = document.getElementById('paperStack');
       const source = document.getElementById('source-content');
+      const findSourceHeading = (text) => Array.from(source.children).find((node) => node.matches('h1, h2') && node.textContent.trim() === text);
+      const renameHeading = (node, text, tag = 'h2') => {
+        const replacement = document.createElement(tag);
+        replacement.textContent = text;
+        node.replaceWith(replacement);
+        return replacement;
+      };
+      const moveRange = (start, end, before) => {
+        const nodes = [];
+        for (let node = start; node && node !== end; node = node.nextElementSibling) nodes.push(node);
+        nodes.forEach((node) => source.insertBefore(node, before));
+      };
+
+      // Keep the first chapter as a compact shared framework; move operational
+      // measurement details into the two research-method chapters that use them.
+      const h = Object.fromEntries([
+        '1.1 研究要回答什么', '1.2 研究不等同于什么', '1.3 适用场景', '1.4 最小研究单元：任务事件',
+        '1.5 协同体验的定义', '1.6 五类研究变量', '1.7 四种结果状态', '1.8 四类证据',
+        '1.9 七阶段协同旅程', '1.10 六个核心测量维度', '1.11 体验剖面而不是单一分数',
+        '1.12 先确定研究类型', '1.13 固定条件与可变条件', '1.14 选择比较方式', '1.15 研究协议',
+        '1.16 三种基准条件', '1.17 样本、分配与顺序效应', '1.18 预注册核心判断',
+        '1.19 不从“问题”开始，而从“结果”开始', '1.20 任务选择的六个维度', '1.21 任务难度与 AI 角色',
+        '1.22 跨系统对照的问法原则', '1.23 事件记录模型', '1.24 必须保留的上下文',
+        '1.25 证据采集方式', '1.26 何时停止任务', '1.27 指标设计原则', '1.28 核心指标表',
+        '1.29 指标计算示例', '1.30 主观量表建议', '1.31 聚合、缺测与风险门槛', '1.32 报告不确定性',
+        '2.1 研究对象与问题边界', '2.2 从知识获取到人工接管的研究过程', '2.3 领域模块与变量替换',
+        '2.4 技术知识检索模块', '2.5 数据分析模块', '2.6 服务与合规模块', '2.7 创意与设计模块',
+        '2.8 教学与辅导模块', '2.9 领域模块的编制规则', '3.1 研究对象：用户在领域中的端到端基础体验',
+        '3.2 从领域目标定义用户旅程', '3.3 以 AI 模拟用户旅程', '3.4 基础体验的触点测量',
+        '3.5 与真人研究的交叉验证', '4.2 三种人与 AI 协同体验研究案例',
+      ].map((text) => [text, findSourceHeading(text)]));
+
+      renameHeading(findSourceHeading('第一章 通用研究框架'), '第一章 通用研究框架', 'h1');
+      renameHeading(h['1.2 研究不等同于什么'], '研究不等同于什么', 'h3');
+      renameHeading(h['1.3 适用场景'], '适用场景', 'h3');
+      renameHeading(h['1.4 最小研究单元：任务事件'], '1.2 任务事件与结果状态');
+      renameHeading(h['1.5 协同体验的定义'], '1.3 协同体验、变量与证据');
+      renameHeading(h['1.6 五类研究变量'], '五类研究变量', 'h3');
+      renameHeading(h['1.9 七阶段协同旅程'], '1.4 协同过程与体验维度');
+      renameHeading(h['1.10 六个核心测量维度'], '六个核心测量维度', 'h3');
+      renameHeading(h['1.11 体验剖面而不是单一分数'], '体验剖面而不是单一分数', 'h3');
+      renameHeading(h['1.12 先确定研究类型'], '1.5 通用研究设计');
+      ['1.13 固定条件与可变条件', '1.14 选择比较方式', '1.15 研究协议', '1.16 三种基准条件', '1.17 样本、分配与顺序效应', '1.18 预注册核心判断'].forEach((text) => renameHeading(h[text], text.replace(/^1\.\d+\s+/, ''), 'h3'));
+      renameHeading(h['1.7 四种结果状态'], '1.6 结果状态与证据规则');
+      renameHeading(h['1.8 四类证据'], '四类证据', 'h3');
+
+      renameHeading(findSourceHeading('第二章 AI 可用性研究'), '第二章 AI 可用性研究', 'h1');
+      renameHeading(h['1.19 不从“问题”开始，而从“结果”开始'], '2.2 配对任务与研究协议');
+      ['1.20 任务选择的六个维度', '1.21 任务难度与 AI 角色', '1.22 跨系统对照的问法原则'].forEach((text) => renameHeading(h[text], text.replace(/^1\.\d+\s+/, ''), 'h3'));
+      renameHeading(h['2.2 从知识获取到人工接管的研究过程'], '2.3 知识链路、证据与受阻');
+      ['1.23 事件记录模型', '1.24 必须保留的上下文', '1.25 证据采集方式', '1.26 何时停止任务'].forEach((text) => renameHeading(h[text], text.replace(/^1\.\d+\s+/, ''), 'h3'));
+      renameHeading(h['1.27 指标设计原则'], '2.4 指标、评分与人工接管');
+      ['1.28 核心指标表', '1.29 指标计算示例', '1.30 主观量表建议', '1.31 聚合、缺测与风险门槛', '1.32 报告不确定性'].forEach((text) => renameHeading(h[text], text.replace(/^1\.\d+\s+/, ''), 'h3'));
+      renameHeading(h['2.3 领域模块与变量替换'], '2.5 领域模块与变量替换');
+      ['2.4 技术知识检索模块', '2.5 数据分析模块', '2.6 服务与合规模块', '2.7 创意与设计模块', '2.8 教学与辅导模块'].forEach((text) => renameHeading(h[text], text.replace(/^2\.\d+\s+/, ''), 'h3'));
+      renameHeading(h['2.9 领域模块的编制规则'], '2.6 评分锚点与研究边界');
+
+      renameHeading(findSourceHeading('第三章 用户基础体验研究'), '第三章 用户基础体验研究', 'h1');
+      const journeyValidation = renameHeading(h['3.5 与真人研究的交叉验证'], '3.6 与真人研究的交叉验证');
+      const journeySummary = document.createElement('h2');
+      journeySummary.textContent = '3.5 旅程汇总与问题输出';
+      const journeySummaryText = document.createElement('p');
+      journeySummaryText.textContent = '将触点证据按旅程顺序汇总为旅程图、摩擦曲线与热力图；优先呈现影响任务完成的关键断点，并使每个问题可下钻到页面、操作、来源与恢复路径。';
+      source.insertBefore(journeySummary, journeyValidation);
+      source.insertBefore(journeySummaryText, journeyValidation);
+      const caseBoundary = document.createElement('h2');
+      caseBoundary.textContent = '4.3 案例使用边界';
+      const caseBoundaryText = document.createElement('p');
+      caseBoundaryText.textContent = '案例用于说明如何替换任务、角色、知识环境与风险门槛，不代替该领域的实测结论。进入高风险领域前，应补充领域专家审查与不可替代的真人证据。';
+      const analysisChapter = findSourceHeading('第五章 分析与归因');
+      source.insertBefore(caseBoundary, analysisChapter);
+      source.insertBefore(caseBoundaryText, analysisChapter);
+
+      // Normalise sheet order after the compact chapter-1 / detailed chapter-2 split.
+      // The source remains intact; only the rendered reading sequence is re-sorted.
+      const chapterOrder = new Map([
+        ['第一章 通用研究框架', 1], ['第二章 AI 可用性研究', 2], ['第三章 用户基础体验研究', 3],
+        ['第四章 两条路径的组合与领域案例', 4], ['第五章 分析与归因', 5], ['第六章 改进验证与持续治理', 6],
+        ['第七章 白皮书与研究报告写法', 7], ['第八章 局限、伦理与质量控制', 8], ['第九章 实施路线', 9]
+      ]);
+      const sectionOrder = new Map([
+        ['1.1 研究要回答什么', 101], ['1.2 任务事件与结果状态', 102], ['1.3 协同体验、变量与证据', 103],
+        ['1.4 协同过程与体验维度', 104], ['1.5 通用研究设计', 105], ['1.6 结果状态与证据规则', 106],
+        ['2.1 研究对象与问题边界', 201], ['2.2 配对任务与研究协议', 202], ['2.3 知识链路、证据与受阻', 203],
+        ['2.4 指标、评分与人工接管', 204], ['2.5 领域模块与变量替换', 205], ['2.6 评分锚点与研究边界', 206],
+        ['3.1 研究对象：用户在领域中的端到端基础体验', 301], ['3.2 从领域目标定义用户旅程', 302],
+        ['3.3 以 AI 模拟用户旅程', 303], ['3.4 基础体验的触点测量', 304], ['3.5 旅程汇总与问题输出', 305],
+        ['3.6 与真人研究的交叉验证', 306], ['4.1 两条路径如何共同解释问题', 401],
+        ['4.2 三种人与 AI 协同体验研究案例', 402], ['4.3 案例使用边界', 403],
+        ['5.1 从结果回到过程', 501], ['5.2 失败模式分类', 502], ['5.3 交接分析', 503], ['5.4 分群分析', 504], ['5.5 对照矩阵', 505],
+        ['6.1 从问题转成可检验假设', 601], ['6.2 选择评估设计', 602], ['6.3 改造优先级', 603], ['6.4 持续回归', 604], ['6.5 研究结果回流', 605],
+        ['7.1 推荐的白皮书结构', 701], ['7.2 事实、解释、建议分开写', 702], ['7.3 面向不同读者的三种视图', 703],
+        ['8.1 常见局限', 801], ['8.2 数据与隐私', 802], ['8.3 高风险场景的额外要求', 803], ['8.4 质量控制清单', 804],
+        ['9.1 0 至 30 天：定义和试跑', 901], ['9.2 30 至 90 天：形成基准', 902], ['9.3 90 天以后：建立改进循环', 903], ['9.4 最小可行研究包', 904]
+      ]);
+      const sectionRank = (title) => sectionOrder.get(title) || 10000;
+
+      Array.from(source.children).filter((node) => node.tagName === 'H1' && /^第[一二三]部分｜/.test(node.textContent.trim())).forEach((node) => node.remove());
       const sourceChildren = Array.from(source.children);
       const startAt = sourceChildren.findIndex((node) => node.tagName === 'H2' && node.textContent.trim() === '摘要');
       const usable = sourceChildren.slice(Math.max(0, startAt));
@@ -2657,7 +2741,7 @@
             currentSheet.appendChild(node);
             return;
           }
-          currentChapter += 1;
+          currentChapter = chapterOrder.get(title) || currentChapter + 1;
           currentSheet = createSheet('chapter-opener', title, currentChapter);
           const number = document.createElement('div');
           number.className = 'chapter-number';
@@ -2676,6 +2760,9 @@
 
         if (node.tagName === 'H2') {
           const title = node.textContent.trim();
+          const rank = sectionRank(title);
+          if (currentChapter && rank === 10000) return;
+          if (rank < 10000) currentChapter = Math.floor(rank / 100);
           const isFront = currentChapter === 0;
           currentSheet = createSheet(isFront ? 'front-sheet content-sheet' : 'content-sheet', title, currentChapter);
           if (title === '摘要') currentSheet.classList.add('abstract-sheet');
@@ -2687,8 +2774,20 @@
         }
 
         if (!currentSheet) return;
+        if (currentChapter && !sectionOrder.has(currentSheet.querySelector(':scope > h2')?.textContent.trim())) return;
         currentSheet.appendChild(node);
       });
+
+      // Source order preserves provenance; rendered sheets follow the reader's chapter order.
+      Array.from(stack.querySelectorAll('.sheet')).sort((a, b) => {
+        const chapterDelta = Number(a.dataset.chapter) - Number(b.dataset.chapter);
+        if (chapterDelta) return chapterDelta;
+        const aTitle = a.querySelector(':scope > h2')?.textContent.trim() || '';
+        const bTitle = b.querySelector(':scope > h2')?.textContent.trim() || '';
+        const aRank = a.classList.contains('chapter-opener') ? 0 : sectionRank(aTitle);
+        const bRank = b.classList.contains('chapter-opener') ? 0 : sectionRank(bTitle);
+        return aRank - bRank;
+      }).forEach((sheet) => stack.appendChild(sheet));
 
       contentSheets.forEach((sheet) => {
         const title = sheet.querySelector(':scope > h2');
@@ -2797,34 +2896,24 @@
       const contentsBody = stack.querySelector('.contents-sheet .section-body');
       if (contentsBody) {
         const targets = visibleChapters;
-        const parts = [
-          { title: '第一部分｜通用研究框架', range: [0, 1] },
-          { title: '第二部分｜两条专项研究路径', range: [1, 4] },
-          { title: '第三部分｜分析、改进与持续研究', range: [4, targets.length] }
-        ];
         contentsBody.innerHTML = '';
-        parts.forEach((part) => {
-          const group = document.createElement('section');
-          group.className = 'contents-part';
-          const title = document.createElement('h3');
-          title.textContent = part.title;
-          const grid = document.createElement('div');
-          grid.className = 'contents-grid';
-          targets.slice(part.range[0], part.range[1]).forEach((sheet) => {
-            const h1 = sheet.querySelector('h1');
-            const rawTitle = h1?.textContent.trim() || '';
-            const match = rawTitle.match(/^(第(\d+)章|附录\s*([A-Z]))[：:\s]*(.*)$/);
-            const chapterNumber = match?.[2];
-            const appendixNumber = match?.[3];
-            const label = match?.[4] || rawTitle;
-            const link = document.createElement('a');
-            link.href = `#${sheet.id}`;
-            link.innerHTML = `<span class="contents-no">${appendixNumber || (chapterNumber ? `${chapterNumber}.X` : '')}</span><span>${label}</span><span class="contents-arrow">↗</span>`;
-            grid.appendChild(link);
-          });
-          group.append(title, grid);
-          contentsBody.appendChild(group);
+        const grid = document.createElement('div');
+        grid.className = 'contents-grid';
+        targets.forEach((sheet) => {
+          const h1 = sheet.querySelector('h1');
+          const rawTitle = h1?.textContent.trim() || '';
+          const chapterNumber = Number(sheet.dataset.chapter);
+          const isAppendix = rawTitle.startsWith('附录');
+          const label = isAppendix
+            ? rawTitle.replace(/^附录\s*[A-Z][：:\s]*/, '')
+            : rawTitle.replace(/^第[一二三四五六七八九十]+章\s*/, '');
+          const appendixNumber = rawTitle.match(/^附录\s*([A-Z])/i)?.[1] || '';
+          const link = document.createElement('a');
+          link.href = `#${sheet.id}`;
+          link.innerHTML = `<span class="contents-no">${isAppendix ? appendixNumber : `${chapterNumber}.X`}</span><span>${label}</span><span class="contents-arrow">↗</span>`;
+          grid.appendChild(link);
         });
+        contentsBody.appendChild(grid);
       }
 
       const panel = document.getElementById('tocPanel');
