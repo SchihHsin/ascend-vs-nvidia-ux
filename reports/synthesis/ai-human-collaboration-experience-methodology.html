@@ -1042,8 +1042,8 @@
 
     .contents-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0 36px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
       margin: 0;
       padding: 0;
     }
@@ -1294,8 +1294,7 @@
         padding: 28px;
       }
 
-      .chapter-index,
-      .contents-grid {
+      .chapter-index {
         grid-template-columns: 1fr;
       }
 
@@ -1429,11 +1428,6 @@
 
       <div class="cover-visual">
         <svg class="collab-system" viewBox="0 0 740 432" role="img" aria-label="人、AI 与两个抽象外部角色围绕共同任务协同推进的简化时序图">
-          <defs>
-            <marker id="seq-arrow-ink" viewBox="0 0 8 8" refX="6.6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#2a2e36"/></marker>
-            <marker id="seq-arrow-ai" viewBox="0 0 8 8" refX="6.6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#304ffe"/></marker>
-            <marker id="seq-arrow-recover" viewBox="0 0 8 8" refX="6.6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#b52d36"/></marker>
-          </defs>
           <g font-family="HarmonyOS Sans SC, PingFang SC, Arial, sans-serif">
             <g font-size="11" font-weight="850" text-anchor="middle">
               <rect x="44" y="44" width="116" height="34" rx="17" fill="#2a2e36" stroke="#2a2e36" stroke-width="1.4"/><text x="102" y="66" fill="#fff">人</text>
@@ -1450,8 +1444,14 @@
               <circle cx="102" cy="368" r="5"/><circle cx="286" cy="368" r="5"/><circle cx="470" cy="368" r="5"/><circle cx="654" cy="368" r="5"/>
             </g>
             <g fill="none" stroke-linecap="round" stroke-width="2">
-              <path d="M108 128H280" stroke="#2a2e36" marker-end="url(#seq-arrow-ink)"/><path d="M292 188H648" stroke="#304ffe" marker-end="url(#seq-arrow-ai)"/><path d="M648 248H292" stroke="#2a2e36" marker-end="url(#seq-arrow-ink)"/><path d="M292 308H464" stroke="#304ffe" marker-end="url(#seq-arrow-ai)"/><path d="M464 368H108" stroke="#2a2e36" marker-end="url(#seq-arrow-ink)"/>
-              <path d="M292 272C244 272 166 272 108 272" stroke="#b52d36" stroke-dasharray="5 5" marker-end="url(#seq-arrow-recover)"/>
+              <path d="M108 128H280" stroke="#2a2e36"/><path d="M292 188H648" stroke="#304ffe"/><path d="M648 248H292" stroke="#2a2e36"/><path d="M292 308H464" stroke="#304ffe"/><path d="M464 368H108" stroke="#2a2e36"/>
+              <path d="M292 272C244 272 166 272 108 272" stroke="#b52d36" stroke-dasharray="5 5"/>
+            </g>
+            <!-- Explicit arrowheads avoid browser-specific SVG marker displacement. -->
+            <g stroke="none">
+              <path d="M280 128L269 122L269 134Z" fill="#2a2e36"/><path d="M648 188L637 182L637 194Z" fill="#304ffe"/>
+              <path d="M292 248L303 242L303 254Z" fill="#2a2e36"/><path d="M464 308L453 302L453 314Z" fill="#304ffe"/>
+              <path d="M108 368L119 362L119 374Z" fill="#2a2e36"/><path d="M108 272L119 266L119 278Z" fill="#b52d36"/>
             </g>
           </g>
         </svg>
