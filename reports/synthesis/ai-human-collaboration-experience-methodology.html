@@ -1042,17 +1042,27 @@
 
     .contents-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 36px;
       margin: 0;
       padding: 0;
+    }
+
+    .contents-column {
+      min-width: 0;
     }
 
     .contents-chapter {
       break-inside: avoid;
       min-width: 0;
       padding: 16px 0 20px;
-      border-bottom: 1px solid var(--line);
+      border: 0;
+    }
+
+    /* Only the consecutive appendix entries retain a small divider. */
+    .contents-chapter.appendix + .contents-chapter.appendix {
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
     }
 
     .contents-chapter h3 {
@@ -1294,7 +1304,8 @@
         padding: 28px;
       }
 
-      .chapter-index {
+      .chapter-index,
+      .contents-grid {
         grid-template-columns: 1fr;
       }
 
@@ -3159,6 +3170,7 @@
           const appendixNumber = rawTitle.match(/^附录\s*([A-Z])/i)?.[1] || '';
           const chapter = document.createElement('section');
           chapter.className = 'contents-chapter';
+          if (isAppendix) chapter.classList.add('appendix');
           const title = document.createElement('h3');
           const chapterLabel = isAppendix
             ? `附录 ${appendixNumber}`
@@ -3187,6 +3199,19 @@
         });
         contentsBody.appendChild(grid);
 
+        const flowContentsColumns = (contentsGrid) => {
+          const items = Array.from(contentsGrid.children).filter((child) => !child.classList.contains('contents-column'));
+          if (!items.length) return;
+          const splitAt = Math.ceil(items.length / 2);
+          const left = document.createElement('div');
+          left.className = 'contents-column';
+          const right = document.createElement('div');
+          right.className = 'contents-column';
+          items.slice(0, splitAt).forEach((item) => left.appendChild(item));
+          items.slice(splitAt).forEach((item) => right.appendChild(item));
+          contentsGrid.replaceChildren(left, right);
+        };
+
         // Let the fixed A4 frame decide the directory break; do not rely on a
         // fixed chapter count, because sections differ greatly in length.
         let contentsPage = stack.querySelector('.contents-sheet');
@@ -3205,6 +3230,10 @@
           }
           contentsPage = continued;
         }
+
+        // Each page reads top-to-bottom in its left column before continuing
+        // at the top of the right column, as in a conventional printed TOC.
+        Array.from(stack.querySelectorAll('.contents-sheet .contents-grid')).forEach(flowContentsColumns);
       }
 
       contentSheets.filter((sheet) => !sheet.classList.contains('contents-sheet')).forEach((sheet) => {
