@@ -237,6 +237,11 @@
       display: block;
     }
 
+    .spread,
+    .spread-inner {
+      display: contents;
+    }
+
     .sheet {
       position: relative;
       width: min(var(--paper-width), calc(100vw - 48px));
@@ -265,66 +270,68 @@
       }
 
       body.spread-mode #paperStack {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 30px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
         width: min(1540px, calc(100vw - 64px));
         margin: 0 auto;
-        align-items: start;
       }
 
-      body.spread-mode #paperStack::before {
+      body.spread-mode .spread {
+        position: relative;
+        display: block;
+        width: calc(1920px * var(--spread-page-scale));
+        height: calc(var(--spread-height, 1120px) * var(--spread-page-scale));
+        margin: 0 auto;
+        overflow: hidden;
+        background: var(--paper);
+      }
+
+      body.spread-mode .spread-inner {
+        position: absolute;
+        inset: 0 auto auto 0;
+        display: grid;
+        grid-template-columns: repeat(2, 960px);
+        width: 1920px;
+        min-height: var(--spread-height, 1120px);
+        transform: scale(var(--spread-page-scale));
+        transform-origin: top left;
+      }
+
+      body.spread-mode .spread-inner::after {
         content: "";
         position: absolute;
-        z-index: 0;
+        z-index: 3;
         top: 0;
         bottom: 0;
-        left: 50%;
-        width: 16px;
+        left: 960px;
+        width: 22px;
         transform: translateX(-50%);
         pointer-events: none;
-        background: linear-gradient(90deg, rgba(104, 110, 121, .14), rgba(255, 255, 255, 0) 45%, rgba(104, 110, 121, .12));
-        filter: blur(4px);
+        background: linear-gradient(90deg, rgba(91, 98, 110, .13), rgba(255, 255, 255, 0) 48%, rgba(91, 98, 110, .12));
+        filter: blur(3px);
       }
 
       body.spread-mode .sheet {
-        z-index: 1;
         width: var(--paper-width);
-        min-height: 1120px;
-        /* zoom does not reduce the grid track, so reclaim that reserved height. */
-        margin: 0 0 calc(1120px * (var(--spread-page-scale) - 1));
-        /* Scale the complete page, rather than shrinking only its outer frame. */
-        zoom: var(--spread-page-scale, .8);
+        min-height: var(--spread-height, 1120px);
+        height: var(--spread-height, 1120px);
+        margin: 0;
+        overflow: hidden;
+        background: transparent;
         box-shadow: none;
       }
 
-      body.spread-mode .sheet:nth-child(odd)::before {
-        content: "";
-        position: absolute;
-        z-index: 3;
-        inset: 0 0 0 auto;
-        width: 10px;
-        pointer-events: none;
-        background: linear-gradient(90deg, transparent, rgba(91, 98, 110, .07));
-      }
-
-      body.spread-mode .sheet:nth-child(even)::before {
-        content: "";
-        position: absolute;
-        z-index: 3;
-        inset: 0 auto 0 0;
-        width: 10px;
-        pointer-events: none;
-        background: linear-gradient(270deg, transparent, rgba(91, 98, 110, .07));
+      body.spread-mode .sheet::after {
+        display: none;
       }
 
       body.spread-mode .cover {
         width: var(--paper-width);
         min-height: 1120px;
         aspect-ratio: auto;
-        margin-right: auto;
-        margin-left: auto;
+        margin: 0 auto calc(42px + 1120px * (var(--spread-page-scale) - 1));
+        zoom: var(--spread-page-scale);
       }
     }
 
@@ -1281,7 +1288,7 @@
   <div class="toolbar" role="toolbar" aria-label="阅读工具">
     <button id="tocOpen" type="button" title="打开章节目录">目录</button>
     <button id="spreadMode" type="button" title="切换双页书册阅读" aria-pressed="false">双页：关</button>
-    <label class="zoom-control" for="zoomRange">缩放 <input id="zoomRange" type="range" min="80" max="110" step="5" value="100"><output id="zoomValue">100%</output></label>
+    <label class="zoom-control" for="zoomRange">缩放 <input id="zoomRange" type="range" min="30" max="120" step="5" value="100"><output id="zoomValue">100%</output></label>
     <span class="page-readout" id="pageReadout">01 / 01</span>
     <button id="printDoc" type="button" title="打印或导出 PDF">打印</button>
   </div>
@@ -2953,7 +2960,38 @@
         opener.appendChild(index);
       });
 
-      const allSheets = [document.getElementById('cover'), ...Array.from(stack.querySelectorAll('.sheet'))];
+      // A spread is one landscape sheet made from two complete portrait pages.
+      // Keeping the pages inside one wrapper makes the spine belong to the spread,
+      // rather than looking like shadows on two independent cards.
+      const renderedSheets = Array.from(stack.querySelectorAll('.sheet'));
+      for (let i = 0; i < renderedSheets.length; i += 2) {
+        const spread = document.createElement('div');
+        spread.className = 'spread';
+        const inner = document.createElement('div');
+        inner.className = 'spread-inner';
+        stack.insertBefore(spread, renderedSheets[i]);
+        spread.appendChild(inner);
+        inner.appendChild(renderedSheets[i]);
+        if (renderedSheets[i + 1]) {
+          inner.appendChild(renderedSheets[i + 1]);
+        } else {
+          const blank = document.createElement('div');
+          blank.className = 'sheet spread-blank';
+          blank.setAttribute('aria-hidden', 'true');
+          inner.appendChild(blank);
+        }
+      }
+
+      const spreads = Array.from(stack.querySelectorAll('.spread'));
+      const updateSpreadHeights = () => {
+        spreads.forEach((spread) => {
+          const height = Math.max(1120, ...Array.from(spread.querySelectorAll('.sheet')).map((sheet) => sheet.scrollHeight));
+          spread.style.setProperty('--spread-height', `${height}px`);
+        });
+      };
+      updateSpreadHeights();
+
+      const allSheets = [document.getElementById('cover'), ...Array.from(stack.querySelectorAll('.sheet:not(.spread-blank)'))];
       allSheets.forEach((sheet, i) => {
         sheet.dataset.page = String(i + 1);
         const pageNo = sheet.querySelector('.page-no');
@@ -3048,7 +3086,7 @@
         spreadMode.title = usable ? '当前为双页书册阅读；点击切换为单页' : '当前为单页阅读；点击切换为双页书册阅读';
       };
       const applyZoom = (value) => {
-        const zoom = Math.max(80, Math.min(110, Number(value) || 100));
+        const zoom = Math.max(30, Math.min(120, Number(value) || 100));
         document.documentElement.style.setProperty('--reader-zoom', String(zoom / 100));
         zoomRange.value = String(zoom);
         zoomValue.value = `${zoom}%`;
@@ -3070,6 +3108,7 @@
       zoomRange.addEventListener('change', () => localStorage.setItem('collab-reader-zoom', zoomRange.value));
       window.addEventListener('resize', () => {
         setSpreadPageScale();
+        updateSpreadHeights();
         applySpread(wantsSpread);
       });
       spreadQuery.addEventListener('change', () => applySpread(wantsSpread));
