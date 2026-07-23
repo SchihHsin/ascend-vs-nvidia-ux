@@ -516,13 +516,14 @@
       width: 252px;
       height: 520px;
       padding: 188px 28px 30px;
-      background-color: #f3f4f6;
+      /* Keep the information area white; the gray hatch itself carries the grouping. */
+      background-color: #fff;
       background-image: repeating-linear-gradient(
         -45deg,
-        rgba(48, 79, 254, .055) 0,
-        rgba(48, 79, 254, .055) 4px,
-        transparent 4px,
-        transparent 16px
+        rgba(34, 38, 47, .09) 0,
+        rgba(34, 38, 47, .09) 5px,
+        transparent 5px,
+        transparent 18px
       );
     }
 
@@ -627,13 +628,14 @@
       padding: 22px 26px;
       border: 0;
       color: var(--ink);
-      background-color: #f3f4f6;
+      /* Blue and white alternate directly, without a separate gray base layer. */
+      background-color: #fff;
       background-image: repeating-linear-gradient(
         -45deg,
-        rgba(48, 79, 254, .06) 0,
-        rgba(48, 79, 254, .06) 3px,
-        transparent 3px,
-        transparent 14px
+        rgba(48, 79, 254, .11) 0,
+        rgba(48, 79, 254, .11) 4px,
+        transparent 4px,
+        transparent 16px
       );
       font-size: 18px;
       font-weight: 650;
@@ -861,7 +863,7 @@
     .front-sheet.abstract-sheet .section-body p:first-child {
       grid-row: span 3;
       padding: 26px;
-      border-top: 5px solid var(--blue);
+      border-top: 0;
       background: var(--soft);
       font-size: 20px;
       font-weight: 650;
@@ -1968,48 +1970,26 @@
 <li>与核心指标的关系，避免重复计分；</li>
 <li>领域特有的最低安全门槛。</li>
 </ol>
-<h2>8.8 用户体验研究案例（一）：开发与车载场景</h2>
-<p class="case-intro">以下案例展示如何把本方法转化为具体的用户体验研究方案，不代表已经完成实测。每个案例都从研究目标出发，明确需要观察的体验情境，以及可以组合使用的行为、主观与结果指标。</p>
+<h2>8.8 三种人与 AI 协同体验研究案例</h2>
+<p class="case-intro">以下案例展示同一套方法如何用于不同领域的人与 AI 协同体验研究，不代表已经完成实测。每个案例都围绕同一条主线：人和 AI 为完成共同目标如何分工；AI 受阻、失效或超出边界时，人如何识别、接管或获得连续支持。</p>
 <div class="case-grid">
 <article class="case-row">
-<header class="case-scene"><span class="case-code">UX Case 01 · 开发者体验</span><h3>AI 辅助算子开发体验</h3><small>复杂工具链 · 专业用户</small></header>
-<div class="case-field"><strong>研究目标</strong><p>判断开发者能否把部分工作交给 AI，同时理解答案依据、有效验证结果，并在 AI 失效后顺利接管。</p></div>
-<div class="case-field"><strong>关键体验情境</strong><p>提出开发诉求、补充上下文、检查来源、运行代码、遇错追问、人工接管、把经验用于下一次任务。</p></div>
-<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>任务成功率与完成时间</li><li>验证负担与修正轮数</li><li>信任校准</li><li>接管成本</li><li>来源可追溯性</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 01 · 开发者 × 开发 AI</span><h3>知识获取、验证与接管</h3><small>知识受阻 · 人工恢复</small></header>
+<div class="case-field"><strong>共同目标与分工</strong><p>开发者完成可验证的开发任务；AI 从官方、第三方和自身知识中获取依据并组织回答；开发者判断证据、运行验证并决定是否采纳。</p></div>
+<div class="case-field"><strong>协同与恢复</strong><p>记录提出诉求、知识触达、回答、验证与追问。AI 未获足够可靠知识时，应暴露证据缺口与不确定性；开发者转向文档、社区或手动排查。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>知识触达与证据覆盖</li><li>答案可执行性与任务成功率</li><li>验证负担与修正轮数</li><li>信任校准</li><li>接管成本与来源可追溯性</li></ul></div>
 </article>
 <article class="case-row">
-<header class="case-scene"><span class="case-code">UX Case 02 · 自动驾驶</span><h3>驾驶辅助监督与接管体验</h3><small>持续监督 · 安全关键</small></header>
-<div class="case-field"><strong>研究目标</strong><p>研究驾驶员是否理解系统能力边界、保持必要的情境意识，并在接管请求出现时恢复稳定控制。</p></div>
-<div class="case-field"><strong>关键体验情境</strong><p>开启功能、理解系统状态、持续监督、收到接管请求、恢复人工控制、事件解释与再次启用。</p></div>
-<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>情境意识与认知负荷</li><li>接管反应时间和质量</li><li>信任校准</li><li>感知控制感</li><li>接管后焦虑与恢复</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 02 · 驾驶员 × 驾驶辅助 AI</span><h3>持续监督与安全接管</h3><small>能力边界 · 安全恢复</small></header>
+<div class="case-field"><strong>共同目标与分工</strong><p>驾驶员和 AI 共同完成驾驶；AI 感知环境、提示风险并执行能力范围内操作；驾驶员保留对系统状态、边界和道路情境的监督责任。</p></div>
+<div class="case-field"><strong>协同与恢复</strong><p>记录功能开启、状态理解、持续监督、系统降级或接管请求、人工恢复控制与事件解释。AI 无法安全覆盖场景时，人需要理解原因并恢复稳定控制。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>情境意识与认知负荷</li><li>接管反应时间和质量</li><li>信任校准与控制感</li><li>接管后恢复</li><li>安全最低门槛</li></ul></div>
 </article>
 <article class="case-row">
-<header class="case-scene"><span class="case-code">UX Case 03 · 智能座舱</span><h3>车载智能助手多模态体验</h3><small>低干扰 · 多模态反馈</small></header>
-<div class="case-field"><strong>研究目标</strong><p>评估驾驶过程中语音与视觉反馈能否帮助用户完成任务，同时避免注意力被过度占用。</p></div>
-<div class="case-field"><strong>关键体验情境</strong><p>唤醒与表达意图、语音和屏幕确认、纠错、驾驶高负荷时的中断、敏感信息与隐私控制。</p></div>
-<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>任务成功率</li><li>视线离路时长</li><li>纠错轮数</li><li>中断成本</li><li>可控性与隐私感知</li></ul></div>
-</article>
-</div>
-<h2>8.9 用户体验研究案例（二）：服务、健康与学习</h2>
-<p class="case-intro">这些案例关注用户如何理解 AI、何时需要转交给人、过程是否连续，以及 AI 是否真正改善体验而不是只提高自动化比例。</p>
-<div class="case-grid">
-<article class="case-row">
-<header class="case-scene"><span class="case-code">UX Case 04 · 智能客服</span><h3>AI 客服转人工体验</h3><small>服务连续性 · 情绪恢复</small></header>
-<div class="case-field"><strong>研究目标</strong><p>研究用户在 AI 无法解决问题时，能否顺利转人工、保留上下文，并感到处理过程连续且公平。</p></div>
-<div class="case-field"><strong>关键体验情境</strong><p>首次描述问题、AI 误解、发现能力边界、触发转人工、上下文移交、人工接续与最终解决。</p></div>
-<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>重复说明成本</li><li>转人工成功率</li><li>解决率与放弃率</li><li>过程透明度</li><li>情绪变化与公平感</li></ul></div>
-</article>
-<article class="case-row">
-<header class="case-scene"><span class="case-code">UX Case 05 · 健康服务</span><h3>AI 问诊与分诊体验</h3><small>风险沟通 · 责任边界</small></header>
-<div class="case-field"><strong>研究目标</strong><p>研究用户是否理解 AI 的角色与局限、正确感知风险，并知道何时应转向医生或线下服务。</p></div>
-<div class="case-field"><strong>关键体验情境</strong><p>描述症状、AI 追问、风险解释、查看依据、建议转诊、联系医生、后续记录与隐私管理。</p></div>
-<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>信息理解度</li><li>合理转诊率</li><li>信任校准</li><li>焦虑变化</li><li>隐私控制感</li></ul></div>
-</article>
-<article class="case-row">
-<header class="case-scene"><span class="case-code">UX Case 06 · AI 教育</span><h3>学习助手的引导体验</h3><small>学习达成 · 主体性</small></header>
-<div class="case-field"><strong>研究目标</strong><p>判断 AI 是否帮助学习者理解和迁移知识，而不是通过直接给答案制造表面完成。</p></div>
-<div class="case-field"><strong>关键体验情境</strong><p>理解题目、请求提示、连续犯错、获得反馈、形成解释、独立完成相似任务与复习。</p></div>
-<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>学习增益与迁移表现</li><li>提示依赖度</li><li>认知负荷</li><li>感知主体性</li><li>持续学习意愿</li></ul></div>
+<header class="case-scene"><span class="case-code">UX Case 03 · 用户 × 客服 AI × 人工客服</span><h3>信息理解与服务交接</h3><small>能力边界 · 上下文连续</small></header>
+<div class="case-field"><strong>共同目标与分工</strong><p>用户解决服务问题；AI 理解诉求、检索政策和业务上下文、给出建议；用户补充信息并决定是否接受；人工客服承担 AI 无权、无法理解或无法可靠处理的问题。</p></div>
+<div class="case-field"><strong>协同与恢复</strong><p>记录首次描述、AI 检索与解释、能力边界被识别、转人工触发、上下文移交、人工接续与最终解决。AI 受阻时，应明确升级原因并完整传递上下文。</p></div>
+<div class="case-field"><strong>证据与指标</strong><ul class="case-metrics"><li>诉求理解与知识/政策触达</li><li>解决率与转人工及时性</li><li>重复说明成本</li><li>过程透明度与掌控感</li><li>情绪变化与服务连续性</li></ul></div>
 </article>
 </div>
 <hr>
