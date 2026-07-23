@@ -102,7 +102,7 @@
 .qcc-roadmap{height:65vh}.qcc-roadmap .rm-pad{top:5.8vh;bottom:3.6vh}.qcc-roadmap .rm-bar{min-height:25px;max-height:34px}.qcc-roadmap .roadmap-key{bottom:1.8vh}
 /* Keep the roster airy: profile sits beside the portrait, then work and capability evidence follow below. */
 .qcc-team{grid-template-columns:.55fr 1.45fr;height:69vh;min-height:69vh}.qcc-team-right{grid-template-rows:auto minmax(0,1fr)}.qcc-member-grid{grid-auto-rows:minmax(0,1fr);gap:1.3vw}.qcc-member{grid-template-columns:8.4vh minmax(0,1fr);grid-template-rows:auto auto auto 1fr;column-gap:1vw;padding:1.75vh 1.25vw}.qcc-member .avatar{grid-row:1 / span 2;width:8.4vh;height:8.4vh;align-self:center}.qcc-member .member-head{align-self:end}.qcc-member .dept{grid-column:2;align-self:start;margin-top:.24vh;font-size:var(--fs-sm);line-height:1.2}.qcc-member .member-task{grid-column:1/-1;margin-top:1.3vh;font-size:var(--fs-sm);line-height:1.42;white-space:nowrap}.qcc-member .skill-bars{grid-column:1/-1;align-self:end;gap:.95vh;padding-top:1.35vh}.qcc-member .skill-bar{grid-template-columns:3.3em 1fr}.qcc-member .skill-bar i{height:7px}
-.qcc-roadmap .rm-date{color:var(--ink);font-weight:600;text-shadow:0 1px 0 rgba(255,255,255,.82)}.qcc-roadmap .rm-lane{left:-14.4vw;width:13vw;font-size:var(--fs-xs)}.qcc-roadmap .rm-phase{left:-22vw;width:7.4vw;font-size:var(--fs-xs)}.qcc-roadmap .rm-bar{height:5.9%;font-size:var(--fs-xs)}.qcc-roadmap .rm-pad::before{background-size:16.666% 100%,100% 10%}
+.qcc-roadmap .rm-date{color:var(--ink);font-weight:600;text-shadow:0 1px 0 rgba(255,255,255,.82)}.qcc-roadmap .rm-lane{left:-14.4vw;width:13vw;font-size:var(--fs-xs)}.qcc-roadmap .rm-phase{left:-22vw;width:7.4vw;font-size:var(--fs-xs)}.qcc-roadmap .rm-bar{height:5.9%;font-size:var(--fs-xs)}.qcc-roadmap .rm-pad::before{background-size:12.5% 100%,100% 10%}
 /* Peer cards use one same-hue top wash; the lower-right watermark stays neutral. */
 .domain-pack,.time-card,.current-right .break,.target{background:var(--card-glass)!important}
 .domain-pack::before,.time-card::before,.current-right .break::before,.target::before{left:-14%!important;right:-14%!important;top:-12%!important;height:25%!important;background:linear-gradient(105deg,rgba(var(--pc-rgb),.20),rgba(var(--pc-rgb),.08) 52%,transparent 88%)!important;filter:blur(32px)!important}
@@ -263,6 +263,33 @@
     tabs.innerHTML=chapterNames.map((name,i)=>`<span class="${i===section?'active':''}">${name}</span>`).join('');
     head.insertBefore(tabs,pageNo);
   });
+  const radarSvg=(ids,now,aim)=>{
+    const center=[110,89],vertices=[[110,12],[194,73],[162,167],[58,167],[26,73]];
+    const points=values=>values.map((value,i)=>{
+      const vertex=vertices[i];
+      return `${center[0]+(vertex[0]-center[0])*value/5},${center[1]+(vertex[1]-center[1])*value/5}`;
+    }).join(' ');
+    return `<svg viewBox="0 0 220 180" aria-label="现状与目标雷达图"><g fill="none" stroke="#cbd1da" stroke-width="1"><polygon points="110,12 194,73 162,167 58,167 26,73"/><polygon points="110,27.4 177.2,76.2 151.6,151.4 68.4,151.4 42.8,76.2"/><polygon points="110,42.8 160.4,79.4 141.2,135.8 78.8,135.8 59.6,79.4"/><polygon points="110,58.2 143.6,82.6 130.8,120.2 89.2,120.2 76.4,82.6"/><line x1="110" y1="12" x2="110" y2="167"/><line x1="26" y1="73" x2="162" y2="167"/><line x1="194" y1="73" x2="58" y2="167"/></g><polygon points="${points(now)}" fill="rgba(180,120,5,.13)" stroke="#b47805" stroke-width="3"/><polygon points="${points(aim)}" fill="rgba(91,91,214,.15)" stroke="#5b5bd6" stroke-width="3"/><g fill="#5e646e" font-size="10" text-anchor="middle"><text x="110" y="9">${ids[0]}</text><text x="202" y="75">${ids[1]}</text><text x="167" y="177">${ids[2]}</text><text x="53" y="177">${ids[3]}</text><text x="18" y="75">${ids[4]}</text></g></svg>`;
+  };
+  const assessmentSlide=slides.find(slide=>slide.textContent.includes('阶段性评估'));
+  if(assessmentSlide){
+    const ability=[['A1','QC基本理念和解决问题步骤','3.5','4.5'],['B1','QC小组活动的运行方法','3','4'],['C1','QC手法的使用和活动结果的归纳、发表','2.5','4'],['D1','专业技能、多能工的培养','3','4.5'],['E1','改善技能、改善能力','3','5']];
+    const activity=[['A1','人际关系和团队精神','3','4.5'],['B1','QC小组集会实施状况','2.5','4'],['C1','与上司、员工、相关部门的协作','3','4'],['D1','提高QC和工作的知识、技能的意愿','3.5','4.5'],['E1','遵守工作岗位的规章制度','3','4.5']];
+    const table=(title,rows)=>`<article class="qcc-score"><h2>${title}</h2><div class="qcc-score-grid"><div class="qh">项目</div><div class="qh">评判内容</div><div class="qh">现状</div><div class="qh">目标</div>${rows.map(row=>`<div>${row[0]}</div><div>${row[1]}</div><div class="now">${row[2]}</div><div class="aim">${row[3]}</div>`).join('')}</div></article>`;
+    assessmentSlide.querySelector('.head h1').textContent='团队能力与活动运行，按 QCC 标准建立现状与目标基线';
+    assessmentSlide.querySelector('.head .sub').textContent='评判内容、现状与目标严格采用 QCC 团队能力评估参考表；后续以活动过程和评审结果持续复核。';
+    assessmentSlide.querySelector('.qcc-assessment').innerHTML=`<div class="qcc-scorecards">${table('小组的能力',ability)}${table('小组活动情况分析',activity)}</div><div class="qcc-radars"><article class="qcc-radar"><h2>小组的能力</h2>${radarSvg(ability.map(row=>row[0]),ability.map(row=>+row[2]),ability.map(row=>+row[3]))}<div class="legend"><span>现状</span><span>目标</span></div></article><article class="qcc-radar"><h2>小组的活动情况</h2>${radarSvg(activity.map(row=>row[0]),activity.map(row=>+row[2]),activity.map(row=>+row[3]))}<div class="legend"><span>现状</span><span>目标</span></div></article></div>`;
+  }
+  const roadmapSlide=slides.find(slide=>slide.textContent.includes('开题计划'));
+  if(roadmapSlide){
+    const months=['2026.07','08','09','10','11','12','2027.01','02'];
+    const lanes=['组圈注册登记','制定活动计划表','选择课题和把握现状','主题评审','根因分析','对策拟定','对策评审','对策实施和效果确认','成果标准化和总结','成果评审'];
+    const phases=[['选择课题',0,30],['分析根因',30,20],['拟定对策',50,10],['对策实施<br>效果确认',60,20],['成果标准化<br>和总结',80,20]];
+    const bars=[['dark','组圈注册登记','7 月',0,10,2],['dark','制定活动计划表','7 月',0,10,12],['dark','选择课题和把握现状','7–8 月',0,22,22],['accent','主题评审','8–9 月',18,16,32],['accent','根因分析','9–11 月',31,38,42],['accent','对策拟定','10–12 月',44,36,52],['white','对策评审','12 月–2027.01 月',68,17,62],['white','对策实施和效果确认','2027.01–02 月',80,18,72],['white','成果标准化和总结','2027.02 月',87,12,82],['dark','成果评审','2027.02 月',95,5,92]];
+    roadmapSlide.querySelector('.head h1').textContent='活动按 QCC 五阶段推进，周期从 2026 年 7 月延续至 2027 年 2 月';
+    roadmapSlide.querySelector('.head .sub').textContent='活动名称和阶段顺序严格采用参考活动计划表；仅将原 5–12 月的时间轴顺延至当前项目周期。';
+    roadmapSlide.querySelector('.qcc-roadmap').innerHTML=`<div class="rm-pad">${months.map((month,i)=>`<div class="rm-date" style="left:${(i+.5)*12.5}%">${month}</div>`).join('')}<div class="rm-now-pill" style="left:3%">NOW</div><div class="rm-now-line" style="left:0"></div>${phases.map(phase=>`<div class="rm-phase" style="top:${phase[1]}%;height:${phase[2]}%">${phase[0]}</div>`).join('')}${lanes.map((lane,i)=>`<div class="rm-lane" style="top:${5+i*10}%">${lane}</div>`).join('')}${bars.map(bar=>`<div class="rm-bar ${bar[0]}" style="left:${bar[3]}%;width:${bar[4]}%;top:${bar[5]}%"><span class="lbl">${bar[1]}</span><span class="rm-badge">${bar[2]}</span></div>`).join('')}</div><div class="roadmap-key"><span>选择课题</span><span>分析与拟定对策</span><span>实施、总结与评审</span></div>`;
+  }
   slides.forEach((slide,i)=>{const counter=`${pad(i+1)} / ${pad(slides.length)}`;const pageNo=slide.querySelector('.page-no'),chapterNo=slide.querySelector('.dark-chrome span:last-child');if(pageNo)pageNo.textContent=counter;if(chapterNo)chapterNo.textContent=counter});
   const journey=document.querySelector('.jrn-wrap');
   if(journey){['限定研究范围','分层寻找竞品','搜集业务上下文与真实材料','进入产品核验与调整','形成评审材料'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
