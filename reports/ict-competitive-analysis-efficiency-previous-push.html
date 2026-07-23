@@ -297,7 +297,7 @@
   }
   slides.forEach((slide,i)=>{const counter=`${pad(i+1)} / ${pad(slides.length)}`;const pageNo=slide.querySelector('.page-no'),chapterNo=slide.querySelector('.dark-chrome span:last-child');if(pageNo)pageNo.textContent=counter;if(chapterNo)chapterNo.textContent=counter});
   const journey=document.querySelector('.jrn-wrap');
-  if(journey){['接收分析需求','明确分析目标','生成前补充上下文','等待生成初稿','审阅与核验','补充上下文并调整','形成设计判断'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
+  if(journey){['接收分析需求','明确分析目标','准备分析输入','等待生成初稿','审阅与核验','调整与迭代','形成设计判断'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
   const ICON_MAX='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 1 2 2h3"/></svg>',ICON_MIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M16 21v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/></svg>';
   slides.forEach((slide,i)=>{const b=document.createElement('button');b.title=`第 ${i+1} 页`;b.addEventListener('click',()=>go(i));dots.append(b);const thumb=document.createElement('button');thumb.className='thumb';thumb.innerHTML=`<span>${pad(i+1)}</span><strong>${slide.querySelector('.head h1,.chapter-title,.cover-title')?.textContent.replace(/\s+/g,' ').trim()||'ICT 竞品分析效率提升'}</strong>`;thumb.addEventListener('click',()=>{closeOverview();go(i)});grid.append(thumb)});
   const buttons=[...dots.children];
@@ -339,11 +339,11 @@
         }
       }
     });
-    ['接收分析需求','明确分析目标','生成前补充上下文','等待生成初稿','审阅与核验','补充上下文并调整','形成设计判断'].forEach((label,i)=>{
+    ['接收分析需求','明确分析目标','准备分析输入','等待生成初稿','审阅与核验','调整与迭代','形成设计判断'].forEach((label,i)=>{
       const stage=journeyEl.querySelectorAll('.jrn-ph .pt')[i];
       if(stage)stage.textContent=label;
     });
-    ['Request','Target','Context In','Generate','Review','Refine','Decision'].forEach((label,i)=>{
+    ['Request','Target','Input','Generate','Review','Refine','Decision'].forEach((label,i)=>{
       const stageMeta=journeyEl.querySelectorAll('.jrn-ph .ptm')[i];
       if(stageMeta)stageMeta.textContent=label;
     });
@@ -374,7 +374,7 @@
     ];
     focusLists.forEach((list,i)=>{if(focusCopy[i])list.innerHTML=focusCopy[i]});
     const effortLabels=journeyEl.querySelectorAll('.jrn-grid.je .l');
-    ['需求信息待对齐','范围与边界需确认','生成前上下文补充','等待 Skill 生成','结果需审阅与核验','补充上下文并调整','结论沉淀待完善'].forEach((label,i)=>{if(effortLabels[i])effortLabels[i].textContent=label});
+    ['需求信息待对齐','范围与边界需确认','分析输入准备负担重','等待 Skill 生成','结果需审阅与核验','调整与迭代负担重','结论沉淀待完善'].forEach((label,i)=>{if(effortLabels[i])effortLabels[i].textContent=label});
     const effortSvg=journeyEl.querySelectorAll('.jrn-grid.je svg polyline');
     ['0,28 100,34','0,34 100,48','0,48 100,82','0,82 100,70','0,70 100,89','0,89 100,92','0,92 100,58'].forEach((points,i)=>{if(effortSvg[i])effortSvg[i].setAttribute('points',points)});
     journeyEl.querySelectorAll('.jrn-grid.je .d').forEach((dot,i)=>{const top=['34%','48%','82%','70%','89%','92%','58%'][i];if(top)dot.style.top=top});
