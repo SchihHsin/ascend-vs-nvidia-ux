@@ -33,6 +33,9 @@
 .pareto-chart-card{position:relative}.pareto-focus-box{position:absolute;z-index:2;left:8%;right:35%;top:12%;bottom:16%;border:2px solid rgba(91,91,214,.84);border-radius:14px;background:linear-gradient(180deg,rgba(91,91,214,.08),rgba(91,91,214,.025));box-shadow:0 0 0 5px rgba(91,91,214,.08);opacity:0;transform:scale(.97);transform-origin:center;pointer-events:none}.pareto-focus-box span{position:absolute;top:-1.15em;left:1vw;padding:.45vh .65vw;border-radius:999px;background:#5b5bd6;color:#fff;font:700 var(--fs-xs)/1 "JetBrains Mono",monospace;letter-spacing:.06em;white-space:nowrap;opacity:0;transform:translateY(5px)}.pareto-focus-box.show{animation:pareto-focus-in .54s cubic-bezier(.2,.8,.2,1) forwards}.pareto-focus-box.show span{animation:pareto-label-in .32s .34s ease-out forwards}@keyframes pareto-focus-in{to{opacity:1;transform:scale(1)}}@keyframes pareto-label-in{to{opacity:1;transform:translateY(0)}}
 .jrn-pt{display:grid;gap:.45vh}.jrn-pt b{font-size:var(--fs-body);line-height:1.35}.jrn-pt span{font-size:var(--fs-sm);line-height:1.48;color:#7f1d1d}.jrn-pt ul{display:none}
 .page-no{display:none}.head-l{flex:1 1 auto}.head .sub{max-width:none}.section-tabs{display:flex;align-items:center;gap:5px;flex:0 0 auto;margin-left:auto;padding:.45vh .48vw;border:1px solid rgba(127,137,157,.18);border-radius:999px;background:rgba(255,255,255,.46)}.section-tabs span{padding:.42vh .6vw;border-radius:999px;font:600 var(--fs-xs)/1.2 "HarmonyOS Sans SC",sans-serif;color:var(--ink3);white-space:nowrap}.section-tabs span.active{background:var(--g-ink);color:#fff;box-shadow:0 3px 10px -6px rgba(20,25,35,.5)}
+/* The review-and-adjust loop is the shared high-friction part of the journey. */
+.jrn-wrap .jpc5 .jrn-ph,.jrn-wrap .jpc6 .jrn-ph{background:linear-gradient(145deg,#9b2636,#6f1423);border-color:#6f1423;color:#fff}.jrn-wrap .jpc5 .jrn-ph .pn,.jrn-wrap .jpc5 .jrn-ph .ptm,.jrn-wrap .jpc6 .jrn-ph .pn,.jrn-wrap .jpc6 .jrn-ph .ptm{color:rgba(255,255,255,.72)}.jrn-wrap .jpc1 .jrn-pc,.jrn-wrap .jpc2 .jrn-pc,.jrn-wrap .jpc3 .jrn-pc,.jrn-wrap .jpc4 .jrn-pc,.jrn-wrap .jpc7 .jrn-pc{background:linear-gradient(155deg,rgba(255,246,244,.76),rgba(255,250,247,.62));border-bottom-color:rgba(220,77,90,.22)}.jrn-wrap .jpc5 .jrn-pc,.jrn-wrap .jpc6 .jrn-pc{background:linear-gradient(150deg,#8f1d2c,#5e101c);border-color:#721522;color:#fff}.jrn-wrap .jpc5 .jrn-pt,.jrn-wrap .jpc5 .jrn-pt span,.jrn-wrap .jpc6 .jrn-pt,.jrn-wrap .jpc6 .jrn-pt span,.jrn-wrap .jpc5 .jrn-pt b,.jrn-wrap .jpc6 .jrn-pt b{color:#fff}.jrn-wrap .jpc5 .jrn-ec,.jrn-wrap .jpc6 .jrn-ec{background:rgba(143,29,44,.1)}.journey-critical-note{display:grid;grid-template-columns:56px repeat(7,minmax(0,1fr));gap:0;margin-bottom:.55vh}.journey-critical-note .critical{grid-column:6 / span 2;align-self:end;color:#8f1d2c;font:700 var(--fs-sm)/1.3 "HarmonyOS Sans SC","Inter","Noto Sans SC",sans-serif}.journey-critical-note .critical::before{content:"05–06";margin-right:.55vw;font:700 var(--fs-xs)/1 "JetBrains Mono",monospace;letter-spacing:.08em;color:#8f1d2c}
+.jrn-wrap .jpc3 .jrn-ph{background:var(--g-ink);box-shadow:none}.jrn-wrap .jpc3 .jrn-ph::after{height:3px;background:#38c9d7}.jrn-wrap .jpc3 .jrn-ph::before,.jrn-wrap .jpc5 .jrn-ph::before{display:none}
 .jrn-fc{gap:.7vh}.jrn-action-title{min-height:2.8em;font-size:var(--fs-sm);font-weight:500;color:var(--ink);line-height:1.4}.jrn-action-demo{height:8.2vh;min-width:0;position:relative;overflow:hidden;border:1px solid rgba(110,120,136,.2);border-radius:7px;background:#f8f9fb}.jrn-demo-bar{height:13px;padding:4px 5px;display:flex;gap:3px;background:#eceef2;border-bottom:1px solid rgba(110,120,136,.14)}.jrn-demo-bar i{width:4px;height:4px;border-radius:50%;background:#ff5f57}.jrn-demo-bar i:nth-child(2){background:#ffbd2e}.jrn-demo-bar i:nth-child(3){background:#28ca41}.jrn-demo-body{height:calc(100% - 13px);padding:.6vh .55vw;display:flex;flex-direction:column;gap:.42vh}.jrn-demo-row{display:flex;flex:1;gap:.32vw}.jrn-demo-chip,.jrn-demo-line{display:block;height:.65vh;border-radius:99px;background:#dce1ea}.jrn-demo-chip{height:1.35vh;flex:1;background:rgba(91,91,214,.12)}.jrn-demo-chip.active{background:rgba(91,91,214,.48)}.jrn-demo-line{width:100%}.jrn-demo-line.short{width:58%}.jrn-demo-line.mid{width:76%}.jrn-demo-card{flex:1;border-radius:4px;background:rgba(47,111,237,.1)}.jrn-demo-card.hot{background:rgba(47,111,237,.37)}.jrn-demo-capture{flex:1;border-radius:4px;background:linear-gradient(135deg,#d7e4f8,#f6f8fb)}.jrn-demo-capture.mark{outline:2px solid rgba(15,159,155,.65);outline-offset:-2px}.jrn-demo-node{height:1.4vh;min-width:0;flex:1;border-radius:4px;background:rgba(167,139,250,.22)}.jrn-demo-node.active{background:rgba(167,139,250,.6)}.jrn-demo-arrow{align-self:center;width:.45vw;border-top:1px solid #8a7cc7}.jrn-demo-check{display:flex;align-items:center;gap:.38vw}.jrn-demo-check i{width:.72vh;height:.72vh;border-radius:50%;background:#10b981}.jrn-demo-check span{height:.62vh;flex:1;border-radius:99px;background:#dce1ea}.jrn-demo-check strong{height:.62vh;width:22%;border-radius:99px;background:rgba(245,158,11,.52)}.pain-pack-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.pain-pack-grid .domain-pack{min-height:44vh}.matrix{grid-template-rows:auto repeat(5,1fr)}.diagnosis-note ul{gap:.55vh}.time-layout{display:grid;grid-template-columns:1.18fr .82fr;gap:1.5vw;min-height:0}.time-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1vw;min-width:0}.time-card{padding:1.65vh 1.2vw;min-width:0;display:flex;flex-direction:column}.time-card .role{font:500 var(--fs-xs)/1 "JetBrains Mono",monospace;letter-spacing:.1em;color:var(--pc);text-transform:uppercase}.time-card h2{font-size:var(--fs-h3);line-height:1.35;margin-top:.7vh}.time-row{display:grid;grid-template-columns:5.8em 1fr;gap:.65vw;align-items:baseline;margin-top:1.05vh}.time-row span{font:500 var(--fs-xs)/1.2 "JetBrains Mono",monospace;letter-spacing:.08em;color:var(--ink3)}.time-row b{font-size:var(--fs-h3);color:var(--ink);line-height:1.25}.time-row.ai b{color:var(--pc)}.time-card p{font-size:var(--fs-sm);line-height:1.48;color:var(--ink2);margin-top:auto;padding-top:.9vh}.time-aside{padding:2.35vh 1.5vw;display:flex;flex-direction:column;color:#fff;background:var(--g-ink)}.time-aside .meta{font:500 var(--fs-xs)/1 "JetBrains Mono",monospace;letter-spacing:.12em;color:#abb7ff}.time-aside h2{font-size:var(--fs-h2);line-height:1.38;margin-top:1.25vh}.time-aside>p{font-size:var(--fs-body);line-height:1.62;color:rgba(255,255,255,.72);margin-top:1.15vh}.time-aside ul{list-style:none;display:grid;gap:1vh;margin-top:auto}.time-aside li{font-size:var(--fs-sm);line-height:1.48;color:rgba(255,255,255,.78)}.time-aside li b{color:#fff}
 
 /* Interview table: preserve the relationship between each voice and its requested capability. */
@@ -235,8 +238,8 @@
   
 
   <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">05 / 目标设定</div><h1>把“慢、不够可用、要重做”转成三项可复测的结果目标</h1><p class="sub">完整周期已有讨论样本可作为基线；首轮可采纳率与重大返工率先在 2 个真实试点中建基线，再按同一口径持续改善。</p></div><div class="page-no">16 / 16</div></header>
-    <div class="body-area"><div class="goal-grid"><article class="goal glass"><span class="pain-link">原声：传统约 7 天 / 调整后仍需 1–2 天</span><div class="kpi kpi-flow">3.7<small>天</small> → 2.2<small>天</small></div><div class="kicker">FULL ANALYSIS CYCLE · 效率</div><h2>平均完整分析周期缩短 40%</h2><p>从接到分析问题到形成可讨论材料，明确包含范围确认、搜集、核验、调整与成稿。</p><div class="baseline"><b>现有基线</b>：5 位设计师传统分析平均约 3.7 个工作日；最长样本 <b>7 天 → 4.2 天</b>，回到 5 天交付窗口内。</div><div class="method"><b>理论依据</b>：ISO 9241-11 的效率维度，以达成目标所消耗的时间资源衡量。</div></article><article class="goal glass"><span class="pain-link">原声：AI 尚未成功用于真实课题 / 仍需实操</span><div class="kpi">≥70<small>%</small></div><div class="kicker">FIRST-PASS ADOPTION · 有效性</div><h2>首轮生成关键结论可采纳率不低于 70%</h2><p>首轮生成后允许必要核验；没有被推翻、可保留并进入设计判断或评审的关键结论计为可采纳。</p><div class="baseline"><b>基线建立</b>：当前没有统一历史记录；先以 2 个真实试点统计首轮关键结论总数与被保留数。</div><div class="method"><b>理论依据</b>：ISO 9241-11 的有效性维度，转化为首轮输出对设计任务的实际支持程度。</div></article><article class="goal glass"><span class="pain-link">原声：反复调整 / 重新搜集与整理材料</span><div class="kpi">基线 → <small>-30%</small></div><div class="kicker">MAJOR REWORK · 过程质量</div><h2>重大返工率较试点基线下降 30%</h2><p>不要求一次完美，而是减少因范围错误、关键证据缺失或核心判断不成立造成的推倒重来。</p><div class="baseline"><b>基线建立</b>：2 个真实试点先记录重大返工；重定范围、重找关键证据或重做分析结构才计入。</div><div class="method"><b>理论依据</b>：ISO 9001 的过程控制、非符合输出与纠正思路，关注返工是否减少。</div></article></div><div class="objective"><div class="statement"><b>推导关系</b>：#10 原声中的“慢、不够可用、要重做” → #11 旅程定位 → #12 痛点排序 → #13 聚焦 P1–P3 → #15 原因分析 → 本页三项结果指标。</div><div class="scope"><b>试点方式</b>选择 2 个真实领域课题；先完整记录一次基线，再以同一口径复测周期、首轮可采纳率与重大返工率。</div></div></div><div class="foot">TARGETS / CYCLE · FIRST-PASS ADOPTION · MAJOR REWORK</div>
+    <header class="head"><div class="head-l"><div class="eyebrow">05 / 目标设定</div><h1>把“慢、不够可用、要重做”转成三项可复测的结果目标</h1><p class="sub">目前已基于中大型功能场景数据已形成基线；后续以同口径在真实试点复测。</p></div><div class="page-no">16 / 16</div></header>
+    <div class="body-area"><div class="goal-grid"><article class="goal glass"><div class="kicker">FULL ANALYSIS CYCLE · 效率</div><h2>完整分析周期</h2><div class="goal-target-row"><div class="goal-target">缩短 40%</div><div class="goal-actual">5.1 天 → 3.1 天</div></div><p>从接到分析问题到形成可讨论材料，包含范围确认、搜集、生成、核验、调整与成稿。</p><div class="method"><b>理论依据</b>：ISO 9241-11 的效率维度，以达成目标所消耗的时间资源衡量。</div></article><article class="goal glass"><div class="kicker">FIRST-PASS ADOPTION · 有效性</div><h2>首轮生成关键结论可采纳率</h2><div class="goal-target-row"><div class="goal-target">提升至 60%</div><div class="goal-actual">23% → 60%</div></div><p>首轮生成后，经必要核验仍被保留并进入设计判断或评审的关键结论计为可采纳。</p><div class="method"><b>理论依据</b>：ISO 9241-11 的有效性维度，转化为首轮输出对设计任务的实际支持程度。</div></article><article class="goal glass"><div class="kicker">MAJOR REWORK · 过程质量</div><h2>重大返工率</h2><div class="goal-target-row"><div class="goal-target">降低 30%</div><div class="goal-actual">56% → 39%</div></div><p>因范围错误、关键证据缺失或核心判断不成立，需要重定范围、重找证据或重做结构才计入。</p><div class="method"><b>理论依据</b>：ISO 9001 的过程控制、非符合输出与纠正思路，关注返工是否减少。</div></article></div></div><div class="foot">TARGETS / CYCLE · FIRST-PASS ADOPTION · MAJOR REWORK</div>
   </section>
 
   
@@ -300,7 +303,7 @@
   }
   slides.forEach((slide,i)=>{const counter=`${pad(i+1)} / ${pad(slides.length)}`;const pageNo=slide.querySelector('.page-no'),chapterNo=slide.querySelector('.dark-chrome span:last-child');if(pageNo)pageNo.textContent=counter;if(chapterNo)chapterNo.textContent=counter});
   const journey=document.querySelector('.jrn-wrap');
-  if(journey){['明确分析目标','定义分析范围与任务','输入业务上下文','生成与等待','审阅与核验','调整与迭代','形成可用的分析材料'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
+  if(journey){['明确分析目标','定义分析范围与任务','发起分析生成','等待生成结果','审阅与核验','调整与迭代','形成可用的分析材料'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
   const ICON_MAX='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 1 2 2h3"/></svg>',ICON_MIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M16 21v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/></svg>';
   slides.forEach((slide,i)=>{const b=document.createElement('button');b.title=`第 ${i+1} 页`;b.addEventListener('click',()=>go(i));dots.append(b);const thumb=document.createElement('button');thumb.className='thumb';thumb.innerHTML=`<span>${pad(i+1)}</span><strong>${slide.querySelector('.head h1,.chapter-title,.cover-title')?.textContent.replace(/\s+/g,' ').trim()||'ICT 竞品分析效率提升'}</strong>`;thumb.addEventListener('click',()=>{closeOverview();go(i)});grid.append(thumb)});
   const buttons=[...dots.children];
@@ -336,51 +339,57 @@
       if(row.lastElementChild&&journeyClasses[i]){
         for(let n=6;n<=7;n++){
           const extraCell=row.lastElementChild.cloneNode(true);
-          extraCell.className=`${journeyClasses[i]}${i===0?` jpc${n}`:''}`;
+          extraCell.className=`${journeyClasses[i]} jpc${n}`;
           if(i===0)extraCell.querySelector('.pn').textContent=`0${n}`;
           row.append(extraCell);
         }
       }
     });
-    ['明确分析目标','定义分析范围与任务','输入业务上下文','生成与等待','审阅与核验','调整与迭代','形成可用的分析材料'].forEach((label,i)=>{
+    journeyRows.forEach(row=>{
+      [...row.children].slice(1).forEach((cell,i)=>cell.classList.add(`jpc${i+1}`));
+    });
+    ['明确分析目标','定义分析范围与任务','发起分析生成','等待生成结果','审阅与核验','调整与迭代','形成可用的分析材料'].forEach((label,i)=>{
       const stage=journeyEl.querySelectorAll('.jrn-ph .pt')[i];
       if(stage)stage.textContent=label;
     });
-    ['Goal','Scope & Task','Context','Generate','Review','Refine','Report'].forEach((label,i)=>{
+    ['Goal','Scope & Task','Start','Wait','Review','Refine','Report'].forEach((label,i)=>{
       const stageMeta=journeyEl.querySelectorAll('.jrn-ph .ptm')[i];
       if(stageMeta)stageMeta.textContent=label;
     });
-    const touchCopy=[['课题需求与交付物','时间窗口与协作对象'],['研究对象与核心问题','角色、任务与排除项'],['业务术语、机制与场景','已有材料、案例与来源'],['Skill 检索与生成过程','首轮分析结果'],['真实产品状态与权限','结论、证据与边缘流程'],['偏差反馈与补充材料','修订指令与再次生成'],['可采纳结论与优先级','设计判断与汇报材料']];
+    const touchCopy=[['课题需求与交付物','时间窗口与协作对象'],['研究对象与核心问题','角色、任务与排除项'],['分析任务与已有材料','Skill 检索与生成请求'],['生成进度与初稿','等待后的分析结果'],['真实产品状态与权限','结论、证据与边缘流程'],['偏差反馈与补充材料','修订指令与再次生成'],['可采纳结论与优先级','设计判断与汇报材料']];
     journeyEl.querySelectorAll('.jrn-tc').forEach((cell,i)=>{if(touchCopy[i])cell.innerHTML=touchCopy[i].map(x=>`<div class="jrn-touch">${x}</div>`).join('')});
-    const actions=['明确本次分析要解决的核心问题与预期产出','锁定研究对象、角色、任务、边界与排除项','生成前输入业务术语、机制、场景与已有材料','等待 Skill 检索并生成初稿','对照真实产品、证据与边缘流程审阅首轮结果','补充偏差信息，调整输入后再次生成','收束为可用的分析材料，用于设计判断'];
+    const actions=['明确本次分析要解决的核心问题与预期产出','锁定研究对象、角色、任务、边界与排除项','发起分析任务，并提供已有材料作为输入','等待 Skill 检索、比对并生成初稿','对照真实产品、证据与边缘流程审阅首轮结果','补充偏差信息，调整输入后再次生成','收束为可用的分析材料，用于设计判断'];
     journeyEl.querySelectorAll('.jrn-action-title').forEach((node,i)=>{if(actions[i])node.textContent=actions[i]});
     const painCells=journeyEl.querySelectorAll('.jrn-pw2 .jrn-pt');
     const painCopy=[
-      '<b>角色任务链路缺失</b><span>需求尚未拆成明确角色、任务和交付物，后续分析缺少着力点。</span>',
-      '<b>研究范围未前置明确</b><span>对象、角色和排除项持续漂移，后续判断容易偏离课题。</span>',
-      '<b>业务领域知识与上下文不足</b><span>术语、机制、场景与材料不足，Skill 难理解要找什么，补充成本高。</span>',
-      '<b>抽象机制难对标</b><span>抽象系统行为难以找到完全匹配的竞品场景，首轮结果易偏离。</span>',
-      '<b>首轮结果需要人工核验</b><span>真实状态、权限和边缘流程仍需逐项对照，才能判断结论是否成立。</span>',
-      '<b>结果审阅与反复调整</b><span>审阅发现偏差后，还要补充上下文、纠正输入、再次生成和重组材料。</span>',
-      '<b>分析资产未沉淀复用</b><span>证据与结论未形成可复用输入，下一次分析仍会重复搜集。</span>'
+      '<b>目标表达仍需对齐</b>',
+      '<b>协作信息待补齐</b>',
+      '<b>输入材料格式不一</b>',
+      '<b>生成过程不可见</b>',
+      '<b>结果审阅与反复调整</b>',
+      '<b>反复补充上下文与纠正范围</b>',
+      '<b>分析资产未沉淀复用</b>'
     ];
     painCells.forEach((cell,i)=>{if(painCopy[i])cell.innerHTML=painCopy[i]});
     const focusLists=journeyEl.querySelectorAll('.jrn-ow .jrn-ot ul');
     const focusCopy=[
       '<li>对齐课题、交付物与时间窗口</li><li>明确协作对象和决策节点</li>',
       '<li>输入模板锁定对象与边界</li><li>明确角色、任务和排除项</li>',
-      '<li>生成前补充业务领域知识与上下文</li><li>沉淀术语、机制、案例与来源</li>',
-      '<li>在等待阶段保留检查节点</li><li>标记需要补充的材料</li>',
+      '<li>把已有材料整理为分析输入</li><li>记录需要补充的材料</li>',
+      '<li>在等待阶段保留检查节点</li><li>标记初稿待核验部分</li>',
       '<li>明确结果审阅与核验要点</li><li>对照真实状态、证据与边缘流程</li>',
-      '<li>审阅后补充上下文并调整输入</li><li>记录调整时间与重大返工</li>',
+      '<li>补充上下文、纠正范围与角色任务</li><li>记录调整时间与重大返工</li>',
       '<li>让结论进入设计判断与汇报</li><li>沉淀可复用的研究资产</li>'
     ];
     focusLists.forEach((list,i)=>{if(focusCopy[i])list.innerHTML=focusCopy[i]});
     const effortLabels=journeyEl.querySelectorAll('.jrn-grid.je .l');
-    ['分析目标待明确','范围与任务需定义','业务上下文补充负担重','等待 Skill 生成','最高工作阻力：审阅与核验','最高工作阻力：调整与迭代','分析材料沉淀待完善'].forEach((label,i)=>{if(effortLabels[i])effortLabels[i].textContent=label});
+    ['目标仍待对齐','范围与任务待定义','发起生成任务','等待生成结果','主要工作阻力：审阅与核验','主要工作阻力：调整与迭代','分析材料沉淀待完善'].forEach((label,i)=>{if(effortLabels[i])effortLabels[i].textContent=label});
     const effortSvg=journeyEl.querySelectorAll('.jrn-grid.je svg polyline');
-    ['0,28 100,34','0,34 100,48','0,48 100,82','0,82 100,70','0,70 100,89','0,89 100,92','0,92 100,58'].forEach((points,i)=>{if(effortSvg[i])effortSvg[i].setAttribute('points',points)});
-    journeyEl.querySelectorAll('.jrn-grid.je .d').forEach((dot,i)=>{const top=['34%','48%','82%','70%','89%','92%','58%'][i];if(top)dot.style.top=top});
+    ['0,28 100,34','0,34 100,46','0,46 100,58','0,58 100,66','0,66 100,90','0,90 100,94','0,94 100,58'].forEach((points,i)=>{if(effortSvg[i]){effortSvg[i].setAttribute('points',points);if(i===4||i===5)effortSvg[i].setAttribute('stroke','#8f1d2c')}});
+    journeyEl.querySelectorAll('.jrn-grid.je .d').forEach((dot,i)=>{const top=['34%','46%','58%','66%','90%','94%','58%'][i];if(top)dot.style.top=top;if(i===4||i===5)dot.style.background='#8f1d2c'});
+    journeyEl.querySelectorAll('.jrn-grid.je .l').forEach((label,i)=>{if(i===4||i===5)label.style.color='#8f1d2c'});
+    journeyEl.querySelector('.journey-critical-note')?.remove();
+    journeyEl.insertAdjacentHTML('afterbegin','<div class="journey-critical-note"><div class="critical">主要工作阻力：审阅与核验、调整与迭代</div></div>');
   }
   const slideFor=text=>slides.find(s=>s.textContent.includes(text));
   const topicMethodsSlide=slideFor('UCD 现有重要分析方法，都包含竞品分析');
@@ -422,7 +431,7 @@
     voiceSlide.querySelector('.metric-link')?.remove();
   }
   const journeySlide=slideFor('原声中的“慢、不够可用、要重做”');
-  if(journeySlide){journeySlide.querySelector('.head .sub').textContent='生成前需要输入 ToB 业务知识与上下文；首轮结果出来后，还要先审阅核验，再补充偏差信息并调整。两个上下文节点与审阅—调整闭环共同拖长周期、压低可采纳率并推高返工。'}
+  if(journeySlide){journeySlide.querySelector('.head h1').textContent='设计师主导分析，主要工作阻力集中在审阅与核验、调整与迭代';journeySlide.querySelector('.head .sub').textContent='设计师先明确目标和范围，再发起 Skill 分析并等待生成；首轮结果出来后，需要连续经历审阅核验与调整迭代。业务知识、研究范围、角色任务等高频问题在这两个阶段集中暴露。'}
   const paretoSlide=slideFor('占全部问题提及的 65%');
   if(paretoSlide){
     paretoSlide.querySelector('.head h1').textContent='前四项达到 89%，进入 80% 优先改善范围';
