@@ -406,9 +406,9 @@
   const timePressureSlide=slides.find(s=>s.querySelector('.topic-value'));
   if(timePressureSlide){
     timePressureSlide.querySelector('.head .eyebrow').textContent='02 / 选择课题 02';
-    timePressureSlide.querySelector('.head h1').textContent='现有 Skill 下，竞品分析平均仍需 5.0 天，与设计时间并列投入';
-    timePressureSlide.querySelector('.head .sub').textContent='左图只呈现现有 Skill 下的并列工作投入：竞品分析平均 5.0 天、设计平均 8.0 天；右图以同一批样本对比传统竞品分析平均 6.5 天至现有 Skill 5.0 天。';
-    timePressureSlide.querySelector('.body-area').innerHTML='<div class="time-dual-chart"><section class="time-chart-card"><div class="time-chart-head"><div class="chart-kicker">CURRENT SKILL · PARALLEL TIME INPUT</div><div class="chart-big"><b>5.0<small> + 8.0</small></b></div><h2>现有 Skill 竞品分析 5.0 天，仍与设计并列投入</h2><p><b>现有 Skill 竞品分析 5.0 天</b>与设计时间 <b>8.0 天</b>为并列投入；堆叠仅用于展示合计工作量。</p></div><div class="chart-slot" id="timePressureChart" aria-label="现有 Skill 竞品分析与设计时间堆叠条形图"></div></section><section class="time-chart-card"><div class="time-chart-head"><div class="chart-kicker">SAME SAMPLE · TRADITIONAL → CURRENT SKILL</div><div class="chart-big"><b>-23<small>%</small></b></div><h2>同一口径下：传统 6.5 天 → 现有 Skill 5.0 天</h2><p>传统竞品分析平均 <b>6.5 天</b>，现有 Skill 平均 <b>5.0 天</b>，仅缩短约 1.5 天。</p></div><div class="chart-slot" id="timeGainChart" aria-label="传统与现有 Skill 竞品分析时间对比图"></div></section></div>';
+    timePressureSlide.querySelector('.head h1').textContent='现有 Skill 已带来提效，但竞品分析仍持续挤压设计投入';
+    timePressureSlide.querySelector('.head .sub').textContent='竞品分析平均仍需 5.0 天，接近设计投入的 8.0 天；现有 Skill 虽将平均分析时间从 6.5 天缩短至 5.0 天，但提效幅度有限。下一页进一步分析人工调整时间为何仍然很长。';
+    timePressureSlide.querySelector('.body-area').innerHTML='<div class="time-dual-chart"><section class="time-chart-card"><div class="time-chart-head"><div class="chart-kicker">CURRENT WORKLOAD · 当前投入</div><div class="chart-big"><b>5.0<small> + 8.0</small></b></div><h2>竞品分析仍占 5 天，持续挤压设计投入</h2><p>竞品分析耗时已接近设计时间，两个工作环节共同占用中大型功能场景的主要投入。</p></div><div class="chart-slot" id="timePressureChart" aria-label="现有 Skill 竞品分析与设计时间堆叠条形图"></div></section><section class="time-chart-card"><div class="time-chart-head"><div class="chart-kicker">CURRENT SKILL IMPACT · 现有提效</div><div class="chart-big"><b>-23<small>%</small></b></div><h2>现有 Skill 有所提效，但尚未形成显著缩短</h2><p>平均分析时间减少约 1.5 天。下一步需定位限制提效的关键原因。</p></div><div class="chart-slot" id="timeGainChart" aria-label="传统与现有 Skill 竞品分析时间对比图"></div></section></div>';
   }
   const adjustmentSlide=slideFor('生成只需几小时');
   if(adjustmentSlide){
