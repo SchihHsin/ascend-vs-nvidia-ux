@@ -2116,22 +2116,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-r">19/ 问题对 · 全量任务集</div>
     </div>
     <style>
-      .task-pairs-flow{flex:0 0 15vh;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}.task-pairs-flow .mermaid{width:100%;margin:0;background:transparent;font-family:'HarmonyOS Sans SC','Inter',sans-serif}.task-pairs-flow svg{display:block;width:100%;max-width:100%;height:14vh;overflow:visible}.task-pairs-flow .nodeLabel{font-family:'HarmonyOS Sans SC','Inter',sans-serif!important;font-size:14px;font-weight:800}.task-pairs-flow .edgeLabel{font-family:'HarmonyOS Sans SC','Inter',sans-serif!important;font-size:11px;font-weight:800}.task-pairs-flow .edgeLabel rect{fill:#F1F3F7!important;opacity:1!important}.task-pairs-flow .flowchart-link{stroke:#9EAABB!important;stroke-width:1.5px!important}.task-pairs-flow marker path{fill:#9EAABB!important;stroke:#9EAABB!important}.copy-large .task-pairs-copy{gap:.65vh}.copy-large .task-pairs-copy .qpx{gap:.42vh}.copy-large .task-pairs-copy .qtask{padding:.62vh .8vw;gap:.38vh}.copy-large .task-pairs-copy .qx-c{padding:.55vh .62vw;line-height:1.32}.copy-large .task-pairs-copy .qx-intent{font-size:var(--fs-xs)}
+      .copy-large .task-pairs-copy{gap:.65vh}.copy-large .task-pairs-copy .qpx{gap:.42vh}.copy-large .task-pairs-copy .qtask{padding:.62vh .8vw;gap:.38vh}.copy-large .task-pairs-copy .qx-c{padding:.55vh .62vw;line-height:1.32}.copy-large .task-pairs-copy .qx-intent{font-size:var(--fs-xs)}
     </style>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
         <iframe data-src="seq-d3.html?hi=1" title="时序图 · AI↔昇腾社区，可切换关系模式" style="flex:1;min-width:0;height:100%;border:0;background:transparent"></iframe>
       </div>
       <div class="task-pairs-copy" style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center">
-      <div class="task-pairs-flow" aria-label="从共同任务分流为 CUDA 与 CANN 对照提问"><pre class="mermaid">flowchart TB
-        A([自定义算子接入 PyTorch]) -->|NVIDIA 开发者| B[CUDA 场景提问]
-        A -->|昇腾开发者| C[CANN 场景提问]
-        classDef source fill:#273551,stroke:#273551,color:#ffffff,stroke-width:1.5px;
-        classDef cuda fill:#F3F8EA,stroke:#76B900,color:#365600,stroke-width:1.5px;
-        classDef cann fill:#FFF2F3,stroke:#C7000B,color:#8F0008,stroke-width:1.5px;
-        class A source;
-        class B cuda;
-        class C cann;</pre></div>
       <div class="bridge" style="margin-top:0;flex:0 0 auto"><b>同一目标，按各自生态的真实说法提问</b>；两边都索要完整步骤、命令与代码。</div>
       <div class="qpx">
         <div class="qhead"><div class="qx-h cu">CUDA / 英伟达 对照问题</div><div class="qx-h ca">CANN / 昇腾 对照问题</div></div>
