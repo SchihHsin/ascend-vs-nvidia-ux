@@ -474,7 +474,7 @@
   const paretoEl=document.querySelector('#paretoChart');
   if(paretoEl&&window.echarts){
     const pareto=echarts.init(paretoEl,null,{renderer:'svg'});
-    const labels=['角色与任务\n链路缺失','业务领域知识与\n上下文不足','研究范围\n未前置明确','抽象机制\n难对标','生成速度慢','分析资产\n未沉淀复用'];
+    const labels=['角色与任务\n链路缺失','业务领域知识与\n上下文不足','研究范围\n漂移','抽象机制\n难对标','生成速度慢','分析资产\n未沉淀复用'];
     // Each count comes from coding the designer quotes on slide 10; one quote may map to more than one cause.
     const values=[4,3,2,2,1,1], total=values.reduce((a,b)=>a+b,0);
     let sum=0;const cumulative=values.map(v=>{sum+=v;return +(sum/total*100).toFixed(1)});
