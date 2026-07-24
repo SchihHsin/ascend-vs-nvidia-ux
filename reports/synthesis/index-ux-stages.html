@@ -2210,7 +2210,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       function beforeHtml(f){
         var d=DETAILS[f.k];
         if(!d)return '';
-        return '<div class="hm-before">'+scoreHtml(d)+'<section class="hm-before-demo"><h4>昇腾社区 · 当前形态</h4><p>'+d.meaning+'</p><div class="hm-demo-scale"><iframe src="ux19-embed.html?card='+d.card+'&demoOnly=1&state=before" title="'+f.title+'的昇腾现状 Demo"></iframe></div></section><section class="hm-before-demo nvidia"><h4>NVIDIA · 同一任务如何获得支撑</h4>'+nvidiaDemoHtml(f.k)+'</section></div>';
+        return '<div class="hm-before">'+scoreHtml(d)+'<section class="hm-before-demo"><h4>昇腾社区 · '+f.title.replace(/^问题\s*\d+\s*·\s*/,'')+'</h4><p>'+d.meaning+'</p><div class="hm-demo-scale"><iframe src="ux19-embed.html?card='+d.card+'&demoOnly=1&state=before" title="'+f.title+'的昇腾现状 Demo"></iframe></div></section><section class="hm-before-demo nvidia"><h4>NVIDIA · '+d.nvidiaTitle+'</h4>'+nvidiaDemoHtml(f.k)+'</section></div>';
       }
       function afterHtml(f){
         var d=DETAILS[f.k];
