@@ -1122,6 +1122,8 @@ body.embed.demo-only[data-demo-card="9"] .uxcard.ux-demo-only .demo>div[style*="
 body.embed.demo-only .uxcard.ux-demo-only .demo{transform:scale(var(--demo-scale))!important;transform-origin:top left!important;width:calc(100% / var(--demo-scale))!important}
 /* 供矩阵页按状态复用原始 Demo：只展示已经存在的现状或改造后部分。 */
 body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo .good{display:none!important}
+/* 父页已呈现 Before 标签与问题说明，嵌入 Demo 不再重复显示原卡标题。 */
+body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo .bad>.duolab{display:none!important}
 body.embed.demo-only.demo-state-after .uxcard.ux-demo-only .demo .bad{display:none!important}
 body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo>.duo,
 body.embed.demo-only.demo-state-after .uxcard.ux-demo-only .demo>.duo{grid-template-rows:minmax(0,1fr)!important}
