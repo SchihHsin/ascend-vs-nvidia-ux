@@ -1241,7 +1241,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="archmetric-step judge" data-map="judge"><span class="num">04</span><div class="act"><b>判断证据是否充分</b><span>看版本、来源一致性和是否需要再检索。</span></div><div class="met"><b>④ 版本清晰度 · ⑥ 第三方可信度 · ⑧ 检索成本</b><span>衡量“证据能不能被放心采用”。</span></div></div>
             <div class="archmetric-step answer" data-map="answer"><span class="num">05</span><div class="act"><b>组织最终答案</b><span>把证据合成为可执行步骤。</span></div><div class="met"><b>⑨ 版本可锁定性 · ⑩ 步骤可复现性 · ⑪ 综合置信度</b><span>衡量“答案能不能落地”。</span></div></div>
           </div>
-          <div class="archmetric-note"><b>评分口径：</b>关键动作被转化为可观测指标，并共同形成综合置信度。</div>
+          <div class="archmetric-note"><b>评分方式：</b>关键动作被转化为可观测指标，并共同形成综合置信度。</div>
         </div>
       </div>
     </div>
@@ -2100,7 +2100,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       var sceneBy={};
       scenes.forEach(function(g){for(var i=g[1];i<g[1]+g[2];i++)sceneBy[i]={name:g[0],first:i===g[1],span:g[2]*2};});
       var h='<colgroup><col class="scene-col"><col class="task-col"><col class="stk-col">'+cols.map(function(){return '<col>';}).join('')+'</colgroup><thead>'
-        +'<tr><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>场景</b><br>按开发任务类型分组。')+'">场景</th><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>任务</b><br>每行是一道模拟开发者会问的问题。')+'">任务</th><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>栈</b><br>CUDA / CANN 使用同一指标口径对比。')+'">栈</th><th class="cat" colspan="2" data-tip="'+hmAttr('<b>官方触达</b><br>能否找到官方来源、能否抓取正文。')+'">官方触达</th><th class="cat" colspan="2" data-tip="'+hmAttr('<b>官方质量</b><br>正文是否详尽、版本是否清楚。')+'">官方质量</th><th class="cat" colspan="3" data-tip="'+hmAttr('<b>生态支撑</b><br>第三方平台与模型自带知识是否能补位。')+'">生态支撑</th><th class="cat" colspan="4" data-tip="'+hmAttr('<b>成本与产出</b><br>检索成本、结论可锁定性、复现性与综合分。')+'">成本与产出</th></tr>'
+        +'<tr><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>场景</b><br>按开发任务类型分组。')+'">场景</th><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>任务</b><br>每行是一道模拟开发者会问的问题。')+'">任务</th><th class="rowhead" rowspan="2" data-tip="'+hmAttr('<b>栈</b><br>CUDA / CANN 按相同评分标准对比。')+'">栈</th><th class="cat" colspan="2" data-tip="'+hmAttr('<b>官方触达</b><br>能否找到官方来源、能否抓取正文。')+'">官方触达</th><th class="cat" colspan="2" data-tip="'+hmAttr('<b>官方质量</b><br>正文是否详尽、版本是否清楚。')+'">官方质量</th><th class="cat" colspan="3" data-tip="'+hmAttr('<b>生态支撑</b><br>第三方平台与模型自带知识是否能补位。')+'">生态支撑</th><th class="cat" colspan="4" data-tip="'+hmAttr('<b>成本与产出</b><br>检索成本、结论可锁定性、复现性与综合分。')+'">成本与产出</th></tr>'
         +'<tr>'+cols.map(function(c,i){return '<th data-col="'+i+'" data-tip="'+hmAttr(hmColTip(i,c))+'">'+c+'</th>';}).join('')+'</tr></thead><tbody>';
       rows.forEach(function(r,ri){
         var c=r.c.slice(); c[10]=[fmt(r.cs),Math.round(r.cs*100)];
@@ -2457,7 +2457,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <section class="mf-fixed">
           <div class="mf-k">CONTROLLED · 固定</div>
           <h2>让每次比较都回答同一类用户任务</h2>
-          <p class="mf-lead">先把任务、上下文与量化口径固定下来，避免“谁的问题更简单”掩盖真实差异。</p>
+          <p class="mf-lead">先把任务、上下文与评分标准固定下来，避免“谁的问题更简单”掩盖真实差异。</p>
           <div class="mf-keep">
             <div><i data-lucide="list-checks"></i><div><b>同一组用户任务</b><span>如开发、运维、学习、选型、排错或服务办理。</span></div></div>
             <div><i data-lucide="sliders-horizontal"></i><div><b>同一运行条件</b><span>相同提示词、版本范围、检索轮次和判定规则。</span></div></div>
@@ -2468,7 +2468,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <section class="mf-variable">
           <div class="mf-k">VARIABLES · 替换</div><div class="mf-rule"><i data-lucide="git-compare-arrows"></i>一次只替换一组变量</div>
           <h2>把“谁被比较”从案例中抽离出来</h2>
-          <p class="mf-lead">本研究的昇腾 × NVIDIA 与开发任务只是一个实例；只要测量口径不变，任何生态、用户任务、知识组合和 AI 都能进入同一张对照矩阵。</p>
+          <p class="mf-lead">本研究的昇腾 × NVIDIA 与开发任务只是一个实例；只要评分标准不变，任何生态、用户任务、知识组合和 AI 都能进入同一张对照矩阵。</p>
           <div class="mf-switches">
             <div class="mf-switch"><i data-lucide="boxes"></i><b>生态</b><span>CANN / CUDA，也可换 ROCm、TPU 或其他 SDK。</span></div>
             <div class="mf-switch"><i data-lucide="library-big"></i><b>知识来源</b><span>官方文档、代码工程、社区内容、模型记忆及其组合。</span></div>
@@ -2602,7 +2602,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div class="auth">
         <div class="au"><div class="au-demo"><svg viewBox="0 0 120 44"><line x1="22" y1="13" x2="98" y2="13" stroke="#5B5BD6" stroke-width="2"/><line x1="60" y1="6" x2="60" y2="13" stroke="#5B5BD6" stroke-width="2"/><circle cx="60" cy="5" r="2.5" fill="#5B5BD6"/><line x1="22" y1="13" x2="22" y2="22" stroke="#9aa3b2" stroke-width="1.4"/><path d="M11 22 H33 L28 31 H16 Z" fill="#ECECFB" stroke="#5B5BD6" stroke-width="1.4"/><line x1="98" y1="13" x2="98" y2="22" stroke="#9aa3b2" stroke-width="1.4"/><path d="M87 22 H109 L104 31 H92 Z" fill="#ECECFB" stroke="#5B5BD6" stroke-width="1.4"/><text x="22" y="41" font-size="9" fill="#5e646e" text-anchor="middle">CUDA</text><text x="98" y="41" font-size="9" fill="#5e646e" text-anchor="middle">CANN</text></svg><div class="acap">同题同评分 · 两边各跑</div></div><span class="au-tag">整体范式</span><div class="au-h">对照实验<span class="en">controlled comparison</span></div>
-          <div class="au-step"><span class="au-k">依据</span>要把差异归因到「生态」，就得让生态成为<b>唯一变量</b>，任务 / 模型 / 评分口径全部固定。</div>
+          <div class="au-step"><span class="au-k">依据</span>要把差异归因到「生态」，就得让生态成为<b>唯一变量</b>，任务 / 模型 / 评分标准全部固定。</div>
           <div class="au-step do"><span class="au-k">做法</span>同一套任务在 CUDA / 英伟达 与 CANN / 昇腾 <b>各实测一遍</b>，同题、同 Agent、同评分。</div>
           <div class="au-step out"><span class="au-k">指标</span>每项都是「昇腾实测 <b>vs</b> 英伟达实测」的<b>成对值</b>，差值即生态差距——非单边主观分。</div>
           <div class="au-src">依据 · <b>R. A. Fisher</b>《实验设计 The Design of Experiments》1935</div></div>
