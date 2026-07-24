@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ICT 竞品分析效率提升</title>
+<title>提升泛ICT领域竞品分析效率</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/IKKI2000/harmonyos-fonts@master/css/harmonyos_sans_sc.css">
 <script src="assets/lib/echarts.min.js"></script>
@@ -169,7 +169,7 @@
 <body>
 <main id="deck">
   <section class="slide s-cover">
-    <div class="cover-inner"><div class="cover-top"><div></div><div class="mono">2026 / UCD设计一部</div></div><div class="cover-middle"><h1 class="cover-title">ICT 竞品分析<br><span>效率提升</span></h1></div></div>
+    <div class="cover-inner"><div class="cover-top"><div></div><div class="mono">2026 / UCD设计一部</div></div><div class="cover-middle"><h1 class="cover-title">提升泛ICT领域<br><span>竞品分析效率</span></h1></div></div>
   </section>
 
   <section class="slide s-gray">
@@ -178,8 +178,8 @@
   </section>
 
   <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">01 / 团队组建</div><h1>以跨领域设计师协同，推进 ICT 竞品分析效率提升</h1><p class="sub">本课题围绕通用竞品分析 Skill 的 1-N 适配展开：以真实设计课题为输入，逐步形成可在不同领域使用的方法、证据要求与设计资产。</p></div><div class="page-no">03 / 15</div></header>
-    <div class="body-area"><div class="qcc-profile"><div class="qcc-mark glass"><b>QCC</b><span>泛计算领域 QCC</span><p>连接开发者、运维、云服务、企业业务与视觉体验研究，让竞品分析真正进入设计工作。</p></div><div class="qcc-facts"><div class="k">圈的名称</div><div class="v">泛计算领域 QCC</div><div class="k">主题名称</div><div class="v"><b>ICT 竞品分析效率提升</b></div><div class="k">主题类型</div><div class="v">问题解决型</div><div class="k">成立时间</div><div class="v">2026.07</div></div></div><div class="qcc-summary"><b>课题方向</b><span>把现有通用 Skill 从“能够完成一次分析”，推进到“能够在具体领域持续支持研究、核验、判断与设计讨论”。</span></div></div><div class="foot">QCC PROFILE / ICT COMPETITIVE ANALYSIS</div>
+    <header class="head"><div class="head-l"><div class="eyebrow">01 / 团队组建</div><h1>以跨领域设计师协同，提升泛ICT领域竞品分析效率</h1><p class="sub">本课题围绕通用竞品分析 Skill 的 1-N 适配展开：以真实设计课题为输入，逐步形成可在不同领域使用的方法、证据要求与设计资产。</p></div><div class="page-no">03 / 15</div></header>
+    <div class="body-area"><div class="qcc-profile"><div class="qcc-mark glass"><b>QCC</b><span>泛计算领域 QCC</span><p>连接开发者、运维、云服务、企业业务与视觉体验研究，让竞品分析真正进入设计工作。</p></div><div class="qcc-facts"><div class="k">圈的名称</div><div class="v">泛计算领域 QCC</div><div class="k">主题名称</div><div class="v"><b>提升泛ICT领域竞品分析效率</b></div><div class="k">主题类型</div><div class="v">问题解决型</div><div class="k">成立时间</div><div class="v">2026.07</div></div></div><div class="qcc-summary"><b>课题方向</b><span>把现有通用 Skill 从“能够完成一次分析”，推进到“能够在具体领域持续支持研究、核验、判断与设计讨论”。</span></div></div><div class="foot">QCC PROFILE / ICT COMPETITIVE ANALYSIS</div>
   </section>
 
   <section class="slide s-gray">
@@ -308,7 +308,7 @@
   const journey=document.querySelector('.jrn-wrap');
   if(journey){['明确分析目标','定义分析范围与任务','发起分析生成','等待生成结果','审阅与核验','调整与迭代','形成可用的分析材料'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
   const ICON_MAX='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 1 2 2h3"/></svg>',ICON_MIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M16 21v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/></svg>';
-  slides.forEach((slide,i)=>{const b=document.createElement('button');b.title=`第 ${i+1} 页`;b.addEventListener('click',()=>go(i));dots.append(b);const thumb=document.createElement('button');thumb.className='thumb';thumb.innerHTML=`<span>${pad(i+1)}</span><strong>${slide.querySelector('.head h1,.chapter-title,.cover-title')?.textContent.replace(/\s+/g,' ').trim()||'ICT 竞品分析效率提升'}</strong>`;thumb.addEventListener('click',()=>{closeOverview();go(i)});grid.append(thumb)});
+  slides.forEach((slide,i)=>{const b=document.createElement('button');b.title=`第 ${i+1} 页`;b.addEventListener('click',()=>go(i));dots.append(b);const thumb=document.createElement('button');thumb.className='thumb';thumb.innerHTML=`<span>${pad(i+1)}</span><strong>${slide.querySelector('.head h1,.chapter-title,.cover-title')?.textContent.replace(/\s+/g,' ').trim()||'提升泛ICT领域竞品分析效率'}</strong>`;thumb.addEventListener('click',()=>{closeOverview();go(i)});grid.append(thumb)});
   const buttons=[...dots.children];
   function set(i){current=i;buttons.forEach((b,n)=>b.classList.toggle('active',n===i));page.textContent=`${pad(i+1)} / ${pad(slides.length)}`;prevBtn.disabled=i===0;nextBtn.disabled=i===slides.length-1;document.body.classList.toggle('on-dark',dark(slides[i]));if(typeof paretoIndex!=='undefined'&&i!==paretoIndex){paretoFocused=false;document.querySelector('.pareto-focus-box')?.classList.remove('show')}try{history.replaceState(null,'',`#${i+1}`)}catch(e){location.hash=i+1}}
   // Let the native snap container finish one scroll; repeated scrollTo calls were fighting it and causing bounce.
