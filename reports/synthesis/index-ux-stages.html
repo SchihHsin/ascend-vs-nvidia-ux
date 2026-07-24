@@ -1610,7 +1610,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hmfull-wrap.is-detail .hmfull-card{flex:0 0 57%}
     .hm-detail{flex:0 0 0;min-width:0;min-height:0;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;opacity:0;overflow:hidden;pointer-events:none;transform:translateX(10px);transition:flex-basis .3s ease,opacity .22s ease,transform .3s ease}
     .hmfull-wrap.is-detail .hm-detail{flex:1;opacity:1;pointer-events:auto;transform:translateX(0)}
-    /* 右侧先承载问题推导，再切换到原始 Demo；问题与改造方法仍叠在左侧矩阵上。 */
+    /* 右侧承载 Before / After Demo；矩阵内只保留随高亮位置移动的问题提示。 */
     .hmfull-wrap.is-detail .hm-detail{overflow:hidden}
     .hm-detail-card{height:100%;min-height:0;padding:0;background:transparent;border:0;box-shadow:none;display:flex;flex-direction:column;gap:.7vh}
     .hm-detail-tabs{display:flex;gap:.42vw;flex:0 0 auto}.hm-detail-tab{height:28px;padding:0 .88vw;border-radius:999px;border:1px solid rgba(47,61,99,.13);background:rgba(255,255,255,.72);color:#6B7280;cursor:pointer;font-family:'HarmonyOS Sans SC','Noto Sans SC',sans-serif;font-size:var(--fs-sm);font-weight:850}.hm-detail-tab.on{background:#253246;border-color:#253246;color:#fff}
@@ -1621,9 +1621,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-nvidia-demo{flex:1;min-height:0;overflow:hidden;border:1px solid rgba(118,185,0,.24);border-radius:8px;background:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.95)}.hm-nv-top{height:21px;display:flex;align-items:center;gap:5px;padding:0 7px;background:#F3F5F1;border-bottom:1px solid #DDE5D4;color:#5A6B47;font-family:'JetBrains Mono';font-size:9px;font-weight:850}.hm-nv-dots{display:flex;gap:3px}.hm-nv-dots i{width:4px;height:4px;border-radius:50%;background:#B7C2AD}.hm-nv-url{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.hm-nv-ui{min-height:0;padding:7px 8px;color:#35422A;font-size:10px;line-height:1.25}.hm-nv-ui b{font-size:10.5px;color:#263A13}.hm-nv-ui small{font-size:9px;color:#728064}.hm-nv-row{display:flex;align-items:center;gap:6px;min-width:0}.hm-nv-row+.hm-nv-row{margin-top:5px}.hm-nv-badge{display:inline-flex;align-items:center;white-space:nowrap;padding:2px 5px;border-radius:999px;background:#EAF6D7;color:#467300;font-size:8.5px;font-weight:900}.hm-nv-tabs{display:flex;gap:8px;margin:3px 0 5px;border-bottom:1px solid #E1E8D8}.hm-nv-tabs span{padding-bottom:3px;font-size:9px;color:#77846B}.hm-nv-tabs span.on{color:#527E00;font-weight:900;border-bottom:2px solid #76B900}.hm-nv-code{margin-top:5px;padding:4px 5px;border-radius:4px;background:#20251D;color:#DDECC7;font-family:'JetBrains Mono';font-size:8.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hm-nv-list{display:grid;gap:4px}.hm-nv-list>div{display:grid;grid-template-columns:13px minmax(0,1fr) auto;gap:5px;align-items:center;padding:4px 5px;border:1px solid #E0E9D7;border-radius:5px;background:#FCFDFB}.hm-nv-list i{display:grid;place-items:center;width:13px;height:13px;border-radius:50%;background:#76B900;color:#fff;font-size:8px;font-style:normal;font-weight:950}.hm-nv-list b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:9.5px}.hm-nv-list small{white-space:nowrap;font-size:8px}.hm-nv-stepper{display:flex;align-items:center;gap:4px;margin-top:6px}.hm-nv-stepper span{display:grid;place-items:center;min-width:17px;height:17px;padding:0 3px;border-radius:50%;background:#76B900;color:#fff;font-size:8px;font-weight:900}.hm-nv-stepper i{height:2px;flex:1;background:#A9D270}.hm-nv-chat{display:grid;gap:5px}.hm-nv-chat .ask{padding:4px 6px;border-radius:6px 6px 2px 6px;background:#F0F2F5;color:#5F6973}.hm-nv-chat .answer{padding:5px 6px;border-radius:6px 6px 6px 2px;background:#EFF8DF;border:1px solid #D5EAB7;color:#3C5321}.hm-nv-log{display:grid;gap:3px;padding:5px 6px;border-radius:5px;background:#20251D;color:#DCEBC8;font-family:'JetBrains Mono';font-size:8.5px}.hm-nv-log em{color:#A9DA60;font-style:normal}.hm-nv-search{display:flex;align-items:center;gap:5px;margin-bottom:5px;padding:4px 6px;border:1px solid #D7E5C7;border-radius:5px;color:#5E6B50;background:#FCFDFB}.hm-nv-search span{margin-left:auto;padding:1px 4px;border-radius:3px;background:#E5F2D1;color:#527E00;font-size:8px;font-weight:900}
     .hm-after{height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:.7vh;min-height:0}.hm-after-design{padding:.88vh .82vw;border-radius:11px;background:rgba(47,111,237,.07);border:1px solid rgba(47,111,237,.14)}.hm-after-design b{display:block;font-size:var(--fs-body);line-height:1.24;font-weight:950;color:#2F63D8}.hm-after-design p{margin:.34vh 0 0;font-size:var(--fs-body);line-height:1.42;color:#536071}.hm-after-demo{min-height:0;overflow:hidden;padding:.62vh .65vw;border-radius:11px;background:rgba(255,255,255,.62);border:1px solid rgba(47,61,99,.09)}.hm-after-demo h4{margin:0 0 .42vh;font-size:var(--fs-sm);line-height:1.2;font-weight:950;color:#1F7A4D}.hm-after-demo .hm-demo-scale{height:calc(100% - 22px)}.hm-after-demo iframe{display:block;width:100%;height:100%;min-height:120px;border:0;background:transparent}
     .hm-detail-demo{width:100%;height:100%;min-height:0;overflow:hidden}.hm-demo-scale{width:100%;height:100%;transform-origin:top left}.hm-detail-demo iframe{display:block;width:100%;min-height:120px;border:0;background:transparent}
-    .hm-matrix-copy{position:absolute;z-index:7;left:1.05vw;right:1.05vw;bottom:1.05vh;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:.58vw .65vw;align-items:start;padding:.85vh .78vw;border-radius:12px;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.96);box-shadow:0 14px 32px -22px rgba(30,40,70,.55);pointer-events:none}.hm-matrix-copy.off{display:none}.hm-matrix-copy .hm-detail-ico{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(199,0,11,.09);color:#C7000B}.hm-matrix-copy .hm-detail-ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.hm-matrix-copy .hm-detail-title{font-size:var(--fs-h3);line-height:1.18;font-weight:950;color:var(--ink)}.hm-matrix-copy .hm-detail-layer{display:inline-flex;margin-top:.18vh;padding:.14vh .4vw;border-radius:999px;background:rgba(91,91,214,.08);color:#5B4AB7;font-size:var(--fs-xs);font-weight:850;line-height:1.2}.hm-matrix-copy .hm-detail-index{font-family:'JetBrains Mono';font-size:var(--fs-h2);line-height:1;color:#C7000B;font-weight:500}.hm-matrix-copy .hm-detail-desc{grid-column:1 / -1;margin:0;font-size:var(--fs-body);line-height:1.42;color:var(--ink-2)}.hm-matrix-copy .hm-detail-actions{grid-column:1 / -1;display:block;min-height:0;padding:0}.hm-matrix-copy .hm-detail-actions b{display:inline;color:#26354A;font-size:var(--fs-body);line-height:1.42;font-weight:950}.hm-matrix-copy .hm-detail-actions ul{display:inline;list-style:none;margin:0;padding:0}.hm-matrix-copy .hm-detail-actions li{display:inline;color:#4E5A6D;font-size:var(--fs-body);line-height:1.42}.hm-matrix-copy .hm-detail-actions li+li:before{content:'；';position:static;width:auto;height:auto;background:none;margin:0}.hm-matrix-copy .hm-detail-actions li:first-child:before{content:'：';position:static;width:auto;height:auto;background:none;margin:0}
-    /* 问题卡需要遮住其下方的矩阵高亮框。 */
-    .hm-matrix-copy{z-index:20}
     .hmfull{width:100%;height:100%;border-collapse:separate;border-spacing:0;table-layout:fixed}
     .hmfull col.scene-col{width:48px}
     .hmfull col.task-col{width:178px}
@@ -1651,7 +1648,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-rings{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
     .hm-ring{position:absolute;box-sizing:border-box;border:2px dotted rgba(55,61,72,.9);border-radius:14px;background:transparent;box-shadow:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),width .42s cubic-bezier(.2,.8,.2,1),height .42s cubic-bezier(.2,.8,.2,1),opacity .24s ease}
     .hm-rings.off{opacity:0}
-    .hm-callout{position:absolute;z-index:6;width:min(382px,29vw);padding:1.28vh 1.08vw 1.16vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
+    .hm-callout{position:absolute;z-index:20;width:min(382px,29vw);padding:1.28vh 1.08vw 1.16vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
     .hm-callout.off{opacity:0;transform:translateY(4px)}
     .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:start}
     .hm-callout .hm-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#C7000B;background:radial-gradient(circle at 30% 25%,rgba(199,0,11,.15),rgba(199,0,11,.035) 70%);border:1px solid rgba(199,0,11,.12)}
@@ -2079,7 +2076,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="hmfull-workspace">
           <div class="card hmfull-card devhm-card">
             <table class="hmfull" id="mFull" aria-label="opknow 全量矩阵"></table>
-            <div class="hm-matrix-copy off" id="hmMatrixCopy" aria-live="polite"></div>
+            <div class="hm-callout off" id="hmCallout" aria-live="polite"></div>
           </div>
           <aside class="hm-detail" id="hmDetail" aria-live="polite"></aside>
         </div>
@@ -2115,7 +2112,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         h+='<tr data-task="'+r.k+'" data-side="cann"><td class="stk asc" data-side="cann" data-task="'+r.k+'">CANN</td>'+c.map(function(x,i){return td(x,i===10?'sum':'',r.n,'CANN',cols[i],r.k,'cann',i);}).join('')+'</tr>';
       });
       table.innerHTML=h+'</tbody>';
-      var card=table.closest('.hmfull-card'), wrap=table.closest('.hmfull-wrap'), rings=document.getElementById('hmRings'), detail=document.getElementById('hmDetail'), matrixCopy=document.getElementById('hmMatrixCopy'), stepBox=document.getElementById('hmSteps');
+      var card=table.closest('.hmfull-card'), wrap=table.closest('.hmfull-wrap'), rings=document.getElementById('hmRings'), detail=document.getElementById('hmDetail'), callout=document.getElementById('hmCallout'), stepBox=document.getElementById('hmSteps');
       var DETAILS={
         version:{card:1,score:{cann:'2 / 5',nvidia:'4.19 / 5',gap:'−1.69',label:'版本清晰度均值'},actions:['为每篇文档设置首选网址，默认指向当前推荐版本。','按芯片与框架版本返回唯一配套组合，并标注验证日期。'],designTitle:'当前版本入口 + 配套查询',afterWhy:'把“该看哪一版、能否配套”从 AI 的临场猜测改成页面可直接回答的关系。',meaning:'多数任务的版本清晰度仅为 2 分：同一主题并存多棵版本树，AI 无法稳定判断该采用哪一套当前版本组合。',nvidiaTitle:'固定当前入口与兼容关系',nvidia:'CUDA 的工具与 API 版本线更稳定，官方入口直接给出版本、兼容关系或支持矩阵，使 AI 能把答案锚定到明确的版本条件。'},
         err:{card:3,score:{cann:'.55',nvidia:'.99',gap:'−.44',unit:'',label:'错误码任务综合置信度（0–1）'},actions:['每个错误码提供触发条件、排查步骤与修复样例。','让报错信息直接链接对应页面，支持定位与复测。'],designTitle:'一码一页的可复测排查链',afterWhy:'让 AI 能从报错语义走到触发条件、排查步骤和修复样例，而不是停在泛化建议。',meaning:'页面能抓到不等于问题能解决：正文详尽度只有 2 分，缺少触发条件、诊断路径和修复样例，AI 只能给出泛化兜底。',nvidiaTitle:'语义明确，并有社区互证',nvidia:'CUDA 的错误信息有明确语义，并由官方资料和 Stack Overflow 讨论共同补足排查、验证和修复路径。'},
@@ -2289,11 +2286,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var frame=[].slice.call(detail.querySelectorAll('iframe')).find(function(fr){return fr.contentWindow===e.source;});
         if(frame){fitBeforeDemos();resizeDetailDemoFrame(frame,d.__ux19DemoHeight);}
       });
-      function matrixCopyHtml(f,idx){
-        var d=DETAILS[f.k], layerName={asset:'知识资产层',machine:'机器理解层',search:'检索与引用层'}[f.layer];
-        if(!d)return '';
-        return '<div class="hm-detail-ico">'+iconSvg(f.icon)+'</div><div><div class="hm-detail-title">'+f.title+'</div><span class="hm-detail-layer">'+layerName+'</span></div><div class="hm-detail-index">/'+String(idx+1).padStart(2,'0')+'</div><p class="hm-detail-desc">'+f.desc+'</p><div class="hm-detail-actions"><b>改造方法</b><ul>'+d.actions.map(function(a){return '<li>'+a+'</li>';}).join('')+'</ul></div>';
-      }
       function placeCallout(box){
         if(!callout||!card)return;
         var cr=card.getBoundingClientRect(), cw=callout.offsetWidth||320, ch=callout.offsetHeight||128, gap=14;
@@ -2354,20 +2346,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
           rings.appendChild(el);
         });
       }
-      function clipRingsUnderCopy(){
-        if(!rings||!card)return;
-        var wr=(wrap||card).getBoundingClientRect(), cr=card.getBoundingClientRect();
-        var bottomInset=Math.max(0,wr.bottom-cr.bottom);
-        if(matrixCopy&&!matrixCopy.classList.contains('off')){
-          var mr=matrixCopy.getBoundingClientRect();
-          bottomInset=Math.max(bottomInset,wr.bottom-Math.max(cr.top,mr.top)+7);
-        }
-        rings.style.clipPath='inset('+
-          Math.max(0,cr.top-wr.top)+'px '+
-          Math.max(0,wr.right-cr.right)+'px '+
-          bottomInset+'px '+
-          Math.max(0,cr.left-wr.left)+'px)';
-      }
       function setStep(idx,settled){
         table.querySelectorAll('.hm-on,.hm-ref,.hm-edge').forEach(function(el){el.classList.remove('hm-on','hm-ref','hm-edge');});
         if(idx<0){
@@ -2376,7 +2354,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           if(rings)rings.style.clipPath='';
           if(wrap)wrap.classList.remove('is-detail');
           if(detail)detail.innerHTML='';
-          if(matrixCopy){matrixCopy.classList.add('off');matrixCopy.innerHTML='';}
+          if(callout){callout.classList.add('off');callout.innerHTML='';}
           updatePager(-1);
           window.__hmStep=-1;
           window.__hmDetailMode='before';
@@ -2435,7 +2413,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
             });});
             bindDetailDemoFrame();fitBeforeDemos();detail.scrollTop=0;
           }
-          if(matrixCopy){matrixCopy.innerHTML=matrixCopyHtml(f,idx%focus.length);matrixCopy.classList.remove('off');requestAnimationFrame(clipRingsUnderCopy);}
+          if(callout){
+            callout.innerHTML=calloutHtml(f,idx%focus.length);
+            callout.classList.remove('off');
+            requestAnimationFrame(function(){placeCallout(box);});
+          }
         }
         updatePager(idx%focus.length);
         window.__hmStep=idx%focus.length;
