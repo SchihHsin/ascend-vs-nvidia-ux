@@ -2022,9 +2022,9 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">AI 实测发现可归纳为三层知识机制</span></div>
-        <div class="subttl">实测验证 · 从 26 个任务的结果归纳知识供给、机器理解与检索引用的问题</div>
+        <div class="subttl">实测验证 · 在全量矩阵概览之后，按知识供给、机器理解与检索引用逐层定位问题</div>
       </div>
-      <div class="head-r">17/ AI · 知识机制</div>
+      <div class="head-r">18/ AI · 知识机制</div>
     </div>
     <style>
       .knowledge-pyramid-slide .body-area{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:2.3vw;align-items:stretch}
@@ -2068,10 +2068,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray hmfull-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">沿三层知识机制定位 8 个内容可用性问题</span></div>
-        <div class="subttl">实测验证 · 先按知识层级聚焦问题，再回看 26 项任务的全量矩阵</div>
+        <div class="brand"><span class="ttl">26 项任务的全量可用性矩阵</span></div>
+        <div class="subttl">实测验证 · 先总览全部任务与 11 项指标，再沿三层知识机制逐层定位 8 个问题</div>
       </div>
-      <div class="head-r">18/ AI · 任务矩阵</div>
+      <div class="head-r">17/ AI · 任务矩阵</div>
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
@@ -2466,7 +2466,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var layers=['asset','machine','search'];
         if(onMatrix){
           var current=typeof window.__hmStep==='number'?window.__hmStep:-1;
-          if(current<0){if(dir>0)return window.__hmOpenIssue(0,'before');return false;}
+          /* 全量矩阵先建立整体认知；下一步才转到金字塔分层。 */
+          if(current<0){if(dir>0&&window.__kpShowLayer){window.__kpShowLayer('asset');return true;}return false;}
           var currentLayer=focus[current].layer, layerStart=focus.findIndex(function(f){return f.layer===currentLayer;});
           if(dir>0){
             if(detailMode==='before')return window.__hmOpenIssue(current,'after');
@@ -2503,7 +2504,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         else if(location.hash==='#'+sectionPageNo())setStep(-1);
       }
       var initialHash=location.hash||'', hmMatch=initialHash.match(new RegExp('^#'+sectionPageNo()+'-hm([1-8])(?:-(after))?$'));
-      if(hmMatch){activeLayer=focus[Number(hmMatch[1])-1].layer;detailMode=hmMatch[2]?'after':'before';setStep(Number(hmMatch[1])-1);}else{activeLayer='asset';detailMode='before';setStep(0);}
+      if(hmMatch){activeLayer=focus[Number(hmMatch[1])-1].layer;detailMode=hmMatch[2]?'after':'before';setStep(Number(hmMatch[1])-1);}else{activeLayer=null;detailMode='before';setStep(-1);}
       clearInterval(window.__hmTimer);
       window.__hmTimer=null;
       addEventListener('resize',function(){setStep(typeof window.__hmStep==='number'?window.__hmStep:-1);},{passive:true});
@@ -2511,6 +2512,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
     })();
     </script>
   </section>
+
+  <script>
+    /* 讲解顺序：全量矩阵 → 金字塔层级 → 对应问题 Before / After。 */
+    (function(){
+      var matrix=document.querySelector('.hmfull-slide'), pyramid=document.querySelector('.knowledge-pyramid-slide');
+      if(matrix&&pyramid&&matrix.previousElementSibling===pyramid)pyramid.parentNode.insertBefore(matrix,pyramid);
+    })();
+  </script>
 
   <!-- 3c 灰底：CUDA vs CANN 问题对 -->
 
