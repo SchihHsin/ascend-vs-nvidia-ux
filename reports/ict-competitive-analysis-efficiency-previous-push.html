@@ -192,6 +192,8 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
 .diagnosis-slide .diagnosis-note li{grid-template-columns:auto 1fr;gap:.7vw;align-items:start}
 .diagnosis-slide .diagnosis-note li span{font-size:var(--fs-sm);line-height:1.35;white-space:nowrap;color:#bfc6ff!important}
 .diagnosis-slide .diagnosis-note li b{display:block;font-size:var(--fs-h2);line-height:1.28;margin-bottom:.28vh}
+/* Pareto chart carries the evidence directly, without a separate explanatory block. */
+.pareto-layout{grid-template-columns:minmax(0,1fr)!important}
 </style>
 </head>
 <body>
@@ -252,7 +254,7 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
 
   <section class="slide s-gray">
     <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>优先解决角色任务、领域上下文与分析范围三项痛点，覆盖 80% 的问题提及</h1><p class="sub">角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦是本轮优先改善范围。</p></div><div class="page-no">12 / 15</div></header>
-    <div class="body-area"><div class="pareto-layout"><aside class="pareto-callout"><div class="big">80<small>%</small></div><h2>优先改善角色任务、领域上下文与分析范围</h2><p>16 / 20 次编码提及，达到 80% 优先改善阈值。</p></aside><div class="pareto-chart-card"><div id="paretoChart" aria-label="竞品分析痛点柏拉图"></div></div></div></div><div class="foot">PAIN PRIORITY / REVIEW · CONTEXT · SCOPE</div>
+    <div class="body-area"><div class="pareto-layout"><div class="pareto-chart-card"><div id="paretoChart" aria-label="竞品分析痛点柏拉图"></div></div></div></div><div class="foot">PAIN PRIORITY / REVIEW · CONTEXT · SCOPE</div>
   </section>
 
    <section class="slide s-gray">
@@ -513,7 +515,6 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   if(paretoSlide){
     paretoSlide.querySelector('.head h1').textContent='优先解决角色任务、领域上下文与分析范围三项痛点，覆盖 80% 的问题提及';
     paretoSlide.querySelector('.head .sub').textContent='角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦是本轮优先改善范围。';
-    paretoSlide.querySelector('.pareto-callout').innerHTML='<div class="big">80<small>%</small></div><h2>优先改善角色任务、领域上下文与分析范围</h2><p>16 / 20 次编码提及，达到 80% 优先改善阈值。</p>';
     paretoSlide.querySelector('.pareto-chart-card').insertAdjacentHTML('beforeend','<div class="pareto-focus-box" aria-hidden="true"><span>本轮优先改善</span></div>');
   }
   const focusSlide=slides.find(s=>s.querySelector('.focus-pain-grid'));
