@@ -187,6 +187,13 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
 .voice-slide .interview-table td:first-child,.voice-slide .interview-table .voice{font-size:var(--fs-body)!important;line-height:1.52!important}
 .voice-slide .interview-table .who{font-size:var(--fs-sm)!important;line-height:1.25!important;margin-bottom:.42vh!important}
 .voice-slide .pain-tag{font-size:var(--fs-sm)!important;line-height:1.25!important;padding:.43vh .54vw!important}
+/* Let the capability matrix and its result panel share the full available canvas. */
+.diagnosis-slide .diagnosis{flex:1 1 auto;height:100%;min-height:0;align-items:stretch}
+.diagnosis-slide .matrix.three-pains{height:100%;min-height:0;grid-template-rows:auto repeat(3,minmax(0,1fr))!important}
+.diagnosis-slide .diagnosis-note{min-height:0;height:100%}
+.diagnosis-slide .diagnosis-note li{grid-template-columns:auto 1fr;gap:.7vw;align-items:start}
+.diagnosis-slide .diagnosis-note li span{font-size:var(--fs-sm);line-height:1.35;white-space:nowrap;color:#bfc6ff!important}
+.diagnosis-slide .diagnosis-note li b{display:block;font-size:var(--fs-h2);line-height:1.28;margin-bottom:.28vh}
 </style>
 </head>
 <body>
@@ -257,9 +264,9 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
 
       
 
-      <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>三项高频痛点在范围定义与审阅调整阶段集中暴露为 Skill 能力不足</h1><p class="sub">横轴按设计师主导的六个分析阶段展开。红色为直接造成痛点的核心 Skill 缺口，橙色为会放大痛点的连带不足。</p></div><div class="page-no">14 / 15</div></header>
-    <div class="body-area"><div class="diagnosis"><div class="matrix three-pains glass"><div class="mh">高频痛点 ／ 阶段</div><div class="mh">01<br>明确分析目标</div><div class="mh">02<br>定义分析范围<br>与任务</div><div class="mh">03<br>发起分析生成</div><div class="mh">04<br>等待生成结果</div><div class="mh">05<br>审阅、核验<br>与调整</div><div class="mh">06<br>形成可用的<br>分析材料</div><div class="row">角色与任务<br>链路缺失</div><div class="na">—</div><div class="low">角色任务链路<br>建模不足</div><div class="warn">无法按真实任务<br>拆解生成</div><div class="na">—</div><div class="low">真实使用链路<br>难核验</div><div class="warn">结论难映射到<br>设计材料</div><div class="row">业务领域知识<br>与上下文不足</div><div class="na">—</div><div class="low">领域知识库与<br>上下文不足</div><div class="warn">上下文输入难<br>结构化使用</div><div class="na">—</div><div class="low">业务语境不足<br>需反复补充</div><div class="warn">领域判断难<br>沉淀复用</div><div class="row">研究范围<br>未前置明确</div><div class="na">—</div><div class="low">范围与任务<br>约束缺失</div><div class="warn">目标约束难<br>传入生成</div><div class="na">—</div><div class="warn">范围偏离难<br>及时识别</div><div class="na">—</div></div><aside class="diagnosis-note glass"><div class="eyebrow">RESULT DIMENSIONS</div><h2>红橙 Skill 缺口共同影响三项结果</h2><p>范围、领域知识和角色任务没有被结构化支持时，问题会在生成后集中转化为人工核验、补充上下文和反复调整。</p><ul><li><span>01</span><div><b>完整分析周期 · 效率</b><br>衡量从接题到形成分析材料的总时间。</div></li><li><span>02</span><div><b>首轮关键结论可采纳率 · 有效性</b><br>衡量首轮结果经必要核验后仍被保留的比例。</div></li><li><span>03</span><div><b>重大返工率 · 过程质量</b><br>衡量是否需要重定范围、重找证据或重做结构。</div></li></ul></aside></div></div><div class="foot">CURRENT SKILL GAPS / EFFICIENCY · EFFECTIVENESS · PROCESS QUALITY</div>
+      <section class="slide s-gray diagnosis-slide">
+    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>现有 Skill 存在角色任务、领域上下文、业务范围约束等缺口</h1><p class="sub">横轴按设计师主导的六个分析阶段展开。红色为直接造成痛点的核心 Skill 缺口，橙色为会放大痛点的连带不足。</p></div><div class="page-no">14 / 15</div></header>
+    <div class="body-area"><div class="diagnosis"><div class="matrix three-pains glass"><div class="mh">高频痛点 ／ 阶段</div><div class="mh">01<br>明确分析目标</div><div class="mh">02<br>定义分析范围<br>与任务</div><div class="mh">03<br>发起分析生成</div><div class="mh">04<br>等待生成结果</div><div class="mh">05<br>审阅、核验<br>与调整</div><div class="mh">06<br>形成可用的<br>分析材料</div><div class="row">角色与任务<br>链路缺失</div><div class="na">—</div><div class="low">角色任务链路<br>建模不足</div><div class="warn">无法按真实任务<br>拆解生成</div><div class="na">—</div><div class="low">真实使用链路<br>难核验</div><div class="warn">结论难映射到<br>设计材料</div><div class="row">业务领域知识<br>与上下文不足</div><div class="na">—</div><div class="low">领域知识库与<br>上下文不足</div><div class="warn">上下文输入难<br>结构化使用</div><div class="na">—</div><div class="low">业务语境不足<br>需反复补充</div><div class="warn">领域判断难<br>沉淀复用</div><div class="row">研究范围<br>未前置明确</div><div class="na">—</div><div class="low">范围与任务<br>约束缺失</div><div class="warn">目标约束难<br>传入生成</div><div class="na">—</div><div class="warn">范围偏离难<br>及时识别</div><div class="na">—</div></div><aside class="diagnosis-note glass"><div class="eyebrow">RESULT DIMENSIONS</div><h2>Skill 缺口共同影响三项结果</h2><p>范围、领域知识和角色任务没有被结构化支持时，问题会在生成后集中转化为人工核验、补充上下文和反复调整。</p><ul><li><span>01 · 效率</span><div><b>完整分析周期</b>衡量从接题到形成分析材料的总时间。</div></li><li><span>02 · 有效性</span><div><b>首轮关键结论可采纳率</b>衡量首轮结果经必要核验后仍被保留的比例。</div></li><li><span>03 · 过程质量</span><div><b>重大返工率</b>衡量是否需要重定范围、重找证据或重做结构。</div></li></ul></aside></div></div><div class="foot">CURRENT SKILL GAPS / EFFICIENCY · EFFECTIVENESS · PROCESS QUALITY</div>
   </section>
 
   
@@ -524,10 +531,11 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   // This page is identified by its matrix rather than its editable headline, so runtime copy stays in sync.
   const diagnosisSlide=slides.find(s=>s.querySelector('.three-pains'));
   if(diagnosisSlide){
-    diagnosisSlide.querySelector('.head h1').textContent='三项高频痛点在范围定义与审阅调整阶段集中暴露为 Skill 能力不足';
+    diagnosisSlide.classList.add('diagnosis-slide');
+    diagnosisSlide.querySelector('.head h1').textContent='现有 Skill 存在角色任务、领域上下文、业务范围约束等缺口';
     diagnosisSlide.querySelector('.head .sub').textContent='横轴按设计师主导的六个分析阶段展开。红色为直接造成痛点的核心 Skill 缺口，橙色为会放大痛点的连带不足。';
     diagnosisSlide.querySelector('.three-pains').innerHTML='<div class="mh">高频痛点 ／ 阶段</div><div class="mh">01<br>明确分析目标</div><div class="mh">02<br>定义分析范围<br>与任务</div><div class="mh">03<br>发起分析生成</div><div class="mh">04<br>等待生成结果</div><div class="mh">05<br>审阅、核验<br>与调整</div><div class="mh">06<br>形成可用的<br>分析材料</div><div class="row">角色与任务<br>链路缺失</div><div class="na">—</div><div class="low">角色任务链路<br>建模不足</div><div class="warn">无法按真实任务<br>拆解生成</div><div class="na">—</div><div class="low">真实使用链路<br>难核验</div><div class="warn">结论难映射到<br>设计材料</div><div class="row">业务领域知识<br>与上下文不足</div><div class="na">—</div><div class="low">领域知识库与<br>上下文不足</div><div class="warn">上下文输入难<br>结构化使用</div><div class="na">—</div><div class="low">业务语境不足<br>需反复补充</div><div class="warn">领域判断难<br>沉淀复用</div><div class="row">研究范围<br>未前置明确</div><div class="na">—</div><div class="low">范围与任务<br>约束缺失</div><div class="warn">目标约束难<br>传入生成</div><div class="na">—</div><div class="warn">范围偏离难<br>及时识别</div><div class="na">—</div>';
-    diagnosisSlide.querySelector('.diagnosis-note').innerHTML='<div class="eyebrow">RESULT DIMENSIONS</div><h2>红橙 Skill 缺口共同影响三项结果</h2><p>范围、领域知识和角色任务没有被结构化支持时，问题会在生成后集中转化为人工核验、补充上下文和反复调整。</p><ul><li><span>01</span><div><b>完整分析周期 · 效率</b><br>衡量从接题到形成分析材料的总时间。</div></li><li><span>02</span><div><b>首轮关键结论可采纳率 · 有效性</b><br>衡量首轮结果经必要核验后仍被保留的比例。</div></li><li><span>03</span><div><b>重大返工率 · 过程质量</b><br>衡量是否需要重定范围、重找证据或重做结构。</div></li></ul>';
+    diagnosisSlide.querySelector('.diagnosis-note').innerHTML='<div class="eyebrow">RESULT DIMENSIONS</div><h2>Skill 缺口共同影响三项结果</h2><p>范围、领域知识和角色任务没有被结构化支持时，问题会在生成后集中转化为人工核验、补充上下文和反复调整。</p><ul><li><span>01 · 效率</span><div><b>完整分析周期</b>衡量从接题到形成分析材料的总时间。</div></li><li><span>02 · 有效性</span><div><b>首轮关键结论可采纳率</b>衡量首轮结果经必要核验后仍被保留的比例。</div></li><li><span>03 · 过程质量</span><div><b>重大返工率</b>衡量是否需要重定范围、重找证据或重做结构。</div></li></ul>';
     diagnosisSlide.querySelector('.foot').textContent='CURRENT SKILL GAPS / EFFICIENCY · EFFECTIVENESS · PROCESS QUALITY';
   }
   const goalSlide=slideFor('把“慢、不够可用、要重做”转成');
