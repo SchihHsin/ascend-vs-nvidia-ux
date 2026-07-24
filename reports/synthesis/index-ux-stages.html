@@ -2485,8 +2485,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
       };
       window.__hmDeckNavigate=function(dir){
         var pyramid=document.querySelector('.knowledge-pyramid-slide');
-        var onMatrix=slideEl.classList.contains('active');
-        var onPyramid=pyramid&&pyramid.classList.contains('active');
+        /* 页面重排后，.active 与 deck 的当前索引都可判定当前页，避免首个问题回退时漏掉矩阵状态。 */
+        var matrixIndex=[].slice.call(document.querySelectorAll('.slide')).indexOf(slideEl);
+        var pyramidIndex=pyramid?[].slice.call(document.querySelectorAll('.slide')).indexOf(pyramid):-1;
+        var onMatrix=slideEl.classList.contains('active')||(typeof idx==='number'&&idx===matrixIndex);
+        var onPyramid=pyramid&&(pyramid.classList.contains('active')||(typeof idx==='number'&&idx===pyramidIndex));
         var layers=['asset','machine','search'];
         if(onMatrix){
           var current=typeof window.__hmStep==='number'?window.__hmStep:-1;
@@ -2520,6 +2523,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
         }
         return false;
       };
+      /* 矩阵问题页是 Before / After 序列的一部分，方向键优先交给这段序列处理。 */
+      document.addEventListener('keydown',function(e){
+        if(e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey)return;
+        if(e.target&&['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
+        var forward=['ArrowDown','ArrowRight','PageDown',' '], backward=['ArrowUp','ArrowLeft','PageUp'];
+        var dir=forward.includes(e.key)?1:(backward.includes(e.key)?-1:0);
+        if(dir&&window.__hmDeckNavigate(dir)){
+          e.preventDefault();
+          e.stopImmediatePropagation();
+        }
+      },true);
       function applyHashStep(){
         var hash=location.hash||'', layerMatch=hash.match(new RegExp('^#'+sectionPageNo()+'-layer-(asset|machine|search)$'));
         var hmMatch=hash.match(new RegExp('^#'+sectionPageNo()+'-hm([1-8])(?:-(after))?$'));
