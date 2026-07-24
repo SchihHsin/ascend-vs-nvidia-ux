@@ -990,13 +990,93 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
 
       <!-- 7 灰底：两种社区使用行为 -->
+  <!-- 先用日常任务建立时序图读法，再映射到算子开发。 -->
+  <section class="slide s-gray simple-seq-slide price-seq-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">先从一件人人能理解的事开始：让 AI 帮我比较三台电脑</span></div>
+        <div class="subttl">时序图读法 · 一个任务、三个角色、一次请求与返回</div>
+      </div>
+      <div class="head-r">07/ 时序图 · 日常任务</div>
+    </div>
+    <style>
+      .simple-seq-slide .body-area{display:grid;grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr);gap:1.55vw;align-items:stretch}
+      .simple-seq-copy,.simple-seq-board{min-width:0;min-height:0;border-radius:18px;border:1px solid rgba(255,255,255,.82);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94)}
+      .simple-seq-copy{position:relative;overflow:hidden;padding:2.1vh 1.45vw;display:flex;flex-direction:column;background:var(--g-ink);color:#fff}.simple-seq-copy:after{content:"";position:absolute;right:-12%;bottom:-18%;width:72%;height:58%;border-radius:50%;background:radial-gradient(closest-side,rgba(135,161,255,.22),transparent 72%);pointer-events:none}.simple-seq-copy>*{position:relative;z-index:1}.simple-seq-k{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.12em;color:#BFC8FF}.simple-seq-copy h2{margin:1.05vh 0 0;font-size:var(--fs-h2);line-height:1.3;color:#fff}.simple-seq-copy p{margin:.8vh 0 0;font-size:var(--fs-body);line-height:1.55;color:rgba(255,255,255,.74)}
+      .simple-seq-parts{display:grid;gap:.72vh;margin-top:auto;padding-top:2vh}.simple-seq-part{display:grid;grid-template-columns:28px minmax(0,1fr);gap:.72vw;align-items:start;padding:.82vh .68vw;border-radius:11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13)}.simple-seq-part i{width:20px;height:20px;color:#AFC3FF;stroke-width:2}.simple-seq-part b{display:block;color:#fff;font-size:var(--fs-body);line-height:1.22;font-weight:950}.simple-seq-part span{display:block;margin-top:.18vh;color:rgba(255,255,255,.7);font-size:var(--fs-sm);line-height:1.34}
+      .simple-seq-board{position:relative;overflow:hidden;padding:1.45vh 1.15vw;background:rgba(255,255,255,.64);display:grid;grid-template-rows:auto 1fr auto;gap:.65vh}.simple-seq-board:before{content:"";position:absolute;right:-5%;top:-12%;width:44%;height:46%;border-radius:50%;background:radial-gradient(closest-side,rgba(91,91,214,.12),transparent 72%);pointer-events:none}.simple-seq-title{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:1vw}.simple-seq-title b{font-size:var(--fs-h3);line-height:1.2;color:var(--ink);font-weight:950}.simple-seq-title span{flex:0 0 auto;border-radius:999px;padding:.42vh .65vw;background:rgba(91,91,214,.09);border:1px solid rgba(91,91,214,.15);color:#5B4AB7;font-size:var(--fs-sm);font-weight:900}.simple-seq-mermaid{position:relative;z-index:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}.simple-seq-mermaid .mermaid{width:100%;margin:0;background:transparent;font-family:'HarmonyOS Sans SC','Inter',sans-serif}.simple-seq-mermaid svg{display:block;width:100%;max-width:100%;height:100%;overflow:visible}.simple-seq-mermaid .actor,.simple-seq-mermaid text{font-family:'HarmonyOS Sans SC','Inter',sans-serif!important}.simple-seq-mermaid .actor{font-weight:900!important}.simple-seq-mermaid .messageText{font-weight:750!important}.simple-seq-mermaid .actor-line{stroke:#C8D0DD!important;stroke-dasharray:5 6}.simple-seq-mermaid .messageLine0,.simple-seq-mermaid .messageLine1{stroke:#596B91!important;stroke-width:1.7px!important}.simple-seq-mermaid marker path{fill:#596B91!important;stroke:#596B91!important}.simple-seq-foot{position:relative;z-index:1;border-radius:10px;padding:.72vh .75vw;background:rgba(47,111,237,.07);border:1px solid rgba(47,111,237,.12);font-size:var(--fs-sm);line-height:1.36;color:#465369}.simple-seq-foot b{color:#202531;font-weight:950}
+      .operator-seq-slide .simple-seq-copy{background:linear-gradient(145deg,#1E2637,#171C27)}.operator-seq-slide .simple-seq-copy:after{background:radial-gradient(closest-side,rgba(196,90,105,.18),transparent 72%)}.operator-seq-slide .simple-seq-title span{background:rgba(199,0,11,.07);border-color:rgba(199,0,11,.14);color:#A60009}.operator-seq-slide .simple-seq-board:before{background:radial-gradient(closest-side,rgba(199,0,11,.08),transparent 72%)}
+    </style>
+    <div class="body-area">
+      <aside class="simple-seq-copy">
+        <div class="simple-seq-k">ONE TASK · ONE EXCHANGE</div>
+        <h2>时序图不先讲技术，先讲一件事如何在不同角色间被推进。</h2>
+        <p>用户给出目标，AI 向外部信息源取数，再把信息组织成能帮助决策的结果。线的方向说明谁向谁发起动作，返回线说明得到了什么。</p>
+        <div class="simple-seq-parts">
+          <div class="simple-seq-part"><i data-lucide="user-round"></i><div><b>用户提出任务</b><span>比较预算内三台电脑，重点看价格、配置与库存。</span></div></div>
+          <div class="simple-seq-part"><i data-lucide="bot"></i><div><b>AI 获取信息</b><span>把模糊需求变成查询，并读取可比较的商品信息。</span></div></div>
+          <div class="simple-seq-part"><i data-lucide="store"></i><div><b>外部来源返回证据</b><span>价格、配置、库存和促销条件成为答案依据。</span></div></div>
+        </div>
+      </aside>
+      <section class="simple-seq-board">
+        <div class="simple-seq-title"><b>电脑比价：一次最小的人机协同过程</b><span>从左到右读</span></div>
+        <div class="simple-seq-mermaid" aria-label="用户、AI 和电商平台的电脑比价时序图"><pre class="mermaid">sequenceDiagram
+          participant U as 用户
+          participant A as AI
+          participant S as 电商平台
+          U->>A: 帮我比较三台电脑
+          A->>S: 查询价格、配置与库存
+          S-->>A: 返回商品信息与促销条件
+          A->>A: 对齐预算与使用需求
+          A-->>U: 给出可解释的推荐</pre></div>
+        <div class="simple-seq-foot"><b>读图规则：</b>每条箭头都是一个可被记录的协同事件；下一页只替换任务和信息源，读法不变。</div>
+      </section>
+    </div>
+  </section>
+
+  <section class="slide s-gray simple-seq-slide operator-seq-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">同一套时序结构，换成开发算子时就是“开发者、AI 与昇腾社区”的协同</span></div>
+        <div class="subttl">时序图映射 · 电脑比价 → 自定义算子开发</div>
+      </div>
+      <div class="head-r">08/ 时序图 · 开发任务</div>
+    </div>
+    <div class="body-area">
+      <aside class="simple-seq-copy">
+        <div class="simple-seq-k">SAME STRUCTURE · NEW DOMAIN</div>
+        <h2>角色与任务变了，但“提出问题 → 取证 → 返回可执行结果”的结构没有变。</h2>
+        <p>把电商平台换成昇腾社区，把商品信息换成操作教程、代码与版本条件。这时，是否找得到、读得全、能否判断版本，直接影响开发任务能不能继续。</p>
+        <div class="simple-seq-parts">
+          <div class="simple-seq-part"><i data-lucide="code-2"></i><div><b>开发者提出目标</b><span>把自定义算子接入 PyTorch，并获得可照做的工程步骤。</span></div></div>
+          <div class="simple-seq-part"><i data-lucide="search-check"></i><div><b>AI 检索并组织证据</b><span>搜索教程、代码样例、版本配套与相关社区经验。</span></div></div>
+          <div class="simple-seq-part"><i data-lucide="shield-check"></i><div><b>开发者必要时核验</b><span>在版本、前置条件或关键代码不明确时回到官方页面确认。</span></div></div>
+        </div>
+      </aside>
+      <section class="simple-seq-board">
+        <div class="simple-seq-title"><b>算子开发：一个阶段的最小协同过程</b><span>结构与电脑比价相同</span></div>
+        <div class="simple-seq-mermaid" aria-label="开发者、AI 与昇腾社区的算子开发时序图"><pre class="mermaid">sequenceDiagram
+          participant D as 开发者
+          participant A as AI
+          participant C as 昇腾社区
+          D->>A: 自定义算子如何接入 PyTorch？
+          A->>C: 检索操作教程、代码与版本条件
+          C-->>A: 返回页面、代码与相关信息
+          A-->>D: 组织构建与注册步骤
+          D->>C: 核对版本与前置条件
+          C-->>D: 确认可执行的工程条件</pre></div>
+        <div class="simple-seq-foot"><b>下一步：</b>把这一段放回从立项到交付的完整开发过程，才能看到知识缺口究竟出现在哪一个阶段。</div>
+      </section>
+    </div>
+  </section>
+
   <section class="slide s-gray ux-method-slide seqfocus-slide seqdemo-slide">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">AI 取证与开发者核验构成两种社区使用行为</span></div>
         <div class="subttl">研究对象 · 人与 AI 在同一任务中的不同知识需求</div>
       </div>
-      <div class="head-r">07/ 研究对象 · 两种行为</div>
+      <div class="head-r">09/ 研究对象 · 两种行为</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card seqdemo-left">
@@ -1062,7 +1142,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">每次知识往返都能识别发起者、证据来源与受阻位置</span></div>
         <div class="subttl">研究对象 · 「写核函数」阶段局部</div>
       </div>
-      <div class="head-r">08/ 研究对象 · 局部往返</div>
+      <div class="head-r">10/ 研究对象 · 局部往返</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card">
@@ -1097,7 +1177,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">七个任务阶段依次衔接，才形成一次完整的自定义算子开发</span></div>
         <div class="subttl">研究对象 · 左侧阶段不是分类，而是一条从立项到交付的开发链</div>
       </div>
-      <div class="head-r">09/ 研究对象 · 阶段串联</div>
+      <div class="head-r">11/ 研究对象 · 阶段串联</div>
     </div>
     <style>
       .seqbuild-slide .body-area{display:grid;grid-template-columns:minmax(255px,.7fr) minmax(0,1.65fr);gap:1.4vw;min-height:0}
@@ -1159,7 +1239,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">研究对象从一次知识往返扩展到完整任务过程</span></div>
         <div class="subttl">研究对象 · 「局部任务 → 自定义算子开发全过程」</div>
       </div>
-      <div class="head-r">10/ 研究对象 · 观察范围</div>
+      <div class="head-r">12/ 研究对象 · 观察范围</div>
     </div>
     <style>
       .seqscope-slide .body-area{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1.15fr);gap:1.05vw;align-items:stretch}
@@ -1201,7 +1281,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">围绕真实任务，量化 AI 能否获得并组织可执行的昇腾知识</span></div>
         <div class="subttl">研究设计 · 以任务、证据与评分为主线，定位 AI 可用性的受阻环节</div>
       </div>
-      <div class="head-r">11/ 研究设计</div>
+      <div class="head-r">13/ 研究设计</div>
     </div>
     <style>
       .research-map-slide .body-area{justify-content:center;gap:1.1vh}
@@ -1262,7 +1342,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">时序图中 AI 与昇腾社区的一条线，就是一次完整的知识获取过程</span></div>
         <div class="subttl">测量方法 · 从任务问题到可引用证据，再到可执行答案</div>
       </div>
-      <div class="head-r">12/ AI 可用性 · 过程说明</div>
+      <div class="head-r">14/ AI 可用性 · 过程说明</div>
     </div>
     <style>
       .ai-community-process-slide .body-area{justify-content:center}.aicp-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);gap:1.5vw;align-items:stretch;min-height:0}.aicp-flow{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8vw;align-items:stretch;padding:1.35vh 1.05vw;border-radius:17px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 34px -24px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.9)}.aicp-node{--a:#5B5BD6;position:relative;z-index:1;min-width:0;border-radius:13px;padding:1.25vh .9vw;background:linear-gradient(145deg,color-mix(in srgb,var(--a) 10%,#fff),rgba(255,255,255,.88));border:1px solid color-mix(in srgb,var(--a) 19%,white);display:flex;flex-direction:column;justify-content:center;gap:.45vh}.aicp-node b{font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950}.aicp-node span{font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}.aicp-node i{font-style:normal;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;color:var(--a);letter-spacing:.06em}.aicp-node.search{--a:#2F6FED}.aicp-node.fetch{--a:#0F9F9B}.aicp-node.quote{--a:#D17724}.aicp-node.answer{--a:#5B5BD6}.aicp-arrow{position:absolute;z-index:0;top:50%;left:20%;right:20%;height:2px;background:linear-gradient(90deg,#2F6FED,#0F9F9B,#D17724,#5B5BD6);opacity:.42}.aicp-arrow:after{content:"";position:absolute;right:-1px;top:50%;width:8px;height:8px;border-top:2px solid #5B5BD6;border-right:2px solid #5B5BD6;transform:translateY(-50%) rotate(45deg)}.aicp-side{border-radius:17px;padding:1.55vh 1.2vw;background:var(--g-ink);color:#fff;box-shadow:0 18px 38px -26px rgba(20,23,28,.68),inset 0 1px 0 rgba(255,255,255,.22);display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.aicp-side .eyebrow{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.1em;color:#BFC8FF}.aicp-side h3{font-size:var(--fs-h2);line-height:1.28;color:#fff;font-weight:950}.aicp-side p{font-size:var(--fs-body);line-height:1.52;color:rgba(255,255,255,.72)}.aicp-side b{color:#fff}.aicp-tag{display:inline-flex;align-self:flex-start;padding:.42vh .58vw;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:var(--fs-sm);font-weight:850;color:#fff}.aicp-tag em{font-style:normal;color:#8CE0D7;margin-right:.35em}
@@ -1315,7 +1395,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">11 项评分覆盖 AI 获取知识、判断证据与组织作答的动作</span></div>
         <div class="subttl">测量方法 · 「架构图 → 可观测指标」</div>
       </div>
-      <div class="head-r">13/ AI 指标 · 架构映射</div>
+      <div class="head-r">15/ AI 指标 · 架构映射</div>
     </div>
     <div class="body-area">
         <div class="archmetric-layout">
@@ -1379,7 +1459,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">可观测得分汇合为综合置信度，区分证据供给与答案产出</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「定义与计算理由」</div>
       </div>
-      <div class="head-r">14/ AI 指标 · 计算理由</div>
+      <div class="head-r">16/ AI 指标 · 计算理由</div>
     </div>
     <div class="body-area">
       <div class="metric-class-layout">
@@ -1972,7 +2052,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">让开发者借助 AI 使用 CANN 时，也能获得接近 CUDA 的可执行支持</span></div>
         <div class="subttl">战略意义 · 以成熟生态为参照，支撑昇腾构建开放、易用、可持续演进的 AI 生态</div>
       </div>
-      <div class="head-r">16/ 问题对 · 设计样例</div>
+      <div class="head-r">18/ 问题对 · 设计样例</div>
     </div>
     <style>
       .question-example-slide .body-area{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:1.5vw;min-height:0}.qexample-rule,.qexample-question{min-width:0;min-height:0;border-radius:18px;padding:2.15vh 1.45vw}.qexample-rule{display:flex;flex-direction:column;background:var(--g-ink);color:#fff;box-shadow:0 18px 42px -25px rgba(20,25,35,.56)}.qexample-question{display:flex;flex-direction:column;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 36px -24px rgba(30,40,70,.3),inset 0 1px 0 rgba(255,255,255,.92)}.qexample-k{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.13em;color:#BFC7FF}.qexample-rule h2,.qexample-question h2{margin:1vh 0 0;font-size:var(--fs-h2);line-height:1.28}.qexample-rule h2{color:#fff}.qexample-question h2{color:var(--ink)}.qexample-lead{margin:.75vh 0 0;font-size:var(--fs-body);line-height:1.5}.qexample-rule .qexample-lead{color:rgba(255,255,255,.72)}.qexample-question .qexample-lead{color:var(--ink-2)}.qexample-checks{display:grid;gap:.7vh;margin-top:auto;padding-top:1.7vh}.qexample-check{display:grid;grid-template-columns:24px minmax(0,1fr);gap:.7vw;align-items:start;padding:.85vh .72vw;border-radius:11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}.qexample-check i{width:19px;height:19px;color:#8FE1C4;stroke-width:2}.qexample-check b{display:block;font-size:var(--fs-body);line-height:1.25;color:#fff}.qexample-check span{display:block;margin-top:.18vh;font-size:var(--fs-sm);line-height:1.38;color:rgba(255,255,255,.68)}.qexample-goal{margin-top:1.5vh;padding:1vh .95vw;border-radius:11px;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.14);font-size:var(--fs-body);line-height:1.48;color:var(--ink-2)}.qexample-goal b{color:var(--accent)}.qexample-flow{position:relative;flex:0 0 11vh;margin-top:auto;min-height:0}.qexample-mermaid-flow{display:flex;align-items:center;justify-content:center;overflow:hidden}.qexample-mermaid-flow .mermaid{width:100%;margin:0;background:transparent;font-family:'HarmonyOS Sans SC','Inter',sans-serif}.qexample-mermaid-flow svg{display:block;width:100%;max-width:100%;height:10.6vh;overflow:visible}.qexample-mermaid-flow .nodeLabel{font-family:'HarmonyOS Sans SC','Inter',sans-serif!important;font-size:14px;font-weight:800}.qexample-mermaid-flow .edgeLabel{font-family:'HarmonyOS Sans SC','Inter',sans-serif!important;font-size:11px;font-weight:800}.qexample-mermaid-flow .edgeLabel rect{fill:#F1F3F7!important;opacity:1!important}.qexample-mermaid-flow .flowchart-link{stroke:#9EAABB!important;stroke-width:1.5px!important}.qexample-mermaid-flow marker path{fill:#9EAABB!important;stroke:#9EAABB!important}.qexample-pair{display:grid;grid-template-columns:1fr 1fr;gap:1vw;margin-top:0;padding-top:0}.qexample-demo{--qc:#5A8A00;min-width:0;min-height:0;border-radius:14px;overflow:hidden;background:#fff;border:1px solid rgba(47,61,99,.14);box-shadow:0 10px 24px -20px rgba(30,40,70,.32);display:flex;flex-direction:column}.qexample-demo.cann{--qc:#C7000B}.qdemo-top{display:flex;align-items:center;gap:5px;padding:.65vh .75vw;background:#F5F6F8;border-bottom:1px solid rgba(47,61,99,.1);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;color:var(--qc)}.qdemo-top i{width:14px;height:14px;stroke-width:2}.qdemo-dots{display:flex;gap:3px;margin-left:auto}.qdemo-dots i{width:5px;height:5px;border-radius:50%;background:#B7BEC9}.qdemo-chat{display:flex;flex-direction:column;gap:.55vh;padding:.8vh .75vw;flex:1}.qdemo-context{font-family:'JetBrains Mono';font-size:10px;font-weight:850;color:#687385}.qdemo-bubble{border-radius:9px;padding:.65vh .65vw;background:color-mix(in srgb,var(--qc) 10%,white);border:1px solid color-mix(in srgb,var(--qc) 20%,white);font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}.qdemo-bubble b{color:var(--ink);font-weight:900}.qdemo-input{margin:.1vh .75vw .75vh;border:1px solid rgba(47,61,99,.16);border-radius:7px;padding:.45vh .55vw;display:flex;align-items:center;gap:5px;color:#8B95A5;font-size:var(--fs-xs)}.qdemo-input i{width:13px;height:13px;margin-left:auto;color:var(--qc);stroke-width:2}.qexample-out{margin-top:1vh;display:flex;align-items:center;gap:.55vw;font-size:var(--fs-sm);line-height:1.4;color:var(--ink-2)}.qexample-out i{width:18px;height:18px;color:var(--accent);stroke-width:2}
@@ -2017,7 +2097,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">再把同一设计原则扩展为五组问题对，覆盖算子开发的关键知识需求</span></div>
         <div class="subttl">实测验证 · 「问题对」全量任务集</div>
       </div>
-      <div class="head-r">17/ 问题对 · 全量任务集</div>
+      <div class="head-r">19/ 问题对 · 全量任务集</div>
     </div>
     <style>
       .task-pairs-flow{flex:0 0 15vh;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}.task-pairs-flow .mermaid{width:100%;margin:0;background:transparent;font-family:'HarmonyOS Sans SC','Inter',sans-serif}.task-pairs-flow svg{display:block;width:100%;max-width:100%;height:14vh;overflow:visible}.task-pairs-flow .nodeLabel{font-family:'HarmonyOS Sans SC','Inter',sans-serif!important;font-size:14px;font-weight:800}.task-pairs-flow .edgeLabel{font-family:'HarmonyOS Sans SC','Inter',sans-serif!important;font-size:11px;font-weight:800}.task-pairs-flow .edgeLabel rect{fill:#F1F3F7!important;opacity:1!important}.task-pairs-flow .flowchart-link{stroke:#9EAABB!important;stroke-width:1.5px!important}.task-pairs-flow marker path{fill:#9EAABB!important;stroke:#9EAABB!important}.copy-large .task-pairs-copy{gap:.65vh}.copy-large .task-pairs-copy .qpx{gap:.42vh}.copy-large .task-pairs-copy .qtask{padding:.62vh .8vw;gap:.38vh}.copy-large .task-pairs-copy .qx-c{padding:.55vh .62vw;line-height:1.32}.copy-large .task-pairs-copy .qx-intent{font-size:var(--fs-xs)}
@@ -2085,7 +2165,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">五项任务结果：写算子可用性最低，其余任务受版本、生态与模型先验影响</span></div>
         <div class="subttl">实测验证 · 「对照问题 → 五项结果」</div>
       </div>
-      <div class="head-r">18/ 矩阵评分 · 结果</div>
+      <div class="head-r">20/ 矩阵评分 · 结果</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -2139,7 +2219,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">AI 实测发现可归纳为三层知识机制</span></div>
         <div class="subttl">实测验证 · 在全量矩阵概览之后，按知识供给、机器理解与检索引用逐层定位问题</div>
       </div>
-      <div class="head-r">19/ AI · 知识机制</div>
+      <div class="head-r">21/ AI · 知识机制</div>
     </div>
     <style>
       .knowledge-pyramid-slide .body-area{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:2.3vw;align-items:stretch}
@@ -2186,7 +2266,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">26 项任务的全量可用性矩阵</span></div>
         <div class="subttl">实测验证 · 先总览全部任务与 11 项指标，再沿三层知识机制逐层定位 8 个问题</div>
       </div>
-      <div class="head-r">20/ AI · 任务矩阵</div>
+      <div class="head-r">22/ AI · 任务矩阵</div>
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
@@ -2712,7 +2792,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">当前是昇腾与 NVIDIA 的案例，但研究框架可迁移到任何技术生态与用户任务</span></div>
         <div class="subttl">方法论抽象 · 固定一类用户任务与量化指标，只替换需要被比较的变量</div>
       </div>
-      <div class="head-r">21/ 可迁移框架</div>
+      <div class="head-r">23/ 可迁移框架</div>
     </div>
     <style>
       .method-general-slide .body-area{min-height:0;display:flex;justify-content:center}.method-frame{width:min(1240px,100%);min-height:0;display:grid;grid-template-columns:minmax(0,.92fr) 58px minmax(0,1.08fr);gap:1.15vw;align-items:stretch}.method-frame .mf-fixed,.method-frame .mf-variable{min-width:0;min-height:0;border-radius:18px;padding:2.25vh 1.45vw;display:flex;flex-direction:column;position:relative;overflow:hidden}.method-frame .mf-fixed{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 36px -24px rgba(30,40,70,.3),inset 0 1px 0 rgba(255,255,255,.92)}.method-frame .mf-variable{background:var(--g-ink);color:#fff;box-shadow:0 18px 42px -25px rgba(20,25,35,.56),inset 0 1px 0 rgba(255,255,255,.22)}.method-frame .mf-k{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.13em}.method-frame .mf-fixed .mf-k{color:var(--accent)}.method-frame .mf-variable .mf-k{color:#BFC7FF}.method-frame h2{margin:1vh 0 0;font-size:var(--fs-h2);line-height:1.28}.method-frame .mf-fixed h2{color:var(--ink)}.method-frame .mf-variable h2{color:#fff}.method-frame .mf-lead{margin:1vh 0 0;font-size:var(--fs-body);line-height:1.52}.method-frame .mf-fixed .mf-lead{color:var(--ink-2)}.method-frame .mf-variable .mf-lead{color:rgba(255,255,255,.72)}.mf-keep{display:grid;gap:.8vh;margin-top:auto;padding-top:2vh}.mf-keep>div{display:grid;grid-template-columns:26px minmax(0,1fr);gap:.7vw;align-items:start;padding:.95vh .75vw;border-radius:11px;background:rgba(91,91,214,.075);border:1px solid rgba(91,91,214,.12)}.mf-keep>div>div{min-width:0}.mf-keep i,.mf-variable i{width:20px;height:20px;stroke-width:1.9}.mf-keep i{color:var(--accent)}.mf-keep b,.mf-switch b{display:block;font-size:var(--fs-body);line-height:1.26}.mf-keep span,.mf-switch span{display:block;margin-top:.18vh;font-size:var(--fs-sm);line-height:1.4}.mf-keep b{color:var(--ink)}.mf-keep span{color:var(--ink-2)}.mf-arrow{align-self:center;display:flex;align-items:center;justify-content:center;color:#7B8494}.mf-arrow svg{width:46px;height:46px;fill:currentColor}.mf-switches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72vw;margin-top:auto;padding-top:2vh}.mf-switch{min-width:0;min-height:0;border:1px solid rgba(255,255,255,.17);border-radius:12px;padding:1.05vh .78vw;background:rgba(255,255,255,.07)}.mf-switch i{color:#BFC7FF}.mf-switch b{margin-top:.7vh;color:#fff}.mf-switch span{color:rgba(255,255,255,.68)}.mf-rule{position:absolute;right:1.4vw;top:1.7vh;display:flex;align-items:center;gap:.42vw;font-size:var(--fs-sm);font-weight:800;color:rgba(255,255,255,.68)}.mf-rule i{width:16px;height:16px;color:#89DFC1}
@@ -2751,7 +2831,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">生态、知识来源与 AI 都可以成为变量，并用同一组指标量化比较</span></div>
         <div class="subttl">研究设计 · 每次只改变一个变量，矩阵结果才可以被清楚归因</div>
       </div>
-      <div class="head-r">22/ 三种对照实验</div>
+      <div class="head-r">24/ 三种对照实验</div>
     </div>
     <style>
       .method-experiment-slide .body-area{min-height:0}.experiment-grid{width:min(1210px,100%);margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5vw;align-items:stretch}.experiment-card{--ec:#5B5BD6;position:relative;min-width:0;min-height:45vh;overflow:hidden;border-radius:18px;padding:2.25vh 1.45vw;display:flex;flex-direction:column;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 36px -24px rgba(30,40,70,.3),inset 0 1px 0 rgba(255,255,255,.92)}.experiment-card::before{content:"";position:absolute;left:0;right:0;top:0;height:7vh;background:linear-gradient(180deg,color-mix(in srgb,var(--ec) 14%,transparent),transparent);pointer-events:none}.experiment-card>svg{position:absolute;right:-1.2vw;bottom:-2.8vh;width:11vw;height:11vw;min-width:120px;min-height:120px;color:var(--ec);opacity:.11;stroke-width:1.35}.experiment-card.eco{--ec:#5B5BD6}.experiment-card.source{--ec:#2F6FED}.experiment-card.ai{--ec:#0F9F9B}.experiment-card .ec-copy{position:relative;z-index:1;display:flex;flex-direction:column;flex:1;min-height:0}.ec-tag{align-self:flex-start;border:1px solid color-mix(in srgb,var(--ec) 22%,transparent);border-radius:999px;background:color-mix(in srgb,var(--ec) 10%,white);padding:.45vh .72vw;color:var(--ec);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.12em}.experiment-card h2{margin:1.35vh 0 0;font-size:var(--fs-h2);line-height:1.27}.experiment-card .ec-desc{margin:.7vh 0 0;font-size:var(--fs-body);line-height:1.5;color:var(--ink-2)}.ec-rows{display:grid;gap:.52vh;margin-top:auto;padding-top:1.6vh}.ec-row{display:grid;grid-template-columns:82px 1fr;gap:.58vw;padding:.72vh 0;border-top:1px solid rgba(100,110,128,.14)}.ec-row b{font-family:'JetBrains Mono';font-size:var(--fs-xs);line-height:1.4;color:var(--ec);letter-spacing:.06em}.ec-row span{font-size:var(--fs-sm);line-height:1.4;color:var(--ink-2)}.experiment-rule{width:min(1040px,100%);margin:1.75vh auto 0;border-radius:13px;background:var(--g-ink);padding:1.3vh 1.2vw;display:grid;grid-template-columns:auto 1fr;gap:.85vw;align-items:center;color:#fff}.experiment-rule i{width:23px;height:23px;color:#BFC7FF}.experiment-rule b{font-size:var(--fs-body);line-height:1.4}.experiment-rule span{color:rgba(255,255,255,.72);font-size:var(--fs-sm);line-height:1.4}
@@ -4049,10 +4129,10 @@ initSeqFocusSlide();
 initSeqbuildSlide();
 initArchMetricFocus();
 initPhaseFocus();
-/* 第 18 页采用 Mermaid 自动布局，避免人工维护分支线与节点位置。 */
+/* 简单时序图与任务对照图均由 Mermaid 自动布局，避免手工维护线条。 */
 if(window.mermaid){
   mermaid.initialize({startOnLoad:false,theme:'base',securityLevel:'loose',flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'}});
-  mermaid.run({querySelector:'.qexample-mermaid-flow .mermaid'}).catch(function(err){console.warn('Mermaid flow render failed',err);});
+  mermaid.run({querySelector:'.simple-seq-mermaid .mermaid, .qexample-mermaid-flow .mermaid'}).catch(function(err){console.warn('Mermaid flow render failed',err);});
 }
 setTimeout(renderDeriveRelations,80);
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
