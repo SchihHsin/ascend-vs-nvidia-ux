@@ -2040,6 +2040,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var layers=['search','search','machine','machine','asset','asset'];
         pyramid.querySelectorAll('polygon').forEach(function(el,i){el.setAttribute('data-layer',layers[i]);});
         function setLayer(layer){
+          window.__kpCurrentLayer=layer;
           pyramid.classList.add('is-focus');
           pyramid.querySelectorAll('[data-layer]').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-layer')===layer);});
           slide.querySelectorAll('.kp-row').forEach(function(el){el.classList.toggle('on',el.classList.contains(layer));});
@@ -2332,6 +2333,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           if(matrixCopy){matrixCopy.classList.add('off');matrixCopy.innerHTML='';}
           updatePager(-1);
           window.__hmStep=-1;
+          window.__hmDetailMode='reason';
           return;
         }
         var f=focus[idx%focus.length];
@@ -2391,6 +2393,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         }
         updatePager(idx%focus.length);
         window.__hmStep=idx%focus.length;
+        window.__hmDetailMode=detailMode;
         /* 首次切入时卡片宽度仍在过渡，延后一帧重算，避免第 1 个聚焦框偶发缺失。 */
         if(!settled){
           var settledIdx=idx%focus.length;
@@ -2413,14 +2416,59 @@ body.overview #panel,body.overview #toggle{display:none!important}
       if(stepBox){
         var problemButtons=focus.map(function(f,i){return '<button class="hm-step problem '+f.layer+'" type="button" data-page="'+i+'" aria-label="定位到'+f.title+'" title="'+f.title+'">'+(i+1)+'</button>';}).join('');
         stepBox.innerHTML='<button class="hm-step arrow" type="button" data-dir="-1" aria-label="上一问题">‹</button><button class="hm-step hm-page overview" type="button" data-page="-1" aria-label="查看全量矩阵">全量</button>'+problemButtons+'<button class="hm-step arrow" type="button" data-dir="1" aria-label="下一问题">›</button>';
-        stepBox.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){activeLayer=null;setStep(Number(b.getAttribute('data-page')));syncHash();});});
+        stepBox.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){activeLayer=null;detailMode='reason';setStep(Number(b.getAttribute('data-page')));syncHash();});});
         stepBox.querySelectorAll('[data-dir]').forEach(function(b){b.addEventListener('click',function(){
-          var dir=Number(b.getAttribute('data-dir')),current=typeof window.__hmStep==='number'?window.__hmStep:-1,next=current+dir;
-          if(next>=0&&next<focus.length){activeLayer=null;setStep(next);syncHash();}
+          var dir=Number(b.getAttribute('data-dir'));
+          if(window.__hmDeckNavigate)window.__hmDeckNavigate(dir);
         });});
       }
       function goLayer(layer){activeLayer=layer;detailMode='reason';var first=focus.findIndex(function(f){return f.layer===layer;});if(first>=0){setStep(first);syncHash();}}
       window.__hmGoLayer=goLayer;
+      /* 唯一的讲解顺序：金字塔层级 → 问题推导 → 改进 Demo。 */
+      window.__hmOpenIssue=function(issue,mode){
+        if(issue<0||issue>=focus.length)return false;
+        activeLayer=focus[issue].layer;
+        detailMode=mode==='demo'?'demo':'reason';
+        setStep(issue,true);
+        syncHash();
+        return true;
+      };
+      window.__hmDeckNavigate=function(dir){
+        var pyramid=document.querySelector('.knowledge-pyramid-slide');
+        var onMatrix=slideEl.classList.contains('active');
+        var onPyramid=pyramid&&pyramid.classList.contains('active');
+        var layers=['asset','machine','search'];
+        if(onMatrix){
+          var current=typeof window.__hmStep==='number'?window.__hmStep:-1;
+          if(current<0){if(dir>0)return window.__hmOpenIssue(0,'reason');return false;}
+          var currentLayer=focus[current].layer, layerStart=focus.findIndex(function(f){return f.layer===currentLayer;});
+          if(dir>0){
+            if(detailMode==='reason')return window.__hmOpenIssue(current,'demo');
+            if(current+1<focus.length&&focus[current+1].layer===currentLayer)return window.__hmOpenIssue(current+1,'reason');
+            var nextLayer=layers[layers.indexOf(currentLayer)+1];
+            if(nextLayer&&window.__kpShowLayer){window.__kpShowLayer(nextLayer);return true;}
+            return false;
+          }
+          if(detailMode==='demo')return window.__hmOpenIssue(current,'reason');
+          if(current>layerStart)return window.__hmOpenIssue(current-1,'demo');
+          var previousLayer=layers[layers.indexOf(currentLayer)-1]||currentLayer;
+          if(window.__kpShowLayer){window.__kpShowLayer(previousLayer);return true;}
+          return false;
+        }
+        if(onPyramid){
+          var layer=window.__kpCurrentLayer||'asset', layerIndex=layers.indexOf(layer);
+          if(dir>0){
+            var first=focus.findIndex(function(f){return f.layer===layer;});
+            if(first>=0&&typeof window.go==='function'){window.go([].slice.call(document.querySelectorAll('.slide')).indexOf(slideEl));return window.__hmOpenIssue(first,'reason');}
+            return false;
+          }
+          if(layerIndex<=0)return false;
+          var priorLayer=layers[layerIndex-1], last=-1;
+          focus.forEach(function(f,i){if(f.layer===priorLayer)last=i;});
+          if(last>=0&&typeof window.go==='function'){window.go([].slice.call(document.querySelectorAll('.slide')).indexOf(slideEl));return window.__hmOpenIssue(last,'demo');}
+        }
+        return false;
+      };
       function applyHashStep(){
         var hash=location.hash||'', layerMatch=hash.match(new RegExp('^#'+sectionPageNo()+'-layer-(asset|machine|search)$'));
         var hmMatch=hash.match(new RegExp('^#'+sectionPageNo()+'-hm([1-8])(?:-(demo))?$'));
@@ -3150,7 +3198,7 @@ function go(n){
   if(i!==idx && triggerSeqMagic(idx,i))return;
   if(i!==idx) updateCurrent(i);
 }
-function next(){if(metricSpotNav(1))return;if(seqFocusNav(1))return;go(idx+1);} function prev(){if(metricSpotNav(-1))return;if(seqFocusNav(-1))return;go(idx-1);}
+function next(){if(window.__hmDeckNavigate&&window.__hmDeckNavigate(1))return;if(metricSpotNav(1))return;if(seqFocusNav(1))return;go(idx+1);} function prev(){if(window.__hmDeckNavigate&&window.__hmDeckNavigate(-1))return;if(metricSpotNav(-1))return;if(seqFocusNav(-1))return;go(idx-1);}
 prevBtn.onclick=prev; nextBtn.onclick=next;
 
 document.addEventListener('keydown',e=>{
