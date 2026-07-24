@@ -2280,16 +2280,24 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var frame=detail.querySelector('iframe');
         if(!frame)return;
         frame.addEventListener('load',function(){
-          fitBeforeDemos();resizeDetailDemoFrame(frame);
-          setTimeout(function(){fitBeforeDemos();resizeDetailDemoFrame(frame);},80);
-          setTimeout(function(){fitBeforeDemos();resizeDetailDemoFrame(frame);},360);
+          /* 每次切题只以 iframe 首次稳定的内容高度布局一次，后续字体/渲染回报不再抖动页面。 */
+          if(frame.dataset.demoBound)return;
+          frame.dataset.demoBound='1';
+          setTimeout(function(){
+            fitBeforeDemos();
+            resizeDetailDemoFrame(frame);
+          },80);
         });
       }
       window.addEventListener('message',function(e){
         var d=e&&e.data;
         if(!d||!d.__ux19DemoHeight||!detail)return;
         var frame=[].slice.call(detail.querySelectorAll('iframe')).find(function(fr){return fr.contentWindow===e.source;});
-        if(frame){fitBeforeDemos();resizeDetailDemoFrame(frame,d.__ux19DemoHeight);}
+        if(frame&&frame.dataset.demoMeasured!=='1'){
+          frame.dataset.demoMeasured='1';
+          fitBeforeDemos();
+          resizeDetailDemoFrame(frame,d.__ux19DemoHeight);
+        }
       });
       function placeCallout(box){
         if(!callout||!card)return;
