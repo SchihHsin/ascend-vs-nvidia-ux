@@ -1340,13 +1340,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
     <style>
-    .archmetric-layout{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:1.45vw;flex:1;min-height:0;align-items:stretch}
-    .archmetric-arch{border-radius:16px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);padding:1.15vh .85vw;display:flex;min-height:0;overflow:hidden}
+    .archmetric-layout{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 7.2vw minmax(0,1fr);gap:1.05vw;flex:1;min-height:0;align-items:stretch}
+    .archmetric-seq,.archmetric-arch{border-radius:16px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);padding:1.15vh .85vw;display:flex;min-height:0;overflow:hidden}
+    .archmetric-seqbox{position:relative;flex:1;min-width:0;min-height:0;border-radius:12px;overflow:hidden;background:#fff}.archmetric-seqbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+    .archmetric-seq-label{position:absolute;z-index:4;left:.68vw;top:.68vh;padding:.45vh .68vw;border-radius:7px;background:rgba(35,43,63,.94);box-shadow:0 5px 13px -12px rgba(30,40,70,.6);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;letter-spacing:.045em;pointer-events:none}
+    .archmetric-lens{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55vh;color:#5B5BD6}.archmetric-lens:before,.archmetric-lens:after{content:"";position:absolute;top:50%;width:1.15vw;height:2px;background:#98A5C6}.archmetric-lens:before{right:calc(50% + 24px)}.archmetric-lens:after{left:calc(50% + 24px)}.archmetric-lens svg{position:relative;z-index:1;width:48px;height:48px;padding:11px;border-radius:50%;background:#fff;border:2px solid rgba(91,91,214,.38);box-shadow:0 12px 24px -16px rgba(56,52,142,.62);stroke:currentColor;fill:none;stroke-width:1.8}.archmetric-lens b{position:relative;z-index:1;width:7.2vw;text-align:center;font-size:var(--fs-xs);line-height:1.35;color:#4B47A8;font-weight:950}
     .archmetric-archbox{position:relative;flex:1;min-width:0;min-height:0;border-radius:12px;overflow:hidden}
     .archmetric-archbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
     .archmetric-diagram-title{position:absolute;z-index:4;left:.68vw;top:.68vh;padding:.45vh .68vw;border-radius:7px;background:rgba(229,233,239,.96);border:1px solid rgba(47,61,99,.16);box-shadow:0 5px 13px -12px rgba(30,40,70,.6);color:#566174;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;letter-spacing:.045em;pointer-events:none}
     .arch-node-annotation{--layer:#5B5BD6;position:absolute;z-index:5;width:126px;padding:.45vh .5vw;border-radius:7px;background:rgba(255,255,255,.94);border:1px solid color-mix(in srgb,var(--layer) 28%,white);box-shadow:0 8px 18px -15px rgba(24,29,44,.45);color:#4B5669;font-size:10px;line-height:1.25;font-weight:800;pointer-events:none}.arch-node-annotation:before{content:"";position:absolute;height:1px;background:var(--layer);opacity:.76}.arch-node-annotation:after{content:"";position:absolute;width:6px;height:6px;border:1.5px solid var(--layer);border-radius:50%;background:#fff}.arch-node-annotation b{display:block;margin-bottom:.12vh;color:var(--layer);font-size:var(--fs-sm);line-height:1.1;font-weight:950}.arch-node-annotation.understand{--layer:#7C5CF0;right:2%;top:17%}.arch-node-annotation.understand:before{right:100%;top:50%;width:65px}.arch-node-annotation.understand:after{right:calc(100% + 62px);top:calc(50% - 4px)}.arch-node-annotation.assets{--layer:#2F6FED;right:2%;top:43%}.arch-node-annotation.assets:before{right:100%;top:50%;width:47px}.arch-node-annotation.assets:after{right:calc(100% + 44px);top:calc(50% - 4px)}.arch-node-annotation.retrieve{--layer:#0F9F9B;left:2%;top:50%}.arch-node-annotation.retrieve:before{left:100%;top:50%;width:54px}.arch-node-annotation.retrieve:after{left:calc(100% + 51px);top:calc(50% - 4px)}
     .archmetric-map{border-radius:16px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);padding:1.45vh 1.12vw;display:grid;grid-template-rows:auto 1fr auto;gap:1.05vh;min-height:0;overflow:hidden;position:relative}
+    .archmetric-metric-drawer{position:absolute;z-index:8;right:.85vw;bottom:.85vh;max-width:min(440px,46%);border-radius:10px;background:rgba(255,255,255,.94);border:1px solid rgba(47,61,99,.15);box-shadow:0 12px 30px -20px rgba(30,40,70,.48);overflow:hidden}.archmetric-metric-drawer summary{cursor:pointer;list-style:none;padding:.6vh .72vw;color:#4B47A8;font-size:var(--fs-sm);font-weight:950}.archmetric-metric-drawer summary::-webkit-details-marker{display:none}.archmetric-metric-drawer summary:after{content:"查看 11 项指标映射"}.archmetric-metric-drawer[open] summary:after{content:"收起 11 项指标映射"}.archmetric-metric-drawer[open]{inset:2vh 1.2vw 2vh auto;max-width:52%;padding:0;overflow:auto}.archmetric-metric-drawer[open] .archmetric-map{display:grid;min-height:100%;border:0;border-radius:0;box-shadow:none}.archmetric-metric-drawer:not([open]) .archmetric-map{display:none}
     .archmetric-map:after{content:"";position:absolute;right:-1px;bottom:-1px;width:42%;height:30%;border-radius:0 0 16px 0;background:radial-gradient(120% 100% at 100% 100%,rgba(109,93,246,.08),rgba(109,93,246,.03) 54%,transparent 78%);pointer-events:none}
     .archmetric-head{position:relative;z-index:1}
     .archmetric-head b{display:block;font-size:var(--fs-h2);line-height:1.24;color:var(--ink);font-weight:950}
@@ -1370,13 +1374,20 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">11 项评分覆盖 AI 获取知识、判断证据与组织作答的动作</span></div>
-        <div class="subttl">测量方法 · 「架构图 → 可观测指标」</div>
+        <div class="brand"><span class="ttl">放大一条 AI 取证线，就能看见知识如何进入 Agent 的判断与作答</span></div>
+        <div class="subttl">测量方法 · 时序图中的一次知识往返 → Agent 内部结构</div>
       </div>
       <div class="head-r">15/ AI 指标 · 架构映射</div>
     </div>
     <div class="body-area">
         <div class="archmetric-layout">
+          <div class="archmetric-seq">
+            <div class="archmetric-seqbox">
+              <iframe src="seq-d3.html?full=1&amp;hi=1" title="全量时序图中 AI 与昇腾社区的知识获取线"></iframe>
+              <div class="archmetric-seq-label">放大对象 · AI ↔ 昇腾社区</div>
+            </div>
+          </div>
+          <div class="archmetric-lens" aria-label="放大镜：将时序图中的知识获取线映射到 Agent 架构"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 5 5"></path></svg><b>放大<br>内部过程</b></div>
           <div class="archmetric-arch">
             <div class="archmetric-archbox">
               <iframe src="arch-d3.html?map=1" title="Agent 循环架构图 · 指标映射参照"></iframe>
@@ -1386,7 +1397,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
               <div class="arch-node-annotation retrieve"><b>检索与引用层</b><code>web_search</code>、<code>web_fetch</code> 与证据回灌</div>
             </div>
         </div>
-        <div class="archmetric-map">
+        <details class="archmetric-metric-drawer"><summary></summary><div class="archmetric-map">
           <div class="archmetric-head"><b>每个指标对应图中的一个可记录动作</b><span>左侧架构图说明动作顺序；右侧把动作映射到可发现、可读取、可判断与可作答的测量项。</span></div>
           <div class="archmetric-steps">
             <div class="archmetric-step read" data-map="read"><span class="num">01</span><div class="act"><b>模型先验与外部检索</b><span>训练记忆与检索证据共同形成答案依据。</span></div><div class="met"><b>⑦ 模型自带知识</b><span>衡量“训练记忆能否支撑答案”。</span></div></div>
@@ -1396,7 +1407,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
             <div class="archmetric-step answer" data-map="answer"><span class="num">05</span><div class="act"><b>组织最终答案</b><span>把证据合成为可执行步骤。</span></div><div class="met"><b>⑨ 版本可锁定性 · ⑩ 步骤可复现性 · ⑪ 综合置信度</b><span>衡量“答案能不能落地”。</span></div></div>
           </div>
           <div class="archmetric-note"><b>评分方式：</b>关键动作被转化为可观测指标，并共同形成综合置信度。</div>
-        </div>
+        </div></details>
       </div>
     </div>
   </section>
