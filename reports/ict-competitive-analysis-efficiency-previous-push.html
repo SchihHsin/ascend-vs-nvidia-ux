@@ -246,7 +246,7 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   </section>
 
   <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>高频痛点在“定义分析范围与任务”与“审阅、核验与调整”两个阶段反复出现</h1><p class="sub">角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦累计占全部编码提及的 80%，也是两个高阻力阶段反复出现的核心问题。</p></div><div class="page-no">12 / 15</div></header>
+    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>柏拉图定位三项优先痛点：角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦</h1><p class="sub">三项痛点累计占全部编码提及的 80%，也是后续优先改善的范围。</p></div><div class="page-no">12 / 15</div></header>
     <div class="body-area"><div class="pareto-layout"><aside class="pareto-callout"><div class="big">80<small>%</small></div><h2>前三项进入优先改善范围</h2><p>16 / 20 次编码提及，达到 80% 优先改善阈值。</p></aside><div class="pareto-chart-card"><div id="paretoChart" aria-label="竞品分析痛点柏拉图"></div></div></div></div><div class="foot">PAIN PRIORITY / REVIEW · CONTEXT · SCOPE</div>
   </section>
 
@@ -505,8 +505,8 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   if(journeySlide){journeySlide.querySelector('.head h1').textContent='设计师主导分析，主要工作阻力集中在范围定义、生成等待与核验调整';journeySlide.querySelector('.head .sub').textContent='设计师先明确目标和范围，再发起 Skill 分析并等待生成；生成后的审阅与调整是低可采纳、返工后的工作现象。高频痛点集中在研究范围、业务上下文、角色任务和抽象机制的理解。'}
   const paretoSlide=slides.find(s=>s.querySelector('#paretoChart'));
   if(paretoSlide){
-    paretoSlide.querySelector('.head h1').textContent='高频痛点在“定义分析范围与任务”与“审阅、核验与调整”两个阶段反复出现';
-    paretoSlide.querySelector('.head .sub').textContent='角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦累计占全部编码提及的 80%，也是两个高阻力阶段反复出现的核心问题。';
+    paretoSlide.querySelector('.head h1').textContent='柏拉图定位三项优先痛点：角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦';
+    paretoSlide.querySelector('.head .sub').textContent='三项痛点累计占全部编码提及的 80%，也是后续优先改善的范围。';
     paretoSlide.querySelector('.pareto-callout').innerHTML='<div class="big">80<small>%</small></div><h2>前三项进入优先改善范围</h2><p>16 / 20 次编码提及，达到 80% 优先改善阈值。</p>';
     paretoSlide.querySelector('.pareto-chart-card').insertAdjacentHTML('beforeend','<div class="pareto-focus-box" aria-hidden="true"><span>本轮优先改善</span></div>');
   }
