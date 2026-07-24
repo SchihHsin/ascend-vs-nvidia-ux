@@ -181,6 +181,12 @@
 .thumb-frame{position:absolute;left:0;top:0;width:100vw;height:100vh;border:0;transform-origin:top left;pointer-events:none}
 .thumb-label{position:absolute;z-index:2;left:.65vw;top:.65vh;padding:.3vh .45vw;border:1px solid rgba(255,255,255,.2);border-radius:6px;background:rgba(11,13,18,.68);color:rgba(255,255,255,.82);font:500 var(--fs-xs)/1 "JetBrains Mono",monospace;letter-spacing:.08em;pointer-events:none}
 html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:none!important}
+/* Page 10 has the densest evidence table, so its reading text steps up one level. */
+.voice-slide .interview-table th{font-size:var(--fs-sm)!important;line-height:1.25!important}
+.voice-slide .interview-table td{padding:1.16vh 1.05vw!important;font-size:var(--fs-body)!important;line-height:1.5!important}
+.voice-slide .interview-table td:first-child,.voice-slide .interview-table .voice{font-size:var(--fs-body)!important;line-height:1.52!important}
+.voice-slide .interview-table .who{font-size:var(--fs-sm)!important;line-height:1.25!important;margin-bottom:.42vh!important}
+.voice-slide .pain-tag{font-size:var(--fs-sm)!important;line-height:1.25!important;padding:.43vh .54vw!important}
 </style>
 </head>
 <body>
@@ -473,6 +479,7 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   }
   const voiceSlide=slideFor('设计师反复提到的，不只是痛点');
   if(voiceSlide){
+    voiceSlide.classList.add('voice-slide');
     voiceSlide.querySelector('.head .sub').textContent='从真实工作中的表达，归纳造成“慢、不够可用、要重做”的具体痛点；后续再将其放回用户旅程和数据图表中定位。';
     const voiceCodes=[
       '<span class="pain-tag">业务领域知识与上下文不足</span>',
