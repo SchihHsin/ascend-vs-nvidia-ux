@@ -1648,7 +1648,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-rings{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
     .hm-ring{position:absolute;box-sizing:border-box;border:2px dotted rgba(55,61,72,.9);border-radius:14px;background:transparent;box-shadow:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),width .42s cubic-bezier(.2,.8,.2,1),height .42s cubic-bezier(.2,.8,.2,1),opacity .24s ease}
     .hm-rings.off{opacity:0}
-    .hm-callout{position:absolute;z-index:20;width:min(382px,29vw);padding:1.28vh 1.08vw 1.16vh;border-radius:14px;background:rgba(255,255,255,.91);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
+    /* 浮动问题卡作为高亮框的遮罩层，避免半透明底让虚线穿过卡片。 */
+    .hm-callout{position:absolute;z-index:20;width:min(382px,29vw);padding:1.28vh 1.08vw 1.16vh;border-radius:14px;background:#fff;border:1px solid rgba(255,255,255,.96);box-shadow:0 20px 54px -24px rgba(30,40,70,.45),inset 0 1px 0 rgba(255,255,255,.94);pointer-events:none;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .28s ease,opacity .28s ease}
     .hm-callout.off{opacity:0;transform:translateY(4px)}
     .hm-callout .hm-top{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:start}
     .hm-callout .hm-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#C7000B;background:radial-gradient(circle at 30% 25%,rgba(199,0,11,.15),rgba(199,0,11,.035) 70%);border:1px solid rgba(199,0,11,.12)}
