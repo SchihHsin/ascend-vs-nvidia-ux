@@ -172,6 +172,16 @@
 .metric-link{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85vw;margin-top:1vh}.metric-link div{padding:1.05vh 1vw;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--card-border);font-size:var(--fs-sm);line-height:1.42;color:var(--ink2)}.metric-link b{display:block;margin-bottom:.3vh;color:var(--accent);font-size:var(--fs-body)}.goal .baseline{margin-top:.8vh;padding:.85vh .8vw;border-radius:10px;background:rgba(91,91,214,.07);font-size:var(--fs-sm);line-height:1.45;color:var(--ink2)}.goal .baseline b{color:var(--ink)}.goal:nth-child(2) .baseline{background:rgba(255,255,255,.15);color:rgba(255,255,255,.78)}.goal:nth-child(2) .baseline b{color:#fff}.goal:nth-child(3) .baseline{background:rgba(255,255,255,.08);color:rgba(255,255,255,.72)}.goal:nth-child(3) .baseline b{color:#fff}.goal .kpi.kpi-flow{font-size:min(5.3vw,8.2vh);white-space:nowrap}.goal .kpi.kpi-flow small{font-size:.27em}.goal .kicker{order:1;margin-top:0}.goal h2{order:2;margin-top:1.2vh}.goal .goal-target-row{order:3;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:1vw;margin-top:1.4vh}.goal .goal-target{font:200 min(5.2vw,8.1vh)/.9 "Inter","HarmonyOS Sans SC","Noto Sans SC",sans-serif;letter-spacing:-.065em;color:var(--accent)}.goal .goal-actual{font:600 var(--fs-h2)/1.1 "HarmonyOS Sans SC","Inter","Noto Sans SC",sans-serif;color:var(--ink);white-space:nowrap}.goal:nth-child(2) .goal-target,.goal:nth-child(3) .goal-target{color:#fff}.goal:nth-child(2) .goal-actual,.goal:nth-child(3) .goal-actual{color:rgba(255,255,255,.96)}.goal>p{order:4;margin-top:1.4vh}.goal>.method{order:5;margin-top:auto}.time-findings{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:1vw;min-height:0}.time-finding{min-width:0;min-height:0;padding:1.65vh 1.4vw;border:1px solid var(--card-border);border-radius:17px;background:var(--card-glass);box-shadow:var(--card-shadow);overflow:hidden}.time-finding .finding-label{font:600 var(--fs-xs)/1 "JetBrains Mono",monospace;letter-spacing:.1em;color:var(--accent)}.time-finding .finding-num{margin-top:.8vh;font:200 min(4.6vw,7.2vh)/.86 "Inter",sans-serif;letter-spacing:-.07em;color:var(--ink)}.time-finding .finding-num small{font-size:.34em;font-weight:500;letter-spacing:0}.time-finding p{margin-top:.75vh;font-size:var(--fs-sm);line-height:1.42;color:var(--ink2)}.time-finding.adjustment{border-color:rgba(255,255,255,.15);background:var(--g-ink);box-shadow:0 14px 28px -20px rgba(20,25,35,.5)}.time-finding.adjustment .finding-label{color:#b9c3ff}.time-finding.adjustment .finding-num{color:#fff}.time-finding.adjustment p{color:rgba(255,255,255,.72)}.time-finding.adoption{border-color:rgba(91,91,214,.25);background:var(--g-accent);box-shadow:0 14px 28px -20px rgba(69,67,180,.65)}.time-finding.adoption .finding-label{color:rgba(255,255,255,.72)}.time-finding.adoption .finding-num{color:#fff}.time-finding.adoption p{color:rgba(255,255,255,.82)}
 @media(max-width:900px){.stat-grid,.goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.domain-pack-grid,.pain-pack-grid,.focus-pain-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.time-layout,.current-layout,.diagnosis,.target-layout,.qcc-profile,.qcc-assessment,.qcc-team{grid-template-columns:1fr}.qcc-member-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.qcc-coach{min-height:34vh}.qcc-team-caption p{text-align:left}}
 </style>
+<style id="overview-thumbnail-system">
+/* The overview is a scaled rendering of each real slide, not a text index. */
+.overview-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1.3vw!important}
+.thumb{position:relative!important;display:block!important;aspect-ratio:16 / 9;min-height:0!important;padding:0!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:14px!important;background:#1d212b!important;color:#fff!important;cursor:pointer!important}
+.thumb:hover{border-color:#aeb8ff!important;transform:translateY(-2px)}
+.thumb-canvas{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.thumb-frame{position:absolute;left:0;top:0;width:100vw;height:100vh;border:0;transform-origin:top left;pointer-events:none}
+.thumb-label{position:absolute;z-index:2;left:.65vw;top:.65vh;padding:.3vh .45vw;border:1px solid rgba(255,255,255,.2);border-radius:6px;background:rgba(11,13,18,.68);color:rgba(255,255,255,.82);font:500 var(--fs-xs)/1 "JetBrains Mono",monospace;letter-spacing:.08em;pointer-events:none}
+html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:none!important}
+</style>
 </head>
 <body>
 <main id="deck">
@@ -216,7 +226,7 @@
 
       <section class="slide s-gray">
     <header class="head"><div class="head-l"><div class="eyebrow">02 / 选择课题</div><h1>生成只需几小时，但人工核验与调整占完整分析周期约 95%</h1><p class="sub">人工调试与调整占完整周期约 98%；同时，8 位设计师的首轮可采纳率平均仅 23%，重大返工率平均达 56%。</p></div><div class="page-no">09 / 15</div></header>
-    <div class="body-area"><div class="time-baseline"><section class="time-chart-card"><div class="time-chart-head"><h2>现有 Skill 完整周期：生成 vs 人工调整</h2><span>单位：工作日 · 堆叠呈现</span></div><div id="timeChart" aria-label="生成与人工调整用时对比图"></div></section><aside class="time-quality"><div class="time-quality-head"><h2>结果质量 · 当前基线</h2><span>8 位设计师</span></div><div id="qualityChart" aria-label="首轮关键结论可采纳率与重大返工率双指标图"></div><p class="time-quality-note">首轮结果难直接进入设计判断，后续需要通过反复核验、纠正与重做来补足。</p></aside></div></div>
+    <div class="body-area"><div class="time-baseline"><section class="time-chart-card"><div class="time-chart-head"><h2>现有 Skill 完整周期：生成 vs 人工调整</h2></div><div id="timeChart" aria-label="生成与人工调整用时对比图"></div></section><aside class="time-quality"><div class="time-quality-head"><h2>结果质量 · 当前基线</h2></div><div id="qualityChart" aria-label="首轮关键结论可采纳率与重大返工率双指标图"></div><p class="time-quality-note">首轮结果难直接进入设计判断，后续需要通过反复核验、纠正与重做来补足。</p></aside></div></div>
   </section>
 
   <section class="slide s-gray">
@@ -260,6 +270,7 @@
 <div class="overview" id="overview" aria-hidden="true"><div class="overview-head"><b>页面总览</b><button type="button" data-action="close-overview">关闭</button></div><div class="overview-grid" id="overviewGrid"></div></div>
 <script>
 (() => {
+  if(new URLSearchParams(location.search).has('thumbnail'))document.documentElement.classList.add('thumbnail');
   try{history.scrollRestoration='manual'}catch(e){}
   const journeyOrderNode=document.querySelector('.jrn-wrap')?.closest('.slide'),paretoOrderNode=document.querySelector('#paretoChart')?.closest('.slide');
   if(journeyOrderNode&&paretoOrderNode&&journeyOrderNode.nextElementSibling===paretoOrderNode)journeyOrderNode.parentElement.insertBefore(paretoOrderNode,journeyOrderNode);
@@ -323,11 +334,15 @@
     thumb.setAttribute('aria-label',`前往第 ${i+1} 页`);
     const canvas=document.createElement('div');
     canvas.className='thumb-canvas';
-    const clone=slide.cloneNode(true);
-    clone.classList.add('thumb-slide');
-    clone.removeAttribute('id');
-    clone.querySelectorAll('[id]').forEach(node=>node.removeAttribute('id'));
-    canvas.append(clone);
+    const frame=document.createElement('iframe');
+    frame.className='thumb-frame';
+    frame.tabIndex=-1;
+    frame.setAttribute('aria-hidden','true');
+    const url=new URL(location.href);
+    url.searchParams.set('thumbnail','1');
+    url.hash=String(i+1);
+    frame.src=url.href;
+    canvas.append(frame);
     thumb.append(canvas);
     const label=document.createElement('span');
     label.className='thumb-label';
@@ -338,9 +353,7 @@
       const width=canvas.clientWidth,height=canvas.clientHeight;
       if(!width||!height)return;
       const scale=Math.min(width/window.innerWidth,height/window.innerHeight);
-      clone.style.width=`${window.innerWidth}px`;
-      clone.style.height=`${window.innerHeight}px`;
-      clone.style.transform=`scale(${scale})`;
+      frame.style.transform=`scale(${scale})`;
     };
     requestAnimationFrame(fit);
     return {thumb,fit};
@@ -454,7 +467,8 @@
     adjustmentSlide.querySelector('.head h1').textContent='生成很快，但结果的低可采纳与高返工造成人工调整时间很长';
     adjustmentSlide.querySelector('.head .sub').textContent='人工调试与调整占完整周期约 98%；同时，8 位设计师的首轮可采纳率平均仅 23%，重大返工率平均达 56%。';
     adjustmentSlide.querySelector('.time-chart-head h2').textContent='目前分析时间，主要集中在调试与调整';
-    adjustmentSlide.querySelector('.time-chart-head span').textContent='单位：工作日 · 并列对比';
+    adjustmentSlide.querySelector('.time-chart-head span')?.remove();
+    adjustmentSlide.querySelector('.time-quality-head span')?.remove();
     adjustmentSlide.querySelector('.time-quality-head h2').textContent='造成调试与调整的原因：可采纳率低，返工率高';
   }
   const voiceSlide=slideFor('设计师反复提到的，不只是痛点');
