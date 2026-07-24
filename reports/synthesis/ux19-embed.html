@@ -1120,10 +1120,15 @@ body.embed.demo-only[data-demo-card="9"] .uxcard.ux-demo-only .demo>div[style*="
 body.embed.demo-only[data-demo-card="9"] .uxcard.ux-demo-only .demo>div[style*="grid-template-columns"]>.bw{height:auto!important;min-height:0!important;box-sizing:border-box!important;overflow:visible!important}
 /* 保持字号尽量大；缩放只用于极长 Demo，且不再改变内容高度计算。 */
 body.embed.demo-only .uxcard.ux-demo-only .demo{transform:scale(var(--demo-scale))!important;transform-origin:top left!important;width:calc(100% / var(--demo-scale))!important}
+/* 供矩阵页按状态复用原始 Demo：只展示已经存在的现状或改造后部分。 */
+body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo .good{display:none!important}
+body.embed.demo-only.demo-state-after .uxcard.ux-demo-only .demo .bad{display:none!important}
+body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo>.duo,
+body.embed.demo-only.demo-state-after .uxcard.ux-demo-only .demo>.duo{grid-template-rows:minmax(0,1fr)!important}
 </style>
 <script id="embedfixjs">
 (function(){
-  var p=new URLSearchParams(location.search);var n=parseInt(p.get('card'),10),demoOnly=p.has('demoOnly');if(!n)return;
+  var p=new URLSearchParams(location.search);var n=parseInt(p.get('card'),10),demoOnly=p.has('demoOnly'),demoState=p.get('state');if(!n)return;
   function reportDemoHeight(){
     if(!demoOnly)return;
     var demo=document.querySelector('.uxcard.ux-demo-only .demo')||document.body;
@@ -1143,6 +1148,7 @@ body.embed.demo-only .uxcard.ux-demo-only .demo{transform:scale(var(--demo-scale
     t.style.display='';t.classList.add('ux-show');
     if(demoOnly){
       document.documentElement.classList.add('demo-only');document.body.classList.add('demo-only');
+      if(demoState==='before'||demoState==='after')document.documentElement.classList.add('demo-state-'+demoState),document.body.classList.add('demo-state-'+demoState);
       t.classList.add('ux-demo-only');document.body.dataset.demoCard=String(n);window.scrollTo(0,0);
       requestAnimationFrame(reportDemoHeight);
       setTimeout(reportDemoHeight,120);

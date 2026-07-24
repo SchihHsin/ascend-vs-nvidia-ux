@@ -1613,9 +1613,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
     /* 右侧先承载问题推导，再切换到原始 Demo；问题与改造方法仍叠在左侧矩阵上。 */
     .hmfull-wrap.is-detail .hm-detail{overflow:hidden}
     .hm-detail-card{height:100%;min-height:0;padding:0;background:transparent;border:0;box-shadow:none;display:flex;flex-direction:column;gap:.7vh}
-    .hm-detail-tabs{display:flex;gap:.42vw;flex:0 0 auto}.hm-detail-tab{height:28px;padding:0 .75vw;border-radius:999px;border:1px solid rgba(47,61,99,.13);background:rgba(255,255,255,.72);color:#6B7280;cursor:pointer;font-family:'HarmonyOS Sans SC','Noto Sans SC',sans-serif;font-size:var(--fs-sm);font-weight:850}.hm-detail-tab.on{background:#253246;border-color:#253246;color:#fff}
+    .hm-detail-tabs{display:flex;gap:.42vw;flex:0 0 auto}.hm-detail-tab{height:28px;padding:0 .88vw;border-radius:999px;border:1px solid rgba(47,61,99,.13);background:rgba(255,255,255,.72);color:#6B7280;cursor:pointer;font-family:'HarmonyOS Sans SC','Noto Sans SC',sans-serif;font-size:var(--fs-sm);font-weight:850}.hm-detail-tab.on{background:#253246;border-color:#253246;color:#fff}
     .hm-detail-panel{flex:1;min-height:0;overflow:hidden}.hm-detail-actions{display:none}
     .hm-reason{height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr) minmax(0,1fr);gap:.75vh;padding:1.1vh 1vw 1vh;border-radius:15px;background:rgba(255,255,255,.64);border:1px solid rgba(255,255,255,.88);box-shadow:0 16px 34px -27px rgba(30,40,70,.38)}.hm-reason-kicker{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.08em;font-weight:900;color:#7D8798}.hm-score-card{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.62vw;align-items:end;padding:.78vh .82vw .72vh;border-radius:11px;background:linear-gradient(110deg,rgba(199,0,11,.1),rgba(255,255,255,.78) 48%,rgba(118,185,0,.1));border:1px solid rgba(47,61,99,.1)}.hm-score-side{min-width:0}.hm-score-side:last-child{text-align:right}.hm-score-side span{display:block;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;color:#7D8798;letter-spacing:.04em}.hm-score-side b{display:block;margin-top:.12vh;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:calc(var(--fs-h2)*1.7);font-weight:500;line-height:.9;letter-spacing:-.02em;color:#A80009}.hm-score-side:last-child b{color:#527E00}.hm-score-gap{align-self:center;text-align:center}.hm-score-gap small{display:block;font-size:var(--fs-xs);font-weight:850;line-height:1.1;color:#7D8798;white-space:nowrap}.hm-score-gap strong{display:block;margin-top:.12vh;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:calc(var(--fs-h1)*1.28);font-weight:400;line-height:.78;letter-spacing:-.035em;color:#C7000B;white-space:nowrap}.hm-score-gap em{font-style:normal;font-family:'HarmonyOS Sans SC','Noto Sans SC',sans-serif;font-size:var(--fs-xs);font-weight:900;letter-spacing:0}.hm-reason-block{min-height:0;padding:.92vh .82vw;border-radius:11px;background:rgba(255,255,255,.62);border:1px solid rgba(47,61,99,.09)}.hm-reason-block b{display:block;font-size:var(--fs-body);line-height:1.24;font-weight:950;color:#273244}.hm-reason-block p{margin:.38vh 0 0;font-size:var(--fs-body);line-height:1.42;color:#536071}.hm-reason-block.meaning{background:rgba(199,0,11,.045)}.hm-reason-block.meaning b{color:#A80009}.hm-reason-block.cuda{background:rgba(118,185,0,.06)}.hm-reason-block.cuda b{color:#527E00}
+    .hm-before{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) minmax(0,1fr);gap:.7vh;min-height:0}.hm-before .hm-score-card{min-height:0}.hm-before-demo{min-height:0;overflow:hidden;padding:.62vh .65vw;border-radius:11px;background:rgba(255,255,255,.62);border:1px solid rgba(47,61,99,.09)}.hm-before-demo h4{margin:0 0 .42vh;font-size:var(--fs-sm);line-height:1.2;font-weight:950;color:#A80009}.hm-before-demo.nvidia h4{color:#527E00}.hm-before-demo p{margin:0 0 .42vh;font-size:var(--fs-xs);line-height:1.32;color:#697588}.hm-before-demo .hm-demo-scale{height:calc(100% - 30px)}.hm-before-demo iframe{display:block;width:100%;height:100%;min-height:90px;border:0;background:transparent}
+    /* NVIDIA 区域按问题复用真实的使用界面结构，而非用结论文字替代 Demo。 */
+    .hm-nvidia-demo{height:calc(100% - 22px);min-height:0;overflow:hidden;border:1px solid rgba(118,185,0,.24);border-radius:8px;background:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.95)}.hm-nv-top{height:21px;display:flex;align-items:center;gap:5px;padding:0 7px;background:#F3F5F1;border-bottom:1px solid #DDE5D4;color:#5A6B47;font-family:'JetBrains Mono';font-size:9px;font-weight:850}.hm-nv-dots{display:flex;gap:3px}.hm-nv-dots i{width:4px;height:4px;border-radius:50%;background:#B7C2AD}.hm-nv-url{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.hm-nv-ui{height:calc(100% - 21px);min-height:0;padding:7px 8px;color:#35422A;font-size:10px;line-height:1.25}.hm-nv-ui b{font-size:10.5px;color:#263A13}.hm-nv-ui small{font-size:9px;color:#728064}.hm-nv-row{display:flex;align-items:center;gap:6px;min-width:0}.hm-nv-row+.hm-nv-row{margin-top:5px}.hm-nv-badge{display:inline-flex;align-items:center;white-space:nowrap;padding:2px 5px;border-radius:999px;background:#EAF6D7;color:#467300;font-size:8.5px;font-weight:900}.hm-nv-tabs{display:flex;gap:8px;margin:3px 0 5px;border-bottom:1px solid #E1E8D8}.hm-nv-tabs span{padding-bottom:3px;font-size:9px;color:#77846B}.hm-nv-tabs span.on{color:#527E00;font-weight:900;border-bottom:2px solid #76B900}.hm-nv-code{margin-top:5px;padding:4px 5px;border-radius:4px;background:#20251D;color:#DDECC7;font-family:'JetBrains Mono';font-size:8.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hm-nv-list{display:grid;gap:4px}.hm-nv-list>div{display:grid;grid-template-columns:13px minmax(0,1fr) auto;gap:5px;align-items:center;padding:4px 5px;border:1px solid #E0E9D7;border-radius:5px;background:#FCFDFB}.hm-nv-list i{display:grid;place-items:center;width:13px;height:13px;border-radius:50%;background:#76B900;color:#fff;font-size:8px;font-style:normal;font-weight:950}.hm-nv-list b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:9.5px}.hm-nv-list small{white-space:nowrap;font-size:8px}.hm-nv-stepper{display:flex;align-items:center;gap:4px;margin-top:6px}.hm-nv-stepper span{display:grid;place-items:center;min-width:17px;height:17px;padding:0 3px;border-radius:50%;background:#76B900;color:#fff;font-size:8px;font-weight:900}.hm-nv-stepper i{height:2px;flex:1;background:#A9D270}.hm-nv-chat{display:grid;gap:5px}.hm-nv-chat .ask{padding:4px 6px;border-radius:6px 6px 2px 6px;background:#F0F2F5;color:#5F6973}.hm-nv-chat .answer{padding:5px 6px;border-radius:6px 6px 6px 2px;background:#EFF8DF;border:1px solid #D5EAB7;color:#3C5321}.hm-nv-log{display:grid;gap:3px;padding:5px 6px;border-radius:5px;background:#20251D;color:#DCEBC8;font-family:'JetBrains Mono';font-size:8.5px}.hm-nv-log em{color:#A9DA60;font-style:normal}.hm-nv-search{display:flex;align-items:center;gap:5px;margin-bottom:5px;padding:4px 6px;border:1px solid #D7E5C7;border-radius:5px;color:#5E6B50;background:#FCFDFB}.hm-nv-search span{margin-left:auto;padding:1px 4px;border-radius:3px;background:#E5F2D1;color:#527E00;font-size:8px;font-weight:900}
+    .hm-after{height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:.7vh;min-height:0}.hm-after-design{padding:.88vh .82vw;border-radius:11px;background:rgba(47,111,237,.07);border:1px solid rgba(47,111,237,.14)}.hm-after-design b{display:block;font-size:var(--fs-body);line-height:1.24;font-weight:950;color:#2F63D8}.hm-after-design p{margin:.34vh 0 0;font-size:var(--fs-body);line-height:1.42;color:#536071}.hm-after-demo{min-height:0;overflow:hidden;padding:.62vh .65vw;border-radius:11px;background:rgba(255,255,255,.62);border:1px solid rgba(47,61,99,.09)}.hm-after-demo h4{margin:0 0 .42vh;font-size:var(--fs-sm);line-height:1.2;font-weight:950;color:#1F7A4D}.hm-after-demo .hm-demo-scale{height:calc(100% - 22px)}.hm-after-demo iframe{display:block;width:100%;height:100%;min-height:120px;border:0;background:transparent}
     .hm-detail-demo{width:100%;height:100%;min-height:0;overflow:hidden}.hm-demo-scale{width:100%;height:100%;transform-origin:top left}.hm-detail-demo iframe{display:block;width:100%;min-height:120px;border:0;background:transparent}
     .hm-matrix-copy{position:absolute;z-index:7;left:1.05vw;right:1.05vw;bottom:1.05vh;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:.58vw .65vw;align-items:start;padding:.85vh .78vw;border-radius:12px;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.96);box-shadow:0 14px 32px -22px rgba(30,40,70,.55);pointer-events:none}.hm-matrix-copy.off{display:none}.hm-matrix-copy .hm-detail-ico{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(199,0,11,.09);color:#C7000B}.hm-matrix-copy .hm-detail-ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.hm-matrix-copy .hm-detail-title{font-size:var(--fs-h3);line-height:1.18;font-weight:950;color:var(--ink)}.hm-matrix-copy .hm-detail-layer{display:inline-flex;margin-top:.18vh;padding:.14vh .4vw;border-radius:999px;background:rgba(91,91,214,.08);color:#5B4AB7;font-size:var(--fs-xs);font-weight:850;line-height:1.2}.hm-matrix-copy .hm-detail-index{font-family:'JetBrains Mono';font-size:var(--fs-h2);line-height:1;color:#C7000B;font-weight:500}.hm-matrix-copy .hm-detail-desc{grid-column:1 / -1;margin:0;font-size:var(--fs-body);line-height:1.42;color:var(--ink-2)}.hm-matrix-copy .hm-detail-actions{grid-column:1 / -1;display:block;min-height:0;padding:0}.hm-matrix-copy .hm-detail-actions b{display:inline;color:#26354A;font-size:var(--fs-body);line-height:1.42;font-weight:950}.hm-matrix-copy .hm-detail-actions ul{display:inline;list-style:none;margin:0;padding:0}.hm-matrix-copy .hm-detail-actions li{display:inline;color:#4E5A6D;font-size:var(--fs-body);line-height:1.42}.hm-matrix-copy .hm-detail-actions li+li:before{content:'；';position:static;width:auto;height:auto;background:none;margin:0}.hm-matrix-copy .hm-detail-actions li:first-child:before{content:'：';position:static;width:auto;height:auto;background:none;margin:0}
     /* 问题卡需要遮住其下方的矩阵高亮框。 */
@@ -2113,14 +2117,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
       table.innerHTML=h+'</tbody>';
       var card=table.closest('.hmfull-card'), wrap=table.closest('.hmfull-wrap'), rings=document.getElementById('hmRings'), detail=document.getElementById('hmDetail'), matrixCopy=document.getElementById('hmMatrixCopy'), stepBox=document.getElementById('hmSteps');
       var DETAILS={
-        version:{card:1,score:{cann:'2 / 5',nvidia:'4.19 / 5',gap:'−1.69',label:'版本清晰度均值'},actions:['为每篇文档设置首选网址，默认指向当前推荐版本。','按芯片与框架版本返回唯一配套组合，并标注验证日期。'],meaning:'多数任务的版本清晰度仅为 2 分：同一主题并存多棵版本树，AI 无法稳定判断该采用哪一套当前版本组合。',nvidia:'CUDA 的工具与 API 版本线更稳定，官方入口直接给出版本、兼容关系或支持矩阵，使 AI 能把答案锚定到明确的版本条件。'},
-        err:{card:3,score:{cann:'.55',nvidia:'.99',gap:'−.44',unit:'',label:'错误码任务综合置信度（0–1）'},actions:['每个错误码提供触发条件、排查步骤与修复样例。','让报错信息直接链接对应页面，支持定位与复测。'],meaning:'页面能抓到不等于问题能解决：正文详尽度只有 2 分，缺少触发条件、诊断路径和修复样例，AI 只能给出泛化兜底。',nvidia:'CUDA 的错误信息有明确语义，并由官方资料和 Stack Overflow 讨论共同补足排查、验证和修复路径。'},
-        third:{card:7,score:{cann:'2.88 / 5',nvidia:'3.00 / 5',gap:'−.12',label:'第三方来源数量均值'},actions:['官方发布版本基线与任务入口，论坛沉淀问题、日志和解决过程。','引导 GitCode 与外部社区发布可复现案例，并保留源链。'],meaning:'第三方数量平均差距不大，但 CANN 的低分集中在复杂任务，且可被 AI 读取并相互验证的来源更少，官方内容不足时难以补位。',nvidia:'CUDA 以 Stack Overflow、独立技术博客、课程和英文教程形成多平台互证，AI 可从不同来源验证步骤和结论。'},
-        funnel:{card:8,score:{cann:'.53',nvidia:'.94',gap:'−.41',unit:'',label:'三类复杂任务平均综合分（0–1）'},actions:['按真实任务组织内容，而非分散发布页面。','一个任务包覆盖前置条件、步骤、代码、验证输出与常见报错。'],meaning:'自定义算子、错误码、动态 shape / Tiling 的综合分平均只有 .53；正文、诊断或专题知识任一环断开，都会让 AI 无法拼出完整可执行的回答。',nvidia:'CUDA 对复杂任务通常同时提供可读的官方教程、稳定工具文档和社区讨论，形成从概念到执行再到排错的连续证据链。'},
-        own:{card:9,score:{cann:'2.85 / 5',nvidia:'4.54 / 5',gap:'−1.69',label:'模型自带知识均值'},actions:['关键内容同步 Markdown / Git 仓，并补齐英文版与可运行样例。','将高质量问答沉淀为带版本、芯片和日期的 FAQ / 案例。'],meaning:'CANN 的模型自带知识多为 2–3 分。官方或第三方检索受阻时，AI 缺少足以替代检索结果的任务骨架和参数知识。',nvidia:'CUDA 的模型自带知识多数为 4–5 分；即使不检索，也更容易先给出正确的任务骨架，再用官方资料校验细节。'},
-        spa:{card:6,score:{cann:'0 / 5',nvidia:'5 / 5',gap:'−5',label:'自定义算子官方正文可抓取性'},actions:['主路径正文、代码和表格进入首屏 HTML，不依赖脚本渲染。','发布前用无脚本抓取校验版本、命令、参数表与下一步。'],meaning:'自定义算子教程对 AI 返回的只有导航和标题，正文为 0。页面即使对人可见，机器也拿不到命令、代码和参数表，后续推理没有证据可用。',nvidia:'CUDA 对应教程默认能直接返回正文，Agent 可读取命令、代码与下一步操作，并在回答中引用和组织。'},
-        discover:{card:2,score:{cann:'3.58 / 5',nvidia:'4.42 / 5',gap:'−.84',label:'官方可发现性均值'},actions:['稳定网址绑定当前版本，让任务词直达官方教程。','标题、摘要和英文入口覆盖核心任务词。'],meaning:'CANN 有 12 个任务需要二次检索，复杂任务的官方答案没有稳定出现在首轮结果中，AI 会把时间耗在换词和筛选候选页上。',nvidia:'CUDA 仅 5 个任务需要二次检索；官方内容更常以任务词出现在首轮结果，AI 能更快进入正文和证据组织。'},
-        cost:{card:5,score:{cann:'3.31 / 5',nvidia:'3.92 / 5',gap:'−.61',label:'检索成本得分均值'},actions:['提供 llms.txt、Markdown 查看与结构化 API 索引。','让 AI 一次获取任务入口、版本与接口信息，减少逐页抓取。'],meaning:'CANN 的自定义算子、容器和注册集成需要多次换词、换地址和重试。高成本不仅拖慢回答，也提高选错页面、丢失上下文和引用不一致的风险。',nvidia:'CUDA 通常以较少轮次完成搜索和抓取，证据来源更稳定，AI 可以把更多上下文窗口留给任务推理和结果核验。'}
+        version:{card:1,score:{cann:'2 / 5',nvidia:'4.19 / 5',gap:'−1.69',label:'版本清晰度均值'},actions:['为每篇文档设置首选网址，默认指向当前推荐版本。','按芯片与框架版本返回唯一配套组合，并标注验证日期。'],designTitle:'当前版本入口 + 配套查询',afterWhy:'把“该看哪一版、能否配套”从 AI 的临场猜测改成页面可直接回答的关系。',meaning:'多数任务的版本清晰度仅为 2 分：同一主题并存多棵版本树，AI 无法稳定判断该采用哪一套当前版本组合。',nvidiaTitle:'固定当前入口与兼容关系',nvidia:'CUDA 的工具与 API 版本线更稳定，官方入口直接给出版本、兼容关系或支持矩阵，使 AI 能把答案锚定到明确的版本条件。'},
+        err:{card:3,score:{cann:'.55',nvidia:'.99',gap:'−.44',unit:'',label:'错误码任务综合置信度（0–1）'},actions:['每个错误码提供触发条件、排查步骤与修复样例。','让报错信息直接链接对应页面，支持定位与复测。'],designTitle:'一码一页的可复测排查链',afterWhy:'让 AI 能从报错语义走到触发条件、排查步骤和修复样例，而不是停在泛化建议。',meaning:'页面能抓到不等于问题能解决：正文详尽度只有 2 分，缺少触发条件、诊断路径和修复样例，AI 只能给出泛化兜底。',nvidiaTitle:'语义明确，并有社区互证',nvidia:'CUDA 的错误信息有明确语义，并由官方资料和 Stack Overflow 讨论共同补足排查、验证和修复路径。'},
+        third:{card:7,score:{cann:'2.88 / 5',nvidia:'3.00 / 5',gap:'−.12',label:'第三方来源数量均值'},actions:['官方发布版本基线与任务入口，论坛沉淀问题、日志和解决过程。','引导 GitCode 与外部社区发布可复现案例，并保留源链。'],designTitle:'官方任务入口 + 社区可复现案例',afterWhy:'当官方页信息不足时，AI 仍能从多个可追溯来源交叉确认步骤与版本条件。',meaning:'第三方数量平均差距不大，但 CANN 的低分集中在复杂任务，且可被 AI 读取并相互验证的来源更少，官方内容不足时难以补位。',nvidiaTitle:'多平台内容可相互验证',nvidia:'CUDA 以 Stack Overflow、独立技术博客、课程和英文教程形成多平台互证，AI 可从不同来源验证步骤和结论。'},
+        funnel:{card:8,score:{cann:'.53',nvidia:'.94',gap:'−.41',unit:'',label:'三类复杂任务平均综合分（0–1）'},actions:['按真实任务组织内容，而非分散发布页面。','一个任务包覆盖前置条件、步骤、代码、验证输出与常见报错。'],designTitle:'按任务组织完整证据链',afterWhy:'复杂任务需要把前置条件、代码、验证与报错放在同一条连续路径上，避免任一环断开。',meaning:'自定义算子、错误码、动态 shape / Tiling 的综合分平均只有 .53；正文、诊断或专题知识任一环断开，都会让 AI 无法拼出完整可执行的回答。',nvidiaTitle:'教程、工具与社区连续衔接',nvidia:'CUDA 对复杂任务通常同时提供可读的官方教程、稳定工具文档和社区讨论，形成从概念到执行再到排错的连续证据链。'},
+        own:{card:9,score:{cann:'2.85 / 5',nvidia:'4.54 / 5',gap:'−1.69',label:'模型自带知识均值'},actions:['关键内容同步 Markdown / Git 仓，并补齐英文版与可运行样例。','将高质量问答沉淀为带版本、芯片和日期的 FAQ / 案例。'],designTitle:'可引用的公开知识资产',afterWhy:'稳定的 Markdown、代码样例与版本化 FAQ 更容易被检索、引用和长期沉淀为模型的基础知识。',meaning:'CANN 的模型自带知识多为 2–3 分。官方或第三方检索受阻时，AI 缺少足以替代检索结果的任务骨架和参数知识。',nvidiaTitle:'成熟公开内容形成知识积累',nvidia:'CUDA 的模型自带知识多数为 4–5 分；即使不检索，也更容易先给出正确的任务骨架，再用官方资料校验细节。'},
+        spa:{card:6,score:{cann:'0 / 5',nvidia:'5 / 5',gap:'−5',label:'自定义算子官方正文可抓取性'},actions:['主路径正文、代码和表格进入首屏 HTML，不依赖脚本渲染。','发布前用无脚本抓取校验版本、命令、参数表与下一步。'],designTitle:'正文优先的可读取页面',afterWhy:'把命令、代码和参数表直接送入 HTML 或 Markdown，AI 才能获取可引用的任务证据。',meaning:'自定义算子教程对 AI 返回的只有导航和标题，正文为 0。页面即使对人可见，机器也拿不到命令、代码和参数表，后续推理没有证据可用。',nvidiaTitle:'默认返回可读取的正文',nvidia:'CUDA 对应教程默认能直接返回正文，Agent 可读取命令、代码与下一步操作，并在回答中引用和组织。'},
+        discover:{card:2,score:{cann:'3.58 / 5',nvidia:'4.42 / 5',gap:'−.84',label:'官方可发现性均值'},actions:['稳定网址绑定当前版本，让任务词直达官方教程。','标题、摘要和英文入口覆盖核心任务词。'],designTitle:'任务词直达当前官方教程',afterWhy:'把用户的任务表达、当前版本与官方页面绑定，减少换词与在目录树中二次筛选。',meaning:'CANN 有 12 个任务需要二次检索，复杂任务的官方答案没有稳定出现在首轮结果中，AI 会把时间耗在换词和筛选候选页上。',nvidiaTitle:'任务词首轮命中官方入口',nvidia:'CUDA 仅 5 个任务需要二次检索；官方内容更常以任务词出现在首轮结果，AI 能更快进入正文和证据组织。'},
+        cost:{card:5,score:{cann:'3.31 / 5',nvidia:'3.92 / 5',gap:'−.61',label:'检索成本得分均值'},actions:['提供 llms.txt、Markdown 查看与结构化 API 索引。','让 AI 一次获取任务入口、版本与接口信息，减少逐页抓取。'],designTitle:'一次取得任务所需的结构化入口',afterWhy:'让 AI 在一次读取中获得任务入口、版本与接口信息，减少逐页抓取和失败重试。',meaning:'CANN 的自定义算子、容器和注册集成需要多次换词、换地址和重试。高成本不仅拖慢回答，也提高选错页面、丢失上下文和引用不一致的风险。',nvidiaTitle:'少轮次检索即可获得稳定证据',nvidia:'CUDA 通常以较少轮次完成搜索和抓取，证据来源更稳定，AI 可以把更多上下文窗口留给任务推理和结果核验。'}
       };
       function clearHoverLink(){
         table.querySelectorAll('.hm-hover,.hm-hover-source').forEach(function(el){el.classList.remove('hm-hover','hm-hover-source');});
@@ -2184,23 +2188,45 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var layer=f.layer?'<span class="layer-tag '+f.layer+'">金字塔：'+layerName[f.layer]+'</span>':'';
         return '<div class="hm-top"><div class="hm-ico">'+iconSvg(f.icon)+'</div><div><div class="k">'+f.title+'</div>'+layer+'</div><div class="hm-no">'+no+'</div></div><div class="d">'+f.desc+'</div>'+(f.demo?'<div class="qdemo">'+f.demo+'</div>':'');
       }
-      var detailMode='reason', activeLayer=null;
-      function reasonHtml(f){
+      var detailMode='before', activeLayer=null;
+      function scoreHtml(d){
+        var s=d.score;
+        return '<div class="hm-score-card"><div class="hm-score-side"><span>CANN</span><b>'+s.cann+'</b></div><div class="hm-score-gap"><small>'+s.label+'</small><strong>'+s.gap+'<em>'+((s.unit===undefined)?' 分':s.unit)+'</em></strong></div><div class="hm-score-side"><span>CUDA / NVIDIA</span><b>'+s.nvidia+'</b></div></div>';
+      }
+      function nvidiaDemoHtml(key){
+        var top='<div class="hm-nv-top"><span class="hm-nv-dots"><i></i><i></i><i></i></span><span class="hm-nv-url">docs.nvidia.com / CUDA Documentation</span></div>';
+        var ui={
+          version:'<div class="hm-nv-ui"><div class="hm-nv-row"><b>CUDA Toolkit Compatibility</b><span class="hm-nv-badge">Current</span></div><div class="hm-nv-tabs"><span class="on">Installation</span><span>Release notes</span><span>Compatibility</span></div><div class="hm-nv-row"><small>CUDA 12.6 · Linux x86_64</small><span class="hm-nv-badge">verified</span></div><div class="hm-nv-code">$ pip install torch --index-url cu126</div></div>',
+          err:'<div class="hm-nv-ui"><div class="hm-nv-row"><b>CUDA error reference</b><span class="hm-nv-badge">Error 700</span></div><div class="hm-nv-list"><div><i>1</i><b>Illegal memory access</b><small>cause</small></div><div><i>2</i><b>Run compute-sanitizer</b><small>diagnose</small></div><div><i>3</i><b>Correct the invalid index</b><small>fix</small></div></div></div>',
+          third:'<div class="hm-nv-ui"><div class="hm-nv-row"><b>CUDA extension integration</b><span class="hm-nv-badge">Official</span></div><div class="hm-nv-list"><div><i>✓</i><b>CUDA C++ Programming Guide</b><small>docs</small></div><div><i>✓</i><b>PyTorch C++ extension</b><small>GitHub</small></div><div><i>✓</i><b>Stack Overflow cases</b><small>community</small></div></div></div>',
+          funnel:'<div class="hm-nv-ui"><div class="hm-nv-row"><b>Custom CUDA extension</b><span class="hm-nv-badge">Guide</span></div><div class="hm-nv-stepper"><span>1</span><i></i><span>2</span><i></i><span>3</span><i></i><span>4</span></div><div class="hm-nv-row" style="justify-content:space-between"><small>Write kernel</small><small>Build</small><small>Run</small><small>Debug</small></div><div class="hm-nv-code">python setup.py install && python test.py</div></div>',
+          own:'<div class="hm-nv-ui"><div class="hm-nv-chat"><div class="ask">How do I launch a CUDA kernel?</div><div class="answer"><b>CUDA kernel launch syntax</b><br><small>Use &lt;&lt;&lt;grid, block&gt;&gt;&gt;, then check cudaGetLastError().</small></div></div><div class="hm-nv-row" style="margin-top:6px"><span class="hm-nv-badge">CUDA docs</span><small>known API pattern</small></div></div>',
+          spa:'<div class="hm-nv-ui"><div class="hm-nv-row"><b>CUDA C Programming Guide</b><span class="hm-nv-badge">HTML</span></div><div class="hm-nv-tabs"><span class="on">Programming model</span><span>Code samples</span></div><div class="hm-nv-code">__global__ void add(int *a) { ... }</div><div class="hm-nv-row"><small>Kernel execution · parameters · next steps</small></div></div>',
+          discover:'<div class="hm-nv-ui"><div class="hm-nv-search">custom CUDA extension <span>Search</span></div><div class="hm-nv-list"><div><i>1</i><b>Custom C++ and CUDA Extensions</b><small>Official</small></div><div><i>2</i><b>CUDA C++ Programming Guide</b><small>Official</small></div><div><i>3</i><b>Extension examples</b><small>GitHub</small></div></div></div>',
+          cost:'<div class="hm-nv-ui"><div class="hm-nv-row"><b>CUDA documentation index</b><span class="hm-nv-badge">Structured</span></div><div class="hm-nv-log"><div><em>GET</em> /docs / api / samples</div><div><em>200</em> current version + code + API</div><div><em>DONE</em> evidence ready</div></div><div class="hm-nv-row"><small>Few retrieval and verification rounds</small></div></div>'
+        };
+        return '<div class="hm-nvidia-demo">'+top+(ui[key]||ui.version)+'</div>';
+      }
+      function beforeHtml(f){
         var d=DETAILS[f.k];
         if(!d)return '';
-        var s=d.score;
-        return '<div class="hm-reason"><div class="hm-reason-kicker">SCORE GAP → WHAT IT MEANS → NVIDIA PRACTICE</div><div class="hm-score-card"><div class="hm-score-side"><span>CANN</span><b>'+s.cann+'</b></div><div class="hm-score-gap"><small>'+s.label+'</small><strong>'+s.gap+'<em>'+((s.unit===undefined)?' 分':s.unit)+'</em></strong></div><div class="hm-score-side"><span>CUDA / NVIDIA</span><b>'+s.nvidia+'</b></div></div><div class="hm-reason-block meaning"><b>这个分数说明昇腾差在哪里</b><p>'+d.meaning+'</p></div><div class="hm-reason-block cuda"><b>NVIDIA 如何支撑同一任务</b><p>'+d.nvidia+'</p></div></div>';
+        return '<div class="hm-before">'+scoreHtml(d)+'<section class="hm-before-demo"><h4>昇腾社区 · 当前形态</h4><p>'+d.meaning+'</p><div class="hm-demo-scale"><iframe src="ux19-embed.html?card='+d.card+'&demoOnly=1&state=before" title="'+f.title+'的昇腾现状 Demo"></iframe></div></section><section class="hm-before-demo nvidia"><h4>NVIDIA · 同一任务如何获得支撑</h4>'+nvidiaDemoHtml(f.k)+'</section></div>';
+      }
+      function afterHtml(f){
+        var d=DETAILS[f.k];
+        if(!d)return '';
+        return '<div class="hm-after"><section class="hm-after-design"><b>设计点 · '+d.designTitle+'</b><p><strong>为什么这样改：</strong>'+d.afterWhy+'</p></section><section class="hm-after-demo"><h4>改造后 Demo</h4><div class="hm-demo-scale"><iframe src="ux19-embed.html?card='+d.card+'&demoOnly=1&state=after" title="'+f.title+'的改造后 Demo"></iframe></div></section></div>';
       }
       function detailHtml(f,idx){
         var d=DETAILS[f.k];
         if(!d)return '';
-        var tabs='<div class="hm-detail-tabs"><button class="hm-detail-tab '+(detailMode==='reason'?'on':'')+'" type="button" data-detail-mode="reason">推导过程</button><button class="hm-detail-tab '+(detailMode==='demo'?'on':'')+'" type="button" data-detail-mode="demo">Before · After</button></div>';
-        var panel=detailMode==='reason'?reasonHtml(f):'<div class="hm-detail-demo"><div class="hm-demo-scale"><iframe src="ux19-embed.html?card='+d.card+'&demoOnly=1" title="'+f.title+'的原始 Before / After Demo"></iframe></div></div>';
+        var tabs='<div class="hm-detail-tabs"><button class="hm-detail-tab '+(detailMode==='before'?'on':'')+'" type="button" data-detail-mode="before">Before</button><button class="hm-detail-tab '+(detailMode==='after'?'on':'')+'" type="button" data-detail-mode="after">After</button></div>';
+        var panel=detailMode==='before'?beforeHtml(f):afterHtml(f);
         return '<div class="hm-detail-card">'+tabs+'<div class="hm-detail-panel">'+panel+'</div></div>';
       }
       function resizeDetailDemoFrame(frame,h){
         if(!frame)return;
-        var demoBox=frame.closest('.hm-detail-demo');
+        var demoBox=frame.closest('.hm-before-demo,.hm-after-demo');
         var scaleBox=frame.closest('.hm-demo-scale');
         if(!demoBox||!scaleBox)return;
         scaleBox.style.transform='scale(1)';
@@ -2333,7 +2359,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
           if(matrixCopy){matrixCopy.classList.add('off');matrixCopy.innerHTML='';}
           updatePager(-1);
           window.__hmStep=-1;
-          window.__hmDetailMode='reason';
+          window.__hmDetailMode='before';
           return;
         }
         var f=focus[idx%focus.length];
@@ -2410,25 +2436,25 @@ body.overview #panel,body.overview #toggle{display:none!important}
       }
       function syncHash(){
         var step=typeof window.__hmStep==='number'?window.__hmStep:-1;
-        var suffix=step>=0?'-hm'+(step+1)+(detailMode==='demo'?'-demo':''):(activeLayer?'-layer-'+activeLayer:'');
+        var suffix=step>=0?'-hm'+(step+1)+(detailMode==='after'?'-after':''):(activeLayer?'-layer-'+activeLayer:'');
         try{history.replaceState(null,'','#'+sectionPageNo()+suffix);}catch(e){}
       }
       if(stepBox){
         var problemButtons=focus.map(function(f,i){return '<button class="hm-step problem '+f.layer+'" type="button" data-page="'+i+'" aria-label="定位到'+f.title+'" title="'+f.title+'">'+(i+1)+'</button>';}).join('');
         stepBox.innerHTML='<button class="hm-step arrow" type="button" data-dir="-1" aria-label="上一问题">‹</button><button class="hm-step hm-page overview" type="button" data-page="-1" aria-label="查看全量矩阵">全量</button>'+problemButtons+'<button class="hm-step arrow" type="button" data-dir="1" aria-label="下一问题">›</button>';
-        stepBox.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){activeLayer=null;detailMode='reason';setStep(Number(b.getAttribute('data-page')));syncHash();});});
+        stepBox.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){activeLayer=null;detailMode='before';setStep(Number(b.getAttribute('data-page')));syncHash();});});
         stepBox.querySelectorAll('[data-dir]').forEach(function(b){b.addEventListener('click',function(){
           var dir=Number(b.getAttribute('data-dir'));
           if(window.__hmDeckNavigate)window.__hmDeckNavigate(dir);
         });});
       }
-      function goLayer(layer){activeLayer=layer;detailMode='reason';var first=focus.findIndex(function(f){return f.layer===layer;});if(first>=0){setStep(first);syncHash();}}
+      function goLayer(layer){activeLayer=layer;detailMode='before';var first=focus.findIndex(function(f){return f.layer===layer;});if(first>=0){setStep(first);syncHash();}}
       window.__hmGoLayer=goLayer;
-      /* 唯一的讲解顺序：金字塔层级 → 问题推导 → 改进 Demo。 */
+      /* 唯一的讲解顺序：金字塔层级 → 问题 Before → 问题 After。 */
       window.__hmOpenIssue=function(issue,mode){
         if(issue<0||issue>=focus.length)return false;
         activeLayer=focus[issue].layer;
-        detailMode=mode==='demo'?'demo':'reason';
+        detailMode=mode==='after'?'after':'before';
         setStep(issue,true);
         syncHash();
         return true;
@@ -2440,17 +2466,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
         var layers=['asset','machine','search'];
         if(onMatrix){
           var current=typeof window.__hmStep==='number'?window.__hmStep:-1;
-          if(current<0){if(dir>0)return window.__hmOpenIssue(0,'reason');return false;}
+          if(current<0){if(dir>0)return window.__hmOpenIssue(0,'before');return false;}
           var currentLayer=focus[current].layer, layerStart=focus.findIndex(function(f){return f.layer===currentLayer;});
           if(dir>0){
-            if(detailMode==='reason')return window.__hmOpenIssue(current,'demo');
-            if(current+1<focus.length&&focus[current+1].layer===currentLayer)return window.__hmOpenIssue(current+1,'reason');
+            if(detailMode==='before')return window.__hmOpenIssue(current,'after');
+            if(current+1<focus.length&&focus[current+1].layer===currentLayer)return window.__hmOpenIssue(current+1,'before');
             var nextLayer=layers[layers.indexOf(currentLayer)+1];
             if(nextLayer&&window.__kpShowLayer){window.__kpShowLayer(nextLayer);return true;}
             return false;
           }
-          if(detailMode==='demo')return window.__hmOpenIssue(current,'reason');
-          if(current>layerStart)return window.__hmOpenIssue(current-1,'demo');
+          if(detailMode==='after')return window.__hmOpenIssue(current,'before');
+          if(current>layerStart)return window.__hmOpenIssue(current-1,'after');
           var previousLayer=layers[layers.indexOf(currentLayer)-1]||currentLayer;
           if(window.__kpShowLayer){window.__kpShowLayer(previousLayer);return true;}
           return false;
@@ -2459,25 +2485,25 @@ body.overview #panel,body.overview #toggle{display:none!important}
           var layer=window.__kpCurrentLayer||'asset', layerIndex=layers.indexOf(layer);
           if(dir>0){
             var first=focus.findIndex(function(f){return f.layer===layer;});
-            if(first>=0&&typeof window.go==='function'){window.go([].slice.call(document.querySelectorAll('.slide')).indexOf(slideEl));return window.__hmOpenIssue(first,'reason');}
+            if(first>=0&&typeof window.go==='function'){window.go([].slice.call(document.querySelectorAll('.slide')).indexOf(slideEl));return window.__hmOpenIssue(first,'before');}
             return false;
           }
           if(layerIndex<=0)return false;
           var priorLayer=layers[layerIndex-1], last=-1;
           focus.forEach(function(f,i){if(f.layer===priorLayer)last=i;});
-          if(last>=0&&typeof window.go==='function'){window.go([].slice.call(document.querySelectorAll('.slide')).indexOf(slideEl));return window.__hmOpenIssue(last,'demo');}
+          if(last>=0&&typeof window.go==='function'){window.go([].slice.call(document.querySelectorAll('.slide')).indexOf(slideEl));return window.__hmOpenIssue(last,'after');}
         }
         return false;
       };
       function applyHashStep(){
         var hash=location.hash||'', layerMatch=hash.match(new RegExp('^#'+sectionPageNo()+'-layer-(asset|machine|search)$'));
-        var hmMatch=hash.match(new RegExp('^#'+sectionPageNo()+'-hm([1-8])(?:-(demo))?$'));
+        var hmMatch=hash.match(new RegExp('^#'+sectionPageNo()+'-hm([1-8])(?:-(after))?$'));
         if(layerMatch)goLayer(layerMatch[1]);
-        else if(hmMatch){activeLayer=focus[Number(hmMatch[1])-1].layer;detailMode=hmMatch[2]?'demo':'reason';setStep(Number(hmMatch[1])-1);}
+        else if(hmMatch){activeLayer=focus[Number(hmMatch[1])-1].layer;detailMode=hmMatch[2]?'after':'before';setStep(Number(hmMatch[1])-1);}
         else if(location.hash==='#'+sectionPageNo())setStep(-1);
       }
-      var initialHash=location.hash||'', hmMatch=initialHash.match(new RegExp('^#'+sectionPageNo()+'-hm([1-8])(?:-(demo))?$'));
-      if(hmMatch){activeLayer=focus[Number(hmMatch[1])-1].layer;detailMode=hmMatch[2]?'demo':'reason';setStep(Number(hmMatch[1])-1);}else{activeLayer='asset';detailMode='reason';setStep(0);}
+      var initialHash=location.hash||'', hmMatch=initialHash.match(new RegExp('^#'+sectionPageNo()+'-hm([1-8])(?:-(after))?$'));
+      if(hmMatch){activeLayer=focus[Number(hmMatch[1])-1].layer;detailMode=hmMatch[2]?'after':'before';setStep(Number(hmMatch[1])-1);}else{activeLayer='asset';detailMode='before';setStep(0);}
       clearInterval(window.__hmTimer);
       window.__hmTimer=null;
       addEventListener('resize',function(){setStep(typeof window.__hmStep==='number'?window.__hmStep:-1);},{passive:true});
