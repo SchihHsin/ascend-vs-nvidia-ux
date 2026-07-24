@@ -1252,12 +1252,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
 
 
-<!-- 10 灰底：研究范围、方法与产出 -->
-  <section class="slide s-gray research-map-slide">
+<!-- 10 灰底：从问题分叉进入 AI 知识往返的研究视角 -->
+  <section class="slide s-gray research-map-slide research-bridge-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">围绕真实任务，量化 AI 能否获得并组织可执行的昇腾知识</span></div>
-        <div class="subttl">研究设计 · 以任务、证据与评分为主线，定位 AI 可用性的受阻环节</div>
+        <div class="brand"><span class="ttl">从“答不出来”出发，观察 AI 如何取得并使用昇腾知识</span></div>
+        <div class="subttl">研究设计 · 聚焦 AI 与昇腾社区之间的知识往返</div>
       </div>
       <div class="head-r">13/ 研究设计</div>
     </div>
@@ -1280,8 +1280,39 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .rm-method{display:flex;align-items:center;gap:.65vw}.rm-method-icon{width:34px;height:34px;flex:0 0 auto;padding:8px;border-radius:9px;background:color-mix(in srgb,var(--rm) 11%,white);border:1px solid color-mix(in srgb,var(--rm) 20%,white);color:var(--rm)}.rm-method-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
       .rm-band.person-ai{background:linear-gradient(140deg,#5B3FB0,#7C5CF0);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(91,63,176,.62),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-dev{background:linear-gradient(140deg,#2361CC,#2F91D4);border-color:rgba(255,255,255,.28);box-shadow:0 16px 30px -22px rgba(35,97,204,.58),inset 0 1px 0 rgba(255,255,255,.3)}.rm-band.person-ai:after,.rm-band.person-dev:after{background:radial-gradient(closest-side,rgba(255,255,255,.24),transparent)}.rm-band.person-ai b,.rm-band.person-dev b{color:#fff}.rm-band.person-ai p,.rm-band.person-dev p{color:rgba(255,255,255,.78)}.rm-band.person-ai .rm-person>svg,.rm-band.person-dev .rm-person>svg{background:rgba(255,255,255,.18);stroke:#fff!important;color:#fff!important;stroke-width:2.1}
       .rm-flow{position:relative;z-index:2;height:3.4vh;margin:-.55vh 0 -.45vh 93px;display:flex;align-items:center;justify-content:center;pointer-events:none;color:rgba(92,102,164,.42);opacity:.58}.rm-flow.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vw}.rm-flow-arrow{width:54px;height:4.4vh;justify-self:center;overflow:visible}.rm-flow-arrow path{fill:currentColor}.rm-flow-arrow.ai{color:rgba(124,92,240,.6)}.rm-flow-arrow.dev{color:rgba(47,111,237,.6)}
+      .research-bridge-slide .research-map{display:none}
+      .research-bridge-slide .body-area{display:flex;min-height:0}
+      .research-bridge-layout{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 5.7vw minmax(0,1fr);gap:1.05vw;align-items:stretch;flex:1;min-height:0}
+      .research-bridge-pane{position:relative;min-width:0;min-height:0;overflow:hidden;border-radius:17px;border:1px solid rgba(255,255,255,.82);background:rgba(255,255,255,.62);box-shadow:0 16px 34px -25px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.9)}
+      .research-bridge-source{padding:.8vh .6vw}
+      .research-bridge-source .branch-canvas{width:100%;height:100%;min-height:0}
+      .research-bridge-source .branch-canvas svg{display:block;width:100%;height:100%}
+      .research-bridge-source:after{content:"";position:absolute;z-index:2;top:0;right:0;bottom:0;left:52%;background:linear-gradient(90deg,rgba(234,237,241,.22),rgba(234,237,241,.82) 24%,rgba(234,237,241,.88));pointer-events:none}
+      .research-bridge-focus{position:absolute;z-index:3;left:3.5%;top:14%;width:39%;height:72%;border:2px solid rgba(201,54,70,.8);border-radius:50%;box-shadow:0 0 0 12px rgba(201,54,70,.07),0 16px 28px -24px rgba(135,29,41,.82);pointer-events:none}
+      .research-bridge-focus span{position:absolute;top:-2.35vh;left:50%;transform:translateX(-50%);white-space:nowrap;padding:.38vh .55vw;border-radius:7px;background:rgba(255,255,255,.96);border:1px solid rgba(201,54,70,.25);box-shadow:0 7px 15px -13px rgba(80,26,34,.6);color:#9f2635;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:950;letter-spacing:.04em}
+      .research-bridge-sequence{padding:.8vh .6vw;display:flex}
+      .research-bridge-sequence-frame{position:relative;flex:1;min-width:0;min-height:0;overflow:hidden;border-radius:12px;background:#fff}
+      .research-bridge-sequence-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+      .research-bridge-sequence-label{position:absolute;z-index:2;top:.72vh;left:.68vw;padding:.42vh .58vw;border-radius:7px;background:rgba(35,43,63,.94);box-shadow:0 5px 13px -12px rgba(30,40,70,.6);color:#fff;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;letter-spacing:.035em;pointer-events:none}
+      .research-bridge-arrow{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;color:#5B5BD6}
+      .research-bridge-arrow:before,.research-bridge-arrow:after{content:"";position:absolute;top:50%;height:2px;background:rgba(91,91,214,.36)}
+      .research-bridge-arrow:before{left:0;right:50%}.research-bridge-arrow:after{left:50%;right:0}
+      .research-bridge-arrow span{position:relative;z-index:1;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#fff;border:2px solid rgba(91,91,214,.34);box-shadow:0 12px 24px -16px rgba(56,52,142,.6);font-size:25px;font-weight:900;line-height:1}
     </style>
     <div class="body-area">
+      <div class="research-bridge-layout">
+        <div class="research-bridge-pane research-bridge-source" aria-label="AI 可用性问题分叉图，左侧问题区域已高亮">
+          <div id="research-bridge-source"></div>
+          <div class="research-bridge-focus"><span>本次观察重点</span></div>
+        </div>
+        <div class="research-bridge-arrow" aria-hidden="true"><span>→</span></div>
+        <div class="research-bridge-pane research-bridge-sequence">
+          <div class="research-bridge-sequence-frame">
+            <iframe data-src="seq-d3.html?hi=1" title="AI 与昇腾社区的知识往返时序图"></iframe>
+            <div class="research-bridge-sequence-label">AI ↔ 昇腾社区 · 知识往返</div>
+          </div>
+        </div>
+      </div>
       <div class="research-map">
         <div class="rm-row">
           <div class="rm-label"><b>研究目标</b><span>Goal · 04</span></div>
@@ -3031,6 +3062,29 @@ body.overview #panel,body.overview #toggle{display:none!important}
 <script>
 const root=document.documentElement;
 const deck=document.getElementById('deck');
+/* 复用第 7 页原图，避免研究设计页出现另一套重画的“问题分叉”。 */
+(function copyResearchBranch(){
+  const source=document.querySelector('.research-branch-slide .branch-canvas');
+  const target=document.getElementById('research-bridge-source');
+  if(!source||!target)return;
+  const clone=source.cloneNode(true);
+  const ids={};
+  clone.querySelectorAll('[id]').forEach(function(node){
+    const next='bridge-'+node.id;
+    ids[node.id]=next;
+    node.id=next;
+  });
+  clone.querySelectorAll('*').forEach(function(node){
+    Array.from(node.attributes).forEach(function(attr){
+      let value=attr.value;
+      Object.keys(ids).forEach(function(id){
+        value=value.replaceAll('url(#'+id+')','url(#'+ids[id]+')').replaceAll('#'+id,'#'+ids[id]);
+      });
+      if(value!==attr.value)node.setAttribute(attr.name,value);
+    });
+  });
+  target.appendChild(clone);
+})();
 /* 把已有的细讲页后移：先由 P2 局部过渡到七阶段拼图，再展开为整张全量图。 */
 (function orderSequenceWalkthrough(){
   const operator=document.querySelector('.operator-seq-slide');
