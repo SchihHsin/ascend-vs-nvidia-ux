@@ -78,6 +78,8 @@
 .diagnosis{grid-template-columns:minmax(0,1.75fr) minmax(19rem,.65fr)}
 .matrix{grid-template-columns:1.3fr repeat(6,minmax(0,1fr));grid-template-rows:auto repeat(3,1fr)}
 .matrix>div{padding:1.25vh .65vw}.matrix .na{background:#fafbfc;color:#b4bac4;text-align:center}
+/* Overview mirrors the actual slide instead of reducing it to a text-only index. */
+.overview-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.3vw}.thumb{position:relative;min-height:0;padding:0;overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:#1d212b;color:#fff;cursor:pointer}.thumb:hover{border-color:#aeb8ff;transform:translateY(-2px)}.thumb-canvas{position:absolute;inset:0;overflow:hidden;pointer-events:none}.thumb-slide{position:absolute!important;left:0;top:0;transform-origin:top left;scroll-snap-align:none!important;scroll-snap-stop:normal!important}.thumb-label{position:absolute;z-index:2;left:.65vw;top:.65vh;padding:.3vh .45vw;border:1px solid rgba(255,255,255,.2);border-radius:6px;background:rgba(11,13,18,.68);color:rgba(255,255,255,.82);font:500 var(--fs-xs)/1 "JetBrains Mono",monospace;letter-spacing:.08em;pointer-events:none}
 </style>
 <style id="deck-system">
 /* Unified report-ppt component system: no legacy page-specific overrides. */
@@ -228,7 +230,7 @@
   </section>
 
   <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>前三项达到 80%，进入优先改善范围</h1><p class="sub">角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦，累计占全部编码提及的 80%。</p></div><div class="page-no">12 / 15</div></header>
+    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>高频痛点在“定义分析范围与任务”与“审阅、核验与调整”两个阶段反复出现</h1><p class="sub">角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦累计占全部编码提及的 80%，也是两个高阻力阶段反复出现的核心问题。</p></div><div class="page-no">12 / 15</div></header>
     <div class="body-area"><div class="pareto-layout"><aside class="pareto-callout"><div class="big">80<small>%</small></div><h2>前三项进入优先改善范围</h2><p>16 / 20 次编码提及，达到 80% 优先改善阈值。</p></aside><div class="pareto-chart-card"><div id="paretoChart" aria-label="竞品分析痛点柏拉图"></div></div></div></div><div class="foot">PAIN PRIORITY / REVIEW · CONTEXT · SCOPE</div>
   </section>
 
@@ -313,7 +315,43 @@
   const journey=document.querySelector('.jrn-wrap');
   if(journey){['明确分析目标','定义分析范围与任务','发起分析生成','等待生成结果','审阅与核验','调整与迭代','形成可用的分析材料'].forEach((label,i)=>{const stage=journey.querySelectorAll('.jrn-ph .pt')[i];if(stage)stage.textContent=label})}
   const ICON_MAX='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 1 2 2h3"/></svg>',ICON_MIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M16 21v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/></svg>';
-  slides.forEach((slide,i)=>{const b=document.createElement('button');b.title=`第 ${i+1} 页`;b.addEventListener('click',()=>go(i));dots.append(b);const thumb=document.createElement('button');thumb.className='thumb';thumb.innerHTML=`<span>${pad(i+1)}</span><strong>${slide.querySelector('.head h1,.chapter-title,.cover-title')?.textContent.replace(/\s+/g,' ').trim()||'提升泛ICT领域竞品分析效率'}</strong>`;thumb.addEventListener('click',()=>{closeOverview();go(i)});grid.append(thumb)});
+  function buildOverviewThumb(slide,i){
+    const thumb=document.createElement('button');
+    thumb.type='button';
+    thumb.className='thumb';
+    thumb.title=`前往第 ${i+1} 页`;
+    thumb.setAttribute('aria-label',`前往第 ${i+1} 页`);
+    const canvas=document.createElement('div');
+    canvas.className='thumb-canvas';
+    const clone=slide.cloneNode(true);
+    clone.classList.add('thumb-slide');
+    clone.removeAttribute('id');
+    clone.querySelectorAll('[id]').forEach(node=>node.removeAttribute('id'));
+    canvas.append(clone);
+    thumb.append(canvas);
+    const label=document.createElement('span');
+    label.className='thumb-label';
+    label.textContent=pad(i+1);
+    thumb.append(label);
+    thumb.addEventListener('click',()=>{closeOverview();go(i)});
+    const fit=()=>{
+      const width=canvas.clientWidth,height=canvas.clientHeight;
+      if(!width||!height)return;
+      const scale=Math.min(width/window.innerWidth,height/window.innerHeight);
+      clone.style.width=`${window.innerWidth}px`;
+      clone.style.height=`${window.innerHeight}px`;
+      clone.style.transform=`scale(${scale})`;
+    };
+    requestAnimationFrame(fit);
+    return {thumb,fit};
+  }
+  const overviewThumbs=[];
+  function refreshOverview(){
+    overviewThumbs.length=0;
+    grid.replaceChildren();
+    slides.forEach((slide,i)=>{const thumb=buildOverviewThumb(slide,i);overviewThumbs.push(thumb);grid.append(thumb.thumb)});
+  }
+  slides.forEach((slide,i)=>{const b=document.createElement('button');b.title=`第 ${i+1} 页`;b.addEventListener('click',()=>go(i));dots.append(b)});
   const buttons=[...dots.children];
   function set(i){current=i;buttons.forEach((b,n)=>b.classList.toggle('active',n===i));page.textContent=`${pad(i+1)} / ${pad(slides.length)}`;prevBtn.disabled=i===0;nextBtn.disabled=i===slides.length-1;document.body.classList.toggle('on-dark',dark(slides[i]));if(typeof paretoIndex!=='undefined'&&i!==paretoIndex){paretoFocused=false;document.querySelector('.pareto-focus-box')?.classList.remove('show')}try{history.replaceState(null,'',`#${i+1}`)}catch(e){location.hash=i+1}}
   // Let the native snap container finish one scroll; repeated scrollTo calls were fighting it and causing bounce.
@@ -330,11 +368,11 @@
     box.classList.add('show');
     return true;
   }
-  function openOverview(){overview.classList.add('show');overview.setAttribute('aria-hidden','false')}function closeOverview(){overview.classList.remove('show');overview.setAttribute('aria-hidden','true')}
+  function openOverview(){refreshOverview();overview.classList.add('show');overview.setAttribute('aria-hidden','false');requestAnimationFrame(()=>overviewThumbs.forEach(item=>item.fit()))}function closeOverview(){overview.classList.remove('show');overview.setAttribute('aria-hidden','true')}
   function syncFsIcon(){const active=!!document.fullscreenElement;fsBtn.innerHTML=active?ICON_MIN:ICON_MAX;fsBtn.title=active?'退出全屏 F':'全屏 F'}
   async function fullscreen(){if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}
   const io=new IntersectionObserver(es=>{const v=es.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(v)set(slides.indexOf(v.target))},{threshold:[.55]});slides.forEach(s=>io.observe(s));
-  prevBtn.addEventListener('click',()=>go(current-1));nextBtn.addEventListener('click',()=>go(current+1));document.querySelector('[data-action="overview"]').addEventListener('click',openOverview);document.querySelector('[data-action="close-overview"]').addEventListener('click',closeOverview);fsBtn.addEventListener('click',fullscreen);document.addEventListener('fullscreenchange',()=>{syncFsIcon();setTimeout(()=>slides[current].scrollIntoView({block:'start',behavior:'auto'}),90)});addEventListener('resize',()=>{clearTimeout(window.__deckResizeTimer);window.__deckResizeTimer=setTimeout(()=>slides[current].scrollIntoView({block:'start',behavior:'auto'}),120)});syncFsIcon();
+  prevBtn.addEventListener('click',()=>go(current-1));nextBtn.addEventListener('click',()=>go(current+1));document.querySelector('[data-action="overview"]').addEventListener('click',openOverview);document.querySelector('[data-action="close-overview"]').addEventListener('click',closeOverview);fsBtn.addEventListener('click',fullscreen);document.addEventListener('fullscreenchange',()=>{syncFsIcon();setTimeout(()=>slides[current].scrollIntoView({block:'start',behavior:'auto'}),90)});addEventListener('resize',()=>{clearTimeout(window.__deckResizeTimer);window.__deckResizeTimer=setTimeout(()=>{slides[current].scrollIntoView({block:'start',behavior:'auto'});overviewThumbs.forEach(item=>item.fit())},120)});syncFsIcon();
   function flashScrollbar(){document.body.classList.add('scrolling');clearTimeout(scrollbarTimer);scrollbarTimer=setTimeout(()=>document.body.classList.remove('scrolling'),700)}document.body.addEventListener('scroll',flashScrollbar,{passive:true});addEventListener('wheel',flashScrollbar,{passive:true});
   addEventListener('mousemove',e=>{controls.classList.toggle('show',e.clientY>innerHeight-120);dots.classList.toggle('show',e.clientX>innerWidth-120)});document.addEventListener('mouseleave',()=>{controls.classList.remove('show');dots.classList.remove('show')});
   addEventListener('keydown',e=>{if(e.key==='Escape'&&overview.classList.contains('show')){closeOverview();return}if(e.key==='o'||e.key==='O'){e.preventDefault();openOverview()}else if(e.key==='f'||e.key==='F'){e.preventDefault();fullscreen()}else if(['ArrowDown','ArrowRight'].includes(e.key)){e.preventDefault();if(current===paretoIndex&&!paretoFocused)focusPareto();else go(current+1)}else if(['PageDown',' '].includes(e.key)){e.preventDefault();go(current+1)}else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(current-1)}else if(e.key==='Home')go(0);else if(e.key==='End')go(slides.length-1)});
@@ -446,8 +484,8 @@
   if(journeySlide){journeySlide.querySelector('.head h1').textContent='设计师主导分析，主要工作阻力集中在范围定义、生成等待与核验调整';journeySlide.querySelector('.head .sub').textContent='设计师先明确目标和范围，再发起 Skill 分析并等待生成；生成后的审阅与调整是低可采纳、返工后的工作现象。高频痛点集中在研究范围、业务上下文、角色任务和抽象机制的理解。'}
   const paretoSlide=slides.find(s=>s.querySelector('#paretoChart'));
   if(paretoSlide){
-    paretoSlide.querySelector('.head h1').textContent='前三项达到 80%，进入优先改善范围';
-    paretoSlide.querySelector('.head .sub').textContent='角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦，累计占全部编码提及的 80%。';
+    paretoSlide.querySelector('.head h1').textContent='高频痛点在“定义分析范围与任务”与“审阅、核验与调整”两个阶段反复出现';
+    paretoSlide.querySelector('.head .sub').textContent='角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦累计占全部编码提及的 80%，也是两个高阻力阶段反复出现的核心问题。';
     paretoSlide.querySelector('.pareto-callout').innerHTML='<div class="big">80<small>%</small></div><h2>前三项进入优先改善范围</h2><p>16 / 20 次编码提及，达到 80% 优先改善阈值。</p>';
     paretoSlide.querySelector('.pareto-chart-card').insertAdjacentHTML('beforeend','<div class="pareto-focus-box" aria-hidden="true"><span>本轮优先改善</span></div>');
   }
