@@ -1689,7 +1689,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .hm-step.arrow{min-width:24px;font-size:13px;line-height:1;padding:0 7px}
     .hm-step.on{background:#C7000B;border-color:#C7000B;color:#fff}
     .hm-step:disabled{opacity:.32;cursor:default;background:rgba(255,255,255,.54);color:#8E96A3}
-    .hm-step.layer{font-family:'HarmonyOS Sans SC','Noto Sans SC',sans-serif;font-size:10px;padding:0 8px}.hm-step.layer.asset.on{background:#9B3E79;border-color:#9B3E79}.hm-step.layer.machine.on{background:#A55A2C;border-color:#A55A2C}.hm-step.layer.search.on{background:#8A681B;border-color:#8A681B}
+    /* 8 个问题直接定位；颜色只提示其所属知识层，不再把问题折叠为 3 个层级入口。 */
+    .hm-step.problem{width:22px;padding:0;border-color:var(--problem-line);background:var(--problem-soft);color:var(--problem-ink)}
+    .hm-step.problem.asset{--problem-line:rgba(155,62,121,.33);--problem-soft:#F7D9EC;--problem-ink:#8D346D}
+    .hm-step.problem.machine{--problem-line:rgba(165,90,44,.34);--problem-soft:#FFE3CD;--problem-ink:#914C25}
+    .hm-step.problem.search{--problem-line:rgba(138,104,27,.35);--problem-soft:#FFF4CD;--problem-ink:#7B5B12}
+    .hm-step.problem.on{background:var(--problem-ink);border-color:var(--problem-ink);color:#fff;box-shadow:0 4px 10px -7px var(--problem-ink)}
     .hmfull-note{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs);line-height:1.05;color:#8E96A3}
     .hm-score-legend{display:flex;align-items:center;gap:7px;flex:0 0 auto;font-family:'JetBrains Mono';font-weight:800;color:#6B7280}
     .hmfull-note b{color:#1B2432}.hmfull-note .hm-grad{width:92px}
@@ -2394,12 +2399,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
       function updatePager(idx){
         if(!stepBox)return;
         stepBox.querySelectorAll('.hm-page').forEach(function(b){b.classList.toggle('on',Number(b.getAttribute('data-page'))===idx);});
-        stepBox.querySelectorAll('.hm-step.layer').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-layer')===activeLayer);});
+        stepBox.querySelectorAll('.hm-step.problem').forEach(function(b){b.classList.toggle('on',Number(b.getAttribute('data-page'))===idx);});
         var prev=stepBox.querySelector('[data-dir="-1"]'), next=stepBox.querySelector('[data-dir="1"]');
-        var inLayer=activeLayer?focus.map(function(f,i){return f.layer===activeLayer?i:null;}).filter(function(i){return i!==null;}):focus.map(function(_,i){return i;});
-        var pos=inLayer.indexOf(idx);
-        if(prev)prev.disabled=idx<0||pos<=0;
-        if(next)next.disabled=idx<0;
+        if(prev)prev.disabled=idx<=0;
+        if(next)next.disabled=idx<0||idx>=focus.length-1;
       }
       function syncHash(){
         var step=typeof window.__hmStep==='number'?window.__hmStep:-1;
@@ -2407,14 +2410,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
         try{history.replaceState(null,'','#'+sectionPageNo()+suffix);}catch(e){}
       }
       if(stepBox){
-        stepBox.innerHTML='<button class="hm-step arrow" type="button" data-dir="-1" aria-label="上一问题">‹</button><button class="hm-step hm-page overview" type="button" data-page="-1" aria-label="全量总览">全量</button><button class="hm-step layer asset" type="button" data-layer="asset">知识资产 · 5</button><button class="hm-step layer machine" type="button" data-layer="machine">机器理解 · 1</button><button class="hm-step layer search" type="button" data-layer="search">检索引用 · 2</button><button class="hm-step arrow" type="button" data-dir="1" aria-label="下一问题">›</button>';
+        var problemButtons=focus.map(function(f,i){return '<button class="hm-step problem '+f.layer+'" type="button" data-page="'+i+'" aria-label="定位到'+f.title+'" title="'+f.title+'">'+(i+1)+'</button>';}).join('');
+        stepBox.innerHTML='<button class="hm-step arrow" type="button" data-dir="-1" aria-label="上一问题">‹</button><button class="hm-step hm-page overview" type="button" data-page="-1" aria-label="查看全量矩阵">全量</button>'+problemButtons+'<button class="hm-step arrow" type="button" data-dir="1" aria-label="下一问题">›</button>';
         stepBox.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){activeLayer=null;setStep(Number(b.getAttribute('data-page')));syncHash();});});
-        stepBox.querySelectorAll('[data-layer]').forEach(function(b){b.addEventListener('click',function(){goLayer(b.getAttribute('data-layer'));});});
         stepBox.querySelectorAll('[data-dir]').forEach(function(b){b.addEventListener('click',function(){
-          var dir=Number(b.getAttribute('data-dir')),list=activeLayer?focus.map(function(f,i){return f.layer===activeLayer?i:null;}).filter(function(i){return i!==null;}):focus.map(function(_,i){return i;});
-          var pos=list.indexOf(typeof window.__hmStep==='number'?window.__hmStep:-1),next=list[pos+dir];
-          if(next!==undefined){setStep(next);syncHash();return;}
-          if(dir>0){var order=['asset','machine','search'],nextLayer=order[order.indexOf(activeLayer)+1];if(nextLayer&&window.__kpShowLayer){window.__kpShowLayer(nextLayer);return;}activeLayer=null;setStep(-1);syncHash();}
+          var dir=Number(b.getAttribute('data-dir')),current=typeof window.__hmStep==='number'?window.__hmStep:-1,next=current+dir;
+          if(next>=0&&next<focus.length){activeLayer=null;setStep(next);syncHash();}
         });});
       }
       function goLayer(layer){activeLayer=layer;detailMode='reason';var first=focus.findIndex(function(f){return f.layer===layer;});if(first>=0){setStep(first);syncHash();}}
