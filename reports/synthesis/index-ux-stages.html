@@ -1184,7 +1184,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">围绕真实任务，量化 AI 能否获得并组织可执行的昇腾知识</span></div>
         <div class="subttl">研究设计 · 以任务、证据与评分为主线，定位 AI 可用性的受阻环节</div>
       </div>
-      <div class="head-r">10/ 研究设计</div>
+      <div class="head-r">11/ 研究设计</div>
     </div>
     <style>
       .research-map-slide .body-area{justify-content:center;gap:1.1vh}
@@ -1238,11 +1238,39 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="inner"><div class="cover-block"><div class="ch-no">02</div><h1 class="ch-cover-title">测量方法</h1><p class="ch-cover-sub">沿着一次真实计算开发任务，观察 AI 如何检索、读取、判断并组织答案；再以统一问题与指标，对照 CANN 与 CUDA 的知识可用性。</p></div></div>
   </section>
 
+  <!-- 先建立时序图中 AI 与昇腾社区这条线的阅读方式，再进入指标与架构。 -->
+  <section class="slide s-gray ai-community-process-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">时序图中 AI 与昇腾社区的一条线，就是一次完整的知识获取过程</span></div>
+        <div class="subttl">测量方法 · 从任务问题到可引用证据，再到可执行答案</div>
+      </div>
+      <div class="head-r">12/ AI 可用性 · 过程说明</div>
+    </div>
+    <style>
+      .ai-community-process-slide .body-area{justify-content:center}.aicp-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);gap:1.5vw;align-items:stretch;min-height:0}.aicp-flow{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8vw;align-items:stretch;padding:1.35vh 1.05vw;border-radius:17px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 34px -24px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.9)}.aicp-node{--a:#5B5BD6;position:relative;z-index:1;min-width:0;border-radius:13px;padding:1.25vh .9vw;background:linear-gradient(145deg,color-mix(in srgb,var(--a) 10%,#fff),rgba(255,255,255,.88));border:1px solid color-mix(in srgb,var(--a) 19%,white);display:flex;flex-direction:column;justify-content:center;gap:.45vh}.aicp-node b{font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950}.aicp-node span{font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}.aicp-node i{font-style:normal;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;color:var(--a);letter-spacing:.06em}.aicp-node.search{--a:#2F6FED}.aicp-node.fetch{--a:#0F9F9B}.aicp-node.quote{--a:#D17724}.aicp-node.answer{--a:#5B5BD6}.aicp-arrow{position:absolute;z-index:0;top:50%;left:20%;right:20%;height:2px;background:linear-gradient(90deg,#2F6FED,#0F9F9B,#D17724,#5B5BD6);opacity:.42}.aicp-arrow:after{content:"";position:absolute;right:-1px;top:50%;width:8px;height:8px;border-top:2px solid #5B5BD6;border-right:2px solid #5B5BD6;transform:translateY(-50%) rotate(45deg)}.aicp-side{border-radius:17px;padding:1.55vh 1.2vw;background:var(--g-ink);color:#fff;box-shadow:0 18px 38px -26px rgba(20,23,28,.68),inset 0 1px 0 rgba(255,255,255,.22);display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.aicp-side .eyebrow{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.1em;color:#BFC8FF}.aicp-side h3{font-size:var(--fs-h2);line-height:1.28;color:#fff;font-weight:950}.aicp-side p{font-size:var(--fs-body);line-height:1.52;color:rgba(255,255,255,.72)}.aicp-side b{color:#fff}.aicp-tag{display:inline-flex;align-self:flex-start;padding:.42vh .58vw;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:var(--fs-sm);font-weight:850;color:#fff}.aicp-tag em{font-style:normal;color:#8CE0D7;margin-right:.35em}
+    </style>
+    <div class="body-area">
+      <div class="aicp-layout">
+        <div class="aicp-flow" aria-label="AI 从昇腾社区获取知识的过程">
+          <div class="aicp-arrow" aria-hidden="true"></div>
+          <article class="aicp-node search"><i>01 · 提出请求</i><b>AI 将任务转成检索问题</b><span>例如：自定义算子操作教程如何完成。</span></article>
+          <article class="aicp-node fetch"><i>02 · 进入社区</i><b>查找并抓取昇腾社区内容</b><span>搜索官方页面，读取正文、代码与版本信息。</span></article>
+          <article class="aicp-node quote"><i>03 · 判断证据</i><b>确认内容是否可引用</b><span>判断正文是否完整、版本是否明确、是否需要补充来源。</span></article>
+          <article class="aicp-node answer"><i>04 · 回到任务</i><b>组织为可执行答案</b><span>将可用证据写成步骤，并标出仍需人工核验的部分。</span></article>
+        </div>
+        <aside class="aicp-side"><div class="eyebrow">HOW TO READ THE SEQUENCE</div><h3>这不是一条“访问记录”，而是一次 <b>知识供给 → 理解 → 引用</b> 的闭环。</h3><p>时序图里每一条 <b>AI ↔ 昇腾社区</b> 的线，都会保留任务问题、来源、抓取结果与后续是否被用于作答。因此可以继续量化“找到没有、读到没有、证据够不够、答案能不能落地”。</p><span class="aicp-tag"><em>对应金字塔：</em>知识资产层 → 机器理解层 → 检索与引用层</span></aside>
+      </div>
+    </div>
+  </section>
+
     <style>
     .archmetric-layout{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:1.45vw;flex:1;min-height:0;align-items:stretch}
     .archmetric-arch{border-radius:16px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);padding:1.15vh .85vw;display:flex;min-height:0;overflow:hidden}
     .archmetric-archbox{position:relative;flex:1;min-width:0;min-height:0;border-radius:12px;overflow:hidden}
     .archmetric-archbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+    .archmetric-diagram-title{position:absolute;z-index:3;left:.68vw;top:.68vh;padding:.38vh .58vw;border-radius:7px;background:rgba(235,238,243,.92);border:1px solid rgba(47,61,99,.1);color:#687282;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:850;letter-spacing:.045em;pointer-events:none}
+    .arch-layer-key{position:absolute;z-index:3;left:.62vw;right:.62vw;bottom:.62vw;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.38vw;pointer-events:none}.arch-layer-key span{--layer:#5B5BD6;min-width:0;padding:.42vh .46vw;border-radius:8px;background:rgba(255,255,255,.9);border:1px solid color-mix(in srgb,var(--layer) 24%,white);box-shadow:0 8px 18px -15px rgba(24,29,44,.38);color:#3B4350;font-size:var(--fs-xs);font-weight:850;line-height:1.22}.arch-layer-key b{display:block;margin-bottom:.14vh;color:var(--layer);font-size:var(--fs-sm);font-weight:950}.arch-layer-key .assets{--layer:#2F6FED}.arch-layer-key .understand{--layer:#7C5CF0}.arch-layer-key .retrieve{--layer:#0F9F9B}
     .archmetric-map{border-radius:16px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);padding:1.45vh 1.12vw;display:grid;grid-template-rows:auto 1fr auto;gap:1.05vh;min-height:0;overflow:hidden;position:relative}
     .archmetric-map:after{content:"";position:absolute;right:-1px;bottom:-1px;width:42%;height:30%;border-radius:0 0 16px 0;background:radial-gradient(120% 100% at 100% 100%,rgba(109,93,246,.08),rgba(109,93,246,.03) 54%,transparent 78%);pointer-events:none}
     .archmetric-head{position:relative;z-index:1}
@@ -1270,13 +1298,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">11 项评分覆盖 AI 获取知识、判断证据与组织作答的动作</span></div>
         <div class="subttl">测量方法 · 「架构图 → 可观测指标」</div>
       </div>
-      <div class="head-r">11/ AI 指标 · 架构映射</div>
+      <div class="head-r">13/ AI 指标 · 架构映射</div>
     </div>
     <div class="body-area">
         <div class="archmetric-layout">
           <div class="archmetric-arch">
             <div class="archmetric-archbox">
               <iframe src="arch-d3.html?map=1" title="Agent 循环架构图 · 指标映射参照"></iframe>
+              <div class="archmetric-diagram-title">AI 知识获取与作答架构</div>
+              <div class="arch-layer-key" aria-label="架构图与知识金字塔的对应关系">
+                <span class="assets"><b>知识资产层</b>官方内容、第三方内容与模型先验</span>
+                <span class="understand"><b>机器理解层</b>理解任务、判断证据、组织答案</span>
+                <span class="retrieve"><b>检索与引用层</b>检索、抓取、回灌与可引用证据</span>
+              </div>
             </div>
         </div>
         <div class="archmetric-map">
@@ -1330,7 +1364,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">可观测得分汇合为综合置信度，区分证据供给与答案产出</span></div>
         <div class="subttl">AI 侧 · 指标体系 · 「定义与计算理由」</div>
       </div>
-      <div class="head-r">12/ AI 指标 · 计算理由</div>
+      <div class="head-r">14/ AI 指标 · 计算理由</div>
     </div>
     <div class="body-area">
       <div class="metric-class-layout">
@@ -1923,7 +1957,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">让开发者借助 AI 使用 CANN 时，也能获得接近 CUDA 的可执行支持</span></div>
         <div class="subttl">战略意义 · 以成熟生态为参照，支撑昇腾构建开放、易用、可持续演进的 AI 生态</div>
       </div>
-      <div class="head-r">15/ 问题对 · 设计样例</div>
+      <div class="head-r">16/ 问题对 · 设计样例</div>
     </div>
     <style>
       .question-example-slide .body-area{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:1.5vw;min-height:0}.qexample-rule,.qexample-question{min-width:0;min-height:0;border-radius:18px;padding:2.15vh 1.45vw}.qexample-rule{display:flex;flex-direction:column;background:var(--g-ink);color:#fff;box-shadow:0 18px 42px -25px rgba(20,25,35,.56)}.qexample-question{display:flex;flex-direction:column;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 36px -24px rgba(30,40,70,.3),inset 0 1px 0 rgba(255,255,255,.92)}.qexample-k{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.13em;color:#BFC7FF}.qexample-rule h2,.qexample-question h2{margin:1vh 0 0;font-size:var(--fs-h2);line-height:1.28}.qexample-rule h2{color:#fff}.qexample-question h2{color:var(--ink)}.qexample-lead{margin:.75vh 0 0;font-size:var(--fs-body);line-height:1.5}.qexample-rule .qexample-lead{color:rgba(255,255,255,.72)}.qexample-question .qexample-lead{color:var(--ink-2)}.qexample-checks{display:grid;gap:.7vh;margin-top:auto;padding-top:1.7vh}.qexample-check{display:grid;grid-template-columns:24px minmax(0,1fr);gap:.7vw;align-items:start;padding:.85vh .72vw;border-radius:11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}.qexample-check i{width:19px;height:19px;color:#8FE1C4;stroke-width:2}.qexample-check b{display:block;font-size:var(--fs-body);line-height:1.25;color:#fff}.qexample-check span{display:block;margin-top:.18vh;font-size:var(--fs-sm);line-height:1.38;color:rgba(255,255,255,.68)}.qexample-goal{margin-top:1.5vh;padding:1vh .95vw;border-radius:11px;background:rgba(91,91,214,.08);border:1px solid rgba(91,91,214,.14);font-size:var(--fs-body);line-height:1.48;color:var(--ink-2)}.qexample-goal b{color:var(--accent)}.qexample-pair{display:grid;grid-template-columns:1fr 1fr;gap:1vw;margin-top:auto;padding-top:1.45vh}.qexample-demo{--qc:#5A8A00;min-width:0;min-height:0;border-radius:14px;overflow:hidden;background:#fff;border:1px solid rgba(47,61,99,.14);box-shadow:0 10px 24px -20px rgba(30,40,70,.32);display:flex;flex-direction:column}.qexample-demo.cann{--qc:#C7000B}.qdemo-top{display:flex;align-items:center;gap:5px;padding:.65vh .75vw;background:#F5F6F8;border-bottom:1px solid rgba(47,61,99,.1);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;color:var(--qc)}.qdemo-top i{width:14px;height:14px;stroke-width:2}.qdemo-dots{display:flex;gap:3px;margin-left:auto}.qdemo-dots i{width:5px;height:5px;border-radius:50%;background:#B7BEC9}.qdemo-chat{display:flex;flex-direction:column;gap:.55vh;padding:.8vh .75vw;flex:1}.qdemo-context{font-family:'JetBrains Mono';font-size:10px;font-weight:850;color:#687385}.qdemo-bubble{border-radius:9px;padding:.65vh .65vw;background:color-mix(in srgb,var(--qc) 10%,white);border:1px solid color-mix(in srgb,var(--qc) 20%,white);font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}.qdemo-bubble b{color:var(--ink);font-weight:900}.qdemo-input{margin:.1vh .75vw .75vh;border:1px solid rgba(47,61,99,.16);border-radius:7px;padding:.45vh .55vw;display:flex;align-items:center;gap:5px;color:#8B95A5;font-size:var(--fs-xs)}.qdemo-input i{width:13px;height:13px;margin-left:auto;color:var(--qc);stroke-width:2}.qexample-out{margin-top:1vh;display:flex;align-items:center;gap:.55vw;font-size:var(--fs-sm);line-height:1.4;color:var(--ink-2)}.qexample-out i{width:18px;height:18px;color:var(--accent);stroke-width:2}
@@ -1959,7 +1993,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">再把同一设计原则扩展为五组问题对，覆盖算子开发的关键知识需求</span></div>
         <div class="subttl">实测验证 · 「问题对」全量任务集</div>
       </div>
-      <div class="head-r">16/ 问题对 · 全量任务集</div>
+      <div class="head-r">17/ 问题对 · 全量任务集</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -2015,7 +2049,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">五项任务结果：写算子可用性最低，其余任务受版本、生态与模型先验影响</span></div>
         <div class="subttl">实测验证 · 「对照问题 → 五项结果」</div>
       </div>
-      <div class="head-r">17/ 矩阵评分 · 结果</div>
+      <div class="head-r">18/ 矩阵评分 · 结果</div>
     </div>
     <div class="body-area" style="display:flex;flex-direction:row;gap:2vw;align-items:stretch">
       <div class="card" style="flex:0 0 52%;height:100%;padding:1vh .4vw;display:flex">
@@ -2069,7 +2103,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">AI 实测发现可归纳为三层知识机制</span></div>
         <div class="subttl">实测验证 · 在全量矩阵概览之后，按知识供给、机器理解与检索引用逐层定位问题</div>
       </div>
-      <div class="head-r">18/ AI · 知识机制</div>
+      <div class="head-r">19/ AI · 知识机制</div>
     </div>
     <style>
       .knowledge-pyramid-slide .body-area{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:2.3vw;align-items:stretch}
@@ -2116,7 +2150,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">26 项任务的全量可用性矩阵</span></div>
         <div class="subttl">实测验证 · 先总览全部任务与 11 项指标，再沿三层知识机制逐层定位 8 个问题</div>
       </div>
-      <div class="head-r">17/ AI · 任务矩阵</div>
+      <div class="head-r">20/ AI · 任务矩阵</div>
     </div>
     <div class="body-area">
       <div class="hmfull-wrap">
@@ -2642,7 +2676,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">当前是昇腾与 NVIDIA 的案例，但研究框架可迁移到任何技术生态与用户任务</span></div>
         <div class="subttl">方法论抽象 · 固定一类用户任务与量化指标，只替换需要被比较的变量</div>
       </div>
-      <div class="head-r">06/ 可迁移框架</div>
+      <div class="head-r">21/ 可迁移框架</div>
     </div>
     <style>
       .method-general-slide .body-area{min-height:0;display:flex;justify-content:center}.method-frame{width:min(1240px,100%);min-height:0;display:grid;grid-template-columns:minmax(0,.92fr) 58px minmax(0,1.08fr);gap:1.15vw;align-items:stretch}.method-frame .mf-fixed,.method-frame .mf-variable{min-width:0;min-height:0;border-radius:18px;padding:2.25vh 1.45vw;display:flex;flex-direction:column;position:relative;overflow:hidden}.method-frame .mf-fixed{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 36px -24px rgba(30,40,70,.3),inset 0 1px 0 rgba(255,255,255,.92)}.method-frame .mf-variable{background:var(--g-ink);color:#fff;box-shadow:0 18px 42px -25px rgba(20,25,35,.56),inset 0 1px 0 rgba(255,255,255,.22)}.method-frame .mf-k{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.13em}.method-frame .mf-fixed .mf-k{color:var(--accent)}.method-frame .mf-variable .mf-k{color:#BFC7FF}.method-frame h2{margin:1vh 0 0;font-size:var(--fs-h2);line-height:1.28}.method-frame .mf-fixed h2{color:var(--ink)}.method-frame .mf-variable h2{color:#fff}.method-frame .mf-lead{margin:1vh 0 0;font-size:var(--fs-body);line-height:1.52}.method-frame .mf-fixed .mf-lead{color:var(--ink-2)}.method-frame .mf-variable .mf-lead{color:rgba(255,255,255,.72)}.mf-keep{display:grid;gap:.8vh;margin-top:auto;padding-top:2vh}.mf-keep>div{display:grid;grid-template-columns:26px minmax(0,1fr);gap:.7vw;align-items:start;padding:.95vh .75vw;border-radius:11px;background:rgba(91,91,214,.075);border:1px solid rgba(91,91,214,.12)}.mf-keep>div>div{min-width:0}.mf-keep i,.mf-variable i{width:20px;height:20px;stroke-width:1.9}.mf-keep i{color:var(--accent)}.mf-keep b,.mf-switch b{display:block;font-size:var(--fs-body);line-height:1.26}.mf-keep span,.mf-switch span{display:block;margin-top:.18vh;font-size:var(--fs-sm);line-height:1.4}.mf-keep b{color:var(--ink)}.mf-keep span{color:var(--ink-2)}.mf-arrow{align-self:center;display:flex;align-items:center;justify-content:center;color:#7B8494}.mf-arrow svg{width:46px;height:46px;fill:currentColor}.mf-switches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72vw;margin-top:auto;padding-top:2vh}.mf-switch{min-width:0;min-height:0;border:1px solid rgba(255,255,255,.17);border-radius:12px;padding:1.05vh .78vw;background:rgba(255,255,255,.07)}.mf-switch i{color:#BFC7FF}.mf-switch b{margin-top:.7vh;color:#fff}.mf-switch span{color:rgba(255,255,255,.68)}.mf-rule{position:absolute;right:1.4vw;top:1.7vh;display:flex;align-items:center;gap:.42vw;font-size:var(--fs-sm);font-weight:800;color:rgba(255,255,255,.68)}.mf-rule i{width:16px;height:16px;color:#89DFC1}
@@ -2681,7 +2715,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">生态、知识来源与 AI 都可以成为变量，并用同一组指标量化比较</span></div>
         <div class="subttl">研究设计 · 每次只改变一个变量，矩阵结果才可以被清楚归因</div>
       </div>
-      <div class="head-r">07/ 三种对照实验</div>
+      <div class="head-r">22/ 三种对照实验</div>
     </div>
     <style>
       .method-experiment-slide .body-area{min-height:0}.experiment-grid{width:min(1210px,100%);margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5vw;align-items:stretch}.experiment-card{--ec:#5B5BD6;position:relative;min-width:0;min-height:45vh;overflow:hidden;border-radius:18px;padding:2.25vh 1.45vw;display:flex;flex-direction:column;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 36px -24px rgba(30,40,70,.3),inset 0 1px 0 rgba(255,255,255,.92)}.experiment-card::before{content:"";position:absolute;left:0;right:0;top:0;height:7vh;background:linear-gradient(180deg,color-mix(in srgb,var(--ec) 14%,transparent),transparent);pointer-events:none}.experiment-card>svg{position:absolute;right:-1.2vw;bottom:-2.8vh;width:11vw;height:11vw;min-width:120px;min-height:120px;color:var(--ec);opacity:.11;stroke-width:1.35}.experiment-card.eco{--ec:#5B5BD6}.experiment-card.source{--ec:#2F6FED}.experiment-card.ai{--ec:#0F9F9B}.experiment-card .ec-copy{position:relative;z-index:1;display:flex;flex-direction:column;flex:1;min-height:0}.ec-tag{align-self:flex-start;border:1px solid color-mix(in srgb,var(--ec) 22%,transparent);border-radius:999px;background:color-mix(in srgb,var(--ec) 10%,white);padding:.45vh .72vw;color:var(--ec);font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.12em}.experiment-card h2{margin:1.35vh 0 0;font-size:var(--fs-h2);line-height:1.27}.experiment-card .ec-desc{margin:.7vh 0 0;font-size:var(--fs-body);line-height:1.5;color:var(--ink-2)}.ec-rows{display:grid;gap:.52vh;margin-top:auto;padding-top:1.6vh}.ec-row{display:grid;grid-template-columns:82px 1fr;gap:.58vw;padding:.72vh 0;border-top:1px solid rgba(100,110,128,.14)}.ec-row b{font-family:'JetBrains Mono';font-size:var(--fs-xs);line-height:1.4;color:var(--ec);letter-spacing:.06em}.ec-row span{font-size:var(--fs-sm);line-height:1.4;color:var(--ink-2)}.experiment-rule{width:min(1040px,100%);margin:1.75vh auto 0;border-radius:13px;background:var(--g-ink);padding:1.3vh 1.2vw;display:grid;grid-template-columns:auto 1fr;gap:.85vw;align-items:center;color:#fff}.experiment-rule i{width:23px;height:23px;color:#BFC7FF}.experiment-rule b{font-size:var(--fs-body);line-height:1.4}.experiment-rule span{color:rgba(255,255,255,.72);font-size:var(--fs-sm);line-height:1.4}
@@ -2892,22 +2926,22 @@ const deck=document.getElementById('deck');
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
   {id:'overview',label:'研究概览',range:[1,13]},
-  {id:'method',label:'测量方法',range:[14,16]},
-  {id:'task',label:'任务定义',range:[17,18]},
-  {id:'result',label:'实测结果',range:[19,21]},
-  {id:'generality',label:'通用性',range:[22,24]},
-  {id:'outputs',label:'研究产出与附录',range:[25,28]}
+  {id:'method',label:'测量方法',range:[14,17]},
+  {id:'task',label:'任务定义',range:[18,19]},
+  {id:'result',label:'实测结果',range:[20,22]},
+  {id:'generality',label:'通用性',range:[23,25]},
+  {id:'outputs',label:'研究产出与附录',range:[26,29]}
 ];
 const SECTIONS=[
   {id:'overview-context',chapter:'overview',label:'背景判断',range:[4,6]},
   {id:'overview-branch',chapter:'overview',label:'问题分叉',range:[7,7]},
   {id:'overview-framework',chapter:'overview',label:'研究框架',range:[8,13]},
-  {id:'method-core',chapter:'method',label:'指标与计算',range:[15,16]},
-  {id:'task-pairs',chapter:'task',label:'问题对设计',range:[17,18]},
-  {id:'result-matrix',chapter:'result',label:'任务矩阵与问题',range:[19,21]},
-  {id:'generality-framework',chapter:'generality',label:'变量实验与白皮书',range:[22,24]},
-  {id:'outputs-assets',chapter:'outputs',label:'研究资产',range:[26,26]},
-  {id:'outputs-appendix',chapter:'outputs',label:'指标理论依据',range:[27,27]}
+  {id:'method-core',chapter:'method',label:'指标与计算',range:[15,17]},
+  {id:'task-pairs',chapter:'task',label:'问题对设计',range:[18,19]},
+  {id:'result-matrix',chapter:'result',label:'任务矩阵与问题',range:[20,22]},
+  {id:'generality-framework',chapter:'generality',label:'变量实验与白皮书',range:[23,25]},
+  {id:'outputs-assets',chapter:'outputs',label:'研究资产',range:[27,27]},
+  {id:'outputs-appendix',chapter:'outputs',label:'指标理论依据',range:[28,28]}
 ];
 function chapterFor(index){return CHAPTERS.find(function(ch){return index+1>=ch.range[0]&&index+1<=ch.range[1];})||CHAPTERS[CHAPTERS.length-1];}
 function sectionFor(index){
