@@ -223,8 +223,8 @@
   </section>
 
   <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>前四项达到 87.5%，进入 80% 优先改善范围</h1><p class="sub">角色与任务链路缺失、业务领域知识与上下文不足、研究范围未前置明确、抽象机制难对标，累计占全部编码提及的 87.5%。</p></div><div class="page-no">12 / 15</div></header>
-    <div class="body-area"><div class="pareto-layout"><aside class="pareto-callout"><div class="big">87.5<small>%</small></div><h2>前四项进入优先改善范围</h2><p>14 / 16 次编码提及，超过 80% 优先改善阈值。</p></aside><div class="pareto-chart-card"><div id="paretoChart" aria-label="竞品分析痛点柏拉图"></div></div></div></div><div class="foot">PAIN PRIORITY / REVIEW · CONTEXT · SCOPE</div>
+    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>前四项达到 90%，进入 80% 优先改善范围</h1><p class="sub">角色与任务链路缺失、业务领域知识与上下文不足、研究范围未前置明确、抽象机制难对标，累计占全部编码提及的 90%。</p></div><div class="page-no">12 / 15</div></header>
+    <div class="body-area"><div class="pareto-layout"><aside class="pareto-callout"><div class="big">90<small>%</small></div><h2>前四项进入优先改善范围</h2><p>18 / 20 次编码提及，超过 80% 优先改善阈值。</p></aside><div class="pareto-chart-card"><div id="paretoChart" aria-label="竞品分析痛点柏拉图"></div></div></div></div><div class="foot">PAIN PRIORITY / REVIEW · CONTEXT · SCOPE</div>
   </section>
 
    <section class="slide s-gray">
@@ -440,9 +440,9 @@
   if(journeySlide){journeySlide.querySelector('.head h1').textContent='设计师主导分析，主要工作阻力集中在范围定义、生成等待与核验调整';journeySlide.querySelector('.head .sub').textContent='设计师先明确目标和范围，再发起 Skill 分析并等待生成；生成后的审阅与调整是低可采纳、返工后的工作现象。高频痛点集中在研究范围、业务上下文、角色任务和抽象机制的理解。'}
   const paretoSlide=slides.find(s=>s.querySelector('#paretoChart'));
   if(paretoSlide){
-    paretoSlide.querySelector('.head h1').textContent='前四项达到 87.5%，进入 80% 优先改善范围';
-    paretoSlide.querySelector('.head .sub').textContent='角色与任务链路缺失、业务领域知识与上下文不足、研究范围未前置明确、抽象机制难对标，累计占全部编码提及的 87.5%。';
-    paretoSlide.querySelector('.pareto-callout').innerHTML='<div class="big">87.5<small>%</small></div><h2>前四项进入优先改善范围</h2><p>14 / 16 次编码提及，超过 80% 优先改善阈值。</p>';
+    paretoSlide.querySelector('.head h1').textContent='前四项达到 90%，进入 80% 优先改善范围';
+    paretoSlide.querySelector('.head .sub').textContent='角色与任务链路缺失、业务领域知识与上下文不足、研究范围未前置明确、抽象机制难对标，累计占全部编码提及的 90%。';
+    paretoSlide.querySelector('.pareto-callout').innerHTML='<div class="big">90<small>%</small></div><h2>前四项进入优先改善范围</h2><p>18 / 20 次编码提及，超过 80% 优先改善阈值。</p>';
     paretoSlide.querySelector('.pareto-chart-card').insertAdjacentHTML('beforeend','<div class="pareto-focus-box" aria-hidden="true"><span>本轮优先改善</span></div>');
   }
   const focusSlide=slides.find(s=>s.querySelector('.focus-pain-grid'));
@@ -475,9 +475,9 @@
   if(paretoEl&&window.echarts){
     const pareto=echarts.init(paretoEl,null,{renderer:'svg'});
     const labels=['角色与任务\n链路缺失','业务领域知识与\n上下文不足','研究范围\n未前置明确','抽象机制\n难对标','生成速度慢','分析资产\n未沉淀复用'];
-    // Counts include Xu Wenjing's three supplemental Pareto-only codes; one quote may map to more than one cause.
-    // 徐文静补充的三项只计入柏拉图编码，不改变原声页与旅程映射。
-    const values=[5,4,3,2,1,1], total=values.reduce((a,b)=>a+b,0);
+    // Counts include Pareto-only supplemental codes and may exceed the #10 single-main-pain display.
+    // 徐文静、雷先维和陈旭令的补充痛点只计入柏拉图编码，不改变 #10 的单一主要痛点展示。
+    const values=[7,6,3,2,1,1], total=values.reduce((a,b)=>a+b,0);
     let sum=0;const cumulative=values.map(v=>{sum+=v;return +(sum/total*100).toFixed(1)});
     pareto.setOption({animation:false,grid:{left:'8%',right:'8%',top:'16%',bottom:'23%'},tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},xAxis:{type:'category',data:labels,axisTick:{show:false},axisLine:{lineStyle:{color:'#c7cdd8'}},axisLabel:{interval:0,hideOverlap:false,color:'#5e646e',fontSize:13,lineHeight:18,margin:15}},yAxis:[{type:'value',name:'编码提及数',min:0,max:5,interval:1,nameTextStyle:{color:'#7c8490',fontSize:13},axisLabel:{color:'#7c8490',fontSize:12},splitLine:{lineStyle:{type:'dashed',color:'rgba(130,140,156,.22)'}},axisLine:{show:false},axisTick:{show:false}},{type:'value',name:'累计占比',min:0,max:100,interval:20,axisLabel:{formatter:'{value}%',color:'#7c8490',fontSize:12},nameTextStyle:{color:'#7c8490',fontSize:13},splitLine:{show:false},axisLine:{show:false},axisTick:{show:false}}],series:[{name:'原声编码提及数',type:'bar',data:values,barWidth:'46%',itemStyle:{borderRadius:[8,8,0,0],color:p=>p.dataIndex<4?new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#5b5bd6'},{offset:1,color:'#9b8cff'}]):'#c7cdd8'},label:{show:true,position:'top',color:'#454b5a',fontSize:15,fontWeight:700}},{name:'累计占比',type:'line',yAxisIndex:1,data:cumulative,smooth:true,symbol:'circle',symbolSize:9,lineStyle:{width:3,color:'#f09a45'},itemStyle:{color:'#f09a45',borderColor:'#fff',borderWidth:2},label:{show:true,formatter:'{c}%',position:'top',color:'#9a5600',fontSize:12},markLine:{silent:true,symbol:'none',data:[{yAxis:80,name:'80% 优先改善阈值',lineStyle:{color:'#e0782e',width:2,type:'dashed'},label:{show:true,formatter:'80% 优先改善阈值',position:'insideEndTop',color:'#9a5600',backgroundColor:'rgba(255,247,237,.96)',borderRadius:5,padding:[4,6]}}]}}]});
     addEventListener('resize',()=>pareto.resize());
