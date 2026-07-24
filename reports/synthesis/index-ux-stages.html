@@ -2254,13 +2254,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
         }
         if(height>0){
           /* 同一份 Demo 的后续高度回报不再先重置 transform，防止出现闪烁。 */
+          var isAfter=demoBox.classList.contains('hm-after-demo');
           if(Number(demoBox.dataset.demoNaturalHeight||0)===height)return;
           scaleBox.style.transform='scale(1)';
           scaleBox.style.width='100%';
+          /* After 的外层先恢复为可用高度，短 Demo 才能据此放大。 */
+          if(isAfter)scaleBox.style.height='';
           /* 只以 iframe 的实际内容区计算缩放，不能把标题、说明和内边距误算进去。 */
           var avail=Math.max(1,scaleBox.getBoundingClientRect().height||demoBox.getBoundingClientRect().height||detail.getBoundingClientRect().height||height);
-          var scale=Math.min(1,Math.max(.01,(avail-2)/height));
+          var scale=isAfter?Math.min(1.45,Math.max(.01,(avail-2)/height)):Math.min(1,Math.max(.01,(avail-2)/height));
           var visualH=Math.ceil(height*scale);
+          /* After 可放大短内容，Before 仍只在过高时等比缩小。 */
           scaleBox.style.width=(100/scale)+'%';
           scaleBox.style.height=height+'px';
           scaleBox.style.transform='scale('+scale+')';
