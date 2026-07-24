@@ -2302,15 +2302,28 @@ body.overview #panel,body.overview #toggle{display:none!important}
       });
       function placeCallout(box){
         if(!callout||!card)return;
-        var cr=card.getBoundingClientRect(), cw=callout.offsetWidth||320, ch=callout.offsetHeight||128, gap=14;
+        var cr=card.getBoundingClientRect(), gap=14, edge=10;
         var rel={l:box.l-cr.left,t:box.t-cr.top,r:box.r-cr.left,b:box.b-cr.top};
-        var x=rel.r+gap;
-        if(x+cw>cr.width-10)x=rel.l-cw-gap;
-        if(x<10)x=Math.min(cr.width-cw-10,Math.max(10,rel.r-cw));
-        var y=rel.t;
-        if(rel.r-rel.l>cr.width*.68)y=rel.t-ch-gap;
-        if(y<10)y=rel.b+gap;
-        if(y+ch>cr.height-10)y=Math.max(10,cr.height-ch-10);
+        /* 先计算左右完整可用区；绝不因 clamp 把卡片推回高亮框上。 */
+        callout.style.width='';
+        var naturalW=callout.offsetWidth||320;
+        var leftSpace=rel.l-gap-edge, rightSpace=cr.width-rel.r-gap-edge;
+        var side=leftSpace>=rightSpace?'left':'right', sideSpace=Math.max(leftSpace,rightSpace);
+        var x,y,cw,ch;
+        if(sideSpace>=220){
+          cw=Math.min(naturalW,sideSpace);
+          callout.style.width=cw+'px';
+          ch=callout.offsetHeight||128;
+          x=side==='left'?rel.l-gap-cw:rel.r+gap;
+          y=Math.max(edge,Math.min(rel.t,cr.height-ch-edge));
+        }else{
+          /* 仅在两侧都无法完整放置时，才把卡片移到框的上方或下方。 */
+          callout.style.width='';
+          cw=callout.offsetWidth||320; ch=callout.offsetHeight||128;
+          var above=rel.t-gap, below=cr.height-rel.b-gap;
+          y=above>=ch||above>=below?Math.max(edge,rel.t-gap-ch):Math.min(cr.height-ch-edge,rel.b+gap);
+          x=Math.max(edge,Math.min(rel.l,cr.width-cw-edge));
+        }
         callout.style.left=x+'px';
         callout.style.top=y+'px';
         return{left:cr.left+x,top:cr.top+y,right:cr.left+x+cw,bottom:cr.top+y+ch,width:cw,height:ch};
