@@ -398,7 +398,7 @@
   const slideFor=text=>slides.find(s=>s.textContent.includes(text));
   const topicMethodsSlide=slideFor('UCD 现有重要分析方法，都包含竞品分析');
   if(topicMethodsSlide){
-    topicMethodsSlide.querySelector('.head h1').textContent='竞品分析既是 UCD 方法的组成，也是设计判断的重要输入';
+    topicMethodsSlide.querySelector('.head h1').textContent='竞品分析既是 UCD 关键分析方法的组成，也是设计判断的重要输入';
     topicMethodsSlide.querySelector('.head .sub').textContent='BUPT 从产品层进入竞品对比，五看三定把“看竞争”作为外部洞察的关键输入。它帮助设计师看见行业变化、校准设计判断，并沉淀可复用的经验。';
     topicMethodsSlide.querySelector('.body-area').insertAdjacentHTML('beforeend','<div class="method-outcomes"><div><svg class="outcome-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><b>看见外部变化</b>及时发现竞品的新产品、新体验和新做法。</div><div><svg class="outcome-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m8.5 12 2.3 2.3 4.7-5"/></svg><b>校准设计判断</b>以真实界面、任务状态和证据判断哪些差异值得学习。</div><div><svg class="outcome-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><b>形成可复用经验</b>把课题发现沉淀为下一次设计工作的输入。</div></div>');
   }
