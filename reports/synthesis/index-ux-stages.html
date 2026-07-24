@@ -1004,68 +1004,48 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .simple-seq-copy,.simple-seq-board{min-width:0;min-height:0;border-radius:18px;border:1px solid rgba(255,255,255,.82);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94)}
       .simple-seq-copy{position:relative;overflow:hidden;padding:2.1vh 1.45vw;display:flex;flex-direction:column;background:var(--g-ink);color:#fff}.simple-seq-copy:after{content:"";position:absolute;right:-12%;bottom:-18%;width:72%;height:58%;border-radius:50%;background:radial-gradient(closest-side,rgba(135,161,255,.22),transparent 72%);pointer-events:none}.simple-seq-copy>*{position:relative;z-index:1}.simple-seq-k{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.12em;color:#BFC8FF}.simple-seq-copy h2{margin:1.05vh 0 0;font-size:var(--fs-h2);line-height:1.3;color:#fff}.simple-seq-copy p{margin:.8vh 0 0;font-size:var(--fs-body);line-height:1.55;color:rgba(255,255,255,.74)}
       .simple-seq-parts{display:grid;gap:.72vh;margin-top:auto;padding-top:2vh}.simple-seq-part{display:grid;grid-template-columns:28px minmax(0,1fr);gap:.72vw;align-items:start;padding:.82vh .68vw;border-radius:11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13)}.simple-seq-part i{width:20px;height:20px;color:#AFC3FF;stroke-width:2}.simple-seq-part b{display:block;color:#fff;font-size:var(--fs-body);line-height:1.22;font-weight:950}.simple-seq-part span{display:block;margin-top:.18vh;color:rgba(255,255,255,.7);font-size:var(--fs-sm);line-height:1.34}
-      .simple-seq-board{position:relative;overflow:hidden;padding:1.45vh 1.15vw;background:rgba(255,255,255,.64);display:grid;grid-template-rows:auto 1fr auto;gap:.65vh}.simple-seq-board:before{content:"";position:absolute;right:-5%;top:-12%;width:44%;height:46%;border-radius:50%;background:radial-gradient(closest-side,rgba(91,91,214,.12),transparent 72%);pointer-events:none}.simple-seq-title{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:1vw}.simple-seq-title b{font-size:var(--fs-h3);line-height:1.2;color:var(--ink);font-weight:950}.simple-seq-title span{flex:0 0 auto;border-radius:999px;padding:.42vh .65vw;background:rgba(91,91,214,.09);border:1px solid rgba(91,91,214,.15);color:#5B4AB7;font-size:var(--fs-sm);font-weight:900}.simple-seq-mermaid{position:relative;z-index:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}.simple-seq-mermaid .mermaid{width:100%;margin:0;background:transparent;font-family:'HarmonyOS Sans SC','Inter',sans-serif}.simple-seq-mermaid svg{display:block;width:100%;max-width:100%;height:100%;overflow:visible}.simple-seq-mermaid .actor,.simple-seq-mermaid text{font-family:'HarmonyOS Sans SC','Inter',sans-serif!important}.simple-seq-mermaid .actor{font-weight:900!important}.simple-seq-mermaid .messageText{font-weight:750!important}.simple-seq-mermaid .actor-line{stroke:#C8D0DD!important;stroke-dasharray:5 6}.simple-seq-mermaid .messageLine0,.simple-seq-mermaid .messageLine1{stroke:#596B91!important;stroke-width:1.7px!important}.simple-seq-mermaid marker path{fill:#596B91!important;stroke:#596B91!important}.simple-seq-foot{position:relative;z-index:1;border-radius:10px;padding:.72vh .75vw;background:rgba(47,111,237,.07);border:1px solid rgba(47,111,237,.12);font-size:var(--fs-sm);line-height:1.36;color:#465369}.simple-seq-foot b{color:#202531;font-weight:950}
+      .simple-seq-board{position:relative;overflow:hidden;padding:1.45vh 1.15vw;background:rgba(255,255,255,.64);display:grid;grid-template-rows:auto 1fr auto;gap:.65vh}.simple-seq-board:before{content:"";position:absolute;right:-5%;top:-12%;width:44%;height:46%;border-radius:50%;background:radial-gradient(closest-side,rgba(91,91,214,.12),transparent 72%);pointer-events:none}.simple-seq-title{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:1vw}.simple-seq-title b{font-size:var(--fs-h3);line-height:1.2;color:var(--ink);font-weight:950}.simple-seq-title span{flex:0 0 auto;border-radius:999px;padding:.42vh .65vw;background:rgba(91,91,214,.09);border:1px solid rgba(91,91,214,.15);color:#5B4AB7;font-size:var(--fs-sm);font-weight:900}.simple-seq-viz{position:relative;z-index:1;min-height:0;overflow:hidden}.simple-seq-viz svg{display:block;width:100%;height:100%;overflow:visible}.simple-seq-viz text{font-family:'HarmonyOS Sans SC','Inter',sans-serif}.simple-seq-viz .ss-head{fill:#fff;stroke:#d5dbe7;stroke-width:1.2}.simple-seq-viz .ss-lane{fill:none;stroke:#cbd4e2;stroke-width:2;stroke-dasharray:6 8}.simple-seq-viz .ss-msg{fill:none;stroke:#5c709d;stroke-width:2.4;stroke-linecap:round}.simple-seq-viz .ss-return{fill:none;stroke:#5c709d;stroke-width:2.15;stroke-dasharray:6 5}.simple-seq-viz .ss-node{fill:#fff;stroke:#7d8cad;stroke-width:2}.simple-seq-viz .ss-node.ai{fill:#eceafa;stroke:#6b5ba8}.simple-seq-viz .ss-head-t{font-size:17px;font-weight:950;fill:#26344f}.simple-seq-viz .ss-msg-t{font-size:16px;font-weight:900;fill:#303a4b}.simple-seq-viz .ss-note{font-size:12px;font-weight:800;fill:#69758a}.simple-seq-viz .ss-id{font-size:12px;font-weight:950;fill:#566a93}.simple-seq-viz .ss-self{fill:none;stroke:#6b5ba8;stroke-width:2.2}.simple-seq-foot{position:relative;z-index:1;border-radius:10px;padding:.72vh .75vw;background:rgba(47,111,237,.07);border:1px solid rgba(47,111,237,.12);font-size:var(--fs-sm);line-height:1.36;color:#465369}.simple-seq-foot b{color:#202531;font-weight:950}
       .operator-seq-slide .simple-seq-copy{background:linear-gradient(145deg,#1E2637,#171C27)}.operator-seq-slide .simple-seq-copy:after{background:radial-gradient(closest-side,rgba(196,90,105,.18),transparent 72%)}.operator-seq-slide .simple-seq-title span{background:rgba(199,0,11,.07);border-color:rgba(199,0,11,.14);color:#A60009}.operator-seq-slide .simple-seq-board:before{background:radial-gradient(closest-side,rgba(199,0,11,.08),transparent 72%)}
+      .sequence-transfer-slide .body-area{display:grid;grid-template-columns:minmax(0,1fr) 8.5vw minmax(0,1fr);gap:1vw;align-items:stretch}.sequence-transfer-slide .simple-seq-compare{min-width:0}.simple-seq-transfer-arrow{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55vh;color:#5b5bd6}.simple-seq-transfer-arrow span{font-size:var(--fs-sm);font-weight:900;white-space:nowrap}.simple-seq-transfer-arrow i{width:30px;height:30px;stroke-width:1.7}.sequence-transfer-slide .simple-seq-title{gap:.5vw}.sequence-transfer-slide .simple-seq-title b{font-size:var(--fs-body)}.sequence-transfer-slide .simple-seq-title span{font-size:var(--fs-xs);padding:.38vh .52vw}.sequence-transfer-slide .simple-seq-foot{font-size:var(--fs-xs);padding:.62vh .65vw}
     </style>
     <div class="body-area">
       <aside class="simple-seq-copy">
         <div class="simple-seq-k">ONE TASK · ONE EXCHANGE</div>
         <h2>时序图不先讲技术，先讲一件事如何在不同角色间被推进。</h2>
-        <p>用户给出目标，AI 向外部信息源取数，再把信息组织成能帮助决策的结果。线的方向说明谁向谁发起动作，返回线说明得到了什么。</p>
+        <p>用户给出目标，AI 向苹果官网取数，再把信息组织成能帮助决策的结果。线的方向说明谁向谁发起动作，返回线说明得到了什么。</p>
         <div class="simple-seq-parts">
           <div class="simple-seq-part"><i data-lucide="user-round"></i><div><b>用户提出任务</b><span>比较预算内三台电脑，重点看价格、配置与库存。</span></div></div>
           <div class="simple-seq-part"><i data-lucide="bot"></i><div><b>AI 获取信息</b><span>把模糊需求变成查询，并读取可比较的商品信息。</span></div></div>
-          <div class="simple-seq-part"><i data-lucide="store"></i><div><b>外部来源返回证据</b><span>价格、配置、库存和促销条件成为答案依据。</span></div></div>
+          <div class="simple-seq-part"><i data-lucide="store"></i><div><b>苹果官网返回证据</b><span>机型、配置、价格与供货信息成为答案依据。</span></div></div>
         </div>
       </aside>
       <section class="simple-seq-board">
-        <div class="simple-seq-title"><b>电脑比价：一次最小的人机协同过程</b><span>从左到右读</span></div>
-        <div class="simple-seq-mermaid" aria-label="用户、AI 和电商平台的电脑比价时序图"><pre class="mermaid">sequenceDiagram
-          participant U as 用户
-          participant A as AI
-          participant S as 电商平台
-          U->>A: 帮我比较三台电脑
-          A->>S: 查询价格、配置与库存
-          S-->>A: 返回商品信息与促销条件
-          A->>A: 对齐预算与使用需求
-          A-->>U: 给出可解释的推荐</pre></div>
+        <div class="simple-seq-title"><b>苹果官网比价：一次最小的人机协同过程</b><span>从左到右读</span></div>
+        <div class="simple-seq-viz" data-simple-seq="apple" aria-label="用户、AI 和苹果官网的电脑比价时序图"></div>
         <div class="simple-seq-foot"><b>读图规则：</b>每条箭头都是一个可被记录的协同事件；下一页只替换任务和信息源，读法不变。</div>
       </section>
     </div>
   </section>
 
-  <section class="slide s-gray simple-seq-slide operator-seq-slide">
+  <section class="slide s-gray simple-seq-slide operator-seq-slide sequence-transfer-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">同一套时序结构，换成开发算子时就是“开发者、AI 与昇腾社区”的协同</span></div>
-        <div class="subttl">时序图映射 · 电脑比价 → 自定义算子开发</div>
+        <div class="brand"><span class="ttl">先理解苹果官网比价，再把同一套协同结构迁移到算子开发</span></div>
+        <div class="subttl">时序图映射 · 日常任务 → P2 写核函数</div>
       </div>
       <div class="head-r">08/ 时序图 · 开发任务</div>
     </div>
     <div class="body-area">
-      <aside class="simple-seq-copy">
-        <div class="simple-seq-k">SAME STRUCTURE · NEW DOMAIN</div>
-        <h2>角色与任务变了，但“提出问题 → 取证 → 返回可执行结果”的结构没有变。</h2>
-        <p>把电商平台换成昇腾社区，把商品信息换成操作教程、代码与版本条件。这时，是否找得到、读得全、能否判断版本，直接影响开发任务能不能继续。</p>
-        <div class="simple-seq-parts">
-          <div class="simple-seq-part"><i data-lucide="code-2"></i><div><b>开发者提出目标</b><span>把自定义算子接入 PyTorch，并获得可照做的工程步骤。</span></div></div>
-          <div class="simple-seq-part"><i data-lucide="search-check"></i><div><b>AI 检索并组织证据</b><span>搜索教程、代码样例、版本配套与相关社区经验。</span></div></div>
-          <div class="simple-seq-part"><i data-lucide="shield-check"></i><div><b>开发者必要时核验</b><span>在版本、前置条件或关键代码不明确时回到官方页面确认。</span></div></div>
-        </div>
-      </aside>
-      <section class="simple-seq-board">
-        <div class="simple-seq-title"><b>算子开发：一个阶段的最小协同过程</b><span>结构与电脑比价相同</span></div>
-        <div class="simple-seq-mermaid" aria-label="开发者、AI 与昇腾社区的算子开发时序图"><pre class="mermaid">sequenceDiagram
-          participant D as 开发者
-          participant A as AI
-          participant C as 昇腾社区
-          D->>A: 自定义算子如何接入 PyTorch？
-          A->>C: 检索操作教程、代码与版本条件
-          C-->>A: 返回页面、代码与相关信息
-          A-->>D: 组织构建与注册步骤
-          D->>C: 核对版本与前置条件
-          C-->>D: 确认可执行的工程条件</pre></div>
-        <div class="simple-seq-foot"><b>下一步：</b>把这一段放回从立项到交付的完整开发过程，才能看到知识缺口究竟出现在哪一个阶段。</div>
+      <section class="simple-seq-board simple-seq-compare">
+        <div class="simple-seq-title"><b>日常任务：苹果官网比价</b><span>用户 · AI · 苹果官网</span></div>
+        <div class="simple-seq-viz" data-simple-seq="apple" aria-label="用户、AI 和苹果官网的电脑比价时序图"></div>
+        <div class="simple-seq-foot"><b>同一个结构：</b>提出需要比较的目标，AI 向可信官网取数，再把证据组织成推荐。</div>
+      </section>
+      <div class="simple-seq-transfer-arrow" aria-hidden="true"><span>业务迁移</span><i data-lucide="arrow-right"></i></div>
+      <section class="simple-seq-board simple-seq-compare" data-simple-seq-source>
+        <div class="simple-seq-title"><b>P2 写核函数：最小协同过程</b><span>开发者 · AI · 昇腾社区</span></div>
+        <div class="simple-seq-viz" data-simple-seq="operator" aria-label="开发者、AI 与昇腾社区的算子开发时序图"></div>
+        <div class="simple-seq-foot"><b>迁移后的关键：</b>任务和信息源变了，但同样要判断 AI 能否取回足够、可执行的官方知识。</div>
       </section>
     </div>
   </section>
@@ -1076,7 +1056,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">AI 取证与开发者核验构成两种社区使用行为</span></div>
         <div class="subttl">研究对象 · 人与 AI 在同一任务中的不同知识需求</div>
       </div>
-      <div class="head-r">09/ 研究对象 · 两种行为</div>
+      <div class="head-r">11/ 研究对象 · 两种行为</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card seqdemo-left">
@@ -1142,7 +1122,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">每次知识往返都能识别发起者、证据来源与受阻位置</span></div>
         <div class="subttl">研究对象 · 「写核函数」阶段局部</div>
       </div>
-      <div class="head-r">10/ 研究对象 · 局部往返</div>
+      <div class="head-r">12/ 研究对象 · 局部往返</div>
     </div>
     <div class="body-area">
       <div class="uxseq-card">
@@ -1177,7 +1157,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="brand"><span class="ttl">七个任务阶段依次衔接，才形成一次完整的自定义算子开发</span></div>
         <div class="subttl">研究对象 · 左侧阶段不是分类，而是一条从立项到交付的开发链</div>
       </div>
-      <div class="head-r">11/ 研究对象 · 阶段串联</div>
+      <div class="head-r">09/ 研究对象 · 阶段串联</div>
     </div>
     <style>
       .seqbuild-slide .body-area{display:grid;grid-template-columns:minmax(255px,.7fr) minmax(0,1.65fr);gap:1.4vw;min-height:0}
@@ -1199,7 +1179,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     <div class="body-area">
       <div class="seqbuild-rail" aria-label="自定义算子开发阶段">
         <button class="seqbuild-step" style="--phase-bg:#EEF1F7" type="button" data-seqbuild="0"><span class="seqbuild-no">P1</span><span><span class="seqbuild-name">立项</span><span class="seqbuild-note">确定任务与设备</span></span></button>
-        <button class="seqbuild-step" style="--phase-bg:#EFEAF7" type="button" data-seqbuild="1"><span class="seqbuild-no">P2</span><span><span class="seqbuild-name">写核函数</span><span class="seqbuild-note">查操作教程</span></span></button>
+        <button class="seqbuild-step" style="--phase-bg:#EFEAF7" type="button" data-seqbuild="1" data-magic-phase="p2"><span class="seqbuild-no">P2</span><span><span class="seqbuild-name">写核函数</span><span class="seqbuild-note">查操作教程</span></span></button>
         <button class="seqbuild-step" style="--phase-bg:#E9F4F0" type="button" data-seqbuild="2"><span class="seqbuild-no">P3</span><span><span class="seqbuild-name">写 Tiling</span><span class="seqbuild-note">确定切分策略</span></span></button>
         <button class="seqbuild-step" style="--phase-bg:#E9F4F0" type="button" data-seqbuild="3"><span class="seqbuild-no">P4</span><span><span class="seqbuild-name">编译内存</span><span class="seqbuild-note">编包与排错</span></span></button>
         <button class="seqbuild-step" style="--phase-bg:#FBF0E0" type="button" data-seqbuild="4"><span class="seqbuild-no">P5</span><span><span class="seqbuild-name">接框架</span><span class="seqbuild-note">注册与版本配套</span></span></button>
@@ -1207,11 +1187,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <button class="seqbuild-step" style="--phase-bg:#E6EDF8" type="button" data-seqbuild="6"><span class="seqbuild-no">P7</span><span><span class="seqbuild-name">交付</span><span class="seqbuild-note">形成可调用能力</span></span></button>
       </div>
       <div class="seqbuild-stage">
-        <div class="seqbuild-stage-head"><div><h3 data-seqbuild-title>立项与选型</h3><p data-seqbuild-desc>开发者先明确算子要解决什么问题，并确定工程路径和目标设备。</p></div><span class="seqbuild-counter" data-seqbuild-counter>01 / 07</span></div>
+        <div class="seqbuild-stage-head"><div><h3 data-seqbuild-title>P2 写核函数</h3><p data-seqbuild-desc>根据操作教程生成工程骨架，再把真正执行计算的 Compute 核函数写进去。</p></div><span class="seqbuild-counter" data-seqbuild-counter>02 / 07</span></div>
         <div class="seqbuild-canvas">
           <div class="seqbuild-task"><small>开发者任务</small><strong>让一个算子<br>跑起来</strong><span>从需求，到可调用组件</span></div>
           <div class="seqbuild-workbench" data-magic-seq>
-            <div class="seqbuild-workbench-head"><b>自定义算子</b><span data-seqbuild-status>正在放入第一块</span></div>
+            <div class="seqbuild-workbench-head"><b>自定义算子</b><span data-seqbuild-status>已搭好 2 / 7 块</span></div>
             <div class="seqbuild-operator" data-seqbuild-flow aria-label="自定义算子逐步装配示意">
               <svg class="seqbuild-diagram" viewBox="0 0 720 360" role="img" aria-label="从任务定义到可调用自定义算子的装配图">
                 <path class="build-link" d="M110 183 C170 183 175 183 215 183"/><path class="build-link" d="M272 125 C320 125 326 150 350 164"/><path class="build-link" d="M272 245 C320 245 327 218 350 202"/><path class="build-link" d="M470 112 C505 123 518 145 530 164"/><path class="build-link" d="M470 252 C507 240 518 220 530 203"/><path class="build-link" d="M590 183 L635 183"/>
@@ -1232,24 +1212,23 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-<!-- 10 灰底：从局部往返扩展到完整任务过程 -->
+<!-- 10 灰底：从七阶段拼图扩展到完整任务过程 -->
   <section class="slide s-gray seqscope-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">研究对象从一次知识往返扩展到完整任务过程</span></div>
-        <div class="subttl">研究对象 · 「局部任务 → 自定义算子开发全过程」</div>
+        <div class="brand"><span class="ttl">全周期协同：一次自定义算子开发</span></div>
+        <div class="subttl">研究对象 · 从立项到交付，把开发者、AI、昇腾社区与其他来源放在同一张图里</div>
       </div>
-      <div class="head-r">12/ 研究对象 · 观察范围</div>
+      <div class="head-r">10/ 研究对象 · 全周期时序图</div>
     </div>
     <style>
-      .seqscope-slide .body-area{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1.15fr);gap:1.05vw;align-items:stretch}
+      .seqscope-slide .body-area{display:block;position:relative;min-height:0}
       .seqscope-sample,.seqscope-full{position:relative;min-width:0;min-height:0;border-radius:17px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94);overflow:hidden}
-      .seqscope-sample{padding:1.65vh 1.05vw;display:grid;grid-template-rows:auto 1fr auto;gap:.85vh}.seqscope-sample h3,.seqscope-full h3{margin:0;color:var(--ink);font-size:var(--fs-h3);line-height:1.2;font-weight:950}.seqscope-sample p,.seqscope-full p{margin:.28vh 0 0;color:var(--ink-2);font-size:var(--fs-body);line-height:1.4}
+      .seqscope-sample,.seqscope-bridge{display:none}.seqscope-sample h3,.seqscope-full h3{margin:0;color:var(--ink);font-size:var(--fs-h3);line-height:1.2;font-weight:950}.seqscope-sample p,.seqscope-full p{margin:.28vh 0 0;color:var(--ink-2);font-size:var(--fs-body);line-height:1.4}
       .seqscope-mini{min-height:0;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.52)}
       .seqscope-sample-foot{border-radius:10px;background:linear-gradient(135deg,rgba(47,111,237,.1),rgba(91,91,214,.07));border:1px solid rgba(47,111,237,.12);padding:.75vh .7vw;color:#3F495A;font-size:var(--fs-sm);line-height:1.35}.seqscope-sample-foot b{color:#202531;font-weight:950}
-      .seqscope-bridge{position:relative;min-height:0;display:flex;align-items:center;justify-content:center}.seqscope-bridge:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,#7AA6F8,#7C5CF0)}.seqscope-bridge:after{content:"";position:absolute;right:0;top:calc(50% - 5px);width:11px;height:11px;border-top:2px solid #7C5CF0;border-right:2px solid #7C5CF0;transform:rotate(45deg)}
-      .seqscope-full{padding:1.35vh .7vw;display:grid;grid-template-rows:auto 1fr;gap:.7vh}.seqscope-full-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1vw;padding:0 .45vw}.seqscope-full-head div{min-width:0}.seqscope-stage-key{flex:0 0 auto;border-radius:999px;padding:.48vh .62vw;background:rgba(91,91,214,.1);border:1px solid rgba(91,91,214,.16);color:#5B4AB7;font-size:var(--fs-sm);font-weight:900;white-space:nowrap}.seqscope-stage-key:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#7C5CF0;margin-right:6px;box-shadow:0 0 0 3px rgba(124,92,240,.12)}
-      .seqscope-frame{position:relative;min-height:0;border-radius:12px;overflow:hidden;background:#fff;border:1px solid rgba(47,61,99,.1)}.seqscope-frame iframe{width:100%;height:100%;border:0;background:transparent}.seqscope-focusband{position:absolute;left:20.5%;top:15.5%;width:43%;height:10.5%;border:2px dashed #5B5BD6;border-radius:8px;background:rgba(124,92,240,.06);box-shadow:0 0 0 500px rgba(255,255,255,.12);pointer-events:none}.seqscope-focusnote{position:absolute;left:65%;top:17%;max-width:24%;border-radius:9px;background:#16191E;color:#fff;padding:.65vh .62vw;font-size:var(--fs-sm);line-height:1.32;box-shadow:0 12px 24px -16px rgba(20,23,28,.7);pointer-events:none}.seqscope-focusnote b{font-weight:950}.seqscope-focusnote:before{content:"";position:absolute;left:-24px;top:50%;width:23px;height:1px;background:#5B5BD6}.seqscope-summary{position:absolute;right:1.1%;bottom:1.2%;width:42%;border-radius:10px;background:rgba(255,255,255,.93);border:1px solid rgba(91,91,214,.18);box-shadow:0 12px 28px -18px rgba(30,40,70,.35);padding:.7vh .68vw;color:#4E586A;font-size:var(--fs-sm);line-height:1.34}.seqscope-summary b{display:block;color:#202531;font-weight:950;margin-bottom:.18vh}.seqscope-phase-ribbon{position:absolute;z-index:3;left:1.5%;top:10%;bottom:8%;width:10%;display:grid;grid-template-rows:repeat(7,1fr);gap:2px;pointer-events:none}.seqscope-phase-ribbon span{display:flex;align-items:center;justify-content:center;border-radius:4px;background:var(--phase-bg);border:1px solid rgba(47,61,99,.11);color:#2b2b2b;font:700 9px 'JetBrains Mono';writing-mode:vertical-rl;letter-spacing:.02em;box-shadow:0 1px 3px rgba(30,40,70,.05)}
+      .seqscope-full{height:100%;padding:.95vh .7vw;display:block}.seqscope-full-head,.seqscope-stage-key{display:none}
+      .seqscope-frame{position:relative;width:100%;height:100%;min-height:0;border-radius:13px;overflow:hidden;background:#fff;border:1px solid rgba(47,61,99,.1)}.seqscope-frame iframe{width:100%;height:100%;border:0;background:transparent}.seqscope-focusband,.seqscope-focusnote{display:none}.seqscope-phase-ribbon{position:absolute;z-index:2;left:1.3%;top:9%;bottom:9%;width:11%;display:grid;grid-template-rows:repeat(7,1fr);gap:2px;visibility:hidden;pointer-events:none}.seqscope-phase-ribbon span{min-height:0}.seqscope-summary{position:absolute;z-index:3;left:1.2%;right:1.2%;bottom:1.4%;width:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9vw;border-radius:11px;background:rgba(255,255,255,.9);border:1px solid rgba(91,91,214,.16);box-shadow:0 12px 28px -18px rgba(30,40,70,.35);padding:.78vh .85vw;color:#4E586A;font-size:var(--fs-sm);line-height:1.34}.seqscope-summary div{min-width:0}.seqscope-summary b{display:block;color:#202531;font-size:var(--fs-body);font-weight:950;margin-bottom:.18vh}
     </style>
     <div class="body-area">
       <div class="seqscope-sample">
@@ -1263,8 +1242,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="seqscope-frame" data-magic-target>
           <iframe data-src="seq-d3.html?full=1" title="自定义算子开发全量人机协同时序图"></iframe>
           <div class="seqscope-phase-ribbon" data-magic-phase-target aria-hidden="true"><span style="--phase-bg:#EEF1F7">P1</span><span style="--phase-bg:#EFEAF7">P2</span><span style="--phase-bg:#E9F4F0">P3</span><span style="--phase-bg:#E9F4F0">P4</span><span style="--phase-bg:#FBF0E0">P5</span><span style="--phase-bg:#E9F4F0">P6</span><span style="--phase-bg:#E6EDF8">P7</span></div>
-          <div class="seqscope-focusband"></div><div class="seqscope-focusnote"><b>一个任务样例</b><br>是全程中的一个阶段片段</div>
-          <div class="seqscope-summary"><b>全量图的意义</b>将各阶段的检索、受阻与人工核对放在同一时间轴上，比较问题出现的位置与频次，再决定优先改哪里。</div>
+          <div class="seqscope-summary"><div><b>还原全周期协同</b><span>不只看一次问答，而是看 AI 在七个阶段怎样参与、何时由开发者接回。</span></div><div><b>定位痛点出现的位置</b><span>区分问题出在知识缺失、检索受阻、版本判断，还是步骤无法落地。</span></div><div><b>确定改造的优先顺序</b><span>结合问题频次、影响阶段与人工接管成本，判断先补哪一类内容和能力。</span></div></div>
         </div>
       </div>
     </div>
@@ -3042,6 +3020,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
 <script>
 const root=document.documentElement;
 const deck=document.getElementById('deck');
+/* 把已有的细讲页后移：先由 P2 局部过渡到七阶段拼图，再展开为整张全量图。 */
+(function orderSequenceWalkthrough(){
+  const operator=document.querySelector('.operator-seq-slide');
+  const build=document.querySelector('.seqbuild-slide');
+  const scope=document.querySelector('.seqscope-slide');
+  const focus=document.querySelector('.seqfocus-slide');
+  if(!operator||!build||!scope||!focus)return;
+  operator.insertAdjacentElement('afterend',build);
+  build.insertAdjacentElement('afterend',scope);
+  scope.insertAdjacentElement('afterend',focus);
+})();
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
   {id:'overview',label:'研究概览',range:[1,13]},
@@ -3174,6 +3163,30 @@ function localP2SequenceHtml(){
 function initSharedP2Sequences(){
   document.querySelectorAll('[data-seq-shared]').forEach(el=>{el.innerHTML=sharedP2SequenceHtml();});
   document.querySelectorAll('[data-seq-local]').forEach(el=>{el.innerHTML=localP2SequenceHtml();});
+}
+function simpleSequenceHtml(kind){
+  const apple=kind==='apple';
+  const lanes=apple?['用户','AI','苹果官网']:['开发者','AI (Agent)','昇腾社区'];
+  const first=apple?'帮我比较三台 Mac':'写核函数需要什么工程与代码？';
+  const query=apple?'查询机型、配置与价格':'检索操作教程、代码与版本条件';
+  const reply=apple?'返回官网机型与价格信息':'返回页面、代码与相关信息';
+  const result=apple?'给出可解释的推荐':'组织可执行的工程步骤';
+  const sourceColor=apple?'#5c709d':'#c8102e';
+  return `<svg viewBox="0 0 760 440" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${lanes.join('、')}协同过程">
+    <defs>
+      <marker id="${kind}Arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5c709d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <g><rect x="74" y="28" width="142" height="48" rx="13" class="ss-head"/><rect x="310" y="28" width="142" height="48" rx="13" class="ss-head"/><rect x="546" y="28" width="142" height="48" rx="13" class="ss-head"/><text x="145" y="59" text-anchor="middle" class="ss-head-t">${lanes[0]}</text><text x="381" y="59" text-anchor="middle" class="ss-head-t">${lanes[1]}</text><text x="617" y="59" text-anchor="middle" class="ss-head-t" fill="${sourceColor}">${lanes[2]}</text></g>
+    <path d="M145 91V408M381 91V408M617 91V408" class="ss-lane"/>
+    <path d="M145 145H381" class="ss-msg" marker-end="url(#${kind}Arrow)"/><circle cx="145" cy="145" r="14" class="ss-node"/><text x="145" y="150" text-anchor="middle" class="ss-id">n1</text><text x="263" y="127" text-anchor="middle" class="ss-msg-t">${first}</text>
+    <path d="M381 222H617" class="ss-msg" marker-end="url(#${kind}Arrow)"/><circle cx="381" cy="222" r="15" class="ss-node ai"/><text x="381" y="227" text-anchor="middle" class="ss-id">s</text><text x="499" y="204" text-anchor="middle" class="ss-msg-t">${query}</text>
+    <path d="M617 286H381" class="ss-return" marker-end="url(#${kind}Arrow)"/><text x="499" y="272" text-anchor="middle" class="ss-msg-t">${reply}</text>
+    <path d="M381 338c40-20 40 20 0 0" class="ss-self" marker-end="url(#${kind}Arrow)"/><text x="381" y="316" text-anchor="middle" class="ss-note">${apple?'对齐预算与使用需求':'判断证据是否足以继续'}</text>
+    <path d="M381 382H145" class="ss-return" marker-end="url(#${kind}Arrow)"/><text x="263" y="368" text-anchor="middle" class="ss-msg-t">${result}</text>
+  </svg>`;
+}
+function initSimpleSequences(){
+  document.querySelectorAll('[data-simple-seq]').forEach(function(el){el.innerHTML=simpleSequenceHtml(el.dataset.simpleSeq);});
 }
 
 /* ===== 黑底光晕：每章一组色值，可调 + localStorage 持久记忆 ===== */
@@ -3439,7 +3452,8 @@ function initSeqbuildSlide(){
   const rows=[...slide.querySelectorAll('[data-seqbuild]')];
   const title=slide.querySelector('[data-seqbuild-title]'),desc=slide.querySelector('[data-seqbuild-desc]');
   const counter=slide.querySelector('[data-seqbuild-counter]'),flow=slide.querySelector('[data-seqbuild-flow]'),foot=slide.querySelector('[data-seqbuild-foot]'),status=slide.querySelector('[data-seqbuild-status]');
-  let step=0,timer=null;
+  const INITIAL_SEQBUILD_STEP=1; /* 上一页展示的是 P2「写核函数」，进入拼图时从同一块开始。 */
+  let step=INITIAL_SEQBUILD_STEP,timer=null;
   function render(next){
     step=(next+SEQBUILD_STAGES.length)%SEQBUILD_STAGES.length;
     const item=SEQBUILD_STAGES[step];
@@ -3457,9 +3471,9 @@ function initSeqbuildSlide(){
   rows.forEach((row,i)=>row.addEventListener('click',()=>{render(i);start();}));
   slide.addEventListener('mouseenter',stop);slide.addEventListener('mouseleave',start);
   slide.__seqbuildNav=function(delta){render(step+delta);start();return true;};
-  slide.__seqbuildActivate=function(){render(0);start();};
+  slide.__seqbuildActivate=function(){render(INITIAL_SEQBUILD_STEP);start();};
   slide.__seqbuildDeactivate=stop;
-  render(0);
+  render(INITIAL_SEQBUILD_STEP);
 }
 
 /* iframe 懒加载:只给当前页及相邻 ±1 注入 src,避免一打开就并发加载 60 个内嵌页(太慢)。相邻预载让顺序翻页时下一页已就绪。 */
@@ -3521,8 +3535,27 @@ function seqUrlForFull(src){
 function triggerSeqMagic(fromIdx,toIdx){
   const from=slides[fromIdx],to=slides[toIdx];
   if(!from||!to)return false;
+  const simpleSource=from.querySelector('[data-simple-seq-source]');
+  if(simpleSource&&to.classList.contains('seqbuild-slide')&&toIdx===fromIdx+1){
+    const dstBox=to.querySelector('[data-magic-phase="p2"]');
+    if(!dstBox)return false;
+    const a=simpleSource.getBoundingClientRect(),b=dstBox.getBoundingClientRect();
+    window.__lastSeqMagic={from:fromIdx,to:toIdx,start:{left:a.left,top:a.top,width:a.width,height:a.height},end:{left:b.left,top:b.top,width:b.width,height:b.height},at:Date.now()};
+    document.body.dataset.lastSeqMagic=fromIdx+'->'+toIdx;
+    const ghost=document.createElement('div');
+    ghost.className='magic-seq-ghost magic-seq-simple-ghost';
+    ghost.style.left=a.left+'px'; ghost.style.top=a.top+'px'; ghost.style.width=a.width+'px'; ghost.style.height=a.height+'px'; ghost.style.borderRadius='18px'; ghost.style.opacity='1';
+    ghost.innerHTML=simpleSource.outerHTML;
+    document.body.appendChild(ghost);
+    updateCurrent(toIdx);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      ghost.style.left=b.left+'px'; ghost.style.top=b.top+'px'; ghost.style.width=b.width+'px'; ghost.style.height=b.height+'px'; ghost.style.borderRadius='15px'; ghost.style.opacity='0';
+    }));
+    setTimeout(()=>ghost.remove(),820);
+    return true;
+  }
   if(!(from.hasAttribute('data-seq-full')&&toIdx===fromIdx+1))return false;
-  const srcBox=from.querySelector('[data-magic-seq][data-magic-target]')||from.querySelector('[data-magic-seq]');
+  const srcBox=from.querySelector('.seqbuild-rail')||from.querySelector('[data-magic-seq][data-magic-target]')||from.querySelector('[data-magic-seq]');
   const dstBox=to.querySelector('[data-magic-phase-target]')||to.querySelector('[data-magic-target]')||to.querySelector('[data-magic-seq]');
   if(!srcBox||!dstBox)return false;
   const a=srcBox.getBoundingClientRect(),b=dstBox.getBoundingClientRect();
@@ -3531,7 +3564,7 @@ function triggerSeqMagic(fromIdx,toIdx){
   const ghost=document.createElement('div');
   ghost.className='magic-seq-ghost magic-seq-build-ghost';
   ghost.style.left=a.left+'px'; ghost.style.top=a.top+'px'; ghost.style.width=a.width+'px'; ghost.style.height=a.height+'px'; ghost.style.borderRadius='18px'; ghost.style.opacity='1';
-  /* 先移动这一页已经看见的构建链，再把它收束进下一页同样的 P1-P7 阶段带。 */
+  /* P1-P7 阶段列整体移入全量图左侧的阶段列，再展开为完整协同过程。 */
   ghost.innerHTML=srcBox.outerHTML;
   document.body.appendChild(ghost);
   updateCurrent(toIdx);
@@ -4122,6 +4155,7 @@ installSeqZoomButtons();
 installBoardTabs();
 installDevHmFocus();
 initSharedP2Sequences();
+initSimpleSequences();
 initUxEvidenceFocus();
 initUxWhyFocus();
 if(window.lucide)lucide.createIcons();
@@ -4129,10 +4163,10 @@ initSeqFocusSlide();
 initSeqbuildSlide();
 initArchMetricFocus();
 initPhaseFocus();
-/* 简单时序图与任务对照图均由 Mermaid 自动布局，避免手工维护线条。 */
+/* 任务对照图由 Mermaid 自动布局；时序图沿用全量图的生命线与箭头语言。 */
 if(window.mermaid){
   mermaid.initialize({startOnLoad:false,theme:'base',securityLevel:'loose',flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'}});
-  mermaid.run({querySelector:'.simple-seq-mermaid .mermaid, .qexample-mermaid-flow .mermaid'}).catch(function(err){console.warn('Mermaid flow render failed',err);});
+  mermaid.run({querySelector:'.qexample-mermaid-flow .mermaid'}).catch(function(err){console.warn('Mermaid flow render failed',err);});
 }
 setTimeout(renderDeriveRelations,80);
 /* 网址页码：加载时读 #N 跳到对应页（也方便直接链到某页 / 截单页）*/
