@@ -3203,14 +3203,20 @@ const deck=document.getElementById('deck');
   build.insertAdjacentElement('afterend',scope);
 })();
 const slides=[...document.querySelectorAll('.slide')];
-const CHAPTERS=[
-  {id:'overview',label:'研究概览',range:[1,13]},
-  {id:'method',label:'测量方法',range:[14,17]},
-  {id:'task',label:'任务定义',range:[18,20]},
-  {id:'result',label:'实测结果',range:[21,24]},
-  {id:'generality',label:'通用性',range:[25,28]},
-  {id:'outputs',label:'研究产出与附录',range:[29,32]}
+const CHAPTER_META=[
+  {id:'overview',cover:'overview',label:'研究概览'},
+  {id:'method',cover:'ai',label:'测量方法'},
+  {id:'task',cover:'task',label:'任务定义'},
+  {id:'result',cover:'result',label:'实测结果'},
+  {id:'generality',cover:'generality',label:'通用性'},
+  {id:'outputs',cover:'summary',label:'研究产出与附录'}
 ];
+/* 页面可重排；主章节以封面为锚点，直到下一张章节封面为止。 */
+const CHAPTERS=CHAPTER_META.map(function(meta,i){
+  const start=slides.findIndex(function(slide){return slide.dataset.chapter===meta.cover;});
+  const next=i<CHAPTER_META.length-1?slides.findIndex(function(slide){return slide.dataset.chapter===CHAPTER_META[i+1].cover;}):slides.length;
+  return {id:meta.id,label:meta.label,range:[Math.max(1,start+1),Math.max(1,next)]};
+});
 const SECTIONS=[
   {id:'overview-context',chapter:'overview',label:'背景判断',range:[4,6]},
   {id:'overview-branch',chapter:'overview',label:'问题分叉',range:[7,7]},
