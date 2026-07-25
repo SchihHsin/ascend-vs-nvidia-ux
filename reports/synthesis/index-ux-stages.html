@@ -3171,6 +3171,11 @@ const deck=document.getElementById('deck');
       if(value!==attr.value)node.setAttribute(attr.name,value);
     });
   });
+  /* 研究设计页只讲左半的问题定位；右半保留为背景，避免与主线抢注意力。 */
+  const chart=clone.querySelector('svg');
+  if(chart){
+    chart.insertAdjacentHTML('beforeend','<rect x="700" y="0" width="700" height="660" fill="#E9EBEE" fill-opacity=".72" pointer-events="none"/>');
+  }
   target.appendChild(clone);
 })();
 /* 先讲清苹果官网比价，再让算子开发的小时序图接到阶段拼图；算子细讲紧随其后。 */
