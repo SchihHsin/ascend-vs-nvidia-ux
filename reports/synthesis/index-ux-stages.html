@@ -1052,46 +1052,6 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
-  <!-- 先把日常任务的最小协同链讲清楚，再进入算子开发的阶段拼图。 -->
-  <section class="slide s-gray ux-method-slide apple-seq-explain-slide apple-seq-roles-slide">
-    <div class="head">
-      <div class="head-l">
-        <div class="brand"><span class="ttl">一条电脑比价线，串起用户目标、AI 查询与官网证据</span></div>
-        <div class="subttl">时序图读法 · 苹果官网比价的四类元素</div>
-      </div>
-      <div class="head-r">时序图 · 日常任务拆解</div>
-    </div>
-    <style>
-      .apple-seq-explain-slide .body-area{grid-template-columns:minmax(0,1.22fr) minmax(320px,.78fr);gap:1.45vw}
-      .apple-seq-explain-slide .apple-seq-card{padding:2vh 1.35vw 1.45vh}
-      .apple-seq-explain-slide .simple-seq-viz{min-height:0;border-radius:11px;background:rgba(255,255,255,.52)}
-      .apple-seq-explain-slide .simple-seq-viz svg{height:100%}
-      .apple-seq-explain-slide .apple-seq-side{min-height:0;display:grid;grid-template-rows:auto 1fr;gap:1vh}
-      .apple-seq-explain-slide .apple-seq-lead{border-radius:14px;background:var(--g-ink);color:#fff;padding:1.18vh 1vw;font-size:var(--fs-body);line-height:1.48;box-shadow:0 16px 34px -24px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.18)}
-      .apple-seq-explain-slide .apple-seq-lead b{color:#fff;font-weight:950}
-      .apple-seq-explain-slide .apple-seq-result{border-radius:12px;background:linear-gradient(145deg,rgba(240,246,255,.9),rgba(255,255,255,.92));border:1px solid rgba(47,111,237,.16);padding:.82vh .78vw;margin-top:.28vh}
-      .apple-seq-explain-slide .apple-seq-result b{display:block;font-size:var(--fs-body);color:var(--ink);font-weight:950}
-      .apple-seq-explain-slide .apple-seq-result span{display:block;margin-top:.25vh;font-size:var(--fs-sm);line-height:1.36;color:var(--ink-2)}
-    </style>
-    <div class="body-area">
-      <div class="uxseq-card apple-seq-card">
-        <div class="uxseq-title"><div><b>用一条电脑比价线，读懂时序图的四类元素</b><span>后续算子开发的小时序图也完全沿用竖线、节点、横线、红线与回路这套结构。</span></div><div class="uxseq-task">任务：比较三台 Mac</div></div>
-        <div class="simple-seq-viz" data-simple-seq="apple" aria-label="苹果官网电脑比价小时序图"></div>
-        <div class="uxseq-foot"><i>参与方</i><i>节点行为</i><i>知识事件</i><i>受阻 / 回路</i></div>
-      </div>
-      <aside class="apple-seq-side">
-        <div class="apple-seq-lead"><b>这条线的价值：</b>把“AI 帮我查一下”拆成可追溯的请求、取证、受阻与再查询过程。换成算子开发任务时，读法不变。</div>
-        <div class="uxread-main">
-          <div class="uxread-h">读图时先看四类元素</div>
-          <div class="uxread-row" data-ux-evidence="lanes"><div class="uxread-no">01</div><div class="uxread-t"><b>竖线表示参与方</b><span>用户、AI 与苹果官网各占一条竖线；动作落在哪条线上，就能看出由谁发起或承接。</span></div></div>
-          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点标记关键状态</b><span>N 表示提出任务，S 表示 AI 开始查询苹果官网。</span></div></div>
-          <div class="uxread-row" data-ux-evidence="events"><div class="uxread-no">03</div><div class="uxread-t"><b>横线记录一次知识事件</b><span>请求、官网返回价格和配置、AI 输出推荐，都以带方向的横线连接起来。</span></div></div>
-          <div class="uxread-row" data-ux-evidence="loops"><div class="uxread-no">04</div><div class="uxread-t"><b>红线和回路标记受阻与再查</b><span>某个目标配置不能直接比较时，AI 补充预算或内存条件后再向官网查询。</span></div></div>
-        </div>
-      </aside>
-    </div>
-  </section>
-
   <section class="slide s-gray ux-method-slide apple-seq-explain-slide apple-seq-reading-slide">
     <div class="head">
       <div class="head-l">
@@ -3180,21 +3140,18 @@ const deck=document.getElementById('deck');
   }
   target.appendChild(clone);
 })();
-/* 先用一个完整的苹果官网比价过程建立读图规则，再迁移到算子开发。
-   两张苹果解释页内容重复，只保留“沿着箭头读”的一页。 */
+/* 先用一个完整的苹果官网比价过程建立读图规则，再迁移到算子开发。 */
 (function orderSequenceWalkthrough(){
   const operator=document.querySelector('.operator-seq-slide');
   const build=document.querySelector('.seqbuild-slide');
   const scope=document.querySelector('.seqscope-slide');
   const focus=document.querySelector('.seqfocus-slide');
   const appleReading=document.querySelector('.apple-seq-reading-slide');
-  const appleRoles=document.querySelector('.apple-seq-roles-slide');
   const operatorRead=[...document.querySelectorAll('.ux-method-slide')].find(function(slide){
     var ttl=slide.querySelector('.ttl');
     return ttl&&ttl.textContent.indexOf('每次知识往返都能识别')>=0;
   });
   if(!operator||!build||!scope||!focus||!appleReading||!operatorRead)return;
-  if(appleRoles)appleRoles.remove();
   /* 日常示例 → 完整读法 → 算子迁移 → 社区使用 → 小时序图 → 拼图 → 全量图。 */
   operator.insertAdjacentElement('beforebegin',appleReading);
   operator.insertAdjacentElement('afterend',focus);
