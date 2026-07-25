@@ -2216,13 +2216,18 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
   function init(){
     buildCtrl();
     var m=(location.search.match(/[?&]hi=(\d+)/));   // ?hi=1/2 仅作为初始模式；控制条仍保留，可继续翻到其它模式
+    var focus=(location.search.match(/[?&]focus=([^&]+)/));
     var method=(location.search.match(/[?&]method=([^&]+)/));
     var phase=(location.search.match(/[?&]phase=(\d+)/));
     var phaseMode=/(?:[?&])phase-focus=1(?:&|$)/.test(location.search);
     if(phaseMode)document.body.classList.add('phase-focus-ready');
     if(phase){ phaseFocus=Number(phase[1]); applyHi(); }
     else if(method){ methodFocus=decodeURIComponent(method[1]); applyMethodFocus(methodFocus); }
-    else if(m){ go(+m[1]); }
+    else if(m){
+      go(+m[1]);
+      /* 嵌入页可固定一条消息作为主讲线，其余同组消息仅作上下文。 */
+      if(focus){pinnedMsg=decodeURIComponent(focus[1]);applyHi();}
+    }
     try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqPhaseReady:true},'*');}catch(e){}
   }
   window.addEventListener('keydown',function(e){
