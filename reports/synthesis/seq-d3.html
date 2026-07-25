@@ -1004,7 +1004,9 @@ function addDefs(){
     .attr("stroke","#E0C589").attr("stroke-width",2);
 }
 
-/* 节点造型（朝向无关，横竖共用）：形状 + 受阻红环 + id 角标 */
+/* 节点造型（朝向无关，横竖共用）：形状 + 受阻红环 + 类型字母。
+   内部 id 仍用于事件关联，图上只显示首字母，避免编号干扰读图。 */
+function nodeMark(id){ return String(id||"").charAt(0).toUpperCase(); }
 function drawNodeShape(sel,d){
   if(d.kind==="decision"){
     const A=d.dtier==="A";          // A=开发者不可缺位→实心深色；B=技术路线→浅色
@@ -1024,7 +1026,7 @@ function drawNodeShape(sel,d){
   }
   sel.append("text").attr("text-anchor","middle").attr("dy",4)
     .attr("font-size",15).attr("font-weight",800)
-    .attr("fill", d.kind==="decision"?(d.dtier==="A"?"#4d3a06":"#8a6d1a"):stroke(d)).text(d.id);
+    .attr("fill", d.kind==="decision"?(d.dtier==="A"?"#4d3a06":"#8a6d1a"):stroke(d)).text(nodeMark(d.id));
 }
 
 /* 多行换行（centerY: 让多行整体竖直居中） */
@@ -1060,7 +1062,7 @@ function drawBarV(sel,d){
       .attr("font-weight",900).attr("fill","#C8102E").text("✕");
   }
   sel.append("text").attr("text-anchor","middle").attr("dy",4)
-    .attr("font-size",14).attr("font-weight",800).attr("fill",idcol).text(d.id);
+    .attr("font-size",14).attr("font-weight",800).attr("fill",idcol).text(nodeMark(d.id));
 }
 
 /* ===================== 竖向视图 · 4 参与者真·时序图（时间自上而下） =====================
@@ -1130,7 +1132,7 @@ function renderV(){
   const drawMarker=(g,d,color,blocked)=>{
     if(blocked){ g.append("circle").attr("r",18).attr("fill","none").attr("stroke","#C8102E").attr("stroke-width",2.2); }
     g.append("circle").attr("r",15).attr("fill","#fff").attr("stroke",color).attr("stroke-width",2);
-    g.append("text").attr("text-anchor","middle").attr("dy",IS_FULL_SEQ?5:4).attr("font-size",seqFont(13.5)).attr("font-weight",800).attr("fill",color).text(d.id);
+    g.append("text").attr("text-anchor","middle").attr("dy",IS_FULL_SEQ?5:4).attr("font-size",seqFont(13.5)).attr("font-weight",800).attr("fill",color).text(nodeMark(d.id));
   };
   const sideLabel=(g,d,toRight)=>{
     g.append("text").attr("text-anchor", toRight?"start":"end")

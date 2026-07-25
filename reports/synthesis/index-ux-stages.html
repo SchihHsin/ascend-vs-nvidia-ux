@@ -1082,7 +1082,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="uxread-main">
           <div class="uxread-h">读图时先看四类元素</div>
           <div class="uxread-row" data-ux-evidence="lanes"><div class="uxread-no">01</div><div class="uxread-t"><b>竖线表示参与方</b><span>用户、AI 与苹果官网各占一条竖线；动作落在哪条线上，就能看出由谁发起或承接。</span></div></div>
-          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点标记关键状态</b><span>例如 n1 是用户提出比价任务，sD 是 AI 开始查询苹果官网。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点标记关键状态</b><span>N 表示提出任务，S 表示 AI 开始查询苹果官网。</span></div></div>
           <div class="uxread-row" data-ux-evidence="events"><div class="uxread-no">03</div><div class="uxread-t"><b>横线记录一次知识事件</b><span>请求、官网返回价格和配置、AI 输出推荐，都以带方向的横线连接起来。</span></div></div>
           <div class="uxread-row" data-ux-evidence="loops"><div class="uxread-no">04</div><div class="uxread-t"><b>红线和回路标记受阻与再查</b><span>某个目标配置不能直接比较时，AI 补充预算或内存条件后再向官网查询。</span></div></div>
         </div>
@@ -1109,7 +1109,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="uxread-main">
           <div class="uxread-h">读图时依次看四件事</div>
           <div class="uxread-row" data-ux-evidence="lanes"><div class="uxread-no">01</div><div class="uxread-t"><b>竖线表示参与方</b><span>用户、AI 与苹果官网分别承接需求、处理与可信信息来源。</span></div></div>
-          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点标记关键状态</b><span>n1 是提出比价任务，sD 是 AI 发起官网查询；节点把长过程切成可追踪的状态。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点标记关键状态</b><span>N 是提出比价任务，S 是 AI 发起官网查询；节点把长过程切成可追踪的状态。</span></div></div>
           <div class="uxread-row" data-ux-evidence="events"><div class="uxread-no">03</div><div class="uxread-t"><b>横线记录一次知识事件</b><span>请求、官网返回价格和配置、AI 输出推荐，都说明信息如何在角色之间传递。</span></div></div>
           <div class="uxread-row" data-ux-evidence="loops"><div class="uxread-no">04</div><div class="uxread-t"><b>红线和回路标记受阻与再查</b><span>目标配置无法直接比较时，AI 补充条件后再次查询；这也是后续分析问题发生位置的依据。</span></div></div>
         </div>
@@ -1209,7 +1209,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="uxread-main">
           <div class="uxread-h">读图时先看四类元素</div>
           <div class="uxread-row" data-ux-evidence="lanes"><div class="uxread-no">01</div><div class="uxread-t"><b>竖线表示参与方</b><span>每条竖线是一类角色或知识来源；动作落在哪条线，就表示由谁发起或承接。</span></div></div>
-          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点用短 ID 标记状态</b><span>例如 n1 = 开发者提出任务，sD = AI 搜索官方文档；悬浮时显示缩写含义。</span></div></div>
+          <div class="uxread-row" data-ux-evidence="nodes"><div class="uxread-no">02</div><div class="uxread-t"><b>节点用类型字母标记状态</b><span>N = 提出任务，S = 搜索，H = 开发者复核；具体动作直接写在线上。</span></div></div>
           <div class="uxread-row" data-ux-evidence="events"><div class="uxread-no">03</div><div class="uxread-t"><b>横线是一次知识事件</b><span>箭头方向表示谁向谁请求或返回信息；线上文字说明这次往返在做什么。</span></div></div>
           <div class="uxread-row" data-ux-evidence="loops"><div class="uxread-no">04</div><div class="uxread-t"><b>红线和回路表示风险</b><span>红线是受阻，虚线/回路是换词、补证、人工复核或再检索。</span></div></div>
         </div>
@@ -3302,8 +3302,8 @@ function sharedP2SequenceHtml(){
     <g data-seq-item="lane-ai"><g class="p2heads"><rect x="450" y="34" width="104" height="34" rx="10"/><text x="502" y="56" text-anchor="middle">AI (Agent)</text></g><path d="M502 82v336" class="p2lane"/></g>
     <g data-seq-item="lane-community"><g class="p2heads"><rect x="650" y="34" width="104" height="34" rx="10"/><text x="702" y="56" text-anchor="middle" class="off">昇腾社区</text></g><path d="M702 82v336" class="p2lane"/></g>
     <g data-seq-item="lane-third"><g class="p2heads"><rect x="850" y="34" width="104" height="34" rx="10"/><text x="902" y="56" text-anchor="middle">第三方平台</text></g><path d="M902 82v336" class="p2lane"/></g>
-    <g data-seq-item="line-task"><path d="M302 126H502" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="402" y="113" text-anchor="middle" class="p2label">开发者把算子任务交给 AI</text></g><g data-seq-item="node-n1"><circle cx="302" cy="126" r="13" class="p2node hu"/><text x="302" y="131" text-anchor="middle" class="p2id">n1</text><g class="p2node-note"><rect x="222" y="144" width="160" height="38" rx="7"/><text x="302" y="160" text-anchor="middle">n = need（提出任务）</text><text x="302" y="174" text-anchor="middle">开发者的知识需求起点</text></g></g>
-    <g data-seq-item="line-ai-community"><path d="M502 212H702" class="p2msg blocked" marker-end="url(#p2ArrowRed)"/><text x="602" y="199" text-anchor="middle" class="p2label red">AI 搜索自定义算子操作教程</text><text x="602" y="230" text-anchor="middle" class="p2tiny red">未取回页面正文</text></g><g data-seq-item="node-sD"><circle cx="502" cy="212" r="16" class="p2node ai blocked-ring"/><text x="502" y="217" text-anchor="middle" class="p2id aiid">sD</text><g class="p2node-note"><rect x="422" y="246" width="160" height="38" rx="7"/><text x="502" y="262" text-anchor="middle">s = search（搜索）</text><text x="502" y="276" text-anchor="middle">AI 查询官方操作教程</text></g></g>
+    <g data-seq-item="line-task"><path d="M302 126H502" class="p2msg" marker-end="url(#p2ArrowPurple)"/><text x="402" y="113" text-anchor="middle" class="p2label">开发者把算子任务交给 AI</text></g><g data-seq-item="node-n1"><circle cx="302" cy="126" r="13" class="p2node hu"/><text x="302" y="131" text-anchor="middle" class="p2id">N</text><g class="p2node-note"><rect x="222" y="144" width="160" height="38" rx="7"/><text x="302" y="160" text-anchor="middle">N = 提出任务</text><text x="302" y="174" text-anchor="middle">开发者的知识需求起点</text></g></g>
+    <g data-seq-item="line-ai-community"><path d="M502 212H702" class="p2msg blocked" marker-end="url(#p2ArrowRed)"/><text x="602" y="199" text-anchor="middle" class="p2label red">AI 搜索自定义算子操作教程</text><text x="602" y="230" text-anchor="middle" class="p2tiny red">未取回页面正文</text></g><g data-seq-item="node-sD"><circle cx="502" cy="212" r="16" class="p2node ai blocked-ring"/><text x="502" y="217" text-anchor="middle" class="p2id aiid">S</text><g class="p2node-note"><rect x="422" y="246" width="160" height="38" rx="7"/><text x="502" y="262" text-anchor="middle">S = 搜索</text><text x="502" y="276" text-anchor="middle">AI 查询官方操作教程</text></g></g>
     <g data-seq-item="line-human"><path d="M302 292H702" class="p2branch" marker-end="url(#p2ArrowGray)"/><text x="502" y="279" text-anchor="middle" class="p2label humanlabel">AI 受阻后，开发者自查官方文档</text><text x="502" y="309" text-anchor="middle" class="p2tiny">核对版本、步骤与同类经验</text></g>
   </svg>`;
 }
@@ -3316,9 +3316,9 @@ function localP2SequenceHtml(){
     </defs>
     <g class="p2heads"><rect x="38" y="28" width="106" height="36" rx="10"/><text x="91" y="51" text-anchor="middle">开发者</text><rect x="177" y="28" width="106" height="36" rx="10"/><text x="230" y="51" text-anchor="middle">AI</text><rect x="316" y="28" width="106" height="36" rx="10"/><text x="369" y="51" text-anchor="middle" class="off">昇腾社区</text></g>
     <path d="M91 80v388M230 80v388M369 80v388" class="p2lane"/>
-    <path d="M91 126H230" class="p2msg" marker-end="url(#localArrowPurple)"/><text x="160" y="110" text-anchor="middle" class="p2label">提出算子任务</text><circle cx="91" cy="126" r="12" class="p2node hu"/><text x="91" y="131" text-anchor="middle" class="p2id">n1</text>
-    <path d="M230 246H369" class="p2msg blocked" marker-end="url(#localArrowRed)"/><text x="300" y="230" text-anchor="middle" class="p2label red">搜索操作教程</text><text x="300" y="264" text-anchor="middle" class="p2tiny red">正文未取回</text><circle cx="230" cy="246" r="14" class="p2node ai blocked-ring"/><text x="230" y="251" text-anchor="middle" class="p2id aiid">sD</text>
-    <path d="M91 364H369" class="p2branch" marker-end="url(#localArrowInk)"/><text x="230" y="348" text-anchor="middle" class="p2label humanlabel">开发者回到官方文档核验</text><text x="230" y="382" text-anchor="middle" class="p2tiny">确认版本、步骤与同类经验</text><circle cx="91" cy="364" r="12" class="p2node hu"/><text x="91" y="369" text-anchor="middle" class="p2id">h1</text>
+    <path d="M91 126H230" class="p2msg" marker-end="url(#localArrowPurple)"/><text x="160" y="110" text-anchor="middle" class="p2label">提出算子任务</text><circle cx="91" cy="126" r="12" class="p2node hu"/><text x="91" y="131" text-anchor="middle" class="p2id">N</text>
+    <path d="M230 246H369" class="p2msg blocked" marker-end="url(#localArrowRed)"/><text x="300" y="230" text-anchor="middle" class="p2label red">搜索操作教程</text><text x="300" y="264" text-anchor="middle" class="p2tiny red">正文未取回</text><circle cx="230" cy="246" r="14" class="p2node ai blocked-ring"/><text x="230" y="251" text-anchor="middle" class="p2id aiid">S</text>
+    <path d="M91 364H369" class="p2branch" marker-end="url(#localArrowInk)"/><text x="230" y="348" text-anchor="middle" class="p2label humanlabel">开发者回到官方文档核验</text><text x="230" y="382" text-anchor="middle" class="p2tiny">确认版本、步骤与同类经验</text><circle cx="91" cy="364" r="12" class="p2node hu"/><text x="91" y="369" text-anchor="middle" class="p2id">H</text>
   </svg>`;
 }
 function initSharedP2Sequences(){
@@ -3340,7 +3340,7 @@ function simpleSequenceHtml(kind){
     </defs>
     <g data-ux-evidence="lanes"><g><rect x="74" y="28" width="142" height="48" rx="13" class="ss-head"/><rect x="310" y="28" width="142" height="48" rx="13" class="ss-head"/><rect x="546" y="28" width="142" height="48" rx="13" class="ss-head"/><text x="145" y="59" text-anchor="middle" class="ss-head-t">${lanes[0]}</text><text x="381" y="59" text-anchor="middle" class="ss-head-t">${lanes[1]}</text><text x="617" y="59" text-anchor="middle" class="ss-head-t" fill="${sourceColor}">${lanes[2]}</text></g><path d="M145 91V408M381 91V408M617 91V408" class="ss-lane"/></g>
     <g data-ux-evidence="events"><path d="M145 132H381" class="ss-msg" marker-end="url(#${kind}Arrow)"/><text x="263" y="114" text-anchor="middle" class="ss-msg-t">${first}</text><path d="M381 200H617" class="ss-msg" marker-end="url(#${kind}Arrow)"/><text x="499" y="182" text-anchor="middle" class="ss-msg-t">${query}</text><path d="M617 262H381" class="ss-return" marker-end="url(#${kind}Arrow)"/><text x="499" y="248" text-anchor="middle" class="ss-msg-t">${reply}</text><path d="M381 382H145" class="ss-return" marker-end="url(#${kind}Arrow)"/><text x="263" y="368" text-anchor="middle" class="ss-msg-t">${result}</text></g>
-    <g data-ux-evidence="nodes"><circle cx="145" cy="132" r="14" class="ss-node"/><text x="145" y="137" text-anchor="middle" class="ss-id">n1</text><circle cx="381" cy="200" r="15" class="ss-node ai"/><text x="381" y="205" text-anchor="middle" class="ss-id">sD</text></g>
+    <g data-ux-evidence="nodes"><circle cx="145" cy="132" r="14" class="ss-node"/><text x="145" y="137" text-anchor="middle" class="ss-id">N</text><circle cx="381" cy="200" r="15" class="ss-node ai"/><text x="381" y="205" text-anchor="middle" class="ss-id">S</text></g>
     <g data-ux-evidence="loops"><path d="M381 306H617" class="ss-blocked" marker-end="url(#${kind}ArrowRed)"/><text x="499" y="292" text-anchor="middle" class="ss-msg-t red">目标配置无法直接比较</text><path d="M381 335c46-25 46 25 0 0" class="ss-loop" marker-end="url(#${kind}ArrowRed)"/><text x="381" y="322" text-anchor="middle" class="ss-note red">补充预算与内存条件后再查</text></g>
   </svg>`;
 }
