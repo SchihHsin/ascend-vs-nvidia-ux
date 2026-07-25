@@ -3178,25 +3178,27 @@ const deck=document.getElementById('deck');
   }
   target.appendChild(clone);
 })();
-/* 先讲清苹果官网比价，再让算子开发的小时序图接到阶段拼图；算子细讲紧随其后。 */
+/* 先用一个完整的苹果官网比价过程建立读图规则，再迁移到算子开发。
+   两张苹果解释页内容重复，只保留“沿着箭头读”的一页。 */
 (function orderSequenceWalkthrough(){
   const operator=document.querySelector('.operator-seq-slide');
   const build=document.querySelector('.seqbuild-slide');
   const scope=document.querySelector('.seqscope-slide');
   const focus=document.querySelector('.seqfocus-slide');
-  const apple=[...document.querySelectorAll('.apple-seq-explain-slide')];
+  const appleReading=document.querySelector('.apple-seq-reading-slide');
+  const appleRoles=document.querySelector('.apple-seq-roles-slide');
   const operatorRead=[...document.querySelectorAll('.ux-method-slide')].find(function(slide){
     var ttl=slide.querySelector('.ttl');
     return ttl&&ttl.textContent.indexOf('每次知识往返都能识别')>=0;
   });
-  if(!operator||!build||!scope||!focus||apple.length!==2||!operatorRead)return;
-  /* 日常示例先拆解两页；随后才进入算子阶段、算子细讲与全量时序图。 */
-  operator.insertAdjacentElement('afterend',apple[0]);
-  apple[0].insertAdjacentElement('afterend',apple[1]);
-  apple[1].insertAdjacentElement('afterend',build);
+  if(!operator||!build||!scope||!focus||!appleReading||!operatorRead)return;
+  if(appleRoles)appleRoles.remove();
+  /* 日常示例 → 完整读法 → 算子迁移 → 小时序图 → 拼图 → 社区使用 → 全量图。 */
+  operator.insertAdjacentElement('beforebegin',appleReading);
+  operator.insertAdjacentElement('afterend',operatorRead);
+  operatorRead.insertAdjacentElement('afterend',build);
   build.insertAdjacentElement('afterend',focus);
-  focus.insertAdjacentElement('afterend',operatorRead);
-  operatorRead.insertAdjacentElement('afterend',scope);
+  focus.insertAdjacentElement('afterend',scope);
 })();
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
