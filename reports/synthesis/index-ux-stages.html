@@ -532,7 +532,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 .fbig b{color:#E5484D}.fcol.good .fbig b{color:#2E7D46}
 
 /* 研究产出汇总页：可点击资产卡片 */
-      .deliver-layout{flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:1.05vw;align-items:stretch;width:min(920px,100%);margin:auto}
+      .deliver-layout{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:1.05vw;align-items:stretch}
 .deliver-card{position:relative;min-width:0;min-height:0;display:flex;flex-direction:column;gap:1vh;text-decoration:none;color:inherit;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.82);border-radius:15px;padding:1.25vh 1vw;box-shadow:0 14px 34px -24px rgba(30,40,70,.32),inset 0 1px 0 rgba(255,255,255,.86);overflow:hidden;transition:transform .16s,border-color .16s,box-shadow .16s}
 .deliver-card::after{content:'';position:absolute;right:-1px;bottom:-1px;width:54%;height:42%;z-index:0;background:radial-gradient(130% 105% at 100% 100%,color-mix(in srgb,var(--asset-accent,#5B5BD6) 20%,transparent),color-mix(in srgb,var(--asset-accent,#5B5BD6) 8%,transparent) 46%,transparent 72%);pointer-events:none}
 .deliver-card:hover,.deliver-card:focus-visible{transform:translateY(-3px);border-color:color-mix(in srgb,var(--asset-accent,#5B5BD6) 38%,rgba(255,255,255,.82));box-shadow:0 18px 42px -24px rgba(30,40,70,.44),inset 0 1px 0 rgba(255,255,255,.9);outline:none}
@@ -2992,9 +2992,17 @@ body.overview #panel,body.overview #toggle{display:none!important}
           <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/19_findings_ux_synthesis.html</span></div>
         </a>
 
+        <a class="deliver-card exp" href="https://schihhsin.github.io/ascend-vs-nvidia-ux/reports/ascend-vs-nvidia-2026-06-13-visual.html#op" target="_blank" rel="noopener">
+          <div class="deliver-shot"><img src="dev-experience-report-thumb.png" alt="开发者侧基础体验分析报告截图"></div>
+          <div class="deliver-meta"><span class="deliver-no">02</span><span class="deliver-kind">分析报告</span></div>
+          <div class="deliver-title">开发者侧基础体验分析报告</div>
+          <div class="deliver-desc">按真实开发者旅程拆解官网触点，对比昇腾与 NVIDIA 从入口、环境、文档到支持社区的体验差异。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/ascend-vs-nvidia-ux/reports/ascend-vs-nvidia-2026-06-13-visual.html#op</span></div>
+        </a>
+
         <a class="deliver-card matrix" href="https://schihhsin.github.io/opknow/17_official_site_focus.html" target="_blank" rel="noopener">
           <div class="deliver-shot matrix"><img src="ai-usability-heat.png" alt="AI 可用性评分矩阵截图"></div>
-          <div class="deliver-meta"><span class="deliver-no">02</span><span class="deliver-kind">评分资产</span></div>
+          <div class="deliver-meta"><span class="deliver-no">03</span><span class="deliver-kind">评分资产</span></div>
           <div class="deliver-title">AI 可用性评分矩阵</div>
           <div class="deliver-desc">按任务 × 指标呈现官方可发现、可抓取、正文质量、版本清晰度、生态支撑与综合置信度。</div>
           <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/17_official_site_focus.html</span></div>
@@ -3002,7 +3010,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
         <a class="deliver-card seq" href="https://schihhsin.github.io/opknow/20_human_ai_journey.html" target="_blank" rel="noopener">
           <div class="deliver-shot seq"><img src="sequence-journey-thumb-tight.png" alt="人机协同时序图分析截图"></div>
-          <div class="deliver-meta"><span class="deliver-no">03</span><span class="deliver-kind">分析图谱</span></div>
+          <div class="deliver-meta"><span class="deliver-no">04</span><span class="deliver-kind">分析图谱</span></div>
           <div class="deliver-title">人机协同时序图分析</div>
           <div class="deliver-desc">把开发者、AI、官方内容、第三方生态与工具链放在一张链路图上，定位人与 AI 共同依赖的知识触点。</div>
           <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>schihhsin.github.io/opknow/20_human_ai_journey.html</span></div>
@@ -3010,10 +3018,18 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
         <a class="deliver-card skill" href="https://github.com/SchihHsin/ai-usability-benchmark" target="_blank" rel="noopener">
           <div class="deliver-shot"><div class="deliver-doc"><div class="bar"><i></i><i></i><i></i></div><div class="path">ai-usability-benchmark / README.md</div><p><b># ai-usability-benchmark</b></p><p>一份可分享的 Claude Code Skill：衡量「一个会实时检索的 AI 助手，</p><p>回答某个生态的开发任务时，知识从哪来、可用性如何，</p><p>与另一个成熟生态相比差在哪」。</p><p>在若干开发者任务上，对两个生态各实测检索一遍（web_search / web_fetch），</p><p>按统一的 11 项指标量化打分、记录每一步、产出可下钻的对照矩阵。</p><p>默认对照：受测生态 = CANN（昇腾），基线生态 = CUDA（NVIDIA）。</p><p>视角是「会检索的 AI 助手」，不是「这个栈好不好用」。</p><p>AI 助手只能搜→抓→读正文→拼答案。</p></div></div>
-          <div class="deliver-meta"><span class="deliver-no">04</span><span class="deliver-kind">可复用 Skill</span></div>
+          <div class="deliver-meta"><span class="deliver-no">05</span><span class="deliver-kind">可复用 Skill</span></div>
           <div class="deliver-title">AI 可用性基准测试 Skill</div>
           <div class="deliver-desc">复用同一套任务、指标、抓取记录和评分模板，持续评估 AI 对技术内容的获取与作答质量。</div>
           <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>github.com/SchihHsin/ai-usability-benchmark</span></div>
+        </a>
+
+        <a class="deliver-card skill" href="https://github.com/SchihHsin/materials/tree/main/.claude/skills/journey-touchpoint-analysis" target="_blank" rel="noopener">
+          <div class="deliver-shot"><div class="deliver-doc"><div class="bar"><i></i><i></i><i></i></div><div class="path">journey-touchpoint-analysis / SKILL.md</div><p><b># Journey Touchpoint Analysis</b></p><p>将用户完成目标的过程拆成旅程、触点、真实页面证据与评分。</p><p>从真实截图、点击标注和来源链接中识别体验断点，并沉淀为图文报告。</p><p>它来自昇腾与 NVIDIA 开发者门户的体验分析实践。</p></div></div>
+          <div class="deliver-meta"><span class="deliver-no">06</span><span class="deliver-kind">可复用 Skill</span></div>
+          <div class="deliver-title">基础体验旅程分析 Skill</div>
+          <div class="deliver-desc">沉淀模拟用户旅程、网页实跑取证、点击标注、触点评分与图文报告生成的方法。</div>
+          <div class="deliver-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span>github.com/SchihHsin/materials/tree/main/.claude/skills/journey-touchpoint-analysis</span></div>
         </a>
       </div>
     </div>
