@@ -1413,27 +1413,19 @@ body.overview #panel,body.overview #toggle{display:none!important}
   </section>
 
   <!-- 先建立时序图中 AI 与昇腾社区这条线的阅读方式，再进入指标与架构。 -->
-  <section class="slide s-gray ai-community-process-slide">
+  <section class="slide s-gray">
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">时序图中 AI 与昇腾社区的一条线，就是一次完整的知识获取过程</span></div>
         <div class="subttl">测量方法 · 从任务问题到可引用证据，再到可执行答案</div>
       </div>
-      <div class="head-r">14/ AI 可用性 · 过程说明</div>
+      <div class="head-r">14/ AI 可用性 · 架构映射</div>
     </div>
-    <style>
-      .ai-community-process-slide .body-area{justify-content:center}.aicp-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);gap:1.5vw;align-items:stretch;min-height:0}.aicp-flow{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8vw;align-items:stretch;padding:1.35vh 1.05vw;border-radius:17px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 34px -24px rgba(30,40,70,.34),inset 0 1px 0 rgba(255,255,255,.9)}.aicp-node{--a:#5B5BD6;position:relative;z-index:1;min-width:0;border-radius:13px;padding:1.25vh .9vw;background:linear-gradient(145deg,color-mix(in srgb,var(--a) 10%,#fff),rgba(255,255,255,.88));border:1px solid color-mix(in srgb,var(--a) 19%,white);display:flex;flex-direction:column;justify-content:center;gap:.45vh}.aicp-node b{font-size:var(--fs-h3);line-height:1.18;color:var(--ink);font-weight:950}.aicp-node span{font-size:var(--fs-sm);line-height:1.42;color:var(--ink-2)}.aicp-node i{font-style:normal;font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:950;color:var(--a);letter-spacing:.06em}.aicp-node.search{--a:#2F6FED}.aicp-node.fetch{--a:#0F9F9B}.aicp-node.quote{--a:#D17724}.aicp-node.answer{--a:#5B5BD6}.aicp-arrow{position:absolute;z-index:0;top:50%;left:20%;right:20%;height:2px;background:linear-gradient(90deg,#2F6FED,#0F9F9B,#D17724,#5B5BD6);opacity:.42}.aicp-arrow:after{content:"";position:absolute;right:-1px;top:50%;width:8px;height:8px;border-top:2px solid #5B5BD6;border-right:2px solid #5B5BD6;transform:translateY(-50%) rotate(45deg)}.aicp-side{border-radius:17px;padding:1.55vh 1.2vw;background:var(--g-ink);color:#fff;box-shadow:0 18px 38px -26px rgba(20,23,28,.68),inset 0 1px 0 rgba(255,255,255,.22);display:flex;flex-direction:column;justify-content:center;gap:1.05vh}.aicp-side .eyebrow{font-family:'JetBrains Mono';font-size:var(--fs-xs);font-weight:900;letter-spacing:.1em;color:#BFC8FF}.aicp-side h3{font-size:var(--fs-h2);line-height:1.28;color:#fff;font-weight:950}.aicp-side p{font-size:var(--fs-body);line-height:1.52;color:rgba(255,255,255,.72)}.aicp-side b{color:#fff}.aicp-tag{display:inline-flex;align-self:flex-start;padding:.42vh .58vw;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:var(--fs-sm);font-weight:850;color:#fff}.aicp-tag em{font-style:normal;color:#8CE0D7;margin-right:.35em}
-    </style>
     <div class="body-area">
-      <div class="aicp-layout">
-        <div class="aicp-flow" aria-label="AI 从昇腾社区获取知识的过程">
-          <div class="aicp-arrow" aria-hidden="true"></div>
-          <article class="aicp-node search"><i>01 · 提出请求</i><b>AI 将任务转成检索问题</b><span>例如：自定义算子操作教程如何完成。</span></article>
-          <article class="aicp-node fetch"><i>02 · 进入社区</i><b>查找并抓取昇腾社区内容</b><span>搜索官方页面，读取正文、代码与版本信息。</span></article>
-          <article class="aicp-node quote"><i>03 · 判断证据</i><b>确认内容是否可引用</b><span>判断正文是否完整、版本是否明确、是否需要补充来源。</span></article>
-          <article class="aicp-node answer"><i>04 · 回到任务</i><b>组织为可执行答案</b><span>将可用证据写成步骤，并标出仍需人工核验的部分。</span></article>
-        </div>
-        <aside class="aicp-side"><div class="eyebrow">HOW TO READ THE SEQUENCE</div><h3>这不是一条“访问记录”，而是一次 <b>知识供给 → 理解 → 引用</b> 的闭环。</h3><p>时序图里每一条 <b>AI ↔ 昇腾社区</b> 的线，都会保留任务问题、来源、抓取结果与后续是否被用于作答。因此可以继续量化“找到没有、读到没有、证据够不够、答案能不能落地”。</p><span class="aicp-tag"><em>对应金字塔：</em>知识资产层 → 机器理解层 → 检索与引用层</span></aside>
+      <div class="archmetric-layout">
+        <div class="archmetric-seq"><div class="archmetric-seqbox"><iframe src="seq-d3.html?full=1&amp;hi=1&amp;focus=sD" title="全量时序图中 AI 与昇腾社区的知识获取线"></iframe><div class="archmetric-seq-label">放大对象 · AI ↔ 昇腾社区</div></div></div>
+        <div class="archmetric-lens" aria-label="放大镜：将时序图中的知识获取线映射到 Agent 架构"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 5 5"></path></svg><b>放大<br>内部过程</b></div>
+        <div class="archmetric-arch"><div class="archmetric-archbox"><iframe src="arch-d3.html?map=1&amp;embed=architecture" title="Agent 循环架构图 · 指标映射参照"></iframe><div class="archmetric-diagram-title">AI 知识获取与作答架构</div><div class="arch-node-annotation understand"><b>机器理解层</b>意图解析、子目标拆解、路由、证据判断与收敛作答</div><div class="arch-node-annotation assets"><b>知识资产层</b>模型自带知识，以及官方与第三方来源提供的内容</div><div class="arch-node-annotation retrieve"><b>检索与引用层</b><code>web_search</code>、<code>web_fetch</code> 与证据回灌</div></div></div>
       </div>
     </div>
   </section>
@@ -1469,8 +1461,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .archmetric-note b{color:#fff;font-weight:950}
   </style>
 
-  <!-- 3b2b 灰底：AI 指标映射到 Agent 架构图 -->
-  <section class="slide s-gray">
+  <!-- 已并入上一页，保留旧结构仅供后续维护时比对。 -->
+  <section class="archmetric-legacy" hidden>
     <div class="head">
       <div class="head-l">
         <div class="brand"><span class="ttl">放大一条 AI 取证线，就能看见知识如何进入 Agent 的判断与作答</span></div>
