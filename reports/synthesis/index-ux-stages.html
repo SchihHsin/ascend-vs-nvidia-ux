@@ -1290,13 +1290,14 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="head-r">10/ 研究对象 · 全周期时序图</div>
     </div>
     <style>
-      .seqscope-slide .body-area{display:block;position:relative;min-height:0}
-      .seqscope-sample,.seqscope-full{position:relative;min-width:0;min-height:0;border-radius:17px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 42px -28px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.94);overflow:hidden}
+      .seqscope-slide .head{position:relative;z-index:2;margin-bottom:1.7vh}
+      .seqscope-slide .body-area{display:grid;grid-template-columns:minmax(0,1fr) minmax(236px,21vw);gap:1.55vw;position:relative;min-height:0;align-items:stretch}
+      .seqscope-sample,.seqscope-full{position:relative;min-width:0;min-height:0}
       .seqscope-sample,.seqscope-bridge{display:none}.seqscope-sample h3,.seqscope-full h3{margin:0;color:var(--ink);font-size:var(--fs-h3);line-height:1.2;font-weight:950}.seqscope-sample p,.seqscope-full p{margin:.28vh 0 0;color:var(--ink-2);font-size:var(--fs-body);line-height:1.4}
       .seqscope-mini{min-height:0;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.52)}
       .seqscope-sample-foot{border-radius:10px;background:linear-gradient(135deg,rgba(47,111,237,.1),rgba(91,91,214,.07));border:1px solid rgba(47,111,237,.12);padding:.75vh .7vw;color:#3F495A;font-size:var(--fs-sm);line-height:1.35}.seqscope-sample-foot b{color:#202531;font-weight:950}
-      .seqscope-full{height:100%;padding:.95vh .7vw;display:block}.seqscope-full-head,.seqscope-stage-key{display:none}
-      .seqscope-frame{position:relative;width:100%;height:100%;min-height:0;border-radius:13px;overflow:hidden;background:#fff;border:1px solid rgba(47,61,99,.1)}.seqscope-frame iframe{width:100%;height:100%;border:0;background:transparent}.seqscope-focusband,.seqscope-focusnote{display:none}.seqscope-phase-ribbon{position:absolute;z-index:2;left:1.3%;top:9%;bottom:9%;width:11%;display:grid;grid-template-rows:repeat(7,1fr);gap:2px;visibility:hidden;pointer-events:none}.seqscope-phase-ribbon span{min-height:0}.seqscope-summary{position:absolute;z-index:3;left:1.2%;right:1.2%;bottom:1.4%;width:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9vw;border-radius:11px;background:rgba(255,255,255,.9);border:1px solid rgba(91,91,214,.16);box-shadow:0 12px 28px -18px rgba(30,40,70,.35);padding:.78vh .85vw;color:#4E586A;font-size:var(--fs-sm);line-height:1.34}.seqscope-summary div{min-width:0}.seqscope-summary b{display:block;color:#202531;font-size:var(--fs-body);font-weight:950;margin-bottom:.18vh}
+      .seqscope-full{height:100%;display:contents}.seqscope-full-head,.seqscope-stage-key{display:none}
+      .seqscope-frame{position:relative;width:100%;height:100vh;min-height:0;overflow:hidden;background:transparent}.seqscope-frame iframe{width:100%;height:100%;border:0;background:transparent}.seqscope-focusband,.seqscope-focusnote{display:none}.seqscope-phase-ribbon{position:absolute;z-index:2;left:1.3%;top:9%;bottom:9%;width:11%;display:grid;grid-template-rows:repeat(7,1fr);gap:2px;visibility:hidden;pointer-events:none}.seqscope-phase-ribbon span{min-height:0}.seqscope-summary{position:relative;z-index:3;align-self:center;width:auto;display:grid;gap:1.05vh;padding:0;color:#4E586A;font-size:var(--fs-body);line-height:1.48}.seqscope-summary div{min-width:0;padding:1.25vh 1vw;border-radius:13px;background:rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 28px -24px rgba(30,40,70,.32)}.seqscope-summary b{display:block;color:#202531;font-size:var(--fs-h3);font-weight:950;margin-bottom:.36vh}
     </style>
     <div class="body-area">
       <div class="seqscope-sample">
@@ -1310,8 +1311,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <div class="seqscope-frame" data-magic-target>
           <iframe data-src="seq-d3.html?full=1" title="自定义算子开发全量人机协同时序图"></iframe>
           <div class="seqscope-phase-ribbon" data-magic-phase-target aria-hidden="true"><span style="--phase-bg:#EEF1F7">P1</span><span style="--phase-bg:#EFEAF7">P2</span><span style="--phase-bg:#E9F4F0">P3</span><span style="--phase-bg:#E9F4F0">P4</span><span style="--phase-bg:#FBF0E0">P5</span><span style="--phase-bg:#E9F4F0">P6</span><span style="--phase-bg:#E6EDF8">P7</span></div>
-          <div class="seqscope-summary"><div><b>还原全周期协同</b><span>不只看一次问答，而是看 AI 在七个阶段怎样参与、何时由开发者接回。</span></div><div><b>定位痛点出现的位置</b><span>区分问题出在知识缺失、检索受阻、版本判断，还是步骤无法落地。</span></div><div><b>确定改造的优先顺序</b><span>结合问题频次、影响阶段与人工接管成本，判断先补哪一类内容和能力。</span></div></div>
         </div>
+        <aside class="seqscope-summary"><div><b>还原全周期协同</b><span>不只看一次问答，而是看 AI 在七个阶段怎样参与、何时由开发者接回。</span></div><div><b>定位痛点出现的位置</b><span>区分问题出在知识缺失、检索受阻、版本判断，还是步骤无法落地。</span></div><div><b>确定改造的优先顺序</b><span>结合问题频次、影响阶段与人工接管成本，判断先补哪一类内容和能力。</span></div></aside>
       </div>
     </div>
   </section>
