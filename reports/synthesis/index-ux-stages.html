@@ -3193,12 +3193,12 @@ const deck=document.getElementById('deck');
   });
   if(!operator||!build||!scope||!focus||!appleReading||!operatorRead)return;
   if(appleRoles)appleRoles.remove();
-  /* 日常示例 → 完整读法 → 算子迁移 → 小时序图 → 拼图 → 社区使用 → 全量图。 */
+  /* 日常示例 → 完整读法 → 算子迁移 → 社区使用 → 小时序图 → 拼图 → 全量图。 */
   operator.insertAdjacentElement('beforebegin',appleReading);
-  operator.insertAdjacentElement('afterend',operatorRead);
+  operator.insertAdjacentElement('afterend',focus);
+  focus.insertAdjacentElement('afterend',operatorRead);
   operatorRead.insertAdjacentElement('afterend',build);
-  build.insertAdjacentElement('afterend',focus);
-  focus.insertAdjacentElement('afterend',scope);
+  build.insertAdjacentElement('afterend',scope);
 })();
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
