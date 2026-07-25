@@ -652,7 +652,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
   <!-- 3 灰底：开发者怎样使用 AI -->
   <section class="slide s-gray dual-context-slide ide-task-slide">
-    <div class="head"><div class="head-l"><div class="brand"><span class="ttl">开发者将具体问题交给 AI，再依据建议继续开发、调试和核验</span></div><div class="subttl">任务场景 · 提问、检索、形成建议，再回到真实环境执行</div></div><div class="head-r">03/ AI 使用方式</div></div>
+    <div class="head"><div class="head-l"><div class="brand"><span class="ttl">典型AI协同开发场景：开发者将具体问题交给 AI，再依据建议执行</span></div><div class="subttl">任务场景 · 提问、检索、形成建议，再回到真实环境执行</div></div><div class="head-r">03/ AI 使用方式</div></div>
     <div class="body-area">
       <div class="ide-task-layout">
         <div class="ide-window" aria-label="IDE 中的 AI 插件对话示意">
@@ -671,7 +671,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
 
   <!-- 4 灰底：AI 输出的信任落差 -->
   <section class="slide s-gray ai-trust-slide warn">
-    <div class="head"><div class="head-l"><div class="brand"><span class="ttl">AI 已进入开发任务，但输出仍需要被验证</span></div><div class="subttl">研究背景 · 开发者普遍使用 AI，却不会仅依据其输出完成任务</div></div><div class="head-r">04/ AI 输出信任</div></div>
+    <div class="head"><div class="head-l"><div class="brand"><span class="ttl">但研究表明，开发者并不完全信任AI，其答案经常不可靠</span></div><div class="subttl">研究背景 · 开发者普遍使用 AI，却不会仅依据其输出完成任务</div></div><div class="head-r">04/ AI 输出信任</div></div>
     <div class="body-area stage-center">
       <div class="dh-wrap">
         <div class="dh-lead">三项调研共同表明：AI 已融入开发过程，<b>功能正确性、提交前检查与实际可用性</b>仍需由开发者核验。</div>
@@ -688,7 +688,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray research-branch-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">开发者提出任务，AI 能否形成可直接执行的答案</span></div>
+        <div class="brand"><span class="ttl">AI无法解决问题的情况下，我们需要从两个维度去应对</span></div>
         <div class="subttl">研究范围 · 定位 AI 在理解任务、检索知识与组织答案时的受阻位置</div>
       </div>
       <div class="head-r">05/ AI 可用性观察</div>
@@ -994,7 +994,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray simple-seq-slide price-seq-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">先从一件人人能理解的事开始：让 AI 帮我比较三台电脑</span></div>
+        <div class="brand"><span class="ttl">时序图可呈现多种角色间的知识往返——从一个生活中的例子开始</span></div>
         <div class="subttl">时序图读法 · 一个任务、三个角色、一次请求与返回</div>
       </div>
       <div class="head-r">07/ 时序图 · 日常任务</div>
@@ -1284,7 +1284,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray seqscope-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">全周期协同：一次自定义算子开发</span></div>
+        <div class="brand"><span class="ttl">一次自定义算子开发全生命周期的时序图</span></div>
         <div class="subttl">研究对象 · 从立项到交付，把开发者、AI、昇腾社区与其他来源放在同一张图里</div>
       </div>
       <div class="head-r">10/ 研究对象 · 全周期时序图</div>
@@ -1350,14 +1350,12 @@ body.overview #panel,body.overview #toggle{display:none!important}
       .rm-flow{position:relative;z-index:2;height:3.4vh;margin:-.55vh 0 -.45vh 93px;display:flex;align-items:center;justify-content:center;pointer-events:none;color:rgba(92,102,164,.42);opacity:.58}.rm-flow.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9vw}.rm-flow-arrow{width:54px;height:4.4vh;justify-self:center;overflow:visible}.rm-flow-arrow path{fill:currentColor}.rm-flow-arrow.ai{color:rgba(124,92,240,.6)}.rm-flow-arrow.dev{color:rgba(47,111,237,.6)}
       .research-bridge-slide .research-map{display:none}
       .research-bridge-slide .body-area{display:flex;min-height:0}
-      .research-bridge-layout{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 5.7vw minmax(0,1fr);gap:1.05vw;align-items:stretch;flex:1;min-height:0}
+      .research-bridge-layout{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) 4.8vw minmax(0,.88fr);gap:1.05vw;align-items:stretch;flex:1;min-height:0}
       .research-bridge-pane{position:relative;min-width:0;min-height:0;overflow:hidden;border-radius:17px;border:1px solid rgba(255,255,255,.82);background:rgba(255,255,255,.62);box-shadow:0 16px 34px -25px rgba(30,40,70,.36),inset 0 1px 0 rgba(255,255,255,.9)}
-      .research-bridge-source{padding:.8vh .6vw}
-      .research-bridge-source .branch-canvas{width:100%;height:100%;min-height:0}
-      .research-bridge-source .branch-canvas svg{display:block;width:100%;height:100%}
-      .research-bridge-source:after{content:"";position:absolute;z-index:2;top:0;right:0;bottom:0;left:52%;background:linear-gradient(90deg,rgba(234,237,241,.22),rgba(234,237,241,.82) 24%,rgba(234,237,241,.88));pointer-events:none}
-      .research-bridge-focus{position:absolute;z-index:3;left:3.5%;top:14%;width:39%;height:72%;border:2px solid rgba(201,54,70,.8);border-radius:50%;box-shadow:0 0 0 12px rgba(201,54,70,.07),0 16px 28px -24px rgba(135,29,41,.82);pointer-events:none}
-      .research-bridge-focus span{position:absolute;top:-2.35vh;left:50%;transform:translateX(-50%);white-space:nowrap;padding:.38vh .55vw;border-radius:7px;background:rgba(255,255,255,.96);border:1px solid rgba(201,54,70,.25);box-shadow:0 7px 15px -13px rgba(80,26,34,.6);color:#9f2635;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:950;letter-spacing:.04em}
+      .research-bridge-source{display:flex;align-items:center;justify-content:center;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;padding:0}
+      .research-bridge-source>#research-bridge-source{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-width:0;min-height:0}
+      .research-bridge-source .branch-canvas{width:112%;max-width:none;height:auto;min-height:0}
+      .research-bridge-source .branch-canvas svg{display:block;width:100%;height:auto}
       .research-bridge-sequence{padding:.8vh .6vw;display:flex}
       .research-bridge-sequence-frame{position:relative;flex:1;min-width:0;min-height:0;overflow:hidden;border-radius:12px;background:#fff}
       .research-bridge-sequence-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
@@ -1369,9 +1367,8 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </style>
     <div class="body-area">
       <div class="research-bridge-layout">
-        <div class="research-bridge-pane research-bridge-source" aria-label="AI 可用性问题分叉图，左侧问题区域已高亮">
+        <div class="research-bridge-source" aria-label="AI 可用性问题分叉图">
           <div id="research-bridge-source"></div>
-          <div class="research-bridge-focus"><span>本次观察重点</span></div>
         </div>
         <div class="research-bridge-arrow" aria-hidden="true"><span>→</span></div>
         <div class="research-bridge-pane research-bridge-sequence">
@@ -1425,7 +1422,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
       <div class="archmetric-layout">
         <div class="archmetric-seq"><div class="archmetric-seqbox"><iframe src="seq-d3.html?full=1&amp;hi=1&amp;focus=sD" title="全量时序图中 AI 与昇腾社区的知识获取线"></iframe><div class="archmetric-seq-label">放大对象 · AI ↔ 昇腾社区</div></div></div>
         <div class="archmetric-lens" aria-label="放大镜：将时序图中的知识获取线映射到 Agent 架构"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 5 5"></path></svg><b>放大<br>内部过程</b></div>
-        <div class="archmetric-arch"><div class="archmetric-archbox"><iframe src="arch-d3.html?map=1&amp;embed=architecture" title="Agent 循环架构图 · 指标映射参照"></iframe><div class="archmetric-diagram-title">AI 知识获取与作答架构</div><div class="arch-node-annotation understand"><b>机器理解层</b>意图解析、子目标拆解、路由、证据判断与收敛作答</div><div class="arch-node-annotation assets"><b>知识资产层</b>模型自带知识，以及官方与第三方来源提供的内容</div><div class="arch-node-annotation retrieve"><b>检索与引用层</b><code>web_search</code>、<code>web_fetch</code> 与证据回灌</div></div></div>
+        <div class="archmetric-arch"><div class="archmetric-archbox"><iframe src="arch-d3.html?map=1&amp;embed=architecture" title="Agent 循环架构图 · 指标映射参照"></iframe><div class="archmetric-diagram-title">AI 知识获取与作答架构</div><div class="arch-node-annotation understand"><b>机器理解层</b>意图解析、子目标拆解、路由、证据判断与收敛作答</div><div class="arch-node-annotation assets"><b>知识资产层</b>模型自带知识，以及官方与第三方来源提供的内容</div><div class="arch-node-annotation retrieve"><b>检索与引用层</b><code>web_search</code>、<code>web_fetch</code> 与证据回灌</div><div class="archmetric-metric-rail" aria-label="11 项指标在 Agent 架构中的落点"><span>11 项指标落点</span><button class="archmetric-metric-chip own" data-map="read" title="⑦ 模型自带知识">⑦</button><button class="archmetric-metric-chip search" data-map="search" title="① 官方可发现性；⑤ 第三方丰富度">①⑤</button><button class="archmetric-metric-chip fetch" data-map="fetch" title="② 官方可抓取性；③ 官方正文详尽度">②③</button><button class="archmetric-metric-chip judge" data-map="judge" title="④ 版本清晰度；⑥ 第三方可信度；⑧ 检索成本">④⑥⑧</button><button class="archmetric-metric-chip answer" data-map="answer" title="⑨ 版本可锁定性；⑩ 步骤可复现性；⑪ 综合置信度">⑨⑩⑪</button></div></div></div>
       </div>
     </div>
   </section>
@@ -1440,6 +1437,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .archmetric-archbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
     .archmetric-diagram-title{position:absolute;z-index:4;left:.68vw;top:.68vh;padding:.45vh .68vw;border-radius:7px;background:rgba(229,233,239,.96);border:1px solid rgba(47,61,99,.16);box-shadow:0 5px 13px -12px rgba(30,40,70,.6);color:#566174;font-family:'JetBrains Mono';font-size:var(--fs-sm);font-weight:900;letter-spacing:.045em;pointer-events:none}
     .arch-node-annotation{--layer:#5B5BD6;position:absolute;z-index:5;width:126px;padding:.45vh .5vw;border-radius:7px;background:rgba(255,255,255,.94);border:1px solid color-mix(in srgb,var(--layer) 28%,white);box-shadow:0 8px 18px -15px rgba(24,29,44,.45);color:#4B5669;font-size:10px;line-height:1.25;font-weight:800;pointer-events:none}.arch-node-annotation:before{content:"";position:absolute;height:1px;background:var(--layer);opacity:.76}.arch-node-annotation:after{content:"";position:absolute;width:6px;height:6px;border:1.5px solid var(--layer);border-radius:50%;background:#fff}.arch-node-annotation b{display:block;margin-bottom:.12vh;color:var(--layer);font-size:var(--fs-sm);line-height:1.1;font-weight:950}.arch-node-annotation.understand{--layer:#7C5CF0;right:2%;top:17%}.arch-node-annotation.understand:before{right:100%;top:50%;width:65px}.arch-node-annotation.understand:after{right:calc(100% + 62px);top:calc(50% - 4px)}.arch-node-annotation.assets{--layer:#2F6FED;right:2%;top:43%}.arch-node-annotation.assets:before{right:100%;top:50%;width:47px}.arch-node-annotation.assets:after{right:calc(100% + 44px);top:calc(50% - 4px)}.arch-node-annotation.retrieve{--layer:#0F9F9B;left:2%;top:50%}.arch-node-annotation.retrieve:before{left:100%;top:50%;width:54px}.arch-node-annotation.retrieve:after{left:calc(100% + 51px);top:calc(50% - 4px)}
+    .archmetric-metric-rail{position:absolute;z-index:6;left:50%;bottom:.6vh;transform:translateX(-50%);display:flex;align-items:center;gap:.28vw;padding:.34vh .42vw;border-radius:8px;background:rgba(255,255,255,.93);border:1px solid rgba(47,61,99,.14);box-shadow:0 8px 18px -15px rgba(30,40,70,.38);white-space:nowrap}.archmetric-metric-rail>span{margin-right:.18vw;color:#687387;font-family:'JetBrains Mono';font-size:9px;font-weight:900;letter-spacing:.035em}.archmetric-metric-chip{--metric:#667EEA;appearance:none;border:1px solid color-mix(in srgb,var(--metric) 31%,white);border-radius:5px;padding:.18vh .32vw;background:color-mix(in srgb,var(--metric) 10%,white);color:var(--metric);font-family:'JetBrains Mono';font-size:9px;line-height:1.1;font-weight:950;cursor:pointer;transition:transform .16s,background .16s,box-shadow .16s}.archmetric-metric-chip:hover,.archmetric-metric-chip:focus-visible{outline:0;transform:translateY(-1px);background:color-mix(in srgb,var(--metric) 18%,white);box-shadow:0 6px 12px -10px color-mix(in srgb,var(--metric) 82%,#111827)}.archmetric-metric-chip.own{--metric:#23A06A}.archmetric-metric-chip.search{--metric:#667EEA}.archmetric-metric-chip.fetch{--metric:#0F9F9B}.archmetric-metric-chip.judge{--metric:#D17724}.archmetric-metric-chip.answer{--metric:#343944}
     .archmetric-map{border-radius:16px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);box-shadow:0 14px 34px -24px rgba(30,40,70,.35),inset 0 1px 0 rgba(255,255,255,.9);padding:1.45vh 1.12vw;display:grid;grid-template-rows:auto 1fr auto;gap:1.05vh;min-height:0;overflow:hidden;position:relative}
     .archmetric-metric-drawer{position:absolute;z-index:8;right:.85vw;bottom:.85vh;max-width:min(440px,46%);border-radius:10px;background:rgba(255,255,255,.94);border:1px solid rgba(47,61,99,.15);box-shadow:0 12px 30px -20px rgba(30,40,70,.48);overflow:hidden}.archmetric-metric-drawer summary{cursor:pointer;list-style:none;padding:.6vh .72vw;color:#4B47A8;font-size:var(--fs-sm);font-weight:950}.archmetric-metric-drawer summary::-webkit-details-marker{display:none}.archmetric-metric-drawer summary:after{content:"查看 11 项指标映射"}.archmetric-metric-drawer[open] summary:after{content:"收起 11 项指标映射"}.archmetric-metric-drawer[open]{inset:2vh 1.2vw 2vh auto;max-width:52%;padding:0;overflow:auto}.archmetric-metric-drawer[open] .archmetric-map{display:grid;min-height:100%;border:0;border-radius:0;box-shadow:none}.archmetric-metric-drawer:not([open]) .archmetric-map{display:none}
     .archmetric-map:after{content:"";position:absolute;right:-1px;bottom:-1px;width:42%;height:30%;border-radius:0 0 16px 0;background:radial-gradient(120% 100% at 100% 100%,rgba(109,93,246,.08),rgba(109,93,246,.03) 54%,transparent 78%);pointer-events:none}
@@ -2125,6 +2123,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
     .drel path.mid{stroke:#D9D0FF}.drel circle.mid{fill:#D9D0FF;stroke:#D9D0FF}.drel circle.mid.start{fill:transparent}
     .drel path.purple{stroke:#fff}.drel circle.purple{fill:#fff;stroke:#fff}.drel circle.purple.start{fill:transparent}
   </style>
+  <!-- 章节封：任务定义 -->
+  <section class="slide s-glow chapter-cover" data-chapter="task" style="--glow-h:195;--glow-h2:162;--glow-sat:86%;--glow-light:42%;--glow-spread:42;--glow-color-int:.7;--glow-white-int:.42">
+    <div class="glow"></div><div class="glow-white"></div>
+    <div class="chrome"><span>CHAPTER 03</span><span>TASK DEFINITION</span></div>
+    <div class="inner"><div class="cover-block"><div class="ch-no">03</div><h1 class="ch-cover-title">任务定义</h1><p class="ch-cover-sub">用同一开发目标设计 CUDA 与 CANN 的对照问题，让两个生态在相同结果要求下接受观测与比较。</p></div></div>
+  </section>
+
   <!-- 灰底：AI 侧 · 对照问题设计样例 -->
   <section class="slide s-gray question-example-slide">
     <div class="head">
@@ -2224,6 +2229,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
       </div>
       </div>
     </div>
+  </section>
+
+  <!-- 章节封：实测结果 -->
+  <section class="slide s-glow chapter-cover" data-chapter="result" style="--glow-h:14;--glow-h2:335;--glow-sat:88%;--glow-light:43%;--glow-spread:43;--glow-color-int:.72;--glow-white-int:.4">
+    <div class="glow"></div><div class="glow-white"></div>
+    <div class="chrome"><span>CHAPTER 04</span><span>FIELD RESULTS</span></div>
+    <div class="inner"><div class="cover-block"><div class="ch-no">04</div><h1 class="ch-cover-title">实测结果</h1><p class="ch-cover-sub">将每一次检索、抓取和作答转化为可比较的得分，定位昇腾知识供给在完整开发任务中的具体短板。</p></div></div>
   </section>
 
   <section class="slide s-gray">
@@ -2897,6 +2909,13 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
+  <!-- 章节封：通用性 -->
+  <section class="slide s-glow chapter-cover" data-chapter="generality" style="--glow-h:150;--glow-h2:206;--glow-sat:82%;--glow-light:42%;--glow-spread:42;--glow-color-int:.7;--glow-white-int:.4">
+    <div class="glow"></div><div class="glow-white"></div>
+    <div class="chrome"><span>CHAPTER 05</span><span>GENERALITY</span></div>
+    <div class="inner"><div class="cover-block"><div class="ch-no">05</div><h1 class="ch-cover-title">通用性</h1><p class="ch-cover-sub">固定任务与量尺、逐次替换生态、知识来源或 AI，使这套研究方法可以扩展到更多协同场景。</p></div></div>
+  </section>
+
   <!-- 7 灰底：三种变量实验 -->
   <section class="slide s-gray method-experiment-slide">
     <div class="head">
@@ -3177,21 +3196,21 @@ const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
   {id:'overview',label:'研究概览',range:[1,13]},
   {id:'method',label:'测量方法',range:[14,17]},
-  {id:'task',label:'任务定义',range:[18,19]},
-  {id:'result',label:'实测结果',range:[20,22]},
-  {id:'generality',label:'通用性',range:[23,25]},
-  {id:'outputs',label:'研究产出与附录',range:[26,29]}
+  {id:'task',label:'任务定义',range:[18,20]},
+  {id:'result',label:'实测结果',range:[21,24]},
+  {id:'generality',label:'通用性',range:[25,28]},
+  {id:'outputs',label:'研究产出与附录',range:[29,32]}
 ];
 const SECTIONS=[
   {id:'overview-context',chapter:'overview',label:'背景判断',range:[4,6]},
   {id:'overview-branch',chapter:'overview',label:'问题分叉',range:[7,7]},
   {id:'overview-framework',chapter:'overview',label:'研究框架',range:[8,13]},
   {id:'method-core',chapter:'method',label:'指标与计算',range:[15,17]},
-  {id:'task-pairs',chapter:'task',label:'问题对设计',range:[18,19]},
-  {id:'result-matrix',chapter:'result',label:'任务矩阵与问题',range:[20,22]},
-  {id:'generality-framework',chapter:'generality',label:'变量实验与白皮书',range:[23,25]},
-  {id:'outputs-assets',chapter:'outputs',label:'研究资产',range:[27,27]},
-  {id:'outputs-appendix',chapter:'outputs',label:'指标理论依据',range:[28,28]}
+  {id:'task-pairs',chapter:'task',label:'问题对设计',range:[19,20]},
+  {id:'result-matrix',chapter:'result',label:'任务矩阵与问题',range:[22,24]},
+  {id:'generality-framework',chapter:'generality',label:'变量实验与白皮书',range:[26,28]},
+  {id:'outputs-assets',chapter:'outputs',label:'研究资产',range:[30,30]},
+  {id:'outputs-appendix',chapter:'outputs',label:'指标理论依据',range:[31,31]}
 ];
 function chapterFor(index){return CHAPTERS.find(function(ch){return index+1>=ch.range[0]&&index+1<=ch.range[1];})||CHAPTERS[CHAPTERS.length-1];}
 function sectionFor(index){
@@ -3535,6 +3554,13 @@ function initArchMetricFocus(){
     step.addEventListener('mouseleave',function(){send(null);});
     step.addEventListener('focusin',function(){send(step.dataset.map);});
     step.addEventListener('focusout',function(){send(null);});
+  });
+  layout.querySelectorAll('.archmetric-metric-chip[data-map]').forEach(function(chip){
+    chip.addEventListener('mouseenter',function(){send(chip.dataset.map);});
+    chip.addEventListener('mouseleave',function(){send(null);});
+    chip.addEventListener('focusin',function(){send(chip.dataset.map);});
+    chip.addEventListener('focusout',function(){send(null);});
+    chip.addEventListener('click',function(){send(chip.dataset.map);});
   });
   if(frame) frame.addEventListener('load',function(){send(current);});
 }
