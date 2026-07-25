@@ -2877,7 +2877,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-glow chapter-cover" data-chapter="generality" style="--glow-h:150;--glow-h2:206;--glow-sat:82%;--glow-light:42%;--glow-spread:42;--glow-color-int:.7;--glow-white-int:.4">
     <div class="glow"></div><div class="glow-white"></div>
     <div class="chrome"><span>CHAPTER 05</span><span>GENERALITY</span></div>
-    <div class="inner"><div class="cover-block"><div class="ch-no">05</div><h1 class="ch-cover-title">通用性</h1><p class="ch-cover-sub">固定任务与量尺、逐次替换生态、知识来源或 AI，使这套研究方法可以扩展到更多协同场景。</p></div></div>
+    <div class="inner"><div class="cover-block"><div class="ch-no">05</div><h1 class="ch-cover-title">通用性</h1><p class="ch-cover-sub">固定任务与量尺、逐次替换生态、领域或 AI，使这套研究方法可以扩展到更多协同场景。</p></div></div>
   </section>
 
   <!-- 6 灰底：可迁移的研究框架 -->
@@ -2908,10 +2908,10 @@ body.overview #panel,body.overview #toggle{display:none!important}
         <section class="mf-variable">
           <div class="mf-k">VARIABLES · 替换</div><div class="mf-rule"><i data-lucide="git-compare-arrows"></i>一次只替换一组变量</div>
           <h2>把“谁被比较”从案例中抽离出来</h2>
-          <p class="mf-lead">本研究的昇腾 × NVIDIA 与开发任务只是一个实例；只要评分标准不变，任何生态、用户任务、知识组合和 AI 都能进入同一张对照矩阵。</p>
+          <p class="mf-lead">本研究的昇腾 × NVIDIA 与开发任务只是一个实例；只要评分标准不变，任何生态、应用领域和 AI 都能进入同一张对照矩阵。</p>
           <div class="mf-switches">
             <div class="mf-switch"><i data-lucide="boxes"></i><b>生态</b><span>CANN / CUDA，也可换 ROCm、TPU 或其他 SDK。</span></div>
-            <div class="mf-switch"><i data-lucide="library-big"></i><b>知识来源</b><span>官方文档、代码工程、社区内容、模型记忆及其组合。</span></div>
+            <div class="mf-switch"><i data-lucide="briefcase-business"></i><b>领域</b><span>开发者、自动驾驶、消费者手机／PC、设计工具等。</span></div>
             <div class="mf-switch"><i data-lucide="bot"></i><b>AI</b><span>模型、检索配置、Agent 策略或工具链均可作为变量。</span></div>
           </div>
         </section>
@@ -2923,7 +2923,7 @@ body.overview #panel,body.overview #toggle{display:none!important}
   <section class="slide s-gray method-experiment-slide">
     <div class="head">
       <div class="head-l">
-        <div class="brand"><span class="ttl">生态、知识来源与 AI 都可以成为变量，并用同一组指标量化比较</span></div>
+        <div class="brand"><span class="ttl">生态、领域与 AI 都可以成为变量，并用同一组指标量化比较</span></div>
         <div class="subttl">研究设计 · 每次只改变一个变量，矩阵结果才可以被清楚归因</div>
       </div>
       <div class="head-r">24/ 三种对照实验</div>
@@ -2933,11 +2933,11 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </style>
     <div class="body-area stage-center">
       <div class="experiment-grid">
-        <article class="experiment-card eco"><i data-lucide="boxes"></i><div class="ec-copy"><span class="ec-tag">EXPERIMENT 01</span><h2>换生态</h2><p class="ec-desc">比较不同技术栈的知识供给，回答“同一任务在哪个生态中更容易得到可靠答案”。</p><div class="ec-rows"><div class="ec-row"><b>固定</b><span>任务、AI、知识来源与指标</span></div><div class="ec-row"><b>替换</b><span>CANN / CUDA / ROCm / TPU …</span></div><div class="ec-row"><b>输出</b><span>生态间的内容可用性与开发体验差异</span></div></div></div></article>
-        <article class="experiment-card source"><i data-lucide="library-big"></i><div class="ec-copy"><span class="ec-tag">EXPERIMENT 02</span><h2>换知识来源</h2><p class="ec-desc">比较官方、代码工程、第三方社区与模型记忆各自对作答的贡献与失效边界。</p><div class="ec-rows"><div class="ec-row"><b>固定</b><span>生态、任务、AI 与指标</span></div><div class="ec-row"><b>替换</b><span>单一来源或不同来源组合</span></div><div class="ec-row"><b>输出</b><span>哪类知识在何处支撑、何处失效</span></div></div></div></article>
-        <article class="experiment-card ai"><i data-lucide="bot"></i><div class="ec-copy"><span class="ec-tag">EXPERIMENT 03</span><h2>换 AI</h2><p class="ec-desc">在相同生态和知识条件下，比较不同模型、检索方式或 Agent 策略的实际表现。</p><div class="ec-rows"><div class="ec-row"><b>固定</b><span>生态、任务、知识来源与指标</span></div><div class="ec-row"><b>替换</b><span>模型 / RAG / 工具调用 / Agent 策略</span></div><div class="ec-row"><b>输出</b><span>AI 能力与外部知识条件的交互影响</span></div></div></div></article>
+        <article class="experiment-card eco"><i data-lucide="boxes"></i><div class="ec-copy"><span class="ec-tag">EXPERIMENT 01</span><h2>换生态</h2><p class="ec-desc">比较不同技术栈的知识供给，回答“同一任务在哪个生态中更容易得到可靠答案”。</p><div class="ec-rows"><div class="ec-row"><b>固定</b><span>领域、任务、AI 与指标</span></div><div class="ec-row"><b>替换</b><span>CANN / CUDA / ROCm / TPU …</span></div><div class="ec-row"><b>输出</b><span>生态间的内容可用性与开发体验差异</span></div></div></div></article>
+        <article class="experiment-card source"><i data-lucide="briefcase-business"></i><div class="ec-copy"><span class="ec-tag">EXPERIMENT 02</span><h2>换领域</h2><p class="ec-desc">将同一套研究方法迁移到不同业务领域，比较 AI 在各领域中获取、判断与使用知识的差异。</p><div class="ec-rows"><div class="ec-row"><b>固定</b><span>生态、AI 与指标</span></div><div class="ec-row"><b>替换</b><span>开发者 / 自动驾驶 / 消费者手机／PC / 设计工具 …</span></div><div class="ec-row"><b>输出</b><span>不同领域的知识可用性与 AI 协同差异</span></div></div></div></article>
+        <article class="experiment-card ai"><i data-lucide="bot"></i><div class="ec-copy"><span class="ec-tag">EXPERIMENT 03</span><h2>换 AI</h2><p class="ec-desc">在相同生态、领域和知识条件下，比较不同模型、检索方式或 Agent 策略的实际表现。</p><div class="ec-rows"><div class="ec-row"><b>固定</b><span>生态、领域、任务与指标</span></div><div class="ec-row"><b>替换</b><span>模型 / RAG / 工具调用 / Agent 策略</span></div><div class="ec-row"><b>输出</b><span>AI 能力与外部知识条件的交互影响</span></div></div></div></article>
       </div>
-      <div class="experiment-rule"><i data-lucide="equal"></i><div><b>比较原则：任务与量尺保持不变，每轮只替换一个变量。</b><span>因此结果既可呈现在同一张矩阵里，也能追溯差异究竟来自生态、知识供给，还是 AI 本身。</span></div></div>
+      <div class="experiment-rule"><i data-lucide="equal"></i><div><b>比较原则：任务与量尺保持不变，每轮只替换一个变量。</b><span>知识来源作为每轮实验需记录的共同条件，结果则可追溯差异来自生态、领域，还是 AI 本身。</span></div></div>
     </div>
   </section>
 
