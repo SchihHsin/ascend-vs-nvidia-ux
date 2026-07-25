@@ -1079,13 +1079,14 @@ const D_FLOW={
   nEnd:{frm:"hu",to:"self"}
 };
 const IS_FULL_SEQ=/(?:[?&])full=1(?:&|$)/.test(location.search);
+const IS_COMPACT_SEQ=/(?:[?&])compact=1(?:&|$)/.test(location.search);
 const seqFont=(n,dense=false)=>+(n*(IS_FULL_SEQ?(dense?1.06:1.24):1)).toFixed(1);
 function renderV(){
   const phX=4, phW=70, owX=78, owW=44;
   const LX=IS_FULL_SEQ?{hu:250, ai:535, off:820, tool:1105, sec:1390}:{hu:205, ai:425, off:645, tool:865, sec:1085};
   const PCOL={off:"#C8102E", sec:"#BA7517", ai:"#6B5BA8", hu:"#2f3d63", tool:"#3f7d72"};
   const PNAME={off:"昇腾社区", sec:"第三方平台", ai:"AI（Agent）", hu:"开发者", tool:"本机工具"};
-  const vTop=IS_FULL_SEQ?98:92, dyV=IS_FULL_SEQ?44:42, Wv=IS_FULL_SEQ?1440:1130;
+  const vTop=IS_FULL_SEQ?(IS_COMPACT_SEQ?88:98):92, dyV=IS_FULL_SEQ?(IS_COMPACT_SEQ?40:44):42, Wv=IS_FULL_SEQ?1440:1130;
   const Y = xi => vTop + xi*dyV;
   const Hv = Y(NODES.length-1) + 70;
   const exec = ()=> curLvl>=1 ? "ai" : "hu";        // 执行方：Vibe 档起转 AI
