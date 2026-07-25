@@ -2028,7 +2028,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     {name:'AI ↔ 昇腾社区 · 矩阵评分', pairs:['ai-off','ai-sec']},
     {name:'开发者 ↔ 昇腾社区 · 基础体验', pairs:['hu-off']}
   ];
-  var step=0, hoverMsg=null, pinnedMsg=null;  // 0=全亮；hoverMsg=悬浮临时聚焦；pinnedMsg=点击钉住
+  var step=0, hoverMsg=null, pinnedMsg=null, initialFocus=null;  // 0=全亮；hoverMsg=悬浮临时聚焦；pinnedMsg=点击钉住
   var methodFocus=null, phaseFocus=null, triggerFocus=null;
   var TASK_MSG={D:'sD',M:'sM',X:'sX',O:'sO',L:'sL'};
   function curFocus(){return hoverMsg!=null?hoverMsg:pinnedMsg;}  // 有效聚焦：悬浮优先，否则用钉住的
@@ -2229,7 +2229,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     else if(m){
       go(+m[1]);
       /* 嵌入页可固定一条消息作为主讲线，其余同组消息仅作上下文。 */
-      if(focus){pinnedMsg=decodeURIComponent(focus[1]);applyHi();}
+      if(focus){initialFocus=decodeURIComponent(focus[1]);pinnedMsg=initialFocus;applyHi();}
     }
     try{if(window.parent&&window.parent!==window)window.parent.postMessage({__seqPhaseReady:true},'*');}catch(e){}
   }
@@ -2238,7 +2238,7 @@ html.fullseq #seqctrl .sqlbl{font-size:14px;border-radius:10px;padding:8px 14px}
     else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();go(step-1);}
   });
   if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
-  window.addEventListener('load',function(){var m=(location.search.match(/[?&]hi=(\d+)/));if(m)go(+m[1]);});
+  window.addEventListener('load',function(){var m=(location.search.match(/[?&]hi=(\d+)/));if(m){go(+m[1]);if(initialFocus){pinnedMsg=initialFocus;applyHi();}}});
 })();
 </script>
 <style>.embed-title{position:fixed;bottom:8px;left:13px;font-size:11px;font-weight:600;color:#b3b6bd;letter-spacing:.03em;z-index:40;pointer-events:none;font-family:'Noto Sans SC',sans-serif}.fullseq .embed-title{bottom:16px;left:22px;font-size:14px;color:#7f8794}</style>
