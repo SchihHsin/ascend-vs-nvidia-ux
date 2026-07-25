@@ -448,10 +448,10 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
       </div></div>
     </div>
     <div class="good">
-      <div class="duolab"><span class="duo-state after">After</span>docs.nvidia.com/llms.txt（已上线）</div>
-      <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">docs.nvidia.com/llms.txt</span></div>
+      <div class="duolab"><span class="duo-state after">After</span>hiascend.com/llms.txt（改造示意）</div>
+      <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">hiascend.com/llms.txt</span></div>
       <div class="bbody">
-        <div class="index-board"><aside class="index-side"><b>DOCS INDEX</b><span class="on">CUDA Toolkit</span><span>NeMo / NIM</span><span>Jetson</span></aside><div class="index-main"><div class="index-top"><b>CUDA Toolkit · 机器可读入口</b><span>llms-full.txt</span></div><div class="index-item"><i>↗</i><div><b>自定义算子开发</b><small>教程 · 当前版本 · Markdown</small></div><em>任务入口</em></div><div class="index-item"><i>⌘</i><div><b>Runtime API Reference</b><small>接口 · 参数 · 示例</small></div><em>API</em></div><div class="index-item"><i>✓</i><div><b>兼容与安装矩阵</b><small>版本 · 平台 · 驱动</small></div><em>版本</em></div><div class="index-read"><i>✓</i>一次读取 · 3 类任务证据</div></div></div>
+        <div class="index-board"><aside class="index-side"><b>ASCEND INDEX</b><span class="on">CANN 开发</span><span>算子与框架</span><span>芯片与工具</span></aside><div class="index-main"><div class="index-top"><b>昇腾社区 · 机器可读入口</b><span>llms-full.txt</span></div><div class="index-item"><i>↗</i><div><b>自定义算子开发</b><small>教程 · 当前 CANN · Markdown</small></div><em>任务入口</em></div><div class="index-item"><i>⌘</i><div><b>Ascend C / ACLNN API</b><small>接口 · 参数 · 示例</small></div><em>API</em></div><div class="index-item"><i>✓</i><div><b>芯片与版本配套</b><small>Atlas · CANN · 驱动</small></div><em>版本</em></div><div class="index-read"><i>✓</i>一次读取 · 昇腾任务所需证据</div></div></div>
       </div></div>
     </div>
   </div>
@@ -477,7 +477,7 @@ npu-smi info                        # ② 核对芯片型号与 soc_version</pre
           </div></div>
         </div>
         <div class="good">
-          <div class="duolab"><span class="duo-state after">After</span>无脚本抓取仍保留主路径</div>
+          <div class="duolab"><span class="duo-state after">After</span>改造后：Agent 可直接读到完整教程</div>
           <div class="bw"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">发布前机检输出</span></div>
           <div class="bbody">
             <div class="evidence-path"><div class="evidence-step"><i>1</i><b>版本</b><span>8.2.RC1</span></div><div class="evidence-step"><i>2</i><b>步骤</b><span>准备环境</span></div><div class="evidence-step"><i>3</i><b>命令</b><span>可复制</span></div><div class="evidence-step"><i>4</i><b>参数</b><span>真表格</span></div><div class="evidence-step"><i>5</i><b>验证</b><span>下一步</span></div></div>
@@ -1115,6 +1115,10 @@ body.embed.demo-only[data-demo-card="9"] .uxcard.ux-demo-only .demo>div[style*="
 body.embed.demo-only .uxcard.ux-demo-only .demo{transform:scale(var(--demo-scale))!important;transform-origin:top left!important;width:calc(100% / var(--demo-scale))!important}
 /* 供矩阵页按状态复用原始 Demo：只展示已经存在的现状或改造后部分。 */
 body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo .good{display:none!important}
+/* Before 中昇腾 Demo 的浏览器栏使用浅红底；结构与 NVIDIA 栏统一为圆点 + 白色地址栏。 */
+body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo .bw .bbar{background:#FFF4F5!important;border-bottom-color:#F1D4D7!important}
+body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo .bw .dots i{background:#E9B6BC!important}
+body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo .bw .url{border-color:#F0CDD1!important;color:#8A5A60!important}
 /* 父页已呈现 Before 标签与问题说明，嵌入 Demo 不再重复显示原卡标题。 */
 body.embed.demo-only.demo-state-before .uxcard.ux-demo-only .demo .bad>.duolab{display:none!important}
 body.embed.demo-only.demo-state-after .uxcard.ux-demo-only .demo .bad{display:none!important}
