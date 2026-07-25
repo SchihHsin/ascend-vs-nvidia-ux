@@ -1050,6 +1050,74 @@ body.overview #panel,body.overview #toggle{display:none!important}
     </div>
   </section>
 
+  <!-- 先把日常任务的最小协同链讲清楚，再进入算子开发的阶段拼图。 -->
+  <section class="slide s-gray ux-method-slide apple-seq-explain-slide apple-seq-roles-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">一条电脑比价线，串起用户目标、AI 查询与官网证据</span></div>
+        <div class="subttl">时序图读法 · 苹果官网比价的三个参与方</div>
+      </div>
+      <div class="head-r">时序图 · 日常任务拆解</div>
+    </div>
+    <style>
+      .apple-seq-explain-slide .body-area{grid-template-columns:minmax(0,1.22fr) minmax(320px,.78fr);gap:1.45vw}
+      .apple-seq-explain-slide .apple-seq-card{padding:2vh 1.35vw 1.45vh}
+      .apple-seq-explain-slide .simple-seq-viz{min-height:0;border-radius:11px;background:rgba(255,255,255,.52)}
+      .apple-seq-explain-slide .simple-seq-viz svg{height:100%}
+      .apple-seq-explain-slide .apple-seq-side{min-height:0;display:grid;grid-template-rows:auto 1fr;gap:1vh}
+      .apple-seq-explain-slide .apple-seq-lead{border-radius:14px;background:var(--g-ink);color:#fff;padding:1.18vh 1vw;font-size:var(--fs-body);line-height:1.48;box-shadow:0 16px 34px -24px rgba(20,23,28,.65),inset 0 1px 0 rgba(255,255,255,.18)}
+      .apple-seq-explain-slide .apple-seq-lead b{color:#fff;font-weight:950}
+      .apple-seq-explain-slide .apple-seq-result{border-radius:12px;background:linear-gradient(145deg,rgba(240,246,255,.9),rgba(255,255,255,.92));border:1px solid rgba(47,111,237,.16);padding:.82vh .78vw;margin-top:.28vh}
+      .apple-seq-explain-slide .apple-seq-result b{display:block;font-size:var(--fs-body);color:var(--ink);font-weight:950}
+      .apple-seq-explain-slide .apple-seq-result span{display:block;margin-top:.25vh;font-size:var(--fs-sm);line-height:1.36;color:var(--ink-2)}
+    </style>
+    <div class="body-area">
+      <div class="uxseq-card apple-seq-card">
+        <div class="uxseq-title"><div><b>同一条线只记录一次可观察的协同动作</b><span>不关心网页长什么样，而是看谁提出需求、AI 向哪里取证、官网返回了什么。</span></div><div class="uxseq-task">任务：比较三台 Mac</div></div>
+        <div class="simple-seq-viz" data-simple-seq="apple" aria-label="苹果官网电脑比价小时序图"></div>
+        <div class="uxseq-foot"><i>用户给出目标</i><i>AI 生成查询</i><i>官网返回证据</i><i>AI 组织推荐</i></div>
+      </div>
+      <aside class="apple-seq-side">
+        <div class="apple-seq-lead"><b>这条线的价值：</b>把“AI 帮我查一下”拆成可追溯的请求、取证与作答过程。后续换成开发任务时，仍沿用这套读法。</div>
+        <div class="uxread-main">
+          <div class="uxread-h">三个参与方各自做什么</div>
+          <div class="uxread-row"><div class="uxread-no">01</div><div class="uxread-t"><b>用户定义比较目标</b><span>明确预算、使用需求和候选机型，决定 AI 需要获取哪些信息。</span></div></div>
+          <div class="uxread-row"><div class="uxread-no">02</div><div class="uxread-t"><b>AI 把目标变成官网查询</b><span>读取机型、配置、价格和供货状态，并判断是否已满足比较条件。</span></div></div>
+          <div class="uxread-row"><div class="uxread-no">03</div><div class="uxread-t"><b>苹果官网提供可核对的依据</b><span>官网信息不是答案本身，而是 AI 给出推荐时可回溯的证据。</span></div></div>
+          <div class="apple-seq-result"><b>结果：一份可解释的推荐</b><span>用户能继续追问“为什么选它”，并回到官网核对价格和配置。</span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="slide s-gray ux-method-slide apple-seq-explain-slide apple-seq-reading-slide">
+    <div class="head">
+      <div class="head-l">
+        <div class="brand"><span class="ttl">沿着箭头读电脑比价，就能看清一次协同如何完成</span></div>
+        <div class="subttl">时序图读法 · 从请求、查询到官网返回与最终推荐</div>
+      </div>
+      <div class="head-r">时序图 · 日常任务读图</div>
+    </div>
+    <div class="body-area">
+      <div class="uxseq-card apple-seq-card">
+        <div class="uxseq-title"><div><b>用苹果官网比价建立四个读图规则</b><span>角色、节点、箭头和返回信息组合起来，才能完整解释一次协同过程。</span></div><div class="uxseq-task">苹果官网比价</div></div>
+        <div class="simple-seq-viz" data-simple-seq="apple" aria-label="苹果官网电脑比价小时序图"></div>
+        <div class="uxseq-foot"><i>竖线：参与方</i><i>圆点：动作节点</i><i>实线：发起请求</i><i>虚线：返回信息</i></div>
+      </div>
+      <aside class="uxread">
+        <div class="uxwhy"><b>图不只是流程图，而是一份可检查的协同记录</b><span>每一步都可以回到来源、确认信息是否完整，并判断最终推荐是否有足够依据。</span></div>
+        <div class="uxread-main">
+          <div class="uxread-h">读图时依次看四件事</div>
+          <div class="uxread-row"><div class="uxread-no">01</div><div class="uxread-t"><b>先看竖线：谁参与</b><span>用户、AI 与苹果官网分别代表需求、处理与可信信息来源。</span></div></div>
+          <div class="uxread-row"><div class="uxread-no">02</div><div class="uxread-t"><b>再看实线：AI 向谁发起什么请求</b><span>例如查询机型、配置与价格，说明 AI 正在补哪一类决策信息。</span></div></div>
+          <div class="uxread-row"><div class="uxread-no">03</div><div class="uxread-t"><b>看返回线：取回了什么证据</b><span>官网返回的机型和价格信息决定推荐能否被用户复核。</span></div></div>
+          <div class="uxread-row"><div class="uxread-no">04</div><div class="uxread-t"><b>最后看 AI 回到用户的作答</b><span>将证据整理为建议，而不是把未经说明的结论直接交给用户。</span></div></div>
+        </div>
+        <div class="uxread-next"><b>下一步：</b>把同样的结构迁移到算子开发，观察信息源变成昇腾社区后，证据能否仍支撑 AI 作答。</div>
+      </aside>
+    </div>
+  </section>
+
   <section class="slide s-gray ux-method-slide seqfocus-slide seqdemo-slide">
     <div class="head">
       <div class="head-l">
@@ -3072,16 +3140,25 @@ const deck=document.getElementById('deck');
   });
   target.appendChild(clone);
 })();
-/* 把已有的细讲页后移：先由 P2 局部过渡到七阶段拼图，再展开为整张全量图。 */
+/* 先讲清苹果官网比价，再让算子开发的小时序图接到阶段拼图；算子细讲紧随其后。 */
 (function orderSequenceWalkthrough(){
   const operator=document.querySelector('.operator-seq-slide');
   const build=document.querySelector('.seqbuild-slide');
   const scope=document.querySelector('.seqscope-slide');
   const focus=document.querySelector('.seqfocus-slide');
-  if(!operator||!build||!scope||!focus)return;
-  operator.insertAdjacentElement('afterend',build);
-  build.insertAdjacentElement('afterend',scope);
-  scope.insertAdjacentElement('afterend',focus);
+  const apple=[...document.querySelectorAll('.apple-seq-explain-slide')];
+  const operatorRead=[...document.querySelectorAll('.ux-method-slide')].find(function(slide){
+    var ttl=slide.querySelector('.ttl');
+    return ttl&&ttl.textContent.indexOf('每次知识往返都能识别')>=0;
+  });
+  if(!operator||!build||!scope||!focus||apple.length!==2||!operatorRead)return;
+  /* 日常示例先拆解两页；随后才进入算子阶段、算子细讲与全量时序图。 */
+  operator.insertAdjacentElement('afterend',apple[0]);
+  apple[0].insertAdjacentElement('afterend',apple[1]);
+  apple[1].insertAdjacentElement('afterend',build);
+  build.insertAdjacentElement('afterend',focus);
+  focus.insertAdjacentElement('afterend',operatorRead);
+  operatorRead.insertAdjacentElement('afterend',scope);
 })();
 const slides=[...document.querySelectorAll('.slide')];
 const CHAPTERS=[
