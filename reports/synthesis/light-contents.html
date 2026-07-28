@@ -1,47 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>目录 · AI 可用性研究汇报</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200&family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/IKKI2000/harmonyos-fonts@master/css/harmonyos_sans_sc.css">
-  <style>
-    :root{--bg:#e9ebee;--ink:#16191e;--ink-2:#5e646e;--line:rgba(47,61,99,.12)}
-    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font-family:'HarmonyOS Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
-    main{position:relative;isolation:isolate;min-height:100%;padding:clamp(36px,6vh,76px) clamp(34px,6vw,94px);display:flex;flex-direction:column;overflow:hidden}
-    main:before,main:after{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%}main:before{width:58vw;height:30vw;left:-14vw;bottom:-20vw;background:radial-gradient(ellipse at center,rgba(99,126,188,.12),transparent 68%)}main:after{width:48vw;height:28vw;right:-17vw;top:-13vw;background:radial-gradient(ellipse at center,rgba(124,92,240,.1),transparent 70%)}
-    header{display:flex;align-items:flex-start;justify-content:space-between;gap:32px}.kicker{font-family:'JetBrains Mono','SFMono-Regular',monospace;font-size:12px;font-weight:800;letter-spacing:.14em;color:#6f7785}.title{margin:12px 0 0;font-size:clamp(38px,4.2vw,66px);letter-spacing:-.045em;line-height:1;font-weight:950}.intro{max-width:510px;margin:15px 0 0;font-size:clamp(15px,1.22vw,19px);line-height:1.55;color:var(--ink-2)}.index{padding-top:4px;font-family:'JetBrains Mono','SFMono-Regular',monospace;font-size:13px;letter-spacing:.1em;color:#7b8494;white-space:nowrap}
-    .directory{width:min(1220px,100%);margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.45vw,24px)}
-    .card{--c:#5b5bd6;position:relative;min-width:0;min-height:clamp(190px,26vh,272px);padding:clamp(20px,2.15vh,30px) clamp(19px,1.75vw,28px);display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,.9);border-radius:20px;background:rgba(255,255,255,.57);box-shadow:0 18px 38px -28px rgba(35,48,78,.35),inset 0 1px 0 rgba(255,255,255,.94);backdrop-filter:blur(14px) saturate(1.1)}
-    .card:after{content:"";position:absolute;right:-20%;bottom:-32%;width:68%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--c) 18%,transparent),transparent 68%);pointer-events:none}.card>*{position:relative;z-index:1}.card:nth-child(1){--c:#5b5bd6}.card:nth-child(2){--c:#2f6fed}.card:nth-child(3){--c:#0f9f9b}.card:nth-child(4){--c:#b455a0}.card:nth-child(5){--c:#d17724}.card:nth-child(6){--c:#637187}
-    .no{font-family:'Inter','Helvetica Neue',sans-serif;font-size:clamp(38px,4vw,62px);line-height:.84;font-weight:300;letter-spacing:-.055em;color:var(--c)}.name{margin:18px 0 0;font-size:clamp(21px,1.9vw,29px);line-height:1.1;font-weight:950}.en{margin-top:6px;font-family:'JetBrains Mono','SFMono-Regular',monospace;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:color-mix(in srgb,var(--c) 74%,#687486)}
-    .items{display:grid;gap:7px;margin-top:auto;padding-top:25px}.items span{font-size:clamp(14px,1.08vw,17px);line-height:1.35;color:#505967}.items span:before{content:"";display:inline-block;width:6px;height:6px;margin:-2px 9px 0 0;vertical-align:middle;border-radius:99px;background:var(--c);box-shadow:0 0 10px color-mix(in srgb,var(--c) 40%,transparent)}.note{margin-top:18px;padding-top:12px;border-top:1px solid var(--line);font-size:clamp(12px,.93vw,14px);font-weight:900;line-height:1.35;color:color-mix(in srgb,var(--c) 70%,#465364)}
-    footer{display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:12px;color:#7a8495}footer b{color:#4a5362;font-weight:900}.line{height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(47,61,99,.18),transparent)}
-    @media(max-width:760px){body{overflow:auto}main{min-height:100%;padding:34px 24px}header{display:block}.index{margin-top:18px}.directory{grid-template-columns:1fr;margin:32px auto}.card{min-height:190px}.title{font-size:39px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>目录 · AI 可用性研究汇报</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200&family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/IKKI2000/harmonyos-fonts@master/css/harmonyos_sans_sc.css">
+<style>
+:root{--fs-h1:clamp(20px,1.7vw,30px);--fs-h2:clamp(15px,1.15vw,21px);--fs-h3:clamp(14px,1.05vw,17px);--fs-body:clamp(13.5px,1vw,16px);--fs-sm:clamp(10.5px,.72vw,13px);--fs-xs:clamp(9px,.62vw,11px);--paper:#E9EBEE;--ink:#16191e;--ink-2:#5e646e;--ink-3:#929aa6;--line:#d4d8df}
+*{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;height:100%;background:var(--paper);color:var(--ink);font-family:'HarmonyOS Sans SC','Inter','Noto Sans SC',sans-serif;-webkit-font-smoothing:antialiased}
+.s-gray{position:relative;isolation:isolate;min-height:100vh;padding:5vh 4vw;display:flex;flex-direction:column;overflow:hidden;background:var(--paper);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 480' preserveAspectRatio='none'%3E%3Cpath d='M0 320 C 380 250 760 330 1080 195 C 1280 140 1380 185 1440 130 L1440 480 L0 480 Z' fill='%237e8696' fill-opacity='0.07'/%3E%3Cpath d='M0 372 C 430 305 820 405 1180 245 C 1340 198 1402 240 1440 190 L1440 480 L0 480 Z' fill='%23949bab' fill-opacity='0.08'/%3E%3C/svg%3E"),linear-gradient(125deg,rgba(120,128,145,.05),transparent 50%);background-position:bottom center,0 0;background-size:100% 50%,100% 100%;background-repeat:no-repeat,no-repeat}
+.head{display:flex;align-items:flex-start;justify-content:space-between;flex:0 0 auto;margin-bottom:3.4vh}.head-l{display:flex;flex:1 1 auto;min-width:0;flex-direction:column-reverse;gap:.8vh}.brand .ttl{font-weight:800;font-size:var(--fs-h1);letter-spacing:-.01em}.subttl{font-weight:300;font-size:var(--fs-sm);color:var(--ink-2)}.head-r{font-family:'JetBrains Mono';font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.8}
+.body-area{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}.contents-slide .body-area{min-height:0;display:flex;flex-direction:column;justify-content:center}.contents-directory{width:min(1120px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1vw;align-items:stretch}
+/* 直接复用原目录页的尺寸、排版与字体；仅将深色卡片调整为浅色卡片。 */
+.directory-card{--dir:#5B5BD6;position:relative;min-width:0;min-height:22vh;overflow:hidden;padding:1.8vh 1.25vw 1.35vh;display:flex;flex-direction:column;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.88);border-radius:14px;box-shadow:0 18px 42px -25px rgba(20,25,35,.22),inset 0 1px 0 rgba(255,255,255,.94)}
+.directory-card:after{content:"";position:absolute;right:-25%;bottom:-24%;width:90%;height:46%;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--dir) 16%,transparent),transparent 70%);pointer-events:none}.directory-card.overview{--dir:#5B5BD6}.directory-card.measure{--dir:#2F6FED}.directory-card.task{--dir:#0F9F9B}.directory-card.result{--dir:#B455A0}.directory-card.general{--dir:#D17724}.directory-card.sum{--dir:#637187}
+.directory-no,.directory-name,.directory-en,.directory-items,.directory-note{position:relative;z-index:1}.directory-no{font-family:'Barlow Condensed','Inter',sans-serif;font-size:clamp(54px,5.4vw,86px);line-height:.82;letter-spacing:-.035em;font-weight:700;color:var(--dir);text-shadow:0 0 28px color-mix(in srgb,var(--dir) 24%,transparent)}.directory-name{margin-top:1.35vh;font-size:var(--fs-h2);line-height:1.2;font-weight:950;color:var(--ink)}.directory-en{margin-top:.42vh;font-family:'Inter',sans-serif;font-size:var(--fs-sm);font-weight:700;color:color-mix(in srgb,var(--dir) 76%,#596575)}.directory-items{display:grid;gap:.52vh;margin-top:2.65vh}.directory-items span{font-size:var(--fs-body);line-height:1.36;color:var(--ink-2)}.directory-items span:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;vertical-align:middle;margin:-2px .48em 0 0;background:var(--dir);box-shadow:0 0 12px color-mix(in srgb,var(--dir) 42%,transparent)}.directory-note{margin-top:auto;padding-top:1.25vh;border-top:1px solid rgba(47,61,99,.14);font-size:var(--fs-sm);font-weight:900;line-height:1.35;color:color-mix(in srgb,var(--dir) 72%,#465364)}
+@media(max-width:760px){.s-gray{min-height:100%;padding:34px 24px}.contents-directory{grid-template-columns:1fr;gap:14px}.directory-card{min-height:190px}.head{margin-bottom:24px}}
+</style>
 </head>
 <body>
-  <main>
-    <header>
-      <div>
-        <div class="kicker">AI USABILITY RESEARCH · CONTENTS</div>
-        <h1 class="title">目录</h1>
-        <p class="intro">围绕同一开发任务，依次说明 AI 可用性的测量、实测与可复用产出。</p>
-      </div>
-      <div class="index">01 / CONTENTS</div>
-    </header>
-
-    <section class="directory" aria-label="汇报目录">
-      <article class="card"><div class="no">01</div><h2 class="name">研究概览</h2><div class="en">Research Overview</div><div class="items"><span>AI 进入开发任务</span><span>输出为何仍需验证</span></div><div class="note">明确 AI 可用性研究问题</div></article>
-      <article class="card"><div class="no">02</div><h2 class="name">测量方法</h2><div class="en">Measurement</div><div class="items"><span>指标定义</span><span>评分计算</span></div><div class="note">以统一量尺记录证据</div></article>
-      <article class="card"><div class="no">03</div><h2 class="name">任务定义</h2><div class="en">Task Definition</div><div class="items"><span>共同任务</span><span>CANN / CUDA 问法</span></div><div class="note">确保双栈对照可比</div></article>
-      <article class="card"><div class="no">04</div><h2 class="name">实测结果</h2><div class="en">Field Results</div><div class="items"><span>任务矩阵</span><span>问题定位</span></div><div class="note">识别知识供给短板</div></article>
-      <article class="card"><div class="no">05</div><h2 class="name">通用性</h2><div class="en">Generality</div><div class="items"><span>变量实验</span><span>白皮书产出</span></div><div class="note">扩展为长期研究资产</div></article>
-      <article class="card"><div class="no">06</div><h2 class="name">研究产出与附录</h2><div class="en">Outputs &amp; Appendix</div><div class="items"><span>报告与评分资产</span><span>指标理论依据</span></div><div class="note">沉淀可复用方法与工具</div></article>
-    </section>
-
-    <footer><span><b>AI 可用性研究汇报</b> · 2026</span><span class="line"></span><span>Ascend Community</span></footer>
-  </main>
+  <section class="s-gray contents-slide">
+    <div class="head"><div class="head-l"><div class="brand"><span class="ttl">目录</span></div><div class="subttl">CONTENTS · 围绕同一开发任务，依次说明 AI 可用性的测量、实测与可复用产出</div></div><div class="head-r">01/ 目录</div></div>
+    <div class="body-area"><div class="contents-directory">
+      <article class="directory-card overview"><div class="directory-no">01</div><h2 class="directory-name">研究概览</h2><div class="directory-en">Research Overview</div><div class="directory-items"><span>AI 进入开发任务</span><span>输出为何仍需验证</span></div><div class="directory-note">明确 AI 可用性研究问题</div></article>
+      <article class="directory-card measure"><div class="directory-no">02</div><h2 class="directory-name">测量方法</h2><div class="directory-en">Measurement</div><div class="directory-items"><span>指标定义</span><span>评分计算</span></div><div class="directory-note">以统一量尺记录证据</div></article>
+      <article class="directory-card task"><div class="directory-no">03</div><h2 class="directory-name">任务定义</h2><div class="directory-en">Task Definition</div><div class="directory-items"><span>共同任务</span><span>CANN / CUDA 问法</span></div><div class="directory-note">确保双栈对照可比</div></article>
+      <article class="directory-card result"><div class="directory-no">04</div><h2 class="directory-name">实测结果</h2><div class="directory-en">Field Results</div><div class="directory-items"><span>任务矩阵</span><span>问题定位</span></div><div class="directory-note">识别知识供给短板</div></article>
+      <article class="directory-card general"><div class="directory-no">05</div><h2 class="directory-name">通用性</h2><div class="directory-en">Generality</div><div class="directory-items"><span>变量实验</span><span>白皮书产出</span></div><div class="directory-note">扩展为长期研究资产</div></article>
+      <article class="directory-card sum"><div class="directory-no">06</div><h2 class="directory-name">研究产出与附录</h2><div class="directory-en">Outputs &amp; Appendix</div><div class="directory-items"><span>报告与评分资产</span><span>指标理论依据</span></div><div class="directory-note">沉淀可复用方法与工具</div></article>
+    </div></div>
+  </section>
 </body>
 </html>
