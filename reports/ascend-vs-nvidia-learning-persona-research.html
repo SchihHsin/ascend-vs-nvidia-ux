@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>昇腾学习页 vs NVIDIA Training - Persona 与体验路径对比</title>
+  <style>
+:root{
+      --blue:#2f6fed;--blue-d:#1b4fc2;--blue-s:#eaf1fe;
+      --purple:#7c5cf0;--purple-s:#efeafe;--cyan:#1f9fb8;--cyan-s:#e2f4f7;--cyan-d:#136173;
+      --green:#10a36f;--green-s:#e5f7ef;--gold:#d79a25;--gold-s:#fbf1da;
+      --coral:#e8833a;--coral-s:#fdeee2;--red:#b93845;--red-s:#fff0f0;--slate:#5b6b82;--slate-s:#eef1f5;
+      --ink:#171b24;--ink2:#5f6673;--g1:#f7f8fb;--g2:#f0f2f6;
+      --g3:#e1e4ea;--g4:#cdd2dc;--g6:#7a8290;--card:rgba(255,255,255,.92);
+      --shadow:0 14px 34px -24px rgba(18,28,45,.4);--radius:14px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(180deg,#f5f7fa 0%,#eef1f5 100%);color:var(--ink);font:14px/22px Arial,"Microsoft YaHei",sans-serif}
+    button{font:inherit}
+    a{color:inherit}
+    .topnav{position:fixed;top:0;left:0;right:0;height:60px;z-index:40;display:flex;align-items:center;gap:14px;padding:0 26px;background:rgba(255,255,255,.86);backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--g3)}
+    .brand{font-weight:800;font-size:16px;white-space:nowrap;margin-right:8px}.brand b{color:var(--blue)}.brand small{font-size:10px;color:var(--g6);font-weight:700;margin-left:7px;letter-spacing:.05em}
+    .nav-links{display:flex;gap:6px}
+    .nav-links button{border:none;background:none;color:var(--ink2);padding:8px 16px;border-radius:9px;cursor:pointer;font-size:14px;line-height:22px;font-weight:700;transition:.15s}
+    .nav-links button:hover{background:var(--g2);color:var(--ink)}
+    .nav-links button.on{background:var(--blue-s);color:var(--blue-d)}
+    .top-meta{margin-left:auto;color:var(--g6);font-size:11px;white-space:nowrap}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+    .wide{max-width:1280px}
+    .view[hidden]{display:none}
+    section.view{padding:92px 0 60px}
+    .hero{margin-bottom:26px}
+    .eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:800}
+    .hero h1{font-size:24px;line-height:24px;margin:10px 0 12px;letter-spacing:-.4px}
+    .hero p{max-width:840px;color:var(--ink2);font-size:15px;margin:0}
+    .sec-h2{margin:26px 0 12px;font-size:24px;font-weight:800;color:var(--ink);letter-spacing:.02em;height:36px;line-height:36px}
+    .persona-block{margin-bottom:8px}
+    .persona-quadrant-intro{margin-top:8px;margin-bottom:16px}
+    .persona-quadrant-intro h3{font-size:16px;line-height:24px;margin:10px 0 12px;letter-spacing:-.4px}
+    .persona-quadrant-intro p{font-size:14px}
+    .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:0 0 26px}
+    .stat{padding:15px 15px;border:1px solid var(--g3);border-radius:12px;background:var(--card);box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--acc)}
+    .stat .num{font-size:16px;font-weight:800;line-height:1.2}
+    .stat .label{margin-top:4px;color:var(--ink2);font-size:11.5px}
+    .stat.p1{--acc:var(--blue)}.stat.p1 .num{color:var(--blue)}
+    .stat.p2{--acc:var(--cyan)}.stat.p2 .num{color:var(--cyan-d)}
+    .stat.p3{--acc:var(--purple)}.stat.p3 .num{color:var(--purple)}
+    .stat.p4{--acc:var(--green)}.stat.p4 .num{color:var(--green)}
+    .stat.p5{--acc:var(--coral)}.stat.p5 .num{color:#a85713}
+    .panel{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin-bottom:16px}
+    .panel h3{margin:0 0 12px;font-size:17px}
+    .panel p{margin:0 0 10px;color:var(--ink2);font-size:13.5px}
+    .axis-fold{margin:8px 0 16px}
+    .axis-fold > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;user-select:none;padding:4px 0}
+    .axis-fold > summary::-webkit-details-marker{display:none}
+    .axis-fold > summary h3{margin:0;font-size:16px;font-weight:800;color:var(--ink);line-height:24px}
+    .axis-fold > summary .arrow{display:inline-block;width:8px;height:8px;border-right:2px solid var(--ink2);border-bottom:2px solid var(--ink2);transform:rotate(-45deg);transition:transform .15s;margin-top:-2px}
+    .axis-fold[open] > summary .arrow{transform:rotate(45deg);margin-top:-4px}
+    .axis-fold .panel{margin-top:12px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .mini h4{margin:0 0 7px;font-size:14px;line-height:22px;display:flex;align-items:center;gap:8px}
+    .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+    .mini ul{margin:0;padding-left:17px;color:var(--ink2);font-size:12.5px}.mini li{margin:3px 0}
+    .rank{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px}
+    .rank .chip{padding:7px 13px;border-radius:999px;font-weight:800;font-size:12.5px;border:1px solid var(--g3);background:#fff}
+    .rank .gt{color:var(--g6);font-weight:800}
+    .chip.c1{border-color:var(--blue);color:var(--blue-d);background:var(--blue-s)}
+    .chip.c2{border-color:var(--cyan);color:var(--cyan-d);background:var(--cyan-s)}
+    .chip.c3{border-color:var(--purple);color:var(--purple);background:var(--purple-s)}
+    .chip.c5{border-color:var(--coral);color:#a85713;background:var(--coral-s)}
+    .chip.c4{border-color:var(--green);color:#0b7a52;background:var(--green-s)}
+    .note{border-left:3px solid var(--gold);padding:12px 16px;background:linear-gradient(100deg,#fdf6e6,rgba(255,255,255,.5));color:#79590e;font-size:12.5px;border-radius:0 8px 8px 0}
+    .note b{color:#5c4409}
+    .note.blue{border-color:var(--blue);background:linear-gradient(100deg,#eef4ff,rgba(255,255,255,.5));color:#274a86}.note.blue b{color:#1b3a6e}
+    .prob-list{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+    .prob-item{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start;padding:12px 14px;border:1px solid var(--g3);border-radius:11px;background:#fff}
+    .prob-item .sev{font-size:10px;font-weight:800;letter-spacing:.04em;padding:4px 8px;border-radius:7px;text-align:center;white-space:nowrap}
+    .prob-item.s0 .sev{background:var(--red-s);color:var(--red)}
+    .prob-item.s1 .sev{background:#fff7e9;color:#a06a0a}
+    .prob-item.s2 .sev{background:var(--slate-s);color:var(--slate)}
+    .prob-item .pt{font-size:13.5px;font-weight:800;color:var(--ink);line-height:1.35;margin:0 0 4px}
+    .prob-item .pd{font-size:12.5px;color:var(--ink2);line-height:1.5;margin:0}
+    .prob-item .pa{margin-top:6px;display:flex;flex-wrap:wrap;gap:5px}
+    .prob-item .pa span{font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--g2);color:var(--g6)}
+    .strategy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
+    .strategy{padding:14px 15px;border:1px solid var(--g3);border-radius:11px;background:#fff;border-top:3px solid var(--blue)}
+    .strategy .sn{font:800 10px/1 monospace;color:var(--blue);letter-spacing:.08em;margin-bottom:6px}
+    .strategy strong{display:block;font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:5px;line-height:1.35}
+    .strategy p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.5}
+    @media(max-width:700px){.strategy-grid{grid-template-columns:1fr}.prob-item{grid-template-columns:1fr}}
+    /* persona tabs + detail */
+    .ptabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}
+    .ptab{--acc:var(--blue);text-align:left;background:var(--card);border:1px solid var(--g3);border-top:3px solid var(--acc);border-radius:12px;padding:13px 13px 14px;cursor:pointer;box-shadow:var(--shadow);transition:.15s;display:flex;flex-direction:column;gap:7px}
+    .ptab.p1{--acc:var(--blue)}.ptab.p2{--acc:var(--cyan)}.ptab.p3{--acc:var(--purple)}.ptab.p4{--acc:var(--green)}.ptab.p5{--acc:var(--coral)}
+    .ptab:hover{transform:translateY(-2px)}
+    .ptab .pno{align-self:flex-start;font-family:monospace;font-weight:800;font-size:11.5px;color:#fff;background:var(--acc);padding:3px 8px;border-radius:7px}
+    .ptab .ptab-role{font-size:15px;font-weight:800;color:var(--ink);line-height:1.25}
+    .ptab .ptab-goal{font-size:11px;color:var(--ink2);line-height:1.5}
+    .ptab.on{background:var(--acc);border-color:var(--acc)}
+    .ptab.on .pno{background:rgba(255,255,255,.24)}
+    .ptab.on .ptab-role{color:#fff}
+    .ptab.on .ptab-goal{color:rgba(255,255,255,.92)}
+    .pdetail .pd-pane{--acc:var(--blue);display:flex;flex-direction:column;gap:16px}
+    .pdetail .pd-pane[hidden]{display:none}
+    .pd-pane.p1{--acc:var(--blue)}.pd-pane.p2{--acc:var(--cyan)}.pd-pane.p3{--acc:var(--purple)}.pd-pane.p4{--acc:var(--green)}.pd-pane.p5{--acc:var(--coral)}
+    .pd-card{background:var(--card);border:1px solid var(--g3);border-top:4px solid var(--acc);border-radius:15px;box-shadow:var(--shadow);padding:22px 24px 23px}
+    .pd-hd{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+    .pno{font-family:monospace;font-weight:800;font-size:13px;color:#fff;background:var(--acc);padding:4px 9px;border-radius:8px}
+    .pd-hd .role{font-size:20px;font-weight:800;margin:0}
+    .pd-hd .en{font-size:10.5px;color:var(--g6);font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin:2px 0 0}
+    .goal{margin:12px 0 0;padding:10px 13px;background:rgba(0,0,0,.03);border-radius:9px;font-size:13px;color:var(--ink);font-weight:600}
+    .goal .k{font-size:10px;font-weight:800;color:var(--acc);letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:2px}
+    .field{margin-top:13px}
+    .field.jhead{margin-top:20px;padding-top:16px;border-top:1px dashed var(--g3)}
+    .field .k{font-size:10.5px;font-weight:800;color:var(--acc);letter-spacing:.06em;text-transform:uppercase}
+    .field .v{margin-top:4px;font-size:12.5px;color:var(--ink2);line-height:1.55}
+    .flow{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+    .flow span{font-size:11px;background:#fff;border:1px solid var(--g3);border-radius:6px;padding:3px 8px;color:var(--ink2)}
+    .flow i{color:var(--g4);font-style:normal;align-self:center}
+    .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .tagpill{font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:999px;border:1px solid var(--g3);background:#fff;color:var(--ink2)}
+    .tagpill.evi{background:var(--green-s);border-color:#bfe6d3;color:#0b7a52}
+    .tagpill.inf{background:var(--gold-s);border-color:#e8d296;color:#8a6410}
+    .tagpill.merge{background:var(--slate-s);border-color:#d5dce6;color:var(--slate)}
+    .dim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:8px}
+    .dim{background:#fff;border:1px solid var(--g3);border-radius:10px;padding:11px 12px 12px;min-width:0}
+    .dim .dn{font-size:10px;font-weight:800;color:var(--acc);letter-spacing:.04em;margin-bottom:4px}
+    .dim .dt{font-size:13px;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:5px}
+    .dim .dd{font-size:11.5px;color:var(--ink2);line-height:1.5}
+    .dim .dq{margin-top:6px;font-size:11px;color:#8a919c;line-height:1.45;font-style:italic}
+    @media (max-width:980px){.dim-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:560px){.dim-grid{grid-template-columns:1fr}}
+    .secondary{grid-column:1/-1;border:1px dashed var(--g4);border-radius:13px;padding:16px 19px;background:rgba(255,255,255,.5)}
+    .secondary h4{margin:0 0 6px;font-size:14px;line-height:22px;color:var(--ink)}
+    .secondary p{margin:0;color:var(--ink2);font-size:12.5px}
+    /* quadrant plot */
+    .plotwrap{background:var(--card);border:1px solid var(--g3);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 28px 20px;margin-bottom:16px}
+    .plot{position:relative;height:380px;margin:26px 34px 40px 46px}
+    .plot .area{position:absolute;inset:0;border-left:2px solid var(--g4);border-bottom:2px solid var(--g4)}
+    .plot .q{position:absolute;width:50%;height:50%;display:flex;align-items:flex-start;justify-content:flex-start;padding:12px 14px}
+    .plot .q span{font-size:11px;font-weight:800;color:var(--g4);letter-spacing:.04em}
+    .plot .q.tl{left:0;top:0}.plot .q.tr{right:0;top:0;background:linear-gradient(135deg,rgba(233,131,58,.09),transparent 70%);justify-content:flex-end}.plot .q.tr span{color:var(--coral);text-align:right}
+    .plot .q.bl{left:0;bottom:0}.plot .q.br{right:0;bottom:0}
+    .plot .vline{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed var(--g4)}
+    .plot .hline{position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--g4)}
+    .plot .yaxis{position:absolute;left:-40px;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:left;font-size:12px;font-weight:800;color:var(--ink2);white-space:nowrap}
+    .plot .xaxis{position:absolute;left:50%;bottom:-32px;transform:translateX(-50%);font-size:12px;font-weight:800;color:var(--ink2);white-space:nowrap}
+    .dotp{position:absolute;transform:translate(-50%,50%);z-index:3;cursor:default}
+    .dotp .bubble{min-width:64px;display:flex;flex-direction:column;align-items:center;gap:3px}
+    .dotp .circle{width:20px;height:20px;border-radius:50%;border:3px solid #fff;box-shadow:0 3px 10px -2px rgba(0,0,0,.35)}
+    .dotp .plabel{font-size:11px;font-weight:800;white-space:nowrap;background:rgba(255,255,255,.9);padding:1px 6px;border-radius:5px}
+    .dotp.d1 .circle{background:var(--blue)}.dotp.d1 .plabel{color:var(--blue-d)}
+    .dotp.d2 .circle{background:var(--cyan)}.dotp.d2 .plabel{color:var(--cyan-d)}
+    .dotp.d3 .circle{background:var(--purple)}.dotp.d3 .plabel{color:var(--purple)}
+    .dotp.d4 .circle{background:var(--green)}.dotp.d4 .plabel{color:#0b7a52}
+    .dotp.d5 .circle{background:var(--coral)}.dotp.d5 .plabel{color:#a85713}
+    .dotp .tip{position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#141a26;color:#fff;font-size:11px;font-weight:600;line-height:1.5;padding:9px 11px;border-radius:8px;width:205px;opacity:0;visibility:hidden;transition:.15s;box-shadow:0 10px 26px -10px rgba(0,0,0,.5);z-index:5}
+    .dotp .tip b{color:#aabfff}
+    .dotp:hover .tip{opacity:1;visibility:visible}
+    .audit{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+    .audit th,.audit td{border:1px solid var(--g3);padding:9px 11px;text-align:left;vertical-align:top}
+    .audit th{background:#f3f5f8;color:var(--ink2);font-size:11px;font-weight:800}
+    .audit td.role{font-weight:800}
+    .audit .g-hi{color:var(--red);font-weight:800}.audit .g-mid{color:#a06a0a;font-weight:800}.audit .g-lo{color:var(--green);font-weight:800}
+    .cov{font-family:ui-monospace,Consolas,monospace;font-size:11px}
+    .yes{color:var(--green);font-weight:800}.par{color:#a06a0a;font-weight:800}.no{color:var(--red);font-weight:800}
+    .wtag{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;background:var(--g2);color:var(--ink2)}
+    .wtag.h{background:var(--red-s);color:var(--red)}.wtag.m{background:#fff7e9;color:#a06a0a}.wtag.l{background:var(--green-s);color:#0b7a52}
+    /* ===== journey board ===== */
+    .legend{display:flex;flex-wrap:wrap;gap:16px;margin:4px 0 14px;font-size:11.5px;color:var(--ink2)}
+    .legend span{display:flex;align-items:center;gap:6px}
+    .legend i{width:13px;height:13px;border-radius:4px;display:inline-block}
+    .board{overflow-x:auto;padding-bottom:10px;border-radius:14px}
+    .jmap{display:grid;grid-template-columns:118px repeat(6,minmax(158px,1fr));min-width:1080px;border:1px solid var(--g3);border-radius:14px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+    .rowlab{background:#141a26;color:#fff;font-weight:800;font-size:12.5px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 8px;border-bottom:1px solid #2a3140}
+    .rowlab small{display:block;font-size:8.5px;color:rgba(255,255,255,.45);font-weight:700;margin-top:3px;letter-spacing:.06em}
+    .rowlab.lab-emo{background:#7a2731}.rowlab.lab-op{background:#0c6b49}.rowlab.lab-task{background:#12356e}.rowlab.lab-cross{background:#8a5a12}
+    .taskband{grid-column:2 / -1;background:linear-gradient(90deg,#1b4fc2,#3f7bf0);color:#fff;font-weight:800;font-size:14.5px;display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--g3)}
+    .taskband .jtbd-tag{font-size:10px;font-weight:800;letter-spacing:.08em;background:rgba(255,255,255,.22);padding:3px 10px;border-radius:999px;white-space:nowrap}
+    .crossband{grid-column:2 / -1;background:linear-gradient(90deg,#b0730f,#d79a25);color:#fff;font-weight:600;font-size:12px;display:flex;align-items:center;gap:12px;padding:11px 18px;line-height:1.5;border-bottom:1px solid var(--g3)}
+    .crossband .cross-tag{font-size:10px;font-weight:800;letter-spacing:.06em;background:rgba(255,255,255,.24);padding:3px 10px;border-radius:999px;white-space:nowrap}
+    .stepcell{padding:13px 10px;font-weight:800;color:#fff;font-size:13.5px;text-align:center;border-right:2px solid #fff;border-bottom:1px solid var(--g3)}
+    .stepcell small{display:block;font-weight:700;font-size:10px;opacity:.9;margin-top:3px}
+    .stepcell.s1{background:#8a94a6}.stepcell.s2{background:#2f6fed}.stepcell.s3{background:#e8833a}.stepcell.s4{background:#10a36f}.stepcell.s5{background:#b93845}.stepcell.s6{background:#7c5cf0}
+    .emorow{grid-column:2 / -1;position:relative;height:158px;border-bottom:1px solid var(--g3);background:linear-gradient(180deg,#e5f7ef 0%,#eaf7f0 46%,#fdeef0 54%,#fff0f0 100%)}
+    .emorow .midline{position:absolute;left:0;right:0;top:50%;border-top:1px dashed #cdd2dc}
+    .emorow svg{position:absolute;inset:0;width:100%;height:100%}
+    .emopt{position:absolute;transform:translate(-50%,-50%);text-align:center;z-index:2;width:130px}
+    .emopt .fc{font-size:19px;line-height:1}
+    .emopt .d{width:13px;height:13px;border-radius:50%;border:2px solid #fff;margin:3px auto 4px;box-shadow:0 2px 6px -1px rgba(0,0,0,.4)}
+    .emopt .nm{font-size:10.5px;font-weight:800;color:var(--ink2);white-space:nowrap}
+    .emopt.e1 .d{background:#8a94a6}.emopt.e2 .d{background:#2f6fed}.emopt.e3 .d{background:#e8833a}.emopt.e4 .d{background:#10a36f}.emopt.e5 .d{background:#b93845}.emopt.e6 .d{background:#7c5cf0}
+    .emopt .low{display:inline-block;font-size:8.5px;font-weight:800;color:#fff;background:var(--red);padding:1px 6px;border-radius:999px;margin-top:3px}
+    .cell{padding:12px 12px;font-size:11.5px;line-height:1.55;border-right:1px solid var(--g3);border-bottom:1px solid var(--g3);color:var(--ink2)}
+    .cell:last-child{border-right:0}
+    .cell ul{margin:0;padding-left:15px}.cell li{margin:3px 0}
+    .rc{font-family:ui-monospace,Consolas,monospace;font-size:10px;background:var(--purple-s);color:var(--purple);border-radius:4px;padding:1px 5px;display:inline-block;margin:3px 3px 0 0}
+    .rc.miss{background:var(--red-s);color:var(--red);text-decoration:line-through}
+    .rc.ext{background:var(--gold-s);color:#8a6410}
+    a.rc{text-decoration:none;transition:.12s;cursor:pointer}
+    a.rc:hover{background:var(--purple);color:#fff}
+    a.rc.ext:hover{background:var(--gold);color:#fff}
+    .repos-line{display:flex;flex-wrap:wrap;gap:2px;margin-top:5px}
+    .cell.q{color:var(--ink);font-style:italic;background:#fbfbfd}
+    .cell.q .face{font-style:normal;font-size:16px;display:block;margin-bottom:4px}
+    .cell.op{background:#f4fbf7;color:#0b5c40;border-bottom:0}
+    /* ===== 问题细化 ===== */
+    .rf-toolbar{display:flex;align-items:center;gap:12px;margin:4px 0 20px;flex-wrap:wrap}
+    .rf-toolbar label{font-size:13px;font-weight:800;color:var(--ink2);display:flex;align-items:center;gap:10px}
+    .rf-select{
+      font:inherit;font-size:14px;line-height:22px;font-weight:700;color:var(--ink);
+      padding:9px 34px 9px 14px;border:1px solid var(--g3);border-radius:10px;
+      background-color:#fff;cursor:pointer;box-shadow:var(--shadow);
+      appearance:none;-webkit-appearance:none;-moz-appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1.5 1.75L6 6.25L10.5 1.75' stroke='%235b6b82' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 12px center;background-size:12px 8px
+    }
+    .rf-select:focus{outline:none;border-color:var(--blue)}
+    .rf-stages{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:0 0 20px;padding:10px 0 12px;width:100%;max-width:100%;box-sizing:border-box;position:sticky;top:60px;z-index:25;background:rgba(245,247,250,.92);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 10px 28px -18px rgba(18,28,45,.4)}
+    .rf-stages.is-stuck{width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);padding:10px 40px 12px}
+    .rf-stages.is-stuck .rf-stage .no{display:none}
+    .rf-stage{position:relative;text-align:left;border:1px solid var(--g3);background:var(--card);border-radius:12px;padding:13px 12px 12px;cursor:pointer;transition:.15s;box-shadow:var(--shadow);font:inherit;color:var(--ink)}
+    .rf-stage:hover{border-color:var(--blue);transform:translateY(-2px)}
+    .rf-stage .no{font-size:11px;font-weight:800;color:var(--g6)}
+    .rf-stage .nm{font-size:13.5px;font-weight:800;margin-top:3px;line-height:1.3}
+    .rf-stage .sb{font-size:10.5px;color:var(--ink2);margin-top:3px}
+    .rf-stage.on{border-color:var(--blue);background:var(--blue-s);box-shadow:0 10px 24px -14px rgba(47,111,237,.6)}
+    .rf-stage.on .no{color:var(--blue-d)}
+    .rf-stage.todo{opacity:.62}
+    .rf-stage .badge{position:absolute;top:8px;right:8px;font-size:9px;font-weight:800;padding:1px 6px;border-radius:999px}
+    .rf-stage .badge.dn{background:var(--green-s);color:var(--green)}
+    .rf-stage .badge.td{background:var(--g2);color:var(--g6)}
+    .rf-detail{overflow:visible}
+    .rf-dhd{padding:0 2px 14px}
+    .rf-dhd h2{margin:0;font-size:18px}
+    .rf-body{display:grid;grid-template-columns:1fr 480px}
+    .rf-left{padding:20px 22px;border-right:1px solid var(--g3)}
+    .rf-right{padding:20px 22px;background:var(--g1)}
+    .rf-sec{margin-bottom:20px}
+    .rf-sec:last-child{margin-bottom:0}
+    .rf-sec h4{margin:0 0 10px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);font-weight:800}
+    .rf-tasks{list-style:none;margin:0;padding:0}
+    .tk{margin:0 0 12px;padding:12px 12px 12px 12px;border:1px solid var(--g3);border-radius:11px;background:#fff;cursor:pointer;transition:.15s}
+    .tk:last-child{margin-bottom:0}
+    .tk:hover{border-color:var(--blue)}
+    .tk.on{border-color:var(--blue);background:var(--blue-s);box-shadow:0 8px 20px -14px rgba(47,111,237,.7)}
+    .tk-t{display:flex;gap:9px;align-items:flex-start;font-size:14px;font-weight:600;line-height:22px;height:22px}
+    .tk-t > span:not(.tk-no){height:24px;vertical-align:middle;line-height:24px;font-size:16px}
+    .tk-no{flex:none;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:0}
+    .tk-iss{margin-top:9px}
+    .tk .tp-row{margin-left:29px}
+    .rf-right .rf-sec{position:sticky;top:188px}
+    .tp-legend{display:flex;flex-wrap:wrap;gap:6px;margin:-2px 0 12px}
+    .tp-legend .tp{cursor:default;pointer-events:none}
+    .tp-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0 0}
+    .tp-row .tp-lb{font-size:10px;font-weight:800;color:var(--g6);letter-spacing:.04em}
+    .tp{font-size:11px;font-weight:700;text-decoration:none;padding:2px 9px;border-radius:999px;border:1px solid var(--g3);transition:.15s;white-space:nowrap}
+    .tp.page{background:var(--blue-s);color:var(--blue-d);border-color:#cfe0fd}
+    .tp.repo{background:var(--purple-s);color:var(--purple);border-color:#ded4fb}
+    .tp.ext{background:var(--gold-s);color:#8a6410;border-color:#e8d296}
+    a.tp:hover{filter:brightness(.96);text-decoration:underline}
+    .iss{border:1px solid var(--g3);border-radius:10px;padding:11px 13px;margin-bottom:9px;background:#fff}
+    .iss:last-child{margin-bottom:0}
+    .iss-hd{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+    .iss-hd .t{font-weight:800;font-size:14px;flex:1;line-height:22px}
+    .iss .d{font-size:12px;height:auto;color:var(--ink2);line-height:20px}
+    .iss .h{display:inline-block;margin-top:7px;font-size:10.5px;color:var(--g6);background:var(--g2);border-radius:999px;padding:1px 8px}
+    .rf-fig{margin:0}
+    .rf-shot-scroll{aspect-ratio:16/9;overflow:hidden;border:1px solid var(--g3);border-radius:10px;box-shadow:var(--shadow);background:#fff}
+    .rf-shot{position:relative;width:100%;height:100%}
+    .rf-fig img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+    .rf-hl{position:absolute;border:3px solid var(--red);border-radius:6px;box-shadow:0 0 0 2px rgba(255,255,255,.9),0 6px 16px -4px rgba(185,56,69,.5);pointer-events:none;z-index:2}
+    /* current vs ideal compare */
+    .rf-cmp{display:grid;grid-template-columns:1fr 1fr}
+    .rf-cmp-head{padding:12px 18px;font-weight:800;font-size:14px;line-height:22px;color:#fff;letter-spacing:.02em;position:sticky;top:167px;z-index:4}
+    .rf-cmp-head .en{font-size:10px;font-weight:700;opacity:.85;margin-left:6px;letter-spacing:.08em}
+    .rf-cmp-head.cur{background:linear-gradient(90deg,#b93845,#d0596a)}
+    .rf-cmp-head.ideal{background:linear-gradient(90deg,#0c6b49,#10a36f)}
+    .rf-cell{padding:16px 18px;border-top:1px solid var(--g3)}
+    .rf-cell.cur{border-right:1px solid var(--g3);background:#fffafa}
+    .rf-cell.ideal{background:#f5fbf8}
+    .rf-cell .tk-t{display:flex;gap:9px;align-items:center;justify-content:flex-start;font-size:14px;font-weight:700;line-height:22px;margin-bottom:10px}
+    .rf-cell .tk-no{flex:none;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+    .rf-cell .tk-no.good{background:var(--green)}
+    .rf-cell .rf-fig{margin:10px 0}
+    .tp.good{background:var(--green-s);color:var(--green);border-color:#bfe6d4}
+    .tk-desc{font-size:14px;line-height:22px;color:var(--ink2);margin:0 0 12px 0}
+    .blk{margin:0 0 13px}
+    .blk-lb{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:800;color:var(--ink);letter-spacing:.04em;margin:0 0 7px}
+    .blk-lb .dot{width:8px;height:8px;border-radius:50%;flex:none}
+    .blk-lb.tp .dot{background:#3f6ad8}
+    .blk-lb.emo .dot{background:#d3792b}
+    .blk-lb.shot .dot{background:#8a8f99}
+    .blk-lb.iss .dot{background:var(--red)}
+    .blk-lb.note .dot{background:var(--green)}
+    .blk .tp-row{margin:0}
+    .blk .rf-fig{margin:0}
+    .blk .tk-emo{margin:0}
+    .tk-emo{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+    .tk-emo .mood{font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;color:#fff;letter-spacing:.02em;white-space:nowrap}
+    .tk-emo .say{font-size:12px;color:var(--ink2)}
+    .tk-emo.lv-ok .mood{background:var(--green)}
+    .tk-emo.lv-mid .mood{background:var(--gold)}
+    .tk-emo.lv-low .mood{background:#d3792b}
+    .tk-emo.lv-bad .mood{background:var(--red)}
+    .rf-note{margin:0;font-size:12.5px;font-weight:600;color:#0b5c40;background:#eaf7f0;border:1px solid #bfe6d4;border-radius:8px;padding:8px 11px}
+    .emo-card{border:1px solid #f0dcc4;border-radius:12px;overflow:hidden;background:#fff}
+    .emo-card-hd{font-size:14px;line-height:22px;font-weight:800;color:#a5641b;letter-spacing:.04em;padding:9px 13px;background:rgba(215,154,37,.05);border-bottom:1px solid rgba(215,154,37,.08)}
+    .emo-card.lv-ok{border-color:rgba(16,163,111,.18)}
+    .emo-card.lv-ok .emo-card-hd{color:#0b7a52;background:rgba(16,163,111,.05);border-bottom-color:rgba(16,163,111,.08)}
+    .emo-card.lv-mid{border-color:rgba(215,154,37,.2)}
+    .emo-card.lv-mid .emo-card-hd{color:#8a6410;background:rgba(215,154,37,.05);border-bottom-color:rgba(215,154,37,.1)}
+    .emo-card.lv-low{border-color:rgba(211,121,43,.2)}
+    .emo-card.lv-low .emo-card-hd{color:#a5641b;background:rgba(211,121,43,.05);border-bottom-color:rgba(211,121,43,.1)}
+    .emo-card.lv-bad{border-color:rgba(185,56,69,.18)}
+    .emo-card.lv-bad .emo-card-hd{color:var(--red);background:rgba(185,56,69,.05);border-bottom-color:rgba(185,56,69,.08)}
+    .emo-card-bd{padding:11px 13px}
+    .emo-card-bd .tk-emo{margin:0}
+    .iss-card{border:1px solid #f0cdd2;border-radius:12px;overflow:hidden;background:#fff}
+    .iss-card-hd{display:flex;align-items:center;gap:7px;font-size:14px;line-height:22px;font-weight:800;color:var(--red);letter-spacing:.04em;padding:9px 13px;background:var(--red-s);border-bottom:1px solid #f4d7db}
+    .iss-card-hd .dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex:none}
+    .iss-card .iss{border:0;border-radius:0;margin:0;padding:11px 13px;background:transparent}
+    .iss-card .iss + .iss{border-top:1px solid var(--g2)}
+    .learn-card{border:1px solid #bfe6d4;border-radius:12px;overflow:hidden;background:#fff}
+    .learn-card-hd{font-size:12px;font-weight:800;color:#0b5c40;letter-spacing:.04em;padding:9px 13px;background:#eaf7f0;border-bottom:1px solid #cfe9db}
+    .learn-card .iss{border:0;border-radius:0;margin:0;padding:11px 13px;background:transparent}
+    .learn-card .iss + .iss{border-top:1px solid var(--g2)}
+    /* P1: one big task card; left story+shot, right emo/iss/fix */
+    .rf-cmp-single{grid-template-columns:1fr;display:flex;flex-direction:column;gap:16px}
+    .rf-cmp-single .rf-cmp-head.ideal{display:none}
+    .rf-task-card{border:1px solid var(--g3);border-radius:14px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+    .rf-task-split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:0;align-items:stretch}
+    .rf-task-left{padding:16px 18px;border-right:1px solid var(--g3);background:#fffafa}
+    .rf-task-left.lv-ok{background:rgba(16,163,111,.05)}
+    .rf-task-left.lv-mid{background:rgba(215,154,37,.05)}
+    .rf-task-left.lv-low{background:rgba(211,121,43,.05)}
+    .rf-task-left.lv-bad{background:rgba(185,56,69,.05)}
+    .rf-task-right{padding:16px 18px;background:#fff;display:flex;flex-direction:column;gap:16px}
+    .rf-task-right.ideal{background:#f5fbf8}
+    .rf-col-kicker{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px}
+    .rf-col-kicker.cur{color:var(--red);background:var(--red-s)}
+    .rf-col-kicker.ideal{color:#0b5c40;background:#eaf7f0}
+    .rf-task-left .tk-t{margin:0 0 24px;padding:0;height:auto;align-items:center;background:transparent;border:none;border-radius:0}
+    .rf-task-left .tk-t:has(+ .tk-desc){margin-bottom:8px}
+    .rf-task-left .tk-no{background:var(--red)}
+    .rf-task-left .tk-no.lv-ok{background:var(--green)}
+    .rf-task-left .tk-no.lv-mid{background:var(--gold)}
+    .rf-task-left .tk-no.lv-low{background:#d3792b}
+    .rf-task-left .tk-no.lv-bad{background:var(--red)}
+    .rf-task-left .tk-desc{margin:0 0 16px 29px}
+    .rf-task-right .rf-fig{margin:0}
+    .rf-task-left .iss-card,.rf-task-left .fix-card{margin:0}
+    .rf-task-left .iss-card{margin-top:0}
+    .rf-task-left .fix-card{margin-top:12px}
+    .rf-task-right .iss-card,.rf-task-right .fix-card{margin:0}
+    .rf-task-right .iss-card{margin-top:0}
+    .rf-task-right .fix-card{margin-top:0}
+    .rf-task-right .blk{margin:0}
+    .rf-task-left .emo-card{margin:16px 0 0}
+    .rf-task-right .emo-card{margin:0}
+    .fix-card{border:1px solid #bfe6d4;border-radius:12px;overflow:hidden;background:#fff}
+    .fix-card-hd{font-size:14px;line-height:22px;font-weight:800;color:#0b5c40;letter-spacing:.04em;padding:9px 13px;background:#eaf7f0;border-bottom:1px solid #cfe9db}
+    .fix-card .fix{padding:10px 13px;font-size:12px;line-height:1.55;color:var(--ink2);border-top:1px solid var(--g2)}
+    .fix-card .fix:first-of-type{border-top:0}
+    .fix-card .fix b{display:block;font-size:14px;line-height:22px;font-weight:800;color:var(--ink);margin-bottom:3px}
+    .fix-card.empty .fix-card-bd{padding:11px 13px;font-size:12px;color:var(--g6);line-height:1.5}
+    .iss-card.compact .iss{padding:16px}
+    .iss-card.compact .iss-hd .t{font-size:14px;line-height:22px}
+    .iss-card.compact .iss .d{font-size:14px;line-height:22px;margin-top:3px}
+    .rf-note b{color:#083d2a}
+    .rf-fig .u{display:inline-block;font-size:14px;line-height:22px;font-weight:700;color:var(--ink);word-break:break-all;margin:0 0 8px;text-decoration:none}
+    .rf-fig .u:hover{text-decoration:underline}
+    .rf-fig figcaption{font-size:11px;color:var(--g6);margin-top:7px;text-align:center}
+    .rf-empty{padding:54px 22px;text-align:center;color:var(--g6);font-size:14px;line-height:22px}
+    .footer{padding:30px 0 50px;color:var(--g6);font-size:11px;text-align:center}
+    @media(max-width:980px){.stats{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}.ptabs{grid-template-columns:repeat(2,1fr)}.rf-stages{grid-template-columns:repeat(3,1fr)}.rf-body{grid-template-columns:1fr}.rf-left{border-right:0;border-bottom:1px solid var(--g3)}.rf-cmp{grid-template-columns:1fr}.rf-cmp-head{position:static}.rf-cell.cur{border-right:0}.rf-task-split{grid-template-columns:1fr}.rf-task-left{border-right:0;border-bottom:1px solid var(--g3)}.rf-right .rf-sec{top:280px}}
+    @media(max-width:680px){.wrap{padding:0 15px}.hero h1{font-size:26px}.topnav{padding:0 14px}.nav-links button{padding:8px 10px;font-size:13px}.top-meta{display:none}}
+
+</style>
+  <style>
+    .stats,.ptabs{grid-template-columns:repeat(3,1fr)}
+    .hero .scope{margin-top:10px;font-size:12px;color:var(--g6)}
+    .vsline{display:grid;grid-template-columns:1fr 44px 1fr;gap:8px;align-items:stretch;margin:13px 0 0}
+    .vside{padding:12px 13px;border:1px solid var(--g3);border-radius:10px;background:#fff;font-size:12px;line-height:1.55}
+    .vside b{display:block;font-size:12.5px;margin-bottom:3px}.vside.asc b{color:#b93845}.vside.nv b{color:#0b7a52}
+    .vsmid{align-self:center;text-align:center;color:var(--g6);font-size:10px;font-weight:800;letter-spacing:.06em}
+    .evidence{font-size:11px;color:var(--g6);margin-top:8px}.evidence a{color:var(--blue-d);font-weight:700}
+    .jmap{grid-template-columns:118px repeat(6,minmax(150px,1fr));min-width:1020px}
+    .jmap .cell strong{color:var(--ink)}
+    .disclaimer{margin-top:12px;font-size:11.5px;color:var(--g6)}
+    @media(max-width:760px){.stats,.ptabs{grid-template-columns:1fr}.vsline{grid-template-columns:1fr}.vsmid{padding:2px}.topnav{gap:4px}.brand{font-size:13px}.brand small{display:none}}
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <div class="brand"><b>Ascend × NVIDIA</b> · 学习入口<small>USER PERSONA</small></div>
+    <nav class="nav-links">
+      <button data-view="home" class="on">首页</button>
+      <button data-view="persona">Persona</button>
+      <button data-view="refine">问题细化</button>
+    </nav>
+    <div class="top-meta">公开页对比 · 2026-07-29</div>
+  </header>
+
+  <section class="view" id="view-home">
+    <div class="wrap">
+      <div class="hero">
+        <div class="eyebrow">LEARNING EXPERIENCE COMPARISON</div>
+        <h1>完整学习体验，不只是“从哪进入”</h1>
+        <p>对比 <a href="https://www.hiascend.com/developer/learn" target="_blank" rel="noopener">昇腾开发者学习页</a> 与 <a href="https://www.nvidia.com/en-us/training/" target="_blank" rel="noopener">NVIDIA Training</a> 的完整学习链：发现方向、选课与路径、学习 / 实践、进度与认证、完成后的能力升级，以及迁移到真实开发任务。任务承接只是最后一段，不是本次研究边界。</p>
+        <p class="scope">范围：公开页可观察的学习结构与可见下一跳；不推断需登录后才可见的课堂互动、价格、讲师质量、实际完课率或付费服务。证据为两页真实截图、公开页面复核及本工作区既有学习子旅程取证。</p>
+      </div>
+
+      <section class="persona-block">
+        <h2 class="sec-h2">用户画像</h2>
+        <div class="stats">
+          <div class="stat p1"><div class="num">P1 · 首跑探索者</div><div class="label">把陌生技术栈跑出第一个正确结果</div></div>
+          <div class="stat p2"><div class="num">P2 · 能力建设者</div><div class="label">系统学习、证明能力，并选出下一段成长路径</div></div>
+          <div class="stat p3"><div class="num">P3 · 任务迁移者</div><div class="label">把课程成果变成自己的工程、验证和交付</div></div>
+        </div>
+
+        <div class="hero persona-quadrant-intro">
+          <h3>权重 × 服务缺口 象限</h3>
+          <p>纵轴＝到达规模 × 任务完成贡献 × 生态蓄水；横轴＝当前学习入口未能承接的阶段占比。右上优先改造。</p>
+        </div>
+        <div class="plotwrap"><div class="plot"><div class="area">
+          <div class="q tl"><span>巩固区 · 高权重 / 服务足</span></div><div class="q tr"><span>★ 优先改造区 · 高权重 / 缺口大</span></div>
+          <div class="q bl"><span>维持区 · 低权重 / 服务足</span></div><div class="q br"><span>按需补齐区 · 低权重 / 缺口大</span></div>
+          <div class="vline"></div><div class="hline"></div><div class="yaxis">权重 高 →</div><div class="xaxis">服务缺口 大 →</div>
+          <div class="dotp d1" style="left:44%;bottom:76%"><div class="bubble"><i class="circle"></i><span class="plabel">P1 首跑探索者</span></div><div class="tip"><b>权重 82 / 缺口 42</b><br>在线实验与角色路径强；成功后交接不足。</div></div>
+          <div class="dotp d2" style="left:30%;bottom:62%"><div class="bubble"><i class="circle"></i><span class="plabel">P2 能力建设者</span></div><div class="tip"><b>权重 70 / 缺口 25</b><br>课程、排行、认证可见；能力与任务映射仍弱。</div></div>
+          <div class="dotp d3" style="left:77%;bottom:88%"><div class="bubble"><i class="circle"></i><span class="plabel">P3 任务迁移者</span></div><div class="tip"><b>权重 91 / 缺口 75</b><br>课程到工程、验证、排错的交接由用户自拼。</div></div>
+        </div></div></div>
+
+        <details class="axis-fold"><summary><h3>坐标轴说明与可复现审计</h3><span class="arrow" aria-hidden="true"></span></summary>
+          <div class="panel"><h3>服务缺口（X）</h3><p>按每条 Persona 的 6 个关键阶段记：<span class="yes">✓</span> 页面内有明确入口与输出；<span class="par">◐</span> 有资源但需跨板块自行拼接；<span class="no">✗</span> 未见任务级承接。数值为启发式审计，不是流量或满意度统计。</p>
+            <table class="audit"><tr><th>Persona</th><th>阶段覆盖审计</th><th>估算缺口</th></tr>
+              <tr><td class="role">P1 首跑探索者</td><td class="cov"><span class="yes">✓</span> 选路径 · <span class="yes">✓</span> 找课程/实验 · <span class="yes">✓</span> 在线首跑 · <span class="par">◐</span> 看结果 · <span class="no">✗</span> 导出本地等价工程 · <span class="par">◐</span> 失败恢复</td><td class="g-mid">42 / 100</td></tr>
+              <tr><td class="role">P2 能力建设者</td><td class="cov"><span class="yes">✓</span> 探索学习 · <span class="yes">✓</span> 课程发现 · <span class="yes">✓</span> 热门排行 · <span class="yes">✓</span> 认证入口 · <span class="par">◐</span> 能力定位 · <span class="par">◐</span> 下一任务</td><td class="g-lo">25 / 100</td></tr>
+              <tr><td class="role">P3 任务迁移者</td><td class="cov"><span class="par">◐</span> 找相关课程 · <span class="no">✗</span> 领取工程任务 · <span class="par">◐</span> 跳文档/样例 · <span class="no">✗</span> 版本/环境预检 · <span class="no">✗</span> 验收产物 · <span class="no">✗</span> 错误回流</td><td class="g-hi">75 / 100</td></tr>
+            </table></div>
+          <div class="panel"><h3>权重（Y）</h3><p>开发者学习门户采用「到达规模 × 任务完成贡献 × 生态蓄水」三维判断。P3 并非访问者最多，而是决定学习能否转成可复用工程与生态贡献，故战略权重最高。</p>
+            <table class="audit"><tr><th>Persona</th><th>到达规模</th><th>完成贡献</th><th>生态蓄水</th><th>结论</th></tr>
+              <tr><td class="role">P1</td><td><span class="wtag h">高</span></td><td><span class="wtag h">高</span></td><td><span class="wtag m">中</span></td><td>82</td></tr>
+              <tr><td class="role">P2</td><td><span class="wtag m">中</span></td><td><span class="wtag m">中</span></td><td><span class="wtag h">高</span></td><td>70</td></tr>
+              <tr><td class="role">P3</td><td><span class="wtag m">中</span></td><td><span class="wtag h">高</span></td><td><span class="wtag h">高</span></td><td>91</td></tr>
+            </table></div>
+        </details>
+      </section>
+
+      <h2 class="sec-h2">学习体验全链对照</h2>
+      <div class="panel"><p>两边的学习资产都不薄。昇腾的强项是将“课程、微认证、热门内容、按开发方向的学习路径、在线实验”聚在一个开发者学习面；NVIDIA 强项是把“Featured Learning Paths、课程 / workshop、hands-on training、认证”清晰打成一个全球化学习品牌。以下只写页面可见事实与可验证的体验含义。</p>
+        <div class="vsline"><div class="vside asc"><b>01 · 发现方向</b>“探索学习”+ 热门 / 最新排行，卡片展示课程、认证、时长、评分、学习人数；下方按应用、推理、训练、框架开发列学习路径。</div><div class="vsmid">VS</div><div class="vside nv"><b>01 · 发现方向</b>以 Featured Learning Paths 汇总推荐课程和 workshops，并将“发展能力、获取 credential”作为路径价值说明。</div></div>
+        <div class="vsline"><div class="vside asc"><b>02 · 选择路径</b>角色 / 开发方向是前置分流，较适合“不知道产品名、但知道自己要做训练或推理”的学习者。</div><div class="vsmid">VS</div><div class="vside nv"><b>02 · 选择路径</b>页面以学习路径和培训形式组织；认证与 hands-on training 的品牌信号较强，但公开页上未见与开发角色同粒度的分流。</div></div>
+        <div class="vsline"><div class="vside asc"><b>03 · 学习与实践</b>学习页提供在线课程、微认证与“在线实验”入口；在线实验使开发者可先在浏览器里完成一次实践，降低本地环境门槛。</div><div class="vsmid">VS</div><div class="vside nv"><b>03 · 学习与实践</b>页面明确推广 hands-on training，并以课程 / workshop 组成学习路径；具体实验环境、作业和反馈机制需要进入课程后才能验证。</div></div>
+        <div class="vsline"><div class="vside asc"><b>04 · 进度与成长</b>公开页提示登录后查看学习进度，课程卡和微认证同时出现；资源本身与成长记录存在连接，但个人进度详情不在公开证据域。</div><div class="vsmid">VS</div><div class="vside nv"><b>04 · 进度与成长</b>页面将 credential、NVIDIA Certification 和认证 webinar 前置，形成较清晰的职业认可信号；个体学习进度同样需登录后验证。</div></div>
+        <div class="vsline"><div class="vside asc"><b>05 · 完成后升级</b>从课程完成到本地工程、版本预检、验证与排错的默认下一跳仍不够明确，是学习体验后半程的主要缺口。</div><div class="vsmid">VS</div><div class="vside nv"><b>05 · 完成后升级</b>学习品牌与认证表达成熟；但本页也没有把每条学习路径直接画成一个开发工程交付闭环，不能据此宣称其不存在跨站跳转。</div></div>
+        <p class="evidence">界面证据：<a href="../materials/ascend-vs-nvidia/screenshots/07-ascend-learn-3.3.png" target="_blank">昇腾的课程、认证、排行与学习路径截图</a>；<a href="../materials/ascend-vs-nvidia/screenshots/07-nvidia-training-3.3.png" target="_blank">NVIDIA 的认证与 Learning Paths 截图</a>。</p>
+      </div>
+
+      <h2 class="sec-h2">跨角色 · 主要体验问题</h2>
+      <div class="panel"><p>对照 NVIDIA Training 后，昇腾最值得保留的是“按开发方向的学习路径 + 在线实验”的低门槛实践，以及一页同时聚合课程、认证、排行和进度入口；最值得补的是“学什么、学到哪、下一项能力与任务是什么”的连续反馈，而不只是在结课后补一条工程链接。</p><div class="prob-list">
+        <div class="prob-item s1"><div class="sev">S1</div><div><div class="pt">内容发现丰富，但“为目标选课”的决策信息仍可更强</div><p class="pd">昇腾以课程 / 认证卡、热门排行和开发方向路径帮助发现内容，已经比单一文档式入口更接近学习产品；仍可把目标任务、基础要求、实践形态、预计产出与下一关并列展示，避免用户以热度代替适配度决策。</p><div class="pa"><span>P1</span><span>P2</span><span>选型 IA</span></div></div></div>
+        <div class="prob-item s1"><div class="sev">S1</div><div><div class="pt">学习过程可见“进度”，但尚未成为任务型成长反馈</div><p class="pd">公开页提示登录后查看学习进度，也将微认证作为成长节点；但在公开证据内看不到“已具备什么能力、距离目标还差什么、该进入哪段实践”的连续反馈。NVIDIA 也需登录后才能核验个人面板，因此此处应视为待验证的机会而非单方事实判定。</p><div class="pa"><span>P2</span><span>成长反馈</span><span>待登录验证</span></div></div></div>
+        <div class="prob-item s0"><div class="sev">S0</div><div><div class="pt">学习完成页没有“带得走的下一步”</div><p class="pd">课程、在线实验、文档、样例和工具都有，但用户完成首跑后仍需自行判断进哪个仓、复制哪些文件、用什么输入验证。NVIDIA 的课程与认证体系同样跨站，但训练品牌、课程类型和能力路径的表达更集中。</p><div class="pa"><span>P1</span><span>P3</span><span>引导路径</span></div></div></div>
+        <div class="prob-item s1"><div class="sev">S1</div><div><div class="pt">“在线成功”与“本地可复现”之间缺等价桥</div><p class="pd">昇腾的在线实验有效降低第一次成功门槛，却没有默认输出工程骨架、依赖版本、构建命令和 golden。学习效果在换到本地环境时被重新归零。</p><div class="pa"><span>P1</span><span>P3</span><span>就绪预检</span></div></div></div>
+        <div class="prob-item s1"><div class="sev">S1</div><div><div class="pt">能力内容按资源组织，未按“下一项工作”连续编排</div><p class="pd">探索学习、热门排行和微认证能帮用户发现内容；但动态 shape、工程接入、性能验证、排错等升级动作缺少一张连续任务地图。</p><div class="pa"><span>P2</span><span>P3</span><span>任务体验层</span></div></div></div>
+        <div class="prob-item s2"><div class="sev">S2</div><div><div class="pt">失败恢复没有回嵌到学习路径</div><p class="pd">错误发生时，开发者要离开课程，再去检索文档、工具或论坛。学习页没有用“错误类型 → 诊断工具 → 修复样例 → 重验”的方式把恢复路径放回当前任务。</p><div class="pa"><span>P1</span><span>P3</span><span>诊断</span></div></div></div>
+      </div></div>
+
+      <h2 class="sec-h2">UX 设计策略</h2>
+      <div class="panel"><p>建议不是重做课程库，而是为已有的学习、文档、代码仓与工具增加一层可接力的任务体验。</p><div class="strategy-grid">
+        <div class="strategy"><div class="sn">01 · HANDOFF</div><strong>把“首跑成功”定义为可交付的中间产物</strong><p>在线实验结束页默认给出下载工程、环境 lockfile、构建命令、预期输出 / golden，以及“下一项改造任务”。</p></div>
+        <div class="strategy"><div class="sn">02 · TASK PATH</div><strong>从课程目录升级为任务关卡</strong><p>围绕“跑 Add → 改动态 shape → 接入框架 → 验证性能”组织跨板块挑战卡，每关显示输入、资产、成功标准与下一跳。</p></div>
+        <div class="strategy"><div class="sn">03 · READINESS</div><strong>把版本与环境风险前置</strong><p>在开始本地实践前检查硬件、CANN、框架与样例版本；不匹配时给出可执行的替代路径，而不是让用户在报错后重搜。</p></div>
+        <div class="strategy"><div class="sn">04 · RECOVERY</div><strong>让错误成为课程的一部分</strong><p>按常见错误链接诊断工具、FAQ 和修复样例；完成修复后回到原任务并重新验收，形成可恢复学习闭环。</p></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-persona" hidden>
+    <div class="wrap wide"><div class="hero"><div class="eyebrow">PERSONA LIBRARY</div><h1>三条互斥的学习主旅程</h1><p>候选包括“学生、算子开发者、训练开发者、认证者、开源贡献者”等；按核心成功路径合并为三类，而非按职称切分。P1 的成功是第一次结果；P2 的成功是形成可证明能力；P3 的成功是完成可复现工程交付。三者主触点与完成证据不同，互斥检验通过。</p></div>
+      <div class="ptabs">
+        <button class="ptab p1 on" data-p="p1"><span class="pno">P1</span><span class="ptab-role">首跑探索者</span><span class="ptab-goal">先成功一次，再决定是否投入</span></button>
+        <button class="ptab p2" data-p="p2"><span class="pno">P2</span><span class="ptab-role">能力建设者</span><span class="ptab-goal">系统学习、认证与成长规划</span></button>
+        <button class="ptab p3" data-p="p3"><span class="pno">P3</span><span class="ptab-role">任务迁移者</span><span class="ptab-goal">把所学变为自己的工程交付</span></button>
+      </div>
+      <div class="pdetail">
+        <div class="pd-pane p1" data-p="p1">
+          <div class="pd-card"><div class="pd-hd"><span class="pno">P1</span><div><h2 class="role">首跑探索者</h2><div class="en">FIRST-RUN EXPLORER</div></div></div><div class="goal"><span class="k">核心目标</span>在不确定是否适配的前提下，尽快跑出第一个正确结果，并知道下一步能否转到本地继续。</div><div class="field"><div class="k">旅程句</div><div class="v">为了判断“我能不能用这套栈做出东西”，他会沿 <b>进入学习页 → 选角色路径 → 进入在线实验 / 课程 → 跑出结果 → 尝试迁到本地 → 遇错恢复</b> 走完一条路。</div></div><div class="meta-row"><span class="tagpill evi">实证：学习页、在线实验入口与截图</span><span class="tagpill inf">推断：完成后迁移需跨到工程资产</span><span class="tagpill merge">合并：新手 / 试用评估者</span></div><div class="field"><div class="k">问题抽象（DIM）</div><div class="dim-grid"><div class="dim"><div class="dn">D1</div><div class="dt">起点是否明确</div><div class="dd">按角色学习路径降低“从哪开始”的判断。</div><div class="dq">“我该选哪条，才能先跑起来？”</div></div><div class="dim"><div class="dn">D2</div><div class="dt">首跑是否低门槛</div><div class="dd">在线实验是昇腾的可见长板。</div><div class="dq">“我能不先装一堆东西吗？”</div></div><div class="dim"><div class="dn">D3</div><div class="dt">成功能否带走</div><div class="dd">本地等价工程与版本清单未成为默认输出。</div><div class="dq">“这个结果怎么在我的机器上复现？”</div></div></div></div></div>
+          <div class="board"><div class="jmap">
+            <div class="rowlab">P1<small>首跑</small></div><div class="taskband"><span class="jtbd-tag">成功证据</span>浏览器或本地跑出一个可解释、可重复的正确结果</div>
+            <div class="rowlab lab-task">阶段<small>STAGE</small></div><div class="stepcell s1">到达<small>找到学习入口</small></div><div class="stepcell s2">选路径<small>角色 / 主题</small></div><div class="stepcell s3">开始实践<small>课程 / 实验</small></div><div class="stepcell s4">看到结果<small>首个成功</small></div><div class="stepcell s5">迁到本地<small>复现与改动</small></div><div class="stepcell s6">恢复<small>处理错误</small></div>
+            <div class="rowlab">行动<small>ACTION</small></div><div class="cell">打开学习页，判断是否覆盖自己的方向。</div><div class="cell">按应用、算子、训练等角色选择路径。</div><div class="cell">跟随课程或在线实验完成最小动作。</div><div class="cell">确认输出符合预期。</div><div class="cell">寻找本地工程、依赖与命令。</div><div class="cell">查文档、工具或论坛。</div>
+            <div class="rowlab">触点<small>TOUCHPOINT</small></div><div class="cell"><a class="rc" href="https://www.hiascend.com/developer/learn" target="_blank">Ascend Learn</a><a class="rc ext" href="https://www.nvidia.com/en-us/training/" target="_blank">NVIDIA Training</a></div><div class="cell"><span class="rc">角色路径</span><span class="rc ext">课程主题 / 模式</span></div><div class="cell"><span class="rc">在线实验</span><span class="rc ext">培训课程</span></div><div class="cell"><span class="rc">实验结果</span><span class="rc ext">课程完成</span></div><div class="cell"><span class="rc miss">本地等价工程</span><span class="rc ext">Docs / Samples</span></div><div class="cell"><span class="rc ext">文档 / FAQ / Forum</span></div>
+            <div class="rowlab lab-emo">情绪<small>EMOTION</small></div><div class="cell q"><span class="face">🙂</span>“这里能学什么？”</div><div class="cell q"><span class="face">🙂</span>“这条看起来适合我。”</div><div class="cell q"><span class="face">😃</span>“不用先装环境，先试试。”</div><div class="cell q"><span class="face">😃</span>“我跑出来了！”</div><div class="cell q"><span class="face">😟</span>“接下来进哪个仓？”</div><div class="cell q"><span class="face">😣</span>“这个错该找谁？”</div>
+            <div class="rowlab lab-op">机会<small>OPPORTUNITY</small></div><div class="cell op">保持角色化入口。</div><div class="cell op">显示每条路径的时间、前置与产出。</div><div class="cell op">保留在线首跑优势。</div><div class="cell op">将结果命名为可带走产物。</div><div class="cell op">下载工程 + lockfile + golden。</div><div class="cell op">错误 → 工具 → 重验闭环。</div>
+          </div></div>
+        </div>
+        <div class="pd-pane p2" data-p="p2" hidden>
+          <div class="pd-card"><div class="pd-hd"><span class="pno">P2</span><div><h2 class="role">能力建设者</h2><div class="en">SKILL BUILDER</div></div></div><div class="goal"><span class="k">核心目标</span>用连续学习、可识别的能力里程碑与认证，建立能被团队和生态理解的技能证明。</div><div class="field"><div class="k">旅程句</div><div class="v">为了从“会一点”成长到“能承担一类任务”，他会沿 <b>探索方向 → 比较课程 → 系统学习 → 练习 / 认证 → 查看进度与能力缺口 → 选择下一主题</b> 前进。</div></div><div class="meta-row"><span class="tagpill evi">实证：探索学习、热门排行、课程时长 / 评分 / 人数、昇腾学堂 / 微认证</span><span class="tagpill evi">实证：NVIDIA Featured Learning Paths、hands-on training 与认证入口</span><span class="tagpill inf">待验证：登录后的个人进度、课程互动与反馈</span><span class="tagpill merge">合并：学生 / 转岗者 / 持续学习者</span></div><div class="field"><div class="k">问题抽象（DIM）</div><div class="dim-grid"><div class="dim"><div class="dn">D1</div><div class="dt">如何选学习投资</div><div class="dd">昇腾已有路径、热度、时长和人气等公开决策线索；仍可补目标能力与实践产出的映射。</div><div class="dq">“为了完成这类工作，我该学哪组内容？”</div></div><div class="dim"><div class="dn">D2</div><div class="dt">如何完成一段学习</div><div class="dd">课程、在线实践与认证都有入口；课堂内的练习、反馈与完成机制不在本次公开证据域。</div><div class="dq">“我现在做得对吗，离完成还差几步？”</div></div><div class="dim"><div class="dn">D3</div><div class="dt">如何证明并升级</div><div class="dd">认证可见，进度入口可见；可进一步把能力差距和下一任务变成连续反馈。</div><div class="dq">“我学会了，下一项能力该补什么？”</div></div></div></div></div>
+          <div class="board"><div class="jmap">
+            <div class="rowlab">P2<small>成长</small></div><div class="taskband"><span class="jtbd-tag">成功证据</span>完成一条能力链，并能将认证或实践成果映射到具体开发任务</div>
+            <div class="rowlab lab-task">阶段<small>STAGE</small></div><div class="stepcell s1">探索方向<small>看机会</small></div><div class="stepcell s2">选择课程<small>判断投入</small></div><div class="stepcell s3">系统学习<small>吸收知识</small></div><div class="stepcell s4">实践 / 认证<small>证明能力</small></div><div class="stepcell s5">查看进度<small>识别缺口</small></div><div class="stepcell s6">迁移能力<small>用于任务</small></div>
+            <div class="rowlab">行动<small>ACTION</small></div><div class="cell">从探索学习、排行或主题发现内容。</div><div class="cell">比较路径、时长、热度、形式与预期所得。</div><div class="cell">完成课程、实验或 workshop。</div><div class="cell">进入认证或实践环节。</div><div class="cell">登录查看进度，判断下一项所需能力。</div><div class="cell">将能力落到一个真实开发任务。</div>
+            <div class="rowlab">触点<small>TOUCHPOINT</small></div><div class="cell"><span class="rc">探索学习 / 热门排行</span><span class="rc ext">Featured Learning Paths</span></div><div class="cell"><span class="rc">时长 / 评分 / 人数</span><span class="rc ext">课程 / workshop</span></div><div class="cell"><span class="rc">在线课程 / 在线实验</span><span class="rc ext">Hands-on Training</span></div><div class="cell"><span class="rc">微认证</span><span class="rc ext">NVIDIA Certification</span></div><div class="cell"><span class="rc">登录后学习进度</span><span class="rc ext">登录后待验证</span></div><div class="cell"><span class="rc miss">课程产物 → 工程任务</span></div>
+            <div class="rowlab lab-emo">情绪<small>EMOTION</small></div><div class="cell q"><span class="face">🙂</span>“这里有什么值得学？”</div><div class="cell q"><span class="face">🤔</span>“哪个最适合我的目标？”</div><div class="cell q"><span class="face">🙂</span>“我在稳步推进。”</div><div class="cell q"><span class="face">😃</span>“我能证明这项能力。”</div><div class="cell q"><span class="face">🤔</span>“我已学会什么，接下来补什么？”</div><div class="cell q"><span class="face">😟</span>“这项技能怎样用到项目？”</div>
+            <div class="rowlab lab-op">机会<small>OPPORTUNITY</small></div><div class="cell op">用任务标签补强发现。</div><div class="cell op">展示前置、时长与可达结果。</div><div class="cell op">保留内容、实验与认证体系。</div><div class="cell op">认证绑定实践成果。</div><div class="cell op">给出能力雷达与下一关。</div><div class="cell op">发布可验证的任务作品。</div>
+          </div></div>
+        </div>
+        <div class="pd-pane p3" data-p="p3" hidden>
+          <div class="pd-card"><div class="pd-hd"><span class="pno">P3</span><div><h2 class="role">任务迁移者</h2><div class="en">TASK MIGRATOR</div></div></div><div class="goal"><span class="k">核心目标</span>把一次课程或样例成功，迁移为自己的工程，完成版本就绪、正确性、性能和失败恢复的交付闭环。</div><div class="field"><div class="k">旅程句</div><div class="v">为了把所学真正用于项目，他会沿 <b>定位相关课程 → 领取改造任务 → 获得工程骨架 → 对齐环境 → 验证正确性 / 性能 → 排错并沉淀</b> 走完一条与“看完课程”完全不同的路。</div></div><div class="meta-row"><span class="tagpill evi">实证：既有学习子旅程的课程 / 文档 / 样例 / 工具审计</span><span class="tagpill inf">推断：两站均需跳出学习页进入工程资产</span><span class="tagpill merge">合并：算子、训练、框架接入等不同技术子模块</span></div><div class="field"><div class="k">问题抽象（DIM）</div><div class="dim-grid"><div class="dim"><div class="dn">D1</div><div class="dt">任务是否有完整输入</div><div class="dd">课程缺少要改什么、在哪改、如何验收的工程合同。</div><div class="dq">“我从这个例子开始，具体改哪一处？”</div></div><div class="dim"><div class="dn">D2</div><div class="dt">环境是否先被验证</div><div class="dd">硬件、CANN、框架和代码版本散在多处。</div><div class="dq">“我的组合能不能跑，哪里会冲突？”</div></div><div class="dim"><div class="dn">D3</div><div class="dt">失败是否可恢复</div><div class="dd">错误与诊断工具、FAQ、修复样例没有被课程回链。</div><div class="dq">“这个报错下一步该执行什么？”</div></div></div></div></div>
+          <div class="board"><div class="jmap">
+            <div class="rowlab">P3<small>迁移</small></div><div class="taskband"><span class="jtbd-tag">成功证据</span>自己的工程在明确版本组合下构建、通过 golden，并留下性能 / 诊断证据</div>
+            <div class="rowlab lab-task">阶段<small>STAGE</small></div><div class="stepcell s1">定目标<small>关联课程</small></div><div class="stepcell s2">领任务<small>改什么</small></div><div class="stepcell s3">拿骨架<small>工程起点</small></div><div class="stepcell s4">预检环境<small>版本组合</small></div><div class="stepcell s5">验证交付<small>正确性 / 性能</small></div><div class="stepcell s6">恢复沉淀<small>错误 / 复用</small></div>
+            <div class="rowlab">行动<small>ACTION</small></div><div class="cell">从学习内容找到和项目相关的切口。</div><div class="cell">理解输入变化与改造范围。</div><div class="cell">获取可构建、可测试的工程。</div><div class="cell">检查软硬件与框架版本。</div><div class="cell">跑 golden、基线与 profiler。</div><div class="cell">修错、记录并沉淀为下一次起点。</div>
+            <div class="rowlab">触点<small>TOUCHPOINT</small></div><div class="cell"><span class="rc">课程 / 学习仓</span></div><div class="cell"><span class="rc miss">任务卡 / 改造说明</span></div><div class="cell"><span class="rc ext">Docs / Samples / Git</span></div><div class="cell"><span class="rc ext">下载 / 版本表</span></div><div class="cell"><span class="rc ext">测试 / profiler</span></div><div class="cell"><span class="rc ext">FAQ / Forum / 工具</span></div>
+            <div class="rowlab lab-emo">情绪<small>EMOTION</small></div><div class="cell q"><span class="face">🙂</span>“这门课和我的任务相关。”</div><div class="cell q"><span class="face">😕</span>“但我要改到什么程度？”</div><div class="cell q"><span class="face">😟</span>“代码在哪个仓，怎么拼？”</div><div class="cell q"><span class="face">😣</span>“版本能配上吗？”</div><div class="cell q"><span class="face">🤨</span>“跑通是否真的对、真的快？”</div><div class="cell q"><span class="face">😣</span>“失败后又得重新搜索。”</div>
+            <div class="rowlab lab-op">机会<small>OPPORTUNITY</small></div><div class="cell op">课程按开发任务建立入口。</div><div class="cell op">每课给一项可验收改造。</div><div class="cell op">生成或下载工程模板。</div><div class="cell op">一键环境预检与替代建议。</div><div class="cell op">Golden + baseline + profiler 作为毕业件。</div><div class="cell op">错误回链课程，沉淀修复 recipe。</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-refine" hidden>
+    <div class="wrap wide"><div class="hero"><div class="eyebrow">PROBLEM DRILL-DOWN</div><h1>问题细化（按角色 · 分阶段拆解）</h1><p>优先展示右上象限 P3；各任务卡附公开来源和真实截图。截图展示页面事实，体验判断仅针对本次范围内的任务承接。</p></div><div class="rf-toolbar"><label>角色 <select id="rf-role" class="rf-select"></select></label></div><div id="rf-stages" class="rf-stages"></div><div id="rf-detail" class="rf-detail"></div></div>
+  </section>
+
+  <footer class="footer">证据：<a href="https://www.hiascend.com/developer/learn" target="_blank" rel="noopener">hiascend.com/developer/learn</a> · <a href="https://www.nvidia.com/en-us/training/" target="_blank" rel="noopener">nvidia.com/en-us/training</a> · 截图存于本工作区 materials/ascend-vs-nvidia/screenshots/。结论为快速研究草案，建议用实际课程完成率、在线实验转本地率和搜索 / 工单数据校准。</footer>
+
+  <script>
+    const btns=document.querySelectorAll('.nav-links button');
+    function show(view){document.querySelectorAll('.view').forEach(s=>s.hidden=s.id!=='view-'+view);btns.forEach(b=>b.classList.toggle('on',b.dataset.view===view));window.scrollTo({top:0,behavior:'smooth'});history.replaceState(null,'','#'+view)}
+    btns.forEach(b=>b.addEventListener('click',()=>show(b.dataset.view)));
+    if(location.hash){const v=location.hash.slice(1);if(['home','persona','refine'].includes(v))show(v)}
+    const ptabs=document.querySelectorAll('.ptab'),ppanes=document.querySelectorAll('.pd-pane');
+    ptabs.forEach(t=>t.addEventListener('click',()=>{const p=t.dataset.p;ptabs.forEach(x=>x.classList.toggle('on',x.dataset.p===p));ppanes.forEach(x=>x.hidden=x.dataset.p!==p)}));
+
+    const asc='https://www.hiascend.com/developer/learn',nv='https://www.nvidia.com/en-us/training/',shot='../materials/ascend-vs-nvidia/screenshots/';
+    const refineData={
+      p3:{name:'P3 · 任务迁移者（优先）',stages:[
+        {label:'定目标',sub:'课程 → 真实任务',done:true,tasks:[{t:'从学习内容定位与当前工程任务相关的切口',desc:'昇腾学习页能提供方向与内容入口；NVIDIA Training 以课程、认证和培训形式组织。两边的学习入口都不是工程任务看板，用户还需自行建立“课程知识点 → 项目目标”的映射。',emo:{lvl:'mid',word:'有方向·待落地',say:'这门课和我的问题有关，但我应该把它用在项目的哪一部分？'},page:{url:asc,shot:shot+'07-ascend-learn.png',label:'昇腾学习主页',cap:'真实截图：学习入口的角色路径、探索学习与资源组织',hl:{l:5,t:20,w:90,h:45}},iss:[{sev:'mid',t:'课程标签没有连接到项目任务',d:'内容按学习资源可发现，但没有把“学完后能完成什么工程动作”作为第一层筛选。'}],fix:[{t:'为每门课程标出任务出口',d:'用“首跑 / 动态 shape / 框架接入 / 性能验证”等任务标签连接学习内容和项目目标。'}]}]},
+        {label:'领任务',sub:'明确改什么',done:true,tasks:[{t:'把示例成功升级为一项明确的改造任务',desc:'既有取证显示，学习仓、文档、样例、工具仓分别存在；可变 shape、Tiling 或框架接入时，用户需自行拼接要改的文件、输入和验收方式。',emo:{lvl:'low',word:'知道概念·不会下手',say:'我知道 Tiling 是什么，但这次到底改哪个文件、测哪两组输入？'},page:{url:asc,shot:shot+'07-ascend-learn-path-op.png',label:'昇腾学习路径（算子）',cap:'真实截图：按学习路径组织的算子开发内容'},iss:[{sev:'hi',t:'没有“下一项改造任务”合同',d:'缺少输入变化、目标文件、预期输出和失败含义，用户不能从跟做自然过渡到会做。'}],fix:[{t:'增加跨板块挑战卡',d:'每张卡固定写明：课程前置、工程骨架、要改的文件、两组测试输入、golden 与下一跳。'}]}]},
+        {label:'拿骨架',sub:'课程 → 工程',done:true,tasks:[{t:'取得可构建、可测试的本地等价工程',desc:'在线实验让首次成功更快，但当前学习页未把本地工程、依赖版本、构建命令和测试入口作为默认完成产物。NVIDIA Training 也需离开培训页进入技术资产；差别不应被表述为单页能力缺失。',emo:{lvl:'bad',word:'成功断档',say:'浏览器里跑通了，怎么把同一个东西带到我的项目？'},page:{url:asc,shot:shot+'07-ascend-learn-path.png',label:'昇腾学习路径',cap:'真实截图：学习路径与在线实践入口'},iss:[{sev:'hi',t:'在线首跑没有导出等价工程',d:'学习的输出未定义为下一阶段的输入，导致用户重新搜索仓库、版本和命令。'}],fix:[{t:'首跑结束即交付工程包',d:'生成或下载带 lockfile、README、构建命令、golden 和下一改造任务的最小工程。'}]}]},
+        {label:'预检环境',sub:'版本与依赖',done:true,tasks:[{t:'在运行前确认硬件、CANN、框架与样例版本可配',desc:'学习内容、下载页、版本配套说明和代码仓分属不同入口。用户通常在本地失败后才发现组合不兼容。',emo:{lvl:'low',word:'不确定',say:'课程能跑不代表我的机器、框架和 CANN 能配上。'},page:{url:asc,shot:shot+'07-ascend-learn-3.3.png',label:'昇腾学习资源区',cap:'真实截图：探索学习、排行和课程资源',hl:{l:4,t:10,w:92,h:75}},iss:[{sev:'mid',t:'就绪条件没有跟随学习路径',d:'用户需要跨到下载和文档页面确认版本，前置风险对新手不可见。'}],fix:[{t:'开始本地实践前做预检',d:'基于目标任务询问或检测硬件、OS、CANN、框架版本，显示通过、风险、阻断与替代组合。'}]}]},
+        {label:'验证交付',sub:'正确性与性能',done:true,tasks:[{t:'证明改造后的工程正确、可复现且有性能依据',desc:'课程完成或在线结果不足以代表工程完成。正确性、基线、profiling 和环境信息需要作为同一毕业产物呈现。',emo:{lvl:'mid',word:'跑通·未验收',say:'能运行不等于可交付；我如何证明它对、快、可复现？'},page:{url:nv,shot:shot+'07-nvidia-training-3.3.png',label:'NVIDIA Training 页面',cap:'真实截图：NVIDIA 培训资源与认证信息'},iss:[{sev:'mid',t:'学习完成标准停在内容消费',d:'页面未把 golden、baseline 性能、profiler 证据与环境清单组成一个工程验收包。'}],fix:[{t:'用工程毕业件替代单一完成态',d:'定义“可复现工程 + golden + baseline + profiler 证据 + 环境清单”为进阶学习的完成标准。'}]}]},
+        {label:'恢复沉淀',sub:'错误 → 下一次',done:true,tasks:[{t:'遇到错误后定位工具、修复并回到原任务重验',desc:'文档、FAQ、论坛和诊断工具是独立入口。课程不需要包办所有排错知识，但应将常见失败映射到正确工具与修复样例，再把用户送回验收。',emo:{lvl:'bad',word:'受阻·重新搜索',say:'报错以后，我离开课程就不知道该先查文档、工具还是论坛。'},page:{url:asc,shot:shot+'07-ascend-learn.png',label:'昇腾学习主页',cap:'真实截图：学习资源入口；故障恢复不在主学习链路中'},iss:[{sev:'mid',t:'错误恢复脱离学习上下文',d:'错误类型、当前步骤与已完成产物不会随用户进入诊断页面，恢复后也没有重验入口。'}],fix:[{t:'构建“错误 → 工具 → 修复 → 重验”回路',d:'课程和样例列出典型错误，深链诊断工具 / FAQ / 论坛；修复完成后回到原挑战卡自动复验。'}]}]}
+      ]},
+      p1:{name:'P1 · 首跑探索者',stages:[
+        {label:'到达',sub:'识别入口',done:true,tasks:[{t:'打开学习入口，判断是否能快速开始',desc:'昇腾将学习资源作为开发者中心内的角色化入口；NVIDIA Training 将培训、课程和认证集中为学习品牌。两者都能说明“有学习资源”，昇腾在开发者角色路径上更直接。',emo:{lvl:'ok',word:'好奇',say:'我希望一眼知道：这里能不能让我开始。'},page:{url:asc,shot:shot+'07-ascend-learn.png',label:'昇腾学习主页',cap:'真实截图：学习主页首屏与角色化内容入口'},iss:[{sev:'lo',t:'两站的任务承诺仍偏宽泛',d:'用户能进入学习，但首屏较少说明“完成本次学习会得到什么可运行产物”。'}],fix:[{t:'首屏明确三种结果',d:'分别说明“在线首跑、拿到本地工程、获得认证”的时间、前置和完成证据。'}]}]},
+        {label:'选路径',sub:'角色 / 主题',done:true,tasks:[{t:'选择与自己目标相符的起步路径',desc:'昇腾的应用、算子、训练等角色路径降低了新手的术语门槛；NVIDIA Training 的课程型入口适合按培训主题与形式挑选。',emo:{lvl:'ok',word:'被引导',say:'我不用先懂所有产品名，也能选一条开始。'},page:{url:asc,shot:shot+'07-ascend-learn-path-train.png',label:'昇腾学习路径（训练）',cap:'真实截图：面向训练方向的学习路径'},iss:[{sev:'mid',t:'路径完成后的下一跳未显式串联',d:'“选对起点”后的本地实践、工程仓和验收标准不在同一条可见路径。'}],fix:[{t:'路径卡写出全链路',d:'将每条路径展示为“开始条件 → 首跑 → 本地实践 → 验收 → 进阶”。'}]}]},
+        {label:'开始实践',sub:'课程 / 在线实验',done:true,tasks:[{t:'无需先搭完本地环境就完成第一次实验',desc:'在线实验让昇腾在第一次成功前的安装门槛上形成长板；NVIDIA Training 主要强调课程与认证，本页不能据此推断其每门课程的实验准入方式。',emo:{lvl:'ok',word:'轻松',say:'先跑出来再决定投入，成本很低。'},page:{url:asc,shot:shot+'07-ascend-learn-path.png',label:'昇腾学习路径',cap:'真实截图：学习路径与在线实践入口'},iss:[{sev:'lo',t:'在线实践的本地接力未被默认设计',d:'首跑优势没有被转化为后续本地开发的低摩擦起点。'}],fix:[{t:'在线与本地一键切换',d:'实验结束时提供“下载此实验的本地等价版本”及一键验证指令。'}]}]},
+        {label:'看到结果',sub:'首次成功',done:true,tasks:[{t:'确认首个结果正确，并理解其含义',desc:'学习体验应把结果、预期输出与下一步动作一起交付；仅看到运行成功不足以帮助用户建立可迁移理解。',emo:{lvl:'ok',word:'兴奋',say:'跑通了，但我下一步应该改什么？'},page:{url:asc,shot:shot+'07-ascend-learn-path-op.png',label:'昇腾算子学习路径',cap:'真实截图：算子学习内容的阶段化组织'},iss:[{sev:'mid',t:'完成态缺少下一项挑战',d:'首跑成功没有以具体改造任务或本地工程作为自然出口。'}],fix:[{t:'完成态变成任务分岔',d:'提供“原样本地复现 / 改一项输入 / 进入工程模板”三个明确选择。'}]}]},
+        {label:'迁到本地',sub:'复现成果',done:true,tasks:[{t:'将在线结果复现到自己的环境',desc:'这是 P1 的第一个低谷：学习页不承载下载、版本匹配和工程模板，用户只能跨板块自拼。',emo:{lvl:'bad',word:'断档',say:'浏览器里的成功，为什么没有变成我的工程？'},page:{url:asc,shot:shot+'07-ascend-learn-3.3.png',label:'昇腾学习资源区',cap:'真实截图：学习内容聚合；工程出口未显示'},iss:[{sev:'hi',t:'无本地等价工程和版本说明',d:'首次成功后重建环境与查找资产，使学习成果难以留存。'}],fix:[{t:'输出可复现最小项目',d:'为每个在线实验附带依赖锁定、安装、构建、运行与 golden 验证。'}]}]},
+        {label:'恢复',sub:'遇错继续',done:true,tasks:[{t:'在失败时找到明确的诊断动作',desc:'此步需要跨到文档、FAQ、论坛和工具；学习页面没有按错误类型提供恢复路径。',emo:{lvl:'low',word:'挫败',say:'我现在该做什么，而不是该搜什么？'},page:{url:nv,shot:shot+'07-nvidia-training.png',label:'NVIDIA Training 页面',cap:'真实截图：NVIDIA 培训入口；诊断需转到技术文档 / 社区等资产'},iss:[{sev:'mid',t:'恢复触点站外且不带上下文',d:'学习系统无法知道用户在哪一步、用的何种版本、出现何种错误。'}],fix:[{t:'按错误卡片给首个动作',d:'将错误文本或现象映射至诊断命令、FAQ、修复样例和重试按钮。'}]}]}
+      ]},
+      p2:{name:'P2 · 能力建设者',stages:[
+        {label:'探索方向',sub:'发现主题',done:true,tasks:[{t:'从学习资源中发现值得投入的方向',desc:'昇腾页面提供探索学习和热门排行，适合发现内容；NVIDIA Training 以培训课程、学习方式和认证形成成熟学习品牌。',emo:{lvl:'ok',word:'探索',say:'我想知道现在该补哪种能力。'},page:{url:asc,shot:shot+'07-ascend-learn-3.3.png',label:'昇腾探索学习',cap:'真实截图：探索学习与热门排行'},iss:[{sev:'lo',t:'发现逻辑偏内容热度',d:'热度不总等同于个人任务相关性。'}],fix:[{t:'增加任务和基础能力筛选',d:'以目标场景、当前基础、预计时长和所需环境组合推荐内容。'}]}]},
+        {label:'选择课程',sub:'判断投入',done:true,tasks:[{t:'比较课程、认证与学习形式的投入回报',desc:'两站均呈现系统学习资源；用户还需要知道前置条件、练习形态、能获得的工程能力和下一段路径。',emo:{lvl:'mid',word:'比较',say:'我投入这段时间，最后能完成什么？'},page:{url:nv,shot:shot+'07-nvidia-training-3.3.png',label:'NVIDIA Training 课程资源',cap:'真实截图：培训和认证资源组织'},iss:[{sev:'mid',t:'课程结果与具体任务关系弱',d:'用户难以在选择前比较“能完成哪类开发动作”。'}],fix:[{t:'展示能力产出而非仅课程标题',d:'每门课增加任务标签、前置、实践产物和可继续的工程关卡。'}]}]},
+        {label:'系统学习',sub:'形成知识',done:true,tasks:[{t:'沿一条连续内容链建立知识框架',desc:'昇腾的学习、昇腾学堂和认证资产已存在；需要将课程间关系表达得像能力树，而不只是多个资源入口。',emo:{lvl:'ok',word:'投入',say:'我想确认自己没有漏掉关键前置。'},page:{url:asc,shot:shot+'07-ascend-learn.png',label:'昇腾学习主页',cap:'真实截图：学习资源与路径入口'},iss:[{sev:'mid',t:'跨资源的前置关系不透明',d:'用户难以判断课程、文档、实验和认证的顺序与依赖。'}],fix:[{t:'可视化能力树与进度',d:'展示已具备、正在学习、建议下一步，并标出每关的前置和可验证产出。'}]}]},
+        {label:'实践 / 认证',sub:'证明能力',done:true,tasks:[{t:'用可核验的实践或认证证明能力',desc:'昇腾有微认证入口，NVIDIA Training 的认证辨识度较强。两者都可进一步把证明从“完成学习”增强为“完成可复现任务”。',emo:{lvl:'ok',word:'达成',say:'我希望这份证明能代表我真的做过。'},page:{url:asc,shot:shot+'07-ascend-learn-3.3.png',label:'昇腾学习资源区',cap:'真实截图：学习与认证相关资源'},iss:[{sev:'mid',t:'证明与工程成果脱钩',d:'认证或课程完成不必然留下团队可复用的工程材料。'}],fix:[{t:'认证绑定作品化交付',d:'通过认证时同步生成可分享的工程摘要、版本环境和验证证据。'}]}]},
+        {label:'识别缺口',sub:'规划下一段',done:true,tasks:[{t:'根据目标任务识别下一项能力缺口',desc:'当前学习入口提供内容发现，但没有把已完成内容、目标项目与下一门课程组合成个性化能力规划。',emo:{lvl:'mid',word:'需要导航',say:'我会了这些，距离项目目标还差哪一块？'},page:{url:asc,shot:shot+'07-ascend-learn.png',label:'昇腾学习主页',cap:'真实截图：学习入口；未呈现个人能力 / 任务差距'},iss:[{sev:'mid',t:'没有任务驱动的下一步推荐',d:'用户只能重新浏览内容或依赖人工建议。'}],fix:[{t:'引入能力差距诊断',d:'选择目标任务后，系统显示已满足能力、风险项和最短补齐路径。'}]}]},
+        {label:'迁移能力',sub:'落地项目',done:true,tasks:[{t:'把系统学习成果用于一个真实开发任务',desc:'这是能力建设的最终校验，也是昇腾最应补的学习承接：课程、样例、工具和社区有资产，但缺一条默认交接协议。',emo:{lvl:'low',word:'要落地',say:'我不想再学一门课，我要把这项能力用出去。'},page:{url:asc,shot:shot+'07-ascend-learn-path-op.png',label:'昇腾算子学习路径',cap:'真实截图：学习路径；工程、验证与恢复需跨板块衔接'},iss:[{sev:'hi',t:'学习与项目之间缺正式迁移协议',d:'无法把已完成课程转成可领取、可验收、可复用的工程任务。'}],fix:[{t:'发布“课程 → 项目”桥接任务',d:'每条能力链至少提供一个真实工程改造、模板、环境预检、golden 与复盘模板。'}]}]}
+      ]}
+    };
+    (function(){const cn=['①','②','③','④','⑤','⑥'];const roleSel=document.getElementById('rf-role'),stagesEl=document.getElementById('rf-stages'),detailEl=document.getElementById('rf-detail');let role='p3',stage=0;const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');Object.keys(refineData).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=refineData[k].name;roleSel.appendChild(o)});roleSel.value=role;
+      function fig(pg){const box=pg.hl?`<span class="rf-hl" style="left:${pg.hl.l}%;top:${pg.hl.t}%;width:${pg.hl.w}%;height:${pg.hl.h}%"></span>`:'';return `<figure class="rf-fig"><a class="u" href="${pg.url}" target="_blank" rel="noopener">来源：${esc(pg.label)}</a><div class="rf-shot-scroll"><div class="rf-shot">${box}<img src="${pg.shot}" alt="${esc(pg.cap)}" loading="lazy"></div></div><figcaption>${esc(pg.cap)}</figcaption></figure>`}
+      function issues(a){return `<div class="iss-card compact"><div class="iss-card-hd">体验问题</div>${a.map(x=>`<div class="iss"><div class="iss-hd"><span class="t">${esc(x.t)}</span></div><div class="d">${esc(x.d)}</div></div>`).join('')}</div>`}
+      function fixes(a){return `<div class="fix-card"><div class="fix-card-hd">改进建议</div>${a.map(x=>`<div class="fix"><b>${esc(x.t)}</b>${esc(x.d)}</div>`).join('')}</div>`}
+      function renderStages(){stagesEl.innerHTML=refineData[role].stages.map((s,i)=>`<button type="button" class="rf-stage ${i===stage?'on':''}" data-i="${i}"><div class="no">${cn[i]}</div><div class="nm">${esc(s.label)}</div><div class="sb">${esc(s.sub)}</div></button>`).join('');stagesEl.querySelectorAll('.rf-stage').forEach(x=>x.addEventListener('click',()=>{stage=+x.dataset.i;renderStages();renderDetail()}))}
+      function renderDetail(){const s=refineData[role].stages[stage];detailEl.innerHTML=`<div class="rf-dhd"><h2>阶段 ${cn[stage]} · ${esc(s.label)}</h2></div><div class="rf-cmp rf-cmp-single">${s.tasks.map((t,i)=>`<div class="rf-task-card"><div class="rf-task-split"><div class="rf-task-left lv-${t.emo.lvl}"><div class="tk-t"><span class="tk-no lv-${t.emo.lvl}">${i+1}</span><span>${esc(t.t)}</span></div><div class="tk-desc">${esc(t.desc)}</div>${fig(t.page)}<div class="emo-card lv-${t.emo.lvl}"><div class="emo-card-hd">用户情绪</div><div class="emo-card-bd"><div class="tk-emo lv-${t.emo.lvl}"><span class="mood">${esc(t.emo.word)}</span><span class="say">“${esc(t.emo.say)}”</span></div></div></div></div><div class="rf-task-right">${issues(t.iss)}${fixes(t.fix)}</div></div></div>`).join('')}</div>`}
+      roleSel.addEventListener('change',()=>{role=roleSel.value;stage=0;renderStages();renderDetail()});renderStages();renderDetail()})();
+  </script>
+</body>
+</html>
