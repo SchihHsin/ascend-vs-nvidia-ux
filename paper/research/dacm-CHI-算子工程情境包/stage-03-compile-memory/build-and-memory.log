@@ -1,0 +1,8 @@
+[build] package AddCustom
+[build] target: ai_core_<soc_version>
+[warning] tiling metadata was not found for dynamic input shape [N]
+[runtime] sanitizer summary: invalid global-memory access reported near AddCustom kernel launch
+[runtime] available context: input length and block configuration were not attached to this log excerpt
+
+# 研究材料说明：这是脱敏的现场线索，不是可据此唯一定位的真实故障报告。
+# 不应假定问题一定来自 Tiling、dtype、注册或具体某一行代码。

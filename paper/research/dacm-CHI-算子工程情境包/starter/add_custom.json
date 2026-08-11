@@ -1,0 +1,11 @@
+{
+  "op": "AddCustom",
+  "input_desc": [
+    {"name": "x", "dtype": "float16", "format": "ND"},
+    {"name": "y", "dtype": "float16", "format": "ND"}
+  ],
+  "output_desc": [
+    {"name": "z", "dtype": "float16", "format": "ND"}
+  ],
+  "scenario_note": "这是情境工程的原型假设。真实项目中 dtype、format、shape 和 SoC 型号必须由上游模型与现场环境确认。"
+}
