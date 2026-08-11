@@ -1,0 +1,62 @@
+<div id="darModel">
+  <style>
+    #darModel{font-family:Inter,"Noto Sans SC",system-ui,sans-serif;color:#232936;background:#fff;padding:26px 28px;max-width:1120px;margin:auto;position:relative}
+    #darModel .eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:#82683a;text-transform:uppercase}
+    #darModel h1{font-size:27px;line-height:1.25;margin:5px 0 5px;letter-spacing:-.04em}
+    #darModel .lead{font-size:13px;line-height:1.6;color:#64707c;margin:0 0 15px;max-width:760px}
+    #darModel .tabs{display:flex;gap:8px;margin:2px 0 4px}
+    #darModel button{font:600 12px inherit;padding:6px 11px;border:1px solid #d7d2c7;background:transparent;color:#626975;border-radius:14px;cursor:pointer}
+    #darModel button.on{border-color:#6f5bc7;color:#4e3fab;background:#f1eeff}
+    #darModel svg{display:block;width:100%;height:auto;overflow:visible}
+    #darModel .small{font-size:10px;fill:#7a828d}.label{font-size:11px;fill:#303846;font-weight:700}.phase{font-size:10px;fill:#5b6470;font-weight:700}.note{font-size:10px;fill:#786850}.num{font-size:17px;fill:#242a33;font-weight:800}.legend{font-size:10px;fill:#66707b}
+    #darModel .tip{position:absolute;background:#232832;color:#fff;pointer-events:none;border-radius:7px;padding:8px 10px;font-size:11px;line-height:1.45;opacity:0;transition:opacity .1s;z-index:5;max-width:240px}
+    #darModel .foot{font-size:10px;line-height:1.55;color:#838992;margin-top:5px;max-width:920px}
+    @media(max-width:650px){#darModel{padding:17px 12px}#darModel h1{font-size:22px}#darModel .lead{font-size:12px}}
+  </style>
+  <div class="eyebrow">concept figure prototype · ratio model</div>
+  <h1>开发者–Agent 协同配比图（Developer–Agent Ratio）</h1>
+  <p class="lead">每一枚“协同币”代表一个开发阶段：圆面积是阶段总投入；紫/红扇面是该阶段由 Agent 与开发者主导的工作占比；最外层金色断环是无法被语言模型替代的本机事实核对负荷。</p>
+  <div class="tabs"><button class="on" data-s="op">算子开发</button><button data-s="train">训练</button></div>
+  <svg id="darSvg" viewBox="0 0 1060 530" role="img" aria-label="开发者与 AI 协同配比模型"></svg>
+  <div class="foot">当前为把现有时序研究转为“比例模型”的编码草图：正式论文中，扇面应由阶段内可编码的动作时间、主导权或交接次数计算；金环应由需读取本机/业务事实的核对动作计算。它不是把“知识生态”算作一个参与者，而是把它造成的验证负担保留为独立变量。</div>
+  <div class="tip" id="darTip"></div>
+  <script>
+  (()=>{
+    const root=document.getElementById('darModel'),svg=document.getElementById('darSvg'),tip=document.getElementById('darTip');
+    const colors={a:'#7865d6',h:'#c65359',g:'#d4a146',ink:'#2d3642',pale:'#e9e5dd'};
+    const DATA={
+      op:[
+        ['找入口·选型',48,52,20,1.00,'开发者定目标；AI 辅助搜入口'],['理解任务',57,43,30,1.12,'AI 起草知识框架；人判断技术路径'],['写 kernel',35,65,72,1.34,'官方 how-to 受阻；人补齐关键实现'],['编译·部署',28,72,88,1.45,'本机版本、硬件与命令占位集中爆发'],['集成·联调',42,58,75,1.28,'AI 解读，人负责接入与复现'],['精度·排错',38,62,82,1.36,'报错回灌与阈值判断使人持续在场'],['验证·沉淀',46,54,65,1.13,'AI 总结，人验证结果并决定复用']
+      ],
+      train:[
+        ['找入口·选型',53,47,22,1.00,'AI 辅助比较路径；人选定框架'],['环境准备',43,57,67,1.25,'版本矩阵与本机配置需要人核对'],['框架迁移',48,52,61,1.24,'AI 给迁移步骤；人处理项目差异'],['分布式配置',44,56,76,1.34,'拓扑、卡数、数据由人确认'],['运行·监控',50,50,66,1.18,'AI 协助解读；人掌握训练现场'],['调参·排错',46,54,72,1.26,'指标判断与异常归因反复交棒'],['评估·沉淀',49,51,58,1.12,'双方相对均衡，人工完成验收']
+      ]
+    };
+    let scene='op';
+    const polar=(cx,cy,r,a)=>[cx+r*Math.cos(a-Math.PI/2),cy+r*Math.sin(a-Math.PI/2)];
+    const arc=(cx,cy,r,a0,a1)=>{let p0=polar(cx,cy,r,a0),p1=polar(cx,cy,r,a1),large=a1-a0>Math.PI?1:0;return `M ${cx} ${cy} L ${p0[0]} ${p0[1]} A ${r} ${r} 0 ${large} 1 ${p1[0]} ${p1[1]} Z`};
+    const ring=(cx,cy,r,a0,a1,w)=>{let p0=polar(cx,cy,r,a0),p1=polar(cx,cy,r,a1),q0=polar(cx,cy,r-w,a0),q1=polar(cx,cy,r-w,a1),large=a1-a0>Math.PI?1:0;return `M ${p0[0]} ${p0[1]} A ${r} ${r} 0 ${large} 1 ${p1[0]} ${p1[1]} L ${q1[0]} ${q1[1]} A ${r-w} ${r-w} 0 ${large} 0 ${q0[0]} ${q0[1]} Z`};
+    function draw(){
+      const d=DATA[scene],pos=[[110,265],[245,180],[405,130],[555,167],[704,130],[845,185],[960,273]];
+      let s=`<defs><filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity=".14"/></filter></defs>`;
+      s+=`<path d="M75 349 C230 366 274 257 402 281 S539 358 699 280 S873 204 1006 301" fill="none" stroke="#d8d2c5" stroke-width="2" stroke-dasharray="3 7"/>`;
+      s+=`<text x="60" y="395" class="small">开发过程不是一条“AI 取代人”的直线，而是一串协同配比不断变形的阶段币。</text>`;
+      d.forEach((v,i)=>{let [name,a,h,g,eff,desc]=v,[x,y]=pos[i],r=48*eff,ang=a/100*2*Math.PI,outer=r+14,halo=g/100*2*Math.PI;
+        s+=`<g class="coin" data-i="${i}" style="cursor:pointer" filter="url(#shadow)">`;
+        s+=`<circle cx="${x}" cy="${y}" r="${outer}" fill="#fff" stroke="#e2ddd3" stroke-width="1"/>`;
+        s+=`<path d="${arc(x,y,r,0,ang)}" fill="${colors.a}"/><path d="${arc(x,y,r,ang,2*Math.PI)}" fill="${colors.h}"/>`;
+        s+=`<path d="${ring(x,y,outer+7,-.40,-.40+halo,5)}" fill="${colors.g}"/>`;
+        s+=`<circle cx="${x}" cy="${y}" r="${r*.43}" fill="#fff"/>`;
+        s+=`<text x="${x}" y="${y-3}" text-anchor="middle" class="num">${a}:${h}</text><text x="${x}" y="${y+12}" text-anchor="middle" class="small">A : 人</text>`;
+        s+=`<text x="${x}" y="${y+r+31}" text-anchor="middle" class="phase">${name}</text>`;
+        s+=`<text x="${x}" y="${y+r+46}" text-anchor="middle" class="small">核对负荷 ${g}%</text></g>`;
+      });
+      s+=`<g transform="translate(75,437)"><circle cx="8" cy="8" r="7" fill="${colors.a}"/><text x="21" y="12" class="legend">Agent 主导动作占比</text><circle cx="170" cy="8" r="7" fill="${colors.h}"/><text x="183" y="12" class="legend">开发者主导动作占比</text><path d="${ring(410,8,13,-.5,1.9,4)}" fill="${colors.g}"/><text x="429" y="12" class="legend">金环：本机/业务事实核对负荷</text><circle cx="710" cy="8" r="18" fill="#ece8df"/><text x="735" y="12" class="legend">圆面积：阶段总投入</text></g>`;
+      s+=`<g transform="translate(75,474)"><text class="label" x="0" y="0">如何读：</text><text class="note" x="50" y="0">扇面相等 ≠ 可无人值守；只要金环高，Agent 的答案就必须经本机事实校验。</text></g>`;
+      svg.innerHTML=s;
+      svg.querySelectorAll('.coin').forEach(el=>{let v=d[+el.dataset.i];el.addEventListener('mouseenter',e=>{tip.innerHTML=`<b>${v[0]}</b><br>Agent ${v[1]}% · 开发者 ${v[2]}% · 本机核对 ${v[3]}%<br>${v[5]}`;tip.style.opacity=1;tip.style.left=(e.clientX-root.getBoundingClientRect().left+12)+'px';tip.style.top=(e.clientY-root.getBoundingClientRect().top+12)+'px'});el.addEventListener('mousemove',e=>{tip.style.left=(e.clientX-root.getBoundingClientRect().left+12)+'px';tip.style.top=(e.clientY-root.getBoundingClientRect().top+12)+'px'});el.addEventListener('mouseleave',()=>tip.style.opacity=0)});
+    }
+    root.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{scene=b.dataset.s;root.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));draw()}));draw();
+  })();
+  </script>
+</div>
