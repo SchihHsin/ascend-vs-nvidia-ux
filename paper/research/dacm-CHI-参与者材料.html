@@ -9,13 +9,14 @@
 <style>.download{display:inline-flex;align-items:center;gap:8px;background:#202735;color:#fff!important;text-decoration:none;border-radius:9px;padding:10px 14px;font-weight:700;font-size:14px;box-shadow:0 8px 18px -13px #000}.download:before{content:'↓';font-size:18px;line-height:1}.download:hover{background:#377cf6}@media print{.download{display:none}}</style>
 <style>
 .task-map{margin:20px 0 8px;padding:20px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#fbfdff,#f3f7ff);overflow:hidden}.task-map-top{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:10px;align-items:center}.map-source{min-height:86px;padding:14px;border-radius:13px;background:#fff;border:1px solid #e1e8f2}.map-source b{display:block;font-size:14px}.map-source span{display:block;margin-top:4px;font-size:12px;color:var(--muted);line-height:1.45}.map-core{position:relative;padding:14px 18px;border-radius:14px;color:#fff;background:linear-gradient(135deg,#24334d,#377cf6);box-shadow:0 12px 24px -18px #24334d}.map-core:before,.map-core:after{content:'→';position:absolute;top:50%;font-size:24px;transform:translateY(-50%);color:#9ab9fc}.map-core:before{left:-30px}.map-core:after{right:-30px}.map-core b{display:block;font-size:16px}.map-core span{font-size:12px;opacity:.83}.map-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;position:relative;margin-top:18px}.map-flow:before{content:'';position:absolute;top:27px;left:9%;right:9%;height:2px;background:linear-gradient(90deg,#249d89,#9060d2,#ed7a42);opacity:.35}.map-step{position:relative;z-index:1;min-height:205px;padding:10px 11px;border:1px solid var(--line);border-radius:13px;background:#fff}.map-index{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#e9f7f3;color:#16806e;font-size:12px;font-weight:800}.map-step:nth-child(even) .map-index{background:#f2ecff;color:#7651bb}.map-step:nth-child(3) .map-index{background:#fff0e7;color:#c65d28}.map-step b{display:block;margin:7px 0 1px;font-size:13px}.map-step span{display:block;min-height:46px;color:var(--muted);font-size:11px;line-height:1.4}.command{display:flex;align-items:stretch;gap:5px;margin-top:7px}.command code{display:block;flex:1;min-width:0;padding:7px 8px;background:#1f2937;color:#e8eefb;border-radius:7px;font-size:10px;line-height:1.35;white-space:nowrap;overflow:auto}.copy-command{flex:0 0 auto;border:1px solid #cbd7e9;border-radius:7px;background:#fff;color:#3b629d;padding:0 7px;font:700 10px/1 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;cursor:pointer}.copy-command:hover{background:#edf4ff}.copy-command.copied{border-color:#9bd8c7;background:#e8f8f2;color:#13745e}.trace-strip{display:grid;grid-template-columns:100px 1fr;gap:12px;align-items:center;margin-top:18px;padding:13px 15px;border-radius:12px;background:#fff7ed;border:1px solid #ffe2cc}.trace-label{font-size:12px;font-weight:800;color:#a95022}.trace-items{display:flex;gap:7px;flex-wrap:wrap}.trace-items span{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:99px;background:#fff;color:#58657a;font-size:11px;border:1px solid #f3d7c2}.trace-items span:before{content:'✓';color:#d66b32;font-weight:800}.record-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:17px}.record-node{padding:13px;border:1px dashed #bfcad8;border-radius:13px;background:#fcfdff}.record-node b{display:block;font-size:13px;color:#3f4f68}.record-node p{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.5}.record-node em{display:block;margin-top:8px;font-style:normal;font-size:11px;color:#377cf6}.handoff{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center;margin:18px 0 4px;padding:16px;border-radius:14px;background:#f5f8fc;border:1px solid var(--line)}.handoff b{font-size:13px}.handoff p{margin:0;color:#59677d;font-size:13px}@media(max-width:900px){.task-map-top,.map-flow,.record-grid{grid-template-columns:1fr}.map-core:before,.map-core:after,.map-flow:before{display:none}.map-source,.map-core{text-align:left}.map-step{min-height:auto}.map-step span{min-height:auto}.handoff{grid-template-columns:1fr}}
+.choice-set{display:flex;flex-wrap:wrap;gap:7px 12px;margin:8px 0 10px}.choice-set label{display:inline-flex;align-items:center;gap:5px;margin:0;font-size:13px;font-weight:400}.choice-set input{accent-color:var(--blue)}.choice-note{display:block;margin-bottom:7px;color:var(--muted);font-size:12px}.other-input{margin-top:8px!important;font-size:13px!important}.record-actions{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-top:18px;padding:16px;border:1px solid #cfdcf0;border-radius:13px;background:#f7faff}.record-actions b{display:block;font-size:14px}.record-actions p{margin:3px 0 0;color:var(--muted);font-size:12px}.record-buttons{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}.record-buttons button{border:1px solid #bfd1ef;border-radius:8px;background:#fff;color:#315f9e;padding:8px 10px;font:700 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;cursor:pointer}.record-buttons button.primary{border-color:#377cf6;background:#377cf6;color:#fff}.record-buttons button.danger{border-color:#ead4d9;color:#a14e62}.draft-status{grid-column:1/-1;margin:0;color:#58708e;font-size:12px;text-align:right}@media(max-width:900px){.record-actions{grid-template-columns:1fr}.record-buttons{justify-content:flex-start}.draft-status{text-align:left}}
 </style>
 </head>
 <body>
 <main class="shell">
 <header class="hero"><div><div class="eyebrow">AI COLLABORATIVE DEVELOPMENT STUDY</div><h1>参与者材料</h1><div class="kicker">请在研究开始前阅读，访谈中可边看边填写</div></div><p>我们想了解开发者如何与 AI、资料和工程环境一起推进技术任务。</p></header>
 <div class="layout"><nav class="rail" aria-label="章节导航"><strong>本次流程</strong><a href="#welcome">研究说明</a><a href="#consent">同意确认</a><a href="#background">背景问卷</a><a href="#replay">真实项目回放</a><a href="#journey">连续工程任务</a><a href="#plan">过程记录</a><a href="#after">任务后问卷</a><a href="#finish">结束确认</a></nav>
-<article class="paper">
+<article class="paper" id="participant-paper">
 <section class="section" id="welcome"><div class="kicker">01 · 开始前</div><h2>研究说明</h2><p>活动约 110–130 分钟：先回顾一段你过去使用 AI 完成的开发任务，再在你平时常用的 CLI 或 IDE 中打开一份统一的自定义算子研究工程。你可以使用自己的 AI Coding 工具、浏览器和公开技术资料。工程包在本地即可开启；其中的脚本提供阶段性线索，支持代码阅读、修改、检索和人机协作。</p><div class="note"><b>你不需要提供：</b>私有源码、密钥、账号、内部链接、客户信息或业务数据。展示材料前请先脱敏；没有材料时完全口述也可以。</div></section>
 <section class="section" id="consent"><div class="kicker">02 · 知情同意</div><h2>请确认你的选择</h2><p>录音是访谈的基本记录；屏幕、Agent 对话、终端、代码 diff 和文档访问仅在你明确同意时记录。你可以跳过问题，也可以在结束时要求删除指定片段。</p><div class="checks"><label><input type="checkbox"> 我已理解研究内容、时长和自愿参加的权利。</label><label><input type="checkbox"> 我同意录制访谈音频。</label><label><input type="checkbox"> 我同意记录我自愿展示的屏幕、Agent 对话或终端片段。</label><label><input type="checkbox"> 我同意研究者使用经我确认的匿名引语。</label><label><input type="checkbox"> 我同意研究者后续就材料向我澄清问题。</label></div><div class="field" style="margin-top:14px"><label>电子确认（姓名或缩写）</label><input type="text"></div></section>
 <section class="section" id="background"><div class="kicker">03 · 约 5 分钟</div><h2>背景问卷</h2><div class="grid"><div class="field"><label>当前角色</label><div class="checks"><label><input type="checkbox">学生</label><label><input type="checkbox">开发工程师</label><label><input type="checkbox">算法工程师</label><label><input type="checkbox">研究人员</label><label><input type="checkbox">其他</label></div></div><div class="field"><label>开发经验</label><div class="checks"><label><input type="radio" name="years">少于 1 年</label><label><input type="radio" name="years">1–3 年</label><label><input type="radio" name="years">3–5 年</label><label><input type="radio" name="years">5–8 年</label><label><input type="radio" name="years">8 年以上</label></div></div><div class="field wide"><label>常用语言、框架和开发领域</label><input type="text"></div><div class="field"><label>使用 AI Coding 的频率</label><div class="checks"><label><input type="radio" name="freq">几乎每天</label><label><input type="radio" name="freq">每周多次</label><label><input type="radio" name="freq">每周一次左右</label><label><input type="radio" name="freq">偶尔</label></div></div><div class="field"><label>常用 AI 工具（可多选）</label><div class="checks"><label><input type="checkbox">ChatGPT</label><label><input type="checkbox">Claude</label><label><input type="checkbox">Copilot</label><label><input type="checkbox">Cursor</label><label><input type="checkbox">其他</label></div></div><div class="field wide"><label>你通常用 AI 做什么（可多选）</label><div class="checks"><label><input type="checkbox">查资料/读文档</label><label><input type="checkbox">方案设计</label><label><input type="checkbox">写或改代码</label><label><input type="checkbox">调试</label><label><input type="checkbox">性能优化</label><label><input type="checkbox">学习新技术</label></div></div></div><h3>相关经验</h3><table><tr><th>技术</th><th>没有</th><th>了解</th><th>实际使用过</th></tr><tr><td>PyTorch</td><td>□</td><td>□</td><td>□</td></tr><tr><td>CUDA</td><td>□</td><td>□</td><td>□</td></tr><tr><td>CANN / Ascend</td><td>□</td><td>□</td><td>□</td></tr><tr><td>自定义算子 / 扩展开发</td><td>□</td><td>□</td><td>□</td></tr></table></section>
@@ -42,5 +43,90 @@ document.querySelectorAll('.copy-command').forEach(button=>{
     setTimeout(()=>{button.textContent=label;button.classList.remove('copied')},1200);
   });
 });
+
+/* 参与者填写：结构化选项缩短回答成本，补充框保留真实语境。 */
+const paper = document.querySelector('.paper');
+const storageKey = 'dacm-chi-participant-draft-v1';
+const byLabel = (text) => [...paper.querySelectorAll('.field')].find((field) => field.querySelector('label')?.textContent.trim() === text);
+const optionMarkup = (items) => `<div class="choice-set">${items.map((item) => `<label><input type="checkbox">${item}</label>`).join('')}</div>`;
+const supplement = (placeholder) => `<input class="other-input" type="text" placeholder="${placeholder}">`;
+const enrichField = (label, items, placeholder) => {
+  const field = byLabel(label);
+  const control = field?.querySelector('input[type="text"], textarea');
+  if (!field || !control) return;
+  control.insertAdjacentHTML('beforebegin', optionMarkup(items));
+  if (control.tagName === 'INPUT') control.outerHTML = supplement(placeholder);
+  else control.placeholder = placeholder;
+};
+enrichField('为什么当时使用 AI', ['理解代码 / 文档', '生成或修改代码', '定位报错', '方案比较', '性能 / 质量优化'], '其他原因或补充（可填写）');
+enrichField('任务目标，以及什么算完成', ['功能正确', '通过测试', '消除报错', '满足性能 / 精度', '完成工程接入'], '可补充具体目标、验收标准或背景');
+enrichField('语言 / 框架 / 版本 / 环境 / 项目约束', ['Python', 'C / C++', 'PyTorch', 'CUDA', 'CANN / Ascend', '本地环境', '远程环境'], '可补充版本、硬件、依赖、权限或项目约束');
+enrichField('我最信任 AI 的时刻', ['解释与已有事实一致', '给出可运行代码', '引用了可信资料', '节省了重复劳动'], '可补充具体时刻或原因');
+enrichField('我决定自己接手的时刻', ['建议不确定 / 有冲突', '需要本地事实', '涉及风险或权限', '反复尝试无效'], '可补充具体时刻或原因');
+enrichField('我最终如何验证或确认结果', ['运行测试', '检查日志 / 输出', '对照官方文档', '代码审查 / 同伴确认', '真实环境验证'], '可补充验证步骤或尚未验证的部分');
+
+/* 关键节点的发起方也提供选项，仍允许参与者补充。 */
+paper.querySelectorAll('#replay table tr:not(:first-child) td:nth-child(3) input').forEach((input) => {
+  const select = document.createElement('select');
+  select.innerHTML = '<option value="">选择发起方</option><option>我</option><option>AI / Agent</option><option>资料 / 文档</option><option>环境 / 日志</option><option>共同触发</option>';
+  input.replaceWith(select);
+});
+
+const controls = document.createElement('div');
+controls.className = 'record-actions';
+controls.innerHTML = '<div><b>填写记录</b><p>草稿仅保存在当前浏览器设备；导出后由你自行交给研究团队，不会自动上传。</p></div><div class="record-buttons"><button type="button" data-save>保存本机草稿</button><button type="button" class="primary" data-export>导出填写记录（JSON）</button><button type="button" class="danger" data-clear>清除本机草稿</button></div><p class="draft-status" aria-live="polite"></p>';
+paper.querySelector('#finish').append(controls);
+const draftStatus = controls.querySelector('.draft-status');
+const fields = () => [...paper.querySelectorAll('input, textarea, select')];
+const questionOf = (field) => {
+  const fieldBox = field.closest('.field');
+  if (fieldBox?.querySelector(':scope > label')) return fieldBox.querySelector(':scope > label').textContent.trim();
+  const cell = field.closest('td');
+  if (cell) return cell.parentElement.parentElement.querySelectorAll('th')[cell.cellIndex]?.textContent.replace(/\s+/g, ' ').trim() || '关键节点';
+  const label = field.closest('label');
+  return label?.textContent.replace(/\s+/g, ' ').trim() || '未命名字段';
+};
+const sectionOf = (field) => field.closest('.section')?.querySelector('h2')?.textContent.trim() || '参与者材料';
+const snapshot = () => fields().map((field, index) => ({index, section: sectionOf(field), question: questionOf(field), type: field.type, checked: field.checked, value: field.value}));
+const restore = () => {
+  try {
+    const draft = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    draft.forEach((item) => {
+      const field = fields()[item.index];
+      if (!field || field.type !== item.type) return;
+      field.checked = item.checked;
+      field.value = item.value;
+    });
+    if (draft.length) draftStatus.textContent = '已恢复本机草稿。';
+  } catch { localStorage.removeItem(storageKey); }
+};
+const save = (quiet = false) => {
+  localStorage.setItem(storageKey, JSON.stringify(snapshot()));
+  if (!quiet) draftStatus.textContent = '已保存到当前设备的浏览器草稿。';
+};
+restore();
+paper.addEventListener('input', () => save(true));
+paper.addEventListener('change', () => save(true));
+controls.querySelector('[data-save]').addEventListener('click', () => save());
+controls.querySelector('[data-clear]').addEventListener('click', () => {
+  localStorage.removeItem(storageKey);
+  fields().forEach((field) => { field.checked = false; field.value = ''; });
+  draftStatus.textContent = '已清除当前设备的浏览器草稿。';
+});
+controls.querySelector('[data-export]').addEventListener('click', () => {
+  const exportData = {
+    study: 'DACM CHI participant material',
+    exportedAt: new Date().toISOString(),
+    note: '本文件由参与者在本机导出；请研究团队按知情同意范围接收、脱敏与保存。',
+    responses: snapshot().filter((item) => item.checked || item.value)
+  };
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url; link.download = `dacm-participant-record-${new Date().toISOString().slice(0, 10)}.json`; link.click();
+  URL.revokeObjectURL(url);
+  draftStatus.textContent = '已导出 JSON，请将文件自行交给研究团队。';
+});
+document.querySelector('.footer').textContent = '填写内容不会自动上传。可仅保存到当前设备，或在结束后导出 JSON 并由您自行交给研究团队；请先确认需要保留、删除或脱敏的内容。';
 </script>
 </body></html>
