@@ -29,6 +29,9 @@
 #overview .sprint:before{background:#bcd3fa}#overview .sprint-step small{color:#637da8}
 #overview .sprint-step.deadline-step b{color:#3978ee}
 @media(max-width:860px){#overview .schedule{margin-top:28px}#overview .schedule-grid{grid-template-columns:1fr}}
+/* 分析工作流是用户测试的收束步骤，沿用该楼层的青色提示。 */
+#study .analysis-flow-section{padding:0;border:0}#study .analysis-flow{margin-top:34px;border-top-color:#b9e2d9}
+#study .analysis-step .num,#study .analysis-step strong em{color:var(--teal)}
 </style>
 </head>
 <body>
@@ -59,6 +62,9 @@
   const overview = document.getElementById('overview');
   const schedule = document.getElementById('schedule');
   if (overview && schedule) overview.append(schedule);
+  const study = document.getElementById('study');
+  const analysisFlow = document.querySelector('.analysis-flow-section');
+  if (study && analysisFlow) study.querySelector('.wrap').append(analysisFlow);
 
   document.querySelectorAll('a[href]:not([href^="#"])').forEach((link) => {
     link.target = '_blank';
