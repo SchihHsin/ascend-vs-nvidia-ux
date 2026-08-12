@@ -22,13 +22,20 @@
 .sprint:before,.sprint-step:before,.dates:before,.date:before{display:none}
 .sprint,.dates{isolation:isolate}.sprint-step,.date{z-index:1}.d3-timeline{position:absolute;z-index:0;top:0;left:0;width:100%;pointer-events:none;overflow:visible}
 .sprint .d3-timeline{height:40px}.dates .d3-timeline{height:46px}
+/* 倒排计划属于“现在”的执行信息，使用概览的蓝色体系，而不是单独的暖色楼层。 */
+#overview .schedule{margin-top:34px;padding:30px 0 0;border:0;border-top:1px solid #dbe7fb}
+#overview .schedule:before{display:none}#overview .schedule-grid{grid-template-columns:240px 1fr}
+#overview .schedule-note b,#overview .sprint-step b{color:#3978ee}
+#overview .sprint:before{background:#bcd3fa}#overview .sprint-step small{color:#637da8}
+#overview .sprint-step.deadline-step b{color:#3978ee}
+@media(max-width:860px){#overview .schedule{margin-top:28px}#overview .schedule-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
   <div class="rail"><div class="wrap"><b>DACM / CHI 2027 PAPER WORKSPACE</b><span>当前阶段：研究准备 → 等待真实参与者证据</span></div></div>
   <header class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">开发者—AGENT 协同机制</div><h1>论文工作台</h1><p>从研究准备、中文初稿到投稿节点：这一页按实际推进顺序组织，先知道现在缺什么，再进入相应材料。</p></div><aside class="deadline"><div class="label">TARGET DEADLINE · AoE</div><strong>2026 / 09 / 10</strong><p>CHI 2027 Paper submission<br>无摘要截止 · 英文匿名单栏</p></aside></div></header>
 
-  <div class="nav-wrap"><nav class="wrap nav" aria-label="论文工作区导航"><a href="#overview" class="active">现在</a><a href="#study">用户测试</a><a href="#draft">论文初稿</a><a href="#schedule">投稿前计划</a><a href="#submit">CHI 投稿</a><span>从研究证据走向投稿</span></nav>
+  <div class="nav-wrap"><nav class="wrap nav" aria-label="论文工作区导航"><a href="#overview" class="active">现在</a><a href="#study">用户测试</a><a href="#draft">论文初稿</a><a href="#submit">CHI 投稿</a><span>从研究证据走向投稿</span></nav>
 </div>
   <main>
     <section class="section" id="overview"><div class="wrap"><div class="decision"><article class="focus"><div class="eyebrow">CURRENT DECISION</div><h2>先拿到协同轨迹，再完成论文论证。</h2><p>初稿和测试框架已经具备；决定 CHI 是否成立的，是约 20 位开发者在真实工具中留下的接管、验证、换源与事实回灌证据。</p><div class="path"><div><b>形成性审计</b><span>已完成<br>构造知识条件</span></div><div><b>用户研究</b><span>待启动<br>取得轨迹证据</span></div><div><b>发现与图表</b><span>待编码<br>形成机制解释</span></div><div><b>英文投稿</b><span>最后阶段<br>匿名提交</span></div></div></article><aside class="week"><span class="label">NOW / THIS WEEK</span><h3>中文审阅 + 2–3 人 pilot</h3><p>在正式招募前验证情境包、主持话术、记录边界与单次时长。</p><ul><li>确认研究伦理与同意范围</li><li>跑通 D → M → X → O → L</li><li>校准两类知识条件</li></ul></aside></div><div class="lanes"><article class="lane"><div class="label">01 / PARTICIPANT STUDY</div><h3>用户测试</h3><p>真实项目回放 + 连续工程情境；观察开发者如何与 Agent、资料和本地事实协同。</p><div class="meter"><i style="width:52%"></i></div><small>材料已备 · pilot / 招募 / 采集待完成</small><br><a href="#study">进入用户测试</a></article><article class="lane"><div class="label">02 / MANUSCRIPT</div><h3>论文初稿</h3><p>中文框架已完成；发现章节只留证据位，等待真实研究材料填入。</p><div class="meter"><i></i></div><small>内容骨架已备 · 证据、文献、图表待完成</small><br><a href="#draft">进入论文初稿</a></article><article class="lane"><div class="label">03 / SUBMISSION</div><h3>CHI 投稿</h3><p>官方匿名单栏模板已验证；真正的时间风险来自研究采集，而非排版。</p><div class="meter"><i></i></div><small>版式已备 · 英文稿与匿名材料待完成</small><br><a href="#submit">进入投稿节点</a></article></div></div></section>
@@ -49,6 +56,10 @@
   <footer class="wrap foot">最后更新：2026-08-11 · 此页是内部研究工作台：状态、材料与投稿口径在此同步维护。</footer>
 <script src="assets/vendor/d3.v7.9.0.min.js"></script>
 <script>
+  const overview = document.getElementById('overview');
+  const schedule = document.getElementById('schedule');
+  if (overview && schedule) overview.append(schedule);
+
   document.querySelectorAll('a[href]:not([href^="#"])').forEach((link) => {
     link.target = '_blank';
     link.rel = 'noopener';
@@ -110,7 +121,7 @@
 
   drawTimeline('.sprint', '.sprint-step', {
     height: 40, cy: 15, radius: 7, emphasisRadius: 12,
-    line: '#e2c783', fill: '#d59b32', emphasisFill: '#e87942', halo: '#f9dfbd',
+    line: '#bcd3fa', fill: '#3978ee', emphasisFill: '#3978ee', halo: '#dceaff',
     nodeStroke: '#f4f7fb', emphasis: '.deadline-step'
   });
   drawTimeline('.dates', '.date', {
