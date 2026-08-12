@@ -18,6 +18,10 @@
 .sprint{position:relative;gap:24px;border:0;padding-top:8px}.sprint:before{content:"";position:absolute;left:1%;right:1%;top:8px;height:1px;background:#e2c783}.sprint-step,.sprint-step:not(:first-child){min-height:220px;padding:24px 0 0;border:0}.sprint-step:before{top:2px}.sprint-step.deadline-step:before{top:0}.schedule-foot{border-top:0;margin-top:8px;padding-top:0}.submission-band{border-bottom:0}.resources{border-top:0;margin-top:14px;padding-top:0}.resource{padding-top:0}@media(max-width:860px){.sprint{gap:18px}.sprint:before{display:none}.sprint-step,.sprint-step:not(:first-child){padding:20px 0 0;border:0}.sprint-step:before{top:0}.sprint-step.deadline-step:before{top:-3px}.schedule-foot{margin-top:14px}}
 /* 青色只标示研究状态，不承担正文文字颜色。 */
 .study-state p,.check li,.step span,.evidence{color:var(--muted)}.session .label{color:#4c8078}.check .yes span{color:var(--ink)}.check .wait span{color:var(--muted)}.evidence b{color:var(--ink)}
+/* 两条时间线由 D3 在同一 SVG 坐标系绘制：线、普通节点和截止节点共用圆心。 */
+.sprint:before,.sprint-step:before,.dates:before,.date:before{display:none}
+.sprint,.dates{isolation:isolate}.sprint-step,.date{z-index:1}.d3-timeline{position:absolute;z-index:0;top:0;left:0;width:100%;pointer-events:none;overflow:visible}
+.sprint .d3-timeline{height:40px}.dates .d3-timeline{height:46px}
 </style>
 </head>
 <body>
@@ -43,6 +47,7 @@
 
   </main>
   <footer class="wrap foot">最后更新：2026-08-11 · 此页是内部研究工作台：状态、材料与投稿口径在此同步维护。</footer>
+<script src="assets/vendor/d3.v7.9.0.min.js"></script>
 <script>
   document.querySelectorAll('a[href]:not([href^="#"])').forEach((link) => {
     link.target = '_blank';
@@ -58,6 +63,61 @@
     if (visible) setActiveSection(visible.target);
   }, {rootMargin: '-18% 0px -66% 0px', threshold: [0.05, 0.18, 0.35]});
   navSections.forEach((section) => navObserver.observe(section));
+
+  const drawTimeline = (selector, itemSelector, options) => {
+    const container = document.querySelector(selector);
+    if (!container || !window.d3) return;
+    let svg = d3.select(container).select('svg.d3-timeline');
+    if (svg.empty()) svg = d3.select(container).append('svg').attr('class', 'd3-timeline').attr('aria-hidden', 'true');
+
+    const render = () => {
+      const box = container.getBoundingClientRect();
+      const items = [...container.querySelectorAll(itemSelector)];
+      const compact = window.matchMedia('(max-width: 860px)').matches;
+      const height = compact ? 0 : options.height;
+      svg.attr('width', box.width).attr('height', height).attr('viewBox', `0 0 ${box.width} ${height}`);
+      svg.selectAll('*').remove();
+      if (compact || !box.width || !items.length) return;
+
+      const points = items.map((item) => {
+        const rect = item.getBoundingClientRect();
+        return {
+          x: rect.left - box.left + rect.width / 2,
+          emphasis: item.matches(options.emphasis)
+        };
+      });
+      const cy = options.cy;
+      const layer = svg.append('g');
+      layer.append('line')
+        .attr('x1', points[0].x).attr('x2', points[points.length - 1].x)
+        .attr('y1', cy).attr('y2', cy)
+        .attr('stroke', options.line).attr('stroke-width', 1.25);
+      layer.selectAll('circle.halo').data(points.filter((point) => point.emphasis)).join('circle')
+        .attr('class', 'halo').attr('cx', (point) => point.x).attr('cy', cy).attr('r', options.emphasisRadius + 4)
+        .attr('fill', options.halo);
+      layer.selectAll('circle.node').data(points).join('circle')
+        .attr('class', 'node').attr('cx', (point) => point.x).attr('cy', cy)
+        .attr('r', (point) => point.emphasis ? options.emphasisRadius : options.radius)
+        .attr('fill', (point) => point.emphasis ? options.emphasisFill : options.fill)
+        .attr('stroke', options.nodeStroke).attr('stroke-width', 2.5);
+    };
+
+    const observer = new ResizeObserver(render);
+    observer.observe(container);
+    window.addEventListener('resize', render, {passive: true});
+    requestAnimationFrame(render);
+  };
+
+  drawTimeline('.sprint', '.sprint-step', {
+    height: 40, cy: 15, radius: 7, emphasisRadius: 12,
+    line: '#e2c783', fill: '#d59b32', emphasisFill: '#e87942', halo: '#f9dfbd',
+    nodeStroke: '#f4f7fb', emphasis: '.deadline-step'
+  });
+  drawTimeline('.dates', '.date', {
+    height: 46, cy: 20, radius: 8, emphasisRadius: 12,
+    line: '#e8b980', fill: '#d89a4a', emphasisFill: '#e87942', halo: '#f7d5ae',
+    nodeStroke: '#f4f7fb', emphasis: ':nth-child(2)'
+  });
 </script>
 </body>
 </html>
