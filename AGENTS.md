@@ -158,9 +158,9 @@ CHI 论文的协同研究不是从零再测“AI 可用性”或“开发者基�
 
 - **AI 侧基线＝内容/知识对 Agent 的可用性**：源文件 `../opknow/20_human_ai_journey.html`。已按算子开发任务检验 Agent 如何从官方、第三方和模型自带知识中检索、读取、拼接并给出建议；其任务矩阵/时序图刻画“AI 面对什么知识供给条件”，不是让参与者扮演 AI 重新测一遍。
 - **开发者侧基线＝官网/社区的基础体验**：源文件 `reports/ascend-vs-nvidia-2026-06-13-visual.html`。已按开发者从入口到跑通的旅程、触点和 DJFI 实测刻画人直接使用门户、文档、样例与社区的体验；不是在 CHI 现场重新做一遍完整 UX 评估。
-- **CHI 新增层＝开发者—Agent 协同机制（DACM）**：真实项目回放 + 统一算子开发情境推演。应从上述两条已有基线选取具有代表性的任务/知识条件，记录参与者怎样直接读资料或借 Agent 获取资料、何时要求证据、补充本机事实、人工接管及设定验证 checkpoint。不得把新研究写成 CANN/CUDA 谁更好、真实上卡成功率或性能比较。
+- **CHI 新增层＝开发者—Agent 协同机制（DACT）**：真实项目回放 + 统一算子开发情境推演。应从上述两条已有基线选取具有代表性的任务/知识条件，记录参与者怎样直接读资料或借 Agent 获取资料、何时要求证据、补充本机事实、人工接管及设定验证 checkpoint。不得把新研究写成 CANN/CUDA 谁更好、真实上卡成功率或性能比较。早期讨论曾使用 DACM，现已废弃，正式名称为 **DACT = Developer–AI Collaboration Trajectory（开发者—AI 协同轨迹）**。
 
-论文叙事：**AI 可用性基线刻画 Agent 的知识环境；开发者基础体验基线刻画人的知识环境；DACM 研究揭示两者并存且不一致时，人—Agent 分工如何被重塑。**
+论文叙事：**AI 可用性基线刻画 Agent 的知识环境；开发者基础体验基线刻画人的知识环境；DACT 研究揭示两者并存且不一致时，人—Agent 分工如何被重塑。**
 
 ## 综合汇报 PPT(`reports/synthesis/index.html`)
 
@@ -269,3 +269,98 @@ git init && git add -A && git commit -m "init: 昇腾 vs 英伟达 官网体验�
 
 - **入口 `index.html` + 主报告 `reports/ascend-vs-nvidia-2026-06-13-visual.html`** 头部各内联了一个 SVG data-URI favicon(`<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,…">`,无外部文件、GitHub Pages 直接生效)。
 - 图样 = **红绿双柱**(华为红 `#C8102E` 短柱 + 英伟达绿 `#76B900` 高柱 + 深色基线,白底圆角),呼应「昇腾 vs 英伟达」对比主题。下划线开头的临时稿(`_v.html`/`synthesis/*`)未加。
+
+## DACT 当前交接信息（2026-08）
+
+本节是 DACT 研究仓与本仓之间的交接摘要。它补充前文历史记录，不替换原有视觉报告、综合 deck、取证和踩坑信息。
+
+### 正式命名与研究边界
+
+- 正式名称：**DACT = Developer–AI Collaboration Trajectory，开发者—AI 协同轨迹**。
+- `DACM` 是早期讨论名称，今后页面、论文和研究材料统一使用 DACT；如需解释历史文件名，只注明“早期 DACM 命名”，不要把它当作当前框架。
+- `DAR（Developer–Agent Ratio）` 是 DACT 中观察某一阶段主体投入/主导关系的比例视图，不是“AI 替代率”，也不表示开发者被 AI 替代的程度。
+- DACT 研究的特殊性来自协同过程：开发者如何在直接查资料、请求 Agent、检查证据、补充本机事实、人工接管、验证和回灌之间切换。核心不是 CANN/CUDA 谁更好，不是重新做一遍 AI 可用性审计，也不是测真实 NPU 性能。
+- 当前只能写“拟观察”“将分析”；正式用户采集尚未完成，不能把预期模式写成实验发现。
+
+### 源研究文件与层次
+
+| 层次 | 文件 | 可复用内容 |
+| --- | --- | --- |
+| AI 可用性主报告 | `/Users/hsin/Documents/Coding/opknow/17_official_site_focus.html` | 26 项任务 × 11 项指标矩阵、检索结果与对照数据 |
+| AI 可用性方法 | `/Users/hsin/Documents/Coding/opknow/18_metric_definition.html` | 问题对、指标、评分、取证和置信度口径 |
+| AI 可用性发现 | `/Users/hsin/Documents/Coding/opknow/19_findings_ux_synthesis.html` | 发现、归因、局限和改进方向 |
+| 协同过程原型 | `/Users/hsin/Documents/Coding/opknow/20_human_ai_journey.html` | Agent 检索/综合/回退/收敛、开发者接管、工具和环境事实介入的时序模型；`20` 不是简单连接页 |
+| 开发者基础体验 | `/Users/hsin/Documents/Coding/ascend-vs-nvidia-ux/reports/ascend-vs-nvidia-2026-06-13-visual.html` | 开发者门户 7 步生命周期、24 个触点和 DJFI |
+| 综合叙事入口 | `/Users/hsin/Documents/Coding/ascend-vs-nvidia-ux/reports/synthesis/index.html` | 把 AI 可用性与开发者基础体验置于同一 Agent 时代叙事中，不是第三套实证研究 |
+
+正确的关系是：`17/18/19` 共同构成 AI 可用性审计，`ascend-vs-nvidia-2026-06-13-visual.html` 构成开发者基础体验研究，`20_human_ai_journey.html` 建模 Agent 与开发者的协同过程，`reports/synthesis/index.html` 是综合表达入口。DACT 在这些证据之上研究“两个知识环境同时存在且不一致时，协同如何发生”。
+
+### 当前研究设计
+
+- **Study 0**：复用已有 AI 可用性审计，界定任务的知识供给条件；不让参与者再次扮演 Agent，也不把 Study 0 写成新的参与者实验。
+- **Study 1**：真实项目回放访谈。参与者讲述自己近期项目中如何使用 IDE/CLI、浏览器和 Agent；主持人追问检索、证据、核验、接管、返工和停止点。
+- **Study 2**：统一 `AddCustom → PyTorch` 连续工程情境。约 20 名开发者在自己的常用 IDE、CLI、浏览器和 Agent 中完成关键片段，便于比较协同轨迹。
+- 统一情境只取算子开发时序中的代表性阶段：`D` 写 Kernel、`M` Tiling/设备事实、`X` 编译/内存、`O` 注册接入、`L` 精度验收。每名参与者不必一次覆盖全部阶段，具体分配由研究团队包控制。
+- 没有可供研究统一使用的算卡环境。工程包只提供真实风格的本地代码、命令、阶段性线索和预设日志/结果；不伪装真实算卡运行，不要求 CANN 安装、NPU 编译、部署或性能结果。
+- 参与者不需要写计划作业、寻找标准答案或按研究者指定路线操作。应观察自然发生的检索、提问、生成、执行、核验、换源、接管、回退和停止。
+
+### 研究材料仓与页面
+
+DACT 私有源仓：`/Users/hsin/Documents/Coding/dact-chi-study`，远程为 `git@github.com:SchihHsin/dact-chi-study.git`。该仓的 `AGENTS.md` 记录更细的研究协议、编码表、材料字段和 Git 约定。
+
+私有源仓的主要材料：
+
+- `study/dact-CHI-研究材料总览.html`：三入口汇总页，入口为测试提纲、参与者材料、研究团队执行包；卡片使用等比例内容预览图，站内链接打开新标签页。
+- `study/dact-CHI-测试提纲.html`：最新 D3 驱动的访谈/任务思维导图。节点、分组高度、文字、分支和连线由同一布局数据生成，修复了旧手工 SVG 的错位；不要用旧 DACM 手工 SVG 版替换。
+- `study/dact-CHI-参与者材料.html`：知情同意、背景问卷、真实项目回放、连续工程任务、任务后回顾；选项控件、可填写补充和终端命令复制按钮已纳入。
+- `study/dact-CHI-研究团队执行包.html`：主持话术、追问、情境控制、事件编码、DAR 记录、伦理和访谈后整理；事件记录可连续追加，必须能回指录音、录屏、Agent 对话、终端、页面或日志。
+- `study/assets/`：D3 vendor、提纲预览图及可编辑研究图；图表源文件优先于 PNG，PNG 只作为预览/证据。
+- `study/fixtures/addcustom-pytorch/` 或对应工程 ZIP：统一 AddCustom 工程情境。命令只是本地模拟线索，不代表真实算卡执行。
+
+材料语言和交互约定：参与者页面不显示参与者编号、日期、内部“不能记录/引用”规则或辩解式语句；研究团队在结束时按同意范围处理删除、引用和脱敏。参与者输入停止约 3 秒后自动保存，不要求手动下载后发送。
+
+### Supabase 在线保存
+
+- 项目地址：`https://yrivnkemmmtuthqqozwe.supabase.co`。
+- 前端配置：`/Users/hsin/Documents/Coding/dact-chi-study/study/supabase-config.js`；这里只能使用 publishable/anon key，不能放 service role key。
+- 表：`participant_snapshots`；schema：`/Users/hsin/Documents/Coding/dact-chi-study/data/schema/supabase.sql`。
+- 采用仅追加快照：匿名客户端只允许 `INSERT`；浏览器不能 `SELECT`、`UPDATE`、`DELETE`。研究团队从 Supabase Dashboard 查看和导出。
+- 断网时用 `localStorage` 降级；恢复后可继续提交。真实参与者数据、录屏、转录和身份映射不得进入 Git。
+- 接口已验证：表存在，匿名读取被 RLS 拒绝，页面使用的 `POST + Prefer: return=minimal` 返回 `HTTP 201`。库中已有一条 `payload.test=true` 的测试快照，分析时必须过滤。
+
+### GitHub Pages 发布
+
+GitHub Free 私有仓不能直接按当前账号设置发布 Pages，因此采用“私有源仓 + 公开发布副本”：
+
+- 私有源仓：`dact-chi-study`，保存研究材料和代码；
+- 公开发布副本：本仓库的 `dact/` 目录，只放 Pages 所需的脱敏静态材料和工程包；
+- 公开入口：`https://schihhsin.github.io/ascend-vs-nvidia-ux/dact/`；
+- 研究总览：`https://schihhsin.github.io/ascend-vs-nvidia-ux/dact/dact-CHI-%E7%A0%94%E7%A9%B6%E6%9D%90%E6%96%99%E6%80%BB%E8%A7%88.html`；
+- 测试提纲：`https://schihhsin.github.io/ascend-vs-nvidia-ux/dact/dact-CHI-%E6%B5%8B%E8%AF%95%E6%8F%90%E7%BA%B2.html`。
+
+私有源仓关键已推送提交包括：`6b4618a` 初始化研究仓与协作约定、`b2ecf6f` 上游研究来源、`c4ffb5e` 修正源研究层次、`84cfbdc` 自动保存与研究材料、`3131093` Supabase 公钥、`590b59f` D3 测试提纲和错位修复。公开副本关键提交包括：`a35c7d5` 参与者入口、`637fd3b` 最新测试提纲与材料同步。
+
+### 最新提纲的 D3 维护规则
+
+- 本地 vendor：`study/assets/vendor/d3.v7.9.0.min.js`；部署环境可以使用 CDN，但本地 HTTP 和 Pages 验证要保持脚本来源一致，避免重复加载或 `file://` 安全策略导致白图。
+- 最新版本已使用布局数据动态计算：分组高度、叶节点位置、主题节点位置、连线端点一并生成；此前 `const top` 与浏览器全局 `window.top` 冲突，已改为 `startY`。
+- 修改提纲时只改 D3 数据和布局函数，不回退到手工 SVG 坐标。用本地 HTTP 服务或 Pages 验证，不以直接 `file://` 打开失败作为布局判断。
+- 预览图留存于 `study/assets/dact-study-outline-preview.png`；它是预览，不是可编辑源。
+
+### 当前未完成项与证据边界
+
+- 20 人正式采集尚未完成，pilot 是否能找到尚未确定；不得在论文、汇报或页面中声称已有用户发现、协同模式或完成率。
+- 当前没有真实算卡运行记录；所有本地脚本、错误、日志和阶段结果都必须标明为模拟情境线索或预设结果。
+- 后续分析应输出结构化事件表、参与者轨迹、DAR/阶段变量、跨条件比较和论文发现；不要把参与者意见简单汇总成满意度调查。
+- 论文先维护中文初稿，再转英文；CHI 投稿模板、截止日期和投稿版本须以当年 CHI 官方 CFP 为准，不要把旧计划日期当成已确认截止日期。
+
+### DACT 工作区的收尾规则
+
+- 每次实质性修改后，先检查主仓库状态，只暂存本次涉及的文件；保留用户已有的未提交改动，不得 `reset --hard`、`checkout --` 或覆盖旧仓库脏文件。
+- 本仓库与私有 `dact-chi-study` 是独立仓库；修改哪一个就在哪一个仓库提交和 push，不要把另一仓的文件混入提交。
+- DACT 研究材料发生架构、命名、数据保存、发布或研究设计变化时，必须同步更新本文件和对应私有仓 `AGENTS.md`。仅改主项目其他页面时，也应遵守本文件已有“每次改完 push”的用户偏好。
+- 主仓提交前确认只包含 `AGENTS.md`/`agents.md` 或明确点名的文件；主仓存在大量历史和用户未提交改动，不能一并提交。
+- push 使用已验证的 SSH over 443 + SOCKS5 代理：
+  ```bash
+  GIT_SSH_COMMAND="ssh -p 443 -o HostName=ssh.github.com -o ProxyCommand='nc -x 127.0.0.1:7890 -X 5 %h %p'" git push origin main
+  ```
