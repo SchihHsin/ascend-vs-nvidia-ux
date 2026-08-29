@@ -684,11 +684,11 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 <div class="note" data-page-node-id="lKWEc7hnMs1rhIICWhuT4W">关键内部动作 = <b data-page-node-id="e7PYZ5e2CwKXHKeGYhlV9g">「研判信息是否足够」与「遇阻是否编造」两个判断点</b>。D 任务的特殊性在于：官方受阻 + 第三方平台薄 + 自带知识在 Ascend C 深处也不厚 → 模型在第 2 轮就进入「没有强证据」状态，只能给骨架而非可照抄全程，这是综合分低的技术根因。</div>
 
 <h3 data-page-node-id="Fi1iUQRl07BmT8WyR9qnaY">4.3 Agent 循环架构（图）+ 最小实现代码 <span class="disc" data-page-node-id="0XyB2h6az581tCI4T5P5sg">示范实现 · 基于公开 Anthropic Messages API，非 Claude 内部源码</span></h3>
-<div class="sechint" data-page-node-id="aXeySaTcR0QY6fV4301O7a">「我平常如何运行」的 agent 循环流程：<b data-page-node-id="jz293mQjNJk4vVa4FaBsTL">输入</b>（原始问句 + system 约束 → messages，不预处理）→ 模型推理 <b data-page-node-id="ojlKG7Z2wgG79LKzxdHgtk">①意图解析 → ②子目标拆解 → ③工具路由</b> → <b data-page-node-id="GmkThTdouuL00epKSSsXAe">需要工具?</b>（stop_reason）→ 是：通常先调 <b data-page-node-id="tC7KXUcfcHtFOe6Q8Ua5oE">web_search</b> 发现官方 / 第三方候选页，再调 <b data-page-node-id="m7G4wtcIx4JFoph8PmODdm">web_fetch</b> 进入爬取协议检查——先过 <b data-page-node-id="zJCtEiLM7ul3hTxtyLcqET">robots.txt</b> 准入门控（禁止则返回 <code data-page-node-id="rGdfiuCDojyix7GSBEaDO8">url_not_allowed</code>），通过后 <b data-page-node-id="EWkWbRK6cWILWisCZOlxjW">sitemap.xml</b> 经 robots 的 <code data-page-node-id="pAELtKywfnB52KE48dIAGG">Sitemap:</code> 指令被发现（提供 URL 清单），<b data-page-node-id="AMRBa2WYlNFtyqbKlB2Z71">llms.txt / llms-full.txt</b> 是独立旁路（可选、厂商未确认消费）——三路汇聚到<b data-page-node-id="DySkSP3ydVKxlJQugmbuUr">抓取目标正文</b>（HTML → 纯文本 / Markdown）（已知 URL 时可直接进入检查链）→ <b data-page-node-id="0ItYxOeQRBhSIaw390PDaZ">tool_result 回灌</b> → <b data-page-node-id="8HFhf2lYIo57oBDhk1H8e5">④ 证据是否充分?</b> → 充分：<b data-page-node-id="2hf1fn0eunNz1RtIeViqO1">⑥ 收敛 → 终答</b>；不足：<b data-page-node-id="DE7NnZ1vwJMinoz2fVaG38">能否继续检索</b>（未达上限且预期有效，则换检索词回 ③ 再检索一轮）。检索穷尽后若仍无可靠证据，模型<b data-page-node-id="YjuGDg5qqrisKYuSYptJZi">无法可靠识别「自身不知道」，会凭记忆填补空缺 = 杜撰</b>（看似正确、实则有误）。否（end_turn）则不检索，先进入<b data-page-node-id="CtDWIItfaAFEqM8AFlIx0E">模型自带知识</b>这条证据链，再参与证据判断。<b data-page-node-id="xs2rECgZLFiZb8QpFPqUF6">右上角可切「代码」</b>看最小实现（逐段 A–D 对应）。</div>
+<div class="sechint" data-page-node-id="aXeySaTcR0QY6fV4301O7a">「我平常如何运行」的 agent 循环流程：<b data-page-node-id="jz293mQjNJk4vVa4FaBsTL">输入</b>（原始问句 + system 约束 → messages，不预处理）→ 模型推理 <b data-page-node-id="ojlKG7Z2wgG79LKzxdHgtk">①意图解析 → ②子目标拆解 → ③工具路由</b> → <b data-page-node-id="GmkThTdouuL00epKSSsXAe">需要工具?</b>（stop_reason）→ 是：通常先调 <b data-page-node-id="tC7KXUcfcHtFOe6Q8Ua5oE">web_search</b> 发现官方 / 第三方候选页，再调 <b data-page-node-id="m7G4wtcIx4JFoph8PmODdm">web_fetch</b> 进入爬取协议检查——先过 <b data-page-node-id="zJCtEiLM7ul3hTxtyLcqET">robots.txt</b> 准入门控（禁止则返回 <code data-page-node-id="rGdfiuCDojyix7GSBEaDO8">url_not_allowed</code>），通过后 <b data-page-node-id="EWkWbRK6cWILWisCZOlxjW">sitemap.xml</b> 经 robots 的 <code data-page-node-id="pAELtKywfnB52KE48dIAGG">Sitemap:</code> 指令被发现（提供 URL 清单），<b data-page-node-id="AMRBa2WYlNFtyqbKlB2Z71">llms.txt / llms-full.txt</b> 是独立旁路（可选、厂商未确认消费）——三路汇聚到<b data-page-node-id="DySkSP3ydVKxlJQugmbuUr">抓取目标正文</b>；<b>正文再经页面解析</b>（HTML → DOM → 语义提取 → 纯文本/Markdown，按文档流顺序读取，标题/代码/列表权重更高，忽略 CSS/JS/广告；SPA 页此步正文 0 字）（已知 URL 时可直接进入检查链）→ <b data-page-node-id="0ItYxOeQRBhSIaw390PDaZ">tool_result 回灌</b> → <b data-page-node-id="8HFhf2lYIo57oBDhk1H8e5">④ 证据是否充分?</b> → 充分：<b data-page-node-id="2hf1fn0eunNz1RtIeViqO1">⑥ 收敛 → 终答</b>；不足：<b data-page-node-id="DE7NnZ1vwJMinoz2fVaG38">能否继续检索</b>（未达上限且预期有效，则换检索词回 ③ 再检索一轮）。检索穷尽后若仍无可靠证据，模型<b data-page-node-id="YjuGDg5qqrisKYuSYptJZi">无法可靠识别「自身不知道」，会凭记忆填补空缺 = 杜撰</b>（看似正确、实则有误）。否（end_turn）则不检索，先进入<b data-page-node-id="CtDWIItfaAFEqM8AFlIx0E">模型自带知识</b>这条证据链，再参与证据判断。<b data-page-node-id="xs2rECgZLFiZb8QpFPqUF6">右上角可切「代码」</b>看最小实现（逐段 A–D 对应）。</div>
 <div class="avbox" data-page-node-id="SqeRtZqW171eQ7BqahtYC7">
   <div class="avhead" data-page-node-id="XkeHplZG8zsTGuLvtbBZWm"><div class="avtabs" data-page-node-id="Cxt0ay0URJREqFpBI2mA8w"><button class="avtab active" data-v="arch" data-page-node-id="SZ8wJqFKqN2p2kiOVJOm7C">架构图</button><button class="avtab" data-v="code" data-page-node-id="99yScsXsnmIlJHJtvepMHD">代码</button></div></div>
   <div id="archView" data-page-node-id="EmVZ0Ym7MOxjGp6mO4ZHBy">
-<svg viewBox="0 0 720 950" style="width:100%;max-width:660px;height:auto;display:block;margin:0 auto" role="img" aria-label="Agent 执行流程：路由→是否需要检索→web_search 发现候选页→web_fetch 进入爬取协议检查：robots.txt 准入门控（通过 Sitemap: 指令发现 sitemap.xml）+ llms.txt/llms-full.txt 独立旁路→抓取目标正文→证据回灌；模型自带知识作为无需检索的补充证据；之后研判证据是否充分，充分则收敛终答，不足则判断能否继续检索，检索穷尽且无可靠证据时模型会凭记忆杜撰" data-page-node-id="bLB7CBLiReWj43WLvR2C5W">
+<svg viewBox="0 0 720 1080" style="width:100%;max-width:660px;height:auto;display:block;margin:0 auto" role="img" aria-label="Agent 执行流程：路由→是否需要检索→web_search 发现候选页→web_fetch 进入爬取协议检查：robots.txt 准入门控（通过 Sitemap: 指令发现 sitemap.xml）+ llms.txt/llms-full.txt 独立旁路→抓取目标正文→页面解析（HTML→DOM→语义提取→纯文本/Markdown）→证据回灌；模型自带知识作为无需检索的补充证据；之后研判证据是否充分，充分则收敛终答，不足则判断能否继续检索，检索穷尽且无可靠证据时模型会凭记忆杜撰" data-page-node-id="bLB7CBLiReWj43WLvR2C5W">
   <defs data-page-node-id="6PrsAsWfMfym52gkYEuOql">
     <marker id="aae" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse" data-page-node-id="XAxvx8C9qWXmuD5z9wNLgC"><path d="M0,0 L9,4.5 L0,9 z" fill="#8a8a8a" data-page-node-id="cKYN8K1qTya40umZAYd7o2"/></marker>
     <marker id="aaeh" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto-start-reverse" data-page-node-id="vOmYJoGWSKjDSElEVRZaZD"><path d="M0,0 L7,3.5 L0,7 z" fill="#8a6d1a" data-page-node-id="yISAbezji5V3kX9u6TQPp3"/></marker>
@@ -747,23 +747,23 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <text x="421" y="312" font-size="9.4" font-weight="700" fill="#5a3fa0" data-page-node-id="JKCviDzIeuJtqfCp4skSAF">模型自带知识（⑦）</text>
   <text x="421" y="327" font-size="8.2" fill="#6a52a8" data-page-node-id="RDngsRnr1e5zoiOFcfdw8H">训练内置，无需检索亦可用；</text>
   <text x="421" y="340" font-size="8.2" fill="#9a5a8a" data-page-node-id="iRR6AnoOkeTH2NNNG2O4c6">薄弱时即「杜撰」之源。</text></g>
-  <g class="anode" data-k="relay" data-page-node-id="tMIQDEWmYClVboPY1lGxyp"><rect x="150" y="668" width="200" height="30" rx="8" fill="#f4f5f8" stroke="#d8dae0" data-page-node-id="z9SH6S6HrG3iFd2mi1lScr"/>
-  <text x="250" y="688" text-anchor="middle" font-size="10.5" fill="#333" data-page-node-id="SnPKd1Pbq8G8Cua4Af4RWn">汇总当前证据（回灌）</text></g>
-  <g class="anode" data-k="judge" data-page-node-id="YXxcTUv83S50cgoM4GPUXP"><polygon points="250,710 320,740 250,770 180,740" fill="#FCEFC7" stroke="#8a6d1a" data-page-node-id="TLpqnrkhsWSauq0JF9yNug"/>
-  <text x="250" y="737" text-anchor="middle" font-size="9.6" fill="#8a6d1a" data-page-node-id="rnpQPAK7VnObj7rYdwkG57">④ 证据是否充分?</text>
-  <text x="250" y="750" text-anchor="middle" font-size="7.6" fill="#a98a4a" data-page-node-id="osUO2S1pBoJ1CGKDdXqu66">④ 版本清晰 · ⑥ 可信度 · ⑧ 成本</text></g>
-  <g class="anode" data-k="converge" data-page-node-id="Qe0Twgar4cau781LPU4HMS"><rect x="172" y="786" width="156" height="30" rx="8" fill="#E3F4EA" stroke="#3a9b6e" data-page-node-id="pWWtCyQ9IUw0gbH2U6t6VB"/>
-  <text x="250" y="805" text-anchor="middle" font-size="10.5" fill="#1f7a52" data-page-node-id="X9AzrKy2lu2IYuPxnlYfin">⑥ 收敛（证据充分）</text></g>
-  <g class="anode" data-k="redo" data-page-node-id="bifFJ7gJy8S14005uXYueN"><polygon points="470,712 552,740 470,768 388,740" fill="#FFF1D9" stroke="#c79023" data-page-node-id="QYFT6fjh9RdYt4eyVUhqlz"/>
-  <text x="470" y="737" text-anchor="middle" font-size="9" fill="#9a6a18" data-page-node-id="9lJZkqtlzEaxoi9VtCrIe1">能否继续检索?</text>
-  <text x="470" y="749" text-anchor="middle" font-size="7.2" fill="#b08a3a" data-page-node-id="csUO1GfNp2m9u7Ho2JVOo6">未达上限 且 预期有效</text></g>
-  <g class="anode" data-k="hasEv" data-page-node-id="WrWgCBQHvVyo70qzpIqjOj"><polygon points="470,778 560,806 470,834 380,806" fill="#FBEAD9" stroke="#c0703a" data-page-node-id="rKdwhFY3twK5zCLDI88z19"/>
-  <text x="470" y="803" text-anchor="middle" font-size="9" fill="#9a4a18" data-page-node-id="CuA4984Ev8nj1eEMddbHow">是否仍有可靠证据?</text>
-  <text x="470" y="815" text-anchor="middle" font-size="7.2" fill="#b06a3a" data-page-node-id="oxZeNTuB0BeLRbVKYdMVyG">官方/第三方平台/自带 任一充分</text></g>
-  <g class="anode" data-k="final" data-page-node-id="SjeIvHrOlBapSyiykOFFcT"><rect x="130" y="878" width="460" height="58" rx="9" fill="#eef0f3" stroke="#9aa0aa" data-page-node-id="DTsAeXcUsrcUY73iB6qOHq"/>
-  <text x="360" y="899" text-anchor="middle" font-size="12" font-weight="700" fill="#3a3f48" data-page-node-id="aPpyYrSSTpxPrjc0sfI8UR">终答 · end_turn</text>
-  <text x="360" y="915" text-anchor="middle" font-size="8.4" fill="#5a6470" data-page-node-id="kpaUK3LV8zXWPufzbfKtvk">⑨ 版本可锁定性 · ⑩ 步骤可复现性 · ⑪ 综合置信度</text>
-  <text x="360" y="928" text-anchor="middle" font-size="8.4" fill="#9a4048" data-page-node-id="SOff9zjqhFL4QfTPiyr8vF">证据充分才可执行；证据缺失时可能杜撰，取决于是否握有可靠证据。</text></g>
+  <g class="anode" data-k="relay" data-page-node-id="tMIQDEWmYClVboPY1lGxyp"><rect x="150" y="778" width="200" height="30" rx="8" fill="#f4f5f8" stroke="#d8dae0" data-page-node-id="z9SH6S6HrG3iFd2mi1lScr"/>
+  <text x="250" y="798" text-anchor="middle" font-size="10.5" fill="#333" data-page-node-id="SnPKd1Pbq8G8Cua4Af4RWn">汇总当前证据（回灌）</text></g>
+  <g class="anode" data-k="judge" data-page-node-id="YXxcTUv83S50cgoM4GPUXP"><polygon points="250,820 320,850 250,880 180,850" fill="#FCEFC7" stroke="#8a6d1a" data-page-node-id="TLpqnrkhsWSauq0JF9yNug"/>
+  <text x="250" y="847" text-anchor="middle" font-size="9.6" fill="#8a6d1a" data-page-node-id="rnpQPAK7VnObj7rYdwkG57">④ 证据是否充分?</text>
+  <text x="250" y="860" text-anchor="middle" font-size="7.6" fill="#a98a4a" data-page-node-id="osUO2S1pBoJ1CGKDdXqu66">④ 版本清晰 · ⑥ 可信度 · ⑧ 成本</text></g>
+  <g class="anode" data-k="converge" data-page-node-id="Qe0Twgar4cau781LPU4HMS"><rect x="172" y="896" width="156" height="30" rx="8" fill="#E3F4EA" stroke="#3a9b6e" data-page-node-id="pWWtCyQ9IUw0gbH2U6t6VB"/>
+  <text x="250" y="915" text-anchor="middle" font-size="10.5" fill="#1f7a52" data-page-node-id="X9AzrKy2lu2IYuPxnlYfin">⑥ 收敛（证据充分）</text></g>
+  <g class="anode" data-k="redo" data-page-node-id="bifFJ7gJy8S14005uXYueN"><polygon points="470,822 552,850 470,878 388,850" fill="#FFF1D9" stroke="#c79023" data-page-node-id="QYFT6fjh9RdYt4eyVUhqlz"/>
+  <text x="470" y="847" text-anchor="middle" font-size="9" fill="#9a6a18" data-page-node-id="9lJZkqtlzEaxoi9VtCrIe1">能否继续检索?</text>
+  <text x="470" y="859" text-anchor="middle" font-size="7.2" fill="#b08a3a" data-page-node-id="csUO1GfNp2m9u7Ho2JVOo6">未达上限 且 预期有效</text></g>
+  <g class="anode" data-k="hasEv" data-page-node-id="WrWgCBQHvVyo70qzpIqjOj"><polygon points="470,888 560,916 470,944 380,916" fill="#FBEAD9" stroke="#c0703a" data-page-node-id="rKdwhFY3twK5zCLDI88z19"/>
+  <text x="470" y="913" text-anchor="middle" font-size="9" fill="#9a4a18" data-page-node-id="CuA4984Ev8nj1eEMddbHow">是否仍有可靠证据?</text>
+  <text x="470" y="925" text-anchor="middle" font-size="7.2" fill="#b06a3a" data-page-node-id="oxZeNTuB0BeLRbVKYdMVyG">官方/第三方平台/自带 任一充分</text></g>
+  <g class="anode" data-k="final" data-page-node-id="SjeIvHrOlBapSyiykOFFcT"><rect x="130" y="988" width="460" height="58" rx="9" fill="#eef0f3" stroke="#9aa0aa" data-page-node-id="DTsAeXcUsrcUY73iB6qOHq"/>
+  <text x="360" y="1009" text-anchor="middle" font-size="12" font-weight="700" fill="#3a3f48" data-page-node-id="aPpyYrSSTpxPrjc0sfI8UR">终答 · end_turn</text>
+  <text x="360" y="1025" text-anchor="middle" font-size="8.4" fill="#5a6470" data-page-node-id="kpaUK3LV8zXWPufzbfKtvk">⑨ 版本可锁定性 · ⑩ 步骤可复现性 · ⑪ 综合置信度</text>
+  <text x="360" y="1038" text-anchor="middle" font-size="8.4" fill="#9a4048" data-page-node-id="SOff9zjqhFL4QfTPiyr8vF">证据充分才可执行；证据缺失时可能杜撰，取决于是否握有可靠证据。</text></g>
   <!-- ===== 连线 ===== -->
   <line x1="280" y1="44" x2="280" y2="51" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="SOHxMGJzggS6RYXKRa25B8"/>
   <line x1="280" y1="88" x2="280" y2="97" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="Xi9RqQnIvuZYc49lIBehiw"/>
@@ -791,40 +791,63 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <!-- llmsfull → fetchpage (提供内容线索) -->
   <path d="M280,544 V572 H250" fill="none" stroke="#8a4fb0" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aae)" data-page-node-id="ZrqCmFDWCTNkxOEKkxZmHk"/>
   <text x="290" y="560" font-size="7.2" fill="#7a4fa0" data-page-node-id="Uh8YVoOmTUSuSJ3gfEGHQo">内容线索</text>
+  <!-- ===== 页面解析子流程：HTML → 纯文本 ===== -->
+  <!-- 分组背景框 -->
+  <rect x="20" y="738" width="360" height="110" rx="10" fill="#f8faf5" stroke="#d0d8c8" stroke-width="1" stroke-dasharray="5,3" data-page-node-id="parse-bg"/>
+  <text x="200" y="752" text-anchor="middle" font-size="8.5" font-weight="700" fill="#5a8a5a" letter-spacing="0.5" data-page-node-id="parse-label">页面解析 · HTML → 纯文本</text>
+  <!-- 6. HTML 解析 -->
+  <g class="anode" data-k="htmlparse" data-page-node-id="n-htmlparse"><rect x="100" y="760" width="200" height="28" rx="6" fill="#f0f4ed" stroke="#a0c0a0" stroke-width="1" data-page-node-id="r-htmlparse"/>
+  <text x="200" y="778" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2a6a2a" data-page-node-id="t-htmlparse">HTML → DOM 树构建</text></g>
+  <!-- 7. 语义提取 -->
+  <g class="anode" data-k="semantic" data-page-node-id="n-semantic"><rect x="100" y="794" width="200" height="28" rx="6" fill="#f0f4ed" stroke="#a0c0a0" stroke-width="1" data-page-node-id="r-semantic"/>
+  <text x="200" y="812" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2a6a2a" data-page-node-id="t-semantic">语义提取：标题/代码/列表/表格</text></g>
+  <!-- 8. 纯文本/Markdown -->
+  <g class="anode" data-k="plaintext" data-page-node-id="n-plaintext"><rect x="100" y="828" width="200" height="28" rx="6" fill="#e8f0e5" stroke="#7aaa7a" stroke-width="1.5" data-page-node-id="r-plaintext"/>
+  <text x="200" y="846" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1f5a1f" data-page-node-id="t-plaintext">纯文本 / Markdown 输出</text></g>
+  <!-- 扫描方式标注 -->
+  <text x="380" y="775" font-size="7.2" fill="#6a8a6a" data-page-node-id="scan1">按文档流顺序输入模型</text>
+  <text x="380" y="787" font-size="7.2" fill="#6a8a6a" data-page-node-id="scan2">标题·代码·列表权重更高</text>
+  <text x="380" y="799" font-size="7.2" fill="#6a8a6a" data-page-node-id="scan3">忽略 CSS / JS / 广告</text>
+  <text x="380" y="811" font-size="7.2" fill="#6a8a6a" data-page-node-id="scan4">SPA 页正文 0 字（只回导航+meta）</text>
+  <!-- 页面解析内部连线 -->
+  <line x1="200" y1="620" x2="200" y2="760" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="L-fp-hp"/>
+  <line x1="200" y1="788" x2="200" y2="794" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="L-hp-se"/>
+  <line x1="200" y1="822" x2="200" y2="828" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="L-se-pt"/>
+
   <!-- fetchpage → relay -->
-  <line x1="200" y1="620" x2="250" y2="668" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="FqGahXXsyZmoff3niqoCBn"/>
+  <line x1="200" y1="620" x2="250" y2="778" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="FqGahXXsyZmoff3niqoCBn"/>
   <!-- own → relay -->
-  <path d="M501,350 V652 H300 V668" fill="none" stroke="#8a4fb0" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="3jLF4JJviMrpUoGzm7eYDx"/>
+  <path d="M501,350 V762 H300 V778" fill="none" stroke="#8a4fb0" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="3jLF4JJviMrpUoGzm7eYDx"/>
   <!-- 已知 URL 可直接跳到 robots -->
   <path d="M280,282 H300 V390 H288" fill="none" stroke="#9aa0aa" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aae)" data-page-node-id="hJgVc4kSEuuTN4neEDZFp7"/>
   <text x="305" y="330" font-size="7.6" fill="#8a8a8a" data-page-node-id="1tXi6jh7p7GepCO9xvfs2K">已知 URL 直接进入</text>
   <!-- relay → judge -->
-  <line x1="250" y1="698" x2="250" y2="709" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="xs5Qon6GFLrOGUYD0l58F8"/>
+  <line x1="250" y1="808" x2="250" y2="819" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="xs5Qon6GFLrOGUYD0l58F8"/>
   <!-- judge → converge (充分) -->
-  <path d="M250,770 V786" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="oRdiVizXYg5C58I1yNGLgC"/>
-  <text x="258" y="782" font-size="8.4" fill="#2a7a68" data-page-node-id="NK54UKMVbdIREImsF3folw">充分</text>
+  <path d="M250,880 V896" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="oRdiVizXYg5C58I1yNGLgC"/>
+  <text x="258" y="892" font-size="8.4" fill="#2a7a68" data-page-node-id="NK54UKMVbdIREImsF3folw">充分</text>
   <!-- converge → final -->
-  <path d="M250,816 V878" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="yvQc2hsEWV6pFcZiQu48Zz"/>
+  <path d="M250,926 V988" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="yvQc2hsEWV6pFcZiQu48Zz"/>
   <!-- judge → redo (不足) -->
-  <line x1="320" y1="740" x2="388" y2="740" stroke="#c79023" stroke-width="1.3" marker-end="url(#aae)" data-page-node-id="4GLEWcSayEak35cbyDkdY5"/>
-  <text x="338" y="734" font-size="8.4" fill="#9a6a18" data-page-node-id="zGfPAe8oxe1HuVl5Hm3eWK">不足</text>
+  <line x1="320" y1="850" x2="388" y2="850" stroke="#c79023" stroke-width="1.3" marker-end="url(#aae)" data-page-node-id="4GLEWcSayEak35cbyDkdY5"/>
+  <text x="338" y="844" font-size="8.4" fill="#9a6a18" data-page-node-id="zGfPAe8oxe1HuVl5Hm3eWK">不足</text>
   <!-- redo → 回到 search (是) -->
-  <path d="M552,740 H652 V190 H364" fill="none" stroke="#c79023" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#aae)" data-page-node-id="StA4ayDfVepcgM1eVUwAIr"/>
+  <path d="M552,850 H652 V190 H364" fill="none" stroke="#c79023" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#aae)" data-page-node-id="StA4ayDfVepcgM1eVUwAIr"/>
   <text x="556" y="580" font-size="8.4" fill="#9a6a18" data-page-node-id="CY83wg5lxhlIulS9byPAxN">是 · ↺ 换检索词再 search</text>
   <text x="556" y="592" font-size="7.6" fill="#b08a3a" data-page-node-id="xR9Dnvv9vPznYZfIcH4lAd">再选择页面 fetch</text>
   <!-- redo → hasEv (否) -->
-  <line x1="470" y1="768" x2="470" y2="778" stroke="#c0703a" stroke-width="1.3" marker-end="url(#aae)" data-page-node-id="WGXm983AwMgf436nZAmSE1"/>
-  <text x="478" y="774" font-size="8" fill="#9a4a18" data-page-node-id="aAqcMvouSXCCVPyoMR0CBw">否 · 检索已穷尽</text>
+  <line x1="470" y1="878" x2="470" y2="888" stroke="#c0703a" stroke-width="1.3" marker-end="url(#aae)" data-page-node-id="WGXm983AwMgf436nZAmSE1"/>
+  <text x="478" y="884" font-size="8" fill="#9a4a18" data-page-node-id="aAqcMvouSXCCVPyoMR0CBw">否 · 检索已穷尽</text>
   <!-- hasEv → final (有) -->
-  <path d="M380,806 H360 V878" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="J7GE6y1DGWaPu6z2dyLYNG"/>
-  <text x="346" y="842" font-size="8" fill="#2a7a68" data-page-node-id="TjlRYUsFG0JQCKSwzgFuOo">有 · 依据证据作答（可靠）</text>
+  <path d="M380,916 H360 V988" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="J7GE6y1DGWaPu6z2dyLYNG"/>
+  <text x="346" y="952" font-size="8" fill="#2a7a68" data-page-node-id="TjlRYUsFG0JQCKSwzgFuOo">有 · 依据证据作答（可靠）</text>
   <!-- hasEv → final (无 · 杜撰) -->
-  <path d="M470,834 V878" fill="none" stroke="#D0454F" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aaer)" data-page-node-id="lj4JVwfv7vsHIH0x0suDp3"/>
-  <text x="486" y="848" font-size="8.2" font-weight="700" fill="#B0212B" data-page-node-id="D9Rwq3O0V5l99geNfmkjwI">无 · 最高风险：</text>
-  <text x="486" y="860" font-size="7.8" fill="#A03038" data-page-node-id="oWMTVNqdMZJBOCTG8Sn97M">模型无法可靠识别「自身不知道」</text>
-  <text x="486" y="871" font-size="7.8" fill="#A03038" data-page-node-id="aQGo38riD5Dgj4DdKmo2Gf">凭记忆填补空缺 = 杜撰</text>
+  <path d="M470,944 V988" fill="none" stroke="#D0454F" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aaer)" data-page-node-id="lj4JVwfv7vsHIH0x0suDp3"/>
+  <text x="486" y="958" font-size="8.2" font-weight="700" fill="#B0212B" data-page-node-id="D9Rwq3O0V5l99geNfmkjwI">无 · 最高风险：</text>
+  <text x="486" y="970" font-size="7.8" fill="#A03038" data-page-node-id="oWMTVNqdMZJBOCTG8Sn97M">模型无法可靠识别「自身不知道」</text>
+  <text x="486" y="981" font-size="7.8" fill="#A03038" data-page-node-id="aQGo38riD5Dgj4DdKmo2Gf">凭记忆填补空缺 = 杜撰</text>
 </svg>
-<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px" data-page-node-id="9eSZPShJ0UGMEMRtqud7pw">悬浮任意节点查看该环节职责（锚 D 任务）。<b data-page-node-id="QF2MkyKHMdiucskCQj3WZ0">web_fetch 内部不是一条直线，而是分叉的协议检查</b>：先过 <b data-page-node-id="75jZwHxWlKidxjtoy9KM6C">robots.txt</b> 准入门控（禁止则 url_not_allowed），通过后 <b data-page-node-id="6T79zVtQB7nUVWbXiSCIr0">sitemap.xml</b> 经 robots 的 <code data-page-node-id="g5jjwZpY2Fy2rtZbLkUdH3">Sitemap:</code> 指令被发现（提供 URL 清单），<b data-page-node-id="JI5afDxD15cwzFdH5TnLZ2">llms.txt / llms-full.txt</b> 是独立旁路（可选、厂商未确认消费）——三路汇聚到<b data-page-node-id="btpUDEdmbUGtyuWYw0VmTV">抓取目标正文</b>。<b data-page-node-id="7XipafJOBGoKHO4vKOewAN">自带知识无需检索亦在其中</b>，是第三条证据来源。</div>
+<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px" data-page-node-id="9eSZPShJ0UGMEMRtqud7pw">悬浮任意节点查看该环节职责（锚 D 任务）。<b data-page-node-id="QF2MkyKHMdiucskCQj3WZ0">web_fetch 内部不是一条直线，而是分叉的协议检查 + 页面解析</b>：先过 <b data-page-node-id="75jZwHxWlKidxjtoy9KM6C">robots.txt</b> 准入门控（禁止则 url_not_allowed），通过后 <b data-page-node-id="6T79zVtQB7nUVWbXiSCIr0">sitemap.xml</b> 经 robots 的 <code data-page-node-id="g5jjwZpY2Fy2rtZbLkUdH3">Sitemap:</code> 指令被发现（提供 URL 清单），<b data-page-node-id="JI5afDxD15cwzFdH5TnLZ2">llms.txt / llms-full.txt</b> 是独立旁路（可选、厂商未确认消费）——三路汇聚到<b data-page-node-id="btpUDEdmbUGtyuWYw0VmTV">抓取目标正文</b>。<b data-page-node-id="parse-note1">正文并非直接可读：HTML 先解析为 DOM，再提取语义块（标题/段落/代码/列表/表格），忽略 CSS/JS/广告，最后转成纯文本/Markdown 输入模型</b>——按文档流顺序读取，标题与代码块权重更高。<b data-page-node-id="parse-note2">SPA 页此步正文 0 字</b>（只回导航+meta），是 D 任务受阻的技术根因。<b data-page-node-id="7XipafJOBGoKHO4vKOewAN">自带知识无需检索亦在其中</b>，是第三条证据来源。</div>
   </div>
   <div id="codeView" style="display:none" data-page-node-id="wlCXzIB00i9XBvaxcHYVXI">
   <div class="sechint" style="margin:0 0 6px" data-page-node-id="esBrArcW7JMdnoYDAeFUBf">最小实现代码（A–D 段对应架构图各环节）：</div>
