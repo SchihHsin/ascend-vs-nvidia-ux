@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="7lpN2oh7rkQDugpAFux785">
-<head data-page-node-id="ZjmckfrlCll8YSEpNPiXeG">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' data-page-node-id="YIDrJOTBHvkrh9tCp62VFq"><rect width='32' height='32' rx='7' fill='%231C1C28' data-page-node-id="2enrd5aQyzsdI3JGBnXsl2"/><polyline points='4,12 11,17 18,11 27,19' fill='none' stroke='%23C8102E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' data-page-node-id="PE4H3zX9IzAZfbXdv1MmWo"/><polyline points='4,22 12,15 19,17 28,6' fill='none' stroke='%2376B900' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round' data-page-node-id="FfXIRnuhrsFahpNbXv6O5G"/><circle cx='28' cy='6' r='2.3' fill='%2376B900' data-page-node-id="1M6rcN6iMrwCFlHoIEyECj"/></svg>">
-<meta charset="UTF-8" data-page-node-id="K1J0FLMUAOGiWNsWtGHVtq">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="qHTHpH7rrPBDYFuMC2p6Ss">
+<html lang="zh-CN">
+<head>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231C1C28'/><polyline points='4,12 11,17 18,11 27,19' fill='none' stroke='%23C8102E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/><polyline points='4,22 12,15 19,17 28,6' fill='none' stroke='%2376B900' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/><circle cx='28' cy='6' r='2.3' fill='%2376B900'/></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>20 · 人机协同旅程：一次「自定义算子开发」的全链路时序图 + Agent 系统工程拆解</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet" data-page-node-id="GLNmhBIt4kvjCmorocGMdQ">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <style>
 :root{
@@ -326,574 +326,520 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
 <style id="embedhidecss">html.embed-wait body{opacity:0!important}body{transition:opacity .14s ease}</style>
 <script id="embedhidejs">document.documentElement.classList.add('embed-wait');setTimeout(function(){document.documentElement.classList.remove('embed-wait');},3000);</script>
 </head>
-<body data-page-node-id="oJroCx7nrgPX0Vh0CY2qd1">
-<div class="wrap" data-page-node-id="ZIMxh07S0swlZ96fgOaqDR">
+<body>
+<div class="wrap">
 
-<div class="pagenav" data-page-node-id="zJA69JW2y4k7QywuoyeZ6j">
-  <span class="pntitle" data-page-node-id="9j96m5jqwaphy65CGh8hjh">昇腾 vs CUDA · AI 可用性</span>
-  <a class="pnlink" href="18_metric_definition.html" data-page-node-id="qCEawD3VqBzECY202nQRQJ">方法论</a>
-  <a class="pnlink" href="17_official_site_focus.html" data-page-node-id="guuAmiNWwp7U8pAV5umhC3">热力矩阵</a>
-  <a class="pnlink" href="19_findings_ux_synthesis.html" data-page-node-id="wA5TJ2ofMqM16VGGzTDRud">启发与方向</a>
-  <span class="pnlink cur" data-page-node-id="u01KtfGrZpeYfFSy4nynzH">人机协同旅程</span>
+<div class="pagenav">
+  <span class="pntitle">昇腾 vs CUDA · AI 可用性</span>
+  <a class="pnlink" href="18_metric_definition.html">方法论</a>
+  <a class="pnlink" href="17_official_site_focus.html">热力矩阵</a>
+  <a class="pnlink" href="19_findings_ux_synthesis.html">启发与方向</a>
+  <span class="pnlink cur">人机协同旅程</span>
 </div>
 
-<div class="toc" data-page-node-id="7vUsC1YMpAvyu7efYmo3lS">
-  <div class="toclbl" data-page-node-id="QF76OyN8XXIb2oGBqOtUl7">本页目录</div>
-  <a href="#s1" data-page-node-id="ZCuU3NG9PACQzlZL38fnGN">① 全链路时序图</a>
-  <a href="#s4" data-page-node-id="WHiuHiDlJn0SoXugHSyxcM">② Agent 系统工程</a>
-  <a href="#s6" data-page-node-id="bjzApxJ9TbF49oFeSlDLl9">③ 交付物汇总</a>
+<div class="toc">
+  <div class="toclbl">本页目录</div>
+  <a href="#s1">① 全链路时序图</a>
+  <a href="#s4">② Agent 系统工程</a>
+  <a href="#s6">③ 交付物汇总</a>
 </div>
 
-<h1 data-page-node-id="3ldOIAgDPFwrL9I8MTb7UA">人机协同旅程：开发者完成一段任务的全链路</h1>
-<div class="subtitle" data-page-node-id="kYHv8mGIFQYwPUIuQZX9iX">
-  把<b data-page-node-id="JM8TsYw6AqqOu907qVkt0g">开发者从立项到交付的整段旅程</b>画成 5 参与者时序图。当前场景：<b data-page-node-id="8zFDAyBXfHRGtdmZWDCHAD">算子开发</b>——开发一个算子<b data-page-node-id="gFClLgMIseed0H8Wv1Hnxo">沿时间串过 5 次搜索（D 写 kernel → M Tiling → X 内存 → O 集成 → L 精度）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行；唯一官方真受阻的是写 kernel 的 D（.41）。<span style="color:#888" data-page-node-id="k5s2e3cAsvzQbms4wDklmg">（上方 Tab 可切<b data-page-node-id="u2hxXoDXnjfgJNddof8GbB">训练场景</b>看另一条路对照——5 搜全在中高/高带、无受阻深谷；<b data-page-node-id="31yxr0FoohLrcHiV3obDwy">推理</b>场景制作中、迁移场景已归档备扩。）</span>事实取自 <code data-page-node-id="qmCtdQFkKFDHC1SvPEHJTH">task_run_log.md</code> 实测（仅检索段实测、开发段重建）。
+<h1>人机协同旅程：开发者完成一段任务的全链路</h1>
+<div class="subtitle">
+  把<b>开发者从立项到交付的整段旅程</b>画成 5 参与者时序图。当前场景：<b>算子开发</b>——开发一个算子<b>沿时间串过 5 次搜索（D 写 kernel → M Tiling → X 内存 → O 集成 → L 精度）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行；唯一官方真受阻的是写 kernel 的 D（.41）。<span style="color:#888">（上方 Tab 可切<b>训练场景</b>看另一条路对照——5 搜全在中高/高带、无受阻深谷；<b>推理</b>场景制作中、迁移场景已归档备扩。）</span>事实取自 <code>task_run_log.md</code> 实测（仅检索段实测、开发段重建）。
 </div>
 
-<a id="s1" data-page-node-id="d2rB0KzMgI5ZtFrNluh3nB"></a>
-<h2 data-page-node-id="d4B2CNcunOFqiie0wYZH2v"><span class="no" data-page-node-id="Ek0IwEl39vF7kBrNgHAaVu">①</span>全链路时序图 · 4 参与者（拖动「AI 自主度」看场景切换 · 悬浮看每步细节）</h2>
-<div class="sechint" data-page-node-id="pz6Gt1Jh8R4CnVhCEG69w4">竖向时序图、<b data-page-node-id="P4vT8wyiPBRSFPmMA6CabD">5 条生命线（昇腾社区 ｜ 第三方平台 ｜ AI ｜ 开发者 ｜ 本机工具）</b>。这是<b data-page-node-id="iWBLWuQgTh0FuEimH0DgXQ">「算子开发场景」全流程</b>：开发一个算子沿时间撞上 <b data-page-node-id="zf6T087iqgkcgSDGKpL5ZF">5 次搜索（D→M→X→O→L）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行。拖滑块看 3 档自主度、<b data-page-node-id="j47hpRUmJCo08kqGhvWOTH">悬浮节点看细节</b>。<details class="moreinfo" data-page-node-id="pWCqvjxFnafRv9s52mkCmD"><summary data-page-node-id="wp72r6t8GOcAgKYXJNibHf">展开：交互与核心发现</summary><div data-page-node-id="ODmqyDVxYRSQHOLT8E2lGR">每步是参与者间一条消息（横向箭头、标题在上）。<b data-page-node-id="glkUwnPvhNP3PsCoFgVBlB">核心发现</b>：5 次搜索里<b data-page-node-id="UGRdnEdde5lRhblq88qd94">只有写 kernel 的 D（sD）官方真受阻</b>——AI 向昇腾社区 <code data-page-node-id="yEXxv2vDC2puHKliVFnXgo">web_fetch</code>，返回红色空箭头「✕ 页面正文未能取回」、再转第三方平台兜底；后面 M/X/O/L 官方都抓得到、但各有版本/第三方平台/自带的坑。拖动时执行/决策发起方 morph——越自动「开发者」线越靠边。（3 档为协作示意、仅 AI 检索步实测，口径见底部局限①）</div></details></div>
+<a id="s1"></a>
+<h2><span class="no">①</span>全链路时序图 · 4 参与者（拖动「AI 自主度」看场景切换 · 悬浮看每步细节）</h2>
+<div class="sechint">竖向时序图、<b>5 条生命线（昇腾社区 ｜ 第三方平台 ｜ AI ｜ 开发者 ｜ 本机工具）</b>。这是<b>「算子开发场景」全流程</b>：开发一个算子沿时间撞上 <b>5 次搜索（D→M→X→O→L）</b>，每次对应 26 任务里不同的一个、各打穿矩阵不同行。拖滑块看 3 档自主度、<b>悬浮节点看细节</b>。<details class="moreinfo"><summary>展开：交互与核心发现</summary><div>每步是参与者间一条消息（横向箭头、标题在上）。<b>核心发现</b>：5 次搜索里<b>只有写 kernel 的 D（sD）官方真受阻</b>——AI 向昇腾社区 <code>web_fetch</code>，返回红色空箭头「✕ 页面正文未能取回」、再转第三方平台兜底；后面 M/X/O/L 官方都抓得到、但各有版本/第三方平台/自带的坑。拖动时执行/决策发起方 morph——越自动「开发者」线越靠边。（3 档为协作示意、仅 AI 检索步实测，口径见底部局限①）</div></details></div>
 
-<div class="sctabs" id="sctabs" data-page-node-id="hTbuQHi7SpvI2dZSpGzND5"></div>
+<div class="sctabs" id="sctabs"></div>
 
-<div class="ctrlrow" data-page-node-id="8Uy1kZgHbtT5HfrA90piPS">
-  <div class="lvlbox" data-page-node-id="QpMCvs0zhj3gZGDYQ021a5">
-    <div class="lvlhead" data-page-node-id="7PRPdDRAXmoVOQtJuBd5z2">AI 自主度 · 3 档协作模式 <span style="font-weight:400;color:#999;font-size:11px" data-page-node-id="Yyepgs4S7C01BAuJzpkjsl">（悬浮档位看说明）</span></div>
-    <input type="range" min="0" max="2" step="1" value="0" id="lvl" class="lvlslider" aria-label="AI 自主度档位" data-page-node-id="BdyPqDgBHmYt7hgptAWBCe">
-    <div class="lvlticks" data-page-node-id="NbD49uj31MTnaezbvX5oMK"><span class="on" data-lvl="0" data-page-node-id="23ht9vxHDMRALVEsMRX6ey">开发者主笔·AI 辅助</span><span data-lvl="1" data-page-node-id="EBh3FDQm4nKuijdYhA5b4f">AI 主写·开发者审核</span><span data-lvl="2" data-page-node-id="o1EJLkurnh7EXlB4CWx53A">开发者委派·AI 自管</span></div>
+<div class="ctrlrow">
+  <div class="lvlbox">
+    <div class="lvlhead">AI 自主度 · 3 档协作模式 <span style="font-weight:400;color:#999;font-size:11px">（悬浮档位看说明）</span></div>
+    <input type="range" min="0" max="2" step="1" value="0" id="lvl" class="lvlslider" aria-label="AI 自主度档位">
+    <div class="lvlticks"><span class="on" data-lvl="0">开发者主笔·AI 辅助</span><span data-lvl="1">AI 主写·开发者审核</span><span data-lvl="2">开发者委派·AI 自管</span></div>
   </div>
 </div>
-<div class="lvldesc" id="lvlDesc" data-page-node-id="ySr1uTQnGHRIbnvV3GglON"></div>
+<div class="lvldesc" id="lvlDesc"></div>
 
-<div class="chartwrap" data-page-node-id="19UE5CDzeSROw12HyWIrlF">
-  <svg id="journey" data-page-node-id="zkOsYujbnyFA5zyjlfLgIw"></svg>
+<div class="chartwrap">
+  <svg id="journey"></svg>
 </div>
 
-<div class="legendbar" data-page-node-id="OaDLFZXeX7CKjm4XoCJQPU">
-  <span class="lg" style="font-weight:700;color:#555" data-page-node-id="UXCzdWll7mLGqAgzMaokmF">生命线：</span>
-  <span class="lg" data-page-node-id="8mECzfPjmtXHk9KEw8YiOG"><i class="lgdot" style="background:#fff;border-color:#C8102E" data-page-node-id="DawYDpjMYZoVVmXMRUG6Oh"></i> 昇腾社区</span>
-  <span class="lg" data-page-node-id="yz3cBd7NS2EjbCyhV1qvGL"><i class="lgdot" style="background:#fff;border-color:#BA7517" data-page-node-id="Y6zXTgEdsRyNK7wRVvbtdE"></i> 第三方平台</span>
-  <span class="lg" data-page-node-id="S9WKzNK01Ud9TQbdS77vKw"><i class="lgdot" style="background:#fff;border-color:#6B5BA8" data-page-node-id="e7iEG887TGF8AKmmClYq72"></i> AI</span>
-  <span class="lg" data-page-node-id="wxLAU399yNFslp2k06SqYh"><i class="lgdot" style="background:#fff;border-color:#2f3d63" data-page-node-id="jqBkBXxB2yPhyz76J53MCQ"></i> 开发者</span>
-  <span class="lg" data-page-node-id="3zOUv2sbkG3OfFznflwzAv"><i class="lgdot" style="background:#fff;border-color:#3f7d72" data-page-node-id="BFrAuPLiDAal2bjvjm3YLG"></i> 本机工具</span>
-  <span class="lg" id="lgHandoff" data-page-node-id="6QVZDfFuLrQoucmnsnJvnK"><i class="lgline" data-page-node-id="B1qmixNsdE9jBErxUbRbMl"></i> 消息·涉及 AI</span>
-  <span class="lg" data-page-node-id="24kopLZfPDbFW8VWE64204"><i class="lgline" style="border-top-color:#7a8aa0" data-page-node-id="QdNN6d6zl3wQBHwXPVHhKv"></i> 消息·开发者 ↔ 工具</span>
-  <span class="lg" data-page-node-id="GimDFRWYbpA712EEbi64n5"><i class="lgline" style="border-top:2px dashed #C8102E" data-page-node-id="jZeDFGsj69aiiLtCJbHyrS"></i> 受阻·空返回 ✕</span>
-  <span class="lg" data-page-node-id="0RoEkZoRfbgGzOlYRPsnAZ"><i class="lgdiaA" data-page-node-id="KvdHiXPTVwMtu5s295SNQY"></i> 决策·A 开发者不可缺位</span>
-  <span class="lg" data-page-node-id="TyV1xan0oYjOgFd2RygEP6"><i class="lgdiaB" data-page-node-id="x3G8AUxtkUvPBE26tkkOZt"></i> 决策·B 技术路线</span>
-  <span class="lg" data-page-node-id="Jb1QlADillsvadWRvTpmrl"><i class="lgline dash" data-page-node-id="msafGc8Kh0oFLHyWdg0KDQ"></i> 用户独立分支（开发者→社区，悬浮看开发者使用社区撞到的真实摩擦）</span>
-  <span class="lg" data-page-node-id="0BHrsBf74po8dfrvNR2sZC"><b style="color:#bb2236" data-page-node-id="1sHufBcPLS1IztoVI2QAZN">①②③…</b> 节点旁红色小字＝该步对应的<b data-page-node-id="U44HWJQgf6juisHLhur6jk">矩阵指标分</b>（打穿到热力矩阵）</span>
+<div class="legendbar">
+  <span class="lg" style="font-weight:700;color:#555">生命线：</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#C8102E"></i> 昇腾社区</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#BA7517"></i> 第三方平台</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#6B5BA8"></i> AI</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#2f3d63"></i> 开发者</span>
+  <span class="lg"><i class="lgdot" style="background:#fff;border-color:#3f7d72"></i> 本机工具</span>
+  <span class="lg" id="lgHandoff"><i class="lgline"></i> 消息·涉及 AI</span>
+  <span class="lg"><i class="lgline" style="border-top-color:#7a8aa0"></i> 消息·开发者 ↔ 工具</span>
+  <span class="lg"><i class="lgline" style="border-top:2px dashed #C8102E"></i> 受阻·空返回 ✕</span>
+  <span class="lg"><i class="lgdiaA"></i> 决策·A 开发者不可缺位</span>
+  <span class="lg"><i class="lgdiaB"></i> 决策·B 技术路线</span>
+  <span class="lg"><i class="lgline dash"></i> 用户独立分支（开发者→社区，悬浮看开发者使用社区撞到的真实摩擦）</span>
+  <span class="lg"><b style="color:#bb2236">①②③…</b> 节点旁红色小字＝该步对应的<b>矩阵指标分</b>（打穿到热力矩阵）</span>
 </div>
-<div class="ownleg" data-page-node-id="BY6A5tEdCYs8Uap74BVgcU">
-  <b style="font-size:12px;color:#444" data-page-node-id="hEgFrP5tnBiReIgrPmHeHS">主导方色带：</b>
-  <span data-page-node-id="N9DrkDktUhrB9kwv13xgAb"><i class="i-hu" data-page-node-id="dol1FHJlzJfHHN7HfHgjwA"></i> 用户主导（最终决定权归开发者）</span>
-  <span data-page-node-id="lSXZ5bWwQtTUbWcUmlY1wc"><i class="i-co" data-page-node-id="mKhz931CuBO3mRkujHvdRI"></i> 人机协同（AI 起草 / 开发者执行判断）</span>
-  <span data-page-node-id="i1egChZbHI6XuQFuUSNnSP"><i class="i-ai" data-page-node-id="9Ms5r579ObCfj9nsTXFCog"></i> Agent 自动化主导（多轮检索自主）</span>
+<div class="ownleg">
+  <b style="font-size:12px;color:#444">主导方色带：</b>
+  <span><i class="i-hu"></i> 用户主导（最终决定权归开发者）</span>
+  <span><i class="i-co"></i> 人机协同（AI 起草 / 开发者执行判断）</span>
+  <span><i class="i-ai"></i> Agent 自动化主导（多轮检索自主）</span>
 </div>
 
-<div class="conclbox" id="conclbox" data-page-node-id="YEzXZJaNOUYX4CyCISMFl1">
- <div class="scen-concl" data-scen="D" data-page-node-id="jzfsUVw7jqUcoids6VVk7Z">
-  <div class="cb-h" data-page-node-id="CWGkjtdiAL1rbbWIlauhkB">综述 · 算子开发场景旅程（串 5 次搜索 · 最弱 D .41）</div>
-  <div class="jline" data-page-node-id="Eshms0VD1vv9YwI1ll9gDH">用<b data-page-node-id="2RmjT11nuJJUdqBikMCQsr">时序图独有的「时间 + 协同」视角</b>（横截面 19 看不出的）收敛成 <b data-page-node-id="FTYdqKNctxVywRqbKiUp1e">3 个判断 + 行动建议</b>——可用性<b data-page-node-id="m0qLvcx4sXcxlzztT8Y7CR">逐段在变·被最弱环节拖着</b>、人机<b data-page-node-id="aeRfwNtoGF8qHNWiJYbalv">交接质量</b>、体感<b data-page-node-id="mTuG5sM9flX8UNrwh3Nq40">前松后紧</b>。锚算子开发场景的 5 次搜索（D/M/X/O/L）；全 26 任务的指标统计与 ROI 排序（过程态、支撑材料）见 <a href="19_findings_ux_synthesis.html" data-page-node-id="wuJcW20CKQJbfLibJxwUmg">启发与方向 →</a></div>
+<div class="conclbox" id="conclbox">
+ <div class="scen-concl" data-scen="D">
+  <div class="cb-h">综述 · 算子开发场景旅程（串 5 次搜索 · 最弱 D .41）</div>
+  <div class="jline">用<b>时序图独有的「时间 + 协同」视角</b>（横截面 19 看不出的）收敛成 <b>3 个判断 + 行动建议</b>——可用性<b>逐段在变·被最弱环节拖着</b>、人机<b>交接质量</b>、体感<b>前松后紧</b>。锚算子开发场景的 5 次搜索（D/M/X/O/L）；全 26 任务的指标统计与 ROI 排序（过程态、支撑材料）见 <a href="19_findings_ux_synthesis.html">启发与方向 →</a></div>
 
-  <div class="judge" data-page-node-id="m6OGKYOAUVovOlrHKNNm25">
-    <div class="j-h" data-page-node-id="89gerFUFSOkM6hmkYTPAC2">判断 1 · 一个算子开发是 5 次搜索的串联，被最弱、又最靠前的「写 kernel」拖着</div>
-    <div class="j-one" data-page-node-id="hoXeNX2BslsrLlIsBjgsYX">核心一问：开发一个算子，AI 的可用性是一个数，还是一路在变？</div>
-    <div class="jbody" data-page-node-id="EEIVzEy1MX4YZlV3oioF8f">
-      <div class="jtext" data-page-node-id="Eq9aKNzZh79YHsXIidBtdj">
-        <p data-page-node-id="4PZu1HaWUBy2KG69GIuAAC">开发一个算子<b data-page-node-id="GuooyrFl1vkUd5mJp3QxjB">不是搜一次</b>，是沿时间撞上 <b data-page-node-id="Y5gBQAleqUiCEthv3BvCz7">5 次搜索</b>：写 kernel(D) → Tiling(M) → 内存越界(X) → 注册集成(O) → 精度排查(L)。可用性<b data-page-node-id="vvTgsmXtL8RFDmTwpMUzx2">一路在变</b>，不是一个数。</p>
-        <p data-page-node-id="YLDrZSjPirvtdXHSpsosfD">5 次里 <b data-page-node-id="DezdS8mmYJrDDULZ2wJQ6G">4 次官方都抓得到</b>（M.63 / X.74 / O.72 / L.69，各有版本/第三方平台的小坑），<b data-page-node-id="cGxKIU7ZwZDJ7K3I1PfaQT">只有写 kernel 的 D 官方真受阻（.41）</b>。但整条路的体感被 D 拖着——因为它<b data-page-node-id="aaFVZsFDdlNAispjv5peo9">又最弱、又最靠前</b>：kernel 写不出，后面 Tiling/编译/精度全建在第三方平台地基上，到编译才报错。<b data-page-node-id="mQwWctQOQIOwGkcRuuaOeP">场景可用性 ≈ 最弱且最靠前的那一搜。</b></p>
-        <p class="j-fix" data-page-node-id="su1STdyIw9YGtb6RMliehm"><b data-page-node-id="kvW3rMgexJ9c2LYv0VuZD7">怎么改：</b>优先修<b data-page-node-id="TDDAreO47tGZjtVD4zKsYK">最靠前的瓶颈</b>——把写 kernel 那页（opdevg）静态化（治本，见 <a href="19_findings_ux_synthesis.html" data-page-node-id="GA1eckTjjvBtCUlHwHVBfQ">19</a>）；在此之前，AI 抓取为空时<b data-page-node-id="eDqS4ILfxOhSYwqk5Xas4c">显式报「官方未取得、以下第三方平台」</b>，别让错误地基静默往下传。</p>
+  <div class="judge">
+    <div class="j-h">判断 1 · 一个算子开发是 5 次搜索的串联，被最弱、又最靠前的「写 kernel」拖着</div>
+    <div class="j-one">核心一问：开发一个算子，AI 的可用性是一个数，还是一路在变？</div>
+    <div class="jbody">
+      <div class="jtext">
+        <p>开发一个算子<b>不是搜一次</b>，是沿时间撞上 <b>5 次搜索</b>：写 kernel(D) → Tiling(M) → 内存越界(X) → 注册集成(O) → 精度排查(L)。可用性<b>一路在变</b>，不是一个数。</p>
+        <p>5 次里 <b>4 次官方都抓得到</b>（M.63 / X.74 / O.72 / L.69，各有版本/第三方平台的小坑），<b>只有写 kernel 的 D 官方真受阻（.41）</b>。但整条路的体感被 D 拖着——因为它<b>又最弱、又最靠前</b>：kernel 写不出，后面 Tiling/编译/精度全建在第三方平台地基上，到编译才报错。<b>场景可用性 ≈ 最弱且最靠前的那一搜。</b></p>
+        <p class="j-fix"><b>怎么改：</b>优先修<b>最靠前的瓶颈</b>——把写 kernel 那页（opdevg）静态化（治本，见 <a href="19_findings_ux_synthesis.html">19</a>）；在此之前，AI 抓取为空时<b>显式报「官方未取得、以下第三方平台」</b>，别让错误地基静默往下传。</p>
       </div>
-      <div class="jdemo" data-page-node-id="XiD2RIESF8wjw5NsHIaBzE">
-        <div class="demo-cap" data-page-node-id="J6o1kQUSxIOEjGAY15rODt">5 次搜索的可用性 · 整体被最弱的 D 拖着</div>
-        <div class="seg5" data-page-node-id="MsPm88ANWmYaAjp3ygVZb0">
-          <div class="s5row" data-page-node-id="ikSyoJJ0zOKBH2k1kpiMa7"><span class="s5n" data-page-node-id="CkWWjk5SIMLkYuvd08MNZb">写 kernel</span><span class="s5bar v1" style="width:46%" data-page-node-id="YGVP8DJxwDrw2OJWaHQ471">D .41 受阻</span></div>
-          <div class="s5row" data-page-node-id="LsXLXdRV47X5P5aQLXo9j5"><span class="s5n" data-page-node-id="xdCw5uxFS4NblnBg79G7hi">Tiling</span><span class="s5bar v3" style="width:66%" data-page-node-id="QVvUcy5hdzYUSrCWv8b0Dn">M .63</span></div>
-          <div class="s5row" data-page-node-id="zaCbiQY65lmggCoApRgsfM"><span class="s5n" data-page-node-id="W5BxEoGB1XAhiowYA1jYxv">内存越界</span><span class="s5bar v4" style="width:77%" data-page-node-id="HxKcUHdgOzf2XAx1y3IhOg">X .74</span></div>
-          <div class="s5row" data-page-node-id="Dln0JDwfLGiBkz3zIBq0gK"><span class="s5n" data-page-node-id="cSO2epqt6VGEZP3RNQeX6B">注册集成</span><span class="s5bar v4" style="width:75%" data-page-node-id="v2JHsBIDSc0WDt5zBTSogF">O .72</span></div>
-          <div class="s5row" data-page-node-id="IJDAnMkoHRBUVYT4KPhubC"><span class="s5n" data-page-node-id="a38GR8EgSE794Zu3h3Y3my">精度排查</span><span class="s5bar v4" style="width:72%" data-page-node-id="JmH4XbOSZ2ps7oILPnhOci">L .69</span></div>
+      <div class="jdemo">
+        <div class="demo-cap">5 次搜索的可用性 · 整体被最弱的 D 拖着</div>
+        <div class="seg5">
+          <div class="s5row"><span class="s5n">写 kernel</span><span class="s5bar v1" style="width:46%">D .41 受阻</span></div>
+          <div class="s5row"><span class="s5n">Tiling</span><span class="s5bar v3" style="width:66%">M .63</span></div>
+          <div class="s5row"><span class="s5n">内存越界</span><span class="s5bar v4" style="width:77%">X .74</span></div>
+          <div class="s5row"><span class="s5n">注册集成</span><span class="s5bar v4" style="width:75%">O .72</span></div>
+          <div class="s5row"><span class="s5n">精度排查</span><span class="s5bar v4" style="width:72%">L .69</span></div>
         </div>
-        <div class="s5cap" data-page-node-id="lkTZ1TRN7QtHCfwO42SOkA">4 次官方都抓得到，唯独写 kernel 的 D 受阻、且最靠前——整条路被它拖着（横截面 19 给不出这条「逐段」曲线）</div>
-        <div class="demo-side ds-comm" data-page-node-id="FIrs5jjSl6ZdBYLtHBNeng">昇腾社区侧 · 供给侧治本（治根：让 AI 抓得到）</div>
-        <div class="lofi" data-page-node-id="JVHuJAO1AaidSTRXxg1pVl">
-          <div class="lofi-bar s-comm" data-page-node-id="zbhAK21V9OYE8fKBZfCOVM">昇腾社区文档站 · opdevg 写 kernel 页</div>
-          <div class="lofi-body" data-page-node-id="Qn4HQUCxnSKOsRpwPEt90s">
-            <div class="ba2" data-page-node-id="I71mVQmHLXAUKXGnaY8WcC">
-              <div class="ba-col ba-b" data-page-node-id="AUnlQYFWLEgDH8wOIbL5NY"><span class="ba-t" data-page-node-id="MdKDFwP7z0D2Obpyjeikn1">现状（正文未返回）</span>web_fetch 只回导航 + meta、<b data-page-node-id="HPwquw5AMIWMxIOjPdIBuW">正文 0 字</b>——AI 抓取为空，错误地基由此而起</div>
-              <span class="ba-arr" data-page-node-id="7jnnsl8W5Q7vKCiuzeItYd">→</span>
-              <div class="ba-col ba-a" data-page-node-id="9MxN9aBCCGWOGpVMgJ8TpH"><span class="ba-t" data-page-node-id="sjA5PC1jknWpRIKp2UGAIa">改后（静态化）</span>正文 HTML 内含 msopgen 命令 + 参数表，<b data-page-node-id="9koLQBadxlANgrXHSH60AA">AI 一次抓全</b>、不必转第三方平台</div>
+        <div class="s5cap">4 次官方都抓得到，唯独写 kernel 的 D 受阻、且最靠前——整条路被它拖着（横截面 19 给不出这条「逐段」曲线）</div>
+        <div class="demo-side ds-comm">昇腾社区侧 · 供给侧治本（治根：让 AI 抓得到）</div>
+        <div class="lofi">
+          <div class="lofi-bar s-comm">昇腾社区文档站 · opdevg 写 kernel 页</div>
+          <div class="lofi-body">
+            <div class="ba2">
+              <div class="ba-col ba-b"><span class="ba-t">现状（正文未返回）</span>web_fetch 只回导航 + meta、<b>正文 0 字</b>——AI 抓取为空，错误地基由此而起</div>
+              <span class="ba-arr">→</span>
+              <div class="ba-col ba-a"><span class="ba-t">改后（静态化）</span>正文 HTML 内含 msopgen 命令 + 参数表，<b>AI 一次抓全</b>、不必转第三方平台</div>
             </div>
           </div>
         </div>
-        <div class="demo-side ds-ai" data-page-node-id="DLQtzv5fF7KuoPVG9DfyB4">AI 使用侧 · 治标（在治根之前先别让失败静默传下去）</div>
-        <div class="lofi" data-page-node-id="LOVHmBidAA4DWjXPqDsLKI">
-          <div class="lofi-bar s-ai" data-page-node-id="FubKiaRKdAGzhkcKZ3DnWV">AI 助手 · 回答</div>
-          <div class="lofi-body" data-page-node-id="mrAZYtqHQpMHpAmrXLMyg8">
-            <div class="lofi-warn" data-page-node-id="yUwHdn3tXrZKpwKahevdze">⚠ 官方 how-to 页未取得（页面正文未能取回）；以下据第三方平台 + 自带知识，请核对官方</div>
-            <p data-page-node-id="yWKDAecDTjtLOwvMDg2eCv">步骤一：msopgen gen …<span class="src s-2" data-page-node-id="TneE3NYBt2IoEtE47YieHw">第三方平台</span></p>
-            <p data-page-node-id="02NgtFXXBPS3x9psiGzm3C">步骤二：build.sh 编包 …<span class="src s-own" data-page-node-id="Rf0h8BB5NsQ0HkNFuLPEiG">自带知识</span></p>
+        <div class="demo-side ds-ai">AI 使用侧 · 治标（在治根之前先别让失败静默传下去）</div>
+        <div class="lofi">
+          <div class="lofi-bar s-ai">AI 助手 · 回答</div>
+          <div class="lofi-body">
+            <div class="lofi-warn">⚠ 官方 how-to 页未取得（页面正文未能取回）；以下据第三方平台 + 自带知识，请核对官方</div>
+            <p>步骤一：msopgen gen …<span class="src s-2">第三方平台</span></p>
+            <p>步骤二：build.sh 编包 …<span class="src s-own">自带知识</span></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="judge" data-page-node-id="PkYpmbiYdjzizcbpTWrLTC">
-    <div class="j-h" data-page-node-id="IM80GOIhRsduCOYAvUgDcZ">判断 2 · 真正卡住 D 的不是「技术难」，是人机「交接」的质量</div>
-    <div class="j-one" data-page-node-id="QhtxaUESLH3Gt7nWftDqTz">核心一问：一次 D 开发，AI 和人交接了多少次？哪里最容易出问题？</div>
-    <div class="jbody" data-page-node-id="I5MkNX4nttaGQa2h8GuDJD">
-      <div class="jtext" data-page-node-id="SAeiCJRdHrlOY7qqXUmkH0">
-        <p data-page-node-id="EGrgpbqcZpN5oDyxYfpJzb">时序图数得出来：全旅程<b data-page-node-id="eqsUBVj0zgpbr0yLOOL15o">人机交接约 8–10 次</b>（AI 给 → 人执行 → 报错回灌 → AI 解读 → 人重试…），且<b data-page-node-id="HCfMItbFRrhLtVR8UVBxsL">编译 / 部署段（P5）交接最密</b>。这是横截面给不出的「协同密度」。</p>
-        <p data-page-node-id="UHlDPjoCgiTawfKBGOWvJV">每一次交接都是一道<b data-page-node-id="rrCJiKkREmrFs3qIgDGmOW">信息可能丢失的关口</b>：AI 给的命令带占位、人填错；人回灌的报错不全、AI 解读偏。<b data-page-node-id="BpTZrkYsaBligN5swZLyoN">卡的不是「算子难写」，是这条人机流水线的接口质量</b>——交接越密的地方（P5），出错越多。</p>
-        <p class="j-fix" data-page-node-id="qPL3KaaKDIZIltiH3jfUNP"><b data-page-node-id="DEzArmINQkf2ZAPhESg1e5">怎么改：</b>把<b data-page-node-id="ZJV2x1eRMyEzadDhwf6DwA">交接做成产品的一等公民</b>——AI 主动标「这里要你填什么」、报错能<b data-page-node-id="JSmdv15DblHiH0BnVYLTfO">一键完整回灌</b>、每个交接点留 checkpoint。把摩擦从「人自己扛」变成「产品接住」。</p>
+  <div class="judge">
+    <div class="j-h">判断 2 · 真正卡住 D 的不是「技术难」，是人机「交接」的质量</div>
+    <div class="j-one">核心一问：一次 D 开发，AI 和人交接了多少次？哪里最容易出问题？</div>
+    <div class="jbody">
+      <div class="jtext">
+        <p>时序图数得出来：全旅程<b>人机交接约 8–10 次</b>（AI 给 → 人执行 → 报错回灌 → AI 解读 → 人重试…），且<b>编译 / 部署段（P5）交接最密</b>。这是横截面给不出的「协同密度」。</p>
+        <p>每一次交接都是一道<b>信息可能丢失的关口</b>：AI 给的命令带占位、人填错；人回灌的报错不全、AI 解读偏。<b>卡的不是「算子难写」，是这条人机流水线的接口质量</b>——交接越密的地方（P5），出错越多。</p>
+        <p class="j-fix"><b>怎么改：</b>把<b>交接做成产品的一等公民</b>——AI 主动标「这里要你填什么」、报错能<b>一键完整回灌</b>、每个交接点留 checkpoint。把摩擦从「人自己扛」变成「产品接住」。</p>
       </div>
-      <div class="jdemo" data-page-node-id="cpRhnpH3ABdZzSkG1O7FkC">
-        <div class="demo-cap" data-page-node-id="5r7gpqyRIihgSq65kqvYfp">交接热度 · P5 编译部署段最密</div>
-        <div class="hoflow" data-page-node-id="QLUmAOzKYSh9PSKfboqWcP">
-          <div class="hobar" data-page-node-id="GZq9kWA5N1DEV7TDyQRfsE"><span class="hophase" data-page-node-id="DorZ8NmDmHyXntPnQH6mIx">P2 检索</span><span class="hophase" data-page-node-id="vDaCFhhlH8SdqCJqY8V6df">P3 生成</span><span class="hophase" data-page-node-id="dNo2KVscolu0BVVUaD241T">P4 核函数</span><span class="hophase hot" data-page-node-id="MRqh9XFfMk2VUuYwgxxdGg">P5 编译部署</span><span class="hophase" data-page-node-id="CdtwHCo1t5QRT7XZqOAHHj">P6 接入</span></div>
-          <div class="hodots" data-page-node-id="atra4IvKIS3CCDmtBDSymd">交接点：● — ● — ● <b data-page-node-id="C0tnyKl6xIIr73BZKZokCZ">● ● ● ●</b> — ● <br data-page-node-id="h6DWKk2WLFsacFEyoCAAh7"><b data-page-node-id="11JL2hqEdDOu6BGAEbb4Sb">P5 段最密</b>：报错 → AI 解读 → 人重试，来回穿插</div>
+      <div class="jdemo">
+        <div class="demo-cap">交接热度 · P5 编译部署段最密</div>
+        <div class="hoflow">
+          <div class="hobar"><span class="hophase">P2 检索</span><span class="hophase">P3 生成</span><span class="hophase">P4 核函数</span><span class="hophase hot">P5 编译部署</span><span class="hophase">P6 接入</span></div>
+          <div class="hodots">交接点：● — ● — ● <b>● ● ● ●</b> — ● <br><b>P5 段最密</b>：报错 → AI 解读 → 人重试，来回穿插</div>
         </div>
-        <div class="demo-side ds-comm" data-page-node-id="za6dwwVYWN8eBQt43Xzqov">昇腾社区侧 · 供给侧：官方命令写成「可照抄完整块」</div>
-        <div class="lofi" data-page-node-id="l7I4ZSO2kld69XqDvjrSMf">
-          <div class="lofi-bar s-comm" data-page-node-id="NSNGmlZgcfENXTk5H4hMsH">昇腾社区文档站 · 命令示例</div>
-          <div class="lofi-body" data-page-node-id="BHzcAyIHCneOT1DRCH5G9E">
-            <div class="ba2" data-page-node-id="iRzvhtIOcGwQVe2fo6B7Vk">
-              <div class="ba-col ba-b" data-page-node-id="WBQmUDw9S5BRJZnyP4gZ1J"><span class="ba-t" data-page-node-id="F4cY4iKVrDOaNkA7Yf1GtM">现状</span>命令散在正文、soc_version 不说怎么取 → AI 只能现编占位、人填错</div>
-              <span class="ba-arr" data-page-node-id="bqtU3G5TmWnCXEGyPmq4fW">→</span>
-              <div class="ba-col ba-a" data-page-node-id="O3iF9rJ8M3zPbqnj1w4WFz"><span class="ba-t" data-page-node-id="FhpXO1ExWBUZCgh5BTJ6Q0">改后</span>一个可照抄块 + 内联「npu-smi info 查芯片」步骤 → 少一次人机来回</div>
+        <div class="demo-side ds-comm">昇腾社区侧 · 供给侧：官方命令写成「可照抄完整块」</div>
+        <div class="lofi">
+          <div class="lofi-bar s-comm">昇腾社区文档站 · 命令示例</div>
+          <div class="lofi-body">
+            <div class="ba2">
+              <div class="ba-col ba-b"><span class="ba-t">现状</span>命令散在正文、soc_version 不说怎么取 → AI 只能现编占位、人填错</div>
+              <span class="ba-arr">→</span>
+              <div class="ba-col ba-a"><span class="ba-t">改后</span>一个可照抄块 + 内联「npu-smi info 查芯片」步骤 → 少一次人机来回</div>
             </div>
-            <p style="color:#999;margin-top:5px;font-size:9.5px" data-page-node-id="8Ikw0JDqh40K1tinpsAHYF">交接占位的根源一半在官方命令不完整——供给侧把命令做全，使用侧的交接负担自然轻。</p>
+            <p style="color:#999;margin-top:5px;font-size:9.5px">交接占位的根源一半在官方命令不完整——供给侧把命令做全，使用侧的交接负担自然轻。</p>
           </div>
         </div>
-        <div class="demo-side ds-ai" data-page-node-id="7XJaZ4x15ejn9E3qqFc8SD">AI 使用侧 · 把交接做成产品能力</div>
-        <div class="lofi" data-page-node-id="nMDbQiigMjmhKQ59iDBB6Q">
-          <div class="lofi-bar s-ai" data-page-node-id="mR45ULOq9qUJDeWzIiBulS">AI 助手 · 交接点</div>
-          <div class="lofi-body" data-page-node-id="OvWht8AaYD3RXAtCqm9EJq">
-            <p data-page-node-id="wJacoREkwf98BlWtApx6dL">运行：<code data-page-node-id="byVe7ISxwNq2jtel45B0m0">msopgen … -c ai_core_</code><span class="fillchip" data-page-node-id="2KXHDtv9h5Pu6kVUpm0uSA">▢ 需你填 soc_version</span></p>
-            <div class="lofi-input" data-page-node-id="rXyYdVeABRcdz3FmE6OZ6u"><span data-page-node-id="ooyJw89qGfdhUTuGmfscnY">遇到报错？粘到这里，自动回灌给我解读</span><span class="lofi-btn" data-page-node-id="zrnJdFPyx7nc4L9mLTBfNB">一键回灌 ⟳</span></div>
+        <div class="demo-side ds-ai">AI 使用侧 · 把交接做成产品能力</div>
+        <div class="lofi">
+          <div class="lofi-bar s-ai">AI 助手 · 交接点</div>
+          <div class="lofi-body">
+            <p>运行：<code>msopgen … -c ai_core_</code><span class="fillchip">▢ 需你填 soc_version</span></p>
+            <div class="lofi-input"><span>遇到报错？粘到这里，自动回灌给我解读</span><span class="lofi-btn">一键回灌 ⟳</span></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="judge" data-page-node-id="6IbxBjoVHsUDL3BokSpnDK">
-    <div class="j-h" data-page-node-id="Z3N4AEF7wM9JjojMQNz0tQ">判断 3 · 体感「前松后紧」：AI 在检索段给虚假信心，落地段把人独自留下</div>
-    <div class="j-one" data-page-node-id="g1DeKzxJnyQllEjZUGrGfu">核心一问：开发者走完这条路，「顺 / 难」的体感曲线是什么形状？</div>
-    <div class="jbody" data-page-node-id="JkL78AdGij1q6cr6WI4FB6">
-      <div class="jtext" data-page-node-id="d0L9PSvYIccaZMIyd1S7to">
-        <p data-page-node-id="gmIGcnuC0YIjMkUlzhMZLO">把旅程当一条体感曲线：<b data-page-node-id="zrTuZBG6PdiTjFp4nqHpPf">前段（检索 / 起草）AI 很顺、很能干</b>，给人「这件事 AI 能完成」的<b data-page-node-id="zAElqWzP9QiMAOtcfs1KdM">虚假信心</b>；<b data-page-node-id="TScXal0KBdFTUzppcFTAzG">后段（编译 / 部署 / 精度）越来越是人独自承担</b>，AI 退成旁边解读报错的副驾。</p>
-        <p data-page-node-id="KzdzBkFspO7hOdAXAv0Bov">曲线最低点是 <b data-page-node-id="nTRbFHp9VCghNz5ZzWRDST">A 类决策</b>（soc_version / 版本 / 精度）——AI 够不着本机 / 业务事实、只能猜，恰好都落在后半段：<b data-page-node-id="nBmkTtfXHsLNw1nuIfgAkt">前面越顺，这里落差越大</b>。真正的风险不是「AI 不行」，而是<b data-page-node-id="SZDILC4gfGekFB1kvBBto7">「先让你以为可行、到高难度场景才发现得自己来」</b>。</p>
-        <p class="j-fix" data-page-node-id="nRGaTspE1M4UdPsVq38kRm"><b data-page-node-id="0wZk2ZieAlgPUHeuGXEFi8">怎么改：</b>把这条<b data-page-node-id="P79GLscZCOgiA7Gi10Uivv">落差曲线显式化</b>——旅程一开始就告诉用户「这条路后段有 3 处只能你来（要本机芯片 / 版本 / 业务阈值）」，<b data-page-node-id="60MEZQZZ7EaD7OivG65sOm">别让落差到高难度场景才暴露</b>。</p>
+  <div class="judge">
+    <div class="j-h">判断 3 · 体感「前松后紧」：AI 在检索段给虚假信心，落地段把人独自留下</div>
+    <div class="j-one">核心一问：开发者走完这条路，「顺 / 难」的体感曲线是什么形状？</div>
+    <div class="jbody">
+      <div class="jtext">
+        <p>把旅程当一条体感曲线：<b>前段（检索 / 起草）AI 很顺、很能干</b>，给人「这件事 AI 能完成」的<b>虚假信心</b>；<b>后段（编译 / 部署 / 精度）越来越是人独自承担</b>，AI 退成旁边解读报错的副驾。</p>
+        <p>曲线最低点是 <b>A 类决策</b>（soc_version / 版本 / 精度）——AI 够不着本机 / 业务事实、只能猜，恰好都落在后半段：<b>前面越顺，这里落差越大</b>。真正的风险不是「AI 不行」，而是<b>「先让你以为可行、到高难度场景才发现得自己来」</b>。</p>
+        <p class="j-fix"><b>怎么改：</b>把这条<b>落差曲线显式化</b>——旅程一开始就告诉用户「这条路后段有 3 处只能你来（要本机芯片 / 版本 / 业务阈值）」，<b>别让落差到高难度场景才暴露</b>。</p>
       </div>
-      <div class="jdemo" data-page-node-id="n496DcGEmc6rfh9pzNMSkq">
-        <div class="demo-cap" data-page-node-id="yvd3D2Wi0JiHL8GjEFAFhg">体感弧线 · 前松（AI 能干）→ 后紧（人独自承担）</div>
-        <svg viewBox="0 0 240 100" style="width:100%;height:auto" data-page-node-id="IeAlQxjCzocGfvlg9khomX">
-          <text x="6" y="16" font-size="9" fill="#1f6b45" font-weight="700" data-page-node-id="cAwIJC0gWSKFnfjn3XWmzB">前段 · AI 很顺</text>
-          <text x="120" y="96" font-size="9" fill="#a32d2d" font-weight="700" data-page-node-id="TB6g7uCCERhecCj8stSAoQ">后段 · 人独自承担</text>
-          <path d="M8,30 C70,26 96,44 136,62 S206,86 232,88" fill="none" stroke="#cf6a2e" stroke-width="2.5" data-page-node-id="XeHyzDfSZVe78lgffUhAMc"/>
-          <circle cx="198" cy="82" r="4.5" fill="#C8102E" data-page-node-id="2G5fHUewLSBHTaTyOpxBqv"/>
-          <text x="118" y="74" font-size="8.5" fill="#a32d2d" font-weight="700" data-page-node-id="nhHSkbCpQWusHQoD8Q5kBT">A 类决策（最低点）</text>
+      <div class="jdemo">
+        <div class="demo-cap">体感弧线 · 前松（AI 能干）→ 后紧（人独自承担）</div>
+        <svg viewBox="0 0 240 100" style="width:100%;height:auto">
+          <text x="6" y="16" font-size="9" fill="#1f6b45" font-weight="700">前段 · AI 很顺</text>
+          <text x="120" y="96" font-size="9" fill="#a32d2d" font-weight="700">后段 · 人独自承担</text>
+          <path d="M8,30 C70,26 96,44 136,62 S206,86 232,88" fill="none" stroke="#cf6a2e" stroke-width="2.5"/>
+          <circle cx="198" cy="82" r="4.5" fill="#C8102E"/>
+          <text x="118" y="74" font-size="8.5" fill="#a32d2d" font-weight="700">A 类决策（最低点）</text>
         </svg>
-        <div class="arc-cap" data-page-node-id="ci1QFRFb74ROT17mHCA5mG">检索段的「顺」是虚假信心：真正的难全压在后段、且是人独自承担——只有按时间走一遍才看得出这条落差。</div>
-        <div class="demo-side ds-comm" data-page-node-id="hHOkQFH0L3zYxFu7gGvWOK">昇腾社区侧 · 供给侧：只能治「版本」这一处 A 类</div>
-        <div class="lofi" data-page-node-id="nrp9QAbBF0MtAfJMzvtsNa">
-          <div class="lofi-bar s-comm" data-page-node-id="YM7av3n1j68AlbFCHAJJhJ">昇腾社区文档站 · 版本</div>
-          <div class="lofi-body" data-page-node-id="tDcRn5HaBKY1T9KJUGQe1U">
-            <div class="ba2" data-page-node-id="6kGSAos0XAuf5lcfulI6zV">
-              <div class="ba-col ba-b" data-page-node-id="dvQzEyzY2cCeQ8oT122BGx"><span class="ba-t" data-page-node-id="ZGMZE1Y02bru3JJUEpMHCS">现状</span>多版本号并存、URL 还会漂——AI 锁不准版本</div>
-              <span class="ba-arr" data-page-node-id="UUY5kqPTFO3oxgCgqaGdEk">→</span>
-              <div class="ba-col ba-a" data-page-node-id="NA9v6URMVd7Ft1JgeQyFME"><span class="ba-t" data-page-node-id="MPixTxNsCmdoK2fAMDU0Xv">改后</span>一个 canonical + 配套查询器（选机型 → 唯一命令）</div>
+        <div class="arc-cap">检索段的「顺」是虚假信心：真正的难全压在后段、且是人独自承担——只有按时间走一遍才看得出这条落差。</div>
+        <div class="demo-side ds-comm">昇腾社区侧 · 供给侧：只能治「版本」这一处 A 类</div>
+        <div class="lofi">
+          <div class="lofi-bar s-comm">昇腾社区文档站 · 版本</div>
+          <div class="lofi-body">
+            <div class="ba2">
+              <div class="ba-col ba-b"><span class="ba-t">现状</span>多版本号并存、URL 还会漂——AI 锁不准版本</div>
+              <span class="ba-arr">→</span>
+              <div class="ba-col ba-a"><span class="ba-t">改后</span>一个 canonical + 配套查询器（选机型 → 唯一命令）</div>
             </div>
-            <p style="color:#999;margin-top:5px;font-size:9.5px" data-page-node-id="ZSs2EMOaVkLJR92RCvRt67">但 soc_version / 精度阈值这两处 A 类<b data-page-node-id="w0v3sxFYGzkVGAQLy0d68U">本质是本机 / 业务事实，供给侧治不了</b>——只能靠使用侧前置告知（下）。</p>
+            <p style="color:#999;margin-top:5px;font-size:9.5px">但 soc_version / 精度阈值这两处 A 类<b>本质是本机 / 业务事实，供给侧治不了</b>——只能靠使用侧前置告知（下）。</p>
           </div>
         </div>
-        <div class="demo-side ds-ai" data-page-node-id="aGkWrCvty11GULtjVsq10h">AI 使用侧 · 开始前先给路线图</div>
-        <div class="lofi" data-page-node-id="IFto23myN4Ebt1Eq39mmqd">
-          <div class="lofi-bar s-ai" data-page-node-id="6xAxv06YWPrqTQRCBoeGEC">开始前 · 本任务路线预览</div>
-          <div class="lofi-body" data-page-node-id="1wypnnihiJ2EpEs7qJLmic">
-            <div class="rm" data-page-node-id="JzVhZ2KVkYbfqqAiWMpMEC">
-              <span class="rm-step ai" data-page-node-id="Yo1vGB9iS4NhtREAvX8vx0">检索·起草<br data-page-node-id="EBoIv3ItOKnLUBHYs4MfwX"><small data-page-node-id="XOc4J4C5dedD9ucIxJxriG">AI 主导</small></span><span class="rm-arr" data-page-node-id="UvdqdzKlAbI2N6JofpkLPT">→</span>
-              <span class="rm-step ai" data-page-node-id="dJ5IR57ClKayTYQxaxx4Nw">生成工程<br data-page-node-id="AmGQPcKDSXsT0QtSFhRD1j"><small data-page-node-id="H4JhkgBMyNUTgtTqj7Ro2u">AI</small></span><span class="rm-arr" data-page-node-id="Uj3Re5EALq5LkrpWjPpfao">→</span>
-              <span class="rm-step need" data-page-node-id="6B5S8GmJokHGph8A4n3ubO">⚠ 选芯片<br data-page-node-id="6vDVvb5auV2KgqtJdkDs9i"><small data-page-node-id="HJVE6N5vid6p1JnwqZaQKj">需你来</small></span><span class="rm-arr" data-page-node-id="7aJTECimw1dwJ9h0xpdGdj">→</span>
-              <span class="rm-step mix" data-page-node-id="43o3mLeOZFaNDfVbCCduuH">编译·部署<br data-page-node-id="Ln3ZEU0eVaYTTGn8LctF50"><small data-page-node-id="8gxzeCBlKnuFeARZbMk2IK">协同</small></span><span class="rm-arr" data-page-node-id="aEeXnXiCVMlbiiBNMlsd8a">→</span>
-              <span class="rm-step need" data-page-node-id="Pr4NVmVF4AFsNHzjSo7yU6">⚠ 版本·精度<br data-page-node-id="JO0dCs1OpmzVqGjKlKWoEx"><small data-page-node-id="iI8P8ztAm36FvlvNrJDIqd">需你来</small></span>
+        <div class="demo-side ds-ai">AI 使用侧 · 开始前先给路线图</div>
+        <div class="lofi">
+          <div class="lofi-bar s-ai">开始前 · 本任务路线预览</div>
+          <div class="lofi-body">
+            <div class="rm">
+              <span class="rm-step ai">检索·起草<br><small>AI 主导</small></span><span class="rm-arr">→</span>
+              <span class="rm-step ai">生成工程<br><small>AI</small></span><span class="rm-arr">→</span>
+              <span class="rm-step need">⚠ 选芯片<br><small>需你来</small></span><span class="rm-arr">→</span>
+              <span class="rm-step mix">编译·部署<br><small>协同</small></span><span class="rm-arr">→</span>
+              <span class="rm-step need">⚠ 版本·精度<br><small>需你来</small></span>
             </div>
-            <div class="rm-cap" data-page-node-id="GfTw945qQIOOsWEaWn38SQ">前段 AI 顺，后段有 3 处只能你亲自来——开始就告知，不到高难度场景才暴露</div>
+            <div class="rm-cap">前段 AI 顺，后段有 3 处只能你亲自来——开始就告知，不到高难度场景才暴露</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="cb-h" style="margin-top:14px" data-page-node-id="8RCxoL5wxGTfy81jEa1rb3">行动建议 · Agent / 产品体验侧（供给侧文档站的 ROI 排序见 19）</div>
-  <table class="actions" data-page-node-id="Q6czhHxxOABvQZSa5SDKHF">
-    <thead data-page-node-id="gMOvE5Zvwl0GK16filSUeR"><tr data-page-node-id="9brG5c2SMwISn3yNLnNLdi"><th style="width:58px" data-page-node-id="avlw9u3kIPx1jaGdRCDmCj">优先级</th><th data-page-node-id="3HSwKeZdlXxWvDOwvAkH8Y">建议</th><th style="width:84px" data-page-node-id="2vEjpQRr5auUbD0c22sv22">对应节点</th><th style="width:150px" data-page-node-id="VpDl99YRkpfHIain3eG1Wj">预期收益</th></tr></thead>
-    <tbody data-page-node-id="9NEEVrhKrc9Cjrj31dIxsD">
-      <tr data-page-node-id="wjmU71vxBhg22LHFKkG6AN"><td data-page-node-id="AlVi5X5YQKFaNFEDqjKSuz"><span class="pri p0" data-page-node-id="EZf3h1DaxGtuQOXOGInnQV">P0</span></td><td data-page-node-id="RXsARXT0HJYyvHeCahRcCy">先修<b data-page-node-id="U3cGt2mlN4FqndNEOFkwiy">最靠前的瓶颈</b>：写 kernel 页 opdevg 静态化 + 抓不到「响亮」标注</td><td data-page-node-id="P2JsCcVnAEWZjBSLIbRNh5">判断1 · sD</td><td data-page-node-id="0Izaqyfm1EhMneXdklQNQp">把最弱且最靠前的环节抬起来</td></tr>
-      <tr data-page-node-id="0mqITsoxdTEuJgZA0r3OSn"><td data-page-node-id="BFtN6x4B0eKRVyYx1ad97L"><span class="pri p0" data-page-node-id="QflFopVu5NFiY77pM8WZFc">P0</span></td><td data-page-node-id="TFjHkEuHhX09UQhaBwAXns">人机<b data-page-node-id="Zo8ip5e1j99keOOAONrWDE">交接做成一等公民</b>：AI 标需填项 + 报错一键完整回灌</td><td data-page-node-id="0uFu6OtfqkrAEzls9rpVPT">判断2 · 编译段</td><td data-page-node-id="oPPyfB91ORSKTik2rLJMu2">降交接处信息丢失</td></tr>
-      <tr data-page-node-id="5uuZaW9qSjEf5ivFO3t28L"><td data-page-node-id="i0jVqWyEejysxcN7g8fnZi"><span class="pri p1" data-page-node-id="INuW3HgYiPPtZ7IeY8bt58">P1</span></td><td data-page-node-id="ywvUCRBzCzNoNIEpgD7tu7"><b data-page-node-id="yStIw2W47neOQMaEfMDEyk">「前松后紧」前置告知</b>：旅程开头标后段需人核验的点</td><td data-page-node-id="nDDprrUEfot5XWBc0mLB8p">判断3 · A类</td><td data-page-node-id="xh8IqTMJVqaeu6B5yDmtoK">管理预期、不在高难度场景才报错</td></tr>
-      <tr data-page-node-id="Lf5BMSflBXN4duigkpk1Xu"><td data-page-node-id="6Pw31zZjJ8omcvz7lRW2oT"><span class="pri p1" data-page-node-id="Dx5X4Y0c61sSQyB2r1TQO6">P1</span></td><td data-page-node-id="5w5rTF1rU1rUAJ09NiWzx1">供给侧治本（opdevg 静态化 / 版本收口 / 补第三方平台）</td><td data-page-node-id="1qGeWSFdfSjlPvPA5XAcOK">→ 见 19</td><td data-page-node-id="7CxvmJgwJ2A4yT1Lql4UPU">把原料做好，所有 AI 工具受益</td></tr>
+  <div class="cb-h" style="margin-top:14px">行动建议 · Agent / 产品体验侧（供给侧文档站的 ROI 排序见 19）</div>
+  <table class="actions">
+    <thead><tr><th style="width:58px">优先级</th><th>建议</th><th style="width:84px">对应节点</th><th style="width:150px">预期收益</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pri p0">P0</span></td><td>先修<b>最靠前的瓶颈</b>：写 kernel 页 opdevg 静态化 + 抓不到「响亮」标注</td><td>判断1 · sD</td><td>把最弱且最靠前的环节抬起来</td></tr>
+      <tr><td><span class="pri p0">P0</span></td><td>人机<b>交接做成一等公民</b>：AI 标需填项 + 报错一键完整回灌</td><td>判断2 · 编译段</td><td>降交接处信息丢失</td></tr>
+      <tr><td><span class="pri p1">P1</span></td><td><b>「前松后紧」前置告知</b>：旅程开头标后段需人核验的点</td><td>判断3 · A类</td><td>管理预期、不在高难度场景才报错</td></tr>
+      <tr><td><span class="pri p1">P1</span></td><td>供给侧治本（opdevg 静态化 / 版本收口 / 补第三方平台）</td><td>→ 见 19</td><td>把原料做好，所有 AI 工具受益</td></tr>
     </tbody>
   </table>
-  <div class="cb-overall" data-page-node-id="rRdj0qHFGrBqTVm3mJu0HG"><b data-page-node-id="Tj2lm5MSn2FqJF9a39LRX3">总论：AI 能搬来知识，搬不动你的机器</b>——而且这条路是<b data-page-node-id="4jr4ssF1VhcBjsB0IAddmG">「前松后紧」</b>的：真正的问题不是某个分数低，是<b data-page-node-id="ZXsyopHD4BvN9notIfAvB4">早期一次静默失败沿时间放大 + 后段人独自承担</b>。这是只有走一遍旅程才看得出的体感结论。（切上方 <b data-page-node-id="0oEZiKhrUFJZBw0hCb3yjP">训练场景</b> Tab 看同一视角下另一条路；供给侧文档站怎么治本、全 26 任务 ROI 排序见 <a href="19_findings_ux_synthesis.html" data-page-node-id="pwx0vynhexwt6Ktb1QoQPF">19</a>；推理场景制作中。）</div>
+  <div class="cb-overall"><b>总论：AI 能搬来知识，搬不动你的机器</b>——而且这条路是<b>「前松后紧」</b>的：真正的问题不是某个分数低，是<b>早期一次静默失败沿时间放大 + 后段人独自承担</b>。这是只有走一遍旅程才看得出的体感结论。（切上方 <b>训练场景</b> Tab 看同一视角下另一条路；供给侧文档站怎么治本、全 26 任务 ROI 排序见 <a href="19_findings_ux_synthesis.html">19</a>；推理场景制作中。）</div>
  </div>
 
- <div class="scen-concl" data-scen="TR" hidden data-page-node-id="x5VSVeBDKJaEjJ7PIB79xW">
-  <div class="cb-h" data-page-node-id="R0dBbkvaQh3g8thqc7H5RW">综述 · 训练场景旅程（串 5 次搜索 · 最弱 .72，无受阻深谷）</div>
-  <div class="jline" data-page-node-id="rtR3don5ZrFwUIEwOCCf32">同样用<b data-page-node-id="GrpcUhpUFYrs2ziSXpbrav">时序图独有的「时间 + 协同」视角</b>看<b data-page-node-id="63X55GjUlEMOfy6weAUtCQ">训练</b>这条路：单卡脚本扩到多卡昇腾训练，沿时间串过 <b data-page-node-id="XXCg8pNFjPiK3RDkhb1ASN">5 次搜索</b>——版本兼容(I) → 分布式 HCCL(F) → 混合精度(P) → 显存 OOM(Q) → 收敛排查(R)。与算子开发对照：<b data-page-node-id="an0DUWLyPAEHZ2KCdhBll0">5 搜全在中高/高带、官方都抓得到，没有 D 那种「最弱且最靠前」的受阻深谷</b>。全 26 任务统计见 <a href="19_findings_ux_synthesis.html" data-page-node-id="13LE7ESYjUSIR1Mb3aIx0n">启发与方向 →</a></div>
+ <div class="scen-concl" data-scen="TR" hidden>
+  <div class="cb-h">综述 · 训练场景旅程（串 5 次搜索 · 最弱 .72，无受阻深谷）</div>
+  <div class="jline">同样用<b>时序图独有的「时间 + 协同」视角</b>看<b>训练</b>这条路：单卡脚本扩到多卡昇腾训练，沿时间串过 <b>5 次搜索</b>——版本兼容(I) → 分布式 HCCL(F) → 混合精度(P) → 显存 OOM(Q) → 收敛排查(R)。与算子开发对照：<b>5 搜全在中高/高带、官方都抓得到，没有 D 那种「最弱且最靠前」的受阻深谷</b>。全 26 任务统计见 <a href="19_findings_ux_synthesis.html">启发与方向 →</a></div>
 
-  <div class="judge" data-page-node-id="xPctoZjStZ431iDKTUTa4F">
-    <div class="j-h" data-page-node-id="CkiStFti55gdPa3uN2Qi42">判断 1 · 换个场景，「逐段曲线」就从深谷变成平稳波动——可用性是任务相关的</div>
-    <div class="j-one" data-page-node-id="tAznIRO61rYN1aA1ldydnG">核心一问：同一套 AI，换到训练场景，这条逐段可用性曲线长什么样？</div>
-    <div class="jbody" data-page-node-id="n6oFoXMJmkwIzlF29PaW9b">
-      <div class="jtext" data-page-node-id="WVG0IQtgbgWW2X0fY9BKwa">
-        <p data-page-node-id="JaElmcAhZq0BLimrOnEIX5">训练也是 <b data-page-node-id="D3yKOraYsecru3DWv6yWbH">5 次搜索的串联</b>，但和算子开发是<b data-page-node-id="i8ObeDDhEtGVVMVnQluDtc">两种地形</b>：5 搜里<b data-page-node-id="FdqENHoynNWHkp1he9hOi1">官方全部抓得到（②全 4）</b>，最弱的 F 分布式也有 .72（中高）、只是版本散；没有 D 写 kernel 那种 .41 受阻、又最靠前、把全程拖下水的深谷。</p>
-        <p data-page-node-id="XqPRQOTcz0qhyo8tjFpNUi">连<b data-page-node-id="46OkYoAJiBMHv2DQHCcjAy">第三方平台</b>这条线在两个场景里的角色都不同：D 是「官方塌了被迫转第三方平台、第三方平台还薄」（受阻兜底）；训练是「<b data-page-node-id="6JkvCGjTks8vdYw0ViolkA">官方够用、第三方平台再添 ranktable 实例 / 收敛经验</b>」（健康补充）。而且训练里<b data-page-node-id="833JFHzEEBSZi8AZN8nSz8">人也直接和昇腾社区交互</b>——去官方配套表 / Gitee 样例对齐版本拓扑、撞 OOM 时自己翻 CSDN 实战贴。同一条线，地形不同、角色就不同。</p>
-        <p data-page-node-id="LGkuUf8FvXi3flZKIvPNgM">这正印证<b data-page-node-id="GHumgeSDsOYdfWJfqC2UIw">「可用性是任务相关的」</b>：越靠<b data-page-node-id="tUxTNeAM1lnXjVwyBz46im">采纳漏斗的上手 / 训练侧</b>（迁移、分布式、显存），华为投入越足、官方做得越厚；越往深处自研（写 kernel）越塌。<b data-page-node-id="LX8b34rAI3lfQfef9ocD1M">同一个 AI、同样按时间走，体感差一个量级</b>——这是横截面 19 的均值掩盖、只有逐段旅程才显出来的。</p>
-        <p class="j-fix" data-page-node-id="PD6RSSJO8rgVIezFgPN30S"><b data-page-node-id="8kkFGApWxukD59gbP3rHXN">怎么改：</b>训练这条路官方都抓得到，<b data-page-node-id="eUIiIKfnkqRAFYRL1QV2db">治本重点不在「抓不到」而在「版本散」</b>——收口 F/I 的版本（一个 canonical + 配套查询器）最能把 .72 抬起来。</p>
+  <div class="judge">
+    <div class="j-h">判断 1 · 换个场景，「逐段曲线」就从深谷变成平稳波动——可用性是任务相关的</div>
+    <div class="j-one">核心一问：同一套 AI，换到训练场景，这条逐段可用性曲线长什么样？</div>
+    <div class="jbody">
+      <div class="jtext">
+        <p>训练也是 <b>5 次搜索的串联</b>，但和算子开发是<b>两种地形</b>：5 搜里<b>官方全部抓得到（②全 4）</b>，最弱的 F 分布式也有 .72（中高）、只是版本散；没有 D 写 kernel 那种 .41 受阻、又最靠前、把全程拖下水的深谷。</p>
+        <p>连<b>第三方平台</b>这条线在两个场景里的角色都不同：D 是「官方塌了被迫转第三方平台、第三方平台还薄」（受阻兜底）；训练是「<b>官方够用、第三方平台再添 ranktable 实例 / 收敛经验</b>」（健康补充）。而且训练里<b>人也直接和昇腾社区交互</b>——去官方配套表 / Gitee 样例对齐版本拓扑、撞 OOM 时自己翻 CSDN 实战贴。同一条线，地形不同、角色就不同。</p>
+        <p>这正印证<b>「可用性是任务相关的」</b>：越靠<b>采纳漏斗的上手 / 训练侧</b>（迁移、分布式、显存），华为投入越足、官方做得越厚；越往深处自研（写 kernel）越塌。<b>同一个 AI、同样按时间走，体感差一个量级</b>——这是横截面 19 的均值掩盖、只有逐段旅程才显出来的。</p>
+        <p class="j-fix"><b>怎么改：</b>训练这条路官方都抓得到，<b>治本重点不在「抓不到」而在「版本散」</b>——收口 F/I 的版本（一个 canonical + 配套查询器）最能把 .72 抬起来。</p>
       </div>
-      <div class="jdemo" data-page-node-id="r9Y0D2Qx6Oyp8Xg16bvys5">
-        <div class="demo-cap" data-page-node-id="Nvf96iCbbKroMATotTCQnM">训练 5 次搜索的可用性 · 全在中高/高带，无受阻深谷</div>
-        <div class="seg5" data-page-node-id="aIH5kvnq222VCt7M1ygHUo">
-          <div class="s5row" data-page-node-id="0EkRbrUrDBsoazAPvSxweE"><span class="s5n" data-page-node-id="USaQCnLYpef3FKyS3ElgnR">版本兼容</span><span class="s5bar v4" style="width:73%" data-page-node-id="B1tY79R9MNkMjgP8eCRaSw">I .73</span></div>
-          <div class="s5row" data-page-node-id="fYClwXsIm31YN7v4evgRXu"><span class="s5n" data-page-node-id="ZHks4P2fPUctpLBnFCg1on">分布式 HCCL</span><span class="s5bar v3b" style="width:72%" data-page-node-id="2jjNeWCUFJizmZvZBqaimO">F .72 最弱</span></div>
-          <div class="s5row" data-page-node-id="HqLsGxjGrfZvMJQwVG5bA2"><span class="s5n" data-page-node-id="AH55T84RDprw0RXdRhc4CA">混合精度</span><span class="s5bar v4" style="width:83%" data-page-node-id="fK0ozE2HaLb6CniymJKCrB">P .83</span></div>
-          <div class="s5row" data-page-node-id="DgpEeOe4YU3qARnsg6FgKN"><span class="s5n" data-page-node-id="SCNRLByWCAqEm9XCTk81sE">显存 OOM</span><span class="s5bar v4" style="width:86%" data-page-node-id="hGOgvmqUzfqROMfHobZUJO">Q .86</span></div>
-          <div class="s5row" data-page-node-id="IkP0gSdhajbDyowDn1flQa"><span class="s5n" data-page-node-id="M5y0Rj47TwnM4ps7nPAtxM">收敛排查</span><span class="s5bar v4" style="width:75%" data-page-node-id="NuOevgzHcm57LhnOKCnCgo">R .75</span></div>
+      <div class="jdemo">
+        <div class="demo-cap">训练 5 次搜索的可用性 · 全在中高/高带，无受阻深谷</div>
+        <div class="seg5">
+          <div class="s5row"><span class="s5n">版本兼容</span><span class="s5bar v4" style="width:73%">I .73</span></div>
+          <div class="s5row"><span class="s5n">分布式 HCCL</span><span class="s5bar v3b" style="width:72%">F .72 最弱</span></div>
+          <div class="s5row"><span class="s5n">混合精度</span><span class="s5bar v4" style="width:83%">P .83</span></div>
+          <div class="s5row"><span class="s5n">显存 OOM</span><span class="s5bar v4" style="width:86%">Q .86</span></div>
+          <div class="s5row"><span class="s5n">收敛排查</span><span class="s5bar v4" style="width:75%">R .75</span></div>
         </div>
-        <div class="s5cap" style="color:#1f6b45" data-page-node-id="jqCaBH3Cyo8DMGbxA00426">对照算子开发的 D .41 受阻：训练 5 搜全是平稳小波动，最弱 .72 也远在受阻线之上——同一 AI、不同场景，曲线形状完全不同。</div>
+        <div class="s5cap" style="color:#1f6b45">对照算子开发的 D .41 受阻：训练 5 搜全是平稳小波动，最弱 .72 也远在受阻线之上——同一 AI、不同场景，曲线形状完全不同。</div>
       </div>
     </div>
   </div>
 
-  <div class="judge" data-page-node-id="xHMDA1AEAwn4dyxxCsbXI7">
-    <div class="j-h" data-page-node-id="YFy51qVSEkDLLDFJSNCnsk">判断 2 · 训练顺，那摩擦在哪？不在「抓不到」，在「版本对齐 + 本机拓扑」</div>
-    <div class="j-one" data-page-node-id="uCTWG146MEVsCbiFe6MUo3">核心一问：既然官方都抓得到，训练落地真正卡人的是什么？</div>
-    <div class="jbody" data-page-node-id="ooNONsgN1JMRevj0k4sGPT">
-      <div class="jtext" data-page-node-id="bedCNfxWHVnwzg8d6mhQJu">
-        <p data-page-node-id="iyEytfH9QEbB6BROFJUyFV">训练的真实摩擦不是文档受阻，是<b data-page-node-id="qwl9XRPMKU5WmtdnK7padu">两类 AI 够不着的事实</b>：① <b data-page-node-id="t2akiTHA0cAMUgu3wd3bDB">版本对齐</b>——torch_npu 必须与本机已装的 CANN / PyTorch 严格配套，版本号又并存（④散乱），AI 给得了配套表、给不了本机装的是哪个；② <b data-page-node-id="iEJx0HSkNeOxKEuRGp6xuR">本机拓扑</b>——多卡几张卡、怎么组网，AI 只能给 HCCL 模板。</p>
-        <p data-page-node-id="9ecMjncbKUZ6rbe7NrOP71">这跟算子开发的 A 类决策同源（都是本机 / 业务事实回到人），但训练里它们<b data-page-node-id="IIJuodPBOYXc4x7EBJy6H7">每一处都有官方文档兜着</b>、不叠加受阻——所以是「摩擦」而非「深谷」。<b data-page-node-id="xuljEfu0zNXnEf7O2LOQDM">真正能被供给侧改善的，正是其中的「版本散」</b>。</p>
-        <p class="j-fix" data-page-node-id="msEJcH8BtiIxleudc1X1PC"><b data-page-node-id="9Mg5kFXSFBf7ML7u5rErox">怎么改：</b>供给侧收口版本（治根）；使用侧把版本声明<b data-page-node-id="7bOqALDwCzER54TdqDKRpa">前置</b>——开训前先核对本机 CANN / torch_npu 版本，别等 import 失败才发现配错。</p>
+  <div class="judge">
+    <div class="j-h">判断 2 · 训练顺，那摩擦在哪？不在「抓不到」，在「版本对齐 + 本机拓扑」</div>
+    <div class="j-one">核心一问：既然官方都抓得到，训练落地真正卡人的是什么？</div>
+    <div class="jbody">
+      <div class="jtext">
+        <p>训练的真实摩擦不是文档受阻，是<b>两类 AI 够不着的事实</b>：① <b>版本对齐</b>——torch_npu 必须与本机已装的 CANN / PyTorch 严格配套，版本号又并存（④散乱），AI 给得了配套表、给不了本机装的是哪个；② <b>本机拓扑</b>——多卡几张卡、怎么组网，AI 只能给 HCCL 模板。</p>
+        <p>这跟算子开发的 A 类决策同源（都是本机 / 业务事实回到人），但训练里它们<b>每一处都有官方文档兜着</b>、不叠加受阻——所以是「摩擦」而非「深谷」。<b>真正能被供给侧改善的，正是其中的「版本散」</b>。</p>
+        <p class="j-fix"><b>怎么改：</b>供给侧收口版本（治根）；使用侧把版本声明<b>前置</b>——开训前先核对本机 CANN / torch_npu 版本，别等 import 失败才发现配错。</p>
       </div>
-      <div class="jdemo" data-page-node-id="iTzUGikiS59kQR0TR5YGut">
-        <div class="demo-side ds-comm" data-page-node-id="GaCXZBPg2ht76urVYXIZ1m">昇腾社区侧 · 供给侧：版本收口（训练第一坑）</div>
-        <div class="lofi" data-page-node-id="MPgGMFiNOlrYlenHVjR5yk">
-          <div class="lofi-bar s-comm" data-page-node-id="fSJJQUaUvJa0EMcYoFnRpy">昇腾社区文档站 · 版本配套表</div>
-          <div class="lofi-body" data-page-node-id="DYTAvntInd1sMxkBEYfgj1">
-            <div class="ba2" data-page-node-id="71X2aeF9BLVDraG3XQ7pCR">
-              <div class="ba-col ba-b" data-page-node-id="HZvRCV3e1rw9YknIzsj7Sc"><span class="ba-t" data-page-node-id="i00F2xif8JhM7R5BqUGCCE">现状</span>CANN / torch_npu / PyTorch 版本号并存、配套关系散 → AI 锁不准、人对不齐</div>
-              <span class="ba-arr" data-page-node-id="BqAwh94D9wOuYNvD9QILlk">→</span>
-              <div class="ba-col ba-a" data-page-node-id="cXMDQsmaS4sl1qBlJyzIRE"><span class="ba-t" data-page-node-id="wv2qiWMJ7Z9gl8V4FEFkpG">改后</span>canonical 配套表 + 查询器（选 CANN 版本 → 唯一 torch_npu）</div>
+      <div class="jdemo">
+        <div class="demo-side ds-comm">昇腾社区侧 · 供给侧：版本收口（训练第一坑）</div>
+        <div class="lofi">
+          <div class="lofi-bar s-comm">昇腾社区文档站 · 版本配套表</div>
+          <div class="lofi-body">
+            <div class="ba2">
+              <div class="ba-col ba-b"><span class="ba-t">现状</span>CANN / torch_npu / PyTorch 版本号并存、配套关系散 → AI 锁不准、人对不齐</div>
+              <span class="ba-arr">→</span>
+              <div class="ba-col ba-a"><span class="ba-t">改后</span>canonical 配套表 + 查询器（选 CANN 版本 → 唯一 torch_npu）</div>
             </div>
           </div>
         </div>
-        <div class="demo-side ds-ai" data-page-node-id="EQ1o4dEaGZ6yLjiCbJRW6S">AI 使用侧 · 版本声明前置（开训前先核对本机）</div>
-        <div class="lofi" data-page-node-id="fRHuAVQvI4314uarXpp9E2">
-          <div class="lofi-bar s-ai" data-page-node-id="9elJfNgEvIQHNOiTRJaSZH">AI 助手 · 环境卡</div>
-          <div class="lofi-body" data-page-node-id="fiO3idkKyx5o4D6IQN87Mu">
-            <p data-page-node-id="iuYDDuSbo1Ujf7n1aJyROG">本机 CANN：<code data-page-node-id="h8yfQMqPlllrQKvM9z37Gk">8.0.RC3</code> → 建议 torch_npu <code data-page-node-id="N4w6sVBcdvUFNGECVprILb">2.1.0.post*</code> <span class="src s-off" data-page-node-id="GsbW7ryXHCfCaoiScJCEdY">需核对</span></p>
-            <div class="lofi-input" data-page-node-id="3dn776BvEhGG3e42yZJJPL"><span data-page-node-id="xCENaQhPkwffkH8azrtLA9">跑 npu-smi info / pip show 把本机版本贴来，我帮你对配套表</span><span class="lofi-btn" data-page-node-id="fz1a3OOLMl3C1lSbNOtKxN">核对版本 ✓</span></div>
+        <div class="demo-side ds-ai">AI 使用侧 · 版本声明前置（开训前先核对本机）</div>
+        <div class="lofi">
+          <div class="lofi-bar s-ai">AI 助手 · 环境卡</div>
+          <div class="lofi-body">
+            <p>本机 CANN：<code>8.0.RC3</code> → 建议 torch_npu <code>2.1.0.post*</code> <span class="src s-off">需核对</span></p>
+            <div class="lofi-input"><span>跑 npu-smi info / pip show 把本机版本贴来，我帮你对配套表</span><span class="lofi-btn">核对版本 ✓</span></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="judge" data-page-node-id="V9CdaNAwZ0vqvh2EUgKqst">
-    <div class="j-h" data-page-node-id="T7UThTlJ4IK4CBkF5UShLn">判断 3 · 体感是「平稳协同」，不是算子那条「前松后紧」</div>
-    <div class="j-one" data-page-node-id="37HJ3D6fdtD9OmpjMPL7eL">核心一问：两个场景的体感曲线，差在哪？</div>
-    <div class="jbody" data-page-node-id="uof7g4DFgmNnrbCIiBCVIZ">
-      <div class="jtext" data-page-node-id="2pEceVxWhlk0eVsdZLmR6R">
-        <p data-page-node-id="EjY9g4Pj2IWrybXsKbKenH">把训练当一条体感曲线：<b data-page-node-id="hh6xd2nHaKpkwu69CQLeYl">全程都是「AI 给方案 → 人按本机调 → 验证」的均匀协同</b>，每段都有官方文档兜着，A 类决策（版本 / 拓扑 / 精度）<b data-page-node-id="UQDUmLEY8SHyaE5XoejSv8">分散在各段、各自独立</b>，不像算子那样在后半段集中爆发。</p>
-        <p data-page-node-id="5BBfEAJG1eRK6HSXYJxPni">所以训练<b data-page-node-id="FVHhOz8Sl0eN1AZyZJV8B6">没有「检索段虚假信心 + 落地段独自承担」的落差</b>——它的难是<b data-page-node-id="WaAgczWrb0HGo1DTLBj7qi">均匀分布的、可预期的</b>。对开发者体感而言：算子开发要管理的是「别被前段的顺骗了」，训练要管理的是「每段都得备好本机事实」。<b data-page-node-id="rXQJkVhNVA97MeFS1G4yp2">同一个 AI，副驾的称职程度取决于这条路有没有官方兜底。</b></p>
-        <p class="j-fix" data-page-node-id="YR6OdinSQf9zmvTzXcLpPE"><b data-page-node-id="tNpznHTDAN4rJNkGBUAdxr">怎么改：</b>训练侧顺，重点是把<b data-page-node-id="PB6F3GvdFdIIewx7QE09Lm">每段需要的本机事实清单前置</b>（版本 / 卡数 / 显存 / 精度阈值），让协同更省来回；供给侧继续收口版本即可。</p>
+  <div class="judge">
+    <div class="j-h">判断 3 · 体感是「平稳协同」，不是算子那条「前松后紧」</div>
+    <div class="j-one">核心一问：两个场景的体感曲线，差在哪？</div>
+    <div class="jbody">
+      <div class="jtext">
+        <p>把训练当一条体感曲线：<b>全程都是「AI 给方案 → 人按本机调 → 验证」的均匀协同</b>，每段都有官方文档兜着，A 类决策（版本 / 拓扑 / 精度）<b>分散在各段、各自独立</b>，不像算子那样在后半段集中爆发。</p>
+        <p>所以训练<b>没有「检索段虚假信心 + 落地段独自承担」的落差</b>——它的难是<b>均匀分布的、可预期的</b>。对开发者体感而言：算子开发要管理的是「别被前段的顺骗了」，训练要管理的是「每段都得备好本机事实」。<b>同一个 AI，副驾的称职程度取决于这条路有没有官方兜底。</b></p>
+        <p class="j-fix"><b>怎么改：</b>训练侧顺，重点是把<b>每段需要的本机事实清单前置</b>（版本 / 卡数 / 显存 / 精度阈值），让协同更省来回；供给侧继续收口版本即可。</p>
       </div>
-      <div class="jdemo" data-page-node-id="EwjBjtaO2foArFqHOSe0BG">
-        <div class="demo-cap" data-page-node-id="w3Nd9sYuXsKVyiiGdzGGgP">体感弧线对照 · 训练平稳 vs 算子前松后紧</div>
-        <svg viewBox="0 0 240 110" style="width:100%;height:auto" data-page-node-id="tUfsL55TLcEA0hyecH4Yfe">
-          <text x="6" y="14" font-size="9" fill="#1f6b45" font-weight="700" data-page-node-id="hQImOjEMjfzAR9wdLbGPCN">训练 · 全程平稳协同</text>
-          <path d="M8,40 C60,38 100,44 140,42 S206,46 232,44" fill="none" stroke="#3e8540" stroke-width="2.5" data-page-node-id="UWjgSLtuzZUVJfHyFBJcUE"/>
-          <text x="6" y="104" font-size="9" fill="#a32d2d" font-weight="700" data-page-node-id="3JfDyACeyDvcSHMo5BFXE2">算子 · 前松后紧（对照）</text>
-          <path d="M8,58 C70,54 96,70 136,84 S206,104 232,104" fill="none" stroke="#cf6a2e" stroke-width="2" stroke-dasharray="4,3" opacity=".75" data-page-node-id="IyWivdS25jq9sjX6br9s3Z"/>
+      <div class="jdemo">
+        <div class="demo-cap">体感弧线对照 · 训练平稳 vs 算子前松后紧</div>
+        <svg viewBox="0 0 240 110" style="width:100%;height:auto">
+          <text x="6" y="14" font-size="9" fill="#1f6b45" font-weight="700">训练 · 全程平稳协同</text>
+          <path d="M8,40 C60,38 100,44 140,42 S206,46 232,44" fill="none" stroke="#3e8540" stroke-width="2.5"/>
+          <text x="6" y="104" font-size="9" fill="#a32d2d" font-weight="700">算子 · 前松后紧（对照）</text>
+          <path d="M8,58 C70,54 96,70 136,84 S206,104 232,104" fill="none" stroke="#cf6a2e" stroke-width="2" stroke-dasharray="4,3" opacity=".75"/>
         </svg>
-        <div class="arc-cap" data-page-node-id="CCXpcZtNN8JbWOzo9KMO26">训练（绿实线）全程在中高带平稳；算子（橙虚线）前段高、后段塌进受阻——只有按时间走一遍才看得出两种地形的体感差。</div>
-        <div class="demo-cap" style="margin-top:9px" data-page-node-id="pSXYl4Cm3Z0rtleLqY2DwN">界面 lo-fi · 改法：开训前先列本机事实清单</div>
-        <div class="lofi" data-page-node-id="txiDsYXWekXc4E1gA1lqXG">
-          <div class="lofi-bar s-ai" data-page-node-id="0yD3BCgl1ET45itZV8NMah">开始前 · 本机事实清单</div>
-          <div class="lofi-body" data-page-node-id="1vdJwH3caILYEUdB6AJQTk">
-            <p data-page-node-id="4KnE8OycsfJbh3v6RHqIrn">① CANN / torch_npu 版本 <span class="fillchip" data-page-node-id="kSa0KxBXrS42T2z929DBJ9">▢ 需你核对</span></p>
-            <p data-page-node-id="MmvF9HnPWGP3FfCzOA14NM">② 卡数 / 组网拓扑 <span class="fillchip" data-page-node-id="Az7LVzzi8s1gwcpB8XZfwH">▢ 需你填</span></p>
-            <p data-page-node-id="EDwVJiRRKrqdtA9uhV55tO">③ 单卡显存上限 / 业务精度阈值 <span class="fillchip" data-page-node-id="pctbcjDPzPkWfQNAIIG26t">▢ 需你填</span></p>
-            <div class="rm-cap" style="color:#1f6b45" data-page-node-id="4obgw8q1rJ4P3dF8Smb3Uh">训练的难是均匀、可预期的——开训前一次性备齐本机事实，每段协同都更省来回。</div>
+        <div class="arc-cap">训练（绿实线）全程在中高带平稳；算子（橙虚线）前段高、后段塌进受阻——只有按时间走一遍才看得出两种地形的体感差。</div>
+        <div class="demo-cap" style="margin-top:9px">界面 lo-fi · 改法：开训前先列本机事实清单</div>
+        <div class="lofi">
+          <div class="lofi-bar s-ai">开始前 · 本机事实清单</div>
+          <div class="lofi-body">
+            <p>① CANN / torch_npu 版本 <span class="fillchip">▢ 需你核对</span></p>
+            <p>② 卡数 / 组网拓扑 <span class="fillchip">▢ 需你填</span></p>
+            <p>③ 单卡显存上限 / 业务精度阈值 <span class="fillchip">▢ 需你填</span></p>
+            <div class="rm-cap" style="color:#1f6b45">训练的难是均匀、可预期的——开训前一次性备齐本机事实，每段协同都更省来回。</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="cb-h" style="margin-top:14px" data-page-node-id="rssYJetMLF2g0r6T77wvMZ">行动建议 · 训练场景（Agent / 产品体验侧）</div>
-  <table class="actions" data-page-node-id="IpcDwmyyS4ZxiOZWkjht5P">
-    <thead data-page-node-id="TCGNwfnPKZcdKN1ZrXFrIE"><tr data-page-node-id="reOfW0lYolD9l9DQFeOIf6"><th style="width:58px" data-page-node-id="yx1Uh1sdpRlQXiEJTfWO8v">优先级</th><th data-page-node-id="a9xzaQQyKCPMM8u9Tpgl7x">建议</th><th style="width:84px" data-page-node-id="v3adaksSCKF0JLOQltCWCh">对应节点</th><th style="width:150px" data-page-node-id="j3q5bakUCSBvoG6SvkrP2g">预期收益</th></tr></thead>
-    <tbody data-page-node-id="HBESKINSTlY9g3Y68BcfZ4">
-      <tr data-page-node-id="CNdzVZ3Q6UmZGAV7sHt3SV"><td data-page-node-id="bLg4CtsLUTs2rYTsn2I2uu"><span class="pri p0" data-page-node-id="jRCKp8dt5HzvqAS6LFndaw">P0</span></td><td data-page-node-id="xAy1X1ZzX1L2BqB1hzgfDd">供给侧<b data-page-node-id="36LxulrGE8nwXhgGU9mUrh">收口版本</b>：CANN / torch_npu canonical 配套表 + 查询器（治训练第一坑）</td><td data-page-node-id="J9KRLagf3MGLNlJShnTDlh">判断2 · sF/sI</td><td data-page-node-id="T9GJtjG2X8n6Jb1YBcCLN2">把最弱的 F .72 抬起来</td></tr>
-      <tr data-page-node-id="OrK63HLwY2ODwrJ1o8zxOx"><td data-page-node-id="LoiwEfW5mItpv2Dtx7H6HM"><span class="pri p0" data-page-node-id="BUK0U0eTlkhH9nAOv1OfFB">P0</span></td><td data-page-node-id="ORHUSG60WUHrCemitNysL2">使用侧<b data-page-node-id="6tzJEmwrA2xxKdKGqm092r">本机事实清单前置</b>：开训前核对版本 / 拓扑 / 显存 / 精度阈值</td><td data-page-node-id="wyvpVQolwFYPhTVfjUgvEM">判断3 · A 类</td><td data-page-node-id="794hGcC59oLUS4B7U9BmIJ">减少每段协同来回</td></tr>
-      <tr data-page-node-id="a3NilWsIRn4ffzRWBBbTNh"><td data-page-node-id="hqW504eQ3kJGaIusBmpruJ"><span class="pri p1" data-page-node-id="9NoiVaWoyJjfLDt8NCf1rb">P1</span></td><td data-page-node-id="wLYPYgAZD6AQ4OFgMEFIDA"><b data-page-node-id="CrbrD0bdnEAow9Z0ff1fqG">版本声明前置</b>：环境卡先对配套表，别等 import 失败</td><td data-page-node-id="h2cuIWD95heSucU8o22fG5">判断2 · dVerT</td><td data-page-node-id="KVuSSrF3TUb3QWuEnrwhwc">避免「看着对、装不上」</td></tr>
-      <tr data-page-node-id="ed8wq8dPkBdVRv1INC44C5"><td data-page-node-id="kKZGnSBRQlMxARJDY36oPB"><span class="pri p1" data-page-node-id="GWWjZ0VPBcyCu4SM0isuxl">P1</span></td><td data-page-node-id="NKmHHCy3F7oFgYS3UUFiy0">补<b data-page-node-id="MAg9ezaOzlelTqaikEuqBc">带版本号的分布式 / HCCL 第三方平台</b>（救 F 的 ⑤⑥ 同质）</td><td data-page-node-id="9S0WT2nTQrCMS3iWvnsLn6">→ 见 19</td><td data-page-node-id="dWMMWijOpebCt1vtEFgyor">降第三方平台回声、抬可信度</td></tr>
+  <div class="cb-h" style="margin-top:14px">行动建议 · 训练场景（Agent / 产品体验侧）</div>
+  <table class="actions">
+    <thead><tr><th style="width:58px">优先级</th><th>建议</th><th style="width:84px">对应节点</th><th style="width:150px">预期收益</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pri p0">P0</span></td><td>供给侧<b>收口版本</b>：CANN / torch_npu canonical 配套表 + 查询器（治训练第一坑）</td><td>判断2 · sF/sI</td><td>把最弱的 F .72 抬起来</td></tr>
+      <tr><td><span class="pri p0">P0</span></td><td>使用侧<b>本机事实清单前置</b>：开训前核对版本 / 拓扑 / 显存 / 精度阈值</td><td>判断3 · A 类</td><td>减少每段协同来回</td></tr>
+      <tr><td><span class="pri p1">P1</span></td><td><b>版本声明前置</b>：环境卡先对配套表，别等 import 失败</td><td>判断2 · dVerT</td><td>避免「看着对、装不上」</td></tr>
+      <tr><td><span class="pri p1">P1</span></td><td>补<b>带版本号的分布式 / HCCL 第三方平台</b>（救 F 的 ⑤⑥ 同质）</td><td>→ 见 19</td><td>降第三方平台回声、抬可信度</td></tr>
     </tbody>
   </table>
-  <div class="cb-overall" data-page-node-id="NECBlRDA2z12FteE3TqnRc"><b data-page-node-id="m3tsvWNVVJl1Qs3BoinomH">总论：训练这条路 AI 是「称职的副驾」</b>——5 搜全在中高/高带、官方都抓得到，没有算子那种受阻深谷。它的难<b data-page-node-id="V8QSGgZACdCSHgQFckueAB">均匀、可预期</b>：每段都要人备好本机事实（版本 / 拓扑 / 显存 / 精度）。<b data-page-node-id="h3v3P2unGgIrrlzOv7GMEr">对照算子开发，最能说明「可用性是任务相关的」</b>——同一个 AI，地形决定体感。（切上方 <b data-page-node-id="Og5L7ljteFKdB9SQ0qBrjH">算子开发</b> Tab 看深谷那条路；全 26 任务 ROI 排序见 <a href="19_findings_ux_synthesis.html" data-page-node-id="fhYWRDjV1aVaxE0t24daKJ">19</a>；推理场景制作中。）</div>
+  <div class="cb-overall"><b>总论：训练这条路 AI 是「称职的副驾」</b>——5 搜全在中高/高带、官方都抓得到，没有算子那种受阻深谷。它的难<b>均匀、可预期</b>：每段都要人备好本机事实（版本 / 拓扑 / 显存 / 精度）。<b>对照算子开发，最能说明「可用性是任务相关的」</b>——同一个 AI，地形决定体感。（切上方 <b>算子开发</b> Tab 看深谷那条路；全 26 任务 ROI 排序见 <a href="19_findings_ux_synthesis.html">19</a>；推理场景制作中。）</div>
  </div>
 </div>
 
-<a id="s4" data-page-node-id="OeR45a7vm83T3Bp5g0LEGP"></a>
-<h2 data-page-node-id="GKWBXfnCf5rA6bUVzFONRo"><span class="no" data-page-node-id="knryzbtw7jSCnqc9akVFOu">②</span>Agent 底层系统工程 · 跳出业务表层看技术实现</h2>
-<div class="sechint" data-page-node-id="4HRbl1jlVmZHphcwyEMWBO">前三节是「业务层看到的旅程」；本节下沉到「P2 检索区段里，Agent 内部究竟如何运转」。</div>
+<a id="s4"></a>
+<h2><span class="no">②</span>Agent 底层系统工程 · 跳出业务表层看技术实现</h2>
+<div class="sechint">前三节是「业务层看到的旅程」；本节下沉到「P2 检索区段里，Agent 内部究竟如何运转」。</div>
 
-<h3 data-page-node-id="Cf3UkWJfmvmO5oUoZK46A6">4.1 工具调用策略：为什么是有限次检索，而非更多 / 更少</h3>
-<div class="card" data-page-node-id="1Bh1jmryTGqB1cC4yv3Jup">
-  <p style="font-size:13.5px" data-page-node-id="5EhuaWioq2dykwUbIaMZ7v">上图 s2–s4 里 AI 没有把检索工具刷到上限，实测 D 任务只搜了 ~1–2 轮就转入拼装。背后是两层机制叠加：</p>
-  <ul class="tight" style="margin-top:8px" data-page-node-id="hq7Dnw2C1FQpnMANv1Iv5i">
-    <li data-page-node-id="W2hZqFS9vDliiPrRunI609"><b data-page-node-id="kJ0sleIUGVmTAJyEWnCD4x">硬上限 = <code data-page-node-id="W9jBIcHQM1akkCmB2RC2zV">max_uses</code></b>：<code data-page-node-id="YORG5allqOl8OSoXxFPK5p">web_search</code> 是 Anthropic Messages API 的<b data-page-node-id="bkTUDOwwJ7qMR8Ds3Lw4KP">服务端工具</b>，注册时带 <code data-page-node-id="sNecxdR3IxlIj0A6j9OK2D">max_uses</code> 封顶（如 5）；超过会返回 <code data-page-node-id="yIUVakNzE34fTeY8gY7OIy">max_uses_exceeded</code>，模型不能无限刷。</li>
-    <li data-page-node-id="MXqlVfEGjx9aTdwVSWfSnD"><b data-page-node-id="QA1d9SlBzGRuWrTSD7pSui">软停止 = 模型自主判断「信息已足够」</b>：服务端工具在<b data-page-node-id="4vmvkDhOu5t1HZqT3tWUBe">同一轮</b>内自带 loop——模型决定检索内容 → 平台执行并回灌结果 → 模型判断信息是否足够 → 不足则续检索、足够则停止并生成终答（<code data-page-node-id="DKkP7KrLjwXh75D7vwzpjB">stop_reason: end_turn</code>；耗时较长会先 <code data-page-node-id="jwEQ9APwr6xdOHr96Rz6cg">pause_turn</code> 再继续）。所以「调用 N 次」不是写死的常量，而是 <b data-page-node-id="BTH4Frw1kcAkstJOtKbyZl">min(max_uses, 模型判断收敛点)</b>。</li>
-    <li data-page-node-id="DUHvUJ7SArPMHBu61zWsZz"><b data-page-node-id="MrP7Tr04KGurdeRCj9BSsC">为什么 D 任务收敛得早</b>：实测前 1–2 条结果（知乎 / ai6s.net / MindSpore 官方 / CSDN）已能拼出步骤骨架，边际信息递减；继续搜更多只会拿到同质 CSDN 互抄（D 的第三方平台本就薄），模型据此判断「再搜性价比低」→ 提前停。<b data-page-node-id="jCqkHFlFiYPlAxRjAGBbCw">检索次数少 ≠ 偷懒，而是边际收益判断</b>。</li>
+<h3>4.1 工具调用策略：为什么是有限次检索，而非更多 / 更少</h3>
+<div class="card">
+  <p style="font-size:13.5px">上图 s2–s4 里 AI 没有把检索工具刷到上限，实测 D 任务只搜了 ~1–2 轮就转入拼装。背后是两层机制叠加：</p>
+  <ul class="tight" style="margin-top:8px">
+    <li><b>硬上限 = <code>max_uses</code></b>：<code>web_search</code> 是 Anthropic Messages API 的<b>服务端工具</b>，注册时带 <code>max_uses</code> 封顶（如 5）；超过会返回 <code>max_uses_exceeded</code>，模型不能无限刷。</li>
+    <li><b>软停止 = 模型自主判断「信息已足够」</b>：服务端工具在<b>同一轮</b>内自带 loop——模型决定检索内容 → 平台执行并回灌结果 → 模型判断信息是否足够 → 不足则续检索、足够则停止并生成终答（<code>stop_reason: end_turn</code>；耗时较长会先 <code>pause_turn</code> 再继续）。所以「调用 N 次」不是写死的常量，而是 <b>min(max_uses, 模型判断收敛点)</b>。</li>
+    <li><b>为什么 D 任务收敛得早</b>：实测前 1–2 条结果（知乎 / ai6s.net / MindSpore 官方 / CSDN）已能拼出步骤骨架，边际信息递减；继续搜更多只会拿到同质 CSDN 互抄（D 的第三方平台本就薄），模型据此判断「再搜性价比低」→ 提前停。<b>检索次数少 ≠ 偷懒，而是边际收益判断</b>。</li>
   </ul>
-  <h3 style="margin-top:18px" data-page-node-id="gx4AxiYERBY9ERdRgpM7pD">输入优化：用户怎么写指令能显著抬升输出精准度</h3>
-  <table data-page-node-id="PteW1ifpHt3CxdsxRmXzB4">
-    <thead data-page-node-id="rYtKT7ClvPa91URbKPgsr7"><tr data-page-node-id="djfuXON1j69eX3H6dVEXv7"><th data-page-node-id="XGet0nwDG7vtXCUXjzyQSq">优化手段</th><th data-page-node-id="CBgZRL29CMAXenoq8QNMSp">对这条旅程的具体作用</th></tr></thead>
-    <tbody data-page-node-id="DZRl3VnHO68K7vNqQvppem">
-      <tr data-page-node-id="DuYVSC6F60IM5kk6yKx17p"><td data-page-node-id="G0THQECXEXTcKdCf6MhyrH"><b data-page-node-id="7xJA7F58V3dFxEhK2g80IV">补约束</b>：写明「要<b data-page-node-id="lENnYCIxGTy9LW4RNpEAr1">可照抄的完整命令 + 锁定版本号</b>」</td><td data-page-node-id="5jmv4C44dRDmfE00KwtsQ9">逼 AI 在 s5 给出带真实 soc_version 占位说明的 msopgen 命令，而非泛泛描述，减少 d1 的来回。</td></tr>
-      <tr data-page-node-id="1CRLPyFlD5KrpQxkUajzkL"><td data-page-node-id="eBV0LEmQ1OXNY41T9rCVt9"><b data-page-node-id="pyvyRk2Gsp5vJBqMOeyQxV">限范围</b>：写明芯片型号 / CANN 版本（如 910B1 + 8.0.RC3）</td><td data-page-node-id="HVLgUQU6dmPJBqR4B4z9Hp">直接消解 d2 版本对齐这个卡点——AI 不必在多版本间猜，输出一次到位。</td></tr>
-      <tr data-page-node-id="YwpcYQUHZT6XB8OKMpJzCV"><td data-page-node-id="7cgZt1BEgw9BGfoEsWuBY2"><b data-page-node-id="t1P3jSB04pAN4vaFAmLF5m">限渠道</b>：写明「优先官方文档，无法取得则说明受阻、不得编造」</td><td data-page-node-id="QNbtx7GXelRAifS7q3Q4aM">触发 AI 在 s3 受阻时<b data-page-node-id="Ub3YZBmyyMQjDNmTVu9sYD">诚实标注页面正文未能取回</b>并转第三方平台，而不是用记忆补全一个看似正确、实则无法运行的步骤。</td></tr>
-      <tr data-page-node-id="tYSqwyNtZWAyuOKa1hYTQI"><td data-page-node-id="JU3DZEYwOX9kv7RSYqtZy3"><b data-page-node-id="sHSaVH53cPQ3KxyaGfxTJD">给反馈</b>：把 s9 的编译报错<b data-page-node-id="zsoYRU1a5DdXGGgp9eIC1V">原文</b>贴回</td><td data-page-node-id="j2aSY7U1TmA2y1xnoLh90R">AI 解读的准确度直接取决于报错原文，而非「我编译失败了」这类模糊描述。</td></tr>
+  <h3 style="margin-top:18px">输入优化：用户怎么写指令能显著抬升输出精准度</h3>
+  <table>
+    <thead><tr><th>优化手段</th><th>对这条旅程的具体作用</th></tr></thead>
+    <tbody>
+      <tr><td><b>补约束</b>：写明「要<b>可照抄的完整命令 + 锁定版本号</b>」</td><td>逼 AI 在 s5 给出带真实 soc_version 占位说明的 msopgen 命令，而非泛泛描述，减少 d1 的来回。</td></tr>
+      <tr><td><b>限范围</b>：写明芯片型号 / CANN 版本（如 910B1 + 8.0.RC3）</td><td>直接消解 d2 版本对齐这个卡点——AI 不必在多版本间猜，输出一次到位。</td></tr>
+      <tr><td><b>限渠道</b>：写明「优先官方文档，无法取得则说明受阻、不得编造」</td><td>触发 AI 在 s3 受阻时<b>诚实标注页面正文未能取回</b>并转第三方平台，而不是用记忆补全一个看似正确、实则无法运行的步骤。</td></tr>
+      <tr><td><b>给反馈</b>：把 s9 的编译报错<b>原文</b>贴回</td><td>AI 解读的准确度直接取决于报错原文，而非「我编译失败了」这类模糊描述。</td></tr>
     </tbody>
   </table>
 </div>
 
-<h3 data-page-node-id="syoPIBYTf9rypGJGgOdPvW">4.2 大模型每一轮内部在做什么</h3>
-<div class="sechint" data-page-node-id="aY5B2UHjTwicAHkunABhoQ">把 P2 检索区段拆成模型的内部动作循环，逐轮对应到上图节点。</div>
-<table data-page-node-id="1i0KRctxjoR5TEo9P5Ywo0">
-  <thead data-page-node-id="tt1Ad5L4dJhptc29CyTdqE"><tr data-page-node-id="EP53bBi4HZDAlt2JLhW9lW"><th data-page-node-id="ivKHVxdeOuJHtg9uqPWcWH">轮次</th><th data-page-node-id="vCUCzp3caR8OCurv6fFhKu">内部动作</th><th data-page-node-id="TnMin3WJkK0D7tDCdMbLhV">对应图节点</th></tr></thead>
-  <tbody data-page-node-id="4FGCComdWjugsAayCwohjT">
-    <tr data-page-node-id="AD0pNItNpbfEHMB2DbCa5C"><td data-page-node-id="hHhRbJWY1DIRnQSQGS51NZ">第 1 轮</td><td data-page-node-id="k6HCHpHzygR918qsJIGbx8"><b data-page-node-id="BMupfVGyphg4PC7llEwt22">规划</b>：解析「Ascend C 自定义算子 + 接 PyTorch」→ 拆成「找官方 how-to → 找工程脚手架 → 找 PyTorch 绑定方式」三个子目标；<b data-page-node-id="pF2BiaYg1Utwc0Iv8T79oI">决定先发 web_search</b>。</td><td data-page-node-id="ZGUbYFSDKTRHooUaqA2BlS">s2</td></tr>
-    <tr data-page-node-id="TgpXM09VPi8NSFK9yHil9f"><td data-page-node-id="JNmOuk8TccI9wPDoVzMJps">（服务端）</td><td data-page-node-id="8fSJJ6MvPKrC7K2CSIHgmR"><b data-page-node-id="9DhLYwqfgxPt1WOvSpmQPk">读结果 + 研判</b>：扫一遍搜索摘要，识别出官方页 + 知乎 + MindSpore + CSDN；判断官方页最权威 → <b data-page-node-id="XZa7WeC0gki28QB647y6xw">决定 web_fetch 官方 URL</b>。</td><td data-page-node-id="JB0KaZALj8R4wF3A2JjEXM">s2→s3</td></tr>
-    <tr data-page-node-id="FHUO7RGFArSMUPouzSGKtZ"><td data-page-node-id="0GCGBGS31tnzaENeGsg2Eq">第 2 轮</td><td data-page-node-id="yEw7zN2f1qIkw5mjT8a4QQ"><b data-page-node-id="7iU3FHrkQjH4KLE3HNlOWy">遇阻分支判断</b>：fetch 回来只有 meta、正文缺失 → 确认页面正文未返回 → <b data-page-node-id="0HzqiBIEtC4GcEF5KCnRa4">不编造</b>，改判「靠第三方平台 + 自带知识拼」→ 决定再读 MindSpore / CSDN。</td><td data-page-node-id="b1AxMqU4CG9bQn9fsD3Ikl">s3（受阻）→s4</td></tr>
-    <tr data-page-node-id="DGd0j6nPKx6SpgIPexzjDK"><td data-page-node-id="ApBLthzW2XLgcIZJLvRc5h">第 3 轮</td><td data-page-node-id="D4yLxf4fFCdU49pohhg8Jn"><b data-page-node-id="LkSJZwBGdpzuh0e2xItpeq">结果生成</b>：把第三方平台碎片 + 自带知识合成步骤骨架，按「环境→msopgen→核函数→编包→部署→绑定」排序，<b data-page-node-id="unJlaZusFuGNxDEQ5tcumT">给占位 + 标注哪些需用户核验</b>（soc_version / 版本）→ 输出，<code data-page-node-id="raMuC8qpjFjgzc7O4dg62f">end_turn</code>。</td><td data-page-node-id="Sv8wCwIZdAgi4HqybJ26Cs">s5</td></tr>
+<h3>4.2 大模型每一轮内部在做什么</h3>
+<div class="sechint">把 P2 检索区段拆成模型的内部动作循环，逐轮对应到上图节点。</div>
+<table>
+  <thead><tr><th>轮次</th><th>内部动作</th><th>对应图节点</th></tr></thead>
+  <tbody>
+    <tr><td>第 1 轮</td><td><b>规划</b>：解析「Ascend C 自定义算子 + 接 PyTorch」→ 拆成「找官方 how-to → 找工程脚手架 → 找 PyTorch 绑定方式」三个子目标；<b>决定先发 web_search</b>。</td><td>s2</td></tr>
+    <tr><td>（服务端）</td><td><b>读结果 + 研判</b>：扫一遍搜索摘要，识别出官方页 + 知乎 + MindSpore + CSDN；判断官方页最权威 → <b>决定 web_fetch 官方 URL</b>。</td><td>s2→s3</td></tr>
+    <tr><td>第 2 轮</td><td><b>遇阻分支判断</b>：fetch 回来只有 meta、正文缺失 → 确认页面正文未返回 → <b>不编造</b>，改判「靠第三方平台 + 自带知识拼」→ 决定再读 MindSpore / CSDN。</td><td>s3（受阻）→s4</td></tr>
+    <tr><td>第 3 轮</td><td><b>结果生成</b>：把第三方平台碎片 + 自带知识合成步骤骨架，按「环境→msopgen→核函数→编包→部署→绑定」排序，<b>给占位 + 标注哪些需用户核验</b>（soc_version / 版本）→ 输出，<code>end_turn</code>。</td><td>s5</td></tr>
   </tbody>
 </table>
-<div class="note" data-page-node-id="lKWEc7hnMs1rhIICWhuT4W">关键内部动作 = <b data-page-node-id="e7PYZ5e2CwKXHKeGYhlV9g">「研判信息是否足够」与「遇阻是否编造」两个判断点</b>。D 任务的特殊性在于：官方受阻 + 第三方平台薄 + 自带知识在 Ascend C 深处也不厚 → 模型在第 2 轮就进入「没有强证据」状态，只能给骨架而非可照抄全程，这是综合分低的技术根因。</div>
+<div class="note">关键内部动作 = <b>「研判信息是否足够」与「遇阻是否编造」两个判断点</b>。D 任务的特殊性在于：官方受阻 + 第三方平台薄 + 自带知识在 Ascend C 深处也不厚 → 模型在第 2 轮就进入「没有强证据」状态，只能给骨架而非可照抄全程，这是综合分低的技术根因。</div>
 
-<h3 data-page-node-id="Fi1iUQRl07BmT8WyR9qnaY">4.3 Agent 循环架构（图）+ 最小实现代码 <span class="disc" data-page-node-id="0XyB2h6az581tCI4T5P5sg">示范实现 · 基于公开 Anthropic Messages API，非 Claude 内部源码</span></h3>
-<div class="sechint" data-page-node-id="aXeySaTcR0QY6fV4301O7a">「我平常如何运行」的 agent 循环流程：<b data-page-node-id="jz293mQjNJk4vVa4FaBsTL">输入</b>（原始问句 + system 约束 → messages，不预处理）→ 模型推理 <b data-page-node-id="ojlKG7Z2wgG79LKzxdHgtk">①意图解析 → ②子目标拆解 → ③工具路由</b> → <b data-page-node-id="GmkThTdouuL00epKSSsXAe">需要工具?</b>（stop_reason）→ 是：通常先调 <b data-page-node-id="tC7KXUcfcHtFOe6Q8Ua5oE">web_search</b> 发现官方 / 第三方候选页，再调 <b data-page-node-id="m7G4wtcIx4JFoph8PmODdm">web_fetch</b> 进入爬取协议检查——先过 <b data-page-node-id="zJCtEiLM7ul3hTxtyLcqET">robots.txt</b> 准入门控（禁止则返回 <code data-page-node-id="rGdfiuCDojyix7GSBEaDO8">url_not_allowed</code>），通过后 <b data-page-node-id="EWkWbRK6cWILWisCZOlxjW">sitemap.xml</b> 经 robots 的 <code data-page-node-id="pAELtKywfnB52KE48dIAGG">Sitemap:</code> 指令被发现（提供 URL 清单），<b data-page-node-id="AMRBa2WYlNFtyqbKlB2Z71">llms.txt / llms-full.txt</b> 是独立旁路（可选、厂商未确认消费）——三路汇聚到<b data-page-node-id="DySkSP3ydVKxlJQugmbuUr">抓取目标正文</b>（HTML → 纯文本 / Markdown）（已知 URL 时可直接进入检查链）→ <b data-page-node-id="0ItYxOeQRBhSIaw390PDaZ">tool_result 回灌</b> → <b data-page-node-id="8HFhf2lYIo57oBDhk1H8e5">④ 证据是否充分?</b> → 充分：<b data-page-node-id="2hf1fn0eunNz1RtIeViqO1">⑥ 收敛 → 终答</b>；不足：<b data-page-node-id="DE7NnZ1vwJMinoz2fVaG38">能否继续检索</b>（未达上限且预期有效，则换检索词回 ③ 再检索一轮）。检索穷尽后若仍无可靠证据，模型<b data-page-node-id="YjuGDg5qqrisKYuSYptJZi">无法可靠识别「自身不知道」，会凭记忆填补空缺 = 杜撰</b>（看似正确、实则有误）。否（end_turn）则不检索，先进入<b data-page-node-id="CtDWIItfaAFEqM8AFlIx0E">模型自带知识</b>这条证据链，再参与证据判断。<b data-page-node-id="xs2rECgZLFiZb8QpFPqUF6">右上角可切「代码」</b>看最小实现（逐段 A–D 对应）。</div>
-<div class="avbox" data-page-node-id="SqeRtZqW171eQ7BqahtYC7">
-  <div class="avhead" data-page-node-id="XkeHplZG8zsTGuLvtbBZWm"><div class="avtabs" data-page-node-id="Cxt0ay0URJREqFpBI2mA8w"><button class="avtab active" data-v="arch" data-page-node-id="SZ8wJqFKqN2p2kiOVJOm7C">架构图</button><button class="avtab" data-v="code" data-page-node-id="99yScsXsnmIlJHJtvepMHD">代码</button></div></div>
-  <div id="archView" data-page-node-id="EmVZ0Ym7MOxjGp6mO4ZHBy">
-<svg viewBox="0 0 720 950" style="width:100%;max-width:660px;height:auto;display:block;margin:0 auto" role="img" aria-label="Agent 执行流程：路由→是否需要检索→web_search 发现候选页→web_fetch 进入爬取协议检查：robots.txt 准入门控（通过 Sitemap: 指令发现 sitemap.xml）+ llms.txt/llms-full.txt 独立旁路→抓取目标正文→证据回灌；模型自带知识作为无需检索的补充证据；之后研判证据是否充分，充分则收敛终答，不足则判断能否继续检索，检索穷尽且无可靠证据时模型会凭记忆杜撰" data-page-node-id="bLB7CBLiReWj43WLvR2C5W">
-  <defs data-page-node-id="6PrsAsWfMfym52gkYEuOql">
-    <marker id="aae" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse" data-page-node-id="XAxvx8C9qWXmuD5z9wNLgC"><path d="M0,0 L9,4.5 L0,9 z" fill="#8a8a8a" data-page-node-id="cKYN8K1qTya40umZAYd7o2"/></marker>
-    <marker id="aaeh" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto-start-reverse" data-page-node-id="vOmYJoGWSKjDSElEVRZaZD"><path d="M0,0 L7,3.5 L0,7 z" fill="#8a6d1a" data-page-node-id="yISAbezji5V3kX9u6TQPp3"/></marker>
-    <marker id="aaeg" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse" data-page-node-id="amXCwkg0hFXHnHzcI4k7Fr"><path d="M0,0 L9,4.5 L0,9 z" fill="#2a7a68" data-page-node-id="FwzJde60Zigg9180T4GhJ9"/></marker>
-    <marker id="aaer" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse" data-page-node-id="dcoggptn7jjngKOZS5W7BC"><path d="M0,0 L9,4.5 L0,9 z" fill="#D0454F" data-page-node-id="tLHZf2TJyBLL7URjGqWEyX"/></marker>
+<h3>4.3 Agent 循环架构（图）+ 最小实现代码 <span class="disc">示范实现 · 基于公开 Anthropic Messages API，非 Claude 内部源码</span></h3>
+<div class="sechint">「我平常如何运行」的 agent 循环流程：<b>输入</b>（原始问句 + system 约束 → messages，不预处理）→ 模型推理 <b>①意图解析 → ②子目标拆解 → ③工具路由</b> → <b>需要工具?</b>（stop_reason）→ 是：通常先调 <b>web_search</b> 发现官方 / 第三方候选页，再调 <b>web_fetch</b> 抓取选中页面正文（已知 URL 时可直接 fetch）→ <b>tool_result 回灌</b> → <b>④ 证据是否充分?</b> → 充分：<b>⑥ 收敛 → 终答</b>；不足：<b>能否继续检索</b>（未达上限且预期有效，则换检索词回 ③ 再检索一轮）。检索穷尽后若仍无可靠证据，模型<b>无法可靠识别「自身不知道」，会凭记忆填补空缺 = 杜撰</b>（看似正确、实则有误）。否（end_turn）则不检索，先进入<b>模型自带知识</b>这条证据链，再参与证据判断。<b>右上角可切「代码」</b>看最小实现（逐段 A–D 对应）。</div>
+<div class="avbox">
+  <div class="avhead"><div class="avtabs"><button class="avtab active" data-v="arch">架构图</button><button class="avtab" data-v="code">代码</button></div></div>
+  <div id="archView">
+<svg viewBox="0 0 720 712" style="width:100%;max-width:660px;height:auto;display:block;margin:0 auto" role="img" aria-label="Agent 执行流程：路由→是否需要检索→web_search 发现候选页→web_fetch 抓取选中正文→证据回灌；模型自带知识作为无需检索的补充证据；之后研判证据是否充分，充分则收敛终答，不足则判断能否继续检索，检索穷尽且无可靠证据时模型会凭记忆杜撰">
+  <defs>
+    <marker id="aae" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse"><path d="M0,0 L9,4.5 L0,9 z" fill="#8a8a8a"/></marker>
+    <marker id="aaeh" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7 z" fill="#8a6d1a"/></marker>
+    <marker id="aaeg" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse"><path d="M0,0 L9,4.5 L0,9 z" fill="#2a7a68"/></marker>
+    <marker id="aaer" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto-start-reverse"><path d="M0,0 L9,4.5 L0,9 z" fill="#D0454F"/></marker>
   </defs>
-  <g class="anode" data-k="ask" data-page-node-id="0hCRD2OjzcvPPUz7jlZLfW"><rect x="190" y="14" width="180" height="30" rx="8" fill="#f4f5f8" stroke="#d8dae0" data-page-node-id="ySLVbb9krBRqR7e2Cc7Pnz"/>
-  <text x="280" y="34" text-anchor="middle" font-size="12" fill="#333" data-page-node-id="E591KGQwwRZ5YS9u1UmO85">用户原始问句</text></g>
-  <g class="anode" data-k="msg" data-page-node-id="7LfXdvC85nDW8vpvx3mkFo"><rect x="170" y="52" width="220" height="36" rx="8" fill="#f4f5f8" stroke="#d8dae0" data-page-node-id="Di1UfdcxhHDxslh0ZDfT1F"/>
-  <text x="280" y="69" text-anchor="middle" font-size="11" fill="#333" data-page-node-id="dmBykVKPHTcwNlt70myBgV">组装 messages</text>
-  <text x="280" y="82" text-anchor="middle" font-size="9" fill="#888" data-page-node-id="hAJbByAVPzu8UYTJB3ehmV">system 约束 + 历史 + 当前问句</text></g>
-  <g class="anode" data-k="intent" data-page-node-id="TGGFEJEe2OsdDDBDqiAOxk"><rect x="205" y="98" width="150" height="28" rx="8" fill="#ECE7F6" stroke="#b9abe0" data-page-node-id="BVeQcoEh1shJCY6q4G5MrD"/>
-  <text x="280" y="116" text-anchor="middle" font-size="11" fill="#4a3f9e" data-page-node-id="ZCG9DY6dDBT05P9vYTeVTq">① 意图解析</text></g>
-  <g class="anode" data-k="subgoal" data-page-node-id="ZmDGogUdCYG6YaoxSM2JnU"><rect x="205" y="134" width="150" height="28" rx="8" fill="#ECE7F6" stroke="#b9abe0" data-page-node-id="2KGSnP4p0nA8TKaDGSwodl"/>
-  <text x="280" y="152" text-anchor="middle" font-size="11" fill="#4a3f9e" data-page-node-id="cXB98QFThgH6mFHkncnApd">② 子目标拆解</text></g>
-  <g class="anode" data-k="route" data-page-node-id="LK6CobaPlAhKzPJi9P9Vhx"><rect x="196" y="170" width="168" height="32" rx="8" fill="#ECE7F6" stroke="#b9abe0" data-page-node-id="ac3nanDhSLFOZe03lBp61s"/>
-  <text x="280" y="190" text-anchor="middle" font-size="11" fill="#4a3f9e" data-page-node-id="DbGWEvXjqFsLIwttIgdvxQ">③ 路由：检索 / 抓取 / 直接作答</text></g>
-  <g class="anode" data-k="gate" data-page-node-id="yYdyztg0psVFc0EqUeMaCb"><polygon points="280,212 348,238 280,264 212,238" fill="#FCEFC7" stroke="#8a6d1a" data-page-node-id="DOCQUndFVwaEPselzF3jMa"/>
-  <text x="280" y="236" text-anchor="middle" font-size="10" fill="#8a6d1a" data-page-node-id="t94VJ4j6pidhPE6qlQ5VEe">是否需要检索?</text>
-  <text x="280" y="249" text-anchor="middle" font-size="8" fill="#a98a4a" data-page-node-id="P0zZPmyoZfbiSWs9klZGWW">stop_reason</text></g>
-  <g class="anode" data-k="search" data-page-node-id="bCCVachlsAkOH3GFUtfD4q"><rect x="92" y="292" width="176" height="48" rx="8" fill="#eaf1f7" stroke="#bcd0e0" data-page-node-id="cHfqHXCUK4uhJMmmQGFuml"/>
-  <text x="180" y="310" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a" data-page-node-id="UyjoP87zCuGiX8vPb0ur1Q">web_search</text>
-  <text x="180" y="323" text-anchor="middle" font-size="8.2" fill="#3a6f9c" data-page-node-id="4rxfWjWokDPf5f7axAhWY9">发现候选页面</text>
-  <text x="180" y="335" text-anchor="middle" font-size="8.2" fill="#3a6f9c" data-page-node-id="SJjITKcwVMzX8UpGyQDWHx">① 官方可发现性 · ⑤ 第三方丰富度</text></g>
-  <!-- ===== web_fetch 子流程：爬取协议检查 ===== -->
-  <!-- 分组背景框 -->
-  <rect x="20" y="346" width="360" height="300" rx="10" fill="#f0f5f9" stroke="#d0dde8" stroke-width="1" stroke-dasharray="5,3" data-page-node-id="Q4ZIruAzYLiBEPNClNANC1"/>
-  <text x="200" y="360" text-anchor="middle" font-size="8.5" font-weight="700" fill="#5a8ab0" letter-spacing="0.5" data-page-node-id="kTJxCPVQUzHpatqFy5aGYi">web_fetch · 爬取协议检查</text>
-  <!-- 1. robots.txt — 准入门控（居中） -->
-  <g class="anode" data-k="robots" data-page-node-id="pYlBurZfMPWNIVk2eA2GXN"><rect x="112" y="368" width="176" height="44" rx="8" fill="#eaf1f7" stroke="#8ab8d8" stroke-width="1.5" data-page-node-id="fBWwaJbiC7CfITHoadswdK"/>
-  <text x="200" y="385" text-anchor="middle" font-size="10" font-weight="700" fill="#1f5a8a" data-page-node-id="8UCmyNNbG4xeLdkiJyZuZG">robots.txt</text>
-  <text x="200" y="399" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="H1jNAIQZcZd8s7OAnBmXmN">准入门控 · 允许/禁止抓取</text></g>
-  <!-- robots.txt 被禁止 → 失败出口 -->
-  <text x="300" y="386" font-size="7.6" fill="#B0212B" data-page-node-id="oni1SyQBFlgqbxusEGW0EL">禁止 →</text>
-  <text x="300" y="396" font-size="7.2" fill="#A03038" data-page-node-id="rb46J8YrcwDpuaBNCm0nbj">url_not_allowed</text>
-  <!-- 2. sitemap.xml — 左侧，从 robots.txt Sitemap: 指令发现 -->
-  <g class="anode" data-k="sitemap" data-page-node-id="fLkQyx9bDLwqi6FJnFJI8L"><rect x="20" y="448" width="160" height="44" rx="8" fill="#eaf1f7" stroke="#bcd0e0" data-page-node-id="cJ6HAy6ujywDFHzriu2YRw"/>
-  <text x="100" y="465" text-anchor="middle" font-size="10" font-weight="700" fill="#1f5a8a" data-page-node-id="o3MaPxKoPWz0KvFQUNKpIQ">sitemap.xml</text>
-  <text x="100" y="479" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="WztimnzL5059JMuUQX0IqJ">URL 发现 · 页面清单</text></g>
-  <!-- 3. llms.txt — 右侧，独立旁路 -->
-  <g class="anode" data-k="llmstxt" data-page-node-id="Nj3HBdshKCPYqkzzXs8KLp"><rect x="200" y="448" width="160" height="44" rx="8" fill="#f5f0fa" stroke="#c8b8e0" stroke-dasharray="4,2" data-page-node-id="0chMEf46nRQtP0AP2JfBM3"/>
-  <text x="280" y="465" text-anchor="middle" font-size="10" font-weight="700" fill="#5a3fa0" data-page-node-id="0ksnQmWwy9H3xPWQ4Z0QM0">llms.txt</text>
-  <text x="280" y="479" text-anchor="middle" font-size="7.8" fill="#6a52a8" data-page-node-id="aqmCIShFMWa8dbq39mseIk">LLM 索引 · 独立旁路</text></g>
-  <!-- 4. llms-full.txt — 从 llms.txt 扩展 -->
-  <g class="anode" data-k="llmsfull" data-page-node-id="1EmiVHpPtgkDfc813zAoub"><rect x="200" y="504" width="160" height="40" rx="8" fill="#f5f0fa" stroke="#c8b8e0" stroke-dasharray="4,2" data-page-node-id="oK6mpNL52lAFmOWpKpwGvS"/>
-  <text x="280" y="520" text-anchor="middle" font-size="10" font-weight="700" fill="#5a3fa0" data-page-node-id="s8mlGrJyeimwy92OJ1gMOH">llms-full.txt</text>
-  <text x="280" y="533" text-anchor="middle" font-size="7.8" fill="#6a52a8" data-page-node-id="GSxSkN2StqNiDtiJFRyrNR">全文拼接 · 一次吃透</text></g>
-  <!-- "可选·非标准" 标注 -->
-  <text x="280" y="556" text-anchor="middle" font-size="7" fill="#9a8ab8" font-style="italic" data-page-node-id="7FB5mdoFkcnG5d25xjMTPl">（可选 · 厂商未确认消费）</text>
-  <!-- 5. 抓取目标正文 — 居中，所有路径汇聚 -->
-  <g class="anode" data-k="fetchpage" data-page-node-id="ETj8zCPgEqU4hMLbDdpQHB"><rect x="100" y="572" width="200" height="48" rx="8" fill="#e0ecf5" stroke="#8ab8d8" stroke-width="1.5" data-page-node-id="gzNoG7mH0xmnW6QGEFSTTP"/>
-  <text x="200" y="590" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a" data-page-node-id="G3HL2aOfIvwMRPkcY5Lqq5">抓取目标正文</text>
-  <text x="200" y="603" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="x6T5I0z4nErTLU5mzJqNmp">HTML → 纯文本 / Markdown</text>
-  <text x="200" y="614" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="bBh1B5V4MSFaNCW6BkWREL">② 官方可抓取性 · ③ 正文详尽度</text></g>
-  <g class="anode" data-k="own" data-page-node-id="7URlf5pj4Nsob7lCPrYln8"><rect x="412" y="294" width="178" height="56" rx="8" fill="#F1EBF8" stroke="#a98fd0" data-page-node-id="o1eVxqhcOEpniSvfJ1yMM6"/>
-  <text x="421" y="312" font-size="9.4" font-weight="700" fill="#5a3fa0" data-page-node-id="JKCviDzIeuJtqfCp4skSAF">模型自带知识（⑦）</text>
-  <text x="421" y="327" font-size="8.2" fill="#6a52a8" data-page-node-id="RDngsRnr1e5zoiOFcfdw8H">训练内置，无需检索亦可用；</text>
-  <text x="421" y="340" font-size="8.2" fill="#9a5a8a" data-page-node-id="iRR6AnoOkeTH2NNNG2O4c6">薄弱时即「杜撰」之源。</text></g>
-  <g class="anode" data-k="relay" data-page-node-id="tMIQDEWmYClVboPY1lGxyp"><rect x="150" y="668" width="200" height="30" rx="8" fill="#f4f5f8" stroke="#d8dae0" data-page-node-id="z9SH6S6HrG3iFd2mi1lScr"/>
-  <text x="250" y="688" text-anchor="middle" font-size="10.5" fill="#333" data-page-node-id="SnPKd1Pbq8G8Cua4Af4RWn">汇总当前证据（回灌）</text></g>
-  <g class="anode" data-k="judge" data-page-node-id="YXxcTUv83S50cgoM4GPUXP"><polygon points="250,710 320,740 250,770 180,740" fill="#FCEFC7" stroke="#8a6d1a" data-page-node-id="TLpqnrkhsWSauq0JF9yNug"/>
-  <text x="250" y="737" text-anchor="middle" font-size="9.6" fill="#8a6d1a" data-page-node-id="rnpQPAK7VnObj7rYdwkG57">④ 证据是否充分?</text>
-  <text x="250" y="750" text-anchor="middle" font-size="7.6" fill="#a98a4a" data-page-node-id="osUO2S1pBoJ1CGKDdXqu66">④ 版本清晰 · ⑥ 可信度 · ⑧ 成本</text></g>
-  <g class="anode" data-k="converge" data-page-node-id="Qe0Twgar4cau781LPU4HMS"><rect x="172" y="786" width="156" height="30" rx="8" fill="#E3F4EA" stroke="#3a9b6e" data-page-node-id="pWWtCyQ9IUw0gbH2U6t6VB"/>
-  <text x="250" y="805" text-anchor="middle" font-size="10.5" fill="#1f7a52" data-page-node-id="X9AzrKy2lu2IYuPxnlYfin">⑥ 收敛（证据充分）</text></g>
-  <g class="anode" data-k="redo" data-page-node-id="bifFJ7gJy8S14005uXYueN"><polygon points="470,712 552,740 470,768 388,740" fill="#FFF1D9" stroke="#c79023" data-page-node-id="QYFT6fjh9RdYt4eyVUhqlz"/>
-  <text x="470" y="737" text-anchor="middle" font-size="9" fill="#9a6a18" data-page-node-id="9lJZkqtlzEaxoi9VtCrIe1">能否继续检索?</text>
-  <text x="470" y="749" text-anchor="middle" font-size="7.2" fill="#b08a3a" data-page-node-id="csUO1GfNp2m9u7Ho2JVOo6">未达上限 且 预期有效</text></g>
-  <g class="anode" data-k="hasEv" data-page-node-id="WrWgCBQHvVyo70qzpIqjOj"><polygon points="470,778 560,806 470,834 380,806" fill="#FBEAD9" stroke="#c0703a" data-page-node-id="rKdwhFY3twK5zCLDI88z19"/>
-  <text x="470" y="803" text-anchor="middle" font-size="9" fill="#9a4a18" data-page-node-id="CuA4984Ev8nj1eEMddbHow">是否仍有可靠证据?</text>
-  <text x="470" y="815" text-anchor="middle" font-size="7.2" fill="#b06a3a" data-page-node-id="oxZeNTuB0BeLRbVKYdMVyG">官方/第三方平台/自带 任一充分</text></g>
-  <g class="anode" data-k="final" data-page-node-id="SjeIvHrOlBapSyiykOFFcT"><rect x="130" y="878" width="460" height="58" rx="9" fill="#eef0f3" stroke="#9aa0aa" data-page-node-id="DTsAeXcUsrcUY73iB6qOHq"/>
-  <text x="360" y="899" text-anchor="middle" font-size="12" font-weight="700" fill="#3a3f48" data-page-node-id="aPpyYrSSTpxPrjc0sfI8UR">终答 · end_turn</text>
-  <text x="360" y="915" text-anchor="middle" font-size="8.4" fill="#5a6470" data-page-node-id="kpaUK3LV8zXWPufzbfKtvk">⑨ 版本可锁定性 · ⑩ 步骤可复现性 · ⑪ 综合置信度</text>
-  <text x="360" y="928" text-anchor="middle" font-size="8.4" fill="#9a4048" data-page-node-id="SOff9zjqhFL4QfTPiyr8vF">证据充分才可执行；证据缺失时可能杜撰，取决于是否握有可靠证据。</text></g>
-  <!-- ===== 连线 ===== -->
-  <line x1="280" y1="44" x2="280" y2="51" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="SOHxMGJzggS6RYXKRa25B8"/>
-  <line x1="280" y1="88" x2="280" y2="97" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="Xi9RqQnIvuZYc49lIBehiw"/>
-  <line x1="280" y1="126" x2="280" y2="133" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="nOWonOPw3mHXXiYmk6uSmN"/>
-  <line x1="280" y1="162" x2="280" y2="169" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="CVbkbjro7hEc5BdPExpa6c"/>
-  <line x1="280" y1="202" x2="280" y2="211" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="GrGkhXuxTxpqqinTmLTLfk"/>
-  <path d="M280,264 V280 H180 V292" fill="none" stroke="#8a8a8a" stroke-width="1.2" marker-end="url(#aae)" data-page-node-id="Gd023oLd5fIXhQHWMC1G6h"/>
-  <text x="300" y="278" font-size="8.4" fill="#2a7a68" data-page-node-id="G73ToncJHAWpYepbm6xtBd">是 · 调用工具检索</text>
-  <path d="M348,238 H500 V294" fill="none" stroke="#8a4fb0" stroke-width="1.2" marker-end="url(#aae)" data-page-node-id="7Kc99MbDVsZ8Ag4G3DzCaf"/>
-  <text x="430" y="232" font-size="8.4" fill="#7a4fa0" data-page-node-id="6Sd6NFkbrAirC0iBWJ9rWp">否 · 不检索，依据模型先验</text>
-  <!-- search → robots (准入门控) -->
-  <line x1="180" y1="340" x2="200" y2="368" stroke="#8a8a8a" stroke-width="1.15" marker-end="url(#aae)" data-page-node-id="BtGyeh7hAA4eA2Qk6cvWfS"/>
-  <text x="150" y="358" font-size="7.8" fill="#3a6f9c" data-page-node-id="q4KKWgy6jovXi9xyKKr9Xq">选中 URL</text>
-  <!-- robots → sitemap (Sitemap: 指令发现，实线) -->
-  <path d="M112,412 V440 H100 V448" fill="none" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="lXJD7TXBXwb4abhF6dIyy2"/>
-  <text x="40" y="432" font-size="7.2" fill="#5a7a8a" data-page-node-id="CXEvn29E5bNINr7RReK1dA">Sitemap: 指令</text>
-  <!-- robots → llmstxt (独立旁路，虚线) -->
-  <path d="M288,412 V440 H280 V448" fill="none" stroke="#8a4fb0" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aae)" data-page-node-id="41FB4DHJazIkA53uNJ7Kha"/>
-  <text x="300" y="432" font-size="7.2" fill="#7a4fa0" data-page-node-id="GMQohN9nee9rhAGBEG6ebv">独立旁路</text>
-  <!-- llmstxt → llmsfull (扩展) -->
-  <line x1="280" y1="492" x2="280" y2="504" stroke="#8a4fb0" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aae)" data-page-node-id="qtsdUpTFuuMIkPKHveGUu9"/>
-  <!-- sitemap → fetchpage (提供 URL 清单) -->
-  <path d="M100,492 V572 H150" fill="none" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="B6iu3gyHVdueE9BnhSJD0H"/>
-  <text x="50" y="540" font-size="7.2" fill="#5a7a8a" data-page-node-id="XLgxNkGSnwrq2085jD6YOP">URL 清单</text>
-  <!-- llmsfull → fetchpage (提供内容线索) -->
-  <path d="M280,544 V572 H250" fill="none" stroke="#8a4fb0" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aae)" data-page-node-id="ZrqCmFDWCTNkxOEKkxZmHk"/>
-  <text x="290" y="560" font-size="7.2" fill="#7a4fa0" data-page-node-id="Uh8YVoOmTUSuSJ3gfEGHQo">内容线索</text>
-  <!-- fetchpage → relay -->
-  <line x1="200" y1="620" x2="250" y2="668" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="FqGahXXsyZmoff3niqoCBn"/>
-  <!-- own → relay -->
-  <path d="M501,350 V652 H300 V668" fill="none" stroke="#8a4fb0" stroke-width="1.1" marker-end="url(#aae)" data-page-node-id="3jLF4JJviMrpUoGzm7eYDx"/>
-  <!-- 已知 URL 可直接跳到 robots -->
-  <path d="M280,282 H300 V390 H288" fill="none" stroke="#9aa0aa" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aae)" data-page-node-id="hJgVc4kSEuuTN4neEDZFp7"/>
-  <text x="305" y="330" font-size="7.6" fill="#8a8a8a" data-page-node-id="1tXi6jh7p7GepCO9xvfs2K">已知 URL 直接进入</text>
-  <!-- relay → judge -->
-  <line x1="250" y1="698" x2="250" y2="709" stroke="#8a8a8a" marker-end="url(#aae)" data-page-node-id="xs5Qon6GFLrOGUYD0l58F8"/>
-  <!-- judge → converge (充分) -->
-  <path d="M250,770 V786" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="oRdiVizXYg5C58I1yNGLgC"/>
-  <text x="258" y="782" font-size="8.4" fill="#2a7a68" data-page-node-id="NK54UKMVbdIREImsF3folw">充分</text>
-  <!-- converge → final -->
-  <path d="M250,816 V878" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="yvQc2hsEWV6pFcZiQu48Zz"/>
-  <!-- judge → redo (不足) -->
-  <line x1="320" y1="740" x2="388" y2="740" stroke="#c79023" stroke-width="1.3" marker-end="url(#aae)" data-page-node-id="4GLEWcSayEak35cbyDkdY5"/>
-  <text x="338" y="734" font-size="8.4" fill="#9a6a18" data-page-node-id="zGfPAe8oxe1HuVl5Hm3eWK">不足</text>
-  <!-- redo → 回到 search (是) -->
-  <path d="M552,740 H652 V190 H364" fill="none" stroke="#c79023" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#aae)" data-page-node-id="StA4ayDfVepcgM1eVUwAIr"/>
-  <text x="556" y="580" font-size="8.4" fill="#9a6a18" data-page-node-id="CY83wg5lxhlIulS9byPAxN">是 · ↺ 换检索词再 search</text>
-  <text x="556" y="592" font-size="7.6" fill="#b08a3a" data-page-node-id="xR9Dnvv9vPznYZfIcH4lAd">再选择页面 fetch</text>
-  <!-- redo → hasEv (否) -->
-  <line x1="470" y1="768" x2="470" y2="778" stroke="#c0703a" stroke-width="1.3" marker-end="url(#aae)" data-page-node-id="WGXm983AwMgf436nZAmSE1"/>
-  <text x="478" y="774" font-size="8" fill="#9a4a18" data-page-node-id="aAqcMvouSXCCVPyoMR0CBw">否 · 检索已穷尽</text>
-  <!-- hasEv → final (有) -->
-  <path d="M380,806 H360 V878" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)" data-page-node-id="J7GE6y1DGWaPu6z2dyLYNG"/>
-  <text x="346" y="842" font-size="8" fill="#2a7a68" data-page-node-id="TjlRYUsFG0JQCKSwzgFuOo">有 · 依据证据作答（可靠）</text>
-  <!-- hasEv → final (无 · 杜撰) -->
-  <path d="M470,834 V878" fill="none" stroke="#D0454F" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aaer)" data-page-node-id="lj4JVwfv7vsHIH0x0suDp3"/>
-  <text x="486" y="848" font-size="8.2" font-weight="700" fill="#B0212B" data-page-node-id="D9Rwq3O0V5l99geNfmkjwI">无 · 最高风险：</text>
-  <text x="486" y="860" font-size="7.8" fill="#A03038" data-page-node-id="oWMTVNqdMZJBOCTG8Sn97M">模型无法可靠识别「自身不知道」</text>
-  <text x="486" y="871" font-size="7.8" fill="#A03038" data-page-node-id="aQGo38riD5Dgj4DdKmo2Gf">凭记忆填补空缺 = 杜撰</text>
+  <g class="anode" data-k="ask"><rect x="190" y="14" width="180" height="30" rx="8" fill="#f4f5f8" stroke="#d8dae0"/>
+  <text x="280" y="34" text-anchor="middle" font-size="12" fill="#333">用户原始问句</text></g>
+  <g class="anode" data-k="msg"><rect x="170" y="52" width="220" height="36" rx="8" fill="#f4f5f8" stroke="#d8dae0"/>
+  <text x="280" y="69" text-anchor="middle" font-size="11" fill="#333">组装 messages</text>
+  <text x="280" y="82" text-anchor="middle" font-size="9" fill="#888">system 约束 + 历史 + 当前问句</text></g>
+  <g class="anode" data-k="intent"><rect x="205" y="98" width="150" height="28" rx="8" fill="#ECE7F6" stroke="#b9abe0"/>
+  <text x="280" y="116" text-anchor="middle" font-size="11" fill="#4a3f9e">① 意图解析</text></g>
+  <g class="anode" data-k="subgoal"><rect x="205" y="134" width="150" height="28" rx="8" fill="#ECE7F6" stroke="#b9abe0"/>
+  <text x="280" y="152" text-anchor="middle" font-size="11" fill="#4a3f9e">② 子目标拆解</text></g>
+  <g class="anode" data-k="route"><rect x="196" y="170" width="168" height="32" rx="8" fill="#ECE7F6" stroke="#b9abe0"/>
+  <text x="280" y="190" text-anchor="middle" font-size="11" fill="#4a3f9e">③ 路由：检索 / 抓取 / 直接作答</text></g>
+  <g class="anode" data-k="gate"><polygon points="280,212 348,238 280,264 212,238" fill="#FCEFC7" stroke="#8a6d1a"/>
+  <text x="280" y="236" text-anchor="middle" font-size="10" fill="#8a6d1a">是否需要检索?</text>
+  <text x="280" y="249" text-anchor="middle" font-size="8" fill="#a98a4a">stop_reason</text></g>
+  <g class="anode" data-k="search"><rect x="92" y="292" width="176" height="48" rx="8" fill="#eaf1f7" stroke="#bcd0e0"/>
+  <text x="180" y="310" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">web_search</text>
+  <text x="180" y="323" text-anchor="middle" font-size="8.2" fill="#3a6f9c">发现候选页面</text>
+  <text x="180" y="335" text-anchor="middle" font-size="8.2" fill="#3a6f9c">① 官方可发现性 · ⑤ 第三方丰富度</text></g>
+  <g class="anode" data-k="fetch"><rect x="92" y="352" width="176" height="48" rx="8" fill="#eaf1f7" stroke="#bcd0e0"/>
+  <text x="180" y="372" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">web_fetch</text>
+  <text x="180" y="388" text-anchor="middle" font-size="8.2" fill="#3a6f9c">② 官方可抓取性 · ③ 正文详尽度</text></g>
+  <g class="anode" data-k="own"><rect x="412" y="294" width="178" height="56" rx="8" fill="#F1EBF8" stroke="#a98fd0"/>
+  <text x="421" y="312" font-size="9.4" font-weight="700" fill="#5a3fa0">模型自带知识（⑦）</text>
+  <text x="421" y="327" font-size="8.2" fill="#6a52a8">训练内置，无需检索亦可用；</text>
+  <text x="421" y="340" font-size="8.2" fill="#9a5a8a">薄弱时即「杜撰」之源。</text></g>
+  <g class="anode" data-k="relay"><rect x="150" y="430" width="200" height="30" rx="8" fill="#f4f5f8" stroke="#d8dae0"/>
+  <text x="250" y="450" text-anchor="middle" font-size="10.5" fill="#333">汇总当前证据（回灌）</text></g>
+  <g class="anode" data-k="judge"><polygon points="250,472 320,502 250,532 180,502" fill="#FCEFC7" stroke="#8a6d1a"/>
+  <text x="250" y="499" text-anchor="middle" font-size="9.6" fill="#8a6d1a">④ 证据是否充分?</text>
+  <text x="250" y="512" text-anchor="middle" font-size="7.6" fill="#a98a4a">④ 版本清晰 · ⑥ 可信度 · ⑧ 成本</text></g>
+  <g class="anode" data-k="converge"><rect x="172" y="548" width="156" height="30" rx="8" fill="#E3F4EA" stroke="#3a9b6e"/>
+  <text x="250" y="567" text-anchor="middle" font-size="10.5" fill="#1f7a52">⑥ 收敛（证据充分）</text></g>
+  <g class="anode" data-k="redo"><polygon points="470,474 552,502 470,530 388,502" fill="#FFF1D9" stroke="#c79023"/>
+  <text x="470" y="499" text-anchor="middle" font-size="9" fill="#9a6a18">能否继续检索?</text>
+  <text x="470" y="511" text-anchor="middle" font-size="7.2" fill="#b08a3a">未达上限 且 预期有效</text></g>
+  <g class="anode" data-k="hasEv"><polygon points="470,540 560,568 470,596 380,568" fill="#FBEAD9" stroke="#c0703a"/>
+  <text x="470" y="565" text-anchor="middle" font-size="9" fill="#9a4a18">是否仍有可靠证据?</text>
+  <text x="470" y="577" text-anchor="middle" font-size="7.2" fill="#b06a3a">官方/第三方平台/自带 任一充分</text></g>
+  <g class="anode" data-k="final"><rect x="130" y="640" width="460" height="58" rx="9" fill="#eef0f3" stroke="#9aa0aa"/>
+  <text x="360" y="661" text-anchor="middle" font-size="12" font-weight="700" fill="#3a3f48">终答 · end_turn</text>
+  <text x="360" y="677" text-anchor="middle" font-size="8.4" fill="#5a6470">⑨ 版本可锁定性 · ⑩ 步骤可复现性 · ⑪ 综合置信度</text>
+  <text x="360" y="690" text-anchor="middle" font-size="8.4" fill="#9a4048">证据充分才可执行；证据缺失时可能杜撰，取决于是否握有可靠证据。</text></g>
+  <line x1="280" y1="44" x2="280" y2="51" stroke="#8a8a8a" marker-end="url(#aae)"/>
+  <line x1="280" y1="88" x2="280" y2="97" stroke="#8a8a8a" marker-end="url(#aae)"/>
+  <line x1="280" y1="126" x2="280" y2="133" stroke="#8a8a8a" marker-end="url(#aae)"/>
+  <line x1="280" y1="162" x2="280" y2="169" stroke="#8a8a8a" marker-end="url(#aae)"/>
+  <line x1="280" y1="202" x2="280" y2="211" stroke="#8a8a8a" marker-end="url(#aae)"/>
+  <path d="M280,264 V280 H180 V292" fill="none" stroke="#8a8a8a" stroke-width="1.2" marker-end="url(#aae)"/>
+  <text x="300" y="278" font-size="8.4" fill="#2a7a68">是 · 调用工具检索</text>
+  <path d="M348,238 H500 V294" fill="none" stroke="#8a4fb0" stroke-width="1.2" marker-end="url(#aae)"/>
+  <text x="430" y="232" font-size="8.4" fill="#7a4fa0">否 · 不检索，依据模型先验</text>
+  <line x1="180" y1="340" x2="180" y2="352" stroke="#8a8a8a" stroke-width="1.15" marker-end="url(#aae)"/>
+  <text x="190" y="349" font-size="7.8" fill="#3a6f9c">选中 URL</text>
+  <line x1="180" y1="400" x2="222" y2="430" stroke="#8a8a8a" stroke-width="1.1" marker-end="url(#aae)"/>
+  <path d="M501,350 V414 H300 V430" fill="none" stroke="#8a4fb0" stroke-width="1.1" marker-end="url(#aae)"/>
+  <path d="M280,282 H300 V376 H268" fill="none" stroke="#9aa0aa" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aae)"/>
+  <text x="305" y="330" font-size="7.6" fill="#8a8a8a">已知 URL 可直接抓取</text>
+  <line x1="250" y1="460" x2="250" y2="471" stroke="#8a8a8a" marker-end="url(#aae)"/>
+  <path d="M250,532 V548" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
+  <text x="258" y="544" font-size="8.4" fill="#2a7a68">充分</text>
+  <path d="M250,578 V640" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
+  <line x1="320" y1="502" x2="388" y2="502" stroke="#c79023" stroke-width="1.3" marker-end="url(#aae)"/>
+  <text x="338" y="496" font-size="8.4" fill="#9a6a18">不足</text>
+  <path d="M552,502 H652 V190 H364" fill="none" stroke="#c79023" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#aae)"/>
+  <text x="556" y="366" font-size="8.4" fill="#9a6a18">是 · ↺ 换检索词再 search</text>
+  <text x="556" y="378" font-size="7.6" fill="#b08a3a">再选择页面 fetch</text>
+  <line x1="470" y1="530" x2="470" y2="540" stroke="#c0703a" stroke-width="1.3" marker-end="url(#aae)"/>
+  <text x="478" y="536" font-size="8" fill="#9a4a18">否 · 检索已穷尽</text>
+  <path d="M380,568 H360 V640" fill="none" stroke="#3a9b6e" stroke-width="1.3" marker-end="url(#aaeg)"/>
+  <text x="346" y="604" font-size="8" fill="#2a7a68">有 · 依据证据作答（可靠）</text>
+  <path d="M470,596 V640" fill="none" stroke="#D0454F" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aaer)"/>
+  <text x="486" y="610" font-size="8.2" font-weight="700" fill="#B0212B">无 · 最高风险：</text>
+  <text x="486" y="622" font-size="7.8" fill="#A03038">模型无法可靠识别「自身不知道」</text>
+  <text x="486" y="633" font-size="7.8" fill="#A03038">凭记忆填补空缺 = 杜撰</text>
 </svg>
-<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px" data-page-node-id="9eSZPShJ0UGMEMRtqud7pw">悬浮任意节点查看该环节职责（锚 D 任务）。<b data-page-node-id="QF2MkyKHMdiucskCQj3WZ0">web_fetch 内部不是一条直线，而是分叉的协议检查</b>：先过 <b data-page-node-id="75jZwHxWlKidxjtoy9KM6C">robots.txt</b> 准入门控（禁止则 url_not_allowed），通过后 <b data-page-node-id="6T79zVtQB7nUVWbXiSCIr0">sitemap.xml</b> 经 robots 的 <code data-page-node-id="g5jjwZpY2Fy2rtZbLkUdH3">Sitemap:</code> 指令被发现（提供 URL 清单），<b data-page-node-id="JI5afDxD15cwzFdH5TnLZ2">llms.txt / llms-full.txt</b> 是独立旁路（可选、厂商未确认消费）——三路汇聚到<b data-page-node-id="btpUDEdmbUGtyuWYw0VmTV">抓取目标正文</b>。<b data-page-node-id="7XipafJOBGoKHO4vKOewAN">自带知识无需检索亦在其中</b>，是第三条证据来源。</div>
+<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px">悬浮任意节点查看该环节职责（锚 D 任务）。<b>主链路是先 search 发现候选页，再 fetch 抓取选中正文</b>；已知 URL 时可直接 fetch。<b>自带知识无需检索亦在其中</b>，是第三条证据来源。</div>
   </div>
-  <div id="codeView" style="display:none" data-page-node-id="wlCXzIB00i9XBvaxcHYVXI">
-  <div class="sechint" style="margin:0 0 6px" data-page-node-id="esBrArcW7JMdnoYDAeFUBf">最小实现代码（A–D 段对应架构图各环节）：</div>
-<pre class="code" data-page-node-id="jDySnpxlx877EfhNfHxCBZ"><span class="k" data-page-node-id="20ymNEBwqKt4ROcGyMP9Ra">import</span> anthropic
-client = anthropic.<span class="f" data-page-node-id="qc7sgm2IM0NyzGnTSid6sz">Anthropic</span>()
+  <div id="codeView" style="display:none">
+  <div class="sechint" style="margin:0 0 6px">最小实现代码（A–D 段对应架构图各环节）：</div>
+<pre class="code"><span class="k">import</span> anthropic
+client = anthropic.<span class="f">Anthropic</span>()
 
-<span class="c" data-page-node-id="Rt45op4gP3JFl7RNf7Zk7F"># ① 工具注册：web_search 是服务端工具，max_uses 即 §4.1 的硬上限</span>
+<span class="c"># ① 工具注册：web_search 是服务端工具，max_uses 即 §4.1 的硬上限</span>
 TOOLS = [
-    {<span class="s" data-page-node-id="1pO0DHGkmWhHXK7ZpEwDD0">"type"</span>: <span class="s" data-page-node-id="ZURVEca7shA8OcVM8RpqNJ">"web_search_20250305"</span>, <span class="s" data-page-node-id="5mHdVBe1BL2FHEdFmi5AJD">"name"</span>: <span class="s" data-page-node-id="3jx2rAzB6navsbT22OLzVV">"web_search"</span>, <span class="s" data-page-node-id="qWBufzhWSjk5zxEEqiusNI">"max_uses"</span>: 5},
-    {<span class="s" data-page-node-id="eOwBFKKMfnsXi4VJbzEZMV">"name"</span>: <span class="s" data-page-node-id="fNHxL7iWQ4YL8AGIMz4zpo">"web_fetch"</span>, <span class="s" data-page-node-id="38UOoNKkRbgNyRDy1Zdvxl">"description"</span>: <span class="s" data-page-node-id="5cI4JbQaGXhunU5cARTZMr">"抓取一个 URL 的正文"</span>,   <span class="c" data-page-node-id="oUjxH1lBarMakpdxNEurfJ"># 客户端工具：演示通用 agent 循环</span>
-     <span class="s" data-page-node-id="UFoxaGECeGJSEgUpus4dxR">"input_schema"</span>: {<span class="s" data-page-node-id="pCEazs165mOEgb7ONPwcZr">"type"</span>: <span class="s" data-page-node-id="d6FTIymXDFlVxiGUo1JuX7">"object"</span>,
-         <span class="s" data-page-node-id="Wft3KEpjAz7YlzOgaEoN84">"properties"</span>: {<span class="s" data-page-node-id="gnV5asqoHGkJEC6dkHNd3R">"url"</span>: {<span class="s" data-page-node-id="bTb2iFZ2K6uSMHEVoXKk7z">"type"</span>: <span class="s" data-page-node-id="hDTIz3YfYI5bwHz4SzBB6k">"string"</span>}}, <span class="s" data-page-node-id="YZBMUSNq11HWZdbm4F9JVk">"required"</span>: [<span class="s" data-page-node-id="3eOo9wUUQiBxhZQBPV9vPn">"url"</span>]}},
+    {<span class="s">"type"</span>: <span class="s">"web_search_20250305"</span>, <span class="s">"name"</span>: <span class="s">"web_search"</span>, <span class="s">"max_uses"</span>: 5},
+    {<span class="s">"name"</span>: <span class="s">"web_fetch"</span>, <span class="s">"description"</span>: <span class="s">"抓取一个 URL 的正文"</span>,   <span class="c"># 客户端工具：演示通用 agent 循环</span>
+     <span class="s">"input_schema"</span>: {<span class="s">"type"</span>: <span class="s">"object"</span>,
+         <span class="s">"properties"</span>: {<span class="s">"url"</span>: {<span class="s">"type"</span>: <span class="s">"string"</span>}}, <span class="s">"required"</span>: [<span class="s">"url"</span>]}},
 ]
 
-<span class="k" data-page-node-id="TCfHGrwim7mIBisOOKVJzz">def</span> <span class="f" data-page-node-id="ntobWmjjpuz5HUiboPwDw2">run_agent</span>(user_question):
-    <span class="c" data-page-node-id="jqUmMA1x1NpXzbA8l2Irm5"># A. 接收并解析用户原始自然语言输入 —— 直接进 messages，模型负责理解</span>
-    messages = [{<span class="s" data-page-node-id="rIH4s4njAHTGgxp16r568D">"role"</span>: <span class="s" data-page-node-id="TeUcS5gbL37SCFuBFvVB2q">"user"</span>, <span class="s" data-page-node-id="kAr8WNlvGABnSt6Ljj4UHn">"content"</span>: user_question}]
+<span class="k">def</span> <span class="f">run_agent</span>(user_question):
+    <span class="c"># A. 接收并解析用户原始自然语言输入 —— 直接进 messages，模型负责理解</span>
+    messages = [{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: user_question}]
 
-    <span class="k" data-page-node-id="DV3Fd2DGpXHjYfeWS2yTdO">while</span> True:
-        <span class="c" data-page-node-id="CkXWV54BibrXWvQz5E0L8T"># B. 调度：模型自己决定这一轮是搜 / 抓 / 还是直接答（§4.2 的「规划」）</span>
-        resp = client.messages.<span class="f" data-page-node-id="i0WZiwkkZCETs2uc2QW8rg">create</span>(
-            model=<span class="s" data-page-node-id="NyoaHdX9awcCPkZ5G5YuhE">"claude-opus-4-8"</span>, max_tokens=4096,
-            system=<span class="s" data-page-node-id="Y7NkGtwIX4al6Mbh1Jp3vP">"优先给可照抄命令、锁定版本号；官方抓不到就说明受阻，绝不编造。"</span>,
+    <span class="k">while</span> True:
+        <span class="c"># B. 调度：模型自己决定这一轮是搜 / 抓 / 还是直接答（§4.2 的「规划」）</span>
+        resp = client.messages.<span class="f">create</span>(
+            model=<span class="s">"claude-opus-4-8"</span>, max_tokens=4096,
+            system=<span class="s">"优先给可照抄命令、锁定版本号；官方抓不到就说明受阻，绝不编造。"</span>,
             tools=TOOLS, messages=messages)
-        messages.<span class="f" data-page-node-id="2WR5CpODr5t2zHY4AlZGRj">append</span>({<span class="s" data-page-node-id="uFNTMQi1LPpCXB0uinFLed">"role"</span>: <span class="s" data-page-node-id="eSDEJWz4pIWNdBOTbhS9mY">"assistant"</span>, <span class="s" data-page-node-id="gOKoiIEEvv6dkxLbNAxZuI">"content"</span>: resp.content})
+        messages.<span class="f">append</span>({<span class="s">"role"</span>: <span class="s">"assistant"</span>, <span class="s">"content"</span>: resp.content})
 
-        <span class="c" data-page-node-id="MTekZcipXHCKRyB9lrc5QS"># C. 终止条件：模型不再要工具 → 收敛、返回终答（对应图 s5 的 end_turn）</span>
-        <span class="k" data-page-node-id="hvAKyEQrDTNJLUTLF5dOIf">if</span> resp.stop_reason != <span class="s" data-page-node-id="TJXGbO9Qsk8t2UAtlHO1GM">"tool_use"</span>:
-            <span class="k" data-page-node-id="Cv5SNLIQ9fVO5WnGeEQYMd">return</span> <span class="s" data-page-node-id="cRTo1numGlpHFhNP3k2TKD">""</span>.<span class="f" data-page-node-id="9F3NlPvrwduMYgMEXQ3tEe">join</span>(b.text <span class="k" data-page-node-id="v8iP3HzkPW0SvU1qmYeop5">for</span> b <span class="k" data-page-node-id="WPKRefVRfgVgDwRTI0QCGk">in</span> resp.content <span class="k" data-page-node-id="sIucWOLdCgiBCsc4R3r1U4">if</span> b.type == <span class="s" data-page-node-id="AXhVk7oP5p1QYJuiBv52z7">"text"</span>)
+        <span class="c"># C. 终止条件：模型不再要工具 → 收敛、返回终答（对应图 s5 的 end_turn）</span>
+        <span class="k">if</span> resp.stop_reason != <span class="s">"tool_use"</span>:
+            <span class="k">return</span> <span class="s">""</span>.<span class="f">join</span>(b.text <span class="k">for</span> b <span class="k">in</span> resp.content <span class="k">if</span> b.type == <span class="s">"text"</span>)
 
-        <span class="c" data-page-node-id="1f2DKkPqGvQ1ObgOps4DT0"># D. 多轮循环：执行客户端工具并把结果回灌（受阻时如实标注，不编造 → 图 s3）</span>
+        <span class="c"># D. 多轮循环：执行客户端工具并把结果回灌（受阻时如实标注，不编造 → 图 s3）</span>
         results = []
-        <span class="k" data-page-node-id="i1qYI1x3ewnFVrSIkbpzje">for</span> b <span class="k" data-page-node-id="7aRKevyENzttx33gMmuH5J">in</span> resp.content:
-            <span class="k" data-page-node-id="L7ujHEOSLZeu1xb7Z8DjQN">if</span> b.type == <span class="s" data-page-node-id="6gLUyFz37zVP8Nox4xtRIo">"tool_use"</span> <span class="k" data-page-node-id="0FCAPWAmP4Ees0HAN9uIQC">and</span> b.name == <span class="s" data-page-node-id="HOG1P73tZkp9CymXeTP5yY">"web_fetch"</span>:
-                body = <span class="f" data-page-node-id="D5tNP5sqGqBgbv3CaLo2ST">fetch_url</span>(b.input[<span class="s" data-page-node-id="yoQ3duAlf5ODYtnYfUgtCR">"url"</span>])
-                results.<span class="f" data-page-node-id="lbuOxzRuA7MPSbghfh2ap8">append</span>({<span class="s" data-page-node-id="ovTk5kkPCUGzKjJMaYYYcE">"type"</span>: <span class="s" data-page-node-id="GHU0LxJJtEJGzFYGWTKYHu">"tool_result"</span>, <span class="s" data-page-node-id="7CkTA1Go4KyIQm3h9ngr5S">"tool_use_id"</span>: b.id,
-                    <span class="s" data-page-node-id="W3xIWEAU2r2NdAGoukB57B">"content"</span>: body <span class="k" data-page-node-id="GP7hvB9W5fO6k75Sy4UpGu">or</span> <span class="s" data-page-node-id="cP5xPh6JGhltuVFdgNKcMO">"（页面正文未能取回/robots 拦截）"</span>})
-        messages.<span class="f" data-page-node-id="AqNuuQsECWp5ML8diLotEn">append</span>({<span class="s" data-page-node-id="OnhotlgETF8uBGfqSvkVL0">"role"</span>: <span class="s" data-page-node-id="2ra5CsAIOS23nGIwdSvozP">"user"</span>, <span class="s" data-page-node-id="DhUCcMfJkWSCuDHoc0pfRx">"content"</span>: results})
+        <span class="k">for</span> b <span class="k">in</span> resp.content:
+            <span class="k">if</span> b.type == <span class="s">"tool_use"</span> <span class="k">and</span> b.name == <span class="s">"web_fetch"</span>:
+                body = <span class="f">fetch_url</span>(b.input[<span class="s">"url"</span>])
+                results.<span class="f">append</span>({<span class="s">"type"</span>: <span class="s">"tool_result"</span>, <span class="s">"tool_use_id"</span>: b.id,
+                    <span class="s">"content"</span>: body <span class="k">or</span> <span class="s">"（页面正文未能取回/robots 拦截）"</span>})
+        messages.<span class="f">append</span>({<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: results})
 </pre>
-<div class="kv" data-page-node-id="jbPQcEa0nDzy7pbt9itAae">
-  <div class="k" data-page-node-id="oGe5kEDQawNcMW0MZDuvwI">A 段</div><div data-page-node-id="TOqaaGq4Kin8r7CUTF7LtC">接收解析用户自然语言：原始问句直接进 <code data-page-node-id="nqqbqE12EoLoZCPuezGuzq">messages</code>，不做模板化预处理——理解交给模型本身。</div>
-  <div class="k" data-page-node-id="87xf4a2vpDxBjQMVD79zx8">B 段</div><div data-page-node-id="eoaonGp08lB2a28GfthVQm">调度逻辑：每轮 <code data-page-node-id="VBJJwaIEQ8AkaT9ElOuZVr">messages.create</code> 让模型自主决定搜 / 抓 / 答。<code data-page-node-id="7Wb8BBGDN4lM5DjqLpKqhA">web_search</code> 的多轮在服务端同一次调用内闭环（§4.1 软停止）。</div>
-  <div class="k" data-page-node-id="5HIvOCeOxXeuL81rAPanRJ">C 段</div><div data-page-node-id="zhbbw6PrUG8NfLRT0AeTYW">终止逻辑：<code data-page-node-id="Bg78huTzfW6WLoiapyMdJD">stop_reason != "tool_use"</code> 即模型判断信息足够、收敛产出终答——对应图中 s5。</div>
-  <div class="k" data-page-node-id="F1HcKEwciakLJ54uoUAi9q">D 段</div><div data-page-node-id="jbXHgmNMeqQ7LJYiTzJkBO">多轮循环 + 受阻处理：客户端工具结果回灌；<b data-page-node-id="TShy1hj6vmDMsInsFAFkmF">抓不到正文时显式写「正文抽不到」而非留空或臆造</b>，这是「绝不编造」铁律在代码层的落点（图 s3 受阻）。</div>
+<div class="kv">
+  <div class="k">A 段</div><div>接收解析用户自然语言：原始问句直接进 <code>messages</code>，不做模板化预处理——理解交给模型本身。</div>
+  <div class="k">B 段</div><div>调度逻辑：每轮 <code>messages.create</code> 让模型自主决定搜 / 抓 / 答。<code>web_search</code> 的多轮在服务端同一次调用内闭环（§4.1 软停止）。</div>
+  <div class="k">C 段</div><div>终止逻辑：<code>stop_reason != "tool_use"</code> 即模型判断信息足够、收敛产出终答——对应图中 s5。</div>
+  <div class="k">D 段</div><div>多轮循环 + 受阻处理：客户端工具结果回灌；<b>抓不到正文时显式写「正文抽不到」而非留空或臆造</b>，这是「绝不编造」铁律在代码层的落点（图 s3 受阻）。</div>
 </div>
-<div class="note" data-page-node-id="Xv5rROFriBZlyZp4aZwg8f"><b data-page-node-id="3JNqIFzzAg1qiq2hx32ngN">诚实边界：</b>上述为<b data-page-node-id="DoBHeBnfQQRWNrIWArxnym">公开 Messages API 的忠实示范</b>，用于解释 agent 循环骨架，<b data-page-node-id="DhLAk9UxrTFciWXDOpmire">不是 Claude 产品的内部源码</b>；服务端 <code data-page-node-id="RCoYm66ZlahLlOc9A0ZCvD">web_search</code> 的内部检索 / 排序实现不可见，这里只能就「对外可观测的调用契约」作解。</div>
+<div class="note"><b>诚实边界：</b>上述为<b>公开 Messages API 的忠实示范</b>，用于解释 agent 循环骨架，<b>不是 Claude 产品的内部源码</b>；服务端 <code>web_search</code> 的内部检索 / 排序实现不可见，这里只能就「对外可观测的调用契约」作解。</div>
   </div>
 </div>
 
-<a id="s6" data-page-node-id="4cDj0sHL1f53GVZgIcWxtW"></a>
-<h2 data-page-node-id="5xXxTLHpbu9jNeACdiV98x"><span class="no" data-page-node-id="PF0scLySaXC61x5CJCGFrC">③</span>交付物汇总</h2>
-<div class="card" data-page-node-id="SqitEijz0hIQwefSO3jrCg">
-  <div class="deliv" data-page-node-id="HVBM7OQJCYuQ4LupOumzfy"><div class="dn" data-page-node-id="xts6CfRWvlGn4xFsZF5sY8">1</div><div data-page-node-id="oITyJG77pV9hzMldryiIPp"><b data-page-node-id="DUyHUnyUHowyp14uOiHhj2">全链路时序图</b>（本页 §1）：4 参与者（昇腾社区 ｜ AI ｜ 开发者 ｜ 本机工具）、14 主节点 + 9 决策点（A 类 3 开发者不可缺位 + B 类 6 技术路线）+ 6 用户独立分支（开发者→昇腾社区，多数从决策块指出 + sD 安全网，对应 ascend step1/3/4/6）、人机交接连线（① 档 10 处、随档位变少）、7 阶段色带、主导方色带、逐节点悬浮详情——均锚定 D 任务实测事实。</div></div>
-  <div class="deliv" data-page-node-id="WaMBSyjO6U4hbUwQxO9Q6a"><div class="dn" data-page-node-id="uXVdYECBVj6tcaWnSuZXJ9">2</div><div data-page-node-id="seoA5UFuckdZdnmYreEeMB"><b data-page-node-id="OLENuv5x1x1BzVEgZw281S">业务分析全部折进上图交互</b>：任务分工·四轴<b data-page-node-id="5kWa1AlOdEO2HM0FPMjyEN">折进生命线名悬浮</b>、协同交接量化<b data-page-node-id="NS60a5YtsjQKUmxU0CqEO7">折进图例「消息·涉及 AI」悬浮</b>；用户决策依据 / 前置条件 / 决策链（含每步信息来源、随滑块在「开发者做」「AI 接管」两版切换）<b data-page-node-id="0ZFHKqm0Q8VYbuI7hbokGJ">折进 ◆ 节点悬浮</b>；开发者-AI 主导权边界逐阶段<b data-page-node-id="BO2cqKsXGoAVFjlkCxjp5Q">折进左侧阶段条悬浮</b>。结论见 §1 下方蓝色框。</div></div>
-  <div class="deliv" data-page-node-id="HHGoeh3shKDJSxujIBOTbR"><div class="dn" data-page-node-id="zC1CwkstcaGTa2iI1sL8LA">3</div><div data-page-node-id="HlmVTQC6Fe8Z1Bt4gc2mRN"><b data-page-node-id="YJv1ncZfxXnew9qPG0OEaK">技术拆解</b>（§2 Agent 系统工程）：工具调用策略（max_uses 硬上限 + 模型自主软停止）、输入优化、大模型逐轮内部动作、agent 循环架构图 + 代码；每个时序节点悬浮还标出「对应架构环节」。</div></div>
+<a id="s6"></a>
+<h2><span class="no">③</span>交付物汇总</h2>
+<div class="card">
+  <div class="deliv"><div class="dn">1</div><div><b>全链路时序图</b>（本页 §1）：4 参与者（昇腾社区 ｜ AI ｜ 开发者 ｜ 本机工具）、14 主节点 + 9 决策点（A 类 3 开发者不可缺位 + B 类 6 技术路线）+ 6 用户独立分支（开发者→昇腾社区，多数从决策块指出 + sD 安全网，对应 ascend step1/3/4/6）、人机交接连线（① 档 10 处、随档位变少）、7 阶段色带、主导方色带、逐节点悬浮详情——均锚定 D 任务实测事实。</div></div>
+  <div class="deliv"><div class="dn">2</div><div><b>业务分析全部折进上图交互</b>：任务分工·四轴<b>折进生命线名悬浮</b>、协同交接量化<b>折进图例「消息·涉及 AI」悬浮</b>；用户决策依据 / 前置条件 / 决策链（含每步信息来源、随滑块在「开发者做」「AI 接管」两版切换）<b>折进 ◆ 节点悬浮</b>；开发者-AI 主导权边界逐阶段<b>折进左侧阶段条悬浮</b>。结论见 §1 下方蓝色框。</div></div>
+  <div class="deliv"><div class="dn">3</div><div><b>技术拆解</b>（§2 Agent 系统工程）：工具调用策略（max_uses 硬上限 + 模型自主软停止）、输入优化、大模型逐轮内部动作、agent 循环架构图 + 代码；每个时序节点悬浮还标出「对应架构环节」。</div></div>
 </div>
 
-<div class="limit" data-page-node-id="V0CdItUgkOB4lgbnbIaFCo">
-  <b data-page-node-id="XMLDfzRQYmV7MxhvPYZHf1">诚实声明与局限：</b>
-  ① 旅程节点的<b data-page-node-id="wi89cQ4tegM6sFriXrhA9l">受阻 / 卡点 / 版本号 / 第三方平台来源均为 D 任务实测检索所得</b>（见 <code data-page-node-id="a4po7H0cnHelqb4xZn4XYE">task_run_log.md</code>，也正是本项目真正测的「知识可用性」），但「一次完整开发」的<b data-page-node-id="o8Mjz60B8GkDzCN078PBhw">线性步骤顺序是基于实测骨架的合理重构</b>（开发步骤 msopgen / 编包 / aclnn 按官方文档复述、未实际运行验证），真实开发中 P4–P7 可能多次回退迭代（d3 驳回即触发），图为主路径示意。<b data-page-node-id="nPPAzyrFB1k129h07VJZN3">滑块 3 档的分工差异为建模</b>（仅「① 开发者主笔」对应实测的这次检索，另两档非实测）；而<b data-page-node-id="PudNkkEISe1VG6TnRBlwga">受阻事实在三档下不变</b>（同一 CANN 生态），变的只是「谁执行、人是否核查」。
-  ② §4.3 代码是<b data-page-node-id="LAEXOaLmioK9eD1SLAD8rT">公开 Messages API 的示范实现</b>，解释 agent 循环契约，<b data-page-node-id="i4leMGXdCTK8CwCaviYEC9">非 Claude 内部源码</b>；服务端 web_search 的检索 / 排序内部实现不可观测。
-  ③ 工作量占比按<b data-page-node-id="u3sbx3dfdCywswFEZk3Kcl">节点计数</b>而非真实工时；不同开发者熟练度会显著改变开发者侧耗时。
-  ④ 本页只刻画 D 这一个「最难」任务的旅程；成熟任务（如 G 迁移、Z 概念对照）的人机协同形态会大不相同（AI 主导区段更长、卡点更少），详见 <a href="17_official_site_focus.html" style="color:#2f3d63" data-page-node-id="Y6Qrs7r9o9SNA0dffb9CWE">热力矩阵</a>与<a href="19_findings_ux_synthesis.html" style="color:#2f3d63" data-page-node-id="B0zPoijjTBL5HgJMJCBV2E">启发与方向</a>。
+<div class="limit">
+  <b>诚实声明与局限：</b>
+  ① 旅程节点的<b>受阻 / 卡点 / 版本号 / 第三方平台来源均为 D 任务实测检索所得</b>（见 <code>task_run_log.md</code>，也正是本项目真正测的「知识可用性」），但「一次完整开发」的<b>线性步骤顺序是基于实测骨架的合理重构</b>（开发步骤 msopgen / 编包 / aclnn 按官方文档复述、未实际运行验证），真实开发中 P4–P7 可能多次回退迭代（d3 驳回即触发），图为主路径示意。<b>滑块 3 档的分工差异为建模</b>（仅「① 开发者主笔」对应实测的这次检索，另两档非实测）；而<b>受阻事实在三档下不变</b>（同一 CANN 生态），变的只是「谁执行、人是否核查」。
+  ② §4.3 代码是<b>公开 Messages API 的示范实现</b>，解释 agent 循环契约，<b>非 Claude 内部源码</b>；服务端 web_search 的检索 / 排序内部实现不可观测。
+  ③ 工作量占比按<b>节点计数</b>而非真实工时；不同开发者熟练度会显著改变开发者侧耗时。
+  ④ 本页只刻画 D 这一个「最难」任务的旅程；成熟任务（如 G 迁移、Z 概念对照）的人机协同形态会大不相同（AI 主导区段更长、卡点更少），详见 <a href="17_official_site_focus.html" style="color:#2f3d63">热力矩阵</a>与<a href="19_findings_ux_synthesis.html" style="color:#2f3d63">启发与方向</a>。
 </div>
 
 </div>
 
-<div id="tipmask" data-page-node-id="sr6lltDMHlVmRADOYzOdYY"></div>
-<div id="tip" data-page-node-id="yUhp9FpDj9GiV2chCkdUa5"></div>
+<div id="tipmask"></div>
+<div id="tip"></div>
 
 <script>
 /* ===== 多场景框架：当前场景数据挂全局，setScenario(key) 切换 =====
@@ -1994,14 +1940,10 @@ const ANODE={
   msg:{t:"组装 messages",b:"将 <b>system 约束</b>（要求给可照抄命令、锁定版本、抓取不到则如实标注）+ 历史 + 当前问句拼成模型输入；理解全部交给模型。"},
   intent:{t:"① 意图解析",b:"读出「需完成什么 + 目标产物 + 硬约束」。对 D＝识别「开发 Ascend C 算子并接入 PyTorch」，并捕捉隐含约束：可照抄、可运行、锁版本、与本机芯片型号强相关。"},
   subgoal:{t:"② 子目标拆解",b:"切分为可分别检索的子问题：① 官方 how-to（msopgen→编包→部署）② 工程脚手架 ③ 接入 PyTorch 的绑定方式。"},
-  route:{t:"③ 路由：检索 / 抓取 / 直接作答",b:"决定本轮如何获取信息：通常先 web_search 发现候选页，再进入 web_fetch 爬取协议检查；若 URL 已知，也可直接进入检查链；信息已充分则直接作答。"},
+  route:{t:"③ 路由：检索 / 抓取 / 直接作答",b:"决定本轮如何获取信息：通常先 web_search 发现候选页，再 web_fetch 抓取选中页面正文；若 URL 已知，也可直接 fetch；信息已充分则直接作答。"},
   gate:{t:"是否需要检索?",b:"模型本轮是<b>调用工具检索</b>（tool_use），还是<b>不检索、先依赖模型自带知识</b>（end_turn）。这条先验链也要进入证据判断；若自带知识不可靠，同样可能杜撰。"},
   search:{t:"web_search · 发现候选页",b:"先生成检索 query，返回官方与第三方平台的候选页面、摘要和 URL。它解决的是<b>找不找得到入口</b>，不是直接读取完整正文。"},
-  robots:{t:"robots.txt · 准入门控",b:"<b>爬取协议检查的第一道门</b>：检查目标站点的 /robots.txt，确认目标 URL 是否允许被 AI 爬虫抓取。被 Disallow 则返回 <code>url_not_allowed</code>，需改道第三方或自带知识。注意：robots.txt 是建议性协议（RFC 9309），crawler 选择遵守与否；用户触发的 fetch（如 ChatGPT-User）可能跳过此检查。"},
-  sitemap:{t:"sitemap.xml · URL 发现",b:"<b>从 robots.txt 的 <code>Sitemap:</code> 指令被发现</b>（也可独立请求）。列出站点全部可索引 URL + lastmod，帮 AI 发现遗漏页面。与 robots.txt 是<b>发现关系</b>，不是串行执行——sitemap 提供抓取目标的 URL 清单。"},
-  llmstxt:{t:"llms.txt · LLM 索引（独立旁路）",b:"<b>独立旁路，不依赖 robots.txt</b>：站点根的 /llms.txt（Markdown 格式 LLM 专用索引）。如果存在，可帮 AI 快速定位最相关页面。<b>但截至 2026 年，Anthropic / OpenAI / Google 均未正式确认其 API 工具会消费第三方 llms.txt</b>——Google 明确忽略。成本为零，是投机性押注。"},
-  llmsfull:{t:"llms-full.txt · 全文拼接（独立旁路）",b:"<b>从 llms.txt 扩展</b>：所有重要页面 Markdown 正文的拼接版。如果存在，AI 可一次性吃下完整知识，省去多次 fetch。与 llms.txt 同属独立旁路，厂商未确认消费。"},
-  fetchpage:{t:"抓取目标正文",b:"<b>爬取协议检查的最后一步</b>：三路（robots 门控通过 + sitemap 提供的 URL + llms.txt 提供的内容线索）汇聚后，实际抓取目标 URL 的 HTML 正文，转换为纯文本 / Markdown。抓取为空则如实返回「正文无法取回」（这正是 D 任务官方页受阻的根因）。指标 ② 官方可抓取性 · ③ 正文详尽度 在此衡量。"},
+  fetch:{t:"web_fetch · 抓取选中正文",b:"在候选页或已知 URL 中选定目标后，再抓取页面正文、代码和表格；抓取为空则如实返回「正文无法取回」。"},
   own:{t:"模型自带知识（⑦）",b:"模型训练内置的知识，<b>无需检索亦可用</b>，是矩阵三来源（官方/第三方平台/自带）中的第三条。<b>充分时为可靠答案的底；薄弱、且检索未能补足时，即为「杜撰」之源</b>。"},
   relay:{t:"汇总当前证据（回灌）",b:"将本轮取回的官方正文、第三方平台内容连同自带知识一并提交模型，进入研判。"},
   judge:{t:"④ 证据是否充分?",b:"判断手中证据<b>是否足以答好本题</b>。充分→收敛输出终答；不足→评估能否继续检索。对 D：第 2 轮即发现官方核心页 页面正文未能取回、第三方平台稀薄，判定「不足」。"},
@@ -2121,7 +2063,7 @@ body.maparch #codeView{display:none!important}
     var cap=document.getElementById('archcap'); var orig=cap?cap.innerHTML:'';
     var edgeSeq=[
       'ask msg','msg intent','intent subgoal','subgoal route','route gate',
-      'gate search','gate own','search robots','robots sitemap','robots llmstxt','llmstxt llmsfull','sitemap fetchpage','llmsfull fetchpage','fetchpage relay','own relay','gate robots',
+      'gate search','gate own','search fetch','fetch relay','own relay','gate fetch',
       'relay judge','judge converge','converge final','judge redo','redo retry','redo hasEv',
       'hasEv final','hasEv final'
     ];
@@ -2136,8 +2078,8 @@ body.maparch #codeView{display:none!important}
     });
     var edgeLabelMap=[
       ['是 · 调用工具检索','gate search'],
-      ['选中 URL','search robots'],
-      ['已知 URL 直接进入','gate robots'],
+      ['选中 URL','search fetch'],
+      ['已知 URL 可直接抓取','gate fetch'],
       ['否 · 不检索，依据模型先验','gate own'],
       ['充分','judge converge'],
       ['不足','judge redo'],
@@ -2161,7 +2103,7 @@ body.maparch #codeView{display:none!important}
     var WALK=[
       {n:['ask','msg'], c:'用户问句原样进入 messages（system 约束 + 历史 + 当前问句），不做预处理。'},
       {n:['intent','subgoal','route'], c:'模型先想清楚要查什么：① 解析意图 → ② 拆成可分别检索的子问题 → ③ 决定路由（检索 / 抓取 / 直接作答）。'},
-      {n:['gate','search','robots','sitemap','llmstxt','llmsfull','fetchpage','own'], c:'是否需要检索。主链路是 web_search 发现候选页面，再进入 web_fetch 爬取协议检查：先过 robots.txt 准入门控（禁止则 url_not_allowed），通过后 sitemap.xml 经 robots 的 Sitemap: 指令被发现（提供 URL 清单），llms.txt / llms-full.txt 是独立旁路（可选、厂商未确认消费）——三路汇聚到抓取目标正文。已知 URL 时可直接进入检查链。模型自带知识无需检索，是另一条证据来源。'},
+      {n:['gate','search','fetch','own'], c:'是否需要检索。主链路是 web_search 发现候选页面，再 web_fetch 抓取选中正文；已知 URL 时可直接 fetch。模型自带知识无需检索，是另一条证据来源。'},
       {n:['relay','judge'], c:'④ 汇总当前证据后研判：是否足以答好这一题？'},
       {n:['converge','final'], c:'证据充分 → ⑥ 收敛 → 终答：可照抄命令 + 锁版本 + 标注核验，结果可靠。'},
       {n:['redo'], c:'证据不足时先评估能否继续检索：未达 max_uses 上限且预期有效，则换检索词回 ③ 再检索一轮。'},
@@ -2199,7 +2141,7 @@ body.maparch #codeView{display:none!important}
     window.__archApply=apply;
     var METRIC_FOCUS={
       search:{color:'#667EEA',nodes:['route','gate','search'], edges:['route gate','gate search'], softNodes:['ask','msg','intent','subgoal'], softEdges:['ask msg','msg intent','intent subgoal','subgoal route']},
-      fetch:{color:'#38C9D7',nodes:['robots','sitemap','llmstxt','llmsfull','fetchpage'], edges:['search robots','robots sitemap','robots llmstxt','llmstxt llmsfull','sitemap fetchpage','llmsfull fetchpage','fetchpage relay'], softNodes:['search','relay'], softEdges:['gate search','gate robots','own relay']},
+      fetch:{color:'#38C9D7',nodes:['fetch'], edges:['search fetch'], softNodes:['search','relay'], softEdges:['gate search','fetch relay','gate fetch']},
       read:{color:'#23CFA0',nodes:['own'], edges:['gate own','own relay'], softNodes:['gate','relay'], softEdges:['relay judge']},
       judge:{color:'#F59E0B',nodes:['own','relay','judge','redo','hasEv'], edges:['gate own','own relay','relay judge','judge redo','redo retry','redo hasEv','hasEv final']},
       answer:{color:'#22262F',keepLabelColor:true,nodes:['converge','final','hasEv'], edges:['judge converge','converge final','hasEv final']}
