@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>web_fetch 深挖 · 文件全景 / 优先级 / 模型读页机制 / llms.txt / 布局减幻守则</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1a1a; --sub:#666; --line:#e5e5e5; --bg:#F2F3F7; --card:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;padding:48px 20px 80px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:24px;font-weight:900;letter-spacing:.5px}
+.subtitle{color:var(--sub);font-size:13.5px;margin-top:8px;line-height:1.8}
+.subtitle a{color:#2f3d63;font-weight:600}
+h2{font-size:18px;font-weight:700;margin:52px 0 6px;padding-left:12px;border-left:4px solid var(--ink)}
+h2 .no{color:var(--sub);font-weight:400;margin-right:6px}
+h3{font-size:15px;font-weight:700;margin:22px 0 8px}
+.sechint{color:var(--sub);font-size:13px;margin-bottom:16px;padding-left:16px;line-height:1.8}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.card p{font-size:13.5px;margin-bottom:10px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.6}
+th{background:#f4f4f4;font-weight:700;white-space:nowrap}
+code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#f3f3f3;border-radius:4px;padding:1px 5px}
+ul.tight{padding-left:20px;font-size:13px}
+ul.tight li{margin-bottom:7px;line-height:1.7}
+.note{font-size:12.5px;color:var(--sub);margin-top:12px;line-height:1.8}
+.note b{color:#444}
+/* 优先级徽标 */
+.pb{display:inline-block;font-size:11px;font-weight:800;padding:1px 8px;border-radius:6px;white-space:nowrap;vertical-align:1px}
+.pb.p0{background:#F9D2D2;color:#993C1D}
+.pb.p1{background:#FBE0CE;color:#9a5a2a}
+.pb.p2{background:#FCEFC7;color:#7a5d0a}
+.pb.p3{background:#ECE7F6;color:#5b4f93}
+.pb.na{background:#ececec;color:#888}
+/* 图形卡 */
+.fig44{margin:14px 0 16px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px 10px 10px}
+.fig44 svg{display:block;width:100%;height:auto}
+.figcap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:10px;line-height:1.7;padding:0 12px}
+.toc{margin:18px 0 8px;display:flex;gap:8px;flex-wrap:wrap}
+.toc a{font-size:12.5px;color:#333;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 14px}
+.toc a:hover{border-color:#2f3d63;color:#2f3d63}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>web_fetch 深挖：能取到的全部文件 · 优先级 · 大模型怎么「读」页面 · llms.txt 位置 · 布局减幻守则</h1>
+<div class="subtitle">承接 <a href="arch-d3.html">arch-d3 人机协同旅程 · 4.3 架构图</a>的 web_fetch 细化，本页把四个追问<b>全部图形化</b>：① 这份清单<b>全不全</b>（图 A：16 项全景时间轴）；② 这些文件<b>谁重要</b>（图 A 底部 P0–P3 价值条）；③ 大模型到底怎么「扫描」页面（图 C：token 流 + U 型注意力）；④ llms.txt 放哪、什么布局提效减幻（图 D / 图 E）。事实口径锚定 D 任务实测（<code>task_run_log.md</code>）。</div>
+
+<div class="toc">
+  <a href="#s1">① 文件全景 + 优先级（图 A）</a>
+  <a href="#s2">② 模型怎么读页面（图 C）</a>
+  <a href="#s3">③ llms.txt 位置（图 D）</a>
+  <a href="#s4">④ 布局减幻守则（图 E）</a>
+</div>
+
+<a id="s1"></a>
+<h2><span class="no">①</span>文件全景清单：图 A 把 16 项全部入图（主干 12 + 核对补遗 4）</h2>
+<div class="sechint">把「一次 web_fetch 从发请求到拿正文」的完整生命周期逐段过一遍，能碰到的文件 / 信号一共 <b>16 项＝主干 12 类 + 注脚级信号 4 项</b>。4.3 架构图画了主干中的 5 项；<b>图 A 把 16 项全部画入</b>——按请求发生顺序排布在时间轴上、按修站优先级（P0–P3）着色。复查中确认：<b>没有再漏掉「改变架构形状」的文件</b>——新补的 4 项（hreflang / 分页标记 / noscript / 子资源）都属页内信号或传输载荷，是注脚而非新层。</div>
+
+<div class="card">
+<div class="fig44" id="figA">
+<svg viewBox="0 0 1120 668" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans SC',sans-serif">
+  <defs>
+    <marker id="faA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/></marker>
+    <marker id="faP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9a8ab8"/></marker>
+  </defs>
+  <!-- 标题 -->
+  <text x="560" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1a1a">图 A · web_fetch 文件全景：一次抓取按时间顺序碰到的全部信号（主干 12 + 注脚 4 = 16 项）</text>
+  <text x="560" y="40" text-anchor="middle" font-size="9" fill="#888">P0–P3 = 修站优先级（与底部价值条同色）· 虚线 = 旁路 / 可选 · 实线 = 主路径</text>
+
+  <!-- 阶段归属竖带 -->
+  <rect x="339" y="48" width="198" height="195" fill="#f6f9fb"/>
+  <rect x="539" y="48" width="198" height="195" fill="#f6f9fb"/>
+  <rect x="739" y="48" width="198" height="195" fill="#f6f9fb"/>
+
+  <!-- 主时间轴 -->
+  <line x1="60" y1="225" x2="1058" y2="225" stroke="#8a8a8a" stroke-width="1.3" marker-end="url(#faA)"/>
+
+  <!-- T0 -->
+  <rect x="42" y="207" width="118" height="36" rx="8" fill="#f4f5f8" stroke="#d8dae0"/>
+  <text x="101" y="222" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333">① 发起 fetch</text>
+  <text x="101" y="235" text-anchor="middle" font-size="7.5" fill="#888">AI 选定 URL</text>
+  <!-- T1 robots -->
+  <rect x="190" y="207" width="118" height="36" rx="8" fill="#eaf1f7" stroke="#8ab8d8" stroke-width="1.5"/>
+  <text x="249" y="222" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">② GET /robots.txt</text>
+  <text x="249" y="235" text-anchor="middle" font-size="7.5" fill="#3a6f9c">准入门控</text>
+  <rect x="284" y="210" width="20" height="12" rx="3" fill="#FBE0CE"/>
+  <text x="294" y="219.5" text-anchor="middle" font-size="8" font-weight="800" fill="#9a5a2a">P1</text>
+  <!-- robots 禁止出口 -->
+  <text x="249" y="256" text-anchor="middle" font-size="7.4" fill="#B0212B">禁止 → url_not_allowed（整站出局）</text>
+  <!-- T2 -->
+  <rect x="380" y="207" width="118" height="36" rx="8" fill="#eaf1f7" stroke="#bcd0e0"/>
+  <text x="439" y="222" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">③ GET 目标 URL</text>
+  <text x="439" y="235" text-anchor="middle" font-size="7.5" fill="#3a6f9c">跟随重定向链</text>
+  <!-- T3 -->
+  <rect x="580" y="207" width="118" height="36" rx="8" fill="#e0ecf5" stroke="#8ab8d8" stroke-width="1.5"/>
+  <text x="639" y="222" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">④ HTML 到手</text>
+  <text x="639" y="235" text-anchor="middle" font-size="7.5" fill="#3a6f9c">SSR 才有正文</text>
+  <rect x="674" y="210" width="20" height="12" rx="3" fill="#F9D2D2"/>
+  <text x="684" y="219.5" text-anchor="middle" font-size="8" font-weight="800" fill="#993C1D">P0</text>
+  <!-- T4 -->
+  <rect x="770" y="207" width="118" height="36" rx="8" fill="#f0f4ed" stroke="#a0c0a0"/>
+  <text x="829" y="222" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2a6a2a">⑤ 解析剥噪</text>
+  <text x="829" y="235" text-anchor="middle" font-size="7.5" fill="#4a7a4a">HTML → 纯文本/MD</text>
+  <!-- T5 -->
+  <rect x="950" y="207" width="118" height="36" rx="8" fill="#e8f0e5" stroke="#7aaa7a" stroke-width="1.5"/>
+  <text x="1009" y="222" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a1f">⑥ 文本入模型</text>
+  <text x="1009" y="235" text-anchor="middle" font-size="7.5" fill="#3a7a3a">按文档流顺序</text>
+
+  <!-- 上方信号卡：T2 列 -->
+  <g>
+    <rect x="343" y="52" width="190" height="46" rx="6" fill="#FBE0CE" stroke="#D8A878"/>
+    <rect x="505" y="56" width="24" height="12" rx="3" fill="#fff" stroke="#D8A878"/>
+    <text x="517" y="65.5" text-anchor="middle" font-size="8" font-weight="800" fill="#9a5a2a">P1</text>
+    <text x="351" y="68" font-size="9.5" font-weight="700" fill="#9a5a2a">HTTP 状态码 + 重定向链</text>
+    <text x="351" y="81" font-size="7.2" fill="#a06a3a">200 才有正文 · 403/429 反爬=出局</text>
+    <text x="351" y="91" font-size="7.2" fill="#a06a3a">301/302 跟随（参数可能丢）</text>
+  </g>
+  <g>
+    <rect x="343" y="106" width="190" height="46" rx="6" fill="#FCEFC7" stroke="#D8C878"/>
+    <rect x="505" y="110" width="24" height="12" rx="3" fill="#fff" stroke="#D8C878"/>
+    <text x="517" y="119.5" text-anchor="middle" font-size="8" font-weight="800" fill="#7a5d0a">P2</text>
+    <text x="351" y="122" font-size="9.5" font-weight="700" fill="#7a5d0a">响应头</text>
+    <text x="351" y="135" font-size="7.2" fill="#8a7030">Content-Type 判是否 HTML</text>
+    <text x="351" y="145" font-size="7.2" fill="#8a7030">X-Robots-Tag 页级索引控制</text>
+  </g>
+  <!-- 上方信号卡：T3 列 -->
+  <g>
+    <rect x="543" y="52" width="190" height="46" rx="6" fill="#F9D2D2" stroke="#D08080"/>
+    <rect x="705" y="56" width="24" height="12" rx="3" fill="#fff" stroke="#D08080"/>
+    <text x="717" y="65.5" text-anchor="middle" font-size="8" font-weight="800" fill="#993C1D">P0</text>
+    <text x="551" y="68" font-size="9.5" font-weight="700" fill="#993C1D">HTML 正文（SSR 直出）</text>
+    <text x="551" y="81" font-size="7.2" fill="#a05a3a">② 可抓取 · ③ 详尽度全在这一个文件</text>
+    <text x="551" y="91" font-size="7.2" fill="#a05a3a">唯一直接决定答案质量</text>
+  </g>
+  <g>
+    <rect x="543" y="106" width="190" height="46" rx="6" fill="#FBE0CE" stroke="#D8A878"/>
+    <rect x="705" y="110" width="24" height="12" rx="3" fill="#fff" stroke="#D8A878"/>
+    <text x="717" y="119.5" text-anchor="middle" font-size="8" font-weight="800" fill="#9a5a2a">P1</text>
+    <text x="551" y="122" font-size="9.5" font-weight="700" fill="#9a5a2a">head 元数据</text>
+    <text x="551" y="135" font-size="7.2" fill="#a06a3a">title · canonical · JSON-LD · OG</text>
+    <text x="551" y="145" font-size="7.2" fill="#a06a3a">结构化事实，先于正文被读</text>
+  </g>
+  <g>
+    <rect x="543" y="160" width="190" height="42" rx="6" fill="#FCEFC7" stroke="#D8C878"/>
+    <rect x="705" y="164" width="24" height="12" rx="3" fill="#fff" stroke="#D8C878"/>
+    <text x="717" y="173.5" text-anchor="middle" font-size="8" font-weight="800" fill="#7a5d0a">P2</text>
+    <text x="551" y="176" font-size="9.5" font-weight="700" fill="#7a5d0a">meta robots</text>
+    <text x="551" y="189" font-size="7.2" fill="#8a7030">管索引不管抓取 · noindex 照样 fetch</text>
+  </g>
+  <!-- 上方信号卡：T4 列 -->
+  <g>
+    <rect x="743" y="52" width="190" height="46" rx="6" fill="#e8f0e5" stroke="#7aaa7a"/>
+    <text x="751" y="68" font-size="9.5" font-weight="700" fill="#1f5a1f">高权重语义块（解析期加权）</text>
+    <text x="751" y="81" font-size="7.2" fill="#3a7a3a">h 标题 · pre/code · table · list</text>
+    <text x="751" y="91" font-size="7.2" fill="#3a7a3a">视觉显眼 ≠ 模型显眼</text>
+  </g>
+  <g>
+    <rect x="743" y="106" width="190" height="46" rx="6" fill="#FCEFC7" stroke="#D8C878"/>
+    <rect x="905" y="110" width="24" height="12" rx="3" fill="#fff" stroke="#D8C878"/>
+    <text x="917" y="119.5" text-anchor="middle" font-size="8" font-weight="800" fill="#7a5d0a">P2</text>
+    <text x="751" y="122" font-size="9.5" font-weight="700" fill="#7a5d0a">内链 + 锚文本</text>
+    <text x="751" y="135" font-size="7.2" fill="#8a7030">站内权重流转</text>
+    <text x="751" y="145" font-size="7.2" fill="#8a7030">（web_search 侧隐含使用）</text>
+  </g>
+
+  <!-- 旁路泳道 -->
+  <rect x="42" y="286" width="1036" height="188" rx="10" fill="#fbf9fe" stroke="#d8cfe8" stroke-dasharray="5,3"/>
+  <text x="560" y="303" text-anchor="middle" font-size="8.5" font-weight="700" fill="#7a6a9a" letter-spacing="0.5">旁路 · 站点级文件（不经目标页面本体）</text>
+  <!-- B1 sitemap -->
+  <g>
+    <rect x="60" y="312" width="180" height="64" rx="6" fill="#FCEFC7" stroke="#D8C878"/>
+    <rect x="212" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#D8C878"/>
+    <text x="224" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#7a5d0a">P2</text>
+    <text x="68" y="329" font-size="9.5" font-weight="700" fill="#7a5d0a">sitemap.xml / index</text>
+    <text x="68" y="343" font-size="7.2" fill="#8a7030">URL 清单 + lastmod · 帮发现深页</text>
+    <text x="68" y="354" font-size="7.2" fill="#8a7030">由 robots 的 Sitemap: 指令发现</text>
+  </g>
+  <!-- B2 RSS -->
+  <g>
+    <rect x="262" y="312" width="180" height="64" rx="6" fill="#ECE7F6" stroke="#B8A8D8"/>
+    <rect x="414" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#B8A8D8"/>
+    <text x="426" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#5b4f93">P3</text>
+    <text x="270" y="329" font-size="9.5" font-weight="700" fill="#5b4f93">RSS / Atom feed</text>
+    <text x="270" y="343" font-size="7.2" fill="#6a5aa3">时效性内容发现</text>
+    <text x="270" y="354" font-size="7.2" fill="#6a5aa3">部分爬虫使用</text>
+  </g>
+  <!-- B3 llms.txt -->
+  <g>
+    <rect x="464" y="312" width="180" height="64" rx="6" fill="#ECE7F6" stroke="#B8A8D8" stroke-dasharray="4,2"/>
+    <rect x="616" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#B8A8D8"/>
+    <text x="628" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#5b4f93">P3</text>
+    <text x="472" y="329" font-size="9.5" font-weight="700" fill="#5b4f93">llms.txt</text>
+    <text x="472" y="343" font-size="7.2" fill="#6a5aa3">LLM 专用索引 · 根路径直取</text>
+    <text x="472" y="354" font-size="7.2" fill="#6a5aa3">可选：厂商未确认消费</text>
+  </g>
+  <!-- B4 llms-full -->
+  <g>
+    <rect x="666" y="312" width="180" height="64" rx="6" fill="#ECE7F6" stroke="#B8A8D8" stroke-dasharray="4,2"/>
+    <rect x="818" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#B8A8D8"/>
+    <text x="830" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#5b4f93">P3</text>
+    <text x="674" y="329" font-size="9.5" font-weight="700" fill="#5b4f93">llms-full.txt</text>
+    <text x="674" y="343" font-size="7.2" fill="#6a5aa3">全文拼接 · 一次吃透</text>
+    <text x="674" y="354" font-size="7.2" fill="#6a5aa3">由 llms.txt 引出</text>
+  </g>
+  <!-- B5 MD 镜像 -->
+  <g>
+    <rect x="868" y="312" width="190" height="64" rx="6" fill="#FBE0CE" stroke="#D8A878"/>
+    <rect x="1032" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#D8A878"/>
+    <text x="1044" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#9a5a2a">P1</text>
+    <text x="876" y="329" font-size="9.5" font-weight="700" fill="#9a5a2a">Markdown / print 镜像</text>
+    <text x="876" y="343" font-size="7.2" fill="#a06a3a">.md 源 · ?format=md · print 视图</text>
+    <text x="876" y="354" font-size="7.2" fill="#a06a3a">若提供 = 低噪正文直取</text>
+  </g>
+  <!-- B6 截图 -->
+  <g>
+    <rect x="60" y="392" width="180" height="52" rx="6" fill="#f0f0f0" stroke="#c8c8c8"/>
+    <text x="68" y="409" font-size="9.5" font-weight="700" fill="#777">（对照）页面截图</text>
+    <text x="68" y="423" font-size="7.2" fill="#8a8a8a">vision 多模态路径</text>
+    <text x="68" y="433" font-size="7.2" fill="#8a8a8a">非 web_fetch 文本路径</text>
+  </g>
+  <!-- B7 补遗 -->
+  <g>
+    <rect x="262" y="392" width="796" height="52" rx="6" fill="#fafafa" stroke="#c8c8c8" stroke-dasharray="4,2"/>
+    <text x="274" y="409" font-size="8.5" font-weight="700" fill="#666">本次核对补遗（注脚级信号，不改架构形状）：</text>
+    <text x="274" y="424" font-size="7.4" fill="#888">hreflang 多语言互链（帮模型选对语言版本，对应语言切换触点） · rel=prev/next 分页标记（无限滚动=尾页难界定） · noscript 内容（SPA 里唯一静态文本） · 子资源 CSS/JS/图（会请求、解析即弃）</text>
+    <text x="274" y="436" font-size="7" fill="#a0a0a0" font-style="italic">→ 这 4 项都长在「页内 / 传输」层上，是 4.3 架构图的注脚，不构成新层</text>
+  </g>
+  <!-- 旁路连线 -->
+  <path d="M249,243 L249,278 L150,278 L150,312" fill="none" stroke="#9a8ab8" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#faP)"/>
+  <text x="168" y="274" font-size="7.2" fill="#7a6a9a">Sitemap: 指令</text>
+  <line x1="644" y1="344" x2="664" y2="344" stroke="#9a8ab8" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#faP)"/>
+  <path d="M963,312 L963,278 L1009,278 L1009,243" fill="none" stroke="#9a8ab8" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#faP)"/>
+  <text x="978" y="274" font-size="7.2" fill="#7a6a9a">直取正文 · 跳过剥噪</text>
+
+  <!-- 底部：优先级价值条 -->
+  <text x="560" y="508" text-anchor="middle" font-size="12" font-weight="800" fill="#1a1a1a">修站优先级：资源有限先修哪个 —— 九成价值在 P0+P1（工程判断，非测量）</text>
+  <g>
+    <rect x="60" y="524" width="34" height="20" rx="4" fill="#F9D2D2"/><text x="77" y="538" text-anchor="middle" font-size="9" font-weight="800" fill="#993C1D">P0</text>
+    <rect x="102" y="522" width="560" height="26" rx="5" fill="#F9D2D2" stroke="#D08080"/>
+    <text x="112" y="540" font-size="9.5" font-weight="800" fill="#993C1D">HTML 正文（SSR 可抓）</text>
+    <text x="672" y="540" font-size="8.5" fill="#666">唯一直接决定答案质量——D 任务受阻根因＝正文 0 字，九成价值的大头</text>
+  </g>
+  <g>
+    <rect x="60" y="560" width="34" height="20" rx="4" fill="#FBE0CE"/><text x="77" y="574" text-anchor="middle" font-size="9" font-weight="800" fill="#9a5a2a">P1</text>
+    <rect x="102" y="558" width="280" height="26" rx="5" fill="#FBE0CE" stroke="#D8A878"/>
+    <text x="112" y="576" font-size="9.5" font-weight="800" fill="#9a5a2a">一票否决门控 + 结构化事实</text>
+    <text x="392" y="576" font-size="8.5" fill="#666">robots 被禁 / 403 / 429＝整站出局；canonical + 版本日期防多版本混叠</text>
+  </g>
+  <g>
+    <rect x="60" y="596" width="34" height="20" rx="4" fill="#FCEFC7"/><text x="77" y="610" text-anchor="middle" font-size="9" font-weight="800" fill="#7a5d0a">P2</text>
+    <rect x="102" y="594" width="120" height="26" rx="5" fill="#FCEFC7" stroke="#D8C878"/>
+    <text x="112" y="612" font-size="9.5" font-weight="800" fill="#7a5d0a">发现 + 语义辅助</text>
+    <text x="232" y="612" font-size="8.5" fill="#666">sitemap 找深页 · 语义标签帮解析剥噪</text>
+  </g>
+  <g>
+    <rect x="60" y="632" width="34" height="20" rx="4" fill="#ECE7F6"/><text x="77" y="646" text-anchor="middle" font-size="9" font-weight="800" fill="#5b4f93">P3</text>
+    <rect x="102" y="630" width="80" height="26" rx="5" fill="#ECE7F6" stroke="#B8A8D8"/>
+    <text x="112" y="648" font-size="9.5" font-weight="800" fill="#5b4f93">零成本投机</text>
+    <text x="192" y="648" font-size="8.5" fill="#666">llms.txt · RSS——做了不亏、不做不痛</text>
+  </g>
+</svg>
+<div class="figcap"><b>图 A</b> · 完整性核对后的全景：时间轴＝一次 fetch 的真实发生顺序（robots 门控 → GET 目标 → HTML → 解析 → 入模型）；上方浅蓝竖带＝各阶段产出的页内信号；下方紫色泳道＝不经页面本体的站点级旁路；条长＝价值占比示意。回答两问：<b>清单全不全</b>（16 项已穷尽主干，4 项注脚不改变架构形状）与<b>谁重要</b>（P0 正文独占大头，九成价值在 P0+P1）。</div>
+</div>
+
+<h3>16 项明细表</h3>
+<table>
+  <thead><tr><th>层</th><th>文件 / 信号</th><th>对 fetch 的作用</th><th>优先级</th></tr></thead>
+  <tbody>
+    <tr><td>协议门控</td><td><b>HTTP 状态码 + 重定向链</b></td><td>200 才有正文；301/302 跟随（重定向链上参数可能丢失）；<b>403/429 = 反爬墙</b>、5xx = 站点故障——这些都发生在读 robots.txt 之前</td><td><span class="pb p1">P1</span></td></tr>
+    <tr><td>协议门控</td><td><b>robots.txt</b></td><td>准入门控（Disallow → <code>url_not_allowed</code>）+ 承载 <code>Sitemap:</code> 指令</td><td><span class="pb p1">P1</span></td></tr>
+    <tr><td>协议门控</td><td>响应头（Content-Type / X-Robots-Tag）</td><td>判定返回的是不是 HTML；<code>X-Robots-Tag: noindex</code> 是页级索引控制</td><td><span class="pb p2">P2</span></td></tr>
+    <tr><td>协议门控</td><td>页内 <code>&lt;meta name="robots"&gt;</code></td><td>与 X-Robots-Tag 同粒度；注意它管「索引」不管「抓取」——写了 noindex 页面照样能被 fetch</td><td><span class="pb p2">P2</span></td></tr>
+    <tr><td>发现层</td><td><b>sitemap.xml / sitemap index</b></td><td>站点 URL 清单 + lastmod，帮发现深页</td><td><span class="pb p2">P2</span></td></tr>
+    <tr><td>发现层</td><td>RSS / Atom feed</td><td>时效性内容发现（部分爬虫使用）</td><td><span class="pb p3">P3</span></td></tr>
+    <tr><td>发现层</td><td>页面内链 + 锚文本</td><td>站内权重流转；搜索排序信号（隐含在 web_search 侧）</td><td><span class="pb p2">P2</span></td></tr>
+    <tr><td><b>内容主体</b></td><td><b>HTML 正文（SSR 直出）</b></td><td>价值主体：指标 ② 官方可抓取性 · ③ 正文详尽度全部落在这一个文件上</td><td><span class="pb p0">P0</span></td></tr>
+    <tr><td>内容主体</td><td><b>head 元数据</b>：title / meta description / <b>canonical</b> / JSON-LD / OpenGraph</td><td>结构化事实：正主 URL、发布/更新日期、版本号、面包屑路径——解析时先于正文被读</td><td><span class="pb p1">P1</span></td></tr>
+    <tr><td>内容主体</td><td>Markdown / 纯文本镜像（.md 源 / ?format=md / print 视图）</td><td>部分文档站直接提供低噪正文源</td><td><span class="pb p1">P1</span>（若提供）</td></tr>
+    <tr><td>投机旁路</td><td><b>llms.txt / llms-full.txt</b></td><td>LLM 专用索引；厂商未确认消费、Google 明确忽略</td><td><span class="pb p3">P3</span></td></tr>
+    <tr><td>页内信号（补遗）</td><td>hreflang 多语言互链</td><td>标出同内容的语言版本，帮模型选对语言版本（对应「语言切换」触点）</td><td><span class="pb p2">P2</span></td></tr>
+    <tr><td>页内信号（补遗）</td><td>rel=prev/next · 分页标记</td><td>长内容分页的边界信号；无限滚动＝尾页难界定</td><td><span class="pb p3">P3</span></td></tr>
+    <tr><td>页内信号（补遗）</td><td>noscript 内容</td><td>关 JS 时的兜底文本——CSR 站里有时是唯一静态正文</td><td><span class="pb p3">P3</span></td></tr>
+    <tr><td>传输载荷（补遗）</td><td>子资源：CSS / JS / 图片</td><td>fetch 过程会请求，但解析时丢弃（对文本路径零贡献；图内文字拿不到）</td><td><span class="pb na">弃</span></td></tr>
+    <tr><td>（对照）</td><td>页面截图</td><td>走多模态 vision 路径，不属 web_fetch 文本路径；图内文字基本拿不到</td><td><span class="pb na">—</span></td></tr>
+  </tbody>
+</table>
+<div class="note"><b>优先级怎么排（修站顺序）：</b><b>P0 HTML 正文</b>是唯一直接决定答案质量的文件——D 任务全部问题的技术根因就是「正文取回 0 字」，所以第一优先是保正文出得来（SSR）。<b>P1 是一票否决项与结构化事实</b>：robots.txt 被禁 = 整站出局、403/429 反爬 = 同样出局、canonical + 版本日期防多版本混叠。<b>P2 发现与语义辅助</b>：sitemap 在搜索时代作用已弱化，但深页仍有价值；语义标签帮解析器剥噪。<b>P3 零成本投机</b>：llms.txt、RSS——做了不亏、不做不痛。一句话：<b>九成价值在 P0+P1，其中 P0 独占大头</b>（这是工程判断排序，非测量值）——图形版即图 A 底部的价值条。</div>
+</div>
+
+<a id="s2"></a>
+<h2><span class="no">②</span>大模型怎么「扫描」页面：不是从上到下逐行看，而是整个文本一次性入脑</h2>
+<div class="sechint">先纠正一个直觉：web_fetch 这条路径上，模型<b>根本不「看」界面</b>——没有视觉、不逐行扫视、也没有鼠标滚动。真实链路是：抓回 HTML → 剥 CSS/JS/广告转纯文本 → 切 token → <b>一次性整体放进上下文窗口</b>，自注意力并行关联。位置不平等（U 型）+ 截断，见图 C。</div>
+
+<div class="card">
+<div class="fig44" id="figC">
+<svg viewBox="0 0 1120 470" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans SC',sans-serif">
+  <defs>
+    <marker id="fcA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/></marker>
+    <marker id="fcB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f3d63"/></marker>
+  </defs>
+  <text x="560" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1a1a">图 C · 大模型怎么「读」页面：不逐行扫视，一次性整体入上下文；位置不平等（U 型注意力 + 截断）</text>
+
+  <!-- ===== 左半：DOM → token → 上下文 ===== -->
+  <text x="290" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#444">① 不是从上到下逐行看：剥噪 → 切 token → 整体入上下文</text>
+  <!-- 页面轮廓 -->
+  <rect x="50" y="64" width="130" height="306" rx="6" fill="#fff" stroke="#c8ccd4"/>
+  <rect x="50" y="64" width="130" height="14" rx="6" fill="#eef1f6"/>
+  <text x="115" y="75" text-anchor="middle" font-size="6.5" fill="#888">页面（DOM 文档流）</text>
+  <rect x="58" y="86" width="114" height="9" fill="#e3e6ec"/>
+  <text x="115" y="92.5" text-anchor="middle" font-size="6" fill="#888">nav 导航</text>
+  <rect x="58" y="101" width="114" height="12" fill="#2f3d63"/>
+  <text x="115" y="110" text-anchor="middle" font-size="6.5" fill="#fff">h1 标题（高权重）</text>
+  <g fill="#dfe3ea">
+    <rect x="58" y="119" width="114" height="7"/><rect x="58" y="130" width="114" height="7"/><rect x="58" y="141" width="104" height="7"/><rect x="58" y="152" width="110" height="7"/>
+  </g>
+  <rect x="58" y="165" width="114" height="40" fill="#e8f0e5" stroke="#7aaa7a"/>
+  <text x="115" y="181" text-anchor="middle" font-size="6.5" fill="#1f5a1f">pre / code 命令</text>
+  <text x="115" y="192" text-anchor="middle" font-size="6" fill="#3a7a3a">（高权重·逐字可复制）</text>
+  <text x="115" y="201" text-anchor="middle" font-size="6" fill="#3a7a3a">msopgen gen ...</text>
+  <g fill="#e3e6ec">
+    <rect x="58" y="213" width="114" height="7"/><rect x="58" y="224" width="108" height="7"/><rect x="58" y="235" width="114" height="7"/><rect x="58" y="246" width="100" height="7"/><rect x="58" y="257" width="112" height="7"/><rect x="58" y="268" width="106" height="7"/><rect x="58" y="279" width="114" height="7"/><rect x="58" y="290" width="98" height="7"/><rect x="58" y="301" width="110" height="7"/><rect x="58" y="312" width="104" height="7"/>
+  </g>
+  <text x="115" y="333" text-anchor="middle" font-size="6" fill="#a05050">← 长中段（U 型谷，见右图）</text>
+  <rect x="58" y="340" width="114" height="20" fill="#eaf1f7" stroke="#bcd0e0"/>
+  <text x="115" y="353" text-anchor="middle" font-size="6.5" fill="#1f5a8a">table 事实（高权重）</text>
+  <rect x="58" y="366" width="114" height="9" fill="#e3e6ec"/>
+  <text x="115" y="372.5" text-anchor="middle" font-size="6" fill="#888">footer 页脚</text>
+
+  <!-- 剥噪箭头 -->
+  <line x1="184" y1="217" x2="222" y2="217" stroke="#8a8a8a" stroke-width="1.2" marker-end="url(#fcA)"/>
+  <text x="203" y="205" text-anchor="middle" font-size="6.5" fill="#777">剥 CSS/JS</text>
+  <text x="203" y="213" text-anchor="middle" font-size="6.5" fill="#777">广告 → 切 token</text>
+
+  <!-- 上下文窗口 -->
+  <rect x="232" y="96" width="300" height="244" rx="10" fill="#f8fafd" stroke="#9bb3e0" stroke-dasharray="6,3"/>
+  <text x="382" y="112" text-anchor="middle" font-size="8" font-weight="700" fill="#2f3d63">上下文窗口（token 序列 · 按 DOM 文档流顺序）</text>
+  <!-- token 带 -->
+  <rect x="248" y="150" width="66" height="46" fill="#2f3d63" opacity=".85"/>
+  <rect x="314" y="150" width="162" height="46" fill="#c9d4e8"/>
+  <rect x="476" y="150" width="40" height="46" fill="#8fa5c8"/>
+  <g stroke="#fff" stroke-width=".6" opacity=".5">
+    <line x1="258" y1="150" x2="258" y2="196"/><line x1="270" y1="150" x2="270" y2="196"/><line x1="282" y1="150" x2="282" y2="196"/><line x1="294" y1="150" x2="294" y2="196"/>
+    <line x1="330" y1="150" x2="330" y2="196"/><line x1="346" y1="150" x2="346" y2="196"/><line x1="362" y1="150" x2="362" y2="196"/><line x1="378" y1="150" x2="378" y2="196"/><line x1="394" y1="150" x2="394" y2="196"/><line x1="410" y1="150" x2="410" y2="196"/><line x1="426" y1="150" x2="426" y2="196"/><line x1="442" y1="150" x2="442" y2="196"/><line x1="458" y1="150" x2="458" y2="196"/>
+  </g>
+  <text x="281" y="213" text-anchor="middle" font-size="6.8" fill="#2f3d63" font-weight="700">开头＝头部 + h1</text>
+  <text x="281" y="222" text-anchor="middle" font-size="6.2" fill="#5a6a8a">「先见标题，才知道</text>
+  <text x="281" y="230" text-anchor="middle" font-size="6.2" fill="#5a6a8a">后文在讲什么」</text>
+  <text x="395" y="213" text-anchor="middle" font-size="6.8" fill="#5a6a8a">中段＝正文主体</text>
+  <text x="395" y="222" text-anchor="middle" font-size="6.2" fill="#8a8a8a">（注意力最弱区，右图）</text>
+  <text x="496" y="213" text-anchor="middle" font-size="6.8" fill="#2f3d63" font-weight="700">结尾＝收尾</text>
+  <text x="496" y="222" text-anchor="middle" font-size="6.2" fill="#5a6a8a">+ 页脚</text>
+  <!-- 自注意力示意 -->
+  <text x="382" y="255" text-anchor="middle" font-size="7.5" font-weight="700" fill="#2f3d63">↓ 一次性整体放进窗口</text>
+  <g opacity=".8">
+    <path d="M300,270 C330,300 430,300 460,270" fill="none" stroke="#7a8aa0" stroke-width=".8"/>
+    <path d="M280,268 C300,310 380,310 420,268" fill="none" stroke="#7a8aa0" stroke-width=".8"/>
+    <path d="M330,272 C360,296 400,296 440,272" fill="none" stroke="#7a8aa0" stroke-width=".8"/>
+  </g>
+  <text x="382" y="325" text-anchor="middle" font-size="7.5" font-weight="700" fill="#2f3d63">自注意力并行关联所有 token</text>
+  <text x="382" y="337" text-anchor="middle" font-size="6.8" fill="#666">没有逐行扫视 · 没有鼠标滚动 · 没有视觉</text>
+  <text x="382" y="348" text-anchor="middle" font-size="6.8" fill="#666">「从上到下」只对了一半：文档流顺序＝语义顺序</text>
+
+  <!-- ===== 右半：U 型注意力 ===== -->
+  <text x="840" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#444">② 位置不平等：开头结尾强、中段弱（U 型）+ 截断</text>
+  <!-- 坐标轴 -->
+  <line x1="600" y1="352" x2="1078" y2="352" stroke="#8a8a8a" stroke-width="1.2" marker-end="url(#fcA)"/>
+  <line x1="600" y1="352" x2="600" y2="76" stroke="#8a8a8a" stroke-width="1.2" marker-end="url(#fcA)"/>
+  <text x="840" y="370" text-anchor="middle" font-size="8" fill="#666">token 位置（开头 → 中段 → 结尾）</text>
+  <text x="590" y="215" text-anchor="middle" font-size="8" fill="#666" transform="rotate(-90 590 215)">注意力强度</text>
+  <!-- U 曲线 -->
+  <path d="M600,92 C680,300 720,318 830,318 C940,318 1020,150 1074,98" fill="none" stroke="#2f3d63" stroke-width="2.5"/>
+  <!-- 标注 -->
+  <circle cx="600" cy="92" r="4" fill="#2f3d63"/>
+  <text x="622" y="88" font-size="8" font-weight="800" fill="#2f3d63">开头最强（primacy）</text>
+  <text x="622" y="99" font-size="6.6" fill="#5a6a8a">训练语料的自然顺序：开头引出下文</text>
+  <circle cx="1074" cy="98" r="4" fill="#2f3d63"/>
+  <text x="1064" y="88" text-anchor="end" font-size="8" font-weight="800" fill="#2f3d63">结尾强（recency）</text>
+  <circle cx="830" cy="318" r="5" fill="#D0454F"/>
+  <text x="830" y="340" text-anchor="middle" font-size="8" font-weight="800" fill="#B0212B">中段最弱——lost in the middle（Liu et al. 2023）</text>
+  <text x="830" y="361" text-anchor="middle" font-size="6.8" fill="#A03038">长文档中段的事实最易被忽略或张冠李戴 → 重要结论别埋长文中段</text>
+  <!-- 截断卡 -->
+  <rect x="880" y="106" width="196" height="66" rx="6" fill="#fdf3f3" stroke="#D08080" stroke-dasharray="4,2"/>
+  <text x="890" y="122" font-size="7.8" font-weight="800" fill="#993C1D">✂ 截断：超长页被砍两刀</text>
+  <text x="890" y="134" font-size="6.8" fill="#a05a3a">① 工具返回大小上限</text>
+  <text x="890" y="144" font-size="6.8" fill="#a05a3a">② 上下文窗口上限</text>
+  <text x="890" y="158" font-size="6.8" fill="#993C1D" font-weight="700">尾部内容整段进不了模型——</text>
+  <text x="890" y="167" font-size="6.8" fill="#993C1D" font-weight="700">比「被忽略」更彻底</text>
+
+  <!-- 底部结论条 -->
+  <rect x="40" y="400" width="336" height="42" rx="7" fill="#e3f3ec" stroke="#bfe3d0"/>
+  <text x="208" y="417" text-anchor="middle" font-size="8.2" font-weight="700" fill="#1f5b3f">重要结论前置、别埋长文中段</text>
+  <text x="208" y="430" text-anchor="middle" font-size="6.8" fill="#3a7a5a">对策＝图 E 守则 7「正文前置 + 超长页拆分」</text>
+  <rect x="392" y="400" width="336" height="42" rx="7" fill="#e3f3ec" stroke="#bfe3d0"/>
+  <text x="560" y="417" text-anchor="middle" font-size="8.2" font-weight="700" fill="#1f5b3f">超长页拆分（同时解 U 型谷与截断）</text>
+  <text x="560" y="430" text-anchor="middle" font-size="6.8" fill="#3a7a5a">一页一主题＝检索命中页与问题对齐</text>
+  <rect x="744" y="400" width="336" height="42" rx="7" fill="#fdf3f3" stroke="#f0c9c9"/>
+  <text x="912" y="417" text-anchor="middle" font-size="8.2" font-weight="700" fill="#993C1D">视觉显眼（大图 / 动效 / 配色）对文本路径零贡献</text>
+  <text x="912" y="430" text-anchor="middle" font-size="6.8" fill="#a05a3a">对人眼的强调 ≠ 对模型的强调（权重发生在解析期）</text>
+</svg>
+<div class="figcap"><b>图 C</b> · 左：页面 DOM 按文档流顺序剥噪、切 token、<b>一次性整体</b>放进上下文窗口——「从上到下」只对了一半（文档流顺序＝语义顺序），但不存在逐行扫视。右：token 位置不平等——<b>开头与结尾注意力强、中段最弱</b>（U 型，lost in the middle），超长页还会在两道上限处被<b>整段截断</b>。设计推论见底部三条。</div>
+</div>
+<ul class="tight">
+  <li><b>「从上到下」只对了一半——文档流顺序 = 语义顺序</b>。模型不按行读，但 DOM 从上到下映射成 token 从先到后，与视觉顺序基本一致；训练语料的自然顺序让开头的 token 天然承担「引出下文」的角色（先见到标题，才知道后文在讲什么）。</li>
+  <li><b>U 型位置偏置（lost in the middle）</b>：注意力对<b>开头与结尾</b>最强、<b>中部最弱</b>（Liu et al. 2023, <i>Lost in the Middle: How Language Models Use Long Contexts</i>）。长文档中段的事实最易被忽略或张冠李戴——<b>重要结论别埋长文中段</b>。</li>
+  <li><b>截断</b>：超长页面在两个关口被砍——工具返回大小上限 + 上下文窗口。尾部内容可能整段进不了模型，比「被忽略」更彻底。</li>
+  <li><b>权重效应发生在解析阶段，不在视觉阶段</b>：标题层级、<code>pre/code</code>、table、列表被识别为高价值语义块；而视觉上的「显眼」（大图、动效、配色）对文本路径<b>零贡献</b>——对人眼的强调不等于对模型的强调。</li>
+</ul>
+<div class="note">给站点方的推论：页面的「可读性」要按<b>DOM 语义顺序</b>重新审计一遍，而不是按视觉设计稿——视觉上再醒目的信息，如果 DOM 里是中段一长串无结构文本、或者是 JS 现渲染的，对模型等于不存在。</div>
+</div>
+
+<a id="s3"></a>
+<h2><span class="no">③</span>llms.txt 放哪里：反直觉的答案——页面内位置无所谓</h2>
+<div class="sechint">llms.txt 的约定（llmstxt.org 提案）是<b>站点根路径的 <code>/llms.txt</code> 文件</b>，一个纯 Markdown 索引。AI 与取 robots.txt 同款方式<b>直接请求这个 URL</b>，不通过页面内链接发现它。</div>
+
+<div class="card">
+<div class="fig44" id="figD">
+<svg viewBox="0 0 1120 300" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans SC',sans-serif">
+  <defs>
+    <marker id="fdA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5b4f93"/></marker>
+  </defs>
+  <text x="560" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1a1a">图 D · llms.txt 的位置：AI 按约定直接请求根路径文件——页内放不放链接、放哪，都不影响 AI 拿不拿得到</text>
+
+  <!-- 左：三种页面内位置 -->
+  <g>
+    <rect x="48" y="52" width="128" height="118" rx="5" fill="#fff" stroke="#c8ccd4"/>
+    <rect x="48" y="52" width="128" height="12" rx="5" fill="#eef1f6"/>
+    <rect x="54" y="56" width="26" height="5" rx="2" fill="#fff"/>
+    <rect x="56" y="72" width="48" height="7" fill="#e3e6ec"/>
+    <rect x="56" y="80" width="36" height="7" fill="#FCEFC7"/>
+    <text x="74" y="85.5" text-anchor="middle" font-size="5.2" fill="#7a5d0a" font-weight="700">llms.txt</text>
+    <g fill="#e9ebf0">
+      <rect x="56" y="94" width="112" height="6"/><rect x="56" y="104" width="104" height="6"/><rect x="56" y="114" width="108" height="6"/><rect x="56" y="124" width="96" height="6"/><rect x="56" y="134" width="106" height="6"/><rect x="56" y="144" width="100" height="6"/>
+    </g>
+    <text x="112" y="188" text-anchor="middle" font-size="7" fill="#666">放顶部导航</text>
+    <text x="112" y="202" text-anchor="middle" font-size="7.5" font-weight="700" fill="#1f6b45">✓ AI 照样拿得到</text>
+  </g>
+  <g>
+    <rect x="192" y="52" width="128" height="118" rx="5" fill="#fff" stroke="#c8ccd4"/>
+    <rect x="192" y="52" width="128" height="12" rx="5" fill="#eef1f6"/>
+    <g fill="#e9ebf0">
+      <rect x="200" y="72" width="112" height="6"/><rect x="200" y="82" width="104" height="6"/><rect x="200" y="92" width="108" height="6"/><rect x="200" y="102" width="96" height="6"/><rect x="200" y="112" width="106" height="6"/><rect x="200" y="122" width="100" height="6"/>
+    </g>
+    <rect x="200" y="140" width="44" height="9" fill="#FCEFC7"/>
+    <text x="222" y="146.5" text-anchor="middle" font-size="5.4" fill="#7a5d0a" font-weight="700">llms.txt</text>
+    <text x="256" y="152" text-anchor="middle" font-size="5.6" fill="#bbb">footer</text>
+    <text x="256" y="188" text-anchor="middle" font-size="7" fill="#666">放页脚</text>
+    <text x="256" y="202" text-anchor="middle" font-size="7.5" font-weight="700" fill="#1f6b45">✓ AI 照样拿得到</text>
+  </g>
+  <g>
+    <rect x="336" y="52" width="128" height="118" rx="5" fill="#fff" stroke="#c8ccd4"/>
+    <rect x="336" y="52" width="128" height="12" rx="5" fill="#eef1f6"/>
+    <g fill="#e9ebf0">
+      <rect x="344" y="72" width="112" height="6"/><rect x="344" y="82" width="104" height="6"/><rect x="344" y="92" width="108" height="6"/><rect x="344" y="102" width="96" height="6"/><rect x="344" y="112" width="106" height="6"/><rect x="344" y="122" width="100" height="6"/><rect x="344" y="132" width="104" height="6"/><rect x="344" y="142" width="96" height="6"/>
+    </g>
+    <text x="400" y="188" text-anchor="middle" font-size="7" fill="#666">完全不放链接</text>
+    <text x="400" y="202" text-anchor="middle" font-size="7.5" font-weight="700" fill="#1f6b45">✓ AI 照样拿得到</text>
+  </g>
+  <text x="256" y="230" text-anchor="middle" font-size="7.8" font-weight="700" fill="#444">三种放法结果相同——AI 不经页面发现它</text>
+  <text x="256" y="244" text-anchor="middle" font-size="6.8" fill="#888">页内 link 顶多是给人和普通爬虫看的</text>
+
+  <!-- 中：AI 直接 GET -->
+  <circle cx="540" cy="130" r="26" fill="#ECE7F6" stroke="#8a6fb0" stroke-width="1.5"/>
+  <text x="540" y="128" text-anchor="middle" font-size="9" font-weight="800" fill="#5b4f93">AI</text>
+  <text x="540" y="140" text-anchor="middle" font-size="6" fill="#6a5aa3">web_fetch</text>
+  <line x1="570" y1="130" x2="626" y2="130" stroke="#5b4f93" stroke-width="2" marker-end="url(#fdA)"/>
+  <text x="598" y="120" text-anchor="middle" font-size="7" font-weight="700" fill="#5b4f93">直接 GET</text>
+  <text x="598" y="145" text-anchor="middle" font-size="6.2" fill="#8a7ab8">与取 robots.txt 同款</text>
+  <g>
+    <rect x="632" y="88" width="150" height="84" rx="7" fill="#f5f0fa" stroke="#B8A8D8" stroke-width="1.3"/>
+    <text x="707" y="112" text-anchor="middle" font-size="11" font-weight="800" fill="#5b3fa0" font-family="ui-monospace,Menlo,monospace">/llms.txt</text>
+    <text x="707" y="128" text-anchor="middle" font-size="7" fill="#6a52a8">站点根路径 · 纯 Markdown 索引</text>
+    <text x="707" y="142" text-anchor="middle" font-size="6.6" fill="#8a7ab8">不是 meta 标签 · 不写进 &lt;head&gt;</text>
+    <text x="707" y="153" text-anchor="middle" font-size="6.6" fill="#8a7ab8">页内 &lt;link&gt; 无标准约定</text>
+  </g>
+  <text x="707" y="230" text-anchor="middle" font-size="7.8" font-weight="700" fill="#444">位置＝根路径，是「文件」不是「页面元素」</text>
+  <text x="707" y="244" text-anchor="middle" font-size="6.8" fill="#888">同族：/robots.txt · /sitemap.xml · /llms-full.txt</text>
+
+  <!-- 右：三件要紧事 -->
+  <text x="935" y="52" text-anchor="middle" font-size="9.5" font-weight="800" fill="#444">真正要紧的三件事（位置之外）</text>
+  <g>
+    <rect x="790" y="60" width="290" height="44" rx="6" fill="#fff" stroke="#d6dbe6"/>
+    <text x="800" y="77" font-size="8.5" font-weight="800" fill="#2f3d63">① 根路径可匿名 GET</text>
+    <text x="800" y="93" font-size="7" fill="#777">无登录墙、无反爬墙（403/429 直接断路）</text>
+  </g>
+  <g>
+    <rect x="790" y="112" width="290" height="44" rx="6" fill="#fff" stroke="#d6dbe6"/>
+    <text x="800" y="129" font-size="8.5" font-weight="800" fill="#2f3d63">② 纯 Markdown 低噪内容</text>
+    <text x="800" y="145" font-size="7" fill="#777">索引每条带一句话说明 + 指向正文页的 URL</text>
+  </g>
+  <g>
+    <rect x="790" y="164" width="290" height="44" rx="6" fill="#fff" stroke="#d6dbe6"/>
+    <text x="800" y="181" font-size="8.5" font-weight="800" fill="#2f3d63">③ URL 长期稳定不搬家</text>
+    <text x="800" y="197" font-size="7" fill="#777">搬家＝索引失效；和 canonical 一个道理</text>
+  </g>
+  <rect x="790" y="222" width="290" height="52" rx="7" fill="#ECE7F6" stroke="#B8A8D8"/>
+  <text x="935" y="240" text-anchor="middle" font-size="7.8" font-weight="800" fill="#5b4f93">诚实边界：P3 零成本投机</text>
+  <text x="935" y="254" text-anchor="middle" font-size="6.8" fill="#6a5aa3">厂商未确认消费 · Google 明确忽略</text>
+  <text x="935" y="265" text-anchor="middle" font-size="6.8" fill="#6a5aa3">必答题仍是 P0：正文 SSR 可抓（图 A）</text>
+</svg>
+<div class="figcap"><b>图 D</b> · 左：链接放顶部 / 页脚 / 不放，三种放法 AI 都照样拿得到——它不通过页面发现 llms.txt。中：AI 与取 robots.txt 同款方式直接 GET 根路径的 <code>/llms.txt</code>（它是文件，不是页面元素）。右：真正决定成败的是三件事：可匿名 GET、纯 Markdown、URL 稳定。</div>
+</div>
+<ul class="tight">
+  <li><b>放在页面顶部、页脚、还是根本不放链接——都不影响 AI 拿不拿得到</b>。AI 是按约定路径直接请求 <code>/llms.txt</code>。</li>
+  <li><b>它不是 meta 标签</b>，不写进 <code>&lt;head&gt;</code>；页内 <code>&lt;link&gt;</code> 引用它也没有标准约定。</li>
+  <li>页脚放一个人可见的链接，价值仅在于<b>人和普通爬虫</b>能发现它。</li>
+</ul>
+<div class="note"><b>真正要紧的是三件事</b>：① 根路径可匿名 GET（无登录、无反爬墙）；② 纯 Markdown 低噪内容；③ URL 长期稳定不搬家。再叠一层诚实边界：截至 2026 年，Anthropic / OpenAI 均未正式确认其 API 工具消费第三方 llms.txt，Google 明确忽略——<b>它是零成本投机，不是必答题</b>；真正必答的是 P0（正文 SSR 可抓）。</div>
+</div>
+
+<a id="s4"></a>
+<h2><span class="no">④</span>什么样的页面布局能让大模型提效、减幻觉</h2>
+<div class="sechint">把 ② 的机制（图 C）反过来用，就是设计守则——<b>图 E 用同一页面的两种写法做对照</b>，每条守则都对得上一个真实幻觉来源（右侧锚回 D 任务实测卡点），细节表在图后。</div>
+
+<div class="card">
+<div class="fig44" id="figE">
+<svg viewBox="0 0 1120 690" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans SC',sans-serif">
+  <defs>
+    <marker id="feA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f3d63"/></marker>
+  </defs>
+  <text x="560" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1a1a">图 E · 布局守则图形版：同一页面的两种写法，对模型是两个世界</text>
+
+  <!-- 左栏：坏 -->
+  <rect x="40" y="42" width="490" height="628" rx="10" fill="#fdf6f6" stroke="#f0c9c9"/>
+  <rect x="40" y="42" width="490" height="34" rx="10" fill="#fbeaea"/>
+  <text x="285" y="64" text-anchor="middle" font-size="11.5" font-weight="800" fill="#993C1D">✕ 幻觉友好型布局（对模型不可用）</text>
+
+  <!-- L1 CSR SPA -->
+  <rect x="48" y="88" width="474" height="94" rx="7" fill="#fff" stroke="#f0c9c9"/>
+  <text x="58" y="105" font-size="9" font-weight="800" fill="#993C1D">1 ✕ CSR SPA：正文由 JS 现渲染</text>
+  <rect x="58" y="112" width="196" height="62" rx="5" fill="#1e1e28"/>
+  <text x="66" y="124" font-size="6.8" fill="#c8ccd4" font-family="ui-monospace,Menlo,monospace">&lt;body&gt;</text>
+  <text x="74" y="134" font-size="6.8" fill="#8fa5c8" font-family="ui-monospace,Menlo,monospace">&lt;div id="app"&gt;&lt;/div&gt;</text>
+  <text x="74" y="144" font-size="6.8" fill="#8fa5c8" font-family="ui-monospace,Menlo,monospace">&lt;script src="bundle.js"&gt;</text>
+  <text x="66" y="154" font-size="6.8" fill="#c8ccd4" font-family="ui-monospace,Menlo,monospace">&lt;/body&gt;</text>
+  <text x="62" y="168" font-size="6.2" fill="#a06060" font-style="italic">初始 HTML＝空壳</text>
+  <text x="266" y="126" font-size="7.6" fill="#7a4a4a">初始 HTML 里没有正文——</text>
+  <text x="266" y="138" font-size="7.6" fill="#7a4a4a">解析正文 0 字 → 模型只剩自带记忆</text>
+  <text x="266" y="152" font-size="7.8" font-weight="800" fill="#B0212B">→ 杜撰（D 任务受阻的技术根因）</text>
+  <text x="266" y="166" font-size="6.6" fill="#a08080">noscript 兜底文本是唯一例外（图 A 注脚）</text>
+
+  <!-- L2 无语义 -->
+  <rect x="48" y="190" width="474" height="88" rx="7" fill="#fff" stroke="#f0c9c9"/>
+  <text x="58" y="207" font-size="9" font-weight="800" fill="#993C1D">2 ✕ div 套 div：无语义标签</text>
+  <g fill="none" stroke="#d8b8b8" stroke-width="1">
+    <rect x="58" y="216" width="196" height="52" rx="3"/>
+    <rect x="66" y="224" width="180" height="40" rx="3"/>
+    <rect x="74" y="232" width="164" height="28" rx="3"/>
+    <rect x="82" y="240" width="148" height="16" rx="3"/>
+  </g>
+  <text x="64" y="224" font-size="5.8" fill="#b08a8a" font-family="ui-monospace,Menlo,monospace">&lt;div&gt;</text>
+  <text x="72" y="232" font-size="5.8" fill="#b08a8a" font-family="ui-monospace,Menlo,monospace">&lt;div&gt;</text>
+  <text x="80" y="240" font-size="5.8" fill="#b08a8a" font-family="ui-monospace,Menlo,monospace">&lt;div&gt;</text>
+  <text x="266" y="226" font-size="7.6" fill="#7a4a4a">解析器认不出 nav / 正文 / 页脚——</text>
+  <text x="266" y="238" font-size="7.6" fill="#7a4a4a">导航与页脚噪音挤占 token 与注意力</text>
+  <text x="266" y="252" font-size="7.8" font-weight="800" fill="#B0212B">→ 关键事实被稀释</text>
+
+  <!-- L3 埋中段 -->
+  <rect x="48" y="286" width="474" height="80" rx="7" fill="#fff" stroke="#f0c9c9"/>
+  <text x="58" y="303" font-size="9" font-weight="800" fill="#993C1D">3 ✕ 关键事实埋长文中段</text>
+  <g fill="#e9ebf0">
+    <rect x="58" y="316" width="196" height="7"/><rect x="58" y="327" width="188" height="7"/><rect x="58" y="338" width="192" height="7"/><rect x="58" y="349" width="180" height="7"/>
+  </g>
+  <circle cx="150" cy="332" r="5" fill="#D0454F"/>
+  <text x="150" y="335" text-anchor="middle" font-size="4.5" fill="#fff" font-weight="700">!</text>
+  <text x="150" y="362" text-anchor="middle" font-size="6" fill="#a05050">关键版本号在这里</text>
+  <text x="266" y="320" font-size="7.6" fill="#7a4a4a">无结构长文的中段＝注意力最弱区</text>
+  <text x="266" y="332" font-size="7.6" fill="#7a4a4a">（图 C 的 U 型谷）</text>
+  <text x="266" y="346" font-size="7.8" font-weight="800" fill="#B0212B">→ 被忽略或张冠李戴</text>
+
+  <!-- L4 图片化 -->
+  <rect x="48" y="374" width="474" height="80" rx="7" fill="#fff" stroke="#f0c9c9"/>
+  <text x="58" y="391" font-size="9" font-weight="800" fill="#993C1D">4 ✕ 命令 / 表格做成图片</text>
+  <rect x="58" y="400" width="196" height="44" rx="4" fill="#f4f2ee" stroke="#d0c8b8"/>
+  <circle cx="76" cy="414" r="5" fill="#e8d8a8"/>
+  <path d="M64,438 L92,410 L108,424 L124,406 L148,438 Z" fill="#d8d2c4"/>
+  <g fill="#c8c2b4"><rect x="158" y="406" width="88" height="4"/><rect x="158" y="415" width="88" height="4"/><rect x="158" y="424" width="70" height="4"/><rect x="158" y="433" width="80" height="4"/></g>
+  <text x="156" y="452" font-size="6" fill="#a09080" font-style="italic">「截图样例：msopgen 命令」</text>
+  <text x="266" y="410" font-size="7.6" fill="#7a4a4a">文本路径拿不到图内文字</text>
+  <text x="266" y="422" font-size="7.6" fill="#7a4a4a">（OCR 不在 web_fetch 这条路上）</text>
+  <text x="266" y="436" font-size="7.8" font-weight="800" fill="#B0212B">→ 命令 / 参数整段丢失</text>
+
+  <!-- L5 版本缺位 -->
+  <rect x="48" y="462" width="474" height="88" rx="7" fill="#fff" stroke="#f0c9c9"/>
+  <text x="58" y="479" font-size="9" font-weight="800" fill="#993C1D">5 ✕ 版本号 / 日期缺位 · URL 漂移</text>
+  <g>
+    <rect x="58" y="488" width="60" height="24" rx="4" fill="#fdf" stroke="#d8b8b8"/>
+    <text x="88" y="503" text-anchor="middle" font-size="6" fill="#a07070" font-family="ui-monospace,Menlo,monospace">/v7.0</text>
+    <rect x="126" y="492" width="60" height="24" rx="4" fill="#fdf" stroke="#d8b8b8"/>
+    <text x="156" y="507" text-anchor="middle" font-size="6" fill="#a07070" font-family="ui-monospace,Menlo,monospace">/v8.0</text>
+    <rect x="194" y="496" width="60" height="24" rx="4" fill="#fdf" stroke="#d8b8b8"/>
+    <text x="224" y="511" text-anchor="middle" font-size="6" fill="#a07070" font-family="ui-monospace,Menlo,monospace">?ver=rc3</text>
+    <text x="58" y="534" font-size="6.2" fill="#a08080" font-style="italic">同内容三 URL · 无 canonical · 无更新日期</text>
+  </g>
+  <text x="266" y="498" font-size="7.6" fill="#7a4a4a">模型分不清正主版本——</text>
+  <text x="266" y="510" font-size="7.6" fill="#7a4a4a">多版本混叠拼接 + 用旧训练知识填新问题</text>
+  <text x="266" y="524" font-size="7.8" font-weight="800" fill="#B0212B">→ 幻觉「拼合体」（d2 / dVerT 卡点）</text>
+
+  <!-- 左小结 -->
+  <rect x="48" y="558" width="474" height="100" rx="7" fill="#fbeaea" stroke="#f0c0c0"/>
+  <text x="285" y="580" text-anchor="middle" font-size="8.5" font-weight="800" fill="#993C1D">共同结局：模型退回自带知识（⑦）→ 幻觉高发</text>
+  <text x="285" y="596" text-anchor="middle" font-size="7.4" fill="#a05a5a">图 A ④ 研判「证据不足」→ 转第三方平台兜底（D 任务实况）</text>
+  <text x="285" y="608" text-anchor="middle" font-size="7.4" fill="#a05a5a">或：图 A hasEv「无可靠证据」→ 凭记忆作答 = 杜撰</text>
+  <text x="285" y="628" text-anchor="middle" font-size="7.2" fill="#a08080" font-style="italic">整页机制性不可用——视觉上它可能很漂亮</text>
+
+  <!-- 右栏：好 -->
+  <rect x="590" y="42" width="490" height="628" rx="10" fill="#f6fbf6" stroke="#bfe3d0"/>
+  <rect x="590" y="42" width="490" height="34" rx="10" fill="#e3f3ec"/>
+  <text x="835" y="64" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1f6b45">✓ 模型友好型布局（图 A P0 落地形态）</text>
+
+  <!-- R1..R7 -->
+  <g>
+    <rect x="598" y="88" width="474" height="66" rx="7" fill="#fff" stroke="#bfe3d0"/>
+    <circle cx="614" cy="117" r="10" fill="#e3f3ec" stroke="#3a9b6e"/>
+    <text x="614" y="121" text-anchor="middle" font-size="8" font-weight="800" fill="#1f6b45">✓</text>
+    <text x="632" y="110" font-size="9" font-weight="800" fill="#1f5b3f">1 SSR / SSG 直出正文</text>
+    <text x="632" y="126" font-size="7" fill="#557">命令 + 参数表就在初始 HTML 里，AI 一次抓全（图 A 的 P0）</text>
+    <text x="632" y="140" font-size="6.6" fill="#88a">治本项：静态化 = 把 D 的 .41 拉出深谷的那一刀</text>
+    <rect x="962" y="104" width="102" height="20" rx="9" fill="#eef4ef"/>
+    <text x="1013" y="117" text-anchor="middle" font-size="6.6" fill="#1f5b3f" font-weight="700">抑制：杜撰（D 根因）</text>
+  </g>
+  <g>
+    <rect x="598" y="162" width="474" height="66" rx="7" fill="#fff" stroke="#bfe3d0"/>
+    <circle cx="614" cy="191" r="10" fill="#e3f3ec" stroke="#3a9b6e"/>
+    <text x="614" y="195" text-anchor="middle" font-size="8" font-weight="800" fill="#1f6b45">✓</text>
+    <text x="632" y="184" font-size="9" font-weight="800" fill="#1f5b3f">2 语义标签：main / article / nav / footer</text>
+    <text x="632" y="200" font-size="7" fill="#557">解析器按标签精准剥噪留主，导航页脚不抢 token</text>
+    <rect x="962" y="178" width="102" height="20" rx="9" fill="#eef4ef"/>
+    <text x="1013" y="191" text-anchor="middle" font-size="6.6" fill="#1f5b3f" font-weight="700">抑制：噪音稀释</text>
+  </g>
+  <g>
+    <rect x="598" y="236" width="474" height="66" rx="7" fill="#fff" stroke="#bfe3d0"/>
+    <circle cx="614" cy="265" r="10" fill="#e3f3ec" stroke="#3a9b6e"/>
+    <text x="614" y="269" text-anchor="middle" font-size="8" font-weight="800" fill="#1f6b45">✓</text>
+    <text x="632" y="258" font-size="9" font-weight="800" fill="#1f5b3f">3 一页一主题 + h1＞h2＞h3 严格层级</text>
+    <text x="632" y="274" font-size="7" fill="#557">语义块边界清晰，标题先于正文被读（图 C 左）</text>
+    <rect x="962" y="252" width="102" height="20" rx="9" fill="#eef4ef"/>
+    <text x="1013" y="265" text-anchor="middle" font-size="6.6" fill="#1f5b3f" font-weight="700">抑制：检索命中错位</text>
+  </g>
+  <g>
+    <rect x="598" y="310" width="474" height="66" rx="7" fill="#fff" stroke="#bfe3d0"/>
+    <circle cx="614" cy="339" r="10" fill="#e3f3ec" stroke="#3a9b6e"/>
+    <text x="614" y="343" text-anchor="middle" font-size="8" font-weight="800" fill="#1f6b45">✓</text>
+    <text x="632" y="332" font-size="9" font-weight="800" fill="#1f5b3f">4 命令用 pre/code · 事实用 table</text>
+    <text x="632" y="348" font-size="7" fill="#557">高权重语义块、逐字可复制——不凭记忆改写</text>
+    <rect x="962" y="326" width="102" height="20" rx="9" fill="#eef4ef"/>
+    <text x="1013" y="339" text-anchor="middle" font-size="6.6" fill="#1f5b3f" font-weight="700">抑制：改写命令/参数错</text>
+  </g>
+  <g>
+    <rect x="598" y="384" width="474" height="66" rx="7" fill="#fff" stroke="#bfe3d0"/>
+    <circle cx="614" cy="413" r="10" fill="#e3f3ec" stroke="#3a9b6e"/>
+    <text x="614" y="417" text-anchor="middle" font-size="8" font-weight="800" fill="#1f6b45">✓</text>
+    <text x="632" y="406" font-size="9" font-weight="800" fill="#1f5b3f">5 版本号 + 更新日期显式</text>
+    <text x="632" y="422" font-size="7" fill="#557">如「CANN 8.0.RC3 · 2026-06 更新」——锁定证据时效锚点</text>
+    <rect x="962" y="400" width="102" height="20" rx="9" fill="#eef4ef"/>
+    <text x="1013" y="413" text-anchor="middle" font-size="6.6" fill="#1f5b3f" font-weight="700">抑制：旧版本填新问题</text>
+  </g>
+  <g>
+    <rect x="598" y="458" width="474" height="66" rx="7" fill="#fff" stroke="#bfe3d0"/>
+    <circle cx="614" cy="487" r="10" fill="#e3f3ec" stroke="#3a9b6e"/>
+    <text x="614" y="491" text-anchor="middle" font-size="8" font-weight="800" fill="#1f6b45">✓</text>
+    <text x="632" y="480" font-size="9" font-weight="800" fill="#1f5b3f">6 canonical + 稳定 URL</text>
+    <text x="632" y="496" font-size="7" fill="#557">多 URL 同内容去重，正主唯一（图 A head 元数据 P1）</text>
+    <rect x="962" y="474" width="102" height="20" rx="9" fill="#eef4ef"/>
+    <text x="1013" y="487" text-anchor="middle" font-size="6.6" fill="#1f5b3f" font-weight="700">抑制：多版本混叠拼接</text>
+  </g>
+  <g>
+    <rect x="598" y="532" width="474" height="66" rx="7" fill="#fff" stroke="#bfe3d0"/>
+    <circle cx="614" cy="561" r="10" fill="#e3f3ec" stroke="#3a9b6e"/>
+    <text x="614" y="565" text-anchor="middle" font-size="8" font-weight="800" fill="#1f6b45">✓</text>
+    <text x="632" y="554" font-size="9" font-weight="800" fill="#1f5b3f">7 正文前置（DOM 序）+ 超长页拆分</text>
+    <text x="632" y="570" font-size="7" fill="#557">避开图 C 的 U 型谷与截断——重要结论不埋中段、不压尾</text>
+    <rect x="962" y="548" width="102" height="20" rx="9" fill="#eef4ef"/>
+    <text x="1013" y="561" text-anchor="middle" font-size="6.6" fill="#1f5b3f" font-weight="700">抑制：中段/尾部丢失</text>
+  </g>
+
+  <!-- 右小结 -->
+  <rect x="598" y="606" width="474" height="52" rx="7" fill="#e3f3ec" stroke="#bfe3d0"/>
+  <text x="835" y="627" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1f6b45">共同结局：证据齐 → ④ 研判充分 → 直接收敛（⑥）</text>
+  <text x="835" y="643" text-anchor="middle" font-size="7.4" fill="#3a7a5a">AI 一次抓全官方正文，无需兜底第三方平台——D 变 G 的差别就在这一抓</text>
+
+  <!-- 中间箭头 -->
+  <line x1="534" y1="350" x2="576" y2="350" stroke="#2f3d63" stroke-width="3" marker-end="url(#feA)"/>
+  <text x="556" y="338" text-anchor="middle" font-size="9" font-weight="800" fill="#2f3d63">改</text>
+</svg>
+<div class="figcap"><b>图 E</b> · 左栏五种写法各自触发一类幻觉（右端红字），共同结局＝模型退回自带知识；右栏七条守则各带「抑制」标签与机制说明，共同结局＝证据充分直接收敛。守则 1（SSR）即图 A 的 P0，是唯一治本项；2–7 是在同一起跑线上的效率与减幻增益。</div>
+</div>
+
+<table>
+  <thead><tr><th>布局 / 结构手段</th><th>起效机制</th><th>抑制哪类幻觉</th></tr></thead>
+  <tbody>
+    <tr><td><b>SSR / SSG 直出正文，别 CSR SPA</b></td><td>正文直接在初始 HTML 里，解析器拿得到</td><td>D 根因：SPA 正文 0 字 → 模型只剩记忆 → 杜撰</td></tr>
+    <tr><td><b>语义 HTML：<code>&lt;main&gt;&lt;article&gt;&lt;nav&gt;&lt;footer&gt;</code></b></td><td>解析器按标签精准剥噪留主</td><td>导航 / 页脚噪音挤占 token 与注意力，关键事实被稀释</td></tr>
+    <tr><td><b>一页一主题 + 严格 h1&gt;h2&gt;h3 层级</b></td><td>语义块边界清晰，标题先于正文被读</td><td>检索命中页与问题错位（把「产品介绍」当「how-to」用）</td></tr>
+    <tr><td><b>命令用 <code>&lt;pre&gt;&lt;code&gt;</code>、事实用 <code>&lt;table&gt;</code></b></td><td>高权重语义块、逐字可复制</td><td>模型凭记忆改写命令（参数 / 路径错）</td></tr>
+    <tr><td><b>版本号 / 更新日期显式</b>（如 CANN 8.0.RC3 · 2026-06 更新）</td><td>给模型锁定证据时效的锚点</td><td>用旧版本训练知识填新问题（d2 / dVerT 版本对齐卡点）</td></tr>
+    <tr><td><b>canonical + 稳定 URL</b></td><td>多 URL 同内容去重，正主唯一</td><td>多版本混叠拼接——幻觉「拼合体」最常见的来源</td></tr>
+    <tr><td><b>正文前置（DOM 序）+ 超长页拆分</b></td><td>U 型注意力 + 截断对策</td><td>中段 / 尾部关键事实丢失或被张冠李戴</td></tr>
+    <tr><td><b>代码 / 表格禁图片化</b></td><td>文本路径拿不到图内文字</td><td>命令零丢失（OCR 不在 web_fetch 这条路上）</td></tr>
+    <tr><td>（投机）根路径提供 /llms.txt 索引</td><td>若被消费则跳过发现层摩擦</td><td>零成本旁路，非核心依赖</td></tr>
+  </tbody>
+</table>
+<div class="note"><b>诚实边界：</b>① ①节的优先级是基于可观测调用契约 + 通用爬取工程惯例的<b>判断排序</b>（「九成价值在 P0+P1」是工程估计，非测量）；② ②节的扫描机制引用公开研究（Liu et al. 2023 lost-in-the-middle）与自注意力的通用描述，不针对任何厂商内部实现；③ ④节是机制反推的设计守则，单项收益未做 A/B 测量。</div>
+</div>
+
+</div>
+</body>
+</html>
