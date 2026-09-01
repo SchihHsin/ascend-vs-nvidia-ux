@@ -341,6 +341,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <div class="toclbl" data-page-node-id="QF76OyN8XXIb2oGBqOtUl7">本页目录</div>
   <a href="#s1" data-page-node-id="ZCuU3NG9PACQzlZL38fnGN">① 全链路时序图</a>
   <a href="#s4" data-page-node-id="WHiuHiDlJn0SoXugHSyxcM">② Agent 系统工程</a>
+  <a href="#s45" data-page-node-id="toc-s45">4.4 web_fetch 深挖</a>
   <a href="#s6" data-page-node-id="bjzApxJ9TbF49oFeSlDLl9">③ 交付物汇总</a>
 </div>
 
@@ -720,29 +721,34 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <!-- 1. robots.txt — 准入门控（居中） -->
   <g class="anode" data-k="robots" data-page-node-id="pYlBurZfMPWNIVk2eA2GXN"><rect x="112" y="368" width="176" height="44" rx="8" fill="#eaf1f7" stroke="#8ab8d8" stroke-width="1.5" data-page-node-id="fBWwaJbiC7CfITHoadswdK"/>
   <text x="200" y="385" text-anchor="middle" font-size="10" font-weight="700" fill="#1f5a8a" data-page-node-id="8UCmyNNbG4xeLdkiJyZuZG">robots.txt</text>
-  <text x="200" y="399" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="H1jNAIQZcZd8s7OAnBmXmN">准入门控 · 允许/禁止抓取</text></g>
+  <text x="200" y="399" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="H1jNAIQZcZd8s7OAnBmXmN">准入门控 · 允许/禁止抓取</text>
+  <text x="118" y="382" font-size="7" font-weight="700" fill="#8a6d1a">P1</text></g>
   <!-- robots.txt 被禁止 → 失败出口 -->
   <text x="300" y="386" font-size="7.6" fill="#B0212B" data-page-node-id="oni1SyQBFlgqbxusEGW0EL">禁止 →</text>
   <text x="300" y="396" font-size="7.2" fill="#A03038" data-page-node-id="rb46J8YrcwDpuaBNCm0nbj">url_not_allowed</text>
   <!-- 2. sitemap.xml — 左侧，从 robots.txt Sitemap: 指令发现 -->
   <g class="anode" data-k="sitemap" data-page-node-id="fLkQyx9bDLwqi6FJnFJI8L"><rect x="20" y="448" width="160" height="44" rx="8" fill="#eaf1f7" stroke="#bcd0e0" data-page-node-id="cJ6HAy6ujywDFHzriu2YRw"/>
   <text x="100" y="465" text-anchor="middle" font-size="10" font-weight="700" fill="#1f5a8a" data-page-node-id="o3MaPxKoPWz0KvFQUNKpIQ">sitemap.xml</text>
-  <text x="100" y="479" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="WztimnzL5059JMuUQX0IqJ">URL 发现 · 页面清单</text></g>
+  <text x="100" y="479" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="WztimnzL5059JMuUQX0IqJ">URL 发现 · 页面清单</text>
+  <text x="26" y="462" font-size="7" font-weight="700" fill="#7a5d0a">P2</text></g>
   <!-- 3. llms.txt — 右侧，独立旁路 -->
   <g class="anode" data-k="llmstxt" data-page-node-id="Nj3HBdshKCPYqkzzXs8KLp"><rect x="200" y="448" width="160" height="44" rx="8" fill="#f5f0fa" stroke="#c8b8e0" stroke-dasharray="4,2" data-page-node-id="0chMEf46nRQtP0AP2JfBM3"/>
   <text x="280" y="465" text-anchor="middle" font-size="10" font-weight="700" fill="#5a3fa0" data-page-node-id="0ksnQmWwy9H3xPWQ4Z0QM0">llms.txt</text>
-  <text x="280" y="479" text-anchor="middle" font-size="7.8" fill="#6a52a8" data-page-node-id="aqmCIShFMWa8dbq39mseIk">LLM 索引 · 独立旁路</text></g>
+  <text x="280" y="479" text-anchor="middle" font-size="7.8" fill="#6a52a8" data-page-node-id="aqmCIShFMWa8dbq39mseIk">LLM 索引 · 独立旁路</text>
+  <text x="206" y="462" font-size="7" font-weight="700" fill="#7a5d0a">P3</text></g>
   <!-- 4. llms-full.txt — 从 llms.txt 扩展 -->
   <g class="anode" data-k="llmsfull" data-page-node-id="1EmiVHpPtgkDfc813zAoub"><rect x="200" y="504" width="160" height="40" rx="8" fill="#f5f0fa" stroke="#c8b8e0" stroke-dasharray="4,2" data-page-node-id="oK6mpNL52lAFmOWpKpwGvS"/>
   <text x="280" y="520" text-anchor="middle" font-size="10" font-weight="700" fill="#5a3fa0" data-page-node-id="s8mlGrJyeimwy92OJ1gMOH">llms-full.txt</text>
-  <text x="280" y="533" text-anchor="middle" font-size="7.8" fill="#6a52a8" data-page-node-id="GSxSkN2StqNiDtiJFRyrNR">全文拼接 · 一次吃透</text></g>
+  <text x="280" y="533" text-anchor="middle" font-size="7.8" fill="#6a52a8" data-page-node-id="GSxSkN2StqNiDtiJFRyrNR">全文拼接 · 一次吃透</text>
+  <text x="206" y="517" font-size="7" font-weight="700" fill="#7a5d0a">P3</text></g>
   <!-- "可选·非标准" 标注 -->
   <text x="280" y="556" text-anchor="middle" font-size="7" fill="#9a8ab8" font-style="italic" data-page-node-id="7FB5mdoFkcnG5d25xjMTPl">（可选 · 厂商未确认消费）</text>
   <!-- 5. 抓取目标正文 — 居中，所有路径汇聚 -->
   <g class="anode" data-k="fetchpage" data-page-node-id="ETj8zCPgEqU4hMLbDdpQHB"><rect x="100" y="572" width="200" height="48" rx="8" fill="#e0ecf5" stroke="#8ab8d8" stroke-width="1.5" data-page-node-id="gzNoG7mH0xmnW6QGEFSTTP"/>
   <text x="200" y="590" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a" data-page-node-id="G3HL2aOfIvwMRPkcY5Lqq5">抓取目标正文</text>
   <text x="200" y="603" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="x6T5I0z4nErTLU5mzJqNmp">HTML → 纯文本 / Markdown</text>
-  <text x="200" y="614" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="bBh1B5V4MSFaNCW6BkWREL">② 官方可抓取性 · ③ 正文详尽度</text></g>
+  <text x="200" y="614" text-anchor="middle" font-size="7.8" fill="#3a6f9c" data-page-node-id="bBh1B5V4MSFaNCW6BkWREL">② 官方可抓取性 · ③ 正文详尽度</text>
+  <text x="108" y="586" font-size="8" font-weight="800" fill="#993C1D">P0</text></g>
   <g class="anode" data-k="own" data-page-node-id="7URlf5pj4Nsob7lCPrYln8"><rect x="412" y="294" width="178" height="56" rx="8" fill="#F1EBF8" stroke="#a98fd0" data-page-node-id="o1eVxqhcOEpniSvfJ1yMM6"/>
   <text x="421" y="312" font-size="9.4" font-weight="700" fill="#5a3fa0" data-page-node-id="JKCviDzIeuJtqfCp4skSAF">模型自带知识（⑦）</text>
   <text x="421" y="327" font-size="8.2" fill="#6a52a8" data-page-node-id="RDngsRnr1e5zoiOFcfdw8H">训练内置，无需检索亦可用；</text>
@@ -800,7 +806,7 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <text x="200" y="778" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2a6a2a" data-page-node-id="t-htmlparse">HTML → DOM 树构建</text></g>
   <!-- 7. 语义提取 -->
   <g class="anode" data-k="semantic" data-page-node-id="n-semantic"><rect x="100" y="794" width="200" height="28" rx="6" fill="#f0f4ed" stroke="#a0c0a0" stroke-width="1" data-page-node-id="r-semantic"/>
-  <text x="200" y="812" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2a6a2a" data-page-node-id="t-semantic">语义提取：标题/代码/列表/表格</text></g>
+  <text x="200" y="812" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2a6a2a" data-page-node-id="t-semantic">语义提取：head 元数据·标题·代码·表格</text></g>
   <!-- 8. 纯文本/Markdown -->
   <g class="anode" data-k="plaintext" data-page-node-id="n-plaintext"><rect x="100" y="828" width="200" height="28" rx="6" fill="#e8f0e5" stroke="#7aaa7a" stroke-width="1.5" data-page-node-id="r-plaintext"/>
   <text x="200" y="846" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1f5a1f" data-page-node-id="t-plaintext">纯文本 / Markdown 输出</text></g>
@@ -846,8 +852,11 @@ pre.code .f{color:#6fb6e0}/* 函数/方法 */
   <text x="486" y="958" font-size="8.2" font-weight="700" fill="#B0212B" data-page-node-id="D9Rwq3O0V5l99geNfmkjwI">无 · 最高风险：</text>
   <text x="486" y="970" font-size="7.8" fill="#A03038" data-page-node-id="oWMTVNqdMZJBOCTG8Sn97M">模型无法可靠识别「自身不知道」</text>
   <text x="486" y="981" font-size="7.8" fill="#A03038" data-page-node-id="aQGo38riD5Dgj4DdKmo2Gf">凭记忆填补空缺 = 杜撰</text>
+  <!-- 优先级图例 + 未入图文件注脚（web_fetch 分组内节点左上角 P0–P3 徽标） -->
+  <text x="360" y="1062" text-anchor="middle" font-size="7.4" fill="#5a6470">文件优先级（web_fetch 分组内徽标）：P0 正文主体 · P1 一票否决门控 / 结构化事实 · P2 发现与语义辅助 · P3 零成本投机</text>
+  <text x="360" y="1074" text-anchor="middle" font-size="7" fill="#9aa2ac" font-style="italic">未入图：HTTP 状态码 / 重定向（P1，位于 robots.txt 之前）· head 元数据 canonical / JSON-LD（P1，位于解析内部）· RSS（P3）——完整 12 类清单见 4.4.1</text>
 </svg>
-<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px" data-page-node-id="9eSZPShJ0UGMEMRtqud7pw">悬浮任意节点查看该环节职责（锚 D 任务）。<b data-page-node-id="QF2MkyKHMdiucskCQj3WZ0">web_fetch 内部不是一条直线，而是分叉的协议检查 + 页面解析</b>：先过 <b data-page-node-id="75jZwHxWlKidxjtoy9KM6C">robots.txt</b> 准入门控（禁止则 url_not_allowed），通过后 <b data-page-node-id="6T79zVtQB7nUVWbXiSCIr0">sitemap.xml</b> 经 robots 的 <code data-page-node-id="g5jjwZpY2Fy2rtZbLkUdH3">Sitemap:</code> 指令被发现（提供 URL 清单），<b data-page-node-id="JI5afDxD15cwzFdH5TnLZ2">llms.txt / llms-full.txt</b> 是独立旁路（可选、厂商未确认消费）——三路汇聚到<b data-page-node-id="btpUDEdmbUGtyuWYw0VmTV">抓取目标正文</b>。<b data-page-node-id="parse-note1">正文并非直接可读：HTML 先解析为 DOM，再提取语义块（标题/段落/代码/列表/表格），忽略 CSS/JS/广告，最后转成纯文本/Markdown 输入模型</b>——按文档流顺序读取，标题与代码块权重更高。<b data-page-node-id="parse-note2">SPA 页此步正文 0 字</b>（只回导航+meta），是 D 任务受阻的技术根因。<b data-page-node-id="7XipafJOBGoKHO4vKOewAN">自带知识无需检索亦在其中</b>，是第三条证据来源。</div>
+<div class="sechint" id="archcap" style="margin:8px 0 0;font-size:12px" data-page-node-id="9eSZPShJ0UGMEMRtqud7pw">悬浮任意节点查看该环节职责（锚 D 任务）。<b data-page-node-id="QF2MkyKHMdiucskCQj3WZ0">web_fetch 内部不是一条直线，而是分叉的协议检查 + 页面解析</b>：先过 <b data-page-node-id="75jZwHxWlKidxjtoy9KM6C">robots.txt</b> 准入门控（禁止则 url_not_allowed），通过后 <b data-page-node-id="6T79zVtQB7nUVWbXiSCIr0">sitemap.xml</b> 经 robots 的 <code data-page-node-id="g5jjwZpY2Fy2rtZbLkUdH3">Sitemap:</code> 指令被发现（提供 URL 清单），<b data-page-node-id="JI5afDxD15cwzFdH5TnLZ2">llms.txt / llms-full.txt</b> 是独立旁路（可选、厂商未确认消费）——三路汇聚到<b data-page-node-id="btpUDEdmbUGtyuWYw0VmTV">抓取目标正文</b>。<b data-page-node-id="parse-note1">正文并非直接可读：HTML 先解析为 DOM，再提取语义块（标题/段落/代码/列表/表格），忽略 CSS/JS/广告，最后转成纯文本/Markdown 输入模型</b>——按文档流顺序读取，标题与代码块权重更高。<b data-page-node-id="parse-note2">SPA 页此步正文 0 字</b>（只回导航+meta），是 D 任务受阻的技术根因。<b data-page-node-id="7XipafJOBGoKHO4vKOewAN">自带知识无需检索亦在其中</b>，是第三条证据来源。<b data-page-node-id="pri-note-44">节点左上角的 P0–P3 是文件优先级</b>（P0 正文主体 / P1 一票否决门控与结构化事实 / P2 发现与语义辅助 / P3 零成本投机）；另有 HTTP 状态码·重定向（P1，位于 robots.txt 之前）与 head 元数据 canonical / JSON-LD（P1，位于解析内部）未入图——完整 12 类文件清单、大模型怎么「读」页面、llms.txt 位置与布局减幻守则见下方 <a href="#s45" style="color:#2f3d63;font-weight:700">4.4 节</a>。</div>
   </div>
   <div id="codeView" style="display:none" data-page-node-id="wlCXzIB00i9XBvaxcHYVXI">
   <div class="sechint" style="margin:0 0 6px" data-page-node-id="esBrArcW7JMdnoYDAeFUBf">最小实现代码（A–D 段对应架构图各环节）：</div>
@@ -895,6 +904,87 @@ TOOLS = [
 </div>
 <div class="note" data-page-node-id="Xv5rROFriBZlyZp4aZwg8f"><b data-page-node-id="3JNqIFzzAg1qiq2hx32ngN">诚实边界：</b>上述为<b data-page-node-id="DoBHeBnfQQRWNrIWArxnym">公开 Messages API 的忠实示范</b>，用于解释 agent 循环骨架，<b data-page-node-id="DhLAk9UxrTFciWXDOpmire">不是 Claude 产品的内部源码</b>；服务端 <code data-page-node-id="RCoYm66ZlahLlOc9A0ZCvD">web_search</code> 的内部检索 / 排序实现不可见，这里只能就「对外可观测的调用契约」作解。</div>
   </div>
+</div>
+
+<style>
+/* 4.4 优先级徽标 */
+.pb{display:inline-block;font-size:11px;font-weight:800;padding:1px 8px;border-radius:6px;white-space:nowrap;vertical-align:1px}
+.pb.p0{background:#F9D2D2;color:#993C1D}
+.pb.p1{background:#FBE0CE;color:#9a5a2a}
+.pb.p2{background:#FCEFC7;color:#7a5d0a}
+.pb.p3{background:#ECE7F6;color:#5b4f93}
+.pb.na{background:#ececec;color:#888}
+</style>
+
+<a id="s45"></a>
+<h3>4.4 web_fetch 细化的完整性核对：能取到的全部主要文件 · 优先级 · 大模型怎么「读」页面</h3>
+<div class="sechint">上图把 web_fetch 展开为「robots / sitemap / llms.txt → 抓取正文 → 页面解析」。本节回答四个追问：① 这份清单<b>全不全</b>——一次 fetch 实际还会碰到哪些没画进来的文件；② 这些文件<b>谁重要</b>（站点资源有限先修哪个）；③ 大模型到底怎么「扫描」页面（是从上到下吗）；④ 什么样的页面布局能提效、减幻。</div>
+
+<div class="card">
+<h3>4.4.1 文件全景清单：上图画了 5 项，另有 6 类真实存在但未入图</h3>
+<p style="font-size:13.5px;margin-bottom:10px">把「一次 web_fetch 从发请求到拿正文」的完整生命周期过一遍，能碰到的文件 / 信号一共 12 类。上图覆盖了其中主干（门控 / 发现 / 正文 / 解析 / 投机旁路），<b>缺的主要是 HTTP 传输层与页内结构化数据</b>——这两者不改变图的架构形状（一个在 robots.txt 之前、一个在解析内部），属于对现有结构的注脚而非推翻：</p>
+<table>
+  <thead><tr><th>层</th><th>文件 / 信号</th><th>对 fetch 的作用</th><th>优先级</th><th>上图</th></tr></thead>
+  <tbody>
+    <tr><td>协议门控</td><td><b>HTTP 状态码 + 重定向链</b></td><td>200 才有正文；301/302 跟随（重定向链上参数可能丢失）；<b>403/429 = 反爬墙</b>、5xx = 站点故障——这些都发生在读 robots.txt 之前</td><td><span class="pb p1">P1</span></td><td>缺（第一层）</td></tr>
+    <tr><td>协议门控</td><td><b>robots.txt</b></td><td>准入门控（Disallow → <code>url_not_allowed</code>）+ 承载 <code>Sitemap:</code> 指令</td><td><span class="pb p1">P1</span></td><td>已入图</td></tr>
+    <tr><td>协议门控</td><td>响应头（Content-Type / X-Robots-Tag）</td><td>判定返回的是不是 HTML；<code>X-Robots-Tag: noindex</code> 是页级索引控制</td><td><span class="pb p2">P2</span></td><td>缺</td></tr>
+    <tr><td>协议门控</td><td>页内 <code>&lt;meta name="robots"&gt;</code></td><td>与 X-Robots-Tag 同粒度；注意它管「索引」不管「抓取」——写了 noindex 页面照样能被 fetch</td><td><span class="pb p2">P2</span></td><td>缺</td></tr>
+    <tr><td>发现层</td><td><b>sitemap.xml / sitemap index</b></td><td>站点 URL 清单 + lastmod，帮发现深页</td><td><span class="pb p2">P2</span></td><td>已入图</td></tr>
+    <tr><td>发现层</td><td>RSS / Atom feed</td><td>时效性内容发现（部分爬虫使用）</td><td><span class="pb p3">P3</span></td><td>缺（作用小）</td></tr>
+    <tr><td>发现层</td><td>页面内链 + 锚文本</td><td>站内权重流转；搜索排序信号（隐含在 web_search 侧）</td><td><span class="pb p2">P2</span></td><td>缺（隐含）</td></tr>
+    <tr><td><b>内容主体</b></td><td><b>HTML 正文（SSR 直出）</b></td><td>价值主体：指标 ② 官方可抓取性 · ③ 正文详尽度全部落在这一个文件上</td><td><span class="pb p0">P0</span></td><td>已入图</td></tr>
+    <tr><td>内容主体</td><td><b>head 元数据</b>：title / meta description / <b>canonical</b> / JSON-LD / OpenGraph</td><td>结构化事实：正主 URL、发布/更新日期、版本号、面包屑路径——解析时先于正文被读</td><td><span class="pb p1">P1</span></td><td>半入图（解析节一笔带过，本版已补标注）</td></tr>
+    <tr><td>内容主体</td><td>Markdown / 纯文本镜像（.md 源 / ?format=md / print 视图）</td><td>部分文档站直接提供低噪正文源</td><td><span class="pb p1">P1</span>（若提供）</td><td>缺</td></tr>
+    <tr><td>投机旁路</td><td><b>llms.txt / llms-full.txt</b></td><td>LLM 专用索引；厂商未确认消费、Google 明确忽略</td><td><span class="pb p3">P3</span></td><td>已入图</td></tr>
+    <tr><td>（对照）</td><td>页面截图</td><td>走多模态 vision 路径，不属 web_fetch 文本路径；图内文字基本拿不到</td><td><span class="pb na">—</span></td><td>不适用</td></tr>
+  </tbody>
+</table>
+<div class="note"><b>优先级怎么排（修站顺序）：</b><b>P0 HTML 正文</b>是唯一直接决定答案质量的文件——D 任务全部问题的技术根因就是「正文取回 0 字」，所以第一优先是保正文出得来（SSR）。<b>P1 是一票否决项与结构化事实</b>：robots.txt 被禁 = 整站出局、403/429 反爬 = 同样出局、canonical + 版本日期防多版本混叠。<b>P2 发现与语义辅助</b>：sitemap 在搜索时代作用已弱化，但深页仍有价值；语义标签帮解析器剥噪。<b>P3 零成本投机</b>：llms.txt、RSS——做了不亏、不做不痛。一句话：<b>九成价值在 P0+P1，其中 P0 独占大头</b>（这是工程判断排序，非测量值）。</div>
+</div>
+
+<div class="card">
+<h3>4.4.2 大模型怎么「扫描」页面：不是从上到下逐行看，而是整个文本一次性入脑</h3>
+<p style="font-size:13.5px;margin-bottom:10px">先纠正一个直觉：web_fetch 这条路径上，模型<b>根本不「看」界面</b>——没有视觉、不逐行扫视、也没有鼠标滚动。真实链路是：</p>
+<div class="pipe" style="max-width:680px"><span class="seg mid">抓回 HTML</span><span class="seg mid">剥 CSS/JS/广告 → 纯文本/Markdown</span><span class="seg mid">切成 token 序列</span><span class="seg ok">一次性整体放进上下文窗口</span><span class="seg ok">自注意力并行关联</span></div>
+<ul class="tight" style="margin-top:12px">
+  <li><b>「从上到下」只对了一半——文档流顺序 = 语义顺序</b>。模型不按行读，但 DOM 从上到下映射成 token 从先到后，与视觉顺序基本一致；训练语料的自然顺序让开头的 token 天然承担「引出下文」的角色（先见到标题，才知道后文在讲什么）。</li>
+  <li><b>U 型位置偏置（lost in the middle）</b>：注意力对<b>开头与结尾</b>最强、<b>中部最弱</b>（Liu et al. 2023, <i>Lost in the Middle: How Language Models Use Long Contexts</i>）。长文档中段的事实最易被忽略或张冠李戴——<b>重要结论别埋长文中段</b>。</li>
+  <li><b>截断</b>：超长页面在两个关口被砍——工具返回大小上限 + 上下文窗口。尾部内容可能整段进不了模型，比「被忽略」更彻底。</li>
+  <li><b>权重效应发生在解析阶段，不在视觉阶段</b>：标题层级、<code>pre/code</code>、table、列表被识别为高价值语义块；而视觉上的「显眼」（大图、动效、配色）对文本路径<b>零贡献</b>——对人眼的强调不等于对模型的强调。</li>
+</ul>
+<div class="note">给站点方的推论：页面的「可读性」要按<b>DOM 语义顺序</b>重新审计一遍，而不是按视觉设计稿——视觉上再醒目的信息，如果 DOM 里是中段一长串无结构文本、或者是 JS 现渲染的，对模型等于不存在。</div>
+</div>
+
+<div class="card">
+<h3>4.4.3 llms.txt 放哪里：反直觉的答案——页面内位置无所谓</h3>
+<p style="font-size:13.5px;margin-bottom:10px">llms.txt 的约定（llmstxt.org 提案）是<b>站点根路径的 <code>/llms.txt</code> 文件</b>，一个纯 Markdown 索引。AI 与取 robots.txt 同款方式<b>直接请求这个 URL</b>，不通过页面内链接发现它，所以：</p>
+<ul class="tight">
+  <li><b>放在页面顶部、页脚、还是根本不放链接——都不影响 AI 拿不拿得到</b>。AI 是按约定路径直接请求 <code>/llms.txt</code>。</li>
+  <li><b>它不是 meta 标签</b>，不写进 <code>&lt;head&gt;</code>；页内 <code>&lt;link&gt;</code> 引用它也没有标准约定。</li>
+  <li>页脚放一个人可见的链接，价值仅在于<b>人和普通爬虫</b>能发现它。</li>
+</ul>
+<div class="note"><b>真正要紧的是三件事</b>：① 根路径可匿名 GET（无登录、无反爬墙）；② 纯 Markdown 低噪内容；③ URL 长期稳定不搬家。再叠一层诚实边界：截至 2026 年，Anthropic / OpenAI 均未正式确认其 API 工具消费第三方 llms.txt，Google 明确忽略——<b>它是零成本投机，不是必答题</b>；真正必答的是 4.4.1 的 P0（正文 SSR 可抓）。</div>
+</div>
+
+<div class="card">
+<h3>4.4.4 什么样的页面布局能让大模型提效、减幻觉</h3>
+<p style="font-size:13.5px;margin-bottom:10px">把 4.4.2 的机制反过来用，就是设计守则——每一条都对得上一个真实幻觉来源（右列锚回 D 任务实测卡点）：</p>
+<table>
+  <thead><tr><th>布局 / 结构手段</th><th>起效机制</th><th>抑制哪类幻觉</th></tr></thead>
+  <tbody>
+    <tr><td><b>SSR / SSG 直出正文，别 CSR SPA</b></td><td>正文直接在初始 HTML 里，解析器拿得到</td><td>D 根因：SPA 正文 0 字 → 模型只剩记忆 → 杜撰</td></tr>
+    <tr><td><b>语义 HTML：<code>&lt;main&gt;&lt;article&gt;&lt;nav&gt;&lt;footer&gt;</code></b></td><td>解析器按标签精准剥噪留主</td><td>导航 / 页脚噪音挤占 token 与注意力，关键事实被稀释</td></tr>
+    <tr><td><b>一页一主题 + 严格 h1&gt;h2&gt;h3 层级</b></td><td>语义块边界清晰，标题先于正文被读</td><td>检索命中页与问题错位（把「产品介绍」当「how-to」用）</td></tr>
+    <tr><td><b>命令用 <code>&lt;pre&gt;&lt;code&gt;</code>、事实用 <code>&lt;table&gt;</code></b></td><td>高权重语义块、逐字可复制</td><td>模型凭记忆改写命令（参数 / 路径错）</td></tr>
+    <tr><td><b>版本号 / 更新日期显式</b>（如 CANN 8.0.RC3 · 2026-06 更新）</td><td>给模型锁定证据时效的锚点</td><td>用旧版本训练知识填新问题（d2 / dVerT 版本对齐卡点）</td></tr>
+    <tr><td><b>canonical + 稳定 URL</b></td><td>多 URL 同内容去重，正主唯一</td><td>多版本混叠拼接——幻觉「拼合体」最常见的来源</td></tr>
+    <tr><td><b>正文前置（DOM 序）+ 超长页拆分</b></td><td>U 型注意力 + 截断对策</td><td>中段 / 尾部关键事实丢失或被张冠李戴</td></tr>
+    <tr><td><b>代码 / 表格禁图片化</b></td><td>文本路径拿不到图内文字</td><td>命令零丢失（OCR 不在 web_fetch 这条路上）</td></tr>
+    <tr><td>（投机）根路径提供 /llms.txt 索引</td><td>若被消费则跳过发现层摩擦</td><td>零成本旁路，非核心依赖</td></tr>
+  </tbody>
+</table>
+<div class="note"><b>诚实边界：</b>① 4.4.1 的优先级是基于可观测调用契约 + 通用爬取工程惯例的<b>判断排序</b>（「九成价值在 P0+P1」是工程估计，非测量）；② 4.4.2 的扫描机制引用公开研究（Liu et al. 2023 lost-in-the-middle）与自注意力的通用描述，不针对任何厂商内部实现；③ 4.4.4 是机制反推的设计守则，单项收益未做 A/B 测量。</div>
 </div>
 
 <a id="s6" data-page-node-id="4cDj0sHL1f53GVZgIcWxtW"></a>
@@ -2022,9 +2112,12 @@ const ANODE={
   search:{t:"web_search · 发现候选页",b:"先生成检索 query，返回官方与第三方平台的候选页面、摘要和 URL。它解决的是<b>找不找得到入口</b>，不是直接读取完整正文。"},
   robots:{t:"robots.txt · 准入门控",b:"<b>爬取协议检查的第一道门</b>：检查目标站点的 /robots.txt，确认目标 URL 是否允许被 AI 爬虫抓取。被 Disallow 则返回 <code>url_not_allowed</code>，需改道第三方或自带知识。注意：robots.txt 是建议性协议（RFC 9309），crawler 选择遵守与否；用户触发的 fetch（如 ChatGPT-User）可能跳过此检查。"},
   sitemap:{t:"sitemap.xml · URL 发现",b:"<b>从 robots.txt 的 <code>Sitemap:</code> 指令被发现</b>（也可独立请求）。列出站点全部可索引 URL + lastmod，帮 AI 发现遗漏页面。与 robots.txt 是<b>发现关系</b>，不是串行执行——sitemap 提供抓取目标的 URL 清单。"},
-  llmstxt:{t:"llms.txt · LLM 索引（独立旁路）",b:"<b>独立旁路，不依赖 robots.txt</b>：站点根的 /llms.txt（Markdown 格式 LLM 专用索引）。如果存在，可帮 AI 快速定位最相关页面。<b>但截至 2026 年，Anthropic / OpenAI / Google 均未正式确认其 API 工具会消费第三方 llms.txt</b>——Google 明确忽略。成本为零，是投机性押注。"},
+  llmstxt:{t:"llms.txt · LLM 索引（独立旁路 · P3）",b:"<b>独立旁路，不依赖 robots.txt</b>：约定是<b>站点根路径的 /llms.txt</b>（Markdown 格式 LLM 专用索引），AI 与取 robots.txt 同款方式直接请求这个 URL——<b>页面内放不放链接、放顶部还是底部都不影响</b>（详见 4.4.3）。如果存在，可帮 AI 快速定位最相关页面。<b>但截至 2026 年，Anthropic / OpenAI / Google 均未正式确认其 API 工具会消费第三方 llms.txt</b>——Google 明确忽略。成本为零，是投机性押注。"},
   llmsfull:{t:"llms-full.txt · 全文拼接（独立旁路）",b:"<b>从 llms.txt 扩展</b>：所有重要页面 Markdown 正文的拼接版。如果存在，AI 可一次性吃下完整知识，省去多次 fetch。与 llms.txt 同属独立旁路，厂商未确认消费。"},
-  fetchpage:{t:"抓取目标正文",b:"<b>爬取协议检查的最后一步</b>：三路（robots 门控通过 + sitemap 提供的 URL + llms.txt 提供的内容线索）汇聚后，实际抓取目标 URL 的 HTML 正文，转换为纯文本 / Markdown。抓取为空则如实返回「正文无法取回」（这正是 D 任务官方页受阻的根因）。指标 ② 官方可抓取性 · ③ 正文详尽度 在此衡量。"},
+  fetchpage:{t:"抓取目标正文（P0 · 价值主体）",b:"<b>爬取协议检查的最后一步，也是全流程唯一的价值主体</b>：三路（robots 门控通过 + sitemap 提供的 URL + llms.txt 提供的内容线索）汇聚后，实际抓取目标 URL 的 HTML 正文，转换为纯文本 / Markdown。抓取为空则如实返回「正文无法取回」（这正是 D 任务官方页受阻的根因）。指标 ② 官方可抓取性 · ③ 正文详尽度 在此衡量。注意它之前还有一层未入图的 <b>HTTP 状态码 / 重定向</b>（403/429 反爬墙同样一票否决），见 4.4.1。"},
+  htmlparse:{t:"页面解析 · HTML → DOM 树构建",b:"解析器读原始 HTML 建文档树。<b>CSR / SPA 页返回的只是壳子</b>：main 里是空挂载点，正文靠 JS 现渲染——纯 HTTP 抓取拿到的是空壳（导航 + meta），后续两步颗粒无收。这正是 D 任务官方页「正文 0 字」的机制。"},
+  semantic:{t:"语义提取 · head 元数据 + 标题/代码/表格",b:"按 HTML 语义识别内容块：<b>head 元数据先读</b>（title / meta description / canonical / JSON-LD / OpenGraph——正主 URL、更新日期、版本号等结构化事实），随后是标题层级、<code>pre/code</code>、表格、列表等高价值语义块；nav / footer / 广告 / CSS / JS 被剥除。视觉上的「显眼」（大图、动效）在这一步<b>零贡献</b>。"},
+  plaintext:{t:"纯文本 / Markdown 输出",b:"最终进入模型上下文的形态：<b>按文档流顺序排列</b>（DOM 从上到下 ≈ token 从先到后），超长页面会被截断（工具返回上限 + 上下文窗口）。注意力呈 <b>U 型</b>——开头结尾强、中段弱（lost in the middle），重要结论别埋长文中段。见 4.4.2。"},
   own:{t:"模型自带知识（⑦）",b:"模型训练内置的知识，<b>无需检索亦可用</b>，是矩阵三来源（官方/第三方平台/自带）中的第三条。<b>充分时为可靠答案的底；薄弱、且检索未能补足时，即为「杜撰」之源</b>。"},
   relay:{t:"汇总当前证据（回灌）",b:"将本轮取回的官方正文、第三方平台内容连同自带知识一并提交模型，进入研判。"},
   judge:{t:"④ 证据是否充分?",b:"判断手中证据<b>是否足以答好本题</b>。充分→收敛输出终答；不足→评估能否继续检索。对 D：第 2 轮即发现官方核心页 页面正文未能取回、第三方平台稀薄，判定「不足」。"},
