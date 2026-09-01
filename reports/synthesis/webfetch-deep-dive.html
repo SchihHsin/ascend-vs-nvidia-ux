@@ -135,7 +135,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <rect x="705" y="56" width="24" height="12" rx="3" fill="#fff" stroke="#D08080"/>
     <text x="717" y="65.5" text-anchor="middle" font-size="8" font-weight="800" fill="#993C1D">P0</text>
     <text x="551" y="68" font-size="9.5" font-weight="700" fill="#993C1D">正文事实静态可取（P0）</text>
-    <text x="551" y="81" font-size="7.2" fill="#a05a3a">HTML SSR 默认实现 · MD 镜像等效替代</text>
+    <text x="551" y="81" font-size="7.2" fill="#a05a3a">HTML SSR 默认实现 · MD 镜像内容等效</text>
     <text x="551" y="91" font-size="7.2" fill="#a05a3a">唯一直接决定答案质量</text>
   </g>
   <g>
@@ -244,7 +244,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <rect x="60" y="524" width="34" height="20" rx="4" fill="#F9D2D2"/><text x="77" y="538" text-anchor="middle" font-size="9" font-weight="800" fill="#993C1D">P0</text>
     <rect x="102" y="522" width="560" height="26" rx="5" fill="#F9D2D2" stroke="#D08080"/>
     <text x="112" y="540" font-size="9.5" font-weight="800" fill="#993C1D">正文事实静态可取</text>
-    <text x="672" y="540" font-size="8.5" fill="#666">HTML SSR 默认 · MD 镜像等效替代——D 根因＝正文 0 字，九成价值大头</text>
+    <text x="672" y="540" font-size="8.5" fill="#666">HTML SSR 默认 · MD 镜像内容等效（处方 P1）——D 根因＝正文 0 字</text>
   </g>
   <g>
     <rect x="60" y="560" width="34" height="20" rx="4" fill="#FBE0CE"/><text x="77" y="574" text-anchor="middle" font-size="9" font-weight="800" fill="#9a5a2a">P1</text>
@@ -279,9 +279,9 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <tr><td>发现层</td><td><b>sitemap.xml / sitemap index</b></td><td>站点 URL 清单 + lastmod，帮发现深页</td><td><span class="pb p2">P2</span></td></tr>
     <tr><td>发现层</td><td>RSS / Atom feed</td><td>时效性内容发现（部分爬虫使用）</td><td><span class="pb p3">P3</span></td></tr>
     <tr><td>发现层</td><td>页面内链 + 锚文本</td><td>站内权重流转；搜索排序信号（隐含在 web_search 侧）</td><td><span class="pb p2">P2</span></td></tr>
-    <tr><td><b>内容主体</b></td><td><b>HTML 正文（SSR 直出）</b></td><td>价值主体：指标 ② 官方可抓取性 · ③ 正文详尽度全部落在这一个文件上。<b>P0 的本体是"正文事实静态可取"</b>——HTML SSR 是默认实现，Markdown 镜像是等效替代（P1，若提供）</td><td><span class="pb p0">P0</span></td></tr>
+    <tr><td><b>内容主体</b></td><td><b>HTML 正文（SSR 直出）</b></td><td>价值主体：指标 ② 官方可抓取性 · ③ 正文详尽度全部落在这一个文件上。<b>P0 的本体是"正文事实静态可取"</b>——HTML SSR 是默认实现；Markdown 镜像<b>内容上等效（per-instance P0-eq），处方上归 P1</b>（若提供、且需同步维护）</td><td><span class="pb p0">P0</span></td></tr>
     <tr><td>内容主体</td><td><b>head 元数据</b>：title / meta description / <b>canonical</b> / JSON-LD / OpenGraph</td><td>结构化事实：正主 URL、发布/更新日期、版本号、面包屑路径——解析时先于正文被读</td><td><span class="pb p1">P1</span></td></tr>
-    <tr><td>内容主体</td><td>Markdown / 纯文本镜像（.md 源 / ?format=md / print 视图）</td><td>部分文档站直接提供低噪正文源</td><td><span class="pb p1">P1</span>（若提供）</td></tr>
+    <tr><td>内容主体</td><td>Markdown / 纯文本镜像（.md 源 / ?format=md / print 视图）</td><td>部分文档站直接提供低噪正文源。<b>内容上与 HTML 正文等效（per-instance P0-eq）</b>，但作为处方不能默认化（多数站不提供、派生物、双份同步漂移），故处方排序归 P1</td><td><span class="pb p1">P1</span>（若提供）</td></tr>
     <tr><td>投机旁路</td><td><b>llms.txt / llms-full.txt</b></td><td>LLM 专用索引；厂商未确认消费、Google 明确忽略</td><td><span class="pb p3">P3</span></td></tr>
     <tr><td>页内信号（补遗）</td><td>hreflang 多语言互链</td><td>标出同内容的语言版本，帮模型选对语言版本（对应「语言切换」触点）</td><td><span class="pb p2">P2</span></td></tr>
     <tr><td>页内信号（补遗）</td><td>rel=prev/next · 分页标记</td><td>长内容分页的边界信号；无限滚动＝尾页难界定</td><td><span class="pb p3">P3</span></td></tr>
@@ -290,7 +290,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <tr><td>（对照）</td><td>页面截图</td><td>走多模态 vision 路径，不属 web_fetch 文本路径；图内文字基本拿不到</td><td><span class="pb na">—</span></td></tr>
   </tbody>
 </table>
-<div class="note"><b>优先级怎么排（修站顺序）：</b><b>P0＝正文事实静态可取</b>——HTML SSR 是默认实现，Markdown 镜像是等效替代（P1，若提供）。D 任务全部问题的技术根因就是「正文取回 0 字」，所以第一优先是保正文出得来。<b>P1 是一票否决项与结构化事实</b>：robots.txt 被禁 = 整站出局、403/429 反爬 = 同样出局、canonical + 版本日期防多版本混叠。<b>P2 发现与语义辅助</b>：sitemap 在搜索时代作用已弱化，但深页仍有价值；语义标签帮解析器剥噪。<b>P3 零成本投机</b>：llms.txt、RSS——做了不亏、不做不痛。一句话：<b>九成价值在 P0+P1，其中 P0 独占大头</b>（这是工程判断排序，非测量值）——图形版即图 A 底部的价值条。</div>
+<div class="note"><b>优先级怎么排（修站顺序）：</b><b>P0＝正文事实静态可取</b>——HTML SSR 是默认实现；Markdown 镜像<b>内容上等效（per-instance P0-eq），处方上归 P1</b>（若提供、且需同步维护）。D 任务全部问题的技术根因就是「正文取回 0 字」，所以第一优先是保正文出得来。<b>P1 是一票否决项与结构化事实</b>：robots.txt 被禁 = 整站出局、403/429 反爬 = 同样出局、canonical + 版本日期防多版本混叠。<b>P2 发现与语义辅助</b>：sitemap 在搜索时代作用已弱化，但深页仍有价值；语义标签帮解析器剥噪。<b>P3 零成本投机</b>：llms.txt、RSS——做了不亏、不做不痛。一句话：<b>九成价值在 P0+P1，其中 P0 独占大头</b>（这是工程判断排序，非测量值）——图形版即图 A 底部的价值条。</div>
 </div>
 
 <a id="s2"></a>
