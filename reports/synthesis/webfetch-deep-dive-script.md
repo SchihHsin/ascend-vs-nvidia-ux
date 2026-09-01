@@ -60,6 +60,7 @@
 
 ## 备答（被问再说）
 
+- **「llms.txt 是在 robots.txt 里的吗？」** 独立文件，根路径 `/llms.txt`，和 `/robots.txt` 平级。关键差别：robots.txt 里有 `Sitemap:` 指令指向 sitemap.xml（先读 robots 才发现 sitemap）；但 robots 里**没有**指向 llms.txt 的指令——AI 是按约定直接 GET 根路径，不经 robots 引路。图 A 里 sitemap 用实线连回 robots（"Sitemap: 指令"那条），llms.txt 在旁路泳道里裸放、和 robots 没连线。
 - **「为什么 HTML 是 P0？llms.txt 那些 TXT 不也能获取吗？」** 优先级排的不是"能不能获取"，是"装没装答案要的事实"。robots/sitemap/llms.txt 里全是路标（规则、URL 清单、一句话简介），**零事实**；只有正文装着命令、参数表、版本号——**路标 vs 目的地**。D 任务就是反例：robots 过了、页面也回了，SPA 壳里正文 0 字，模型手里没事实，只能退回记忆。例外：llms-full.txt 装内容但几 MB 大杂烩且厂商未确认（P3）。
 - **「Markdown 镜像不能完全替代 HTML 吗？」** 内容上等效——P0 的本体是"正文事实静态可取"，HTML SSR 只是**默认实现**，镜像是**等效替代路径**。但替代路径开不进处方：① 生态默认是 HTML，搜索落地 URL 都是 HTML 页，AI 得先被告知镜像存在（多一跳发现层）；② 镜像是派生物，源是 SPA 空壳它也生成不出来——治本仍是让源静态化；③ 双份内容要同步，不同步就是版本漂移幻觉源。所以镜像定位 P1"若提供"：有了更好，不能指望。
 - **llms.txt 做不做？** 做，半天工作量，定性零成本投机。
