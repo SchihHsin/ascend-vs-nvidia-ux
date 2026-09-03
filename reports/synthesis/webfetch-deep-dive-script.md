@@ -14,7 +14,7 @@
 
 **观点：16 项里九成价值在 P0+P1，P0 独占大头。**
 
-- 横轴是一次 fetch 的顺序：robots 门控 → GET 页面 → 解析 → 入模型。上方是各阶段信号，下方紫色泳道是旁路（sitemap / llms.txt / RSS）。
+- 横轴是一次 fetch 的顺序：robots 门控 → GET 页面 → 解析 → 入模型。上方是各阶段信号，下方紫色泳道是旁路（sitemap / llms.txt / RSS）。**旁路＝GLM 实测未走的路（模型相对口径，别当成普适——见实验 tab「不同模型，不同路径」）**。
 - 核对结论：主干 12 + 补遗 4 = 16 项，**没有再漏改变架构的东西**。
 - 看底部价值条：**P0 = HTML 正文，独占大头**。修站顺序就一句：**先把正文弄出来，一切才有意义**。
 - D 任务 .41 的根因就一句话：SPA 正文取回 0 字。
@@ -37,7 +37,7 @@
 
 - 放顶部、页脚、不放——AI 都照样拿得到，因为它**直接 GET 根路径 `/llms.txt`**，不经过页面。
 - 要紧的只有三件：匿名 GET、纯 Markdown、URL 稳定。
-- 诚实边界：厂商未确认消费、Google 忽略。**别指望它救命，必答题还是 P0。**
+- 诚实边界：多数厂商未确认消费、Google 明确拒绝；**但 Perplexity 官方称会取用、编码 agent（Cursor / Claude Code）被指向域时会真读——谁读不读是模型相对的**。别指望它救命，必答题还是 P0。
 
 ---
 
@@ -60,10 +60,11 @@
 
 ## 备答（被问再说）
 
-- **「llms.txt 是在 robots.txt 里的吗？」** 独立文件，根路径 `/llms.txt`，和 `/robots.txt` 平级。关键差别：robots.txt 里有 `Sitemap:` 指令指向 sitemap.xml（先读 robots 才发现 sitemap）；但 robots 里**没有**指向 llms.txt 的指令——AI 是按约定直接 GET 根路径，不经 robots 引路。图 A 里 sitemap 用实线连回 robots（"Sitemap: 指令"那条），llms.txt 在旁路泳道里裸放、和 robots 没连线。
+- **「llms.txt 是在 robots.txt 里的吗？」** 独立文件，根路径 `/llms.txt`，和 `/robots.txt` 平级。关键差别：robots.txt 里有 `Sitemap:` 指令指向 sitemap.xml（先读 robots 才发现 sitemap）；标准约定里 robots 没有指向 llms.txt 的指令——AI 按约定直接 GET 根路径，不经 robots 引路。图 A 里 sitemap 用实线连回 robots（"Sitemap: 指令"那条），llms.txt 在旁路泳道里裸放、和 robots 没连线。（例外：hiascend 在自家 robots 里挂了 `LLM-Policy:` 行指向 llms.txt——非标准的站点侧增强，是否被消费未知。）
 - **「为什么 HTML 是 P0？llms.txt 那些 TXT 不也能获取吗？」** 优先级排的不是"能不能获取"，是"装没装答案要的事实"。robots/sitemap/llms.txt 里全是路标（规则、URL 清单、一句话简介），**零事实**；只有正文装着命令、参数表、版本号——**路标 vs 目的地**。D 任务就是反例：robots 过了、页面也回了，SPA 壳里正文 0 字，模型手里没事实，只能退回记忆。例外：llms-full.txt 装内容但几 MB 大杂烩且厂商未确认（P3）。
 - **「Markdown 镜像不能完全替代 HTML 吗？它该是 P0 还是 P1？」** 看你排的是哪种：**per-instance 价值**上它和 HTML 正文平——都装同样的事实，是 P0-eq；**处方排序**（资源有限先修哪个）上它是 P1——多数站不提供、是派生物（源是 SPA 空壳它也生不出来）、双份同步会漂移（不同步本身就是版本混叠幻觉源）。所以页面口径是「内容上等效（per-instance P0-eq），处方上归 P1」。一句话：**能替代 ≠ 能处方化**。
-- **「有 Markdown 的话，大模型还会去读 HTML 吗？」** 会，几乎一定先读 HTML——AI 拿到的落地 URL 几乎都是 HTML（web_search 不返回 .md），fetch 先抓 HTML；HTML 抓到正文了任务就结束，模型**根本不会想到去找 MD**。MD 镜像是「HTML 失败时的备用路径」，不是并行首选——它救的是 HTML 已经失败的局，不能预防 HTML 失败本身。而且真要触发「改去读 MD」需三条件同时成立：① 站点在 llms.txt / `<link rel=alternate>` 里声明了镜像；② AI 工具消费该声明（目前厂商未确认）；③ HTML 确实失败了。第②条目前是空，所以即便做了 MD 镜像也不一定被消费——这也是它归 P1 而非更高的原因。
+- **「有 Markdown 的话，大模型还会去读 HTML 吗？」** GLM 实测：会，几乎一定先读 HTML——AI 拿到的落地 URL 几乎都是 HTML（web_search 不返回 .md），fetch 先抓 HTML；HTML 抓到正文了任务就结束，模型**根本不会想到去找 MD**。MD 镜像是「HTML 失败时的备用路径」，不是并行首选——它救的是 HTML 已经失败的局，不能预防 HTML 失败本身。而且真要触发「改去读 MD」需三条件同时成立：① 站点在 llms.txt / `<link rel=alternate>` 里声明了镜像；② AI 工具消费该声明（目前厂商未确认）；③ HTML 确实失败了。第②条目前是空，所以即便做了 MD 镜像也不一定被消费——这也是它归 P1 而非更高的原因。（注意模型相对：Perplexity 官方称先取 llms.txt 排页序、编码 agent 被指向域时直接读 llms.txt；「先 HTML」是 GLM 这类 agentic 抓取工具的行为。）
+- **「不同模型都会走『先 HTML』这条路吗？」** 不会，**路径是模型相对的**：GLM 实测 search→HTML 直抓、不碰 llms.txt；Google 明确拒绝 llms.txt；OpenAI / Anthropic 未确认（GPTBot 偶有 fetch 像探索，ClaudeBot 占 llms.txt 请求 0.80%）；Perplexity 官方称会取用排页序——但 Semrush 日志里 PerplexityBot 对 llms.txt 零请求，口径与观测有出入；Cursor / Claude Code 等编码 agent 被指向域时把它当主入口（需人工配置，非自动发现）。日志总账：Ahrefs 2026-05 分析 13.7 万域名，97% 的 llms.txt 全月零请求。**所以别赌模型习惯——P0（正文静态直出）是唯一不挑模型的必答题。**
 - **llms.txt 做不做？** 做，半天工作量，定性零成本投机。
 - **已是 SPA 怎么办？** 正文子域 SSR/SSG；过渡期给关键页加 Markdown/print 镜像。
 - **U 型有实测吗？** 公开研究（Liu 2023），非我们测的；优先级也是工程判断，页上标了诚实边界。

@@ -83,7 +83,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
 
 <a id="s1"></a>
 <h2><span class="no">①</span>文件全景清单：图 A 把 16 项全部入图（主干 12 + 核对补遗 4）</h2>
-<div class="sechint">把「一次 web_fetch 从发请求到拿正文」的完整生命周期逐段过一遍，能碰到的文件 / 信号一共 <b>16 项＝主干 12 类 + 注脚级信号 4 项</b>。4.3 架构图画了主干中的 5 项；<b>图 A 把 16 项全部画入</b>——按请求发生顺序排布在时间轴上、按修站优先级（P0–P3）着色。复查中确认：<b>没有再漏掉「改变架构形状」的文件</b>——新补的 4 项（hreflang / 分页标记 / noscript / 子资源）都属页内信号或传输载荷，是注脚而非新层。</div>
+<div class="sechint">把「一次 web_fetch 从发请求到拿正文」的完整生命周期逐段过一遍，能碰到的文件 / 信号一共 <b>16 项＝主干 12 类 + 注脚级信号 4 项</b>。4.3 架构图画了主干中的 5 项；<b>图 A 把 16 项全部画入</b>——按请求发生顺序排布在时间轴上、按修站优先级（P0–P3）着色。复查中确认：<b>没有再漏掉「改变架构形状」的文件</b>——新补的 4 项（hreflang / 分页标记 / noscript / 子资源）都属页内信号或传输载荷，是注脚而非新层。<b>口径提醒：「主干 / 旁路」的划分＝GLM 单模型实测动线 + 通用工具契约，不是文件的固有属性</b>——对声明会消费 llms.txt 的 Perplexity、或被指向域名的编码 agent，llms.txt 就是主入口（逐模型证据见实验 tab「不同模型，不同路径」）。</div>
 
 <div class="card">
 <div class="fig44" id="figA">
@@ -94,7 +94,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   </defs>
   <!-- 标题 -->
   <text x="560" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1a1a">图 A · web_fetch 文件全景：一次抓取按时间顺序碰到的全部信号（主干 12 + 注脚 4 = 16 项）</text>
-  <text x="560" y="40" text-anchor="middle" font-size="9" fill="#888">P0–P3 = 修站优先级（与底部价值条同色）· 虚线 = 旁路 / 可选 · 实线 = 主路径</text>
+  <text x="560" y="40" text-anchor="middle" font-size="9" fill="#888">P0–P3 = 修站优先级（与底部价值条同色）· 实线 = GLM 实测主路径 · 虚线 = GLM 实测未走的旁路（主/旁＝模型相对口径，见实验 tab）</text>
 
   <!-- 阶段归属竖带 -->
   <rect x="339" y="48" width="198" height="195" fill="#f6f9fb"/>
@@ -305,7 +305,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <tr><td><b>内容主体</b></td><td><b>HTML 正文（SSR 直出）</b></td><td>价值主体：指标 ② 官方可抓取性 · ③ 正文详尽度全部落在这一个文件上。<b>P0 的本体是"正文事实静态可取"</b>——HTML SSR 是默认实现；Markdown 镜像<b>内容上等效（per-instance P0-eq），处方上归 P1</b>（若提供、且需同步维护）</td><td><span class="pb p0">P0</span></td></tr>
     <tr><td>内容主体</td><td><b>head 元数据</b>：title / meta description / <b>canonical</b> / JSON-LD / OpenGraph</td><td>结构化事实：正主 URL、发布/更新日期、版本号、面包屑路径——解析时先于正文被读</td><td><span class="pb p1">P1</span></td></tr>
     <tr><td>内容主体</td><td><a class="fl" href="https://www.hiascend.com/llms-content/cann/zh_cann_ascend-c.md" target="_blank">Markdown / 纯文本镜像</a>（.md 源 / ?format=md / print 视图）</td><td>部分文档站直接提供低噪正文源。<b>内容上与 HTML 正文等效（per-instance P0-eq）</b>，但作为处方不能默认化（多数站不提供、派生物、双份同步漂移），故处方排序归 P1</td><td><span class="pb p1">P1</span>（若提供）</td></tr>
-    <tr><td>投机旁路</td><td><b><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> / <a class="fl" href="https://llmstxt.org" target="_blank">llms-full.txt</a></b></td><td>LLM 专用索引；厂商未确认消费、Google 明确忽略</td><td><span class="pb p3">P3</span></td></tr>
+    <tr><td>旁路（GLM 实测未走）</td><td><b><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> / <a class="fl" href="https://llmstxt.org" target="_blank">llms-full.txt</a></b></td><td>LLM 专用索引；多数厂商未确认消费、Google 明确拒绝；Perplexity 称会取用、编码 agent 被指向域时会读——路径模型相对</td><td><span class="pb p3">P3</span></td></tr>
     <tr><td>页内信号（补遗）</td><td>hreflang 多语言互链</td><td>标出同内容的语言版本，帮模型选对语言版本（对应「语言切换」触点）</td><td><span class="pb p2">P2</span></td></tr>
     <tr><td>页内信号（补遗）</td><td>rel=prev/next · 分页标记</td><td>长内容分页的边界信号；无限滚动＝尾页难界定</td><td><span class="pb p3">P3</span></td></tr>
     <tr><td>页内信号（补遗）</td><td>noscript 内容</td><td>关 JS 时的兜底文本——CSR 站里有时是唯一静态正文</td><td><span class="pb p3">P3</span></td></tr>
@@ -533,7 +533,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <li><b>它不是 meta 标签</b>，不写进 <code>&lt;head&gt;</code>；页内 <code>&lt;link&gt;</code> 引用它也没有标准约定。</li>
   <li>页脚放一个人可见的链接，价值仅在于<b>人和普通爬虫</b>能发现它。</li>
 </ul>
-<div class="note"><b>真正要紧的是三件事</b>：① 根路径可匿名 GET（无登录、无反爬墙）；② 纯 Markdown 低噪内容；③ URL 长期稳定不搬家。再叠一层诚实边界：截至 2026 年，Anthropic / OpenAI 均未正式确认其 API 工具消费第三方 <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a>，Google 明确忽略——<b>它是零成本投机，不是必答题</b>；真正必答的是 P0（正文事实静态可取）。</div>
+<div class="note"><b>真正要紧的是三件事</b>：① 根路径可匿名 GET（无登录、无反爬墙）；② 纯 Markdown 低噪内容；③ URL 长期稳定不搬家。再叠一层诚实边界（分模型如实说）：截至 2026 年，Anthropic / OpenAI 均未正式确认其检索消费第三方 <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a>，Google 明确拒绝（「不支持且无计划」）；<b>但 Perplexity 官方称会取 llms.txt 做页序优先，Cursor / Claude Code 等编码 agent 被指向一个域时也会真读它</b>——「谁读不读 llms.txt」是模型相对的，逐模型证据见实验 tab「不同模型，不同路径」。对多数站点它仍是零成本投机、不是必答题；真正必答的是 P0（正文事实静态可取）——<b>那是唯一不挑模型的必答题</b>。</div>
 </div>
 
 <a id="s4"></a>
@@ -736,7 +736,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
 <div id="tab-lab" style="display:none">
 <a id="lab"></a>
 <h2><span class="no">⑤</span>实验实测：让 GLM 真的跑一遍「Ascend C 入门」</h2>
-<div class="sechint">任务原话：<b>「Ascend C怎么入门？请只从 hiascend 的官方文档找，并写下你每一步请求了哪个 URL。」</b>执行者＝GLM（2026-09-03），观测工具＝web_search / web_fetch（模型视角）+ curl（传输层观测，还原 fetch 背后发生的事件）。图 F 是全程时序：模型主线止于 S3（两连空），旁路观测发现唯一的官方正文出口是 MD 镜像。</div>
+<div class="sechint">任务原话：<b>「Ascend C怎么入门？请只从 hiascend 的官方文档找，并写下你每一步请求了哪个 URL。」</b>执行者＝GLM（2026-09-03），观测工具＝web_search / web_fetch（模型视角）+ curl（传输层观测，还原 fetch 背后发生的事件）。图 F 是全程时序：模型主线止于 S3（两连空），旁路观测发现唯一的官方正文出口是 MD 镜像。<b>口径提醒：全程只有 GLM 一个执行样本</b>——本页所有「主线 / 旁路」均指 GLM 的实测动线，不外推为普适；GLM 的规划自述见下方专卡，其他模型的差异证据见「不同模型，不同路径」。</div>
 
 <div class="card">
 <div class="fig44" id="figF">
@@ -890,9 +890,9 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <tbody>
     <tr><td><b>S1</b></td><td>web_search</td><td><code>hiascend.com</code> 域内搜索「Ascend C 入门」</td><td>—</td><td>5 条结果；选中官方文档「Ascend C 简介」（CANN 8.5.0.alpha002）</td><td>web_search 发现层</td></tr>
     <tr><td><b>S2</b></td><td>web_fetch</td><td><code><a class="fl" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html" target="_blank">https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html</a></code></td><td><b>301</b> → <code>…_00046.html</code> → 200；HTML 186KB；title 为<b>全站通用</b>（非本页文档名）；canonical ✓ 指向新 URL；无 JSON-LD；正文关键词（核函数/编程模型/达芬奇/矢量算子/环境准备）<b>出现 0 次</b>；去标签正文 1003 字符全为导航菜单；四类 UA（curl/Chrome/Googlebot/ChatGLM-Spider）<b>返回同一空壳</b></td><td>带 JS 渲染的 fetch 拿到了文档 title，但正文仍空——只返回「获取效率/正确性/完整性/易理解」评分组件词</td><td>301 重定向链 · canonical · <b>HTML 正文（P0 ✗）</b></td></tr>
-    <tr><td><b>S3</b></td><td>web_fetch</td><td><code><a class="fl" href="https://www.hiascend.com/cann/ascend-c" target="_blank">https://www.hiascend.com/cann/ascend-c</a></code>（llms.txt 条目发现）</td><td>200；SPA 空壳</td><td>导航菜单 + 页脚链接 + <b>「加载中」占位符</b>；无任何 Ascend C 实质内容</td><td>页内链接（仅导航）</td></tr>
+    <tr><td><b>S3</b></td><td>web_fetch</td><td><code><a class="fl" href="https://www.hiascend.com/cann/ascend-c" target="_blank">https://www.hiascend.com/cann/ascend-c</a></code>（来源＝web_search 结果 / 模型自带路径知识——<b>非 llms.txt：模型当时还没读过它</b>，原「llms.txt 条目发现」标注系事后归因，已更正）</td><td>200；SPA 空壳</td><td>导航菜单 + 页脚链接 + <b>「加载中」占位符</b>；无任何 Ascend C 实质内容</td><td>页内链接（仅导航）</td></tr>
     <tr><td><b>S4</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">https://www.hiascend.com/robots.txt</a></code></td><td>200；<code>Allow: /</code>；专门 AI Agent 白名单段（anthropic-ai、Chatglm-spider、Bytespider、CCBot 等）；<b><code>LLM-Policy: <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></b>；多个 <code>Sitemap:</code> 分片</td><td>（传输层证据）门全开，无任何拦截</td><td>robots 门控 · sitemap 指令</td></tr>
-    <tr><td><b>S5</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></td><td>200；<b>12,080,654 字节 / 26,166 行</b>；含 19,847 条 CANN 文档条目；有 <code>/cann/ascend-c</code> 条目，<b>但全文 grep 不到「Ascend C 简介」</b>（850alpha002 版亦无 ascendc 条目）</td><td>（若被消费）S3 的 URL 来源；但巨型体量超出单次 fetch 预算</td><td>llms.txt（P3 ⚠ 巨型化）</td></tr>
+    <tr><td><b>S5</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></td><td>200；<b>12,080,654 字节 / 26,166 行</b>；含 19,847 条 CANN 文档条目；有 <code>/cann/ascend-c</code> 条目，<b>但全文 grep 不到「Ascend C 简介」</b>（850alpha002 版亦无 ascendc 条目）</td><td>（若被消费）站点的 URL 索引；其中确有 <code>/cann/ascend-c</code> 条目、与 S3 所抓 URL 互为印证，<b>但 S3 并非由它发现</b>（模型未读过此文件）；巨型体量超出单次 fetch 预算</td><td>llms.txt（P3 ⚠ 巨型化）</td></tr>
     <tr><td><b>S6</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md" target="_blank">https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md</a></code></td><td>200；<code>Content-Type: text/markdown</code>；1.9KB；YAML frontmatter（title/description/url/sourcePath）</td><td>（若被消费）<b>正文真实可读</b>——环境准备步骤逐条在列</td><td>Markdown 镜像（P1 ✓）</td></tr>
   </tbody>
 </table>
@@ -915,7 +915,37 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
 <li><b>修正 1 · llms.txt 的发现方式</b>：图 D 及备答原说「AI 不通过 robots 发现 llms.txt，robots 里没有任何指令指向它」——这是 llmstxt.org 标准约定，但 hiascend 实测在 <a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> 里写了 <code>LLM-Policy:</code> 行主动挂钩（超出标准约定的站点侧增强）。准确表述：<b>「约定不依赖 robots 引路；站点可选挂 LLM-Policy 行——hiascend 已挂，是否被消费未知」</b>。</li>
 <li><b>修正 2 · MD 镜像的「多数站不提供」</b>：hiascend 实际提供了 <a class="fl" href="https://www.hiascend.com/llms-content/cann/zh_cann_ascend-c.md" target="_blank">llms-content/</a> 全量 MD 镜像（每条 llms.txt 详情链接都真实可访问、带 frontmatter）——这点上它走在多数站点前面。但 P0 未修使这些镜像的价值打折：它们只能救场，不能顶替正文直出。</li>
 </ul>
-<div class="note"><b>诚实边界：</b>① S4–S6 是 curl 传输层观测，用于还原 web_fetch 背后发生的传输事件，不是模型主动 fetch 序列的一部分——模型主线止于 S3；② 单次实验、单一模型（GLM）+ 单一工具链，不同厂商工具（是否渲染、渲染等待时长、是否消费 llms.txt）路径可能不同——S3 的「加载中」就是等待时长的直接证据；③ llms.txt 覆盖性 grep 基于当日快照（12MB 文件本身也可能变化）；④ 实验日期 2026-09-03，站点行为可能随版本迭代改变。</div>
+<div class="note"><b>诚实边界：</b>① S4–S6 是 curl 传输层观测，用于还原 web_fetch 背后发生的传输事件，不是模型主动 fetch 序列的一部分——模型主线止于 S3；② 单次实验、单一模型（GLM）+ 单一工具链；不同模型的路径差异已不是推测——见下方「不同模型，不同路径」（Perplexity 称消费、编码 agent 真读、Google 拒绝、GLM 不读），渲染等待时长差异的实证是 S3 的「加载中」；③ llms.txt 覆盖性 grep 基于当日快照（12MB 文件本身也可能变化）；④ 实验日期 2026-09-03，站点行为可能随版本迭代改变。</div>
+</div>
+
+<div class="card">
+<h3>执行者自述：GLM 拿到这个任务时是怎么规划的</h3>
+<ul class="tight">
+<li><b>真实计划只有三步</b>：① web_search 找候选 URL → ② web_fetch 抓最像正文的那页 HTML → ③ 抓空了就再抓一页（S1→S2→S3）。<b>计划里从头到尾没有「先读 robots.txt / llms.txt / sitemap」这一步</b>——S4–S6 是事后用 curl 补的传输层取证，不是模型的动作。</li>
+<li><b>为什么没有</b>：模型的动线是「工具契约 + 系统提示 + 训练先验」的函数。web_fetch 的工具说明只讲「抓 URL、转 Markdown」，没有提任何站点级文件；训练先验是「找资料＝搜索→抓页面」。llms.txt 对 GLM 不是「判断了没用」，是<b>压根不在默认动线里</b>。</li>
+<li><b>一处事后归因已更正</b>：S3 抓的 <code>/cann/ascend-c</code> 原标注「llms.txt 条目发现」——不成立：模型当时还没读过 llms.txt，该 URL 来自搜索结果或自带知识（上表已改）。</li>
+<li><b>含义</b>：把「先查 /llms.txt」写进系统提示或工具说明的产品，同一道题的路径就完全不同——<b>主 / 旁不是文件的属性，是「模型 × 工具契约」的属性</b>。</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>不同模型，不同路径（如实记录 · 2026-09 核对）</h3>
+<table>
+  <thead><tr><th>模型 / 产品</th><th>类型</th><th>对 llms.txt 的实际行为</th><th>证据</th></tr></thead>
+  <tbody>
+    <tr><td><b>GLM</b>（本实验）</td><td>agentic 抓取（web_search + web_fetch）</td><td><b>不读</b>。动线＝搜索 → HTML 直抓；robots / llms.txt / sitemap 均不在计划内</td><td>本次实测（上图 F）</td></tr>
+    <tr><td><b>Google</b></td><td>搜索 / AI Overviews</td><td><b>明确拒绝</b>：「不支持且无计划」（Illyes，2025-07）；Mueller 比作已废弃的 keywords meta tag；2026-06 写进官方文档「不帮助也不损害」</td><td>官方声明</td></tr>
+    <tr><td><b>OpenAI</b></td><td>搜索 / GPTBot</td><td><b>未确认</b>。爬虫文档只字未提；日志里 GPTBot 偶有 fetch（占 llms.txt 少量请求的 4.51%），更像探索而非消费</td><td>文档 + 日志</td></tr>
+    <tr><td><b>Anthropic</b></td><td>Claude / ClaudeBot</td><td><b>态度友好但未确认</b>：自家文档发布 llms.txt、曾推动文档平台支持；未确认 Claude 检索会解析第三方文件（ClaudeBot 占 llms.txt 请求 0.80%）</td><td>文档 + 报道</td></tr>
+    <tr><td><b>Perplexity</b></td><td>AI 搜索</td><td><b>官方称会取用</b>（用于页序优先）——但第三方日志观测（Semrush，2025-08~10）里 PerplexityBot 对 llms.txt 零请求，<b>口径与观测有出入</b></td><td>官方口径 vs 日志</td></tr>
+    <tr><td><b>编码 agent</b>（Cursor / Claude Code / Cline / Continue）</td><td>开发工具</td><td><b>会真读</b>——被指向一个域时把 llms.txt 当主要文档入口；但非自动发现，需在 rules / 配置里人工指向</td><td>社区实践</td></tr>
+  </tbody>
+</table>
+<div class="note"><b>日志总账</b>：Ahrefs 2026-05 分析 137,210 个域名——<b>97% 的 llms.txt 全月零请求</b>；有请求者中 AI 检索 bot 仅占约 1.1%，其余是 SEO 工具与普通爬虫；Slackbot 抓 llms.txt 的次数都比 PerplexityBot 多。</div>
+<ul class="tight">
+<li><b>「主路 / 旁路」是模型相对的</b>：对 GLM 是旁路的东西，对 Perplexity（官方口径）和编码 agent 是主入口，对 Google 不存在。本页理论 tab 的主干 / 旁路划分＝GLM 实测视角，不外推为普适。</li>
+<li><b>唯一跨模型成立的必答题仍是 P0</b>：正文以静态 HTML 直出，不依赖任何模型的特殊习惯——这反而强化了 P0 的优先级论证：<b>它不赌「模型碰巧会读哪个文件」</b>。</li>
+</ul>
 </div>
 </div><!-- /tab-lab -->
 
