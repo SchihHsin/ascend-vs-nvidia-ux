@@ -900,13 +900,21 @@ details.fold[open] summary{margin-bottom:8px}
 </div>
 
 <div class="card">
-<h3>逐步实录：每一步请求了哪个 URL、发生了什么</h3>
+<h3>模型实际执行的步骤（S1–S3）</h3>
+<p style="font-size:12px;color:var(--sub);margin:0 0 8px">以下 3 步是 GLM 模型自己发起、自己记录的工具调用链。</p>
 <table>
   <thead><tr><th>步</th><th>动作</th><th>请求 URL</th><th>传输层观测（curl）</th><th>模型拿到什么</th><th>命中图 A</th></tr></thead>
   <tbody>
     <tr><td><b>S1</b></td><td>web_search</td><td><code>hiascend.com</code> 域内搜索「Ascend C 入门」</td><td>—</td><td>5 条结果；选中官方文档「Ascend C 简介」（CANN 8.5.0.alpha002）</td><td>web_search 发现层</td></tr>
     <tr><td><b>S2</b></td><td>web_fetch</td><td><code><a class="fl" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html" target="_blank">https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html</a></code></td><td><b>301</b> → <code>…_00046.html</code> → 200；HTML 186KB；title 为<b>全站通用</b>（非本页文档名）；canonical ✓ 指向新 URL；无 JSON-LD；正文关键词（核函数/编程模型/达芬奇/矢量算子/环境准备）<b>出现 0 次</b>；去标签正文 1003 字符全为导航菜单；四类 UA（curl/Chrome/Googlebot/ChatGLM-Spider）<b>返回同一空壳</b></td><td>带 JS 渲染的 fetch 拿到了文档 title，但正文仍空——只返回「获取效率/正确性/完整性/易理解」评分组件词</td><td>301 重定向链 · canonical · <b>HTML 正文（P0 ✗）</b></td></tr>
     <tr><td><b>S3</b></td><td>web_fetch</td><td><code><a class="fl" href="https://www.hiascend.com/cann/ascend-c" target="_blank">https://www.hiascend.com/cann/ascend-c</a></code>（来源＝web_search 结果 / 模型自带路径知识——<b>非 llms.txt：模型当时还没读过它</b>，原「llms.txt 条目发现」标注系事后归因，已更正）</td><td>200；SPA 空壳</td><td>导航菜单 + 页脚链接 + <b>「加载中」占位符</b>；无任何 Ascend C 实质内容</td><td>页内链接（仅导航）</td></tr>
+  </tbody>
+</table>
+
+<h3>外部观测者事后补查（S4–S6）<span style="font-size:11px;color:var(--sub);font-weight:400">——不是 GLM 自己规划的，是我用 curl 主动去查的</span></h3>
+<table>
+  <thead><tr><th>步</th><th>动作</th><th>请求 URL</th><th>传输层观测（curl）</th><th>模型拿到什么</th><th>命中图 A</th></tr></thead>
+  <tbody>
     <tr><td><b>S4</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">https://www.hiascend.com/robots.txt</a></code></td><td>200；<code>Allow: /</code>；专门 AI Agent 白名单段（anthropic-ai、Chatglm-spider、Bytespider、CCBot 等）；<b><code>LLM-Policy: <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></b>；多个 <code>Sitemap:</code> 分片</td><td>（传输层证据）门全开，无任何拦截</td><td>robots 门控 · sitemap 指令</td></tr>
     <tr><td><b>S5</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></td><td>200；<b>12,080,654 字节 / 26,166 行</b>；含 19,847 条 CANN 文档条目；有 <code>/cann/ascend-c</code> 条目，<b>但全文 grep 不到「Ascend C 简介」</b>（850alpha002 版亦无 ascendc 条目）</td><td>（若被消费）站点的 URL 索引；其中确有 <code>/cann/ascend-c</code> 条目、与 S3 所抓 URL 互为印证，<b>但 S3 并非由它发现</b>（模型未读过此文件）；巨型体量超出单次 fetch 预算</td><td>llms.txt（P3 ⚠ 巨型化）</td></tr>
     <tr><td><b>S6</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md" target="_blank">https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md</a></code></td><td>200；<code>Content-Type: text/markdown</code>；1.9KB；YAML frontmatter（title/description/url/sourcePath）</td><td>（若被消费）<b>正文真实可读</b>——环境准备步骤逐条在列</td><td>Markdown 镜像（P1 ✓）</td></tr>
@@ -989,7 +997,8 @@ details.fold[open] summary{margin-bottom:8px}
   </tbody>
 </table>
 
-<h3>8 步实录</h3>
+<h3>模型实际执行的步骤（S1–S4）</h3>
+<p style="font-size:12px;color:var(--sub);margin:0 0 8px">以下 4 步是 Kimi 模型（通过 WorkBuddy 工具链）真实发起的动作。</p>
 <table>
   <thead><tr><th>步骤</th><th>工具 / UA</th><th>请求 URL</th><th>传输层观测</th><th>拿到什么</th><th>命中图 A 项</th></tr></thead>
   <tbody>
@@ -997,6 +1006,13 @@ details.fold[open] summary{margin-bottom:8px}
     <tr><td><b>S2</b></td><td>WebFetch</td><td><code><a class="fl" href="https://www.hiascend.com/zh/ascend-c" target="_blank">https://www.hiascend.com/zh/ascend-c</a></code></td><td>200；302 重定向</td><td>cookie 弹窗 + 几乎无实质内容（标题「AscendC与CANN算子开发」，正文仅 cookie 声明）</td><td>HTML（SPA 空壳）</td></tr>
     <tr><td><b>S3</b></td><td>WebFetch</td><td><code><a class="fl" href="https://www.hiascend.com/document/detail/zh/canncommercial/80RC2/developmentguide/opdevg/Ascendcopdevg/atlas_ascendc_10_43.html" target="_blank">.../atlas_ascendc_10_43.html</a></code></td><td>200；301→200</td><td><b>「Ascend C简介」正文片段</b>：概述（编程语言介绍）+ 使用须知（支持的产品型号列表）+ 内含链接（atlas_ascendc_10_0001.html）</td><td>HTML（SSR 片段 ✓）</td></tr>
     <tr><td><b>S4</b></td><td>WebFetch</td><td><code>.../atlas_ascendc_10_0001.html</code>（S3 页面内链接）</td><td>200</td><td><b>「环境准备」+「快速入门」正文</b>：硬件/软件环境、安装步骤、HelloWorld 样例、编译运行</td><td>HTML（SSR 正文 ✓）</td></tr>
+  </tbody>
+</table>
+
+<h3>外部观测者事后补查（S5–S8）<span style="font-size:11px;color:var(--sub);font-weight:400">——不是模型自己规划的，是我用 curl 主动去查的</span></h3>
+<table>
+  <thead><tr><th>步骤</th><th>工具 / UA</th><th>请求 URL</th><th>传输层观测</th><th>拿到什么</th><th>命中图 A 项</th></tr></thead>
+  <tbody>
     <tr><td><b>S5</b></td><td>curl（Kimi-User UA）</td><td>同 S4 URL</td><td>200；175KB HTML</td><td><b>SPA 空壳</b>：title「昇腾社区官网-昇腾万里 让智能无所不及」（通用站名）；正文关键词「环境准备/快速入门/HelloWorld」命中 0 次</td><td>HTML（SPA 空壳 ✗）</td></tr>
     <tr><td><b>S6</b></td><td>curl（Kimi-User UA）</td><td><code><a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">https://www.hiascend.com/robots.txt</a></code></td><td>200</td><td>无 Kimi 专门白名单段（有 Chatglm-spider / anthropic-ai / Bytespider / CCBot，<b>无 Kimi</b>）</td><td>robots.txt（P1）</td></tr>
     <tr><td><b>S7</b></td><td>curl（Kimi-User UA）</td><td><code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></td><td>200；12MB</td><td>grep「ascendc_10_0001」<b>0 命中</b>；grep「80RC2」0 命中；仅有 latest/900 版本 canncommercial 条目</td><td>llms.txt（P3）</td></tr>
