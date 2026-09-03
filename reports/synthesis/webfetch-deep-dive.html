@@ -69,11 +69,12 @@ details.fold[open] summary{margin-bottom:8px}
 <div class="wrap">
 
 <h1>web_fetch 深挖：能取到的全部文件 · 优先级 · 大模型怎么「读」页面 · llms.txt 位置 · 布局减幻守则</h1>
-<div class="subtitle">承接 <a href="arch-d3.html">arch-d3 人机协同旅程 · 4.3 架构图</a>的 web_fetch 细化。<b>「理论」tab</b> 把四个追问全部图形化：① 这份清单<b>全不全</b>（图 A：16 项全景时间轴）；② 这些文件<b>谁重要</b>（图 A 底部 P0–P3 价值条）；③ 大模型到底怎么「扫描」页面（图 C：token 流 + U 型注意力）；④ llms.txt 放哪、什么布局提效减幻（图 D / 图 E）。<b>「实验实测」tab</b> 是 2026-09-03 用 GLM 真实跑一遍「Ascend C 入门」检索的全程实录（图 F），逐 URL 验证理论。事实口径锚定 D 任务实测（<code>task_run_log.md</code>）。文中提到的站点文件（<a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> · <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> · <a class="fl" href="https://www.hiascend.com/sitemap.xml" target="_blank">sitemap.xml</a> · MD 镜像等）<b>均为可点击链接</b>，直达 hiascend 线上原文（2026-09-03 验证可达）。</div>
+<div class="subtitle">承接 <a href="arch-d3.html">arch-d3 人机协同旅程 · 4.3 架构图</a>的 web_fetch 细化。<b>「理论」tab</b> 把四个追问全部图形化：① 这份清单<b>全不全</b>（图 A：16 项全景时间轴）；② 这些文件<b>谁重要</b>（图 A 底部 P0–P3 价值条）；③ 大模型到底怎么「扫描」页面（图 C：token 流 + U 型注意力）；④ llms.txt 放哪、什么布局提效减幻（图 D / 图 E）。<b>「实验 · GLM」tab</b> 是 2026-09-03 GLM 自己跑「Ascend C 入门」的全程实录（图 F），<b>「实验 · Kimi」tab</b> 是同一天用 Kimi 跑同一任务的对比——两个模型面对同一站点的路径、拿到的内容、遇到的断点全不同。事实口径锚定 D 任务实测（<code>task_run_log.md</code>）。文中提到的站点文件（<a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> · <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> · <a class="fl" href="https://www.hiascend.com/sitemap.xml" target="_blank">sitemap.xml</a> · MD 镜像等）<b>均为可点击链接</b>，直达 hiascend 线上原文（2026-09-03 验证可达）。</div>
 
 <div class="tabs">
   <button id="tabBtn-theory" class="on" onclick="showTab('theory')">理论 · 4 图</button>
-  <button id="tabBtn-lab" onclick="showTab('lab')">实验实测 · GLM 跑「Ascend C 入门」</button>
+  <button id="tabBtn-glm" onclick="showTab('glm')">实验 · GLM</button>
+  <button id="tabBtn-kimi" onclick="showTab('kimi')">实验 · Kimi</button>
 </div>
 
 <div id="tab-theory">
@@ -739,8 +740,8 @@ details.fold[open] summary{margin-bottom:8px}
 </div><!-- /tab-theory -->
 
 
-<div id="tab-lab" style="display:none">
-<a id="lab"></a>
+<div id="tab-glm" style="display:none">
+<a id="glm"></a>
 <h2><span class="no">⑤</span>实验实测：让 GLM 真的跑一遍「Ascend C 入门」</h2>
 <table style="margin:0 0 16px">
   <thead><tr><th>项</th><th>内容</th></tr></thead>
@@ -749,6 +750,7 @@ details.fold[open] summary{margin-bottom:8px}
     <tr><td><b>执行者</b></td><td>GLM（2026-09-03）。<b>口径提醒：全程只有 GLM 一个执行样本</b>——本页所有「主线 / 旁路」均指 GLM 的实测动线，不外推为普适</td></tr>
     <tr><td><b>观测工具</b></td><td>web_search / web_fetch（模型视角）+ curl（传输层观测，还原 fetch 背后发生的事件）</td></tr>
     <tr><td><b>图 F 读法</b></td><td>模型主线止于 S3（两连空），旁路观测发现唯一的官方正文出口是 MD 镜像；GLM 的规划自述见下方专卡，其他模型的差异证据见「不同模型，不同路径」</td></tr>
+    <tr><td><b>与 Kimi 的核心差异</b></td><td>GLM 的 web_fetch 对 850alpha002 文档页返回「正文 0 字」；Kimi 的 WebFetch 对 80RC2 的 10_0001 页能提取完整正文——<b>差异可能来自页面版本或工具链实现</b>。robots.txt 对 GLM 有 Chatglm-spider 白名单段，对 Kimi 没有。</td></tr>
   </tbody>
 </table>
 
@@ -971,7 +973,23 @@ details.fold[open] summary{margin-bottom:8px}
 </table>
 <div class="note"><b>日志总账</b>：Ahrefs 2026-05 分析 137,210 个域名——<b>97% 的 llms.txt 全月零请求</b>；有请求者中 AI 检索 bot 仅占约 1.1%，其余是 SEO 工具与普通爬虫；Slackbot 抓 llms.txt 的次数都比 PerplexityBot 多。</div>
 
-<h3>Kimi 实测（2026-09-03 · 同一任务）</h3>
+</div>
+</div><!-- /tab-glm -->
+
+<div id="tab-kimi" style="display:none">
+<a id="kimi"></a>
+<h2><span class="no">⑥</span>实验实测：让 Kimi 跑一遍「Ascend C 入门」</h2>
+<table style="margin:0 0 16px">
+  <thead><tr><th>项</th><th>内容</th></tr></thead>
+  <tbody>
+    <tr><td><b>任务原话</b></td><td>「Ascend C怎么入门？请只从 hiascend 的官方文档找，并写下你每一步请求了哪个 URL。」</td></tr>
+    <tr><td><b>执行者</b></td><td>Kimi（2026-09-03）。<b>口径提醒：这是 WorkBuddy 工具链行为记录，不是 Kimi 模型「自反」记录</b>——GLM 实验是 GLM 自己调工具自己记；Kimi 实验是用 WorkBuddy 工具链跑、外部观测</td></tr>
+    <tr><td><b>观测工具</b></td><td>WebSearch + WebFetch（框架工具）+ curl（Kimi-User UA，传输层观测）</td></tr>
+    <tr><td><b>与 GLM 的核心差异</b></td><td>WebFetch 能提取片段/完整正文（GLM 实验里 web_fetch 对 850alpha002 返回「正文 0 字」）；但 curl（Kimi-User UA）面对同一页仍是 SPA 空壳——<b>差异来自工具链实现或页面版本，不是模型本身</b></td></tr>
+  </tbody>
+</table>
+
+<h3>8 步实录</h3>
 <table>
   <thead><tr><th>步骤</th><th>工具 / UA</th><th>请求 URL</th><th>传输层观测</th><th>拿到什么</th><th>命中图 A 项</th></tr></thead>
   <tbody>
@@ -986,6 +1004,7 @@ details.fold[open] summary{margin-bottom:8px}
   </tbody>
 </table>
 
+<h3>4 条结论</h3>
 <ul class="tight">
 <li><b>① WebFetch 有渲染/提取能力，curl 没有。</b>同一 URL（atlas_ascendc_10_0001.html），WebFetch 提取到「环境准备+快速入门」正文，curl（Kimi-User UA）拿到 175KB SPA 空壳。这说明 WebFetch 工具链内部有 JS 执行或 DOM 解析能力，而纯 HTTP 请求拿不到。</li>
 <li><b>② 但「有提取能力」≠「P0 已解决」。</b>S2 的 /zh/ascend-c 页 WebFetch 也只拿到 cookie 弹窗；S3 的 10_43 页只拿到片段（目录页，非完整入门）。<b>真正拿到完整入门正文的是 S4 的 10_0001 页</b>——但这个 URL 是 S3 页面内的链接，不是搜索直接给的。如果模型停在 S2/S3，手里仍然不完整。</li>
@@ -1006,23 +1025,20 @@ details.fold[open] summary{margin-bottom:8px}
   </tbody>
 </table>
 </details>
-
-<ul class="tight">
-<li><b>「主路 / 旁路」是模型相对的</b>：对 GLM 是旁路的东西，对 Perplexity（官方口径）和编码 agent 是主入口，对 Google 不存在——本页理论 tab 的划分＝GLM 实测视角，不外推普适。</li>
-<li><b>唯一跨模型成立的必答题仍是 P0</b>：正文以静态 HTML 直出，不依赖任何模型的特殊习惯——它<b>不赌「模型碰巧会读哪个文件」</b>。</li>
-</ul>
-</div>
-</div><!-- /tab-lab -->
+</div><!-- /tab-kimi -->
 
 <script>
 function showTab(id){
   document.getElementById('tab-theory').style.display = (id==='theory')?'':'none';
-  document.getElementById('tab-lab').style.display = (id==='lab')?'':'none';
+  document.getElementById('tab-glm').style.display = (id==='glm')?'':'none';
+  document.getElementById('tab-kimi').style.display = (id==='kimi')?'':'none';
   document.getElementById('tabBtn-theory').classList.toggle('on', id==='theory');
-  document.getElementById('tabBtn-lab').classList.toggle('on', id==='lab');
+  document.getElementById('tabBtn-glm').classList.toggle('on', id==='glm');
+  document.getElementById('tabBtn-kimi').classList.toggle('on', id==='kimi');
   window.scrollTo(0,0);
 }
-if(location.hash==='#lab'){showTab('lab');}
+if(location.hash==='#glm'){showTab('glm');}
+if(location.hash==='#kimi'){showTab('kimi');}
 </script>
 
 </div>
