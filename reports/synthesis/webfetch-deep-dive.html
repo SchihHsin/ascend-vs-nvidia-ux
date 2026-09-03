@@ -997,6 +997,152 @@ details.fold[open] summary{margin-bottom:8px}
   </tbody>
 </table>
 
+<div class="card">
+<div class="fig44" id="figK">
+<svg viewBox="0 0 1120 700" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans SC',sans-serif">
+  <defs>
+    <marker id="fkG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/></marker>
+    <marker id="fkR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C8102E"/></marker>
+  </defs>
+  <text x="560" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1a1a">图 K · Kimi 实测时序：跑「Ascend C 入门（仅 hiascend 官方文档）」· 2026-09-03</text>
+  <text x="560" y="38" text-anchor="middle" font-size="9" fill="#888">上泳道＝模型真实动作（S4 拿到正文 ✓）· 下泳道＝curl 外部观测（工具链 vs 纯 HTTP 对比）· 卡头色＝该步结果</text>
+
+  <!-- ===== 泳道 1：模型真实动作 ===== -->
+  <rect x="20" y="52" width="1080" height="272" rx="8" fill="#fbfbfd" stroke="#e5e5e5"/>
+  <text x="34" y="74" font-size="10.5" font-weight="800" fill="#555">泳道 1 · 模型真实动作</text>
+  <text x="150" y="74" font-size="8.5" fill="#999">Kimi 通过 WorkBuddy 工具链真实发起</text>
+
+  <!-- S1 -->
+  <rect x="40" y="88" width="235" height="220" rx="8" fill="#fff" stroke="#b8d4e8"/>
+  <rect x="40" y="88" width="235" height="26" rx="8" fill="#eaf4fb"/>
+  <rect x="40" y="106" width="235" height="8" fill="#eaf4fb"/>
+  <text x="52" y="105" font-size="10" font-weight="800" fill="#1f5a8a">S1 · WebSearch</text>
+  <text x="52" y="130" font-size="8" fill="#444">site:hiascend.com Ascend C 入门</text>
+  <text x="52" y="146" font-size="8" fill="#444">返回 2 个官方 URL</text>
+  <text x="52" y="170" font-size="8" font-weight="700" fill="#1f5a8a">① /zh/ascend-c</text>
+  <text x="52" y="186" font-size="8" font-weight="700" fill="#1f5a8a">② .../atlas_ascendc_10_43.html</text>
+  <text x="52" y="210" font-size="7.5" fill="#1f5a8a">命中图 A：搜索索引</text>
+
+  <!-- S2 -->
+  <rect x="295" y="88" width="235" height="220" rx="8" fill="#fff" stroke="#e8b8b8"/>
+  <rect x="295" y="88" width="235" height="26" rx="8" fill="#fbeaea"/>
+  <rect x="295" y="106" width="235" height="8" fill="#fbeaea"/>
+  <text x="307" y="105" font-size="10" font-weight="800" fill="#993C1D">S2 · WebFetch /zh/ascend-c</text>
+  <rect x="452" y="92" width="66" height="17" rx="8" fill="#C8102E"/>
+  <text x="485" y="104" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✗ 空壳</text>
+  <text x="307" y="130" font-size="8" fill="#444">200；302 重定向</text>
+  <text x="307" y="146" font-size="8" fill="#444">cookie 弹窗 + 几乎无实质内容</text>
+  <text x="307" y="170" font-size="8" font-weight="700" fill="#993C1D">标题「AscendC与CANN算子开发」</text>
+  <text x="307" y="186" font-size="8" font-weight="700" fill="#993C1D">正文仅 cookie 声明</text>
+  <text x="307" y="210" font-size="7.5" fill="#993C1D">命中图 A：HTML（SPA 空壳 ✗）</text>
+
+  <!-- S3 -->
+  <rect x="550" y="88" width="235" height="220" rx="8" fill="#fff" stroke="#e6dcae"/>
+  <rect x="550" y="88" width="235" height="26" rx="8" fill="#fdf6df"/>
+  <rect x="550" y="106" width="235" height="8" fill="#fdf6df"/>
+  <text x="562" y="105" font-size="10" font-weight="800" fill="#7a5d0a">S3 · WebFetch 10_43</text>
+  <rect x="707" y="92" width="66" height="17" rx="8" fill="#b8860b"/>
+  <text x="740" y="104" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">⚠ 片段</text>
+  <text x="562" y="130" font-size="8" fill="#444">200；301→200</text>
+  <text x="562" y="146" font-size="8" fill="#444">「Ascend C简介」正文片段</text>
+  <text x="562" y="162" font-size="8" fill="#444">概述 + 使用须知 + 内含链接</text>
+  <text x="562" y="186" font-size="8" font-weight="700" fill="#7a5d0a">10_0001.html 链接在此页内</text>
+  <text x="562" y="210" font-size="7.5" fill="#7a5d0a">命中图 A：HTML（SSR 片段）</text>
+
+  <!-- S4 -->
+  <rect x="805" y="88" width="275" height="220" rx="8" fill="#fff" stroke="#256b2f" stroke-width="2"/>
+  <rect x="805" y="88" width="275" height="26" rx="8" fill="#d8ecd8"/>
+  <rect x="805" y="106" width="275" height="8" fill="#d8ecd8"/>
+  <text x="817" y="105" font-size="10" font-weight="800" fill="#256b2f">S4 · WebFetch 10_0001 ✓</text>
+  <rect x="1037" y="92" width="34" height="17" rx="8" fill="#256b2f"/>
+  <text x="1054" y="104" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">正文</text>
+  <text x="817" y="130" font-size="8" fill="#444">200；S3 页面内链接跟随</text>
+  <text x="817" y="150" font-size="8" font-weight="700" fill="#256b2f">「环境准备」+「快速入门」正文</text>
+  <text x="817" y="170" font-size="8" fill="#444">硬件/软件环境、安装步骤</text>
+  <text x="817" y="186" font-size="8" fill="#444">HelloWorld 样例、编译运行</text>
+  <text x="817" y="210" font-size="8.5" font-weight="800" fill="#256b2f">模型主线唯一拿到完整正文的一步</text>
+  <text x="817" y="230" font-size="7.5" fill="#256b2f">命中图 A：HTML（SSR 正文 ✓）</text>
+
+  <!-- 泳道1→2 箭头 -->
+  <line x1="270" y1="198" x2="290" y2="198" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#fkG)"/>
+  <line x1="530" y1="198" x2="550" y2="198" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#fkG)"/>
+  <line x1="785" y1="198" x2="805" y2="198" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#fkG)"/>
+
+  <!-- ===== 泳道 2：外部观测 ===== -->
+  <rect x="20" y="350" width="1080" height="272" rx="8" fill="#fbfbfd" stroke="#e5e5e5"/>
+  <text x="34" y="372" font-size="10.5" font-weight="800" fill="#555">泳道 2 · 外部观测者事后补查（curl）</text>
+  <text x="240" y="372" font-size="8.5" fill="#999">不是 Kimi 自己规划的，是我主动去查的</text>
+
+  <!-- S5 -->
+  <rect x="40" y="386" width="235" height="220" rx="8" fill="#fff" stroke="#e6dcae"/>
+  <rect x="40" y="386" width="235" height="26" rx="8" fill="#fdf6df"/>
+  <rect x="40" y="404" width="235" height="8" fill="#fdf6df"/>
+  <text x="52" y="403" font-size="10" font-weight="800" fill="#7a5d0a">S5 · curl 同 URL</text>
+  <rect x="199" y="390" width="66" height="17" rx="8" fill="#b8860b"/>
+  <text x="232" y="402" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">⚠ 空壳</text>
+  <text x="52" y="428" font-size="8" fill="#444">200；175KB HTML</text>
+  <text x="52" y="448" font-size="8" font-weight="700" fill="#7a5d0a">title「昇腾社区官网…」（通用站名）</text>
+  <text x="52" y="468" font-size="8" font-weight="700" fill="#7a5d0a">正文关键词命中 0 次</text>
+  <text x="52" y="492" font-size="7.5" fill="#7a5d0a">同一 URL，WebFetch 能拿、curl 不能</text>
+  <text x="52" y="510" font-size="7.5" fill="#7a5d0a">命中图 A：HTML（SPA 空壳 ✗）</text>
+
+  <!-- S6 -->
+  <rect x="295" y="386" width="235" height="220" rx="8" fill="#fff" stroke="#d0d0d0"/>
+  <rect x="295" y="386" width="235" height="26" rx="8" fill="#f0f0f0"/>
+  <rect x="295" y="404" width="235" height="8" fill="#f0f0f0"/>
+  <text x="307" y="403" font-size="10" font-weight="800" fill="#666">S6 · robots.txt</text>
+  <rect x="452" y="390" width="66" height="17" rx="8" fill="#888"/>
+  <text x="485" y="402" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">无白名单</text>
+  <text x="307" y="428" font-size="8" fill="#444">200；Allow: /</text>
+  <text x="307" y="448" font-size="8" fill="#444">有 Chatglm-spider / anthropic-ai</text>
+  <text x="307" y="468" font-size="8" font-weight="700" fill="#666">Bytespider / CCBot</text>
+  <text x="307" y="488" font-size="8" font-weight="700" fill="#993C1D">无 Kimi 专门段</text>
+  <text x="307" y="510" font-size="7.5" fill="#666">命中图 A：robots.txt（P1）</text>
+
+  <!-- S7 -->
+  <rect x="550" y="386" width="235" height="220" rx="8" fill="#fff" stroke="#e8b8b8"/>
+  <rect x="550" y="386" width="235" height="26" rx="8" fill="#fbeaea"/>
+  <rect x="550" y="404" width="235" height="8" fill="#fbeaea"/>
+  <text x="562" y="403" font-size="10" font-weight="800" fill="#993C1D">S7 · llms.txt</text>
+  <rect x="707" y="390" width="66" height="17" rx="8" fill="#C8102E"/>
+  <text x="740" y="402" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✗ 无命中</text>
+  <text x="562" y="428" font-size="8" fill="#444">200；12MB / 26,166 行</text>
+  <text x="562" y="448" font-size="8" fill="#444">grep ascendc_10_0001 → 0</text>
+  <text x="562" y="468" font-size="8" fill="#444">grep 80RC2 → 0</text>
+  <text x="562" y="488" font-size="8" font-weight="700" fill="#993C1D">仅有 latest/900 版本条目</text>
+  <text x="562" y="510" font-size="7.5" fill="#993C1D">命中图 A：llms.txt（P3 ⚠）</text>
+
+  <!-- S8 -->
+  <rect x="805" y="386" width="275" height="220" rx="8" fill="#fff" stroke="#e8b8b8"/>
+  <rect x="805" y="386" width="275" height="26" rx="8" fill="#fbeaea"/>
+  <rect x="805" y="404" width="275" height="8" fill="#fbeaea"/>
+  <text x="817" y="403" font-size="10" font-weight="800" fill="#993C1D">S8 · MD 镜像</text>
+  <rect x="1037" y="390" width="34" height="17" rx="8" fill="#C8102E"/>
+  <text x="1054" y="402" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">404</text>
+  <text x="817" y="428" font-size="8" fill="#444">构造路径尝试</text>
+  <text x="817" y="448" font-size="8" fill="#444">/llms-content/.../atlas_ascendc_10_0001.md</text>
+  <text x="817" y="472" font-size="8" font-weight="700" fill="#993C1D">80RC2 版本 Ascend C 入门</text>
+  <text x="817" y="488" font-size="8" font-weight="700" fill="#993C1D">无 MD 镜像</text>
+  <text x="817" y="510" font-size="7.5" fill="#993C1D">命中图 A：MD 镜像（P1 ✗）</text>
+
+  <!-- 泳道2→3 箭头 -->
+  <line x1="270" y1="496" x2="290" y2="496" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#fkG)"/>
+  <line x1="530" y1="496" x2="550" y2="496" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#fkG)"/>
+  <line x1="785" y1="496" x2="805" y2="496" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#fkG)"/>
+
+  <!-- ===== 底部：工具链 vs 纯 HTTP 对比 ===== -->
+  <text x="560" y="640" text-anchor="middle" font-size="11" font-weight="800" fill="#1a1a1a">同一 URL，不同工具，不同结果</text>
+  <rect x="80" y="650" width="440" height="42" rx="6" fill="#256b2f"/>
+  <text x="300" y="667" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fff">WebFetch（工具链）→ 有渲染/提取 → 拿到完整正文</text>
+  <text x="300" y="682" text-anchor="middle" font-size="8" fill="#d8ecd8">内部可能含 headless 渲染或 DOM 解析</text>
+  <rect x="600" y="650" width="440" height="42" rx="6" fill="#C8102E"/>
+  <text x="820" y="667" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fff">curl（Kimi-User UA）→ 纯 HTTP → SPA 空壳</text>
+  <text x="820" y="682" text-anchor="middle" font-size="8" fill="#ffd9d9">175KB HTML，正文关键词命中 0 次</text>
+</svg>
+<div class="figcap"><b>图 K</b> · 上泳道＝Kimi 模型真实动作：S1 搜索 → S2 /zh/ascend-c（SPA 空壳）→ S3 10_43（SSR 片段）→ <b>S4 10_0001（完整正文 ✓）</b>。下泳道＝curl 外部观测：S5 同一 URL curl 拿不到（空壳对比）→ S6 robots 无 Kimi 白名单 → S7 llms.txt 12MB 且 80RC2 无命中 → S8 MD 镜像 404。底部＝「WebFetch 有渲染提取、curl 没有」的核心发现。</div>
+</div>
+</div>
+
 <h3>模型实际执行的步骤（S1–S4）</h3>
 <p style="font-size:12px;color:var(--sub);margin:0 0 8px">以下 4 步是 Kimi 模型（通过 WorkBuddy 工具链）真实发起的动作。</p>
 <table>
