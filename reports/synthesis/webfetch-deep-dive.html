@@ -25,6 +25,11 @@ table{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}
 th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.6}
 th{background:#f4f4f4;font-weight:700;white-space:nowrap}
 code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#f3f3f3;border-radius:4px;padding:1px 5px}
+/* 文件原文链接：文中提到的站点文件可点击直达线上原文 */
+a.fl{color:#2f3d63;text-decoration:none;border-bottom:1px solid #b8c2e0;word-break:break-all}
+a.fl:hover{color:#C8102E;border-bottom-color:#C8102E}
+svg a{cursor:pointer}
+svg a text{text-decoration:underline}
 ul.tight{padding-left:20px;font-size:13px}
 ul.tight li{margin-bottom:7px;line-height:1.7}
 .note{font-size:12.5px;color:var(--sub);margin-top:12px;line-height:1.8}
@@ -60,7 +65,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
 <div class="wrap">
 
 <h1>web_fetch 深挖：能取到的全部文件 · 优先级 · 大模型怎么「读」页面 · llms.txt 位置 · 布局减幻守则</h1>
-<div class="subtitle">承接 <a href="arch-d3.html">arch-d3 人机协同旅程 · 4.3 架构图</a>的 web_fetch 细化。<b>「理论」tab</b> 把四个追问全部图形化：① 这份清单<b>全不全</b>（图 A：16 项全景时间轴）；② 这些文件<b>谁重要</b>（图 A 底部 P0–P3 价值条）；③ 大模型到底怎么「扫描」页面（图 C：token 流 + U 型注意力）；④ llms.txt 放哪、什么布局提效减幻（图 D / 图 E）。<b>「实验实测」tab</b> 是 2026-09-03 用 GLM 真实跑一遍「Ascend C 入门」检索的全程实录（图 F），逐 URL 验证理论。事实口径锚定 D 任务实测（<code>task_run_log.md</code>）。</div>
+<div class="subtitle">承接 <a href="arch-d3.html">arch-d3 人机协同旅程 · 4.3 架构图</a>的 web_fetch 细化。<b>「理论」tab</b> 把四个追问全部图形化：① 这份清单<b>全不全</b>（图 A：16 项全景时间轴）；② 这些文件<b>谁重要</b>（图 A 底部 P0–P3 价值条）；③ 大模型到底怎么「扫描」页面（图 C：token 流 + U 型注意力）；④ llms.txt 放哪、什么布局提效减幻（图 D / 图 E）。<b>「实验实测」tab</b> 是 2026-09-03 用 GLM 真实跑一遍「Ascend C 入门」检索的全程实录（图 F），逐 URL 验证理论。事实口径锚定 D 任务实测（<code>task_run_log.md</code>）。文中提到的站点文件（<a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> · <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> · <a class="fl" href="https://www.hiascend.com/sitemap.xml" target="_blank">sitemap.xml</a> · MD 镜像等）<b>均为可点击链接</b>，直达 hiascend 线上原文（2026-09-03 验证可达）。</div>
 
 <div class="tabs">
   <button id="tabBtn-theory" class="on" onclick="showTab('theory')">理论 · 4 图</button>
@@ -105,7 +110,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <text x="101" y="235" text-anchor="middle" font-size="7.5" fill="#888">AI 选定 URL</text>
   <!-- T1 robots -->
   <rect x="190" y="207" width="118" height="36" rx="8" fill="#eaf1f7" stroke="#8ab8d8" stroke-width="1.5"/>
-  <text x="249" y="222" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">② GET /robots.txt</text>
+  <a href="https://www.hiascend.com/robots.txt" target="_blank"><text x="249" y="222" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1f5a8a">② GET /robots.txt</text></a>
   <text x="249" y="235" text-anchor="middle" font-size="7.5" fill="#3a6f9c">准入门控</text>
   <rect x="284" y="210" width="20" height="12" rx="3" fill="#FBE0CE"/>
   <text x="294" y="219.5" text-anchor="middle" font-size="8" font-weight="800" fill="#9a5a2a">P1</text>
@@ -195,7 +200,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <rect x="60" y="312" width="180" height="64" rx="6" fill="#FCEFC7" stroke="#D8C878"/>
     <rect x="212" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#D8C878"/>
     <text x="224" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#7a5d0a">P2</text>
-    <text x="68" y="329" font-size="9.5" font-weight="700" fill="#7a5d0a">sitemap.xml / index</text>
+    <a href="https://www.hiascend.com/sitemap.xml" target="_blank"><text x="68" y="329" font-size="9.5" font-weight="700" fill="#7a5d0a">sitemap.xml / index</text></a>
     <text x="68" y="343" font-size="7.2" fill="#8a7030">URL 清单 + lastmod · 帮发现深页</text>
     <text x="68" y="354" font-size="7.2" fill="#8a7030">由 robots 的 Sitemap: 指令发现</text>
   </g>
@@ -213,7 +218,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <rect x="464" y="312" width="180" height="64" rx="6" fill="#ECE7F6" stroke="#B8A8D8" stroke-dasharray="4,2"/>
     <rect x="616" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#B8A8D8"/>
     <text x="628" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#5b4f93">P3</text>
-    <text x="472" y="329" font-size="9.5" font-weight="700" fill="#5b4f93">llms.txt</text>
+    <a href="https://www.hiascend.com/llms.txt" target="_blank"><text x="472" y="329" font-size="9.5" font-weight="700" fill="#5b4f93">llms.txt</text></a>
     <text x="472" y="343" font-size="7.2" fill="#6a5aa3">LLM 专用索引 · 根路径直取</text>
     <text x="472" y="354" font-size="7.2" fill="#6a5aa3">可选：厂商未确认消费</text>
   </g>
@@ -222,7 +227,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <rect x="666" y="312" width="180" height="64" rx="6" fill="#ECE7F6" stroke="#B8A8D8" stroke-dasharray="4,2"/>
     <rect x="818" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#B8A8D8"/>
     <text x="830" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#5b4f93">P3</text>
-    <text x="674" y="329" font-size="9.5" font-weight="700" fill="#5b4f93">llms-full.txt</text>
+    <a href="https://llmstxt.org" target="_blank"><text x="674" y="329" font-size="9.5" font-weight="700" fill="#5b4f93">llms-full.txt</text></a>
     <text x="674" y="343" font-size="7.2" fill="#6a5aa3">全文拼接 · 一次吃透</text>
     <text x="674" y="354" font-size="7.2" fill="#6a5aa3">由 llms.txt 引出</text>
   </g>
@@ -231,7 +236,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <rect x="868" y="312" width="190" height="64" rx="6" fill="#FBE0CE" stroke="#D8A878"/>
     <rect x="1032" y="316" width="24" height="12" rx="3" fill="#fff" stroke="#D8A878"/>
     <text x="1044" y="325.5" text-anchor="middle" font-size="8" font-weight="800" fill="#9a5a2a">P1</text>
-    <text x="876" y="329" font-size="9.5" font-weight="700" fill="#9a5a2a">Markdown / print 镜像</text>
+    <a href="https://www.hiascend.com/llms-content/cann/zh_cann_ascend-c.md" target="_blank"><text x="876" y="329" font-size="9.5" font-weight="700" fill="#9a5a2a">Markdown / print 镜像</text></a>
     <text x="876" y="343" font-size="7.2" fill="#a06a3a">.md 源 · ?format=md · print 视图</text>
     <text x="876" y="354" font-size="7.2" fill="#a06a3a">若提供 = 低噪正文直取</text>
   </g>
@@ -290,17 +295,17 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
 <table>
   <thead><tr><th>层</th><th>文件 / 信号</th><th>对 fetch 的作用</th><th>优先级</th></tr></thead>
   <tbody>
-    <tr><td>协议门控</td><td><b>HTTP 状态码 + 重定向链</b></td><td>200 才有正文；301/302 跟随（重定向链上参数可能丢失）；<b>403/429 = 反爬墙</b>、5xx = 站点故障——这些都发生在读 robots.txt 之前</td><td><span class="pb p1">P1</span></td></tr>
-    <tr><td>协议门控</td><td><b>robots.txt</b></td><td>准入门控（Disallow → <code>url_not_allowed</code>）+ 承载 <code>Sitemap:</code> 指令</td><td><span class="pb p1">P1</span></td></tr>
+    <tr><td>协议门控</td><td><b>HTTP 状态码 + 重定向链</b></td><td>200 才有正文；301/302 跟随（重定向链上参数可能丢失）；<b>403/429 = 反爬墙</b>、5xx = 站点故障——这些都发生在读 <a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> 之前</td><td><span class="pb p1">P1</span></td></tr>
+    <tr><td>协议门控</td><td><b><a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a></b></td><td>准入门控（Disallow → <code>url_not_allowed</code>）+ 承载 <code>Sitemap:</code> 指令</td><td><span class="pb p1">P1</span></td></tr>
     <tr><td>协议门控</td><td>响应头（Content-Type / X-Robots-Tag）</td><td>判定返回的是不是 HTML；<code>X-Robots-Tag: noindex</code> 是页级索引控制</td><td><span class="pb p2">P2</span></td></tr>
     <tr><td>协议门控</td><td>页内 <code>&lt;meta name="robots"&gt;</code></td><td>与 X-Robots-Tag 同粒度；注意它管「索引」不管「抓取」——写了 noindex 页面照样能被 fetch</td><td><span class="pb p2">P2</span></td></tr>
-    <tr><td>发现层</td><td><b>sitemap.xml / sitemap index</b></td><td>站点 URL 清单 + lastmod，帮发现深页</td><td><span class="pb p2">P2</span></td></tr>
+    <tr><td>发现层</td><td><b><a class="fl" href="https://www.hiascend.com/sitemap.xml" target="_blank">sitemap.xml</a> / sitemap index</b></td><td>站点 URL 清单 + lastmod，帮发现深页</td><td><span class="pb p2">P2</span></td></tr>
     <tr><td>发现层</td><td>RSS / Atom feed</td><td>时效性内容发现（部分爬虫使用）</td><td><span class="pb p3">P3</span></td></tr>
     <tr><td>发现层</td><td>页面内链 + 锚文本</td><td>站内权重流转；搜索排序信号（隐含在 web_search 侧）</td><td><span class="pb p2">P2</span></td></tr>
     <tr><td><b>内容主体</b></td><td><b>HTML 正文（SSR 直出）</b></td><td>价值主体：指标 ② 官方可抓取性 · ③ 正文详尽度全部落在这一个文件上。<b>P0 的本体是"正文事实静态可取"</b>——HTML SSR 是默认实现；Markdown 镜像<b>内容上等效（per-instance P0-eq），处方上归 P1</b>（若提供、且需同步维护）</td><td><span class="pb p0">P0</span></td></tr>
     <tr><td>内容主体</td><td><b>head 元数据</b>：title / meta description / <b>canonical</b> / JSON-LD / OpenGraph</td><td>结构化事实：正主 URL、发布/更新日期、版本号、面包屑路径——解析时先于正文被读</td><td><span class="pb p1">P1</span></td></tr>
-    <tr><td>内容主体</td><td>Markdown / 纯文本镜像（.md 源 / ?format=md / print 视图）</td><td>部分文档站直接提供低噪正文源。<b>内容上与 HTML 正文等效（per-instance P0-eq）</b>，但作为处方不能默认化（多数站不提供、派生物、双份同步漂移），故处方排序归 P1</td><td><span class="pb p1">P1</span>（若提供）</td></tr>
-    <tr><td>投机旁路</td><td><b>llms.txt / llms-full.txt</b></td><td>LLM 专用索引；厂商未确认消费、Google 明确忽略</td><td><span class="pb p3">P3</span></td></tr>
+    <tr><td>内容主体</td><td><a class="fl" href="https://www.hiascend.com/llms-content/cann/zh_cann_ascend-c.md" target="_blank">Markdown / 纯文本镜像</a>（.md 源 / ?format=md / print 视图）</td><td>部分文档站直接提供低噪正文源。<b>内容上与 HTML 正文等效（per-instance P0-eq）</b>，但作为处方不能默认化（多数站不提供、派生物、双份同步漂移），故处方排序归 P1</td><td><span class="pb p1">P1</span>（若提供）</td></tr>
+    <tr><td>投机旁路</td><td><b><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> / <a class="fl" href="https://llmstxt.org" target="_blank">llms-full.txt</a></b></td><td>LLM 专用索引；厂商未确认消费、Google 明确忽略</td><td><span class="pb p3">P3</span></td></tr>
     <tr><td>页内信号（补遗）</td><td>hreflang 多语言互链</td><td>标出同内容的语言版本，帮模型选对语言版本（对应「语言切换」触点）</td><td><span class="pb p2">P2</span></td></tr>
     <tr><td>页内信号（补遗）</td><td>rel=prev/next · 分页标记</td><td>长内容分页的边界信号；无限滚动＝尾页难界定</td><td><span class="pb p3">P3</span></td></tr>
     <tr><td>页内信号（补遗）</td><td>noscript 内容</td><td>关 JS 时的兜底文本——CSR 站里有时是唯一静态正文</td><td><span class="pb p3">P3</span></td></tr>
@@ -308,7 +313,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <tr><td>（对照）</td><td>页面截图</td><td>走多模态 vision 路径，不属 web_fetch 文本路径；图内文字基本拿不到</td><td><span class="pb na">—</span></td></tr>
   </tbody>
 </table>
-<div class="note"><b>优先级怎么排（修站顺序）：</b><b>P0＝正文事实静态可取</b>——HTML SSR 是默认实现；Markdown 镜像<b>内容上等效（per-instance P0-eq），处方上归 P1</b>（若提供、且需同步维护）。D 任务全部问题的技术根因就是「正文取回 0 字」，所以第一优先是保正文出得来。<b>P1 是一票否决项与结构化事实</b>：robots.txt 被禁 = 整站出局、403/429 反爬 = 同样出局、canonical + 版本日期防多版本混叠。<b>P2 发现与语义辅助</b>：sitemap 在搜索时代作用已弱化，但深页仍有价值；语义标签帮解析器剥噪。<b>P3 零成本投机</b>：llms.txt、RSS——做了不亏、不做不痛。一句话：<b>九成价值在 P0+P1，其中 P0 独占大头</b>（这是工程判断排序，非测量值）——图形版即图 A 底部的价值条。</div>
+<div class="note"><b>优先级怎么排（修站顺序）：</b><b>P0＝正文事实静态可取</b>——HTML SSR 是默认实现；Markdown 镜像<b>内容上等效（per-instance P0-eq），处方上归 P1</b>（若提供、且需同步维护）。D 任务全部问题的技术根因就是「正文取回 0 字」，所以第一优先是保正文出得来。<b>P1 是一票否决项与结构化事实</b>：<a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> 被禁 = 整站出局、403/429 反爬 = 同样出局、canonical + 版本日期防多版本混叠。<b>P2 发现与语义辅助</b>：sitemap 在搜索时代作用已弱化，但深页仍有价值；语义标签帮解析器剥噪。<b>P3 零成本投机</b>：<a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a>、RSS——做了不亏、不做不痛。一句话：<b>九成价值在 P0+P1，其中 P0 独占大头</b>（这是工程判断排序，非测量值）——图形版即图 A 底部的价值条。</div>
 </div>
 
 <a id="s2"></a>
@@ -434,7 +439,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
 
 <a id="s3"></a>
 <h2><span class="no">③</span>llms.txt 放哪里：反直觉的答案——页面内位置无所谓</h2>
-<div class="sechint">llms.txt 的约定（llmstxt.org 提案）是<b>站点根路径的 <code>/llms.txt</code> 文件</b>，一个纯 Markdown 索引。AI 与取 robots.txt 同款方式<b>直接请求这个 URL</b>，不通过页面内链接发现它。</div>
+<div class="sechint">llms.txt 的约定（<a class="fl" href="https://llmstxt.org" target="_blank">llmstxt.org 提案</a>）是<b>站点根路径的 <code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">/llms.txt</a></code> 文件</b>，一个纯 Markdown 索引。AI 与取 <a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> 同款方式<b>直接请求这个 URL</b>，不通过页面内链接发现它。</div>
 
 <div class="card">
 <div class="fig44" id="figD">
@@ -491,7 +496,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <text x="598" y="145" text-anchor="middle" font-size="6.2" fill="#8a7ab8">与取 robots.txt 同款</text>
   <g>
     <rect x="632" y="88" width="150" height="84" rx="7" fill="#f5f0fa" stroke="#B8A8D8" stroke-width="1.3"/>
-    <text x="707" y="112" text-anchor="middle" font-size="11" font-weight="800" fill="#5b3fa0" font-family="ui-monospace,Menlo,monospace">/llms.txt</text>
+    <a href="https://www.hiascend.com/llms.txt" target="_blank"><text x="707" y="112" text-anchor="middle" font-size="11" font-weight="800" fill="#5b3fa0" font-family="ui-monospace,Menlo,monospace">/llms.txt</text></a>
     <text x="707" y="128" text-anchor="middle" font-size="7" fill="#6a52a8">站点根路径 · 纯 Markdown 索引</text>
     <text x="707" y="142" text-anchor="middle" font-size="6.6" fill="#8a7ab8">不是 meta 标签 · 不写进 &lt;head&gt;</text>
     <text x="707" y="153" text-anchor="middle" font-size="6.6" fill="#8a7ab8">页内 &lt;link&gt; 无标准约定</text>
@@ -521,14 +526,14 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <text x="935" y="254" text-anchor="middle" font-size="6.8" fill="#6a5aa3">厂商未确认消费 · Google 明确忽略</text>
   <text x="935" y="265" text-anchor="middle" font-size="6.8" fill="#6a5aa3">必答题仍是 P0：正文事实静态可取</text>
 </svg>
-<div class="figcap"><b>图 D</b> · 左：链接放顶部 / 页脚 / 不放，三种放法 AI 都照样拿得到——它不通过页面发现 llms.txt。中：AI 与取 robots.txt 同款方式直接 GET 根路径的 <code>/llms.txt</code>（它是文件，不是页面元素）。右：真正决定成败的是三件事：可匿名 GET、纯 Markdown、URL 稳定。</div>
+<div class="figcap"><b>图 D</b> · 左：链接放顶部 / 页脚 / 不放，三种放法 AI 都照样拿得到——它不通过页面发现 llms.txt。中：AI 与取 <a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> 同款方式直接 GET 根路径的 <code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">/llms.txt</a></code>（它是文件，不是页面元素）。右：真正决定成败的是三件事：可匿名 GET、纯 Markdown、URL 稳定。</div>
 </div>
 <ul class="tight">
-  <li><b>放在页面顶部、页脚、还是根本不放链接——都不影响 AI 拿不拿得到</b>。AI 是按约定路径直接请求 <code>/llms.txt</code>。</li>
+  <li><b>放在页面顶部、页脚、还是根本不放链接——都不影响 AI 拿不拿得到</b>。AI 是按约定路径直接请求 <code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">/llms.txt</a></code>。</li>
   <li><b>它不是 meta 标签</b>，不写进 <code>&lt;head&gt;</code>；页内 <code>&lt;link&gt;</code> 引用它也没有标准约定。</li>
   <li>页脚放一个人可见的链接，价值仅在于<b>人和普通爬虫</b>能发现它。</li>
 </ul>
-<div class="note"><b>真正要紧的是三件事</b>：① 根路径可匿名 GET（无登录、无反爬墙）；② 纯 Markdown 低噪内容；③ URL 长期稳定不搬家。再叠一层诚实边界：截至 2026 年，Anthropic / OpenAI 均未正式确认其 API 工具消费第三方 llms.txt，Google 明确忽略——<b>它是零成本投机，不是必答题</b>；真正必答的是 P0（正文事实静态可取）。</div>
+<div class="note"><b>真正要紧的是三件事</b>：① 根路径可匿名 GET（无登录、无反爬墙）；② 纯 Markdown 低噪内容；③ URL 长期稳定不搬家。再叠一层诚实边界：截至 2026 年，Anthropic / OpenAI 均未正式确认其 API 工具消费第三方 <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a>，Google 明确忽略——<b>它是零成本投机，不是必答题</b>；真正必答的是 P0（正文事实静态可取）。</div>
 </div>
 
 <a id="s4"></a>
@@ -720,7 +725,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <tr><td><b>canonical + 稳定 URL</b></td><td>多 URL 同内容去重，正主唯一</td><td>多版本混叠拼接——幻觉「拼合体」最常见的来源</td></tr>
     <tr><td><b>正文前置（DOM 序）+ 超长页拆分</b></td><td>U 型注意力 + 截断对策</td><td>中段 / 尾部关键事实丢失或被张冠李戴</td></tr>
     <tr><td><b>代码 / 表格禁图片化</b></td><td>文本路径拿不到图内文字</td><td>命令零丢失（OCR 不在 web_fetch 这条路上）</td></tr>
-    <tr><td>（投机）根路径提供 /llms.txt 索引</td><td>若被消费则跳过发现层摩擦</td><td>零成本旁路，非核心依赖</td></tr>
+    <tr><td>（投机）根路径提供 <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">/llms.txt</a> 索引</td><td>若被消费则跳过发现层摩擦</td><td>零成本旁路，非核心依赖</td></tr>
   </tbody>
 </table>
 <div class="note"><b>诚实边界：</b>① ①节的优先级是基于可观测调用契约 + 通用爬取工程惯例的<b>判断排序</b>（「九成价值在 P0+P1」是工程估计，非测量）；② ②节的扫描机制引用公开研究（Liu et al. 2023 lost-in-the-middle）与自注意力的通用描述，不针对任何厂商内部实现；③ ④节是机制反推的设计守则，单项收益未做 A/B 测量；④ 实验 tab（图 F）为 2026-09-03 单次实测，详见该 tab 的诚实边界。</div>
@@ -771,8 +776,8 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <text x="452" y="103" font-size="10" font-weight="800" fill="#993C1D">S2 · web_fetch 文档页</text>
   <rect x="672" y="90" width="58" height="17" rx="8" fill="#C8102E"/>
   <text x="701" y="102" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✗ 正文 0 字</text>
-  <text x="452" y="128" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /document/detail/zh/CANNCommunityEdition/</text>
-  <text x="452" y="139" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html</text>
+  <a href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html" target="_blank"><text x="452" y="128" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /document/detail/zh/CANNCommunityEdition/</text>
+  <text x="452" y="139" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html</text></a>
   <text x="452" y="156" font-size="8" fill="#444">传输层：301 → …_00046.html → 200（重定向 1 次）</text>
   <text x="452" y="172" font-size="8" fill="#444">HTML 186KB，但 title＝「昇腾社区官网-…」全站通用</text>
   <text x="452" y="188" font-size="8" fill="#444">正文关键词 0 次 · 去标签 1003 字符全为导航菜单</text>
@@ -791,7 +796,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <text x="792" y="103" font-size="10" font-weight="800" fill="#993C1D">S3 · web_fetch 主页</text>
   <rect x="1012" y="90" width="58" height="17" rx="8" fill="#C8102E"/>
   <text x="1041" y="102" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✗ 正文 0 字</text>
-  <text x="792" y="128" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /cann/ascend-c（llms.txt 条目发现）</text>
+  <a href="https://www.hiascend.com/cann/ascend-c" target="_blank"><text x="792" y="128" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /cann/ascend-c（llms.txt 条目发现）</text></a>
   <text x="792" y="150" font-size="8" fill="#444">返回：导航菜单 + 页脚链接 + 「加载中」占位符</text>
   <text x="792" y="166" font-size="8" fill="#444">无任何 Ascend C 实质内容（特性/入门路径均空）</text>
   <text x="792" y="182" font-size="8" fill="#444">「加载中」＝异步拉正文没等到——渲染型工具也赌运气</text>
@@ -814,7 +819,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <rect x="100" y="400" width="300" height="182" rx="8" fill="#fff" stroke="#cfe3cf"/>
   <rect x="100" y="400" width="300" height="26" rx="8" fill="#e4f0e4"/>
   <rect x="100" y="418" width="300" height="8" fill="#e4f0e4"/>
-  <text x="112" y="417" font-size="10" font-weight="800" fill="#256b2f">S4 · robots.txt</text>
+  <a href="https://www.hiascend.com/robots.txt" target="_blank"><text x="112" y="417" font-size="10" font-weight="800" fill="#256b2f">S4 · robots.txt</text></a>
   <rect x="332" y="404" width="58" height="17" rx="8" fill="#256b2f"/>
   <text x="361" y="416" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✓ 门全开</text>
   <text x="112" y="442" font-size="8" fill="#444">200 · Allow: /（仅禁 /profile/ · /doc_center/）</text>
@@ -830,7 +835,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <rect x="440" y="400" width="300" height="182" rx="8" fill="#fff" stroke="#e6dcae"/>
   <rect x="440" y="400" width="300" height="26" rx="8" fill="#fdf6df"/>
   <rect x="440" y="418" width="300" height="8" fill="#fdf6df"/>
-  <text x="452" y="417" font-size="10" font-weight="800" fill="#7a5d0a">S5 · llms.txt</text>
+  <a href="https://www.hiascend.com/llms.txt" target="_blank"><text x="452" y="417" font-size="10" font-weight="800" fill="#7a5d0a">S5 · llms.txt</text></a>
   <rect x="672" y="404" width="58" height="17" rx="8" fill="#b8860b"/>
   <text x="701" y="416" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">⚠ 12MB 巨型</text>
   <text x="452" y="442" font-size="8" fill="#444">200 · 12,080,654 字节 · 26,166 行</text>
@@ -847,11 +852,11 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <rect x="780" y="400" width="300" height="182" rx="8" fill="#fff" stroke="#256b2f" stroke-width="2"/>
   <rect x="780" y="400" width="300" height="26" rx="8" fill="#d8ecd8"/>
   <rect x="780" y="418" width="300" height="8" fill="#d8ecd8"/>
-  <text x="792" y="417" font-size="10" font-weight="800" fill="#256b2f">S6 · MD 镜像（llms-content/）</text>
+  <a href="https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md" target="_blank"><text x="792" y="417" font-size="10" font-weight="800" fill="#256b2f">S6 · MD 镜像（llms-content/）</text></a>
   <rect x="1012" y="404" width="58" height="17" rx="8" fill="#256b2f"/>
   <text x="1041" y="416" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✓ 正文到手</text>
-  <text x="792" y="442" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /llms-content/document/detail/…/</text>
-  <text x="792" y="453" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">Ascendcopdevg_opdev_001_html.md</text>
+  <a href="https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md" target="_blank"><text x="792" y="442" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /llms-content/document/detail/…/</text>
+  <text x="792" y="453" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">Ascendcopdevg_opdev_001_html.md</text></a>
   <text x="792" y="474" font-size="8" fill="#444">200 · Content-Type: text/markdown · 1.9KB</text>
   <text x="792" y="490" font-size="8" fill="#444">YAML frontmatter（title/description/url/sourcePath）</text>
   <text x="792" y="506" font-size="8" fill="#444">+ 正文真实可读（环境准备步骤逐条在列）</text>
@@ -874,7 +879,7 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <text x="932" y="668" text-anchor="middle" font-size="8" fill="#4a3d78">llms.txt（虽巨型）· robots LLM-Policy 行</text>
   <text x="560" y="694" text-anchor="middle" font-size="9.5" font-weight="800" fill="#993C1D">投机项全做了，必答题没答——图 A 预言「九成价值在 P0+P1，P0 独占大头」，缺的恰是独占大头的那块</text>
 </svg>
-<div class="figcap"><b>图 F</b> · 上泳道＝模型真实动作：S1 搜索拿到候选 URL → S2 fetch 文档页（301 重定向后 SPA 空壳，正文 0 字）→ S3 fetch 主页（导航+页脚+「加载中」）——主线两连空。下泳道＝curl 传输层观测：robots 门全开且挂了 LLM-Policy 行（S4）→ llms.txt 存在但 12MB 巨型且漏核心文档（S5）→ MD 镜像真实可读（S6）＝唯一走通的官方正文路径。底部＝修站顺序倒挂实况。</div>
+<div class="figcap"><b>图 F</b> · 上泳道＝模型真实动作：S1 搜索拿到候选 URL → S2 fetch 文档页（301 重定向后 SPA 空壳，正文 0 字）→ S3 fetch 主页（导航+页脚+「加载中」）——主线两连空。下泳道＝curl 传输层观测：<a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots</a> 门全开且挂了 LLM-Policy 行（S4）→ <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> 存在但 12MB 巨型且漏核心文档（S5）→ <a class="fl" href="https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md" target="_blank">MD 镜像</a>真实可读（S6）＝唯一走通的官方正文路径。底部＝修站顺序倒挂实况。</div>
 </div>
 </div>
 
@@ -884,31 +889,31 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
   <thead><tr><th>步</th><th>动作</th><th>请求 URL</th><th>传输层观测（curl）</th><th>模型拿到什么</th><th>命中图 A</th></tr></thead>
   <tbody>
     <tr><td><b>S1</b></td><td>web_search</td><td><code>hiascend.com</code> 域内搜索「Ascend C 入门」</td><td>—</td><td>5 条结果；选中官方文档「Ascend C 简介」（CANN 8.5.0.alpha002）</td><td>web_search 发现层</td></tr>
-    <tr><td><b>S2</b></td><td>web_fetch</td><td><code>https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html</code></td><td><b>301</b> → <code>…_00046.html</code> → 200；HTML 186KB；title 为<b>全站通用</b>（非本页文档名）；canonical ✓ 指向新 URL；无 JSON-LD；正文关键词（核函数/编程模型/达芬奇/矢量算子/环境准备）<b>出现 0 次</b>；去标签正文 1003 字符全为导航菜单；四类 UA（curl/Chrome/Googlebot/ChatGLM-Spider）<b>返回同一空壳</b></td><td>带 JS 渲染的 fetch 拿到了文档 title，但正文仍空——只返回「获取效率/正确性/完整性/易理解」评分组件词</td><td>301 重定向链 · canonical · <b>HTML 正文（P0 ✗）</b></td></tr>
-    <tr><td><b>S3</b></td><td>web_fetch</td><td><code>https://www.hiascend.com/cann/ascend-c</code>（llms.txt 条目发现）</td><td>200；SPA 空壳</td><td>导航菜单 + 页脚链接 + <b>「加载中」占位符</b>；无任何 Ascend C 实质内容</td><td>页内链接（仅导航）</td></tr>
-    <tr><td><b>S4</b></td><td>旁路观测</td><td><code>https://www.hiascend.com/robots.txt</code></td><td>200；<code>Allow: /</code>；专门 AI Agent 白名单段（anthropic-ai、Chatglm-spider、Bytespider、CCBot 等）；<b><code>LLM-Policy: https://www.hiascend.com/llms.txt</code></b>；多个 <code>Sitemap:</code> 分片</td><td>（传输层证据）门全开，无任何拦截</td><td>robots 门控 · sitemap 指令</td></tr>
-    <tr><td><b>S5</b></td><td>旁路观测</td><td><code>https://www.hiascend.com/llms.txt</code></td><td>200；<b>12,080,654 字节 / 26,166 行</b>；含 19,847 条 CANN 文档条目；有 <code>/cann/ascend-c</code> 条目，<b>但全文 grep 不到「Ascend C 简介」</b>（850alpha002 版亦无 ascendc 条目）</td><td>（若被消费）S3 的 URL 来源；但巨型体量超出单次 fetch 预算</td><td>llms.txt（P3 ⚠ 巨型化）</td></tr>
-    <tr><td><b>S6</b></td><td>旁路观测</td><td><code>https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/…/opdev_001_html.md</code></td><td>200；<code>Content-Type: text/markdown</code>；1.9KB；YAML frontmatter（title/description/url/sourcePath）</td><td>（若被消费）<b>正文真实可读</b>——环境准备步骤逐条在列</td><td>Markdown 镜像（P1 ✓）</td></tr>
+    <tr><td><b>S2</b></td><td>web_fetch</td><td><code><a class="fl" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html" target="_blank">https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html</a></code></td><td><b>301</b> → <code>…_00046.html</code> → 200；HTML 186KB；title 为<b>全站通用</b>（非本页文档名）；canonical ✓ 指向新 URL；无 JSON-LD；正文关键词（核函数/编程模型/达芬奇/矢量算子/环境准备）<b>出现 0 次</b>；去标签正文 1003 字符全为导航菜单；四类 UA（curl/Chrome/Googlebot/ChatGLM-Spider）<b>返回同一空壳</b></td><td>带 JS 渲染的 fetch 拿到了文档 title，但正文仍空——只返回「获取效率/正确性/完整性/易理解」评分组件词</td><td>301 重定向链 · canonical · <b>HTML 正文（P0 ✗）</b></td></tr>
+    <tr><td><b>S3</b></td><td>web_fetch</td><td><code><a class="fl" href="https://www.hiascend.com/cann/ascend-c" target="_blank">https://www.hiascend.com/cann/ascend-c</a></code>（llms.txt 条目发现）</td><td>200；SPA 空壳</td><td>导航菜单 + 页脚链接 + <b>「加载中」占位符</b>；无任何 Ascend C 实质内容</td><td>页内链接（仅导航）</td></tr>
+    <tr><td><b>S4</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">https://www.hiascend.com/robots.txt</a></code></td><td>200；<code>Allow: /</code>；专门 AI Agent 白名单段（anthropic-ai、Chatglm-spider、Bytespider、CCBot 等）；<b><code>LLM-Policy: <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></b>；多个 <code>Sitemap:</code> 分片</td><td>（传输层证据）门全开，无任何拦截</td><td>robots 门控 · sitemap 指令</td></tr>
+    <tr><td><b>S5</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></td><td>200；<b>12,080,654 字节 / 26,166 行</b>；含 19,847 条 CANN 文档条目；有 <code>/cann/ascend-c</code> 条目，<b>但全文 grep 不到「Ascend C 简介」</b>（850alpha002 版亦无 ascendc 条目）</td><td>（若被消费）S3 的 URL 来源；但巨型体量超出单次 fetch 预算</td><td>llms.txt（P3 ⚠ 巨型化）</td></tr>
+    <tr><td><b>S6</b></td><td>旁路观测</td><td><code><a class="fl" href="https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md" target="_blank">https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/Atlas200IDKA2DeveloperKit_230RC2_operatordev_Ascendcopdevg_opdev_001_html.md</a></code></td><td>200；<code>Content-Type: text/markdown</code>；1.9KB；YAML frontmatter（title/description/url/sourcePath）</td><td>（若被消费）<b>正文真实可读</b>——环境准备步骤逐条在列</td><td>Markdown 镜像（P1 ✓）</td></tr>
   </tbody>
 </table>
-<div class="note">sitemap 本次主线未消费，但观测确认存在：<code>sitemapdoc1–6.xml</code> 收录全部文档 URL，甚至直接含 <code>.md</code> 后缀的源文件直链（Gitee 文档仓映射）——发现层（P2）完备。</div>
+<div class="note">sitemap 本次主线未消费，但观测确认存在：<code><a class="fl" href="https://www.hiascend.com/sitemap/sitemapdoc1.xml" target="_blank">sitemapdoc1–6.xml</a></code>（点开为第 1 片，其余见 <a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> 的 Sitemap 指令）收录全部文档 URL，甚至直接含 <code>.md</code> 后缀的源文件直链（Gitee 文档仓映射）——发现层（P2）完备。</div>
 </div>
 
 <div class="card">
 <h3>四条实验结论</h3>
 <ul class="tight">
 <li><b>① P0 是唯一断点，且比预想更顽固。</b>主线上模型两连空（文档页 + 主页），最终手里没有任何正文事实。值得注意的是 S2/S3 的细节：<b>fetch 工具自带 JS 渲染</b>（所以拿到了 JS 动态设置的文档 title），但正文是「再发一个异步 API 拉取」的——渲染等待期内没等到，照样空。「加载中」三个字就是铁证。<b>对站点方的含义：SPA 异步正文对渲染型抓取器也是赌运气，SSR/SSG 直出才是确定性的。</b></li>
-<li><b>② 修站顺序倒挂实锤。</b>hiascend 把 P3（llms.txt + robots LLM-Policy 行）、P1 的镜像半壁（llms-content 全量 MD 镜像）、P2（sitemap 全收录）都做了——<b>投机项全做了，必答题（P0 正文静态可取）没答</b>。图 A 价值条说「九成价值在 P0+P1，P0 独占大头」，实验里缺的恰是独占大头的那块。</li>
-<li><b>③ llms.txt 巨型化反例。</b>12MB / 26,166 行，远超 llmstxt.org「每页一行链接 + 一句话简介」的精简索引初衷——这实际是把 llms-full.txt 的体量塞进了 llms.txt。后果有二：一次 fetch 预算读不完（等于不可用）；且近 2 万条收录里<b>漏了「Ascend C 简介」这种最核心的入门文档</b>——大而全 ≠ 覆盖关键。该做的是：llms.txt 收口到几百行以内的人工精选，全文放 llms-full.txt。</li>
-<li><b>④ MD 镜像的定位被精确验证。</b>它正是本实验唯一走通的官方正文路径（S6）——「HTML 失败时的备用路径」名副其实。但触发它依赖「模型知道并去消费 llms.txt / 镜像」，而主流厂商未确认消费 llms.txt（理论 tab 图 D 的诚实边界），<b>所以这个救场不保证发生</b>；若 P0 修好，这些旁路全部自动变成锦上添花。优先级判断（P1 而非 P0）经受住了实测。</li>
+<li><b>② 修站顺序倒挂实锤。</b>hiascend 把 P3（<a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> + robots LLM-Policy 行）、P1 的镜像半壁（llms-content 全量 MD 镜像）、P2（sitemap 全收录）都做了——<b>投机项全做了，必答题（P0 正文静态可取）没答</b>。图 A 价值条说「九成价值在 P0+P1，P0 独占大头」，实验里缺的恰是独占大头的那块。</li>
+<li><b>③ llms.txt 巨型化反例。</b><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a> 12MB / 26,166 行，远超 <a class="fl" href="https://llmstxt.org" target="_blank">llmstxt.org</a>「每页一行链接 + 一句话简介」的精简索引初衷——这实际是把 llms-full.txt 的体量塞进了 llms.txt。后果有二：一次 fetch 预算读不完（等于不可用）；且近 2 万条收录里<b>漏了「Ascend C 简介」这种最核心的入门文档</b>——大而全 ≠ 覆盖关键。该做的是：llms.txt 收口到几百行以内的人工精选，全文放 llms-full.txt。</li>
+<li><b>④ MD 镜像的定位被精确验证。</b>它正是本实验唯一走通的官方正文路径（S6）——「HTML 失败时的备用路径」名副其实。但触发它依赖「模型知道并去消费 llms.txt / 镜像」，而主流厂商未确认消费 <a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">llms.txt</a>（理论 tab 图 D 的诚实边界），<b>所以这个救场不保证发生</b>；若 P0 修好，这些旁路全部自动变成锦上添花。优先级判断（P1 而非 P0）经受住了实测。</li>
 </ul>
 </div>
 
 <div class="card">
 <h3>对本页理论 tab 的两处修正（实测驱动）</h3>
 <ul class="tight">
-<li><b>修正 1 · llms.txt 的发现方式</b>：图 D 及备答原说「AI 不通过 robots 发现 llms.txt，robots 里没有任何指令指向它」——这是 llmstxt.org 标准约定，但 hiascend 实测在 robots.txt 里写了 <code>LLM-Policy:</code> 行主动挂钩（超出标准约定的站点侧增强）。准确表述：<b>「约定不依赖 robots 引路；站点可选挂 LLM-Policy 行——hiascend 已挂，是否被消费未知」</b>。</li>
-<li><b>修正 2 · MD 镜像的「多数站不提供」</b>：hiascend 实际提供了 llms-content/ 全量 MD 镜像（每条 llms.txt 详情链接都真实可访问、带 frontmatter）——这点上它走在多数站点前面。但 P0 未修使这些镜像的价值打折：它们只能救场，不能顶替正文直出。</li>
+<li><b>修正 1 · llms.txt 的发现方式</b>：图 D 及备答原说「AI 不通过 robots 发现 llms.txt，robots 里没有任何指令指向它」——这是 llmstxt.org 标准约定，但 hiascend 实测在 <a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">robots.txt</a> 里写了 <code>LLM-Policy:</code> 行主动挂钩（超出标准约定的站点侧增强）。准确表述：<b>「约定不依赖 robots 引路；站点可选挂 LLM-Policy 行——hiascend 已挂，是否被消费未知」</b>。</li>
+<li><b>修正 2 · MD 镜像的「多数站不提供」</b>：hiascend 实际提供了 <a class="fl" href="https://www.hiascend.com/llms-content/cann/zh_cann_ascend-c.md" target="_blank">llms-content/</a> 全量 MD 镜像（每条 llms.txt 详情链接都真实可访问、带 frontmatter）——这点上它走在多数站点前面。但 P0 未修使这些镜像的价值打折：它们只能救场，不能顶替正文直出。</li>
 </ul>
 <div class="note"><b>诚实边界：</b>① S4–S6 是 curl 传输层观测，用于还原 web_fetch 背后发生的传输事件，不是模型主动 fetch 序列的一部分——模型主线止于 S3；② 单次实验、单一模型（GLM）+ 单一工具链，不同厂商工具（是否渲染、渲染等待时长、是否消费 llms.txt）路径可能不同——S3 的「加载中」就是等待时长的直接证据；③ llms.txt 覆盖性 grep 基于当日快照（12MB 文件本身也可能变化）；④ 实验日期 2026-09-03，站点行为可能随版本迭代改变。</div>
 </div>
