@@ -43,13 +43,31 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
 .toc{margin:18px 0 8px;display:flex;gap:8px;flex-wrap:wrap}
 .toc a{font-size:12.5px;color:#333;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 14px}
 .toc a:hover{border-color:#2f3d63;color:#2f3d63}
+/* 一级 tab */
+.tabs{display:flex;gap:0;margin:26px 0 0;border-bottom:2px solid var(--line)}
+.tabs button{font-family:inherit;font-size:14px;font-weight:700;color:var(--sub);background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;padding:10px 22px;cursor:pointer}
+.tabs button.on{color:var(--ink);border-bottom-color:#C8102E}
+.tabs button:hover{color:var(--ink)}
+/* 实验步骤徽章 */
+.sb{display:inline-block;font-size:11px;font-weight:800;padding:1px 8px;border-radius:6px;white-space:nowrap;vertical-align:1px}
+.sb.ok{background:#D8ECD8;color:#256b2f}
+.sb.bad{background:#F9D2D2;color:#993C1D}
+.sb.warn{background:#FCEFC7;color:#7a5d0a}
+.sb.neu{background:#ececec;color:#888}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>web_fetch 深挖：能取到的全部文件 · 优先级 · 大模型怎么「读」页面 · llms.txt 位置 · 布局减幻守则</h1>
-<div class="subtitle">承接 <a href="arch-d3.html">arch-d3 人机协同旅程 · 4.3 架构图</a>的 web_fetch 细化，本页把四个追问<b>全部图形化</b>：① 这份清单<b>全不全</b>（图 A：16 项全景时间轴）；② 这些文件<b>谁重要</b>（图 A 底部 P0–P3 价值条）；③ 大模型到底怎么「扫描」页面（图 C：token 流 + U 型注意力）；④ llms.txt 放哪、什么布局提效减幻（图 D / 图 E）。事实口径锚定 D 任务实测（<code>task_run_log.md</code>）。</div>
+<div class="subtitle">承接 <a href="arch-d3.html">arch-d3 人机协同旅程 · 4.3 架构图</a>的 web_fetch 细化。<b>「理论」tab</b> 把四个追问全部图形化：① 这份清单<b>全不全</b>（图 A：16 项全景时间轴）；② 这些文件<b>谁重要</b>（图 A 底部 P0–P3 价值条）；③ 大模型到底怎么「扫描」页面（图 C：token 流 + U 型注意力）；④ llms.txt 放哪、什么布局提效减幻（图 D / 图 E）。<b>「实验实测」tab</b> 是 2026-09-03 用 GLM 真实跑一遍「Ascend C 入门」检索的全程实录（图 F），逐 URL 验证理论。事实口径锚定 D 任务实测（<code>task_run_log.md</code>）。</div>
+
+<div class="tabs">
+  <button id="tabBtn-theory" class="on" onclick="showTab('theory')">理论 · 4 图</button>
+  <button id="tabBtn-lab" onclick="showTab('lab')">实验实测 · GLM 跑「Ascend C 入门」</button>
+</div>
+
+<div id="tab-theory">
 
 <div class="toc">
   <a href="#s1">① 文件全景 + 优先级（图 A）</a>
@@ -705,8 +723,207 @@ ul.tight li{margin-bottom:7px;line-height:1.7}
     <tr><td>（投机）根路径提供 /llms.txt 索引</td><td>若被消费则跳过发现层摩擦</td><td>零成本旁路，非核心依赖</td></tr>
   </tbody>
 </table>
-<div class="note"><b>诚实边界：</b>① ①节的优先级是基于可观测调用契约 + 通用爬取工程惯例的<b>判断排序</b>（「九成价值在 P0+P1」是工程估计，非测量）；② ②节的扫描机制引用公开研究（Liu et al. 2023 lost-in-the-middle）与自注意力的通用描述，不针对任何厂商内部实现；③ ④节是机制反推的设计守则，单项收益未做 A/B 测量。</div>
+<div class="note"><b>诚实边界：</b>① ①节的优先级是基于可观测调用契约 + 通用爬取工程惯例的<b>判断排序</b>（「九成价值在 P0+P1」是工程估计，非测量）；② ②节的扫描机制引用公开研究（Liu et al. 2023 lost-in-the-middle）与自注意力的通用描述，不针对任何厂商内部实现；③ ④节是机制反推的设计守则，单项收益未做 A/B 测量；④ 实验 tab（图 F）为 2026-09-03 单次实测，详见该 tab 的诚实边界。</div>
 </div>
+
+</div><!-- /tab-theory -->
+
+<div id="tab-lab" style="display:none">
+<a id="lab"></a>
+<h2><span class="no">⑤</span>实验实测：让 GLM 真的跑一遍「Ascend C 入门」</h2>
+<div class="sechint">任务原话：<b>「Ascend C怎么入门？请只从 hiascend 的官方文档找，并写下你每一步请求了哪个 URL。」</b>执行者＝GLM（2026-09-03），观测工具＝web_search / web_fetch（模型视角）+ curl（传输层观测，还原 fetch 背后发生的事件）。图 F 是全程时序：模型主线止于 S3（两连空），旁路观测发现唯一的官方正文出口是 MD 镜像。</div>
+
+<div class="card">
+<div class="fig44" id="figF">
+<svg viewBox="0 0 1120 700" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans SC',sans-serif">
+  <defs>
+    <marker id="ffG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/></marker>
+    <marker id="ffR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C8102E"/></marker>
+  </defs>
+  <text x="560" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1a1a">图 F · 实验实测时序：GLM 跑「Ascend C 入门（仅 hiascend 官方文档）」· 2026-09-03</text>
+  <text x="560" y="38" text-anchor="middle" font-size="9" fill="#888">上泳道＝模型真实动作（模型视角可观测）· 下泳道＝curl 传输层观测（还原 web_fetch 背后发生的事件）· 卡头色＝该步结果</text>
+
+  <!-- ===== 泳道 1：模型真实动作 ===== -->
+  <rect x="20" y="52" width="1080" height="272" rx="8" fill="#fbfbfd" stroke="#e5e5e5"/>
+  <text x="34" y="74" font-size="10.5" font-weight="800" fill="#555">泳道 1 · 模型真实动作</text>
+  <text x="150" y="74" font-size="8.5" fill="#999">模型自己发起、自己看得到的部分</text>
+
+  <!-- S1 -->
+  <rect x="100" y="86" width="300" height="182" rx="8" fill="#fff" stroke="#cfe3cf"/>
+  <rect x="100" y="86" width="300" height="26" rx="8" fill="#e4f0e4"/>
+  <rect x="100" y="104" width="300" height="8" fill="#e4f0e4"/>
+  <text x="112" y="103" font-size="10" font-weight="800" fill="#256b2f">S1 · web_search</text>
+  <rect x="332" y="90" width="58" height="17" rx="8" fill="#256b2f"/>
+  <text x="361" y="102" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✓ 候选到手</text>
+  <text x="112" y="128" font-size="8" fill="#444">query =「Ascend C 入门 site:hiascend.com」</text>
+  <text x="112" y="144" font-size="8" fill="#444">返回 5 条结果，其中 3 条为 hiascend.com 域内</text>
+  <text x="112" y="160" font-size="8" fill="#444">选中第 2 条：官方文档「Ascend C 简介」</text>
+  <text x="112" y="176" font-size="8" fill="#444">（CANN 8.5.0.alpha002 · opdevg/Ascendcopdevg）</text>
+  <text x="112" y="198" font-size="7.5" fill="#256b2f">命中图 A：web_search 发现层（搜索结果落地 URL＝HTML）</text>
+  <text x="112" y="212" font-size="7.5" fill="#256b2f">另命中 3 条第三方（华为云博客/CSDN）——被「仅官方」约束排除</text>
+
+  <line x1="400" y1="177" x2="438" y2="177" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ffG)"/>
+
+  <!-- S2 -->
+  <rect x="440" y="86" width="300" height="182" rx="8" fill="#fff" stroke="#e8c4c4"/>
+  <rect x="440" y="86" width="300" height="26" rx="8" fill="#f9e3e3"/>
+  <rect x="440" y="104" width="300" height="8" fill="#f9e3e3"/>
+  <text x="452" y="103" font-size="10" font-weight="800" fill="#993C1D">S2 · web_fetch 文档页</text>
+  <rect x="672" y="90" width="58" height="17" rx="8" fill="#C8102E"/>
+  <text x="701" y="102" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✗ 正文 0 字</text>
+  <text x="452" y="128" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /document/detail/zh/CANNCommunityEdition/</text>
+  <text x="452" y="139" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html</text>
+  <text x="452" y="156" font-size="8" fill="#444">传输层：301 → …_00046.html → 200（重定向 1 次）</text>
+  <text x="452" y="172" font-size="8" fill="#444">HTML 186KB，但 title＝「昇腾社区官网-…」全站通用</text>
+  <text x="452" y="188" font-size="8" fill="#444">正文关键词 0 次 · 去标签 1003 字符全为导航菜单</text>
+  <text x="452" y="204" font-size="8" fill="#444">fetch 工具带 JS 渲染：拿到文档 title 但正文仍空</text>
+  <text x="452" y="216" font-size="7.2" fill="#993C1D">（只返回「获取效率/正确性/完整性/易理解」评分组件词）</text>
+  <text x="452" y="234" font-size="7.5" fill="#9a5a2a">命中图 A：301 重定向链 ✓ · canonical ✓ 跟随 · 无 JSON-LD</text>
+  <text x="452" y="248" font-size="7.5" fill="#9a5a2a">SPA 壳：/_static3/Dy1Fh9Yn.js（UA 无分流，四类 UA 同壳）</text>
+  <text x="452" y="262" font-size="8.5" font-weight="800" fill="#C8102E">P0 断点：正文事实静态可取 = ✗</text>
+
+  <line x1="740" y1="177" x2="778" y2="177" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ffG)"/>
+
+  <!-- S3 -->
+  <rect x="780" y="86" width="300" height="182" rx="8" fill="#fff" stroke="#e8c4c4"/>
+  <rect x="780" y="86" width="300" height="26" rx="8" fill="#f9e3e3"/>
+  <rect x="780" y="104" width="300" height="8" fill="#f9e3e3"/>
+  <text x="792" y="103" font-size="10" font-weight="800" fill="#993C1D">S3 · web_fetch 主页</text>
+  <rect x="1012" y="90" width="58" height="17" rx="8" fill="#C8102E"/>
+  <text x="1041" y="102" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✗ 正文 0 字</text>
+  <text x="792" y="128" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /cann/ascend-c（llms.txt 条目发现）</text>
+  <text x="792" y="150" font-size="8" fill="#444">返回：导航菜单 + 页脚链接 + 「加载中」占位符</text>
+  <text x="792" y="166" font-size="8" fill="#444">无任何 Ascend C 实质内容（特性/入门路径均空）</text>
+  <text x="792" y="182" font-size="8" fill="#444">「加载中」＝异步拉正文没等到——渲染型工具也赌运气</text>
+  <text x="792" y="204" font-size="7.5" fill="#9a5a2a">命中图 A：页内链接（仅导航与页脚，无正文内链）</text>
+
+  <!-- 主线终局条 -->
+  <rect x="100" y="280" width="980" height="34" rx="6" fill="#C8102E"/>
+  <text x="590" y="301" text-anchor="middle" font-size="10.5" font-weight="800" fill="#fff">主线终局（S1→S3）：模型手里没有任何正文事实 → 只能退回自带知识（＝图 E 左栏「幻觉高发型布局」的共同结局）</text>
+
+  <!-- 跨泳道虚线：主线失败后查旁路 -->
+  <path d="M 230,268 L 230,362" stroke="#C8102E" stroke-width="1.4" stroke-dasharray="4 3" fill="none" marker-end="url(#ffR)"/>
+  <text x="238" y="320" font-size="7.8" fill="#C8102E">主线失败，用 curl 观测旁路还原现场</text>
+
+  <!-- ===== 泳道 2：传输层与旁路观测 ===== -->
+  <rect x="20" y="366" width="1080" height="236" rx="8" fill="#f8faf8" stroke="#e5e5e5"/>
+  <text x="34" y="388" font-size="10.5" font-weight="800" fill="#555">泳道 2 · 传输层与旁路观测</text>
+  <text x="210" y="388" font-size="8.5" fill="#999">curl 补充观测——还原 web_fetch 背后发生的传输事件（非模型主动序列）</text>
+
+  <!-- S4 -->
+  <rect x="100" y="400" width="300" height="182" rx="8" fill="#fff" stroke="#cfe3cf"/>
+  <rect x="100" y="400" width="300" height="26" rx="8" fill="#e4f0e4"/>
+  <rect x="100" y="418" width="300" height="8" fill="#e4f0e4"/>
+  <text x="112" y="417" font-size="10" font-weight="800" fill="#256b2f">S4 · robots.txt</text>
+  <rect x="332" y="404" width="58" height="17" rx="8" fill="#256b2f"/>
+  <text x="361" y="416" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✓ 门全开</text>
+  <text x="112" y="442" font-size="8" fill="#444">200 · Allow: /（仅禁 /profile/ · /doc_center/）</text>
+  <text x="112" y="458" font-size="8" fill="#444">专门 AI Agent 白名单段：anthropic-ai、</text>
+  <text x="112" y="471" font-size="8" fill="#444">Chatglm-spider、Bytespider、CCBot…（明确欢迎抓取）</text>
+  <text x="112" y="493" font-size="8" font-weight="700" fill="#7a5d0a">⚠ 发现修正点：LLM-Policy: /llms.txt 指令——</text>
+  <text x="112" y="506" font-size="8" font-weight="700" fill="#7a5d0a">站点主动把 llms.txt 挂进 robots（超标准约定的做法）</text>
+  <text x="112" y="528" font-size="7.5" fill="#256b2f">命中图 A：robots 门控 · Sitemap: 多分片指令</text>
+
+  <line x1="400" y1="491" x2="438" y2="491" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ffG)"/>
+
+  <!-- S5 -->
+  <rect x="440" y="400" width="300" height="182" rx="8" fill="#fff" stroke="#e6dcae"/>
+  <rect x="440" y="400" width="300" height="26" rx="8" fill="#fdf6df"/>
+  <rect x="440" y="418" width="300" height="8" fill="#fdf6df"/>
+  <text x="452" y="417" font-size="10" font-weight="800" fill="#7a5d0a">S5 · llms.txt</text>
+  <rect x="672" y="404" width="58" height="17" rx="8" fill="#b8860b"/>
+  <text x="701" y="416" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">⚠ 12MB 巨型</text>
+  <text x="452" y="442" font-size="8" fill="#444">200 · 12,080,654 字节 · 26,166 行</text>
+  <text x="452" y="458" font-size="8" fill="#444">收录 19,847 条 CANN 文档条目（近乎全站）</text>
+  <text x="452" y="474" font-size="8" fill="#444">有 /cann/ascend-c 主页条目 ✓（S3 的 URL 即来自这里）</text>
+  <text x="452" y="496" font-size="8" font-weight="700" fill="#993C1D">✗ 漏收「Ascend C 简介」——最核心的入门文档</text>
+  <text x="452" y="512" font-size="8" font-weight="700" fill="#993C1D">grep 全文无此条目 · 850alpha002 版亦无 ascendc 条目</text>
+  <text x="452" y="534" font-size="7.5" fill="#7a5d0a">判定：把 llms-full 级体量塞进了 llms.txt——一次 fetch 预算</text>
+  <text x="452" y="547" font-size="7.5" fill="#7a5d0a">读不完 · 大而全 ≠ 覆盖关键</text>
+
+  <line x1="740" y1="491" x2="778" y2="491" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ffG)"/>
+
+  <!-- S6 -->
+  <rect x="780" y="400" width="300" height="182" rx="8" fill="#fff" stroke="#256b2f" stroke-width="2"/>
+  <rect x="780" y="400" width="300" height="26" rx="8" fill="#d8ecd8"/>
+  <rect x="780" y="418" width="300" height="8" fill="#d8ecd8"/>
+  <text x="792" y="417" font-size="10" font-weight="800" fill="#256b2f">S6 · MD 镜像（llms-content/）</text>
+  <rect x="1012" y="404" width="58" height="17" rx="8" fill="#256b2f"/>
+  <text x="1041" y="416" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">✓ 正文到手</text>
+  <text x="792" y="442" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">GET /llms-content/document/detail/…/</text>
+  <text x="792" y="453" font-size="7.2" fill="#666" font-family="ui-monospace,Menlo,monospace">Ascendcopdevg_opdev_001_html.md</text>
+  <text x="792" y="474" font-size="8" fill="#444">200 · Content-Type: text/markdown · 1.9KB</text>
+  <text x="792" y="490" font-size="8" fill="#444">YAML frontmatter（title/description/url/sourcePath）</text>
+  <text x="792" y="506" font-size="8" fill="#444">+ 正文真实可读（环境准备步骤逐条在列）</text>
+  <text x="792" y="528" font-size="8.5" font-weight="800" fill="#256b2f">本实验唯一走通的官方正文路径</text>
+  <text x="792" y="547" font-size="7.5" fill="#256b2f">命中图 A：Markdown 镜像（P1）——「HTML 失败时的备用路径」验证</text>
+
+  <!-- ===== 底部：修站顺序倒挂 ===== -->
+  <text x="560" y="626" text-anchor="middle" font-size="11" font-weight="800" fill="#1a1a1a">修站顺序倒挂实况（对照图 A 底部价值条）</text>
+  <rect x="80" y="636" width="235" height="42" rx="6" fill="#C8102E"/>
+  <text x="197" y="653" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fff">P0 正文事实静态可取：✗ 未做</text>
+  <text x="197" y="668" text-anchor="middle" font-size="8" fill="#ffd9d9">文档页/主页均为 SPA 空壳</text>
+  <rect x="325" y="636" width="235" height="42" rx="6" fill="#e8a25a"/>
+  <text x="442" y="653" text-anchor="middle" font-size="9.5" font-weight="800" fill="#7a4a10">P1 门控+结构化+MD 镜像：✓ 大半已做</text>
+  <text x="442" y="668" text-anchor="middle" font-size="8" fill="#7a4a10">robots 开放 · canonical ✓ · llms-content 全量镜像 ✓</text>
+  <rect x="570" y="636" width="235" height="42" rx="6" fill="#e6cf7a"/>
+  <text x="687" y="653" text-anchor="middle" font-size="9.5" font-weight="800" fill="#6b550a">P2 发现层：✓ 已做</text>
+  <text x="687" y="668" text-anchor="middle" font-size="8" fill="#6b550a">sitemap 多分片 · 文档 URL 全收录（含 .md 直链）</text>
+  <rect x="815" y="636" width="235" height="42" rx="6" fill="#b9a7e3"/>
+  <text x="932" y="653" text-anchor="middle" font-size="9.5" font-weight="800" fill="#4a3d78">P3 投机：✓ 已做</text>
+  <text x="932" y="668" text-anchor="middle" font-size="8" fill="#4a3d78">llms.txt（虽巨型）· robots LLM-Policy 行</text>
+  <text x="560" y="694" text-anchor="middle" font-size="9.5" font-weight="800" fill="#993C1D">投机项全做了，必答题没答——图 A 预言「九成价值在 P0+P1，P0 独占大头」，缺的恰是独占大头的那块</text>
+</svg>
+<div class="figcap"><b>图 F</b> · 上泳道＝模型真实动作：S1 搜索拿到候选 URL → S2 fetch 文档页（301 重定向后 SPA 空壳，正文 0 字）→ S3 fetch 主页（导航+页脚+「加载中」）——主线两连空。下泳道＝curl 传输层观测：robots 门全开且挂了 LLM-Policy 行（S4）→ llms.txt 存在但 12MB 巨型且漏核心文档（S5）→ MD 镜像真实可读（S6）＝唯一走通的官方正文路径。底部＝修站顺序倒挂实况。</div>
+</div>
+</div>
+
+<div class="card">
+<h3>逐步实录：每一步请求了哪个 URL、发生了什么</h3>
+<table>
+  <thead><tr><th>步</th><th>动作</th><th>请求 URL</th><th>传输层观测（curl）</th><th>模型拿到什么</th><th>命中图 A</th></tr></thead>
+  <tbody>
+    <tr><td><b>S1</b></td><td>web_search</td><td><code>hiascend.com</code> 域内搜索「Ascend C 入门」</td><td>—</td><td>5 条结果；选中官方文档「Ascend C 简介」（CANN 8.5.0.alpha002）</td><td>web_search 发现层</td></tr>
+    <tr><td><b>S2</b></td><td>web_fetch</td><td><code>https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850alpha002/opdevg/Ascendcopdevg/atlas_ascendc_10_0001.html</code></td><td><b>301</b> → <code>…_00046.html</code> → 200；HTML 186KB；title 为<b>全站通用</b>（非本页文档名）；canonical ✓ 指向新 URL；无 JSON-LD；正文关键词（核函数/编程模型/达芬奇/矢量算子/环境准备）<b>出现 0 次</b>；去标签正文 1003 字符全为导航菜单；四类 UA（curl/Chrome/Googlebot/ChatGLM-Spider）<b>返回同一空壳</b></td><td>带 JS 渲染的 fetch 拿到了文档 title，但正文仍空——只返回「获取效率/正确性/完整性/易理解」评分组件词</td><td>301 重定向链 · canonical · <b>HTML 正文（P0 ✗）</b></td></tr>
+    <tr><td><b>S3</b></td><td>web_fetch</td><td><code>https://www.hiascend.com/cann/ascend-c</code>（llms.txt 条目发现）</td><td>200；SPA 空壳</td><td>导航菜单 + 页脚链接 + <b>「加载中」占位符</b>；无任何 Ascend C 实质内容</td><td>页内链接（仅导航）</td></tr>
+    <tr><td><b>S4</b></td><td>旁路观测</td><td><code>https://www.hiascend.com/robots.txt</code></td><td>200；<code>Allow: /</code>；专门 AI Agent 白名单段（anthropic-ai、Chatglm-spider、Bytespider、CCBot 等）；<b><code>LLM-Policy: https://www.hiascend.com/llms.txt</code></b>；多个 <code>Sitemap:</code> 分片</td><td>（传输层证据）门全开，无任何拦截</td><td>robots 门控 · sitemap 指令</td></tr>
+    <tr><td><b>S5</b></td><td>旁路观测</td><td><code>https://www.hiascend.com/llms.txt</code></td><td>200；<b>12,080,654 字节 / 26,166 行</b>；含 19,847 条 CANN 文档条目；有 <code>/cann/ascend-c</code> 条目，<b>但全文 grep 不到「Ascend C 简介」</b>（850alpha002 版亦无 ascendc 条目）</td><td>（若被消费）S3 的 URL 来源；但巨型体量超出单次 fetch 预算</td><td>llms.txt（P3 ⚠ 巨型化）</td></tr>
+    <tr><td><b>S6</b></td><td>旁路观测</td><td><code>https://www.hiascend.com/llms-content/document/detail/Atlas200IDKA2DeveloperKit/…/opdev_001_html.md</code></td><td>200；<code>Content-Type: text/markdown</code>；1.9KB；YAML frontmatter（title/description/url/sourcePath）</td><td>（若被消费）<b>正文真实可读</b>——环境准备步骤逐条在列</td><td>Markdown 镜像（P1 ✓）</td></tr>
+  </tbody>
+</table>
+<div class="note">sitemap 本次主线未消费，但观测确认存在：<code>sitemapdoc1–6.xml</code> 收录全部文档 URL，甚至直接含 <code>.md</code> 后缀的源文件直链（Gitee 文档仓映射）——发现层（P2）完备。</div>
+</div>
+
+<div class="card">
+<h3>四条实验结论</h3>
+<ul class="tight">
+<li><b>① P0 是唯一断点，且比预想更顽固。</b>主线上模型两连空（文档页 + 主页），最终手里没有任何正文事实。值得注意的是 S2/S3 的细节：<b>fetch 工具自带 JS 渲染</b>（所以拿到了 JS 动态设置的文档 title），但正文是「再发一个异步 API 拉取」的——渲染等待期内没等到，照样空。「加载中」三个字就是铁证。<b>对站点方的含义：SPA 异步正文对渲染型抓取器也是赌运气，SSR/SSG 直出才是确定性的。</b></li>
+<li><b>② 修站顺序倒挂实锤。</b>hiascend 把 P3（llms.txt + robots LLM-Policy 行）、P1 的镜像半壁（llms-content 全量 MD 镜像）、P2（sitemap 全收录）都做了——<b>投机项全做了，必答题（P0 正文静态可取）没答</b>。图 A 价值条说「九成价值在 P0+P1，P0 独占大头」，实验里缺的恰是独占大头的那块。</li>
+<li><b>③ llms.txt 巨型化反例。</b>12MB / 26,166 行，远超 llmstxt.org「每页一行链接 + 一句话简介」的精简索引初衷——这实际是把 llms-full.txt 的体量塞进了 llms.txt。后果有二：一次 fetch 预算读不完（等于不可用）；且近 2 万条收录里<b>漏了「Ascend C 简介」这种最核心的入门文档</b>——大而全 ≠ 覆盖关键。该做的是：llms.txt 收口到几百行以内的人工精选，全文放 llms-full.txt。</li>
+<li><b>④ MD 镜像的定位被精确验证。</b>它正是本实验唯一走通的官方正文路径（S6）——「HTML 失败时的备用路径」名副其实。但触发它依赖「模型知道并去消费 llms.txt / 镜像」，而主流厂商未确认消费 llms.txt（理论 tab 图 D 的诚实边界），<b>所以这个救场不保证发生</b>；若 P0 修好，这些旁路全部自动变成锦上添花。优先级判断（P1 而非 P0）经受住了实测。</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>对本页理论 tab 的两处修正（实测驱动）</h3>
+<ul class="tight">
+<li><b>修正 1 · llms.txt 的发现方式</b>：图 D 及备答原说「AI 不通过 robots 发现 llms.txt，robots 里没有任何指令指向它」——这是 llmstxt.org 标准约定，但 hiascend 实测在 robots.txt 里写了 <code>LLM-Policy:</code> 行主动挂钩（超出标准约定的站点侧增强）。准确表述：<b>「约定不依赖 robots 引路；站点可选挂 LLM-Policy 行——hiascend 已挂，是否被消费未知」</b>。</li>
+<li><b>修正 2 · MD 镜像的「多数站不提供」</b>：hiascend 实际提供了 llms-content/ 全量 MD 镜像（每条 llms.txt 详情链接都真实可访问、带 frontmatter）——这点上它走在多数站点前面。但 P0 未修使这些镜像的价值打折：它们只能救场，不能顶替正文直出。</li>
+</ul>
+<div class="note"><b>诚实边界：</b>① S4–S6 是 curl 传输层观测，用于还原 web_fetch 背后发生的传输事件，不是模型主动 fetch 序列的一部分——模型主线止于 S3；② 单次实验、单一模型（GLM）+ 单一工具链，不同厂商工具（是否渲染、渲染等待时长、是否消费 llms.txt）路径可能不同——S3 的「加载中」就是等待时长的直接证据；③ llms.txt 覆盖性 grep 基于当日快照（12MB 文件本身也可能变化）；④ 实验日期 2026-09-03，站点行为可能随版本迭代改变。</div>
+</div>
+</div><!-- /tab-lab -->
+
+<script>
+function showTab(id){
+  document.getElementById('tab-theory').style.display = (id==='theory')?'':'none';
+  document.getElementById('tab-lab').style.display = (id==='lab')?'':'none';
+  document.getElementById('tabBtn-theory').classList.toggle('on', id==='theory');
+  document.getElementById('tabBtn-lab').classList.toggle('on', id==='lab');
+  window.scrollTo(0,0);
+}
+if(location.hash==='#lab'){showTab('lab');}
+</script>
 
 </div>
 </body>
