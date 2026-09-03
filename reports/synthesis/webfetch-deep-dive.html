@@ -961,6 +961,7 @@ details.fold[open] summary{margin-bottom:8px}
   <thead><tr><th>模型 / 产品</th><th>类型</th><th>对 llms.txt 的实际行为</th><th>证据</th></tr></thead>
   <tbody>
     <tr><td><b>GLM</b>（本实验）</td><td>agentic 抓取（web_search + web_fetch）</td><td><b>不读</b>。动线＝搜索 → HTML 直抓；robots / llms.txt / sitemap 均不在计划内</td><td>本次实测（上图 F）</td></tr>
+    <tr><td><b>Kimi</b>（本实验）</td><td>长上下文 assistant（Kimi-User UA）</td><td><b>robots.txt 无白名单段</b>；llms.txt 无专属条目；MD 镜像不存在（404）。WebFetch 工具有渲染/提取能力（能拿到 80RC2 入门正文），但纯 curl（Kimi-User UA）面对同一 URL 是 SPA 空壳</td><td>本次实测（下方 Kimi 实录表）</td></tr>
     <tr><td><b>Google</b></td><td>搜索 / AI Overviews</td><td><b>明确拒绝</b>：「不支持且无计划」（Illyes，2025-07）；Mueller 比作已废弃的 keywords meta tag；2026-06 写进官方文档「不帮助也不损害」</td><td>官方声明</td></tr>
     <tr><td><b>OpenAI</b></td><td>搜索 / GPTBot</td><td><b>未确认</b>。爬虫文档只字未提；日志里 GPTBot 偶有 fetch（占 llms.txt 少量请求的 4.51%），更像探索而非消费</td><td>文档 + 日志</td></tr>
     <tr><td><b>Anthropic</b></td><td>Claude / ClaudeBot</td><td><b>态度友好但未确认</b>：自家文档发布 llms.txt、曾推动文档平台支持；未确认 Claude 检索会解析第三方文件（ClaudeBot 占 llms.txt 请求 0.80%）</td><td>文档 + 报道</td></tr>
@@ -969,6 +970,43 @@ details.fold[open] summary{margin-bottom:8px}
   </tbody>
 </table>
 <div class="note"><b>日志总账</b>：Ahrefs 2026-05 分析 137,210 个域名——<b>97% 的 llms.txt 全月零请求</b>；有请求者中 AI 检索 bot 仅占约 1.1%，其余是 SEO 工具与普通爬虫；Slackbot 抓 llms.txt 的次数都比 PerplexityBot 多。</div>
+
+<h3>Kimi 实测（2026-09-03 · 同一任务）</h3>
+<table>
+  <thead><tr><th>步骤</th><th>工具 / UA</th><th>请求 URL</th><th>传输层观测</th><th>拿到什么</th><th>命中图 A 项</th></tr></thead>
+  <tbody>
+    <tr><td><b>S1</b></td><td>WebSearch</td><td><code>site:hiascend.com Ascend C 入门 官方文档</code></td><td>—</td><td>2 个官方 URL：① /zh/ascend-c ② /document/detail/.../atlas_ascendc_10_43.html</td><td>搜索索引</td></tr>
+    <tr><td><b>S2</b></td><td>WebFetch</td><td><code><a class="fl" href="https://www.hiascend.com/zh/ascend-c" target="_blank">https://www.hiascend.com/zh/ascend-c</a></code></td><td>200；302 重定向</td><td>cookie 弹窗 + 几乎无实质内容（标题「AscendC与CANN算子开发」，正文仅 cookie 声明）</td><td>HTML（SPA 空壳）</td></tr>
+    <tr><td><b>S3</b></td><td>WebFetch</td><td><code><a class="fl" href="https://www.hiascend.com/document/detail/zh/canncommercial/80RC2/developmentguide/opdevg/Ascendcopdevg/atlas_ascendc_10_43.html" target="_blank">.../atlas_ascendc_10_43.html</a></code></td><td>200；301→200</td><td><b>「Ascend C简介」正文片段</b>：概述（编程语言介绍）+ 使用须知（支持的产品型号列表）+ 内含链接（atlas_ascendc_10_0001.html）</td><td>HTML（SSR 片段 ✓）</td></tr>
+    <tr><td><b>S4</b></td><td>WebFetch</td><td><code>.../atlas_ascendc_10_0001.html</code>（S3 页面内链接）</td><td>200</td><td><b>「环境准备」+「快速入门」正文</b>：硬件/软件环境、安装步骤、HelloWorld 样例、编译运行</td><td>HTML（SSR 正文 ✓）</td></tr>
+    <tr><td><b>S5</b></td><td>curl（Kimi-User UA）</td><td>同 S4 URL</td><td>200；175KB HTML</td><td><b>SPA 空壳</b>：title「昇腾社区官网-昇腾万里 让智能无所不及」（通用站名）；正文关键词「环境准备/快速入门/HelloWorld」命中 0 次</td><td>HTML（SPA 空壳 ✗）</td></tr>
+    <tr><td><b>S6</b></td><td>curl（Kimi-User UA）</td><td><code><a class="fl" href="https://www.hiascend.com/robots.txt" target="_blank">https://www.hiascend.com/robots.txt</a></code></td><td>200</td><td>无 Kimi 专门白名单段（有 Chatglm-spider / anthropic-ai / Bytespider / CCBot，<b>无 Kimi</b>）</td><td>robots.txt（P1）</td></tr>
+    <tr><td><b>S7</b></td><td>curl（Kimi-User UA）</td><td><code><a class="fl" href="https://www.hiascend.com/llms.txt" target="_blank">https://www.hiascend.com/llms.txt</a></code></td><td>200；12MB</td><td>grep「ascendc_10_0001」<b>0 命中</b>；grep「80RC2」0 命中；仅有 latest/900 版本 canncommercial 条目</td><td>llms.txt（P3）</td></tr>
+    <tr><td><b>S8</b></td><td>curl（Kimi-User UA）</td><td><code>https://www.hiascend.com/llms-content/.../atlas_ascendc_10_0001.md</code>（构造路径）</td><td>404</td><td>80RC2 版本 Ascend C 入门<b>无 MD 镜像</b></td><td>MD 镜像（P1 ✗）</td></tr>
+  </tbody>
+</table>
+
+<ul class="tight">
+<li><b>① WebFetch 有渲染/提取能力，curl 没有。</b>同一 URL（atlas_ascendc_10_0001.html），WebFetch 提取到「环境准备+快速入门」正文，curl（Kimi-User UA）拿到 175KB SPA 空壳。这说明 WebFetch 工具链内部有 JS 执行或 DOM 解析能力，而纯 HTTP 请求拿不到。</li>
+<li><b>② 但「有提取能力」≠「P0 已解决」。</b>S2 的 /zh/ascend-c 页 WebFetch 也只拿到 cookie 弹窗；S3 的 10_43 页只拿到片段（目录页，非完整入门）。<b>真正拿到完整入门正文的是 S4 的 10_0001 页</b>——但这个 URL 是 S3 页面内的链接，不是搜索直接给的。如果模型停在 S2/S3，手里仍然不完整。</li>
+<li><b>③ Kimi 在 hiascend 的待遇：robots.txt 无白名单、llms.txt 无专属条目、MD 镜像不存在。</b>相比 GLM（robots.txt 有 Chatglm-spider 白名单段），Kimi 连白名单段都没有——虽然 Allow:/ 对所有人开放，但「没有专门提到」本身就是个信号。</li>
+<li><b>④ 与 GLM 的核心差异：WebFetch 提取能力更强，但遇到 SPA 照样有空壳风险。</b>GLM 实验里 web_fetch 对 850alpha002 文档页返回「正文 0 字」；Kimi 实测里 WebFetch 对 80RC2 的 10_43 页能提取片段、对 10_0001 页能提取完整正文——<b>差异可能来自页面版本（80RC2 vs 850alpha002）或工具链实现</b>，不是模型本身的能力差异。</li>
+</ul>
+
+<details class="fold">
+<summary>诚实边界（点击展开）</summary>
+<table>
+  <thead><tr><th>项</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr><td>执行者</td><td>WorkBuddy 工具链（WebSearch + WebFetch + curl），底层推理模型为 Kimi</td></tr>
+    <tr><td>与 GLM 实验的区别</td><td>GLM 实验是「模型自述」工具调用链；本实验是「外部观测」工具链行为。两者口径不同，不可直接比较数量</td></tr>
+    <tr><td>WebFetch 能力</td><td>WebFetch 是 WorkBuddy 框架提供的工具，不是 Kimi 原生工具。其内部实现（是否含 headless 渲染、等待时长）未知</td></tr>
+    <tr><td>UA 测试局限性</td><td>curl 用 Kimi-User UA 只能模拟 HTTP 层，不能模拟 Kimi 的实际抓取器内部逻辑（是否有渲染、Cookie、JS 执行）</td></tr>
+    <tr><td>页面版本差异</td><td>GLM 实验抓的是 850alpha002 版；Kimi 实测抓的是 80RC2 版——两版站点实现可能不同，不能直接归因模型差异</td></tr>
+  </tbody>
+</table>
+</details>
+
 <ul class="tight">
 <li><b>「主路 / 旁路」是模型相对的</b>：对 GLM 是旁路的东西，对 Perplexity（官方口径）和编码 agent 是主入口，对 Google 不存在——本页理论 tab 的划分＝GLM 实测视角，不外推普适。</li>
 <li><b>唯一跨模型成立的必答题仍是 P0</b>：正文以静态 HTML 直出，不依赖任何模型的特殊习惯——它<b>不赌「模型碰巧会读哪个文件」</b>。</li>
