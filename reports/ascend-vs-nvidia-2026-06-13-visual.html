@@ -1535,43 +1535,43 @@ function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 
 /* ---------- journey overview ---------- */
 const JOURNEY_OP=[
- {n:'01',name:'落地·找入口·选型',acc:'#EF4444',meta:'昇 75 / NV 76',
+ {n:'01',name:'落地·找入口·选型',acc:'#EF4444',meta:'',
   touch:['官网首页','开发者门户','顶部导航','产品总览','规格','解决方案'],
   action:'搜索·品牌页落地 → 找到「算子开发」入口 → 看产品/规格/方案选型',
   aY:42,nY:36,emoji:'😐',eL:'入口要绕',eC:'#D97706',
   pains:['开发者中心埋在二级、找「算子开发」要绕；好在首屏有「算子开发」场景卡，比想象直接'],
   opps:[['首屏/导航补「按场景·按角色」横切入口，让“我要做算子”一步直达','用户体验']]},
- {n:'02',name:'上手引导',acc:'#16A34A',meta:'昇 78 / NV 78 · 微反超',
+ {n:'02',name:'上手引导',acc:'#16A34A',meta:'· 微反超',
   touch:['算子开发 hub','产品详情（CANN）','快速入门（学习路径）','在线实验'],
   action:'进算子开发 hub 看 5 环节 → 选 Ascend C → 看学习路径 → 在线实验试跑',
   aY:30,nY:34,emoji:'🙂',eL:'结构更清',eC:'#059669',
   pains:['算子 hub 有 5 环节框架，但缺“先装 CANN”的明确第一步；不过结构已胜过 NVIDIA 的 CUDA 资源堆'],
   opps:[['算子 hub 顶部加“按 4 步开始”主线 + 在线实验前置，把结构优势讲足','产品']]},
- {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
+ {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'· 谷底',
   touch:['下载中心','注册 / 登录','Toolkit 下载流程','版本选择'],
   action:'关下载公告 → 选架构/版本/包 → 同意 CANN 协议 → 登录华为账号 → 下载（约 7 步）',
   aY:82,nY:22,emoji:'😣',eL:'卡在下载',eC:'#DC2626',
   pains:['“先跑起来”<b>7 步</b> + 登录前置 + 协议同意，链路最长；NVIDIA 绿按钮零登录、内联命令约 2 步'],
   opps:[['游客可下、登录与协议后置、选项给默认值智能推荐','官网平台 · P0']]},
- {n:'04',name:'动手写·查文档',acc:'#3B82F6',meta:'昇 77 / NV 80',
+ {n:'04',name:'动手写·查文档',acc:'#3B82F6',meta:'',
   touch:['文档中心','API 参考','代码示例'],
   action:'查 Ascend C 编程指南 → 抄 ModelZoo 内联示例 → 写第一个算子 → 查 API',
   aY:44,nY:30,emoji:'😐',eL:'查得到',eC:'#D97706',
   pains:['API 版本切换 / 结构待统一、缺在线试调；示例偏模型级，算子级 Hello-World 偏少'],
   opps:[['API 文档统一版本选择器 + 补算子级示例与“一键在线跑”','资料']]},
- {n:'05',name:'编译跑通',acc:'#8B5CF6',meta:'昇 75 / NV 79',
+ {n:'05',name:'编译跑通',acc:'#8B5CF6',meta:'',
   touch:['开发工具（MindStudio / 工具链）'],
   action:'用 CANN 工具链/MindStudio 编译算子 → 部署到卡 → 跑出第一个结果',
   aY:46,nY:30,emoji:'😐',eL:'链路偏长',eC:'#D97706',
   pains:['算子编译/部署链路较长、工程化门槛高；NVIDIA nvcc 一条命令即编译即跑'],
   opps:[['给算子编译/运行做“一键脚手架 + 在线实验直跑”，压短首次成功步数','研发·工具链']]},
- {n:'06',name:'调试·求助',acc:'#0EA5B7',meta:'昇 75 / NV 76',
+ {n:'06',name:'调试·求助',acc:'#0EA5B7',meta:'',
   touch:['开发者社区 / 论坛','技术支持','FAQ'],
   action:'看报错 → 查 FAQ → 论坛按产品线提问 → 提工单',
   aY:44,nY:32,emoji:'😐',eL:'能解决偏内',eC:'#D97706',
   pains:['论坛发帖需登录、以中文圈为主，优质问答全球搜索可达性低；FAQ 集中是亮点'],
   opps:[['论坛游客可读 + 英文版块 + FAQ 接入全站搜索，把“一搜就有答案”做大','社区运营']]},
- {n:'07',name:'进阶·跟生态',acc:'#e0a32e',meta:'昇 77 / NV 81',
+ {n:'07',name:'进阶·跟生态',acc:'#e0a32e',meta:'',
   touch:['模型库（ModelZoo）','博客 / 案例'],
   action:'逛 ModelZoo 找进阶模型 → 看博客/技术专区 → 考微认证 → 参与 SIG/开源',
   aY:44,nY:28,emoji:'😐',eL:'内容不差',eC:'#D97706',
@@ -1579,43 +1579,43 @@ const JOURNEY_OP=[
   opps:[['博客补英文+SEO+顶栏直达，微认证建含金量背书，推到全球搜索','社区运营']]},
 ];
 const JOURNEY_TRAIN=[
- {n:'01',name:'落地·找入口·选型',acc:'#EF4444',meta:'昇 76 / NV 76',
+ {n:'01',name:'落地·找入口·选型',acc:'#EF4444',meta:'',
   touch:['官网首页','开发者门户','顶部导航','产品总览','规格','解决方案'],
   action:'落地开发者中心 → 点「训练开发」场景卡 → 看框架/硬件选型',
   aY:42,nY:36,emoji:'😐',eL:'入口清晰',eC:'#D97706',
   pains:['和算子一样，开发者中心埋在二级；好在「训练开发」场景卡直给入口'],
   opps:[['首屏「按场景」横切入口，训练/推理/算子并列直达','用户体验']]},
- {n:'02',name:'上手引导',acc:'#16A34A',meta:'昇 78 / NV 77',
+ {n:'02',name:'上手引导',acc:'#16A34A',meta:'',
   touch:['训练开发 hub','快速入门','教程','在线实验'],
   action:'进训练 hub 看框架路径 → 选 MindSpore/PyTorch → 走学习路径 → 在线实验',
   aY:32,nY:34,emoji:'🙂',eL:'引导清晰',eC:'#059669',
   pains:['MindSpeed / MindSpore 等专用栈需额外认知；NVIDIA 多数原生框架即可起步'],
   opps:[['训练 hub 给“按框架选路径 + 一键拉可训模型在线跑”最短线','产品']]},
- {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'昇 68 / NV 79 · 谷底',
+ {n:'03',name:'配环境·拿 Toolkit',acc:'#DC2626',meta:'· 谷底',
   touch:['下载中心','注册 / 登录','Toolkit 流程','版本选择'],
   action:'装 CANN + 框架(torch_npu/MindSpeed) + 数据集 → 同意协议 → 登录 → 备好',
   aY:80,nY:24,emoji:'😣',eL:'环境最重',eC:'#DC2626',
   pains:['训练环境更重：CANN + 框架 + 数据，叠加登录前置 / 协议，比算子还多步'],
   opps:[['训练环境一键脚本 / 镜像（CANN+框架+依赖打包），游客可下','官网平台 · P0']]},
- {n:'04',name:'动手写·框架迁移',acc:'#3B82F6',meta:'昇 74 / NV 81 · 摩擦',
+ {n:'04',name:'动手写·框架迁移',acc:'#3B82F6',meta:'· 摩擦',
   touch:['框架迁移 / 训练脚本','文档中心','API 参考','代码示例'],
   action:'把 PyTorch 代码迁到 torch_npu/MindSpeed → 配并行/显存 → 写训练脚本',
   aY:62,nY:28,emoji:'😣',eL:'迁移成本',eC:'#DC2626',
   pains:['NVIDIA 框架原生零迁移；昇腾需 torch_npu 适配 + MindSpeed，多一层迁移摩擦'],
   opps:[['“PyTorch→昇腾”一键迁移/自动适配工具 + 迁移对照样例库','研发·工具链']]},
- {n:'05',name:'训练跑通·分布式',acc:'#8B5CF6',meta:'昇 74 / NV 81',
+ {n:'05',name:'训练跑通·分布式',acc:'#8B5CF6',meta:'',
   touch:['训练跑通 / 分布式'],
   action:'起多卡分布式训练 → MindSpeed 并行 → MindStudio 调试 → 跑出 loss',
   aY:50,nY:28,emoji:'😐',eL:'首跑门槛',eC:'#D97706',
   pains:['NVIDIA 分布式 recipe/经验多、坑少；昇腾链路完整但现成训练样例与排错资料偏少'],
   opps:[['端到端“一键跑通”分布式训练样例 + 报错排查手册（按规模/卡数分档）','研发·工具链']]},
- {n:'06',name:'调试·求助',acc:'#0EA5B7',meta:'昇 75 / NV 76',
+ {n:'06',name:'调试·求助',acc:'#0EA5B7',meta:'',
   touch:['开发者社区 / 论坛','技术支持','FAQ'],
   action:'看训练报错 → 查 FAQ → 论坛/MindSpeed 版块提问 → 提工单',
   aY:46,nY:32,emoji:'😐',eL:'能解决偏内',eC:'#D97706',
   pains:['训练类报错(OOM/并行/精度)排查资料以中文圈为主，全球可搜性低'],
   opps:[['训练专题 FAQ/报错库 + 英文版块 + 接入全站搜索','社区运营']]},
- {n:'07',name:'进阶·跟生态',acc:'#e0a32e',meta:'昇 77 / NV 81',
+ {n:'07',name:'进阶·跟生态',acc:'#e0a32e',meta:'',
   touch:['模型库（ModelZoo）','博客 / 案例'],
   action:'ModelZoo 找可训模型 → 看训练优化博客 → 大模型并行进阶 → 参与社区',
   aY:44,nY:28,emoji:'😐',eL:'内容不差',eC:'#D97706',
@@ -1632,7 +1632,14 @@ function renderJourney(){
   wrap.style.setProperty('--jc',N);
   const seg=(a,i)=>{const p=i===0?a[i]:(a[i-1]+a[i])/2, q=i===N-1?a[i]:(a[i]+a[i+1])/2; return `0,${p} 50,${a[i]} 100,${q}`;};
   const rl=(rn,re)=>`<div class="jrn-rl"><div class="jrn-rn">${rn}</div><div class="jrn-re">${re}</div></div>`;
-  const r1=`<div class="jrn-grid"><div></div>`+JOURNEY.map(s=>`<div class="jrn-pw"><div class="jrn-ph" style="--acc:${s.acc}"><div class="pn">${s.n}</div><div class="pt">${s.name}</div><div class="ptm">${s.meta}</div></div></div>`).join('')+`</div>`;
+  /* 步骤分数一律 stepAvg() 现算（与热力图/楼层同源），meta 只留后缀标签（· 谷底 / · 微反超 / · 摩擦），
+     避免「旅程头写 昇75 / NV76，热力图同一行写 昇79 / NV82」这种同一页两处数字打架 */
+  const stepTag=s=>{
+    const [aa,nn]=stepAvg(+s.n);
+    const suf=String(s.meta||'').replace(/^昇\s*\d+\s*\/\s*NV\s*\d+\s*/,'').replace(/^·\s*/,'').trim();
+    return '昇 '+aa+' / NV '+nn+(suf?' · '+suf:'');
+  };
+  const r1=`<div class="jrn-grid"><div></div>`+JOURNEY.map(s=>`<div class="jrn-pw"><div class="jrn-ph" style="--acc:${s.acc}"><div class="pn">${s.n}</div><div class="pt">${s.name}</div><div class="ptm">${stepTag(s)}</div></div></div>`).join('')+`</div>`;
   const r2=`<div class="jrn-grid">`+rl('触点','Touch')+JOURNEY.map(s=>`<div class="jrn-tw"><div class="jrn-tc">${s.touch.map(t=>`<div class="jrn-touch">${t}</div>`).join('')}</div></div>`).join('')+`</div>`;
   const r3=`<div class="jrn-grid">`+rl('行为','Action')+JOURNEY.map(s=>{
     // 把 action 按 → 拆成步骤,手画成竖向流程图(HTML 方框 + SVG 连接箭头)
