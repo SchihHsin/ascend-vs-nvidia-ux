@@ -387,16 +387,19 @@ body{height:100vh}
 .rc .sources .source-item{padding:1.3vh 0;border-bottom:1px solid var(--line)}
 .rc .summary-note{display:flex;flex-direction:column;justify-content:center;gap:2vh;padding:2.8vh 2vw;background:var(--g-ink);color:#fff;border-radius:16px}
 .rc .summary-note p{color:#dce0e9}.rc .summary-note h2{font-size:var(--fs-h1)}
-.rc-cover .cv-bg{background:radial-gradient(ellipse at 74% 55%,#6860c970,transparent 46%),linear-gradient(125deg,#11121c,#202033 60%,#12151c)}
-.rc-cover .cv-bg::after{background:linear-gradient(95deg,#0b0d1680,transparent 65%)}
-.rc-cover .cv-center{position:absolute;left:6vw;top:50%;transform:translateY(-50%);max-width:86vw;gap:2.3vh}
-.rc-cover .cv-title{font-size:clamp(40px,5.7vw,88px);font-weight:600;line-height:1.24;letter-spacing:-.03em}
-.rc-cover .cv-sub{font-size:clamp(24px,2.5vw,42px);font-weight:300;color:#b3b3df}
-.rc-cover .cv-kicker{font-size:var(--fs-sm);color:#b5b8cd}
-.rc-cover .cv-top{align-items:center}.rc-cover .circle-name{font-size:var(--fs-h2);font-weight:600;letter-spacing:.1em}
-.rc-cover .cv-meta{font-family:inherit;font-size:var(--fs-sm);letter-spacing:.04em;opacity:.7}
-.rc-cover .cover-methods{display:flex;gap:1.3em;font-size:var(--fs-body);color:#b7bbcf;margin-top:2vh}
-.rc-cover .cover-art{position:absolute;right:3%;top:15%;height:70%;width:50%;opacity:.14}
+/* Reuse the original report cover verbatim; scope its styles to this slide. */
+.rc-cover{color:#fff;background:#0a0c13}
+.rc-cover .cover-backdrop{position:absolute;inset:0;pointer-events:none}
+.rc-cover .cover-backdrop::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 75% 35%,rgba(90,91,214,.6),transparent 27%),radial-gradient(circle at 86% 78%,rgba(53,179,230,.4),transparent 24%),linear-gradient(115deg,#08090f 8%,#101326 52%,#0b0d16 100%)}
+.rc-cover .cover-backdrop::after{content:"";position:absolute;right:6vw;top:10vh;width:43vw;height:72vh;border:1px solid rgba(255,255,255,.18);border-radius:34px;transform:rotate(-8deg);box-shadow:inset 0 0 80px rgba(142,157,255,.16),0 0 90px rgba(64,106,255,.18);background:repeating-linear-gradient(0deg,transparent 0 43px,rgba(255,255,255,.08) 44px 45px),repeating-linear-gradient(90deg,transparent 0 43px,rgba(255,255,255,.08) 44px 45px)}
+.rc-cover .cover-inner{position:relative;z-index:1;height:100%;padding:6vh 6vw;display:flex;flex-direction:column;justify-content:space-between}
+.rc-cover .cover-top{display:flex;justify-content:space-between;align-items:flex-end}
+.rc-cover .cover-brand{font-size:var(--fs-h3);font-weight:700;letter-spacing:.04em}
+.rc-cover .mono{font-family:"JetBrains Mono",monospace;font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase}
+.rc-cover .cover-middle{max-width:60vw;position:absolute;top:50%;left:6vw;transform:translateY(-50%)}
+.rc-cover .cover-title{font-size:min(6.5vw,11vh);line-height:1.02;letter-spacing:-.055em;font-weight:700}
+.rc-cover .cover-title span{font-weight:200;color:#aebaff}
+@media(max-width:900px){.rc-cover .cover-middle{max-width:82vw}.rc-cover .cover-title{font-size:min(10vw,10vh)}}
 @media(max-width:1050px){.rc .section-tabs span{padding:.4em .45em}.rc .head-l{gap:1.1vh}.rc .sm2{grid-template-columns:.72fr 1.28fr;gap:2vw}.rc .pool{gap:1vw}.rc .why-layout{grid-template-columns:.62fr 1.38fr;gap:2vw}.rc .node{padding:.8vh .6vw}.rc .validation td{padding:1.1vh .8vw}.rc .metric-strip{gap:.9vw}}
 @media(max-height:680px){.rc .head{margin-bottom:1.6vh;gap:.7vh}.rc .why-stack{gap:.7vh}.rc .why-row{padding:.7vh 1vw}.rc .pool-note{padding:1vh .8vw}.rc .body-area{padding-bottom:3vh}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
@@ -405,7 +408,10 @@ body{height:100vh}
 </head>
 <body>
 <div id="deck">
-<section class="slide s-cover rc-cover" aria-label="提升泛ICT领域竞品分析效率：根因分析"><div class="cv-bg"></div><svg class="cover-art" viewBox="0 0 700 600" fill="none"><g stroke="#c8c4ff" stroke-width="2"><path d="M30 300H660M60 110L210 300M260 110L410 300M460 110L610 300M60 490L210 300M260 490L410 300M460 490L610 300"/><path d="M100 185H40M140 235H70M300 185H235M340 235H270M500 185H440M540 235H470M100 415H40M140 365H70M300 415H235M340 365H270M500 415H440M540 365H470"/></g></svg><div class="cv-content"><div class="cv-top"><span class="circle-name">竞速圈</span><span class="cv-meta">2026 / UCD设计一部</span></div><div class="cv-center"><div class="cv-kicker">ROOT CAUSE ANALYSIS</div><h1 class="cv-title">提升泛ICT领域<br>竞品分析效率</h1><div class="cv-sub">根因分析 · 追查人工核验与调整耗时的原因</div><div class="cover-methods"><span>头脑风暴</span><span>鱼骨图</span><span>系统图</span><span>关联图</span><span>5 Why</span></div></div></div></section>
+<section class="slide s-cover rc-cover" aria-label="提升泛ICT领域竞品分析效率：根因分析">
+    <div class="cover-backdrop" aria-hidden="true"></div>
+    <div class="cover-inner"><div class="cover-top"><div class="cover-brand">竞速圈</div><div class="mono">2026 / UCD设计一部</div></div><div class="cover-middle"><h1 class="cover-title">提升泛ICT领域<br><span>竞品分析效率</span></h1></div></div>
+  </section>
 
 <section class="slide s-gray rc" data-template="deck-template:sm2-figure-text" data-density="A3" aria-label="为什么形成可用分析材料，仍需大量人工核验与调整"><header class="head"><div class="head-l"><div class="brand"><h1 class="ttl">为什么形成可用分析材料，仍需大量人工核验与调整</h1></div><div class="subttl">问题界定 · 01</div></div><nav class="section-tabs" aria-label="当前章节"><span class="active">01 问题界定</span><span class="">02 原因展开</span><span class="">03 深挖疑因</span><span class="">04 验证收敛</span></nav><p class="subtitle">直接从人工核验与调整耗时长这一现象出发，追查原因及其作用机制。</p></header><div class="body-area"><div class="sm2"><div class="sm2-left"><h2>首轮结果与可用材料之间，<br>还有哪些工作必须由人补足？</h2><p>访谈反映，首轮结果仍需补充业务语境、核验适用性并修正分析内容。<b>本阶段追查这些人工工作为何发生、为何难以前置消解。</b></p><div class="metric-strip"><div><span class="small">现有分析时间</span><span class="val">4.75</span><span class="small">天 · 8 人均值</span></div><div><span class="small">首轮可采纳</span><span class="val">22.5%</span><span class="small">自报比例均值</span></div><div><span class="small">重大返工</span><span class="val">56.25%</span><span class="small">自报比例均值</span></div></div><div class="cx-concl"><span class="ck">分析对象</span><span class="cv">首轮结果到可用材料之间的人工核验与调整。</span></div></div><div class="card baseline-panel"><h2>从三类人工工作追问耗时来源</h2><div class="analysis-step"><span class="step-no">01</span><div><h3>核验：判断结果是否可信、适用</h3><p>哪些事实、来源与适用条件，仍需要人工重新确认？</p></div></div><div class="analysis-step"><span class="step-no">02</span><div><h3>纠正：补足与当前任务的差距</h3><p>为什么需要补充业务语境、细化角色任务或修正分析边界？</p></div></div><div class="analysis-step"><span class="step-no">03</span><div><h3>重做：重新组织证据与结论</h3><p>哪些偏差未能及早发现，直到成稿后才需要大幅修改？</p></div></div><p class="small">以上为待调查的工作拆分；需通过任务回放记录各类操作与实际用时。</p></div></div></div><div class="foot"><span>来源：D1 自报基线；E1–E5 访谈线索 · 比例不作为因果证明</span><span>竞速圈 · 根因分析 / 02</span></div></section>
 
