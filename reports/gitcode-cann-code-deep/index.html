@@ -1,0 +1,2049 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CANN GitCode 算子开发代码级体验评测</title>
+  <style>
+    :root {
+      --bg: #dcdcdc;
+      --canvas: #fbfbf8;
+      --ink: #070707;
+      --muted: #5f625f;
+      --line: #d8d8d2;
+      --card: #ffffff;
+      --accent: #edff4f;
+      --accent-soft: #f6ffc4;
+      --red: #c7000b;
+      --red-soft: #fff1f2;
+      --blue: #1f5fff;
+      --blue-soft: #eef3ff;
+      --green: #157a4d;
+      --green-soft: #eefaf3;
+      --orange: #a96500;
+      --orange-soft: #fff6df;
+      --purple: #6f46d8;
+      --purple-soft: #f4efff;
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.14);
+      --radius: 24px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "HarmonyOS Sans SC", "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.48;
+      letter-spacing: 0;
+    }
+    a { color: inherit; }
+    .nav {
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      overflow-x: auto;
+      width: min(1180px, calc(100% - 32px));
+      margin: 20px auto 0;
+      padding: 10px 12px;
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: 999px;
+      background: rgba(251,251,248,.92);
+      box-shadow: 0 18px 45px rgba(0,0,0,.10);
+      backdrop-filter: blur(18px);
+    }
+    .nav b {
+      white-space: nowrap;
+      margin-right: auto;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #f1f1ee;
+      font-size: 13px;
+    }
+    .nav a {
+      display: inline-flex;
+      min-height: 34px;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      padding: 7px 11px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: #111;
+      text-decoration: none;
+      font-size: 13px;
+      background: #f1f1ee;
+      transition: background .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
+    }
+    .nav a.active {
+      color: #000;
+      border-color: #000;
+      background: var(--accent);
+      box-shadow: none;
+    }
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 16px auto 64px;
+      padding: 18px;
+      border-radius: 34px;
+      background: var(--canvas);
+      box-shadow: var(--shadow);
+    }
+    section { margin: 28px 0; scroll-margin-top: 78px; }
+    .hero {
+      padding: clamp(28px, 5vw, 58px);
+      border: 0;
+      border-radius: 30px;
+      background: var(--accent);
+      box-shadow: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #000;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #000;
+    }
+    h1, h2, h3 { margin: 0; letter-spacing: 0; line-height: 1.15; }
+    h1 { max-width: 920px; margin-top: 18px; font-size: clamp(38px, 6vw, 76px); font-weight: 520; }
+    h2 { margin-bottom: 16px; font-size: clamp(24px, 3vw, 36px); }
+    h3 { margin-bottom: 9px; font-size: 20px; }
+    p { margin: 0; }
+    .lead { max-width: 900px; margin-top: 18px; color: rgba(0,0,0,.72); font-size: 18px; }
+    .grid { display: grid; gap: 14px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: none;
+    }
+    /* 同层级卡片统一白底；颜色只表达状态、风险、方法或当前选中。 */
+    .card.pad { padding: 18px; }
+    .hero-facts {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .hero-fact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 6px 12px 6px 8px;
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 999px;
+      background: #fff;
+      color: #111;
+      font-size: 13px;
+      font-weight: 760;
+    }
+    .hero-fact b {
+      display: inline-grid;
+      place-items: center;
+      min-width: 28px;
+      height: 28px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: #000;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1;
+    }
+    .hero-fact span { color: rgba(0,0,0,.72); font-weight: 680; }
+    .muted { color: var(--muted); }
+    .small { font-size: 13px; color: var(--muted); }
+    .task-ledger {
+      margin-top: 16px;
+      padding: 14px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 20px;
+      background: #f7f7f4;
+    }
+    .task-ledger-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .task-ledger-head b { font-size: 14px; }
+    .task-ledger-head span { color: var(--muted); font-size: 12px; }
+    .task-ledger-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(145px, 1fr));
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .task-ledger-item {
+      min-width: 145px;
+      padding: 10px;
+      border: 1px solid rgba(0,0,0,.09);
+      border-radius: 14px;
+      background: #fff;
+    }
+    .task-ledger-item b { display: block; font-size: 12px; }
+    .task-ledger-item span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .task-ledger-item code { color: #111; font-family: var(--mono); font-size: 11px; }
+    .tagrow { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.16);
+      background: #f7f7f4;
+      color: #111;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .tag.red { color: var(--red); border-color: #fac8cc; background: var(--red-soft); }
+    .tag.blue { color: var(--blue); border-color: #cad9ff; background: var(--blue-soft); }
+    .tag.green { color: var(--green); border-color: #bfe9d2; background: var(--green-soft); }
+    .tag.orange { color: var(--orange); border-color: #f4d8ad; background: var(--orange-soft); }
+    .tag.purple { color: var(--purple); border-color: #ded0ff; background: var(--purple-soft); }
+    .method {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .method.run { color: #0f6b43; background: var(--green-soft); border: 1px solid #bfe9d2; }
+    .method.review { color: #2557b8; background: var(--blue-soft); border: 1px solid #cad9ff; }
+    .method.edit { color: #6b42ba; background: var(--purple-soft); border: 1px solid #ded0ff; }
+    .method.block { color: #9a4f00; background: var(--orange-soft); border: 1px solid #f4d8ad; }
+    .panel {
+      padding: 24px;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 30px;
+      background: #fff;
+    }
+    .journey-intro { max-width: 880px; margin: -5px 0 16px; color: var(--muted); font-size: 14px; }
+    .jrn-scroll { overflow-x: auto; padding-bottom: 8px; }
+    .jrn-wrap { min-width: 1260px; }
+    .jrn-grid { display: grid; grid-template-columns: 78px repeat(7, minmax(156px, 1fr)); gap: 0; }
+    .jrn-label { display: flex; flex-direction: column; justify-content: center; padding: 0 10px 0 0; text-align: right; }
+    .jrn-label b { font-size: 12px; }
+    .jrn-label span { margin-top: 2px; color: #858585; font-family: var(--mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
+    .jrn-cell { min-width: 0; padding-right: 5px; display: flex; }
+    .jrn-stage { position: relative; min-height: 102px; flex: 1; overflow: hidden; padding: 14px 12px 12px; border-radius: 12px 12px 0 0; background: #090909; color: #fff; }
+    .jrn-stage::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 4px; background: var(--stage-color); }
+    .jrn-num { color: rgba(255,255,255,.38); font-family: var(--mono); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+    .jrn-stage h3 { margin: 4px 0 7px; color: #fff; font-size: 16px; }
+    .jrn-stage .method { min-height: 20px; padding: 2px 7px; border: 0; background: rgba(255,255,255,.11); color: rgba(255,255,255,.86); font-size: 10px; }
+    .jrn-stage .method + .method { margin-left: 3px; }
+    .jrn-content { flex: 1; min-height: 112px; padding: 12px; border: 1px solid rgba(0,0,0,.10); border-top: 0; background: #fff; }
+    .jrn-touch { display: flex; gap: 6px; align-items: flex-start; color: #242424; font-family: var(--mono); font-size: 11px; line-height: 1.45; }
+    .jrn-touch + .jrn-touch { margin-top: 6px; }
+    .jrn-touch::before { content: ""; width: 5px; height: 5px; margin-top: 5px; flex: 0 0 auto; border-radius: 50%; background: var(--stage-color); }
+    .jrn-action { min-height: 166px; padding: 10px; border: 1px solid rgba(0,0,0,.10); border-top: 0; background: #f7f7f4; }
+    .jrn-mini { position: relative; display: flex; height: 62px; margin-bottom: 9px; overflow: hidden; border: 1px solid #d7d7d0; border-radius: 7px; background: #fff; font-family: var(--mono); font-size: 7px; }
+    .jrn-terminal { padding: 8px; background: #151917; color: #c9f7a9; line-height: 1.65; }
+    .jrn-terminal b { color: var(--accent); }
+    .jrn-course { display: grid; grid-template-columns: 16px 1fr; width: 100%; }
+    .jrn-course aside { background: #1e2321; }
+    .jrn-course main { display: grid; gap: 4px; padding: 8px; }
+    .jrn-course i, .jrn-tree i { display: block; height: 6px; border-radius: 2px; background: #dcded8; }
+    .jrn-course i:nth-child(2) { width: 76%; background: var(--stage-color); }
+    .jrn-course i:nth-child(3) { width: 58%; }
+    .jrn-tree { display: grid; grid-template-columns: 22px 1fr; gap: 6px; width: 100%; padding: 8px; }
+    .jrn-tree b { color: var(--stage-color); font-size: 11px; line-height: 1; }
+    .jrn-tree div { display: grid; gap: 4px; padding-top: 1px; }
+    .jrn-diff { display: grid; grid-template-columns: 1fr 1fr; width: 100%; padding: 8px; gap: 4px; background: #fbfbf9; }
+    .jrn-diff span { padding: 3px; border-radius: 2px; line-height: 1.15; }
+    .jrn-diff .minus { background: #ffe5e7; color: #a91a22; }
+    .jrn-diff .plus { background: #e3f7e9; color: #167444; }
+    .jrn-tiling { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; align-content: center; width: 100%; padding: 8px; }
+    .jrn-tiling i { display: block; height: 18px; border: 1px solid #cfd4df; border-radius: 3px; background: #eff3ff; }
+    .jrn-tiling i:nth-child(3), .jrn-tiling i:nth-child(4) { background: var(--accent-soft); border-color: var(--stage-color); }
+    .jrn-perf { display: flex; align-items: end; gap: 5px; width: 100%; padding: 8px; background: #111; }
+    .jrn-perf i { display: block; flex: 1; border-radius: 2px 2px 0 0; background: #69706d; }
+    .jrn-perf i:nth-child(1) { height: 18px; }.jrn-perf i:nth-child(2) { height: 30px; background: var(--stage-color); }.jrn-perf i:nth-child(3) { height: 42px; background: var(--accent); }
+    .jrn-handler { display: grid; grid-template-columns: 1fr 18px 1fr; align-items: center; gap: 5px; width: 100%; padding: 8px; }
+    .jrn-handler b { padding: 5px 2px; border-radius: 3px; background: #ecece7; color: #51534f; font-size: 7px; text-align: center; }
+    .jrn-handler b:last-child { background: var(--accent-soft); color: #283900; }
+    .jrn-handler span { color: var(--stage-color); font-size: 14px; text-align: center; }
+    .jrn-action p { color: #2f302e; font-size: 12px; line-height: 1.5; }
+    .jrn-emotion { position: relative; flex: 1; height: 136px; overflow: hidden; border: 1px solid rgba(0,0,0,.10); border-top: 0; background: #fbfbfa; }
+    .jrn-emotion svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .jrn-emotion .dot { position: absolute; top: var(--y); left: 50%; width: 12px; height: 12px; transform: translate(-50%,-50%); border: 3px solid #fff; border-radius: 50%; background: var(--stage-color); box-shadow: 0 1px 5px rgba(0,0,0,.2); }
+    .jrn-emotion .face { position: absolute; top: calc(var(--y) + 10px); left: 50%; transform: translateX(-50%); font-size: 18px; line-height: 1; }
+    .jrn-emotion .emotion-score { position: absolute; right: 8px; bottom: 8px; color: #5f625f; font-family: var(--mono); font-size: 10px; font-weight: 800; }
+    .jrn-pain, .jrn-opportunity { min-height: 148px; padding: 11px; border: 1px solid rgba(0,0,0,.10); border-top: 0; font-size: 12px; line-height: 1.48; }
+    .jrn-pain { background: #fff5f5; color: #741017; }
+    .jrn-opportunity { border-radius: 0 0 10px 10px; background: #f5ffc7; color: #263600; }
+    .jrn-pain b, .jrn-opportunity b { display: block; margin-bottom: 6px; color: #111; font-size: 11px; }
+    .jrn-pain ul, .jrn-opportunity ul { margin: 0; padding-left: 15px; }
+    .jrn-pain li + li, .jrn-opportunity li + li { margin-top: 4px; }
+    .asset-list {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .asset-list span {
+      display: inline-flex;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.12);
+      color: #111;
+      font-size: 11px;
+      font-family: var(--mono);
+    }
+    .run-detail {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 16px;
+      background: rgba(255,255,255,.72);
+      color: #333;
+      line-height: 1.5;
+    }
+    .run-detail b {
+      display: block;
+      margin-bottom: 5px;
+      color: #000;
+      font-size: 12px;
+    }
+    .run-detail p { margin: 0; }
+    .run-detail p + b { margin-top: 8px; }
+    .scorebar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.10);
+      overflow: hidden;
+      margin: 10px 0 8px;
+    }
+    .scoreline {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      margin: 10px 0 8px;
+    }
+    .scoreline .scorebar { margin: 0; }
+    .scoreval {
+      color: #000;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .scorebar span { display: block; height: 100%; border-radius: 999px; }
+    .ok span { background: #000; }
+    .warn span { background: #3b3b36; }
+    .bad span { background: var(--red); }
+    .table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: var(--radius); }
+    .table th, .table td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+    .table th { background: #f5f7fb; font-size: 13px; color: #344056; }
+    .table tr:last-child td { border-bottom: 0; }
+    .stage {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .stage .side { position: sticky; top: 78px; align-self: start; }
+    .stage h3 { display: flex; align-items: center; gap: 9px; }
+    .stage .n {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: #000;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+    .evidence {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 14px;
+    }
+    .trace {
+      grid-column: 1 / -1;
+      padding: 14px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 22px;
+      background: #f7f7f4;
+    }
+    .trace-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+    .trace-title::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 1px solid #000;
+    }
+    .trace-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .trace-card {
+      min-height: 118px;
+      padding: 12px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 16px;
+      background: #fff;
+      font-size: 13px;
+    }
+    .trace-card b {
+      display: block;
+      margin-bottom: 6px;
+      color: #000;
+      font-size: 12px;
+    }
+    .trace-card code {
+      font-family: var(--mono);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+    .trace-card strong {
+      color: #000;
+      font-weight: 850;
+    }
+    .repo-shots {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .repo-shot {
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 18px;
+      background: #f7f7f4;
+    }
+    .repo-shot img {
+      display: block;
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      object-position: top;
+      background: #e7e7e2;
+    }
+    .repo-shot figcaption {
+      padding: 9px 11px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .repo-shot b { color: #111; }
+    .code {
+      position: relative;
+      overflow: auto;
+      max-height: 430px;
+      padding: 14px;
+      border-radius: 18px;
+      background: #101725;
+      color: #e9eef7;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.55;
+      white-space: pre;
+    }
+    .evidence-label {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #000;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .filelist {
+      display: grid;
+      gap: 7px;
+      margin-top: 12px;
+    }
+    .file {
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: #f7f7f4;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: #253044;
+      overflow-wrap: anywhere;
+    }
+    .finding {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    .finding .head {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      border-radius: var(--radius) var(--radius) 0 0;
+      background: var(--accent-soft);
+      font-weight: 800;
+    }
+    .finding .chain {
+      display: inline-block;
+      margin-left: 7px;
+      color: #516100;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .finding .body { padding: 16px; }
+    ul.clean { margin: 10px 0 0; padding-left: 18px; }
+    ul.clean li { margin: 6px 0; }
+    .demo {
+      border: 1px solid rgba(0,0,0,.10);
+      background: #f7f7f4;
+      border-radius: 22px;
+      padding: 14px;
+    }
+    .demo .bar {
+      height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #000;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .demo .lane {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: stretch;
+    }
+    .demo .label {
+      padding: 10px;
+      border-radius: 14px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .demo .box {
+      padding: 10px;
+      border: 1px dashed rgba(0,0,0,.25);
+      border-radius: 14px;
+      background: #fff;
+      font-size: 13px;
+    }
+    .owner {
+      display: grid;
+      grid-template-columns: 170px 1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .owner + .owner { margin-top: 12px; }
+    .owner > div {
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: #fff;
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .problem-card {
+      position: relative;
+      min-height: 210px;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: none;
+    }
+    .problem-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .problem-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 50%;
+      background: #f1f1ee;
+      color: #000;
+    }
+    .problem-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+    .problem-icon .glyph {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+    .problem-card h3 { color: #000; }
+    .problem-card .why {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,.10);
+      color: #333;
+      font-size: 13px;
+    }
+    .problem-flow {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin: 11px 0 -3px;
+      color: #5f625f;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .problem-flow span {
+      padding: 3px 6px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 999px;
+      background: #f7f7f4;
+    }
+    .problem-flow .arrow { padding: 3px 0; border: 0; background: transparent; color: #8a8a85; }
+    .issue {
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: var(--radius);
+      background: var(--accent);
+      color: #000;
+    }
+    .issue b {
+      display: block;
+      margin-bottom: 6px;
+      color: #000;
+    }
+    .issue .small { color: rgba(0,0,0,.72); }
+    .method-table {
+      display: grid;
+      grid-template-columns: 140px 1fr 1fr;
+      gap: 10px;
+      align-items: stretch;
+      margin-top: 14px;
+    }
+    .method-table > div {
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: #fff;
+    }
+    .score-matrix-wrap {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      overflow: visible;
+    }
+    .matrix-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .matrix-legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-weight: 900;
+      color: #666;
+    }
+    .matrix-grad {
+      width: 94px;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(90deg,#ffd2d5,#ffe2a9 38%,#f7ffc1 58%,#c8f1df 78%,#8bd7bd);
+    }
+    .spot-control-wrap { position: relative; margin-left: auto; }
+    .spot-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .matrix-guide {
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 13px);
+      z-index: 6;
+      width: 290px;
+      padding: 10px 36px 10px 12px;
+      overflow: visible;
+      border: 1px solid rgba(255,255,255,.56);
+      border-radius: 16px;
+      background: rgba(22,24,22,.36);
+      color: #fff;
+      box-shadow: 0 16px 35px rgba(0,0,0,.16), 0 0 26px rgba(237,255,79,.24), 0 0 58px rgba(237,255,79,.14), inset 0 1px 0 rgba(255,255,255,.34);
+      backdrop-filter: blur(7px) saturate(135%);
+      -webkit-backdrop-filter: blur(7px) saturate(135%);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .matrix-guide::before {
+      content: "";
+      position: absolute;
+      inset: -14px;
+      z-index: -1;
+      border-radius: 25px;
+      background: radial-gradient(ellipse at 48% 55%, rgba(237,255,79,.52) 0%, rgba(237,255,79,.25) 22%, rgba(237,255,79,.08) 47%, transparent 72%);
+      filter: blur(11px);
+      opacity: .9;
+      animation: matrixGuideFlow 2.8s linear infinite;
+      pointer-events: none;
+    }
+    .matrix-guide::after {
+      content: "";
+      position: absolute;
+      right: 22px;
+      bottom: -10px;
+      width: 20px;
+      height: 12px;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: rgba(22,24,22,.36);
+      filter: drop-shadow(0 4px 5px rgba(237,255,79,.12));
+    }
+    .matrix-guide b { color: var(--accent); text-shadow: 0 0 12px rgba(237,255,79,.65); }
+    .matrix-guide-title { display: inline-flex; align-items: center; gap: 6px; }
+    .matrix-guide-title svg { width: 15px; height: 15px; stroke: currentColor; stroke-width: 2; fill: none; }
+    .matrix-guide-close {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      z-index: 1;
+      width: 23px;
+      height: 23px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.18);
+      color: #fff;
+      cursor: pointer;
+      font-size: 17px;
+      line-height: 1;
+    }
+    .matrix-guide-close:hover { background: rgba(255,255,255,.34); }
+    .matrix-guide.is-hidden { display: none; }
+    @keyframes matrixGuideFlow {
+      0%, 100% { transform: scale(.94); opacity: .48; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+    .spot-controls button {
+      min-width: 30px;
+      height: 30px;
+      padding: 0 9px;
+      border: 1px solid rgba(0,0,0,.16);
+      border-radius: 999px;
+      background: #fff;
+      color: #111;
+      cursor: pointer;
+      font-weight: 900;
+    }
+    .spot-controls button.on {
+      border-color: #000;
+      background: var(--accent);
+      color: #000;
+    }
+    .score-matrix-card {
+      position: relative;
+      overflow: visible;
+      padding: 10px;
+      border-radius: 24px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: #fff;
+    }
+    .score-matrix {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+    }
+    .score-matrix th,
+    .score-matrix td {
+      padding: 10px 8px;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      border-right: 1px solid rgba(0,0,0,.06);
+      text-align: center;
+      vertical-align: middle;
+      transition: opacity .22s ease, filter .22s ease;
+    }
+    .score-matrix th:first-child,
+    .score-matrix td:first-child {
+      text-align: left;
+      width: 188px;
+    }
+    .score-matrix th {
+      background: #f7f7f4;
+      color: #111;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    .score-matrix tr:last-child td { border-bottom: 0; }
+    .score-matrix th:last-child,
+    .score-matrix td:last-child { border-right: 0; }
+    .matrix-stage {
+      font-weight: 900;
+      color: #000;
+    }
+    .matrix-stage small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-weight: 650;
+      font-size: 11px;
+    }
+    .score-cell {
+      display: inline-grid;
+      place-items: center;
+      min-width: 34px;
+      height: 28px;
+      border-radius: 9px;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 950;
+    }
+    .score-cell.s1 { background: #ffe1e3; color: var(--red); }
+    .score-cell.s2 { background: #ffefd1; color: #9a4f00; }
+    .score-cell.s3 { background: #f7ffc4; color: #6a6500; }
+    .score-cell.s4 { background: #dff5eb; color: var(--green); }
+    .score-cell.s5 { background: #bff0d8; color: #075a38; }
+    .score-matrix .total {
+      font-family: var(--mono);
+      font-weight: 950;
+      color: #000;
+    }
+    .score-matrix.is-spot th,
+    .score-matrix.is-spot td {
+      opacity: .2;
+      filter: saturate(.72);
+    }
+    .score-matrix.is-spot .spot-on {
+      opacity: 1;
+      filter: saturate(1.18);
+      position: relative;
+      z-index: 2;
+    }
+    .spot-rings {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .spot-ring {
+      position: absolute;
+      border: 2px dotted rgba(55,61,72,.9);
+      border-radius: 14px;
+      transition: left .24s ease, top .24s ease, width .24s ease, height .24s ease, opacity .18s ease;
+    }
+    .spot-rings.off { opacity: 0; }
+    .spot-callout {
+      position: relative;
+      z-index: 5;
+      width: auto;
+      margin-top: 12px;
+      padding: 14px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 24px 55px rgba(0,0,0,.18);
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .spot-callout.off {
+      display: none;
+    }
+    .spot-callout .top {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      gap: 10px;
+      align-items: start;
+    }
+    .spot-callout .ico {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--accent);
+      border: 1px solid #000;
+      color: #000;
+      font-family: var(--mono);
+      font-weight: 950;
+    }
+    .spot-callout .k {
+      color: #000;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .spot-callout .v {
+      margin-top: 4px;
+      color: var(--red);
+      font-family: var(--mono);
+      font-weight: 950;
+    }
+    .spot-callout .no {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-weight: 950;
+    }
+    .spot-callout .d {
+      margin-top: 10px;
+      color: #333;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .spot-callout .chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .spot-callout .chip {
+      padding: 4px 8px;
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 999px;
+      background: #f7f7f4;
+      color: #111;
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .spot-callout .chip.bad {
+      border-color: #fac8cc;
+      background: var(--red-soft);
+      color: var(--red);
+    }
+    .stage-intro {
+      margin: -4px 0 16px;
+      padding: 16px;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 24px;
+      background: #fff;
+    }
+    .stage-intro strong {
+      color: #000;
+    }
+    .footer {
+      margin-top: 40px;
+      padding: 24px;
+      border-radius: 30px;
+      background: #000;
+      color: #fff;
+    }
+    @media (max-width: 980px) {
+      .grid.cols-2, .grid.cols-3, .grid.cols-4, .problem-grid, .finding, .evidence, .stage, .owner, .method-table, .trace-grid {
+        grid-template-columns: 1fr;
+      }
+      .stage .side { position: static; }
+      .score-matrix-card { overflow-x: auto; }
+      .score-matrix { min-width: 880px; }
+      .spot-rings { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <b>CANN 代码级评测</b>
+    <a href="#journey">7 阶段旅程</a>
+    <a href="#matrix">矩阵评分</a>
+    <a href="#stages">逐阶段分析</a>
+    <a href="#findings">结论与 demo</a>
+    <a href="#owners">责任归属</a>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="eyebrow">代码资产能否支撑 ASC 算子开发</div>
+      <h1>CANN GitCode 算子开发代码级体验评测</h1>
+      <p class="lead">
+        本次评测把开发者目标收窄为“基于 GitCode CANN 仓库实际完成 ASC / Ascend C 算子开发”，按 7 个开发阶段模拟真实行动：
+        找代码、改代码、接构建、接测试、看正式算子结构、读 tiling / kernel / API 实现、尝试运行，并记录断点。这次评测做到了“真实代码审视 + 一次实际改码 + 多次运行尝试”，但没有条件做到本地成功运行闭环。
+      </p>
+      <div class="hero-facts" aria-label="评测概览">
+        <div class="hero-fact"><b>16</b>代码任务<span>覆盖 7 阶段</span></div>
+        <div class="hero-fact"><b>7</b>代表仓库<span>按任务链选择</span></div>
+        <div class="hero-fact"><b>1</b>实际改码<span>vector_sub 派生</span></div>
+        <div class="hero-fact"><b>3</b>运行尝试<span>cmake / CANN / TTK</span></div>
+      </div>
+    </header>
+
+    <section id="journey" class="panel">
+      <h2>算子开发 7 阶段旅程</h2>
+      <p class="journey-intro">以一个开发者从复现样例到泛化性能优化的实际任务为主线。每列对应一个阶段；评分反映当前代码资产对该阶段任务的直接支撑程度，情绪曲线反映开发者推进任务时的确定感。</p>
+      <div class="tagrow" style="margin-bottom:14px">
+        <span class="method run">实际运行</span>
+        <span class="method edit">实际改码</span>
+        <span class="method review">代码审视</span>
+        <span class="method block">运行尝试受阻</span>
+      </div>
+      <div class="jrn-scroll"><div class="jrn-wrap">
+        <div class="jrn-grid">
+          <div></div>
+          <div class="jrn-cell"><div class="jrn-stage" style="--stage-color:#e95d42"><div class="jrn-num">01</div><h3>复现部署</h3><span class="method review">代码审视</span><span class="method block">运行受阻</span></div></div>
+          <div class="jrn-cell"><div class="jrn-stage" style="--stage-color:#f0a227"><div class="jrn-num">02</div><h3>迁移部署</h3><span class="method review">代码审视</span></div></div>
+          <div class="jrn-cell"><div class="jrn-stage" style="--stage-color:#4d8cff"><div class="jrn-num">03</div><h3>builtin 定制</h3><span class="method review">代码审视</span></div></div>
+          <div class="jrn-cell"><div class="jrn-stage" style="--stage-color:#91b900"><div class="jrn-num">04</div><h3>基本功能实现</h3><span class="method edit">实际改码</span><span class="method block">运行受阻</span></div></div>
+          <div class="jrn-cell"><div class="jrn-stage" style="--stage-color:#5b72db"><div class="jrn-num">05</div><h3>泛化 shape</h3><span class="method review">代码审视</span></div></div>
+          <div class="jrn-cell"><div class="jrn-stage" style="--stage-color:#159d8a"><div class="jrn-num">06</div><h3>特定 shape 优化</h3><span class="method review">代码审视</span></div></div>
+          <div class="jrn-cell"><div class="jrn-stage" style="--stage-color:#9b65d8"><div class="jrn-num">07</div><h3>泛化性能优化</h3><span class="method review">代码审视</span></div></div>
+        </div>
+        <div class="jrn-grid">
+          <div class="jrn-label"><b>代码触点</b><span>Assets</span></div>
+          <div class="jrn-cell"><div class="jrn-content"><div class="jrn-touch">cann-samples</div><div class="jrn-touch">vector_add</div><div class="jrn-touch">ascend.cmake</div></div></div>
+          <div class="jrn-cell"><div class="jrn-content"><div class="jrn-touch">learning-hub</div><div class="jrn-touch">asc-devkit</div><div class="jrn-touch">add_custom.asc</div></div></div>
+          <div class="jrn-cell"><div class="jrn-content"><div class="jrn-touch">ops-math / ops-nn</div><div class="jrn-touch">op_api / op_host</div><div class="jrn-touch">op_kernel / tests</div></div></div>
+          <div class="jrn-cell"><div class="jrn-content"><div class="jrn-touch">vector_add → vector_sub</div><div class="jrn-touch">ops-test-kit</div><div class="jrn-touch">CPU golden / CMake</div></div></div>
+          <div class="jrn-cell"><div class="jrn-content"><div class="jrn-touch">learning-hub 3.4 / 3.5</div><div class="jrn-touch">TilingContext</div><div class="jrn-touch">workspace / blockDim</div></div></div>
+          <div class="jrn-cell"><div class="jrn-content"><div class="jrn-touch">performance stories</div><div class="jrn-touch">rms_norm / moe</div><div class="jrn-touch">CATLASS StreamK</div></div></div>
+          <div class="jrn-cell"><div class="jrn-content"><div class="jrn-touch">dynamic matmul</div><div class="jrn-touch">TilingParams</div><div class="jrn-touch">handlers / tilingKey</div></div></div>
+        </div>
+        <div class="jrn-grid">
+          <div class="jrn-label"><b>实际动作</b><span>Action</span></div>
+          <div class="jrn-cell"><div class="jrn-action"><div class="jrn-mini jrn-terminal"><b>$</b> cmake -S . -B build<br><b>!</b> cmake: not found</div><p>读 README 与 CMake，执行 <code>cmake -S . -B build</code>。</p></div></div>
+          <div class="jrn-cell"><div class="jrn-action"><div class="jrn-mini jrn-course"><aside></aside><main><i></i><i></i><i></i></main></div><p>从课程找工程入口，再查 API、examples 与 clangd 配置。</p></div></div>
+          <div class="jrn-cell"><div class="jrn-action"><div class="jrn-mini jrn-tree"><b>{ }</b><div><i></i><i></i><i></i></div></div><p>沿正式仓追 dtype、tiling、kernel、参数校验与 UT。</p></div></div>
+          <div class="jrn-cell"><div class="jrn-action"><div class="jrn-mini jrn-diff"><span class="minus">- Add<br>- vector_add</span><span class="plus">+ Sub<br>+ vector_sub</span></div><p>复制 Add 改 Sub，并同步 kernel、golden、target、README。</p></div></div>
+          <div class="jrn-cell"><div class="jrn-action"><div class="jrn-mini jrn-tiling"><i></i><i></i><i></i><i></i></div><p>对比 tail tile 与正式 tiling 的 workspace、tilingKey 演进。</p></div></div>
+          <div class="jrn-cell"><div class="jrn-action"><div class="jrn-mini jrn-perf"><i></i><i></i><i></i></div><p>比较 tail rebalance、N-buffer、StreamK 的适用 shape 假设。</p></div></div>
+          <div class="jrn-cell"><div class="jrn-action"><div class="jrn-mini jrn-handler"><b>shape</b><span>→</span><b>handler</b></div><p>追 TilingParams 到 handler 条件和实际 tilingKey 分支。</p></div></div>
+        </div>
+        <div class="jrn-grid">
+          <div class="jrn-label"><b>开发者情绪</b><span>Emotion</span></div>
+          <div class="jrn-cell"><div class="jrn-emotion" style="--stage-color:#e95d42;--y:62%"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="50" x2="100" y2="50" stroke="#deded9" stroke-dasharray="3 3"/><polyline points="0,54 50,62 100,72" fill="none" stroke="#e95d42" stroke-width="2"/></svg><i class="dot"></i><span class="face">😕</span><span class="emotion-score">48 / 100</span></div></div>
+          <div class="jrn-cell"><div class="jrn-emotion" style="--stage-color:#f0a227;--y:75%"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="0,72 50,75 100,66" fill="none" stroke="#f0a227" stroke-width="2"/></svg><i class="dot"></i><span class="face">😣</span><span class="emotion-score">45 / 100</span></div></div>
+          <div class="jrn-cell"><div class="jrn-emotion" style="--stage-color:#4d8cff;--y:58%"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="0,66 50,58 100,48" fill="none" stroke="#4d8cff" stroke-width="2"/></svg><i class="dot"></i><span class="face">😐</span><span class="emotion-score">54 / 100</span></div></div>
+          <div class="jrn-cell"><div class="jrn-emotion" style="--stage-color:#91b900;--y:38%"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="0,48 50,38 100,44" fill="none" stroke="#91b900" stroke-width="2"/></svg><i class="dot"></i><span class="face">🙂</span><span class="emotion-score">62 / 100</span></div></div>
+          <div class="jrn-cell"><div class="jrn-emotion" style="--stage-color:#5b72db;--y:60%"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="0,44 50,60 100,55" fill="none" stroke="#5b72db" stroke-width="2"/></svg><i class="dot"></i><span class="face">😕</span><span class="emotion-score">52 / 100</span></div></div>
+          <div class="jrn-cell"><div class="jrn-emotion" style="--stage-color:#159d8a;--y:42%"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="0,55 50,42 100,48" fill="none" stroke="#159d8a" stroke-width="2"/></svg><i class="dot"></i><span class="face">🙂</span><span class="emotion-score">60 / 100</span></div></div>
+          <div class="jrn-cell"><div class="jrn-emotion" style="--stage-color:#9b65d8;--y:57%"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="0,48 50,57 100,57" fill="none" stroke="#9b65d8" stroke-width="2"/></svg><i class="dot"></i><span class="face">😐</span><span class="emotion-score">55 / 100</span></div></div>
+        </div>
+        <div class="jrn-grid">
+          <div class="jrn-label"><b>核心痛点</b><span>Pain</span></div>
+          <div class="jrn-cell"><div class="jrn-pain"><b>环境不可自诊断</b><ul><li>cmake 不在 PATH</li><li>Toolkit、Bisheng、NPU 无预检</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-pain"><b>课程到工程断层</b><ul><li>没有正式仓 scaffold</li><li>跨仓版本不可预判</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-pain"><b>最小改动面不可见</b><ul><li>接口、kernel、UT 分散</li><li>缺任务型必改清单</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-pain"><b>手工派生易漏改</b><ul><li>target、golden、文档需同步</li><li>TTK 依赖在运行时才暴露</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-pain"><b>概念和工程跳层</b><ul><li>课程与正式仓不同形</li><li>UT 不会随 shape 自动派生</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-pain"><b>优化路径难选择</b><ul><li>shape 与瓶颈假设分散</li><li>没有 profiling 闭环</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-pain"><b>模板选择成黑箱</b><ul><li>handler 条件只埋在代码</li><li>跨仓验证仍会断裂</li></ul></div></div>
+        </div>
+        <div class="jrn-grid">
+          <div class="jrn-label"><b>机会点</b><span>Opportunity</span></div>
+          <div class="jrn-cell"><div class="jrn-opportunity"><b>环境 Doctor</b><ul><li>一次检查工具链、SoC、版本</li><li>给出可执行修复命令</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-opportunity"><b>工程迁移模板</b><ul><li>课程提交式升级工程</li><li>带版本 lockfile</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-opportunity"><b>改动面地图</b><ul><li>按加 dtype / shape / 属性列文件</li><li>绑定必跑 UT</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-opportunity"><b>Sample Fork</b><ul><li>自动生成算子骨架</li><li>同步 TTK、golden、构建验证</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-opportunity"><b>泛化升级路径</b><ul><li>提供可 clone / diff 工程</li><li>附 shape checklist</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-opportunity"><b>性能实验路径</b><ul><li>shape 到 story 的推荐</li><li>关联指标与 profiling 入口</li></ul></div></div>
+          <div class="jrn-cell"><div class="jrn-opportunity"><b>Shape Advisor</b><ul><li>外显命中 handler 及条件</li><li>给出实验与验证入口</li></ul></div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <section id="matrix" class="panel">
+      <h2>矩阵评分：7 阶段 × 6 个代码资产支撑能力</h2>
+      <p class="muted">
+        评分采用 1-5 档：1=基本阻断，2=需要专家补全，3=有材料但不成闭环，4=可用但需改进，5=可直接支撑任务。
+        评分对象是 GitCode 代码资产对 ASC / Ascend C 算子开发任务的支撑程度。
+      </p>
+      <div class="score-matrix-wrap" style="margin-top:16px">
+        <div class="matrix-note">
+          <div class="matrix-legend"><span>1</span><span class="matrix-grad"></span><span>5</span></div>
+          <div class="spot-control-wrap">
+            <div class="matrix-guide" id="matrixGuide" role="status"><b class="matrix-guide-title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-4-4"></path></svg>查看问题证据</b><br>点击编号或左右箭头，定位对应评分与结论。<button class="matrix-guide-close" id="matrixGuideClose" type="button" aria-label="关闭操作提示">×</button></div>
+            <div class="spot-controls" id="matrixSpotControls" aria-label="矩阵问题聚光灯控制"></div>
+          </div>
+        </div>
+        <div class="score-matrix-card" id="matrixCard">
+          <table class="score-matrix" id="scoreMatrix">
+            <thead>
+              <tr>
+                <th>开发阶段</th>
+                <th>可发现</th>
+                <th>可理解</th>
+                <th>可改造</th>
+                <th>可运行</th>
+                <th>可测试</th>
+                <th>可迁移 / 优化</th>
+                <th>均分</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="matrix-stage">1 复现部署<small>cann-samples / vector_add / ascend.cmake</small></td>
+                <td data-issue="1,6"><span class="score-cell s4">4</span></td>
+                <td data-issue="1,6"><span class="score-cell s4">4</span></td>
+                <td data-issue="2,6"><span class="score-cell s3">3</span></td>
+                <td data-issue="0,6"><span class="score-cell s1">1</span></td>
+                <td data-issue="0"><span class="score-cell s2">2</span></td>
+                <td data-issue="2"><span class="score-cell s3">3</span></td>
+                <td class="total">2.8</td>
+              </tr>
+              <tr>
+                <td class="matrix-stage">2 迁移部署<small>asc-devkit / learning-hub / add_custom</small></td>
+                <td data-issue="1,6"><span class="score-cell s3">3</span></td>
+                <td data-issue="1,6"><span class="score-cell s3">3</span></td>
+                <td data-issue="2,6"><span class="score-cell s2">2</span></td>
+                <td data-issue="0,6"><span class="score-cell s2">2</span></td>
+                <td data-issue="3"><span class="score-cell s2">2</span></td>
+                <td data-issue="2"><span class="score-cell s2">2</span></td>
+                <td class="total">2.3</td>
+              </tr>
+              <tr>
+                <td class="matrix-stage">3 builtin 定制<small>ops-math / ops-nn / tests/ut</small></td>
+                <td data-issue="1,6"><span class="score-cell s3">3</span></td>
+                <td data-issue="4"><span class="score-cell s3">3</span></td>
+                <td data-issue="4"><span class="score-cell s2">2</span></td>
+                <td data-issue="0,6"><span class="score-cell s2">2</span></td>
+                <td data-issue="3"><span class="score-cell s3">3</span></td>
+                <td data-issue="4"><span class="score-cell s2">2</span></td>
+                <td class="total">2.5</td>
+              </tr>
+              <tr>
+                <td class="matrix-stage">4 基本功能实现<small>vector_add -> vector_sub / ops-test-kit</small></td>
+                <td data-issue="1,6"><span class="score-cell s4">4</span></td>
+                <td data-issue="1,6"><span class="score-cell s4">4</span></td>
+                <td data-issue="2"><span class="score-cell s4">4</span></td>
+                <td data-issue="0,6"><span class="score-cell s2">2</span></td>
+                <td data-issue="3"><span class="score-cell s2">2</span></td>
+                <td data-issue="2"><span class="score-cell s3">3</span></td>
+                <td class="total">3.2</td>
+              </tr>
+              <tr>
+                <td class="matrix-stage">5 泛化 shape<small>tail tile / TilingContext / tilingKey</small></td>
+                <td data-issue="1,6"><span class="score-cell s3">3</span></td>
+                <td data-issue="5"><span class="score-cell s2">2</span></td>
+                <td data-issue="5"><span class="score-cell s2">2</span></td>
+                <td data-issue="0,6"><span class="score-cell s2">2</span></td>
+                <td data-issue="3"><span class="score-cell s3">3</span></td>
+                <td data-issue="5"><span class="score-cell s2">2</span></td>
+                <td class="total">2.3</td>
+              </tr>
+              <tr>
+                <td class="matrix-stage">6 特定 shape 优化<small>performance story / profiling / StreamK</small></td>
+                <td data-issue="1,6"><span class="score-cell s4">4</span></td>
+                <td data-issue="5"><span class="score-cell s3">3</span></td>
+                <td data-issue="2"><span class="score-cell s3">3</span></td>
+                <td data-issue="0,6"><span class="score-cell s2">2</span></td>
+                <td data-issue="3"><span class="score-cell s2">2</span></td>
+                <td data-issue="5"><span class="score-cell s3">3</span></td>
+                <td class="total">2.8</td>
+              </tr>
+              <tr>
+                <td class="matrix-stage">7 泛化性能优化<small>CATLASS dynamic matmul / handlers</small></td>
+                <td data-issue="1,6"><span class="score-cell s3">3</span></td>
+                <td data-issue="5"><span class="score-cell s2">2</span></td>
+                <td data-issue="5"><span class="score-cell s2">2</span></td>
+                <td data-issue="0,6"><span class="score-cell s2">2</span></td>
+                <td data-issue="3"><span class="score-cell s2">2</span></td>
+                <td data-issue="5"><span class="score-cell s3">3</span></td>
+                <td class="total">2.3</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="spot-callout off" id="matrixSpotCallout"></div>
+          <div class="spot-rings off" id="matrixSpotRings"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stages">
+      <h2>逐阶段代码分析：每一步具体干了什么</h2>
+      <div class="stage-intro">
+        <p class="muted">
+          这一层按“开发者真实行动”复盘，而不是只给结论。每个阶段都固定展示
+          <strong>用户目标、查看资产、实际动作、结果与断点</strong>，再接代码摘录、文件清单和问题拆解。
+          因此它对应之前官网评测里的“触点证据卡”，只是这里的证据从网页截图换成了 repo、文件、diff 和运行尝试。
+        </p>
+        <p class="muted" style="margin-top:8px">
+          仓库选择也按任务链路展开：学习入口看 <strong>cann-learning-hub</strong>，复现和改码看 <strong>cann-samples</strong>，
+          API 与工具能力看 <strong>asc-devkit</strong>，正式 builtin 结构看 <strong>ops-math / ops-nn</strong>，
+          测试闭环看 <strong>ops-test-kit</strong>，性能模板看 <strong>catlass</strong>。
+        </p>
+        <div class="task-ledger" aria-label="本轮任务样本清单">
+          <div class="task-ledger-head"><b>本轮实际审视的 16 个代码任务样本</b><span>每项均可回溯到本地只读副本中的具体文件；其中仅 vector_sub 为实际改码。</span></div>
+          <div class="task-ledger-grid">
+            <div class="task-ledger-item"><b>1 复现部署</b><span><code>vector_add</code><br>构建入口与 host/kernel/CPU golden</span></div>
+            <div class="task-ledger-item"><b>2 迁移部署</b><span><code>add_custom</code>、工程化课程<br><code>asc-devkit</code> quick start / clangd</span></div>
+            <div class="task-ledger-item"><b>3 builtin 定制</b><span><code>stateless_random_normal_v2</code><br><code>thnn_fused_lstm_cell_grad</code></span></div>
+            <div class="task-ledger-item"><b>4 基本功能</b><span><code>vector_add -> vector_sub</code><br>TTK <code>add.csv</code> 迁移检查</span></div>
+            <div class="task-ledger-item"><b>5 泛化 shape</b><span>tail tile、课程 3.4/3.5<br>正式 tiling / UT</span></div>
+            <div class="task-ledger-item"><b>6 特定 shape 优化</b><span>tail rebalance、N-buffer<br>rms norm story</span></div>
+            <div class="task-ledger-item"><b>7 泛化性能</b><span>dynamic matmul、StreamK<br>handler 选择链</span></div>
+          </div>
+        </div>
+      </div>
+
+      <article class="stage card pad">
+        <div class="side">
+          <h3><span class="n">1</span>算子复现部署</h3>
+          <p class="muted">任务：复现 cann-samples 的 vector_add，并确认样例能否成为后续改造起点。</p>
+          <div class="tagrow" style="margin-top:12px"><span class="tag blue">cann-samples</span><span class="tag orange">环境断点</span><span class="method review">代码审视</span><span class="method block">运行尝试受阻</span></div>
+          <div class="issue"><b>问题判定</b><p class="small">不是样例代码不够，而是仓库没有先回答“我的机器能不能跑”。开发者第一步失败时无法定位是工具、环境、硬件还是代码问题。</p></div>
+        </div>
+        <div class="evidence">
+          <div class="trace">
+            <div class="trace-title">这一步具体干了什么</div>
+            <div class="trace-grid">
+              <div class="trace-card"><b>用户目标</b>像真实开发者一样，先把 <strong>vector_add</strong> 在本地复现，确认仓库样例是否能作为后续改造起点。</div>
+              <div class="trace-card"><b>查看资产</b><code>cann-samples/README.md</code>、<code>vector_add/main.asc</code>、<code>CMakeLists.txt</code>、<code>cmake/ascend.cmake</code>。</div>
+              <div class="trace-card"><b>实际动作</b>按 README 尝试 <code>cmake -S . -B build -DNPU_ARCH=dav-2201</code>，并追到 CMake 对 Toolkit 路径的依赖。</div>
+              <div class="trace-card"><b>结果与断点</b>本机 <code>cmake</code> 不在 PATH；继续往下还会需要 <code>ASCEND_HOME_PATH</code>、Bisheng 和 NPU 环境。</div>
+            </div>
+          </div>
+          <div class="repo-shots">
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/cann-samples-entry.png" alt="已标注的 cann-samples 样例入口" /><figcaption><b>界面证据 · cann-samples</b>：标出 <code>Samples</code>，开发者由此继续定位 <code>0_Introduction/vector_add</code> 作为本地复现起点。</figcaption></figure>
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/learning-hub-curriculum.png" alt="已标注的 Ascend C 课程链" /><figcaption><b>界面证据 · 课程链</b>：标出从基础到工程化、泛化 tiling、UT、性能的课程路径；本地构建环境仍需另行核对。</figcaption></figure>
+          </div>
+          <div>
+            <div class="evidence-label">运行命令与真实环境断点</div>
+            <div class="code"># cann-samples README 的运行路径
+source ${install_path}/ascend-toolkit/set_env.sh
+cmake -S . -B build -DNPU_ARCH=dav-3510
+cmake --build build --target vector_add
+./build/Samples/0_Introduction/vector_add/vector_add
+
+# 本次本机实测
+$ command -v cmake
+zsh: command not found: cmake
+$ python3 --version
+Python 3.9.6
+$ echo $ASCEND_HOME_PATH
+&lt;unset&gt;
+
+# ascend.cmake 后续还会解析
+ASCEND_DIR / ccec_compiler/bin/bisheng / toolkit headers</div>
+            <div class="filelist">
+              <div class="file">cann-samples/README.md</div>
+              <div class="file">Samples/0_Introduction/vector_add/main.asc</div>
+              <div class="file">Samples/0_Introduction/vector_add/CMakeLists.txt</div>
+              <div class="file">cmake/ascend.cmake</div>
+            </div>
+          </div>
+          <div>
+            <h3>问题拆解</h3>
+            <ul class="clean">
+              <li>代码资产本身有帮助：vector_add 同时包含 kernel、ACL host 侧内存管理、kernel launch、CPU golden 校验。</li>
+              <li>复现入口没有形成预检脚本。实际运行第一步卡在 <code>cmake</code> 缺失；即便补 cmake，<code>ascend.cmake</code> 还会要求 <code>ASCEND_HOME_PATH</code> 或默认 Toolkit 路径。</li>
+              <li>问题不是“网页找不到”，而是代码仓缺少环境可执行性检查：开发者无法在 30 秒内知道自己缺 cmake、Toolkit、Bisheng、NPU 还是 Python 依赖。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="stage card pad">
+        <div class="side">
+          <h3><span class="n">2</span>算子迁移部署</h3>
+          <p class="muted">任务：从学习样例迁移到 asc-devkit / 正式工程，判断是否有“样例到工程”的桥。</p>
+          <div class="tagrow" style="margin-top:12px"><span class="tag blue">asc-devkit</span><span class="tag purple">cann-learning-hub</span><span class="method review">代码审视</span></div>
+          <div class="issue"><b>问题判定</b><p class="small">学习代码、API 说明、正式仓结构彼此断开；用户无法把一个能跑的 demo 直接升级成可贡献、可测试、可维护的正式算子工程。</p></div>
+        </div>
+        <div class="evidence">
+          <div class="trace">
+            <div class="trace-title">这一步具体干了什么</div>
+            <div class="trace-grid">
+              <div class="trace-card"><b>用户目标</b>把学习阶段的 add_custom / vector_add 迁移成更接近正式贡献的 ASC 算子工程。</div>
+              <div class="trace-card"><b>查看资产</b><code>asc-devkit</code> API 分层、clangd 配置、examples，以及 <code>cann-learning-hub</code> 的 add_custom 和贡献教程。</div>
+              <div class="trace-card"><b>实际动作</b>沿“课程代码 -> devkit API -> 正式仓贡献说明”查找是否有生成 <code>op_api/op_host/op_kernel/tests</code> 的脚手架。</div>
+              <div class="trace-card"><b>结果与断点</b>只找到分散说明，没有找到从样例工程迁移到正式算子结构的一键路径或最小模板。</div>
+            </div>
+          </div>
+          <div class="repo-shots">
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/learning-hub-curriculum.png" alt="已标注的 Ascend C 课程链" /><figcaption><b>界面证据 · learning-hub</b>：标出工程化、泛化 tiling、UT、性能课程，是迁移阶段的学习入口。</figcaption></figure>
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/asc-devkit-engineering.png" alt="已标注的 asc-devkit 工程入口" /><figcaption><b>界面证据 · asc-devkit</b>：标出 <code>examples / impl / include / tests / tools</code>；课程样例迁入正式目录的交接工件仍缺失。</figcaption></figure>
+          </div>
+          <div>
+            <div class="evidence-label">真实工程交接证据</div>
+            <div class="code"># learning-hub 已有的课程路径
+02_AscendC_basic/src/add_custom.asc
+03.02_operator_engineering_intro.ipynb
+03.04_generalized_tiling_design.ipynb
+06.03_operator_development_based_on_opensource_repo.ipynb
+06.04_ut_st_writing_and_verification.ipynb
+
+# asc-devkit 的工程侧能力
+scripts/setup_clangd.py --npu-arch 2201 --output .clangd.local
+cmake/  examples/  impl/  include/  tests/  tools/
+
+# 未找到的交接产物
+sample -> op_api/op_host/op_kernel/tests 的 scaffold
+课程样例 -> 可提交正式算子工程的迁移 diff
+跨仓版本 / SoC 兼容性预检
+
+# 扩样后新增的版本配套证据
+learning-hub: 当前仓验证 CANN 9.0；教程声明 CANN 8.5+，仅验证 Atlas A2
+CATLASS: 不同示例分别标注 CANN 8.2.RC1 或 CANN 9.0
+asc-devkit: “暂不支持独立升级”，需搭配对应版本 CANN 包编译</div>
+            <div class="filelist">
+              <div class="file">asc-devkit/README.md</div>
+              <div class="file">asc-devkit/examples/01_simd_cpp_api/...</div>
+              <div class="file">cann-learning-hub/tutorials/ascendc_operator_development/02_AscendC_basic/src/add_custom.asc</div>
+              <div class="file">cann-learning-hub/tutorials/ascendc_operator_development/06_opensource_repo_operator_intro_and_contribution</div>
+            </div>
+          </div>
+          <div>
+            <h3>问题拆解</h3>
+            <ul class="clean">
+              <li>这次扩样修正了旧判断：课程并非缺失，learning-hub 已覆盖工程化、泛化 tiling、开源仓开发和 UT；问题是这些课程没有产出一个可直接接入正式仓的工程交接物。</li>
+              <li>缺少“把 cann-samples 的单文件 demo 迁移为正式算子目录”的脚手架，例如命令生成 <code>op_api</code>、<code>op_host</code>、<code>op_kernel</code>、<code>tests</code> 的空壳。</li>
+              <li>迁移时开发者要自己理解 API 选择、CMake 入口、SoC 宏、clangd 配置和测试接入，学习路径没有落到同一个可执行工程。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="stage card pad">
+        <div class="side">
+          <h3><span class="n">3</span>builtin 算子定制修改</h3>
+          <p class="muted">任务：以正式算子为样本，识别定制一个 builtin 类算子到底要改哪些文件。</p>
+          <div class="tagrow" style="margin-top:12px"><span class="tag blue">ops-math</span><span class="tag blue">ops-nn</span><span class="method review">代码审视</span></div>
+          <div class="issue"><b>问题判定</b><p class="small">正式算子仓最大问题是“改动面不可见”。代码结构专业，但没有把 dtype、format、shape、tiling、kernel、API、UT 的依赖关系显式告诉开发者。</p></div>
+        </div>
+        <div class="evidence">
+          <div class="trace">
+            <div class="trace-title">这一步具体干了什么</div>
+            <div class="trace-grid">
+              <div class="trace-card"><b>用户目标</b>模拟“我要定制一个已有 builtin 算子”，判断需要改哪些源码、测哪些用例。</div>
+              <div class="trace-card"><b>查看资产</b><code>ops-math/stateless_random_normal_v2</code> 与 <code>ops-nn/thnn_fused_lstm_cell_grad</code> 的正式算子目录。</div>
+              <div class="trace-card"><b>实际动作</b>逐层定位 <code>op_api</code>、<code>op_host</code>、<code>op_kernel</code>、<code>tests/ut</code>，看 dtype、shape、tiling、kernel 分别落在哪。</div>
+              <div class="trace-card"><b>结果与断点</b>能读出改动面，但仓库没有把“加 dtype / 加 shape / 改属性”对应的必改文件和必测项显式列出来。</div>
+            </div>
+          </div>
+          <div class="repo-shots">
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/ops-math-builtin.png" alt="已标注的 ops-math 算子类别入口" /><figcaption><b>界面证据 · ops-math</b>：标出算子类别入口，进入具体算子后才能看到 <code>op_host / op_kernel / tests</code> 的改动面。</figcaption></figure>
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/ops-nn-builtin.png" alt="已标注的 ops-nn 算子类别入口" /><figcaption><b>界面证据 · ops-nn</b>：标出正式 builtin 分类入口；具体 API、host、kernel 与 UT 仍分散在算子子目录。</figcaption></figure>
+          </div>
+          <div>
+            <div class="evidence-label">两类正式算子的真实改动面</div>
+            <div class="code">stateless_random_normal_v2/
+├── op_api
+├── op_graph
+├── op_host
+│   └── arch35/*tiling*.cpp
+├── op_kernel
+│   └── arch35/*.h
+├── tests/ut
+└── examples
+
+thnn_fused_lstm_cell_grad/
+├── op_api
+├── op_host
+├── op_kernel
+├── docs
+├── examples
+└── tests/ut
+
+# op_host/*_def.cpp: 声明与注册的实际片段
+this-&gt;Input("shape").DataType({ge::DT_INT64, ge::DT_INT32})
+    .Format({ge::FORMAT_ND, ge::FORMAT_ND});
+this-&gt;Output("y").DataType({ge::DT_FLOAT, ge::DT_BF16, ge::DT_FLOAT16});
+this-&gt;Attr("dtype").AttrType(OPTIONAL).Int(0);
+this-&gt;AICore().AddConfig("ascend950");
+OP_ADD(StatelessRandomNormalV2);
+
+# ops-nn/thnn_fused_lstm_cell_grad 的验证层
+tests/ut/op_host | tests/ut/op_kernel | tests/ut/op_api
+同一算子已有三层 UT，而非单一 kernel 测试</div>
+            <div class="filelist">
+              <div class="file">ops-math/random/stateless_random_normal_v2/op_host/stateless_random_normal_v2_def.cpp</div>
+              <div class="file">ops-math/random/stateless_random_normal_v2/op_host/arch35/stateless_random_normal_v2_tiling_arch35.cpp</div>
+              <div class="file">ops-math/random/stateless_random_normal_v2/op_kernel/stateless_random_normal_v2.cpp</div>
+              <div class="file">ops-nn/rnn/thnn_fused_lstm_cell_grad/op_api/aclnn_thnn_fused_lstm_cell_backward.cpp</div>
+            </div>
+          </div>
+          <div>
+            <h3>问题拆解</h3>
+            <ul class="clean">
+              <li>正式仓的代码结构完整，能帮助高级开发者理解“生产级算子”的改动面。</li>
+              <li>但定制修改不是一个入口文件问题：dtype/format 在 <code>op_host/*_def.cpp</code>，shape/tiling 在 <code>op_host/*tiling*.cpp</code>，计算在 <code>op_kernel</code>，ACLNN 参数校验在 <code>op_api</code>，UT 分散在 <code>tests/ut</code>。</li>
+              <li>仓库缺“变更清单视图”：例如我要给某算子加 dtype、加 shape、加属性时，系统应列出必改文件、推荐测试和风险点。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="stage card pad">
+        <div class="side">
+          <h3><span class="n">4</span>算子基本功能实现</h3>
+          <p class="muted">任务：实际从 vector_add 改出 vector_sub，验证样例是否能支撑最小新算子开发。</p>
+          <div class="tagrow" style="margin-top:12px"><span class="tag green">vector_sub</span><span class="method edit">实际改码</span><span class="method block">运行尝试受阻</span></div>
+          <div class="issue"><b>问题判定</b><p class="small">样例能支撑基本改码，但派生新算子完全靠手工复制。真正的问题是缺少 sample fork / target rename / test seed 的机械化工具。</p></div>
+        </div>
+        <div class="evidence">
+          <div class="trace">
+            <div class="trace-title">这一步具体干了什么</div>
+            <div class="trace-grid">
+              <div class="trace-card"><b>用户目标</b>不只阅读样例，而是真的派生一个新算子：从 <strong>vector_add</strong> 改出 <strong>vector_sub</strong>。</div>
+              <div class="trace-card"><b>查看资产</b><code>vector_add/main.asc</code>、子目录 <code>CMakeLists.txt</code>、README、父级 CMake，以及 <code>ops-test-kit</code> 入口。</div>
+              <div class="trace-card"><b>实际动作</b>复制目录，改 kernel 名、<code>AscendC::Add</code>、CPU golden、CMake target、README、父级构建入口，并尝试进入 TTK。</div>
+              <div class="trace-card"><b>结果与断点</b>源码改造完成；构建卡在本地工具链，TTK 入口暴露 <code>numpy</code> 缺失，说明测试也需要预检。</div>
+            </div>
+          </div>
+          <div class="repo-shots">
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/cann-samples-entry.png" alt="已标注的 cann-samples 样例入口" /><figcaption><b>界面证据 · cann-samples</b>：标出 <code>Samples</code>；<code>vector_add</code> 是本次实际派生 <code>vector_sub</code> 的代码起点。</figcaption></figure>
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/ops-test-kit-test.png" alt="已标注的 ops-test-kit 测试入口" /><figcaption><b>界面证据 · ops-test-kit</b>：标出 <code>examples / tests / ttk</code>；样例派生后仍需手动切换到此仓补 CSV 和依赖。</figcaption></figure>
+          </div>
+          <div>
+            <div class="evidence-label">实际改码 diff：从计算语义到工程入口</div>
+            <div class="code"># 1. 构建 target 与安装路径
+- add_executable(vector_add main.asc)
++ add_executable(vector_sub main.asc)
+
+- RUNTIME DESTINATION 0_Introduction/vector_add
++ RUNTIME DESTINATION 0_Introduction/vector_sub
+
+# 2. device kernel 名与计算语义
+- __global__ ... void add_kernel(...)
++ __global__ ... void sub_kernel(...)
+
+- AscendC::Add(zLocal, xLocal, yLocal, elementNumPerTile);
++ AscendC::Sub(zLocal, xLocal, yLocal, elementNumPerTile);
+
+- if (h_C[i] != h_A[i] + h_B[i])
++ if (h_C[i] != h_A[i] - h_B[i])
+
+# 4. 父级工程注册
++ add_subdirectory(vector_sub)
+
+# 5. 尚未自动生成的测试资产
+vector_sub_smoke.csv / vector_sub_tail.csv / expected output
+
+# 实际尝试接入 TTK 时的入口与断点
+python3 -m ttk kernel -i examples/case_store/kernel/add.csv
+Traceback (most recent call last):
+  File "ttk/utilities/classes.py", line 18, in &lt;module&gt;
+    import numpy
+ModuleNotFoundError: No module named 'numpy'
+
+# TTK 的 Kernel 模式实际还支持：dynamic / compile-only / tiling-run / profiling</div>
+            <div class="filelist">
+              <div class="file">materials/gitcode-cann/code-audit/cann-samples/Samples/0_Introduction/vector_sub/main.asc</div>
+              <div class="file">materials/gitcode-cann/code-audit/cann-samples/Samples/0_Introduction/vector_sub/CMakeLists.txt</div>
+              <div class="file">materials/gitcode-cann/code-audit/cann-samples/Samples/0_Introduction/vector_sub/README.md</div>
+              <div class="file">materials/gitcode-cann/code-audit/cann-samples/Samples/0_Introduction/CMakeLists.txt</div>
+              <div class="file">ops-test-kit / TTK Python 入口</div>
+            </div>
+          </div>
+          <div>
+            <h3>问题拆解</h3>
+            <ul class="clean">
+              <li>对基本功能实现，代码样例是有效的。开发者可以复用内存申请、拷贝、tiling、launch、CPU 校验骨架，只改计算语义。</li>
+              <li>样例缺少“复制成新算子”的正式命令或指南，因此我需要手动改目标名、install 路径、README、父级 CMake。</li>
+              <li>运行没有完成不是因为源码无法改，而是当前环境缺 cmake、CANN 工具链和 TTK 所需 Python 依赖。报告应把“代码可改”和“环境不可跑”分开判断。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="stage card pad">
+        <div class="side">
+          <h3><span class="n">5</span>泛化 shape 算子实现</h3>
+          <p class="muted">任务：从样例和正式仓中找 shape 泛化、tail tile、tiling 数据结构的实现证据。</p>
+          <div class="tagrow" style="margin-top:12px"><span class="tag purple">tiling</span><span class="tag blue">shape</span><span class="method review">代码审视</span></div>
+          <div class="issue"><b>问题判定</b><p class="small">课程已经补齐工程化和泛化 tiling 概念，但课程、样例、正式仓的代码形态没有被串成可运行的升级提交。用户仍要自己完成从 tail tile 到 TilingContext 的工程映射。</p></div>
+        </div>
+        <div class="evidence">
+          <div class="trace">
+            <div class="trace-title">这一步具体干了什么</div>
+            <div class="trace-grid">
+              <div class="trace-card"><b>用户目标</b>把固定/简单长度样例升级为可处理泛化 shape 的算子，确认 tiling 学习路径是否连续。</div>
+              <div class="trace-card"><b>查看资产</b><code>vector_add/main.asc</code> 的 tail tile 逻辑，以及 <code>stateless_random_normal_v2_tiling_arch35.cpp</code> 的正式 tiling。</div>
+              <div class="trace-card"><b>实际动作</b>对比 <code>totalLength/tileNum/tailTileElementNum</code> 与 <code>TilingContext/workspace/blockDim/tilingKey</code>，并检查 learning-hub 3.4/3.5 是否覆盖中间概念。</div>
+              <div class="trace-card"><b>结果与断点</b>课程覆盖概念，但没有提供同一算子的“课程版本 -&gt; 正式仓提交”的可运行对照工程；工程映射仍要开发者自行完成。</div>
+            </div>
+          </div>
+          <div class="repo-shots">
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/learning-hub-curriculum.png" alt="已标注的 Ascend C 课程链" /><figcaption><b>界面证据 · learning-hub</b>：标出泛化 tiling、模板化编程、workspace 所在的课程链；尚未形成正式仓可直接复用的升级提交。</figcaption></figure>
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/ops-math-builtin.png" alt="已标注的 ops-math 算子类别入口" /><figcaption><b>界面证据 · ops-math</b>：正式工程代码位于具体算子子目录，<code>TilingContext</code>、<code>tilingKey</code> 与课程概念仍需人工映射。</figcaption></figure>
+          </div>
+          <div>
+            <div class="evidence-label">真实 tiling 代码：样例、课程、正式仓三段对照</div>
+            <div class="code">// cann-samples/vector_add: kernel 内直接处理 tail
+int64_t tileNum = currentBlockLength / elementNumPerTile;
+int64_t tailTileElementNum = currentBlockLength - tileNum * elementNumPerTile;
+if (tailTileElementNum &gt; 0) {
+    AscendC::DataCopyPad(xLocal, xGm[offset], copyParams, padParams);
+    AscendC::Add(zLocal, xLocal, yLocal, tailTileElementNum);
+}
+
+// learning-hub: 3.4 泛化 tiling; 3.5 模板化、attr、Tbuf、workspace
+// 概念已覆盖，但课程源码与正式仓没有同一提交的演进链
+
+// ops-math: host 侧正式 tiling 生命周期
+void BlockTiling() { blockTilingSize_ = ...; blockNum_ = CeilDiv(...); }
+ge::graphStatus DoOpTiling() {
+    BlockTiling(); UbTiling(); SetTilingData(); return ge::GRAPH_SUCCESS;
+}
+ge::graphStatus PostTiling() {
+    workspaces[0] = workspaceSize_;
+    context_-&gt;SetTilingKey(GetTilingKey());
+    context_-&gt;SetBlockDim(blockNum_);
+    tilingData.SaveToBuffer(...);
+}</div>
+            <div class="filelist">
+              <div class="file">cann-samples/Samples/0_Introduction/vector_add/main.asc</div>
+              <div class="file">ops-math/random/stateless_random_normal_v2/op_host/arch35/stateless_random_normal_v2_tiling_arch35.cpp</div>
+              <div class="file">ops-math/random/stateless_random_normal_v2/tests/ut/op_kernel/test_stateless_random_normal_v2.cpp</div>
+            </div>
+          </div>
+          <div>
+            <h3>问题拆解</h3>
+            <ul class="clean">
+              <li>仓库确实提供了 shape 泛化所需代码：样例有 totalLength / tailTileElementNum，正式仓有 tiling context、workspace、tilingKey、blockDim。</li>
+              <li>扩样后确认 learning-hub 已有 3.4 泛化 Tiling 和 3.5 模板化编程；因此问题不是缺课，而是缺一个可 clone、可编译、可 diff 的“同一算子从课程代码升级为正式 tiling”的工程提交。</li>
+              <li>UT 有 smoke / shape / dtype 异常场景，但没有被直接绑定到“泛化 shape 开发 checklist”，也没有从课程练习自动派生。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="stage card pad">
+        <div class="side">
+          <h3><span class="n">6</span>特定 shape 性能优化</h3>
+          <p class="muted">任务：查看针对特定 shape 或特定模式的性能优化代码是否能指导开发者做取舍。</p>
+          <div class="tagrow" style="margin-top:12px"><span class="tag green">性能样例丰富</span><span class="tag orange">未上板实测</span><span class="method review">代码审视</span></div>
+          <div class="issue"><b>问题判定</b><p class="small">性能 story 有内容，但不是决策系统。开发者看到很多优化版本，却不知道自己的 shape 该先测哪一版、怎么判定瓶颈、如何复现实验。</p></div>
+        </div>
+        <div class="evidence">
+          <div class="trace">
+            <div class="trace-title">这一步具体干了什么</div>
+            <div class="trace-grid">
+              <div class="trace-card"><b>用户目标</b>找一个具体 shape 或模式的优化参考，看能否从样例判断该先优化访存、分块、SIMT 还是矩阵模板。</div>
+              <div class="trace-card"><b>查看资产</b><code>rms_norm_quant_story</code>、<code>moe_init_routing_story</code>、<code>matmul_story</code>、CATLASS StreamK 示例。</div>
+              <div class="trace-card"><b>实际动作</b>阅读 naive 到多阶段优化版本，记录每类 story 暗含的瓶颈假设和适用 shape 条件。</div>
+              <div class="trace-card"><b>结果与断点</b>性能代码丰富，但本次没有上板 profiling；仓库也没有把“我的 shape 该先试哪条路径”产品化。</div>
+            </div>
+          </div>
+          <div class="repo-shots">
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/cann-samples-entry.png" alt="已标注的 cann-samples 样例入口" /><figcaption><b>界面证据 · cann-samples</b>：从标出的 <code>Samples</code> 继续进入性能故事和特性样例，再选择 tail rebalance、N-buffer、matmul story 等路径。</figcaption></figure>
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/catlass-performance.png" alt="已标注的 CATLASS 高性能模板入口" /><figcaption><b>界面证据 · CATLASS</b>：标出 <code>examples</code>；高性能模板与样例、profiling、测试仍需跨仓衔接。</figcaption></figure>
+          </div>
+          <div>
+            <div class="evidence-label">性能样例的优化前提与真实实现</div>
+            <div class="code"># 可发现的优化路径（cann-samples）
+cann-samples/Samples/2_Performance/
+├── rms_norm_quant_story/src/0_naive.asc ... 6_binary_sum.asc
+├── moe_init_routing_story/src/0_native.asc ... 5_simt.asc
+├── matmul_story/matmul_tutorials/0_naive ... 7_fullload
+└── simd_vf_story/elemwise/reduce/broadcast
+
+# tail_rebalance: 适用的是“尾轮任务小于可用核”
+tileNum = tileNum + (tailCnt - 1) * perTailCnt;
+for (tileIdx = curBlockIdx; tileIdx &lt; tileNum; tileIdx += blockNum) {
+    if (tileIdx / blockNum == perCoreBlockNum - 1 &amp;&amp; tailCnt &gt; 1) { ... }
+}
+
+# StreamK: 选择条件被编码在 CATLASS handler 内
+blocks = CeilDiv(m, m1t) * CeilDiv(n, n1t);
+if (blocks &gt; coreNum &amp;&amp; blocks &lt; 8 * coreNum &amp;&amp;
+    blocks % coreNum &gt; 0 &amp;&amp; blocks % coreNum &lt; 0.8 * coreNum &amp;&amp;
+    k &gt; 3072) { kernelSerial = 4; return true; }</div>
+            <div class="filelist">
+              <div class="file">Samples/2_Performance/matmul_story/matmul_tutorials</div>
+              <div class="file">Samples/2_Performance/rms_norm_quant_story/src</div>
+              <div class="file">catlass/examples/66_ascend950_streamk_matmul/README.md</div>
+              <div class="file">asc-devkit/examples/01_simd_cpp_api/01_utilities/04_profiling/README.md</div>
+            </div>
+          </div>
+          <div>
+            <h3>问题拆解</h3>
+            <ul class="clean">
+              <li>性能优化代码是这批仓库的强项之一，能看到 naive、多核、double buffer、UB 利用率、SIMT、streamK 等逐步优化路径。</li>
+              <li>问题在“怎么选”。优化故事散在多个仓和目录里，开发者很难从自己的 shape 直接跳到该看哪个 story、哪个模板、哪个性能指标。</li>
+              <li>Profiling / msprof 样例存在，但没有和 cann-samples 的具体优化步骤联动成“测量 -> 定位 -> 改代码 -> 再测”的闭环。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="stage card pad">
+        <div class="side">
+          <h3><span class="n">7</span>泛化 shape 性能优化</h3>
+          <p class="muted">任务：读 CATLASS dynamic optimized matmul，判断泛化性能优化是否可学、可迁移。</p>
+          <div class="tagrow" style="margin-top:12px"><span class="tag blue">catlass</span><span class="tag purple">动态模板选择</span><span class="method review">代码审视</span></div>
+          <div class="issue"><b>问题判定</b><p class="small">泛化性能能力很强，但选择逻辑埋在 handler 代码里。对开发者来说，它更像专家实现，不像可解释、可调参、可验证的工具。</p></div>
+        </div>
+        <div class="evidence">
+          <div class="trace">
+            <div class="trace-title">这一步具体干了什么</div>
+            <div class="trace-grid">
+              <div class="trace-card"><b>用户目标</b>判断 CATLASS 的动态 matmul 能否支撑泛化 shape 下的性能模板选择和迁移。</div>
+              <div class="trace-card"><b>查看资产</b><code>dynamic_optimized_matmul.cpp</code>、<code>tiling_params.h</code>、<code>do_tiling_b16.h</code>、<code>select_kernel_b16.h</code>。</div>
+              <div class="trace-card"><b>实际动作</b>追踪 <code>TilingParams -> DoTilingAndSelectKernel -> handlers -> tilingKey/kernelSerial</code> 的选择链路。</div>
+              <div class="trace-card"><b>结果与断点</b>能力很强，但规则主要埋在 handler 代码中；缺可解释的 shape 覆盖矩阵、失败兜底和推荐下一步实验。</div>
+            </div>
+          </div>
+          <div class="repo-shots">
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/catlass-performance.png" alt="已标注的 CATLASS 高性能模板入口" /><figcaption><b>界面证据 · CATLASS</b>：从标出的 <code>examples</code> 继续定位 dynamic optimized matmul，再读 handler 选择链。</figcaption></figure>
+            <figure class="repo-shot"><img src="../../materials/gitcode-cann/screenshots/annotated/ops-test-kit-test.png" alt="已标注的 ops-test-kit 测试入口" /><figcaption><b>界面证据 · 验证工具</b>：泛化性能策略最终仍需回到标出的测试资产；两个仓的入口尚未被连成任务闭环。</figcaption></figure>
+          </div>
+          <div>
+            <div class="evidence-label">动态模板选择：真实 handler 链与可见性断点</div>
+            <div class="code">// 输入不仅是 MNK，还包括 stride、layout、padding、平台核数
+TilingParams{m, n, k, strideA, strideB, strideC,
+             layoutTagA, layoutTagB, layoutTagC}
+DoTilingAndSelectKernel(tilingParams, platformInfo)
+
+// 选择是“第一个返回 true 的 handler”
+handlers[] = {
+  AivMatmulB16Handler,
+  SmallMatmulB16Handler,
+  PaddingMultiCoreSplitkMatmulB16Handler,
+  PaddingStreamkMatmulB16Handler,
+  LocalPaddingCPaddingCommonMatmulB16Handler,
+  PaddingCommonMatmulB16Handler,
+  CommonMatmulB16Handler
+};
+for (auto handler : handlers) {
+    if (handler(tilingParams, platformInfo)) { break; }
+}
+
+// 命中后再写 tilingKey / kernelSerial / blockDim
+params.tilingKey.SetTilingKey(kernelSerial, ...);
+params.blockDim = platformInfo.coreNum;</div>
+            <div class="filelist">
+              <div class="file">catlass/examples/102_dynamic_optimized_matmul/dynamic_optimized_matmul.cpp</div>
+              <div class="file">catlass/examples/102_dynamic_optimized_matmul/include/tiling_params.h</div>
+              <div class="file">catlass/examples/102_dynamic_optimized_matmul/include/do_tiling_b16.h</div>
+              <div class="file">catlass/examples/102_dynamic_optimized_matmul/include/select_kernel_b16.h</div>
+            </div>
+          </div>
+          <div>
+            <h3>问题拆解</h3>
+            <ul class="clean">
+              <li>泛化性能优化的底层代码很有价值：它把 runtime shape、layout、padding、splitK、streamK、tilingKey 和 kernelSerial 串起来。</li>
+              <li>但对开发者而言，这些知识被埋在模板代码中。README 说“尽力获取最优性能，但不保证最优”，却没有给出可操作的 shape 覆盖矩阵和失败兜底策略。</li>
+              <li>要变成可用体验，需要把 handler 选择规则可视化，让开发者输入 MNK/layout 后看到选择了什么、为什么、下一步该测什么。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="findings" class="panel">
+      <h2>分析结论与 demo 改进</h2>
+      <p class="muted">矩阵中的 7 个问题在这里逐一落到改进结论：每条结论直接带代码证据、责任归属和可落地的界面 / 工具 demo。</p>
+
+      <div class="finding card">
+        <div>
+          <div class="head">结论 1：学习主线已经存在，真正缺的是跨仓可执行交接 <span class="chain">对应问题 2 / 7</span></div>
+          <div class="body">
+            <div class="tagrow"><span class="tag red">体验设计/路径编排</span><span class="tag blue">结构/框架</span></div>
+            <ul class="clean">
+              <li>证据：learning-hub 已有基础、工程化、泛化 tiling、开源仓开发、UT、调试和性能章节；但其源码、cann-samples、asc-devkit、ops-*、TTK、CATLASS 之间没有一个能直接接力的工程工件。</li>
+              <li>影响：问题不是“没有学习路径”，而是开发者从课程的 <code>add_custom</code>、样例的 <code>vector_add</code> 走向正式 builtin 修改时，要自己重建工程、测试和性能链路。</li>
+              <li>建议：建设“算子开发任务工作台”，按 7 阶段聚合代码入口，而不是按仓库/页面入口组织。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body">
+          <div class="demo">
+            <div class="bar">Demo：算子开发工作台 / Operator Task Workspace</div>
+            <div class="lane"><div class="label">输入任务</div><div class="box">我想从 Add 改一个 VectorSub，并支持动态长度。</div></div>
+            <div class="lane"><div class="label">生成改动面</div><div class="box">kernel: main.asc · build: CMakeLists.txt · test: add/sub.csv · doc: README · perf: optional story</div></div>
+            <div class="lane"><div class="label">执行链路</div><div class="box">环境预检 -> 生成模板 -> 编译目标 -> TTK 精度 -> msprof 性能 -> 提交 checklist</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding card">
+        <div>
+          <div class="head">结论 2：环境和依赖问题暴露太晚，开发者在写代码前就会断掉 <span class="chain">对应问题 1 / 7</span></div>
+          <div class="body">
+            <div class="tagrow"><span class="tag red">结构/框架</span><span class="tag orange">文档</span></div>
+            <ul class="clean">
+              <li>证据：实际运行 <code>cmake</code> 直接失败；TTK 入口因缺 <code>numpy</code> 失败；CMake 还会继续要求 Toolkit 路径和 Bisheng 编译器。</li>
+              <li>影响：用户无法判断自己是缺工具、缺 Toolkit、缺 NPU、缺 Python 包，还是代码写错。</li>
+              <li>建议：每个任务仓提供 <code>doctor</code> 级预检，输出红黄绿状态和下一步命令。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body">
+          <div class="demo">
+            <div class="bar">Demo：cann doctor</div>
+            <div class="lane"><div class="label">工具链</div><div class="box">cmake: 缺失 · python: 3.9 · numpy: 缺失 · git: OK</div></div>
+            <div class="lane"><div class="label">CANN</div><div class="box">ASCEND_HOME_PATH: 未设置 · Toolkit: 未找到 · Bisheng: 未找到</div></div>
+            <div class="lane"><div class="label">可执行建议</div><div class="box">安装 cmake；安装 CANN Toolkit；source set_env.sh；pip install -r requirements.txt</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding card">
+        <div>
+          <div class="head">结论 3：版本配套是新增的一级阻断，不是普通说明缺失 <span class="chain">对应问题 7 / 7</span></div>
+          <div class="body">
+            <div class="tagrow"><span class="tag red">结构/框架</span><span class="tag orange">版本治理</span><span class="tag blue">文档</span></div>
+            <ul class="clean">
+              <li>证据：learning-hub 当前写明已验证 CANN 9.0，而教程目录写 8.5+ 且仅验证 Atlas A2；CATLASS 的不同样例可见 8.2 RC1 / 9.0；asc-devkit 明确依赖其他 CANN 开源仓，不能独立升级。</li>
+              <li>影响：开发者组合课程、样例、正式算子和性能模板前，无法先判断 CANN 版本、SoC、分支、工具包是否兼容，错误会在构建或运行后才出现。</li>
+              <li>建议：每个任务入口生成版本锁定文件和兼容矩阵，在 clone / build 前校验 CANN、SoC、Python、Toolkit、依赖仓提交。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body">
+          <div class="demo">
+            <div class="bar">Demo：任务级版本锁 / Compatibility Doctor</div>
+            <div class="lane"><div class="label">任务</div><div class="box">VectorSub + 泛化 tiling + Kernel TTK + Ascend950 性能验证</div></div>
+            <div class="lane"><div class="label">自动解析</div><div class="box">learning-hub 课程版本 · cann-samples commit · ops-test-kit 依赖 · CATLASS 示例 SoC / CANN 标签</div></div>
+            <div class="lane"><div class="label">阻断结果</div><div class="box">CANN 9.0: 可组合；Atlas A2 / Ascend950: 需要分支选择；缺 Toolkit / cmake / numpy: 先补环境</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding card">
+        <div>
+          <div class="head">结论 4：样例代码适合“改出第一个算子”，但缺少正式的复制/派生机制 <span class="chain">对应问题 3 / 7</span></div>
+          <div class="body">
+            <div class="tagrow"><span class="tag blue">结构/框架</span><span class="tag green">代码资产长板</span></div>
+            <ul class="clean">
+              <li>证据：我能从 vector_add 改出 vector_sub；改动点清晰，host 侧校验、kernel launch、tiling 骨架都可复用。</li>
+              <li>影响：手工复制样例容易漏改父级 CMake、install 路径、README、target 名，后续也难接测试工具。</li>
+              <li>建议：提供 <code>cann sample fork vector_add vector_sub --op sub</code> 一类命令，自动生成目标和测试样例。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body">
+          <div class="demo">
+            <div class="bar">Demo：样例派生命令</div>
+            <div class="lane"><div class="label">命令</div><div class="box">cann-sample new --from vector_add --name vector_sub --compute AscendC::Sub</div></div>
+            <div class="lane"><div class="label">自动改</div><div class="box">main.asc 函数名 · CPU golden · CMake target · install path · README 运行命令</div></div>
+            <div class="lane"><div class="label">自动生成</div><div class="box">TTK CSV、最小输入、expected output、构建目标验证脚本</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding card">
+        <div>
+          <div class="head">结论 5：正式算子仓结构完整，但缺“改动面地图” <span class="chain">对应问题 5 / 7</span></div>
+          <div class="body">
+            <div class="tagrow"><span class="tag blue">结构/框架</span><span class="tag orange">文档</span></div>
+            <ul class="clean">
+              <li>证据：stateless_random_normal_v2 横跨 op_api、op_graph、op_host、op_kernel、tests/ut、examples；LSTM backward 在 op_api 中有大量 dtype/format/shape 校验。</li>
+              <li>影响：开发者要加 dtype、加 shape、改 tiling 时，无法从仓库直接知道最小必改集合和必测集合。</li>
+              <li>建议：为每个正式算子生成“变更影响面卡片”，把接口、host、kernel、UT、文档绑定起来。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body">
+          <div class="demo">
+            <div class="bar">Demo：builtin 算子变更地图</div>
+            <div class="lane"><div class="label">我要做</div><div class="box">给 StatelessRandomNormalV2 增加 dtype 或 shape 支持。</div></div>
+            <div class="lane"><div class="label">必改文件</div><div class="box">op_host/*_def.cpp · op_host/*tiling*.cpp · op_kernel/*.cpp · op_api/*.cpp</div></div>
+            <div class="lane"><div class="label">必测用例</div><div class="box">infershape UT · op_kernel smoke · op_api 正常/异常 dtype · TTK CSV</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding card">
+        <div>
+          <div class="head">结论 6：泛化 shape 与性能优化代码很强，但解释层没有跟上 <span class="chain">对应问题 6 / 7</span></div>
+          <div class="body">
+            <div class="tagrow"><span class="tag orange">文档</span><span class="tag red">体验设计/路径编排</span></div>
+            <ul class="clean">
+              <li>证据：CATLASS dynamic matmul 有 TilingParams、DoTiling、SelectKernel handlers；cann-samples 有 matmul/rms_norm/moe 多阶段性能故事。</li>
+              <li>影响：开发者可以读懂“最终代码”，但难以反推出“我的 shape 应该选哪个模板、先测什么、怎么解释性能差”。</li>
+              <li>建议：把选择规则从代码里抽出来，做成 shape advisor 和性能实验面板。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body">
+          <div class="demo">
+            <div class="bar">Demo：Shape Performance Advisor</div>
+            <div class="lane"><div class="label">输入</div><div class="box">M=256 · N=512 · K=1024 · A RowMajor · B ColumnMajor · Ascend950</div></div>
+            <div class="lane"><div class="label">推荐</div><div class="box">CommonMatmul 或 StreamK；展示命中的 handler 条件和 tilingKey。</div></div>
+            <div class="lane"><div class="label">下一步</div><div class="box">生成 5 组邻近 shape 性能测试；提示是否需要 splitK / padding / swizzle。</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding card">
+        <div>
+          <div class="head">结论 7：测试工具存在，但没有嵌入开发旅程 <span class="chain">对应问题 4 / 7</span></div>
+          <div class="body">
+            <div class="tagrow"><span class="tag blue">结构/框架</span><span class="tag orange">文档</span></div>
+            <ul class="clean">
+              <li>证据：ops-test-kit 支持 Kernel / ACLNN / E2E，CSV 可定义 shape、dtype、format、precision；但实际运行先卡 Python 依赖。</li>
+              <li>影响：开发者改完 kernel 后，很难自然进入“生成 CSV -> 跑精度 -> dump -> rerun -> 性能统计”。</li>
+              <li>建议：在样例派生、正式算子变更地图中自动生成 TTK 用例，并将 TTK 结果回写到任务工作台。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body">
+          <div class="demo">
+            <div class="bar">Demo：测试用例联动</div>
+            <div class="lane"><div class="label">从代码读</div><div class="box">op_name、input_shapes、dtype、format、output_shapes。</div></div>
+            <div class="lane"><div class="label">生成 CSV</div><div class="box">vector_sub_smoke.csv · vector_sub_tail.csv · vector_sub_broadcast.csv</div></div>
+            <div class="lane"><div class="label">结果回写</div><div class="box">通过率、失败 case、dump 文件、profiling 摘要进入报告。</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="owners" class="panel">
+      <h2>问题责任归属</h2>
+      <div class="owner">
+        <div><strong>文档问题</strong><p class="small">说明和解释层</p></div>
+        <div>课程并不缺失；缺的是课程代码到正式工程的可运行交接、样例到正式仓的迁移 diff、性能模板选择条件的用户化解释。</div>
+        <div>应交付：7 阶段任务教程、跨仓交接提交、变更影响面说明、shape/perf 决策说明、TTK 用例编写示例。</div>
+      </div>
+      <div class="owner">
+        <div><strong>结构/框架问题</strong><p class="small">仓库、工具、脚手架</p></div>
+        <div>没有 sample fork / op scaffold / doctor / TTK 自动用例生成；版本与 SoC 配套未形成跨仓锁定；测试和性能工具没有嵌入开发主链路。</div>
+        <div>应交付：CLI 脚手架、环境与版本预检、正式算子模板、TTK 集成、profiling 集成、结果回写。</div>
+      </div>
+      <div class="owner">
+        <div><strong>体验设计问题</strong><p class="small">路径编排和工作台</p></div>
+        <div>用户按仓库找材料，而不是按任务完成开发；代码资产多但缺少“我现在在哪一步、下一步该做什么”的旅程感。</div>
+        <div>应交付：算子开发工作台、7 阶段进度视图、改动面地图、shape advisor、失败诊断面板。</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <h2 style="margin-bottom:12px">一句话结论</h2>
+      <p>
+        CANN GitCode 的真实代码资产并不薄，learning-hub 也已有从基础到性能的学习主线；当前体验问题是课程、样例、正式算子、测试和性能模板没有形成带版本配套的可执行交接。
+        下一步不应继续只优化页面入口，而应围绕算子开发 7 阶段补跨仓工程交接、脚手架、环境/版本预检、变更地图、测试联动和性能决策工具。
+      </p>
+    </footer>
+  </main>
+  <script>
+    (() => {
+      // Keep the reading order aligned with the research narrative, not source-file history.
+      const main = document.querySelector('main');
+      const hero = main?.querySelector('.hero');
+      const journey = document.querySelector('#journey');
+      const matrixSection = document.querySelector('#matrix');
+      const stages = document.querySelector('#stages');
+      if (main && hero && journey && matrixSection && stages) {
+        [stages, matrixSection, journey].forEach(section => main.insertBefore(section, hero.nextSibling));
+      }
+      const nav = document.querySelector('.nav');
+      const links = [...document.querySelectorAll('.nav a[href^="#"]')];
+      const sections = links
+        .map(link => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+      const setActive = id => {
+        links.forEach(link => {
+          const active = link.getAttribute('href') === `#${id}`;
+          link.classList.toggle('active', active);
+          if (active) {
+            link.setAttribute('aria-current', 'true');
+            link.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      };
+
+      const pickCurrent = () => {
+        const offset = (nav?.offsetHeight || 64) + 26;
+        let current = sections[0]?.id;
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= offset) current = section.id;
+        }
+        setActive(current);
+      };
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          const visible = entries
+            .filter(entry => entry.isIntersecting)
+            .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top))[0];
+          if (visible) setActive(visible.target.id);
+        }, {
+          root: null,
+          rootMargin: '-20% 0px -64% 0px',
+          threshold: [0, 0.08, 0.2]
+        });
+        sections.forEach(section => observer.observe(section));
+      }
+
+      window.addEventListener('scroll', pickCurrent, { passive: true });
+      window.addEventListener('resize', pickCurrent);
+      pickCurrent();
+
+      const matrix = document.querySelector('#scoreMatrix');
+      const matrixCard = document.querySelector('#matrixCard');
+      const spotControls = document.querySelector('#matrixSpotControls');
+      const spotRings = document.querySelector('#matrixSpotRings');
+      const spotCallout = document.querySelector('#matrixSpotCallout');
+      const matrixGuide = document.querySelector('#matrixGuide');
+      const matrixGuideClose = document.querySelector('#matrixGuideClose');
+      const focus = [
+        {
+          title: '问题 1 / 7：环境与运行能力是横向硬断点',
+          value: '7 阶段可运行均分 1.9 / 5',
+          desc: '复现、改码、builtin、shape、性能阶段都被本地工具链、CANN Toolkit、Bisheng、NPU 或 Python 依赖挡住。开发者在进入 ASC 代码问题前，无法判断是环境、依赖、硬件还是源码导致失败。',
+          chips: ['cmake 缺失', 'Toolkit 路径', 'TTK numpy', '对应结论 2']
+        },
+        {
+          title: '问题 2 / 7：材料能找到，但不是按任务组织',
+          value: '可发现均分 3.4 / 5',
+          desc: '多数仓库和文件能被定位到，但开发者要按仓库名、目录名和已有专业知识拼路径。课程、样例、正式算子、测试和性能模板之间缺少可执行交接。',
+          chips: ['跨 7 个仓', '任务入口缺失', '对应结论 1']
+        },
+        {
+          title: '问题 3 / 7：样例可改造，但缺工程化派生机制',
+          value: '基本功能可改造 4 / 5，迁移 2 / 5',
+          desc: 'vector_add 能改成 vector_sub，说明底层样例有效；但从样例到正式 op_api / op_host / op_kernel / tests 的迁移缺脚手架，用户仍要手工复制和补构建。',
+          chips: ['vector_sub', 'sample fork', 'op scaffold', '对应结论 4']
+        },
+        {
+          title: '问题 4 / 7：测试资产存在，但没有嵌入开发主线',
+          value: '可测试均分 2.3 / 5',
+          desc: 'ops-test-kit 和 tests/ut 都存在，但它们没有在样例派生、builtin 修改、shape 泛化时自动成为下一步。改完代码后，用户仍要自己理解 CSV、精度、dump 和 rerun 流程。',
+          chips: ['ops-test-kit', 'tests/ut', '结果回写', '对应结论 7']
+        },
+        {
+          title: '问题 5 / 7：正式算子仓缺少改动面地图',
+          value: 'builtin 定制的可改造均分 2.0 / 5',
+          desc: '正式算子横跨 op_api、op_host、op_kernel 与 tests/ut。开发者要加 dtype、shape 或属性时，无法从仓库直接知道最小必改集合和必测集合。',
+          chips: ['op_api', 'op_host', 'op_kernel', '对应结论 5']
+        },
+        {
+          title: '问题 6 / 7：泛化与性能代码缺少可操作解释',
+          value: '泛化 / 优化均分 2.4 / 5',
+          desc: '从 tail tile 到 TilingContext、从性能 story 到 CATLASS handler，代码能力很强，但没有把 shape、tiling 与模板选择规则转译成可执行的升级路径和实验建议。',
+          chips: ['TilingContext', 'handler', 'shape advisor', '对应结论 6']
+        },
+        {
+          title: '问题 7 / 7：跨仓版本配套缺少一次性校验',
+          value: '7 阶段均受 CANN / SoC / 分支组合影响',
+          desc: 'learning-hub、CATLASS 与 asc-devkit 的 CANN、SoC、分支约束分散在各仓。跨仓任务在动手前没有可组合性判定，错误会在构建或运行后才出现。',
+          chips: ['CANN 8.2 / 8.5 / 9.0', 'Atlas A2', 'asc-devkit 依赖', '对应结论 3']
+        }
+      ];
+
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const iconText = index => ['RUN', 'PATH', 'FORK', 'TEST', 'MAP', 'SHAPE', 'VERS'][index];
+      const calloutHtml = (item, index) => `
+        <div class="top">
+          <div class="ico">${iconText(index)}</div>
+          <div><div class="k">${item.title}</div><div class="v">${item.value}</div></div>
+          <div class="no">/${String(index + 1).padStart(2, '0')}</div>
+        </div>
+        <div class="d">${item.desc}</div>
+        <div class="chips">${item.chips.map(chip => `<span class="chip${/(缺失|断|低|手工|阻断)/.test(chip) ? ' bad' : ''}">${chip}</span>`).join('')}</div>
+      `;
+      const targetBox = els => els.reduce((box, el) => {
+        const rect = el.getBoundingClientRect();
+        return {
+          left: Math.min(box.left, rect.left),
+          top: Math.min(box.top, rect.top),
+          right: Math.max(box.right, rect.right),
+          bottom: Math.max(box.bottom, rect.bottom)
+        };
+      }, { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity });
+
+      let matrixSpot = -1;
+      const setMatrixSpot = index => {
+        if (!matrix || !matrixCard || !spotRings || !spotCallout || !spotControls) return;
+        matrixSpot = index;
+        matrix.classList.toggle('is-spot', index >= 0);
+        matrix.querySelectorAll('.spot-on').forEach(el => el.classList.remove('spot-on'));
+        spotControls.querySelectorAll('button[data-spot]').forEach(btn => {
+          btn.classList.toggle('on', Number(btn.dataset.spot) === index);
+        });
+        if (index < 0) {
+          spotRings.classList.add('off');
+          spotRings.innerHTML = '';
+          spotCallout.classList.add('off');
+          return;
+        }
+        const targets = [...matrix.querySelectorAll('[data-issue]')]
+          .filter(el => el.dataset.issue.split(',').includes(String(index)));
+        if (!targets.length) return;
+        targets.forEach(el => el.classList.add('spot-on'));
+        matrix.querySelectorAll('thead th').forEach(el => el.classList.add('spot-on'));
+        const box = targetBox(targets);
+        const cardRect = matrixCard.getBoundingClientRect();
+        spotRings.classList.remove('off');
+        spotRings.innerHTML = '';
+        const ring = document.createElement('div');
+        ring.className = 'spot-ring';
+        const pad = 8;
+        ring.style.left = `${box.left - cardRect.left - pad}px`;
+        ring.style.top = `${box.top - cardRect.top - pad}px`;
+        ring.style.width = `${box.right - box.left + pad * 2}px`;
+        ring.style.height = `${box.bottom - box.top + pad * 2}px`;
+        spotRings.appendChild(ring);
+
+        spotCallout.innerHTML = calloutHtml(focus[index], index);
+        spotCallout.classList.remove('off');
+      };
+
+      if (matrix && spotControls) {
+        const closeMatrixGuide = () => matrixGuide?.classList.add('is-hidden');
+        const mkBtn = (text, value, label) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = text;
+          btn.setAttribute('aria-label', label);
+          if (typeof value === 'number') btn.dataset.spot = String(value);
+          btn.addEventListener('click', () => {
+            closeMatrixGuide();
+            if (value === 'prev') setMatrixSpot(Math.max(-1, matrixSpot - 1));
+            else if (value === 'next') setMatrixSpot(Math.min(focus.length - 1, matrixSpot + 1));
+            else setMatrixSpot(value);
+          });
+          return btn;
+        };
+        matrixGuideClose?.addEventListener('click', closeMatrixGuide);
+        spotControls.append(
+          mkBtn('总览', -1, '查看矩阵总览'),
+          mkBtn('‹', 'prev', '查看上一个问题'),
+          ...focus.map((_, index) => mkBtn(String(index + 1), index, `查看问题 ${index + 1}`)),
+          mkBtn('›', 'next', '查看下一个问题')
+        );
+        window.addEventListener('resize', () => setMatrixSpot(matrixSpot));
+        window.requestAnimationFrame(() => setMatrixSpot(-1));
+      }
+    })();
+  </script>
+</body>
+</html>
