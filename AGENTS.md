@@ -256,8 +256,16 @@ CHI 论文的协同研究不是从零再测“AI 可用性”或“开发者基�
 - 第 5–11 页不再整页等比缩放原 PPT：全部使用综合 deck 原有 `.head` / `.head-l` / `.brand .ttl` / `.subttl` / `.head-r`，标题、右上角、页边距与正文其它页面一致；不保留原 PPT 的独立页眉 Tab、灰底背景图和右下重复页码。
 - 第 5、8、9、10 页改为作用域内的网页 grid/flex 组件，保留原文与真实 Logo/预览图；窄窗口自动改为两列或单列，正文超出可用高度时在页内滚动。第 6 页流程图、第 7 页评分表仍直接复用原 SVG/可选中文字，按主体边界适配正文区，节点方位与评分内容不变；窄窗口保持图内字可读并允许横向查看。
 - 第 11 页以 **准备实验 / 执行实验 / 评分与复核** 三列为主线；任务、生态、模型归入准备列，`process.jsonl` 与 `evaluation.json` 原文归入对应步骤下方，用同色虚线箭头连接。取消外层白框、折角与零散左下说明，保留真实记录展示量、多个输入例子、黑色输入标签及半透明品牌 Logo。
-- 新自适应 CSS/JS 为 `method-responsive-styles` / `method-responsive-runtime`，只作用于 `.method-slide`。旧整页 `method-canvas-runtime` 已删除。页内滚动采用边缘转发：内容尚可滚动时不触发 deck 翻页，到边缘再交还原控件。图形适配由局部 ResizeObserver 处理，不改变其他 62 页。
+- 新自适应 CSS/JS 为 `method-responsive-styles` / `method-responsive-runtime`，只作用于 `.method-slide`。旧整页 `method-canvas-runtime` 已删除。页内滚动采用边缘转发：内容尚可滚动时不触发 deck 翻页，到边缘再交还原控件。图形适配由局部 ResizeObserver 处理（稳定尺寸修复见下一节），不改变其他 62 页。
 - 本轮静态核验覆盖原正文、所有原图字节、69 页页序、备页、局部样式与脚本语法；部署后还需检查桌面与窄窗口、图形适配、页内滚动和概览。
+
+
+### 2026-10-13 方法图自适应抖动修复
+
+- 第 6–7 页的尺寸容器 `.method-native-shell` 用 flex 分配剩余高度并隔离内容尺寸；新增绝对定位的 `.method-figure-viewport` 专门处理滚动。ResizeObserver 只观察外层 border-box，不能观察受图形尺寸或滚动条影响的 scrollport。
+- 缩放内容只占实际图形尺寸，使用 auto margin 居中；保留最小 .9 倍和窄窗口横向滚动。垂直滚动条预留稳定 gutter，缩放留 1px 安全量并统一精度，避免边缘取整反复触发滚动条。
+- resize / fullscreen / 字体就绪共用 requestAnimationFrame 合并计算；有效几何未变时不重写样式。后续不得恢复“读滚动容器 client 尺寸，再把子元素填满该尺寸”的反馈结构。
+- 本次仅更改方法图局部 CSS / runtime，不改七页文案、配色、页眉、Skill 页结构或其他 62 页。
 
 ## 协作规则
 
