@@ -321,6 +321,8 @@ git init && git add -A && git commit -m "init: 昇腾 vs 英伟达 官网体验�
 
 正确的关系是：`17/18/19` 共同构成 AI 可用性审计，`ascend-vs-nvidia-2026-06-13-visual.html` 构成开发者基础体验研究，`20_human_ai_journey.html` 建模 Agent 与开发者的协同过程，`reports/synthesis/index.html` 是综合表达入口。DACT 在这些证据之上研究“两个知识环境同时存在且不一致时，协同如何发生”。
 
+另，https://schihhsin.github.io/AscendCANN/cann-dashboard/ai-development-behavior-system-report-concise.html#5 的第 5 页“AI 协作开发者旅程图”只作为研究团队的协同行为观察参考；其行为阶段与 D/M/X/O/L 工程节点是不同维度，不作一一映射，也不能当作参与者流程或本研究实测结论。
+
 ### 当前研究设计
 
 - **Study 0**：复用已有 AI 可用性审计，界定任务的知识供给条件；不让参与者再次扮演 Agent，也不把 Study 0 写成新的参与者实验。
