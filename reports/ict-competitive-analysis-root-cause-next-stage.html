@@ -315,6 +315,19 @@ document.addEventListener('click',e=>{const tab=e.target.closest('.view-tabs but
 /* 鱼骨图交互：按钮缩放、拖动平移、双击复位；滚轮用于页面滚动。 */
 const fishSvg=document.querySelector('#fishbone svg');if(fishSvg){
   const n=fishSvg.getAttribute('viewBox').trim().split(/[ ,]+/).map(Number),base={x:n[0],y:n[1],w:n[2],h:n[3]};let vb={...base},drag=null;
+  function centerFishHighlights(){
+    fishSvg.querySelectorAll('.ishikawa-sub-group').forEach(group=>{
+      const box=group.querySelector(':scope > rect'),label=group.querySelector(':scope > text');
+      if(!box||!label)return;
+      try{
+        const bounds=label.getBBox(),height=Number(box.getAttribute('height'));
+        if(bounds.height>0&&Number.isFinite(height)&&height>0)
+          box.setAttribute('y',String(bounds.y+(bounds.height-height)/2));
+      }catch(_){}
+    });
+  }
+  requestAnimationFrame(centerFishHighlights);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(centerFishHighlights).catch(()=>{});
   fishSvg.setAttribute('preserveAspectRatio','xMidYMid meet');function apply(){fishSvg.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);}
   function fit(){const r=fishSvg.getBoundingClientRect(),ratio=r.width/Math.max(r.height,1);let{x,y,w,h}=base;if(w/h<ratio){const nw=h*ratio;x-=(nw-w)/2;w=nw;}else{const nh=w/ratio;y-=(nh-h)/2;h=nh;}vb={x,y,w,h};apply();}
   function zoom(f,cx,cy){cx??=vb.x+vb.w/2;cy??=vb.y+vb.h/2;const nw=Math.max(base.w*.12,Math.min(base.w*3,vb.w*f)),nh=nw/(base.w/base.h);vb={x:cx-(cx-vb.x)*(nw/vb.w),y:cy-(cy-vb.y)*(nh/vb.h),w:nw,h:nh};apply();}
