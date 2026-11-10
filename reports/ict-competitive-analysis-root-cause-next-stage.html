@@ -210,7 +210,7 @@ body.overview .nav-dots,body.overview #controls{display:none!important}
 .slide.s-gray .evaluation-table td.decision.unselected{background:rgba(255,255,255,.16);color:var(--ink2)}
 .slide.s-gray .evaluation-table .decision .selection-label{background:transparent;border-color:transparent;border-radius:0;color:inherit;font-weight:600;padding:0}
 .slide.s-gray .confirm-table td:last-child.yes{background:#c7000b;color:#fff}
-.slide.s-gray .confirm-table td:last-child.no{background:rgba(255,255,255,.16);color:var(--ink2)}
+.slide.s-gray .confirm-table td:last-child.no{background:#f0bf4e;color:#332607;text-align:center}
 .slide.s-gray .confirm-table td:last-child :is(b,small){color:inherit}
 </style></head><body><div id="deck"><section class="slide s-cover s-phase-cover" data-title="提升泛 ICT 领域竞品分析效率">
     <div class="cover-inner"><div class="cover-top"><div class="cover-brand">竞速圈</div><div class="mono">2026 / UCD设计一部</div></div><div class="cover-middle"><h1 class="cover-title">提升泛ICT领域<br><span>竞品分析效率</span></h1></div></div>
@@ -248,6 +248,32 @@ body.overview .nav-dots,body.overview #controls{display:none!important}
 (()=>{
 const slides=[...document.querySelectorAll('#deck > .slide')];
 if(!slides.length)return;
+function applyCauseDecisions(){
+  const decisions=['yes','no','no','yes','yes','no','yes','no','yes','no','no','yes','yes','no','no','no'];
+  const rows=[...document.querySelectorAll('.confirm-slide .confirm-table tbody tr')];
+  rows.forEach((row,i)=>{
+    const decision=decisions[i];if(!decision)return;
+    const cell=row.querySelector('td:last-child');
+    cell.classList.remove('yes','no','pending','external');cell.classList.add(decision);
+    cell.textContent=decision==='yes'?'是':'否';row.dataset.confirmed=decision;
+    if(i===11){const name='迭代中已确认内容未被稳定保留';row.dataset.candidate=name;row.cells[0].textContent=name;}
+  });
+  document.querySelectorAll('.confirm-slide .head p').forEach(p=>p.textContent='按当前访谈与材料判断是否纳入本轮要因；外部条件与 Skill 能力缺口分开记录。');
+  document.querySelectorAll('.confirm-slide .status-note span').forEach(p=>p.textContent='“是”项纳入本轮要因；“否”项本轮不列入。公开资料难覆盖真实状态作为外部条件，不归为 Skill 能力缺陷。');
+  const summary=document.querySelector('.cause-summary-slide');
+  if(summary){
+    summary.querySelector('.head p').textContent='按本轮访谈与材料，将 16 项候选原因逐项判为“是”或“否”；后续对策只对应“是”项。';
+    const body=summary.querySelector('.cause-summary-table tbody');
+    const content=[
+      ['是（7项）','范围一致性检查、替代对象选择依据、角色任务分析框架、公开资料覆盖真实状态（外部条件）、任务输入业务背景、迭代内容保留、结论与来源证据核对。'],
+      ['否（9项）','设计决策前置、行业用语扩展、搜集前证据需求、账号／环境阻断、已有资料未使用、信息状态标注、前期核查时机、资料索引、修正规则复用。'],
+      ['判定口径','“否”表示本轮不列为要因，不等于断言该因素绝不存在；外部条件不归因于 Skill 能力缺陷。']
+    ];
+    body.replaceChildren(...content.map(([label,description])=>{const tr=document.createElement('tr');const a=document.createElement('td');const b=document.createElement('td');a.textContent=label;b.textContent=description;tr.append(a,b);return tr;}));
+    summary.querySelector('.status-note span').textContent='正式对策仅承接本轮判“是”的要因；已确认的外部条件单独说明其影响边界。';
+  }
+}
+applyCauseDecisions();
 const navDots=document.getElementById('navDots'),controls=document.getElementById('controls'),counter=document.getElementById('counter');
 const prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn'),ovBtn=document.getElementById('ovBtn'),fsBtn=document.getElementById('fsBtn');
 const overview=document.getElementById('overview'),overviewGrid=document.getElementById('overviewGrid');
