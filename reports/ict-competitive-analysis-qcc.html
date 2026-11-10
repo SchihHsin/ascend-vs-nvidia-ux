@@ -831,18 +831,23 @@ const fishSvg=document.querySelector('#fishbone svg');if(fishSvg){
     });
     const touchCopy=[['课题需求与交付物','时间窗口与协作对象'],['研究对象与核心问题','角色、任务与排除项'],['分析任务与已有材料','Skill 检索与生成请求'],['生成进度与初稿','等待后的分析结果'],['真实产品状态与权限','结论、证据与修订指令'],['可采纳结论与优先级','设计判断与汇报材料']];
     journeyEl.querySelectorAll('.jrn-tc').forEach((cell,i)=>{if(touchCopy[i])cell.innerHTML=touchCopy[i].map(x=>`<div class="jrn-touch">${x}</div>`).join('')});
-    const actions=['明确本次分析要解决的核心问题与预期产出','锁定研究对象、角色、任务、边界与排除项','发起分析任务，并提供已有材料作为输入','等待 Skill 检索、比对并生成初稿','审阅首轮结果、核验真实状态，并补充输入后再次生成','收束为可用的分析材料，用于设计判断'];
+    const actions=['确认本次要回答的问题、交付物与时间窗口','选定研究对象，梳理相关角色、任务及纳入／排除边界','整理已有材料与业务背景，编写请求并发起分析','等待检索与生成，查看进度和初稿','对照产品状态与来源核验结论，补充信息、调整要求并再次生成','筛选结论，整理证据与优先级，形成设计讨论材料'];
     journeyEl.querySelectorAll('.jrn-action-title').forEach((node,i)=>{if(actions[i])node.textContent=actions[i]});
-    const painCells=journeyEl.querySelectorAll('.jrn-pw2 .jrn-pt');
-    const painCopy=[
-      '<ul><li>目标模糊难量化</li><li>业务背景难传递</li></ul>',
-      '<ul><li>分析范围失焦</li><li>业务领域知识与上下文不足</li><li>角色与任务链路缺失</li></ul>',
-      '<ul><li>提示词工程门槛高</li><li>上下文窗口受限</li><li>抽象机制难对标</li></ul>',
-      '<ul><li>生成速度慢</li><li>过程难监管</li></ul>',
-      '<ul><li>业务领域知识与上下文不足</li><li>角色与任务链路缺失</li></ul>',
-      '<ul><li>材料质量不够汇报要求</li><li>细节总有纰漏</li></ul>'
+    const observationRow=[...journeyEl.querySelectorAll('.jrn-grid')].find(row=>row.querySelector('.jrn-pw2'));
+    const observationLabel=observationRow?.querySelector('.jrn-rl .jrn-rn');
+    const observationMeta=observationRow?.querySelector('.jrn-rl .jrn-re');
+    if(observationLabel)observationLabel.textContent='行为观察';
+    if(observationMeta)observationMeta.textContent='Observed';
+    const observationCells=journeyEl.querySelectorAll('.jrn-pw2 .jrn-pt');
+    const observationCopy=[
+      '<ul><li>确认要回答的问题与交付形式</li><li>对齐时间窗口和协作对象</li></ul>',
+      '<ul><li>确定研究对象与竞品范围</li><li>明确角色任务和纳入／排除边界</li></ul>',
+      '<ul><li>提交已有材料与业务背景</li><li>补充提示内容并发起分析请求</li></ul>',
+      '<ul><li>等待检索与初稿生成</li><li>查看生成进度和返回内容</li></ul>',
+      '<ul><li>逐项核对结论、来源与真实状态</li><li>补充信息、调整要求后再次生成</li></ul>',
+      '<ul><li>筛选并重组分析结论</li><li>补齐证据、优先级和汇报细节</li></ul>'
     ];
-    painCells.forEach((cell,i)=>{if(painCopy[i])cell.innerHTML=painCopy[i]});
+    observationCells.forEach((cell,i)=>{if(observationCopy[i])cell.innerHTML=observationCopy[i]});
     const focusLists=journeyEl.querySelectorAll('.jrn-ow .jrn-ot ul');
     const focusCopy=[
       '<li>对齐课题、交付物与时间窗口</li><li>明确协作对象和决策节点</li>',
@@ -920,7 +925,7 @@ const fishSvg=document.querySelector('#fishbone svg');if(fishSvg){
     voiceSlide.querySelector('.metric-link')?.remove();
   }
   const journeySlide=slides.find(s=>s.querySelector('.jrn-wrap'));
-  if(journeySlide){journeySlide.querySelector('.head h1').textContent='高频痛点在“定义分析范围与任务”与“审阅、核验与调整”两个阶段反复出现';journeySlide.querySelector('.head .sub').textContent='设计师主导完整分析流程；角色任务、领域上下文与分析范围三项痛点，在范围定义与审阅调整两个高阻力阶段集中暴露。'}
+  if(journeySlide){journeySlide.querySelector('.head h1').textContent='从明确分析目标到形成材料：设计师的六阶段行为路径';journeySlide.querySelector('.head .sub').textContent='设计师先确认研究对象、角色任务与范围边界；生成后核对来源和产品状态，补充信息、调整要求，再整理为设计判断材料。'}
   const paretoSlide=slides.find(s=>s.querySelector('#paretoChart'));
   if(paretoSlide){
     paretoSlide.querySelector('.head h1').textContent='设计师提及最多的是角色任务、领域信息与研究边界';
