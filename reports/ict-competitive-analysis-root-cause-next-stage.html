@@ -257,12 +257,12 @@ function applyCauseDecisions(){
     const cell=row.querySelector('td:last-child');
     cell.classList.remove('yes','no','pending','external');cell.classList.add(decision);
     cell.textContent=decision==='yes'?'是':'否';row.dataset.confirmed=decision;
-    const dateCell=document.createElement('td');dateCell.className='completion-date';dateCell.innerHTML=`${dates[i]}<small>计划</small>`;row.insertBefore(dateCell,row.cells[6]);
+    const dateCell=document.createElement('td');dateCell.className='completion-date';dateCell.textContent=dates[i];row.insertBefore(dateCell,row.cells[6]);
     if(i===11){const name='迭代中已确认内容未被稳定保留';row.dataset.candidate=name;row.cells[0].textContent=name;}
   });
   document.querySelectorAll('.confirm-slide .confirm-table thead tr').forEach(row=>{const th=document.createElement('th');th.textContent='完成时间';row.insertBefore(th,row.cells[6]);});
   document.querySelectorAll('.confirm-slide .head p').forEach(p=>p.textContent='按当前访谈与材料判断是否纳入本轮要因；外部条件与 Skill 能力缺口分开记录。');
-  document.querySelectorAll('.confirm-slide .status-note span').forEach(p=>p.textContent='“是”项纳入本轮要因；“否”项本轮不列入。公开资料难覆盖真实状态作为外部条件，不归为 Skill 能力缺陷。表内日期为拟定计划日期。');
+  document.querySelectorAll('.confirm-slide .status-note span').forEach(p=>p.textContent='“是”项纳入本轮要因；“否”项本轮不列入。公开资料难覆盖真实状态作为外部条件，不归为 Skill 能力缺陷。');
   const summary=document.querySelector('.cause-summary-slide');
   if(summary){
     summary.querySelector('.head p').textContent='按本轮访谈与材料，将 16 项候选原因逐项判为“是”或“否”；后续对策只对应“是”项。';
