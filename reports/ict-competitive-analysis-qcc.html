@@ -532,22 +532,22 @@ const slides=[...document.querySelectorAll('.qcc-root-scope .slide')];
 if(!slides.length)return;
 /* 当前确认口径以名称为键，避免行顺序变化导致判断和日期错位。 */
 const causeRecords=[
-  {key:'缺少范围一致性检查',status:'yes',date:'2026.10.06',evidence:'访谈反馈具体产品板块不够可控，并要求官网与 Console 分开；现有材料未保留完整任务执行轨迹，无法定位约束在哪一步失效。',impact:'范围可控性受影响'},
-  {key:'开始前未明确设计决策',status:'no',date:'2026.10.07',evidence:'已有访谈涉及官网、岗位等研究目标；本轮未取得初始任务输入及追问记录，无法判断目标是否在分析前缺失。',impact:'目标传递情况未核实'},
-  {key:'缺少行业用语扩展规则',status:'no',date:'2026.10.08',evidence:'雷先维反馈相似案例难找；本轮未保存查询词、命中结果及同义词转换记录，无法确认术语扩展是否缺失。',impact:'检索影响未量化'},
-  {key:'替代对象选择依据不清',status:'yes',date:'2026.10.09',evidence:'王心宇、雷先维反馈直接竞品较少；现有访谈未记录替代对象的筛选过程及采用的类比对象。',impact:'可比对象选择困难'},
-  {key:'分析框架未围绕角色任务',status:'yes',date:'2026.10.12',evidence:'季舒婷反馈输出以产品整体为主、岗位体验仍需二次操作；王心宇提出沿角色和任务链展开。访谈支持覆盖问题，尚未定位具体生成机制。',impact:'角色任务覆盖不足',refText:'季舒婷／王心宇访谈'},
-  {key:'查资料前未明确证据需求',status:'no',date:'2026.10.13',evidence:'王心宇指出材料缺少真实任务和失败场景；未取得搜集前的证据需求清单，无法对照实际取证是否漏项。',impact:'真实任务证据不足'},
-  {key:'公开资料难覆盖真实状态（外部条件）',status:'yes',date:'2026.10.14',content:'公开材料能否覆盖关键任务和真实状态',method:'对照任务所需状态与可公开获得的材料',criteria:'公开材料未呈现任务所需的关键状态或动态过程',evidence:'雷先维反馈公开资料具有选择性，真实边缘状态常在软件中；本轮未统计所需状态与公开材料的覆盖比例。',impact:'真实状态取证受限',owner:'雷先维、陈旭令'},
-  {key:'账号或环境限制体验（外部条件）',status:'no',date:'2026.10.15',evidence:'陈旭令说明没有免费体验时会改用文档和视频；现有记录未见具体账号或环境阻断案例，不能确认访问条件造成额外耗时。',impact:'具体阻断未核实'},
-  {key:'任务输入缺少必要业务背景',status:'yes',date:'2026.10.16',evidence:'雷先维提出需要与 AI 多轮讨论业务；未取得相应任务的初始输入，无法核对业务背景提供情况。',impact:'业务语境需补充'},
-  {key:'已有业务资料未用于分析判断',status:'no',date:'2026.10.19',evidence:'访谈反映分析与业务关联不足；未取得“已提供业务资料—分析结论”逐项对照，无法确认资料是否未被使用。',impact:'资料调用情况未核实'},
-  {key:'输出未要求标注信息状态',status:'no',date:'2026.10.20',evidence:'现有材料未发现可对应来源状态误判的具体案例及其修正前后版本，不能确认是否把未知信息写成确定结论。',impact:'是否误判未核实'},
-  {key:'修改前未明确保留项与修改项',status:'yes',date:'2026.10.21',evidence:'访谈反馈涉及反复调整；未取得同一任务的修改要求及前后版本，无法核实是否因未区分保留项与修改项而重做。',impact:'非目标改动未核实'},
-  {key:'结论与来源证据仍需人工核对',name:'关键结论未逐项关联证据',status:'yes',date:'2026.10.22',content:'关键结论能否对应来源与适用条件',method:'抽查关键结论、引用来源及适用条件',criteria:'关键结论缺少可核验来源或来源不能支持该判断',evidence:'王心宇反馈证据偏官网宣传；既有报告含来源链接，但关键结论与来源的对应关系尚未逐条核对。',impact:'来源核对负担未量化',refText:'王心宇访谈',refHref:'../materials/ict-competitive-analysis/designer-interview-voices.md'},
-  {key:'前期未核查方向与证据',status:'no',date:'2026.10.23',evidence:'访谈提到核验与调整；现有材料未记录偏差首次出现和被发现的时间，暂不能判断是否发现过晚。',impact:'发现时点未核实'},
-  {key:'归档未标注任务和适用条件',status:'no',date:'2026.10.26',evidence:'项目材料目前主要按文件整理；未记录历史材料查找用时或查找困难导致的重复工作，无法确认其对本次耗时的影响。',impact:'复用耗时未量化'},
-  {key:'后续任务未沿用修正规则',status:'no',date:'2026.10.27',evidence:'项目已沉淀部分修正规则；现有任务材料未见后续调用记录，尚不能确认同类问题是否跨任务复发。',impact:'跨任务复发未核实'}
+  {key:'缺少范围一致性检查',name:'未核对结果是否仍在已定范围内',status:'yes',date:'2026.10.06',evidence:'访谈反馈具体产品板块不够可控，并要求官网与 Console 分开；现有材料未保留完整任务执行轨迹，无法定位约束在哪一步失效。',impact:'范围可控性受影响'},
+  {key:'开始前未明确设计决策',name:'开始前没明确要支持的设计决策',status:'no',date:'2026.10.07',evidence:'已有访谈涉及官网、岗位等研究目标；本轮未取得初始任务输入及追问记录，无法判断目标是否在分析前缺失。',impact:'目标传递情况未核实'},
+  {key:'缺少行业用语扩展规则',name:'搜索未扩展到行业常用说法',status:'no',date:'2026.10.08',evidence:'雷先维反馈相似案例难找；本轮未保存查询词、命中结果及同义词转换记录，无法确认术语扩展是否缺失。',impact:'检索影响未量化'},
+  {key:'替代对象选择依据不清',name:'替代对象没有明确筛选标准',status:'yes',date:'2026.10.09',evidence:'王心宇、雷先维反馈直接竞品较少；现有访谈未记录替代对象的筛选过程及采用的类比对象。',impact:'可比对象选择困难'},
+  {key:'分析框架未围绕角色任务',name:'分析框架没有围绕角色和任务',status:'yes',date:'2026.10.12',evidence:'季舒婷反馈输出以产品整体为主、岗位体验仍需二次操作；王心宇提出沿角色和任务链展开。访谈支持覆盖问题，尚未定位具体生成机制。',impact:'角色任务覆盖不足',refText:'季舒婷／王心宇访谈'},
+  {key:'查资料前未明确证据需求',name:'查资料前没先列清所需证据',status:'no',date:'2026.10.13',evidence:'王心宇指出材料缺少真实任务和失败场景；未取得搜集前的证据需求清单，无法对照实际取证是否漏项。',impact:'真实任务证据不足'},
+  {key:'公开资料难覆盖真实状态（外部条件）',name:'公开资料难呈现关键状态（外部条件）',status:'yes',date:'2026.10.14',content:'公开材料能否覆盖关键任务和真实状态',method:'对照任务所需状态与可公开获得的材料',criteria:'公开材料未呈现任务所需的关键状态或动态过程',evidence:'雷先维反馈公开资料具有选择性，真实边缘状态常在软件中；本轮未统计所需状态与公开材料的覆盖比例。',impact:'真实状态取证受限',owner:'雷先维、陈旭令'},
+  {key:'账号或环境限制体验（外部条件）',name:'账号或环境限制实际体验（外部条件）',status:'no',date:'2026.10.15',evidence:'陈旭令说明没有免费体验时会改用文档和视频；现有记录未见具体账号或环境阻断案例，不能确认访问条件造成额外耗时。',impact:'具体阻断未核实'},
+  {key:'任务输入缺少必要业务背景',name:'输入缺少判断所需的业务背景',status:'yes',date:'2026.10.16',evidence:'雷先维提出需要与 AI 多轮讨论业务；未取得相应任务的初始输入，无法核对业务背景提供情况。',impact:'业务语境需补充'},
+  {key:'已有业务资料未用于分析判断',name:'已有业务资料没有用于判断',status:'no',date:'2026.10.19',evidence:'访谈反映分析与业务关联不足；未取得“已提供业务资料—分析结论”逐项对照，无法确认资料是否未被使用。',impact:'资料调用情况未核实'},
+  {key:'输出未要求标注信息状态',name:'结果没有标明信息状态',status:'no',date:'2026.10.20',evidence:'现有材料未发现可对应来源状态误判的具体案例及其修正前后版本，不能确认是否把未知信息写成确定结论。',impact:'是否误判未核实'},
+  {key:'修改前未明确保留项与修改项',name:'修改前没说清保留项和修改项',status:'yes',date:'2026.10.21',evidence:'访谈反馈涉及反复调整；未取得同一任务的修改要求及前后版本，无法核实是否因未区分保留项与修改项而重做。',impact:'非目标改动未核实'},
+  {key:'结论与来源证据仍需人工核对',name:'关键结论没有对应来源证据',status:'yes',date:'2026.10.22',content:'关键结论能否对应来源与适用条件',method:'抽查关键结论、引用来源及适用条件',criteria:'关键结论缺少可核验来源或来源不能支持该判断',evidence:'王心宇反馈证据偏官网宣传；既有报告含来源链接，但关键结论与来源的对应关系尚未逐条核对。',impact:'来源核对负担未量化',refText:'王心宇访谈',refHref:'../materials/ict-competitive-analysis/designer-interview-voices.md'},
+  {key:'前期未核查方向与证据',name:'前期没先核对方向和关键证据',status:'no',date:'2026.10.23',evidence:'访谈提到核验与调整；现有材料未记录偏差首次出现和被发现的时间，暂不能判断是否发现过晚。',impact:'发现时点未核实'},
+  {key:'归档未标注任务和适用条件',name:'归档未注明任务和适用条件',status:'no',date:'2026.10.26',evidence:'项目材料目前主要按文件整理；未记录历史材料查找用时或查找困难导致的重复工作，无法确认其对本次耗时的影响。',impact:'复用耗时未量化'},
+  {key:'后续任务未沿用修正规则',name:'后续任务没有沿用修正规则',status:'no',date:'2026.10.27',evidence:'项目已沉淀部分修正规则；现有任务材料未见后续调用记录，尚不能确认同类问题是否跨任务复发。',impact:'跨任务复发未核实'}
 ];
 function applyCauseDecisions(){
   const byKey=new Map(causeRecords.map(item=>[item.key,item]));
@@ -571,11 +571,37 @@ function applyCauseDecisions(){
   document.querySelectorAll('.confirm-slide .confirm-table thead tr').forEach(row=>{if(row.cells[6]?.textContent.trim()!=='完成时间'){const th=document.createElement('th');th.textContent='完成时间';row.insertBefore(th,row.cells[6]);}});
   document.querySelectorAll('.confirm-slide .head p').forEach(p=>p.textContent='依据现有访谈与本轮讨论判断；具体机制尚无完整过程记录。');
   document.querySelectorAll('.confirm-slide .status-note span').forEach(p=>p.textContent='“是”为本轮优先改善或应对；“否”为本轮不纳入，不等于因素不存在。外部条件不归为 Skill 内部缺陷。');
-  const fishText=new Map([
-    ['后续分析未沿用已确认范围','范围偏离未被及时发现'],
-    ['结论与来源证据仍需人工核对','关键结论未逐项关联证据'],
-    ['修改后难以定位受影响结论','证据变更时难定位受影响结论']
-  ]);
+  const fishText=new Map(causeRecords.map(item=>[item.key,item.name||item.key]));
+  [
+    ['结论中包含范围外内容','分析结论超出已定范围'],
+    ['后续分析未沿用已确认范围','后续步骤未沿用已确认范围'],
+    ['分析内容偏离设计决策','分析内容未支持设计决策'],
+    ['分析目标未转成具体问题','目标未拆成具体分析问题'],
+    ['相关案例难以找到','相似案例难以找到'],
+    ['搜索时只使用内部业务用语','搜索词未扩展到行业常用说法'],
+    ['可比较的对象较少','可比较对象数量有限'],
+    ['角色任务关键步骤被遗漏','角色任务中的关键步骤未覆盖'],
+    ['分析结果停留在功能清单','分析结果只列功能，未呈现角色任务'],
+    ['关键判断缺少相应证据','关键判断缺少对应证据'],
+    ['材料与判断问题不匹配','现有材料无法回答判断问题'],
+    ['需要的资料难以找到','所需资料难以找到'],
+    ['关键状态无法直接体验','关键状态无法直接查看'],
+    ['产品业务差异难以解释','产品差异难联系业务场景'],
+    ['任务资料未说明关键业务规则','任务资料未提供关键业务规则'],
+    ['业务判断未结合实际场景','判断未结合实际业务场景'],
+    ['相关资料未与当前任务对应','已有资料与当前任务不匹配'],
+    ['未核实的信息被写成确定结论','未经核实的信息被当作确定结论'],
+    ['未区分未找到、无法访问和确认不存在','未区分未找到、无法访问与确认不存在'],
+    ['已确认内容在修改中被改变','修改时改动了已确认内容'],
+    ['修改要求未定位到具体内容','修改要求未对应到具体内容'],
+    ['修改后难以定位受影响结论','修改后难以找到受影响结论'],
+    ['方向或证据问题在后期才发现','方向或证据问题到后期才发现'],
+    ['首次核验安排在全面搜集之后','首次核验放在全面搜集之后'],
+    ['旧研究难按任务和条件查找','旧研究难按任务和条件检索'],
+    ['材料只能按项目或产品名称查找','材料只能按项目或产品名称检索'],
+    ['相近任务反复遇到同类问题','相近任务重复遇到同类问题'],
+    ['已知问题未在开始前检查','开始前未检查已知问题']
+  ].forEach(([before,after])=>fishText.set(before,after));
   document.querySelectorAll('#fishbone .ishikawa-sub-group text').forEach(text=>{const replacement=fishText.get(text.textContent.trim());if(replacement){const tspan=text.querySelector('tspan');if(tspan)tspan.textContent=replacement;else text.textContent=replacement;}});
   const summary=document.querySelector('.cause-summary-slide');
   if(summary){
@@ -589,27 +615,27 @@ function applyCauseDecisions(){
 applyCauseDecisions();
 /* 对策、评分与措施共同引用本轮“是”项，外部条件单独分组。 */
 const solutionGroups=[
-  {id:'R1',causes:['缺少范围一致性检查','修改前未明确保留项与修改项'],options:[
+  {id:'R1',causes:['未核对结果是否仍在已定范围内','修改前没说清保留项和修改项'],options:[
     {text:'仅延长提示词，重复范围和保留要求',reason:'容易补充，但缺少后续检查与修改边界',scores:[3,5,5]},
     {text:'用任务书固定范围，并以保留项／修改项约束迭代',reason:'同时检查范围传递和修改影响；同分时优先有效性',scores:[5,3,5],pick:true},
     {text:'每轮由设计师手工检查并修改全部内容',reason:'可控制结果，但人工投入较高',scores:[5,1,5]}
   ],action:'任务书贯穿研究，并明确每次修改的保留范围',measures:['记录比较对象、必选项和排除项。','修改前列出保留项与修改项，并对照修改前后版本。','用云服务与岗位样例检查范围是否被沿用。'],goal:'计划、来源和结论能回到已确认范围；修改影响范围可检查。',owners:['时昕昱、陈旭令、孙晨栋','石涵睿复核'],time:'11月'},
-  {id:'R2',causes:['替代对象选择依据不清','分析框架未围绕角色任务'],options:[
+  {id:'R2',causes:['替代对象没有明确筛选标准','分析框架没有围绕角色和任务'],options:[
     {text:'仅在现有报告中增加角色和任务栏目',reason:'不能保证前面的对象选择和取证方式同步调整',scores:[1,5,5]},
     {text:'按角色任务或系统状态选择方法，并分层比较对象',reason:'同时明确比较单元、对象层级及类比条件',scores:[5,3,5],pick:true},
     {text:'为每个业务领域分别开发一套完整 Skill',reason:'建设和后续维护负担较高',scores:[5,1,1]}
   ],action:'建立角色任务／系统状态方法与竞品分层规则',measures:['按研究问题选择角色任务、系统状态等分析方法。','将对象分为直接竞品、替代方案和机制类比，并记录适用条件。','王心宇、雷先维分别提供任务链与系统状态样例。'],goal:'每项研究明确比较单元、对象层级与选择理由。',owners:['王心宇、雷先维','时昕昱整合'],time:'11月'},
-  {id:'R3',causes:['任务输入缺少必要业务背景'],options:[
+  {id:'R3',causes:['输入缺少判断所需的业务背景'],options:[
     {text:'每次直接上传更多原始背景资料',reason:'资料增加仍需筛选，关键规则可能被淹没',scores:[3,3,5]},
     {text:'按任务整理业务背景，并对缺失信息进行追问',reason:'让术语、规则和适用条件进入当前任务',scores:[5,3,5],pick:true},
     {text:'一次建设覆盖全部领域的大型知识库',reason:'准备和维护成本高，难以快速验证',scores:[5,1,1]}
   ],action:'形成任务化业务背景包与必要追问',measures:['整理业务目标、术语、关键状态和判断规则。','记录资料来源及适用条件；输入缺项时补充追问。','用运维课题样例检查背景是否能支持具体判断。'],goal:'每项任务可查到业务目标、术语、规则与来源；缺失项明确。',owners:['梁雪微、雷先维、王心宇','时昕昱整合'],time:'11月'},
-  {id:'R4',causes:['关键结论未逐项关联证据'],options:[
+  {id:'R4',causes:['关键结论没有对应来源证据'],options:[
     {text:'仅在报告末尾统一列出参考链接',reason:'读者仍需自行判断链接支持哪条结论',scores:[1,5,5]},
     {text:'关键结论逐项关联来源、适用条件与证据状态',reason:'便于定位依据，并区分可证实与无法证实的内容',scores:[5,3,5],pick:true},
     {text:'全部结论都由设计师重新查证',reason:'适合高影响问题，不宜作为全部任务的默认流程',scores:[5,1,5]}
   ],action:'建立结论—证据—条件对应记录',measures:['为关键结论记录对应来源、任务和适用条件。','区分已找到、未找到与访问受限，缺口单独标注。','抽查结论与来源是否一致，并保留必要的修正记录。'],goal:'每条关键结论可定位来源及条件；无法核实的内容明确标注。',owners:['陈旭令、时昕昱','雷先维协作'],time:'11月'},
-  {id:'E1',causes:['公开资料难覆盖真实状态（外部条件）'],options:[
+  {id:'E1',causes:['公开资料难呈现关键状态（外部条件）'],options:[
     {text:'增加公开网页搜索数量',reason:'扩大检索仍不能保证公开材料包含真实状态',scores:[3,5,5]},
     {text:'优先实际体验，受限时多来源替代并说明边界',reason:'在资料受限时保留可核验来源和结论边界',scores:[5,3,5],pick:true},
     {text:'所有受限场景均依赖专家进入真实环境',reason:'仍受账号、环境和人力条件约束',scores:[5,1,1]}
@@ -664,6 +690,11 @@ const fishSvg=document.querySelector('#fishbone svg');if(fishSvg){
       if(!box||!label)return;
       try{
         const bounds=label.getBBox(),height=Number(box.getAttribute('height'));
+        const width=Number(box.getAttribute('width'));
+        if(bounds.width>0&&Number.isFinite(width)&&bounds.width+14>width){
+          box.setAttribute('x',String(bounds.x-7));
+          box.setAttribute('width',String(bounds.width+14));
+        }
         if(bounds.height>0&&Number.isFinite(height)&&height>0)
           box.setAttribute('y',String(bounds.y+(bounds.height-height)/2));
       }catch(_){}
