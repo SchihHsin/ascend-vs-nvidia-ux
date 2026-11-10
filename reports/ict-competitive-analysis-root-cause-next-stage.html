@@ -73,7 +73,7 @@ body.overview .nav-dots,body.overview #controls{display:none!important}
 .confirm-slide .confirm-table{height:100%;table-layout:fixed}
 .confirm-slide .confirm-table th{font-size:var(--fs-sm);padding:.8vh .5vw}
 .confirm-slide .confirm-table td{font-size:var(--fs-body);line-height:1.4;padding:.9vh .52vw;overflow-wrap:anywhere}
-.confirm-slide .confirm-table th:nth-child(1){width:12%}.confirm-slide .confirm-table th:nth-child(2){width:10%}.confirm-slide .confirm-table th:nth-child(3){width:11%}.confirm-slide .confirm-table th:nth-child(4){width:12%}.confirm-slide .confirm-table th:nth-child(5){width:27%}.confirm-slide .confirm-table th:nth-child(6){width:9%}.confirm-slide .confirm-table th:nth-child(7){width:9%}.confirm-slide .confirm-table th:nth-child(8){width:10%}
+.confirm-slide .confirm-table th:nth-child(1){width:12%}.confirm-slide .confirm-table th:nth-child(2){width:10%}.confirm-slide .confirm-table th:nth-child(3){width:11%}.confirm-slide .confirm-table th:nth-child(4){width:12%}.confirm-slide .confirm-table th:nth-child(5){width:24%}.confirm-slide .confirm-table th:nth-child(6){width:9%}.confirm-slide .confirm-table th:nth-child(7){width:7%}.confirm-slide .confirm-table th:nth-child(8){width:7%}.confirm-slide .confirm-table th:nth-child(9){width:8%}
 .confirm-slide td small{display:block;margin-top:.5vh;font-size:var(--fs-sm);font-weight:400;line-height:1.4}
 .confirm-slide td.external{color:#986414;background:rgba(216,160,46,.07)}
 .source-ref{display:inline-flex;max-width:100%;font-size:var(--fs-sm);line-height:1.35;color:var(--accent);text-decoration:underline;text-underline-offset:2px;margin-top:.5vh}
@@ -250,16 +250,19 @@ const slides=[...document.querySelectorAll('#deck > .slide')];
 if(!slides.length)return;
 function applyCauseDecisions(){
   const decisions=['yes','no','no','yes','yes','no','yes','no','yes','no','no','yes','yes','no','no','no'];
+  const dates=['2026.10.06','2026.10.07','2026.10.08','2026.10.09','2026.10.12','2026.10.13','2026.10.14','2026.10.15','2026.10.16','2026.10.19','2026.10.20','2026.10.21','2026.10.22','2026.10.23','2026.10.26','2026.10.27'];
   const rows=[...document.querySelectorAll('.confirm-slide .confirm-table tbody tr')];
   rows.forEach((row,i)=>{
     const decision=decisions[i];if(!decision)return;
     const cell=row.querySelector('td:last-child');
     cell.classList.remove('yes','no','pending','external');cell.classList.add(decision);
     cell.textContent=decision==='yes'?'是':'否';row.dataset.confirmed=decision;
+    const dateCell=document.createElement('td');dateCell.className='completion-date';dateCell.innerHTML=`${dates[i]}<small>计划</small>`;row.insertBefore(dateCell,row.cells[6]);
     if(i===11){const name='迭代中已确认内容未被稳定保留';row.dataset.candidate=name;row.cells[0].textContent=name;}
   });
+  document.querySelectorAll('.confirm-slide .confirm-table thead tr').forEach(row=>{const th=document.createElement('th');th.textContent='完成时间';row.insertBefore(th,row.cells[6]);});
   document.querySelectorAll('.confirm-slide .head p').forEach(p=>p.textContent='按当前访谈与材料判断是否纳入本轮要因；外部条件与 Skill 能力缺口分开记录。');
-  document.querySelectorAll('.confirm-slide .status-note span').forEach(p=>p.textContent='“是”项纳入本轮要因；“否”项本轮不列入。公开资料难覆盖真实状态作为外部条件，不归为 Skill 能力缺陷。');
+  document.querySelectorAll('.confirm-slide .status-note span').forEach(p=>p.textContent='“是”项纳入本轮要因；“否”项本轮不列入。公开资料难覆盖真实状态作为外部条件，不归为 Skill 能力缺陷。表内日期为拟定计划日期。');
   const summary=document.querySelector('.cause-summary-slide');
   if(summary){
     summary.querySelector('.head p').textContent='按本轮访谈与材料，将 16 项候选原因逐项判为“是”或“否”；后续对策只对应“是”项。';
