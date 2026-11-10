@@ -427,8 +427,8 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   </section>
 
   <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">02 / 选择课题 01</div><h1>UCD 现有重要分析方法，都包含竞品分析</h1><p class="sub">BUPT 在产品分析中通过竞品对比寻找体验差异；五看三定将“看竞争”作为外部洞察的必经环节。竞品分析不是额外工作，而是方法的一部分。</p></div><div class="page-no">07 / 15</div></header>
-    <div class="body-area"><div class="topic-methods"><article class="method-card bupt"><div class="method-name">BUPT</div><h2>业务、用户、产品、技术共同构成分析视角</h2><div class="method-visual bupt-map"><div class="bupt-node"><b>B</b><span>业务</span></div><div class="bupt-node"><b>U</b><span>用户</span></div><div class="bupt-node focus"><b>P</b><span>产品</span><em>竞品分析</em></div><div class="bupt-node"><b>T</b><span>技术</span></div></div><p class="method-note">从产品层进入<b>竞品分析</b>，理解现有解法、体验差异与可借鉴的设计切口。</p></article><article class="method-card wksd"><div class="method-name">五看三定</div><h2>先看外部与自身，再确定目标和策略</h2><div class="method-visual wksd-map"><div class="wksd-look"><span>看趋势</span><span>看市场</span><span class="focus">看竞争</span><span>看自身</span><span>看机会</span></div><div class="wksd-connector" aria-hidden="true"></div><div class="wksd-decide"><span>定目标</span><span>定策略</span><span>定控制点</span></div></div><p class="method-note"><b>看竞争</b>是外部洞察的关键输入，支撑后续的目标、策略与控制点确定。</p></article></div></div>
+    <header class="head"><div class="head-l"><div class="eyebrow">02 / 选择课题 01</div><h1>UCD 现有重要分析方法，都包含竞品分析</h1><p class="sub">BUTP 在产品分析中通过竞品对比寻找体验差异；五看三定将“看竞争”作为外部洞察的必经环节。竞品分析不是额外工作，而是方法的一部分。</p></div><div class="page-no">07 / 15</div></header>
+    <div class="body-area"><div class="topic-methods"><article class="method-card bupt"><div class="method-name">BUTP</div><h2>业务、用户、技术、产品共同构成分析视角</h2><div class="method-visual bupt-map"><div class="bupt-node"><b>B</b><span>业务</span></div><div class="bupt-node"><b>U</b><span>用户</span></div><div class="bupt-node"><b>T</b><span>技术</span></div><div class="bupt-node focus"><b>P</b><span>产品</span><em>竞品分析</em></div></div><p class="method-note">从产品层进入<b>竞品分析</b>，理解现有解法、体验差异与可借鉴的设计切口。</p></article><article class="method-card wksd"><div class="method-name">五看三定</div><h2>先看外部与自身，再确定目标和策略</h2><div class="method-visual wksd-map"><div class="wksd-look"><span>看趋势</span><span>看市场</span><span class="focus">看竞争</span><span>看自身</span><span>看机会</span></div><div class="wksd-connector" aria-hidden="true"></div><div class="wksd-decide"><span>定目标</span><span>定策略</span><span>定控制点</span></div></div><p class="method-note"><b>看竞争</b>是外部洞察的关键输入，支撑后续的目标、策略与控制点确定。</p></article></div></div>
   </section>
 
       <section class="slide s-gray">
@@ -845,7 +845,7 @@ const fishSvg=document.querySelector('#fishbone svg');if(fishSvg){
   const topicMethodsSlide=slideFor('UCD 现有重要分析方法，都包含竞品分析');
   if(topicMethodsSlide){
     topicMethodsSlide.querySelector('.head h1').textContent='竞品分析既是 UCD 关键分析方法的组成，也是设计判断的重要输入';
-    topicMethodsSlide.querySelector('.head .sub').textContent='BUPT 从产品层进入竞品对比，五看三定把“看竞争”作为外部洞察的关键输入。它帮助设计师看见行业变化、校准设计判断，并沉淀可复用的经验。';
+    topicMethodsSlide.querySelector('.head .sub').textContent='BUTP 从产品层进入竞品对比，五看三定把“看竞争”作为外部洞察的关键输入。它帮助设计师看见行业变化、校准设计判断，并沉淀可复用的经验。';
     topicMethodsSlide.querySelector('.body-area').insertAdjacentHTML('beforeend','<div class="method-outcomes"><div><svg class="outcome-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><b>看见外部变化</b>及时发现竞品的新产品、新体验和新做法。</div><div><svg class="outcome-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m8.5 12 2.3 2.3 4.7-5"/></svg><b>校准设计判断</b>以真实界面、任务状态和证据判断哪些差异值得学习。</div><div><svg class="outcome-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><b>形成可复用经验</b>把课题发现沉淀为下一次设计工作的输入。</div></div>');
   }
   // This page compares two parallel work inputs; analysis time is not a subset of design time.
