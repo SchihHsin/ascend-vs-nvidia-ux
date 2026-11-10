@@ -255,8 +255,8 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   </section>
 
   <section class="slide s-gray">
-    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>优先解决角色任务、领域上下文与分析范围三项痛点，覆盖 80% 的问题</h1><p class="sub">角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦是本轮优先改善范围。</p></div><div class="page-no">12 / 15</div></header>
-    <div class="body-area"><div class="pareto-layout"><div class="pareto-chart-card"><div id="paretoChart" aria-label="竞品分析痛点柏拉图"></div></div></div></div><div class="foot">PAIN PRIORITY / REVIEW · CONTEXT · SCOPE</div>
+    <header class="head"><div class="head-l"><div class="eyebrow">03 / 现状调查</div><h1>设计师提及最多的是角色任务、领域信息与研究边界</h1><p class="sub">横轴按访谈中提到的分析对象与信息项归类，柱形表示编码提及数；这是问题分布，不是根因判定。前三类累计占 80%。</p></div><div class="page-no">12 / 15</div></header>
+    <div class="body-area"><div class="pareto-layout"><div class="pareto-chart-card"><div id="paretoChart" aria-label="访谈编码提及数柏拉图"></div></div></div></div><div class="foot">INTERVIEW CODING / FREQUENCY DISTRIBUTION</div>
   </section>
 
    <section class="slide s-gray">
@@ -527,8 +527,9 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   if(journeySlide){journeySlide.querySelector('.head h1').textContent='高频痛点在“定义分析范围与任务”与“审阅、核验与调整”两个阶段反复出现';journeySlide.querySelector('.head .sub').textContent='设计师主导完整分析流程；角色任务、领域上下文与分析范围三项痛点，在范围定义与审阅调整两个高阻力阶段集中暴露。'}
   const paretoSlide=slides.find(s=>s.querySelector('#paretoChart'));
   if(paretoSlide){
-    paretoSlide.querySelector('.head h1').textContent='优先解决角色任务、领域上下文与分析范围三项痛点，覆盖 80% 的问题';
-    paretoSlide.querySelector('.head .sub').textContent='角色与任务链路缺失、业务领域知识与上下文不足、分析范围失焦是本轮优先改善范围。';
+    paretoSlide.querySelector('.head h1').textContent='设计师提及最多的是角色任务、领域信息与研究边界';
+    paretoSlide.querySelector('.head .sub').textContent='横轴按访谈中提到的分析对象与信息项归类，柱形表示编码提及数；这是问题分布，不是根因判定。前三类累计占 80%。';
+    paretoSlide.querySelector('.foot').textContent='INTERVIEW CODING / FREQUENCY DISTRIBUTION';
     paretoSlide.querySelector('.pareto-chart-card').insertAdjacentHTML('beforeend','<div class="pareto-focus-box" aria-hidden="true"><span>本轮优先改善</span></div>');
   }
   const focusSlide=slides.find(s=>s.querySelector('.focus-pain-grid'));
@@ -561,7 +562,7 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
   const paretoEl=document.querySelector('#paretoChart');
   if(paretoEl&&window.echarts){
     const pareto=echarts.init(paretoEl,null,{renderer:'svg'});
-    const labels=['角色与任务\n链路缺失','业务领域知识与\n上下文不足','分析范围\n失焦','抽象机制\n难对标','生成速度慢','分析资产\n未沉淀复用'];
+    const labels=['角色 / 岗位 /\n任务链路','领域知识 /\n业务上下文','研究对象 /\n范围边界','系统机制 /\n状态表现','生成耗时','分析资产\n复用'];
     // Counts include Pareto-only supplemental codes and may exceed the #10 single-main-pain display.
     // 徐文静、雷先维和陈旭令的补充痛点只计入柏拉图编码，不改变 #10 的单一主要痛点展示。
     const values=[7,6,3,2,1,1], total=values.reduce((a,b)=>a+b,0);
