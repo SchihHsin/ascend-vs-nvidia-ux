@@ -678,6 +678,36 @@ function applyCountermeasureReview(){
   });
 }
 applyCountermeasureReview();
+/* #16–#26：只强调段落中的判断词与行动词，避免整段同一字重。 */
+function emphasizeRootKeywords(){
+  const terms=[
+    '没有核对分析结果是否超出已定范围','已确认范围','必选或排除项','主动变更',
+    '初始任务输入','追问记录','查询词','命中结果','同义词转换','替代对象','适用条件',
+    '角色任务','系统变化','真实任务和失败场景','账号或环境阻断','业务背景','逐项对照',
+    '来源状态','修正前后版本','修改前','修改要求','前后版本','过程记录','因素是否发生',
+    '影响调整时间','分析估计','不代表试点实测','任务书固定范围','比较单元','对象层级',
+    '任务化业务背景','关键结论','可核验来源','来源不能支持','优先实际体验','真实界面和状态',
+    '不能验证的状态','直接竞品、替代方案和机制类比','业务目标、术语、关键状态和判断规则',
+    '来源及适用条件','无法核实的内容明确标注','明确每次修改的保留范围','分工与完成时间'
+  ].sort((a,b)=>b.length-a.length);
+  const root=document.querySelector('.qcc-root-scope');if(!root)return;
+  const targets=root.querySelectorAll('.confirm-slide .confirm-table td:not(:first-child),.confirm-slide .head p,.cause-summary-slide .cause-summary-table td,.cause-summary-slide .head p,.eval-slide .evaluation-table .description,.eval-slide .head p,.eval-slide .evaluation-table-note span,.plan-table-slide .plan-table td,.plan-table-slide .head p');
+  targets.forEach(el=>{
+    const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];
+    while(walker.nextNode())if(walker.currentNode.nodeValue.trim())nodes.push(walker.currentNode);
+    nodes.forEach(node=>{
+      const text=node.nodeValue,pattern=new RegExp(terms.map(term=>term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
+      let last=0,match,changed=false;const fragment=document.createDocumentFragment();
+      while((match=pattern.exec(text))){
+        if(match.index>last)fragment.append(document.createTextNode(text.slice(last,match.index)));
+        const strong=document.createElement('strong');strong.textContent=match[0];fragment.append(strong);
+        last=match.index+match[0].length;changed=true;
+      }
+      if(changed){if(last<text.length)fragment.append(document.createTextNode(text.slice(last)));node.replaceWith(fragment);}
+    });
+  });
+}
+emphasizeRootKeywords();
 /* 鱼骨图交互：按钮缩放、拖动平移、双击复位；滚轮用于页面滚动。 */
 const fishSvg=document.querySelector('#fishbone svg');if(fishSvg){
   const n=fishSvg.getAttribute('viewBox').trim().split(/[ ,]+/).map(Number),base={x:n[0],y:n[1],w:n[2],h:n[3]};let vb={...base},drag=null;
