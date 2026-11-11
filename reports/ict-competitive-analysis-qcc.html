@@ -632,27 +632,27 @@ const solutionGroups=[
     {text:'仅延长提示词，重复目标和修改要求',reason:'容易补充，但缺少对目标理解与修改边界的检查',scores:[3,5,5]},
     {text:'在 Skill 中前置确认设计决策与研究范围，并记录每轮保留项／修改项',reason:'让分析目标可核对，也能检查修改影响；同分时优先有效性',scores:[5,3,5],pick:true},
     {text:'每轮由设计师手工检查并修改全部内容',reason:'可控制结果，但人工投入较高',scores:[5,1,5]}
-  ],action:'在 Skill 中增加目标澄清要求，先确认本次分析要支持的设计决策，再据此明确研究范围',measures:['在 Skill 中加入目标澄清要求：先确认要支持的设计决策，再明确研究对象与范围。','修改前列出保留项与修改项，并对照修改前后版本。','用云服务与岗位样例检查分析是否回应目标。'],goal:'分析内容对应明确的设计决策；修改影响范围可检查。',owners:['时昕昱、陈旭令、孙晨栋','石涵睿复核'],time:'11月'},
+  ],action:'在 Skill 中增加目标澄清要求，先确认本次分析要支持的设计决策，再据此明确研究范围',measures:['在 Skill 中加入目标澄清要求：先确认要支持的设计决策，再明确研究对象与范围。','修改前列出保留项与修改项，并对照修改前后版本。','用云服务与岗位样例检查分析是否回应目标。'],goal:'分析内容对应明确的设计决策；修改影响范围可检查。',owners:['时昕昱、陈旭令、孙晨栋','石涵睿复核'],time:'12月'},
   {id:'R2',causes:['替代对象没有明确筛选标准','分析框架没有围绕角色和任务'],options:[
     {text:'仅在现有报告中增加角色和任务栏目',reason:'不能保证前面的对象选择和取证方式同步调整',scores:[1,5,5]},
     {text:'按角色任务或系统状态选择方法，并分层比较对象',reason:'同时明确比较单元、对象层级及类比条件',scores:[5,3,5],pick:true},
     {text:'为每个业务领域分别开发一套完整 Skill',reason:'建设和后续维护负担较高',scores:[5,1,1]}
-  ],action:'建立角色任务／系统状态方法与竞品分层规则',measures:['按研究问题选择角色任务、系统状态等分析方法。','将对象分为直接竞品、替代方案和机制类比，并记录适用条件。','王心宇、雷先维分别提供任务链与系统状态样例。'],goal:'每项研究明确比较单元、对象层级与选择理由。',owners:['王心宇、雷先维','时昕昱整合'],time:'11月'},
+  ],action:'建立角色任务／系统状态方法与竞品分层规则',measures:['按研究问题选择角色任务、系统状态等分析方法。','将对象分为直接竞品、替代方案和机制类比，并记录适用条件。','王心宇、雷先维分别提供任务链与系统状态样例。'],goal:'每项研究明确比较单元、对象层级与选择理由。',owners:['王心宇、雷先维','时昕昱整合'],time:'12月'},
   {id:'R3',causes:['输入缺少判断所需的业务背景'],options:[
     {text:'每次直接上传更多原始背景资料',reason:'资料增加仍需筛选，关键规则可能被淹没',scores:[3,3,5]},
     {text:'按任务整理业务背景，并对缺失信息进行追问',reason:'让术语、规则和适用条件进入当前任务',scores:[5,3,5],pick:true},
     {text:'一次建设覆盖全部领域的大型知识库',reason:'准备和维护成本高，难以快速验证',scores:[5,1,1]}
-  ],action:'形成任务化业务背景包与必要追问',measures:['整理业务目标、术语、关键状态和判断规则。','记录资料来源及适用条件；输入缺项时补充追问。','用运维课题样例检查背景是否能支持具体判断。'],goal:'每项任务可查到业务目标、术语、规则与来源；缺失项明确。',owners:['梁雪微、雷先维、王心宇','时昕昱整合'],time:'11月'},
+  ],action:'形成任务化业务背景包与必要追问',measures:['整理业务目标、术语、关键状态和判断规则。','记录资料来源及适用条件；输入缺项时补充追问。','用运维课题样例检查背景是否能支持具体判断。'],goal:'每项任务可查到业务目标、术语、规则与来源；缺失项明确。',owners:['梁雪微、雷先维、王心宇','时昕昱整合'],time:'12月'},
   {id:'R4',causes:['关键结论没有对应来源证据'],options:[
     {text:'仅在报告末尾统一列出参考链接',reason:'读者仍需自行判断链接支持哪条结论',scores:[1,5,5]},
     {text:'关键结论逐项关联来源、适用条件与证据状态',reason:'便于定位依据，并区分可证实与无法证实的内容',scores:[5,3,5],pick:true},
     {text:'全部结论都由设计师重新查证',reason:'适合高影响问题，不宜作为全部任务的默认流程',scores:[5,1,5]}
-  ],action:'建立结论—证据—条件对应记录',measures:['为关键结论记录对应来源、任务和适用条件。','区分已找到、未找到与访问受限，缺口单独标注。','抽查结论与来源是否一致，并保留必要的修正记录。'],goal:'每条关键结论可定位来源及条件；无法核实的内容明确标注。',owners:['陈旭令、时昕昱','雷先维协作'],time:'11月'},
+  ],action:'建立结论—证据—条件对应记录',measures:['为关键结论记录对应来源、任务和适用条件。','区分已找到、未找到与访问受限，缺口单独标注。','抽查结论与来源是否一致，并保留必要的修正记录。'],goal:'每条关键结论可定位来源及条件；无法核实的内容明确标注。',owners:['陈旭令、时昕昱','雷先维协作'],time:'12月'},
   {id:'E1',causes:['公开资料难呈现关键状态（外部条件）'],options:[
     {text:'增加公开网页搜索数量',reason:'扩大检索仍不能保证公开材料包含真实状态',scores:[3,5,5]},
     {text:'优先实际体验，受限时多来源替代并说明边界',reason:'在资料受限时保留可核验来源和结论边界',scores:[5,3,5],pick:true},
     {text:'所有受限场景均依赖专家进入真实环境',reason:'仍受账号、环境和人力条件约束',scores:[5,1,1]}
-  ],action:'分层取证，并对不可获得的状态说明边界',measures:['能进入产品时优先记录真实界面和状态。','无法进入时对照官方文档、视频或案例等可用来源。','记录不能验证的状态，避免将未找到写成不存在。'],goal:'真实状态不可获得时，能够说明替代来源与剩余证据边界。',owners:['陈旭令、雷先维','时昕昱整合'],time:'11月'}
+  ],action:'分层取证，并对不可获得的状态说明边界',measures:['能进入产品时优先记录真实界面和状态。','无法进入时对照官方文档、视频或案例等可用来源。','记录不能验证的状态，避免将未找到写成不存在。'],goal:'真实状态不可获得时，能够说明替代来源与剩余证据边界。',owners:['陈旭令、雷先维','时昕昱整合'],time:'12月'}
 ];
 function tableCell(text,className){const td=document.createElement('td');if(className)td.className=className;if(text!=null)td.textContent=text;return td;}
 function appendLines(cell,lines,className){lines.forEach(text=>{const span=document.createElement('span');span.className=className;span.textContent=text;cell.appendChild(span);});}
@@ -805,9 +805,9 @@ const fishSvg=document.querySelector('#fishbone svg');if(fishSvg){
     const months=['2026.07','08','09','10','11','12','2027.01','02'];
     const lanes=['组圈注册登记','制定活动计划表','选择课题和把握现状','设定目标指标','开题汇报与修订','根因分析与要因确认','对策拟定与措施','对策评审','对策实施和效果确认','成果标准化与总结评审'];
     const phases=[['D 选择课题',0,30],['M 把握现状<br>与目标设定',30,20],['A 根因分析',50,10],['I 拟定对策<br>与对策实施',60,30],['C 成果标准化<br>和总结',90,10]];
-    const bars=[['dark','组圈注册登记','7 月',0,10,2],['dark','制定活动计划表','7–8 月',0,18.75,12],['dark','选择课题和把握现状','7–9 月',0,31.25,22],['accent','设定目标指标','9–10 月',25,25,32],['accent','开题汇报与修订','10 月',37.5,12.5,42],['accent','根因分析与要因确认','8 月下旬–10 月',22.3,27.7,52],['accent','对策拟定与措施','9 月下旬–11 月',35.3,27.2,62],['white','对策评审','11–12 月',50,25,72],['white','对策实施和效果确认','2026.12–2027.02 月',62.5,37.5,82],['white','成果标准化与总结评审','2027.01–02 月',75,25,92]];
+    const bars=[['dark','组圈注册登记','7 月',0,10,2],['dark','制定活动计划表','7–8 月',0,18.75,12],['dark','选择课题和把握现状','7–9 月',0,31.25,22],['accent','设定目标指标','9–10 月',25,25,32],['accent','开题汇报与修订','10 月',37.5,12.5,42],['accent','根因分析与要因确认','8 月下旬–10 月',22.3,27.7,52],['accent','对策拟定与措施','9 月下旬–12 月',35.3,39.7,62],['white','对策评审','11–12 月',50,25,72],['white','对策实施和效果确认','2026.12–2027.02 月',62.5,37.5,82],['white','成果标准化与总结评审','2027.01–02 月',75,25,92]];
     roadmapSlide.querySelector('.head h1').textContent='活动按 QCC 五阶段推进，时间从 2026 年 7 月延续至 2027 年 2 月';
-    roadmapSlide.querySelector('.head .sub').textContent='已与前文计划和各阶段完成时间对齐：选题至9月、目标与开题评审至10月、要因确认在10月完成；对策拟定自9月下旬推进、11月完成，评审于11–12月开展，实施与标准化延续至2027年2月。';
+    roadmapSlide.querySelector('.head .sub').textContent='已与前文计划和各阶段完成时间对齐：选题至9月、目标与开题评审至10月、要因确认在10月完成；对策拟定自9月下旬推进、12月完成，评审于11–12月开展，实施与标准化延续至2027年2月。';
     roadmapSlide.querySelector('.qcc-roadmap').innerHTML=`<div class="rm-pad">${months.map((month,i)=>`<div class="rm-date" style="left:${(i+.5)*12.5}%">${month}</div>`).join('')}<div class="rm-now-pill" style="left:12.3%">NOW</div><div class="rm-now-line" style="left:9.3%"></div>${phases.map(phase=>`<div class="rm-phase" style="top:${phase[1]}%;height:${phase[2]}%">${phase[0]}</div>`).join('')}${lanes.map((lane,i)=>`<div class="rm-lane" style="top:${5+i*10}%">${lane}</div>`).join('')}${bars.map(bar=>`<div class="rm-bar ${bar[0]}" style="left:${bar[3]}%;width:${bar[4]}%;top:${bar[5]}%"><span class="lbl">${bar[1]}</span><span class="rm-badge">${bar[2]}</span></div>`).join('')}</div><div class="roadmap-key"><span>选择课题</span><span>分析与拟定对策</span><span>实施、总结与评审</span></div>`;
   }
   slides.forEach((slide,i)=>{const counter=`${pad(i+1)} / ${pad(slides.length)}`;const pageNo=slide.querySelector('.page-no'),chapterNo=slide.querySelector('.dark-chrome span:last-child');if(pageNo)pageNo.textContent=counter;if(chapterNo)chapterNo.textContent=counter});
