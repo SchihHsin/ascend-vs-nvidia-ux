@@ -605,7 +605,23 @@ function applyCauseDecisions(){
     summary.querySelector('.head p').textContent='本轮讨论筛选出 7 项优先改善或应对的因素，其中 1 项为外部条件。';
     const table=summary.querySelector('.cause-summary-table'), headings=table.tHead.rows[0].cells;
     headings[0].textContent='序号';headings[1].textContent='要因与外部条件';
-    table.tBodies[0].replaceChildren(...causeRecords.filter(item=>item.status==='yes').map((item,i)=>{const tr=document.createElement('tr'),a=document.createElement('td'),b=document.createElement('td');a.textContent=String(i+1);b.textContent=item.name||item.key;tr.append(a,b);return tr;}));
+    const summaryEmphasis={
+      '开始前未明确设计决策':'设计决策',
+      '替代对象选择依据不清':'筛选标准',
+      '分析框架未围绕角色任务':'角色和任务',
+      '公开资料难覆盖真实状态（外部条件）':'关键状态',
+      '任务输入缺少必要业务背景':'业务背景',
+      '修改前未明确保留项与修改项':'保留项和修改项',
+      '结论与来源证据仍需人工核对':'来源证据'
+    };
+    table.tBodies[0].replaceChildren(...causeRecords.filter(item=>item.status==='yes').map((item,i)=>{
+      const tr=document.createElement('tr'),a=document.createElement('td'),b=document.createElement('td'),name=item.name||item.key,phrase=summaryEmphasis[item.key]||'';
+      a.textContent=String(i+1);
+      const start=name.indexOf(phrase);
+      if(phrase&&start>=0){b.append(document.createTextNode(name.slice(0,start)));const strong=document.createElement('strong');strong.textContent=phrase;b.append(strong,document.createTextNode(name.slice(start+phrase.length)));}
+      else b.textContent=name;
+      tr.append(a,b);return tr;
+    }));
     summary.querySelector('.status-note span').textContent='“是”表示本轮优先改善或应对；外部条件单独管理，不归为 Skill 内部缺陷。具体机制需结合过程记录核对。';
   }
 }
@@ -691,7 +707,7 @@ function emphasizeRootKeywords(){
     '来源及适用条件','无法核实的内容明确标注','明确每次修改的保留范围','分工与完成时间'
   ].sort((a,b)=>b.length-a.length);
   const root=document.querySelector('.qcc-root-scope');if(!root)return;
-  const targets=root.querySelectorAll('.confirm-slide .confirm-table td:not(:first-child),.confirm-slide .head p,.cause-summary-slide .cause-summary-table td,.cause-summary-slide .head p,.eval-slide .evaluation-table .description,.eval-slide .head p,.eval-slide .evaluation-table-note span,.plan-table-slide .plan-table td,.plan-table-slide .head p');
+  const targets=root.querySelectorAll('.confirm-slide .confirm-table td:not(:first-child),.confirm-slide .head p,.cause-summary-slide .head p,.eval-slide .evaluation-table .description,.eval-slide .head p,.eval-slide .evaluation-table-note span,.plan-table-slide .plan-table td,.plan-table-slide .head p');
   targets.forEach(el=>{
     const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];
     while(walker.nextNode())if(walker.currentNode.nodeValue.trim())nodes.push(walker.currentNode);
