@@ -245,7 +245,7 @@ html.thumbnail .controls,html.thumbnail .dots,html.thumbnail .overview{display:n
 .confirm-slide .confirm-table th:nth-child(1){width:12%}.confirm-slide .confirm-table th:nth-child(2){width:10%}.confirm-slide .confirm-table th:nth-child(3){width:11%}.confirm-slide .confirm-table th:nth-child(4){width:12%}.confirm-slide .confirm-table th:nth-child(5){width:24%}.confirm-slide .confirm-table th:nth-child(6){width:9%}.confirm-slide .confirm-table th:nth-child(7){width:7%}.confirm-slide .confirm-table th:nth-child(8){width:7%}.confirm-slide .confirm-table th:nth-child(9){width:8%}
 .confirm-slide td small{display:block;margin-top:.5vh;font-size:var(--fs-sm);font-weight:400;line-height:1.4}
 .confirm-slide td.external{color:#986414;background:rgba(216,160,46,.07)}
-.source-ref{display:inline-flex;max-width:100%;font-size:var(--fs-sm);line-height:1.35;color:var(--accent);text-decoration:underline;text-underline-offset:2px;margin-top:.5vh}.confirm-slide .confirm-table td:nth-child(5) .source-ref{color:inherit}
+.source-ref{display:inline-flex;max-width:100%;font-size:var(--fs-sm);line-height:1.35;color:var(--accent);text-decoration:underline;text-underline-offset:2px;margin-top:.5vh}
 .status-note{border:1px solid var(--line);border-radius:12px;align-items:flex-start}
 .status-note span{font-size:var(--fs-body);line-height:1.4}
 .root-summary-slide .root-card{min-height:21vh;grid-template-columns:3.8vw 1fr;gap:.65vw}
@@ -532,11 +532,11 @@ const slides=[...document.querySelectorAll('.qcc-root-scope .slide')];
 if(!slides.length)return;
 /* 当前确认口径以名称为键，避免行顺序变化导致判断和日期错位。 */
 const causeRecords=[
-  {key:'缺少范围一致性检查',name:'未核对结果是否仍在已定范围内',status:'yes',date:'2026.10.06',evidence:'访谈反馈具体产品板块不够可控，并要求官网与 Console 分开；现有材料未保留完整任务执行轨迹，无法定位约束在哪一步失效。',impact:'范围可控性受影响'},
+  {key:'缺少范围一致性检查',name:'没有核对分析结果是否超出已定范围',status:'yes',date:'2026.10.06',evidence:'访谈反馈具体产品板块不够可控，并要求官网与 Console 分开；现有材料未保留完整任务执行轨迹，无法定位约束在哪一步失效。',impact:'范围可控性受影响'},
   {key:'开始前未明确设计决策',name:'开始前没明确要支持的设计决策',status:'no',date:'2026.10.07',evidence:'已有访谈涉及官网、岗位等研究目标；本轮未取得初始任务输入及追问记录，无法判断目标是否在分析前缺失。',impact:'目标传递情况未核实'},
   {key:'缺少行业用语扩展规则',name:'搜索未扩展到行业常用说法',status:'no',date:'2026.10.08',evidence:'雷先维反馈相似案例难找；本轮未保存查询词、命中结果及同义词转换记录，无法确认术语扩展是否缺失。',impact:'检索影响未量化'},
   {key:'替代对象选择依据不清',name:'替代对象没有明确筛选标准',status:'yes',date:'2026.10.09',evidence:'王心宇、雷先维反馈直接竞品较少；现有访谈未记录替代对象的筛选过程及采用的类比对象。',impact:'可比对象选择困难'},
-  {key:'分析框架未围绕角色任务',name:'分析框架没有围绕角色和任务',status:'yes',date:'2026.10.12',evidence:'季舒婷反馈输出以产品整体为主、岗位体验仍需二次操作；王心宇提出沿角色和任务链展开。访谈支持覆盖问题，尚未定位具体生成机制。',impact:'角色任务覆盖不足',refText:'季舒婷／王心宇访谈'},
+  {key:'分析框架未围绕角色任务',name:'分析框架没有围绕角色和任务',status:'yes',date:'2026.10.12',evidence:'季舒婷反馈输出以产品整体为主、岗位体验仍需二次操作；王心宇提出沿角色和任务链展开。访谈支持覆盖问题，尚未定位具体生成机制。',impact:'角色任务覆盖不足'},
   {key:'查资料前未明确证据需求',name:'查资料前没先列清所需证据',status:'no',date:'2026.10.13',evidence:'王心宇指出材料缺少真实任务和失败场景；未取得搜集前的证据需求清单，无法对照实际取证是否漏项。',impact:'真实任务证据不足'},
   {key:'公开资料难覆盖真实状态（外部条件）',name:'公开资料难呈现关键状态（外部条件）',status:'yes',date:'2026.10.14',content:'公开材料能否覆盖关键任务和真实状态',method:'对照任务所需状态与可公开获得的材料',criteria:'公开材料未呈现任务所需的关键状态或动态过程',evidence:'雷先维反馈公开资料具有选择性，真实边缘状态常在软件中；本轮未统计所需状态与公开材料的覆盖比例。',impact:'真实状态取证受限',owner:'雷先维、陈旭令'},
   {key:'账号或环境限制体验（外部条件）',name:'账号或环境限制实际体验（外部条件）',status:'no',date:'2026.10.15',evidence:'陈旭令说明没有免费体验时会改用文档和视频；现有记录未见具体账号或环境阻断案例，不能确认访问条件造成额外耗时。',impact:'具体阻断未核实'},
@@ -544,7 +544,7 @@ const causeRecords=[
   {key:'已有业务资料未用于分析判断',name:'已有业务资料没有用于判断',status:'no',date:'2026.10.19',evidence:'访谈反映分析与业务关联不足；未取得“已提供业务资料—分析结论”逐项对照，无法确认资料是否未被使用。',impact:'资料调用情况未核实'},
   {key:'输出未要求标注信息状态',name:'结果没有标明信息状态',status:'no',date:'2026.10.20',evidence:'现有材料未发现可对应来源状态误判的具体案例及其修正前后版本，不能确认是否把未知信息写成确定结论。',impact:'是否误判未核实'},
   {key:'修改前未明确保留项与修改项',name:'修改前没说清保留项和修改项',status:'yes',date:'2026.10.21',evidence:'访谈反馈涉及反复调整；未取得同一任务的修改要求及前后版本，无法核实是否因未区分保留项与修改项而重做。',impact:'非目标改动未核实'},
-  {key:'结论与来源证据仍需人工核对',name:'关键结论没有对应来源证据',status:'yes',date:'2026.10.22',content:'关键结论能否对应来源与适用条件',method:'抽查关键结论、引用来源及适用条件',criteria:'关键结论缺少可核验来源或来源不能支持该判断',evidence:'王心宇反馈证据偏官网宣传；既有报告含来源链接，但关键结论与来源的对应关系尚未逐条核对。',impact:'来源核对负担未量化',refText:'王心宇访谈',refHref:'../materials/ict-competitive-analysis/designer-interview-voices.md'},
+  {key:'结论与来源证据仍需人工核对',name:'关键结论没有对应来源证据',status:'yes',date:'2026.10.22',content:'关键结论能否对应来源与适用条件',method:'抽查关键结论、引用来源及适用条件',criteria:'关键结论缺少可核验来源或来源不能支持该判断',evidence:'王心宇反馈证据偏官网宣传；既有报告含来源链接，但关键结论与来源的对应关系尚未逐条核对。',impact:'来源核对负担未量化'},
   {key:'前期未核查方向与证据',name:'前期没先核对方向和关键证据',status:'no',date:'2026.10.23',evidence:'访谈提到核验与调整；现有材料未记录偏差首次出现和被发现的时间，暂不能判断是否发现过晚。',impact:'发现时点未核实'},
   {key:'归档未标注任务和适用条件',name:'归档未注明任务和适用条件',status:'no',date:'2026.10.26',evidence:'项目材料目前主要按文件整理；未记录历史材料查找用时或查找困难导致的重复工作，无法确认其对本次耗时的影响。',impact:'复用耗时未量化'},
   {key:'后续任务未沿用修正规则',name:'后续任务没有沿用修正规则',status:'no',date:'2026.10.27',evidence:'项目已沉淀部分修正规则；现有任务材料未见后续调用记录，尚不能确认同类问题是否跨任务复发。',impact:'跨任务复发未核实'}
@@ -559,10 +559,7 @@ function applyCauseDecisions(){
     if(item.method)cells[2].textContent=item.method;
     if(item.criteria)cells[3].textContent=item.criteria;
     if(item.owner)cells[5].textContent=item.owner;
-    const refs=[...cells[4].querySelectorAll('a.source-ref')];
-    if(item.refText&&refs[0])refs[0].textContent=item.refText;
-    if(item.refHref&&refs[0])refs[0].setAttribute('href',item.refHref);
-    cells[4].replaceChildren(document.createTextNode(item.evidence),...refs);
+    cells[4].textContent=item.evidence;
     (existingDate?cells[7]:cells[6]).textContent=item.impact;
     decision.classList.remove('yes','no','pending','external');decision.classList.add(item.status);
     decision.textContent=item.status==='yes'?'是':'否';row.dataset.confirmed=item.status;row.dataset.sourceKey=item.key;row.dataset.candidate=label;
@@ -615,7 +612,7 @@ function applyCauseDecisions(){
 applyCauseDecisions();
 /* 对策、评分与措施共同引用本轮“是”项，外部条件单独分组。 */
 const solutionGroups=[
-  {id:'R1',causes:['未核对结果是否仍在已定范围内','修改前没说清保留项和修改项'],options:[
+  {id:'R1',causes:['没有核对分析结果是否超出已定范围','修改前没说清保留项和修改项'],options:[
     {text:'仅延长提示词，重复范围和保留要求',reason:'容易补充，但缺少后续检查与修改边界',scores:[3,5,5]},
     {text:'用任务书固定范围，并以保留项／修改项约束迭代',reason:'同时检查范围传递和修改影响；同分时优先有效性',scores:[5,3,5],pick:true},
     {text:'每轮由设计师手工检查并修改全部内容',reason:'可控制结果，但人工投入较高',scores:[5,1,5]}
